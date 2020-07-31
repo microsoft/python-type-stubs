@@ -1,0 +1,6 @@
+from .. import Provider as BaseProvider
+from typing import Any
+
+class Provider(BaseProvider):
+    vat_id_formats: Any = ...
+    def vat_id(self): ...

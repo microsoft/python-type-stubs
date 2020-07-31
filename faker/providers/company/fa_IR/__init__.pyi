@@ -1,0 +1,6 @@
+from .. import Provider as CompanyProvider
+from typing import Any
+
+class Provider(CompanyProvider):
+    company_names: Any = ...
+    def company(self): ...

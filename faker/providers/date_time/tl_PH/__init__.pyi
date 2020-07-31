@@ -1,0 +1,3 @@
+from ..fil_PH import Provider as FilPhProvider
+
+class Provider(FilPhProvider): ...

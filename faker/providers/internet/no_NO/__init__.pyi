@@ -1,0 +1,6 @@
+from .. import Provider as InternetProvider
+from typing import Any
+
+class Provider(InternetProvider):
+    tlds: Any = ...
+    replacements: Any = ...

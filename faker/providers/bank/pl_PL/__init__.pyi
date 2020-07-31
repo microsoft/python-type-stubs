@@ -1,0 +1,6 @@
+from .. import Provider as BankProvider
+from typing import Any
+
+class Provider(BankProvider):
+    bban_format: Any = ...
+    country_code: str = ...

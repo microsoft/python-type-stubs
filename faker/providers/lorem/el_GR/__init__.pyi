@@ -1,0 +1,6 @@
+from .. import Provider as LoremProvider
+from typing import Any
+
+class Provider(LoremProvider):
+    common_words: Any = ...
+    word_list: Any = ...

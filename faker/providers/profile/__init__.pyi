@@ -1,0 +1,6 @@
+from .. import BaseProvider as BaseProvider
+from typing import Any, Optional
+
+class Provider(BaseProvider):
+    def simple_profile(self, sex: Optional[Any] = ...): ...
+    def profile(self, fields: Optional[Any] = ..., sex: Optional[Any] = ...): ...

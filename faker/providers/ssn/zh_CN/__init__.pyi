@@ -1,0 +1,6 @@
+from .. import Provider as SsnProvider
+from typing import Any
+
+class Provider(SsnProvider):
+    area_codes: Any = ...
+    def ssn(self, min_age: int = ..., max_age: int = ...): ...

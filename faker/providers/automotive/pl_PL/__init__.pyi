@@ -1,0 +1,6 @@
+from .. import Provider as AutomotiveProvider
+from typing import Any
+
+class Provider(AutomotiveProvider):
+    license_formats: Any = ...
+    def license_plate_regex_formats(self): ...

@@ -1,0 +1,6 @@
+from .. import Provider as InternetProvider
+from typing import Any
+
+class Provider(InternetProvider):
+    free_email_domains: Any = ...
+    tlds: Any = ...

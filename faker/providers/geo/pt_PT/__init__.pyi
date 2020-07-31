@@ -1,0 +1,6 @@
+from .. import Provider as GeoProvider
+from typing import Any
+
+class Provider(GeoProvider):
+    nationalities: Any = ...
+    def nationality(self): ...

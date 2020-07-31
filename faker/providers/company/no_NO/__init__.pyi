@@ -1,0 +1,6 @@
+from .. import Provider as CompanyProvider
+from typing import Any
+
+class Provider(CompanyProvider):
+    formats: Any = ...
+    company_suffixes: Any = ...
