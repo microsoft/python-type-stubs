@@ -349,3 +349,9 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+
+# Python virtual environment
+.venv/
+
+# VSCode local settings
+.vscode/
