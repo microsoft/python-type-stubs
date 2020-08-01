@@ -1,6 +1,7 @@
-from .cache import Cache as Cache
-from .decorators import cached as cached, cachedmethod as cachedmethod
-from .lfu import LFUCache as LFUCache
-from .lru import LRUCache as LRUCache
-from .rr import RRCache as RRCache
-from .ttl import TTLCache as TTLCache
+from typing import TypeVar
+from .cache import Cache
+from .decorators import cached, cachedmethod
+from .lfu import LFUCache
+from .lru import LRUCache
+from .rr import RRCache
+from .ttl import TTLCache

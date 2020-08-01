@@ -1,21 +1,10 @@
 from .ttl import TTLCache
 from collections import namedtuple
-from typing import Any
+from typing import Callable, NamedTuple, Optional, Sequence, TypeVar
 
-_CacheInfo = namedtuple("CacheInfo", ["hits", "misses", "maxsize", "currsize"])
+_T = TypeVar("_T")
 
-class _UnboundCache(dict):
-    @property
-    def maxsize(self) -> int: ...
-    @property
-    def currsize(self) -> int: ...
-
-class _UnboundTTLCache(TTLCache):
-    def __init__(self, ttl: int, timer: int) -> None: ...
-    @property
-    def maxsize(self) -> int: ...
-
-def lfu_cache(maxsize: int = ..., typed: bool = ...):
+def lfu_cache(maxsize: int = ..., typed: bool = ...) -> None:
     """Decorator to wrap a function with a memoizing callable that saves
     up to `maxsize` results based on a Least Frequently Used (LFU)
     algorithm.
@@ -23,12 +12,12 @@ def lfu_cache(maxsize: int = ..., typed: bool = ...):
     Parameters:
     maxsize: int, default=128
 
-    typed: bool, default: False
+    typed: bool, default: False 
 
     """
     ...
 
-def lru_cache(maxsize: int = ..., typed: bool = ...):
+def lru_cache(maxsize: int = ..., typed: bool = ...) -> None:
     """Decorator to wrap a function with a memoizing callable that saves
     up to `maxsize` results based on a Least Recently Used (LRU)
     algorithm.
@@ -41,7 +30,7 @@ def lru_cache(maxsize: int = ..., typed: bool = ...):
     """
     ...
 
-def rr_cache(maxsize: int = ..., choice: Any = ..., typed: bool = ...):
+def rr_cache(maxsize: int = ..., choice: Optional[Callable[[Sequence[_T]], _T]] = ..., typed: bool = ...) -> None:
     """Decorator to wrap a function with a memoizing callable that saves
     up to `maxsize` results based on a Random Replacement (RR)
     algorithm.
@@ -57,7 +46,7 @@ def rr_cache(maxsize: int = ..., choice: Any = ..., typed: bool = ...):
     """
     ...
 
-def ttl_cache(maxsize: int = ..., ttl: int = ..., timer: Any = ..., typed: bool = ...):
+def ttl_cache(maxsize: int = ..., ttl: int = ..., timer: float = ..., typed: bool = ...) -> None:
     """Decorator to wrap a function with a memoizing callable that saves
     up to `maxsize` results based on a Least Recently Used (LRU)
     algorithm with a per-item time-to-live (TTL) value.
