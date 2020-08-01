@@ -1,0 +1,3 @@
+def detect_console_encoding(): ...
+
+pc_encoding_doc: str

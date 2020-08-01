@@ -1,0 +1,6 @@
+from pandas._config import get_option as get_option
+from typing import Any
+
+def result_type_many(*arrays_and_dtypes: Any): ...
+
+class NameResolutionError(NameError): ...

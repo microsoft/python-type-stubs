@@ -1,0 +1,6 @@
+from pandas.core.algorithms import unique1d as unique1d
+from pandas.core.arrays.categorical import Categorical as Categorical, CategoricalDtype as CategoricalDtype
+from typing import Any
+
+def recode_for_groupby(c: Categorical, sort: bool, observed: bool) -> Any: ...
+def recode_from_groupby(c: Categorical, sort: bool, ci: Any) -> Any: ...

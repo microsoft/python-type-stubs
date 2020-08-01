@@ -1,0 +1,6 @@
+from pandas.compat._optional import import_optional_dependency as import_optional_dependency
+from pandas.core.dtypes.common import is_integer as is_integer, is_list_like as is_list_like
+from typing import Any
+
+def register_writer(klass: Any) -> None: ...
+def get_writer(engine_name: Any): ...
