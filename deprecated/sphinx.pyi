@@ -10,7 +10,6 @@ from typing import (
     Generic,
     Literal,
     Optional,
-    overload,
     Type,
     TypeVar,
     Union,
@@ -144,12 +143,9 @@ def versionchanged(reason: str = "", version: str = "") -> Callable[[_T], _T]:
     """
     ...
 
-@overload
 def deprecated(
     *, reason: str = "", version: str = "", action: Optional[str] = ..., category: Optional[Type[DeprecationWarning]] = ...,
-) -> Callable[[_T], _T]: ...
-@overload
-def deprecated(*args: Any, **kwargs: Dict[str, Union[str, Type[DeprecationWarning]]]) -> Callable[[_T], _T]:
+) -> Callable[[_T], _T]:
     """
     This decorator can be used to insert a "deprecated" directive
     in your function/class docstring in order to documents the

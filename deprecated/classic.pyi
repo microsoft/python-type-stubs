@@ -10,7 +10,6 @@ from typing import (
     Dict,
     Generic,
     Optional,
-    overload,
     Type,
     TypeVar,
     Union,
@@ -28,6 +27,7 @@ Classic ``@deprecated`` decorator to deprecate old python classes, functions or 
 .. _The Warnings Filter: https://docs.python.org/3/library/warnings.html#the-warnings-filter
 """
 string_types = (type(b""), type(""))
+
 
 class ClassicAdapter(wrapt.AdapterFactory):
     """
@@ -84,6 +84,7 @@ class ClassicAdapter(wrapt.AdapterFactory):
     version: str
     action: Union[str, None]
     category: Type[DeprecationWarning]
+
     def __init__(
         self, reason: str = "", version: str = "", action: Optional[str] = None, category: Type[DeprecationWarning] = ...,
     ):
@@ -113,6 +114,7 @@ class ClassicAdapter(wrapt.AdapterFactory):
             By default, the category class is :class:`~DeprecationWarning`,
             you can inherit this class to define your own deprecation warning category.
         """
+
     def get_deprecated_msg(self, wrapped: Generic[_T], instance) -> str:
         """
         Get the deprecation warning message for the user.
@@ -122,6 +124,7 @@ class ClassicAdapter(wrapt.AdapterFactory):
         :return: The warning message.
         """
         ...
+
     def __call__(self, wrapped: Generic[_T]) -> Callable[[_T], _T]:
         """
         Decorate your class or function.
@@ -136,12 +139,10 @@ class ClassicAdapter(wrapt.AdapterFactory):
         """
         ...
 
-@overload
+
 def deprecated(
     *, reason: str = "", version: str = "", action: Optional[str] = ..., category: Optional[Type[DeprecationWarning]] = ...,
-) -> Callable[[_T], _T]: ...
-@overload
-def deprecated(*args: Any, **kwargs: Dict[str, Union[str, Type[DeprecationWarning]]]) -> Callable[[_T], _T]:
+) -> Callable[[_T], _T]:
     """
     This is a decorator which can be used to mark functions
     as deprecated. It will result in a warning being emitted
