@@ -17,9 +17,8 @@ class RRCache(Cache):
         The `choice` function used by the cache.
         """
         ...
-    def popitem(self) -> Generic[_KT, _VT]:
+    def popitem(self) -> _VT:
         """
         Remove and return a random `(key, value)` pair.
         """
         ...
-
