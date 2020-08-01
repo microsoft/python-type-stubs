@@ -4,16 +4,13 @@ from typing import Any, Callable, Optional, Sequence, TypeVar, Union
 logging_logger = logging.getLogger(__name__)
 _T = TypeVar("_T", bound=Callable[..., Any])
 _Decorator = Callable[[_T], _T]
-
-_fargs = TypeVar("_fargs")
-_fkwargs = TypeVar("_fkwargs")
 _R = TypeVar("_R")
 
 
 def retry_call(
     f: Callable[..., _R],
-    fargs: _fargs = ...,
-    fkwargs: _fkwargs = ...,
+    fargs: Any = ...,
+    fkwargs: Any = ...,
     exceptions: Union[Exception, Sequence[Exception]] = ...,
     tries: int = ...,
     delay: int = ...,
