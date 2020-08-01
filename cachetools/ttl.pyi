@@ -1,12 +1,10 @@
 from .cache import Cache as Cache
-from typing import Callable, Generic, Optional, TypeVar
+from typing import Callable, Generic, Optional, Tuple, TypeVar
 
 _KT = TypeVar("_KT")
 _VT = TypeVar("_VT")
 
-class _Timer: ...
-
-class TTLCache(Cache):
+class TTLCache(Cache[_KT, _VT]):
     """LRU Cache implementation with per-item time-to-live (TTL) value."""
 
     def __init__(
@@ -23,7 +21,7 @@ class TTLCache(Cache):
         """The current size of the cache."""
         ...
     @property
-    def timer(self) -> _Timer:
+    def timer(self) -> Callable[[], float]:
         """ The timer function used by the cache. """
         ...
     @property
@@ -37,7 +35,7 @@ class TTLCache(Cache):
     def get(self, key: _KT, default: _VT = None) -> _VT: ...
     def pop(self, key: _KT, default: _VT = object) -> _VT: ...
     def setdefault(self, key: _KT, default: _VT = None) -> _VT: ...
-    def popitem(self) -> _VT:
+    def popitem(self) -> Tuple[_KT, _VT]:
         """Remove and return the `(key, value)` pair least recently used that
         has not already expired.
 
