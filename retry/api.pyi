@@ -1,5 +1,5 @@
 import logging
-from typing import Any, Callable, Optional, Sequence, TypeVar, Union
+from typing import Any, Callable, Dict, List, Optional, Sequence, TypeVar, Union
 
 logging_logger = logging.getLogger(__name__)
 _T = TypeVar("_T", bound=Callable[..., Any])
@@ -9,8 +9,8 @@ _R = TypeVar("_R")
 
 def retry_call(
     f: Callable[..., _R],
-    fargs: Any = ...,
-    fkwargs: Any = ...,
+    fargs: List[Any] = ...,
+    fkwargs: Dict[str, Any] = ...,
     exceptions: Union[Exception, Sequence[Exception]] = ...,
     tries: int = ...,
     delay: int = ...,
