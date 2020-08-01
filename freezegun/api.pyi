@@ -1,7 +1,19 @@
 import datetime
 import numbers
 import types
-from typing import Any, Callable, Optional, Sequence, Tuple, Type, TypeVar, Union
+from typing import (
+    Any,
+    Callable,
+    Generator,
+    Optional,
+    Sequence,
+    Tuple,
+    Type,
+    TypeVar,
+    Union,
+)
+
+_T = TypeVar("_T")
 
 class TickingDateTimeFactory(object):
     def __init__(
@@ -64,7 +76,6 @@ class _freeze_time:
         as_arg: bool,
         auto_tick_seconds: float,
     ) -> None: ...
-    _T = TypeVar("_T")
     def __call__(self, func: Union[Type[_T], _T, Callable[..., Any]]) -> Any: ...
     def __enter__(
         self,
@@ -85,8 +96,8 @@ def freeze_time(
             datetime.datetime,
             datetime.date,
             datetime.timedelta,
-            types.FunctionType,
-            types.GeneratorType,
+            Callable[..., Any],
+            Generator,
         ]
     ] = ...,
     tz_offset: Optional[float] = ...,
