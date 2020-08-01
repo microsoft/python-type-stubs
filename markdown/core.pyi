@@ -31,13 +31,11 @@ License: BSD (see LICENSE.md for details).
 __all__ = ["Markdown", "markdown", "markdownFromFile"]
 logger = logging.getLogger("MARKDOWN")
 
-
 class Markdown:
     """Convert Markdown to HTML."""
 
     doc_tag = ...
     output_formats = ...
-
     @overload
     def __init__(
         self,
@@ -64,15 +62,11 @@ class Markdown:
 
         """
         ...
-
     @overload
-    def __init__(**kwargs: Any) -> None:
-        ...
-
+    def __init__(**kwargs: Any) -> None: ...
     def build_parser(self) -> Markdown:
         """ Build the parser from the various parts. """
         ...
-
     def registerExtensions(
         self, extensions: Sequence[Union[Extension, str]], configs: Mapping[str, Mapping[str, str]]
     ) -> Markdown:
@@ -87,7 +81,6 @@ class Markdown:
 
         """
         ...
-
     def build_extension(self, ext_name: Text, configs: Mapping[str, str]) -> Extension:
         """
         Build extension from a string name, then return an instance.
@@ -101,25 +94,20 @@ class Markdown:
         the Extension instance returned by that function.
         """
         ...
-
     def registerExtension(self, extension: Extension) -> Markdown:
         """ This gets called by the extension """
         ...
-
     def reset(self: Markdown) -> Markdown:
         """
         Resets all state variables so that we can start with a new text.
         """
         ...
-
     def set_output_format(self, format: Literal["xhtml", "html"]) -> Markdown:
         """ Set the output format for the class instance. """
         ...
-
     def is_block_level(self, tag: str) -> bool:
         """Check if the tag is a block level HTML tag."""
         ...
-
     def convert(self, source: Text) -> Text:
         """
         Convert markdown to serialized XHTML or HTML.
@@ -142,7 +130,6 @@ class Markdown:
 
         """
         ...
-
     def convertFile(
         self,
         input: Optional[Union[str, TextIO, BinaryIO]] = ...,
@@ -170,7 +157,6 @@ class Markdown:
         """
         ...
 
-
 @overload
 def markdown(
     text: Text,
@@ -195,12 +181,8 @@ def markdown(
     """
     ...
 
-
 @overload
-def markdown(text: Text, **kwargs: Any) -> Text:
-    ...
-
-
+def markdown(text: Text, **kwargs: Any) -> Text: ...
 @overload
 def markdownFromFile(
     input: Optional[Union[str, TextIO, BinaryIO]] = ...,
@@ -226,8 +208,6 @@ def markdownFromFile(
     """
     ...
 
-
 @overload
-def markdownFromFile(**kwargs: Any) -> None:
-    ...
+def markdownFromFile(**kwargs: Any) -> None: ...
 
