@@ -7,7 +7,6 @@ from typing import (
     Any,
     Callable,
     Dict,
-    Generic,
     Literal,
     Optional,
     Type,
@@ -15,7 +14,6 @@ from typing import (
     Union,
 )
 
-_C = TypeVar("_C")
 _T = TypeVar("_T", bound=Callable[..., Any])
 
 """
@@ -39,6 +37,7 @@ Of course, the ``@deprecated`` decorator will emit a deprecation warning
 when the function/method is called or the class is constructed.
 """
 
+
 class SphinxAdapter(ClassicAdapter):
     """
     Sphinx adapter -- *for advanced usage only*
@@ -55,8 +54,9 @@ class SphinxAdapter(ClassicAdapter):
     directive: Literal["versionadded", "versionchanged", "deprecated"]
     reason: str
     version: str
-    action: Union[str, None]
+    action: Optional[str]
     category: Type[DeprecationWarning]
+
     def __init__(
         self,
         directive: Literal["versionadded", "versionchanged", "deprecated"],
@@ -96,7 +96,8 @@ class SphinxAdapter(ClassicAdapter):
             you can inherit this class to define your own deprecation warning category.
         """
         ...
-    def __call__(self, wrapped: Generic[_C]) -> Callable[[_T], _T]:
+
+    def __call__(self, wrapped: _T) -> Callable[[_T], _T]:
         """
         Add the Sphinx directive to your class or function.
 
@@ -105,6 +106,7 @@ class SphinxAdapter(ClassicAdapter):
         :return: the decorated class or function.
         """
         ...
+
 
 def versionadded(reason: str = "", version: str = "") -> Callable[[_T], _T]:
     """
@@ -125,6 +127,7 @@ def versionadded(reason: str = "", version: str = "") -> Callable[[_T], _T]:
     """
     ...
 
+
 def versionchanged(reason: str = "", version: str = "") -> Callable[[_T], _T]:
     """
     This decorator can be used to insert a "versionchanged" directive
@@ -142,6 +145,7 @@ def versionchanged(reason: str = "", version: str = "") -> Callable[[_T], _T]:
     :return: the decorated function.
     """
     ...
+
 
 def deprecated(
     *, reason: str = "", version: str = "", action: Optional[str] = ..., category: Optional[Type[DeprecationWarning]] = ...,

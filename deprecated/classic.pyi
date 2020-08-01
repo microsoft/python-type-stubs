@@ -15,7 +15,6 @@ from typing import (
     Union,
 )
 
-_C = TypeVar("_C")
 _T = TypeVar("_T", bound=Callable[..., Any])
 
 """
@@ -27,7 +26,6 @@ Classic ``@deprecated`` decorator to deprecate old python classes, functions or 
 .. _The Warnings Filter: https://docs.python.org/3/library/warnings.html#the-warnings-filter
 """
 string_types = (type(b""), type(""))
-
 
 class ClassicAdapter(wrapt.AdapterFactory):
     """
@@ -82,9 +80,8 @@ class ClassicAdapter(wrapt.AdapterFactory):
 
     reason: str
     version: str
-    action: Union[str, None]
+    action: Optional[str]
     category: Type[DeprecationWarning]
-
     def __init__(
         self, reason: str = "", version: str = "", action: Optional[str] = None, category: Type[DeprecationWarning] = ...,
     ):
@@ -114,7 +111,6 @@ class ClassicAdapter(wrapt.AdapterFactory):
             By default, the category class is :class:`~DeprecationWarning`,
             you can inherit this class to define your own deprecation warning category.
         """
-
     def get_deprecated_msg(self, wrapped: Generic[_T], instance) -> str:
         """
         Get the deprecation warning message for the user.
@@ -124,8 +120,7 @@ class ClassicAdapter(wrapt.AdapterFactory):
         :return: The warning message.
         """
         ...
-
-    def __call__(self, wrapped: Generic[_T]) -> Callable[[_T], _T]:
+    def __call__(self, wrapped: _T) -> Callable[[_T], _T]:
         """
         Decorate your class or function.
 
@@ -138,7 +133,6 @@ class ClassicAdapter(wrapt.AdapterFactory):
            The warning filter is not set if the *action* parameter is ``None`` or empty.
         """
         ...
-
 
 def deprecated(
     *, reason: str = "", version: str = "", action: Optional[str] = ..., category: Optional[Type[DeprecationWarning]] = ...,
