@@ -1,5 +1,6 @@
-from ..en import Provider as AddressProvider
 from typing import Any, Optional
+
+from ..en import Provider as AddressProvider
 
 class Provider(AddressProvider):
     postal_code_letters: Any = ...

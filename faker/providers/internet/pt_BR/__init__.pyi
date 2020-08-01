@@ -1,5 +1,6 @@
-from .. import Provider as InternetProvider
 from typing import Any
+
+from .. import Provider as InternetProvider
 
 class Provider(InternetProvider):
     safe_email_tlds: Any = ...

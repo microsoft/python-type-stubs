@@ -1,5 +1,6 @@
-from .. import Provider as PersonProvider
 from typing import Any, Optional
+
+from .. import Provider as PersonProvider
 
 def checksum_identity_card_number(characters: Any): ...
 

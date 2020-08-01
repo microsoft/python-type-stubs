@@ -1,5 +1,6 @@
-from .. import BaseProvider as BaseProvider
 from typing import Any
+
+from .. import BaseProvider as BaseProvider
 
 localized: bool
 

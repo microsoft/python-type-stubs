@@ -1,6 +1,8 @@
-from .. import Provider as CompanyProvider
-from faker.utils.datetime_safe import datetime as datetime
 from typing import Any
+
+from faker.utils.datetime_safe import datetime as datetime
+
+from .. import Provider as CompanyProvider
 
 def calculate_checksum(value: Any): ...
 

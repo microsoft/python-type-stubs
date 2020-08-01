@@ -1,5 +1,6 @@
-from .. import Provider as AutomotiveProvider
 from typing import Any
+
+from .. import Provider as AutomotiveProvider
 
 class Provider(AutomotiveProvider):
     LICENSE_FORMAT_EN: str = ...

@@ -1,5 +1,6 @@
-from ..es_ES import Provider as PersonProvider
 from typing import Any
+
+from ..es_ES import Provider as PersonProvider
 
 class Provider(PersonProvider):
     first_names_male: Any = ...

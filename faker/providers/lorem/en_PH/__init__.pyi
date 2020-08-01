@@ -1,5 +1,6 @@
-from ..la import Provider as LoremProvider
 from typing import Any
+
+from ..la import Provider as LoremProvider
 
 class Provider(LoremProvider):
     english_word_list: Any = ...

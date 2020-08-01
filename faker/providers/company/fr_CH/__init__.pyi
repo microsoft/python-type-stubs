@@ -1,5 +1,6 @@
-from ..fr_FR import Provider as CompanyProvider
 from typing import Any
+
+from ..fr_FR import Provider as CompanyProvider
 
 class Provider(CompanyProvider):
     company_suffixes: Any = ...

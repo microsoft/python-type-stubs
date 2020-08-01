@@ -1,5 +1,6 @@
-from .. import Provider as SsnProvider
 from typing import Any
+
+from .. import Provider as SsnProvider
 
 def checksum(digits: Any): ...
 

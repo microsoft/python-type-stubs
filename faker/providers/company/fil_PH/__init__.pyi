@@ -1,5 +1,6 @@
-from ..en_PH import Provider as EnPhProvider
 from typing import Any
+
+from ..en_PH import Provider as EnPhProvider
 
 class Provider(EnPhProvider):
     catch_phrase_formats: Any = ...

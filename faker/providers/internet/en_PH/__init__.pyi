@@ -1,6 +1,9 @@
-from .. import Provider as InternetProvider
-from faker.utils.decorators import lowercase as lowercase, slugify as slugify
 from typing import Any
+
+from faker.utils.decorators import lowercase as lowercase
+from faker.utils.decorators import slugify as slugify
+
+from .. import Provider as InternetProvider
 
 class Provider(InternetProvider):
     tlds: Any = ...

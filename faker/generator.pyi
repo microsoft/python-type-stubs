@@ -1,8 +1,9 @@
 # pyright: strict
 
-from faker.providers import BaseProvider
 from random import Random
 from typing import Any, Callable, NoReturn, Optional, Sequence, Union
+
+from faker.providers import BaseProvider
 
 random: Random
 mod_random: Random
@@ -24,4 +25,3 @@ class Generator:
     def get_formatter(self, formatter: str) -> Callable[..., Any]: ...
     def set_formatter(self, name: Any, method: Any) -> NoReturn: ...
     def parse(self, text: str) -> str: ...
-

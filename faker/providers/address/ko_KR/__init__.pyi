@@ -1,5 +1,6 @@
-from .. import Provider as AddressProvider
 from typing import Any
+
+from .. import Provider as AddressProvider
 
 ALPHABET: Any
 

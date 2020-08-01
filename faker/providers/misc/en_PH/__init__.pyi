@@ -1,5 +1,6 @@
-from .. import Provider as MiscProvider
 from typing import Any
+
+from .. import Provider as MiscProvider
 
 class Provider(MiscProvider):
     gemstone_names: Any = ...

@@ -1,5 +1,6 @@
-from .. import Provider as CompanyProvider
 from typing import Any
+
+from .. import Provider as CompanyProvider
 
 def company_id_checksum(digits: Any): ...
 

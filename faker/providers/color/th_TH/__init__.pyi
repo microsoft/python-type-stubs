@@ -1,5 +1,6 @@
-from .. import Provider as ColorProvider
 from typing import Any
+
+from .. import Provider as ColorProvider
 
 localized: bool
 

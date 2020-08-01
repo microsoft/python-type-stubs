@@ -1,5 +1,6 @@
-from .. import Provider as BaseProvider
 from typing import Any
+
+from .. import Provider as BaseProvider
 
 ALPHABET: Any
 ALPHANUMERIC: Any

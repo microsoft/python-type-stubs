@@ -1,6 +1,9 @@
-from .. import CreditCard as CreditCard, Provider as CreditCardProvider
-from faker.providers.person.ru_RU import translit as translit
 from typing import Any, Optional
+
+from faker.providers.person.ru_RU import translit as translit
+
+from .. import CreditCard as CreditCard
+from .. import Provider as CreditCardProvider
 
 class Provider(CreditCardProvider):
     prefix_visa: Any = ...

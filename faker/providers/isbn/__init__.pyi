@@ -1,5 +1,7 @@
 from .. import BaseProvider as BaseProvider
-from .isbn import ISBN as ISBN, ISBN10 as ISBN10, ISBN13 as ISBN13
+from .isbn import ISBN as ISBN
+from .isbn import ISBN10 as ISBN10
+from .isbn import ISBN13 as ISBN13
 from .rules import RULES as RULES
 
 class Provider(BaseProvider):

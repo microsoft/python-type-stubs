@@ -1,6 +1,8 @@
-from .. import Provider as SsnProvider
-from faker.utils.checksums import calculate_luhn as calculate_luhn
 from typing import Any
+
+from faker.utils.checksums import calculate_luhn as calculate_luhn
+
+from .. import Provider as SsnProvider
 
 class Provider(SsnProvider):
     def ssn(

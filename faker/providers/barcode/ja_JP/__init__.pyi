@@ -1,5 +1,6 @@
-from .. import Provider as BarcodeProvider
 from typing import Any
+
+from .. import Provider as BarcodeProvider
 
 class Provider(BarcodeProvider):
     local_prefixes: Any = ...

@@ -1,5 +1,6 @@
-from .. import Provider as DateTimeProvider
 from typing import Any
+
+from .. import Provider as DateTimeProvider
 
 class Provider(DateTimeProvider):
     DAY_NAMES: Any = ...

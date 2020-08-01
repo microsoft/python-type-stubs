@@ -1,5 +1,6 @@
-from .. import Provider as AddressProvider
 from typing import Any
+
+from .. import Provider as AddressProvider
 
 class Provider(AddressProvider):
     city_formats: Any = ...

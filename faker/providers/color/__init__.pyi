@@ -1,6 +1,7 @@
+from typing import Any, Optional
+
 from .. import BaseProvider as BaseProvider
 from .color import RandomColor as RandomColor
-from typing import Any, Optional
 
 localized: bool
 

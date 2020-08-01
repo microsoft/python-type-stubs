@@ -1,5 +1,6 @@
-from .. import Provider as SsnProvider
 from typing import Any
+
+from .. import Provider as SsnProvider
 
 class Provider(SsnProvider):
     def ssn(self, min_age: int = ..., max_age: int = ..., artificial: bool = ...): ...

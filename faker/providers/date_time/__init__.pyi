@@ -1,11 +1,11 @@
-from .. import BaseProvider as BaseProvider
-from faker.utils.datetime_safe import (
-    date as date,
-    datetime as datetime,
-    real_date as real_date,
-    real_datetime as real_datetime,
-)
 from typing import Any, Optional
+
+from faker.utils.datetime_safe import date as date
+from faker.utils.datetime_safe import datetime as datetime
+from faker.utils.datetime_safe import real_date as real_date
+from faker.utils.datetime_safe import real_datetime as real_datetime
+
+from .. import BaseProvider as BaseProvider
 
 localized: bool
 

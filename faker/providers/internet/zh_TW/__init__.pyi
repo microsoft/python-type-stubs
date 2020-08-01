@@ -1,6 +1,8 @@
-from .. import Provider as InternetProvider
-from faker.utils.decorators import slugify as slugify
 from typing import Any
+
+from faker.utils.decorators import slugify as slugify
+
+from .. import Provider as InternetProvider
 
 class Provider(InternetProvider):
     user_name_formats: Any = ...

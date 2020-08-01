@@ -1,5 +1,7 @@
-from .. import CreditCard as CreditCard, Provider as CreditCardProvider
 from typing import Any
+
+from .. import CreditCard as CreditCard
+from .. import Provider as CreditCardProvider
 
 class Provider(CreditCardProvider):
     prefix_ansar: Any = ...

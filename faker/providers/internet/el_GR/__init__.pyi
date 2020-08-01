@@ -1,6 +1,8 @@
-from .. import Provider as InternetProvider
-from faker.utils.decorators import slugify_domain as slugify_domain
 from typing import Any
+
+from faker.utils.decorators import slugify_domain as slugify_domain
+
+from .. import Provider as InternetProvider
 
 class Provider(InternetProvider):
     free_email_domains: Any = ...

@@ -1,5 +1,6 @@
-from .. import Provider as AutomotiveProvider
 from typing import Any
+
+from .. import Provider as AutomotiveProvider
 
 class Provider(AutomotiveProvider):
     license_plate_letters: Any = ...

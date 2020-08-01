@@ -1,5 +1,6 @@
-from .. import Provider as CompanyProvider
 from typing import Any
+
+from .. import Provider as CompanyProvider
 
 def regon_checksum(digits: Any): ...
 def local_regon_checksum(digits: Any): ...

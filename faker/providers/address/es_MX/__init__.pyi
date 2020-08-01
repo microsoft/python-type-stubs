@@ -1,5 +1,6 @@
-from ..es import Provider as AddressProvider
 from typing import Any
+
+from ..es import Provider as AddressProvider
 
 class Provider(AddressProvider):
     city_prefixes: Any = ...

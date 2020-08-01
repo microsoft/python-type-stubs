@@ -1,6 +1,8 @@
-from .. import Provider as CompanyProvider
-from faker.utils.checksums import calculate_luhn as calculate_luhn
 from typing import Any
+
+from faker.utils.checksums import calculate_luhn as calculate_luhn
+
+from .. import Provider as CompanyProvider
 
 class Provider(CompanyProvider):
     formats: Any = ...
