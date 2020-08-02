@@ -1,5 +1,5 @@
 from markdown.core import Markdown
-from typing import Any, Mapping, Sequence
+from typing import Mapping, Sequence
 
 class Extension:
     config: Mapping[str, str] = ...

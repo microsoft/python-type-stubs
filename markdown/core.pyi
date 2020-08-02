@@ -1,6 +1,6 @@
 import logging
 from .extensions import Extension
-from typing import Any, BinaryIO, Dict, IO, List, Mapping, Optional, Sequence, Text, TextIO, Union
+from typing import BinaryIO, Mapping, Optional, Sequence, Text, TextIO, Union
 
 from typing_extensions import Literal
 
@@ -30,8 +30,6 @@ logger = logging.getLogger("MARKDOWN")
 class Markdown:
     """Convert Markdown to HTML."""
 
-    doc_tag = ...
-    output_formats = ...
     def __init__(
         self,
         extensions: Optional[Sequence[Union[str, Extension]]] = ...,
