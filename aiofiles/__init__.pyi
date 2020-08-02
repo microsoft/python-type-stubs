@@ -1,2 +1,2 @@
-from .threadpool import open
+from .threadpool import open as open
 

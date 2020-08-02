@@ -6,11 +6,10 @@ from typing_extensions import Literal
 from ._filemodes import (
     OpenBinaryMode,
     OpenBinaryModeReading,
-    OpenBinaryModeUpdating,
     OpenBinaryModeWriting,
     OpenTextMode,
 )
-from .binary import AsyncBufferedIOBase, AsyncBufferedReader, AsyncFileIO
+from .binary import AsyncBufferedReader, AsyncFileIO
 from .text import AsyncTextIOWrapper
 
 _AnyPath = Union[str, bytes, PathLike[str], PathLike[bytes]]
@@ -30,7 +29,7 @@ def open(
     opener: Optional[_Opener] = ...,
     *,
     loop: Optional[Any] = ...,
-    executor: Optional[Any] = ...
+    executor: Optional[Any] = ...,
 ) -> AsyncTextIOWrapper: ...
 
 # Unbuffered binary mode: returns a FileIO
@@ -46,7 +45,7 @@ def open(
     opener: Optional[_Opener] = ...,
     *,
     loop: Optional[Any] = ...,
-    executor: Optional[Any] = ...
+    executor: Optional[Any] = ...,
 ) -> AsyncFileIO: ...
 
 # Buffering is on: return BufferedRandom, BufferedReader, or BufferedWriter
@@ -62,7 +61,7 @@ def open(
     opener: Optional[_Opener] = ...,
     *,
     loop: Optional[Any] = ...,
-    executor: Optional[Any] = ...
+    executor: Optional[Any] = ...,
 ) -> AsyncBufferedReader: ...
 @overload
 def open(
@@ -76,7 +75,7 @@ def open(
     opener: Optional[_Opener] = ...,
     *,
     loop: Optional[Any] = ...,
-    executor: Optional[Any] = ...
+    executor: Optional[Any] = ...,
 ) -> AsyncBufferedReader: ...
 
 # Buffering cannot be determined: fall back to BinaryIO
@@ -92,5 +91,5 @@ def open(
     opener: Optional[_Opener] = ...,
     *,
     loop: Optional[Any] = ...,
-    executor: Optional[Any] = ...
+    executor: Optional[Any] = ...,
 ) -> AsyncFileIO: ...
