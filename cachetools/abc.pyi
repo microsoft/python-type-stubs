@@ -1,10 +1,6 @@
 from abc import ABCMeta, abstractmethod
 from collections.abc import MutableMapping
-from typing import (
-    Optional,
-    Tuple,
-    TypeVar,
-)
+from typing import Optional, Tuple, TypeVar
 
 _KT = TypeVar("_KT")
 _VT = TypeVar("_VT")

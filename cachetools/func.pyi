@@ -1,6 +1,4 @@
-from .ttl import TTLCache
-from collections import namedtuple
-from typing import Callable, NamedTuple, Optional, Sequence, TypeVar
+from typing import Callable, Optional, Sequence, TypeVar
 
 _T = TypeVar("_T")
 
@@ -62,4 +60,3 @@ def ttl_cache(maxsize: int = ..., ttl: int = ..., timer: float = ..., typed: boo
 
     """
     ...
-

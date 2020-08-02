@@ -1,5 +1,6 @@
-from .cache import Cache as Cache
-from typing import Callable, Generic, Optional, Sequence, Tuple, TypeVar
+from typing import Callable, Optional, Sequence, Tuple, TypeVar
+
+from .cache import Cache
 
 _KT = TypeVar("_KT")
 _VT = TypeVar("_VT")

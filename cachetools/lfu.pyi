@@ -1,5 +1,6 @@
-from .cache import Cache as Cache
-from typing import Callable, Generic, Optional, Tuple, TypeVar
+from typing import Callable, Optional, Tuple, TypeVar
+
+from .cache import Cache
 
 _KT = TypeVar("_KT")
 _VT = TypeVar("_VT")
@@ -16,4 +17,3 @@ class LFUCache(Cache[_KT, _VT]):
         Remove and return the (key, value) pair least frequently used.
         """
         ...
-

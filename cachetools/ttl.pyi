@@ -1,5 +1,6 @@
-from .cache import Cache as Cache
-from typing import Callable, Generic, Optional, Tuple, TypeVar
+from typing import Callable, Optional, Tuple, TypeVar
+
+from .cache import Cache
 
 _KT = TypeVar("_KT")
 _VT = TypeVar("_VT")
@@ -28,7 +29,7 @@ class TTLCache(Cache[_KT, _VT]):
     def ttl(self) -> int:
         """ The time-to-live value of the cache's items. """
         ...
-    def expire(self, time: Optional[_Timer] = ...) -> None:
+    def expire(self, time: Optional[Callable[[], float]] = ...) -> None:
         """ Remove expired items from the cache. """
         ...
     def clear(self) -> None: ...

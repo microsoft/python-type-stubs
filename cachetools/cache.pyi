@@ -1,7 +1,6 @@
 from .abc import DefaultMapping as DefaultMapping
 from typing import (
     Callable,
-    Generic,
     Optional,
     TypeVar,
 )
