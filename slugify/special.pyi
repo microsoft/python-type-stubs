@@ -1,9 +1,6 @@
 from typing import Sequence, Tuple
 
-
-def add_uppercase_char(char_list: Sequence[Tuple[str, str]]) -> Sequence[Tuple[str, str]]:
-    ...
-
+def add_uppercase_char(char_list: Sequence[Tuple[str, str]]) -> Sequence[Tuple[str, str]]: ...
 
 CYRILLIC: Sequence[Tuple[str, str]]
 GERMAN: Sequence[Tuple[str, str]]

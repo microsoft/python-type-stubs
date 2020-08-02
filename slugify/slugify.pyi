@@ -1,5 +1,4 @@
-import re
-from typing import Any, Iterable, Optional
+from typing import Iterable
 
 def smart_truncate(
     string: str, max_length: int = ..., word_boundary: bool = ..., separator: str = ..., save_order: bool = ...
@@ -46,4 +45,3 @@ def slugify(
     :return (str):
     """
     ...
-
