@@ -2,14 +2,12 @@ import logging
 import os
 import threading
 import time
-from typing import Any, Optional, Union
+from typing import Any, Optional, Type, Union
+from types import TracebackType
 
 """
 A platform independent file lock that supports the with-statement.
 """
-__all__ = ["Timeout", "BaseFileLock", "WindowsFileLock", "UnixFileLock", "SoftFileLock", "FileLock"]
-__version__ = "3.0.12"
-_logger = None
 
 def logger() -> logging.Logger:
     """Returns the logger instance used in this module."""
@@ -31,7 +29,7 @@ class _Acquire_ReturnProxy(object):
 
     def __enter__(self) -> str: ...
 
-    def __exit__(self, exc_type: Any, exc_value: Any, traceback: Any) -> None: ...
+    def __exit__(self, exc_type: Optional[Type[BaseException]], exc_val: Optional[BaseException], traceback: Optional[TracebackType]) -> None: ...
 
 
 class BaseFileLock(object):
@@ -136,7 +134,7 @@ class BaseFileLock(object):
     def __enter__(self) -> BaseFileLock:
         ...
     
-    def __exit__(self, exc_type: Any, exc_value: Any, traceback: Any) -> None:
+    def __exit__(self, exc_type: Optional[Type[BaseException]], exc_val: Optional[BaseException], traceback: Optional[TracebackType]) -> None:
         ...
     
     def __del__(self) -> None:
