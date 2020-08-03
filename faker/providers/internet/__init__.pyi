@@ -3,8 +3,7 @@ from typing import Any, Optional
 from faker.utils.decorators import lowercase as lowercase
 from faker.utils.decorators import slugify as slugify
 from faker.utils.decorators import slugify_unicode as slugify_unicode
-from faker.utils.distribution import \
-    choices_distribution as choices_distribution
+from faker.utils.distribution import choices_distribution as choices_distribution
 
 from .. import BaseProvider as BaseProvider
 

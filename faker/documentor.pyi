@@ -1,5 +1,3 @@
-# pyright: strict
-
 from typing import Any, Mapping, Optional, Sequence, Tuple
 
 from faker.providers import BaseProvider

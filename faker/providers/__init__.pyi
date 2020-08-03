@@ -1,9 +1,9 @@
 from typing import Any, Optional
 
-from faker.utils.distribution import \
-    choices_distribution as choices_distribution
-from faker.utils.distribution import \
-    choices_distribution_unique as choices_distribution_unique
+from faker.utils.distribution import choices_distribution as choices_distribution
+from faker.utils.distribution import (
+    choices_distribution_unique as choices_distribution_unique,
+)
 
 class BaseProvider:
     __provider__: str = ...

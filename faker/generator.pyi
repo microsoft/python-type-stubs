@@ -1,5 +1,3 @@
-# pyright: strict
-
 from random import Random
 from typing import Any, Callable, NoReturn, Optional, Sequence, Union
 

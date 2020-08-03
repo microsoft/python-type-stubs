@@ -1,14 +1,19 @@
-# pyright: strict
-
 from random import Random
-from typing import (Any, AnyStr, NoReturn, Optional, OrderedDict, Pattern,
-                    Sequence, Tuple, Union)
+from typing import (
+    Any,
+    AnyStr,
+    NoReturn,
+    Optional,
+    OrderedDict,
+    Pattern,
+    Sequence,
+    Tuple,
+    Union,
+)
 
-from faker.config import DEFAULT_LOCALE as DEFAULT_LOCALE
 from faker.factory import Factory as Factory
 from faker.generator import Generator as Generator
-from faker.utils.distribution import \
-    choices_distribution as choices_distribution
+from faker.utils.distribution import choices_distribution as choices_distribution
 
 class Faker:
     cache_pattern: Pattern[AnyStr] = ...
