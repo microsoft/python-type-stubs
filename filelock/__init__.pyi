@@ -18,33 +18,29 @@ class Timeout(TimeoutError):
     Raised when the lock could not be acquired in *timeout*
     seconds.
     """
+
     def __init__(self, lock_file: str) -> None: ...
-    
     def __str__(self) -> str: ...
-    
 
 class _Acquire_ReturnProxy(object):
-
     def __init__(self, lock: str) -> None: ...
-
     def __enter__(self) -> str: ...
-
-    def __exit__(self, exc_type: Optional[Type[BaseException]], exc_val: Optional[BaseException], traceback: Optional[TracebackType]) -> None: ...
-
+    def __exit__(
+        self, exc_type: Optional[Type[BaseException]], exc_val: Optional[BaseException], traceback: Optional[TracebackType]
+    ) -> None: ...
 
 class BaseFileLock(object):
     """
     Implements the base class of a file lock.
     """
-    def __init__(self, lock_file: str, timeout: Union[float, int, str] =...) -> None: ...
-    
+
+    def __init__(self, lock_file: str, timeout: Union[float, int, str] = ...) -> None: ...
     @property
     def lock_file(self) -> str:
         """
         The path to the lock file.
         """
         ...
-    
     @property
     def timeout(self) -> float:
         """
@@ -60,14 +56,11 @@ class BaseFileLock(object):
         .. versionadded:: 2.0.0
         """
         ...
-    
     @timeout.setter
     def timeout(self, value: Union[int, str, float]) -> None:
         """
         """
         ...
-    
-    
     @property
     def is_locked(self) -> bool:
         """
@@ -78,8 +71,7 @@ class BaseFileLock(object):
             This was previously a method and is now a property.
         """
         ...
-    
-    def acquire(self, timeout: Optional[float] = ..., poll_intervall: float=...) -> _Acquire_ReturnProxy:
+    def acquire(self, timeout: Optional[float] = ..., poll_intervall: float = ...) -> _Acquire_ReturnProxy:
         """
         Acquires the file lock or fails with a :exc:`Timeout` error.
 
@@ -115,7 +107,6 @@ class BaseFileLock(object):
             so that it can be used in a with statement without side effects.
         """
         ...
-    
     def release(self, force: bool = ...) -> None:
         """
         Releases the file lock.
@@ -130,50 +121,33 @@ class BaseFileLock(object):
             every case.
         """
         ...
-    
-    def __enter__(self) -> BaseFileLock:
-        ...
-    
-    def __exit__(self, exc_type: Optional[Type[BaseException]], exc_val: Optional[BaseException], traceback: Optional[TracebackType]) -> None:
-        ...
-    
-    def __del__(self) -> None:
-        ...
-    
-
+    def __enter__(self) -> BaseFileLock: ...
+    def __exit__(
+        self, exc_type: Optional[Type[BaseException]], exc_val: Optional[BaseException], traceback: Optional[TracebackType]
+    ) -> None: ...
+    def __del__(self) -> None: ...
 
 class WindowsFileLock(BaseFileLock):
     """
     Uses the :func:`msvcrt.locking` function to hard lock the lock file on
     windows systems.
     """
-    def _acquire(self) -> None:
-        ...
-    
-    def _release(self) -> None:
-        ...
-    
 
+    def _acquire(self) -> None: ...
+    def _release(self) -> None: ...
 
 class UnixFileLock(BaseFileLock):
     """
     Uses the :func:`fcntl.flock` to hard lock the lock file on unix systems.
     """
-    def _acquire(self) -> None:
-        ...
-    
-    def _release(self) -> None:
-        ...
-    
 
+    def _acquire(self) -> None: ...
+    def _release(self) -> None: ...
 
 class SoftFileLock(BaseFileLock):
     """
     Simply watches the existence of the lock file.
     """
-    def _acquire(self) -> None:
-        ...
-    
-    def _release(self) -> None:
-        ...
-    
+    def _acquire(self) -> None: ...
+    def _release(self) -> None: ...
+
