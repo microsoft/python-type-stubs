@@ -5,7 +5,7 @@ from typing import (
     Any,
     Awaitable,
     Callable,
-    Generator,
+    Iterator,
     Optional,
     Sequence,
     Tuple,
@@ -16,11 +16,10 @@ from typing import (
 )
 
 _T = TypeVar("_T")
+_Freezable = Union[str, datetime.datetime, datetime.date, datetime.timedelta]
 
 class TickingDateTimeFactory(object):
-    def __init__(
-        self, time_to_freeze: datetime.datetime, start: datetime.datetime
-    ) -> None:
+    def __init__(self, time_to_freeze: datetime.datetime, start: datetime.datetime) -> None:
         self.time_to_freeze: datetime.datetime = ...
         self.start: datetime.datetime = ...
     def __call__(self) -> datetime.datetime: ...
@@ -29,15 +28,8 @@ class FrozenDateTimeFactory(object):
     def __init__(self, time_to_freeze: datetime.datetime) -> None:
         self.time_to_freeze: datetime.datetime = ...
     def __call__(self) -> datetime.datetime: ...
-    def tick(
-        self, delta: Union[float, numbers.Real, datetime.timedelta] = ...
-    ) -> None: ...
-    def move_to(
-        self,
-        target_datetime: Optional[
-            Union[str, datetime.datetime, datetime.date, datetime.timedelta]
-        ],
-    ) -> None:
+    def tick(self, delta: Union[float, numbers.Real, datetime.timedelta] = ...) -> None: ...
+    def move_to(self, target_datetime: Optional[_Freezable],) -> None:
         """Moves frozen datetime.date to the given ``target_datetime``"""
         ...
 
@@ -49,12 +41,7 @@ class StepTickTimeFactory(object):
     def tick(self, delta: Optional[datetime.timedelta] = ...) -> None: ...
     def update_step_width(self, step_width: float) -> None:
         self.step_width = ...
-    def move_to(
-        self,
-        target_datetime: Optional[
-            Union[str, datetime.datetime, datetime.date, datetime.timedelta]
-        ],
-    ) -> None:
+    def move_to(self, target_datetime: Optional[_Freezable],) -> None:
         """Moves frozen datetime.date to the given ``target_datetime``"""
         ...
 
@@ -69,9 +56,7 @@ class _freeze_time:
     as_arg: bool = ...
     def __init__(
         self,
-        time_to_freeze_str: Union[
-            None, str, datetime.datetime, datetime.date, datetime.timedelta
-        ],
+        time_to_freeze_str: Optional[_Freezable],
         tz_offset: float,
         ignore: Sequence[str],
         tick: bool,
@@ -81,34 +66,19 @@ class _freeze_time:
     @overload
     def __call__(self, func: Type[_T]) -> Type[_T]: ...
     @overload
-    def __call__(
-        self, func: Callable[..., Awaitable[_T]]
-    ) -> Callable[..., Awaitable[_T]]: ...
+    def __call__(self, func: Callable[..., Awaitable[_T]]) -> Callable[..., Awaitable[_T]]: ...
     @overload
     def __call__(self, func: Callable[..., _T]) -> Callable[..., _T]: ...
-    def __enter__(
-        self,
-    ) -> Union[StepTickTimeFactory, TickingDateTimeFactory, FrozenDateTimeFactory]: ...
-    def __exit__(self, *args: Any) -> None: ...
-    def start(
-        self,
-    ) -> Union[StepTickTimeFactory, TickingDateTimeFactory, FrozenDateTimeFactory]: ...
+    def __enter__(self,) -> Union[StepTickTimeFactory, TickingDateTimeFactory, FrozenDateTimeFactory]: ...
+    def __exit__(self) -> None: ...
+    def start(self,) -> Union[StepTickTimeFactory, TickingDateTimeFactory, FrozenDateTimeFactory]: ...
     def stop(self) -> None: ...
     def decorate_class(self, klass: Type[_T]) -> _T: ...
     def decorate_coroutine(self, coroutine: _T) -> _T: ...
     def decorate_callable(self, func: Callable[..., _T],) -> Callable[..., _T]: ...
 
 def freeze_time(
-    time_to_freeze: Optional[
-        Union[
-            str,
-            datetime.datetime,
-            datetime.date,
-            datetime.timedelta,
-            Callable[..., Any],
-            Generator,
-        ]
-    ] = ...,
+    time_to_freeze: Optional[Union[_Freezable, Callable[..., _Freezable], Iterator[_Freezable],]] = ...,
     tz_offset: Optional[float] = ...,
     ignore: Optional[Sequence[str]] = ...,
     tick: Optional[bool] = ...,

@@ -352,6 +352,3 @@ MigrationBackup/
 
 # Python virtual environment
 .venv/
-
-# VSCode local settings
-.vscode/
