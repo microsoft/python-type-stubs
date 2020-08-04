@@ -1,13 +1,10 @@
-import logging
-import os
-import threading
-import time
-from typing import Any, Optional, Type, Union
-from types import TracebackType
-
 """
 A platform independent file lock that supports the with-statement.
 """
+
+import logging
+from typing import Optional, Type, Union
+from types import TracebackType
 
 def logger() -> logging.Logger:
     """Returns the logger instance used in this module."""
@@ -148,6 +145,7 @@ class SoftFileLock(BaseFileLock):
     """
     Simply watches the existence of the lock file.
     """
+
     def _acquire(self) -> None: ...
     def _release(self) -> None: ...
 
