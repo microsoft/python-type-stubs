@@ -1,6 +1,6 @@
 import sys
 from pandas._typing import FilePathOrBuffer as FilePathOrBuffer
-from pandas.io.common import get_filepath_or_buffer as get_filepath_or_buffer, get_handle as get_handle
+#from pandas.io.common import get_filepath_or_buffer as get_filepath_or_buffer, get_handle as get_handle
 from typing import Any, Optional
 if sys.version_info >= (3, 8):
     from typing import Literal

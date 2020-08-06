@@ -1,18 +1,20 @@
-from pandas import datetime
-from pandas._libs import lib as lib, tslibs as tslibs
+#from datetime import datetime
+#from pandas._libs import lib as lib, tslibs as tslibs
 #from pandas._libs.tslibs import NaT as NaT, iNaT as iNaT
-from pandas._libs.tslibs import Timedelta as Timedelta, Timestamp as Timestamp
+#from pandas._libs.tslibs import Timedelta as Timedelta, Timestamp as Timestamp
 #from pandas._libs.tslibs.fields import get_timedelta_field as get_timedelta_field
 #from pandas._libs.tslibs.timedeltas import array_to_timedelta64 as array_to_timedelta64, parse_timedelta_unit as parse_timedelta_unit, precision_from_unit as precision_from_unit
-from pandas.core import nanops as nanops
-from pandas.core.algorithms import checked_add_with_arr as checked_add_with_arr
+#from pandas.core import nanops as nanops
+#from pandas.core.algorithms import checked_add_with_arr as checked_add_with_arr
+from datetime import timedelta
+
 from pandas.core.arrays import datetimelike as dtl
-from pandas.core.dtypes.common import is_dtype_equal as is_dtype_equal, is_float_dtype as is_float_dtype, is_integer_dtype as is_integer_dtype, is_object_dtype as is_object_dtype, is_scalar as is_scalar, is_string_dtype as is_string_dtype, is_timedelta64_dtype as is_timedelta64_dtype, is_timedelta64_ns_dtype as is_timedelta64_ns_dtype, pandas_dtype as pandas_dtype
-from pandas.core.dtypes.dtypes import DatetimeTZDtype as DatetimeTZDtype
-from pandas.core.dtypes.generic import ABCDataFrame as ABCDataFrame, ABCIndexClass as ABCIndexClass, ABCSeries as ABCSeries, ABCTimedeltaIndex as ABCTimedeltaIndex
-from pandas.core.dtypes.missing import isna as isna
-from pandas.tseries.frequencies import to_offset as to_offset
-from pandas.tseries.offsets import Tick as Tick
+#from pandas.core.dtypes.common import is_dtype_equal as is_dtype_equal, is_float_dtype as is_float_dtype, is_integer_dtype as is_integer_dtype, is_object_dtype as is_object_dtype, is_scalar as is_scalar, is_string_dtype as is_string_dtype, is_timedelta64_dtype as is_timedelta64_dtype, is_timedelta64_ns_dtype as is_timedelta64_ns_dtype, pandas_dtype as pandas_dtype
+#from pandas.core.dtypes.dtypes import DatetimeTZDtype as DatetimeTZDtype
+#from pandas.core.dtypes.generic import ABCDataFrame as ABCDataFrame, ABCIndexClass as ABCIndexClass, ABCSeries as ABCSeries, ABCTimedeltaIndex as ABCTimedeltaIndex
+#from pandas.core.dtypes.missing import isna as isna
+#from pandas.tseries.frequencies import to_offset as to_offset
+#from pandas.tseries.offsets import Tick as Tick
 from typing import Any, Optional, Sequence
 
 class TimedeltaArray(dtl.DatetimeLikeArrayMixin, dtl.TimelikeOps):
@@ -38,7 +40,7 @@ class TimedeltaArray(dtl.DatetimeLikeArrayMixin, dtl.TimelikeOps):
     def __pos__(self): ...
     def __abs__(self): ...
     def total_seconds(self) -> int: ...
-    def to_pytimedelta(self) -> Sequence[datetime.timedelta]: ...
+    def to_pytimedelta(self) -> Sequence[timedelta]: ...
     days: int = ...
     seconds: int = ...
     microseconds: int = ...

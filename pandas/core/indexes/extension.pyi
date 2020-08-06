@@ -1,10 +1,10 @@
-from pandas.core.arrays import ExtensionArray as ExtensionArray
-from pandas.core.dtypes.common import ensure_platform_int as ensure_platform_int, is_dtype_equal as is_dtype_equal, is_object_dtype as is_object_dtype
-from pandas.core.dtypes.generic import ABCSeries as ABCSeries
-from pandas.core.indexers import deprecate_ndim_indexing as deprecate_ndim_indexing
+#from pandas.core.arrays import ExtensionArray as ExtensionArray
+#from pandas.core.dtypes.common import ensure_platform_int as ensure_platform_int, is_dtype_equal as is_dtype_equal, is_object_dtype as is_object_dtype
+#from pandas.core.dtypes.generic import ABCSeries as ABCSeries
+#from pandas.core.indexers import deprecate_ndim_indexing as deprecate_ndim_indexing
 from pandas.core.indexes.base import Index as Index
-from pandas.core.ops import get_op_result_name as get_op_result_name
-from pandas.util._decorators import Appender as Appender, cache_readonly as cache_readonly
+#from pandas.core.ops import get_op_result_name as get_op_result_name
+#from pandas.util._decorators import Appender as Appender, cache_readonly as cache_readonly
 from typing import Any, List, Optional
 
 def inherit_from_data(name: str, delegate: Any, cache: bool=..., wrap: bool=...) -> Any: ...

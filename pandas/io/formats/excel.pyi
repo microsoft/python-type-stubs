@@ -1,11 +1,11 @@
-from pandas import Index as Index
-from pandas.core.dtypes import missing as missing
-from pandas.core.dtypes.common import is_float as is_float, is_scalar as is_scalar
-from pandas.core.dtypes.generic import ABCMultiIndex as ABCMultiIndex, ABCPeriodIndex as ABCPeriodIndex
-from pandas.io.common import stringify_path as stringify_path
-from pandas.io.formats.css import CSSResolver as CSSResolver, CSSWarning as CSSWarning
-from pandas.io.formats.format import get_level_lengths as get_level_lengths
-from pandas.io.formats.printing import pprint_thing as pprint_thing
+#from pandas import Index as Index
+#from pandas.core.dtypes import missing as missing
+#from pandas.core.dtypes.common import is_float as is_float, is_scalar as is_scalar
+#from pandas.core.dtypes.generic import ABCMultiIndex as ABCMultiIndex, ABCPeriodIndex as ABCPeriodIndex
+#from pandas.io.common import stringify_path as stringify_path
+#from pandas.io.formats.css import CSSResolver as CSSResolver, CSSWarning as CSSWarning
+#from pandas.io.formats.format import get_level_lengths as get_level_lengths
+#from pandas.io.formats.printing import pprint_thing as pprint_thing
 from typing import Any, Callable, Dict, List, Optional, Sequence, Union
 
 class ExcelCell:

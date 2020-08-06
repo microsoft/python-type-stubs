@@ -1,9 +1,11 @@
 import abc
-from pandas import DataFrame as DataFrame, Index as Index, Series as Series
-from pandas.core.construction import create_series_with_explicit_dtype as create_series_with_explicit_dtype
-from pandas.core.dtypes.common import is_dict_like as is_dict_like, is_extension_array_dtype as is_extension_array_dtype, is_list_like as is_list_like, is_sequence as is_sequence
-from pandas.core.dtypes.generic import ABCSeries as ABCSeries
-from pandas.util._decorators import cache_readonly as cache_readonly
+from pandas.core.frame import DataFrame as DataFrame
+from pandas.core.indexes.base import Index as Index
+from pandas.core.series import Series as Series
+#from pandas.core.construction import create_series_with_explicit_dtype as create_series_with_explicit_dtype
+#from pandas.core.dtypes.common import is_dict_like as is_dict_like, is_extension_array_dtype as is_extension_array_dtype, is_list_like as is_list_like, is_sequence as is_sequence
+#from pandas.core.dtypes.generic import ABCSeries as ABCSeries
+#from pandas.util._decorators import cache_readonly as cache_readonly
 from typing import Any, Dict, Iterator, Tuple, Union
 
 ResType = Dict[int, Any]

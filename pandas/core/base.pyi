@@ -1,28 +1,19 @@
 import numpy as np
-import sys
-from pandas._typing import _Scalar
-from pandas.compat import PYPY as PYPY
-from pandas.core import algorithms as algorithms
+from pandas._typing import Scalar, SeriesAxisType
+#from pandas.compat import PYPY as PYPY
+#from pandas.core import algorithms as algorithms
 from pandas.core.accessor import DirNamesMixin as DirNamesMixin
-from pandas.core.algorithms import duplicated as duplicated, unique1d as unique1d, value_counts as value_counts
+#from pandas.core.algorithms import duplicated as duplicated, unique1d as unique1d, value_counts as value_counts
 from pandas.core.arrays import ExtensionArray as ExtensionArray
-from pandas.core.construction import create_series_with_explicit_dtype as create_series_with_explicit_dtype
-from pandas.core.dtypes.cast import is_nested_object as is_nested_object
-from pandas.core.dtypes.common import is_categorical_dtype as is_categorical_dtype, is_dict_like as is_dict_like, is_extension_array_dtype as is_extension_array_dtype, is_list_like as is_list_like, is_object_dtype as is_object_dtype, is_scalar as is_scalar, needs_i8_conversion as needs_i8_conversion
-from pandas.core.dtypes.generic import ABCDataFrame as ABCDataFrame, ABCIndexClass as ABCIndexClass, ABCSeries as ABCSeries
-from pandas.core.dtypes.missing import isna as isna
-from pandas.errors import AbstractMethodError as AbstractMethodError
-from pandas.util._decorators import Appender as Appender, Substitution as Substitution
-from pandas.util._validators import validate_bool_kwarg as validate_bool_kwarg
+#from pandas.core.construction import create_series_with_explicit_dtype as create_series_with_explicit_dtype
+#from pandas.core.dtypes.cast import is_nested_object as is_nested_object
+#from pandas.core.dtypes.common import is_categorical_dtype as is_categorical_dtype, is_dict_like as is_dict_like, is_extension_array_dtype as is_extension_array_dtype, is_list_like as is_list_like, is_object_dtype as is_object_dtype, is_scalar as is_scalar, needs_i8_conversion as needs_i8_conversion
+#from pandas.core.dtypes.generic import ABCDataFrame as ABCDataFrame, ABCIndexClass as ABCIndexClass, ABCSeries as ABCSeries
+#from pandas.core.dtypes.missing import isna as isna
+#from pandas.errors import AbstractMethodError as AbstractMethodError
+#from pandas.util._decorators import Appender as Appender, Substitution as Substitution
+#from pandas.util._validators import validate_bool_kwarg as validate_bool_kwarg
 from typing import Any, Callable, Generic, List, Optional, Tuple, TypeVar, Union, overload
-
-if sys.version_info >= (3, 8):
-    from typing import Literal
-else:
-    from typing_extensions import Literal
-
-_SeriesAxisType = Literal["index", 0]  # Restricted subset of _AxisType for series
-
 
 class PandasObject(DirNamesMixin):
     def __sizeof__(self): ...
@@ -37,7 +28,7 @@ class SpecificationError(GroupByError): ...
 class SelectionMixin:
     def ndim(self) -> int: ...
     def __getitem__(self, key: Any): ...
-    def aggregate(self, func: Optional[Callable] = ..., *args, **kwargs) -> Union[_Scalar, Series, DataFrame]: ...
+    def aggregate(self, func: Optional[Callable] = ..., *args, **kwargs) -> Union[Scalar, Series, DataFrame]: ...
     agg = aggregate
 
 class ShallowMixin: ...
@@ -67,8 +58,8 @@ class IndexOpsMixin(Generic[_T]):
     def empty(self): ...
     def max(self, axis: Optional[Any] = ..., skipna: bool = ..., *args: Any, **kwargs: Any): ...
     def min(self, axis: Optional[Any] = ..., skipna: bool = ..., *args: Any, **kwargs: Any): ...
-    def argmax(self, axis: Optional[_SeriesAxisType] = ..., skipna: bool = ..., *args, **kwargs) -> np.ndarray: ...
-    def argmin(self, axis: Optional[_SeriesAxisType] = ..., skipna: bool = ..., *args, **kwargs) -> np.ndarray: ...
+    def argmax(self, axis: Optional[SeriesAxisType] = ..., skipna: bool = ..., *args, **kwargs) -> np.ndarray: ...
+    def argmin(self, axis: Optional[SeriesAxisType] = ..., skipna: bool = ..., *args, **kwargs) -> np.ndarray: ...
     def tolist(self): ...
     def tolist(self) -> List[_T]: ...
     def __iter__(self) -> Any: ...

@@ -1,8 +1,8 @@
-from pandas._libs import algos as algos, hashtable as hashtable, lib as lib
-from pandas._libs.hashtable import unique_label_indices as unique_label_indices
-from pandas.core.construction import extract_array as extract_array
-from pandas.core.dtypes.common import ensure_int64 as ensure_int64, ensure_platform_int as ensure_platform_int, is_categorical_dtype as is_categorical_dtype, is_extension_array_dtype as is_extension_array_dtype
-from pandas.core.dtypes.missing import isna as isna
+#from pandas._libs import algos as algos, hashtable as hashtable, lib as lib
+#from pandas._libs.hashtable import unique_label_indices as unique_label_indices
+#from pandas.core.construction import extract_array as extract_array
+#from pandas.core.dtypes.common import ensure_int64 as ensure_int64, ensure_platform_int as ensure_platform_int, is_categorical_dtype as is_categorical_dtype, is_extension_array_dtype as is_extension_array_dtype
+#from pandas.core.dtypes.missing import isna as isna
 from typing import Any
 
 def get_group_index(labels: Any, shape: Any, sort: bool, xnull: bool) -> Any: ...

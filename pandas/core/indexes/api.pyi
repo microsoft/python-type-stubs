@@ -1,5 +1,6 @@
-from pandas._libs import NaT as NaT
-from pandas.core.indexes.base import Index as Index, InvalidIndexError as InvalidIndexError, _new_Index as _new_Index, ensure_index as ensure_index, ensure_index_from_sequences as ensure_index_from_sequences
+#from pandas._libs import NaT as NaT
+from pandas.core.indexes.base import Index as Index
+# , InvalidIndexError as InvalidIndexError, ensure_index as ensure_index, ensure_index_from_sequences as ensure_index_from_sequences
 from pandas.core.indexes.category import CategoricalIndex as CategoricalIndex
 from pandas.core.indexes.datetimes import DatetimeIndex as DatetimeIndex
 from pandas.core.indexes.interval import IntervalIndex as IntervalIndex

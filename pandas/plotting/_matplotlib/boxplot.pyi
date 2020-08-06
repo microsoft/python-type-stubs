@@ -1,13 +1,19 @@
-from collections import namedtuple
-from pandas.core.dtypes.common import is_dict_like as is_dict_like
-from pandas.core.dtypes.generic import ABCSeries as ABCSeries
-from pandas.core.dtypes.missing import remove_na_arraylike as remove_na_arraylike
-from pandas.io.formats.printing import pprint_thing as pprint_thing
-from pandas.plotting._matplotlib.core import LinePlot as LinePlot, MPLPlot as MPLPlot
-from typing import Any, Optional
+#from collections import namedtuple
+#from pandas.core.dtypes.common import is_dict_like as is_dict_like
+#from pandas.core.dtypes.generic import ABCSeries as ABCSeries
+#from pandas.core.dtypes.missing import remove_na_arraylike as remove_na_arraylike
+#from pandas.io.formats.printing import pprint_thing as pprint_thing
+from pandas.plotting._matplotlib.core import LinePlot as LinePlot
+# , MPLPlot as MPLPlot
+from typing import Any, NamedTuple, Optional
 
 class BoxPlot(LinePlot):
-    BP = namedtuple('Boxplot', ['ax', 'lines'])
+    class BoxPlot(NamedTuple):
+        ax: Any
+        lines: Any
+
+    BP = BoxPlot
+
     return_type: Any = ...
     def __init__(self, data: Any, return_type: str = ..., **kwargs: Any) -> None: ...
     def maybe_color_bp(self, bp: Any) -> None: ...

@@ -1,5 +1,5 @@
 from pandas.core.base import PandasObject as PandasObject
-from pandas.io.formats.printing import pprint_thing as pprint_thing
+#from pandas.io.formats.printing import pprint_thing as pprint_thing
 from typing import Any
 
 class FrozenList(PandasObject, list):

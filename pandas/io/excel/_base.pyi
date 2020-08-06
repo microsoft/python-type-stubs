@@ -1,15 +1,15 @@
 import abc
-from pandas._config import config as config
-from pandas._typing import _DType, _Scalar
+#from pandas._config import config as config
+from pandas._typing import Scalar
 #from pandas._libs.parsers import STR_NA_VALUES as STR_NA_VALUES
-from pandas.core.dtypes.common import is_bool as is_bool, is_float as is_float, is_integer as is_integer, is_list_like as is_list_like
+#from pandas.core.dtypes.common import is_bool as is_bool, is_float as is_float, is_integer as is_integer, is_list_like as is_list_like
 from pandas.core.frame import DataFrame as DataFrame
-from pandas.errors import EmptyDataError as EmptyDataError
-from pandas.io.common import get_filepath_or_buffer as get_filepath_or_buffer, is_url as is_url, stringify_path as stringify_path, urlopen as urlopen, validate_header_arg as validate_header_arg
-from pandas.io.excel._util import get_writer as get_writer
-from pandas.io.formats.printing import pprint_thing as pprint_thing
-from pandas.io.parsers import TextParser as TextParser
-from pandas.util._decorators import Appender as Appender
+#from pandas.errors import EmptyDataError as EmptyDataError
+#from pandas.io.common import get_filepath_or_buffer as get_filepath_or_buffer, is_url as is_url, stringify_path as stringify_path, urlopen as urlopen, validate_header_arg as validate_header_arg
+#from pandas.io.excel._util import get_writer as get_writer
+#from pandas.io.formats.printing import pprint_thing as pprint_thing
+#from pandas.io.parsers import TextParser as TextParser
+#from pandas.util._decorators import Appender as Appender
 from typing import Any, Callable, Dict, Optional, Sequence, Union, overload
 
 @overload
@@ -24,8 +24,8 @@ def read_excel(
     dtype: Union[str, Dict[str, Any]] = ...,
     engine: Optional[str] = ...,
     converters: Optional[Dict[Union[int, str], Callable]] = ...,
-    true_values: Optional[Sequence[_Scalar]] = ...,
-    false_values: Optional[Sequence[_Scalar]] = ...,
+    true_values: Optional[Sequence[Scalar]] = ...,
+    false_values: Optional[Sequence[Scalar]] = ...,
     skiprows: Optional[Sequence[int]] = ...,
     nrows: Optional[int] = ...,
     na_values: Any = ...,
@@ -52,8 +52,8 @@ def read_excel(
     dtype: Union[str, Dict[str, Any]] = ...,
     engine: Optional[str] = ...,
     converters: Optional[Dict[Union[int, str], Callable]] = ...,
-    true_values: Optional[Sequence[_Scalar]] = ...,
-    false_values: Optional[Sequence[_Scalar]] = ...,
+    true_values: Optional[Sequence[Scalar]] = ...,
+    false_values: Optional[Sequence[Scalar]] = ...,
     skiprows: Optional[Sequence[int]] = ...,
     nrows: Optional[int] = ...,
     na_values: Any = ...,

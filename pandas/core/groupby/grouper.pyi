@@ -1,15 +1,16 @@
 import numpy as np
 from pandas._typing import FrameOrSeries as FrameOrSeries
-from pandas.core.arrays import Categorical as Categorical, ExtensionArray as ExtensionArray
-from pandas.core.dtypes.common import ensure_categorical as ensure_categorical, is_categorical_dtype as is_categorical_dtype, is_datetime64_dtype as is_datetime64_dtype, is_list_like as is_list_like, is_scalar as is_scalar, is_timedelta64_dtype as is_timedelta64_dtype
-from pandas.core.dtypes.generic import ABCSeries as ABCSeries
-from pandas.core.frame import DataFrame as DataFrame
+#from pandas.core.arrays import Categorical as Categorical, ExtensionArray as ExtensionArray
+#from pandas.core.dtypes.common import ensure_categorical as ensure_categorical, is_categorical_dtype as is_categorical_dtype, is_datetime64_dtype as is_datetime64_dtype, is_list_like as is_list_like, is_scalar as is_scalar, is_timedelta64_dtype as is_timedelta64_dtype
+#from pandas.core.dtypes.generic import ABCSeries as ABCSeries
+#from pandas.core.frame import DataFrame as DataFrame
 from pandas.core.groupby import ops as ops
-from pandas.core.groupby.categorical import recode_for_groupby as recode_for_groupby, recode_from_groupby as recode_from_groupby
-from pandas.core.indexes.api import CategoricalIndex as CategoricalIndex, Index as Index, MultiIndex as MultiIndex
-from pandas.core.series import Series as Series
-from pandas.io.formats.printing import pprint_thing as pprint_thing
-from pandas.util._decorators import cache_readonly as cache_readonly
+#from pandas.core.groupby.categorical import recode_for_groupby as recode_for_groupby, recode_from_groupby as recode_from_groupby
+#from pandas.core.indexes.api import CategoricalIndex as CategoricalIndex, Index as Index, MultiIndex as MultiIndex
+from pandas.core.indexes.api import Index as Index
+#from pandas.core.series import Series as Series
+#from pandas.io.formats.printing import pprint_thing as pprint_thing
+#from pandas.util._decorators import cache_readonly as cache_readonly
 from typing import Any, Dict, Hashable, List, Optional, Tuple
 
 class Grouper:

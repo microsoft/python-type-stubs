@@ -1,9 +1,9 @@
-from pandas._config import get_option as get_option
-from pandas._libs import lib as lib
-from pandas.api.types import is_dict_like as is_dict_like, is_list_like as is_list_like
-from pandas.compat._optional import import_optional_dependency as import_optional_dependency
-from pandas.core.dtypes.common import is_float as is_float
-from pandas.util._decorators import Appender as Appender
+#from pandas._config import get_option as get_option
+#from pandas._libs import lib as lib
+#from pandas.api.types import is_dict_like as is_dict_like, is_list_like as is_list_like
+#from pandas.compat._optional import import_optional_dependency as import_optional_dependency
+#from pandas.core.dtypes.common import is_float as is_float
+#from pandas.util._decorators import Appender as Appender
 from typing import Any, Optional
 
 jinja2: Any

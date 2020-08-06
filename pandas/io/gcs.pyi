@@ -1,5 +1,5 @@
 from pandas._typing import FilePathOrBuffer as FilePathOrBuffer
-from pandas.compat._optional import import_optional_dependency as import_optional_dependency
+#from pandas.compat._optional import import_optional_dependency as import_optional_dependency
 from typing import Any, Optional
 
 gcsfs: Any

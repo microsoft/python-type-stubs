@@ -1,5 +1,5 @@
-from pandas import DataFrame as DataFrame
-from pandas.compat._optional import import_optional_dependency as import_optional_dependency
+from pandas.core.frame import DataFrame as DataFrame
+#from pandas.compat._optional import import_optional_dependency as import_optional_dependency
 from typing import Any, Dict, List, Optional
 
 def read_gbq(query: str, project_id: Optional[str]=..., index_col: Optional[str]=..., col_order: Optional[List[str]]=..., reauth: bool=..., auth_local_webserver: bool=..., dialect: Optional[str]=..., location: Optional[str]=..., configuration: Optional[Dict[str, Any]]=..., credentials: Any=..., use_bqstorage_api: Optional[bool]=..., private_key: Any=..., verbose: Any=..., progress_bar_type: Optional[str]=...) -> DataFrame: ...

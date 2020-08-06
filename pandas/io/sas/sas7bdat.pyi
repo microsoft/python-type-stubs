@@ -1,7 +1,7 @@
 from collections import abc
-from pandas.errors import EmptyDataError as EmptyDataError
-from pandas.io.common import get_filepath_or_buffer as get_filepath_or_buffer
-from pandas.io.sas._sas import Parser as Parser
+#from pandas.errors import EmptyDataError as EmptyDataError
+#from pandas.io.common import get_filepath_or_buffer as get_filepath_or_buffer
+#from pandas.io.sas._sas import Parser as Parser
 from typing import Any, Optional
 
 class _subheader_pointer: ...

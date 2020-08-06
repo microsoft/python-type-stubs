@@ -17,3 +17,5 @@ copy: Any
 paste: Any
 clipboard_get = paste
 clipboard_set = copy
+
+__all__ = ["copy", "paste", "set_clipboard", "determine_clipboard"]

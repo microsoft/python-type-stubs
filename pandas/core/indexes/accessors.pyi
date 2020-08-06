@@ -1,10 +1,11 @@
-from pandas.core.accessor import PandasDelegate as PandasDelegate, delegate_names as delegate_names
-from pandas.core.arrays import DatetimeArray as DatetimeArray, PeriodArray as PeriodArray, TimedeltaArray as TimedeltaArray
+from pandas.core.accessor import PandasDelegate as PandasDelegate
+#from pandas.core.accessor import delegate_names as delegate_names
+#from pandas.core.arrays import DatetimeArray as DatetimeArray, PeriodArray as PeriodArray, TimedeltaArray as TimedeltaArray
 from pandas.core.base import NoNewAttributesMixin as NoNewAttributesMixin, PandasObject as PandasObject
-from pandas.core.dtypes.common import is_categorical_dtype as is_categorical_dtype, is_datetime64_dtype as is_datetime64_dtype, is_datetime64tz_dtype as is_datetime64tz_dtype, is_datetime_arraylike as is_datetime_arraylike, is_integer_dtype as is_integer_dtype, is_list_like as is_list_like, is_period_arraylike as is_period_arraylike, is_timedelta64_dtype as is_timedelta64_dtype
-from pandas.core.dtypes.generic import ABCSeries as ABCSeries
-from pandas.core.indexes.datetimes import DatetimeIndex as DatetimeIndex
-from pandas.core.indexes.timedeltas import TimedeltaIndex as TimedeltaIndex
+#from pandas.core.dtypes.common import is_categorical_dtype as is_categorical_dtype, is_datetime64_dtype as is_datetime64_dtype, is_datetime64tz_dtype as is_datetime64tz_dtype, is_datetime_arraylike as is_datetime_arraylike, is_integer_dtype as is_integer_dtype, is_list_like as is_list_like, is_period_arraylike as is_period_arraylike, is_timedelta64_dtype as is_timedelta64_dtype
+#from pandas.core.dtypes.generic import ABCSeries as ABCSeries
+#from pandas.core.indexes.datetimes import DatetimeIndex as DatetimeIndex
+#from pandas.core.indexes.timedeltas import TimedeltaIndex as TimedeltaIndex
 from typing import Any
 
 class Properties(PandasDelegate, PandasObject, NoNewAttributesMixin):

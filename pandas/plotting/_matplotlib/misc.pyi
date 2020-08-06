@@ -1,5 +1,5 @@
-from pandas.core.dtypes.missing import notna as notna
-from pandas.io.formats.printing import pprint_thing as pprint_thing
+#from pandas.core.dtypes.missing import notna as notna
+#from pandas.io.formats.printing import pprint_thing as pprint_thing
 from typing import Any, Optional
 
 def scatter_matrix(frame: Any, alpha: float = ..., figsize: Optional[Any] = ..., ax: Optional[Any] = ..., grid: bool = ..., diagonal: str = ..., marker: str = ..., density_kwds: Optional[Any] = ..., hist_kwds: Optional[Any] = ..., range_padding: float = ..., **kwds: Any): ...

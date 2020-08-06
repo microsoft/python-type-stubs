@@ -1,14 +1,14 @@
 import datetime
 from collections import abc
-from pandas import Categorical as Categorical, DatetimeIndex as DatetimeIndex, NaT as NaT, Timestamp as Timestamp, concat as concat, isna as isna, to_datetime as to_datetime, to_timedelta as to_timedelta
+#from pandas import Categorical as Categorical, DatetimeIndex as DatetimeIndex, NaT as NaT, Timestamp as Timestamp, concat as concat, isna as isna, to_datetime as to_datetime, to_timedelta as to_timedelta
 #from pandas._libs.lib import infer_dtype as infer_dtype
 #from pandas._libs.writers import max_len_string_array as max_len_string_array
 from pandas._typing import FilePathOrBuffer as FilePathOrBuffer
-from pandas.core.dtypes.common import ensure_object as ensure_object, is_categorical_dtype as is_categorical_dtype, is_datetime64_dtype as is_datetime64_dtype
+#from pandas.core.dtypes.common import ensure_object as ensure_object, is_categorical_dtype as is_categorical_dtype, is_datetime64_dtype as is_datetime64_dtype
 from pandas.core.frame import DataFrame as DataFrame
-from pandas.core.series import Series as Series
-from pandas.io.common import get_filepath_or_buffer as get_filepath_or_buffer, stringify_path as stringify_path
-from pandas.util._decorators import Appender as Appender
+#from pandas.core.series import Series as Series
+#from pandas.io.common import get_filepath_or_buffer as get_filepath_or_buffer, stringify_path as stringify_path
+#from pandas.util._decorators import Appender as Appender
 from typing import Any, Dict, Hashable, Optional, Sequence
 
 def read_stata(

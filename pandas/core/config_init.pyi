@@ -1,4 +1,4 @@
-from pandas._config.config import is_bool as is_bool, is_callable as is_callable, is_instance_factory as is_instance_factory, is_int as is_int, is_nonnegative_int as is_nonnegative_int, is_one_of_factory as is_one_of_factory, is_text as is_text
+#from pandas._config.config import is_bool as is_bool, is_callable as is_callable, is_instance_factory as is_instance_factory, is_int as is_int, is_nonnegative_int as is_nonnegative_int, is_one_of_factory as is_one_of_factory, is_text as is_text
 from typing import Any
 
 use_bottleneck_doc: str

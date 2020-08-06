@@ -1,6 +1,7 @@
 import ast
-from pandas.core.computation.ops import BinOp as BinOp, Constant as Constant, Div as Div, FuncNode as FuncNode, Op as Op, Term as Term, UnaryOp as UnaryOp, UndefinedVariableError as UndefinedVariableError, is_term as is_term
-from pandas.core.computation.parsing import clean_backtick_quoted_toks as clean_backtick_quoted_toks, tokenize_string as tokenize_string
+#from pandas.core.computation.ops import BinOp as BinOp, Constant as Constant, Div as Div, FuncNode as FuncNode, Op as Op, Term as Term, UnaryOp as UnaryOp, UndefinedVariableError as UndefinedVariableError, is_term as is_term
+#from pandas.core.computation.parsing import clean_backtick_quoted_toks as clean_backtick_quoted_toks, tokenize_string as tokenize_string
+from pandas.core.computation.ops import Term as Term
 from pandas.core.computation.scope import Scope as Scope
 from typing import Any, Optional, Type
 

@@ -1,5 +1,6 @@
-#from pandas._libs.properties import cache_readonly as cache_readonly
+from pandas._libs.properties import cache_readonly as cache_readonly
 from typing import Any, Callable, List, Mapping, Optional, Tuple, Type, TypeVar, Union
+
 
 FuncType = Callable[..., Any]
 F = TypeVar('F', bound=FuncType)

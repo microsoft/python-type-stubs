@@ -1,4 +1,4 @@
-from pandas.util._decorators import Appender as Appender
+#from pandas.util._decorators import Appender as Appender
 from typing import Any
 
 class DirNamesMixin:

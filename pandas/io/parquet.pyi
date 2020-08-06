@@ -1,8 +1,9 @@
 from pandas._typing import FilePathOrBuffer as FilePathOrBuffer
-from pandas import DataFrame as DataFrame, get_option as get_option
-from pandas.compat._optional import import_optional_dependency as import_optional_dependency
-from pandas.errors import AbstractMethodError as AbstractMethodError
-from pandas.io.common import get_filepath_or_buffer as get_filepath_or_buffer, is_gcs_url as is_gcs_url, is_s3_url as is_s3_url
+from pandas.core.frame import DataFrame as DataFrame
+#    , get_option as get_option
+#from pandas.compat._optional import import_optional_dependency as import_optional_dependency
+#from pandas.errors import AbstractMethodError as AbstractMethodError
+#from pandas.io.common import get_filepath_or_buffer as get_filepath_or_buffer, is_gcs_url as is_gcs_url, is_s3_url as is_s3_url
 from typing import Any, Optional, Sequence
 
 def get_engine(engine: str) -> BaseImpl: ...

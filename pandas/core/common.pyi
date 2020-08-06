@@ -1,9 +1,9 @@
-from pandas._libs import lib as lib, tslibs as tslibs
+#from pandas._libs import lib as lib, tslibs as tslibs
 from pandas._typing import T as T
-from pandas.core.dtypes.cast import construct_1d_object_array_from_listlike as construct_1d_object_array_from_listlike
-from pandas.core.dtypes.common import is_array_like as is_array_like, is_bool_dtype as is_bool_dtype, is_extension_array_dtype as is_extension_array_dtype, is_integer as is_integer
-from pandas.core.dtypes.generic import ABCIndex as ABCIndex, ABCIndexClass as ABCIndexClass, ABCSeries as ABCSeries
-from pandas.core.dtypes.missing import isna as isna, isnull as isnull, notnull as notnull
+#from pandas.core.dtypes.cast import construct_1d_object_array_from_listlike as construct_1d_object_array_from_listlike
+#from pandas.core.dtypes.common import is_array_like as is_array_like, is_bool_dtype as is_bool_dtype, is_extension_array_dtype as is_extension_array_dtype, is_integer as is_integer
+#from pandas.core.dtypes.generic import ABCIndex as ABCIndex, ABCIndexClass as ABCIndexClass, ABCSeries as ABCSeries
+#from pandas.core.dtypes.missing import isna as isna, isnull as isnull, notnull as notnull
 from typing import Any, Collection, Iterable, Optional, Union
 
 class SettingWithCopyError(ValueError): ...

@@ -1,9 +1,9 @@
-from pandas._libs import tslibs as tslibs
-from pandas.core.dtypes.cast import maybe_promote as maybe_promote
-from pandas.core.dtypes.common import is_categorical_dtype as is_categorical_dtype, is_datetime64_dtype as is_datetime64_dtype, is_datetime64tz_dtype as is_datetime64tz_dtype, is_extension_array_dtype as is_extension_array_dtype, is_float_dtype as is_float_dtype, is_numeric_dtype as is_numeric_dtype, is_sparse as is_sparse, is_timedelta64_dtype as is_timedelta64_dtype
-from pandas.core.dtypes.concat import concat_compat as concat_compat
-from pandas.core.dtypes.missing import isna as isna
-from pandas.util._decorators import cache_readonly as cache_readonly
+#from pandas._libs import tslibs as tslibs
+#from pandas.core.dtypes.cast import maybe_promote as maybe_promote
+#from pandas.core.dtypes.common import is_categorical_dtype as is_categorical_dtype, is_datetime64_dtype as is_datetime64_dtype, is_datetime64tz_dtype as is_datetime64tz_dtype, is_extension_array_dtype as is_extension_array_dtype, is_float_dtype as is_float_dtype, is_numeric_dtype as is_numeric_dtype, is_sparse as is_sparse, is_timedelta64_dtype as is_timedelta64_dtype
+#from pandas.core.dtypes.concat import concat_compat as concat_compat
+#from pandas.core.dtypes.missing import isna as isna
+#from pandas.util._decorators import cache_readonly as cache_readonly
 from typing import Any, Optional
 
 def get_mgr_concatenation_plan(mgr: Any, indexers: Any): ...

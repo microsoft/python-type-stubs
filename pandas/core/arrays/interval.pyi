@@ -1,19 +1,21 @@
-# merged types from pylance
 import numpy as np
-from pandas._config import get_option as get_option
-from pandas._libs.interval import Interval as Interval, IntervalMixin as IntervalMixin, intervals_to_interval_bounds as intervals_to_interval_bounds
-from pandas.core.algorithms import take as take, value_counts as value_counts
+#from pandas._config import get_option as get_option
+from pandas._libs.interval import Interval as Interval, IntervalMixin as IntervalMixin
+# from pandas._libs.interval import intervals_to_interval_bounds as intervals_to_interval_bounds
+#from pandas.core.algorithms import take as take, value_counts as value_counts
 from pandas.core.arrays.base import ExtensionArray as ExtensionArray
-from pandas.core.arrays.categorical import Categorical as Categorical
-from pandas.core.construction import array as array
-from pandas.core.dtypes.cast import cast_scalar_to_array, maybe_convert_platform as maybe_convert_platform
-from pandas.core.dtypes.common import is_categorical_dtype as is_categorical_dtype, is_datetime64_any_dtype as is_datetime64_any_dtype, is_float_dtype as is_float_dtype, is_integer_dtype as is_integer_dtype, is_interval as is_interval, is_interval_dtype as is_interval_dtype, is_list_like as is_list_like, is_object_dtype as is_object_dtype, is_scalar as is_scalar, is_string_dtype as is_string_dtype, is_timedelta64_dtype as is_timedelta64_dtype, pandas_dtype as pandas_dtype
-from pandas.core.dtypes.dtypes import IntervalDtype as IntervalDtype
-from pandas.core.dtypes.generic import ABCDatetimeIndex as ABCDatetimeIndex, ABCExtensionArray as ABCExtensionArray, ABCIndexClass as ABCIndexClass, ABCInterval as ABCInterval, ABCIntervalIndex as ABCIntervalIndex, ABCPeriodIndex as ABCPeriodIndex, ABCSeries as ABCSeries
-from pandas.core.dtypes.missing import isna as isna, notna as notna
-from pandas.core.indexers import check_array_indexer as check_array_indexer
-from pandas.core.indexes.base import ensure_index as ensure_index
-from pandas.util._decorators import Appender as Appender
+#from pandas.core.arrays.categorical import Categorical as Categorical
+#from pandas.core.construction import array as array
+from pandas.core.dtypes.cast import cast_scalar_to_array #, maybe_convert_platform as maybe_convert_platform
+#from pandas.core.dtypes.common import is_categorical_dtype as is_categorical_dtype, is_datetime64_any_dtype as is_datetime64_any_dtype, is_float_dtype as is_float_dtype, is_integer_dtype as is_integer_dtype, is_interval as is_interval, is_interval_dtype as is_interval_dtype, is_list_like as is_list_like, is_object_dtype as is_object_dtype, is_scalar as is_scalar, is_string_dtype as is_string_dtype, is_timedelta64_dtype as is_timedelta64_dtype, pandas_dtype as pandas_dtype
+#from pandas.core.dtypes.dtypes import IntervalDtype as IntervalDtype
+#from pandas.core.dtypes.generic import ABCDatetimeIndex as ABCDatetimeIndex
+from pandas.core.dtypes.generic import ABCExtensionArray as ABCExtensionArray\
+#from pandas.core.dtypes.generic import ABCIndexClass as ABCIndexClass, ABCInterval as ABCInterval, ABCIntervalIndex as ABCIntervalIndex, ABCPeriodIndex as ABCPeriodIndex, ABCSeries as ABCSeries
+#from pandas.core.dtypes.missing import isna as isna, notna as notna
+#from pandas.core.indexers import check_array_indexer as check_array_indexer
+#from pandas.core.indexes.base import ensure_index as ensure_index
+#from pandas.util._decorators import Appender as Appender
 from pandas._typing import Axis, Scalar
 from typing import Any, Optional
 

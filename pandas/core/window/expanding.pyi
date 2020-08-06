@@ -1,6 +1,6 @@
 from pandas.core.window.common import WindowGroupByMixin as WindowGroupByMixin
 from pandas.core.window.rolling import _Rolling_and_Expanding
-from pandas.util._decorators import Appender as Appender, Substitution as Substitution
+#from pandas.util._decorators import Appender as Appender, Substitution as Substitution
 from typing import Any, Optional
 
 class Expanding(_Rolling_and_Expanding):

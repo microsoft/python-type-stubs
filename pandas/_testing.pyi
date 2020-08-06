@@ -1,12 +1,16 @@
-from pandas import Categorical as Categorical, CategoricalIndex as CategoricalIndex, DataFrame as DataFrame, DatetimeIndex as DatetimeIndex, Index as Index, IntervalIndex as IntervalIndex, MultiIndex as MultiIndex, RangeIndex as RangeIndex, Series as Series, bdate_range as bdate_range
-from pandas._config.localization import can_set_locale as can_set_locale, get_locales as get_locales, set_locale as set_locale
+#from pandas import Categorical as Categorical, CategoricalIndex as CategoricalIndex, DataFrame as DataFrame, DatetimeIndex as DatetimeIndex, Index as Index, IntervalIndex as IntervalIndex, MultiIndex as MultiIndex, RangeIndex as RangeIndex, Series as Series, bdate_range as bdate_range
+#from pandas._config.localization import can_set_locale as can_set_locale, get_locales as get_locales, set_locale as set_locale
+from core.arrays.categorical import Categorical
+from core.frame import DataFrame
+from core.indexes.base import Index
+from core.series import Series
 from pandas._typing import FilePathOrBuffer as FilePathOrBuffer, FrameOrSeries as FrameOrSeries
-from pandas.core.algorithms import take_1d as take_1d
-from pandas.core.arrays import DatetimeArray as DatetimeArray, ExtensionArray as ExtensionArray, IntervalArray as IntervalArray, PeriodArray as PeriodArray, TimedeltaArray as TimedeltaArray, period_array as period_array
-from pandas.core.dtypes.common import is_bool as is_bool, is_categorical_dtype as is_categorical_dtype, is_datetime64_dtype as is_datetime64_dtype, is_datetime64tz_dtype as is_datetime64tz_dtype, is_extension_array_dtype as is_extension_array_dtype, is_interval_dtype as is_interval_dtype, is_list_like as is_list_like, is_number as is_number, is_period_dtype as is_period_dtype, is_sequence as is_sequence, is_timedelta64_dtype as is_timedelta64_dtype, needs_i8_conversion as needs_i8_conversion
-from pandas.core.dtypes.missing import array_equivalent as array_equivalent
-from pandas.io.common import urlopen as urlopen
-from pandas.io.formats.printing import pprint_thing as pprint_thing
+#from pandas.core.algorithms import take_1d as take_1d
+#from pandas.core.arrays import DatetimeArray as DatetimeArray, ExtensionArray as ExtensionArray, IntervalArray as IntervalArray, PeriodArray as PeriodArray, TimedeltaArray as TimedeltaArray, period_array as period_array
+#from pandas.core.dtypes.common import is_bool as is_bool, is_categorical_dtype as is_categorical_dtype, is_datetime64_dtype as is_datetime64_dtype, is_datetime64tz_dtype as is_datetime64tz_dtype, is_extension_array_dtype as is_extension_array_dtype, is_interval_dtype as is_interval_dtype, is_list_like as is_list_like, is_number as is_number, is_period_dtype as is_period_dtype, is_sequence as is_sequence, is_timedelta64_dtype as is_timedelta64_dtype, needs_i8_conversion as needs_i8_conversion
+#from pandas.core.dtypes.missing import array_equivalent as array_equivalent
+#from pandas.io.common import urlopen as urlopen
+#from pandas.io.formats.printing import pprint_thing as pprint_thing
 from typing import Any, List, Optional, Union
 
 lzma: Any

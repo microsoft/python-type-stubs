@@ -1,4 +1,4 @@
-from pandas._libs.tslibs import parsing as parsing
+#from pandas._libs.tslibs import parsing as parsing
 from typing import Any
 
 def parse_date_time(date_col: Any, time_col: Any): ...

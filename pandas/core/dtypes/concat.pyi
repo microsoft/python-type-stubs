@@ -1,6 +1,7 @@
-from pandas._libs import tslib as tslib, tslibs as tslibs
-from pandas.core.dtypes.common import is_bool_dtype as is_bool_dtype, is_categorical_dtype as is_categorical_dtype, is_datetime64_dtype as is_datetime64_dtype, is_datetime64tz_dtype as is_datetime64tz_dtype, is_dtype_equal as is_dtype_equal, is_extension_array_dtype as is_extension_array_dtype, is_object_dtype as is_object_dtype, is_sparse as is_sparse, is_timedelta64_dtype as is_timedelta64_dtype
-from pandas.core.dtypes.generic import ABCCategoricalIndex as ABCCategoricalIndex, ABCDatetimeArray as ABCDatetimeArray, ABCIndexClass as ABCIndexClass, ABCRangeIndex as ABCRangeIndex, ABCSeries as ABCSeries
+#from pandas._libs import tslib as tslib, tslibs as tslibs
+#from pandas._libs import tslibs as tslibs
+#from pandas.core.dtypes.common import is_bool_dtype as is_bool_dtype, is_categorical_dtype as is_categorical_dtype, is_datetime64_dtype as is_datetime64_dtype, is_datetime64tz_dtype as is_datetime64tz_dtype, is_dtype_equal as is_dtype_equal, is_extension_array_dtype as is_extension_array_dtype, is_object_dtype as is_object_dtype, is_sparse as is_sparse, is_timedelta64_dtype as is_timedelta64_dtype
+#from pandas.core.dtypes.generic import ABCCategoricalIndex as ABCCategoricalIndex, ABCDatetimeArray as ABCDatetimeArray, ABCIndexClass as ABCIndexClass, ABCRangeIndex as ABCRangeIndex, ABCSeries as ABCSeries
 from typing import Any, Optional
 
 def get_dtype_kinds(l: Any): ...

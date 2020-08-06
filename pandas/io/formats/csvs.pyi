@@ -1,7 +1,7 @@
 from pandas._typing import FilePathOrBuffer as FilePathOrBuffer
-from pandas.core.dtypes.generic import ABCDatetimeIndex as ABCDatetimeIndex, ABCIndexClass as ABCIndexClass, ABCMultiIndex as ABCMultiIndex, ABCPeriodIndex as ABCPeriodIndex
-from pandas.core.dtypes.missing import notna as notna
-from pandas.io.common import get_compression_method as get_compression_method, get_filepath_or_buffer as get_filepath_or_buffer, get_handle as get_handle, infer_compression as infer_compression
+#from pandas.core.dtypes.generic import ABCDatetimeIndex as ABCDatetimeIndex, ABCIndexClass as ABCIndexClass, ABCMultiIndex as ABCMultiIndex, ABCPeriodIndex as ABCPeriodIndex
+#from pandas.core.dtypes.missing import notna as notna
+#from pandas.io.common import get_compression_method as get_compression_method, get_filepath_or_buffer as get_filepath_or_buffer, get_handle as get_handle, infer_compression as infer_compression
 from typing import Any, Hashable, Mapping, Optional, Sequence, Union
 
 class CSVFormatter:

@@ -1,3 +1,4 @@
+""" # See if we actually need these in stubs
 import pyarrow
 from typing import Any
 
@@ -24,3 +25,4 @@ class ArrowIntervalType(pyarrow.ExtensionType):
     def __arrow_ext_deserialize__(cls, storage_type: Any, serialized: Any): ...
     def __eq__(self, other: Any) -> Any: ...
     def __hash__(self) -> Any: ...
+"""

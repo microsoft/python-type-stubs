@@ -1,5 +1,5 @@
 import abc
-from pandas.core.computation.align import align_terms as align_terms, reconstruct_object as reconstruct_object
+#from pandas.core.computation.align import align_terms as align_terms, reconstruct_object as reconstruct_object
 from typing import Any
 
 class NumExprClobberingError(NameError): ...

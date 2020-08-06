@@ -1,5 +1,5 @@
-from pandas.core.dtypes.common import is_float_dtype as is_float_dtype, is_integer_dtype as is_integer_dtype, is_scalar as is_scalar
-from pandas.core.ops.roperator import rdivmod as rdivmod, rfloordiv as rfloordiv, rmod as rmod
+#from pandas.core.dtypes.common import is_float_dtype as is_float_dtype, is_integer_dtype as is_integer_dtype, is_scalar as is_scalar
+#from pandas.core.ops.roperator import rdivmod as rdivmod, rfloordiv as rfloordiv, rmod as rmod
 from typing import Any
 
 def fill_zeros(result: Any, x: Any, y: Any): ...

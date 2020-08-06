@@ -1,6 +1,6 @@
 from collections import abc
-from pandas.io.common import get_filepath_or_buffer as get_filepath_or_buffer
-from pandas.util._decorators import Appender as Appender
+#from pandas.io.common import get_filepath_or_buffer as get_filepath_or_buffer
+#from pandas.util._decorators import Appender as Appender
 from typing import Any, Optional
 
 class XportReader(abc.Iterator):

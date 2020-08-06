@@ -1,5 +1,5 @@
-from pandas._libs.tslibs import Timestamp as Timestamp
-from pandas.compat.chainmap import DeepChainMap as DeepChainMap
+#from pandas._libs.tslibs import Timestamp as Timestamp
+#from pandas.compat.chainmap import DeepChainMap as DeepChainMap
 from typing import Any, Optional
 
 def ensure_scope(level: int, global_dict: Any=..., local_dict: Any=..., resolvers: Any=..., target: Any=..., **kwargs: Any) -> Scope: ...

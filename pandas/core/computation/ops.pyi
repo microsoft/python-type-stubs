@@ -1,8 +1,8 @@
 import numpy as np
-from pandas._libs.tslibs import Timestamp as Timestamp
-from pandas.core.computation.common import result_type_many as result_type_many
-from pandas.core.dtypes.common import is_list_like as is_list_like, is_scalar as is_scalar
-from pandas.io.formats.printing import pprint_thing as pprint_thing, pprint_thing_encoded as pprint_thing_encoded
+#from pandas._libs.tslibs import Timestamp as Timestamp
+#from pandas.core.computation.common import result_type_many as result_type_many
+#from pandas.core.dtypes.common import is_list_like as is_list_like, is_scalar as is_scalar
+#from pandas.io.formats.printing import pprint_thing as pprint_thing, pprint_thing_encoded as pprint_thing_encoded
 from typing import Any, Optional
 
 class UndefinedVariableError(NameError):

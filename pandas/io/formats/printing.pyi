@@ -1,5 +1,5 @@
-from pandas._config import get_option as get_option
-from pandas.core.dtypes.inference import is_sequence as is_sequence
+#from pandas._config import get_option as get_option
+#from pandas.core.dtypes.inference import is_sequence as is_sequence
 from typing import Any, Callable, Iterable, List, Mapping, Optional, Sequence, Tuple, Union
 
 EscapeChars = Union[Mapping[str, str], Iterable[str]]

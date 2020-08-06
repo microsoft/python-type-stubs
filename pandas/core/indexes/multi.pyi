@@ -1,25 +1,30 @@
 import numpy as np
-from pandas._config import get_option as get_option
-from pandas._libs import Timestamp as Timestamp, index as libindex, lib as lib, tslibs as tslibs
-from pandas._libs.hashtable import duplicated_int64 as duplicated_int64
-from pandas.core.arrays import Categorical as Categorical
-from pandas.core.arrays.categorical import factorize_from_iterables as factorize_from_iterables
-from pandas.core.dtypes.cast import coerce_indexer_dtype as coerce_indexer_dtype
-from pandas.core.dtypes.common import ensure_int64 as ensure_int64, ensure_platform_int as ensure_platform_int, is_categorical_dtype as is_categorical_dtype, is_hashable as is_hashable, is_integer as is_integer, is_iterator as is_iterator, is_list_like as is_list_like, is_object_dtype as is_object_dtype, is_scalar as is_scalar, pandas_dtype as pandas_dtype
-from pandas.core.dtypes.dtypes import ExtensionDtype as ExtensionDtype
-from pandas.core.dtypes.generic import ABCDataFrame as ABCDataFrame
-from pandas.core.dtypes.missing import array_equivalent as array_equivalent, isna as isna
-from pandas.core.indexes.base import Index as Index, InvalidIndexError as InvalidIndexError, ensure_index as ensure_index
-from pandas.core.indexes.frozen import FrozenList as FrozenList
-from pandas.core.sorting import get_group_index as get_group_index, indexer_from_factorized as indexer_from_factorized, lexsort_indexer as lexsort_indexer
-from pandas.core.util.hashing import hash_tuple as hash_tuple, hash_tuples as hash_tuples
-from pandas.errors import PerformanceWarning as PerformanceWarning, UnsortedIndexError as UnsortedIndexError
-from pandas.io.formats.printing import format_object_attrs as format_object_attrs, format_object_summary as format_object_summary, pprint_thing as pprint_thing
-from pandas.util._decorators import Appender as Appender, cache_readonly as cache_readonly
+#from pandas._config import get_option as get_option
+#from pandas._libs import (
+#    Timestamp as Timestamp,
+    #index as libindex,
+#    lib as lib,
+#    tslibs as tslibs)
+#from pandas._libs.hashtable import duplicated_int64 as duplicated_int64
+#from pandas.core.arrays import Categorical as Categorical
+#from pandas.core.arrays.categorical import factorize_from_iterables as factorize_from_iterables
+#from pandas.core.dtypes.cast import coerce_indexer_dtype as coerce_indexer_dtype
+#from pandas.core.dtypes.common import ensure_int64 as ensure_int64, ensure_platform_int as ensure_platform_int, is_categorical_dtype as is_categorical_dtype, is_hashable as is_hashable, is_integer as is_integer, is_iterator as is_iterator, is_list_like as is_list_like, is_object_dtype as is_object_dtype, is_scalar as is_scalar, pandas_dtype as pandas_dtype
+#from pandas.core.dtypes.dtypes import ExtensionDtype as ExtensionDtype
+#from pandas.core.dtypes.generic import ABCDataFrame as ABCDataFrame
+#from pandas.core.dtypes.missing import array_equivalent as array_equivalent, isna as isna
+from pandas.core.indexes.base import Index as Index
+# , InvalidIndexError as InvalidIndexError #, ensure_index as ensure_index
+#from pandas.core.indexes.frozen import FrozenList as FrozenList
+#from pandas.core.sorting import get_group_index as get_group_index, indexer_from_factorized as indexer_from_factorized, lexsort_indexer as lexsort_indexer
+#from pandas.core.util.hashing import hash_tuple as hash_tuple, hash_tuples as hash_tuples
+#from pandas.errors import PerformanceWarning as PerformanceWarning, UnsortedIndexError as UnsortedIndexError
+#from pandas.io.formats.printing import format_object_attrs as format_object_attrs, format_object_summary as format_object_summary, pprint_thing as pprint_thing
+#from pandas.util._decorators import Appender as Appender, cache_readonly as cache_readonly
 from typing import Any, Hashable, Optional, Sequence, Union
 
-class MultiIndexUIntEngine(libindex.BaseMultiIndexCodesEngine, libindex.UInt64Engine): ...
-class MultiIndexPyIntEngine(libindex.BaseMultiIndexCodesEngine, libindex.ObjectEngine): ...
+#class MultiIndexUIntEngine(libindex.BaseMultiIndexCodesEngine, libindex.UInt64Engine): ...
+#class MultiIndexPyIntEngine(libindex.BaseMultiIndexCodesEngine, libindex.ObjectEngine): ...
 
 class MultiIndex(Index):
     rename: Any = ...

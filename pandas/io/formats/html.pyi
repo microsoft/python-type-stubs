@@ -1,10 +1,11 @@
-from pandas import option_context as option_context
-from pandas._config import get_option as get_option
-from pandas._libs import lib as lib
-from pandas.core.dtypes.generic import ABCMultiIndex as ABCMultiIndex
-from pandas.io.common import is_url as is_url
-from pandas.io.formats.format import DataFrameFormatter as DataFrameFormatter, TableFormatter as TableFormatter, buffer_put_lines as buffer_put_lines, get_level_lengths as get_level_lengths
-from pandas.io.formats.printing import pprint_thing as pprint_thing
+#from pandas import option_context as option_context
+#from pandas._config import get_option as get_option
+#from pandas._libs import lib as lib
+#from pandas.core.dtypes.generic import ABCMultiIndex as ABCMultiIndex
+#from pandas.io.common import is_url as is_url
+from pandas.io.formats.format import DataFrameFormatter as DataFrameFormatter, TableFormatter as TableFormatter
+# , buffer_put_lines as buffer_put_lines, get_level_lengths as get_level_lengths
+#from pandas.io.formats.printing import pprint_thing as pprint_thing
 from typing import Any, Dict, IO, Iterable, List, Optional, Tuple, Union
 
 class HTMLFormatter(TableFormatter):

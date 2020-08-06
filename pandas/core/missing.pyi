@@ -1,8 +1,8 @@
-from pandas._libs import algos as algos, lib as lib
-from pandas.compat._optional import import_optional_dependency as import_optional_dependency
-from pandas.core.dtypes.cast import infer_dtype_from_array as infer_dtype_from_array
-from pandas.core.dtypes.common import ensure_float64 as ensure_float64, is_datetime64_dtype as is_datetime64_dtype, is_datetime64tz_dtype as is_datetime64tz_dtype, is_integer_dtype as is_integer_dtype, is_numeric_v_string_like as is_numeric_v_string_like, is_scalar as is_scalar, is_timedelta64_dtype as is_timedelta64_dtype, needs_i8_conversion as needs_i8_conversion
-from pandas.core.dtypes.missing import isna as isna
+#from pandas._libs import algos as algos, lib as lib
+#from pandas.compat._optional import import_optional_dependency as import_optional_dependency
+#from pandas.core.dtypes.cast import infer_dtype_from_array as infer_dtype_from_array
+#from pandas.core.dtypes.common import ensure_float64 as ensure_float64, is_datetime64_dtype as is_datetime64_dtype, is_datetime64tz_dtype as is_datetime64tz_dtype, is_integer_dtype as is_integer_dtype, is_numeric_v_string_like as is_numeric_v_string_like, is_scalar as is_scalar, is_timedelta64_dtype as is_timedelta64_dtype, needs_i8_conversion as needs_i8_conversion
+#from pandas.core.dtypes.missing import isna as isna
 from typing import Any, Optional
 
 def mask_missing(arr: Any, values_to_mask: Any): ...

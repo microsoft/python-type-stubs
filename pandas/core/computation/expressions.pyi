@@ -1,6 +1,6 @@
-from pandas._config import get_option as get_option
+#from pandas._config import get_option as get_option
 #from pandas._libs.lib import values_from_object as values_from_object
-from pandas.core.dtypes.generic import ABCDataFrame as ABCDataFrame
+#from pandas.core.dtypes.generic import ABCDataFrame as ABCDataFrame
 from typing import Any, Optional
 
 def set_use_numexpr(v: bool = ...) -> None: ...

@@ -1,10 +1,14 @@
 import numpy as np
-from pandas._libs import algos as algos, lib as lib
-from pandas._libs.tslibs import conversion as conversion
+#from pandas._libs import algos as algos, lib as lib
+#from pandas._libs.tslibs import conversion as conversion
 from pandas._typing import ArrayLike as ArrayLike
-from pandas.core.dtypes.dtypes import CategoricalDtype as CategoricalDtype, DatetimeTZDtype as DatetimeTZDtype, ExtensionDtype as ExtensionDtype, IntervalDtype as IntervalDtype, PeriodDtype as PeriodDtype, registry as registry
-from pandas.core.dtypes.generic import ABCCategorical as ABCCategorical, ABCDatetimeIndex as ABCDatetimeIndex, ABCIndexClass as ABCIndexClass, ABCPeriodArray as ABCPeriodArray, ABCPeriodIndex as ABCPeriodIndex, ABCSeries as ABCSeries
-from pandas.core.dtypes.inference import is_array_like as is_array_like, is_bool as is_bool, is_complex as is_complex, is_decimal as is_decimal, is_dict_like as is_dict_like, is_file_like as is_file_like, is_float as is_float, is_hashable as is_hashable, is_integer as is_integer, is_interval as is_interval, is_iterator as is_iterator, is_list_like as is_list_like, is_named_tuple as is_named_tuple, is_nested_list_like as is_nested_list_like, is_number as is_number, is_re as is_re, is_re_compilable as is_re_compilable, is_scalar as is_scalar, is_sequence as is_sequence
+#from pandas.core.dtypes.dtypes import CategoricalDtype as CategoricalDtype, DatetimeTZDtype as DatetimeTZDtype, ExtensionDtype as ExtensionDtype, IntervalDtype as IntervalDtype, PeriodDtype as PeriodDtype, registry as registry
+#from pandas.core.dtypes.generic import ABCCategorical as ABCCategorical, ABCDatetimeIndex as ABCDatetimeIndex, ABCIndexClass as ABCIndexClass, ABCPeriodArray as ABCPeriodArray, ABCPeriodIndex as ABCPeriodIndex, ABCSeries as ABCSeries
+from pandas.core.dtypes.inference import (
+    is_array_like as is_array_like,
+    is_integer as is_integer,
+    is_scalar as is_scalar)
+# , is_bool as is_bool, is_complex as is_complex, is_decimal as is_decimal, is_dict_like as is_dict_like, is_file_like as is_file_like, is_float as is_float, is_hashable as is_hashable, is_integer as is_integer, is_interval as is_interval, is_iterator as is_iterator, is_list_like as is_list_like, is_named_tuple as is_named_tuple, is_nested_list_like as is_nested_list_like, is_number as is_number, is_re as is_re, is_re_compilable as is_re_compilable, is_scalar as is_scalar, is_sequence as is_sequence
 from typing import Any, Callable, Union
 
 ensure_float64: Any

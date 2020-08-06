@@ -1,10 +1,10 @@
 from pandas.core.indexes.base import Index
-from pandas._libs.interval import Interval as Interval
-from pandas._libs.tslibs import NaT as NaT, Period as Period, Timestamp as Timestamp, timezones as timezones
+#from pandas._libs.interval import Interval as Interval
+from pandas._libs.tslibs import NaT as NaT, Period as Period, Timestamp as Timestamp #, timezones as timezones
 from pandas._typing import Ordered as Ordered
 from pandas.core.dtypes.base import ExtensionDtype as ExtensionDtype
-from pandas.core.dtypes.generic import ABCCategoricalIndex as ABCCategoricalIndex, ABCDateOffset as ABCDateOffset, ABCIndexClass as ABCIndexClass
-from pandas.core.dtypes.inference import is_bool as is_bool, is_list_like as is_list_like
+#from pandas.core.dtypes.generic import ABCCategoricalIndex as ABCCategoricalIndex, ABCDateOffset as ABCDateOffset, ABCIndexClass as ABCIndexClass
+#from pandas.core.dtypes.inference import is_bool as is_bool, is_list_like as is_list_like
 from typing import Any, Optional, Sequence, Tuple, Type, Union
 
 str_type = str

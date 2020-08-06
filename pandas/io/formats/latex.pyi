@@ -1,4 +1,4 @@
-from pandas.core.dtypes.generic import ABCMultiIndex as ABCMultiIndex
+#from pandas.core.dtypes.generic import ABCMultiIndex as ABCMultiIndex
 from pandas.io.formats.format import DataFrameFormatter as DataFrameFormatter, TableFormatter as TableFormatter
 from typing import Any, IO, Optional
 

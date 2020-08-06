@@ -1,24 +1,43 @@
 import numpy as np
-from pandas._config import get_option as get_option
-from pandas._libs import Timedelta as Timedelta, Timestamp as Timestamp, lib as lib
-from pandas._libs.interval import Interval as Interval, IntervalMixin as IntervalMixin, IntervalTree as IntervalTree
-from pandas._typing import AnyArrayLike as AnyArrayLike
-from pandas.core.algorithms import take_1d as take_1d
-from pandas.core.arrays.interval import IntervalArray as IntervalArray
-from pandas.core.dtypes.cast import find_common_type as find_common_type, infer_dtype_from_scalar as infer_dtype_from_scalar, maybe_downcast_to_dtype as maybe_downcast_to_dtype
-from pandas.core.dtypes.common import ensure_platform_int as ensure_platform_int, is_categorical as is_categorical, is_datetime64tz_dtype as is_datetime64tz_dtype, is_datetime_or_timedelta_dtype as is_datetime_or_timedelta_dtype, is_dtype_equal as is_dtype_equal, is_float as is_float, is_float_dtype as is_float_dtype, is_integer as is_integer, is_integer_dtype as is_integer_dtype, is_interval_dtype as is_interval_dtype, is_list_like as is_list_like, is_number as is_number, is_object_dtype as is_object_dtype, is_scalar as is_scalar
+#from pandas._config import get_option as get_option
+#from pandas._libs import Timedelta as Timedelta, Timestamp as Timestamp, lib as lib
+from pandas._libs.interval import IntervalMixin as IntervalMixin, Interval as Interval
+from pandas._typing import AnyArrayLike as AnyArrayLike, UU
+#from pandas.core.algorithms import take_1d as take_1d
+#from pandas.core.arrays.interval import IntervalArray as IntervalArray
+#from pandas.core.dtypes.cast import find_common_type as find_common_type, infer_dtype_from_scalar as infer_dtype_from_scalar, maybe_downcast_to_dtype as maybe_downcast_to_dtype
+#from pandas.core.dtypes.common import (
+#    ensure_platform_int as ensure_platform_int,
+#    is_categorical as is_categorical,
+#    is_datetime64tz_dtype as is_datetime64tz_dtype,
+#    is_datetime_or_timedelta_dtype as is_datetime_or_timedelta_dtype,
+#    is_dtype_equal as is_dtype_equal,
+#    is_float as is_float,
+#    is_float_dtype as is_float_dtype,
+#    is_integer as is_integer,
+#    is_integer_dtype as is_integer_dtype,
+#    is_interval_dtype as is_interval_dtype,
+#    is_list_like as is_list_like,
+#    is_number as is_number,
+#    is_object_dtype as is_object_dtype,
+#    is_scalar as is_scalar
+#    )
 from pandas.core.dtypes.generic import ABCSeries as ABCSeries
-from pandas.core.dtypes.missing import isna as isna
-from pandas.core.indexes.base import Index as Index, InvalidIndexError as InvalidIndexError, default_pprint as default_pprint, ensure_index as ensure_index, maybe_extract_name as maybe_extract_name
-from pandas.core.indexes.datetimes import DatetimeIndex as DatetimeIndex, date_range as date_range
-from pandas.core.indexes.extension import ExtensionIndex as ExtensionIndex, inherit_names as inherit_names
-from pandas.core.indexes.multi import MultiIndex as MultiIndex
-from pandas.core.indexes.timedeltas import TimedeltaIndex as TimedeltaIndex, timedelta_range as timedelta_range
-from pandas.core.ops import get_op_result_name as get_op_result_name
-from pandas.tseries.frequencies import to_offset as to_offset
-from pandas.tseries.offsets import DateOffset as DateOffset
-from pandas.util._decorators import Appender as Appender, Substitution as Substitution, cache_readonly as cache_readonly
-from pandas.util._exceptions import rewrite_exception as rewrite_exception
+#from pandas.core.dtypes.missing import isna as isna
+from pandas.core.indexes.base import Index as Index
+# ,InvalidIndexError as InvalidIndexError,
+#    ensure_index as ensure_index,
+#    maybe_extract_name as maybe_extract_name
+#from pandas.core.indexes.datetimes import DatetimeIndex as DatetimeIndex, date_range as date_range
+from pandas.core.indexes.extension import ExtensionIndex as ExtensionIndex
+# , inherit_names as inherit_names
+#from pandas.core.indexes.multi import MultiIndex as MultiIndex
+#from pandas.core.indexes.timedeltas import TimedeltaIndex as TimedeltaIndex, timedelta_range as timedelta_range
+#from pandas.core.ops import get_op_result_name as get_op_result_name
+#from pandas.tseries.frequencies import to_offset as to_offset
+#from pandas.tseries.offsets import DateOffset as DateOffset
+#from pandas.util._decorators import Appender as Appender, Substitution as Substitution, cache_readonly as cache_readonly
+#from pandas.util._exceptions import rewrite_exception as rewrite_exception
 from typing import Any, Optional, Tuple, Union
 
 class SetopCheck:
@@ -38,7 +57,7 @@ class IntervalIndex(IntervalMixin, ExtensionIndex):
     def values(self): ...
     def __array_wrap__(self, result: Any, context: Optional[Any] = ...): ...
     def __reduce__(self): ...
-    def astype(self, dtype: Any, copy: bool = ...): ...
+    def astype(self, dtype: UU, copy: bool = ...) -> Index[UU]: ...
     @property
     def inferred_type(self) -> str: ...
     def memory_usage(self, deep: bool=...) -> int: ...

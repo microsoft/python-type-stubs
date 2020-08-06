@@ -1,17 +1,19 @@
 from collections import abc
 import sys
-from pandas import DataFrame as DataFrame, MultiIndex as MultiIndex, Series as Series, isna as isna, to_datetime as to_datetime
-from pandas._libs.tslibs import iNaT as iNaT
-from pandas._typing import JSONSerializable as JSONSerializable, _Path_or_Buf
-from pandas.core.construction import create_series_with_explicit_dtype as create_series_with_explicit_dtype
-from pandas.core.dtypes.common import ensure_str as ensure_str, is_period_dtype as is_period_dtype
-from pandas.core.reshape.concat import concat as concat
-from pandas.errors import AbstractMethodError as AbstractMethodError
-from pandas.io.common import get_filepath_or_buffer as get_filepath_or_buffer, get_handle as get_handle, infer_compression as infer_compression, stringify_path as stringify_path
-from pandas.io.json._normalize import convert_to_line_delimits as convert_to_line_delimits
-from pandas.io.json._table_schema import build_table_schema as build_table_schema, parse_table_schema as parse_table_schema
-from pandas.util._decorators import deprecate_kwarg as deprecate_kwarg
-from typing import Any, Callable, IO, Optional, Union, overload
+#from pandas import DataFrame as DataFrame, MultiIndex as MultiIndex, Series as Series, isna as isna, to_datetime as to_datetime
+from pandas.core.series import Series as Series
+from pandas.core.frame import DataFrame
+#from pandas._libs.tslibs import iNaT as iNaT
+from pandas._typing import JSONSerializable as JSONSerializable, FilePathOrBuffer
+#from pandas.core.construction import create_series_with_explicit_dtype as create_series_with_explicit_dtype
+#from pandas.core.dtypes.common import ensure_str as ensure_str, is_period_dtype as is_period_dtype
+#from pandas.core.reshape.concat import concat as concat
+#from pandas.errors import AbstractMethodError as AbstractMethodError
+#from pandas.io.common import get_filepath_or_buffer as get_filepath_or_buffer, get_handle as get_handle, infer_compression as infer_compression, stringify_path as stringify_path
+#from pandas.io.json._normalize import convert_to_line_delimits as convert_to_line_delimits
+#from pandas.io.json._table_schema import build_table_schema as build_table_schema, parse_table_schema as parse_table_schema
+#from pandas.util._decorators import deprecate_kwarg as deprecate_kwarg
+from typing import Any, Callable, Optional, Union, overload
 if sys.version_info >= (3, 8):
     from typing import Literal
 else:
@@ -50,7 +52,7 @@ class JSONTableWriter(FrameWriter):
 
 @overload
 def read_json(
-    path: _Path_or_Buf,
+    path: FilePathOrBuffer,
     orient: Optional[str] = ...,
     dtype: Any = ...,
     convert_axes: Any = ...,
@@ -68,7 +70,7 @@ def read_json(
 ) -> Series: ...
 @overload
 def read_json(
-    path: _Path_or_Buf,
+    path: FilePathOrBuffer,
     orient: Optional[str] = ...,
     dtype: Any = ...,
     convert_axes: Any = ...,
@@ -86,7 +88,7 @@ def read_json(
 ) -> DataFrame: ...
 @overload
 def read_json(
-    path: _Path_or_Buf,
+    path: FilePathOrBuffer,
     orient: Optional[str] = ...,
     typ: Optional[Literal["frame", "series"]] = ...,
     dtype: Any = ...,

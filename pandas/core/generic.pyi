@@ -1,33 +1,31 @@
-import datetime
-from pandas import datetime
 import numpy as np
-from pathlib import Path
 import sys
 import pandas.core.indexing as indexing
-from pandas._config import config as config
-from pandas._libs import Timestamp as Timestamp, iNaT as iNaT  #, lib as lib, properties as properties
-from pandas._typing import Axis as Axis, Dtype as Dtype, FilePathOrBuffer as FilePathOrBuffer, FrameOrSeries as FrameOrSeries, JSONSerializable as JSONSerializable, Level as Level, Renamer as Renamer
-from pandas.compat import set_function_name as set_function_name
-from pandas.compat._optional import import_optional_dependency as import_optional_dependency
-from pandas.core import missing as missing, nanops as nanops
+#from pandas._config import config as config
+#from pandas._libs import Timestamp as Timestamp, iNaT as iNaT  #, lib as lib, properties as properties
+from pandas._typing import Axis as Axis, DType as DType, FilePathOrBuffer as FilePathOrBuffer, FrameOrSeries as FrameOrSeries, JSONSerializable as JSONSerializable, Level as Level, Renamer as Renamer, ListLike as ListLike, Scalar as Scalar, SeriesAxisType as SeriesAxisType
+#from pandas.compat import set_function_name as set_function_name
+#from pandas.compat._optional import import_optional_dependency as import_optional_dependency
+#from pandas.core import missing as missing, nanops as nanops
 from pandas.core.base import PandasObject as PandasObject, SelectionMixin as SelectionMixin
-from pandas.core.construction import create_series_with_explicit_dtype as create_series_with_explicit_dtype
-from pandas.core.dtypes.common import ensure_int64 as ensure_int64, ensure_object as ensure_object, ensure_str as ensure_str, is_bool as is_bool, is_bool_dtype as is_bool_dtype, is_datetime64_any_dtype as is_datetime64_any_dtype, is_datetime64tz_dtype as is_datetime64tz_dtype, is_dict_like as is_dict_like, is_extension_array_dtype as is_extension_array_dtype, is_float as is_float, is_integer as is_integer, is_list_like as is_list_like, is_number as is_number, is_numeric_dtype as is_numeric_dtype, is_object_dtype as is_object_dtype, is_period_arraylike as is_period_arraylike, is_re_compilable as is_re_compilable, is_scalar as is_scalar, is_timedelta64_dtype as is_timedelta64_dtype, pandas_dtype as pandas_dtype
-from pandas.core.dtypes.generic import ABCDataFrame as ABCDataFrame, ABCSeries as ABCSeries
-from pandas.core.dtypes.inference import is_hashable as is_hashable
-from pandas.core.dtypes.missing import isna as isna, notna as notna
-from pandas.core.indexes.api import Index as Index, InvalidIndexError as InvalidIndexError, MultiIndex as MultiIndex, RangeIndex as RangeIndex
-from pandas.core.indexes.datetimes import DatetimeIndex as DatetimeIndex
-from pandas.core.indexes.period import Period as Period, PeriodIndex as PeriodIndex
+#from pandas.core.construction import create_series_with_explicitDType as create_series_with_explicitDType
+#from pandas.core.dtypes.common import ensure_int64 as ensure_int64, ensure_object as ensure_object, ensurestr_t as ensurestr_t, isbool_t as isbool_t, isbool_tDType as isbool_tDType, is_datetime64_anyDType as is_datetime64_anyDType, is_datetime64tzDType as is_datetime64tzDType, is_dict_like as is_dict_like, is_extension_arrayDType as is_extension_arrayDType, is_float as is_float, is_integer as is_integer, is_list_like as is_list_like, is_number as is_number, is_numericDType as is_numericDType, is_objectDType as is_objectDType, is_period_arraylike as is_period_arraylike, is_re_compilable as is_re_compilable, isScalar as isScalar, is_timedelta64DType as is_timedelta64DType, pandasDType as pandasDType
+#from pandas.core.dtypes.generic import ABCDataFrame as ABCDataFrame, ABCSeries as ABCSeries
+#from pandas.core.dtypes.inference import is_hashable as is_hashable
+#from pandas.core.dtypes.missing import isna as isna, notna as notna
+from pandas.core.indexes.api import Index as Index
+# , InvalidIndexError as InvalidIndexError, MultiIndex as MultiIndex, RangeIndex as RangeIndex
+#from pandas.core.indexes.datetimes import DatetimeIndex as DatetimeIndex
+#from pandas.core.indexes.period import Period as Period, PeriodIndex as PeriodIndex
 from pandas.core.internals import BlockManager as BlockManager
-from pandas.core.missing import find_valid_index as find_valid_index
-from pandas.errors import AbstractMethodError as AbstractMethodError
-from pandas.io.formats.format import DataFrameFormatter as DataFrameFormatter, format_percentiles as format_percentiles
-from pandas.io.formats.printing import pprint_thing as pprint_thing
-from pandas.tseries.frequencies import to_offset as to_offset
-from pandas.util._decorators import Appender as Appender, Substitution as Substitution, rewrite_axis_style_signature as rewrite_axis_style_signature
-from pandas.util._validators import validate_bool_kwarg as validate_bool_kwarg, validate_fillna_kwargs as validate_fillna_kwargs, validate_percentile as validate_percentile
-from typing import Any, Callable, Dict, Hashable, IO, Iterator, List, Mapping, Optional, Sequence, Tuple, TypeVar, Union, overload
+#from pandas.core.missing import find_valid_index as find_valid_index
+#from pandas.errors import AbstractMethodError as AbstractMethodError
+#from pandas.io.formats.format import DataFrameFormatter as DataFrameFormatter, format_percentiles as format_percentiles
+#from pandas.io.formats.printing import pprint_thing as pprint_thing
+#from pandas.tseries.frequencies import to_offset as to_offset
+#from pandas.util._decorators import Appender as Appender, Substitution as Substitution, rewrite_axis_style_signature as rewrite_axis_style_signature
+#from pandas.util._validators import validatebool_t_kwarg as validatebool_t_kwarg, validate_fillna_kwargs as validate_fillna_kwargs, validate_percentile as validate_percentile
+from typing import Any, Callable, Dict, Hashable, Iterator, List, Mapping, Optional, Sequence, Tuple, Union, overload
 
 if sys.version_info >= (3, 8):
     from typing import Literal
@@ -35,23 +33,11 @@ else:
     from typing_extensions import Literal
 
 bool_t = bool
+str_t = str
 
-_str = str  # needed because Series/DataFrame have properties called "str"...
-_bool = bool  # ditto
-num = Union[int, float]
-
-_SeriesAxisType = Literal["index", 0]  # Restricted subset of _AxisType for series
-_AxisType = Literal["columns", "index", 0, 1]
-_DType = TypeVar("_DType", bool, int, float, object)
-_DTypeNp = TypeVar("_DTypeNp", bound=np.dtype)
-_StrLike = Union[str, np.str_]
-_Path_or_Buf = Union[str, Path, IO]
-_LevelType = Union[int, str]
-_Scalar = Union[str, bytes, datetime.date, datetime.datetime, datetime.timedelta, bool, int, float, complex]
-_ListLike = TypeVar("_ListLike", Sequence, np.ndarray, Series)
 
 class NDFrame(PandasObject, SelectionMixin, indexing.IndexingMixin):
-    def __init__(self, data: BlockManager, axes: Optional[List[Index]]=..., copy: bool=..., dtype: Optional[Dtype]=..., attrs: Optional[Mapping[Optional[Hashable], Any]]=..., fastpath: bool=...) -> None: ...
+    def __init__(self, data: BlockManager, axes: Optional[List[Index]]=..., copy: bool=..., dtype: Optional[DType]=..., attrs: Optional[Mapping[Optional[Hashable], Any]]=..., fastpath: bool=...) -> None: ...
     @property
     def attrs(self) -> Dict[Optional[Hashable], Any]: ...
     @attrs.setter
@@ -66,46 +52,46 @@ class NDFrame(PandasObject, SelectionMixin, indexing.IndexingMixin):
     def size(self) -> int: ...
     @overload
     def set_axis(
-        self, labels: Union[Index, _ListLike], axis: _SeriesAxisType = ..., *, inplace: Literal[True]
+        self, labels: Union[Index, ListLike], axis: SeriesAxisType = ..., *, inplace: Literal[True]
     ) -> None: ...
     @overload
     def set_axis(
-        self, labels: Union[Index, _ListLike], axis: _SeriesAxisType = ..., inplace: Literal[False] = ...,
-    ) -> Series[_DType]: ...
-    def swapaxes(self, axis1: _SeriesAxisType, axis2: _SeriesAxisType, copy: _bool = ...) -> FrameOrSeries: ...
-    def droplevel(self, level: _LevelType, axis: _SeriesAxisType = ...) -> FrameOrSeries: ...
-    def pop(self, item: _str) -> FrameOrSeries: ...
+        self, labels: Union[Index, ListLike], axis: SeriesAxisType = ..., inplace: Literal[False] = ...,
+    ) -> Series[DType]: ...
+    def swapaxes(self, axis1: SeriesAxisType, axis2: SeriesAxisType, copy: bool_t = ...) -> FrameOrSeries: ...
+    def droplevel(self, level: Level, axis: SeriesAxisType = ...) -> FrameOrSeries: ...
+    def pop(self, item: str_t) -> FrameOrSeries: ...
     def squeeze(self, axis: Optional[Any] = ...): ...
     def swaplevel(self, i: Any=..., j: Any=..., axis: Any=...) -> FrameOrSeries: ...
     def rename(self, mapper: Optional[Renamer]=..., *, index: Optional[Renamer]=..., columns: Optional[Renamer]=..., axis: Optional[Axis]=..., copy: bool=..., inplace: bool=..., level: Optional[Level]=..., errors: str=...) -> Optional[FrameOrSeries]: ...
     @overload
     def rename_axis(
         self,
-        mapper: Union[_Scalar, _ListLike] = ...,
-        index: Optional[Union[_Scalar, _ListLike, Callable, Dict]] = ...,
-        columns: Optional[Union[_Scalar, _ListLike, Callable, Dict]] = ...,
-        axis: Optional[_SeriesAxisType] = ...,
-        copy: _bool = ...,
+        mapper: Union[Scalar, ListLike] = ...,
+        index: Optional[Union[Scalar, ListLike, Callable, Dict]] = ...,
+        columns: Optional[Union[Scalar, ListLike, Callable, Dict]] = ...,
+        axis: Optional[SeriesAxisType] = ...,
+        copy: bool_t = ...,
         *,
         inplace: Literal[True]
     ) -> None: ...
     @overload
     def rename_axis(
         self,
-        mapper: Union[_Scalar, _ListLike] = ...,
-        index: Optional[Union[_Scalar, _ListLike, Callable, Dict]] = ...,
-        columns: Optional[Union[_Scalar, _ListLike, Callable, Dict]] = ...,
-        axis: Optional[_SeriesAxisType] = ...,
-        copy: _bool = ...,
+        mapper: Union[Scalar, ListLike] = ...,
+        index: Optional[Union[Scalar, ListLike, Callable, Dict]] = ...,
+        columns: Optional[Union[Scalar, ListLike, Callable, Dict]] = ...,
+        axis: Optional[SeriesAxisType] = ...,
+        copy: bool_t = ...,
         inplace: Optional[Literal[False]] = ...,
     ) -> Series: ...
-    def equals(self, other: Series[_DType]) -> _bool: ...
+    def equals(self, other: Series[DType]) -> bool_t: ...
     def __neg__(self) -> None: ...
     def __pos__(self) -> None: ...
     def __invert__(self): ...
     def __nonzero__(self) -> None: ...
-    __bool__: Any = ...
-    def bool(self) -> _bool: ...
+    _bool_t__: Any = ...
+    def bool(self) -> bool_t: ...
     def __abs__(self) -> FrameOrSeries: ...
     def __round__(self, decimals: int=...) -> FrameOrSeries: ...
     def __hash__(self) -> Any: ...
@@ -123,35 +109,35 @@ class NDFrame(PandasObject, SelectionMixin, indexing.IndexingMixin):
     def to_excel(
         self,
         excel_writer: Any,
-        sheet_name: _str = ...,
-        na_rep: _str = ...,
-        float_format: Optional[_str] = ...,
-        columns: Optional[Union[_str, Sequence[_str]]] = ...,
-        header: _bool = ...,
-        index: _bool = ...,
-        index_label: Optional[Union[_str, Sequence[_str]]] = ...,
+        sheet_name: str_t = ...,
+        na_rep: str_t = ...,
+        float_format: Optional[str_t] = ...,
+        columns: Optional[Union[str_t, Sequence[str_t]]] = ...,
+        header: bool_t = ...,
+        index: bool_t = ...,
+        index_label: Optional[Union[str_t, Sequence[str_t]]] = ...,
         startrow: int = ...,
         startcol: int = ...,
-        engine: Optional[_str] = ...,
-        merge_cells: _bool = ...,
-        encoding: Optional[_str] = ...,
-        inf_rep: _str = ...,
-        verbose: _bool = ...,
+        engine: Optional[str_t] = ...,
+        merge_cells: bool_t = ...,
+        encoding: Optional[str_t] = ...,
+        inf_rep: str_t = ...,
+        verbose: bool_t = ...,
         freeze_panes: Optional[Tuple[int, int]] = ...,
     ) -> None: ...
     @overload
     def to_json(
         self,
-        path_or_buf: Optional[_Path_or_Buf],
+        path_or_buf: Optional[FilePathOrBuffer],
         orient: Optional[Literal["split", "records", "index", "columns", "values", "table"]] = ...,
         date_format: Optional[Literal["epoch", "iso"]] = ...,
         double_precision: int = ...,
-        force_ascii: _bool = ...,
+        force_ascii: bool_t = ...,
         date_unit: Literal["s", "ms", "us", "ns"] = ...,
-        default_handler: Optional[Callable[[Any], Union[_str, int, float, _bool, List, Dict]]] = ...,
-        lines: _bool = ...,
+        default_handler: Optional[Callable[[Any], Union[str_t, int, float, bool_t, List, Dict]]] = ...,
+        lines: bool_t = ...,
         compression: Literal["infer", "gzip", "bz2", "zip", "xz"] = ...,
-        index: _bool = ...,
+        index: bool_t = ...,
         indent: Optional[int] = ...,
     ) -> None: ...
     @overload
@@ -160,153 +146,153 @@ class NDFrame(PandasObject, SelectionMixin, indexing.IndexingMixin):
         orient: Optional[Literal["split", "records", "index", "columns", "values", "table"]] = ...,
         date_format: Optional[Literal["epoch", "iso"]] = ...,
         double_precision: int = ...,
-        force_ascii: _bool = ...,
+        force_ascii: bool_t = ...,
         date_unit: Literal["s", "ms", "us", "ns"] = ...,
-        default_handler: Optional[Callable[[Any], Union[_str, int, float, _bool, List, Dict]]] = ...,
-        lines: _bool = ...,
+        default_handler: Optional[Callable[[Any], Union[str_t, int, float, bool_t, List, Dict]]] = ...,
+        lines: bool_t = ...,
         compression: Literal["infer", "gzip", "bz2", "zip", "xz"] = ...,
-        index: _bool = ...,
+        index: bool_t = ...,
         indent: Optional[int] = ...,
-    ) -> _str: ...
+    ) -> str_t: ...
     def to_hdf(
         self,
-        path_or_buf: _Path_or_Buf,
-        key: _str,
-        mode: _str = ...,
+        path_or_buf: FilePathOrBuffer,
+        key: str_t,
+        mode: str_t = ...,
         complevel: Optional[int] = ...,
-        complib: Optional[_str] = ...,
-        append: _bool = ...,
-        format: Optional[_str] = ...,
-        index: _bool = ...,
-        min_itemsize: Optional[Union[int, Dict[_str, int]]] = ...,
+        complib: Optional[str_t] = ...,
+        append: bool_t = ...,
+        format: Optional[str_t] = ...,
+        index: bool_t = ...,
+        min_itemsize: Optional[Union[int, Dict[str_t, int]]] = ...,
         nan_rep: Optional[Any] = ...,
-        dropna: Optional[_bool] = ...,
-        data_columns: Optional[List[_str]] = ...,
-        errors: _str = ...,
-        encoding: _str = ...,
+        dropna: Optional[bool_t] = ...,
+        data_columns: Optional[List[str_t]] = ...,
+        errors: str_t = ...,
+        encoding: str_t = ...,
     ) -> None: ...
     def to_sql(
         self,
-        name: _str,
+        name: str_t,
         con: Any,
-        schema: Optional[_str] = ...,
-        if_exists: _str = ...,
-        index: _bool = ...,
-        index_label: Optional[Union[_str, Sequence[_str]]] = ...,
+        schema: Optional[str_t] = ...,
+        if_exists: str_t = ...,
+        index: bool_t = ...,
+        index_label: Optional[Union[str_t, Sequence[str_t]]] = ...,
         chunksize: Optional[int] = ...,
-        dtype: Optional[Union[Dict, _Scalar]] = ...,
-        method: Optional[Union[_str, Callable]] = ...,
+        dtype: Optional[Union[Dict, Scalar]] = ...,
+        method: Optional[Union[str_t, Callable]] = ...,
     ) -> None: ...
     def to_pickle(
-        self, path: _str, compression: Literal["infer", "gzip", "bz2", "zip", "xz"] = ..., protocol: int = ...,
+        self, path: str_t, compression: Literal["infer", "gzip", "bz2", "zip", "xz"] = ..., protocol: int = ...,
     ) -> None: ...
-    def to_clipboard(self, excel: _bool = ..., sep: Optional[_str] = ..., **kwargs) -> None: ...
+    def to_clipboard(self, excel: bool_t = ..., sep: Optional[str_t] = ..., **kwargs) -> None: ...
     def to_xarray(self): ...
     @overload
     def to_latex(
         self,
-        buf: Optional[_Path_or_Buf],
-        columns: Optional[List[_str]] = ...,
+        buf: Optional[FilePathOrBuffer],
+        columns: Optional[List[str_t]] = ...,
         col_space: Optional[int] = ...,
-        header: _bool = ...,
-        index: _bool = ...,
-        na_rep: _str = ...,
+        header: bool_t = ...,
+        index: bool_t = ...,
+        na_rep: str_t = ...,
         formatters: Optional[Any] = ...,
         float_format: Optional[Any] = ...,
-        sparsify: Optional[_bool] = ...,
-        index_names: _bool = ...,
-        bold_rows: _bool = ...,
-        column_format: Optional[_str] = ...,
-        longtable: Optional[_bool] = ...,
-        escape: Optional[_bool] = ...,
-        encoding: Optional[_str] = ...,
-        decimal: _str = ...,
-        multicolumn: Optional[_bool] = ...,
-        multicolumn_format: Optional[_str] = ...,
-        multirow: Optional[_bool] = ...,
-        caption: Optional[_str] = ...,
-        label: Optional[_str] = ...,
+        sparsify: Optional[bool_t] = ...,
+        index_names: bool_t = ...,
+        bold_rows: bool_t = ...,
+        column_format: Optional[str_t] = ...,
+        longtable: Optional[bool_t] = ...,
+        escape: Optional[bool_t] = ...,
+        encoding: Optional[str_t] = ...,
+        decimal: str_t = ...,
+        multicolumn: Optional[bool_t] = ...,
+        multicolumn_format: Optional[str_t] = ...,
+        multirow: Optional[bool_t] = ...,
+        caption: Optional[str_t] = ...,
+        label: Optional[str_t] = ...,
     ) -> None: ...
     @overload
     def to_latex(
         self,
-        columns: Optional[List[_str]] = ...,
+        columns: Optional[List[str_t]] = ...,
         col_space: Optional[int] = ...,
-        header: _bool = ...,
-        index: _bool = ...,
-        na_rep: _str = ...,
+        header: bool_t = ...,
+        index: bool_t = ...,
+        na_rep: str_t = ...,
         formatters: Optional[Any] = ...,
         float_format: Optional[Any] = ...,
-        sparsify: Optional[_bool] = ...,
-        index_names: _bool = ...,
-        bold_rows: _bool = ...,
-        column_format: Optional[_str] = ...,
-        longtable: Optional[_bool] = ...,
-        escape: Optional[_bool] = ...,
-        encoding: Optional[_str] = ...,
-        decimal: _str = ...,
-        multicolumn: Optional[_bool] = ...,
-        multicolumn_format: Optional[_str] = ...,
-        multirow: Optional[_bool] = ...,
-        caption: Optional[_str] = ...,
-        label: Optional[_str] = ...,
-    ) -> _str: ...
+        sparsify: Optional[bool_t] = ...,
+        index_names: bool_t = ...,
+        bold_rows: bool_t = ...,
+        column_format: Optional[str_t] = ...,
+        longtable: Optional[bool_t] = ...,
+        escape: Optional[bool_t] = ...,
+        encoding: Optional[str_t] = ...,
+        decimal: str_t = ...,
+        multicolumn: Optional[bool_t] = ...,
+        multicolumn_format: Optional[str_t] = ...,
+        multirow: Optional[bool_t] = ...,
+        caption: Optional[str_t] = ...,
+        label: Optional[str_t] = ...,
+    ) -> str_t: ...
     @overload
     def to_csv(
         self,
-        path_or_buf: Optional[_Path_or_Buf],
-        sep: _str = ...,
-        na_rep: _str = ...,
-        float_format: Optional[_str] = ...,
+        path_or_buf: Optional[FilePathOrBuffer],
+        sep: str_t = ...,
+        na_rep: str_t = ...,
+        float_format: Optional[str_t] = ...,
         columns: Optional[Sequence[Hashable]] = ...,
-        header: Union[_bool, List[_str]] = ...,
-        index: _bool = ...,
-        index_label: Optional[Union[_bool, _str, Sequence[Hashable]]] = ...,
-        mode: _str = ...,
-        encoding: Optional[_str] = ...,
-        compression: Union[_str, Mapping[_str, _str]] = ...,
+        header: Union[bool_t, List[str_t]] = ...,
+        index: bool_t = ...,
+        index_label: Optional[Union[bool_t, str_t, Sequence[Hashable]]] = ...,
+        mode: str_t = ...,
+        encoding: Optional[str_t] = ...,
+        compression: Union[str_t, Mapping[str_t, str_t]] = ...,
         quoting: Optional[int] = ...,
-        quotechar: _str = ...,
-        line_terminator: Optional[_str] = ...,
+        quotechar: str_t = ...,
+        line_terminator: Optional[str_t] = ...,
         chunksize: Optional[int] = ...,
-        date_format: Optional[_str] = ...,
-        doublequote: _bool = ...,
-        escapechar: Optional[_str] = ...,
-        decimal: _str = ...,
+        date_format: Optional[str_t] = ...,
+        doublequote: bool_t = ...,
+        escapechar: Optional[str_t] = ...,
+        decimal: str_t = ...,
     ) -> None: ...
     @overload
     def to_csv(
         self,
-        sep: _str = ...,
-        na_rep: _str = ...,
-        float_format: Optional[_str] = ...,
+        sep: str_t = ...,
+        na_rep: str_t = ...,
+        float_format: Optional[str_t] = ...,
         columns: Optional[Sequence[Hashable]] = ...,
-        header: Union[_bool, List[_str]] = ...,
-        index: _bool = ...,
-        index_label: Optional[Union[_bool, _str, Sequence[Hashable]]] = ...,
-        mode: _str = ...,
-        encoding: Optional[_str] = ...,
-        compression: Union[_str, Mapping[_str, _str]] = ...,
+        header: Union[bool_t, List[str_t]] = ...,
+        index: bool_t = ...,
+        index_label: Optional[Union[bool_t, str_t, Sequence[Hashable]]] = ...,
+        mode: str_t = ...,
+        encoding: Optional[str_t] = ...,
+        compression: Union[str_t, Mapping[str_t, str_t]] = ...,
         quoting: Optional[int] = ...,
-        quotechar: _str = ...,
-        line_terminator: Optional[_str] = ...,
+        quotechar: str_t = ...,
+        line_terminator: Optional[str_t] = ...,
         chunksize: Optional[int] = ...,
-        date_format: Optional[_str] = ...,
-        doublequote: _bool = ...,
-        escapechar: Optional[_str] = ...,
-        decimal: _str = ...,
-    ) -> _str: ...
+        date_format: Optional[str_t] = ...,
+        doublequote: bool_t = ...,
+        escapechar: Optional[str_t] = ...,
+        decimal: str_t = ...,
+    ) -> str_t: ...
     def take(self, indices: Any, axis: Any=..., is_copy: Optional[bool_t]=..., **kwargs: Any) -> FrameOrSeries: ...
     def xs(
         self,
-        key: Union[_str, Tuple[_str]],
-        axis: _SeriesAxisType = ...,
-        level: Optional[_LevelType] = ...,
-        drop_level: _bool = ...,
-    ) -> Series[_DType]: ...
+        key: Union[str_t, Tuple[str_t]],
+        axis: SeriesAxisType = ...,
+        level: Optional[Level] = ...,
+        drop_level: bool_t = ...,
+    ) -> Series[DType]: ...
     def __getitem__(self, item: Any) -> None: ...
-    def __delitem__(self, idx: Union[int, _str]): ...
-    def get(self, key: object, default: Optional[_DType] = ...) -> _DType: ...
+    def __delitem__(self, idx: Union[int, str_t]): ...
+    def get(self, key: object, default: Optional[DType] = ...) -> DType: ...
     def reindex_like(self, other: Any, method: Optional[str]=..., copy: bool_t=..., limit: Any=..., tolerance: Any=...) -> FrameOrSeries: ...
     def drop(self, labels: Any=..., axis: Any=..., index: Any=..., columns: Any=..., level: Any=..., inplace: bool_t=..., errors: str=...) -> Any: ...
     def add_prefix(self, prefix: str) -> FrameOrSeries: ...
@@ -331,11 +317,11 @@ class NDFrame(PandasObject, SelectionMixin, indexing.IndexingMixin):
     def __copy__(self, deep: bool_t=...) -> FrameOrSeries: ...
     def __deepcopy__(self, memo: Any=...) -> FrameOrSeries: ...
     def infer_objects(self) -> FrameOrSeries: ...
-    def convert_dtypes(self, infer_objects: bool_t=..., convert_string: bool_t=..., convert_integer: bool_t=..., convert_boolean: bool_t=...) -> FrameOrSeries: ...
+    def convertDTypes(self, infer_objects: bool_t=..., convertstr_ting: bool_t=..., convert_integer: bool_t=..., convertbool_tean: bool_t=...) -> FrameOrSeries: ...
     def fillna(self, value: Any=..., method: Any=..., axis: Any=..., inplace: bool_t=..., limit: Any=..., downcast: Any=...) -> Optional[FrameOrSeries]: ...
     def ffill(self, axis: Any=..., inplace: bool_t=..., limit: Any=..., downcast: Any=...) -> Optional[FrameOrSeries]: ...
     def bfill(self, axis: Any=..., inplace: bool_t=..., limit: Any=..., downcast: Any=...) -> Optional[FrameOrSeries]: ...
-    def replace(self, to_replace: Optional[Any] = ..., value: Optional[Any] = ..., inplace: bool_t = ..., limit: Optional[Any] = ..., regex: bool_t = ..., method: _str = ...): ...
+    def replace(self, to_replace: Optional[Any] = ..., value: Optional[Any] = ..., inplace: bool_t = ..., limit: Optional[Any] = ..., regex: bool_t = ..., method: str_t = ...): ...
     def interpolate(self, method: str = ..., axis: int = ..., limit: Optional[Any] = ..., inplace: bool_t = ..., limit_direction: str = ..., limit_area: Optional[Any] = ..., downcast: Optional[Any] = ..., **kwargs: Any): ...
     def asof(self, where: Any, subset: Optional[Any] = ...): ...
     def isna(self) -> FrameOrSeries: ...

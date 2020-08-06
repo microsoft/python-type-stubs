@@ -1,5 +1,5 @@
-from pandas.core.dtypes.generic import ABCDataFrame as ABCDataFrame, ABCIndexClass as ABCIndexClass, ABCSeries as ABCSeries
-from pandas.errors import AbstractMethodError as AbstractMethodError
+#from pandas.core.dtypes.generic import ABCDataFrame as ABCDataFrame, ABCIndexClass as ABCIndexClass, ABCSeries as ABCSeries
+#from pandas.errors import AbstractMethodError as AbstractMethodError
 from typing import Any, List, Optional, Type
 
 class ExtensionDtype:

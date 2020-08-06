@@ -1,10 +1,10 @@
-import matplotlib
-from pandas._config import get_option as get_option
+from matplotlib.axes import Axes as PlotAxes
+#from pandas._config import get_option as get_option
 from pandas.core.base import PandasObject as PandasObject
 from pandas.core.frame import DataFrame
-from pandas.core.dtypes.common import is_integer as is_integer, is_list_like as is_list_like
-from pandas.core.dtypes.generic import ABCDataFrame as ABCDataFrame, ABCSeries as ABCSeries
-from pandas.util._decorators import Appender as Appender, Substitution as Substitution
+#from pandas.core.dtypes.common import is_integer as is_integer, is_list_like as is_list_like
+#from pandas.core.dtypes.generic import ABCDataFrame as ABCDataFrame, ABCSeries as ABCSeries
+#from pandas.util._decorators import Appender as Appender, Substitution as Substitution
 from typing import Any, Optional, Sequence, Tuple, Union
 
 def hist_series(self, by: Optional[Any] = ..., ax: Optional[Any] = ..., grid: bool = ..., xlabelsize: Optional[Any] = ..., xrot: Optional[Any] = ..., ylabelsize: Optional[Any] = ..., yrot: Optional[Any] = ..., figsize: Optional[Any] = ..., bins: int = ..., backend: Optional[Any] = ..., **kwargs: Any): ...
@@ -13,7 +13,7 @@ def boxplot(
     data: DataFrame,
     column: Optional[Union[str, Sequence[str]]] = ...,
     by: Optional[Union[str, Sequence[str]]] = ...,
-    ax: Optional[matplotlib.axes.Axes] = ...,
+    ax: Optional[PlotAxes] = ...,
     fontsize: Optional[Union[float, str]] = ...,
     rot: float = ...,
     grid: bool = ...,

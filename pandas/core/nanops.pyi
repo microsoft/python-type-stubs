@@ -1,10 +1,10 @@
-from pandas._config import get_option as get_option
-from pandas._libs import NaT as NaT, Timedelta as Timedelta, Timestamp as Timestamp, iNaT as iNaT, lib as lib
-from pandas.compat._optional import import_optional_dependency as import_optional_dependency
-from pandas.core.dtypes.cast import maybe_upcast_putmask as maybe_upcast_putmask
-from pandas.core.dtypes.common import is_any_int_dtype as is_any_int_dtype, is_bool_dtype as is_bool_dtype, is_complex as is_complex, is_datetime64_dtype as is_datetime64_dtype, is_datetime64tz_dtype as is_datetime64tz_dtype, is_datetime_or_timedelta_dtype as is_datetime_or_timedelta_dtype, is_float as is_float, is_float_dtype as is_float_dtype, is_integer as is_integer, is_integer_dtype as is_integer_dtype, is_numeric_dtype as is_numeric_dtype, is_object_dtype as is_object_dtype, is_scalar as is_scalar, is_timedelta64_dtype as is_timedelta64_dtype, pandas_dtype as pandas_dtype
-from pandas.core.dtypes.dtypes import DatetimeTZDtype as DatetimeTZDtype
-from pandas.core.dtypes.missing import isna as isna, na_value_for_dtype as na_value_for_dtype, notna as notna
+#from pandas._config import get_option as get_option
+#from pandas._libs import NaT as NaT, Timedelta as Timedelta, Timestamp as Timestamp, iNaT as iNaT, lib as lib
+#from pandas.compat._optional import import_optional_dependency as import_optional_dependency
+#from pandas.core.dtypes.cast import maybe_upcast_putmask as maybe_upcast_putmask
+#from pandas.core.dtypes.common import is_any_int_dtype as is_any_int_dtype, is_bool_dtype as is_bool_dtype, is_complex as is_complex, is_datetime64_dtype as is_datetime64_dtype, is_datetime64tz_dtype as is_datetime64tz_dtype, is_datetime_or_timedelta_dtype as is_datetime_or_timedelta_dtype, is_float as is_float, is_float_dtype as is_float_dtype, is_integer as is_integer, is_integer_dtype as is_integer_dtype, is_numeric_dtype as is_numeric_dtype, is_object_dtype as is_object_dtype, is_scalar as is_scalar, is_timedelta64_dtype as is_timedelta64_dtype, pandas_dtype as pandas_dtype
+#from pandas.core.dtypes.dtypes import DatetimeTZDtype as DatetimeTZDtype
+#from pandas.core.dtypes.missing import isna as isna, na_value_for_dtype as na_value_for_dtype, notna as notna
 from typing import Any, Optional
 
 bn: Any

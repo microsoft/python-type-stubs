@@ -1,21 +1,20 @@
 import numpy as np
-from pandas._config import get_option as get_option
-from pandas._libs.hashtable import duplicated_int64 as duplicated_int64
-from pandas._typing import AnyArrayLike as AnyArrayLike
+#from pandas._config import get_option as get_option
+#from pandas._libs.hashtable import duplicated_int64 as duplicated_int64
+from pandas._typing import AnyArrayLike as AnyArrayLike, UU
 from pandas.core import accessor as accessor
-from pandas.core.algorithms import take_1d as take_1d
-from pandas.core.arrays.categorical import Categorical as Categorical, contains as contains
-from pandas.core.dtypes.common import ensure_platform_int as ensure_platform_int, is_categorical_dtype as is_categorical_dtype, is_interval_dtype as is_interval_dtype, is_list_like as is_list_like, is_scalar as is_scalar
-from pandas.core.dtypes.dtypes import CategoricalDtype as CategoricalDtype
-from pandas.core.dtypes.generic import ABCCategorical as ABCCategorical, ABCSeries as ABCSeries
-from pandas.core.dtypes.missing import isna as isna
-from pandas.core.indexes.base import Index as Index, maybe_extract_name as maybe_extract_name
-from pandas.core.indexes.extension import ExtensionIndex as ExtensionIndex, inherit_names as inherit_names
-from pandas.core.ops import get_op_result_name as get_op_result_name
-from pandas.util._decorators import Appender as Appender, cache_readonly as cache_readonly
-from typing import Any, Optional, Type, TypeVar, overload
-
-_U = TypeVar("_U", str, int)
+#from pandas.core.algorithms import take_1d as take_1d
+#from pandas.core.arrays.categorical import Categorical as Categorical, contains as contains
+#from pandas.core.dtypes.common import ensure_platform_int as ensure_platform_int, is_categorical_dtype as is_categorical_dtype, is_interval_dtype as is_interval_dtype, is_list_like as is_list_like, is_scalar as is_scalar
+#from pandas.core.dtypes.dtypes import CategoricalDtype as CategoricalDtype
+#from pandas.core.dtypes.generic import ABCCategorical as ABCCategorical, ABCSeries as ABCSeries
+#from pandas.core.dtypes.missing import isna as isna
+from pandas.core.indexes.base import Index as Index #, maybe_extract_name as maybe_extract_name
+from pandas.core.indexes.extension import ExtensionIndex as ExtensionIndex
+#from pandas.core.indexes.extension import inherit_names as inherit_names
+#from pandas.core.ops import get_op_result_name as get_op_result_name
+#from pandas.util._decorators import Appender as Appender, cache_readonly as cache_readonly
+from typing import Any, Optional, Type, overload
 
 
 class CategoricalIndex(ExtensionIndex, accessor.PandasDelegate):
@@ -30,13 +29,13 @@ class CategoricalIndex(ExtensionIndex, accessor.PandasDelegate):
     def __contains__(self, key: Any) -> bool: ...
     def __array__(self, dtype: Any=...) -> np.ndarray: ...
     @overload
-    def astype(self, dtype: Type[_U]) -> Index[_U]: ...
+    def astype(self, dtype: Type[UU]) -> Index[UU]: ...
     @overload
     def astype(self, dtype: str) -> Index: ...
     def fillna(self, value: Any, downcast: Optional[Any] = ...): ...
     def is_unique(self) -> bool: ...
     @property
-    def is_monotonic_increasing(self): ...
+    def is_monotonic_increasing(self) -> bool: ...
     @property
     def is_monotonic_decreasing(self) -> bool: ...
     def unique(self, level: Optional[Any] = ...): ...

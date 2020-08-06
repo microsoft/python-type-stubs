@@ -1,15 +1,15 @@
-from pandas import compat as compat
-from pandas._libs import lib as lib
-from pandas.core import ops as ops
+#from pandas import compat as compat
+#from pandas._libs import lib as lib
+#from pandas.core import ops as ops
 from pandas.core.arrays import PandasArray as PandasArray
-from pandas.core.construction import extract_array as extract_array
+#from pandas.core.construction import extract_array as extract_array
 from pandas.core.dtypes.base import ExtensionDtype as ExtensionDtype
-from pandas.core.dtypes.common import pandas_dtype as pandas_dtype
-from pandas.core.dtypes.dtypes import register_extension_dtype as register_extension_dtype
-from pandas.core.dtypes.generic import ABCDataFrame as ABCDataFrame, ABCIndexClass as ABCIndexClass, ABCSeries as ABCSeries
-from pandas.core.dtypes.inference import is_array_like as is_array_like
-from pandas.core.indexers import check_array_indexer as check_array_indexer
-from pandas.core.missing import isna as isna
+#from pandas.core.dtypes.common import pandas_dtype as pandas_dtype
+#from pandas.core.dtypes.dtypes import register_extension_dtype as register_extension_dtype
+#from pandas.core.dtypes.generic import ABCDataFrame as ABCDataFrame, ABCIndexClass as ABCIndexClass, ABCSeries as ABCSeries
+#from pandas.core.dtypes.inference import is_array_like as is_array_like
+#from pandas.core.indexers import check_array_indexer as check_array_indexer
+#from pandas.core.missing import isna as isna
 from typing import Any, Optional, Type
 
 class StringDtype(ExtensionDtype):

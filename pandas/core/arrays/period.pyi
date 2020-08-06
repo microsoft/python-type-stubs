@@ -1,17 +1,24 @@
-# Merged types from pylance
-from pandas2.core import Timestamp
+#from pandas.core import Timestamp
 import numpy as np
 #from pandas._libs.tslibs import NaT as NaT, NaTType as NaTType, iNaT as iNaT
+from pandas._libs.tslibs import Timestamp
 #from pandas._libs.tslibs.fields import isleapyear_arr as isleapyear_arr
-#from pandas._libs.tslibs.period import DIFFERENT_FREQ as DIFFERENT_FREQ, IncompatibleFrequency as IncompatibleFrequency, Period as Period, get_period_field_arr as get_period_field_arr, period_asfreq_arr as period_asfreq_arr
+from pandas._libs.tslibs.period import (
+    #DIFFERENT_FREQ as DIFFERENT_FREQ,
+    #IncompatibleFrequency as IncompatibleFrequency,
+    Period as Period
+    #get_period_field_arr as get_period_field_arr,
+    #period_asfreq_arr as period_asfreq_arr
+)
 #from pandas._libs.tslibs.timedeltas import Timedelta as Timedelta, delta_to_nanoseconds as delta_to_nanoseconds
 from pandas.core.arrays import datetimelike as dtl
-from pandas.core.dtypes.common import ensure_object as ensure_object, is_datetime64_dtype as is_datetime64_dtype, is_float_dtype as is_float_dtype, is_period_dtype as is_period_dtype, pandas_dtype as pandas_dtype
-from pandas.core.dtypes.dtypes import PeriodDtype as PeriodDtype
-from pandas.core.dtypes.generic import ABCIndexClass as ABCIndexClass, ABCPeriodArray as ABCPeriodArray, ABCPeriodIndex as ABCPeriodIndex, ABCSeries as ABCSeries
-from pandas.core.dtypes.missing import isna as isna, notna as notna
-from pandas.tseries import frequencies as frequencies
-from pandas.tseries.offsets import DateOffset as DateOffset, Tick as Tick
+#from pandas.core.dtypes.common import ensure_object as ensure_object, is_datetime64_dtype as is_datetime64_dtype, is_float_dtype as is_float_dtype, is_period_dtype as is_period_dtype, pandas_dtype as pandas_dtype
+#from pandas.core.dtypes.dtypes import PeriodDtype as PeriodDtype
+#from pandas.core.dtypes.generic import ABCIndexClass as ABCIndexClass, ABCPeriodArray as ABCPeriodArray, ABCPeriodIndex as ABCPeriodIndex, ABCSeries as ABCSeries
+#from pandas.core.dtypes.missing import isna as isna, notna as notna
+#from pandas.tseries import frequencies as frequencies
+#from pandas.tseries.offsets import DateOffset as DateOffset
+from pandas.tseries.offsets import Tick as Tick
 #from pandas.util._decorators import cache_readonly as cache_readonly
 from typing import Any, Optional, Sequence, Union
 

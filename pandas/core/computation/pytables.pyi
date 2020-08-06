@@ -1,11 +1,12 @@
-import pandas.core.common as pd
-from pandas._libs.tslibs import Timedelta as Timedelta, Timestamp as Timestamp
-from pandas.compat.chainmap import DeepChainMap as DeepChainMap
+#import pandas.core.common as pd
+from core.indexes.base import Index
+#from pandas._libs.tslibs import Timedelta as Timedelta, Timestamp as Timestamp
+#from pandas.compat.chainmap import DeepChainMap as DeepChainMap
 from pandas.core.computation import expr as expr, ops as ops, scope as _scope
 from pandas.core.computation.expr import BaseExprVisitor as BaseExprVisitor
-from pandas.core.computation.ops import UndefinedVariableError as UndefinedVariableError, is_term as is_term
-from pandas.core.dtypes.common import is_list_like as is_list_like
-from pandas.io.formats.printing import pprint_thing as pprint_thing, pprint_thing_encoded as pprint_thing_encoded
+#from pandas.core.computation.ops import UndefinedVariableError as UndefinedVariableError, is_term as is_term
+#from pandas.core.dtypes.common import is_list_like as is_list_like
+#from pandas.io.formats.printing import pprint_thing as pprint_thing, pprint_thing_encoded as pprint_thing_encoded
 from typing import Any, Dict, Optional, Tuple
 
 class PyTablesScope(_scope.Scope):
@@ -45,7 +46,7 @@ class BinOp(ops.BinOp):
     def convert_values(self) -> None: ...
 
 class FilterBinOp(BinOp):
-    filter: Optional[Tuple[Any, Any, pd.Index]] = ...
+    filter: Optional[Tuple[Any, Any, Index]] = ...
     def invert(self): ...
     def format(self): ...
     def evaluate(self): ...

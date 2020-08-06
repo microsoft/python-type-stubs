@@ -1,7 +1,7 @@
-from pandas.core.dtypes.common import is_integer as is_integer
-from pandas.core.dtypes.generic import ABCDataFrame as ABCDataFrame, ABCSeries as ABCSeries
+#from pandas.core.dtypes.common import is_integer as is_integer
+#from pandas.core.dtypes.generic import ABCDataFrame as ABCDataFrame, ABCSeries as ABCSeries
 from pandas.core.groupby.base import GroupByMixin as GroupByMixin
-from pandas.core.indexes.api import MultiIndex as MultiIndex
+#from pandas.core.indexes.api import MultiIndex as MultiIndex
 from typing import Any, Callable, Optional
 
 class WindowGroupByMixin(GroupByMixin):

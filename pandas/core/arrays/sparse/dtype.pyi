@@ -1,6 +1,6 @@
 # merged types from pylance
 
-from pandas._typing import Dtype as Dtype, Scalar
+from pandas._typing import DType as DType, Scalar
 from pandas.core.dtypes.base import ExtensionDtype as ExtensionDtype
 from pandas.core.dtypes.cast import astype_nansafe as astype_nansafe
 from pandas.core.dtypes.common import is_bool_dtype as is_bool_dtype, is_object_dtype as is_object_dtype, is_scalar as is_scalar, is_string_dtype as is_string_dtype, pandas_dtype as pandas_dtype
@@ -9,7 +9,7 @@ from pandas.core.dtypes.missing import isna as isna, na_value_for_dtype as na_va
 from typing import Any, Optional
 
 class SparseDtype(ExtensionDtype):
-    def __init__(self, dtype: Dtype=..., fill_value: Optional[Scalar]=...) -> None: ...
+    def __init__(self, dtype: DType=..., fill_value: Optional[Scalar]=...) -> None: ...
     def __hash__(self) -> Any: ...
     def __eq__(self, other: Any) -> bool: ...
     @property

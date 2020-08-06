@@ -1,12 +1,12 @@
 from pandas._typing import FilePathOrBuffer as FilePathOrBuffer
-from pandas.compat._optional import import_optional_dependency as import_optional_dependency
-from pandas.core.construction import create_series_with_explicit_dtype as create_series_with_explicit_dtype
-from pandas.core.dtypes.common import is_list_like as is_list_like
+#from pandas.compat._optional import import_optional_dependency as import_optional_dependency
+#from pandas.core.construction import create_series_with_explicit_dtype as create_series_with_explicit_dtype
+#from pandas.core.dtypes.common import is_list_like as is_list_like
 from pandas.core.frame import DataFrame as DataFrame
-from pandas.errors import AbstractMethodError as AbstractMethodError, EmptyDataError as EmptyDataError
-from pandas.io.common import is_url as is_url, urlopen as urlopen, validate_header_arg as validate_header_arg
-from pandas.io.formats.printing import pprint_thing as pprint_thing
-from pandas.io.parsers import TextParser as TextParser
+#from pandas.errors import AbstractMethodError as AbstractMethodError, EmptyDataError as EmptyDataError
+#from pandas.io.common import is_url as is_url, urlopen as urlopen, validate_header_arg as validate_header_arg
+#from pandas.io.formats.printing import pprint_thing as pprint_thing
+#from pandas.io.parsers import TextParser as TextParser
 from typing import Any, Callable, Iterable, List, Mapping, Optional, Sequence, Union
 
 class _HtmlFrameParser:

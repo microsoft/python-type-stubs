@@ -1,8 +1,9 @@
-from collections import namedtuple
-from pandas.core.dtypes.common import is_list_like as is_list_like, is_scalar as is_scalar
-from typing import Any
+#from pandas.core.dtypes.common import is_list_like as is_list_like, is_scalar as is_scalar
+from typing import Any, NamedTuple
 
-OutputKey = namedtuple('OutputKey', ['label', 'position'])
+class OutputKey(NamedTuple):
+    label: str
+    position: int
 
 class GroupByMixin: ...
 

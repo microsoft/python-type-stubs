@@ -1,10 +1,11 @@
 #from numpy.core.machar import MachAr
-from pandas.core.api import DataFrame as DataFrame, Series as Series
+from pandas.core.frame import DataFrame as DataFrame
+#from pandas.core.series import Series as Series
 from pandas.core.base import PandasObject as PandasObject
-from pandas.core.dtypes.common import is_datetime64tz_dtype as is_datetime64tz_dtype, is_dict_like as is_dict_like, is_list_like as is_list_like
-from pandas.core.dtypes.dtypes import DatetimeTZDtype as DatetimeTZDtype
-from pandas.core.dtypes.missing import isna as isna
-from pandas.core.tools.datetimes import to_datetime as to_datetime
+#from pandas.core.dtypes.common import is_datetime64tz_dtype as is_datetime64tz_dtype, is_dict_like as is_dict_like, is_list_like as is_list_like
+#from pandas.core.dtypes.dtypes import DatetimeTZDtype as DatetimeTZDtype
+#from pandas.core.dtypes.missing import isna as isna
+#from pandas.core.tools.datetimes import to_datetime as to_datetime
 from typing import Any, Mapping, Optional, Sequence, Tuple, Union
 
 class SQLAlchemyRequired(ImportError): ...

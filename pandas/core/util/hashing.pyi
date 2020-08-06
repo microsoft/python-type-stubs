@@ -1,8 +1,8 @@
-from pandas._libs import Timestamp as Timestamp
-from pandas.core.dtypes.cast import infer_dtype_from_scalar as infer_dtype_from_scalar
-from pandas.core.dtypes.common import is_categorical_dtype as is_categorical_dtype, is_extension_array_dtype as is_extension_array_dtype, is_list_like as is_list_like
-from pandas.core.dtypes.generic import ABCDataFrame as ABCDataFrame, ABCIndexClass as ABCIndexClass, ABCMultiIndex as ABCMultiIndex, ABCSeries as ABCSeries
-from pandas.core.dtypes.missing import isna as isna
+#from pandas._libs import Timestamp as Timestamp
+#from pandas.core.dtypes.cast import infer_dtype_from_scalar as infer_dtype_from_scalar
+#from pandas.core.dtypes.common import is_categorical_dtype as is_categorical_dtype, is_extension_array_dtype as is_extension_array_dtype, is_list_like as is_list_like
+#from pandas.core.dtypes.generic import ABCDataFrame as ABCDataFrame, ABCIndexClass as ABCIndexClass, ABCMultiIndex as ABCMultiIndex, ABCSeries as ABCSeries
+#from pandas.core.dtypes.missing import isna as isna
 from typing import Any, Optional
 
 def hash_pandas_object(obj: Any, index: bool=..., encoding: str=..., hash_key: Optional[str]=..., categorize: bool=...) -> Any: ...
