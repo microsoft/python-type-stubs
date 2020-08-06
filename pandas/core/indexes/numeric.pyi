@@ -1,6 +1,6 @@
 import numpy as np
 #from pandas._libs import lib as lib
-#from pandas._typing import DType as DType
+#from pandas._typing import Dtype as Dtype
 #from pandas.core import algorithms as algorithms
 #from pandas.core.dtypes.cast import astype_nansafe as astype_nansafe
 #from pandas.core.dtypes.common import is_bool as is_bool, is_bool_dtype as is_bool_dtype, is_dtype_equal as is_dtype_equal, is_extension_array_dtype as is_extension_array_dtype, is_float as is_float, is_float_dtype as is_float_dtype, is_integer_dtype as is_integer_dtype, is_scalar as is_scalar, is_signed_integer_dtype as is_signed_integer_dtype, is_unsigned_integer_dtype as is_unsigned_integer_dtype, needs_i8_conversion as needs_i8_conversion, pandas_dtype as pandas_dtype

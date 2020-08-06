@@ -1,11 +1,12 @@
 import datetime
 import numpy as np
+from core.indexing import _iLocIndexer, _LocIndexer
 from matplotlib.axes import Axes as PlotAxes
 import sys
 #from pandas._config import get_option as get_option
 #from pandas._libs import lib as lib
 from pandas._typing import Axes as Axes, Axis as Axis, FilePathOrBuffer as FilePathOrBuffer, Level as Level, Renamer as Renamer
-from pandas._typing import num, SeriesAxisType, AxisType, DType, DTypeNp, StrLike, Scalar, IndexType, MaskType, np_ndarray_bool, np_ndarray_int64, np_ndarray_str
+from pandas._typing import num, SeriesAxisType, AxisType, Dtype, DtypeNp, StrLike, Scalar, IndexType, MaskType, np_ndarray_bool, np_ndarray_int64, np_ndarray_str
 #from pandas.compat import PY37 as PY37
 #from pandas.compat._optional import import_optional_dependency as import_optional_dependency
 #from pandas.core import algorithms as algorithms, nanops as nanops, ops as ops
@@ -79,18 +80,16 @@ else:
 import numpy as _np
 import datetime as _dt
 
-
 _str = str
 _bool = bool
 
-
-class _iLocIndexerFrame:
+class _iLocIndexerFrame(_iLocIndexer):
     @overload
-    def __getitem__(self, idx: Tuple[int, int]) -> DType: ...
+    def __getitem__(self, idx: Tuple[int, int]) -> Dtype: ...
     @overload
     def __getitem__(self, idx: Union[IndexType, slice, Tuple[IndexType, IndexType]]) -> DataFrame: ...
     @overload
-    def __getitem__(self, idx: Union[int, Tuple[IndexType, int, Tuple[int, IndexType]]]) -> Series[DType]: ...
+    def __getitem__(self, idx: Union[int, Tuple[IndexType, int, Tuple[int, IndexType]]]) -> Series[Dtype]: ...
     def __setitem__(
         self,
         idx: Union[
@@ -101,15 +100,14 @@ class _iLocIndexerFrame:
             Tuple[IndexType, IndexType],
             Tuple[int, IndexType],
         ],
-        value: Union[float, Series[DType], DataFrame],
+        value: Union[float, Series[Dtype], DataFrame],
     ) -> None: ...
 
-
-class _LocIndexerFrame:
+class _LocIndexerFrame(_LocIndexer):
     @overload
     def __getitem__(self, idx: Union[int, slice, MaskType],) -> DataFrame: ...
     @overload
-    def __getitem__(self, idx: StrLike,) -> Series[DType]: ...
+    def __getitem__(self, idx: StrLike,) -> Series[Dtype]: ...
     @overload
     def __getitem__(self, idx: Tuple[StrLike, StrLike],) -> float: ...
     @overload
@@ -117,13 +115,13 @@ class _LocIndexerFrame:
     def __setitem__(
         self,
         idx: Union[MaskType, StrLike, Tuple[Union[MaskType, List[str]], Union[MaskType, List[str]]],],
-        value: Union[float, _np.ndarray, Series[DType], DataFrame],
+        value: Union[float, _np.ndarray, Series[Dtype], DataFrame],
     ) -> None: ...
 
 
 class DataFrame(NDFrame):
     _ListLike = Union[
-        np.ndarray, List[DType], Dict[_str, _np.ndarray], Sequence, Index, Series[DType],
+        np.ndarray, List[Dtype], Dict[_str, _np.ndarray], Sequence, Index, Series[Dtype],
     ]
 
     def __init__(
@@ -135,7 +133,7 @@ class DataFrame(NDFrame):
         copy: bool = ...,
     ): ...
 
-    def __init__(self, data: Any=..., index: Optional[Axes]=..., columns: Optional[Axes]=..., dtype: Optional[DType]=..., copy: bool=...) -> None: ...
+    def __init__(self, data: Any=..., index: Optional[Axes]=..., columns: Optional[Axes]=..., dtype: Optional[Dtype]=..., copy: bool=...) -> None: ...
     @property
     def axes(self) -> List[Index]: ...
     @property
@@ -151,7 +149,7 @@ class DataFrame(NDFrame):
     @overload
     def dot(self, other: DataFrame) -> DataFrame: ...
     @overload
-    def dot(self, other: Series[DType]) -> Series[DType]: ...
+    def dot(self, other: Series[Dtype]) -> Series[Dtype]: ...
     def __matmul__(self, other: Any): ...
     def __rmatmul__(self, other: Any): ...
     @classmethod
@@ -159,7 +157,7 @@ class DataFrame(NDFrame):
     @overload
     def to_numpy(self) -> _np.ndarray: ...
     @overload
-    def to_numpy(self, dtype: Optional[Type[DTypeNp]]) -> _np.ndarray: ...
+    def to_numpy(self, dtype: Optional[Type[DtypeNp]]) -> _np.ndarray: ...
     @overload
     def to_dict(self) -> Dict[_str, Any]: ...
     @overload
@@ -255,12 +253,12 @@ class DataFrame(NDFrame):
         encoding: Optional[_str] = ...,
     ) -> _str: ...
     def info(self, verbose: Any=..., buf: Any=..., max_cols: Any=..., memory_usage: Any=..., null_counts: Any=...) -> None: ...
-    def memory_usage(self, index: _bool = ..., deep: _bool = ...) -> Series[DType]: ...
+    def memory_usage(self, index: _bool = ..., deep: _bool = ...) -> Series[Dtype]: ...
     def transpose(self, *args: Any, copy: bool=...) -> DataFrame: ...
     @property
     def T(self) -> DataFrame: ...
     @overload
-    def __getitem__(self, idx: _str) -> Series[DType]: ...
+    def __getitem__(self, idx: _str) -> Series[Dtype]: ...
     @overload
     def __getitem__(self, rows: slice) -> DataFrame: ...
     @overload
@@ -278,7 +276,7 @@ class DataFrame(NDFrame):
     def lookup(self, row_labels: Sequence, col_labels: Sequence) -> np.ndarray: ...
     def align(
         self,
-        other: Union[DataFrame, Series[DType]],
+        other: Union[DataFrame, Series[Dtype]],
         join: Literal["inner", "outer", "left", "right"] = ...,
         axis: Optional[AxisType] = ...,
         level: Optional[Level] = ...,
@@ -454,7 +452,7 @@ class DataFrame(NDFrame):
         self,
         subset: Optional[Union[Hashable, Sequence[Hashable]]] = ...,
         keep: Union[Literal["first", "last"], _bool] = ...,
-    ) -> Series[DType]: ...
+    ) -> Series[Dtype]: ...
     @overload
     def sort_values(
         self,
@@ -517,7 +515,7 @@ class DataFrame(NDFrame):
     def combine_first(self, other: DataFrame) -> DataFrame: ...
     def update(
         self,
-        other: Union[DataFrame, Series[DType]],
+        other: Union[DataFrame, Series[Dtype]],
         join: Literal["left"] = ...,
         overwrite: _bool = ...,
         filter_func: Optional[Callable] = ...,
@@ -549,11 +547,11 @@ class DataFrame(NDFrame):
         margins_name: _str = ...,
         observed: _bool = ...,
     ) -> DataFrame: ...
-    def stack(self, level: Level = ..., dropna: _bool = ...) -> Union[DataFrame, Series[DType]]: ...
+    def stack(self, level: Level = ..., dropna: _bool = ...) -> Union[DataFrame, Series[Dtype]]: ...
     def explode(self, column: Union[str, Tuple]) -> DataFrame: ...
     def unstack(
         self, level: Level = ..., fill_value: Optional[Union[int, _str, Dict]] = ...,
-    ) -> Union[DataFrame, Series[DType]]: ...
+    ) -> Union[DataFrame, Series[Dtype]]: ...
     def melt(
         self,
         id_vars: Optional[Any] = ...,
@@ -564,18 +562,18 @@ class DataFrame(NDFrame):
     ) -> DataFrame: ...
     def diff(self, periods: int = ..., axis: AxisType = ...) -> DataFrame: ...
     @overload
-    def agg(self, func: Union[Callable, _str], axis: AxisType = ..., **kwargs) -> Series[DType]: ...
+    def agg(self, func: Union[Callable, _str], axis: AxisType = ..., **kwargs) -> Series[Dtype]: ...
     @overload
     def agg(self, func: Union[List[Callable], Dict[_str, Callable]], axis: AxisType = ..., **kwargs) -> DataFrame: ...
     @overload
-    def aggregate(self, func: Union[Callable, _str], axis: AxisType = ..., **kwargs) -> Series[DType]: ...
+    def aggregate(self, func: Union[Callable, _str], axis: AxisType = ..., **kwargs) -> Series[Dtype]: ...
     @overload
     def aggregate(
         self, func: Union[List[Callable], Dict[_str, Callable]], axis: AxisType = ..., **kwargs
     ) -> DataFrame: ...
     def transform(self, func: Callable, axis: AxisType = ..., *args, **kwargs) -> DataFrame: ...
     @overload
-    def apply(self, f: Callable[..., int]) -> Series[DType]: ...
+    def apply(self, f: Callable[..., int]) -> Series[Dtype]: ...
     @overload
     def apply(
         self, f: Callable, axis: AxisType = ..., raw: _bool = ..., result_type: Optional[_str] = ...,
@@ -583,14 +581,14 @@ class DataFrame(NDFrame):
     def applymap(self, func: Callable) -> DataFrame: ...
     def append(
         self,
-        other: Union[DataFrame, Series[DType], Dict[_str, Any]],
+        other: Union[DataFrame, Series[Dtype], Dict[_str, Any]],
         ignore_index: _bool = ...,
         verify_integrity: _bool = ...,
         sort: _bool = ...,
     ) -> DataFrame: ...
     def join(
         self,
-        other: Union[DataFrame, Series[DType], List[DataFrame]],
+        other: Union[DataFrame, Series[Dtype], List[DataFrame]],
         on: Optional[Union[_str, List[_str]]] = ...,
         how: Literal["left", "right", "outer", "inner"] = ...,
         lsuffix: _str = ...,
@@ -599,7 +597,7 @@ class DataFrame(NDFrame):
     ) -> DataFrame: ...
     def merge(
         self,
-        right: Union[DataFrame, Series[DType]],
+        right: Union[DataFrame, Series[Dtype]],
         how: Literal["left", "right", "inner", "outer"] = ...,
         on: Optional[Union[Level, List[Level]]] = ...,
         left_on: Optional[Union[Level, List[Level]]] = ...,
@@ -612,12 +610,12 @@ class DataFrame(NDFrame):
         indicator: Union[_bool, _str] = ...,
         validate: Optional[_str] = ...,
     ) -> DataFrame: ...
-    def round(self, decimals: Union[int, Dict, Series[DType]] = ..., *args, **kwargs) -> DataFrame: ...
+    def round(self, decimals: Union[int, Dict, Series[Dtype]] = ..., *args, **kwargs) -> DataFrame: ...
     def corr(self, method: Literal["pearson", "kendall", "spearman"] = ..., min_periods: int = ...,) -> DataFrame: ...
     def cov(self, min_periods: Optional[int] = ...) -> DataFrame: ...
     def corrwith(
         self,
-        other: Union[DataFrame, Series[DType]],
+        other: Union[DataFrame, Series[Dtype]],
         axis: Optional[AxisType] = ...,
         drop: _bool = ...,
         method: Literal["pearson", "kendall", "spearman"] = ...,
@@ -625,10 +623,10 @@ class DataFrame(NDFrame):
     @overload
     def count(self, axis: AxisType = ..., numeric_only: _bool = ..., *, level: Level) -> DataFrame: ...
     @overload
-    def count(self, axis: AxisType = ..., level: None = ..., numeric_only: _bool = ...) -> Series[DType]: ...
-    def nunique(self, axis: AxisType = ..., dropna=True) -> Series[DType]: ...
-    def idxmax(self, axis: AxisType, skipna: _bool = ...) -> Series[DType]: ...
-    def idxmin(self, axis: AxisType, skipna: _bool = ...) -> Series[DType]: ...
+    def count(self, axis: AxisType = ..., level: None = ..., numeric_only: _bool = ...) -> Series[Dtype]: ...
+    def nunique(self, axis: AxisType = ..., dropna=True) -> Series[Dtype]: ...
+    def idxmax(self, axis: AxisType, skipna: _bool = ...) -> Series[Dtype]: ...
+    def idxmin(self, axis: AxisType, skipna: _bool = ...) -> Series[Dtype]: ...
     @overload
     def mode(
         self, axis: AxisType = ..., skipna: _bool = ..., numeric_only: _bool = ..., *, level: Level, **kwargs
@@ -636,7 +634,7 @@ class DataFrame(NDFrame):
     @overload
     def mode(
         self, axis: AxisType = ..., skipna: _bool = ..., level: None = ..., numeric_only: _bool = ..., **kwargs
-    ) -> Series[DType]: ...
+    ) -> Series[Dtype]: ...
     @overload
     def quantile(
         self,
@@ -661,7 +659,7 @@ class DataFrame(NDFrame):
         copy: _bool = ...,
     ) -> DataFrame: ...
     def to_period(self, freq: Optional[_str] = ..., axis: AxisType = ..., copy: _bool = ...) -> DataFrame: ...
-    def isin(self, values: Union[Iterable, Series[DType], DataFrame, Dict]) -> DataFrame: ...
+    def isin(self, values: Union[Iterable, Series[Dtype], DataFrame, Dict]) -> DataFrame: ...
     def plot(self, kind: _str, yerr: DataFrame, **kwargs) -> PlotAxes: ...
     def hist(
         data,
@@ -709,7 +707,7 @@ class DataFrame(NDFrame):
     def __and__(self, other: Union[num, _ListLike, DataFrame], axis: SeriesAxisType = ...) -> DataFrame: ...
     def __delitem__(self, key: _str) -> None: ...
     def __div__(self, other: Union[num, _ListLike, DataFrame]) -> DataFrame: ...
-    def __eq__(self, other: Union[float, Series[DType], DataFrame]) -> DataFrame: ...  # type: ignore
+    def __eq__(self, other: Union[float, Series[Dtype], DataFrame]) -> DataFrame: ...  # type: ignore
     def __exp__(
         self,
         other: Union[num, _ListLike, DataFrame],
@@ -728,7 +726,7 @@ class DataFrame(NDFrame):
     def __mod__(self, other: Union[num, _ListLike, DataFrame]) -> DataFrame: ...
     def __mul__(self, other: Union[num, _ListLike, DataFrame]) -> DataFrame: ...
     def __pow__(self, other: Union[num, _ListLike, DataFrame]) -> DataFrame: ...
-    def __ne__(self, other: Union[float, Series[DType], DataFrame]) -> DataFrame: ...  # type: ignore
+    def __ne__(self, other: Union[float, Series[Dtype], DataFrame]) -> DataFrame: ...  # type: ignore
     def __or__(self, other: Union[num, _ListLike, DataFrame]) -> DataFrame: ...
     def __radd__(self, other: Union[num, _ListLike, DataFrame]) -> DataFrame: ...
     def __rand__(self, other: Union[num, _ListLike, DataFrame]) -> DataFrame: ...
@@ -756,7 +754,7 @@ class DataFrame(NDFrame):
     @columns.setter  # setter needs to be right next to getter; otherwise mypy complains
     def columns(self, cols: Union[List[_str], Index[_str]]) -> None: ...
     @property
-    def dtypes(self) -> Series[DType]: ...
+    def dtypes(self) -> Series[Dtype]: ...
     @property
     def empty(self) -> _bool: ...
     @property
@@ -792,7 +790,7 @@ class DataFrame(NDFrame):
     @overload
     def all(
         self, axis: AxisType = ..., bool_only: Optional[_bool] = ..., skipna: _bool = ..., level: None = ..., **kwargs
-    ) -> Series[DType]: ...
+    ) -> Series[Dtype]: ...
     @overload
     def all(
         self,
@@ -806,7 +804,7 @@ class DataFrame(NDFrame):
     @overload
     def any(
         self, axis: AxisType = ..., bool_only: Optional[_bool] = ..., skipna: _bool = ..., level: None = ..., **kwargs
-    ) -> Series[DType]: ...
+    ) -> Series[Dtype]: ...
     @overload
     def any(
         self, axis: AxisType = ..., bool_only: _bool = ..., skipna: _bool = ..., *, level: Level, **kwargs
@@ -835,7 +833,7 @@ class DataFrame(NDFrame):
     @overload
     def bfill(
         self,
-        value: Optional[Union[float, Dict, Series[DType], DataFrame]] = ...,
+        value: Optional[Union[float, Dict, Series[Dtype], DataFrame]] = ...,
         axis: Optional[AxisType] = ...,
         inplace: Optional[Literal[False]] = ...,
         limit: int = ...,
@@ -844,7 +842,7 @@ class DataFrame(NDFrame):
     @overload
     def bfill(
         self,
-        value: Optional[Union[float, Dict, Series[DType], DataFrame]] = ...,
+        value: Optional[Union[float, Dict, Series[Dtype], DataFrame]] = ...,
         axis: Optional[AxisType] = ...,
         limit: int = ...,
         downcast: Optional[Dict] = ...,
@@ -875,8 +873,8 @@ class DataFrame(NDFrame):
     def describe(
         self,
         percentiles: Optional[List[float]] = ...,
-        include: Optional[Union[Literal["all"], List[DType]]] = ...,
-        exclude: Optional[List[DType]] = ...,
+        include: Optional[Union[Literal["all"], List[Dtype]]] = ...,
+        exclude: Optional[List[Dtype]] = ...,
     ) -> DataFrame: ...
     def div(
         self,
@@ -894,7 +892,7 @@ class DataFrame(NDFrame):
     ) -> DataFrame: ...
     def droplevel(self, level: Level = ..., axis: AxisType = ...) -> DataFrame: ...
     def eq(self, other: Any, axis: AxisType = ..., level: Optional[Level] = ...) -> DataFrame: ...
-    def equals(self, other: Union[Series[DType], DataFrame]) -> _bool: ...
+    def equals(self, other: Union[Series[Dtype], DataFrame]) -> _bool: ...
     def ewm(
         self,
         com: Optional[float] = ...,
@@ -917,7 +915,7 @@ class DataFrame(NDFrame):
     @overload
     def ffill(
         self,
-        value: Optional[Union[Scalar, Dict, Series[DType], DataFrame]] = ...,
+        value: Optional[Union[Scalar, Dict, Series[Dtype], DataFrame]] = ...,
         axis: Optional[AxisType] = ...,
         inplace: Optional[Literal[False]] = ...,
         limit: int = ...,
@@ -1008,7 +1006,7 @@ class DataFrame(NDFrame):
         level: None = ...,
         numeric_only: Optional[_bool] = ...,
         **kwargs
-    ) -> Series[DType]: ...
+    ) -> Series[Dtype]: ...
     @overload
     def kurtosis(
         self,
@@ -1027,7 +1025,7 @@ class DataFrame(NDFrame):
         level: None = ...,
         numeric_only: Optional[_bool] = ...,
         **kwargs
-    ) -> Series[DType]: ...
+    ) -> Series[Dtype]: ...
     def last(self, offset: Any) -> DataFrame: ...
     def last_valid_index(self) -> Scalar: ...
     def le(self, other: Any, axis: AxisType = ..., level: Optional[Level] = ...) -> DataFrame: ...
@@ -1035,14 +1033,14 @@ class DataFrame(NDFrame):
     @overload
     def mad(
         self, axis: Optional[AxisType] = ..., skipna: Optional[_bool] = ..., level: None = ...,
-    ) -> Series[DType]: ...
+    ) -> Series[Dtype]: ...
     @overload
     def mad(
         self, axis: Optional[AxisType] = ..., skipna: Optional[_bool] = ..., *, level: Level, **kwargs
     ) -> DataFrame: ...
     def mask(
         self,
-        cond: Union[Series[DType], DataFrame, _np.ndarray],
+        cond: Union[Series[Dtype], DataFrame, _np.ndarray],
         other: Any = ...,
         inplace: _bool = ...,
         axis: Optional[AxisType] = ...,
@@ -1068,7 +1066,7 @@ class DataFrame(NDFrame):
         level: None = ...,
         numeric_only: Optional[_bool] = ...,
         **kwargs
-    ) -> Series[DType]: ...
+    ) -> Series[Dtype]: ...
     @overload
     def mean(
         self,
@@ -1087,7 +1085,7 @@ class DataFrame(NDFrame):
         level: None = ...,
         numeric_only: Optional[_bool] = ...,
         **kwargs
-    ) -> Series[DType]: ...
+    ) -> Series[Dtype]: ...
     @overload
     def median(
         self,
@@ -1106,7 +1104,7 @@ class DataFrame(NDFrame):
         level: None = ...,
         numeric_only: Optional[_bool] = ...,
         **kwargs
-    ) -> Series[DType]: ...
+    ) -> Series[Dtype]: ...
     @overload
     def min(
         self,
@@ -1125,7 +1123,7 @@ class DataFrame(NDFrame):
         level: None = ...,
         numeric_only: Optional[_bool] = ...,
         **kwargs
-    ) -> Series[DType]: ...
+    ) -> Series[Dtype]: ...
     def mod(
         self,
         other: Union[num, _ListLike, DataFrame],
@@ -1157,7 +1155,7 @@ class DataFrame(NDFrame):
         **kwargs
     ) -> DataFrame: ...
     def pipe(self, func: Callable, *args, **kwargs) -> Any: ...
-    def pop(self, item: _str) -> Series[DType]: ...
+    def pop(self, item: _str) -> Series[Dtype]: ...
     def pow(
         self,
         other: Union[num, _ListLike, DataFrame],
@@ -1322,7 +1320,7 @@ class DataFrame(NDFrame):
         ddof: int = ...,
         numeric_only: Optional[_bool] = ...,
         **kwargs
-    ) -> Series[DType]: ...
+    ) -> Series[Dtype]: ...
     @overload
     def set_axis(self, labels: List, inplace: Literal[True], axis: AxisType = ...) -> None: ...
     @overload
@@ -1345,7 +1343,7 @@ class DataFrame(NDFrame):
         level: None = ...,
         numeric_only: Optional[_bool] = ...,
         **kwargs
-    ) -> Series[DType]: ...
+    ) -> Series[Dtype]: ...
     def slice_shift(self, periods: int = ..., axis: AxisType = ...) -> DataFrame: ...
     def squeeze(self, axis: Optional[AxisType] = ...) -> Any: ...
     @overload
@@ -1368,7 +1366,7 @@ class DataFrame(NDFrame):
         ddof: int = ...,
         numeric_only: _bool = ...,
         **kwargs
-    ) -> Series[DType]: ...
+    ) -> Series[Dtype]: ...
     def sub(
         self,
         other: Union[num, _ListLike, DataFrame],
@@ -1403,7 +1401,7 @@ class DataFrame(NDFrame):
         numeric_only: Optional[_bool] = ...,
         min_count: int = ...,
         **kwargs
-    ) -> Series[DType]: ...
+    ) -> Series[Dtype]: ...
     def swapaxes(self, axis1: AxisType, axis2: AxisType, copy: _bool = ...) -> DataFrame: ...
     def tail(self, n: int = ...) -> DataFrame: ...
     def take(self, indices: List, axis: AxisType = ..., is_copy: Optional[_bool] = ..., **kwargs) -> DataFrame: ...
@@ -1680,10 +1678,10 @@ class DataFrame(NDFrame):
         ddof: int = ...,
         numeric_only: Optional[_bool] = ...,
         **kwargs
-    ) -> Series[DType]: ...
+    ) -> Series[Dtype]: ...
     def where(
         self,
-        cond: Union[Series[DType], DataFrame, _np.ndarray],
+        cond: Union[Series[Dtype], DataFrame, _np.ndarray],
         other: Any = ...,
         inplace: _bool = ...,
         axis: Optional[AxisType] = ...,

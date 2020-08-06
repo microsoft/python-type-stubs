@@ -1,4 +1,4 @@
-#from pandas._typing import ArrayLike as ArrayLike, DType as DType
+#from pandas._typing import ArrayLike as ArrayLike, Dtype as Dtype
 #from pandas.arrays import StringArray as StringArray
 #from pandas.core.algorithms import take_1d as take_1d
 from pandas.core.base import NoNewAttributesMixin as NoNewAttributesMixin
