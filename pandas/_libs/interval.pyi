@@ -1,3 +1,4 @@
+from __future__ import annotations
 import sys
 from typing import Any
 if sys.version_info >= (3, 8):

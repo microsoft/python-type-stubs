@@ -1,9 +1,6 @@
+from __future__ import annotations
 import sys
 from typing import Any, Optional, Union
-
-from _libs.tslibs import Timedelta
-
-from .period import Period
 
 if sys.version_info >= (3, 8):
     from typing import Literal
@@ -13,15 +10,16 @@ else:
 class Timestamp:
 
     def astimezone(self, *args, **kwargs) -> Timestamp: ...
+    def ceil(self, freq: str, ambiguous: Union[bool, Literal['raise', 'NaT']] = ...,
+                nonexistent: Union[Timedelta,Literal['raise', 'shift_forward', 'shift_backward', 'NaT']] = ...) \
+            -> Timestamp: ...
     def floor(self, freq: str, ambiguous: Union[bool, Literal['raise', 'NaT']] = ...,
                 nonexistent: Union[Timedelta,Literal['raise', 'shift_forward', 'shift_backward', 'NaT']] = ...) \
             -> Timestamp: ...
     @classmethod
     def combine(cls, date, time) -> Timestamp: ...
     def day_name(self, *args, **kwargs) -> str: ...
-    def floor(self, freq: str, ambiguous: Union[bool, Literal['raise', 'NaT']] = ...,
-                nonexistent: Union[Timedelta,Literal['raise', 'shift_forward', 'shift_backward', 'NaT']] = ...) \
-            -> Timestamp: ...
+
     @classmethod
     def fromordinal(cls, ordinal, freq=None, tz=None) -> Timestamp: ...
     @classmethod
@@ -56,8 +54,7 @@ class Timestamp:
     @classmethod
     def utcnow(cls) -> Timestamp: ...
     def __init__(self, *args, **kwargs): ...
-    @staticmethod # known case of __new__
-    def __new__(*args, **kwargs) -> Timestamp: ...
+    def __new__(cls, *args, **kwargs) -> Timestamp: ...
     @property
     def dayofweek(self) -> int: ...
     @property
@@ -89,4 +86,5 @@ class Timestamp:
     @property
     def weekofyear(self) -> int: ...
 
-
+from .timedeltas import Timedelta
+from .period import Period

@@ -1,22 +1,20 @@
-#from __future__ import annotations
-
 import numpy as np
 from datetime import time, date
-
-from core.indexes.base import Index
-from core.indexing import _iLocIndexer, _LocIndexer
 from matplotlib.axes import Axes as PlotAxes, SubplotBase as SubplotBase
 import sys
-from pandas._typing import FilePathOrBuffer, num, SeriesAxisType, AxisType, Dtype, DtypeNp, Level, Scalar, MaskType, np_ndarray_bool, np_ndarray_int64, np_ndarray_str
-from pandas.core import base, generic
-from pandas.core.arrays import ExtensionArray
+from .base import IndexOpsMixin
+from .generic import NDFrame
+from .indexing import _iLocIndexer, _LocIndexer
+from .frame import DataFrame
+from pandas.core.arrays.base import ExtensionArray
 from pandas.core.groupby import generic as groupby_generic
+from pandas.core.indexes.base import Index
+from pandas._typing import AxisType as AxisType, Dtype as Dtype, DtypeNp as DtypeNp, FilePathOrBuffer as FilePathOrBuffer, Level as Level, MaskType as MaskType, Scalar as Scalar, SeriesAxisType as SeriesAxisType, num as num
 from typing import Any, Callable, Dict, Generic, Hashable, Iterable, List, Optional, Sequence, Tuple, Type, Union, overload
 if sys.version_info >= (3, 8):
     from typing import Literal
 else:
     from typing_extensions import Literal
-
 
 _bool = bool
 _str = str
@@ -49,19 +47,20 @@ class _LocIndexerSeries(_LocIndexer, Generic[Dtype]):
     def __setitem__(self, idx: List[str], value: Union[Dtype, np.ndarray, Series[Dtype]], ) -> None: ...
 
 
-class Series(base.IndexOpsMixin, generic.NDFrame, Generic[Dtype]):
+class Series(IndexOpsMixin, NDFrame, Generic[Dtype]):
 
     _ListLike = Union[np.ndarray, List[Dtype], Dict[_str, np.ndarray], Sequence, Index]
     def __init__(
         self,
         data: Optional[Union[_ListLike, Series[Dtype], Dict[int, Dtype], Dict[_str, Dtype]]] = ...,
         index: Union[_str, int, Series, List] = ...,
-        dtype: Any = ...,
+        dtype = ...,
         name: _str = ...,
         copy: bool = ...,
+        fastpath: bool = ...
     ): ...
-
-    hasnans: Any = ...
+    @property
+    def hasnans(self) -> bool: ...
     def div(
         self,
         other: Union[num, _ListLike, Series[Dtype]],
@@ -76,11 +75,10 @@ class Series(base.IndexOpsMixin, generic.NDFrame, Generic[Dtype]):
         fill_value: Optional[float] = ...,
         axis: SeriesAxisType = ...,
     ) -> Series[Dtype]: ...
-    def __init__(self, data: Optional[Any] = ..., index: Optional[Any] = ..., dtype: Optional[Any] = ..., name: Optional[Any] = ..., copy: bool = ..., fastpath: bool = ...) -> None: ...
     @property
-    def dtype(self): ...
+    def dtype(self) -> Dtype: ...
     @property
-    def dtypes(self): ...
+    def dtypes(self) -> Dtype: ...
     @property
     def name(self) -> Optional[Hashable]: ...
     @name.setter
@@ -89,14 +87,14 @@ class Series(base.IndexOpsMixin, generic.NDFrame, Generic[Dtype]):
     def values(self): ...
     @property
     def array(self) -> ExtensionArray: ...
-    def ravel(self, order: str = ...): ...
+    def ravel(self, order: _str = ...) -> np.ndarray: ...
     def __len__(self) -> int: ...
-    def view(self, dtype: Optional[Any] = ...): ...
-    def __array_ufunc__(self, ufunc: Callable, method: str, *inputs: Any, **kwargs: Any) -> Any: ...
-    def __array__(self, dtype: Any=...) -> np.ndarray: ...
-    __float__: Any = ...
-    __long__: Any = ...
-    __int__: Any = ...
+    def view(self, dtype = ...) -> Series[Dtype]: ...
+    def __array_ufunc__(self, ufunc: Callable, method: _str, *inputs, **kwargs) : ...
+    def __array__(self, dtype=...) -> np.ndarray: ...
+    def __float__(self) -> Series[np.float]: ...
+    def __long__(self) -> Series[np.long]: ...
+    def __int__(self) -> Series[np.int]: ...
     @property
     def axes(self) -> List: ...
     def take(self, indices: Sequence, axis: SeriesAxisType = ..., is_copy: _bool = ..., **kwargs) -> Series[Dtype]: ...
@@ -104,7 +102,7 @@ class Series(base.IndexOpsMixin, generic.NDFrame, Generic[Dtype]):
     def __getitem__(self, idx: Union[List[_str], Index[int], Series[Dtype], slice]) -> Series: ...
     @overload
     def __getitem__(self, idx: Union[int, _str]) -> Dtype: ...
-    def __setitem__(self, key: Any, value: Any) -> None: ...
+    def __setitem__(self, key, value) -> None: ...
     def repeat(self, repeats: Union[int, List[int]], axis: Optional[SeriesAxisType] = ...) -> Series[Dtype]: ...
     @property
     def index(self) -> Index: ...
@@ -116,8 +114,8 @@ class Series(base.IndexOpsMixin, generic.NDFrame, Generic[Dtype]):
         self,
         buf: Optional[FilePathOrBuffer],
         na_rep: _str = ...,
-        formatters: Optional[Any] = ...,
-        float_format: Optional[Any] = ...,
+        formatters = ...,
+        float_format = ...,
         sparsify: Optional[_bool] = ...,
         index_names: _bool = ...,
         justify: Optional[_str] = ...,
@@ -134,8 +132,8 @@ class Series(base.IndexOpsMixin, generic.NDFrame, Generic[Dtype]):
     def to_string(
         self,
         na_rep: _str = ...,
-        formatters: Optional[Any] = ...,
-        float_format: Optional[Any] = ...,
+        formatters = ...,
+        float_format = ...,
         sparsify: Optional[_bool] = ...,
         index_names: _bool = ...,
         justify: Optional[_str] = ...,
@@ -159,7 +157,7 @@ class Series(base.IndexOpsMixin, generic.NDFrame, Generic[Dtype]):
     def to_frame(self, name: Optional[object] = ...) -> DataFrame: ...
     def groupby(
         self,
-        by: Optional[Any] = ...,
+        by = ...,
         axis: SeriesAxisType = ...,
         level: Optional[Level] = ...,
         as_index: _bool = ...,
@@ -172,7 +170,7 @@ class Series(base.IndexOpsMixin, generic.NDFrame, Generic[Dtype]):
     def count(self, level: None = ...) -> int: ...
     @overload
     def count(self, level: Level) -> Series[Dtype]: ...
-    def mode(self, dropna: Any) -> Series[Dtype]: ...
+    def mode(self, dropna) -> Series[Dtype]: ...
     def unique(self) -> np.ndarray: ...
     def drop_duplicates(self, keep: Literal["first", "last", False] = ..., inplace: _bool = ...) -> Series[Dtype]: ...
     def duplicated(self, keep: Literal["first", "last", False] = ...) -> Series[_bool]: ...
@@ -197,8 +195,8 @@ class Series(base.IndexOpsMixin, generic.NDFrame, Generic[Dtype]):
     def dot(self, other: Union[DataFrame, Series[Dtype]]) -> Series[Dtype]: ...
     @overload
     def dot(self, other: _ListLike) -> np.ndarray: ...
-    def __matmul__(self, other: Any): ...
-    def __rmatmul__(self, other: Any): ...
+    def __matmul__(self, other): ...
+    def __rmatmul__(self, other): ...
     @overload
     def searchsorted(
         self, value: _ListLike, side: Literal["left", "right"] = ..., sorter: Optional[_ListLike] = ...,
@@ -209,7 +207,7 @@ class Series(base.IndexOpsMixin, generic.NDFrame, Generic[Dtype]):
     ) -> int: ...
     def append(
         self,
-        to_append: Union[Series[Any], Sequence[Series[Any]]],
+        to_append: Union[Series, Sequence[Series]],
         ignore_index: _bool = ...,
         verify_integrity: _bool = ...,
     ) -> Series[Dtype]: ...
@@ -250,7 +248,7 @@ class Series(base.IndexOpsMixin, generic.NDFrame, Generic[Dtype]):
     def reorder_levels(self, order: List) -> Series[Dtype]: ...
     def explode(self) -> Series[Dtype]: ...
     def unstack(self, level: Level = ..., fill_value: Optional[Union[int, _str, Dict]] = ...,) -> DataFrame: ...
-    def map(self, arg: Any, na_action: Optional[Literal["ignore"]] = ...) -> Series[Dtype]: ...
+    def map(self, arg, na_action: Optional[Literal["ignore"]] = ...) -> Series[Dtype]: ...
     def aggregate(
         self,
         func: Union[Callable, _str, List[Union[Callable, _str]], Dict[SeriesAxisType, Union[Callable, _str]],],
@@ -273,12 +271,12 @@ class Series(base.IndexOpsMixin, generic.NDFrame, Generic[Dtype]):
     ) -> Union[Series, DataFrame]: ...
     def align(
         self,
-        other: Union[DataFrame, Series[Any]],
+        other: Union[DataFrame, Series],
         join: Literal["inner", "outer", "left", "right"] = ...,
         axis: Optional[AxisType] = ...,
         level: Optional[Level] = ...,
         copy: _bool = ...,
-        fill_value: Optional[Any] = ...,
+        fill_value = ...,
         method: Optional[Literal["backfill", "bfill", "pad", "ffill"]] = ...,
         limit: Optional[int] = ...,
         fill_axis: SeriesAxisType = ...,
@@ -286,7 +284,7 @@ class Series(base.IndexOpsMixin, generic.NDFrame, Generic[Dtype]):
     ) -> Tuple[Series, Series]: ...
     def rename(
         self,
-        index: Optional[Any] = ...,
+        index = ...,
         *,
         axis: Optional[SeriesAxisType] = ...,
         copy: _bool = ...,
@@ -335,17 +333,17 @@ class Series(base.IndexOpsMixin, generic.NDFrame, Generic[Dtype]):
     ) -> None: ...
     def replace(
         self,
-        to_replace: Optional[Union[str, List, Dict, Series[Dtype], int, float]] = ...,
+        to_replace: Optional[Union[_str, List, Dict, Series[Dtype], int, float]] = ...,
         value: Optional[Union[Scalar, Dict, List, _str]] = ...,
         inplace: _bool = ...,
         limit: Optional[int] = ...,
-        regex: Any = ...,
+        regex = ...,
         method: Optional[Literal["pad", "ffill", "bfill"]] = ...,
     ) -> Series[Dtype]: ...
     def shift(
         self,
         periods: int = ...,
-        freq: Optional[Any] = ...,
+        freq = ...,
         axis: SeriesAxisType = ...,
         fill_value: Optional[object] = ...,
     ) -> Series[Dtype]: ...
@@ -362,15 +360,15 @@ class Series(base.IndexOpsMixin, generic.NDFrame, Generic[Dtype]):
         self, axis: SeriesAxisType = ..., inplace: _bool = ..., how: Optional[_str] = ...,
     ) -> Series[Dtype]: ...
     def to_timestamp(
-        self, freq: Optional[Any] = ..., how: Literal["start", "end", "s", "e"] = ..., copy: _bool = ...,
+        self, freq = ..., how: Literal["start", "end", "s", "e"] = ..., copy: _bool = ...,
     ) -> Series[Dtype]: ...
     def to_period(self, freq: Optional[_str] = ..., copy: _bool = ...) -> DataFrame: ...
     def str(self) -> _str: ...
     @property
     def dt(self) -> Series: ...
-    cat: Any = ...
+    cat = ...
     def plot(self, **kwargs) -> Union[PlotAxes, np.ndarray]: ...
-    sparse: Any = ...
+    sparse = ...
     def hist(
         self,
         by: Optional[object] = ...,
@@ -411,13 +409,9 @@ class Series(base.IndexOpsMixin, generic.NDFrame, Generic[Dtype]):
         random_state: Optional[int] = ...,
         axis: Optional[SeriesAxisType] = ...,
     ) -> Series[Dtype]: ...
-    @property
-    def dtype(self) -> Dtype: ...
-    @property
-    def dtypes(self) -> Dtype: ...
     def astype(
         self,
-        dtype: Union[Type[_str], Type[int], Type[float]],
+        dtype: Union[Dtype, _str],
         copy: _bool = ...,
         errors: Literal["raise", "ignore"] = ...,
     ) -> Series: ...
@@ -508,7 +502,6 @@ class Series(base.IndexOpsMixin, generic.NDFrame, Generic[Dtype]):
     def asof(
         self, where: Union[Scalar, Sequence[Scalar]], subset: Optional[Union[_str, Sequence[_str]]] = ...,
     ) -> Union[Scalar, Series[Dtype]]: ...
-    def notnull(self) -> Series[_bool]: ...
     def clip(
         self,
         lower: Optional[float] = ...,
@@ -520,7 +513,7 @@ class Series(base.IndexOpsMixin, generic.NDFrame, Generic[Dtype]):
     ) -> Series[Dtype]: ...
     def asfreq(
         self,
-        freq: Any,
+        freq,
         method: Optional[Literal["backfill", "bfill", "pad", "ffill"]] = ...,
         how: Optional[Literal["start", "end"]] = ...,
         normalize: _bool = ...,
@@ -540,19 +533,19 @@ class Series(base.IndexOpsMixin, generic.NDFrame, Generic[Dtype]):
     # Next one should return a 'Resampler' object
     def resample(
         self,
-        rule: Any,
+        rule,
         axis: SeriesAxisType = ...,
         closed: Optional[_str] = ...,
         label: Optional[_str] = ...,
         convention: Literal["start", "end", "s", "e"] = ...,
         kind: Optional[Literal["timestamp", "period"]] = ...,
-        loffset: Optional[Any] = ...,
+        loffset = ...,
         base: int = ...,
-        on: Optional[str] = ...,
+        on: Optional[_str] = ...,
         level: Optional[Level] = ...,
-    ) -> Any: ...
-    def first(self, offset: Any) -> Series[Dtype]: ...
-    def last(self, offset: Any) -> Series[Dtype]: ...
+    ) : ...
+    def first(self, offset) -> Series[Dtype]: ...
+    def last(self, offset) -> Series[Dtype]: ...
     def rank(
         self,
         axis: SeriesAxisType = ...,
@@ -565,7 +558,7 @@ class Series(base.IndexOpsMixin, generic.NDFrame, Generic[Dtype]):
     def where(
         self,
         cond: Union[Series[Dtype], Series[Dtype], np.ndarray],
-        other: Any = ...,
+        other = ...,
         inplace: _bool = ...,
         axis: Optional[SeriesAxisType] = ...,
         level: Optional[Level] = ...,
@@ -583,7 +576,7 @@ class Series(base.IndexOpsMixin, generic.NDFrame, Generic[Dtype]):
         try_cast: _bool = ...,
     ) -> Series[Dtype]: ...
     def slice_shift(self, periods: int = ..., axis: SeriesAxisType = ...) -> Series[Dtype]: ...
-    def tshift(self, periods: int = ..., freq: Any = ..., axis: SeriesAxisType = ...) -> Series[Dtype]: ...
+    def tshift(self, periods: int = ..., freq = ..., axis: SeriesAxisType = ...) -> Series[Dtype]: ...
     def truncate(
         self,
         before: Optional[Union[date, _str, int]] = ...,
@@ -592,15 +585,15 @@ class Series(base.IndexOpsMixin, generic.NDFrame, Generic[Dtype]):
         copy: _bool = ...,
     ) -> Series[Dtype]: ...
     def tz_convert(
-        self, tz: Any, axis: SeriesAxisType = ..., level: Optional[Level] = ..., copy: _bool = ...,
+        self, tz, axis: SeriesAxisType = ..., level: Optional[Level] = ..., copy: _bool = ...,
     ) -> Series[Dtype]: ...
     def tz_localize(
         self,
-        tz: Any,
+        tz,
         axis: SeriesAxisType = ...,
         level: Optional[Level] = ...,
         copy: _bool = ...,
-        ambiguous: Any = ...,
+        ambiguous = ...,
         nonexistent: _str = ...,
     ) -> Series[Dtype]: ...
     def abs(self) -> Series[Dtype]: ...
@@ -615,7 +608,7 @@ class Series(base.IndexOpsMixin, generic.NDFrame, Generic[Dtype]):
         periods: int = ...,
         fill_method: _str = ...,
         limit: Optional[int] = ...,
-        freq: Optional[Any] = ...,
+        freq = ...,
         **kwargs
     ) -> Series[Dtype]: ...
     def first_valid_index(self) -> Scalar: ...
@@ -656,7 +649,7 @@ class Series(base.IndexOpsMixin, generic.NDFrame, Generic[Dtype]):
     # def __ipow__(self, other: Dtype) -> Series[Dtype]: ...
     # def __isub__(self, other: Dtype) -> Series[Dtype]: ...
     # def __itruediv__(self, other: Dtype) -> Series[Dtype]: ...
-    # def __itruediv__(self, other: Any) -> None: ...
+    # def __itruediv__(self, other) -> None: ...
     # def __ixor__(self, other: Dtype) -> Series[_bool]: ...
     def __le__(self, other: Union[num, _ListLike, Series[Dtype]]) -> Series[_bool]: ...
     def __lt__(self, other: Union[num, _ListLike, Series[Dtype]]) -> Series[_bool]: ...
@@ -689,8 +682,7 @@ class Series(base.IndexOpsMixin, generic.NDFrame, Generic[Dtype]):
 
     # @property
     # def cat(self) -> ?
-    @property
-    def hasnans(self) -> bool: ...
+
     @property
     def iat(self) -> _iLocIndexerSeries[Dtype]: ...
     @property
@@ -1010,7 +1002,6 @@ class Series(base.IndexOpsMixin, generic.NDFrame, Generic[Dtype]):
         fill_value: Optional[float] = ...,
         axis: SeriesAxisType = ...,
     ) -> Series[Dtype]: ...
-    def ravel(self, order: _str = ...) -> np.ndarray: ...
     def rdivmod(
         self,
         other: Union[Series[Dtype], Scalar],
@@ -1020,7 +1011,7 @@ class Series(base.IndexOpsMixin, generic.NDFrame, Generic[Dtype]):
     ) -> Series[Dtype]: ...
     def rfloordiv(
         self,
-        other: Any,
+        other,
         level: Optional[Level] = ...,
         fill_value: Optional[Union[float, None]] = ...,
         axis: SeriesAxisType = ...,
@@ -1042,14 +1033,14 @@ class Series(base.IndexOpsMixin, generic.NDFrame, Generic[Dtype]):
     # Next one should return a window class
     def rolling(
         self,
-        window: Any,
+        window,
         min_periods: Optional[int] = ...,
         center: _bool = ...,
         win_type: Optional[_str] = ...,
         on: Optional[_str] = ...,
         axis: SeriesAxisType = ...,
         closed: Optional[_str] = ...,
-    ) -> Any: ...
+    ) : ...
     def rpow(
         self,
         other: Union[Series[Dtype], Scalar],
@@ -1066,7 +1057,7 @@ class Series(base.IndexOpsMixin, generic.NDFrame, Generic[Dtype]):
     ) -> Series[Dtype]: ...
     def rtruediv(
         self,
-        other: Any,
+        other,
         level: Optional[Level] = ...,
         fill_value: Optional[Union[float, None]] = ...,
         axis: SeriesAxisType = ...,
@@ -1157,18 +1148,18 @@ class Series(base.IndexOpsMixin, generic.NDFrame, Generic[Dtype]):
     ) -> float: ...
     def to_list(self) -> List: ...
     def to_numpy(
-        self, dtype: Optional[Type[DtypeNp]] = ..., copy: _bool = ..., na_value: Any = ..., **kwargs
+        self, dtype: Optional[Type[DtypeNp]] = ..., copy: _bool = ..., na_value = ..., **kwargs
     ) -> np.ndarray: ...
     def to_records(
         self,
         index: _bool = ...,
         columnDTypes: Optional[Union[_str, Dict]] = ...,
         indexDTypes: Optional[Union[_str, Dict]] = ...,
-    ) -> Any: ...
+    ) : ...
     def tolist(self) -> List: ...
     def truediv(
         self,
-        other: Any,
+        other,
         level: Optional[Level] = ...,
         fill_value: Optional[Union[float, None]] = ...,
         axis: SeriesAxisType = ...,
@@ -1194,8 +1185,6 @@ class Series(base.IndexOpsMixin, generic.NDFrame, Generic[Dtype]):
         numeric_only: Optional[_bool] = ...,
         **kwargs
     ) -> Scalar: ...
-    def view(self, dtype: Optional[Any] = ...) -> Series[Dtype]: ...
 
 
-from pandas.core.indexes.base import Index
-from pandas.core.frame import DataFrame
+

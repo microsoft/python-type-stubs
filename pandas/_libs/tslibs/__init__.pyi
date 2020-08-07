@@ -1,31 +1,4 @@
-__all__ = [
-    "dtypes",
-    "localize_pydatetime",
-    "NaT",
-    "NaTType",
-    "iNaT",
-    "nat_strings",
-    "is_null_datetimelike",
-    "OutOfBoundsDatetime",
-    "OutOfBoundsTimedelta",
-    "IncompatibleFrequency",
-    "Period",
-    "Resolution",
-    "Timedelta",
-    "normalize_i8_timestamps",
-    "is_date_array_normalized",
-    "dt64arr_to_periodarr",
-    "delta_to_nanoseconds",
-    "ints_to_pydatetime",
-    "ints_to_pytimedelta",
-    "get_resolution",
-    "Timestamp",
-    "tz_convert_from_utc_single",
-    "to_offset",
-    "Tick",
-    "BaseOffset",
-]
-
+from __future__ import annotations
 from .nattype import is_null_datetimelike as is_null_datetimelike, nat_strings as nat_strings
 from .dtypes import Resolution as Resolution
 from .vectorized import (
@@ -36,13 +9,10 @@ from .vectorized import (
     normalize_i8_timestamps as normalize_i8_timestamps)
 from .tzconversion import tz_convert_from_utc_single as tz_convert_from_utc_single
 from .offsets import to_offset as to_offset, SingleConstructorOffset
-from .conversion import localize_pydatetime as localize_pydatetime, \
-    OutOfBoundsTimedelta as OutOfBoundsTimedelta  # , normalize_date as normalize_date
+from .conversion import localize_pydatetime as localize_pydatetime, OutOfBoundsTimedelta as OutOfBoundsTimedelta
 from .np_datetime import OutOfBoundsDatetime as OutOfBoundsDatetime
 from .period import IncompatibleFrequency as IncompatibleFrequency
 from .timedeltas import delta_to_nanoseconds as delta_to_nanoseconds, ints_to_pytimedelta as ints_to_pytimedelta
-#from .tzconversion import tz_convert_single as tz_convert_single
-
 
 import datetime
 import numpy as _np
@@ -50,13 +20,12 @@ from typing import Any, Mapping, Optional, Tuple, Union
 
 _Scalar = Union[str, bytes, datetime.date, datetime.datetime, datetime.timedelta, bool, int, float, complex]
 
-class OutOfBoundsDatetime: ...
+#class OutOfBoundsDatetime(OutOfBoundsDatetime): ...
 class NullFrequencyError: ...
 class BaseOffset: ...
 class NaT: ...
 NaTType = type(NaT)
-iNaT: int
-
+iNaT: int = ...
 
 class Period(object):
     def __init__(
@@ -165,9 +134,9 @@ class Timedelta(object):
     def resolution_string(self) -> str: ...
     @property
     def seconds(self) -> int: ...
-    max: Timedelta
-    min: Timedelta
-    resolution: Timedelta
+    max: Timedelta = ...
+    min: Timedelta = ...
+    resolution: 'Timedelta' = ...
     def ceil(self, freq, **kwargs) -> Timedelta: ...
     def floor(self, freq, **kwargs) -> Timedelta: ...
     def isoformat(self) -> str: ...
