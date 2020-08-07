@@ -1,16 +1,4 @@
-from ._structures import InfinityType, NegativeInfinityType
-from collections import namedtuple
-from typing import Callable, Optional, Tuple, Union
-
-InfiniteTypes = Union[InfinityType, NegativeInfinityType]
-PrePostDevType = Union[InfiniteTypes, Tuple[str, int]]
-SubLocalType = Union[InfiniteTypes, int, str]
-LocalType = Union[NegativeInfinityType, Tuple[Union[SubLocalType, Tuple[SubLocalType, str], Tuple[NegativeInfinityType, SubLocalType]], ...]]
-CmpKey = Tuple[int, Tuple[int, ...], PrePostDevType, PrePostDevType, PrePostDevType, LocalType]
-LegacyCmpKey = Tuple[int, Tuple[str, ...]]
-VersionComparisonMethod = Callable[[Union[CmpKey, LegacyCmpKey], Union[CmpKey, LegacyCmpKey]], bool]
-
-_Version = namedtuple('_Version', ['epoch', 'release', 'dev', 'pre', 'post', 'local'])
+from typing import Optional, Tuple, Union
 
 def parse(version: str) -> Union[LegacyVersion, Version]: ...
 
@@ -50,8 +38,6 @@ class LegacyVersion(_BaseVersion):
     @property
     def is_devrelease(self) -> bool: ...
 
-VERSION_PATTERN: str
-
 class Version(_BaseVersion):
     def __init__(self, version: str) -> None: ...
     @property
@@ -82,3 +68,4 @@ class Version(_BaseVersion):
     def minor(self) -> int: ...
     @property
     def micro(self) -> int: ...
+

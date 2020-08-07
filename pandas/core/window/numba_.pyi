@@ -1,0 +1,6 @@
+from pandas._typing import Scalar as Scalar
+#from pandas.compat._optional import import_optional_dependency as import_optional_dependency
+from typing import Any, Callable, Dict, Optional, Tuple
+
+def make_rolling_apply(func: Callable[..., Scalar], args: Tuple, nogil: bool, parallel: bool, nopython: bool) -> Any: ...
+def generate_numba_apply_func(args: Tuple, kwargs: Dict[str, Any], func: Callable[..., Scalar], engine_kwargs: Optional[Dict[str, bool]]) -> Any: ...

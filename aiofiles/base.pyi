@@ -12,14 +12,10 @@ class AsyncBase:
     async def __anext__(self) -> str: ...
 
 class _ContextManager(Coroutine[_V_co, _T_co, _T_contra]):
-    __slots__ = ...
     def __init__(self, __coro: Coroutine[_V_co, _T_co, _T_contra]) -> None: ...
     def send(self, __value: _T_contra) -> _T_co: ...
     def throw(
-        self,
-        __typ: Type[BaseException],
-        __val: Union[BaseException, object] = ...,
-        tb: Optional[TracebackType] = ...,
+        self, __typ: Type[BaseException], __val: Union[BaseException, object] = ..., tb: Optional[TracebackType] = ...,
     ) -> _T_co: ...
     def close(self) -> None: ...
     @property
@@ -35,17 +31,11 @@ class _ContextManager(Coroutine[_V_co, _T_co, _T_contra]):
     async def __anext__(self) -> Coroutine[_V_co, _T_co, _T_contra]: ...
     async def __aenter__(self) -> Coroutine[_V_co, _T_co, _T_contra]: ...
     async def __aexit__(
-        self,
-        exc_type: Optional[Type[BaseException]],
-        exc_val: Optional[BaseException],
-        exc_tb: Optional[TracebackType],
+        self, exc_type: Optional[Type[BaseException]], exc_val: Optional[BaseException], exc_tb: Optional[TracebackType],
     ) -> None: ...
 
 class AiofilesContextManager(_ContextManager):
     async def __aexit__(
-        self,
-        exc_type: Optional[Type[BaseException]],
-        exc_val: Optional[BaseException],
-        exc_tb: Optional[TracebackType],
+        self, exc_type: Optional[Type[BaseException]], exc_val: Optional[BaseException], exc_tb: Optional[TracebackType],
     ) -> None: ...
 

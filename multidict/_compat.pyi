@@ -1,6 +1,0 @@
-from typing import Any
-
-NO_EXTENSIONS: Any
-PYPY: Any
-USE_CYTHON_EXTENSIONS: Any
-USE_CYTHON: Any
