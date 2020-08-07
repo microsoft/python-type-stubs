@@ -1,3 +1,1 @@
-from typing import Any
-
-reverse_op: Any
+reverse_op = ...
