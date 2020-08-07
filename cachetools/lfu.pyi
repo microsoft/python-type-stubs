@@ -1,4 +1,4 @@
-from typing import Callable, Iterator, Optional, Tuple, TypeVar
+from typing import Callable, Iterator, Optional, TypeVar
 
 from .cache import Cache
 
@@ -14,4 +14,3 @@ class LFUCache(Cache[_KT, _VT]):
     def __delitem__(self, key: _KT, cache_delitem: Callable[[_KT], None] = ...) -> None: ...
     def __iter__(self) -> Iterator[_KT]: ...
     def __len__(self) -> int: ...
-

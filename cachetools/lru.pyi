@@ -1,4 +1,4 @@
-from typing import Callable, Iterator, Optional, Tuple, TypeVar
+from typing import Callable, Iterator, Optional, TypeVar
 
 from .cache import Cache as Cache
 
@@ -11,4 +11,3 @@ class LRUCache(Cache[_KT, _VT]):
     def __setitem__(self, key: _KT, value: _VT, cache_setitem: Callable[[_KT, _VT], None] = ...) -> None: ...
     def __delitem__(self, key: _KT, cache_delitem: Callable[[_KT], None] = ...) -> None: ...
     def __iter__(self) -> Iterator[_KT]: ...
-
