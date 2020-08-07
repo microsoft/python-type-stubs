@@ -1,5 +1,6 @@
-from cachetools.cache import Cache
 from typing import Any, Callable, ContextManager, Optional, TypeVar
+
+from .cache import Cache
 
 _KT = TypeVar("_KT")
 _VT = TypeVar("_VT")
