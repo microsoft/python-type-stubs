@@ -1,3 +1,12 @@
+"""
+Classic deprecation warning
+===========================
+
+Classic ``@deprecated`` decorator to deprecate old python classes, functions or methods.
+
+.. _The Warnings Filter: https://docs.python.org/3/library/warnings.html#the-warnings-filter
+"""
+
 from typing import (
     Any,
     Callable,
@@ -7,17 +16,6 @@ from typing import (
 )
 
 _T = TypeVar("_T", bound=Callable[..., Any])
-
-"""
-Classic deprecation warning
-===========================
-
-Classic ``@deprecated`` decorator to deprecate old python classes, functions or methods.
-
-.. _The Warnings Filter: https://docs.python.org/3/library/warnings.html#the-warnings-filter
-"""
-string_types = (type(b""), type(""))
-
 
 class ClassicAdapter:
     """

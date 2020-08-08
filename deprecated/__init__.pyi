@@ -1,1 +1,1 @@
-from deprecated.classic import deprecated as deprecated
+from .classic import deprecated as deprecated
