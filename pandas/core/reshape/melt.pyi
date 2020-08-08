@@ -1,6 +1,6 @@
 import numpy as np
 from pandas.core.frame import DataFrame as DataFrame
-from typing import Any, List, Optional, Tuple, Union
+from typing import List, Optional, Tuple, Union
 
 def melt(
     frame: DataFrame,

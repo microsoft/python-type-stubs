@@ -1,6 +1,6 @@
 def factorize(
     values: Any, sort: bool = ..., na_sentinel: int = ..., size_hint: Union[int, None] = None,
-) -> Tuple[_np.ndarray, Union[_np.ndarray, Index]]:
+) -> Tuple[np.ndarray, Union[np.ndarray, Index]]:
     """Encode the object as an enumerated type or categorical variable.
 
 This method is useful for obtaining a numeric representation of an

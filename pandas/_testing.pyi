@@ -1,4 +1,3 @@
-from pandas.core.arrays.categorical import Categorical
 from pandas.core.frame import DataFrame
 from pandas.core.indexes.base import Index
 from pandas.core.series import Series

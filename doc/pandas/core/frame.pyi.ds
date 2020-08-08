@@ -1,4 +1,4 @@
-class DataFrame:
+class DataFrame(NDFrame):
     def aggregate(self, func: Union[Callable, _str], axis: AxisType = ..., **kwargs) -> Series[Dtype]:
         """Aggregate using one or more operations over the specified axis.
 
@@ -973,7 +973,7 @@ dtype: bool
         pass
     def pivot(
         self, index = ..., columns = ..., values = ...,
-    ) -> DataFrame
+    ) -> DataFrame:
         """Return reshaped DataFrame organized by given index / column values.
 
 Reshape data (produce a "pivot" table) based on column values. Uses
