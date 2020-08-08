@@ -1,10 +1,7 @@
-from typing import Any, Dict, FrozenSet, Iterable, Iterator, Optional, Sequence, Tuple
+from typing import FrozenSet, Iterable, Iterator, Optional, Sequence, Tuple
 
 PythonVersion = Sequence[int]
 MacVersion = Tuple[int, int]
-GlibcVersion = Tuple[int, int]
-logger: Any
-INTERPRETER_SHORT_NAMES: Dict[str, str]
 
 class Tag:
     def __init__(self, interpreter: str, abi: str, platform: str) -> None: ...
@@ -37,4 +34,3 @@ def mac_platforms(version: Optional[MacVersion] = ..., arch: Optional[str] = ...
 def interpreter_name() -> str: ...
 def interpreter_version(**kwargs: bool) -> str: ...
 def sys_tags(**kwargs: bool) -> Iterator[Tag]: ...
-

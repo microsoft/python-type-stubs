@@ -1,6 +1,4 @@
-from typing import Any, Callable, Dict, Optional
-
-Operator = Callable[[str, str], bool]
+from typing import Any, Dict, Optional
 
 class InvalidMarker(ValueError): ...
 class UndefinedComparison(ValueError): ...

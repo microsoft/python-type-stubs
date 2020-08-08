@@ -1,7 +1,8 @@
 import abc
+from typing import Callable, FrozenSet, Iterable, Iterator, Optional, Union
+
 from .utils import canonicalize_version as canonicalize_version
 from .version import LegacyVersion as LegacyVersion, Version as Version, parse as parse
-from typing import Callable, FrozenSet, Iterable, Iterator, Optional, Union
 
 ParsedVersion = Union[Version, LegacyVersion]
 UnparsedVersion = Union[Version, LegacyVersion, str]
@@ -68,4 +69,3 @@ class SpecifierSet(BaseSpecifier):
     def filter(
         self, iterable: Iterable[Union[ParsedVersion, str]], prereleases: Optional[bool] = ...
     ) -> Iterable[Union[ParsedVersion, str]]: ...
-
