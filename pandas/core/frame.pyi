@@ -1,6 +1,7 @@
 from __future__ import  annotations
 import datetime
 import numpy as np
+
 from core.indexing import _iLocIndexer, _LocIndexer
 from matplotlib.axes import Axes as PlotAxes
 import sys
@@ -8,11 +9,13 @@ from pandas._typing import Axes as Axes, Axis as Axis, FilePathOrBuffer as FileP
 from pandas._typing import num, SeriesAxisType, AxisType, Dtype, DtypeNp, Label, StrLike, Scalar, IndexType, MaskType
 from pandas.core.generic import NDFrame as NDFrame
 from pandas.core.groupby import DataFrameGroupBy as DataFrameGroupBy
+from pandas.core.groupby.grouper import Grouper
 from pandas.core.indexes.api import Index as Index
 from pandas.core.series import Series as Series
 from pandas.io.formats import console as console, format as fmt
 from pandas.io.formats.style import Styler as Styler
-from typing import Any, Callable, Dict, Hashable, Iterable, Iterator, List, Mapping, Optional, Sequence, Tuple, Type, Union, overload
+from typing import Any, Callable, Dict, Hashable, Iterable, Iterator, List, Mapping, Optional, Sequence, Tuple, Type, \
+    Union, overload, Pattern
 
 if sys.version_info >= (3, 8):
     from typing import Literal
@@ -227,19 +230,7 @@ class DataFrame(NDFrame):
         fill_axis: AxisType = ...,
         broadcast_axis: Optional[AxisType] = ...,
     ) -> DataFrame: ...
-    def reindex(
-        self,
-        labels: Optional[List] = ...,
-        index = ...,
-        columns = ...,
-        axis: Optional[AxisType] = ...,
-        method: Optional[Union[_str, Literal["backfill", "bfill", "pad", "ffill", "nearest"]]] = ...,
-        copy: _bool = ...,
-        level: Optional[Level] = ...,
-        fill_value = ...,
-        limit: Optional[int] = ...,
-        tolerance = ...,
-    ) -> DataFrame: ...
+    def reindex(**kwargs) -> DataFrame: ...
     def drop(
         self,
         labels: Optional[Union[_str, List]] = ...,
@@ -317,10 +308,10 @@ class DataFrame(NDFrame):
     def replace(
         self,
         to_replace = ...,
-        value = ...,
+        value: Optional[Union[Scalar, Sequence, Mapping, Pattern]] = ...,
         limit: Optional[int] = ...,
         regex = ...,
-        method: _str = ...,
+        method: Optional[_str] = ...,
         *,
         inplace: Literal[True]
     ) -> None: ...
@@ -328,10 +319,10 @@ class DataFrame(NDFrame):
     def replace(
         self,
         to_replace = ...,
-        value = ...,
+        value: Optional[Union[Scalar, Sequence, Mapping, Pattern]] = ...,
         limit: Optional[int] = ...,
         regex = ...,
-        method: _str = ...,
+        method: Optional[_str] = ...,
         *,
         inplace: Literal[False]
     ) -> DataFrame: ...
@@ -339,21 +330,21 @@ class DataFrame(NDFrame):
     def replace(
         self,
         to_replace = ...,
-        value = ...,
+        value: Optional[Union[Scalar, Sequence, Mapping, Pattern]] = ...,
         *,
         limit: Optional[int] = ...,
         regex = ...,
-        method: _str = ...,
+        method: Optional[_str] = ...,
     ) -> DataFrame: ...
     @overload
     def replace(
         self,
         to_replace = ...,
-        value = ...,
+        value: Optional[Union[Scalar, Sequence, Mapping, Pattern]] = ...,
         inplace: Optional[_bool] = ...,
         limit: Optional[int] = ...,
         regex = ...,
-        method: _str = ...,
+        method: Optional[_str] = ...,
     ) -> Union[None, DataFrame]: ...
     def shift(
         self,
@@ -623,11 +614,11 @@ class DataFrame(NDFrame):
     ) -> DataFrame: ...
     def pivot_table(
         self,
-        values = ...,
-        index = ...,
-        columns = ...,
+        values: Optional[_str] = ...,
+        index: Optional[_str, Grouper, Sequence] = ...,
+        columns: Optional[_str, Grouper, Sequence] = ...,
         aggfunc = ...,
-        fill_value = ...,
+        fill_value: Optional[Scalar] = ...,
         margins: _bool = ...,
         dropna: _bool = ...,
         margins_name: _str = ...,
@@ -640,11 +631,12 @@ class DataFrame(NDFrame):
     ) -> Union[DataFrame, Series[Dtype]]: ...
     def melt(
         self,
-        id_vars = ...,
-        value_vars = ...,
-        var_name = ...,
-        value_name = ...,
+        id_vars: Optional[Tuple, Sequence, np.ndarray] = ...,
+        value_vars: Optional[Tuple, Sequence, np.ndarray] = ...,
+        var_name: Optional[Scalar] = ...,
+        value_name: Scalar = ...,
         col_level: Optional[Union[int, _str]] = ...,
+        ignore_index: _bool = ...
     ) -> DataFrame: ...
     def diff(self, periods: int = ..., axis: AxisType = ...) -> DataFrame: ...
     @overload
