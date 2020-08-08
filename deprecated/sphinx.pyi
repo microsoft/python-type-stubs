@@ -53,8 +53,8 @@ class SphinxAdapter(ClassicAdapter):
     def __init__(
         self,
         directive: Literal["versionadded", "versionchanged", "deprecated"],
-        reason: str = "",
-        version: str = "",
+        reason: str = ...,
+        version: str = ...,
         action: Optional[str] = None,
         category: Type[DeprecationWarning] = ...,
     ) -> None:
@@ -99,7 +99,7 @@ class SphinxAdapter(ClassicAdapter):
         """
         ...
 
-def versionadded(reason: str = "", version: str = "") -> Callable[[_T], _T]:
+def versionadded(reason: str = ..., version: str = ...) -> Callable[[_T], _T]:
     """
     This decorator can be used to insert a "versionadded" directive
     in your function/class docstring in order to documents the
@@ -118,7 +118,7 @@ def versionadded(reason: str = "", version: str = "") -> Callable[[_T], _T]:
     """
     ...
 
-def versionchanged(reason: str = "", version: str = "") -> Callable[[_T], _T]:
+def versionchanged(reason: str = ..., version: str = ...) -> Callable[[_T], _T]:
     """
     This decorator can be used to insert a "versionchanged" directive
     in your function/class docstring in order to documents the
@@ -137,7 +137,7 @@ def versionchanged(reason: str = "", version: str = "") -> Callable[[_T], _T]:
     ...
 
 def deprecated(
-    *, reason: str = "", version: str = "", action: Optional[str] = ..., category: Optional[Type[DeprecationWarning]] = ...,
+    *, reason: str = ..., version: str = ..., action: Optional[str] = ..., category: Optional[Type[DeprecationWarning]] = ...,
 ) -> Callable[[_T], _T]:
     """
     This decorator can be used to insert a "deprecated" directive
