@@ -54,7 +54,7 @@ def read_json(
     encoding: Optional[str] = ...,
     lines: bool = ...,
     chunksize: Optional[int] = ...,
-    compression: Optional[Literal["infer", "gzip", "bz2", "zip", "xz"]] = ...,
+    compression: Optional[Union[str, Literal["infer", "gzip", "bz2", "zip", "xz"]]] = ...,
     *,
     typ: Literal["series"]
 ) -> Series: ...
@@ -72,7 +72,7 @@ def read_json(
     encoding: Optional[str] = ...,
     lines: bool = ...,
     chunksize: Optional[int] = ...,
-    compression: Optional[Literal["infer", "gzip", "bz2", "zip", "xz"]] = ...,
+    compression: Optional[Union[str, Literal["infer", "gzip", "bz2", "zip", "xz"]]] = ...,
     *,
     typ: Literal["frame"]
 ) -> DataFrame: ...
@@ -80,7 +80,7 @@ def read_json(
 def read_json(
     path: FilePathOrBuffer,
     orient: Optional[str] = ...,
-    typ: Optional[Literal["frame", "series"]] = ...,
+    typ: Optional[str] = ...,
     dtype = ...,
     convert_axes = ...,
     convert_dates: bool = ...,
@@ -91,7 +91,7 @@ def read_json(
     encoding: Optional[str] = ...,
     lines: bool = ...,
     chunksize: Optional[int] = ...,
-    compression: Optional[Literal["infer", "gzip", "bz2", "zip", "xz"]] = ...,
+    compression: Optional[Union[str, Literal["infer", "gzip", "bz2", "zip", "xz"]]] = ...,
 ) -> Union[Series, DataFrame]: ...
 
 

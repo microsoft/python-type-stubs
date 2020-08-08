@@ -10,11 +10,11 @@ else:
 class Timestamp:
 
     def astimezone(self, *args, **kwargs) -> Timestamp: ...
-    def ceil(self, freq: str, ambiguous: Union[bool, Literal['raise', 'NaT']] = ...,
-                nonexistent: Union[Timedelta,Literal['raise', 'shift_forward', 'shift_backward', 'NaT']] = ...) \
+    def ceil(self, freq: str, ambiguous: Union[bool, str, Literal['raise', 'NaT']] = ...,
+                nonexistent: Union[Timedelta, str, Literal['raise', 'shift_forward', 'shift_backward', 'NaT']] = ...) \
             -> Timestamp: ...
-    def floor(self, freq: str, ambiguous: Union[bool, Literal['raise', 'NaT']] = ...,
-                nonexistent: Union[Timedelta,Literal['raise', 'shift_forward', 'shift_backward', 'NaT']] = ...) \
+    def floor(self, freq: str, ambiguous: Union[bool, str, Literal['raise', 'NaT']] = ...,
+                nonexistent: Union[Timedelta, str, Literal['raise', 'shift_forward', 'shift_backward', 'NaT']] = ...) \
             -> Timestamp: ...
     @classmethod
     def combine(cls, date, time) -> Timestamp: ...
@@ -40,8 +40,8 @@ class Timestamp:
                 nanosecond: Optional[int] = ...,
                 tzinfo: Optional[Any] = ...,
                 fold: int = ...) -> Timestamp: ...
-    def round(self, freq: str, ambiguous: Union[bool, Literal['raise', 'NaT']] = ...,
-                nonexistent: Union[Timedelta,Literal['raise', 'shift_forward', 'shift_backward', 'NaT']] = ...) \
+    def round(self, freq: str, ambiguous: Union[bool, str, Literal['raise', 'NaT']] = ...,
+                nonexistent: Union[Timedelta, str, Literal['raise', 'shift_forward', 'shift_backward', 'NaT']] = ...) \
             -> Timestamp: ...
     @classmethod
     def today(cls, tz: Optional[Any] = ...) -> Timestamp: ...

@@ -133,10 +133,21 @@ class DataFrameGroupBy(GroupBy):
         value,
         method: Optional[str] = ...,
         axis: AxisType = ...,
-        inplace: Literal[False] = ...,
         limit: Optional[int] = ...,
         downcast: Optional[Dict] = ...,
+        *,
+        inplace: Literal[False]
     ) -> DataFrame: ...
+    @overload
+    def fillna(
+        self,
+        value,
+        method: Optional[str] = ...,
+        axis: AxisType = ...,
+        inplace: bool = ...,
+        limit: Optional[int] = ...,
+        downcast: Optional[Dict] = ...,
+    ) -> Union[None, DataFrame]: ...
 
     def first(self, **kwargs) -> DataFrame: ...
     def head(self, n: int = ...) -> DataFrame: ...
