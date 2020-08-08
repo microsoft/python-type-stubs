@@ -1,4 +1,4 @@
-from markdown.core import Markdown
+from ..core import Markdown
 from typing import Mapping, Sequence
 
 class Extension:
@@ -10,4 +10,3 @@ class Extension:
     def setConfig(self, key: str, value: str) -> None: ...
     def setConfigs(self, items: Mapping[str, str]) -> None: ...
     def extendMarkdown(self, md: Markdown) -> None: ...
-

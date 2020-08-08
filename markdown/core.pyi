@@ -1,9 +1,3 @@
-import logging
-from .extensions import Extension
-from typing import BinaryIO, Mapping, Optional, Sequence, Text, TextIO, Union
-
-from typing_extensions import Literal
-
 """
 Python Markdown
 
@@ -24,8 +18,11 @@ Copyright 2004 Manfred Stienstra (the original version)
 
 License: BSD (see LICENSE.md for details).
 """
-__all__ = ["Markdown", "markdown", "markdownFromFile"]
-logger = logging.getLogger("MARKDOWN")
+
+from .extensions import Extension
+from typing import BinaryIO, Mapping, Optional, Sequence, Text, TextIO, Union
+
+from typing_extensions import Literal
 
 class Markdown:
     """Convert Markdown to HTML."""
