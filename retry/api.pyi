@@ -1,7 +1,6 @@
-import logging
+from logging import Logger
 from typing import Any, Callable, Dict, List, Optional, Sequence, TypeVar, Union
 
-logging_logger = logging.getLogger(__name__)
 _T = TypeVar("_T", bound=Callable[..., Any])
 _Decorator = Callable[[_T], _T]
 _R = TypeVar("_R")
@@ -17,7 +16,7 @@ def retry_call(
     max_delay: int = ...,
     backoff: int = ...,
     jitter: int = ...,
-    logger: Optional[logging.Logger] = ...,
+    logger: Optional[Logger] = ...,
 ) -> _R:
     """
     Calls a function and re-executes it if it failed.
@@ -46,7 +45,7 @@ def retry(
     max_delay: int = ...,
     backoff: int = ...,
     jitter: int = ...,
-    logger: Optional[logging.Logger] = ...,
+    logger: Optional[Logger] = ...,
 ) -> _Decorator:
     """Returns a retry decorator.
 
@@ -62,4 +61,3 @@ def retry(
     :returns: a retry decorator.
     """
     ...
-
