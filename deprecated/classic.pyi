@@ -74,7 +74,7 @@ class ClassicAdapter:
     category: Type[DeprecationWarning]
 
     def __init__(
-        self, reason: str = ..., version: str = ..., action: Optional[str] = None, category: Type[DeprecationWarning] = ...,
+        self, reason: str = ..., version: str = ..., action: Optional[str] = ..., category: Type[DeprecationWarning] = ...,
     ) -> None:
         """
         Construct a wrapper adapter.
