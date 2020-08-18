@@ -110,7 +110,7 @@ class GroupSingle(AbstractGroup):
     def copy(self) -> GroupSingle: ...
 
 def spritecollide(
-    sprite: Sprite, group: AbstractGroup, dokill: bool, collided: Optional[Callable[[Sprite, Sprite], bool]] = None,
+    sprite: Sprite, group: AbstractGroup, dokill: bool, collided: Optional[Callable[[Sprite, Sprite], bool]] = None
 ) -> Sequence[Sprite]: ...
 def collide_rect(left: Sprite, right: Sprite) -> bool: ...
 
@@ -132,9 +132,9 @@ def groupcollide(
     group2: AbstractGroup,
     dokill: bool,
     dokill2: bool,
-    collided: Optional[Callable[[Sprite, Sprite], bool]] = None,
+    collided: Optional[Callable[[Sprite, Sprite], bool]] = None
 ) -> Mapping[Sprite, Sprite]: ...
 def spritecollideany(
-    sprite: Sprite, group: AbstractGroup, collided: Optional[Callable[[Sprite, Sprite], bool]] = None,
+    sprite: Sprite, group: AbstractGroup, collided: Optional[Callable[[Sprite, Sprite], bool]] = None
 ) -> Sprite: ...
 

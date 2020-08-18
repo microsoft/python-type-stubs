@@ -14,19 +14,19 @@ def get_visible() -> bool: ...
 def get_focused() -> int: ...
 @overload
 def set_cursor(
-    size: Tuple[int, int], hotspot: Tuple[int, int], xormasks: Sequence[int], andmasks: Sequence[int],
+    size: Tuple[int, int], hotspot: Tuple[int, int], xormasks: Sequence[int], andmasks: Sequence[int]
 ) -> None: ...  # This needs to be checked
 @overload
 def set_cursor(
-    size: Tuple[int, int], hotspot: Sequence[int], xormasks: Sequence[int], andmasks: Sequence[int],
+    size: Tuple[int, int], hotspot: Sequence[int], xormasks: Sequence[int], andmasks: Sequence[int]
 ) -> None: ...  # This needs to be checked
 @overload
 def set_cursor(
-    size: Sequence[int], hotspot: Tuple[int, int], xormasks: Sequence[int], andmasks: Sequence[int],
+    size: Sequence[int], hotspot: Tuple[int, int], xormasks: Sequence[int], andmasks: Sequence[int]
 ) -> None: ...  # This needs to be checked
 @overload
 def set_cursor(
-    size: Sequence[int], hotspot: Sequence[int], xormasks: Sequence[int], andmasks: Sequence[int],
+    size: Sequence[int], hotspot: Sequence[int], xormasks: Sequence[int], andmasks: Sequence[int]
 ) -> None: ...  # This needs to be checked
 def get_cursor() -> Tuple[Tuple[int, int], Tuple[int, int], Sequence[int], Sequence[int]]: ...
 

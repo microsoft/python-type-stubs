@@ -1,34 +1,34 @@
 from typing import Tuple, Callable, Optional, overload, Type
 
 # Most useful stuff
-from pygame.constants import *
-import pygame.surface
-import pygame.rect
-import pygame.color
-import pygame.event
-import pygame.bufferproxy
-import pygame.draw
-import pygame.display
-import pygame.font
-import pygame.image
-import pygame.key
-import pygame.mixer
-import pygame.mouse
-import pygame.time
-import pygame.version
+from .constants import *
+import .surface
+import .rect
+import .color
+import .event
+import .bufferproxy
+import .draw
+import .display
+import .font
+import .image
+import .key
+import .mixer
+import .mouse
+import .time
+import .version
 
 # Advanced stuff
-import pygame.cursors
-import pygame.joystick
-import pygame.mask
-import pygame.sprite
-import pygame.transform
-import pygame.pixelarray
-import pygame.pixelcopy
-import pygame.sndarray
-import pygame.surfarray
-import pygame.math
-import pygame.fastevent
+import .cursors
+import .joystick
+import .mask
+import .sprite
+import .transform
+import .pixelarray
+import .pixelcopy
+import .sndarray
+import .surfarray
+import .math
+import .fastevent
 
 # Other
 import pygame.scrap
