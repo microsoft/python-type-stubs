@@ -10,11 +10,11 @@ _from_string_format = Literal["p", "RGB", "RGBX", "RGBA", "ARGB"]
 @overload
 def load(filename: str, namehint: Optional[str] = "") -> Surface: ...
 @overload
-def load(filename: Any, namehint: Optional[str] = "") -> Surface: ...  # Any is IO
+def load(filename: Any, namehint: Optional[str] = "") -> Surface: ...  # todo: Any is IO
 @overload
 def save(surface: Surface, filename: str) -> None: ...
 @overload
-def save(surface: Surface, filename: Any) -> None: ...  # Any is IO
+def save(surface: Surface, filename: Any) -> None: ...  # todo: Any is IO
 def get_extended() -> bool: ...
 def tostring(surface: Surface, format: _to_string_format, flipped: Optional[bool] = False) -> str: ...
 @overload
