@@ -1,11 +1,9 @@
-from typing import Tuple, Union, List, Optional, TypeVar, Sequence
+from typing import Tuple, Union, Optional, Sequence
 
 from pygame.color import Color
 from pygame.surface import Surface
 
-_ColorValue = Union[
-    Color, Tuple[int, int, int], List[int], int, Tuple[int, int, int, int]
-]
+_ColorValue = Union[Color, Tuple[int, int, int], Sequence[int], int, Tuple[int, int, int, int]]
 
 class PixelArray:
     surface: Surface
@@ -23,16 +21,11 @@ class PixelArray:
         weights: Optional[Sequence[float]] = (0.299, 0.587, 0.114),
     ) -> None: ...
     def extract(
-        self,
-        color: _ColorValue,
-        distance: Optional[float] = 0,
-        weights: Optional[Sequence[float]] = (0.299, 0.587, 0.114),
+        self, color: _ColorValue, distance: Optional[float] = 0, weights: Optional[Sequence[float]] = (0.299, 0.587, 0.114),
     ) -> PixelArray: ...
     def compare(
-        self,
-        array: PixelArray,
-        distance: Optional[float] = 0,
-        weights: Optional[Sequence[float]] = (0.299, 0.587, 0.114),
+        self, array: PixelArray, distance: Optional[float] = 0, weights: Optional[Sequence[float]] = (0.299, 0.587, 0.114),
     ) -> PixelArray: ...
     def transpose(self) -> PixelArray: ...
     def close(self) -> PixelArray: ...
+

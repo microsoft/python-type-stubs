@@ -13,8 +13,7 @@ with open("constants.pyi", "w") as f:
     f.write("__all__: List[str]\n")
 """
 
-from typing import List
-
+from typing import Sequence
 
 ACTIVEEVENT: int
 ANYFORMAT: int
@@ -525,5 +524,4 @@ VIDEORESIZE: int
 WINDOWEVENT: int
 WINDOWEVENT_CLOSE: int
 
-
-__all__: List[str]
+__all__: Sequence[str]

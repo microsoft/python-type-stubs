@@ -1,8 +1,6 @@
-from typing import Text, Tuple, Union, overload, List
+from typing import Sequence, Text, Tuple, Union, overload
 
-_ColorValue = Union[
-    "Color", str, Tuple[int, int, int], List[int], int, Tuple[int, int, int, int]
-]
+_ColorValue = Union["Color", str, Tuple[int, int, int], Sequence[int], int, Tuple[int, int, int, int]]
 
 class Color:
     r: int
@@ -19,7 +17,9 @@ class Color:
     @overload
     def __init__(self, r: int, g: int, b: int, a: int = ...) -> None: ...
     @overload
-    def __init__(self, rgbvalue: Union[Text, int]) -> None: ...
+    def __init__(self, rgbvalue: Text) -> None: ...
+    @overload
+    def __init__(self, rgbvalue: int) -> None: ...
     @overload
     def __getitem__(self, i: int) -> int: ...
     @overload

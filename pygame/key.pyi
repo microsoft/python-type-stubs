@@ -1,12 +1,10 @@
-from typing import Sequence, Optional, Tuple, Union, List
+from typing import Sequence, Optional, Tuple, Union
 from pygame.math import Vector2
 from pygame.rect import Rect
 
-_Coordinate = Union[Tuple[float, float], List[float], Vector2]
+_Coordinate = Union[Tuple[float, float], Sequence[float], Vector2]
 _RectValue = Union[
-    Rect,
-    Union[Tuple[int, int, int, int], List[int]],
-    Union[Tuple[_Coordinate, _Coordinate], List[_Coordinate]],
+    Rect, Union[Tuple[int, int, int, int], Sequence[int]], Union[Tuple[_Coordinate, _Coordinate], Sequence[_Coordinate]],
 ]
 
 def get_focused() -> bool: ...
@@ -20,3 +18,4 @@ def key_code(name: str) -> int: ...
 def start_text_input() -> None: ...
 def stop_text_input() -> None: ...
 def set_text_input_rect(_RectValue) -> None: ...
+
