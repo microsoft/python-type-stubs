@@ -16,9 +16,13 @@ def get_cache_size() -> int: ...
 def get_default_resolution() -> int: ...
 def set_default_resolution(resolution: int) -> None: ...
 @overload
-def SysFont(name: str, size: int, bold: Optional[int] = False, italic: Optional[int] = False) -> Font: ...
+def SysFont(
+    name: str, size: int, bold: Optional[int] = False, italic: Optional[int] = False
+) -> Font: ...  # todo: optionional int false?
 @overload
-def SysFont(name: Sequence[str], size: int, bold: Optional[int] = False, italic: Optional[int] = False) -> Font: ...
+def SysFont(
+    name: Sequence[str], size: int, bold: Optional[int] = False, italic: Optional[int] = False
+) -> Font: ...  # todo: optionional int false?
 def get_default_font() -> str: ...
 
 STYLE_NORMAL: int
@@ -63,7 +67,7 @@ class Font:
         size: Optional[float] = 0,
         font_index: Optional[int] = 0,
         resolution: Optional[int] = 0,
-        ucs4: Optional[int] = False,
+        ucs4: Optional[int] = False,  # todo: optionional int false?
     ) -> None: ...
     @overload
     def __init__(

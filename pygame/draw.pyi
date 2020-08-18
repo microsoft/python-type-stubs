@@ -35,18 +35,18 @@ def circle(
 ) -> Rect: ...
 def ellipse(surface: Surface, color: _ColorValue, rect: _RectValue, width: Optional[int] = 0) -> Rect: ...
 def arc(
-    surface: Surface, color: _ColorValue, rect: _RectValue, start_angle: float, stop_angle: float, width: Optional[int] = 1,
+    surface: Surface, color: _ColorValue, rect: _RectValue, start_angle: float, stop_angle: float, width: Optional[int] = 1
 ) -> Rect: ...
 def line(
-    surface: Surface, color: _ColorValue, start_pos: _Coordinate, end_pos: _Coordinate, width: Optional[int] = 1,
+    surface: Surface, color: _ColorValue, start_pos: _Coordinate, end_pos: _Coordinate, width: Optional[int] = 1
 ) -> Rect: ...
 def lines(
-    surface: Surface, color: _ColorValue, closed: bool, points: Sequence[_Coordinate], width: Optional[int] = 1,
+    surface: Surface, color: _ColorValue, closed: bool, points: Sequence[_Coordinate], width: Optional[int] = 1
 ) -> Rect: ...
 def aaline(
-    surface: Surface, color: _ColorValue, start_pos: _Coordinate, end_pos: _Coordinate, blend: Optional[int] = 1,
+    surface: Surface, color: _ColorValue, start_pos: _Coordinate, end_pos: _Coordinate, blend: Optional[int] = 1
 ) -> Rect: ...
 def aalines(
-    surface: Surface, color: _ColorValue, closed: bool, points: Sequence[_Coordinate], blend: Optional[int] = 1,
+    surface: Surface, color: _ColorValue, closed: bool, points: Sequence[_Coordinate], blend: Optional[int] = 1
 ) -> Rect: ...
 
