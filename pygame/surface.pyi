@@ -19,7 +19,6 @@ _RectStyle = Union[
 _Coordinate = Union[Tuple[float, float], Sequence[float], Vector2]
 
 class Surface:
-    _pixels_address: int
     @overload
     def __init__(self, size: _Coordinate, flags: int = ..., depth: int = ..., masks: Optional[_ColorInput] = ...,) -> None: ...
     @overload

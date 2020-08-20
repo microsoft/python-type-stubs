@@ -26,9 +26,6 @@ class DirtySprite(Sprite):
     blendmode: int
     source_rect: Rect
     visible: int
-    _layer: int
-    def _set_visible(self, value: int) -> None: ...
-    def _get_visible(self) -> int: ...
 
 class AbstractGroup:
     spritedict = Mapping[Sprite, int]

@@ -1,6 +1,6 @@
 from typing import Sequence, Text, Tuple, Union, overload
 
-_ColorValue = Union["Color", str, Tuple[int, int, int], Sequence[int], int, Tuple[int, int, int, int]]
+_ColorValue = Union[Color, str, Tuple[int, int, int], Sequence[int], int, Tuple[int, int, int, int]]
 
 class Color:
     r: int
@@ -31,3 +31,4 @@ class Color:
     def correct_gamma(self, gamma: float) -> Color: ...
     def set_length(self, length: int) -> None: ...
     def lerp(self, color: _ColorValue, amount: float) -> Color: ...
+

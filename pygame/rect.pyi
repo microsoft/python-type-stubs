@@ -38,7 +38,7 @@ class Rect:
     height: int
     w: int
     h: int
-    __hash__: None  # type: ignore
+    def __hash__(self) -> int: ...
     @overload
     def __init__(self, left: float, top: float, width: float, height: float) -> None: ...
     @overload

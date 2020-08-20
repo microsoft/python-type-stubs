@@ -76,7 +76,6 @@ _Small_string = Tuple[str, str, str, str, str, str, str, str, str, str, str, str
 _Big_string = Tuple[
     str, str, str, str, str, str, str, str, str, str, str, str, str, str, str, str, str, str, str, str, str, str, str, str,
 ]
-
 arrow: _Bitmap
 diamond: _Bitmap
 broken_x: _Bitmap
@@ -91,3 +90,4 @@ def compile(
     strings: Sequence[str], black: Optional[str] = ..., white: Optional[str] = ..., xor: str = ...,
 ) -> Tuple[Sequence[int], Sequence[int]]: ...
 def load_xbm(cursorfile: str, maskfile: str) -> Tuple[Sequence[int], Sequence[int], Sequence[int], Sequence[int]]: ...
+
