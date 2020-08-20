@@ -1,6 +1,6 @@
-from typing import (IO, Any, Hashable, Optional, Sequence, Text, Tuple, Union,
-                    overload)
+from typing import IO, Optional, Sequence, Text, Tuple, Union
 
+from pygame.bufferproxy import BufferProxy
 from pygame.color import Color
 from pygame.rect import Rect
 from pygame.surface import Surface
@@ -16,7 +16,7 @@ def was_init() -> bool: ...
 def get_cache_size() -> int: ...
 def get_default_resolution() -> int: ...
 def set_default_resolution(resolution: int) -> None: ...
-def SysFont(name: str, size: int, bold: Optional[Hashable] = ..., italic: Optional[Hashable] = ...,) -> Font: ...
+def SysFont(name: Union[str, Sequence[str]], size: int, bold: Optional[int] = ..., italic: Optional[int] = ...,) -> Font: ...
 def get_default_font() -> str: ...
 
 STYLE_NORMAL: int
@@ -54,19 +54,9 @@ class Font:
     pad: bool
     ucs4: bool
     resolution: int
-    @overload
     def __init__(
         self,
-        file: str,
-        size: Optional[float] = ...,
-        font_index: Optional[int] = ...,
-        resolution: Optional[int] = ...,
-        ucs4: Optional[int] = ...,  # ucs4 is a bool but passed in as an int
-    ) -> None: ...
-    @overload
-    def __init__(
-        self,
-        file: IO[bytes],
+        file: Union[str, IO[bytes]],
         size: Optional[float] = ...,
         font_index: Optional[int] = ...,
         resolution: Optional[int] = ...,
@@ -109,23 +99,11 @@ class Font:
         size: Optional[float] = ...,
         invert: Optional[bool] = ...,
     ) -> Tuple[bytes, Tuple[int, int]]: ...
-    @overload
     def render_raw_to(
         self,
-        array: Any,  # Sequence[int] ?
+        array: BufferProxy,
         text: str,
-        dest: Optional[Tuple[int, int]] = ...,
-        style: Optional[int] = ...,
-        rotation: Optional[int] = ...,
-        size: Optional[float] = ...,
-        invert: Optional[bool] = ...,
-    ) -> Rect: ...
-    @overload
-    def render_raw_to(
-        self,
-        array: Any,  # Sequence[int] ?
-        text: str,
-        dest: Optional[Sequence[int]] = ...,
+        dest: Optional[Union[Tuple[int, int], Sequence[int]]] = ...,
         style: Optional[int] = ...,
         rotation: Optional[int] = ...,
         size: Optional[float] = ...,
