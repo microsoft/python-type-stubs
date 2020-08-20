@@ -17,14 +17,14 @@ class PixelArray:
         self,
         color: _ColorValue,
         repcolor: _ColorValue,
-        distance: Optional[float] = 0,
-        weights: Optional[Sequence[float]] = [0.299, 0.587, 0.114],
+        distance: Optional[float] = ...,
+        weights: Optional[Sequence[float]] = ...,
     ) -> None: ...
     def extract(
-        self, color: _ColorValue, distance: Optional[float] = 0, weights: Optional[Sequence[float]] = [0.299, 0.587, 0.114]
+        self, color: _ColorValue, distance: Optional[float] = ..., weights: Optional[Sequence[float]] = ...,
     ) -> PixelArray: ...
     def compare(
-        self, array: PixelArray, distance: Optional[float] = 0, weights: Optional[Sequence[float]] = [0.299, 0.587, 0.114]
+        self, array: PixelArray, distance: Optional[float] = ..., weights: Optional[Sequence[float]] = ...,
     ) -> PixelArray: ...
     def transpose(self) -> PixelArray: ...
     def close(self) -> PixelArray: ...

@@ -88,6 +88,7 @@ sizer_y_strings: _Big_string
 sizer_xy_strings: _Small_string
 
 def compile(
-    strings: Sequence[str], black: Optional[str] = "X", white: Optional[str] = ".", xor: str = "o",
+    strings: Sequence[str], black: Optional[str] = ..., white: Optional[str] = ..., xor: str = ...,
 ) -> Tuple[Sequence[int], Sequence[int]]: ...
 def load_xbm(cursorfile: str, maskfile: str) -> Tuple[Sequence[int], Sequence[int], Sequence[int], Sequence[int]]: ...
+

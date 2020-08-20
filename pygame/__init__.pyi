@@ -1,37 +1,37 @@
-from typing import Tuple, Callable, Optional, overload, Type
+from typing import Tuple, Callable, Optional, Union, overload, Type
 
 # Most useful stuff
-from .constants import *
-import .surface
-import .rect
-import .color
-import .event
-import .bufferproxy
-import .draw
-import .display
-import .font
-import .image
-import .key
-import .mixer
-import .mouse
-import .time
-import .version
+from . import constants as constants
+from . import surface as surface
+from . import rect as rect
+from . import color as color
+from . import event as event
+from . import bufferproxy as bufferproxy
+from . import draw as draw
+from . import display as display
+from . import font as font
+from . import image as image
+from . import key as key
+from . import mixer as mixer
+from . import mouse as mouse
+from . import time as time
+from . import version as version
 
 # Advanced stuff
-import .cursors
-import .joystick
-import .mask
-import .sprite
-import .transform
-import .pixelarray
-import .pixelcopy
-import .sndarray
-import .surfarray
-import .math
-import .fastevent
+from . import cursors as cursors
+from . import joystick as joystick
+from . import mask as mask
+from . import sprite as sprite
+from . import transform as transform
+from . import pixelarray as pixelarray
+from . import pixelcopy as pixelcopy
+from . import sndarray as sndarray
+from . import surfarray as surfarray
+from . import math as math
+from . import fastevent as fastevent
 
 # Other
-import .scrap
+from . import scrap as scrap
 
 # This classes are auto imported with pygame, so I put their declaration here
 class Rect(rect.Rect): ...
@@ -51,26 +51,12 @@ def get_error() -> str: ...
 def set_error(error_msg: str) -> None: ...
 def get_sdl_version() -> Tuple[int, int, int]: ...
 def get_sdl_byteorder() -> int: ...
-@overload
 def encode_string(
-    obj: str,
-    encoding: Optional[str] = "unicode_escape",
-    errors: Optional[str] = "backslashreplace",
-    etype: Optional[Type[Exception]] = UnicodeEncodeError,
+    obj: Union[str, bytes], encoding: Optional[str] = ..., errors: Optional[str] = ..., etype: Optional[Type[Exception]] = ...,
 ) -> bytes: ...
 @overload
-def encode_string(
-    obj: bytes,
-    encoding: Optional[str] = "unicode_escape",
-    errors: Optional[str] = "backslashreplace",
-    etype: Optional[Type[Exception]] = UnicodeEncodeError,
-) -> bytes: ...
-@overload
-def encode_file_path(obj: str, etype: Optional[Type[Exception]] = UnicodeEncodeError) -> bytes: ...
-@overload
-def encode_file_path(obj: bytes, etype: Optional[Type[Exception]] = UnicodeEncodeError) -> bytes: ...
-@overload
-def encode_file_path(obj: object, etype: Optional[Type[Exception]] = UnicodeEncodeError) -> bytes: ...
+def encode_file_path(obj: Union[str, bytes], etype: Optional[Type[Exception]] = ...) -> bytes: ...
+def encode_file_path(obj: object, etype: Optional[Type[Exception]] = ...) -> bytes: ...
 def register_quit(callable: Callable[[], None]) -> None: ...
 
 # def __getattr__(name) -> Any: ...  # don't error on missing stubs

@@ -1,1 +1,1 @@
-from .touch import *
+from . import touch as touch

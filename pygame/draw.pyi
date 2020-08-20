@@ -14,39 +14,39 @@ def rect(
     surface: Surface,
     color: _ColorValue,
     rect: _RectValue,
-    width: Optional[int] = 0,
-    border_radius: Optional[int] = -1,
-    border_top_left_radius: Optional[int] = -1,
-    border_top_right_radius: Optional[int] = -1,
-    border_bottom_left_radius: Optional[int] = -1,
-    border_bottom_right_radius: Optional[int] = -1,
+    width: Optional[int] = ...,
+    border_radius: Optional[int] = ...,
+    border_top_left_radius: Optional[int] = ...,
+    border_top_right_radius: Optional[int] = ...,
+    border_bottom_left_radius: Optional[int] = ...,
+    border_bottom_right_radius: Optional[int] = ...,
 ) -> Rect: ...
-def polygon(surface: Surface, color: _ColorValue, points: Sequence[_Coordinate], width: Optional[int] = 0) -> Rect: ...
+def polygon(surface: Surface, color: _ColorValue, points: Sequence[_Coordinate], width: Optional[int] = ...) -> Rect: ...
 def circle(
     surface: Surface,
     color: _ColorValue,
     center: _Coordinate,
     radius: float,
-    width: Optional[int] = 0,
-    draw_top_right: Optional[bool] = None,
-    draw_top_left: Optional[bool] = None,
-    draw_bottom_left: Optional[bool] = None,
-    draw_bottom_right: Optional[bool] = None,
+    width: Optional[int] = ...,
+    draw_top_right: Optional[bool] = ...,
+    draw_top_left: Optional[bool] = ...,
+    draw_bottom_left: Optional[bool] = ...,
+    draw_bottom_right: Optional[bool] = ...,
 ) -> Rect: ...
-def ellipse(surface: Surface, color: _ColorValue, rect: _RectValue, width: Optional[int] = 0) -> Rect: ...
+def ellipse(surface: Surface, color: _ColorValue, rect: _RectValue, width: Optional[int] = ...) -> Rect: ...
 def arc(
-    surface: Surface, color: _ColorValue, rect: _RectValue, start_angle: float, stop_angle: float, width: Optional[int] = 1
+    surface: Surface, color: _ColorValue, rect: _RectValue, start_angle: float, stop_angle: float, width: Optional[int] = ...
 ) -> Rect: ...
 def line(
-    surface: Surface, color: _ColorValue, start_pos: _Coordinate, end_pos: _Coordinate, width: Optional[int] = 1
+    surface: Surface, color: _ColorValue, start_pos: _Coordinate, end_pos: _Coordinate, width: Optional[int] = ...
 ) -> Rect: ...
 def lines(
-    surface: Surface, color: _ColorValue, closed: bool, points: Sequence[_Coordinate], width: Optional[int] = 1
+    surface: Surface, color: _ColorValue, closed: bool, points: Sequence[_Coordinate], width: Optional[int] = ...
 ) -> Rect: ...
 def aaline(
-    surface: Surface, color: _ColorValue, start_pos: _Coordinate, end_pos: _Coordinate, blend: Optional[int] = 1
+    surface: Surface, color: _ColorValue, start_pos: _Coordinate, end_pos: _Coordinate, blend: Optional[int] = ...
 ) -> Rect: ...
 def aalines(
-    surface: Surface, color: _ColorValue, closed: bool, points: Sequence[_Coordinate], blend: Optional[int] = 1
+    surface: Surface, color: _ColorValue, closed: bool, points: Sequence[_Coordinate], blend: Optional[int] = ...
 ) -> Rect: ...
 
