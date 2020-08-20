@@ -1,4 +1,4 @@
-from typing import Tuple, Optional, Union, Text, IO, Sequence, Any, overload
+from typing import Hashable, Tuple, Optional, Union, Text, IO, Sequence, Any, overload
 
 from pygame.surface import Surface
 from pygame.color import Color
@@ -8,21 +8,14 @@ _ColorValue = Union[Color, Tuple[int, int, int], Sequence[int], int]
 
 def get_error() -> str: ...
 def get_version() -> Tuple[int, int, int]: ...
-def init(cache_size: Optional[int] = 64, resolution: Optional[int] = 72) -> None: ...
+def init(cache_size: Optional[int] = ..., resolution: Optional[int] = ...) -> None: ...
 def quit() -> None: ...
 def get_init() -> bool: ...
 def was_init() -> bool: ...
 def get_cache_size() -> int: ...
 def get_default_resolution() -> int: ...
 def set_default_resolution(resolution: int) -> None: ...
-@overload
-def SysFont(
-    name: str, size: int, bold: Optional[int] = False, italic: Optional[int] = False
-) -> Font: ...  # todo: optionional int false?
-@overload
-def SysFont(
-    name: Sequence[str], size: int, bold: Optional[int] = False, italic: Optional[int] = False
-) -> Font: ...  # todo: optionional int false?
+def SysFont(name: str, size: int, bold: Optional[Hashable] = ..., italic: Optional[Hashable] = ...,) -> Font: ...
 def get_default_font() -> str: ...
 
 STYLE_NORMAL: int
@@ -64,24 +57,24 @@ class Font:
     def __init__(
         self,
         file: str,
-        size: Optional[float] = 0,
-        font_index: Optional[int] = 0,
-        resolution: Optional[int] = 0,
-        ucs4: Optional[int] = False,  # todo: optionional int false?
+        size: Optional[float] = ...,
+        font_index: Optional[int] = ...,
+        resolution: Optional[int] = ...,
+        ucs4: Optional[int] = ...,  # ucs4 is a bool but passed in as an int
     ) -> None: ...
     @overload
     def __init__(
         self,
-        file: IO,  # what should this be?
-        size: Optional[float] = 0,
-        font_index: Optional[int] = 0,
-        resolution: Optional[int] = 0,
-        ucs4: Optional[int] = False,
+        file: IO[bytes],
+        size: Optional[float] = ...,
+        font_index: Optional[int] = ...,
+        resolution: Optional[int] = ...,
+        ucs4: Optional[int] = ...,  # ucs4 is a bool but passed in as an int
     ) -> None: ...
     def get_rect(
-        self, text: str, style: Optional[int] = STYLE_DEFAULT, rotation: Optional[int] = 0, size: Optional[float] = 0,
+        self, text: str, style: Optional[int] = ..., rotation: Optional[int] = ..., size: Optional[float] = ...,
     ) -> Rect: ...
-    def get_metrics(self, text: str, size: Optional[float] = 0) -> Sequence[Tuple[int, int, int, int, float, float]]: ...
+    def get_metrics(self, text: str, size: Optional[float] = ...) -> Sequence[Tuple[int, int, int, int, float, float]]: ...
     def get_sized_ascender(self, size: float) -> int: ...
     def get_sized_descender(self, size: float) -> int: ...
     def get_sized_height(self, size: float) -> int: ...
@@ -90,73 +83,73 @@ class Font:
     def render(
         self,
         text: str,
-        fgcolor: Optional[_ColorValue] = None,
-        bgcolor: Optional[_ColorValue] = None,
-        style: Optional[int] = STYLE_DEFAULT,
-        rotation: Optional[int] = 0,
-        size: Optional[float] = 0,
+        fgcolor: Optional[_ColorValue] = ...,
+        bgcolor: Optional[_ColorValue] = ...,
+        style: Optional[int] = ...,
+        rotation: Optional[int] = ...,
+        size: Optional[float] = ...,
     ) -> Tuple[Surface, Rect]: ...
     def render_to(
         self,
         surf: Surface,
         dest: Tuple[int, int],
         text: str,
-        fgcolor: Optional[_ColorValue] = None,
-        bgcolor: Optional[_ColorValue] = None,
-        style: Optional[int] = STYLE_DEFAULT,
-        rotation: Optional[int] = 0,
-        size: Optional[float] = 0,
+        fgcolor: Optional[_ColorValue] = ...,
+        bgcolor: Optional[_ColorValue] = ...,
+        style: Optional[int] = ...,
+        rotation: Optional[int] = ...,
+        size: Optional[float] = ...,
     ) -> Rect: ...
     def render_to(
         self,
         surf: Surface,
         dest: Sequence[int],
         text: str,
-        fgcolor: Optional[_ColorValue] = None,
-        bgcolor: Optional[_ColorValue] = None,
-        style: Optional[int] = STYLE_DEFAULT,
-        rotation: Optional[int] = 0,
-        size: Optional[float] = 0,
+        fgcolor: Optional[_ColorValue] = ...,
+        bgcolor: Optional[_ColorValue] = ...,
+        style: Optional[int] = ...,
+        rotation: Optional[int] = ...,
+        size: Optional[float] = ...,
     ) -> Rect: ...
     def render_to(
         self,
         surf: Surface,
         dest: Rect,
         text: str,
-        fgcolor: Optional[_ColorValue] = None,
-        bgcolor: Optional[_ColorValue] = None,
-        style: Optional[int] = STYLE_DEFAULT,
-        rotation: Optional[int] = 0,
-        size: Optional[float] = 0,
+        fgcolor: Optional[_ColorValue] = ...,
+        bgcolor: Optional[_ColorValue] = ...,
+        style: Optional[int] = ...,
+        rotation: Optional[int] = ...,
+        size: Optional[float] = ...,
     ) -> Rect: ...
     def render_raw(
         self,
         text: str,
-        style: Optional[int] = STYLE_DEFAULT,
-        rotation: Optional[int] = 0,
-        size: Optional[float] = 0,
-        invert: Optional[bool] = False,
+        style: Optional[int] = ...,
+        rotation: Optional[int] = ...,
+        size: Optional[float] = ...,
+        invert: Optional[bool] = ...,
     ) -> Tuple[bytes, Tuple[int, int]]: ...
     @overload
     def render_raw_to(
         self,
         array: Any,  # Sequence[int] ?
         text: str,
-        dest: Optional[Tuple[int, int]] = None,
-        style: Optional[int] = STYLE_DEFAULT,
-        rotation: Optional[int] = 0,
-        size: Optional[float] = 0,
-        invert: Optional[bool] = False,
+        dest: Optional[Tuple[int, int]] = ...,
+        style: Optional[int] = ...,
+        rotation: Optional[int] = ...,
+        size: Optional[float] = ...,
+        invert: Optional[bool] = ...,
     ) -> Rect: ...
     @overload
     def render_raw_to(
         self,
         array: Any,  # Sequence[int] ?
         text: str,
-        dest: Optional[Sequence[int]] = None,
-        style: Optional[int] = STYLE_DEFAULT,
-        rotation: Optional[int] = 0,
-        size: Optional[float] = 0,
-        invert: Optional[bool] = False,
+        dest: Optional[Sequence[int]] = ...,
+        style: Optional[int] = ...,
+        rotation: Optional[int] = ...,
+        size: Optional[float] = ...,
+        invert: Optional[bool] = ...,
     ) -> Rect: ...
 
