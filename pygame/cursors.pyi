@@ -1,4 +1,4 @@
-from typing import Tuple, Sequence, Optional
+from typing import Optional, Sequence, Tuple
 
 _Bitmap = Tuple[
     Tuple[int, int],
@@ -91,4 +91,3 @@ def compile(
     strings: Sequence[str], black: Optional[str] = ..., white: Optional[str] = ..., xor: str = ...,
 ) -> Tuple[Sequence[int], Sequence[int]]: ...
 def load_xbm(cursorfile: str, maskfile: str) -> Tuple[Sequence[int], Sequence[int], Sequence[int], Sequence[int]]: ...
-

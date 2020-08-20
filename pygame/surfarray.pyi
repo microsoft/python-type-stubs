@@ -1,6 +1,7 @@
 from typing import Tuple
-from pygame.surface import Surface
+
 from numpy import ndarray
+from pygame.surface import Surface
 
 def array2d(surface: Surface) -> ndarray: ...
 def pixels2d(surface: Surface) -> ndarray: ...

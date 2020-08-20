@@ -1,4 +1,4 @@
-from typing import Optional, AnyStr
+from typing import AnyStr, Optional
 
 class BufferProxy:
     parent: Optional[BufferProxy]

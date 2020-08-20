@@ -1,9 +1,9 @@
-from typing import Union, Tuple, Sequence
+from typing import Sequence, Tuple, Union
 
-from pygame.surface import Surface
-from pygame.math import Vector2
 from pygame.color import Color
+from pygame.math import Vector2
 from pygame.rect import Rect
+from pygame.surface import Surface
 
 _ColorValue = Union[Color, Tuple[int, int, int], Sequence[int], int, Tuple[int, int, int, int]]
 _RectValue = Union[Rect, Tuple[int, int, int, int]]
@@ -31,4 +31,3 @@ def aapolygon(surface: Surface, points: Sequence[_Coordinate], color: _ColorValu
 def filled_polygon(surface: Surface, points: Sequence[_Coordinate], color: _ColorValue) -> None: ...
 def textured_polygon(surface: Surface, points: Sequence[_Coordinate], texture: Surface, tx: int, ty: int) -> None: ...
 def bezier(surface: Surface, points: Sequence[_Coordinate], steps: int, color: _ColorValue) -> None: ...
-

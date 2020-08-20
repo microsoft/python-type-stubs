@@ -1,14 +1,12 @@
 import sys
 from io import BytesIO, StringIO
-from typing import Tuple, Type, Union, overload
-from cStringIO import StringIO
-from itertools import imap as imap_
 from types import TracebackType
+from typing import Tuple, Type, Union
 
 """Python 2.x/3.x compatibility tools"""
 PY_MAJOR_VERSION = sys.version_info[0]
 
-def geterror() -> Tuple[Type[BaseException], BaseException, TracebackType] | Tuple[None, None, None]: ...
+def geterror() -> Union[Tuple[Type[BaseException], BaseException, TracebackType], Tuple[None, None, None]]: ...
 
 if PY_MAJOR_VERSION >= 3:
     long_ = int
@@ -44,9 +42,4 @@ def get_BytesIO() -> Type[BytesIO]: ...
 def get_StringIO() -> Type[StringIO]: ...
 def ord_(o: Union[str, bytes]) -> int: ...
 
-if sys.platform == "win32":
-    filesystem_errors = "replace"
-else: ...
-
 def filesystem_encode(u: str) -> bytes: ...
-

@@ -1,4 +1,4 @@
-from typing import Optional, Tuple, Union, overload, Sequence
+from typing import Optional, Sequence, Tuple, Union, overload
 
 class _VectorElementwiseProxy2:
     def __add__(self, other: Union[float, Vector2, _VectorElementwiseProxy2]) -> Vector2: ...

@@ -1,4 +1,4 @@
-from typing import Optional, Tuple, Sequence, Union
+from typing import Optional, Sequence, Tuple, Union
 
 from pygame.event import Event
 

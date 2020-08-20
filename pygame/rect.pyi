@@ -1,4 +1,5 @@
-from typing import Mapping, Sequence, Tuple, TypeVar, Union, overload, Iterable
+from typing import Iterable, Mapping, Sequence, Tuple, TypeVar, Union, overload
+
 from pygame.math import Vector2
 
 _K = TypeVar("_K")

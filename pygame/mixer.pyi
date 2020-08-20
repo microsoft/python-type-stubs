@@ -1,8 +1,9 @@
-from typing import Optional, Union, Tuple, Any, overload, IO
+from typing import IO, Any, Optional, Tuple, Union, overload
 
-from pygame.event import Event
-from . import music as music
 from numpy import ndarray
+from pygame.event import Event
+
+from . import music as music
 
 def init(
     frequency: Optional[int] = ...,

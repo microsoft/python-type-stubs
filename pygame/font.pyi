@@ -1,4 +1,4 @@
-from typing import Optional, Sequence, Union, Tuple, IO, Hashable
+from typing import IO, Hashable, Optional, Sequence, Tuple, Union
 
 from pygame.color import Color
 from pygame.surface import Surface
@@ -32,4 +32,3 @@ class Font:
     def get_height(self) -> int: ...
     def get_ascent(self) -> int: ...
     def get_descent(self) -> int: ...
-

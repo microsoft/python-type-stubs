@@ -1,4 +1,5 @@
-from typing import Sequence, Optional, Tuple, Union
+from typing import Optional, Sequence, Tuple, Union
+
 from pygame.math import Vector2
 from pygame.rect import Rect
 

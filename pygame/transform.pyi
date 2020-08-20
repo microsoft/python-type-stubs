@@ -1,8 +1,9 @@
-from typing import Tuple, Union, Optional, Sequence
-from pygame.surface import Surface
-from pygame.math import Vector2
+from typing import Optional, Sequence, Tuple, Union
+
 from pygame.color import Color
+from pygame.math import Vector2
 from pygame.rect import Rect
+from pygame.surface import Surface
 
 _Coordinate = Union[Tuple[float, float], Sequence[float], Vector2]
 _ColorValue = Union[Color, Tuple[int, int, int], Sequence[int], int, Tuple[int, int, int, int]]
@@ -36,4 +37,3 @@ def threshold(
     search_surf: Optional[Surface] = ...,
     inverse_set: Optional[bool] = ...,
 ) -> int: ...
-

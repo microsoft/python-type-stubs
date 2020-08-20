@@ -1,9 +1,9 @@
-from typing import Any, Optional, Sequence, Text, Tuple, Union, overload, Iterable
+from typing import Any, Iterable, Optional, Sequence, Text, Tuple, Union, overload
+
 from pygame.bufferproxy import BufferProxy
 from pygame.color import Color
-from pygame.rect import Rect
-
 from pygame.math import Vector2
+from pygame.rect import Rect
 
 _ColorInput = Union[Color, str, Sequence[int], Tuple[int, int, int], Tuple[int, int, int, int]]
 _RgbaOutput = Tuple[int, int, int, int]

@@ -1,12 +1,13 @@
-from typing import Optional
 import sys
+from typing import Optional
+
+from numpy import ndarray
+from pygame.surface import Surface
 
 if sys.version_info >= (3, 8):
     from typing import Literal
 else:
     from typing_extensions import Literal
-from numpy import ndarray
-from pygame.surface import Surface
 
 _kind = Literal["P", "p", "R", "r", "G", "g", "B", "b", "A", "a", "C", "c"]
 

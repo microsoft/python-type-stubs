@@ -1,8 +1,9 @@
-from typing import Union, Optional, Tuple, Sequence
+from typing import Optional, Sequence, Tuple, Union
+
 from pygame.color import Color
+from pygame.math import Vector2
 from pygame.rect import Rect
 from pygame.surface import Surface
-from pygame.math import Vector2
 
 _Coordinate = Union[Tuple[float, float], Sequence[float], Vector2]
 _ColorValue = Union[Color, str, Tuple[int, int, int], Sequence[int], int, Tuple[int, int, int, int]]
@@ -49,4 +50,3 @@ def aaline(
 def aalines(
     surface: Surface, color: _ColorValue, closed: bool, points: Sequence[_Coordinate], blend: Optional[int] = ...
 ) -> Rect: ...
-

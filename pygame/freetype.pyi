@@ -1,8 +1,9 @@
-from typing import Hashable, Tuple, Optional, Union, Text, IO, Sequence, Any, overload
+from typing import (IO, Any, Hashable, Optional, Sequence, Text, Tuple, Union,
+                    overload)
 
-from pygame.surface import Surface
 from pygame.color import Color
 from pygame.rect import Rect
+from pygame.surface import Surface
 
 _ColorValue = Union[Color, Tuple[int, int, int], Sequence[int], int]
 
@@ -92,29 +93,7 @@ class Font:
     def render_to(
         self,
         surf: Surface,
-        dest: Tuple[int, int],
-        text: str,
-        fgcolor: Optional[_ColorValue] = ...,
-        bgcolor: Optional[_ColorValue] = ...,
-        style: Optional[int] = ...,
-        rotation: Optional[int] = ...,
-        size: Optional[float] = ...,
-    ) -> Rect: ...
-    def render_to(
-        self,
-        surf: Surface,
-        dest: Sequence[int],
-        text: str,
-        fgcolor: Optional[_ColorValue] = ...,
-        bgcolor: Optional[_ColorValue] = ...,
-        style: Optional[int] = ...,
-        rotation: Optional[int] = ...,
-        size: Optional[float] = ...,
-    ) -> Rect: ...
-    def render_to(
-        self,
-        surf: Surface,
-        dest: Rect,
+        dest: Union[Sequence[int], Rect],
         text: str,
         fgcolor: Optional[_ColorValue] = ...,
         bgcolor: Optional[_ColorValue] = ...,
@@ -152,4 +131,3 @@ class Font:
         size: Optional[float] = ...,
         invert: Optional[bool] = ...,
     ) -> Rect: ...
-

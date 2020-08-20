@@ -1,9 +1,9 @@
-from typing import Optional, Union, Text, Tuple, TypeVar, Sequence, overload
+from typing import Optional, Sequence, Text, Tuple, TypeVar, Union
 
-from pygame.math import Vector2
-from pygame.surface import Surface
-from pygame.rect import Rect
 from pygame.color import Color
+from pygame.math import Vector2
+from pygame.rect import Rect
+from pygame.surface import Surface
 
 _Coordinate = Union[Tuple[float, float], Sequence[float], Vector2]
 _ColorValue = Union[Color, Tuple[int, int, int], Sequence[int], int, Tuple[int, int, int, int]]
@@ -35,10 +35,7 @@ class Mask:
     def fill(self) -> None: ...
     def clear(self) -> None: ...
     def invert(self) -> None: ...
-    @overload
     def scale(self, size: Sequence[int]) -> Mask: ...
-    @overload
-    def scale(self, size: Tuple[int, int]) -> Mask: ...
     def draw(self, othermask: Mask, offset: _Offset) -> None: ...
     def erase(self, othermask: Mask, offset: _Offset) -> None: ...
     def count(self) -> int: ...
@@ -58,4 +55,3 @@ class Mask:
         unsetcolor: Optional[_ToSurfaceColorValue] = ...,
         dest: Optional[Union[_RectValue, _Coordinate]] = ...,
     ) -> Surface: ...
-

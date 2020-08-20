@@ -1,4 +1,4 @@
-from typing import Tuple, Union, Optional, Sequence
+from typing import Optional, Sequence, Tuple, Union
 
 from pygame.color import Color
 from pygame.surface import Surface

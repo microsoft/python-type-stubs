@@ -1,7 +1,7 @@
-from typing import Optional, Sequence, Tuple, Union, IO, Literal
+from typing import IO, Literal, Optional, Sequence, Tuple, Union
 
-from pygame.surface import Surface
 from pygame.bufferproxy import BufferProxy
+from pygame.surface import Surface
 
 _BufferStyle = Union[BufferProxy, bytes, bytearray, memoryview]
 _to_string_format = Literal["p", "RGB", "RGBX", "RGBA", "ARGB", "RGBA_PREMULT", "ARGB_PREMULT"]
@@ -16,4 +16,3 @@ def fromstring(
     string: str, size: Union[Sequence[int], Tuple[int, int]], format: _from_string_format, flipped: Optional[bool] = ...,
 ) -> Surface: ...
 def frombuffer(bytes: _BufferStyle, size: Union[Sequence[int], Tuple[int, int]], format: _from_buffer_format) -> Surface: ...
-
