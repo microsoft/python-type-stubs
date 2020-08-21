@@ -8,7 +8,7 @@ from netaddr.strategy import ipv4 as _ipv4, ipv6 as _ipv6
 from netaddr.core import DictDotLookup, INET_PTON, ZEROFILL, P, Z
 
 PROTOCOL_VERSION: Literal["4", "6"]
-FLAGS: Literal['INET_PTON', 'ZEROFILL', 'P, ''Z']
+FLAGS: Literal[INET_PTON, 'ZEROFILL', 'P, ''Z']
 
 """Routines for IPv4 and IPv6 addresses, subnets and ranges."""
 
