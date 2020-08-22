@@ -1,32 +1,34 @@
 from typing import Callable, Optional, Tuple, Type, Union
 
-from . import bufferproxy as bufferproxy
-from . import color as color
-from . import constants as constants
-from . import cursors as cursors
-from . import display as display
-from . import draw as draw
-from . import event as event
-from . import fastevent as fastevent
-from . import font as font
-from . import image as image
-from . import joystick as joystick
-from . import key as key
-from . import mask as mask
-from . import math as math
-from . import mixer as mixer
-from . import mouse as mouse
-from . import pixelarray as pixelarray
-from . import pixelcopy as pixelcopy
-from . import rect as rect
-from . import scrap as scrap
-from . import sndarray as sndarray
-from . import sprite as sprite
-from . import surface as surface
-from . import surfarray as surfarray
-from . import time as time
-from . import transform as transform
-from . import version as version
+from . import (
+    bufferproxy as bufferproxy,
+    color as color,
+    constants as constants,
+    cursors as cursors,
+    display as display,
+    draw as draw,
+    event as event,
+    fastevent as fastevent,
+    font as font,
+    image as image,
+    joystick as joystick,
+    key as key,
+    mask as mask,
+    math as math,
+    mixer as mixer,
+    mouse as mouse,
+    pixelarray as pixelarray,
+    pixelcopy as pixelcopy,
+    rect as rect,
+    scrap as scrap,
+    sndarray as sndarray,
+    sprite as sprite,
+    surface as surface,
+    surfarray as surfarray,
+    time as time,
+    transform as transform,
+    version as version,
+)
 
 # This classes are auto imported with pygame, so I put their declaration here
 class Rect(rect.Rect): ...

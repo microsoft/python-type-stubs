@@ -122,4 +122,3 @@ def groupcollide(
 def spritecollideany(
     sprite: Sprite, group: AbstractGroup, collided: Optional[Callable[[Sprite, Sprite], bool]] = ...,
 ) -> Sprite: ...
-

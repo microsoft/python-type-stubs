@@ -1,6 +1,7 @@
 from typing import IO, Any, Optional, Tuple, Union, overload
 
 from numpy import ndarray
+
 from pygame.event import Event
 
 from . import music as music
@@ -39,7 +40,7 @@ class Sound:
     @overload
     def __init__(self, buffer: Any) -> None: ...  # Buffer protocol is still not implemented in typing
     @overload
-    def __init__(self, array: numpy.ndarray) -> None: ...  # Buffer protocol is still not implemented in typing
+    def __init__(self, array: ndarray) -> None: ...  # Buffer protocol is still not implemented in typing
     def play(self, loops: Optional[int] = ..., maxtime: Optional[int] = ..., fade_ms: Optional[int] = ...,) -> Channel: ...
     def stop(self) -> None: ...
     def fadeout(self, time: int) -> None: ...
@@ -68,4 +69,3 @@ class Channel:
     def get_queue(self) -> Sound: ...
     def set_endevent(self, type: Optional[Union[int, Event]] = ...) -> None: ...
     def get_endevent(self) -> int: ...
-

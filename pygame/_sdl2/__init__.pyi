@@ -1,2 +1,1 @@
-from . import touch as touch
-from . import mixer as mixer
+from . import mixer as mixer, touch as touch

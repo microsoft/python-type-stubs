@@ -2,6 +2,7 @@ import sys
 from typing import Optional
 
 from numpy import ndarray
+
 from pygame.surface import Surface
 
 if sys.version_info >= (3, 8):
@@ -17,4 +18,3 @@ def surface_to_array(
 def array_to_surface(surface: Surface, array: ndarray) -> None: ...
 def map_to_array(array1: ndarray, array2: ndarray, surface: Surface) -> None: ...
 def make_surface(array: ndarray) -> Surface: ...
-

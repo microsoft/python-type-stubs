@@ -531,5 +531,4 @@ AUDIO_F32LSB: int
 AUDIO_F32MSB: int
 AUDIO_F32: int
 
-
 __all__: Sequence[str]
