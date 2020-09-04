@@ -9,7 +9,7 @@ class SubnetSplitter(object):
     all space is exhausted.
     """
 
-    def __init__(self, base_cidr) -> None:
+    def __init__(self, base_cidr: str) -> None:
         """
         Constructor.
 
@@ -17,16 +17,13 @@ class SubnetSplitter(object):
             (see IPNetwork.__init__ for full details).
         """
         ...
-
-    def extract_subnet(self, prefix, count: int=...) -> List[IPNetwork]:
+    def extract_subnet(self, prefix: str, count: int = ...) -> List[IPNetwork]:
         """Extract 1 or more subnets of size specified by CIDR prefix."""
         ...
-
-    def available_subnets(self) -> List[]:
+    def available_subnets(self) -> List[IPNetwork]:
         """Returns a list of the currently available subnets."""
         ...
-
-    def remove_subnet(self, ip_network) -> None:
+    def remove_subnet(self, ip_network: IPNetwork) -> None:
         """Remove a specified IPNetwork from available address space."""
         ...
 

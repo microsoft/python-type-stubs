@@ -1,8 +1,7 @@
-import sys as _sys
 from typing import Any, List, TextIO
 
 """Common code shared between various netaddr sub modules"""
-BIG_ENDIAN_PLATFORM = _sys.byteorder == "big"
+BIG_ENDIAN_PLATFORM: bool
 P = INET_PTON = 1
 Z = ZEROFILL = 2
 N = NOHOST = 4
@@ -71,7 +70,7 @@ class PrettyPrinter(Subscriber):
         """
         ...
 
-    def update(self, data) -> None:
+    def update(self, data: Any) -> None:
         """
         A callback method used by a Publisher to notify this Subscriber about
         updates.
@@ -130,7 +129,7 @@ class DictDotLookup(object):
 
     """
 
-    def __init__(self, d) -> None:
+    def __init__(self, d: Any) -> None:
         ...
 
     def __getitem__(self, name: str):
