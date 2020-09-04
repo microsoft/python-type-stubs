@@ -1,34 +1,13 @@
 from typing import Callable, Optional, Tuple, Type, Union
 
-from . import (
-    bufferproxy as bufferproxy,
-    color as color,
-    constants as constants,
-    cursors as cursors,
-    display as display,
-    draw as draw,
-    event as event,
-    fastevent as fastevent,
-    font as font,
-    image as image,
-    joystick as joystick,
-    key as key,
-    mask as mask,
-    math as math,
-    mixer as mixer,
-    mouse as mouse,
-    pixelarray as pixelarray,
-    pixelcopy as pixelcopy,
-    rect as rect,
-    scrap as scrap,
-    sndarray as sndarray,
-    sprite as sprite,
-    surface as surface,
-    surfarray as surfarray,
-    time as time,
-    transform as transform,
-    version as version,
-)
+# Most useful stuff
+from . import constants, surface, rect, color, event, bufferproxy, draw, display, font, image, key, mixer, mouse, time, version
+
+# Advanced stuff
+from . import cursors, joystick, mask, sprite, transform, pixelarray, pixelcopy, sndarray, surfarray, math, fastevent
+
+# Other
+from . import scrap
 
 # This classes are auto imported with pygame, so I put their declaration here
 class Rect(rect.Rect): ...
@@ -53,5 +32,5 @@ def encode_string(
 ) -> bytes: ...
 def encode_file_path(obj: Union[str, bytes, object], etype: Optional[Type[Exception]] = ...) -> bytes: ...
 def register_quit(callable: Callable[[], None]) -> None: ...
+def __getattr__(name) -> Any: ...  # don't error on missing stubs
 
-# def __getattr__(name) -> Any: ...  # don't error on missing stubs
