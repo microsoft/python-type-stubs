@@ -1,5 +1,5 @@
 import sys as _sys
-from typing import Any, Iterable, List, Literal, Tuple, Type, Union
+from typing import Any, Iterable, Iterator, List, Literal, Tuple, Type, Union
 from netaddr.strategy import ipv4 as _ipv4, ipv6 as _ipv6
 from netaddr.core import DictDotLookup
 
@@ -149,7 +149,7 @@ class IPAddress(BaseIP):
     """
 
     __slots__ = ...
-    def __init__(self, addr: Union[BaseIP, str], version: PROTOCOL_VERSION = ..., flags: FLAGS = ...) -> None:
+    def __init__(self, addr: Union[IPAddress, int, str], version: PROTOCOL_VERSION = ..., flags: FLAGS = ...) -> None:
         """
         Constructor.
 
@@ -531,7 +531,7 @@ class IPNetwork(BaseIP, IPListMixin):
         ...
     prefixlen: int = ...
     @property
-    def ip(self):
+    def ip(self) -> IPAddress:
         """
         The IP address of this `IPNetwork` object. This is may or may not be
         the same as the network IP address which varies according to the value
@@ -539,11 +539,11 @@ class IPNetwork(BaseIP, IPListMixin):
         """
         ...
     @property
-    def network(self):
+    def network(self) -> IPAddress:
         """The network address of this `IPNetwork` object."""
         ...
     @property
-    def broadcast(self):
+    def broadcast(self) -> Union[IPAddress, None]:
         """The broadcast address of this `IPNetwork` object.
 
         .. warning::
@@ -568,19 +568,19 @@ class IPNetwork(BaseIP, IPListMixin):
         """
         ...
     @property
-    def netmask(self):
+    def netmask(self) -> IPAddress:
         """The subnet mask of this `IPNetwork` object."""
         ...
     @netmask.setter
-    def netmask(self, value):
+    def netmask(self, value: Union[IPAddress, int, str]) -> None:
         """Set the prefixlen using a subnet mask"""
         ...
     @property
-    def hostmask(self):
+    def hostmask(self) -> IPAddress:
         """The host mask of this `IPNetwork` object."""
         ...
     @property
-    def cidr(self):
+    def cidr(self) -> IPNetwork:
         """
         The true CIDR address for this `IPNetwork` object which omits any
         host bits to the right of the CIDR subnet prefix.
@@ -610,7 +610,7 @@ class IPNetwork(BaseIP, IPListMixin):
             this IPNetwork's value by.
         """
         ...
-    def __contains__(self, other):
+    def __contains__(self, other: Union[IPAddress, IPNetwork, Tuple[int, int], str]) -> bool:
         """
         :param other: an `IPAddress` or ranged IP object.
 
@@ -618,24 +618,24 @@ class IPNetwork(BaseIP, IPListMixin):
             ``False`` otherwise.
         """
         ...
-    def key(self):
+    def key(self) -> Tuple[PROTOCOL_VERSION, int, int]:
         """
         :return: A key tuple used to uniquely identify this `IPNetwork`.
         """
         ...
-    def sort_key(self):
+    def sort_key(self) -> Tuple[PROTOCOL_VERSION, int, int, int]:
         """
         :return: A key tuple used to compare and sort this `IPNetwork` correctly.
         """
         ...
-    def ipv4(self):
+    def ipv4(self) -> IPNetwork:
         """
         :return: A numerically equivalent version 4 `IPNetwork` object. \
             Raises an `AddrConversionError` if IPv6 address cannot be \
             converted to IPv4.
         """
         ...
-    def ipv6(self, ipv4_compatible=...):
+    def ipv6(self, ipv4_compatible: bool = ...) -> IPNetwork:
         """
         .. note:: the IPv4-mapped IPv6 address format is now considered \
         deprecated. See RFC 4291 or later for details.
@@ -647,7 +647,7 @@ class IPNetwork(BaseIP, IPListMixin):
         :return: A numerically equivalent version 6 `IPNetwork` object.
         """
         ...
-    def previous(self, step=...):
+    def previous(self, step: int = ...) -> IPNetwork:
         """
         :param step: the number of IP subnets between this `IPNetwork` object
             and the expected subnet. Default: 1 (the previous IP subnet).
@@ -655,7 +655,7 @@ class IPNetwork(BaseIP, IPListMixin):
         :return: The adjacent subnet preceding this `IPNetwork` object.
         """
         ...
-    def next(self, step=...):
+    def next(self, step: int = ...) -> IPNetwork:
         """
         :param step: the number of IP subnets between this `IPNetwork` object
             and the expected subnet. Default: 1 (the next IP subnet).
@@ -663,7 +663,7 @@ class IPNetwork(BaseIP, IPListMixin):
         :return: The adjacent subnet succeeding this `IPNetwork` object.
         """
         ...
-    def supernet(self, prefixlen=...):
+    def supernet(self, prefixlen: int = ...) -> Tuple[IPNetwork]:
         """
         Provides a list of supernets for this `IPNetwork` object between the
         size of the current prefix and (if specified) an endpoint prefix.
@@ -674,7 +674,7 @@ class IPNetwork(BaseIP, IPListMixin):
         :return: a tuple of supernet `IPNetwork` objects.
         """
         ...
-    def subnet(self, prefixlen, count=..., fmt=...):
+    def subnet(self, prefixlen: int, count: int = ..., fmt: str = ...) -> Iterator[IPNetwork]:
         """
         A generator that divides up this IPNetwork's subnet into smaller
         subnets based on a specified CIDR prefix.
@@ -688,7 +688,7 @@ class IPNetwork(BaseIP, IPListMixin):
         :return: an iterator containing IPNetwork subnet objects.
         """
         ...
-    def iter_hosts(self):
+    def iter_hosts(self) -> Iterator[IPAddress]:
         """
         A generator that provides all the IP addresses that can be assigned
         to hosts within the range of this IP object's subnet.
@@ -713,7 +713,7 @@ class IPNetwork(BaseIP, IPListMixin):
     def __str__(self) -> str:
         """:return: this IPNetwork in CIDR format"""
         ...
-    def __repr__(self):
+    def __repr__(self) -> str:
         """:return: Python statement to create an equivalent object"""
         ...
 
@@ -727,8 +727,7 @@ class IPRange(BaseIP, IPListMixin):
 
     """
 
-    __slots__ = ...
-    def __init__(self, start, end, flags=...) -> None:
+    def __init__(self, start: Union[IPAddress, int, str], end: Union[IPAddress, int, str], flags: FLAGS = ...) -> None:
         """
         Constructor.
 
@@ -745,34 +744,34 @@ class IPRange(BaseIP, IPListMixin):
 
         """
         ...
-    def __getstate__(self):
+    def __getstate__(self) -> Tuple[IPAddress, IPAddress, PROTOCOL_VERSION]:
         """:return: Pickled state of an `IPRange` object."""
         ...
-    def __setstate__(self, state):
+    def __setstate__(self, state: Tuple[IPAddress, IPAddress, PROTOCOL_VERSION]) -> None:
         """
         :param state: data used to unpickle a pickled `IPRange` object.
         """
         ...
-    def __contains__(self, other): ...
+    def __contains__(self, other: Union[IPAddress, IPNetwork, IPRange, int, str]): ...
     @property
-    def first(self):
+    def first(self) -> int:
         """The integer value of first IP address in this `IPRange` object."""
         ...
     @property
-    def last(self):
+    def last(self) -> int:
         """The integer value of last IP address in this `IPRange` object."""
         ...
-    def key(self):
+    def key(self) -> Tuple[PROTOCOL_VERSION, int, int]:
         """
         :return: A key tuple used to uniquely identify this `IPRange`.
         """
         ...
-    def sort_key(self):
+    def sort_key(self) -> Tuple[PROTOCOL_VERSION, Any, int]:
         """
         :return: A key tuple used to compare and sort this `IPRange` correctly.
         """
         ...
-    def cidrs(self):
+    def cidrs(self) -> List[Union[IPAddress, IPNetwork]]:
         """
         The list of CIDR addresses found within the lower and upper bound
         addresses of this `IPRange`.
@@ -781,11 +780,11 @@ class IPRange(BaseIP, IPListMixin):
     def __str__(self) -> str:
         """:return: this `IPRange` in a common representational format."""
         ...
-    def __repr__(self):
+    def __repr__(self) -> str:
         """:return: Python statement to create an equivalent object"""
         ...
 
-def iter_unique_ips(*args):
+def iter_unique_ips(*args) -> Iterator[Union[IPAddress, IPNetwork]]:
     """
     :param args: A list of IP addresses and subnets passed in as arguments.
 
@@ -794,7 +793,7 @@ def iter_unique_ips(*args):
     """
     ...
 
-def cidr_abbrev_to_verbose(abbrev_cidr):
+def cidr_abbrev_to_verbose(abbrev_cidr: Union[IPAddress, IPNetwork]) -> Union[IPAddress, IPNetwork]:
     """
     A function that converts abbreviated IPv4 CIDRs to their more verbose
     equivalent.
@@ -820,7 +819,7 @@ def cidr_abbrev_to_verbose(abbrev_cidr):
     """
     ...
 
-def cidr_merge(ip_addrs):
+def cidr_merge(ip_addrs: Iterable[Union[IPAddress, IPNetwork]]) -> List[IPNetwork]:
     """
     A function that accepts an iterable sequence of IP addresses and subnets
     merging them into the smallest possible list of CIDRs. It merges adjacent
@@ -833,7 +832,7 @@ def cidr_merge(ip_addrs):
     """
     ...
 
-def cidr_exclude(target, exclude):
+def cidr_exclude(target: Union[IPAddress, IPNetwork], exclude: Union[IPAddress, IPNetwork]) -> List[IPNetwork]:
     """
     Removes an exclude IP address or subnet from target IP subnet.
 
@@ -845,7 +844,9 @@ def cidr_exclude(target, exclude):
     """
     ...
 
-def cidr_partition(target, exclude):
+def cidr_partition(
+    target: Union[IPAddress, IPNetwork], exclude: Union[IPAddress, IPNetwork]
+) -> Tuple[List[IPNetwork], List[IPNetwork], List[IPNetwork]]:
     """
     Partitions a target IP subnet on an exclude IP address.
 
@@ -859,7 +860,7 @@ def cidr_partition(target, exclude):
     """
     ...
 
-def spanning_cidr(ip_addrs):
+def spanning_cidr(ip_addrs: Iterable[Union[IPAddress, IPNetwork]]) -> IPNetwork:
     """
     Function that accepts a sequence of IP addresses and subnets returning
     a single `IPNetwork` subnet that is large enough to span the lower and
@@ -871,7 +872,7 @@ def spanning_cidr(ip_addrs):
     """
     ...
 
-def iter_iprange(start, end, step=...):
+def iter_iprange(start: Union[IPAddress, IPNetwork], end: Union[IPAddress, IPNetwork], step: int = ...) -> Iterable[IPAddress]:
     """
     A generator that produces IPAddress objects between an arbitrary start
     and stop IP address with intervals of step between them. Sequences
@@ -887,7 +888,7 @@ def iter_iprange(start, end, step=...):
     """
     ...
 
-def iprange_to_cidrs(start, end):
+def iprange_to_cidrs(start: Union[IPAddress, IPNetwork], end: Union[IPAddress, IPNetwork]) -> List[Union[IPAddress, IPNetwork]]:
     """
     A function that accepts an arbitrary start and end IP address or subnet
     and returns a list of CIDR subnets that fit exactly between the boundaries
@@ -901,7 +902,9 @@ def iprange_to_cidrs(start, end):
     """
     ...
 
-def smallest_matching_cidr(ip, cidrs):
+def smallest_matching_cidr(
+    ip: Union[IPAddress, IPNetwork], cidrs: Iterable[Union[IPAddress, IPNetwork]]
+) -> Union[IPAddress, IPNetwork, None]:
     """
     Matches an IP address or subnet against a given sequence of IP addresses
     and subnets.
@@ -915,7 +918,9 @@ def smallest_matching_cidr(ip, cidrs):
     """
     ...
 
-def largest_matching_cidr(ip, cidrs):
+def largest_matching_cidr(
+    ip: Union[IPAddress, IPNetwork], cidrs: Iterable[Union[IPAddress, IPNetwork]]
+) -> Union[IPAddress, IPNetwork, None]:
     """
     Matches an IP address or subnet against a given sequence of IP addresses
     and subnets.
@@ -929,7 +934,9 @@ def largest_matching_cidr(ip, cidrs):
     """
     ...
 
-def all_matching_cidrs(ip, cidrs):
+def all_matching_cidrs(
+    ip: Union[IPAddress, IPNetwork], cidrs: Iterable[Union[IPAddress, IPNetwork]]
+) -> List[Union[IPAddress, IPNetwork]]:
     """
     Matches an IP address or subnet against a given sequence of IP addresses
     and subnets.
@@ -943,49 +950,15 @@ def all_matching_cidrs(ip, cidrs):
     """
     ...
 
-IPV4_LOOPBACK = IPNetwork("127.0.0.0/8")
-IPV4_PRIVATE = (
-    IPNetwork("10.0.0.0/8"),
-    IPNetwork("100.64.0.0/10"),
-    IPNetwork("172.16.0.0/12"),
-    IPNetwork("192.0.0.0/24"),
-    IPNetwork("192.168.0.0/16"),
-    IPNetwork("198.18.0.0/15"),
-    IPRange("239.0.0.0", "239.255.255.255"),
-)
-IPV4_LINK_LOCAL = IPNetwork("169.254.0.0/16")
-IPV4_MULTICAST = IPNetwork("224.0.0.0/4")
-IPV4_6TO4 = IPNetwork("192.88.99.0/24")
-IPV4_RESERVED = (
-    IPNetwork("0.0.0.0/8"),
-    IPNetwork("192.0.2.0/24"),
-    IPNetwork("240.0.0.0/4"),
-    IPNetwork("198.51.100.0/24"),
-    IPNetwork("203.0.113.0/24"),
-    IPNetwork("233.252.0.0/24"),
-    IPRange("234.0.0.0", "238.255.255.255"),
-    IPRange("225.0.0.0", "231.255.255.255"),
-) + (IPV4_LOOPBACK, IPV4_6TO4)
-IPV6_LOOPBACK = IPAddress("::1")
-IPV6_PRIVATE = (IPNetwork("fc00::/7"), IPNetwork("fec0::/10"))
-IPV6_LINK_LOCAL = IPNetwork("fe80::/10")
-IPV6_MULTICAST = IPNetwork("ff00::/8")
-IPV6_RESERVED = (
-    IPNetwork("ff00::/12"),
-    IPNetwork("::/8"),
-    IPNetwork("0100::/8"),
-    IPNetwork("0200::/7"),
-    IPNetwork("0400::/6"),
-    IPNetwork("0800::/5"),
-    IPNetwork("1000::/4"),
-    IPNetwork("4000::/3"),
-    IPNetwork("6000::/3"),
-    IPNetwork("8000::/3"),
-    IPNetwork("A000::/3"),
-    IPNetwork("C000::/3"),
-    IPNetwork("E000::/4"),
-    IPNetwork("F000::/5"),
-    IPNetwork("F800::/6"),
-    IPNetwork("FE00::/9"),
-)
+IPV4_LOOPBACK: IPNetwork
+IPV4_PRIVATE: Tuple[IPNetwork]
+IPV4_LINK_LOCAL: IPNetwork
+IPV4_MULTICAST: IPNetwork
+IPV4_6TO4: IPNetwork
+IPV4_RESERVED: Tuple[IPNetwork]
+IPV6_LOOPBACK: IPAddress
+IPV6_PRIVATE = Tuple[IPNetwork, IPNetwork]
+IPV6_LINK_LOCAL: IPNetwork
+IPV6_MULTICAST: IPNetwork
+IPV6_RESERVED: Tuple[IPNetwork]
 
