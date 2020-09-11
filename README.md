@@ -1,7 +1,5 @@
 # Python Type Stubs
 
-# Python Type Stubs
-
 ## Introduction
 
 As the Python team, we are helping to ensure that packages have high-quality type annotations.
