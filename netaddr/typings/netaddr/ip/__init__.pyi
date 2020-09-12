@@ -5,7 +5,7 @@ from netaddr.core import DictDotLookup
 from netaddr.ip import CIDR
 
 PROTOCOL_VERSION: Literal[4, 6]
-FLAGS: Literal[1, 2]
+FLAGS: Literal[0, 1, 2]
 WIDTH: Literal[32, 128]
 
 """Routines for IPv4 and IPv6 addresses, subnets and ranges."""
@@ -488,7 +488,7 @@ class IPNetwork(BaseIP, IPListMixin):
         will be ``None``.
     """
 
-    def __init__(self, addr: CIDR, implicit_prefix: bool = ..., version: PROTOCOL_VERSION = ..., flags: int = ...,) -> None:
+    def __init__(self, addr: CIDR, implicit_prefix: bool = ..., version: PROTOCOL_VERSION = ..., flags: FLAGS = ...,) -> None:
         """
         Constructor.
 
