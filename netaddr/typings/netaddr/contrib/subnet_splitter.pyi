@@ -1,5 +1,5 @@
-from typing import List
-from netaddr.ip import IPNetwork
+from typing import List, NewType, Tuple, Union
+from netaddr.ip import CIDR, IPNetwork
 
 class SubnetSplitter(object):
     """
@@ -9,7 +9,7 @@ class SubnetSplitter(object):
     all space is exhausted.
     """
 
-    def __init__(self, base_cidr: str) -> None:
+    def __init__(self, base_cidr: CIDR) -> None:
         """
         Constructor.
 
@@ -17,7 +17,7 @@ class SubnetSplitter(object):
             (see IPNetwork.__init__ for full details).
         """
         ...
-    def extract_subnet(self, prefix: str, count: int = ...) -> List[IPNetwork]:
+    def extract_subnet(self, prefix: int, count: int = ...) -> List[IPNetwork]:
         """Extract 1 or more subnets of size specified by CIDR prefix."""
         ...
     def available_subnets(self) -> List[IPNetwork]:

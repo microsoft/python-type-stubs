@@ -1,4 +1,4 @@
-from typing import Any, List, Literal, Tuple, Type, Union
+from typing import Any, Iterable, List, Literal, Tuple, Type, Union
 from netaddr.core import DictDotLookup
 from netaddr.ip import IPAddress
 
@@ -7,36 +7,28 @@ Classes and functions for dealing with MAC addresses, EUI-48, EUI-64, OUI, IAB
 identifiers.
 """
 
-
 class BaseIdentifier(object):
     """Base class for all IEEE identifiers."""
 
-    def __init__(self) -> None:
-        ...
-
+    def __init__(self) -> None: ...
     def __int__(self) -> int:
         """:return: integer value of this identifier"""
         ...
-
     def __long__(self) -> int:
         """:return: integer value of this identifier"""
         ...
-
     def __oct__(self) -> str:
         """:return: octal string representation of this identifier."""
         ...
-
     def __hex__(self) -> str:
         """:return: hexadecimal string representation of this identifier."""
         ...
-
     def __index__(self) -> int:
         """
         :return: return the integer value of this identifier when passed to
             hex(), oct() or bin().
         """
         ...
-
 
 class OUI(BaseIdentifier):
     """
@@ -55,27 +47,19 @@ class OUI(BaseIdentifier):
             MAC/EUI-48 integers)!
         """
         ...
-
-    def __eq__(self, other: Union[OUI, int, str]) -> bool:
-        ...
-
-    def __ne__(self, other: Union[OUI, int, str]) -> bool:
-        ...
-
+    def __eq__(self, other: Union[OUI, int, str]) -> bool: ...
+    def __ne__(self, other: Union[OUI, int, str]) -> bool: ...
     def __getstate__(self) -> Any:
         """:returns: Pickled state of an `OUI` object."""
         ...
-
     def __setstate__(self, state: Any) -> None:
         """:param state: data used to unpickle a pickled `OUI` object."""
         ...
-
     @property
     def reg_count(self) -> int:
         """Number of registered organisations with this OUI"""
         ...
-
-    def registration(self, index: int = ...) -> Any:
+    def registration(self, index: int = ...) -> DictDotLookup:
         """
         The IEEE registration details for this OUI.
 
@@ -86,21 +70,17 @@ class OUI(BaseIdentifier):
             details.
         """
         ...
-
     def __str__(self) -> str:
         """:return: string representation of this OUI"""
         ...
-
     def __repr__(self) -> str:
         """:return: executable Python string to recreate equivalent object."""
         ...
 
-
 class IAB(BaseIdentifier):
     IAB_EUI_VALUES: Tuple[int, int]
-
     @classmethod
-    def split_iab_mac(cls, eui_int: int, strict: bool = ...):
+    def split_iab_mac(cls, eui_int: int, strict: bool = ...) -> Tuple[int, int]:
         """
         :param eui_int: a MAC IAB as an unsigned integer.
 
@@ -109,7 +89,6 @@ class IAB(BaseIdentifier):
             (Default: False)
         """
         ...
-
     def __init__(self, iab: Union[int, str], strict: bool = ...) -> None:
         """
         Constructor
@@ -123,33 +102,23 @@ class IAB(BaseIdentifier):
             (Default: False)
         """
         ...
-
-    def __eq__(self, other: Union[IAB, int, str]) -> bool:
-        ...
-
-    def __ne__(self, other: Union[IAB, int, str]) -> bool:
-        ...
-
+    def __eq__(self, other: Union[IAB, int, str]) -> bool: ...
+    def __ne__(self, other: Union[IAB, int, str]) -> bool: ...
     def __getstate__(self) -> Any:
         """:returns: Pickled state of an `IAB` object."""
         ...
-
     def __setstate__(self, state: Any) -> None:
         """:param state: data used to unpickle a pickled `IAB` object."""
         ...
-
     def registration(self) -> DictDotLookup:
         """The IEEE registration details for this IAB"""
         ...
-
     def __str__(self) -> str:
         """:return: string representation of this IAB"""
         ...
-
     def __repr__(self) -> str:
         """:return: executable Python string to recreate equivalent object."""
         ...
-
 
 class EUI(BaseIdentifier):
     """
@@ -163,8 +132,7 @@ class EUI(BaseIdentifier):
     """
 
     __slots__ = ...
-
-    def __init__(self, addr: Union[int, str], version: Literal[48, 64] = ..., dialect=...) -> None:
+    def __init__(self, addr: Union[EUI, int, str], version: Literal[48, 64] = ..., dialect: Type = ...) -> None:
         """
         Constructor.
 
@@ -180,35 +148,28 @@ class EUI(BaseIdentifier):
             the formatting of EUI-48 (MAC) addresses.
         """
         ...
-
-    def __getstate__(self):
+    def __getstate__(self) -> Any:
         """:returns: Pickled state of an `EUI` object."""
         ...
-
-    def __setstate__(self, state):
+    def __setstate__(self, state: Any) -> None:
         """
         :param state: data used to unpickle a pickled `EUI` object.
 
         """
         ...
-
-    value = ...
-    dialect = ...
-
+    value: Union[int, Type] = ...
+    dialect: Type = ...
     @property
     def oui(self) -> OUI:
         """The OUI (Organisationally Unique Identifier) for this EUI."""
         ...
-
     @property
-    def ei(self):
+    def ei(self) -> Union[str, None]:
         """The EI (Extension Identifier) for this EUI"""
         ...
-
     def is_iab(self) -> bool:
         """:return: True if this EUI is an IAB address, False otherwise"""
         ...
-
     @property
     def iab(self) -> Union[IAB, None]:
         """
@@ -216,13 +177,11 @@ class EUI(BaseIdentifier):
         ``None`` otherwise.
         """
         ...
-
     @property
     def version(self):
         """The EUI version represented by this EUI object."""
         ...
-
-    def __getitem__(self, idx: int) -> int:
+    def __getitem__(self, idx: int) -> Union[int, slice]:
         """
         :return: The integer value of the word referenced by index (both \
             positive and negative). Raises ``IndexError`` if index is out \
@@ -230,57 +189,48 @@ class EUI(BaseIdentifier):
             word groups.
         """
         ...
-
-    def __setitem__(self, idx: int, value):
+    def __setitem__(self, idx: Union[slice, int], value: int) -> None:
         """Set the value of the word referenced by index in this address"""
         ...
-
     def __hash__(self) -> int:
         """:return: hash of this EUI object suitable for dict keys, sets etc"""
         ...
-
     def __eq__(self, other: Union[EUI, int, str]) -> bool:
         """
         :return: ``True`` if this EUI object is numerically the same as other, \
             ``False`` otherwise.
         """
         ...
-
     def __ne__(self, other: Union[EUI, int, str]) -> bool:
         """
         :return: ``True`` if this EUI object is numerically the same as other, \
             ``False`` otherwise.
         """
         ...
-
     def __lt__(self, other: Union[EUI, int, str]) -> bool:
         """
         :return: ``True`` if this EUI object is numerically lower in value than \
             other, ``False`` otherwise.
         """
         ...
-
     def __le__(self, other: Union[EUI, int, str]) -> bool:
         """
         :return: ``True`` if this EUI object is numerically lower or equal in \
             value to other, ``False`` otherwise.
         """
         ...
-
     def __gt__(self, other: Union[EUI, int, str]) -> bool:
         """
         :return: ``True`` if this EUI object is numerically greater in value \
             than other, ``False`` otherwise.
         """
         ...
-
     def __ge__(self, other: Union[EUI, int, str]) -> bool:
         """
         :return: ``True`` if this EUI object is numerically greater or equal \
             in value to other, ``False`` otherwise.
         """
         ...
-
     def bits(self, word_sep: str = ...) -> str:
         """
         :param word_sep: (optional) the separator to insert between words. \
@@ -289,17 +239,14 @@ class EUI(BaseIdentifier):
         :return: human-readable binary digit string of this address.
         """
         ...
-
     @property
     def packed(self) -> str:
         """The value of this EUI address as a packed binary string."""
         ...
-
     @property
     def words(self) -> List[int]:
         """A list of unsigned integer octets found in this EUI address."""
         ...
-
     @property
     def bin(self) -> str:
         """
@@ -308,7 +255,6 @@ class EUI(BaseIdentifier):
         the builtin bin() function found in Python 2.6.x and higher.
         """
         ...
-
     def eui64(self) -> EUI:
         """
         - If this object represents an EUI-48 it is converted to EUI-64 \
@@ -319,7 +265,6 @@ class EUI(BaseIdentifier):
         :return: The value of this EUI object as a new 64-bit EUI object.
         """
         ...
-
     def modified_eui64(self) -> EUI:
         """
         - create a new EUI object with a modified EUI-64 as described in RFC 4291 section 2.5.1
@@ -327,7 +272,6 @@ class EUI(BaseIdentifier):
         :return: a new and modified 64-bit EUI object.
         """
         ...
-
     def ipv6(self, prefix: Union[str, int]) -> IPAddress:
         """
         .. note:: This poses security risks in certain scenarios. \
@@ -339,7 +283,6 @@ class EUI(BaseIdentifier):
             using the technique described in RFC 4291.
         """
         ...
-
     def ipv6_link_local(self) -> IPAddress:
         """
         .. note:: This poses security risks in certain scenarios. \
@@ -349,7 +292,6 @@ class EUI(BaseIdentifier):
             using the technique described in RFC 4291.
         """
         ...
-
     @property
     def info(self) -> DictDotLookup:
         """
@@ -357,7 +299,6 @@ class EUI(BaseIdentifier):
         (MAC-48) if available, None otherwise.
         """
         ...
-
     def format(self, dialect: Type = ...) -> str:
         """
         Format the EUI into the representational format according to the given
@@ -369,11 +310,9 @@ class EUI(BaseIdentifier):
         :return: EUI in representational format according to the given dialect
         """
         ...
-
     def __str__(self) -> str:
         """:return: EUI in representational format"""
         ...
-
     def __repr__(self) -> str:
         """:return: executable Python string to recreate equivalent object."""
         ...

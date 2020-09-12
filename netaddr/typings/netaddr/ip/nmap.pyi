@@ -9,7 +9,11 @@ Based on nmap's Target Specification :-
 
     http://nmap.org/book/man-target-specification.html
 """
-def valid_nmap_range(target_spec):
+from typing import Generator
+
+from netaddr.ip import IPAddress
+
+def valid_nmap_range(target_spec: str) -> bool:
     """
     :param target_spec: an nmap-style IP range target specification.
 
@@ -17,7 +21,7 @@ def valid_nmap_range(target_spec):
     """
     ...
 
-def iter_nmap_range(*nmap_target_spec):
+def iter_nmap_range(*nmap_target_spec) -> Generator[IPAddress]:
     """
     An generator that yields IPAddress objects from defined by nmap target
     specifications.
