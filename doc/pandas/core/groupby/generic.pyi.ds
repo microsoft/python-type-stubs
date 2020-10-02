@@ -1,3 +1,4 @@
+
 class DataFrameGroupBy(GroupBy):
     def aggregate(self, arg: str, *args, **kwargs) -> DataFrame:
         """Aggregate using one or more operations over the specified axis.
@@ -113,6 +114,95 @@ A
 See :ref:`groupby.aggregate.named` for more.
 """
         pass
+    def filter(self, func: Callable, dropna: bool = ..., *args, **kwargs) -> DataFrame:
+        """Return a copy of a DataFrame excluding elements from groups that
+do not satisfy the boolean criterion specified by func.
+
+Parameters
+----------
+f : function
+    Function to apply to each subframe. Should return True or False.
+dropna : Drop groups that do not pass the filter. True by default;
+    If False, groups that evaluate False are filled with NaNs.
+
+Returns
+-------
+filtered : DataFrame
+
+Notes
+-----
+Each subframe is endowed the attribute 'name' in case you need to know
+which group you are working on.
+
+Examples
+--------
+>>> df = pd.DataFrame({'A' : ['foo', 'bar', 'foo', 'bar',
+...                           'foo', 'bar'],
+...                    'B' : [1, 2, 3, 4, 5, 6],
+...                    'C' : [2.0, 5., 8., 1., 2., 9.]})
+>>> grouped = df.groupby('A')
+>>> grouped.filter(lambda x: x['B'].mean() > 3.)
+        A  B    C
+1  bar  2  5.0
+3  bar  4  1.0
+5  bar  6  9.0
+"""
+        pass
+    def count(self) -> DataFrame:
+        """Compute count of group, excluding missing values.
+
+Returns
+-------
+DataFrame
+    Count of values within each group.
+"""
+        pass
+    def nunique(self, dropna: bool = ...) -> DataFrame:
+        """
+Return DataFrame with number of distinct observations per group for
+each column.
+
+Parameters
+----------
+dropna : bool, default True
+    Don't include NaN in the counts.
+
+Returns
+-------
+nunique: DataFrame
+
+Examples
+--------
+>>> df = pd.DataFrame({'id': ['spam', 'egg', 'egg', 'spam',
+...                           'ham', 'ham'],
+...                    'value1': [1, 5, 5, 2, 5, 5],
+...                    'value2': list('abbaxy')})
+>>> df
+        id  value1 value2
+0  spam       1      a
+1   egg       5      b
+2   egg       5      b
+3  spam       2      a
+4   ham       5      x
+5   ham       5      y
+
+>>> df.groupby('id').nunique()
+    id  value1  value2
+id
+egg    1       1       1
+ham    1       1       2
+spam   1       2       1
+
+Check for rows with the same id but conflicting values:
+
+>>> df.groupby('id').filter(lambda g: (g.nunique() > 1).any())
+        id  value1 value2
+0  spam       1      a
+3  spam       2      a
+4   ham       5      x
+5   ham       5      y
+"""
+        pass
     def boxplot(
         self,
         grouped: DataFrame,
@@ -226,15 +316,6 @@ See Also
 DataFrame.corr
 """
         pass
-    def count(self) -> DataFrame:
-        """Compute count of group, excluding missing values.
-
-Returns
--------
-DataFrame
-    Count of values within each group.
-"""
-        pass
     def fillna(
         self,
         value,
@@ -339,40 +420,6 @@ Only replace the first NaN element.
 1   3.0 4.0 NaN 1
 2   NaN 1.0 NaN 5
 3   NaN 3.0 NaN 4
-"""
-        pass
-    def filter(self, func: Callable, dropna: bool = ..., *args, **kwargs) -> DataFrame:
-        """Return a copy of a DataFrame excluding elements from groups that
-do not satisfy the boolean criterion specified by func.
-
-Parameters
-----------
-f : function
-    Function to apply to each subframe. Should return True or False.
-dropna : Drop groups that do not pass the filter. True by default;
-    If False, groups that evaluate False are filled with NaNs.
-
-Returns
--------
-filtered : DataFrame
-
-Notes
------
-Each subframe is endowed the attribute 'name' in case you need to know
-which group you are working on.
-
-Examples
---------
->>> df = pd.DataFrame({'A' : ['foo', 'bar', 'foo', 'bar',
-...                           'foo', 'bar'],
-...                    'B' : [1, 2, 3, 4, 5, 6],
-...                    'C' : [2.0, 5., 8., 1., 2., 9.]})
->>> grouped = df.groupby('A')
->>> grouped.filter(lambda x: x['B'].mean() > 3.)
-        A  B    C
-1  bar  2  5.0
-3  bar  4  1.0
-5  bar  6  9.0
 """
         pass
     def hist(
@@ -572,52 +619,6 @@ numeric_only : bool, default None
 Returns
 -------
 Series or DataFrame (if level specified)
-"""
-        pass
-    def nunique(self, dropna: bool = ...) -> DataFrame:
-        """
-Return DataFrame with number of distinct observations per group for
-each column.
-
-Parameters
-----------
-dropna : bool, default True
-    Don't include NaN in the counts.
-
-Returns
--------
-nunique: DataFrame
-
-Examples
---------
->>> df = pd.DataFrame({'id': ['spam', 'egg', 'egg', 'spam',
-...                           'ham', 'ham'],
-...                    'value1': [1, 5, 5, 2, 5, 5],
-...                    'value2': list('abbaxy')})
->>> df
-        id  value1 value2
-0  spam       1      a
-1   egg       5      b
-2   egg       5      b
-3  spam       2      a
-4   ham       5      x
-5   ham       5      y
-
->>> df.groupby('id').nunique()
-    id  value1  value2
-id
-egg    1       1       1
-ham    1       1       2
-spam   1       2       1
-
-Check for rows with the same id but conflicting values:
-
->>> df.groupby('id').filter(lambda g: (g.nunique() > 1).any())
-        id  value1 value2
-0  spam       1      a
-3  spam       2      a
-4   ham       5      x
-5   ham       5      y
 """
         pass
     def skew(

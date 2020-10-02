@@ -1,23 +1,79 @@
 import abc
-from pandas._typing import Scalar
+from pandas._typing import DType, Scalar
 from pandas.core.frame import DataFrame as DataFrame
-from typing import Any, Callable, Dict, Optional, Sequence, Union, overload
+from typing import Any, Callable, Dict, Literal, Optional, Sequence, Union, overload
 
 @overload
 def read_excel(
     filepath: str,
-    sheet_name: Optional[Sequence[Union[int, str]]],
-    header: Union[int, Sequence[int]] = ...,
+    sheet_name: Optional[Sequence[str]],
+    header: Optional[Union[int, Sequence[int]]] = ...,
     names: Optional[Sequence[str]] = ...,
     index_col: Optional[Union[int, Sequence[int]]] = ...,
     usecols: Optional[Union[int, str, Sequence[Union[int, str, Callable]]]] = ...,
     squeeze: bool = ...,
-    dtype: Union[str, Dict[str, Any]] = ...,
+    dtype: Union[str, Dict[str, Any], DType] = ...,
     engine: Optional[str] = ...,
     converters: Optional[Dict[Union[int, str], Callable]] = ...,
     true_values: Optional[Sequence[Scalar]] = ...,
     false_values: Optional[Sequence[Scalar]] = ...,
-    skiprows: Optional[Sequence[int]] = ...,
+    skiprows: Optional[Union[Sequence[int], int, Callable]] = ...,
+    nrows: Optional[int] = ...,
+    na_values = ...,
+    keep_default_na: bool = ...,
+    verbose: bool = ...,
+    parse_dates: Union[bool, Sequence, Dict[str, Sequence]] = ...,
+    date_parser: Optional[Callable] = ...,
+    thousands: Optional[str] = ...,
+    comment: Optional[str] = ...,
+    skipfooter: int = ...,
+    convert_float: bool = ...,
+    mangle_dupe_cols: bool = ...,
+) -> Dict[str, DataFrame]: ...
+
+@overload
+def read_excel(
+    filepath: str,
+    sheet_name: Sequence[int],
+    header: Optional[Union[int, Sequence[int]]] = ...,
+    names: Optional[Sequence[str]] = ...,
+    index_col: Optional[Union[int, Sequence[int]]] = ...,
+    usecols: Optional[Union[int, str, Sequence[Union[int, str, Callable]]]] = ...,
+    squeeze: bool = ...,
+    dtype: Union[str, Dict[str, Any], DType] = ...,
+    engine: Optional[str] = ...,
+    converters: Optional[Dict[Union[int, str], Callable]] = ...,
+    true_values: Optional[Sequence[Scalar]] = ...,
+    false_values: Optional[Sequence[Scalar]] = ...,
+    skiprows: Optional[Union[Sequence[int], int, Callable]] = ...,
+    nrows: Optional[int] = ...,
+    na_values = ...,
+    keep_default_na: bool = ...,
+    verbose: bool = ...,
+    parse_dates: Union[bool, Sequence, Dict[str, Sequence]] = ...,
+    date_parser: Optional[Callable] = ...,
+    thousands: Optional[str] = ...,
+    comment: Optional[str] = ...,
+    skipfooter: int = ...,
+    convert_float: bool = ...,
+    mangle_dupe_cols: bool = ...,
+) -> Dict[int, DataFrame]: ...
+
+@overload
+def read_excel(
+    filepath: str,
+    sheet_name: Sequence[Union[int, str]],
+    header: Optional[Union[int, Sequence[int]]] = ...,
+    names: Optional[Sequence[str]] = ...,
+    index_col: Optional[Union[int, Sequence[int]]] = ...,
+    usecols: Optional[Union[int, str, Sequence[Union[int, str, Callable]]]] = ...,
+    squeeze: bool = ...,
+    dtype: Union[str, Dict[str, Any], DType] = ...,
+    engine: Optional[str] = ...,
+    converters: Optional[Dict[Union[int, str], Callable]] = ...,
+    true_values: Optional[Sequence[Scalar]] = ...,
+    false_values: Optional[Sequence[Scalar]] = ...,
+    skiprows: Optional[Union[Sequence[int], int, Callable]] = ...,
     nrows: Optional[int] = ...,
     na_values = ...,
     keep_default_na: bool = ...,
@@ -35,17 +91,17 @@ def read_excel(
 def read_excel(
     filepath: str,
     sheet_name: Union[int, str] = ...,
-    header: Union[int, Sequence[int]] = ...,
+    header: Optional[Union[int, Sequence[int]]] = ...,
     names: Optional[Sequence[str]] = ...,
     index_col: Optional[Union[int, Sequence[int]]] = ...,
     usecols: Optional[Union[int, str, Sequence[Union[int, str, Callable]]]] = ...,
     squeeze: bool = ...,
-    dtype: Union[str, Dict[str, Any]] = ...,
+    dtype: Union[str, Dict[str, Any], DType] = ...,
     engine: Optional[str] = ...,
     converters: Optional[Dict[Union[int, str], Callable]] = ...,
     true_values: Optional[Sequence[Scalar]] = ...,
     false_values: Optional[Sequence[Scalar]] = ...,
-    skiprows: Optional[Sequence[int]] = ...,
+    skiprows: Optional[Union[Sequence[int], int, Callable]] = ...,
     nrows: Optional[int] = ...,
     na_values = ...,
     keep_default_na: bool = ...,
@@ -60,6 +116,7 @@ def read_excel(
     **kwargs
 ) -> DataFrame: ...
 
+# This probably isn't needed
 class _BaseExcelReader(metaclass=abc.ABCMeta):
     book = ...
     def __init__(self, filepath_or_buffer) -> None: ...
@@ -83,14 +140,10 @@ class ExcelWriter(metaclass=abc.ABCMeta):
     curr_sheet = ...
     path = ...
     @property
-    @abc.abstractmethod
     def supported_extensions(self): ...
     @property
-    @abc.abstractmethod
     def engine(self): ...
-    @abc.abstractmethod
     def write_cells(self, cells, sheet_name = ..., startrow: int = ..., startcol: int = ..., freeze_panes = ...): ...
-    @abc.abstractmethod
     def save(self): ...
     sheets = ...
     cur_sheet = ...

@@ -116,8 +116,12 @@ class Interval(object):
     def overlaps(self, other: Interval) -> bool: ...
 
 
-class Timedelta(object):
-    def __init__(self, value: Any, unit: str = ..., **kwargs) -> None: ...
+# For the next two, inheriting from the datetime objects is not strictly
+# accurate, as these are replacements for those, not derivations of those.
+# Nontheless, using them as base classes saves us some effort here for now.
+
+class Timedelta(datetime.timedelta):
+    def __init__(self, value: Any = ..., unit: str = ..., **kwargs) -> None: ...
     @property
     def asm8(self) -> int: ...
     @property
@@ -146,16 +150,16 @@ class Timedelta(object):
     def to_timedelta64(self) -> _np.timedelta64: ...
     def total_seconds(self) -> int: ...
 
-class Timestamp(object):
+class Timestamp(datetime.timestamp):
     def __init__(
         self,
         ts_input: Any,
-        freq: Any,
-        tz: Any,
-        unit: str,
-        year: int,
-        month: int,
-        day: int,
+        freq: Any = ...,
+        tz: Any = ...,
+        unit: str = ...,
+        year: int = ...,
+        month: int = ...,
+        day: int = ...,
         hour: int = ...,
         minute: int = ...,
         second: int = ...,
@@ -240,7 +244,7 @@ class Timestamp(object):
         fold: int = ...,
     ) -> Timestamp: ...
     def round(self, freq: str, ambiguous: Any = ..., nonexistent: Any = ...) -> Timestamp: ...
-    def strftime(self) -> str: ...
+    def strftime(self, fmt: str) -> str: ...
     def time(self) -> Timestamp: ...
     def timestamp(self) -> float: ...
     def timetuple(self) -> Tuple: ...

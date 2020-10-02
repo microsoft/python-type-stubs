@@ -1,4 +1,354 @@
-class Series(Generic[_DType]):
+
+class Series(IndexOpsMixin, NDFrame, Generic[S1]):
+    def take(self, indices: Sequence, axis: SeriesAxisType = ..., is_copy: Optional[_bool] = ..., **kwargs) -> Series[S1]:
+        """Return the elements in the given *positional* indices along an axis.
+
+This means that we are not indexing according to actual values in
+the index attribute of the object. We are indexing according to the
+actual position of the element in the object.
+
+Parameters
+----------
+indices : array-like
+    An array of ints indicating which positions to take.
+axis : {0 or 'index', 1 or 'columns', None}, default 0
+    The axis on which to select elements. ``0`` means that we are
+    selecting rows, ``1`` means that we are selecting columns.
+is_copy : bool
+    Before pandas 1.0, ``is_copy=False`` can be specified to ensure
+    that the return value is an actual copy. Starting with pandas 1.0,
+    ``take`` always returns a copy, and the keyword is therefore
+    deprecated.
+
+    .. deprecated:: 1.0.0
+**kwargs
+    For compatibility with :meth:`numpy.take`. Has no effect on the
+    output.
+
+Returns
+-------
+taken : same type as caller
+    An array-like containing the elements taken from the object.
+
+See Also
+--------
+DataFrame.loc : Select a subset of a DataFrame by labels.
+DataFrame.iloc : Select a subset of a DataFrame by positions.
+numpy.take : Take elements from an array along an axis.
+
+Examples
+--------
+>>> df = pd.DataFrame([('falcon', 'bird', 389.0),
+...                    ('parrot', 'bird', 24.0),
+...                    ('lion', 'mammal', 80.5),
+...                    ('monkey', 'mammal', np.nan)],
+...                   columns=['name', 'class', 'max_speed'],
+...                   index=[0, 2, 3, 1])
+>>> df
+     name   class  max_speed
+0  falcon    bird      389.0
+2  parrot    bird       24.0
+3    lion  mammal       80.5
+1  monkey  mammal        NaN
+
+Take elements at positions 0 and 3 along the axis 0 (default).
+
+Note how the actual indices selected (0 and 1) do not correspond to
+our selected indices 0 and 3. That's because we are selecting the 0th
+and 3rd rows, not rows whose indices equal 0 and 3.
+
+>>> df.take([0, 3])
+     name   class  max_speed
+0  falcon    bird      389.0
+1  monkey  mammal        NaN
+
+Take elements at indices 1 and 2 along the axis 1 (column selection).
+
+>>> df.take([1, 2], axis=1)
+    class  max_speed
+0    bird      389.0
+2    bird       24.0
+3  mammal       80.5
+1  mammal        NaN
+
+We may take elements using negative integers for positive indices,
+starting from the end of the object, just like with Python lists.
+
+>>> df.take([-1, -2])
+     name   class  max_speed
+1  monkey  mammal        NaN
+3    lion  mammal       80.5
+"""
+        pass
+    def to_markdown(self, buf: Optional[FilePathOrBuffer], mode: Optional[_str] = ..., **kwargs) -> None:
+        """Print Series in Markdown-friendly format.
+
+.. versionadded:: 1.0.0
+
+Parameters
+----------
+buf : writable buffer, defaults to sys.stdout
+    Where to send the output. By default, the output is printed to
+    sys.stdout. Pass a writable buffer if you need to further process
+    the output.
+mode : str, optional
+    Mode in which file is opened.
+**kwargs
+    These parameters will be passed to `tabulate`.
+
+Returns
+-------
+str
+    Series in Markdown-friendly format.
+
+        Examples
+        --------
+        >>> s = pd.Series(["elk", "pig", "dog", "quetzal"], name="animal")
+        >>> print(s.to_markdown())
+        |    | animal   |
+        |---:|:---------|
+        |  0 | elk      |
+        |  1 | pig      |
+        |  2 | dog      |
+        |  3 | quetzal  |
+"""
+        pass
+    def iteritems(self) -> Iterable[Tuple[Label, S1]]:
+        """Lazily iterate over (index, value) tuples.
+
+This method returns an iterable tuple (index, value). This is
+convenient if you want to create a lazy iterator.
+
+Returns
+-------
+iterable
+    Iterable of tuples containing the (index, value) pairs from a
+    Series.
+
+See Also
+--------
+DataFrame.items : Iterate over (column name, Series) pairs.
+DataFrame.iterrows : Iterate over DataFrame rows as (index, Series) pairs.
+
+Examples
+--------
+>>> s = pd.Series(['A', 'B', 'C'])
+>>> for index, value in s.items():
+...     print(f"Index : {index}, Value : {value}")
+Index : 0, Value : A
+Index : 1, Value : B
+Index : 2, Value : C
+"""
+        pass
+    def groupby(
+        self,
+        by = ...,
+        axis: SeriesAxisType = ...,
+        level: Optional[Level] = ...,
+        as_index: _bool = ...,
+        sort: _bool = ...,
+        group_keys: _bool = ...,
+        squeeze: _bool = ...,
+        observed: _bool = ...,
+    ) -> SeriesGroupBy:
+        """Group Series using a mapper or by a Series of columns.
+
+A groupby operation involves some combination of splitting the
+object, applying a function, and combining the results. This can be
+used to group large amounts of data and compute operations on these
+groups.
+
+Parameters
+----------
+by : mapping, function, label, or list of labels
+    Used to determine the groups for the groupby.
+    If ``by`` is a function, it's called on each value of the object's
+    index. If a dict or Series is passed, the Series or dict VALUES
+    will be used to determine the groups (the Series' values are first
+    aligned; see ``.align()`` method). If an ndarray is passed, the
+    values are used as-is determine the groups. A label or list of
+    labels may be passed to group by the columns in ``self``. Notice
+    that a tuple is interpreted as a (single) key.
+axis : {0 or 'index', 1 or 'columns'}, default 0
+    Split along rows (0) or columns (1).
+level : int, level name, or sequence of such, default None
+    If the axis is a MultiIndex (hierarchical), group by a particular
+    level or levels.
+as_index : bool, default True
+    For aggregated output, return object with group labels as the
+    index. Only relevant for DataFrame input. as_index=False is
+    effectively "SQL-style" grouped output.
+sort : bool, default True
+    Sort group keys. Get better performance by turning this off.
+    Note this does not influence the order of observations within each
+    group. Groupby preserves the order of rows within each group.
+group_keys : bool, default True
+    When calling apply, add group keys to index to identify pieces.
+squeeze : bool, default False
+    Reduce the dimensionality of the return type if possible,
+    otherwise return a consistent type.
+observed : bool, default False
+    This only applies if any of the groupers are Categoricals.
+    If True: only show observed values for categorical groupers.
+    If False: show all values for categorical groupers.
+
+    .. versionadded:: 0.23.0
+
+Returns
+-------
+SeriesGroupBy
+    Returns a groupby object that contains information about the groups.
+
+See Also
+--------
+resample : Convenience method for frequency conversion and resampling
+    of time series.
+
+Notes
+-----
+See the `user guide
+<https://pandas.pydata.org/pandas-docs/stable/groupby.html>`_ for more.
+
+Examples
+--------
+>>> ser = pd.Series([390., 350., 30., 20.],
+...                 index=['Falcon', 'Falcon', 'Parrot', 'Parrot'], name="Max Speed")
+>>> ser
+Falcon    390.0
+Falcon    350.0
+Parrot     30.0
+Parrot     20.0
+Name: Max Speed, dtype: float64
+>>> ser.groupby(["a", "b", "a", "b"]).mean()
+a    210.0
+b    185.0
+Name: Max Speed, dtype: float64
+>>> ser.groupby(level=0).mean()
+Falcon    370.0
+Parrot     25.0
+Name: Max Speed, dtype: float64
+>>> ser.groupby(ser > 100).mean()
+Max Speed
+False     25.0
+True     370.0
+Name: Max Speed, dtype: float64
+
+**Grouping by Indexes**
+
+We can groupby different levels of a hierarchical index
+using the `level` parameter:
+
+>>> arrays = [['Falcon', 'Falcon', 'Parrot', 'Parrot'],
+...           ['Captive', 'Wild', 'Captive', 'Wild']]
+>>> index = pd.MultiIndex.from_arrays(arrays, names=('Animal', 'Type'))
+>>> ser = pd.Series([390., 350., 30., 20.], index=index, name="Max Speed")
+>>> ser
+Animal  Type
+Falcon  Captive    390.0
+        Wild       350.0
+Parrot  Captive     30.0
+        Wild        20.0
+Name: Max Speed, dtype: float64
+>>> ser.groupby(level=0).mean()
+Animal
+Falcon    370.0
+Parrot     25.0
+Name: Max Speed, dtype: float64
+>>> ser.groupby(level="Type").mean()
+Type
+Captive    210.0
+Wild       185.0
+Name: Max Speed, dtype: float64
+"""
+        pass
+    def searchsorted(
+        self, value: _ListLike, side: Union[_str, Literal["left", "right"]] = ..., sorter: Optional[_ListLike] = ...,
+    ) -> Union[int, List[int]]:
+        """Find indices where elements should be inserted to maintain order.
+
+Find the indices into a sorted Series `self` such that, if the
+corresponding elements in `value` were inserted before the indices,
+the order of `self` would be preserved.
+
+.. note::
+
+    The Series *must* be monotonically sorted, otherwise
+    wrong locations will likely be returned. Pandas does *not*
+    check this for you.
+
+Parameters
+----------
+value : array_like
+    Values to insert into `self`.
+side : {'left', 'right'}, optional
+    If 'left', the index of the first suitable location found is given.
+    If 'right', return the last such index.  If there is no suitable
+    index, return either 0 or N (where N is the length of `self`).
+sorter : 1-D array_like, optional
+    Optional array of integer indices that sort `self` into ascending
+    order. They are typically the result of ``np.argsort``.
+
+Returns
+-------
+int or array of int
+    A scalar or array of insertion points with the
+    same shape as `value`.
+
+    .. versionchanged:: 0.24.0
+        If `value` is a scalar, an int is now always returned.
+        Previously, scalar inputs returned an 1-item array for
+        :class:`Series` and :class:`Categorical`.
+
+See Also
+--------
+sort_values
+numpy.searchsorted
+
+Notes
+-----
+Binary search is used to find the required insertion points.
+
+Examples
+--------
+
+>>> x = pd.Series([1, 2, 3])
+>>> x
+0    1
+1    2
+2    3
+dtype: int64
+
+>>> x.searchsorted(4)
+3
+
+>>> x.searchsorted([0, 4])
+array([0, 3])
+
+>>> x.searchsorted([1, 3], side='left')
+array([0, 2])
+
+>>> x.searchsorted([1, 3], side='right')
+array([1, 3])
+
+>>> x = pd.Categorical(['apple', 'bread', 'bread',
+                        'cheese', 'milk'], ordered=True)
+[apple, bread, bread, cheese, milk]
+Categories (4, object): [apple < bread < cheese < milk]
+
+>>> x.searchsorted('bread')
+1
+
+>>> x.searchsorted(['bread'], side='right')
+array([3])
+
+If the values are not monotonically sorted, wrong locations
+may be returned:
+
+>>> x = pd.Series([2, 1, 3])
+>>> x.searchsorted(1)
+0  # wrong result, correct would be 1
+"""
+        pass
     def aggregate(
         self,
         func: Union[Callable, _str, List[Union[Callable, _str]], Dict[SeriesAxisType, Union[Callable, _str]],],
@@ -69,6 +419,76 @@ dtype: int64
 min   1
 max   4
 dtype: int64
+"""
+        pass
+    def transform(
+        self, func: Union[List[Callable], Dict[_str, Callable]], axis: SeriesAxisType = ..., *args, **kwargs
+    ) -> Series[S1]:
+        """Call ``func`` on self producing a Series with transformed values.
+
+Produced Series will have same axis length as self.
+
+Parameters
+----------
+func : function, str, list or dict
+    Function to use for transforming the data. If a function, must either
+    work when passed a Series or when passed to Series.apply.
+
+    Accepted combinations are:
+
+    - function
+    - string function name
+    - list of functions and/or function names, e.g. ``[np.exp. 'sqrt']``
+    - dict of axis labels -> functions, function names or list of such.
+axis : {0 or 'index'}
+    Parameter needed for compatibility with DataFrame.
+*args
+    Positional arguments to pass to `func`.
+**kwargs
+    Keyword arguments to pass to `func`.
+
+Returns
+-------
+Series
+    A Series that must have the same length as self.
+
+Raises
+------
+ValueError : If the returned Series has a different length than self.
+
+See Also
+--------
+Series.agg : Only perform aggregating type operations.
+Series.apply : Invoke function on a Series.
+
+Examples
+--------
+>>> df = pd.DataFrame({'A': range(3), 'B': range(1, 4)})
+>>> df
+   A  B
+0  0  1
+1  1  2
+2  2  3
+>>> df.transform(lambda x: x + 1)
+   A  B
+0  1  2
+1  2  3
+2  3  4
+
+Even though the resulting Series must have the same length as the
+input Series, it is possible to provide several input functions:
+
+>>> s = pd.Series(range(3))
+>>> s
+0    0
+1    1
+2    2
+dtype: int64
+>>> s.transform([np.sqrt, np.exp])
+       sqrt        exp
+0  0.000000   1.000000
+1  1.000000   2.718282
+2  1.414214   7.389056
 """
         pass
     def align(
@@ -234,125 +654,381 @@ Only replace the first NaN element.
 3   NaN 3.0 NaN 4
 """
         pass
-    def groupby(
+    def replace(
         self,
-        by = ...,
-        axis: SeriesAxisType = ...,
-        level: Optional[Level] = ...,
-        as_index: _bool = ...,
-        sort: _bool = ...,
-        group_keys: _bool = ...,
-        squeeze: _bool = ...,
-        observed: _bool = ...,
-    ) -> SeriesGroupBy:
-        """Group Series using a mapper or by a Series of columns.
+        to_replace: Optional[Union[_str, List, Dict, Series[S1], int, float]] = ...,
+        value: Optional[Union[Scalar, Dict, List, _str]] = ...,
+        inplace: _bool = ...,
+        limit: Optional[int] = ...,
+        regex = ...,
+        method: Optional[Union[_str, Literal["pad", "ffill", "bfill"]]] = ...,
+    ) -> Series[S1]:
+        """Replace values given in `to_replace` with `value`.
 
-A groupby operation involves some combination of splitting the
-object, applying a function, and combining the results. This can be
-used to group large amounts of data and compute operations on these
-groups.
+Values of the Series are replaced with other values dynamically.
+This differs from updating with ``.loc`` or ``.iloc``, which require
+you to specify a location to update with some value.
 
 Parameters
 ----------
-by : mapping, function, label, or list of labels
-    Used to determine the groups for the groupby.
-    If ``by`` is a function, it's called on each value of the object's
-    index. If a dict or Series is passed, the Series or dict VALUES
-    will be used to determine the groups (the Series' values are first
-    aligned; see ``.align()`` method). If an ndarray is passed, the
-    values are used as-is determine the groups. A label or list of
-    labels may be passed to group by the columns in ``self``. Notice
-    that a tuple is interpreted as a (single) key.
-axis : {0 or 'index', 1 or 'columns'}, default 0
-    Split along rows (0) or columns (1).
-level : int, level name, or sequence of such, default None
-    If the axis is a MultiIndex (hierarchical), group by a particular
-    level or levels.
-as_index : bool, default True
-    For aggregated output, return object with group labels as the
-    index. Only relevant for DataFrame input. as_index=False is
-    effectively "SQL-style" grouped output.
-sort : bool, default True
-    Sort group keys. Get better performance by turning this off.
-    Note this does not influence the order of observations within each
-    group. Groupby preserves the order of rows within each group.
-group_keys : bool, default True
-    When calling apply, add group keys to index to identify pieces.
-squeeze : bool, default False
-    Reduce the dimensionality of the return type if possible,
-    otherwise return a consistent type.
-observed : bool, default False
-    This only applies if any of the groupers are Categoricals.
-    If True: only show observed values for categorical groupers.
-    If False: show all values for categorical groupers.
+to_replace : str, regex, list, dict, Series, int, float, or None
+    How to find the values that will be replaced.
 
-    .. versionadded:: 0.23.0
+    * numeric, str or regex:
+
+        - numeric: numeric values equal to `to_replace` will be
+          replaced with `value`
+        - str: string exactly matching `to_replace` will be replaced
+          with `value`
+        - regex: regexs matching `to_replace` will be replaced with
+          `value`
+
+    * list of str, regex, or numeric:
+
+        - First, if `to_replace` and `value` are both lists, they
+          **must** be the same length.
+        - Second, if ``regex=True`` then all of the strings in **both**
+          lists will be interpreted as regexs otherwise they will match
+          directly. This doesn't matter much for `value` since there
+          are only a few possible substitution regexes you can use.
+        - str, regex and numeric rules apply as above.
+
+    * dict:
+
+        - Dicts can be used to specify different replacement values
+          for different existing values. For example,
+          ``{'a': 'b', 'y': 'z'}`` replaces the value 'a' with 'b' and
+          'y' with 'z'. To use a dict in this way the `value`
+          parameter should be `None`.
+        - For a DataFrame a dict can specify that different values
+          should be replaced in different columns. For example,
+          ``{'a': 1, 'b': 'z'}`` looks for the value 1 in column 'a'
+          and the value 'z' in column 'b' and replaces these values
+          with whatever is specified in `value`. The `value` parameter
+          should not be ``None`` in this case. You can treat this as a
+          special case of passing two lists except that you are
+          specifying the column to search in.
+        - For a DataFrame nested dictionaries, e.g.,
+          ``{'a': {'b': np.nan}}``, are read as follows: look in column
+          'a' for the value 'b' and replace it with NaN. The `value`
+          parameter should be ``None`` to use a nested dict in this
+          way. You can nest regular expressions as well. Note that
+          column names (the top-level dictionary keys in a nested
+          dictionary) **cannot** be regular expressions.
+
+    * None:
+
+        - This means that the `regex` argument must be a string,
+          compiled regular expression, or list, dict, ndarray or
+          Series of such elements. If `value` is also ``None`` then
+          this **must** be a nested dictionary or Series.
+
+    See the examples section for examples of each of these.
+value : scalar, dict, list, str, regex, default None
+    Value to replace any values matching `to_replace` with.
+    For a DataFrame a dict of values can be used to specify which
+    value to use for each column (columns not in the dict will not be
+    filled). Regular expressions, strings and lists or dicts of such
+    objects are also allowed.
+inplace : bool, default False
+    If True, in place. Note: this will modify any
+    other views on this object (e.g. a column from a DataFrame).
+    Returns the caller if this is True.
+limit : int, default None
+    Maximum size gap to forward or backward fill.
+regex : bool or same types as `to_replace`, default False
+    Whether to interpret `to_replace` and/or `value` as regular
+    expressions. If this is ``True`` then `to_replace` *must* be a
+    string. Alternatively, this could be a regular expression or a
+    list, dict, or array of regular expressions in which case
+    `to_replace` must be ``None``.
+method : {'pad', 'ffill', 'bfill', `None`}
+    The method to use when for replacement, when `to_replace` is a
+    scalar, list or tuple and `value` is ``None``.
+
+    .. versionchanged:: 0.23.0
+        Added to DataFrame.
 
 Returns
 -------
-SeriesGroupBy
-    Returns a groupby object that contains information about the groups.
+Series
+    Object after replacement.
+
+Raises
+------
+AssertionError
+    * If `regex` is not a ``bool`` and `to_replace` is not
+      ``None``.
+TypeError
+    * If `to_replace` is a ``dict`` and `value` is not a ``list``,
+      ``dict``, ``ndarray``, or ``Series``
+    * If `to_replace` is ``None`` and `regex` is not compilable
+      into a regular expression or is a list, dict, ndarray, or
+      Series.
+    * When replacing multiple ``bool`` or ``datetime64`` objects and
+      the arguments to `to_replace` does not match the type of the
+      value being replaced
+ValueError
+    * If a ``list`` or an ``ndarray`` is passed to `to_replace` and
+      `value` but they are not the same length.
 
 See Also
 --------
-resample : Convenience method for frequency conversion and resampling
-    of time series.
+Series.fillna : Fill NA values.
+Series.where : Replace values based on boolean condition.
+Series.str.replace : Simple string replacement.
 
 Notes
 -----
-See the `user guide
-<https://pandas.pydata.org/pandas-docs/stable/groupby.html>`_ for more.
+* Regex substitution is performed under the hood with ``re.sub``. The
+  rules for substitution for ``re.sub`` are the same.
+* Regular expressions will only substitute on strings, meaning you
+  cannot provide, for example, a regular expression matching floating
+  point numbers and expect the columns in your frame that have a
+  numeric dtype to be matched. However, if those floating point
+  numbers *are* strings, then you can do this.
+* This method has *a lot* of options. You are encouraged to experiment
+  and play with this method to gain intuition about how it works.
+* When dict is used as the `to_replace` value, it is like
+  key(s) in the dict are the to_replace part and
+  value(s) in the dict are the value parameter.
 
 Examples
 --------
->>> ser = pd.Series([390., 350., 30., 20.],
-...                 index=['Falcon', 'Falcon', 'Parrot', 'Parrot'], name="Max Speed")
->>> ser
-Falcon    390.0
-Falcon    350.0
-Parrot     30.0
-Parrot     20.0
-Name: Max Speed, dtype: float64
->>> ser.groupby(["a", "b", "a", "b"]).mean()
-a    210.0
-b    185.0
-Name: Max Speed, dtype: float64
->>> ser.groupby(level=0).mean()
-Falcon    370.0
-Parrot     25.0
-Name: Max Speed, dtype: float64
->>> ser.groupby(ser > 100).mean()
-Max Speed
-False     25.0
-True     370.0
-Name: Max Speed, dtype: float64
 
-**Grouping by Indexes**
+**Scalar `to_replace` and `value`**
 
-We can groupby different levels of a hierarchical index
-using the `level` parameter:
+>>> s = pd.Series([0, 1, 2, 3, 4])
+>>> s.replace(0, 5)
+0    5
+1    1
+2    2
+3    3
+4    4
+dtype: int64
 
->>> arrays = [['Falcon', 'Falcon', 'Parrot', 'Parrot'],
-...           ['Captive', 'Wild', 'Captive', 'Wild']]
->>> index = pd.MultiIndex.from_arrays(arrays, names=('Animal', 'Type'))
->>> ser = pd.Series([390., 350., 30., 20.], index=index, name="Max Speed")
->>> ser
-Animal  Type
-Falcon  Captive    390.0
-        Wild       350.0
-Parrot  Captive     30.0
-        Wild        20.0
-Name: Max Speed, dtype: float64
->>> ser.groupby(level=0).mean()
-Animal
-Falcon    370.0
-Parrot     25.0
-Name: Max Speed, dtype: float64
->>> ser.groupby(level="Type").mean()
-Type
-Captive    210.0
-Wild       185.0
-Name: Max Speed, dtype: float64
+>>> df = pd.DataFrame({'A': [0, 1, 2, 3, 4],
+...                    'B': [5, 6, 7, 8, 9],
+...                    'C': ['a', 'b', 'c', 'd', 'e']})
+>>> df.replace(0, 5)
+   A  B  C
+0  5  5  a
+1  1  6  b
+2  2  7  c
+3  3  8  d
+4  4  9  e
+
+**List-like `to_replace`**
+
+>>> df.replace([0, 1, 2, 3], 4)
+   A  B  C
+0  4  5  a
+1  4  6  b
+2  4  7  c
+3  4  8  d
+4  4  9  e
+
+>>> df.replace([0, 1, 2, 3], [4, 3, 2, 1])
+   A  B  C
+0  4  5  a
+1  3  6  b
+2  2  7  c
+3  1  8  d
+4  4  9  e
+
+>>> s.replace([1, 2], method='bfill')
+0    0
+1    3
+2    3
+3    3
+4    4
+dtype: int64
+
+**dict-like `to_replace`**
+
+>>> df.replace({0: 10, 1: 100})
+     A  B  C
+0   10  5  a
+1  100  6  b
+2    2  7  c
+3    3  8  d
+4    4  9  e
+
+>>> df.replace({'A': 0, 'B': 5}, 100)
+     A    B  C
+0  100  100  a
+1    1    6  b
+2    2    7  c
+3    3    8  d
+4    4    9  e
+
+>>> df.replace({'A': {0: 100, 4: 400}})
+     A  B  C
+0  100  5  a
+1    1  6  b
+2    2  7  c
+3    3  8  d
+4  400  9  e
+
+**Regular expression `to_replace`**
+
+>>> df = pd.DataFrame({'A': ['bat', 'foo', 'bait'],
+...                    'B': ['abc', 'bar', 'xyz']})
+>>> df.replace(to_replace=r'^ba.$', value='new', regex=True)
+      A    B
+0   new  abc
+1   foo  new
+2  bait  xyz
+
+>>> df.replace({'A': r'^ba.$'}, {'A': 'new'}, regex=True)
+      A    B
+0   new  abc
+1   foo  bar
+2  bait  xyz
+
+>>> df.replace(regex=r'^ba.$', value='new')
+      A    B
+0   new  abc
+1   foo  new
+2  bait  xyz
+
+>>> df.replace(regex={r'^ba.$': 'new', 'foo': 'xyz'})
+      A    B
+0   new  abc
+1   xyz  new
+2  bait  xyz
+
+>>> df.replace(regex=[r'^ba.$', 'foo'], value='new')
+      A    B
+0   new  abc
+1   new  new
+2  bait  xyz
+
+Note that when replacing multiple ``bool`` or ``datetime64`` objects,
+the data types in the `to_replace` parameter must match the data
+type of the value being replaced:
+
+>>> df = pd.DataFrame({'A': [True, False, True],
+...                    'B': [False, True, False]})
+>>> df.replace({'a string': 'new value', True: False})  # raises
+Traceback (most recent call last):
+    ...
+TypeError: Cannot compare types 'ndarray(dtype=bool)' and 'str'
+
+This raises a ``TypeError`` because one of the ``dict`` keys is not of
+the correct type for replacement.
+
+Compare the behavior of ``s.replace({'a': None})`` and
+``s.replace('a', None)`` to understand the peculiarities
+of the `to_replace` parameter:
+
+>>> s = pd.Series([10, 'a', 'a', 'b', 'a'])
+
+When one uses a dict as the `to_replace` value, it is like the
+value(s) in the dict are equal to the `value` parameter.
+``s.replace({'a': None})`` is equivalent to
+``s.replace(to_replace={'a': None}, value=None, method=None)``:
+
+>>> s.replace({'a': None})
+0      10
+1    None
+2    None
+3       b
+4    None
+dtype: object
+
+When ``value=None`` and `to_replace` is a scalar, list or
+tuple, `replace` uses the method parameter (default 'pad') to do the
+replacement. So this is why the 'a' values are being replaced by 10
+in rows 1 and 2 and 'b' in row 4 in this case.
+The command ``s.replace('a', None)`` is actually equivalent to
+``s.replace(to_replace='a', value=None, method='pad')``:
+
+>>> s.replace('a', None)
+0    10
+1    10
+2    10
+3     b
+4     b
+dtype: object
+"""
+        pass
+    def shift(
+        self,
+        periods: int = ...,
+        freq = ...,
+        axis: SeriesAxisType = ...,
+        fill_value: Optional[object] = ...,
+    ) -> Series[S1]:
+        """Shift index by desired number of periods with an optional time `freq`.
+
+When `freq` is not passed, shift the index without realigning the data.
+If `freq` is passed (in this case, the index must be date or datetime,
+or it will raise a `NotImplementedError`), the index will be
+increased using the periods and the `freq`.
+
+Parameters
+----------
+periods : int
+    Number of periods to shift. Can be positive or negative.
+freq : DateOffset, tseries.offsets, timedelta, or str, optional
+    Offset to use from the tseries module or time rule (e.g. 'EOM').
+    If `freq` is specified then the index values are shifted but the
+    data is not realigned. That is, use `freq` if you would like to
+    extend the index when shifting and preserve the original data.
+axis : {0 or 'index', 1 or 'columns', None}, default None
+    Shift direction.
+fill_value : object, optional
+    The scalar value to use for newly introduced missing values.
+    the default depends on the dtype of `self`.
+    For numeric data, ``np.nan`` is used.
+    For datetime, timedelta, or period data, etc. :attr:`NaT` is used.
+    For extension dtypes, ``self.dtype.na_value`` is used.
+
+    .. versionchanged:: 0.24.0
+
+Returns
+-------
+Series
+    Copy of input object, shifted.
+
+See Also
+--------
+Index.shift : Shift values of Index.
+DatetimeIndex.shift : Shift values of DatetimeIndex.
+PeriodIndex.shift : Shift values of PeriodIndex.
+tshift : Shift the time index, using the index's frequency if
+    available.
+
+Examples
+--------
+>>> df = pd.DataFrame({'Col1': [10, 20, 15, 30, 45],
+...                    'Col2': [13, 23, 18, 33, 48],
+...                    'Col3': [17, 27, 22, 37, 52]})
+
+>>> df.shift(periods=3)
+   Col1  Col2  Col3
+0   NaN   NaN   NaN
+1   NaN   NaN   NaN
+2   NaN   NaN   NaN
+3  10.0  13.0  17.0
+4  20.0  23.0  27.0
+
+>>> df.shift(periods=1, axis='columns')
+   Col1  Col2  Col3
+0   NaN  10.0  13.0
+1   NaN  20.0  23.0
+2   NaN  15.0  18.0
+3   NaN  30.0  33.0
+4   NaN  45.0  48.0
+
+>>> df.shift(periods=3, fill_value=0)
+   Col1  Col2  Col3
+0     0     0     0
+1     0     0     0
+2     0     0     0
+3    10    13    17
+4    20    23    27
 """
         pass
     def isna(self) -> Series[_bool]:
@@ -473,33 +1149,6 @@ dtype: float64
 1    False
 2     True
 dtype: bool
-"""
-        pass
-    def iteritems(self) -> Iterable[Tuple[Label, S1]]:
-        """Lazily iterate over (index, value) tuples.
-
-This method returns an iterable tuple (index, value). This is
-convenient if you want to create a lazy iterator.
-
-Returns
--------
-iterable
-    Iterable of tuples containing the (index, value) pairs from a
-    Series.
-
-See Also
---------
-DataFrame.items : Iterate over (column name, Series) pairs.
-DataFrame.iterrows : Iterate over DataFrame rows as (index, Series) pairs.
-
-Examples
---------
->>> s = pd.Series(['A', 'B', 'C'])
->>> for index, value in s.items():
-...     print(f"Index : {index}, Value : {value}")
-Index : 0, Value : A
-Index : 1, Value : B
-Index : 2, Value : C
 """
         pass
     def notna(self) -> Series[_bool]:
@@ -825,652 +1474,3 @@ in the original dataframe, use the ``fillna()`` method.
 See the :ref:`user guide <basics.reindexing>` for more.
 """
         pass
-    def replace(
-        self,
-        to_replace: Optional[Union[_str, List, Dict, Series[S1], int, float]] = ...,
-        value: Optional[Union[Scalar, Dict, List, _str]] = ...,
-        inplace: _bool = ...,
-        limit: Optional[int] = ...,
-        regex = ...,
-        method: Optional[Union[_str, Literal["pad", "ffill", "bfill"]]] = ...,
-    ) -> Series[S1]:
-        """Replace values given in `to_replace` with `value`.
-
-Values of the Series are replaced with other values dynamically.
-This differs from updating with ``.loc`` or ``.iloc``, which require
-you to specify a location to update with some value.
-
-Parameters
-----------
-to_replace : str, regex, list, dict, Series, int, float, or None
-    How to find the values that will be replaced.
-
-    * numeric, str or regex:
-
-        - numeric: numeric values equal to `to_replace` will be
-          replaced with `value`
-        - str: string exactly matching `to_replace` will be replaced
-          with `value`
-        - regex: regexs matching `to_replace` will be replaced with
-          `value`
-
-    * list of str, regex, or numeric:
-
-        - First, if `to_replace` and `value` are both lists, they
-          **must** be the same length.
-        - Second, if ``regex=True`` then all of the strings in **both**
-          lists will be interpreted as regexs otherwise they will match
-          directly. This doesn't matter much for `value` since there
-          are only a few possible substitution regexes you can use.
-        - str, regex and numeric rules apply as above.
-
-    * dict:
-
-        - Dicts can be used to specify different replacement values
-          for different existing values. For example,
-          ``{'a': 'b', 'y': 'z'}`` replaces the value 'a' with 'b' and
-          'y' with 'z'. To use a dict in this way the `value`
-          parameter should be `None`.
-        - For a DataFrame a dict can specify that different values
-          should be replaced in different columns. For example,
-          ``{'a': 1, 'b': 'z'}`` looks for the value 1 in column 'a'
-          and the value 'z' in column 'b' and replaces these values
-          with whatever is specified in `value`. The `value` parameter
-          should not be ``None`` in this case. You can treat this as a
-          special case of passing two lists except that you are
-          specifying the column to search in.
-        - For a DataFrame nested dictionaries, e.g.,
-          ``{'a': {'b': np.nan}}``, are read as follows: look in column
-          'a' for the value 'b' and replace it with NaN. The `value`
-          parameter should be ``None`` to use a nested dict in this
-          way. You can nest regular expressions as well. Note that
-          column names (the top-level dictionary keys in a nested
-          dictionary) **cannot** be regular expressions.
-
-    * None:
-
-        - This means that the `regex` argument must be a string,
-          compiled regular expression, or list, dict, ndarray or
-          Series of such elements. If `value` is also ``None`` then
-          this **must** be a nested dictionary or Series.
-
-    See the examples section for examples of each of these.
-value : scalar, dict, list, str, regex, default None
-    Value to replace any values matching `to_replace` with.
-    For a DataFrame a dict of values can be used to specify which
-    value to use for each column (columns not in the dict will not be
-    filled). Regular expressions, strings and lists or dicts of such
-    objects are also allowed.
-inplace : bool, default False
-    If True, in place. Note: this will modify any
-    other views on this object (e.g. a column from a DataFrame).
-    Returns the caller if this is True.
-limit : int, default None
-    Maximum size gap to forward or backward fill.
-regex : bool or same types as `to_replace`, default False
-    Whether to interpret `to_replace` and/or `value` as regular
-    expressions. If this is ``True`` then `to_replace` *must* be a
-    string. Alternatively, this could be a regular expression or a
-    list, dict, or array of regular expressions in which case
-    `to_replace` must be ``None``.
-method : {'pad', 'ffill', 'bfill', `None`}
-    The method to use when for replacement, when `to_replace` is a
-    scalar, list or tuple and `value` is ``None``.
-
-    .. versionchanged:: 0.23.0
-        Added to DataFrame.
-
-Returns
--------
-Series
-    Object after replacement.
-
-Raises
-------
-AssertionError
-    * If `regex` is not a ``bool`` and `to_replace` is not
-      ``None``.
-TypeError
-    * If `to_replace` is a ``dict`` and `value` is not a ``list``,
-      ``dict``, ``ndarray``, or ``Series``
-    * If `to_replace` is ``None`` and `regex` is not compilable
-      into a regular expression or is a list, dict, ndarray, or
-      Series.
-    * When replacing multiple ``bool`` or ``datetime64`` objects and
-      the arguments to `to_replace` does not match the type of the
-      value being replaced
-ValueError
-    * If a ``list`` or an ``ndarray`` is passed to `to_replace` and
-      `value` but they are not the same length.
-
-See Also
---------
-Series.fillna : Fill NA values.
-Series.where : Replace values based on boolean condition.
-Series.str.replace : Simple string replacement.
-
-Notes
------
-* Regex substitution is performed under the hood with ``re.sub``. The
-  rules for substitution for ``re.sub`` are the same.
-* Regular expressions will only substitute on strings, meaning you
-  cannot provide, for example, a regular expression matching floating
-  point numbers and expect the columns in your frame that have a
-  numeric dtype to be matched. However, if those floating point
-  numbers *are* strings, then you can do this.
-* This method has *a lot* of options. You are encouraged to experiment
-  and play with this method to gain intuition about how it works.
-* When dict is used as the `to_replace` value, it is like
-  key(s) in the dict are the to_replace part and
-  value(s) in the dict are the value parameter.
-
-Examples
---------
-
-**Scalar `to_replace` and `value`**
-
->>> s = pd.Series([0, 1, 2, 3, 4])
->>> s.replace(0, 5)
-0    5
-1    1
-2    2
-3    3
-4    4
-dtype: int64
-
->>> df = pd.DataFrame({'A': [0, 1, 2, 3, 4],
-...                    'B': [5, 6, 7, 8, 9],
-...                    'C': ['a', 'b', 'c', 'd', 'e']})
->>> df.replace(0, 5)
-   A  B  C
-0  5  5  a
-1  1  6  b
-2  2  7  c
-3  3  8  d
-4  4  9  e
-
-**List-like `to_replace`**
-
->>> df.replace([0, 1, 2, 3], 4)
-   A  B  C
-0  4  5  a
-1  4  6  b
-2  4  7  c
-3  4  8  d
-4  4  9  e
-
->>> df.replace([0, 1, 2, 3], [4, 3, 2, 1])
-   A  B  C
-0  4  5  a
-1  3  6  b
-2  2  7  c
-3  1  8  d
-4  4  9  e
-
->>> s.replace([1, 2], method='bfill')
-0    0
-1    3
-2    3
-3    3
-4    4
-dtype: int64
-
-**dict-like `to_replace`**
-
->>> df.replace({0: 10, 1: 100})
-     A  B  C
-0   10  5  a
-1  100  6  b
-2    2  7  c
-3    3  8  d
-4    4  9  e
-
->>> df.replace({'A': 0, 'B': 5}, 100)
-     A    B  C
-0  100  100  a
-1    1    6  b
-2    2    7  c
-3    3    8  d
-4    4    9  e
-
->>> df.replace({'A': {0: 100, 4: 400}})
-     A  B  C
-0  100  5  a
-1    1  6  b
-2    2  7  c
-3    3  8  d
-4  400  9  e
-
-**Regular expression `to_replace`**
-
->>> df = pd.DataFrame({'A': ['bat', 'foo', 'bait'],
-...                    'B': ['abc', 'bar', 'xyz']})
->>> df.replace(to_replace=r'^ba.$', value='new', regex=True)
-      A    B
-0   new  abc
-1   foo  new
-2  bait  xyz
-
->>> df.replace({'A': r'^ba.$'}, {'A': 'new'}, regex=True)
-      A    B
-0   new  abc
-1   foo  bar
-2  bait  xyz
-
->>> df.replace(regex=r'^ba.$', value='new')
-      A    B
-0   new  abc
-1   foo  new
-2  bait  xyz
-
->>> df.replace(regex={r'^ba.$': 'new', 'foo': 'xyz'})
-      A    B
-0   new  abc
-1   xyz  new
-2  bait  xyz
-
->>> df.replace(regex=[r'^ba.$', 'foo'], value='new')
-      A    B
-0   new  abc
-1   new  new
-2  bait  xyz
-
-Note that when replacing multiple ``bool`` or ``datetime64`` objects,
-the data types in the `to_replace` parameter must match the data
-type of the value being replaced:
-
->>> df = pd.DataFrame({'A': [True, False, True],
-...                    'B': [False, True, False]})
->>> df.replace({'a string': 'new value', True: False})  # raises
-Traceback (most recent call last):
-    ...
-TypeError: Cannot compare types 'ndarray(dtype=bool)' and 'str'
-
-This raises a ``TypeError`` because one of the ``dict`` keys is not of
-the correct type for replacement.
-
-Compare the behavior of ``s.replace({'a': None})`` and
-``s.replace('a', None)`` to understand the peculiarities
-of the `to_replace` parameter:
-
->>> s = pd.Series([10, 'a', 'a', 'b', 'a'])
-
-When one uses a dict as the `to_replace` value, it is like the
-value(s) in the dict are equal to the `value` parameter.
-``s.replace({'a': None})`` is equivalent to
-``s.replace(to_replace={'a': None}, value=None, method=None)``:
-
->>> s.replace({'a': None})
-0      10
-1    None
-2    None
-3       b
-4    None
-dtype: object
-
-When ``value=None`` and `to_replace` is a scalar, list or
-tuple, `replace` uses the method parameter (default 'pad') to do the
-replacement. So this is why the 'a' values are being replaced by 10
-in rows 1 and 2 and 'b' in row 4 in this case.
-The command ``s.replace('a', None)`` is actually equivalent to
-``s.replace(to_replace='a', value=None, method='pad')``:
-
->>> s.replace('a', None)
-0    10
-1    10
-2    10
-3     b
-4     b
-dtype: object
-"""
-        pass
-    def searchsorted(
-        self, value: _ListLike, side: Union[_str, Literal["left", "right"]] = ..., sorter: Optional[_ListLike] = ...,
-    ) -> Union[int, List[int]]:
-        """Find indices where elements should be inserted to maintain order.
-
-Find the indices into a sorted Series `self` such that, if the
-corresponding elements in `value` were inserted before the indices,
-the order of `self` would be preserved.
-
-.. note::
-
-    The Series *must* be monotonically sorted, otherwise
-    wrong locations will likely be returned. Pandas does *not*
-    check this for you.
-
-Parameters
-----------
-value : array_like
-    Values to insert into `self`.
-side : {'left', 'right'}, optional
-    If 'left', the index of the first suitable location found is given.
-    If 'right', return the last such index.  If there is no suitable
-    index, return either 0 or N (where N is the length of `self`).
-sorter : 1-D array_like, optional
-    Optional array of integer indices that sort `self` into ascending
-    order. They are typically the result of ``np.argsort``.
-
-Returns
--------
-int or array of int
-    A scalar or array of insertion points with the
-    same shape as `value`.
-
-    .. versionchanged:: 0.24.0
-        If `value` is a scalar, an int is now always returned.
-        Previously, scalar inputs returned an 1-item array for
-        :class:`Series` and :class:`Categorical`.
-
-See Also
---------
-sort_values
-numpy.searchsorted
-
-Notes
------
-Binary search is used to find the required insertion points.
-
-Examples
---------
-
->>> x = pd.Series([1, 2, 3])
->>> x
-0    1
-1    2
-2    3
-dtype: int64
-
->>> x.searchsorted(4)
-3
-
->>> x.searchsorted([0, 4])
-array([0, 3])
-
->>> x.searchsorted([1, 3], side='left')
-array([0, 2])
-
->>> x.searchsorted([1, 3], side='right')
-array([1, 3])
-
->>> x = pd.Categorical(['apple', 'bread', 'bread',
-                        'cheese', 'milk'], ordered=True)
-[apple, bread, bread, cheese, milk]
-Categories (4, object): [apple < bread < cheese < milk]
-
->>> x.searchsorted('bread')
-1
-
->>> x.searchsorted(['bread'], side='right')
-array([3])
-
-If the values are not monotonically sorted, wrong locations
-may be returned:
-
->>> x = pd.Series([2, 1, 3])
->>> x.searchsorted(1)
-0  # wrong result, correct would be 1
-"""
-        pass
-    def shift(
-        self,
-        periods: int = ...,
-        freq = ...,
-        axis: SeriesAxisType = ...,
-        fill_value: Optional[object] = ...,
-    ) -> Series[S1]:
-        """Shift index by desired number of periods with an optional time `freq`.
-
-When `freq` is not passed, shift the index without realigning the data.
-If `freq` is passed (in this case, the index must be date or datetime,
-or it will raise a `NotImplementedError`), the index will be
-increased using the periods and the `freq`.
-
-Parameters
-----------
-periods : int
-    Number of periods to shift. Can be positive or negative.
-freq : DateOffset, tseries.offsets, timedelta, or str, optional
-    Offset to use from the tseries module or time rule (e.g. 'EOM').
-    If `freq` is specified then the index values are shifted but the
-    data is not realigned. That is, use `freq` if you would like to
-    extend the index when shifting and preserve the original data.
-axis : {0 or 'index', 1 or 'columns', None}, default None
-    Shift direction.
-fill_value : object, optional
-    The scalar value to use for newly introduced missing values.
-    the default depends on the dtype of `self`.
-    For numeric data, ``np.nan`` is used.
-    For datetime, timedelta, or period data, etc. :attr:`NaT` is used.
-    For extension dtypes, ``self.dtype.na_value`` is used.
-
-    .. versionchanged:: 0.24.0
-
-Returns
--------
-Series
-    Copy of input object, shifted.
-
-See Also
---------
-Index.shift : Shift values of Index.
-DatetimeIndex.shift : Shift values of DatetimeIndex.
-PeriodIndex.shift : Shift values of PeriodIndex.
-tshift : Shift the time index, using the index's frequency if
-    available.
-
-Examples
---------
->>> df = pd.DataFrame({'Col1': [10, 20, 15, 30, 45],
-...                    'Col2': [13, 23, 18, 33, 48],
-...                    'Col3': [17, 27, 22, 37, 52]})
-
->>> df.shift(periods=3)
-   Col1  Col2  Col3
-0   NaN   NaN   NaN
-1   NaN   NaN   NaN
-2   NaN   NaN   NaN
-3  10.0  13.0  17.0
-4  20.0  23.0  27.0
-
->>> df.shift(periods=1, axis='columns')
-   Col1  Col2  Col3
-0   NaN  10.0  13.0
-1   NaN  20.0  23.0
-2   NaN  15.0  18.0
-3   NaN  30.0  33.0
-4   NaN  45.0  48.0
-
->>> df.shift(periods=3, fill_value=0)
-   Col1  Col2  Col3
-0     0     0     0
-1     0     0     0
-2     0     0     0
-3    10    13    17
-4    20    23    27
-"""
-        pass
-    def take(self, indices: Sequence, axis: SeriesAxisType = ..., is_copy: Optional[_bool] = ..., **kwargs) -> Series[S1]:
-        """Return the elements in the given *positional* indices along an axis.
-
-This means that we are not indexing according to actual values in
-the index attribute of the object. We are indexing according to the
-actual position of the element in the object.
-
-Parameters
-----------
-indices : array-like
-    An array of ints indicating which positions to take.
-axis : {0 or 'index', 1 or 'columns', None}, default 0
-    The axis on which to select elements. ``0`` means that we are
-    selecting rows, ``1`` means that we are selecting columns.
-is_copy : bool
-    Before pandas 1.0, ``is_copy=False`` can be specified to ensure
-    that the return value is an actual copy. Starting with pandas 1.0,
-    ``take`` always returns a copy, and the keyword is therefore
-    deprecated.
-
-    .. deprecated:: 1.0.0
-**kwargs
-    For compatibility with :meth:`numpy.take`. Has no effect on the
-    output.
-
-Returns
--------
-taken : same type as caller
-    An array-like containing the elements taken from the object.
-
-See Also
---------
-DataFrame.loc : Select a subset of a DataFrame by labels.
-DataFrame.iloc : Select a subset of a DataFrame by positions.
-numpy.take : Take elements from an array along an axis.
-
-Examples
---------
->>> df = pd.DataFrame([('falcon', 'bird', 389.0),
-...                    ('parrot', 'bird', 24.0),
-...                    ('lion', 'mammal', 80.5),
-...                    ('monkey', 'mammal', np.nan)],
-...                   columns=['name', 'class', 'max_speed'],
-...                   index=[0, 2, 3, 1])
->>> df
-     name   class  max_speed
-0  falcon    bird      389.0
-2  parrot    bird       24.0
-3    lion  mammal       80.5
-1  monkey  mammal        NaN
-
-Take elements at positions 0 and 3 along the axis 0 (default).
-
-Note how the actual indices selected (0 and 1) do not correspond to
-our selected indices 0 and 3. That's because we are selecting the 0th
-and 3rd rows, not rows whose indices equal 0 and 3.
-
->>> df.take([0, 3])
-     name   class  max_speed
-0  falcon    bird      389.0
-1  monkey  mammal        NaN
-
-Take elements at indices 1 and 2 along the axis 1 (column selection).
-
->>> df.take([1, 2], axis=1)
-    class  max_speed
-0    bird      389.0
-2    bird       24.0
-3  mammal       80.5
-1  mammal        NaN
-
-We may take elements using negative integers for positive indices,
-starting from the end of the object, just like with Python lists.
-
->>> df.take([-1, -2])
-     name   class  max_speed
-1  monkey  mammal        NaN
-3    lion  mammal       80.5
-"""
-        pass
-    def to_markdown(self, buf: Optional[FilePathOrBuffer], mode: Optional[_str] = ..., **kwargs) -> None:
-        """Print Series in Markdown-friendly format.
-
-.. versionadded:: 1.0.0
-
-Parameters
-----------
-buf : writable buffer, defaults to sys.stdout
-    Where to send the output. By default, the output is printed to
-    sys.stdout. Pass a writable buffer if you need to further process
-    the output.
-mode : str, optional
-    Mode in which file is opened.
-**kwargs
-    These parameters will be passed to `tabulate`.
-
-Returns
--------
-str
-    Series in Markdown-friendly format.
-
-        Examples
-        --------
-        >>> s = pd.Series(["elk", "pig", "dog", "quetzal"], name="animal")
-        >>> print(s.to_markdown())
-        |    | animal   |
-        |---:|:---------|
-        |  0 | elk      |
-        |  1 | pig      |
-        |  2 | dog      |
-        |  3 | quetzal  |
-"""
-        pass
-    def transform(
-        self, func: Union[List[Callable], Dict[_str, Callable]], axis: SeriesAxisType = ..., *args, **kwargs
-    ) -> Series[S1]:
-        """Call ``func`` on self producing a Series with transformed values.
-
-Produced Series will have same axis length as self.
-
-Parameters
-----------
-func : function, str, list or dict
-    Function to use for transforming the data. If a function, must either
-    work when passed a Series or when passed to Series.apply.
-
-    Accepted combinations are:
-
-    - function
-    - string function name
-    - list of functions and/or function names, e.g. ``[np.exp. 'sqrt']``
-    - dict of axis labels -> functions, function names or list of such.
-axis : {0 or 'index'}
-    Parameter needed for compatibility with DataFrame.
-*args
-    Positional arguments to pass to `func`.
-**kwargs
-    Keyword arguments to pass to `func`.
-
-Returns
--------
-Series
-    A Series that must have the same length as self.
-
-Raises
-------
-ValueError : If the returned Series has a different length than self.
-
-See Also
---------
-Series.agg : Only perform aggregating type operations.
-Series.apply : Invoke function on a Series.
-
-Examples
---------
->>> df = pd.DataFrame({'A': range(3), 'B': range(1, 4)})
->>> df
-   A  B
-0  0  1
-1  1  2
-2  2  3
->>> df.transform(lambda x: x + 1)
-   A  B
-0  1  2
-1  2  3
-2  3  4
-
-Even though the resulting Series must have the same length as the
-input Series, it is possible to provide several input functions:
-
->>> s = pd.Series(range(3))
->>> s
-0    0
-1    1
-2    2
-dtype: int64
->>> s.transform([np.sqrt, np.exp])
-       sqrt        exp
-0  0.000000   1.000000
-1  1.000000   2.718282
-2  1.414214   7.389056
-"""
-        pass
-
