@@ -1,18 +1,5 @@
-class Index(Generic[_T]):
-    def is_monotonic_increasing(self) -> bool:
-        """Return if the index is monotonic increasing (only equal or
-increasing) values.
 
-Examples
---------
->>> Index([1, 2, 3]).is_monotonic_increasing
-True
->>> Index([1, 2, 2]).is_monotonic_increasing
-True
->>> Index([1, 3, 2]).is_monotonic_increasing
-False
-"""
-        pass
+class Index(IndexOpsMixin[T1], PandasObject, Generic[T1]):
     def astype(self, dtype: _str) -> Index:
         """Create an Index with values cast to dtypes. The class of a new Index
 is determined by dtype. When conversion is impossible, a ValueError
@@ -36,4 +23,17 @@ Index
     Index with values cast to specified dtype.
 """
         pass
+    def is_monotonic_increasing(self) -> bool:
+        """Return if the index is monotonic increasing (only equal or
+increasing) values.
 
+Examples
+--------
+>>> Index([1, 2, 3]).is_monotonic_increasing
+True
+>>> Index([1, 2, 2]).is_monotonic_increasing
+True
+>>> Index([1, 3, 2]).is_monotonic_increasing
+False
+"""
+        pass

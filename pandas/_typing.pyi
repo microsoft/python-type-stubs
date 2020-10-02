@@ -32,6 +32,8 @@ JSONSerializable = Union[PythonScalar, List, Dict]
 Axes = Collection
 Renamer = Union[Mapping[Label, Any], Callable[[Label], Label]]
 T = TypeVar('T')
+FuncType = Callable[..., Any]
+F = TypeVar("F", bound=FuncType)
 
 
 num = Union[int, float]

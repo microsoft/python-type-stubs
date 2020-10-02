@@ -4,6 +4,7 @@ from matplotlib.axes import Axes as PlotAxes, SubplotBase as SubplotBase
 import sys
 from .base import IndexOpsMixin
 from .generic import NDFrame
+from .indexes.api import MultiIndex
 from .indexing import _iLocIndexer, _LocIndexer
 from .frame import DataFrame
 from pandas.core.arrays.base import ExtensionArray
@@ -53,7 +54,7 @@ class Series(IndexOpsMixin, NDFrame, Generic[S1]):
     def __init__(
         self,
         data: Optional[Union[_ListLike, Series[S1], Dict[int, S1], Dict[_str, S1]]] = ...,
-        index: Union[_str, int, Series, List] = ...,
+        index: Union[_str, int, Series, List, Index] = ...,
         dtype = ...,
         name: _str = ...,
         copy: bool = ...,
@@ -105,10 +106,19 @@ class Series(IndexOpsMixin, NDFrame, Generic[S1]):
     def __setitem__(self, key, value) -> None: ...
     def repeat(self, repeats: Union[int, List[int]], axis: Optional[SeriesAxisType] = ...) -> Series[S1]: ...
     @property
-    def index(self) -> Index: ...
+    def index(self) -> Union[Index[int], MultiIndex]: ...
+    @overload
     def reset_index(
-        self, level: Optional[Level] = ..., drop: _bool = ..., name: Optional[object] = ..., inplace: _bool = ...,
+        self, level: Optional[Union[Level, Sequence[Level]]], drop: Literal[True], name: Optional[object] = ..., inplace: _bool = ...,
     ) -> Series[S1]: ...
+    @overload
+    def reset_index(
+        self, level: Optional[Union[Level, Sequence[Level]]] = ..., name: Optional[object] = ..., inplace: _bool = ..., *, drop: Literal[True]
+    ) -> Series[S1]: ...
+    @overload
+    def reset_index(
+        self, level: Optional[Union[Level, Sequence[Level]]] = ..., drop: _bool = ..., name: Optional[object] = ..., inplace: _bool = ...,
+    ) -> DataFrame: ...
     @overload
     def to_string(
         self,
@@ -394,7 +404,7 @@ class Series(IndexOpsMixin, NDFrame, Generic[S1]):
         **kwargs
     ) -> SubplotBase: ...
     def swapaxes(self, axis1: SeriesAxisType, axis2: SeriesAxisType, copy: _bool = ...) -> Series[S1]: ...
-    def droplevel(self, level: Level, axis: SeriesAxisType = ...) -> DataFrame: ...
+    def droplevel(self, level: Union[Level, List[Level]], axis: SeriesAxisType = ...) -> DataFrame: ...
     def pop(self, item: _str) -> Series[S1]: ...
     def squeeze(self, axis: Optional[SeriesAxisType] = ...) -> Scalar: ...
     def __abs__(self) -> Series[S1]: ...

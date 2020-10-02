@@ -10,7 +10,7 @@ from pandas._typing import num, SeriesAxisType, AxisType, Dtype, DtypeNp, Label,
 from pandas.core.generic import NDFrame as NDFrame
 from pandas.core.groupby import DataFrameGroupBy as DataFrameGroupBy
 from pandas.core.groupby.grouper import Grouper
-from pandas.core.indexes.api import Index as Index
+from pandas.core.indexes.api import Index as Index, MultiIndex as MultiIndex
 from pandas.core.series import Series as Series
 from pandas.io.formats import console as console, format as fmt
 from pandas.io.formats.style import Styler as Styler
@@ -30,11 +30,11 @@ _bool = bool
 
 class _iLocIndexerFrame(_iLocIndexer):
     @overload
-    def __getitem__(self, idx: Tuple[int, int]) -> Dtype: ...
+    def __getitem__(self, idx: Tuple[int, int]) -> Scalar: ...
     @overload
     def __getitem__(self, idx: Union[IndexType, slice, Tuple[IndexType, IndexType]]) -> DataFrame: ...
     @overload
-    def __getitem__(self, idx: Union[int, Tuple[IndexType, int, Tuple[int, IndexType]]]) -> Series[Dtype]: ...
+    def __getitem__(self, idx: Union[int, Tuple[IndexType, int, Tuple[int, IndexType]]]) -> Series: ...
     def __setitem__(
         self,
         idx: Union[
@@ -72,7 +72,7 @@ class DataFrame(NDFrame):
     def __init__(
         self,
         data: Optional[Union[_ListLike, DataFrame, Dict[_str, Any]]] = ...,
-        index: Optional[_ListLike] = ...,
+        index: Optional[Union[Index, _ListLike]] = ...,
         columns: Optional[_ListLike] = ...,
         dtype = ...,
         copy: _bool = ...,
@@ -211,7 +211,7 @@ class DataFrame(NDFrame):
     def __setitem__(self, key, value): ...
     def query(self, expr: _str, inplace: _bool = ..., **kwargs) -> DataFrame: ...
     def eval(self, expr: _str, inplace: _bool = ..., **kwargs) : ...
-    def selectDTypes(
+    def select_dtypes(
         self, include: Optional[Union[_str, List[_str]]] = ..., exclude: Optional[Union[_str, List[_str]]] = ...,
     ) -> DataFrame: ...
     def insert(self, loc: int, column, value: Union[int, _ListLike], allow_duplicates: _bool = ...,) -> None: ...
@@ -241,10 +241,10 @@ class DataFrame(NDFrame):
         inplace: _bool = ...,
         errors: Union[_str, Literal["ignore", "raise"]] = ...,
     ) -> DataFrame: ...
-    # looks like rename is missing an index arg?
     @overload
     def rename(
         self,
+        index: Optional[Union[Dict[Union[_str, int], _str], Callable]] = ...,
         mapper: Optional[Callable],
         axis: Optional[AxisType] = ...,
         copy: _bool = ...,
@@ -255,8 +255,8 @@ class DataFrame(NDFrame):
     @overload
     def rename(
         self,
-        columns: Optional[Dict[_str, _str]],
-        axis: Optional[AxisType] = ...,
+        index: Optional[Union[Dict[Union[_str, int], _str], Callable]] = ...,
+        columns: Optional[Union[Callable, Dict[Union[int,_str], _str]]] = ...,
         copy: _bool = ...,
         inplace: _bool = ...,
         level: Optional[Level] = ...,
@@ -356,7 +356,7 @@ class DataFrame(NDFrame):
     @overload
     def set_index(
         self,
-        keys: List,
+        keys: Union[Label, Sequence],
         drop: _bool = ...,
         append: _bool = ...,
         verify_integrity: _bool = ...,
@@ -366,7 +366,7 @@ class DataFrame(NDFrame):
     @overload
     def set_index(
         self,
-        keys: List,
+        keys: Union[Label, Sequence],
         drop: _bool = ...,
         append: _bool = ...,
         verify_integrity: _bool = ...,
@@ -376,7 +376,7 @@ class DataFrame(NDFrame):
     @overload
     def set_index(
         self,
-        keys: List,
+        keys: Union[Label, Sequence],
         drop: _bool = ...,
         append: _bool = ...,
         *,
@@ -385,7 +385,7 @@ class DataFrame(NDFrame):
     @overload
     def set_index(
         self,
-        keys: List,
+        keys: Union[Label, Sequence],
         drop: _bool = ...,
         append: _bool = ...,
         inplace: Optional[_bool] = ...,
@@ -394,7 +394,7 @@ class DataFrame(NDFrame):
     @overload
     def reset_index(
         self,
-        level: Level = ...,
+        level: Union[Level, Sequence[Level]] = ...,
         drop: _bool = ...,
         col_level: Union[int, _str] = ...,
         col_fill: Hashable = ...,
@@ -404,7 +404,7 @@ class DataFrame(NDFrame):
     @overload
     def reset_index(
         self,
-        level: Level = ...,
+        level: Union[Level, Sequence[Level]] = ...,
         drop: _bool = ...,
         col_level: Union[int, _str] = ...,
         col_fill: Hashable = ...,
@@ -414,7 +414,7 @@ class DataFrame(NDFrame):
     @overload
     def reset_index(
         self,
-        level: Level = ...,
+        level: Union[Level, Sequence[Level]] = ...,
         drop: _bool = ...,
         *,
         col_level: Union[int, _str] = ...,
@@ -423,7 +423,7 @@ class DataFrame(NDFrame):
     @overload
     def reset_index(
         self,
-        level: Level = ...,
+        level: Union[Level, Sequence[Level]] = ...,
         drop: _bool = ...,
         inplace: Optional[_bool] = ...,
         col_level: Union[int, _str] = ...,
@@ -600,7 +600,7 @@ class DataFrame(NDFrame):
     ) -> None: ...
     def groupby(
         self,
-        by: Optional[Union[List[_str], _str]],
+        by: Optional[Union[List[_str], _str]] = ...,
         axis: AxisType = ...,
         level: Optional[Level] = ...,
         as_index: _bool = ...,
@@ -837,7 +837,7 @@ class DataFrame(NDFrame):
     @property
     def iloc(self) -> _iLocIndexerFrame: ...
     @property
-    def index(self) -> Index[int]: ...
+    def index(self) -> Index: ...
     @index.setter
     def index(self, idx: Index) -> None: ...
     @property
@@ -983,7 +983,7 @@ class DataFrame(NDFrame):
         level: Optional[Level] = ...,
         fill_value: Optional[float] = ...,
     ) -> DataFrame: ...
-    def droplevel(self, level: Level = ..., axis: AxisType = ...) -> DataFrame: ...
+    def droplevel(self, level: Union[Level, List[Level]] = ..., axis: AxisType = ...) -> DataFrame: ...
     def eq(self, other, axis: AxisType = ..., level: Optional[Level] = ...) -> DataFrame: ...
     def equals(self, other: Union[Series[Dtype], DataFrame]) -> _bool: ...
     def ewm(
