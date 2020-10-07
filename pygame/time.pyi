@@ -1,3 +1,5 @@
+# Portions (c) Microsoft Corporation
+
 from typing import Optional, Union
 
 from . import event

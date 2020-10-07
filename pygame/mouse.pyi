@@ -1,3 +1,5 @@
+# Portions (c) Microsoft Corporation
+
 from typing import Sequence, Tuple, Union, overload
 
 def get_pressed() -> Tuple[bool, bool, bool, bool, bool]: ...

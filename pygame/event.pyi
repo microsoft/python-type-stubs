@@ -1,3 +1,5 @@
+# Portions (c) Microsoft Corporation
+
 from typing import Any, List, Mapping, Optional, Sequence, SupportsInt, Tuple, Union, overload
 
 class Event:

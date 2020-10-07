@@ -1,3 +1,5 @@
+# Portions (c) Microsoft Corporation
+
 from typing import AnyStr, List
 
 def init() -> None: ...

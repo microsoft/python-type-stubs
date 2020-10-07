@@ -1,3 +1,5 @@
+# Portions (c) Microsoft Corporation
+
 from typing import IO, Any, Optional, Tuple, Union, overload
 
 from numpy import ndarray

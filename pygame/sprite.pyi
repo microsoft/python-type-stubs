@@ -1,3 +1,5 @@
+# Portions (c) Microsoft Corporation
+
 from typing import Callable, Dict, Iterator, List, Mapping, Optional, Sequence, SupportsFloat, Tuple, Union
 
 from . import rect as r, surface
