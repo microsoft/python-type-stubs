@@ -1,3 +1,5 @@
+# Portions (c) Microsoft Corporation
+
 from typing import Iterable, List, Mapping, Sequence, Tuple, TypeVar, Union, overload
 
 from . import math

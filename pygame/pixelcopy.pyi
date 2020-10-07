@@ -1,3 +1,5 @@
+# Portions (c) Microsoft Corporation
+
 import sys
 from typing import Optional
 

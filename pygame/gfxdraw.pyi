@@ -1,3 +1,5 @@
+# Portions (c) Microsoft Corporation
+
 from typing import Sequence, Tuple, Union
 
 from . import color, math, rect, surface
