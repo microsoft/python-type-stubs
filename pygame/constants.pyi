@@ -1,5 +1,3 @@
-# Portions (c) Microsoft Corporation
-
 """
 Script used to generate this file (if we change something in the constants in the future):
 import pygame.constants

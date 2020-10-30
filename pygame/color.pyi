@@ -1,5 +1,3 @@
-# Portions (c) Microsoft Corporation
-
 from typing import Sequence, Text, Tuple, Union, overload
 
 _ColorValue = Union[Color, str, Tuple[int, int, int], Sequence[int], int, Tuple[int, int, int, int]]

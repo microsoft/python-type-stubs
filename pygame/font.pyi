@@ -1,5 +1,3 @@
-# Portions (c) Microsoft Corporation
-
 from typing import AnyStr, IO, Hashable, List, Optional, Sequence, Tuple, Union
 
 from . import color, surface

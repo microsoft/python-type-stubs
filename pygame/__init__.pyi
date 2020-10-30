@@ -1,5 +1,3 @@
-# Portions (c) Microsoft Corporation
-
 from typing import Callable, Optional, Tuple, Type, Union
 
 # Most useful stuff
