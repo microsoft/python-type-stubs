@@ -1,5 +1,3 @@
-# Portions (c) Microsoft Corporation
-
 from typing import List, Optional, Sequence, Text, Tuple, TypeVar, Union
 
 from . import color, math, rect, surface

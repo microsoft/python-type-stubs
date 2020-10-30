@@ -1,5 +1,3 @@
-# Portions (c) Microsoft Corporation
-
 from typing import IO, Literal, Optional, Sequence, Tuple, Union
 
 from . import bufferproxy, surface

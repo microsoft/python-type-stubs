@@ -1,5 +1,3 @@
-# Portions (c) Microsoft Corporation
-
 from typing import Any, Iterable, List, Optional, Sequence, Text, Tuple, Union, overload
 
 from . import bufferproxy, color, math, rect

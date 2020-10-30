@@ -1,5 +1,3 @@
-# Portions (c) Microsoft Corporation
-
 from typing import List, Optional, Sequence, Tuple, Union, overload
 
 class _VectorElementwiseProxy2:

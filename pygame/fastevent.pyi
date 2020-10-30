@@ -1,5 +1,3 @@
-# Portions (c) Microsoft Corporation
-
 from typing import List
 
 from . import event
