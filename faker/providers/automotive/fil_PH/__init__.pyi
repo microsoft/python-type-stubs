@@ -1,0 +1,3 @@
+from ..en_PH import Provider as EnPhAutomotiveProvider
+
+class Provider(EnPhAutomotiveProvider): ...

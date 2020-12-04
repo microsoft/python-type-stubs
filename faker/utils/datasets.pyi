@@ -1,0 +1,3 @@
+from typing import Any, Counter, Mapping, Sequence
+
+def add_dicts(*args: Sequence[Mapping[str, int]]) -> Mapping[str, Counter]: ...

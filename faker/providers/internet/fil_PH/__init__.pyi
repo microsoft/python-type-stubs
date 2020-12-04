@@ -1,0 +1,3 @@
+from ..en_PH import Provider as EnPhInternetProvider
+
+class Provider(EnPhInternetProvider): ...
