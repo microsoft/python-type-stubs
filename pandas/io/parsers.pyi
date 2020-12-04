@@ -2,7 +2,7 @@ from collections import abc
 import sys
 from pandas._typing import FilePathOrBuffer as FilePathOrBuffer, Scalar
 from pandas.core.frame import DataFrame as DataFrame
-from typing import Any, Callable, IO, Mapping, Optional, Sequence, Union, overload
+from typing import Any, Callable, IO, List, Mapping, Optional, Sequence, Union, overload
 if sys.version_info >= (3, 8):
     from typing import Literal
 else:
@@ -34,7 +34,7 @@ def read_csv(
     na_filter: bool = ...,
     verbose: bool = ...,
     skip_blank_lines: bool = ...,
-    parse_dates: bool = ...,
+    parse_dates: Union[bool, List[int], List[str]] = ...,
     infer_datetime_format: bool = ...,
     keep_date_col: bool = ...,
     date_parser: Optional[Callable] = ...,
@@ -87,7 +87,7 @@ def read_csv(
     na_filter: bool = ...,
     verbose: bool = ...,
     skip_blank_lines: bool = ...,
-    parse_dates: bool = ...,
+    parse_dates: Union[bool, List[int], List[str]] = ...,
     infer_datetime_format: bool = ...,
     keep_date_col: bool = ...,
     date_parser: Optional[Callable] = ...,
@@ -140,7 +140,7 @@ def read_table(
     na_filter: bool = ...,
     verbose: bool = ...,
     skip_blank_lines: bool = ...,
-    parse_dates: bool = ...,
+    parse_dates: Union[bool, List[int], List[str]] = ...,
     infer_datetime_format: bool = ...,
     keep_date_col: bool = ...,
     date_parser: Optional[Callable] = ...,
@@ -193,7 +193,7 @@ def read_table(
     na_filter: bool = ...,
     verbose: bool = ...,
     skip_blank_lines: bool = ...,
-    parse_dates: bool = ...,
+    parse_dates: Union[bool, List[int], List[str]] = ...,
     infer_datetime_format: bool = ...,
     keep_date_col: bool = ...,
     date_parser: Optional[Callable] = ...,
