@@ -1,12 +1,12 @@
 import abc
 from pandas._typing import DType, Scalar
 from pandas.core.frame import DataFrame as DataFrame
-from typing import Any, Callable, Dict, Literal, Optional, Sequence, Union, overload
+from typing import Any, Callable, Dict, List, Literal, Optional, Sequence, Union, overload
 
 @overload
 def read_excel(
     filepath: str,
-    sheet_name: Optional[Sequence[str]],
+    sheet_name: Optional[List[str]],
     header: Optional[Union[int, Sequence[int]]] = ...,
     names: Optional[Sequence[str]] = ...,
     index_col: Optional[Union[int, Sequence[int]]] = ...,
@@ -34,7 +34,7 @@ def read_excel(
 @overload
 def read_excel(
     filepath: str,
-    sheet_name: Sequence[int],
+    sheet_name: List[int],
     header: Optional[Union[int, Sequence[int]]] = ...,
     names: Optional[Sequence[str]] = ...,
     index_col: Optional[Union[int, Sequence[int]]] = ...,
@@ -62,7 +62,7 @@ def read_excel(
 @overload
 def read_excel(
     filepath: str,
-    sheet_name: Sequence[Union[int, str]],
+    sheet_name: List[Union[int, str]],
     header: Optional[Union[int, Sequence[int]]] = ...,
     names: Optional[Sequence[str]] = ...,
     index_col: Optional[Union[int, Sequence[int]]] = ...,
