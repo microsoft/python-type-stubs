@@ -27,8 +27,8 @@ class DirtySprite(Sprite):
     visible: int
 
 class AbstractGroup:
-    spritedict = Mapping[Sprite, int]
-    lostsprites = Sequence[int]  # I think
+    spritedict: Mapping[Sprite, int]
+    lostsprites: Sequence[int]  # I think
     def __init__(self) -> None: ...
     def __len__(self) -> int: ...
     def __iter__(self) -> Iterator[Sprite]: ...
