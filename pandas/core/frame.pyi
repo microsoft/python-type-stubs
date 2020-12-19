@@ -897,7 +897,7 @@ class DataFrame(NDFrame):
         normalize: _bool = ...,
         fill_value: Optional[Scalar] = ...,
     ) -> DataFrame: ...
-    def astype(self, dtype: Union[_str, Dict[_str, _str]], copy: _bool = ..., errors: _str = ...,) -> DataFrame: ...
+    def astype(self, dtype: Union[_str, Dtype, Dict[_str, Union[_str, Dtype]]], copy: _bool = ..., errors: _str = ...,) -> DataFrame: ...
     def at_time(
         self, time: Union[_str, datetime.time], asof: _bool = ..., axis: Optional[AxisType] = ...,
     ) -> DataFrame: ...
@@ -1358,43 +1358,38 @@ class DataFrame(NDFrame):
     def rename_axis(
         self,
         mapper = ...,
-        index: Optional[IndexType] = ...,
-        columns = ...,
-        axis: Optional[AxisType] = ...,
-        copy: _bool = ...,
         *,
-        inplace: Literal[True]
+        inplace: Literal[True],
+        axis: Optional[AxisType] = ...,
+        copy: _bool = ...
     ) -> None: ...
     @overload
     def rename_axis(
         self,
         mapper = ...,
-        index: Optional[IndexType] = ...,
-        columns = ...,
-        axis: Optional[AxisType] = ...,
-        copy: _bool = ...,
         *,
-        inplace: Literal[False]
+        inplace: Literal[False] = ...,
+        axis: Optional[AxisType] = ...,
+        copy: _bool = ...
     ) -> DataFrame: ...
     @overload
     def rename_axis(
         self,
-        mapper = ...,
-        index: Optional[IndexType] = ...,
-        columns = ...,
-        axis: Optional[AxisType] = ...,
-        copy: _bool = ...,
-    ) -> DataFrame: ...
+        *,
+        inplace: Literal[True],
+        index: Optional[Union[_str, Sequence[_str], Dict[Union[_str, int], _str], Callable]] = ...,
+        columns: Oprional[Union[_str, Sequence[_str], Dict[Union[_str, int], _str], Callable]] = ...,
+        copy: _bool = ...
+    ) -> None: ...
     @overload
     def rename_axis(
         self,
-        mapper = ...,
-        index: Optional[IndexType] = ...,
-        columns = ...,
-        axis: Optional[AxisType] = ...,
-        copy: _bool = ...,
-        inplace: Optional[_bool] = ...,
-    ) -> Union[None, DataFrame]: ...
+        *,
+        inplace: Literal[False] = ...,
+        index: Optional[Union[_str, Sequence[_str], Dict[Union[_str, int], _str], Callable]] = ...,
+        columns: Optional[Union[_str, Sequence[_str], Dict[Union[_str, int], _str], Callable]] = ...,
+        copy: _bool = ...
+    ) -> DataFrame: ...
     def resample(
         self,
         rule,
