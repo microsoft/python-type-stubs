@@ -1,6 +1,7 @@
 import datetime
 import numpy as np
 import sys
+from os import PathLike
 from pathlib import Path
 from typing import Any, AnyStr, Callable, Collection, Dict, Hashable, IO, List, Mapping, NewType, Optional, Sequence, Type, TypeVar, Union
 
@@ -21,7 +22,12 @@ DatetimeLikeScalar = TypeVar('DatetimeLikeScalar', Period, Timestamp, Timedelta)
 PandasScalar = Union[bytes, datetime.date, datetime.datetime, datetime.timedelta]
 #Scalar = Union[PythonScalar, PandasScalar]
 #Dtype: Any
-FilePathOrBuffer = Union[str, Path, IO[AnyStr]]
+
+# filenames and file-like-objects
+Buffer = Union[IO[AnyStr], RawIOBase, BufferedIOBase, TextIOBase, TextIOWrapper, mmap]
+FileOrBuffer = Union[str, Buffer[T]]
+FilePathOrBuffer = Union["PathLike[str]", FileOrBuffer[T]]
+
 FrameOrSeriesUnion: Any
 FrameOrSeries = TypeVar('FrameOrSeries', bound=NDFrame)
 Axis = Union[str, int]
@@ -34,7 +40,6 @@ Renamer = Union[Mapping[Label, Any], Callable[[Label], Label]]
 T = TypeVar('T')
 FuncType = Callable[..., Any]
 F = TypeVar("F", bound=FuncType)
-
 
 num = Union[int, float]
 SeriesAxisType = Union[str, int, Literal["index", 0]]  # Restricted subset of _AxisType for series
