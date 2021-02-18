@@ -248,7 +248,6 @@ class DataFrame(NDFrame):
     @overload
     def rename(
         self,
-        index: Optional[Union[Dict[Union[_str, int], _str], Callable]] = ...,
         mapper: Optional[Callable],
         axis: Optional[AxisType] = ...,
         copy: _bool = ...,
