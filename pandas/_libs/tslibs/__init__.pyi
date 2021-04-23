@@ -150,7 +150,7 @@ class Timedelta(datetime.timedelta):
     def to_timedelta64(self) -> _np.timedelta64: ...
     def total_seconds(self) -> int: ...
 
-class Timestamp(datetime.timestamp):
+class Timestamp(datetime.datetime):
     def __init__(
         self,
         ts_input: Any,

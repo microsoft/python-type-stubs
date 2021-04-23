@@ -1,5 +1,5 @@
 import numpy as np
-from core.arrays.categorical import Categorical
+from pandas.core.arrays.categorical import Categorical
 from pandas.core.series import Series as Series
 from pandas.core.frame import DataFrame as DataFrame
 from pandas._typing import FilePathOrBuffer as FilePathOrBuffer

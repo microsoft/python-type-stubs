@@ -59,7 +59,7 @@ def read_csv(
     low_memory: bool = ...,
     memory_map: bool = ...,
     float_precision: Optional[str] = ...,
-) -> TextParser: ...
+) -> DataFrame: ...
 
 @overload
 def read_csv(
@@ -165,7 +165,7 @@ def read_table(
     low_memory: bool = ...,
     memory_map: bool = ...,
     float_precision: Optional[str] = ...,
-) -> TextParser: ...
+) -> DataFrame: ...
 
 @overload
 def read_table(

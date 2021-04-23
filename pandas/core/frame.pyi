@@ -2,7 +2,7 @@ from __future__ import  annotations
 import datetime
 import numpy as np
 
-from core.indexing import _iLocIndexer, _LocIndexer
+from pandas.core.indexing import _iLocIndexer, _LocIndexer
 from matplotlib.axes import Axes as PlotAxes
 import sys
 from pandas._typing import Axes as Axes, Axis as Axis, FilePathOrBuffer as FilePathOrBuffer, Level as Level, Renamer as Renamer
@@ -81,13 +81,12 @@ class DataFrame(NDFrame):
     def axes(self) -> List[Index]: ...
     @property
     def shape(self) -> Tuple[int, int]: ...
-    def to_string(self, buf: Optional[FilePathOrBuffer[_str]]=..., columns: Optional[Sequence[str]]=..., col_space: Optional[int]=..., header: Union[bool, Sequence[str]]=..., index: bool=..., na_rep: str=..., formatters: Optional[fmt.formatters_type]=..., float_format: Optional[fmt.float_format_type]=..., sparsify: Optional[bool]=..., index_names: bool=..., justify: Optional[str]=..., max_rows: Optional[int]=..., min_rows: Optional[int]=..., max_cols: Optional[int]=..., show_dimensions: bool=..., decimal: str=..., line_width: Optional[int]=..., max_colwidth: Optional[int]=..., encoding: Optional[str]=...) -> Optional[str]: ...
     @property
     def style(self) -> Styler: ...
     def items(self) -> Iterable[Tuple[Optional[Hashable], Series]]: ...
     def iteritems(self) -> Iterable[Tuple[Label, Series]]: ...
     def iterrows(self) -> Iterable[Tuple[Label, Series]]: ...
-    def itertuples(self, index: _bool = ..., name: str = ...): ...
+    def itertuples(self, index: _bool = ..., name: _str = ...): ...
     def __len__(self) -> int: ...
     @overload
     def dot(self, other: DataFrame) -> DataFrame: ...
@@ -618,8 +617,8 @@ class DataFrame(NDFrame):
     def pivot_table(
         self,
         values: Optional[_str] = ...,
-        index: Optional[_str, Grouper, Sequence] = ...,
-        columns: Optional[_str, Grouper, Sequence] = ...,
+        index: Optional[Union[_str, Grouper, Sequence]] = ...,
+        columns: Optional[Union[_str, Grouper, Sequence]] = ...,
         aggfunc = ...,
         fill_value: Optional[Scalar] = ...,
         margins: _bool = ...,
@@ -628,14 +627,14 @@ class DataFrame(NDFrame):
         observed: _bool = ...,
     ) -> DataFrame: ...
     def stack(self, level: Level = ..., dropna: _bool = ...) -> Union[DataFrame, Series[Dtype]]: ...
-    def explode(self, column: Union[str, Tuple]) -> DataFrame: ...
+    def explode(self, column: Union[_str, Tuple]) -> DataFrame: ...
     def unstack(
         self, level: Level = ..., fill_value: Optional[Union[int, _str, Dict]] = ...,
     ) -> Union[DataFrame, Series[Dtype]]: ...
     def melt(
         self,
-        id_vars: Optional[Tuple, Sequence, np.ndarray] = ...,
-        value_vars: Optional[Tuple, Sequence, np.ndarray] = ...,
+        id_vars: Optional[Union[Tuple, Sequence, np.ndarray]] = ...,
+        value_vars: Optional[Union[Tuple, Sequence, np.ndarray]] = ...,
         var_name: Optional[Scalar] = ...,
         value_name: Scalar = ...,
         col_level: Optional[Union[int, _str]] = ...,
@@ -830,7 +829,7 @@ class DataFrame(NDFrame):
     @property
     def columns(self) -> Index[_str]: ...
     @columns.setter  # setter needs to be right next to getter; otherwise mypy complains
-    def columns(self, cols: Union[List[_str], Index[_str]]) -> None: ...
+    def columns(self, cols: Union[List[_str], Index[_str]]) -> None: ... # type: ignore
     @property
     def dtypes(self) -> Series[Dtype]: ...
     @property
@@ -1377,7 +1376,7 @@ class DataFrame(NDFrame):
         *,
         inplace: Literal[True],
         index: Optional[Union[_str, Sequence[_str], Dict[Union[_str, int], _str], Callable]] = ...,
-        columns: Oprional[Union[_str, Sequence[_str], Dict[Union[_str, int], _str], Callable]] = ...,
+        columns: Optional[Union[_str, Sequence[_str], Dict[Union[_str, int], _str], Callable]] = ...,
         copy: _bool = ...
     ) -> None: ...
     @overload
