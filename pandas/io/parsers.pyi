@@ -59,14 +59,14 @@ def read_csv(
     low_memory: bool = ...,
     memory_map: bool = ...,
     float_precision: Optional[str] = ...,
-) -> DataFrame: ...
+) -> TextFileReader: ...
 
 @overload
 def read_csv(
     filepath: FilePathOrBuffer,
     sep: str = ...,
     delimiter: Optional[str] = ...,
-    header: Union[int, Sequence[int], Union[str, Literal["infer"]]] = ...,
+    header: Union[int, Sequence[int], str, Literal["infer"]] = ...,
     names: Optional[Sequence[str]] = ...,
     index_col: Optional[Union[int, str, Sequence, Union[bool, Literal[False]]]] = ...,
     usecols: Optional[Union[int, str, Sequence]] = ...,
@@ -172,7 +172,7 @@ def read_table(
     filepath: FilePathOrBuffer,
     sep: str = ...,
     delimiter: Optional[str] = ...,
-    header: Union[int, Sequence[int], Union[str, Literal["infer"]]] = ...,
+    header: Union[int, Sequence[int], str, Literal["infer"]] = ...,
     names: Optional[Sequence[str]] = ...,
     index_col: Optional[Union[int, str, Sequence, bool, Literal[False]]] = ...,
     usecols: Optional[Union[int, str, Sequence]] = ...,
