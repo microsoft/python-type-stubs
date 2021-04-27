@@ -1,6 +1,6 @@
 def read_excel(
     filepath: str,
-    sheet_name: Optional[Sequence[str]],
+    sheet_name: Optional[List[str]],
     header: Optional[Union[int, Sequence[int]]] = ...,
     names: Optional[Sequence[str]] = ...,
     index_col: Optional[Union[int, Sequence[int]]] = ...,
