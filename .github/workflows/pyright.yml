@@ -1,0 +1,19 @@
+name: 'Pyright'
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-18.04
+    name: Pyright
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: jakebailey/pyright-action@main
