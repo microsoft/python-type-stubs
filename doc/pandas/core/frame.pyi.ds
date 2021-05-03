@@ -1,6 +1,6 @@
 
 class DataFrame(NDFrame):
-    def items(self) -> Iterable[Tuple[Optional[Hashable], Series]]:
+    def items(self) -> Iterable[Tuple[Optional[Hashable], Series[Dtype]]]:
         """Iterate over (column name, Series) pairs.
 
 Iterates over the DataFrame columns, returning a tuple with
@@ -48,7 +48,7 @@ koala    80000
 Name: population, dtype: int64
 """
         pass
-    def iteritems(self) -> Iterable[Tuple[Label, Series]]:
+    def iteritems(self) -> Iterable[Tuple[Label, Series[Dtype]]]:
         """Iterate over (column name, Series) pairs.
 
 Iterates over the DataFrame columns, returning a tuple with
@@ -394,7 +394,7 @@ See the :ref:`user guide <basics.reindexing>` for more.
         pass
     def fillna(
         self,
-        value: Optional[Union[Scalar, Dict, Series, DataFrame]] = ...,
+        value: Optional[Union[Scalar, Dict, Series[Dtype], DataFrame]] = ...,
         method: Optional[Literal["backfill", "bfill", "ffill", "pad"]] = ...,
         axis: Optional[AxisType] = ...,
         limit: int = ...,

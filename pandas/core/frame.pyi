@@ -34,7 +34,7 @@ class _iLocIndexerFrame(_iLocIndexer):
     @overload
     def __getitem__(self, idx: Union[IndexType, slice, Tuple[IndexType, IndexType]]) -> DataFrame: ...
     @overload
-    def __getitem__(self, idx: Union[int, Tuple[IndexType, int, Tuple[int, IndexType]]]) -> Series: ...
+    def __getitem__(self, idx: Union[int, Tuple[IndexType, int, Tuple[int, IndexType]]]) -> Series[Dtype]: ...
     def __setitem__(
         self,
         idx: Union[
@@ -83,10 +83,10 @@ class DataFrame(NDFrame):
     def shape(self) -> Tuple[int, int]: ...
     @property
     def style(self) -> Styler: ...
-    def items(self) -> Iterable[Tuple[Optional[Hashable], Series]]: ...
-    def iteritems(self) -> Iterable[Tuple[Label, Series]]: ...
-    def iterrows(self) -> Iterable[Tuple[Label, Series]]: ...
-    def itertuples(self, index: _bool = ..., name: _str = ...): ...
+    def items(self) -> Iterable[Tuple[Optional[Hashable], Series[Dtype]]]: ...
+    def iteritems(self) -> Iterable[Tuple[Label, Series[Dtype]]]: ...
+    def iterrows(self) -> Iterable[Tuple[Label, Series[Dtype]]]: ...
+    def itertuples(self, index: _bool = ..., name: str = ...): ...
     def __len__(self) -> int: ...
     @overload
     def dot(self, other: DataFrame) -> DataFrame: ...
@@ -211,6 +211,9 @@ class DataFrame(NDFrame):
     def __getitem__(
         self, idx: Union[Series[_bool], DataFrame, List[_str], Index[_str], np.ndarray_str],
     ) -> DataFrame: ...
+    @overload
+    def __getitem__(self, idx: Tuple) -> Series[Dtype]: ...
+    @overload
     def __setitem__(self, key, value): ...
     def query(self, expr: _str, inplace: _bool = ..., **kwargs) -> DataFrame: ...
     def eval(self, expr: _str, inplace: _bool = ..., **kwargs) : ...
@@ -267,7 +270,7 @@ class DataFrame(NDFrame):
     @overload
     def fillna(
         self,
-        value: Optional[Union[Scalar, Dict, Series, DataFrame]] = ...,
+        value: Optional[Union[Scalar, Dict, Series[Dtype], DataFrame]] = ...,
         method: Optional[Literal["backfill", "bfill", "ffill", "pad"]] = ...,
         axis: Optional[AxisType] = ...,
         limit: int = ...,
@@ -278,7 +281,7 @@ class DataFrame(NDFrame):
     @overload
     def fillna(
         self,
-        value: Optional[Union[Scalar, Dict, Series, DataFrame]] = ...,
+        value: Optional[Union[Scalar, Dict, Series[Dtype], DataFrame]] = ...,
         method: Optional[Literal["backfill", "bfill", "ffill", "pad"]] = ...,
         axis: Optional[AxisType] = ...,
         limit: int = ...,
@@ -289,7 +292,7 @@ class DataFrame(NDFrame):
     @overload
     def fillna(
         self,
-        value: Optional[Union[Scalar, Dict, Series, DataFrame]] = ...,
+        value: Optional[Union[Scalar, Dict, Series[Dtype], DataFrame]] = ...,
         method: Optional[Union[_str, Literal["backfill", "bfill", "ffill", "pad"]]] = ...,
         axis: Optional[AxisType] = ...,
         *,
@@ -299,7 +302,7 @@ class DataFrame(NDFrame):
     @overload
     def fillna(
         self,
-        value: Optional[Union[Scalar, Dict, Series, DataFrame]] = ...,
+        value: Optional[Union[Scalar, Dict, Series[Dtype], DataFrame]] = ...,
         method: Optional[Union[_str, Literal["backfill", "bfill", "ffill", "pad"]]] = ...,
         axis: Optional[AxisType] = ...,
         inplace: Optional[_bool] = ...,
@@ -699,7 +702,7 @@ class DataFrame(NDFrame):
         axis: Optional[AxisType] = ...,
         drop: _bool = ...,
         method: Union[_str, Literal["pearson", "kendall", "spearman"]] = ...,
-    ) -> Series: ...
+    ) -> Series[Dtype]: ...
     @overload
     def count(self, axis: AxisType = ..., numeric_only: _bool = ..., *, level: Level) -> DataFrame: ...
     @overload
@@ -722,7 +725,7 @@ class DataFrame(NDFrame):
         axis: AxisType = ...,
         numeric_only: _bool = ...,
         interpolation: Union[_str, Literal["linear", "lower", "higher", "midpoint", "nearest"]] = ...,
-    ) -> Series: ...
+    ) -> Series[Dtype]: ...
     @overload
     def quantile(
         self,
@@ -953,7 +956,7 @@ class DataFrame(NDFrame):
         *args,
         **kwargs
     ) -> DataFrame: ...
-    def convertDTypes(
+    def convert_dtypes(
         self,
         infer_objects: _bool = ...,
         convert_string: _bool = ...,
@@ -1010,7 +1013,7 @@ class DataFrame(NDFrame):
     @overload
     def ffill(
         self,
-        value: Optional[Union[Scalar, Dict, Series, DataFrame]] = ...,
+        value: Optional[Union[Scalar, Dict, Series[Dtype], DataFrame]] = ...,
         axis: Optional[AxisType] = ...,
         limit: int = ...,
         downcast: Optional[Dict] = ...,
@@ -1020,7 +1023,7 @@ class DataFrame(NDFrame):
     @overload
     def ffill(
         self,
-        value: Optional[Union[Scalar, Dict, Series, DataFrame]] = ...,
+        value: Optional[Union[Scalar, Dict, Series[Dtype], DataFrame]] = ...,
         axis: Optional[AxisType] = ...,
         limit: int = ...,
         downcast: Optional[Dict] = ...,
@@ -1030,7 +1033,7 @@ class DataFrame(NDFrame):
     @overload
     def ffill(
         self,
-        value: Optional[Union[Scalar, Dict, Series, DataFrame]] = ...,
+        value: Optional[Union[Scalar, Dict, Series[Dtype], DataFrame]] = ...,
         axis: Optional[AxisType] = ...,
         limit: int = ...,
         downcast: Optional[Dict] = ...,
@@ -1319,7 +1322,7 @@ class DataFrame(NDFrame):
         numeric_only: Optional[_bool] = ...,
         min_count: int = ...,
         **kwargs
-    ) -> Series: ...
+    ) -> Series[Dtype]: ...
     def product(
         self,
         axis: Optional[AxisType] = ...,

@@ -1,2 +1,2 @@
-from . import stubsplit
+from .stubsplit import split, combine
 
