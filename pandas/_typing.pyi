@@ -1,4 +1,6 @@
 import datetime
+from io import BufferedIOBase, RawIOBase, TextIOBase, TextIOWrapper
+from mmap import mmap
 import numpy as np
 import sys
 from os import PathLike
@@ -25,10 +27,9 @@ PandasScalar = Union[bytes, datetime.date, datetime.datetime, datetime.timedelta
 
 # filenames and file-like-objects
 Buffer = Union[IO[AnyStr], RawIOBase, BufferedIOBase, TextIOBase, TextIOWrapper, mmap]
-FileOrBuffer = Union[str, Buffer[T]]
-FilePathOrBuffer = Union["PathLike[str]", FileOrBuffer[T]]
+FileOrBuffer = Union[str, Buffer[AnyStr]]
+FilePathOrBuffer = Union["PathLike[str]", FileOrBuffer[AnyStr]]
 
-FrameOrSeriesUnion: Any
 FrameOrSeries = TypeVar('FrameOrSeries', bound=NDFrame)
 Axis = Union[str, int]
 Label = Optional[Hashable]

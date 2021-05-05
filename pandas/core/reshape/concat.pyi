@@ -1,6 +1,6 @@
 from pandas import DataFrame as DataFrame, Series as Series
 from pandas._typing import Dtype
-from typing import Hashable, Iterable, Mapping, Optional, Union, overload
+from typing import Hashable, Iterable, Literal, Mapping, Optional, Union, overload
 
 
 @overload

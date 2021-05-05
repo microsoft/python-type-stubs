@@ -48,7 +48,7 @@ def read_csv(
     low_memory: bool = ...,
     memory_map: bool = ...,
     float_precision: Optional[str] = ...,
-) -> TextParser:
+) -> TextFileReader:
     """Read a comma-separated values (csv) file into DataFrame.
 
 Also supports optionally iterating or breaking of the file
@@ -383,7 +383,7 @@ def read_table(
     low_memory: bool = ...,
     memory_map: bool = ...,
     float_precision: Optional[str] = ...,
-) -> TextParser:
+) -> TextFileReader:
     """Read general delimited file into DataFrame.
 
 Also supports optionally iterating or breaking of the file

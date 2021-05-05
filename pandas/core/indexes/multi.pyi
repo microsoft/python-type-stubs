@@ -1,6 +1,6 @@
 import numpy as np
 from pandas.core.indexes.base import Index as Index
-from typing import Hashable, Sequence, Union
+from typing import Hashable, List, Sequence, Union
 
 class MultiIndex(Index):
     rename = ...
