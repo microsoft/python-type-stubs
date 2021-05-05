@@ -1499,8 +1499,8 @@ ValueError: Index contains duplicate entries, cannot reshape
     def pivot_table(
         self,
         values: Optional[_str] = ...,
-        index: Optional[_str, Grouper, Sequence] = ...,
-        columns: Optional[_str, Grouper, Sequence] = ...,
+        index: Optional[Union[_str, Grouper, Sequence]] = ...,
+        columns: Optional[Union[_str, Grouper, Sequence]] = ...,
         aggfunc = ...,
         fill_value: Optional[Scalar] = ...,
         margins: _bool = ...,
@@ -1636,8 +1636,8 @@ foo large  2.000000  5.0  4.500000  4.0
         pass
     def melt(
         self,
-        id_vars: Optional[Tuple, Sequence, np.ndarray] = ...,
-        value_vars: Optional[Tuple, Sequence, np.ndarray] = ...,
+        id_vars: Optional[Union[Tuple, Sequence, np.ndarray]] = ...,
+        value_vars: Optional[Union[Tuple, Sequence, np.ndarray]] = ...,
         var_name: Optional[Scalar] = ...,
         value_name: Scalar = ...,
         col_level: Optional[Union[int, _str]] = ...,

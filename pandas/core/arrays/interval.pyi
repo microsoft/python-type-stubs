@@ -1,7 +1,6 @@
 import numpy as np
 from pandas._libs.interval import Interval as Interval, IntervalMixin as IntervalMixin
 from pandas.core.arrays.base import ExtensionArray as ExtensionArray
-from pandas.core.dtypes.cast import cast_scalar_to_array
 from pandas.core.dtypes.generic import ABCExtensionArray as ABCExtensionArray
 from pandas._typing import Axis, Scalar
 from typing import Optional
@@ -45,7 +44,7 @@ class IntervalArray(IntervalMixin, ExtensionArray):
     @property
     def length(self) -> Scalar: ...
     @property
-    def mid(self) -> cast_scalar_to_array: ...
+    def mid(self) -> Scalar: ...
     @property
     def is_non_overlapping_monotonic(self) -> bool: ...
     def __array__(self, dtype=...) -> np.ndarray: ...

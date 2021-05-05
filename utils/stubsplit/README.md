@@ -3,6 +3,11 @@ merge docstrings back in. We use this because we sometimes want to put docstring
 functions into the stubs, because it is hard to extract them from source. This is 
 primarily used for some pandas APIs for now.
 
+To install:
+
+    PBR_VERSION=1.0.0 pip install .
+
+
 Usage:
   stubsplit (split|merge) [--verbose] <stubpath> <docpath>
   stubsplit -h | --help

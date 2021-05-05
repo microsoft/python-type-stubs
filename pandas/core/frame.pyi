@@ -1,10 +1,10 @@
 from __future__ import  annotations
 import datetime
 import numpy as np
-
-from core.indexing import _iLocIndexer, _LocIndexer
-from matplotlib.axes import Axes as PlotAxes
 import sys
+
+from pandas.core.indexing import _iLocIndexer, _LocIndexer
+from matplotlib.axes import Axes as PlotAxes
 from pandas._typing import Axes as Axes, Axis as Axis, FilePathOrBuffer as FilePathOrBuffer, Level as Level, Renamer as Renamer
 from pandas._typing import num, SeriesAxisType, AxisType, Dtype, DtypeNp, Label, StrLike, Scalar, IndexType, MaskType
 from pandas.core.generic import NDFrame as NDFrame
@@ -32,9 +32,14 @@ class _iLocIndexerFrame(_iLocIndexer):
     @overload
     def __getitem__(self, idx: Tuple[int, int]) -> Scalar: ...
     @overload
-    def __getitem__(self, idx: Union[IndexType, slice, Tuple[IndexType, IndexType]]) -> DataFrame: ...
+    def __getitem__(self, idx: int) -> Series[Dtype]: ...
     @overload
-    def __getitem__(self, idx: Union[int, Tuple[IndexType, int, Tuple[int, IndexType]]]) -> Series[Dtype]: ...
+    def __getitem__(self, idx: Tuple[Union[IndexType, MaskType], int]) -> Series[Dtype]: ...
+    @overload
+    def __getitem__(self, idx: Tuple[int, Union[IndexType, MaskType]]) -> Series[Dtype]: ...
+    @overload
+    def __getitem__(self, idx: Union[int, Tuple[Union[IndexType, MaskType], Union[IndexType, MaskType, int]]]) -> DataFrame: ...
+
     def __setitem__(
         self,
         idx: Union[
@@ -50,13 +55,16 @@ class _iLocIndexerFrame(_iLocIndexer):
 
 class _LocIndexerFrame(_LocIndexer):
     @overload
-    def __getitem__(self, idx: Union[int, slice, MaskType],) -> DataFrame: ...
+    def __getitem__(self, idx: Tuple[StrLike, StrLike],) -> Scalar: ...   
     @overload
-    def __getitem__(self, idx: StrLike,) -> Series[Dtype]: ...
+    def __getitem__(self, idx: int,) -> Series[Dtype]: ...
     @overload
-    def __getitem__(self, idx: Tuple[StrLike, StrLike],) -> float: ...
+    def __getitem__(self, idx: Tuple[int, Union[slice, StrLike]],) -> Series[Dtype]: ...    
     @overload
-    def __getitem__(self, idx: Tuple[Union[MaskType, List[str]], Union[MaskType, List[str]]],) -> DataFrame: ...
+    def __getitem__(self, idx: Tuple[Union[IndexType, MaskType], StrLike],) -> Series[Dtype]: ...    
+    @overload
+    def __getitem__(self, idx: Tuple[Union[IndexType, MaskType], Union[List[StrLike], slice]],) -> DataFrame: ...    
+
     def __setitem__(
         self,
         idx: Union[MaskType, StrLike, Tuple[Union[MaskType, List[str]], Union[MaskType, List[str]]],],
@@ -207,13 +215,11 @@ class DataFrame(NDFrame):
     @overload
     def __getitem__(self, idx: _str) -> Series[Dtype]: ...
     @overload
-    def __getitem__(self, rows: slice) -> DataFrame: ...
+    def __getitem__(self, rows: slice) -> NDFrame: ...
     @overload
     def __getitem__(
-        self, idx: Union[Series[_bool], DataFrame, List[_str], Index[_str], np.ndarray_str],
-    ) -> DataFrame: ...
-    @overload
-    def __getitem__(self, idx: Tuple) -> Series[Dtype]: ...
+        self, idx: Union[Tuple, Series[_bool], DataFrame, List[_str], Index[_str], np.ndarray_str],
+    ) -> NDFrame: ...
     @overload
     def __setitem__(self, key, value): ...
     def query(self, expr: _str, inplace: _bool = ..., **kwargs) -> DataFrame: ...
@@ -621,8 +627,8 @@ class DataFrame(NDFrame):
     def pivot_table(
         self,
         values: Optional[_str] = ...,
-        index: Optional[_str, Grouper, Sequence] = ...,
-        columns: Optional[_str, Grouper, Sequence] = ...,
+        index: Optional[Union[_str, Grouper, Sequence]] = ...,
+        columns: Optional[Union[_str, Grouper, Sequence]] = ...,
         aggfunc = ...,
         fill_value: Optional[Scalar] = ...,
         margins: _bool = ...,
@@ -631,14 +637,14 @@ class DataFrame(NDFrame):
         observed: _bool = ...,
     ) -> DataFrame: ...
     def stack(self, level: Level = ..., dropna: _bool = ...) -> Union[DataFrame, Series[Dtype]]: ...
-    def explode(self, column: Union[str, Tuple]) -> DataFrame: ...
+    def explode(self, column: Union[_str, Tuple]) -> DataFrame: ...
     def unstack(
         self, level: Level = ..., fill_value: Optional[Union[int, _str, Dict]] = ...,
     ) -> Union[DataFrame, Series[Dtype]]: ...
     def melt(
         self,
-        id_vars: Optional[Tuple, Sequence, np.ndarray] = ...,
-        value_vars: Optional[Tuple, Sequence, np.ndarray] = ...,
+        id_vars: Optional[Union[Tuple, Sequence, np.ndarray]] = ...,
+        value_vars: Optional[Union[Tuple, Sequence, np.ndarray]] = ...,
         var_name: Optional[Scalar] = ...,
         value_name: Scalar = ...,
         col_level: Optional[Union[int, _str]] = ...,
@@ -833,7 +839,7 @@ class DataFrame(NDFrame):
     @property
     def columns(self) -> Index[_str]: ...
     @columns.setter  # setter needs to be right next to getter; otherwise mypy complains
-    def columns(self, cols: Union[List[_str], Index[_str]]) -> None: ...
+    def columns(self, cols: Union[List[_str], Index[_str]]) -> None: ...  # type:ignore
     @property
     def dtypes(self) -> Series[Dtype]: ...
     @property
@@ -1380,7 +1386,7 @@ class DataFrame(NDFrame):
         *,
         inplace: Literal[True],
         index: Optional[Union[_str, Sequence[_str], Dict[Union[_str, int], _str], Callable]] = ...,
-        columns: Oprional[Union[_str, Sequence[_str], Dict[Union[_str, int], _str], Callable]] = ...,
+        columns: Optional[Union[_str, Sequence[_str], Dict[Union[_str, int], _str], Callable]] = ...,
         copy: _bool = ...
     ) -> None: ...
     @overload
