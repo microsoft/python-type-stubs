@@ -1,0 +1,148 @@
+# Python: 3.8.2 (tags/v3.8.2:7b3ab59, Feb 25 2020, 23:03:10) [MSC v.1916 64 bit (AMD64)]
+# Library: win32comext, version: unspecified
+# Module: win32comext.directsound.directsound, version: unspecified
+
+'A module encapsulating the DirectSound interfaces.'
+
+import typing
+import builtins as _mod_builtins
+import win32.lib.pywintypes as _mod_pywintypes
+
+_PyIID = _mod_pywintypes.IID
+
+DS3DMODE_DISABLE: int
+DS3DMODE_HEADRELATIVE: int
+DS3DMODE_NORMAL: int
+def DSBCAPS() -> typing.Any:
+    ...
+
+DSBCAPSType = _mod_builtins.PyDSBCAPS
+DSBCAPS_CTRL3D: int
+DSBCAPS_CTRLFREQUENCY: int
+DSBCAPS_CTRLPAN: int
+DSBCAPS_CTRLPOSITIONNOTIFY: int
+DSBCAPS_CTRLVOLUME: int
+DSBCAPS_GETCURRENTPOSITION2: int
+DSBCAPS_GLOBALFOCUS: int
+DSBCAPS_LOCHARDWARE: int
+DSBCAPS_LOCSOFTWARE: int
+DSBCAPS_MUTE3DATMAXDISTANCE: int
+DSBCAPS_PRIMARYBUFFER: int
+DSBCAPS_STATIC: int
+DSBCAPS_STICKYFOCUS: int
+DSBFREQUENCY_MAX: int
+DSBFREQUENCY_MIN: int
+DSBFREQUENCY_ORIGINAL: int
+DSBLOCK_ENTIREBUFFER: int
+DSBLOCK_FROMWRITECURSOR: int
+DSBPAN_CENTER: int
+DSBPAN_LEFT: int
+DSBPAN_RIGHT: int
+DSBPLAY_LOOPING: int
+DSBPN_OFFSETSTOP: int
+DSBSIZE_MAX: int
+DSBSIZE_MIN: int
+DSBSTATUS_BUFFERLOST: int
+DSBSTATUS_LOOPING: int
+DSBSTATUS_PLAYING: int
+def DSBUFFERDESC() -> typing.Any:
+    ...
+
+DSBUFFERDESCType = _mod_builtins.PyDSBUFFERDESC
+DSBVOLUME_MAX: int
+DSBVOLUME_MIN: int
+def DSCAPS() -> typing.Any:
+    ...
+
+DSCAPSType = _mod_builtins.PyDSCAPSType
+DSCAPS_CERTIFIED: int
+DSCAPS_CONTINUOUSRATE: int
+DSCAPS_EMULDRIVER: int
+DSCAPS_PRIMARY16BIT: int
+DSCAPS_PRIMARY8BIT: int
+DSCAPS_PRIMARYMONO: int
+DSCAPS_PRIMARYSTEREO: int
+DSCAPS_SECONDARY16BIT: int
+DSCAPS_SECONDARY8BIT: int
+DSCAPS_SECONDARYMONO: int
+DSCAPS_SECONDARYSTEREO: int
+def DSCBCAPS() -> typing.Any:
+    ...
+
+DSCBCAPSType = _mod_builtins.PyDSCBCAPSType
+DSCBCAPS_WAVEMAPPED: int
+DSCBLOCK_ENTIREBUFFER: int
+DSCBSTART_LOOPING: int
+DSCBSTATUS_CAPTURING: int
+DSCBSTATUS_LOOPING: int
+def DSCBUFFERDESC() -> typing.Any:
+    ...
+
+DSCBUFFERDESCType = _mod_builtins.PyDSCBUFFERDESC
+def DSCCAPS() -> typing.Any:
+    ...
+
+DSCCAPSType = _mod_builtins.PyDSCCAPSType
+DSCCAPS_EMULDRIVER: int
+DSERR_ACCESSDENIED: int
+DSERR_ALLOCATED: int
+DSERR_ALREADYINITIALIZED: int
+DSERR_BADFORMAT: int
+DSERR_BADSENDBUFFERGUID: int
+DSERR_BUFFERLOST: int
+DSERR_BUFFERTOOSMALL: int
+DSERR_CONTROLUNAVAIL: int
+DSERR_DS8_REQUIRED: int
+DSERR_FXUNAVAILABLE: int
+DSERR_GENERIC: int
+DSERR_INVALIDCALL: int
+DSERR_INVALIDPARAM: int
+DSERR_NOAGGREGATION: int
+DSERR_NODRIVER: int
+DSERR_NOINTERFACE: int
+DSERR_OBJECTNOTFOUND: int
+DSERR_OTHERAPPHASPRIO: int
+DSERR_OUTOFMEMORY: int
+DSERR_PRIOLEVELNEEDED: int
+DSERR_SENDLOOP: int
+DSERR_UNINITIALIZED: int
+DSERR_UNSUPPORTED: int
+DSSCL_EXCLUSIVE: int
+DSSCL_NORMAL: int
+DSSCL_PRIORITY: int
+DSSCL_WRITEPRIMARY: int
+DSSPEAKER_GEOMETRY_MAX: int
+DSSPEAKER_GEOMETRY_MIN: int
+DSSPEAKER_GEOMETRY_NARROW: int
+DSSPEAKER_GEOMETRY_WIDE: int
+DSSPEAKER_HEADPHONE: int
+DSSPEAKER_MONO: int
+DSSPEAKER_QUAD: int
+DSSPEAKER_STEREO: int
+DSSPEAKER_SURROUND: int
+DS_NO_VIRTUALIZATION: int
+DS_OK: int
+def DirectSoundCaptureCreate() -> typing.Any:
+    ...
+
+def DirectSoundCaptureEnumerate() -> typing.Any:
+    ...
+
+def DirectSoundCreate() -> typing.Any:
+    ...
+
+def DirectSoundEnumerate() -> typing.Any:
+    ...
+
+IID_IDirectSound: _PyIID
+IID_IDirectSoundBuffer: _PyIID
+IID_IDirectSoundCapture: _PyIID
+IID_IDirectSoundCaptureBuffer: _PyIID
+IID_IDirectSoundNotify: _PyIID
+__doc__: str
+__file__: str
+__name__: str
+__package__: str
+def __getattr__(name) -> typing.Any:
+    ...
+
