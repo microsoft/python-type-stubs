@@ -3,7 +3,7 @@ from pandas import DataFrame as DataFrame, Series as Series
 from pandas._typing import Label
 from typing import Optional, Sequence, Union
 
-def merge(left: DataFrame,
+def merge(left: Union[DataFrame, Series],
           right: Union[DataFrame, Series],
           how: str = ...,
           on: Optional[Union[Label, Sequence]] = ...,
@@ -17,7 +17,7 @@ def merge(left: DataFrame,
           indicator: Union[bool, str] = ...,
           validate: str = ...) -> DataFrame: ...
 
-def merge_ordered(left: DataFrame,
+def merge_ordered(left: Union[DataFrame, Series],
                   right: Union[DataFrame, Series],
                   on: Optional[Union[Label, Sequence]] = ...,
                   left_on: Optional[Union[Label, Sequence]] = ...,
@@ -29,8 +29,8 @@ def merge_ordered(left: DataFrame,
                   how: str = ...) -> DataFrame: ...
 
 def merge_asof(
-        left: DataFrame,
-        right: DataFrame, Series,
+        left: Union[DataFrame, Series],
+        right: Union[DataFrame, Series],
         on: Optional[Label] = ...,
         left_on: Optional[Label] = ...,
         right_on: Optional[Label] = ...,
