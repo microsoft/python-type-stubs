@@ -249,7 +249,7 @@ class DataFrame(NDFrame):
         labels: Optional[Union[_str, List]] = ...,
         axis: AxisType = ...,
         index: Optional[Union[List[_str], List[int], Index]] = ...,
-        columns: Optional[Union[_str, List]] = ...,
+        columns: Optional[Union[_str, List, Index]] = ...,
         level: Optional[Level] = ...,
         inplace: _bool = ...,
         errors: Union[_str, Literal["ignore", "raise"]] = ...,
