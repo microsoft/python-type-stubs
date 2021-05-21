@@ -431,7 +431,7 @@ class Series(IndexOpsMixin, NDFrame, Generic[S1]):
     ) -> Series[S1]: ...
     def astype(
         self,
-        dtype: Union[S1, _str],
+        dtype: Union[S1, _str, Type[Scalar]],
         copy: _bool = ...,
         errors: Union[_str, Literal["raise", "ignore"]] = ...,
     ) -> Series: ...
