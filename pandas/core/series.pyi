@@ -56,7 +56,7 @@ class Series(IndexOpsMixin, NDFrame, Generic[S1]):
         data: Optional[Union[_ListLike, Series[S1], Dict[int, S1], Dict[_str, S1]]] = ...,
         index: Union[_str, int, Series, List, Index] = ...,
         dtype = ...,
-        name: _str = ...,
+        name: Optional[Hashable] = ...,
         copy: bool = ...,
         fastpath: bool = ...
     ): ...
