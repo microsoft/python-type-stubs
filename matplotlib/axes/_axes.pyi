@@ -401,8 +401,9 @@ class Axes(_AxesBase):
     have_units: Any  # TODO
 
     def hexbin(
-        self
-        x: ArrayLike, y: ArrayLike,
+        self,
+        x: ArrayLike,
+        y: ArrayLike,
         C: Optional[ArrayLike] = ...,
         gridsize: Union[int, Tuple[int, int]] = ...,
         bins: Optional[Union[Literal["log"], int, Sequence[Any]]] = ...,

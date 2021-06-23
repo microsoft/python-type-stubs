@@ -7,7 +7,7 @@ from PIL.Image import Image as PILImage
 
 from matplotlib._typing import ArrayLike, ndarray
 from matplotlib.artist import Artist
-from matplotlib.axes import Axes
+from matplotlib.axes._axes import Axes
 from matplotlib.backend_bases import LocationEvent, MouseEvent, RendererBase
 from matplotlib.cm import Colormap, ScalarMappable
 from matplotlib.colors import Normalize
