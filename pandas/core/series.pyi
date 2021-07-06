@@ -53,7 +53,7 @@ class Series(IndexOpsMixin, NDFrame, Generic[S1]):
     _ListLike = Union[np.ndarray, Dict[_str, np.ndarray], Sequence, Index]
     def __init__(
         self,
-        data: Optional[Union[_ListLike, Series[S1], Dict[int, S1], Dict[_str, S1]]] = ...,
+        data: Optional[Union[object, _ListLike, Series[S1], Dict[int, S1], Dict[_str, S1]]] = ...,
         index: Union[_str, int, Series, List, Index] = ...,
         dtype = ...,
         name: Optional[Hashable] = ...,
