@@ -1,1 +1,0 @@
-These stubs were submitted to typeshed but were rejected because the authors of the package did not want seperate stubs. Instead, they maintain annotations in the code (currently using Python 2-style annotation comments).

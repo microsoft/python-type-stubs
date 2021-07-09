@@ -1,1 +1,0 @@
-These stubs were submitted to typeshed and are now maintained there.
