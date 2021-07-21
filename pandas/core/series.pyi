@@ -323,7 +323,7 @@ class Series(IndexOpsMixin, NDFrame, Generic[S1]):
     @overload
     def fillna(
         self,
-        value: Union[S1, Dict, Series[S1], DataFrame],
+        value: Union[Scalar, Dict, Series[S1], DataFrame],
         method: Optional[Union[_str, Literal["backfill", "bfill", "pad", "ffill"]]] = ...,
         axis: SeriesAxisType = ...,
         limit: Optional[int] = ...,
@@ -334,7 +334,7 @@ class Series(IndexOpsMixin, NDFrame, Generic[S1]):
     @overload
     def fillna(
         self,
-        value: Union[S1, Dict, Series[S1], DataFrame],
+        value: Union[Scalar, Dict, Series[S1], DataFrame],
         method: Optional[Union[_str, Literal["backfill", "bfill", "pad", "ffill"]]] = ...,
         axis: SeriesAxisType = ...,
         *,
@@ -344,7 +344,7 @@ class Series(IndexOpsMixin, NDFrame, Generic[S1]):
     @overload
     def fillna(
         self,
-        value: Union[S1, Dict, Series[S1], DataFrame],
+        value: Union[Scalar, Dict, Series[S1], DataFrame],
         method: Optional[Union[_str, Literal["backfill", "bfill", "pad", "ffill"]]] = ...,
         axis: SeriesAxisType = ...,
         inplace: _bool = ...,
