@@ -1,6 +1,6 @@
 from pandas._typing import FilePathOrBuffer as FilePathOrBuffer
 from pandas.core.frame import DataFrame as DataFrame
-from typing import Any, Callable, Iterable, List, Mapping, Optional, Sequence, Union
+from typing import Any, Callable, Dict, Iterable, List, Mapping, Optional, Sequence, Union
 
 class _HtmlFrameParser:
     io = ...
@@ -25,7 +25,7 @@ def read_html(
     index_col: Optional[Union[int, Sequence[Any]]] = ...,
     skiprows: Optional[Union[int, Sequence[Any], slice]] = ...,
     attrs: Optional[Mapping[str, str]] = ...,
-    parse_dates: bool = ...,
+    parse_dates: Union[bool, Sequence[Union[int, str, Sequence[Union[int, str]]]], Dict[str, Sequence[Union[int, str]]]] = ...,
     thousands: str = ...,
     encoding: Optional[str] = ...,
     decimal: str = ...,
