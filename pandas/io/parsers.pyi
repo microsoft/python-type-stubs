@@ -60,7 +60,7 @@ def read_csv(
     low_memory: bool = ...,
     memory_map: bool = ...,
     float_precision: Optional[str] = ...,
-) -> TextFileReader: ...
+) -> DataFrame: ...
 
 @overload
 def read_csv(
