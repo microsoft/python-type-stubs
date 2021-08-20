@@ -70,7 +70,7 @@ class _LocIndexerFrame(_LocIndexer):
     def __setitem__(
         self,
         idx: Union[MaskType, StrLike, Tuple[Union[MaskType, Index, List[str]], Union[MaskType, List[str], str]],],
-        value: Union[float, _np.ndarray, Series[Dtype], DataFrame],
+        value: Union[Scalar, _np.ndarray, Series[Dtype], DataFrame],
     ) -> None: ...
 
 
