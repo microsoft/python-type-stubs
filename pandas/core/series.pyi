@@ -605,7 +605,7 @@ class Series(IndexOpsMixin, NDFrame, Generic[S1]):
     ) -> Series[S1]: ...
     def mask(
         self,
-        cond: Union[Series[S1], np.ndarray, Callable],
+        cond: MaskType,
         other: Union[Scalar, Series[S1], DataFrame, Callable] = ...,
         inplace: _bool = ...,
         axis: Optional[SeriesAxisType] = ...,
