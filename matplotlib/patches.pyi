@@ -4,6 +4,7 @@ from matplotlib.artist import Artist
 
 
 class Patch(Artist):
+    def __init__(self, *args, **kwargs) -> None: ...
     def __getattr__(self, name: str) -> Any: ...  # incomplete
 
 class Polygon(Patch):
