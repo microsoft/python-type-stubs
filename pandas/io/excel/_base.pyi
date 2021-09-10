@@ -116,8 +116,7 @@ def read_excel(
     **kwargs
 ) -> DataFrame: ...
 
-# This probably isn't needed
-class _BaseExcelReader(metaclass=abc.ABCMeta):
+class BaseExcelReader(metaclass=abc.ABCMeta):
     book = ...
     def __init__(self, filepath_or_buffer) -> None: ...
     @abc.abstractmethod
