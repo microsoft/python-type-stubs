@@ -18,7 +18,7 @@ def should_cache(arg: ArrayConvertible, unique_share: float=..., check_count: Op
 
 @overload
 def to_datetime(
-    arg: DataFrame,
+    arg: Union[DataFrame, Series],
     errors: str = ...,
     dayfirst: bool = ...,
     yearfirst: bool = ...,
