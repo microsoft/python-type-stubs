@@ -7,7 +7,21 @@ def get_period_ordinal(dts: datetime, freq: int) -> int: ...
 
 class IncompatibleFrequency(ValueError): ...
 
-class _Period(object):
+
+class Period():
+    def __init__(
+        self,
+        value: Any = ...,
+        freqstr: Any = ...,
+        ordinal: Any = ...,
+        year: Any = ...,
+        month: int = ...,
+        quarter: Any = ...,
+        day: int = ...,
+        hour: int = ...,
+        minute: int = ...,
+        second: int = ...,
+    ) -> None: ...
     def asfreq(self, *args, **kwargs) -> Period: ...
 
     @classmethod
@@ -30,7 +44,6 @@ class _Period(object):
     def __rsub__(self, other) -> Period: ...
     def __setstate__(self, *args, **kwargs) -> Any: ... # what should this be?
     def __str__(self) -> str: ...
-    def __sub__(self, other) -> Period: ...
     @property
     def day(self) -> int: ...
     @property
@@ -73,9 +86,12 @@ class _Period(object):
     def weekofyear(self) -> int: ...
     @property
     def year(self) -> int: ...
-
-class Period(_Period):
-    def __init__(self, *args, **kwargs): # real signature unknown
-        pass
+    # Static methods
+    @staticmethod
+    def now() -> Period: ...
+    # Methods
+    def asfreq(self, freq: str, how: str = ...) -> Period: ...
+    def strftime(self, fmt: str) -> str: ...
+    def to_timestamp(self, freq: str, how: str = ...) -> Timestamp: ...
 
 from .timestamps import Timestamp
