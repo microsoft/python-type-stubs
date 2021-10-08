@@ -11,6 +11,8 @@ from pandas.core.generic import NDFrame as NDFrame
 from pandas.core.groupby import DataFrameGroupBy as DataFrameGroupBy
 from pandas.core.groupby.grouper import Grouper
 from pandas.core.indexes.api import Index as Index, MultiIndex as MultiIndex
+from pandas.core.resample import Resampler
+from pandas.core.window.rolling import Rolling, Window
 from pandas.core.series import Series as Series
 from pandas.io.formats import console as console, format as fmt
 from pandas.io.formats.style import Styler as Styler
@@ -1412,7 +1414,7 @@ class DataFrame(NDFrame):
         base: int = ...,
         on: Optional[_str] = ...,
         level: Optional[Level] = ...,
-    ) : ...
+    ) -> Resampler: ...
     def rfloordiv(
         self,
         other,
@@ -1426,16 +1428,27 @@ class DataFrame(NDFrame):
     def rmul(
         self, other, axis: AxisType = ..., level: Optional[Level] = ..., fill_value: Optional[float] = ...,
     ) -> DataFrame: ...
+    @overload
     def rolling(
         self,
         window,
         min_periods: Optional[int] = ...,
         center: _bool = ...,
-        win_type: Optional[_str] = ...,
+        *,
+        win_type: _str,
         on: Optional[_str] = ...,
-        axis: AxisType = ...,
-        closed: Optional[_str] = ...,
-    ) : ...  # For now
+        axis: SeriesAxisType = ...,
+        closed: Optional[_str] = ...) -> Window: ...
+    @overload
+    def rolling(
+        self,
+        window,
+        min_periods: Optional[int] = ...,
+        center: _bool = ...,
+        *,
+        on: Optional[_str] = ...,
+        axis: SeriesAxisType = ...,
+        closed: Optional[_str] = ...) -> Rolling: ...
     def rpow(
         self, other, axis: AxisType = ..., level: Optional[Level] = ..., fill_value: Optional[float] = ...,
     ) -> DataFrame: ...

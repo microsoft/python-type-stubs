@@ -56,11 +56,13 @@ from .core.api import (
     period_range as period_range,
     set_eng_float_format as set_eng_float_format,
     timedelta_range as timedelta_range,
-    to_datetime as to_datetime,
     to_numeric as to_numeric,
-    to_timedelta as to_timedelta,
     unique as unique,
     value_counts as value_counts)
+from .core.tools import (
+    to_datetime as to_datetime,
+    to_timedelta as to_timedelta
+)
 from .core.arrays.sparse import SparseDtype as SparseDtype
 from .tseries import offsets as offsets
 from .tseries.api import infer_freq as infer_freq
@@ -112,4 +114,3 @@ from .util._tester import test as test
 import pandas.testing as testing
 
 __version__ : str
-

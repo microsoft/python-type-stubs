@@ -10,7 +10,9 @@ from .frame import DataFrame
 from pandas.core.arrays.base import ExtensionArray
 from pandas.core.groupby.generic import SeriesGroupBy
 from pandas.core.indexes.base import Index
-from pandas._typing import AxisType as AxisType, Dtype as Dtype, DtypeNp as DtypeNp, \
+from pandas.core.resample import Resampler
+from pandas.core.window.rolling import Rolling, Window
+from pandas._typing import ArrayLike as ArrayLike, AxisType as AxisType, Dtype as Dtype, DtypeNp as DtypeNp, \
     FilePathOrBuffer as FilePathOrBuffer, Level as Level, MaskType as MaskType, S1 as S1, Scalar as Scalar, \
     SeriesAxisType as SeriesAxisType, num as num, Label
 from typing import Any, Callable, Dict, Generic, Hashable, Iterable, List, Optional, Sequence, Tuple, Type, Union, overload
@@ -85,7 +87,7 @@ class Series(IndexOpsMixin, NDFrame, Generic[S1]):
     @name.setter
     def name(self, value: Optional[Hashable]) -> None: ...
     @property
-    def values(self): ...
+    def values(self) -> ArrayLike: ...
     @property
     def array(self) -> ExtensionArray: ...
     def ravel(self, order: _str = ...) -> np.ndarray: ...
@@ -570,7 +572,6 @@ class Series(IndexOpsMixin, NDFrame, Generic[S1]):
         include_end: _bool = ...,
         axis: Optional[SeriesAxisType] = ...,
     ) -> Series[S1]: ...
-    # Next one should return a 'Resampler' object
     def resample(
         self,
         rule,
@@ -583,7 +584,7 @@ class Series(IndexOpsMixin, NDFrame, Generic[S1]):
         base: int = ...,
         on: Optional[_str] = ...,
         level: Optional[Level] = ...,
-    ) : ...
+    ) -> Resampler: ...
     def first(self, offset) -> Series[S1]: ...
     def last(self, offset) -> Series[S1]: ...
     def rank(
@@ -1070,17 +1071,27 @@ class Series(IndexOpsMixin, NDFrame, Generic[S1]):
         fill_value: Optional[float] = ...,
         axis: SeriesAxisType = ...,
     ) -> Series[S1]: ...
-    # Next one should return a window class
+    @overload
     def rolling(
         self,
         window,
         min_periods: Optional[int] = ...,
         center: _bool = ...,
-        win_type: Optional[_str] = ...,
+        *,
+        win_type: _str,
         on: Optional[_str] = ...,
         axis: SeriesAxisType = ...,
-        closed: Optional[_str] = ...,
-    ) : ...
+        closed: Optional[_str] = ...) -> Window: ...
+    @overload
+    def rolling(
+        self,
+        window,
+        min_periods: Optional[int] = ...,
+        center: _bool = ...,
+        *,
+        on: Optional[_str] = ...,
+        axis: SeriesAxisType = ...,
+        closed: Optional[_str] = ...) -> Rolling: ...
     def rpow(
         self,
         other: Union[Series[S1], Scalar],

@@ -7,7 +7,7 @@ from pandas.core.construction import array as array
 from pandas.core.dtypes.dtypes import CategoricalDtype as CategoricalDtype, DatetimeTZDtype as DatetimeTZDtype, IntervalDtype as IntervalDtype, PeriodDtype as PeriodDtype
 from pandas.core.dtypes.missing import isna as isna, isnull as isnull, notna as notna, notnull as notnull
 from pandas.core.indexes.datetimes import bdate_range as bdate_range, date_range as date_range
-from pandas.core.tools.datetimes import to_datetime as to_datetime
+from pandas.core.tools import to_datetime as to_datetime
 from pandas.core.tools.numeric import to_numeric as to_numeric
 from pandas.core.tools.timedeltas import to_timedelta as to_timedelta
 from pandas.io.formats.format import set_eng_float_format as set_eng_float_format
