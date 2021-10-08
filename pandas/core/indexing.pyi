@@ -1,7 +1,7 @@
 import numpy as np
 from pandas._libs.indexing import _NDFrameIndexerBase
 from pandas.core.indexes.api import Index as Index
-from pandas.typing import StrLike
+from pandas._typing import StrLike
 from typing import Tuple, Union
 
 class _IndexSlice:
