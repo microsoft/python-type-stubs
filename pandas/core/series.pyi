@@ -598,7 +598,7 @@ class Series(IndexOpsMixin, NDFrame, Generic[S1]):
     ) -> Series: ...
     def where(
         self,
-        cond: Union[Series[S1], Series[S1], np.ndarray],
+        cond: Union[Series[S1], Series[_bool], np.ndarray],
         other = ...,
         inplace: _bool = ...,
         axis: Optional[SeriesAxisType] = ...,
