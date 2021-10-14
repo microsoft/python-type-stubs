@@ -12,6 +12,7 @@ else:
 @overload
 def read_csv(
     reader: FilePathOrBuffer,
+    *,
     sep: str = ...,
     delimiter: Optional[str] = ...,
     header: Union[int, Sequence[int], str, Literal["infer"]] = ...,
@@ -61,10 +62,10 @@ def read_csv(
     memory_map: bool = ...,
     float_precision: Optional[str] = ...,
 ) -> TextFileReader: ...
-
 @overload
 def read_csv(
     filepath: FilePathOrBuffer,
+    *,
     sep: str = ...,
     delimiter: Optional[str] = ...,
     header: Union[int, Sequence[int], str, Literal["infer"]] = ...,
@@ -117,6 +118,7 @@ def read_csv(
 @overload
 def read_csv(
     filepath: FilePathOrBuffer,
+    *,
     sep: str = ...,
     delimiter: Optional[str] = ...,
     header: Union[int, Sequence[int], str, Literal["infer"]] = ...,
@@ -166,6 +168,59 @@ def read_csv(
     memory_map: bool = ...,
     float_precision: Optional[str] = ...,
 ) -> DataFrame: ...
+@overload
+def read_csv(
+    filepath: FilePathOrBuffer,
+    *,
+    sep: str = ...,
+    delimiter: Optional[str] = ...,
+    header: Union[int, Sequence[int], str, Literal["infer"]] = ...,
+    names: Optional[Sequence[str]] = ...,
+    index_col: Optional[Union[int, str, Sequence, Union[bool, Literal[False]]]] = ...,
+    usecols: Optional[Union[int, str, Sequence]] = ...,
+    squeeze: bool = ...,
+    prefix: Optional[str] = ...,
+    mangle_dupe_cols: bool = ...,
+    dtype: Optional[Union[str, Mapping[str, Any]]] = ...,
+    engine: Optional[Union[str, Literal["c", "python"]]] = ...,
+    converters: Optional[Mapping[Union[int, str], Callable]] = ...,
+    true_values: Optional[Sequence[Scalar]] = ...,
+    false_values: Optional[Sequence[Scalar]] = ...,
+    skipinitialspace: bool = ...,
+    skiprows: Optional[Union[Sequence, int, Callable]] = ...,
+    skipfooter: int = ...,
+    nrows: Optional[int] = ...,
+    na_values = ...,
+    keep_default_na: bool = ...,
+    na_filter: bool = ...,
+    verbose: bool = ...,
+    skip_blank_lines: bool = ...,
+    parse_dates: Union[bool, List[int], List[str]] = ...,
+    infer_datetime_format: bool = ...,
+    keep_date_col: bool = ...,
+    date_parser: Optional[Callable] = ...,
+    dayfirst: bool = ...,
+    cache_dates: bool = ...,
+    iterator: bool = ...,
+    chunksize: int = ...,
+    compression: Optional[Union[str, Literal["infer", "gzip", "bz2", "zip", "xz"]]] = ...,
+    thousands: Optional[str] = ...,
+    decimal: Optional[str] = ...,
+    lineterminator: Optional[str] = ...,
+    quotechar: str = ...,
+    quoting: int = ...,
+    doublequote: bool = ...,
+    escapechar: Optional[str] = ...,
+    comment: Optional[str] = ...,
+    encoding: Optional[str] = ...,
+    dialect: Optional[str] = ...,
+    error_bad_lines: bool = ...,
+    warn_bad_lines: bool = ...,
+    delim_whitespace: bool = ...,
+    low_memory: bool = ...,
+    memory_map: bool = ...,
+    float_precision: Optional[str] = ...,
+) -> TextFileReader: ...
 @overload
 def read_csv(
     filepath: FilePathOrBuffer,
@@ -217,10 +272,11 @@ def read_csv(
     low_memory: bool = ...,
     memory_map: bool = ...,
     float_precision: Optional[str] = ...,
-) -> TextFileReader: ...
+) -> DataFrame: ...
 @overload
 def read_table(
     reader: FilePathOrBuffer,
+    *,
     sep: str = ...,
     delimiter: Optional[str] = ...,
     header: Union[int, Sequence[int], str, Literal["infer"]] = ...,
@@ -270,10 +326,10 @@ def read_table(
     memory_map: bool = ...,
     float_precision: Optional[str] = ...,
 ) -> TextFileReader: ...
-
 @overload
 def read_table(
     filepath: FilePathOrBuffer,
+    *,
     sep: str = ...,
     delimiter: Optional[str] = ...,
     header: Union[int, Sequence[int], str, Literal["infer"]] = ...,
@@ -326,6 +382,7 @@ def read_table(
 @overload
 def read_table(
     filepath: FilePathOrBuffer,
+    *,
     sep: str = ...,
     delimiter: Optional[str] = ...,
     header: Union[int, Sequence[int], str, Literal["infer"]] = ...,
@@ -375,6 +432,59 @@ def read_table(
     memory_map: bool = ...,
     float_precision: Optional[str] = ...,
 ) -> DataFrame: ...
+@overload
+def read_table(
+    filepath: FilePathOrBuffer,
+    *,
+    sep: str = ...,
+    delimiter: Optional[str] = ...,
+    header: Union[int, Sequence[int], str, Literal["infer"]] = ...,
+    names: Optional[Sequence[str]] = ...,
+    index_col: Optional[Union[int, str, Sequence, bool, Literal[False]]] = ...,
+    usecols: Optional[Union[int, str, Sequence]] = ...,
+    squeeze: bool = ...,
+    prefix: Optional[str] = ...,
+    mangle_dupe_cols: bool = ...,
+    dtype: Optional[Union[str, Mapping[str, Any]]] = ...,
+    engine: Optional[Union[str, Literal["c", "python"]]] = ...,
+    converters: Optional[Mapping[Union[int, str], Callable]] = ...,
+    true_values: Optional[Sequence[Scalar]] = ...,
+    false_values: Optional[Sequence[Scalar]] = ...,
+    skipinitialspace: bool = ...,
+    skiprows: Optional[Union[Sequence, int, Callable]] = ...,
+    skipfooter: int = ...,
+    nrows: Optional[int] = ...,
+    na_values = ...,
+    keep_default_na: bool = ...,
+    na_filter: bool = ...,
+    verbose: bool = ...,
+    skip_blank_lines: bool = ...,
+    parse_dates: Union[bool, List[int], List[str]] = ...,
+    infer_datetime_format: bool = ...,
+    keep_date_col: bool = ...,
+    date_parser: Optional[Callable] = ...,
+    dayfirst: bool = ...,
+    cache_dates: bool = ...,
+    iterator: bool = ...,
+    chunksize: int = ...,
+    compression: Optional[Union[str, Literal["infer", "gzip", "bz2", "zip", "xz"]]] = ...,
+    thousands: Optional[str] = ...,
+    decimal: Optional[str] = ...,
+    lineterminator: Optional[str] = ...,
+    quotechar: str = ...,
+    quoting: int = ...,
+    doublequote: bool = ...,
+    escapechar: Optional[str] = ...,
+    comment: Optional[str] = ...,
+    encoding: Optional[str] = ...,
+    dialect: Optional[str] = ...,
+    error_bad_lines: bool = ...,
+    warn_bad_lines: bool = ...,
+    delim_whitespace: bool = ...,
+    low_memory: bool = ...,
+    memory_map: bool = ...,
+    float_precision: Optional[str] = ...,
+) -> TextFileReader: ...
 @overload
 def read_table(
     filepath: FilePathOrBuffer,
