@@ -42,6 +42,14 @@ T = TypeVar('T')
 FuncType = Callable[..., Any]
 F = TypeVar("F", bound=FuncType)
 
+AggFuncTypeBase = Union[Callable, str]
+AggFuncTypeDict = Dict[Hashable, Union[AggFuncTypeBase, List[AggFuncTypeBase]]]
+AggFuncType = Union[
+    AggFuncTypeBase,
+    List[AggFuncTypeBase],
+    AggFuncTypeDict,
+]
+
 num = Union[int, float]
 SeriesAxisType = Union[str, int, Literal["index", 0]]  # Restricted subset of _AxisType for series
 AxisType = Union[str, int, Literal["columns", "index", 0, 1]]

@@ -1,7 +1,7 @@
 from matplotlib.axes import Axes as PlotAxes, SubplotBase as AxesSubplot
 import numpy as np
 import sys
-from pandas._typing import FrameOrSeries as FrameOrSeries, AxisType, Dtype, Level, F
+from pandas._typing import FrameOrSeries as FrameOrSeries, AxisType, Dtype, Level, F, AggFuncType
 from pandas.core.frame import DataFrame as DataFrame
 from pandas.core.groupby.groupby import GroupBy as GroupBy #, get_groupby as get_groupby
 from pandas.core.groupby.grouper import Grouper as Grouper
@@ -13,8 +13,8 @@ else:
     from typing_extensions import Literal
 
 class NamedAgg(NamedTuple):
-    column = ...
-    aggfunc = ...
+    column: str = ...
+    aggfunc: AggFuncType = ...
 
 AggScalar = Union[str, Callable[..., Any]]
 ScalarResult = ...
