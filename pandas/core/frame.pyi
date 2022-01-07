@@ -6,7 +6,7 @@ import sys
 from pandas.core.indexing import _iLocIndexer, _LocIndexer
 from matplotlib.axes import Axes as PlotAxes
 from pandas._typing import Axes as Axes, Axis as Axis, FilePathOrBuffer as FilePathOrBuffer, Level as Level, Renamer as Renamer
-from pandas._typing import num, SeriesAxisType, AxisType, Dtype, DtypeNp, Label, StrLike, Scalar, IndexType, MaskType
+from pandas._typing import num, SeriesAxisType, AxisType, Dtype, DtypeNp, Label, StrLike, Scalar, IndexType, MaskType, S1
 from pandas.core.generic import NDFrame as NDFrame
 from pandas.core.groupby import DataFrameGroupBy as DataFrameGroupBy
 from pandas.core.groupby.grouper import Grouper
@@ -74,7 +74,7 @@ class _LocIndexerFrame(_LocIndexer):
     def __setitem__(
         self,
         idx: Union[MaskType, StrLike, Tuple[Union[MaskType, Index, Sequence[Scalar], Series[_bool], Scalar], Union[MaskType, Sequence[Scalar], Scalar]],],
-        value: Union[Scalar, _np.ndarray, Series[Dtype], DataFrame],
+        value: Union[S1, _np.ndarray, Series[Dtype], DataFrame],
     ) -> None: ...
 
 
