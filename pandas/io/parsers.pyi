@@ -57,10 +57,12 @@ def read_csv(
     dialect: Optional[str] = ...,
     error_bad_lines: bool = ...,
     warn_bad_lines: bool = ...,
+    on_bad_lines: Literal["error", "warn", "skip"] = "error",
     delim_whitespace: bool = ...,
     low_memory: bool = ...,
     memory_map: bool = ...,
     float_precision: Optional[str] = ...,
+    storage_options: Optional[Dict[str, Any]] = ...,
 ) -> TextFileReader: ...
 @overload
 def read_csv(
@@ -110,10 +112,12 @@ def read_csv(
     dialect: Optional[str] = ...,
     error_bad_lines: bool = ...,
     warn_bad_lines: bool = ...,
+    on_bad_lines: Literal["error", "warn", "skip"] = "error",
     delim_whitespace: bool = ...,
     low_memory: bool = ...,
     memory_map: bool = ...,
     float_precision: Optional[str] = ...,
+    storage_options: Optional[Dict[str, Any]] = ...,
 ) -> TextFileReader: ...
 @overload
 def read_csv(
@@ -163,10 +167,12 @@ def read_csv(
     dialect: Optional[str] = ...,
     error_bad_lines: bool = ...,
     warn_bad_lines: bool = ...,
+    on_bad_lines: Literal["error", "warn", "skip"] = "error",
     delim_whitespace: bool = ...,
     low_memory: bool = ...,
     memory_map: bool = ...,
     float_precision: Optional[str] = ...,
+    storage_options: Optional[Dict[str, Any]] = ...,
 ) -> DataFrame: ...
 @overload
 def read_csv(
@@ -216,10 +222,12 @@ def read_csv(
     dialect: Optional[str] = ...,
     error_bad_lines: bool = ...,
     warn_bad_lines: bool = ...,
+    on_bad_lines: Literal["error", "warn", "skip"] = "error",
     delim_whitespace: bool = ...,
     low_memory: bool = ...,
     memory_map: bool = ...,
     float_precision: Optional[str] = ...,
+    storage_options: Optional[Dict[str, Any]] = ...,
 ) -> TextFileReader: ...
 @overload
 def read_csv(
@@ -268,10 +276,12 @@ def read_csv(
     dialect: Optional[str] = ...,
     error_bad_lines: bool = ...,
     warn_bad_lines: bool = ...,
+    on_bad_lines: Literal["error", "warn", "skip"] = "error",
     delim_whitespace: bool = ...,
     low_memory: bool = ...,
     memory_map: bool = ...,
     float_precision: Optional[str] = ...,
+    storage_options: Optional[Dict[str, Any]] = ...,
 ) -> DataFrame: ...
 @overload
 def read_table(
