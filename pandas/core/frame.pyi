@@ -626,6 +626,7 @@ class DataFrame(NDFrame):
         group_keys: _bool = ...,
         squeeze: _bool = ...,
         observed: _bool = ...,
+        dropna: _bool = ...,
     ) -> DataFrameGroupBy: ...
     def pivot(
         self, index = ..., columns = ..., values = ...,
