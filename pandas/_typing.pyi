@@ -58,7 +58,7 @@ DtypeNp = TypeVar("DtypeNp", bound=np.dtype)
 KeysArgType = Any
 ListLike = TypeVar("ListLike", Sequence, np.ndarray, 'Series')
 StrLike = Union[str, np.str_]
-Scalar = Union[str, bytes, datetime.date, datetime.datetime, datetime.timedelta, bool, int, float, complex]
+Scalar = Union[str, bytes, datetime.date, datetime.datetime, datetime.timedelta, bool, int, float, complex, Timestamp, Timedelta]
 # Refine the next 3 in 3.9 to use the specialized type.
 np_ndarray_int64 = NewType("np_ndarray_int64", Type[np.ndarray])
 np_ndarray_bool = NewType("np_ndarray_bool", Type[np.ndarray])
@@ -66,7 +66,7 @@ np_ndarray_str = NewType("np_ndarray_str", Type[np.ndarray])
 IndexType = Union[slice, np_ndarray_int64, Index[int], List[int], Series[int]]
 MaskType = Union[Series[bool], np_ndarray_bool, Sequence[bool]]
 # Scratch types for generics
-S1 = TypeVar("S1", str, bytes, datetime.date, datetime.datetime, datetime.timedelta, bool, int, float, complex, Timedelta)
+S1 = TypeVar("S1", str, bytes, datetime.date, datetime.datetime, datetime.timedelta, bool, int, float, complex, Timestamp, Timedelta)
 T1 = TypeVar("T1", str, int)
 T2 = TypeVar("T2", str, int)
 
