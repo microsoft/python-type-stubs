@@ -80,7 +80,7 @@ starting from the end of the object, just like with Python lists.
 3    lion  mammal       80.5
 """
         pass
-    def to_markdown(self, buf: Optional[FilePathOrBuffer], mode: Optional[_str] = ..., **kwargs) -> None:
+    def to_markdown(self, buf: Optional[FilePathOrBuffer], mode: Optional[_str] = ..., index: _bool = ..., storage_options: Optional[dict] = ..., **kwargs) -> None:
         """Print Series in Markdown-friendly format.
 
 .. versionadded:: 1.0.0
@@ -150,7 +150,8 @@ Index : 2, Value : C
         group_keys: _bool = ...,
         squeeze: _bool = ...,
         observed: _bool = ...,
-    ) -> SeriesGroupBy:
+        dropna: _bool = ...
+    ) -> SeriesGroupBy: ...
         """Group Series using a mapper or by a Series of columns.
 
 A groupby operation involves some combination of splitting the
@@ -196,7 +197,6 @@ observed : bool, default False
 
 Returns
 -------
-SeriesGroupBy
     Returns a groupby object that contains information about the groups.
 
 See Also
@@ -550,7 +550,7 @@ Returns
         pass
     def fillna(
         self,
-        value: Union[S1, Dict, Series[S1], DataFrame],
+        value: Optional[Scalar|Dict|Series[S1]|DataFrame] = ...,
         method: Optional[Union[_str, Literal["backfill", "bfill", "pad", "ffill"]]] = ...,
         axis: SeriesAxisType = ...,
         limit: Optional[int] = ...,

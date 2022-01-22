@@ -11,11 +11,10 @@ else:
 
 @overload
 def read_csv(
-    reader: FilePathOrBuffer,
-    *,
+    reader: IO,
     sep: str = ...,
     delimiter: Optional[str] = ...,
-    header: Optional[int|Sequence[int]|str|Literal["infer"]] = ...,
+    header: Union[int, Sequence[int], str, Literal["infer"]] = ...,
     names: Optional[Sequence[str]] = ...,
     index_col: Optional[Union[int, str, Sequence, str, Literal[False]]] = ...,
     usecols: Optional[Union[int, str, Sequence]] = ...,
@@ -42,7 +41,7 @@ def read_csv(
     date_parser: Optional[Callable] = ...,
     dayfirst: bool = ...,
     cache_dates: bool = ...,
-    iterator: Literal[True],
+    iterator: bool = ...,
     chunksize: Optional[int] = ...,
     compression: Optional[Union[str, Literal["infer", "gzip", "bz2", "zip", "xz"]]] = ...,
     thousands: Optional[str] = ...,
@@ -57,12 +56,10 @@ def read_csv(
     dialect: Optional[str] = ...,
     error_bad_lines: bool = ...,
     warn_bad_lines: bool = ...,
-    on_bad_lines: Literal["error", "warn", "skip"] = "error",
     delim_whitespace: bool = ...,
     low_memory: bool = ...,
     memory_map: bool = ...,
     float_precision: Optional[str] = ...,
-    storage_options: Optional[Dict[str, Any]] = ...,
 ) -> TextFileReader: ...
 
 @overload
@@ -286,11 +283,10 @@ def read_csv(
 ) -> DataFrame: ...
 @overload
 def read_table(
-    reader: FilePathOrBuffer,
-    *,
+    reader: IO,
     sep: str = ...,
     delimiter: Optional[str] = ...,
-    header: Optional[int|Sequence[int]|str|Literal["infer"]] = ...,
+    header: Union[int, Sequence[int], str, Literal["infer"]] = ...,
     names: Optional[Sequence[str]] = ...,
     index_col: Optional[Union[int, str, Sequence, bool, Literal[False]]] = ...,
     usecols: Optional[Union[int, str, Sequence]] = ...,
@@ -317,7 +313,7 @@ def read_table(
     date_parser: Optional[Callable] = ...,
     dayfirst: bool = ...,
     cache_dates: bool = ...,
-    iterator: Literal[True],
+    iterator: bool = ...,
     chunksize: Optional[int] = ...,
     compression: Optional[Union[str, Literal["infer", "gzip", "bz2", "zip", "xz"]]] = ...,
     thousands: Optional[str] = ...,
