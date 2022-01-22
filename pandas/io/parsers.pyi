@@ -15,7 +15,7 @@ def read_csv(
     *,
     sep: str = ...,
     delimiter: Optional[str] = ...,
-    header: Union[int, Sequence[int], str, Literal["infer"]] = ...,
+    header: Optional[int|Sequence[int]|str|Literal["infer"]] = ...,
     names: Optional[Sequence[str]] = ...,
     index_col: Optional[Union[int, str, Sequence, str, Literal[False]]] = ...,
     usecols: Optional[Union[int, str, Sequence]] = ...,
@@ -64,13 +64,14 @@ def read_csv(
     float_precision: Optional[str] = ...,
     storage_options: Optional[Dict[str, Any]] = ...,
 ) -> TextFileReader: ...
+
 @overload
 def read_csv(
     filepath: FilePathOrBuffer,
     *,
     sep: str = ...,
     delimiter: Optional[str] = ...,
-    header: Union[int, Sequence[int], str, Literal["infer"]] = ...,
+    header: Optional[int|Sequence[int]|str|Literal["infer"]] = ...,
     names: Optional[Sequence[str]] = ...,
     index_col: Optional[Union[int, str, Sequence, Union[bool, Literal[False]]]] = ...,
     usecols: Optional[Union[int, str, Sequence]] = ...,
@@ -125,7 +126,7 @@ def read_csv(
     *,
     sep: str = ...,
     delimiter: Optional[str] = ...,
-    header: Union[int, Sequence[int], str, Literal["infer"]] = ...,
+    header: Optional[int|Sequence[int]|str|Literal["infer"]] = ...,
     names: Optional[Sequence[str]] = ...,
     index_col: Optional[Union[int, str, Sequence, Union[bool, Literal[False]]]] = ...,
     usecols: Optional[Union[int, str, Sequence]] = ...,
@@ -180,7 +181,7 @@ def read_csv(
     *,
     sep: str = ...,
     delimiter: Optional[str] = ...,
-    header: Union[int, Sequence[int], str, Literal["infer"]] = ...,
+    header: Optional[int|Sequence[int]|str|Literal["infer"]] = ...,
     names: Optional[Sequence[str]] = ...,
     index_col: Optional[Union[int, str, Sequence, Union[bool, Literal[False]]]] = ...,
     usecols: Optional[Union[int, str, Sequence]] = ...,
@@ -234,7 +235,7 @@ def read_csv(
     filepath: FilePathOrBuffer,
     sep: str = ...,
     delimiter: Optional[str] = ...,
-    header: Union[int, Sequence[int], str, Literal["infer"]] = ...,
+    header: Optional[int|Sequence[int]|str|Literal["infer"]] = ...,
     names: Optional[Sequence[str]] = ...,
     index_col: Optional[Union[int, str, Sequence, Union[bool, Literal[False]]]] = ...,
     usecols: Optional[Union[int, str, Sequence]] = ...,
@@ -289,7 +290,7 @@ def read_table(
     *,
     sep: str = ...,
     delimiter: Optional[str] = ...,
-    header: Union[int, Sequence[int], str, Literal["infer"]] = ...,
+    header: Optional[int|Sequence[int]|str|Literal["infer"]] = ...,
     names: Optional[Sequence[str]] = ...,
     index_col: Optional[Union[int, str, Sequence, bool, Literal[False]]] = ...,
     usecols: Optional[Union[int, str, Sequence]] = ...,
@@ -342,7 +343,7 @@ def read_table(
     *,
     sep: str = ...,
     delimiter: Optional[str] = ...,
-    header: Union[int, Sequence[int], str, Literal["infer"]] = ...,
+    header: Optional[int|Sequence[int]|str|Literal["infer"]] = ...,
     names: Optional[Sequence[str]] = ...,
     index_col: Optional[Union[int, str, Sequence, bool, Literal[False]]] = ...,
     usecols: Optional[Union[int, str, Sequence]] = ...,
@@ -395,7 +396,7 @@ def read_table(
     *,
     sep: str = ...,
     delimiter: Optional[str] = ...,
-    header: Union[int, Sequence[int], str, Literal["infer"]] = ...,
+    header: Optional[int|Sequence[int]|str|Literal["infer"]] = ...,
     names: Optional[Sequence[str]] = ...,
     index_col: Optional[Union[int, str, Sequence, bool, Literal[False]]] = ...,
     usecols: Optional[Union[int, str, Sequence]] = ...,
@@ -495,6 +496,7 @@ def read_table(
     memory_map: bool = ...,
     float_precision: Optional[str] = ...,
 ) -> TextFileReader: ...
+
 @overload
 def read_table(
     filepath: FilePathOrBuffer,

@@ -48,7 +48,23 @@ def assert_numpy_array_equal(left, right, strict_nan: bool = ..., check_dtype: b
 def assert_extension_array_equal(
     left, right, check_dtype: bool = ..., check_less_precise: bool = ..., check_exact: bool = ...,
 ) -> None: ...
-def assert_series_equal(left: Series, right: Series) -> None: ...
+def assert_series_equal(left: Series, right: Series,
+    check_dtype: bool = ...,
+    check_index_type: bool|str = ...,
+    check_series_type: bool = ...,
+    check_less_precise: bool|int = ...,
+    check_names : bool = ...,
+    check_exact: bool = ...,
+    check_datetimelike_compat: bool = ...,
+    check_categorical: bool = ...,
+    check_category_order: bool = ...,
+    check_freq: bool = ...,
+    check_flags: bool = ...,
+    rtol: float = ...,
+    atol: float = ...,
+    obj: str = ...,
+    *,
+    check_index: bool = ...) -> None: ...
 def assert_frame_equal(left: DataFrame, right: DataFrame, check_like: Optional[bool] = ...) -> None: ...
 def assert_equal(left, right, **kwargs) -> None: ...
 def box_expected(expected, box_cls, transpose: bool = ...): ...
