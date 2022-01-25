@@ -1333,6 +1333,7 @@ observed : bool, default False
 
 Returns
 -------
+DataFrameGroupBy
     Returns a groupby object that contains information about the groups.
 
 See Also

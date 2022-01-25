@@ -197,6 +197,7 @@ observed : bool, default False
 
 Returns
 -------
+SeriesGroupBy
     Returns a groupby object that contains information about the groups.
 
 See Also
