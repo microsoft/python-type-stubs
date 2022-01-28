@@ -667,7 +667,7 @@ class Axes(_AxesBase):
         y: ArrayLike,
         s: Optional[Union[Scalar, ArrayLike]] = ...,
         c: Optional[Union[_ColorLike, Sequence[float], Sequence[_ColorLike]]] = ...,
-        marker: Optional[MarkerStyle] = ...,
+        marker: Optional[Union[MarkerStyle, str]] = ...,
         cmap: Optional[Colormap] = ...,
         norm: Optional[Normalize] = ...,
         vmin: Optional[Scalar] = ...,
