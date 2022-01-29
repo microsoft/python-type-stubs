@@ -11,7 +11,7 @@ else:
 
 @overload
 def read_csv(
-    reader: IO,
+    reader: FilePathOrBuffer,
     sep: str = ...,
     delimiter: Optional[str] = ...,
     header: Union[int, Sequence[int], str, Literal["infer"]] = ...,
@@ -283,7 +283,7 @@ def read_csv(
 ) -> DataFrame: ...
 @overload
 def read_table(
-    reader: IO,
+    reader: FilePathOrBuffer,
     sep: str = ...,
     delimiter: Optional[str] = ...,
     header: Union[int, Sequence[int], str, Literal["infer"]] = ...,
