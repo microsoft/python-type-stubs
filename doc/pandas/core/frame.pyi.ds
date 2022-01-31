@@ -1286,7 +1286,8 @@ sorted_obj : DataFrame or None
         group_keys: _bool = ...,
         squeeze: _bool = ...,
         observed: _bool = ...,
-    ) -> DataFrameGroupBy:
+        dropna: _bool = ...,
+    ) -> DataFrameGroupBy: ...
         """Group DataFrame using a mapper or by a Series of columns.
 
 A groupby operation involves some combination of splitting the

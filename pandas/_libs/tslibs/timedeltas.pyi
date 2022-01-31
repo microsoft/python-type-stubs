@@ -1,10 +1,11 @@
 from __future__ import annotations
+from datetime import timedelta
 from typing import Any, Union, Tuple, Type, Optional, Sequence
 
 import numpy as np
 from pandas._typing import Dtype
 
-class _Timedelta:
+class _Timedelta(timedelta):
     def __hash__(self) -> int: ...
     def __richcmp__(self, other, op: int) -> Any: ...
     def to_timedelta64(self) -> np.timedelta64: ...

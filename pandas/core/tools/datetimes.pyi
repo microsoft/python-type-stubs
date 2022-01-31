@@ -41,7 +41,7 @@ def to_datetime(
     unit: Optional[str] = ...,
     infer_datetime_format: bool = ...,
     origin: Scalar = ...,
-    cache: bool = ...) -> datetime: ...
+    cache: bool = ...) -> Timestamp: ...
 @overload
 def to_datetime(
     arg: Union[list, tuple, ArrayLike],
