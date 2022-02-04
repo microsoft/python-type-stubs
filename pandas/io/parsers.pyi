@@ -12,6 +12,7 @@ else:
 @overload
 def read_csv(
     reader: FilePathOrBuffer,
+    *,
     sep: str = ...,
     delimiter: Optional[str] = ...,
     header: Union[int, Sequence[int], str, Literal["infer"]] = ...,
@@ -41,7 +42,7 @@ def read_csv(
     date_parser: Optional[Callable] = ...,
     dayfirst: bool = ...,
     cache_dates: bool = ...,
-    iterator: bool = ...,
+    iterator: Literal[True],
     chunksize: Optional[int] = ...,
     compression: Optional[Union[str, Literal["infer", "gzip", "bz2", "zip", "xz"]]] = ...,
     thousands: Optional[str] = ...,
@@ -284,6 +285,7 @@ def read_csv(
 @overload
 def read_table(
     reader: FilePathOrBuffer,
+    *,
     sep: str = ...,
     delimiter: Optional[str] = ...,
     header: Union[int, Sequence[int], str, Literal["infer"]] = ...,
