@@ -6,7 +6,7 @@ for d in cv2-stubs django gym-stubs jmespath matplotlib openpyxl pandas pythonwi
 do
     cp -R ../../$d stubs
 done
-(cd ../docify; PBR_VERSION=1.0.0 pip install .)
+(cd ../docify; rm -rf .eggs; PBR_VERSION=1.0.0 pip install .)
 (cd stubs/pandas; docify ../../docify-pandas.cfg)
 
 

@@ -42,7 +42,7 @@ import docify
 def main():
     arguments = docopt(__doc__, version='docify 0.1')
     configfile = arguments['<configfile>']
-    stubpath = arguments['<stubpath>']# if '<stubpath>' in arguments else '.'
+    stubpath = arguments['<stubpath>']
     if stubpath is None:
         stubpath = '.'
     verbose = arguments['--verbose']
@@ -83,11 +83,11 @@ def main():
                     print(f'{pkg}.{class_}.{method} has no docstring')
                 sys.exit(-1)
         
-            #try:
-            docify.docify(os.path.join(stubpath, stub), class_, method, doc, verbose)
-            #except Exception as e:
-            #    print(e)
-            #    sys.exit(-1)
+            try:
+                docify.docify(os.path.join(stubpath, stub), class_, method, doc, verbose)
+            except Exception as e:
+                print(e)
+                sys.exit(-1)
 
 
 if __name__ == '__main__':
