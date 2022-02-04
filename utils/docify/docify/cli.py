@@ -59,15 +59,15 @@ def main():
                 else:
                     package = importlib.import_module(pkg)
 
-                x = package
+                obj = package
 
                 for path in stub[:-4].split('/'):
-                    x = x.__dict__[path]
+                    obj = obj.__dict__[path]
             
                 if class_:
-                    x = x.__dict__[class_]
-                x = x.__dict__[method]
-                doc = inspect.getdoc(x)
+                    obj = obj.__dict__[class_]
+                obj = obj.__dict__[method]
+                doc = inspect.getdoc(obj)
 
             except Exception as e:
                 if class_ is None:
