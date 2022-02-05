@@ -28,6 +28,12 @@ jobs:
         run:
           python -m pip install -r tests/requirements.txt
 
+      - name: Generate pandas stubs
+        run:
+          pyright --createstub pandas
+          cp -R partial/pandas typings
+          
+
       - name: Run tests
         uses: jakebailey/pyright-action@main
         with:
