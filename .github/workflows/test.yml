@@ -31,8 +31,10 @@ jobs:
       - name: Generate pandas stubs
         run:
           pyright --createstub pandas
-          cp -R partial/pandas typings
           
+      - name: Patch pandas stubs
+        run:
+          cp -R partial/pandas typings
 
       - name: Run tests
         uses: jakebailey/pyright-action@main
