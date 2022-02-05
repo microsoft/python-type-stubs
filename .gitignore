@@ -357,6 +357,10 @@ MigrationBackup/
 .venv
 
 # Build files from utils
-utils/stubsplit/.eggs
-utils/stubsplit/build
-utils/stubsplit/stubsplit.egg-info
+.eggs
+*.egg-info
+utils/*/build
+utils/build_bundle/stubs
+AUTHORS
+ChangeLog
+
