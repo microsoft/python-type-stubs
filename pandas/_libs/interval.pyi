@@ -1,10 +1,13 @@
 from __future__ import annotations
 import sys
 from typing import Any, Union
+from pandas._typing import OrderableScalar
+
 if sys.version_info >= (3, 8):
     from typing import Literal
 else:
     from typing_extensions import Literal
+import datetime
 
 class IntervalMixin:
     @property
@@ -22,15 +25,19 @@ class IntervalMixin:
     @property
     def is_empty(self) -> bool: ...
 
-
 class Interval(IntervalMixin):
     @property
-    def left(self) -> object: ...
+    def left(self) -> OrderableScalar: ...
     @property
-    def right(self) -> object: ...
+    def right(self) -> OrderableScalar: ...
     @property
     def closed(self) -> str: ...
-    def __init__(self, left: object, right: object, closed: Union[str, Literal['left', 'right', 'both', 'neither']] = ...) -> None: ...
+    def __init__(
+        self,
+        left: OrderableScalar,
+        right: OrderableScalar,
+        closed: Union[str, Literal["left", "right", "both", "neither"]] = ...,
+    ) -> None: ...
     def __hash__(self) -> int: ...
     def __contains__(self, key: Any) -> bool: ...
     def __repr__(self) -> str: ...
