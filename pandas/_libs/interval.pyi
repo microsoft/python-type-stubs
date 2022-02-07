@@ -9,11 +9,9 @@ if sys.version_info >= (3, 8):
 else:
     from typing_extensions import Literal
 
-OrderableScalar = TypeVar("OrderableScalar", str, bytes, bool, int, float)
+OrderableScalar = TypeVar("OrderableScalar", int, float)
 OrderableTimes = TypeVar("OrderableTimes", datetime.date, datetime.datetime, datetime.timedelta, Timestamp, Timedelta)
-Orderable = TypeVar(
-    "Orderable", str, bytes, bool, int, float, datetime.date, datetime.datetime, datetime.timedelta, Timestamp, Timedelta
-)
+Orderable = TypeVar("Orderable", int, float, datetime.date, datetime.datetime, datetime.timedelta, Timestamp, Timedelta)
 
 class IntervalMixinProtocol(Protocol): ...
 
