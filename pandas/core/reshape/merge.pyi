@@ -3,7 +3,7 @@ from pandas import DataFrame as DataFrame, Series as Series
 from pandas._typing import Label
 from typing import Optional, Sequence, Union
 
-def merge(left: DataFrame,
+def merge(left: DataFrame|Series,
           right: DataFrame|Series,
           how: str = ...,
           on: Optional[Union[Label, Sequence]] = ...,
