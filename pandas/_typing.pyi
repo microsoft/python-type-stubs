@@ -75,12 +75,7 @@ DtypeNp = TypeVar("DtypeNp", bound=np.dtype)
 KeysArgType = Any
 ListLike = TypeVar("ListLike", Sequence, np.ndarray, "Series")
 StrLike = Union[str, np.str_]
-OrderableScalar = TypeVar("OrderableScalar", str, bytes, bool, int, float)
-OrderableTimes = TypeVar("OrderableTimes", datetime.date, datetime.datetime, datetime.timedelta, Timestamp, Timedelta)
-Orderable = TypeVar(
-    "Orderable", str, bytes, bool, int, float, datetime.date, datetime.datetime, datetime.timedelta, Timestamp, Timedelta
-)
-Scalar = Union[str, bytes, bool, int, float, datetime.date, datetime.datetime, datetime.timedelta, Timestamp, Timedelta complex]
+Scalar = Union[str, bytes, datetime.date, datetime.datetime, datetime.timedelta, bool, int, float, complex, Timestamp, Timedelta]
 # Refine the next 3 in 3.9 to use the specialized type.
 np_ndarray_int64 = NewType("np_ndarray_int64", Type[np.ndarray])
 np_ndarray_bool = NewType("np_ndarray_bool", Type[np.ndarray])

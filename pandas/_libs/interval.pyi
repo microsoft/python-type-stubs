@@ -1,12 +1,19 @@
 from __future__ import annotations
 import sys
-from typing import Generic, overload, Union, Protocol
-from pandas._typing import OrderableScalar, OrderableTimes, Orderable, Timedelta
+from typing import Generic, overload, Union, Protocol, TypeVar
+from _typing import Timedelta, Timestamp
+import datetime
 
 if sys.version_info >= (3, 8):
     from typing import Literal
 else:
     from typing_extensions import Literal
+
+OrderableScalar = TypeVar("OrderableScalar", str, bytes, bool, int, float)
+OrderableTimes = TypeVar("OrderableTimes", datetime.date, datetime.datetime, datetime.timedelta, Timestamp, Timedelta)
+Orderable = TypeVar(
+    "Orderable", str, bytes, bool, int, float, datetime.date, datetime.datetime, datetime.timedelta, Timestamp, Timedelta
+)
 
 class IntervalMixinProtocol(Protocol): ...
 
