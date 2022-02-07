@@ -13,6 +13,7 @@ from pandas.core.indexes.base import Index
 from pandas.core.resample import Resampler
 from pandas.core.strings import StringMethods
 from pandas.core.window.rolling import Rolling, Window
+from pandas.core.window import ExponentialMovingWindow
 from pandas._typing import (
     ArrayLike as ArrayLike,
     AxisType as AxisType,
@@ -308,26 +309,106 @@ class Series(IndexOpsMixin, NDFrame, Generic[S1]):
     def combine(self, other: Series[S1], func: Callable, fill_value: Optional[Scalar] = ...) -> Series[S1]: ...
     def combine_first(self, other: Series[S1]) -> Series[S1]: ...
     def update(self, other: Series[S1] | Sequence[S1] | Mapping[int, S1]) -> None: ...
+    @overload
     def sort_values(
         self,
-        axis: SeriesAxisType = ...,
-        ascending: _bool = ...,
-        inplace: _bool = ...,
-        kind: Union[_str, Literal["quicksort", "heapsort", "mergesort"]] = ...,
+        axis: AxisType = ...,
+        ascending: Union[_bool, Sequence[_bool]] = ...,
+        kind: Union[_str, Literal["quicksort", "mergesort", "heapsort"]] = ...,
         na_position: Union[_str, Literal["first", "last"]] = ...,
         ignore_index: _bool = ...,
+        *,
+        inplace: Literal[True],
+        key: Optional[Callable] = ...,
+    ) -> None: ...
+    @overload
+    def sort_values(
+        self,
+        axis: AxisType = ...,
+        ascending: Union[_bool, Sequence[_bool]] = ...,
+        kind: Union[_str, Literal["quicksort", "mergesort", "heapsort"]] = ...,
+        na_position: Union[_str, Literal["first", "last"]] = ...,
+        ignore_index: _bool = ...,
+        *,
+        inplace: Literal[False],
+        key: Optional[Callable] = ...,
     ) -> Series[S1]: ...
+    @overload
+    def sort_values(
+        self,
+        axis: AxisType = ...,
+        ascending: Union[_bool, Sequence[_bool]] = ...,
+        *,
+        kind: Union[_str, Literal["quicksort", "mergesort", "heapsort"]] = ...,
+        na_position: Union[_str, Literal["first", "last"]] = ...,
+        ignore_index: _bool = ...,
+        key: Optional[Callable] = ...,
+    ) -> Series[S1]: ...
+    @overload
+    def sort_values(
+        self,
+        axis: AxisType = ...,
+        ascending: Union[_bool, Sequence[_bool]] = ...,
+        inplace: Optional[_bool] = ...,
+        kind: Union[_str, Literal["quicksort", "mergesort", "heapsort"]] = ...,
+        na_position: Union[_str, Literal["first", "last"]] = ...,
+        ignore_index: _bool = ...,
+        key: Optional[Callable] = ...,
+    ) -> Union[None, Series[S1]]: ...
+    @overload
     def sort_index(
         self,
-        axis: SeriesAxisType = ...,
+        axis: AxisType = ...,
         level: Optional[Level] = ...,
-        ascending: _bool = ...,
-        inplace: _bool = ...,
-        kind: Union[_str, Literal["quicksort", "heapsort", "mergesort"]] = ...,
+        ascending: Union[_bool, Sequence[_bool]] = ...,
+        kind: Union[_str, Literal["quicksort", "mergesort", "heapsort"]] = ...,
         na_position: Union[_str, Literal["first", "last"]] = ...,
         sort_remaining: _bool = ...,
         ignore_index: _bool = ...,
-    ) -> Series[S1]: ...
+        *,
+        inplace: Literal[True],
+        key: Optional[Callable] = ...,
+    ) -> None: ...
+    @overload
+    def sort_index(
+        self,
+        axis: AxisType = ...,
+        level: Optional[Union[Level, List[int], List[_str]]] = ...,
+        ascending: Union[_bool, Sequence[_bool]] = ...,
+        kind: Union[_str, Literal["quicksort", "mergesort", "heapsort"]] = ...,
+        na_position: Union[_str, Literal["first", "last"]] = ...,
+        sort_remaining: _bool = ...,
+        ignore_index: _bool = ...,
+        *,
+        inplace: Literal[False],
+        key: Optional[Callable] = ...,
+    ) -> Series: ...
+    @overload
+    def sort_index(
+        self,
+        axis: AxisType = ...,
+        level: Optional[Union[Level, List[int], List[_str]]] = ...,
+        ascending: Union[_bool, Sequence[_bool]] = ...,
+        *,
+        kind: Union[_str, Literal["quicksort", "mergesort", "heapsort"]] = ...,
+        na_position: Union[_str, Literal["first", "last"]] = ...,
+        sort_remaining: _bool = ...,
+        ignore_index: _bool = ...,
+        key: Optional[Callable] = ...,
+    ) -> Series: ...
+    @overload
+    def sort_index(
+        self,
+        axis: AxisType = ...,
+        level: Optional[Union[Level, List[int], List[_str]]] = ...,
+        ascending: Union[_bool, Sequence[_bool]] = ...,
+        inplace: Optional[_bool] = ...,
+        kind: Union[_str, Literal["quicksort", "mergesort", "heapsort"]] = ...,
+        na_position: Union[_str, Literal["first", "last"]] = ...,
+        sort_remaining: _bool = ...,
+        ignore_index: _bool = ...,
+        key: Optional[Callable] = ...,
+    ) -> Union[None, Series]: ...
     def argsort(
         self,
         axis: SeriesAxisType = ...,
@@ -364,7 +445,7 @@ class Series(IndexOpsMixin, NDFrame, Generic[S1]):
             _str,
             List[Union[Callable, _str]],
             Dict[SeriesAxisType, Union[Callable, _str]],
-        ],
+        ] = ...,
         axis: SeriesAxisType = ...,
         *args,
         **kwargs,
@@ -715,6 +796,8 @@ class Series(IndexOpsMixin, NDFrame, Generic[S1]):
         base: int = ...,
         on: Optional[_str] = ...,
         level: Optional[Level] = ...,
+        origin: Union[Timestamp, Literal["epoch", "start", "start_day", "end", "end_day"]] = ...,
+        offset: Optional[Timedelta, _str] = None,
     ) -> Resampler: ...
     def first(self, offset) -> Series[S1]: ...
     def last(self, offset) -> Series[S1]: ...
@@ -777,7 +860,8 @@ class Series(IndexOpsMixin, NDFrame, Generic[S1]):
         self,
         percentiles: Optional[List[float]] = ...,
         include: Optional[Union[_str, Literal["all"], List[S1]]] = ...,
-        exclude: Optional[List[S1]] = ...,
+        exclude: Optional[Union[S1, List[S1]]] = ...,
+        datetime_is_numeric: Optional[_bool] = ...,
     ) -> Series[S1]: ...
     def pct_change(
         self, periods: int = ..., fill_method: _str = ..., limit: Optional[int] = ..., freq=..., **kwargs
@@ -795,13 +879,11 @@ class Series(IndexOpsMixin, NDFrame, Generic[S1]):
     def transpose(self, *args, **kwargs) -> Series[S1]: ...
     @property
     def T(self) -> Series[S1]: ...
-
     # The rest of these were left over from the old
     # stubs we shipped in preview. They may belong in
     # the base classes in some cases; I expect stubgen
     # just failed to generate these so I couldn't match
     # them up.
-
     def __add__(self, other: Union[num, _ListLike, Series[S1]]) -> Series[S1]: ...
     def __and__(self, other: Union[_ListLike, Series[S1], Series[Dtype]]) -> Series[_bool]: ...
     # def __array__(self, dtype: Optional[_bool] = ...) -> _np_ndarray
@@ -850,17 +932,14 @@ class Series(IndexOpsMixin, NDFrame, Generic[S1]):
     # def array(self) -> _npndarray
     @property
     def at(self) -> _LocIndexerSeries[S1]: ...
-
     # @property
     # def cat(self) -> ?
-
     @property
     def iat(self) -> _iLocIndexerSeries[S1]: ...
     @property
     def iloc(self) -> _iLocIndexerSeries[S1]: ...
     @property
     def loc(self) -> _LocIndexerSeries[S1]: ...
-
     # Methods
     def add(
         self,
@@ -920,7 +999,7 @@ class Series(IndexOpsMixin, NDFrame, Generic[S1]):
         adjust: _bool = ...,
         ignore_na: _bool = ...,
         axis: SeriesAxisType = ...,
-    ) -> DataFrame: ...
+    ) -> ExponentialMovingWindow: ...
     def expanding(self, min_periods: int = ..., center: _bool = ..., axis: SeriesAxisType = ...) -> DataFrame: ...
     def floordiv(
         self,
@@ -1302,14 +1381,14 @@ class Series(IndexOpsMixin, NDFrame, Generic[S1]):
         level: Optional[Level] = ...,
         fill_value: Optional[float] = ...,
         axis: Optional[SeriesAxisType] = ...,
-    ) -> float: ...
+    ) -> Series[S1]: ...
     def subtract(
         self,
         other: Union[num, _ListLike, Series[S1]],
         level: Optional[Level] = ...,
         fill_value: Optional[float] = ...,
         axis: Optional[SeriesAxisType] = ...,
-    ) -> float: ...
+    ) -> Series[S1]: ...
     def sum(
         self,
         axis: Optional[SeriesAxisType] = ...,

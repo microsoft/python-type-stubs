@@ -18,7 +18,7 @@ def test_types_init() -> None:
     pd.Series(np.array([1, 2, 3]))
     pd.Series(data=[1, 2, 3, 4], name="series")
     pd.Series(data=[1, 2, 3, 4], dtype=np.int8)
-    pd.Series(data={'row1': [1, 2], 'row2': [3, 4]})
+    pd.Series(data={"row1": [1, 2], "row2": [3, 4]})
     pd.Series(data=[1, 2, 3, 4], index=[4, 3, 2, 1], copy=True)
 
 
@@ -48,7 +48,7 @@ def test_types_csv() -> None:
 
     # This keyword was added in 1.1.0 https://pandas.pydata.org/docs/whatsnew/v1.1.0.html
     with tempfile.NamedTemporaryFile() as file:
-        s.to_csv(file.name, errors='replace')
+        s.to_csv(file.name, errors="replace")
         s4: pd.DataFrame = pd.read_csv(file.name)
 
 
@@ -58,25 +58,25 @@ def test_types_copy() -> None:
 
 
 def test_types_select() -> None:
-    s = pd.Series(data={'row1': 1, 'row2': 2})
+    s = pd.Series(data={"row1": 1, "row2": 2})
     s[0]
     s[1:]
 
 
 def test_types_iloc_iat() -> None:
-    s = pd.Series(data={'row1': 1, 'row2': 2})
+    s = pd.Series(data={"row1": 1, "row2": 2})
     s2 = pd.Series(data=[1, 2])
-    s.loc['row1']
+    s.loc["row1"]
     s.iat[0]
     s2.loc[0]
     s2.iat[0]
 
 
 def test_types_loc_at() -> None:
-    s = pd.Series(data={'row1': 1, 'row2': 2})
+    s = pd.Series(data={"row1": 1, "row2": 2})
     s2 = pd.Series(data=[1, 2])
-    s.loc['row1']
-    s.at['row1']
+    s.loc["row1"]
+    s.at["row1"]
     s2.loc[1]
     s2.at[1]
 
@@ -86,9 +86,10 @@ def test_types_boolean_indexing() -> None:
     s[s > 1]
     s[s]
 
+
 def test_types_df_to_df_comparison() -> None:
-    s = pd.Series(data={'col1': [1, 2]})
-    s2 = pd.Series(data={'col1': [3, 2]})
+    s = pd.Series(data={"col1": [1, 2]})
+    s2 = pd.Series(data={"col1": [3, 2]})
     res_gt: pd.Series = s > s2
     res_ge: pd.Series = s >= s2
     res_lt: pd.Series = s < s2
@@ -111,16 +112,16 @@ def test_types_sample() -> None:
 def test_types_nlargest_nsmallest() -> None:
     s = pd.Series([0, 1, 2])
     s.nlargest(1)
-    s.nlargest(1, 'first')
-    s.nsmallest(1, 'last')
-    s.nsmallest(1, 'all')
+    s.nlargest(1, "first")
+    s.nsmallest(1, "last")
+    s.nsmallest(1, "all")
 
 
 def test_types_filter() -> None:
-    s = pd.Series(data=[1, 2, 3, 4], index=['cow', 'coal', 'coalesce', ''])
-    s.filter(items=['cow'])
-    s.filter(regex='co.*')
-    s.filter(like='al')
+    s = pd.Series(data=[1, 2, 3, 4], index=["cow", "coal", "coalesce", ""])
+    s.filter(items=["cow"])
+    s.filter(regex="co.*")
+    s.filter(like="al")
 
 
 def test_types_setting() -> None:
@@ -135,15 +136,16 @@ def test_types_drop() -> None:
     res: pd.Series = s.drop(0)
     res2: pd.Series = s.drop([0, 1])
     res3: pd.Series = s.drop(0, axis=0)
-    res4: None = s.drop([0, 1], inplace=True, errors='raise')
-    res5: None = s.drop([0, 1], inplace=True, errors='ignore')
+    res4: None = s.drop([0, 1], inplace=True, errors="raise")
+    res5: None = s.drop([0, 1], inplace=True, errors="ignore")
 
 
 def test_types_drop_multilevel() -> None:
-    index = pd.MultiIndex(levels=[['top', 'bottom'], ['first', 'second', 'third']],
-                          codes=[[0, 0, 0, 1, 1, 1], [0, 1, 2, 0, 1, 2]])
+    index = pd.MultiIndex(
+        levels=[["top", "bottom"], ["first", "second", "third"]], codes=[[0, 0, 0, 1, 1, 1], [0, 1, 2, 0, 1, 2]]
+    )
     s = pd.Series(data=[1, 2, 3, 4, 5, 6], index=index)
-    res: pd.Series = s.drop(labels='first', level=1)
+    res: pd.Series = s.drop(labels="first", level=1)
 
 
 def test_types_dropna() -> None:
@@ -155,11 +157,11 @@ def test_types_dropna() -> None:
 def test_types_fillna() -> None:
     s = pd.Series([1, np.nan, np.nan, 3])
     res: pd.Series = s.fillna(0)
-    res2: pd.Series = s.fillna(0, axis='index')
-    res3: pd.Series = s.fillna(method='backfill', axis=0)
-    res4: None = s.fillna(method='bfill', inplace=True)
-    res5: pd.Series = s.fillna(method='pad')
-    res6: pd.Series = s.fillna(method='ffill', limit=1)
+    res2: pd.Series = s.fillna(0, axis="index")
+    res3: pd.Series = s.fillna(method="backfill", axis=0)
+    res4: None = s.fillna(method="bfill", inplace=True)
+    res5: pd.Series = s.fillna(method="pad")
+    res6: pd.Series = s.fillna(method="ffill", limit=1)
 
 
 def test_types_sort_index() -> None:
@@ -171,7 +173,7 @@ def test_types_sort_index() -> None:
 
 # This was added in 1.1.0 https://pandas.pydata.org/docs/whatsnew/v1.1.0.html
 def test_types_sort_index_with_key() -> None:
-    s = pd.Series([1, 2, 3], index=['a', 'B', 'c'])
+    s = pd.Series([1, 2, 3], index=["a", "B", "c"])
     res: pd.Series = s.sort_index(key=lambda k: k.str.lower())
 
 
@@ -179,8 +181,8 @@ def test_types_sort_values() -> None:
     s = pd.Series([4, 2, 1, 3])
     res: pd.Series = s.sort_values(0)
     res2: pd.Series = s.sort_values(ascending=False)
-    res3: None = s.sort_values(inplace=True, kind='quicksort')
-    res4: pd.Series = s.sort_values(na_position='last')
+    res3: None = s.sort_values(inplace=True, kind="quicksort")
+    res4: pd.Series = s.sort_values(na_position="last")
     res5: pd.Series = s.sort_values(ignore_index=True)
 
 
@@ -198,9 +200,9 @@ def test_types_shift() -> None:
 
 
 def test_types_rank() -> None:
-    s = pd.Series([1, 1, 2, 5, 6, np.nan, 'milion'])
+    s = pd.Series([1, 1, 2, 5, 6, np.nan, "milion"])
     s.rank()
-    s.rank(axis=0, na_option='bottom')
+    s.rank(axis=0, na_option="bottom")
     s.rank(method="min", pct=True)
     s.rank(method="dense", ascending=True)
     s.rank(method="first", numeric_only=True)
@@ -259,7 +261,7 @@ def test_types_quantile() -> None:
     s.quantile([0.25, 0.5])
     s.quantile(0.75)
     s.quantile()
-    s.quantile(interpolation='nearest')
+    s.quantile(interpolation="nearest")
 
 
 def test_types_clip() -> None:
@@ -329,8 +331,8 @@ def test_types_element_wise_arithmetic() -> None:
     res_mul: pd.Series = s * s2
     res_mul2: pd.Series = s.mul(s2, fill_value=0)
 
-    res_div: pd. Series = s / s2
-    res_div2: pd. Series = s.div(s2, fill_value=0)
+    res_div: pd.Series = s / s2
+    res_div2: pd.Series = s.div(s2, fill_value=0)
 
     res_floordiv: pd.Series = s // s2
     res_floordiv2: pd.Series = s.floordiv(s2, fill_value=0)
@@ -343,7 +345,7 @@ def test_types_element_wise_arithmetic() -> None:
 
 
 def test_types_scalar_arithmetic() -> None:
-    s = pd.Series([0,1,-10])
+    s = pd.Series([0, 1, -10])
 
     res_add1: pd.Series = s + 1
     res_add2: pd.Series = s.add(1, fill_value=0)
@@ -354,8 +356,8 @@ def test_types_scalar_arithmetic() -> None:
     res_mul: pd.Series = s * 2
     res_mul2: pd.Series = s.mul(2, fill_value=0)
 
-    res_div: pd. Series = s / 2
-    res_div2: pd. Series = s.div(2, fill_value=0)
+    res_div: pd.Series = s / 2
+    res_div2: pd.Series = s.div(2, fill_value=0)
 
     res_floordiv: pd.Series = s // 2
     res_floordiv2: pd.Series = s.floordiv(2, fill_value=0)
@@ -370,15 +372,15 @@ def test_types_scalar_arithmetic() -> None:
 
 
 def test_types_groupby() -> None:
-    s = pd.Series([4, 2, 1, 8], index=['a', 'b', 'a', 'b'])
-    s.groupby(['a', 'b', 'a', 'b'])
+    s = pd.Series([4, 2, 1, 8], index=["a", "b", "a", "b"])
+    s.groupby(["a", "b", "a", "b"])
     s.groupby(level=0)
     s.groupby(s > 2)
 
 
 # This added in 1.1.0 https://pandas.pydata.org/docs/whatsnew/v1.1.0.html
 def test_types_group_by_with_dropna_keyword() -> None:
-    s = pd.Series([1, 2, 3, 3], index=['col1', 'col2', 'col3', np.nan])
+    s = pd.Series([1, 2, 3, 3], index=["col1", "col2", "col3", np.nan])
     s.groupby(level=0, dropna=True).sum()
     s.groupby(level=0, dropna=False).sum()
     s.groupby(level=0).sum()
@@ -429,42 +431,42 @@ def test_types_compare() -> None:
     s1 = pd.Series([0, 1, 1, 0, 5, 1, -10])
     s2 = pd.Series([0, 2, 12, -4, 7, 9, 2])
     s1.compare(s2)
-    s2.compare(s1, align_axis='columns', keep_shape=True, keep_equal=True)
+    s2.compare(s1, align_axis="columns", keep_shape=True, keep_equal=True)
 
 
 def test_types_agg() -> None:
-    s = pd.Series([1, 2, 3], index=['col1', 'col2', 'col3'])
+    s = pd.Series([1, 2, 3], index=["col1", "col2", "col3"])
     s.agg("min")
-    s.agg(x=max, y='min', z=np.mean)
+    s.agg(x=max, y="min", z=np.mean)
     s.agg("mean", axis=0)
 
 
 def test_types_describe() -> None:
     s = pd.Series([1, 2, 3, np.datetime64("2000-01-01")])
     s.describe()
-    s.describe(percentiles=[0.5], include='all')
+    s.describe(percentiles=[0.5], include="all")
     s.describe(exclude=np.number)
     # datetime_is_numeric param added in 1.1.0 https://pandas.pydata.org/docs/whatsnew/v1.1.0.html
     s.describe(datetime_is_numeric=True)
 
 
 def test_types_resample() -> None:
-    s = pd.Series(range(9), index=pd.date_range('1/1/2000', periods=9, freq='T'))
-    s.resample('3T').sum()
+    s = pd.Series(range(9), index=pd.date_range("1/1/2000", periods=9, freq="T"))
+    s.resample("3T").sum()
     # origin and offset params added in 1.1.0 https://pandas.pydata.org/docs/whatsnew/v1.1.0.html
-    s.resample('20min', origin='epoch', offset=pd.Timedelta(value=2, unit='minutes'))
+    s.resample("20min", origin="epoch", offset=pd.Timedelta(value=2, unit="minutes"))
 
 
 # set_flags() method added in 1.2.0 https://pandas.pydata.org/docs/whatsnew/v1.2.0.html
 def test_types_set_flags() -> None:
-    pd.Series([1, 2], index=['a', 'b']).set_flags(allows_duplicate_labels=False)
-    pd.Series([3, 4], index=['a', 'a']).set_flags(allows_duplicate_labels=True)
-    pd.Series([5, 2], index=['a', 'a'])
+    pd.Series([1, 2], index=["a", "b"]).set_flags(allows_duplicate_labels=False)
+    pd.Series([3, 4], index=["a", "a"]).set_flags(allows_duplicate_labels=True)
+    pd.Series([5, 2], index=["a", "a"])
 
 
 def test_types_getitem() -> None:
-    s = pd.Series({'key': [0, 1, 2, 3]})
-    key: List[int] = s['key']
+    s = pd.Series({"key": [0, 1, 2, 3]})
+    key: List[int] = s["key"]
     s2 = pd.Series([0, 1, 2, 3])
     value: int = s2[0]
     s3: pd.Series = s[:2]
@@ -483,9 +485,9 @@ def test_types_rename_axis() -> None:
 
 def test_types_values() -> None:
     n1: np.ndarray = pd.Series([1, 2, 3]).values
-    n2: np.ndarray = pd.Series(list('aabc')).values
-    n3: np.ndarray = pd.Series(list('aabc')).astype('category').values
-    n4: np.ndarray = pd.Series(pd.date_range('20130101', periods=3, tz='US/Eastern')).values
+    n2: np.ndarray = pd.Series(list("aabc")).values
+    n3: np.ndarray = pd.Series(list("aabc")).astype("category").values
+    n4: np.ndarray = pd.Series(pd.date_range("20130101", periods=3, tz="US/Eastern")).values
 
 
 def test_types_rename() -> None:
@@ -536,7 +538,7 @@ def test_types_ffill() -> None:
 
 def test_types_as_type() -> None:
     s1 = pd.Series([1, 2, 8, 9])
-    s2: pd.Series = s1.astype('int32')
+    s2: pd.Series = s1.astype("int32")
 
 
 def test_types_dot() -> None:
@@ -550,4 +552,3 @@ def test_types_dot() -> None:
     s4: pd.Series = s1 @ df1
     n2: np.ndarray = s1.dot(n1)
     n3: np.ndarray = s1 @ n1
-
