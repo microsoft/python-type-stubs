@@ -285,6 +285,7 @@ def read_csv(
 @overload
 def read_table(
     reader: FilePathOrBuffer,
+    *,
     sep: str = ...,
     delimiter: Optional[str] = ...,
     header: Union[int, Sequence[int], str, Literal["infer"]] = ...,
