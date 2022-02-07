@@ -4,6 +4,7 @@ import sys
 from pandas._typing import FilePathOrBuffer as FilePathOrBuffer, Scalar
 from pandas.core.frame import DataFrame as DataFrame
 from typing import Any, Callable, List, Mapping, Optional, Sequence, Union, overload
+
 if sys.version_info >= (3, 8):
     from typing import Literal
 else:
@@ -12,6 +13,7 @@ else:
 @overload
 def read_csv(
     reader: FilePathOrBuffer,
+    *,
     sep: str = ...,
     delimiter: Optional[str] = ...,
     header: Union[int, Sequence[int], str, Literal["infer"]] = ...,
@@ -30,7 +32,7 @@ def read_csv(
     skiprows: Optional[Union[Sequence, int, Callable]] = ...,
     skipfooter: int = ...,
     nrows: Optional[int] = ...,
-    na_values = ...,
+    na_values=...,
     keep_default_na: bool = ...,
     na_filter: bool = ...,
     verbose: bool = ...,
@@ -41,7 +43,7 @@ def read_csv(
     date_parser: Optional[Callable] = ...,
     dayfirst: bool = ...,
     cache_dates: bool = ...,
-    iterator: bool = ...,
+    iterator: Literal[True],
     chunksize: Optional[int] = ...,
     compression: Optional[Union[str, Literal["infer", "gzip", "bz2", "zip", "xz"]]] = ...,
     thousands: Optional[str] = ...,
@@ -61,14 +63,13 @@ def read_csv(
     memory_map: bool = ...,
     float_precision: Optional[str] = ...,
 ) -> TextFileReader: ...
-
 @overload
 def read_csv(
     filepath: FilePathOrBuffer,
     *,
     sep: str = ...,
     delimiter: Optional[str] = ...,
-    header: Optional[int|Sequence[int]|str|Literal["infer"]] = ...,
+    header: Optional[int | Sequence[int] | str | Literal["infer"]] = ...,
     names: Optional[Sequence[str]] = ...,
     index_col: Optional[Union[int, str, Sequence, Union[bool, Literal[False]]]] = ...,
     usecols: Optional[Union[int, str, Sequence]] = ...,
@@ -84,7 +85,7 @@ def read_csv(
     skiprows: Optional[Union[Sequence, int, Callable]] = ...,
     skipfooter: int = ...,
     nrows: Optional[int] = ...,
-    na_values = ...,
+    na_values=...,
     keep_default_na: bool = ...,
     na_filter: bool = ...,
     verbose: bool = ...,
@@ -123,7 +124,7 @@ def read_csv(
     *,
     sep: str = ...,
     delimiter: Optional[str] = ...,
-    header: Optional[int|Sequence[int]|str|Literal["infer"]] = ...,
+    header: Optional[int | Sequence[int] | str | Literal["infer"]] = ...,
     names: Optional[Sequence[str]] = ...,
     index_col: Optional[Union[int, str, Sequence, Union[bool, Literal[False]]]] = ...,
     usecols: Optional[Union[int, str, Sequence]] = ...,
@@ -139,7 +140,7 @@ def read_csv(
     skiprows: Optional[Union[Sequence, int, Callable]] = ...,
     skipfooter: int = ...,
     nrows: Optional[int] = ...,
-    na_values = ...,
+    na_values=...,
     keep_default_na: bool = ...,
     na_filter: bool = ...,
     verbose: bool = ...,
@@ -178,7 +179,7 @@ def read_csv(
     *,
     sep: str = ...,
     delimiter: Optional[str] = ...,
-    header: Optional[int|Sequence[int]|str|Literal["infer"]] = ...,
+    header: Optional[int | Sequence[int] | str | Literal["infer"]] = ...,
     names: Optional[Sequence[str]] = ...,
     index_col: Optional[Union[int, str, Sequence, Union[bool, Literal[False]]]] = ...,
     usecols: Optional[Union[int, str, Sequence]] = ...,
@@ -194,7 +195,7 @@ def read_csv(
     skiprows: Optional[Union[Sequence, int, Callable]] = ...,
     skipfooter: int = ...,
     nrows: Optional[int] = ...,
-    na_values = ...,
+    na_values=...,
     keep_default_na: bool = ...,
     na_filter: bool = ...,
     verbose: bool = ...,
@@ -232,7 +233,7 @@ def read_csv(
     filepath: FilePathOrBuffer,
     sep: str = ...,
     delimiter: Optional[str] = ...,
-    header: Optional[int|Sequence[int]|str|Literal["infer"]] = ...,
+    header: Optional[int | Sequence[int] | str | Literal["infer"]] = ...,
     names: Optional[Sequence[str]] = ...,
     index_col: Optional[Union[int, str, Sequence, Union[bool, Literal[False]]]] = ...,
     usecols: Optional[Union[int, str, Sequence]] = ...,
@@ -248,7 +249,7 @@ def read_csv(
     skiprows: Optional[Union[Sequence, int, Callable]] = ...,
     skipfooter: int = ...,
     nrows: Optional[int] = ...,
-    na_values = ...,
+    na_values=...,
     keep_default_na: bool = ...,
     na_filter: bool = ...,
     verbose: bool = ...,
@@ -302,7 +303,7 @@ def read_table(
     skiprows: Optional[Union[Sequence, int, Callable]] = ...,
     skipfooter: int = ...,
     nrows: Optional[int] = ...,
-    na_values = ...,
+    na_values=...,
     keep_default_na: bool = ...,
     na_filter: bool = ...,
     verbose: bool = ...,
@@ -339,7 +340,7 @@ def read_table(
     *,
     sep: str = ...,
     delimiter: Optional[str] = ...,
-    header: Optional[int|Sequence[int]|str|Literal["infer"]] = ...,
+    header: Optional[int | Sequence[int] | str | Literal["infer"]] = ...,
     names: Optional[Sequence[str]] = ...,
     index_col: Optional[Union[int, str, Sequence, bool, Literal[False]]] = ...,
     usecols: Optional[Union[int, str, Sequence]] = ...,
@@ -355,7 +356,7 @@ def read_table(
     skiprows: Optional[Union[Sequence, int, Callable]] = ...,
     skipfooter: int = ...,
     nrows: Optional[int] = ...,
-    na_values = ...,
+    na_values=...,
     keep_default_na: bool = ...,
     na_filter: bool = ...,
     verbose: bool = ...,
@@ -392,7 +393,7 @@ def read_table(
     *,
     sep: str = ...,
     delimiter: Optional[str] = ...,
-    header: Optional[int|Sequence[int]|str|Literal["infer"]] = ...,
+    header: Optional[int | Sequence[int] | str | Literal["infer"]] = ...,
     names: Optional[Sequence[str]] = ...,
     index_col: Optional[Union[int, str, Sequence, bool, Literal[False]]] = ...,
     usecols: Optional[Union[int, str, Sequence]] = ...,
@@ -408,7 +409,7 @@ def read_table(
     skiprows: Optional[Union[Sequence, int, Callable]] = ...,
     skipfooter: int = ...,
     nrows: Optional[int] = ...,
-    na_values = ...,
+    na_values=...,
     keep_default_na: bool = ...,
     na_filter: bool = ...,
     verbose: bool = ...,
@@ -461,7 +462,7 @@ def read_table(
     skiprows: Optional[Union[Sequence, int, Callable]] = ...,
     skipfooter: int = ...,
     nrows: Optional[int] = ...,
-    na_values = ...,
+    na_values=...,
     keep_default_na: bool = ...,
     na_filter: bool = ...,
     verbose: bool = ...,
@@ -492,7 +493,6 @@ def read_table(
     memory_map: bool = ...,
     float_precision: Optional[str] = ...,
 ) -> TextFileReader: ...
-
 @overload
 def read_table(
     filepath: FilePathOrBuffer,
@@ -514,7 +514,7 @@ def read_table(
     skiprows: Optional[Union[Sequence, int, Callable]] = ...,
     skipfooter: int = ...,
     nrows: Optional[int] = ...,
-    na_values = ...,
+    na_values=...,
     keep_default_na: bool = ...,
     na_filter: bool = ...,
     verbose: bool = ...,
@@ -545,8 +545,7 @@ def read_table(
     memory_map: bool = ...,
     float_precision: Optional[str] = ...,
 ) -> TextFileReader: ...
-
-def read_fwf(filepath_or_buffer: FilePathOrBuffer, colspecs=..., widths=..., infer_nrows=..., **kwds) : ...
+def read_fwf(filepath_or_buffer: FilePathOrBuffer, colspecs=..., widths=..., infer_nrows=..., **kwds): ...
 
 class TextFileReader(abc.Iterator):
     f = ...
@@ -555,11 +554,11 @@ class TextFileReader(abc.Iterator):
     chunksize = ...
     nrows = ...
     squeeze = ...
-    def __init__(self, f, engine = ..., **kwds) -> None: ...
+    def __init__(self, f, engine=..., **kwds) -> None: ...
     def close(self) -> None: ...
     def __next__(self): ...
-    def read(self, nrows = ...): ...
-    def get_chunk(self, size = ...): ...
+    def read(self, nrows=...): ...
+    def get_chunk(self, size=...): ...
 
 class ParserBase:
     names = ...
@@ -596,7 +595,7 @@ class CParserWrapper(ParserBase):
     def __init__(self, src, **kwds) -> None: ...
     def close(self) -> None: ...
     def set_error_bad_lines(self, status) -> None: ...
-    def read(self, nrows = ...): ...
+    def read(self, nrows=...): ...
 
 def TextParser(*args, **kwds): ...
 def count_empty_vals(vals): ...
@@ -636,8 +635,8 @@ class PythonParser(ParserBase):
     index_names = ...
     nonnum = ...
     def __init__(self, f, **kwds): ...
-    def read(self, rows = ...): ...
-    def get_chunk(self, size = ...): ...
+    def read(self, rows=...): ...
+    def get_chunk(self, size=...): ...
 
 class FixedWidthReader(abc.Iterator):
     f = ...
@@ -645,9 +644,9 @@ class FixedWidthReader(abc.Iterator):
     delimiter = ...
     comment = ...
     colspecs = ...
-    def __init__(self, f, colspecs, delimiter, comment, skiprows = ..., infer_nrows: int = ...) -> None: ...
-    def get_rows(self, infer_nrows, skiprows = ...): ...
-    def detect_colspecs(self, infer_nrows: int = ..., skiprows = ...): ...
+    def __init__(self, f, colspecs, delimiter, comment, skiprows=..., infer_nrows: int = ...) -> None: ...
+    def get_rows(self, infer_nrows, skiprows=...): ...
+    def detect_colspecs(self, infer_nrows: int = ..., skiprows=...): ...
     def __next__(self): ...
 
 class FixedWidthFieldParser(PythonParser):
