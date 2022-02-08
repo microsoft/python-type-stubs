@@ -69,7 +69,7 @@ class _LocIndexerSeries(_LocIndexer, Generic[S1]):
     @overload
     def __getitem__(
         self,
-        idx: Union[MaskType, Index, Sequence[str], slice],
+        idx: Union[MaskType, Index, Sequence[str], slice, Tuple[int, str, slice], ...]],
     ) -> Series[S1]: ...
     @overload
     def __getitem__(

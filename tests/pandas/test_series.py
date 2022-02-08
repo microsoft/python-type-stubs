@@ -80,6 +80,11 @@ def test_types_loc_at() -> None:
     s2.loc[1]
     s2.at[1]
 
+def test_multiindex_loc() -> None:
+    s = pd.Series([1, 2, 3], 
+                  index=pd.MultiIndex.from_product([[1, 2], ["a", "b"]]))
+    s.loc[1, :]
+
 
 def test_types_boolean_indexing() -> None:
     s = pd.Series([0, 1, 2])
