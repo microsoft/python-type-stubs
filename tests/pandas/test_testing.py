@@ -1,4 +1,4 @@
-from pandas._testing import assert_series_equal
+from pandas.testing import assert_series_equal
 
 import pandas as pd
 
