@@ -2,10 +2,15 @@
 import io
 import tempfile
 from pathlib import Path
-from typing import Dict, List, Tuple, Iterable, Any
+from typing import Dict, List, Tuple, Iterable, Any, TYPE_CHECKING
 
 import pandas as pd
 import numpy as np
+
+if not TYPE_CHECKING:
+
+    def reveal_type(*args, **kwargs):
+        pass
 
 
 def test_types_init() -> None:
@@ -482,6 +487,8 @@ def test_types_groupby() -> None:
     df4: pd.DataFrame = df.groupby(by=['col1', 'col2']).count()
     df5: pd.DataFrame = df.groupby(by=['col1', 'col2']).filter(lambda x: x['col1'] > 0)
     df6: pd.DataFrame = df.groupby(by=['col1', 'col2']).nunique()
+    df7 = df.groupby(by="col1").apply(sum)
+    reveal_type(df7, expected_text="DataFrame")
 
 
 # This was added in 1.1.0 https://pandas.pydata.org/docs/whatsnew/v1.1.0.html
