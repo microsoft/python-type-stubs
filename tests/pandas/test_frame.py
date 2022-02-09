@@ -13,7 +13,6 @@ def test_types_init() -> None:
     pd.DataFrame(data={'col1': [1, 2], 'col2': [3, 4]}, index=[2, 1])
     pd.DataFrame(data=[1, 2, 3, 4], dtype=np.int8)
     pd.DataFrame(np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]]), columns=['a', 'b', 'c'], dtype=np.int8, copy=True)
-    df7: pd.DataFrame = df.groupby(by="col1").apply(sum)
 
 
 def test_types_append() -> None:
@@ -483,6 +482,7 @@ def test_types_groupby() -> None:
     df4: pd.DataFrame = df.groupby(by=['col1', 'col2']).count()
     df5: pd.DataFrame = df.groupby(by=['col1', 'col2']).filter(lambda x: x['col1'] > 0)
     df6: pd.DataFrame = df.groupby(by=['col1', 'col2']).nunique()
+    df7: pd.DataFrame = df.groupby(by="col1").apply(sum)
 
 
 # This was added in 1.1.0 https://pandas.pydata.org/docs/whatsnew/v1.1.0.html
