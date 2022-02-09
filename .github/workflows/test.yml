@@ -28,11 +28,7 @@ jobs:
         run:
           python -m pip install -r tests/requirements.txt
 
-      - name: Generate pandas stubs
-        run:
-          pyright --createstub pandas
-          
-      - name: Patch pandas stubs
+      - name: Install partial pandas stubs
         run:
           cp -R partial/pandas typings
 
