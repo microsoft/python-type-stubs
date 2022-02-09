@@ -32,6 +32,10 @@ jobs:
         run:
           cp -R partial/pandas typings
 
+      - name: Check partial pandas stubs
+        run:
+          ls -R typings
+
       - name: Run tests
         uses: jakebailey/pyright-action@main
         with:
