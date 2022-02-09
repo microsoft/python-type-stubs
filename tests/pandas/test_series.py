@@ -2,9 +2,9 @@
 
 import tempfile
 from pathlib import Path
-from typing import List
+from typing import List, Union
 
-from pandas._typing import Scalar, Union
+from pandas._typing import Scalar
 from pandas.api.extensions import ExtensionArray
 
 import pandas as pd
