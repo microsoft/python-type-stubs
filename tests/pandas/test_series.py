@@ -4,7 +4,7 @@ import tempfile
 from pathlib import Path
 from typing import List
 
-from pandas._typing import Scalar
+from pandas._typing import Scalar, Union
 from pandas.api.extensions import ExtensionArray
 
 import pandas as pd
