@@ -32,7 +32,7 @@ def test_types_any() -> None:
 def test_types_all() -> None:
     res1: bool = pd.Series([False, False]).all()
     res2: bool = pd.Series([False, False]).all(bool_only=False)
-    res3: int = pd.Series([np.nan]).all(skipna=False)
+    res3: str = pd.Series([np.nan]).all(skipna=False)
 
 
 def test_types_csv() -> None:
