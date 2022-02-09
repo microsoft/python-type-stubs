@@ -488,10 +488,10 @@ def test_types_rename_axis() -> None:
 
 
 def test_types_values() -> None:
-    n1: np.ndarray | ExtensionArray = pd.Series([1, 2, 3]).values
-    n2: np.ndarray | ExtensionArray = pd.Series(list('aabc')).values
-    n3: np.ndarray | ExtensionArray = pd.Series(list('aabc')).astype('category').values
-    n4: np.ndarray | ExtensionArray = pd.Series(pd.date_range('20130101', periods=3, tz='US/Eastern')).values
+    n1: Union[np.ndarray, ExtensionArray] = pd.Series([1, 2, 3]).values
+    n2: Union[np.ndarray, ExtensionArray] = pd.Series(list('aabc')).values
+    n3: Union[np.ndarray, ExtensionArray] = pd.Series(list('aabc')).astype('category').values
+    n4: Union[np.ndarray, ExtensionArray] = pd.Series(pd.date_range('20130101', periods=3, tz='US/Eastern')).values
 
 
 def test_types_rename() -> None:
