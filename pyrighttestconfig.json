@@ -1,7 +1,7 @@
 {
     "typeCheckingMode": "basic",
     "include": [ "tests" ],
-    "stubPath": "typings",
+    "stubPath": "partial",
     "reportMissingModuleSource": false,
     "reportUnusedVariable": false,
     "useLibraryCodeForTypes": true,
