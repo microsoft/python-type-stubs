@@ -579,7 +579,7 @@ def test_types_describe() -> None:
                                                          np.datetime64("2010-01-01")]})
     df.describe()
     df.describe(percentiles=[0.5], include='all')
-    df.describe(exclude=np.number)
+    df.describe(exclude=[np.number])
     # datetime_is_numeric param added in 1.1.0 https://pandas.pydata.org/docs/whatsnew/v1.1.0.html
     df.describe(datetime_is_numeric=True)
 
@@ -597,7 +597,7 @@ def test_types_to_string() -> None:
 def test_types_to_html() -> None:
     df = pd.DataFrame(data={'col1': [1, None, -4], 'col2': [np.datetime64("2000-01-01"), np.datetime64("2010-01-01"),
                                                             np.datetime64("2010-01-01")]})
-    df.to_html(index=True, col_space=2, header=['a', 'b'], na_rep='0', justify='left', max_rows=2, max_cols=2,
+    df.to_html(index=True, col_space=2, header=True, na_rep='0', justify='left', max_rows=2, max_cols=2,
                show_dimensions=True)
     # col_space accepting list or dict added in 1.1.0 https://pandas.pydata.org/docs/whatsnew/v1.1.0.html
     df.to_html(col_space=[1, 2])
