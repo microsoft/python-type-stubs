@@ -3,6 +3,5 @@
     "include": [ "tests" ],
     "reportMissingModuleSource": false,
     "reportUnusedVariable": false,
-    "useLibraryCodeForTypes": true,
-    "verboseOutput": true
+    "useLibraryCodeForTypes": true
 }

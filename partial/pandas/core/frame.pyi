@@ -952,7 +952,7 @@ class DataFrame(NDFrame, OpsMixin):
     Name: _str
     #
     # dunder methods
-     def __delitem__(self, key: _str) -> None: ...
+    def __delitem__(self, key: _str) -> None: ...
     def __exp__(
         self,
         other: Union[num, _ListLike, DataFrame],
@@ -1882,6 +1882,7 @@ class DataFrame(NDFrame, OpsMixin):
         multirow: Optional[_bool] = ...,
         caption: Optional[Union[_str, Tuple[_str, _str]]] = ...,
         label: Optional[_str] = ...,
+        position: Optional[str] = ...,
     ) -> _str: ...
     def to_pickle(
         self,
