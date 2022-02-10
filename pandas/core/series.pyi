@@ -1388,7 +1388,7 @@ class Series(IndexOpsMixin, NDFrame, Generic[S1]):
         level: Optional[Level] = ...,
         fill_value: Optional[float] = ...,
         axis: Optional[SeriesAxisType] = ...,
-    ) -> Series[S1]:: ...
+    ) -> Series[S1]: ...
     def sum(
         self,
         axis: Optional[SeriesAxisType] = ...,
