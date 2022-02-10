@@ -2,7 +2,7 @@
 
 import tempfile
 from pathlib import Path
-from typing import List
+from typing import List, TYPE_CHECKING
 
 from pandas._typing import Scalar
 
@@ -11,6 +11,10 @@ import numpy as np
 
 from pandas.core.window import ExponentialMovingWindow
 
+if not TYPE_CHECKING:
+
+    def reveal_type(arg, **kwargs):
+        pass
 
 def test_types_init() -> None:
     pd.Series(1)
@@ -81,9 +85,10 @@ def test_types_loc_at() -> None:
     s2.at[1]
 
 def test_multiindex_loc() -> None:
-    s = pd.Series([1, 2, 3], 
+    s = pd.Series([1, 2, 3, 4], 
                   index=pd.MultiIndex.from_product([[1, 2], ["a", "b"]]))
-    s.loc[1, :]
+    reveal_type(s.loc[1, :], expected_text="Series[Unknown]")
+    reveal_type(s.loc[pd.Index([1]), :], expected_text="Series[Unknown]")
 
 
 def test_types_boolean_indexing() -> None:
