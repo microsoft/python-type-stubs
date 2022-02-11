@@ -2,6 +2,7 @@
 
 python -m pip install --upgrade pandas
 python -m pip install --upgrade pyright
+python -m pip install --upgrade docopt
 
 mkdir -p stubs
 
