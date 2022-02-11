@@ -42,12 +42,12 @@ def docify(stubfile, class_, method, doc, verbose):
                     raise Exception(f'{stubfile}:{i} Method {method} not found in class {class_}')
 
             # We have found the first line of the method. The signature can
-            # span multiple lines, so we need to look for '...\n' to find the end
+            # span multiple lines, so we need to look for ': ...' to find the end
             j = i
             end = i
             while j < len(stublines):
                 line = stublines[j].rstrip()
-                if line.endswith(' ...'):
+                if line.endswith(': ...'):
                     end = j
                     break
                 j += 1
