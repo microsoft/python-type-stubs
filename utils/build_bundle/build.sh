@@ -7,8 +7,8 @@ mkdir -p stubs
 
 # Generate pandas stubs with pyright and copy them over
 
-pyright --createstub pandas
-cp -R ../../typings/pandas stubs
+#pyright --createstub pandas
+#cp -R ../../typings/pandas stubs
 
 # Copy over the stubs from here, including partial stubs for pandas
 
