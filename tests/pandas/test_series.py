@@ -2,15 +2,20 @@
 
 import tempfile
 from pathlib import Path
-from typing import List
+from typing import List, Union, TYPE_CHECKING
 
 from pandas._typing import Scalar
+from pandas.api.extensions import ExtensionArray
 
 import pandas as pd
 import numpy as np
 
 from pandas.core.window import ExponentialMovingWindow
 
+if not TYPE_CHECKING:
+
+    def reveal_type(arg, **kwargs):
+        pass
 
 def test_types_init() -> None:
     pd.Series(1)
@@ -79,6 +84,13 @@ def test_types_loc_at() -> None:
     s.at['row1']
     s2.loc[1]
     s2.at[1]
+
+
+def test_multiindex_loc() -> None:
+    s = pd.Series([1, 2, 3, 4], 
+                  index=pd.MultiIndex.from_product([[1, 2], ["a", "b"]]))
+    reveal_type(s.loc[1, :], expected_text="Series[Unknown]")
+    reveal_type(s.loc[pd.Index([1]), :], expected_text="Series[Unknown]")
 
 
 def test_types_boolean_indexing() -> None:
@@ -482,10 +494,10 @@ def test_types_rename_axis() -> None:
 
 
 def test_types_values() -> None:
-    n1: np.ndarray = pd.Series([1, 2, 3]).values
-    n2: np.ndarray = pd.Series(list('aabc')).values
-    n3: np.ndarray = pd.Series(list('aabc')).astype('category').values
-    n4: np.ndarray = pd.Series(pd.date_range('20130101', periods=3, tz='US/Eastern')).values
+    n1: Union[np.ndarray, ExtensionArray] = pd.Series([1, 2, 3]).values
+    n2: Union[np.ndarray, ExtensionArray] = pd.Series(list('aabc')).values
+    n3: Union[np.ndarray, ExtensionArray] = pd.Series(list('aabc')).astype('category').values
+    n4: Union[np.ndarray, ExtensionArray] = pd.Series(pd.date_range('20130101', periods=3, tz='US/Eastern')).values
 
 
 def test_types_rename() -> None:

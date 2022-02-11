@@ -41,3 +41,4 @@ def test_types_pydatetime() -> None:
     datet2: dt.datetime = ts.to_pydatetime(False)
     datet3: dt.datetime = ts.to_pydatetime(warn=True)
 
+

@@ -1,10 +1,12 @@
 # flake8: noqa: F841
+from datetime import date, datetime
 import io
 import tempfile
 from pathlib import Path
 from typing import Dict, List, Tuple, Iterable, Any
 
 import pandas as pd
+from pandas.io.parsers import TextFileReader
 import numpy as np
 
 
@@ -482,6 +484,7 @@ def test_types_groupby() -> None:
     df4: pd.DataFrame = df.groupby(by=['col1', 'col2']).count()
     df5: pd.DataFrame = df.groupby(by=['col1', 'col2']).filter(lambda x: x['col1'] > 0)
     df6: pd.DataFrame = df.groupby(by=['col1', 'col2']).nunique()
+    df7: pd.DataFrame = df.groupby(by="col1").apply(sum)
 
 
 # This was added in 1.1.0 https://pandas.pydata.org/docs/whatsnew/v1.1.0.html
@@ -579,7 +582,7 @@ def test_types_describe() -> None:
                                                          np.datetime64("2010-01-01")]})
     df.describe()
     df.describe(percentiles=[0.5], include='all')
-    df.describe(exclude=np.number)
+    df.describe(exclude=[np.number])
     # datetime_is_numeric param added in 1.1.0 https://pandas.pydata.org/docs/whatsnew/v1.1.0.html
     df.describe(datetime_is_numeric=True)
 
@@ -597,7 +600,7 @@ def test_types_to_string() -> None:
 def test_types_to_html() -> None:
     df = pd.DataFrame(data={'col1': [1, None, -4], 'col2': [np.datetime64("2000-01-01"), np.datetime64("2010-01-01"),
                                                             np.datetime64("2010-01-01")]})
-    df.to_html(index=True, col_space=2, header=['a', 'b'], na_rep='0', justify='left', max_rows=2, max_cols=2,
+    df.to_html(index=True, col_space=2, header=True, na_rep='0', justify='left', max_rows=2, max_cols=2,
                show_dimensions=True)
     # col_space accepting list or dict added in 1.1.0 https://pandas.pydata.org/docs/whatsnew/v1.1.0.html
     df.to_html(col_space=[1, 2])
@@ -706,4 +709,79 @@ def test_types_dot() -> None:
     df6: pd.DataFrame = df1.dot(np_array)
     df7: pd.Series = df1 @ s1
     df8: pd.Series = df1.dot(s1)
+
+def test_types_regressions() -> None:
+    # https://github.com/microsoft/python-type-stubs/issues/32
+    df = pd.DataFrame({"x": [1.0, 2.0, 3.0], "y": [4.0, 5, 6]})
+    df2: pd.DataFrame = df.astype(int)
+
+    # https://github.com/microsoft/python-type-stubs/issues/38
+    df: pd.DataFrame = pd.DataFrame({"x": [12, 34], "y": [78, 9]})
+    ds: pd.DataFrame = df.sort_values(["x", "y"], ascending=[True, False])
+
+    # https://github.com/microsoft/python-type-stubs/issues/55
+    df3 = pd.DataFrame([["a", 1], ["b", 2]], columns=["let", "num"]).set_index("let")
+    df4: pd.DataFrame = df3.reset_index()
+    df5: pd.DataFrame = df4[["num"]]
+
+    # https://github.com/microsoft/python-type-stubs/issues/58
+    df1 = pd.DataFrame(columns=["a", "b", "c"])
+    df2 = pd.DataFrame(columns=["a", "c"])
+    df6: pd.DataFrame = df1.drop(columns=df2.columns)
+
+    # https://github.com/microsoft/python-type-stubs/issues/60
+    df1 = pd.DataFrame([["a", 1], ["b", 2]], columns=["let", "num"]).set_index("let")
+    s2 = df1["num"]
+    res: pd.DataFrame = pd.merge(s2, df1, left_index=True, right_index=True)
+
+    # https://github.com/microsoft/python-type-stubs/issues/62
+    df7: pd.DataFrame = pd.DataFrame({"x": [1, 2, 3]}, index=pd.Index(["a", "b", "c"]))
+    index: pd.Index = pd.Index(["b"])
+    df8: pd.DataFrame = df7.loc[index]
+
+    #  https://github.com/microsoft/python-type-stubs/issues/87
+    df11: pd.DataFrame = pd.read_csv('foo')
+    df12: pd.DataFrame = pd.read_csv('foo', iterator=False)
+    df13: pd.DataFrame = pd.read_csv('foo', iterator=False, chunksize=None)
+    df14: TextFileReader = pd.read_csv('foo', chunksize=0)
+    df15: TextFileReader = pd.read_csv('foo', iterator=False, chunksize=0)
+    df16: TextFileReader = pd.read_csv('foo', iterator=True)
+    df17: TextFileReader = pd.read_csv('foo', iterator=True, chunksize=None)
+    df18: TextFileReader = pd.read_csv('foo', iterator=True, chunksize=0)
+    df19: TextFileReader = pd.read_csv('foo', chunksize=0)
+
+    # https://github.com/microsoft/python-type-stubs/issues/31
+    df = pd.DataFrame({"A": [1, 2, 3], "B": [5, 6, 7]})
+    column1: pd.DataFrame = df.iloc[:, [0]]
+    column2: pd.Series = df.iloc[:, 0]
+
+    df = pd.DataFrame({"a_col": list(range(10)), "a_nother": list(range(10)), "b_col": list(range(10))})
+    df.loc[:, lambda df: df.columns.str.startswith("a_")]
+
+    df = df[::-1]
+
+    # https://github.com/microsoft/python-type-stubs/issues/69
+    s1 = pd.Series([1, 2, 3])
+    s2 = pd.Series([4, 5, 6])
+    df = pd.concat([s1, s2], axis=1)
+    ss1: pd.Series = pd.concat([s1,s2], axis=0)
+    ss2: pd.Series = pd.concat([s1,s2])
+
+    # https://github.com/microsoft/python-type-stubs/issues/110
+    d: date = pd.Timestamp('2021-01-01')
+    tslist: List[pd.Timestamp] = list(pd.to_datetime(["2022-01-01", "2022-01-02"]))
+    sseries: pd.Series = pd.Series(tslist)
+    sseries_plus1: pd.Series = sseries + pd.Timedelta(1, "d")
+
+    # https://github.com/microsoft/pylance-release/issues/2133
+    dr = pd.date_range(start='2021-12-01', periods=24, freq='H')
+    time = dr.strftime('%H:%M:%S')
+
+    # https://github.com/microsoft/python-type-stubs/issues/115
+    df = pd.DataFrame({"A": [1, 2, 3], "B": [5, 6, 7]})
+    pd.DatetimeIndex(data=df['A'], tz=None, normalize=False, closed=None, ambiguous='NaT', copy=True)
+
+    # https://github.com/microsoft/python-type-stubs/issues/118
+    pd.read_csv('foo', storage_options=None)
+
 

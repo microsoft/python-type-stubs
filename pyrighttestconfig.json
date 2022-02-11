@@ -2,5 +2,6 @@
     "typeCheckingMode": "basic",
     "include": [ "tests" ],
     "reportMissingModuleSource": false,
-    "reportUnusedVariable": false
+    "reportUnusedVariable": false,
+    "useLibraryCodeForTypes": true
 }
