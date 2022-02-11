@@ -4,8 +4,8 @@ from pandas._typing import Label
 from typing import Optional, Sequence, Union
 
 def merge(
-    left: DataFrame | Series,
-    right: DataFrame | Series,
+    left: Union[DataFrame, Series],
+    right: Union[DataFrame, Series],
     how: str = ...,
     on: Optional[Union[Label, Sequence]] = ...,
     left_on: Optional[Union[Label, Sequence]] = ...,
