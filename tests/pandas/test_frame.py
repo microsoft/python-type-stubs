@@ -1,10 +1,12 @@
 # flake8: noqa: F841
+from datetime import date, datetime
 import io
 import tempfile
 from pathlib import Path
 from typing import Dict, List, Tuple, Iterable, Any
 
 import pandas as pd
+from pandas.io.parsers import TextFileReader
 import numpy as np
 
 
@@ -718,14 +720,14 @@ def test_types_regressions() -> None:
     ds: pd.DataFrame = df.sort_values(["x", "y"], ascending=[True, False])
 
     # https://github.com/microsoft/python-type-stubs/issues/55
-    df1 = pd.DataFrame([["a", 1], ["b", 2]], columns=["let", "num"]).set_index("let")
-    df2: pd.DataFrame = df1.reset_index()
-    df3: pd.DataFrame = df2[["num"]]
+    df3 = pd.DataFrame([["a", 1], ["b", 2]], columns=["let", "num"]).set_index("let")
+    df4: pd.DataFrame = df3.reset_index()
+    df5: pd.DataFrame = df4[["num"]]
 
     # https://github.com/microsoft/python-type-stubs/issues/58
     df1 = pd.DataFrame(columns=["a", "b", "c"])
     df2 = pd.DataFrame(columns=["a", "c"])
-    df3: pd.DataFrame = df1.drop(columns=df2.columns)
+    df6: pd.DataFrame = df1.drop(columns=df2.columns)
 
     # https://github.com/microsoft/python-type-stubs/issues/60
     df1 = pd.DataFrame([["a", 1], ["b", 2]], columns=["let", "num"]).set_index("let")
@@ -733,25 +735,25 @@ def test_types_regressions() -> None:
     res: pd.DataFrame = pd.merge(s2, df1, left_index=True, right_index=True)
 
     # https://github.com/microsoft/python-type-stubs/issues/62
-    df: pd.DataFrame = pd.DataFrame({"x": [1, 2, 3]}, index=pd.Index(["a", "b", "c"]))
+    df7: pd.DataFrame = pd.DataFrame({"x": [1, 2, 3]}, index=pd.Index(["a", "b", "c"]))
     index: pd.Index = pd.Index(["b"])
-    df2: pd.DataFrame = df.loc[index]
+    df8: pd.DataFrame = df7.loc[index]
 
     #  https://github.com/microsoft/python-type-stubs/issues/87
-    df1: pd.DataFrame = pd.read_csv('foo')
-    df2: pd.DataFrame = pd.read_csv('foo', iterator=False)
-    df3: pd.DataFrame = pd.read_csv('foo', iterator=False, chunksize=None)
-    df3: pd.DataFrame = pd.read_csv('foo', chunksize=0)
-    df5: pd.TextFileReader = pd.read_csv('foo', iterator=False, chunksize=0)
-    df6: pd.TextFileReader = pd.read_csv('foo', iterator=True)
-    df7: pd.TextFileReader = pd.read_csv('foo', iterator=True, chunksize=None)
-    df8: pd.TextFileReader = pd.read_csv('foo', iterator=True, chunksize=0)
-    df9: pd.TextFileReader = pd.read_csv('foo', chunksize=0)
+    df11: pd.DataFrame = pd.read_csv('foo')
+    df12: pd.DataFrame = pd.read_csv('foo', iterator=False)
+    df13: pd.DataFrame = pd.read_csv('foo', iterator=False, chunksize=None)
+    df14: TextFileReader = pd.read_csv('foo', chunksize=0)
+    df15: TextFileReader = pd.read_csv('foo', iterator=False, chunksize=0)
+    df16: TextFileReader = pd.read_csv('foo', iterator=True)
+    df17: TextFileReader = pd.read_csv('foo', iterator=True, chunksize=None)
+    df18: TextFileReader = pd.read_csv('foo', iterator=True, chunksize=0)
+    df19: TextFileReader = pd.read_csv('foo', chunksize=0)
 
     # https://github.com/microsoft/python-type-stubs/issues/31
     df = pd.DataFrame({"A": [1, 2, 3], "B": [5, 6, 7]})
-    first_column: pd.DataFrame = df.iloc[:, [0]]
-    first_column: pd.Series = df.iloc[:, 0]
+    column1: pd.DataFrame = df.iloc[:, [0]]
+    column2: pd.Series = df.iloc[:, 0]
 
     df = pd.DataFrame({"a_col": list(range(10)), "a_nother": list(range(10)), "b_col": list(range(10))})
     df.loc[:, lambda df: df.columns.str.startswith("a_")]
@@ -761,22 +763,23 @@ def test_types_regressions() -> None:
     # https://github.com/microsoft/python-type-stubs/issues/69
     s1 = pd.Series([1, 2, 3])
     s2 = pd.Series([4, 5, 6])
-    df: pd.DataFrame = pd.concat([s1, s2], axis=1)
+    df = pd.concat([s1, s2], axis=1)
     ss1: pd.Series = pd.concat([s1,s2], axis=0)
     ss2: pd.Series = pd.concat([s1,s2])
 
     # https://github.com/microsoft/python-type-stubs/issues/110
-    d: datetime.date = pd.Timestamp('2021-01-01')
+    d: date = pd.Timestamp('2021-01-01')
     tslist: List[pd.Timestamp] = list(pd.to_datetime(["2022-01-01", "2022-01-02"]))
     sseries: pd.Series = pd.Series(tslist)
-    sseries_plus1: Series = sseries + pd.Timedelta(1, "d")
+    sseries_plus1: pd.Series = sseries + pd.Timedelta(1, "d")
 
     # https://github.com/microsoft/pylance-release/issues/2133
     dr = pd.date_range(start='2021-12-01', periods=24, freq='H')
     time = dr.strftime('%H:%M:%S')
 
     # https://github.com/microsoft/python-type-stubs/issues/115
-    pd.DatetimeIndex(data=df[timestamp_column], tz=None, normalize=False, closed=None, ambiguous='NaT', copy=True)
+    df = pd.DataFrame({"A": [1, 2, 3], "B": [5, 6, 7]})
+    pd.DatetimeIndex(data=df['A'], tz=None, normalize=False, closed=None, ambiguous='NaT', copy=True)
 
     # https://github.com/microsoft/python-type-stubs/issues/118
     pd.read_csv('foo', storage_options=None)

@@ -84,7 +84,7 @@ class _LocIndexerFrame(_LocIndexer):
             List[StrLike],
             Tuple[
                 Union[IndexType, MaskType, slice, List[StrLike], Tuple[Union[str, int, slice], ...]],
-                Union[List[StrLike], slice, Series[bool]],
+                Union[List[StrLike], slice, Series[bool], Callable],
             ],
         ],
     ) -> DataFrame: ...
@@ -307,7 +307,7 @@ class DataFrame(NDFrame, OpsMixin):
     @overload
     def __getitem__(self, idx: _str) -> Series[S1]: ...
     @overload
-    def __getitem__(self, rows: slice) -> NDFrame: ...
+    def __getitem__(self, rows: slice) -> DataFrame: ...
     @overload
     def __getitem__(
         self,
