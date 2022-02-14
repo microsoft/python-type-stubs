@@ -133,7 +133,7 @@ class Series(IndexOpsMixin, NDFrame, Generic[S1]):
     @name.setter
     def name(self, value: Optional[Hashable]) -> None: ...
     @property
-    def values(self) -> np.ndarray | ExtensionArray: ...
+    def values(self) -> Union[np.ndarray, ExtensionArray]: ...
     @property
     def array(self) -> ExtensionArray: ...
     def ravel(self, order: _str = ...) -> np.ndarray: ...
@@ -309,7 +309,7 @@ class Series(IndexOpsMixin, NDFrame, Generic[S1]):
     ) -> Series[S1]: ...
     def combine(self, other: Series[S1], func: Callable, fill_value: Optional[Scalar] = ...) -> Series[S1]: ...
     def combine_first(self, other: Series[S1]) -> Series[S1]: ...
-    def update(self, other: Series[S1] | Sequence[S1] | Mapping[int, S1]) -> None: ...
+    def update(self, other: Union[Series[S1], Sequence[S1], Mapping[int, S1]]) -> None: ...
     @overload
     def sort_values(
         self,
@@ -477,7 +477,7 @@ class Series(IndexOpsMixin, NDFrame, Generic[S1]):
         axis: Optional[SeriesAxisType] = ...,
         copy: _bool = ...,
         level: Optional[Level] = ...,
-        errors: _str | Literal["raise", "ignore"] = ...,
+        errors: Union[_str, Literal["raise", "ignore"]] = ...,
     ) -> None: ...
     @overload
     def rename(
@@ -488,12 +488,12 @@ class Series(IndexOpsMixin, NDFrame, Generic[S1]):
         copy: _bool = ...,
         inplace: _bool = ...,
         level: Optional[Level] = ...,
-        errors: _str | Literal["raise", "ignore"] = ...,
+        errors: Union[_str, Literal["raise", "ignore"]] = ...,
     ) -> Series: ...
     def reindex_like(
         self,
         other: Series[S1],
-        method: Optional[_str | Literal["backfill", "bfill", "pad", "ffill", "nearest"]] = ...,
+        method: Optional[Union[_str, Literal["backfill", "bfill", "pad", "ffill", "nearest"]]] = ...,
         copy: _bool = ...,
         limit: Optional[int] = ...,
         tolerance: Optional[float] = ...,
@@ -501,10 +501,10 @@ class Series(IndexOpsMixin, NDFrame, Generic[S1]):
     @overload
     def drop(
         self,
-        labels: Optional[_str | int | List] = ...,
+        labels: Optional[Union[_str, int, List]] = ...,
         axis: SeriesAxisType = ...,
-        index: Optional[List[_str] | List[int] | Index] = ...,
-        columns: Optional[_str | List] = ...,
+        index: Optional[Union[List[_str], List[int], Index]] = ...,
+        columns: Optional[Union[_str, List]] = ...,
         level: Optional[Level] = ...,
         errors: Literal["ignore", "raise"] = ...,
         *,
@@ -513,10 +513,10 @@ class Series(IndexOpsMixin, NDFrame, Generic[S1]):
     @overload
     def drop(
         self,
-        labels: Optional[_str | int | List] = ...,
+        labels: Optional[Union[_str, int, List]] = ...,
         axis: SeriesAxisType = ...,
-        index: Optional[List[_str] | List[int] | Index] = ...,
-        columns: Optional[_str | List] = ...,
+        index: Optional[Union[List[_str], List[int], Index]] = ...,
+        columns: Optional[Union[_str, List]] = ...,
         level: Optional[Level] = ...,
         inplace: _bool = ...,
         errors: Literal["ignore", "raise"] = ...,
@@ -524,7 +524,7 @@ class Series(IndexOpsMixin, NDFrame, Generic[S1]):
     @overload
     def fillna(
         self,
-        value: Optional[Scalar | Dict | Series[S1] | DataFrame] = ...,
+        value: Optional[Union[Scalar, Dict, Series[S1], DataFrame]] = ...,
         method: Optional[Union[_str, Literal["backfill", "bfill", "pad", "ffill"]]] = ...,
         axis: SeriesAxisType = ...,
         limit: Optional[int] = ...,
@@ -535,7 +535,7 @@ class Series(IndexOpsMixin, NDFrame, Generic[S1]):
     @overload
     def fillna(
         self,
-        value: Optional[Scalar | Dict | Series[S1] | DataFrame] = ...,
+        value: Optional[Union[Scalar, Dict, Series[S1], DataFrame]] = ...,
         method: Optional[Union[_str, Literal["backfill", "bfill", "pad", "ffill"]]] = ...,
         axis: SeriesAxisType = ...,
         *,
@@ -545,7 +545,7 @@ class Series(IndexOpsMixin, NDFrame, Generic[S1]):
     @overload
     def fillna(
         self,
-        value: Optional[Scalar | Dict | Series[S1] | DataFrame] = ...,
+        value: Optional[Union[Scalar, Dict, Series[S1], DataFrame]] = ...,
         method: Optional[Union[_str, Literal["backfill", "bfill", "pad", "ffill"]]] = ...,
         axis: SeriesAxisType = ...,
         inplace: _bool = ...,
