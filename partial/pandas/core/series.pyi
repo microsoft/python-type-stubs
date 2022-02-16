@@ -4,7 +4,7 @@ from matplotlib.axes import Axes as PlotAxes, SubplotBase as SubplotBase
 import sys
 from .base import IndexOpsMixin
 from .generic import NDFrame
-from .indexes.api import MultiIndex
+from .indexes.multi import MultiIndex
 from .indexing import _iLocIndexer, _LocIndexer
 from .frame import DataFrame
 from pandas.core.arrays.base import ExtensionArray
@@ -70,7 +70,7 @@ class _LocIndexerSeries(_LocIndexer, Generic[S1]):
     @overload
     def __getitem__(
         self,
-        idx: Union[MaskType, Index, Sequence[str], slice, Tuple[Union[int, str, slice, Index], ...]],
+        idx: Union[MaskType, Index, Sequence[Union[str, int]], slice, Tuple[Union[int, str, slice, Index], ...]],
     ) -> Series[S1]: ...
     @overload
     def __getitem__(
@@ -81,7 +81,7 @@ class _LocIndexerSeries(_LocIndexer, Generic[S1]):
     def __setitem__(
         self,
         idx: Union[Index, MaskType],
-        value: Union[S1, np.ndarray, Series[S1]],
+        value: Union[S1, ArrayLike, Series[S1]],
     ) -> None: ...
     @overload
     def __setitem__(
@@ -92,8 +92,8 @@ class _LocIndexerSeries(_LocIndexer, Generic[S1]):
     @overload
     def __setitem__(
         self,
-        idx: List[str],
-        value: Union[S1, np.ndarray, Series[S1]],
+        idx: Union[List[int], List[str], List[Union[str, int]]],
+        value: Union[S1, ArrayLike, Series[S1]],
     ) -> None: ...
 
 class Series(IndexOpsMixin, NDFrame, Generic[S1]):
@@ -148,7 +148,7 @@ class Series(IndexOpsMixin, NDFrame, Generic[S1]):
     def axes(self) -> List: ...
     def take(self, indices: Sequence, axis: SeriesAxisType = ..., is_copy: Optional[_bool] = ..., **kwargs) -> Series[S1]: ...
     @overload
-    def __getitem__(self, idx: Union[List[_str], Index[int], Series[S1], slice]) -> Series: ...
+    def __getitem__(self, idx: Union[List[_str], Index[int], Series[S1], slice, MaskType]) -> Series: ...
     @overload
     def __getitem__(self, idx: Union[int, _str]) -> S1: ...
     def __setitem__(self, key, value) -> None: ...
@@ -798,7 +798,7 @@ class Series(IndexOpsMixin, NDFrame, Generic[S1]):
         on: Optional[_str] = ...,
         level: Optional[Level] = ...,
         origin: Union[Timestamp, Literal["epoch", "start", "start_day", "end", "end_day"]] = ...,
-        offset: Optional[Timedelta, _str] = None
+        offset: Optional[Timedelta, _str] = None,
     ) -> Resampler: ...
     def first(self, offset) -> Series[S1]: ...
     def last(self, offset) -> Series[S1]: ...
@@ -861,8 +861,8 @@ class Series(IndexOpsMixin, NDFrame, Generic[S1]):
         self,
         percentiles: Optional[List[float]] = ...,
         include: Optional[Union[_str, Literal["all"], List[S1]]] = ...,
-        exclude: Optional[Union[S1,List[S1]]] = ...,
-        datetime_is_numeric: Optional[_bool] = ...
+        exclude: Optional[Union[S1, List[S1]]] = ...,
+        datetime_is_numeric: Optional[_bool] = ...,
     ) -> Series[S1]: ...
     def pct_change(
         self, periods: int = ..., fill_method: _str = ..., limit: Optional[int] = ..., freq=..., **kwargs

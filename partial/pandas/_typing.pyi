@@ -2,6 +2,7 @@ import datetime
 from io import BufferedIOBase, RawIOBase, TextIOBase, TextIOWrapper
 from mmap import mmap
 import numpy as np
+import numpy.typing as npt
 import sys
 from os import PathLike
 from pathlib import Path
@@ -77,9 +78,9 @@ ListLike = TypeVar("ListLike", Sequence, np.ndarray, "Series")
 StrLike = Union[str, np.str_]
 Scalar = Union[str, bytes, datetime.date, datetime.datetime, datetime.timedelta, bool, int, float, complex, Timestamp, Timedelta]
 # Refine the next 3 in 3.9 to use the specialized type.
-np_ndarray_int64 = NewType("np_ndarray_int64", Type[np.ndarray])
-np_ndarray_bool = NewType("np_ndarray_bool", Type[np.ndarray])
-np_ndarray_str = NewType("np_ndarray_str", Type[np.ndarray])
+np_ndarray_int64 = npt.NDArray[np.int64]
+np_ndarray_bool = npt.NDArray[np.bool_]
+np_ndarray_str = npt.NDArray[np.str_]
 IndexType = Union[slice, np_ndarray_int64, Index[int], List[int], Series[int]]
 MaskType = Union[Series[bool], np_ndarray_bool, Sequence[bool]]
 # Scratch types for generics

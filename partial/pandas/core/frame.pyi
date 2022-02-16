@@ -11,7 +11,7 @@ from pandas._typing import num, SeriesAxisType, AxisType, Dtype, DtypeNp, Label,
 from pandas._typing import ArrayLike as ArrayLike
 from pandas.core.arraylike import OpsMixin
 from pandas.core.generic import NDFrame as NDFrame
-from pandas.core.groupby import DataFrameGroupBy as DataFrameGroupBy
+from pandas.core.groupby.generic import DataFrameGroupBy as DataFrameGroupBy
 from pandas.core.groupby.grouper import Grouper
 from pandas.core.indexes.api import Index as Index, MultiIndex as MultiIndex
 from pandas.core.resample import Resampler
@@ -183,8 +183,9 @@ class DataFrame(NDFrame, OpsMixin):
     def __rmatmul__(self, other): ...
     @classmethod
     def from_dict(cls, data, orient=..., dtype=..., columns=...) -> DataFrame: ...
-    def to_numpy(self, dtype: Optional[Union[Type[DtypeNp], Dtype]] = ..., 
-                 copy:_bool = ..., na_value: Optional[Any] = ...) -> _np.ndarray: ...
+    def to_numpy(
+        self, dtype: Optional[Union[Type[DtypeNp], Dtype]] = ..., copy: _bool = ..., na_value: Optional[Any] = ...
+    ) -> _np.ndarray: ...
     @overload
     def to_dict(self) -> Dict[_str, Any]: ...
     @overload
@@ -790,7 +791,7 @@ class DataFrame(NDFrame, OpsMixin):
         observed: _bool = ...,
     ) -> DataFrame: ...
     def stack(self, level: Level = ..., dropna: _bool = ...) -> Union[DataFrame, Series[S1]]: ...
-    def explode(self, column: Union[_str, Tuple], ignore_index: _bool=...) -> DataFrame: ...
+    def explode(self, column: Union[_str, Tuple], ignore_index: _bool = ...) -> DataFrame: ...
     def unstack(
         self,
         level: Level = ...,
@@ -809,7 +810,7 @@ class DataFrame(NDFrame, OpsMixin):
     @overload
     def agg(self, func: Union[Callable, _str], axis: AxisType = ..., **kwargs) -> Series[S1]: ...
     @overload
-    def agg(self, func: Union[List[Callable], Dict[_str, Callable]]=..., axis: AxisType = ..., **kwargs) -> DataFrame: ...
+    def agg(self, func: Union[List[Callable], Dict[_str, Callable]] = ..., axis: AxisType = ..., **kwargs) -> DataFrame: ...
     @overload
     def aggregate(self, func: Union[Callable, _str], axis: AxisType = ..., **kwargs) -> Series[S1]: ...
     @overload
@@ -861,7 +862,7 @@ class DataFrame(NDFrame, OpsMixin):
         method: Union[_str, Literal["pearson", "kendall", "spearman"]] = ...,
         min_periods: int = ...,
     ) -> DataFrame: ...
-    def cov(self, min_periods: Optional[int] = ..., ddof:int = 1) -> DataFrame: ...
+    def cov(self, min_periods: Optional[int] = ..., ddof: int = 1) -> DataFrame: ...
     def corrwith(
         self,
         other: Union[DataFrame, Series[S1]],
@@ -961,7 +962,6 @@ class DataFrame(NDFrame, OpsMixin):
         fill_value: Union[None, float] = ...,
     ) -> DataFrame: ...
     def __iter__(self) -> Iterator: ...
-
     # properties
     @property
     def at(self): ...  # Not sure what to do with this yet; look at source
@@ -1108,7 +1108,7 @@ class DataFrame(NDFrame, OpsMixin):
         percentiles: Optional[List[float]] = ...,
         include: Optional[Union[_str, Literal["all"], List[Dtype]]] = ...,
         exclude: Optional[List[Dtype]] = ...,
-        datetime_is_numeric: Optional[_bool] = ...
+        datetime_is_numeric: Optional[_bool] = ...,
     ) -> DataFrame: ...
     def div(
         self,
@@ -1342,7 +1342,7 @@ class DataFrame(NDFrame, OpsMixin):
         level: None = ...,
         numeric_only: Optional[_bool] = ...,
         **kwargs,
-    ) -> Series[S1]: ...
+    ) -> Series: ...
     @overload
     def mean(
         self,
@@ -1399,7 +1399,7 @@ class DataFrame(NDFrame, OpsMixin):
         level: None = ...,
         numeric_only: Optional[_bool] = ...,
         **kwargs,
-    ) -> Series[S1]: ...
+    ) -> Series: ...
     def mod(
         self,
         other: Union[num, _ListLike, DataFrame],
@@ -1532,7 +1532,7 @@ class DataFrame(NDFrame, OpsMixin):
         on: Optional[_str] = ...,
         level: Optional[Level] = ...,
         origin: Union[Timestamp, Literal["epoch", "start", "start_day", "end", "end_day"]] = ...,
-        offset: Optional[Timedelta, _str] = None
+        offset: Optional[Timedelta, _str] = None,
     ) -> Resampler: ...
     def rfloordiv(
         self,
@@ -1929,7 +1929,7 @@ class DataFrame(NDFrame, OpsMixin):
     def to_string(
         self,
         columns: Optional[Sequence[_str]] = ...,
-        col_space:  Optional[Union[int, List[int], Dict[Union[_str, int], int]]] = ...,
+        col_space: Optional[Union[int, List[int], Dict[Union[_str, int], int]]] = ...,
         header: Union[_bool, Sequence[_str]] = ...,
         index: _bool = ...,
         na_rep: _str = ...,
