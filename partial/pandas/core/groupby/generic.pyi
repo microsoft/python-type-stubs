@@ -1,7 +1,7 @@
 from matplotlib.axes import Axes as PlotAxes, SubplotBase as AxesSubplot
 import numpy as np
 import sys
-from pandas._typing import FrameOrSeries as FrameOrSeries, AxisType, Dtype, Level, F, AggFuncType
+from pandas._typing import FrameOrSeries as FrameOrSeries, AxisType, Dtype, Level, F, AggFuncType, S1
 from pandas.core.frame import DataFrame as DataFrame
 from pandas.core.groupby.groupby import GroupBy as GroupBy  # , get_groupby as get_groupby
 from pandas.core.groupby.grouper import Grouper as Grouper
