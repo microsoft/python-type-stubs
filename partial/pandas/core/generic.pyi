@@ -12,7 +12,7 @@ from pandas._typing import (
     Scalar as Scalar,
     SeriesAxisType as SeriesAxisType,
     FrameOrSeries as FrameOrSeries,
-    S1 as S1
+    S1 as S1,
 )
 from pandas.core.base import PandasObject as PandasObject, SelectionMixin as SelectionMixin
 from pandas.core.indexes.api import Index as Index
@@ -37,6 +37,7 @@ class NDFrame(PandasObject, SelectionMixin, indexing.IndexingMixin):
         attrs: Optional[Mapping[Optional[Hashable], Any]] = ...,
         fastpath: _bool = ...,
     ) -> None: ...
+    def set_flags(self, *, copy: bool = ..., allows_duplicate_labels: Optional[bool] = ...) -> NDFrame: ...
     @property
     def attrs(self) -> Dict[Optional[Hashable], Any]: ...
     @attrs.setter

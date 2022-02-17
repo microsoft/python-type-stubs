@@ -854,3 +854,17 @@ def test_groupby_series_methods() -> None:
     gb.nlargest().loc[2]
     gb.nsmallest().loc[2]
     gb.nth(0).loc[2]
+
+
+# https://github.com/microsoft/python-type-stubs/issues/164
+# Comment out for now until issue is resolved.
+# def test_sum_get_add() -> None:
+#     df = pd.DataFrame({"x": [1, 2, 3, 4, 5], "y": [10, 20, 30, 40, 50]})
+#     s = df["x"]
+#     reveal_type(s)
+#     summer = df.sum(axis=1)
+#     reveal_type(summer)
+
+#     s2 = s + summer
+#     s3 = s + df["y"]
+#     s4 = summer + summer
