@@ -27,3 +27,9 @@ def test_index_isin():
     ind = pd.Index([1, 2, 3, 4, 5])
     isin = ind.isin([2, 4])
     reveal_type(isin, expected_type=np_ndarray_bool)
+
+
+def test_index_astype():
+    indi = pd.Index([1, 2, 3])
+    inds = pd.Index(["a", "b", "c"])
+    indc = indi.astype(inds.dtype)

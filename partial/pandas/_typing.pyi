@@ -35,8 +35,8 @@ if sys.version_info >= (3, 8):
 else:
     from typing_extensions import Literal
 
-AnyArrayLike = TypeVar("AnyArrayLike", ExtensionArray, Index, Series, np.ndarray)
-ArrayLike = TypeVar("ArrayLike", ExtensionArray, np.ndarray)
+ArrayLike = Union[ExtensionArray, np.ndarray]
+AnyArrayLike = Union[Index, Series]
 PythonScalar = Union[str, int, float, bool, complex]
 DatetimeLikeScalar = TypeVar("DatetimeLikeScalar", Period, Timestamp, Timedelta)
 PandasScalar = Union[bytes, datetime.date, datetime.datetime, datetime.timedelta]
