@@ -28,4 +28,11 @@ def test_max_intervals() -> None:
 
 def test_interval_length() -> None:
     i1 = pd.Interval(pd.Timestamp("2000-01-01"), pd.Timestamp("2000-01-02"), closed="both")
+    reveal_type(i1.length, expected_string="Timedelta")
     i1.length.total_seconds()
+
+    i2 = pd.Interval(10, 20)
+    reveal_type(i2.length, expected_type=int)
+
+    i3 = pd.Interval(13.2, 19.5)
+    reveal_type(i3.length, expected_type=float)
