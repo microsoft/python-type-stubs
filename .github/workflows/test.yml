@@ -33,6 +33,7 @@ jobs:
           cp -R partial typings
 
       - name: Run tests
-        uses: jakebailey/pyright-action@main
+        uses: gramster/pyright-action@main
         with:
           project: pyrighttestconfig.json
+          warn-partial: true
