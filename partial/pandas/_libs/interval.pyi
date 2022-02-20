@@ -2,7 +2,6 @@ from __future__ import annotations
 import sys
 from typing import Generic, overload, Union, Protocol, TypeVar, Any
 from _typing import Timedelta, Timestamp
-import datetime
 
 if sys.version_info >= (3, 8):
     from typing import Literal
@@ -10,14 +9,12 @@ else:
     from typing_extensions import Literal
 
 OrderableScalarT = TypeVar("OrderableScalarT", int, float)
-OrderableTimesT = TypeVar("OrderableTimesT", datetime.date, datetime.datetime, datetime.timedelta, Timestamp, Timedelta)
-OrderableDTimesT = TypeVar("OrderableDTimesT", datetime.date, datetime.datetime, datetime.timedelta)
-OrderablePTimesT = TypeVar("OrderablePTimesT", Timestamp, Timedelta)
-OrderableT = TypeVar("OrderableT", int, float, datetime.date, datetime.datetime, datetime.timedelta, Timestamp, Timedelta)
+OrderableTimesT = TypeVar("OrderableTimesT", Timestamp, Timedelta)
+OrderableT = TypeVar("OrderableT", int, float, Timestamp, Timedelta)
 
 OrderableScalar = Union[int, float]
-OrderableTimes = Union[datetime.date, datetime.datetime, datetime.timedelta, Timestamp, Timedelta]
-Orderable = Union[int, float, datetime.date, datetime.datetime, datetime.timedelta, Timestamp, Timedelta]
+OrderableTimes = Union[Timestamp, Timedelta]
+Orderable = Union[int, float, Timestamp, Timedelta]
 
 class IntervalMixinProtocol(Protocol): ...
 
@@ -27,9 +24,7 @@ class _LengthDescriptor:
     @overload
     def __get__(self, instance: Interval[int], owner: Any) -> int: ...
     @overload
-    def __get__(self, instance: Interval[OrderablePTimesT], owner: Any) -> Timedelta: ...
-    @overload
-    def __get__(self, instance: Interval[OrderableDTimesT], owner: Any) -> datetime.timedelta: ...
+    def __get__(self, instance: Interval[OrderableTimesT], owner: Any) -> Timedelta: ...
 
 class IntervalMixin:
     @property
@@ -76,27 +71,6 @@ class Interval(IntervalMixin, Generic[OrderableT]):
         right: Timedelta,
         closed: Union[str, Literal["left", "right", "both", "neither"]] = ...,
     ) -> Interval[Timedelta]: ...
-    @overload
-    def __new__(
-        cls,
-        left: datetime.date,
-        right: datetime.date,
-        closed: Union[str, Literal["left", "right", "both", "neither"]] = ...,
-    ) -> Interval[datetime.date]: ...
-    @overload
-    def __new__(
-        cls,
-        left: datetime.datetime,
-        right: datetime.datetime,
-        closed: Union[str, Literal["left", "right", "both", "neither"]] = ...,
-    ) -> Interval[datetime.datetime]: ...
-    @overload
-    def __new__(
-        cls,
-        left: datetime.timedelta,
-        right: datetime.timedelta,
-        closed: Union[str, Literal["left", "right", "both", "neither"]] = ...,
-    ) -> Interval[datetime.timedelta]: ...
     @overload
     def __new__(
         cls,
