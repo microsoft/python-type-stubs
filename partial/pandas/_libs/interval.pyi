@@ -43,34 +43,9 @@ class Interval(IntervalMixin, Generic[OrderableT]):
     def right(self: Interval[OrderableT]) -> OrderableT: ...
     @property
     def closed(self) -> str: ...
-    @overload
-    def __new__(
-        cls,
-        left: Timestamp,
-        right: Timestamp,
-        closed: Union[str, Literal["left", "right", "both", "neither"]] = ...,
-    ) -> Interval[Timestamp]: ...
-    @overload
-    def __new__(
-        cls,
-        left: Timedelta,
-        right: Timedelta,
-        closed: Union[str, Literal["left", "right", "both", "neither"]] = ...,
-    ) -> Interval[Timedelta]: ...
-    @overload
-    def __new__(
-        cls,
-        left: int,
-        right: int,
-        closed: Union[str, Literal["left", "right", "both", "neither"]] = ...,
-    ) -> Interval[int]: ...
-    @overload
-    def __new__(
-        cls,
-        left: float,
-        right: float,
-        closed: Union[str, Literal["left", "right", "both", "neither"]] = ...,
-    ) -> Interval[float]: ...
+    def __init__(
+        self, left: OrderableT, right: OrderableT, closed: Union[str, Literal["left", "right", "both", "neither"]] = ...
+    ): ...
     length: _LengthDescriptor
     def __hash__(self) -> int: ...
     @overload
