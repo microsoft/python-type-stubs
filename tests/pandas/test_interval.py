@@ -36,6 +36,7 @@ def test_interval_length() -> None:
     reveal_type(i1.length, expected_string="Timedelta")
     reveal_type(i1.left, expected_string="Timestamp")
     reveal_type(i1.right, expected_string="Timestamp")
+    reveal_type(i1.mid, expected_string="Timestamp")
     i1.length.total_seconds()
     pd.Timestamp("2001-01-02") in i1
     i1 + pd.Timedelta(seconds=20)
@@ -51,6 +52,8 @@ def test_interval_length() -> None:
     reveal_type(i2.length, expected_type=int)
     reveal_type(i2.left, expected_type=int)
     reveal_type(i2.right, expected_type=int)
+    reveal_type(i2.mid, expected_type=float)
+
     15 in i2
     reveal_type(i2 + 3, expected_string="Interval[int]")
     reveal_type(i2 + 3.2, expected_string="Interval[float]")
@@ -66,6 +69,8 @@ def test_interval_length() -> None:
     reveal_type(i3.length, expected_type=float)
     reveal_type(i3.left, expected_type=float)
     reveal_type(i3.right, expected_type=float)
+    reveal_type(i3.mid, expected_type=float)
+
     15.4 in i3
     reveal_type(i3 + 3, expected_string="Interval[float]")
     reveal_type(i3 * 3, expected_string="Interval[float]")
