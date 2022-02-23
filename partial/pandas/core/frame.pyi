@@ -233,20 +233,31 @@ class DataFrame(NDFrame, OpsMixin):
         version: int = ...,
         convert_strl: Optional[List[_str]] = ...,
     ) -> None: ...
-    def to_feather(self, path: FileOrBuffer, **kwargs) -> None: ...
+    def to_feather(self, path: FilePathOrBuffer, **kwargs) -> None: ...
     @overload
     def to_markdown(self, buf: Optional[FilePathOrBuffer], mode: Optional[_str] = ..., **kwargs) -> None: ...
     @overload
     def to_markdown(self, mode: Optional[_str] = ..., **kwargs) -> _str: ...
+    @overload
     def to_parquet(
         self,
-        path: _str,
+        path: Optional[FilePathOrBuffer],
         engine: Union[_str, Literal["auto", "pyarrow", "fastparquet"]] = ...,
         compression: Union[_str, Literal["snappy", "gzip", "brotli"]] = ...,
         index: Optional[_bool] = ...,
         partition_cols: Optional[List] = ...,
         **kwargs,
     ) -> None: ...
+    @overload
+    def to_parquet(
+        self,
+        path: Optional[FilePathOrBuffer] = ...,
+        engine: Union[_str, Literal["auto", "pyarrow", "fastparquet"]] = ...,
+        compression: Union[_str, Literal["snappy", "gzip", "brotli"]] = ...,
+        index: Optional[_bool] = ...,
+        partition_cols: Optional[List] = ...,
+        **kwargs,
+    ) -> bytes: ...
     @overload
     def to_html(
         self,
@@ -730,6 +741,14 @@ class DataFrame(NDFrame, OpsMixin):
         ignore_index: _bool = ...,
         key: Optional[Callable] = ...,
     ) -> Union[None, DataFrame]: ...
+    def value_counts(
+        self,
+        subset: Optional[Sequence[Hashable]] = ...,
+        normalize: _bool = ...,
+        sort: _bool = ...,
+        ascending: _bool = ...,
+        dropna: _bool = ...,
+    ) -> Series[int]: ...
     def nlargest(
         self,
         n: int,
@@ -744,6 +763,13 @@ class DataFrame(NDFrame, OpsMixin):
     ) -> DataFrame: ...
     def swaplevel(self, i: Level = ..., j: Level = ..., axis: AxisType = ...) -> DataFrame: ...
     def reorder_levels(self, order: List, axis: AxisType = ...) -> DataFrame: ...
+    def compare(
+        self,
+        other: DataFrame,
+        align_axis: Axis = ...,
+        keep_shape: bool = ...,
+        keep_equal: bool = ...,
+    ) -> DataFrame: ...
     def combine(
         self,
         other: DataFrame,

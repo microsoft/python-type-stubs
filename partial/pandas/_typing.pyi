@@ -28,6 +28,7 @@ from pandas.core.generic import NDFrame
 from pandas._libs.tslibs import Period, Timedelta, Timestamp
 from pandas.core.arrays import ExtensionArray
 from pandas.core.series import Series
+from pandas.core.frame import DataFrame
 from pandas.core.indexes.base import Index
 
 if sys.version_info >= (3, 8):
@@ -35,8 +36,8 @@ if sys.version_info >= (3, 8):
 else:
     from typing_extensions import Literal
 
-AnyArrayLike = TypeVar("AnyArrayLike", ExtensionArray, Index, Series, np.ndarray)
-ArrayLike = TypeVar("ArrayLike", ExtensionArray, np.ndarray)
+ArrayLike = Union[ExtensionArray, np.ndarray]
+AnyArrayLike = Union[Index, Series]
 PythonScalar = Union[str, int, float, bool, complex]
 DatetimeLikeScalar = TypeVar("DatetimeLikeScalar", Period, Timestamp, Timedelta)
 PandasScalar = Union[bytes, datetime.date, datetime.datetime, datetime.timedelta]
@@ -49,6 +50,7 @@ FileOrBuffer = Union[str, Buffer[AnyStr]]
 FilePathOrBuffer = Union["PathLike[str]", FileOrBuffer[AnyStr]]
 
 FrameOrSeries = TypeVar("FrameOrSeries", bound=NDFrame)
+FrameOrSeriesUnion = Union[DataFrame, Series]
 Axis = Union[str, int]
 Label = Optional[Hashable]
 Level = Union[Label, int]
