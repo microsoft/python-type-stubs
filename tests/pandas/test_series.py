@@ -596,3 +596,12 @@ def test_series_index_isin() -> None:
     reveal_type(t2, expected_text="Series[Unknown]")
     reveal_type(t3, expected_text="Series[Unknown]")
     reveal_type(t4, expected_text="Series[Unknown]")
+
+
+def test_series_invert() -> None:
+    s1 = pd.Series([True, False, True])
+    s2 = ~s1
+    reveal_type(s2, expected_text="Series[bool]")
+    s3 = pd.Series([1, 2, 3])
+    reveal_type(s3[s2], expected_type=pd.Series)
+    reveal_type(s3.loc[s2], expected_type=pd.Series)
