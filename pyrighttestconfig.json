@@ -3,5 +3,6 @@
     "include": [ "tests" ],
     "reportMissingModuleSource": false,
     "reportUnusedVariable": false,
-    "useLibraryCodeForTypes": true
+    "useLibraryCodeForTypes": true,
+    "reportUnknownArgumentType": true
 }

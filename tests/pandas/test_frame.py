@@ -578,8 +578,9 @@ def test_types_to_feather() -> None:
     # See https://pandas.pydata.org/docs/whatsnew/v1.0.0.html
     # Docstring and type were updated in 1.2.0.
     # https://github.com/pandas-dev/pandas/pull/35408
-    with tempfile.TemporaryFile() as f:
-        df.to_feather(f)
+    with tempfile.NamedTemporaryFile(delete=False) as f:
+        df.to_feather(f.name)
+        f.close()
 
 
 # compare() method added in 1.1.0 https://pandas.pydata.org/docs/whatsnew/v1.1.0.html
@@ -854,3 +855,17 @@ def test_groupby_series_methods() -> None:
     gb.nlargest().loc[2]
     gb.nsmallest().loc[2]
     gb.nth(0).loc[2]
+
+
+# https://github.com/microsoft/python-type-stubs/issues/164
+# Comment out for now until issue is resolved.
+# def test_sum_get_add() -> None:
+#     df = pd.DataFrame({"x": [1, 2, 3, 4, 5], "y": [10, 20, 30, 40, 50]})
+#     s = df["x"]
+#     reveal_type(s)
+#     summer = df.sum(axis=1)
+#     reveal_type(summer)
+
+#     s2 = s + summer
+#     s3 = s + df["y"]
+#     s4 = summer + summer
