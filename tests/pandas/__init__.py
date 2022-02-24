@@ -74,7 +74,7 @@ def check_interval_result(
 ):
     assert isinstance(result, pd.Interval)
     if dtype is not None:
-        assert type(result.left) == dtype
+        assert isinstance(result.left, dtype)
 
 
 def check_int_result(result: int):
