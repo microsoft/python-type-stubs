@@ -10,12 +10,9 @@ import pandas as pd
 from pandas.io.parsers import TextFileReader
 import numpy as np
 
+from . import check_dataframe_result, check_series_result
+
 import pytest
-
-if not TYPE_CHECKING:
-
-    def reveal_type(arg, **kwargs):
-        pass
 
 
 def test_types_init() -> None:
@@ -511,6 +508,14 @@ def test_types_group_by_with_dropna_keyword() -> None:
     df.groupby(by="col2").sum()
 
 
+def test_types_groupby_any() -> None:
+    df = pd.DataFrame(data={"col1": [1, 1, 2], "col2": [True, False, False], "col3": [False, False, False]})
+    check_dataframe_result(df.groupby("col1").any())
+    check_dataframe_result(df.groupby("col1").all())
+    check_series_result(df.groupby("col1")["col2"].any())
+    check_series_result(df.groupby("col1")["col2"].any())
+
+
 def test_types_merge() -> None:
     df = pd.DataFrame(data={"col1": [1, 1, 2], "col2": [3, 4, 5]})
     df2 = pd.DataFrame(data={"col1": [1, 1, 2], "col2": [0, 1, 0]})
@@ -836,7 +841,7 @@ def test_read_csv() -> None:
 def test_groupby_series_methods() -> None:
     df = pd.DataFrame({"x": [1, 2, 2, 3, 3], "y": [10, 20, 30, 40, 50]})
     gb = df.groupby("x")["y"]
-    reveal_type(gb.describe(), expected_text="DataFrame")
+    check_dataframe_result(gb.describe())
     gb.count().loc[2]
     gb.pct_change().loc[2]
     gb.bfill().loc[2]
@@ -862,9 +867,9 @@ def test_groupby_series_methods() -> None:
 # def test_sum_get_add() -> None:
 #     df = pd.DataFrame({"x": [1, 2, 3, 4, 5], "y": [10, 20, 30, 40, 50]})
 #     s = df["x"]
-#     reveal_type(s)
+#     check_series_result(s)
 #     summer = df.sum(axis=1)
-#     reveal_type(summer)
+#     check_dataframe_result(summer)
 
 #     s2 = s + summer
 #     s3 = s + df["y"]

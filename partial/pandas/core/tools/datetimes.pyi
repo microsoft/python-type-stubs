@@ -1,7 +1,7 @@
 from datetime import datetime as datetime
 from numpy import datetime64 as datetime64
 
-from pandas._typing import ArrayLike as ArrayLike
+from pandas._typing import ArrayLike as ArrayLike, Index as Index
 from pandas.core.dtypes.generic import ABCSeries as ABCSeries
 from pandas.core.generic import NDFrame as NDFrame
 from pandas.core.indexes.datetimes import DatetimeIndex as DatetimeIndex
@@ -11,11 +11,10 @@ from typing import Optional, TypeVar, Union, overload
 
 ArrayConvertible = Union[list, tuple, ArrayLike, ABCSeries]
 Scalar = Union[int, float, str, Timestamp]
-DatetimeScalar = TypeVar('DatetimeScalar', Scalar, datetime)
+DatetimeScalar = TypeVar("DatetimeScalar", Scalar, datetime, datetime64)
 DatetimeScalarOrArrayConvertible = Union[DatetimeScalar, list, tuple, ArrayLike, Series]
 
-def should_cache(arg: ArrayConvertible, unique_share: float=..., check_count: Optional[int]=...) -> bool: ...
-
+def should_cache(arg: ArrayConvertible, unique_share: float = ..., check_count: Optional[int] = ...) -> bool: ...
 @overload
 def to_datetime(
     arg: Union[DataFrame, Series],
@@ -28,7 +27,8 @@ def to_datetime(
     unit: Optional[str] = ...,
     infer_datetime_format: bool = ...,
     origin: Scalar = ...,
-    cache: bool = ...) -> Series[datetime64]: ...
+    cache: bool = ...,
+) -> Series[datetime64]: ...
 @overload
 def to_datetime(
     arg: DatetimeScalar,
@@ -41,10 +41,11 @@ def to_datetime(
     unit: Optional[str] = ...,
     infer_datetime_format: bool = ...,
     origin: Scalar = ...,
-    cache: bool = ...) -> Timestamp: ...
+    cache: bool = ...,
+) -> Timestamp: ...
 @overload
 def to_datetime(
-    arg: Union[list, tuple, ArrayLike],
+    arg: Union[list, tuple, ArrayLike, Index],
     errors: str = ...,
     dayfirst: bool = ...,
     yearfirst: bool = ...,
@@ -54,6 +55,6 @@ def to_datetime(
     unit: Optional[str] = ...,
     infer_datetime_format: bool = ...,
     origin: Scalar = ...,
-    cache: bool = ...) -> DatetimeIndex: ...
-
-def to_time(arg, format = ..., infer_time_format: bool = ..., errors: str = ...): ...
+    cache: bool = ...,
+) -> DatetimeIndex: ...
+def to_time(arg, format=..., infer_time_format: bool = ..., errors: str = ...): ...

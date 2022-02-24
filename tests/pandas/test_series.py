@@ -11,13 +11,9 @@ import pandas as pd
 import numpy as np
 
 from pandas.core.window import ExponentialMovingWindow
+from . import check_dataframe_result, check_series_result
 
 import pytest
-
-if not TYPE_CHECKING:
-
-    def reveal_type(arg, **kwargs):
-        pass
 
 
 def test_types_init() -> None:
@@ -94,8 +90,8 @@ def test_types_loc_at() -> None:
 
 def test_multiindex_loc() -> None:
     s = pd.Series([1, 2, 3, 4], index=pd.MultiIndex.from_product([[1, 2], ["a", "b"]]))
-    reveal_type(s.loc[1, :], expected_text="Series[Unknown]")
-    reveal_type(s.loc[pd.Index([1]), :], expected_text="Series[Unknown]")
+    check_series_result(s.loc[1, :])
+    check_series_result(s.loc[pd.Index([1]), :])
 
 
 def test_types_boolean_indexing() -> None:
@@ -592,16 +588,16 @@ def test_series_index_isin() -> None:
     t2 = s.loc[~s.index.isin([1, 3])]
     t3 = s[s.index.isin([1, 3])]
     t4 = s[~s.index.isin([1, 3])]
-    reveal_type(t1, expected_text="Series[Unknown]")
-    reveal_type(t2, expected_text="Series[Unknown]")
-    reveal_type(t3, expected_text="Series[Unknown]")
-    reveal_type(t4, expected_text="Series[Unknown]")
+    check_series_result(t1)
+    check_series_result(t2)
+    check_series_result(t3)
+    check_series_result(t4)
 
 
 def test_series_invert() -> None:
     s1 = pd.Series([True, False, True])
     s2 = ~s1
-    reveal_type(s2, expected_text="Series[bool]")
+    check_series_result(s2, bool)
     s3 = pd.Series([1, 2, 3])
-    reveal_type(s3[s2], expected_type=pd.Series)
-    reveal_type(s3.loc[s2], expected_type=pd.Series)
+    check_series_result(s3[s2])
+    check_series_result(s3.loc[s2])

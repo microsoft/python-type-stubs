@@ -87,7 +87,19 @@ IndexType = Union[slice, np_ndarray_int64, Index[int], List[int], Series[int]]
 MaskType = Union[Series[bool], np_ndarray_bool, Sequence[bool]]
 # Scratch types for generics
 S1 = TypeVar(
-    "S1", str, bytes, datetime.date, datetime.datetime, datetime.timedelta, bool, int, float, complex, Timestamp, Timedelta
+    "S1",
+    str,
+    bytes,
+    datetime.date,
+    datetime.datetime,
+    datetime.timedelta,
+    bool,
+    int,
+    float,
+    complex,
+    Timestamp,
+    Timedelta,
+    np.datetime64,
 )
 T1 = TypeVar("T1", str, int)
 T2 = TypeVar("T2", str, int)
