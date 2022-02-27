@@ -103,3 +103,7 @@ S1 = TypeVar(
 )
 T1 = TypeVar("T1", str, int)
 T2 = TypeVar("T2", str, int)
+
+# Interval closed type
+
+IntervalClosedType = Literal["left", "right", "both", "neither"]
