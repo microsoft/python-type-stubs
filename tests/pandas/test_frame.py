@@ -860,7 +860,6 @@ def test_groupby_series_methods() -> None:
     gb.nlargest().loc[2]
     gb.nsmallest().loc[2]
     gb.nth(0).loc[2]
-    pd.to_datetime("abc")
 
 
 # https://github.com/microsoft/python-type-stubs/issues/164
