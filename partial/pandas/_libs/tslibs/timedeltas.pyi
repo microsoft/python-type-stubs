@@ -1,43 +1,37 @@
 from datetime import timedelta
 from typing import (
     ClassVar,
+    Sequence,
     Type,
     TypeVar,
     overload,
 )
 
 import numpy as np
-
-from pandas._libs.tslibs import (
-    NaTType,
-    Tick,
-)
-from pandas._typing import npt
+import numpy.typing as npt
 
 _S = TypeVar("_S", bound=timedelta)
 
-def ints_to_pytimedelta(arr: Sequence[int], box: bool = ...) -> np.ndarray: ... 
+def ints_to_pytimedelta(arr: Sequence[int], box: bool = ...) -> np.ndarray: ...
 def array_to_timedelta64(
     values: npt.NDArray[np.object_],
     unit: str | None = ...,
     errors: str = ...,
 ) -> np.ndarray: ...  # np.ndarray[m8ns]
 def parse_timedelta_unit(unit: str | None) -> str: ...
-def delta_to_nanoseconds(delta: Tick | np.timedelta64 | timedelta | int) -> int: ...
-  
+def delta_to_nanoseconds(delta: np.timedelta64 | timedelta | int) -> int: ...
+
 class Timedelta(timedelta):
     min: ClassVar[Timedelta]
     max: ClassVar[Timedelta]
     resolution: ClassVar[Timedelta]
     value: int  # np.int64
-
-    # error: "__new__" must return a class instance (got "Union[Timedelta, NaTType]")
-    def __new__(  # type: ignore[misc]
+    def __new__(
         cls: Type[_S],
         value=...,
         unit: str = ...,
         **kwargs: int | float | np.integer | np.floating,
-    ) -> _S | NaTType: ...
+    ) -> _S: ...
     @property
     def days(self) -> int: ...
     @property
@@ -80,4 +74,4 @@ class Timedelta(timedelta):
     def __gt__(self, other: timedelta) -> bool: ...
     def __hash__(self) -> int: ...
     def isoformat(self) -> str: ...
-    def to_numpy(self) -> _np.timedelta64: ...
+    def to_numpy(self) -> np.timedelta64: ...

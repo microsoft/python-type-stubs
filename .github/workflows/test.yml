@@ -42,3 +42,7 @@ jobs:
         run:
           pytest tests/pandas
           
+      - name: Run mypy
+        run:
+          mypy tests/pandas
+          

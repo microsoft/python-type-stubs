@@ -766,7 +766,7 @@ def test_types_regressions() -> None:
     df2: pd.DataFrame = df.astype(int)
 
     # https://github.com/microsoft/python-type-stubs/issues/38
-    df: pd.DataFrame = pd.DataFrame({"x": [12, 34], "y": [78, 9]})
+    df0: pd.DataFrame = pd.DataFrame({"x": [12, 34], "y": [78, 9]})
     ds: pd.DataFrame = df.sort_values(["x", "y"], ascending=[True, False])
 
     # https://github.com/microsoft/python-type-stubs/issues/55
