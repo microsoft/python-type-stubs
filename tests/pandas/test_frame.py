@@ -827,7 +827,7 @@ def test_read_csv() -> None:
     df16: TextFileReader = pd.read_csv("foo", iterator=True)
     df17: TextFileReader = pd.read_csv("foo", iterator=True, chunksize=None)
     df18: TextFileReader = pd.read_csv("foo", iterator=True, chunksize=0)
-    df19: pd.DataFrame = pd.read_csv("foo", chunksize=0)
+    df19: TextFileReader = pd.read_csv("foo", chunksize=0)
 
     # https://github.com/microsoft/python-type-stubs/issues/118
     pd.read_csv("foo", storage_options=None)
@@ -855,7 +855,7 @@ def test_groupby_series_methods() -> None:
     gb.nlargest().loc[2]
     gb.nsmallest().loc[2]
     gb.nth(0).loc[2]
-    badcode
+    pd.to_datetime("abc")
 
 
 # https://github.com/microsoft/python-type-stubs/issues/164
