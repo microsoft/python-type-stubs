@@ -32,8 +32,17 @@ jobs:
         run:
           cp -R partial/ typings
 
-      - name: Run tests
+      - name: Run pyright tests
         uses: gramster/pyright-action@main
         with:
           project: pyrighttestconfig.json
           warn-partial: true
+
+      - name: Run pytest
+        run:
+          pytest tests/pandas
+          
+      - name: Run mypy
+        run:
+          mypy tests/pandas
+          

@@ -25,7 +25,7 @@ from typing import (
 )
 
 from pandas.core.generic import NDFrame
-from pandas._libs.tslibs import Period, Timedelta, Timestamp
+from pandas._libs.tslibs import Period, Timedelta as Timedelta, Timestamp as Timestamp
 from pandas.core.arrays import ExtensionArray
 from pandas.core.series import Series
 from pandas.core.frame import DataFrame
@@ -87,7 +87,23 @@ IndexType = Union[slice, np_ndarray_int64, Index[int], List[int], Series[int]]
 MaskType = Union[Series[bool], np_ndarray_bool, Sequence[bool]]
 # Scratch types for generics
 S1 = TypeVar(
-    "S1", str, bytes, datetime.date, datetime.datetime, datetime.timedelta, bool, int, float, complex, Timestamp, Timedelta
+    "S1",
+    str,
+    bytes,
+    datetime.date,
+    datetime.datetime,
+    datetime.timedelta,
+    bool,
+    int,
+    float,
+    complex,
+    Timestamp,
+    Timedelta,
+    np.datetime64,
 )
 T1 = TypeVar("T1", str, int)
 T2 = TypeVar("T2", str, int)
+
+# Interval closed type
+
+IntervalClosedType = Literal["left", "right", "both", "neither"]

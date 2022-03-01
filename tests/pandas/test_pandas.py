@@ -9,11 +9,13 @@ import pandas as pd
 
 def test_types_to_datetime() -> None:
     df = pd.DataFrame({"year": [2015, 2016], "month": [2, 3], "day": [4, 5]})
-    pd.to_datetime(df)
-    pd.to_datetime(df, unit="s", origin="unix", infer_datetime_format=True)
-    pd.to_datetime(df, unit="ns", dayfirst=True, utc=None, format="%M:%D", exact=False)
-    pd.to_datetime([1, 2], unit="D", origin=pd.Timestamp("01/01/2000"))
-    pd.to_datetime([1, 2], unit="D", origin=3)
+    r1: pd.Series = pd.to_datetime(df)
+    r2: pd.Series = pd.to_datetime(df, unit="s", origin="unix", infer_datetime_format=True)
+    r3: pd.Series = pd.to_datetime(df, unit="ns", dayfirst=True, utc=None, format="%M:%D", exact=False)
+    r4: pd.DatetimeIndex = pd.to_datetime([1, 2], unit="D", origin=pd.Timestamp("01/01/2000"))
+    r5: pd.DatetimeIndex = pd.to_datetime([1, 2], unit="D", origin=3)
+    r6: pd.DatetimeIndex = pd.to_datetime(["2022-01-03", "2022-02-22"])
+    r7: pd.DatetimeIndex = pd.to_datetime(pd.Index(["2022-01-03", "2022-02-22"]))
 
 
 def test_types_concat() -> None:

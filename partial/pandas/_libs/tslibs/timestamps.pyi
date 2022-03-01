@@ -31,9 +31,7 @@ class Timestamp(datetime):
 
     resolution: ClassVar[Timedelta]
     value: int  # np.int64
-
-    # error: "__new__" must return a class instance (got "Union[Timestamp, NaTType]")
-    def __new__(  # type: ignore[misc]
+    def __new__(
         cls: type[_DatetimeT],
         ts_input: int | np.integer | float | str | _date | datetime | np.datetime64 = ...,
         freq: int | None | str | BaseOffset = ...,
@@ -50,7 +48,7 @@ class Timestamp(datetime):
         tzinfo: _tzinfo | None = ...,
         *,
         fold: int | None = ...,
-    ) -> _DatetimeT | NaTType: ...
+    ) -> _DatetimeT: ...
     def _set_freq(self, freq: BaseOffset | None) -> None: ...
     @property
     def year(self) -> int: ...
@@ -136,7 +134,7 @@ class Timestamp(datetime):
     def __radd__(self: _DatetimeT, other: timedelta) -> _DatetimeT: ...
     @overload  # type: ignore
     def __sub__(self, other: Timestamp) -> Timedelta: ...
-    @overload  # type: ignore
+    @overload
     def __sub__(self, other: datetime) -> timedelta: ...
     @overload
     # TODO: other can also be Tick (but it cannot be resolved)
