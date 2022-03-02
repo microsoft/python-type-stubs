@@ -8,7 +8,6 @@ from datetime import (
 from time import struct_time
 from typing import (
     ClassVar,
-    Literal,
     TypeVar,
     overload,
 )
@@ -17,7 +16,6 @@ import numpy as np
 
 from pandas._libs.tslibs import (
     BaseOffset,
-    NaT,
     NaTType,
     Period,
     Timedelta,
@@ -27,13 +25,21 @@ _DatetimeT = TypeVar("_DatetimeT", bound=datetime)
 
 def integer_op_not_supported(obj: object) -> TypeError: ...
 
-class Timestamp(_Timestamp, NaTType):
-    @overload
+class Timestamp(datetime):
+    min: ClassVar[Timestamp]
+    max: ClassVar[Timestamp]
+
+    resolution: ClassVar[Timedelta]
+    value: int  # np.int64
     def __new__(
-        cls: type[Timestamp],
-        # error: Unsupported left operand type for | ("float")
-        value=Literal["NaT"] | Literal["nat"] | Literal["NAT"] | Literal["nan"] | Literal["NaN"] | Literal["NAN"] | None,
-        *,
+        cls: type[_DatetimeT],
+        ts_input: int
+        | np.integer
+        | float
+        | str
+        | _date
+        | datetime
+        | np.datetime64 = ...,
         freq: int | None | str | BaseOffset = ...,
         tz: str | _tzinfo | None | int = ...,
         unit: str | int | None = ...,
@@ -46,51 +52,9 @@ class Timestamp(_Timestamp, NaTType):
         microsecond: int | None = ...,
         nanosecond: int | None = ...,
         tzinfo: _tzinfo | None = ...,
+        *,
         fold: int | None = ...,
-    ) -> NaTType: ...
-    # @overload
-    # def __new__(
-    #     cls: type[_DatetimeT],
-    #     ts_input: int | np.integer | float | str | _date | datetime | np.datetime64 = ...,
-    #     freq: int | None | str | BaseOffset = ...,
-    #     tz: str | _tzinfo | None | int = ...,
-    #     unit: str | int | None = ...,
-    #     year: int | None = ...,
-    #     month: int | None = ...,
-    #     day: int | None = ...,
-    #     hour: int | None = ...,
-    #     minute: int | None = ...,
-    #     second: int | None = ...,
-    #     microsecond: int | None = ...,
-    #     nanosecond: int | None = ...,
-    #     tzinfo: _tzinfo | None = ...,
-    #     *,
-    #     fold: int | None = ...,
-    # ) -> _Timestamp: ...
-    # @overload
-    # def __new__(
-    #     cls: type[_DatetimeT],
-    #     year: int,
-    #     month: int,
-    #     day: int,
-    #     hour: int = ...,
-    #     minute: int = ...,
-    #     second: int = ...,
-    #     microsecond: int = ...,
-    #     nanosecond: int = ...,
-    #     tzinfo: _tzinfo | None = ...,
-    #     *,
-    #     fold: int = ...,
-    # ) -> _Timestamp: ...
-    # error: Incompatible return type for "__new__" (returns "NaTType", but must
-    # return a subtype of "Timestamp")
-
-class _Timestamp(datetime):
-    min: ClassVar[Timestamp]
-    max: ClassVar[Timestamp]
-
-    resolution: ClassVar[Timedelta]
-    value: int  # np.int64
+    ) -> _DatetimeT: ...
     def _set_freq(self, freq: BaseOffset | None) -> None: ...
     @property
     def year(self) -> int: ...
@@ -113,7 +77,9 @@ class _Timestamp(datetime):
     @property
     def fold(self) -> int: ...
     @classmethod
-    def fromtimestamp(cls: type[_DatetimeT], t: float, tz: _tzinfo | None = ...) -> _DatetimeT: ...
+    def fromtimestamp(
+        cls: type[_DatetimeT], t: float, tz: _tzinfo | None = ...
+    ) -> _DatetimeT: ...
     @classmethod
     def utcfromtimestamp(cls: type[_DatetimeT], t: float) -> _DatetimeT: ...
     @classmethod
@@ -174,8 +140,6 @@ class _Timestamp(datetime):
     # TODO: other can also be Tick (but it cannot be resolved)
     def __add__(self: _DatetimeT, other: timedelta | np.timedelta64) -> _DatetimeT: ...
     def __radd__(self: _DatetimeT, other: timedelta) -> _DatetimeT: ...
-    @overload
-    def __sub__(self, other: Timestamp) -> Timedelta: ...
     @overload  # type: ignore
     def __sub__(self, other: datetime) -> timedelta: ...
     @overload
@@ -215,9 +179,15 @@ class _Timestamp(datetime):
     ) -> _DatetimeT: ...
     def normalize(self: _DatetimeT) -> _DatetimeT: ...
     # TODO: round/floor/ceil could return NaT?
-    def round(self: _DatetimeT, freq: str, ambiguous: bool | str = ..., nonexistent: str = ...) -> _DatetimeT: ...
-    def floor(self: _DatetimeT, freq: str, ambiguous: bool | str = ..., nonexistent: str = ...) -> _DatetimeT: ...
-    def ceil(self: _DatetimeT, freq: str, ambiguous: bool | str = ..., nonexistent: str = ...) -> _DatetimeT: ...
+    def round(
+        self: _DatetimeT, freq: str, ambiguous: bool | str = ..., nonexistent: str = ...
+    ) -> _DatetimeT: ...
+    def floor(
+        self: _DatetimeT, freq: str, ambiguous: bool | str = ..., nonexistent: str = ...
+    ) -> _DatetimeT: ...
+    def ceil(
+        self: _DatetimeT, freq: str, ambiguous: bool | str = ..., nonexistent: str = ...
+    ) -> _DatetimeT: ...
     def day_name(self, locale: str | None = ...) -> str: ...
     def month_name(self, locale: str | None = ...) -> str: ...
     @property
@@ -230,4 +200,6 @@ class _Timestamp(datetime):
     def quarter(self) -> int: ...
     @property
     def week(self) -> int: ...
-    def to_numpy(self, dtype: np.dtype | None = ..., copy: bool = ...) -> np.datetime64: ...
+    def to_numpy(
+        self, dtype: np.dtype | None = ..., copy: bool = ...
+    ) -> np.datetime64: ...

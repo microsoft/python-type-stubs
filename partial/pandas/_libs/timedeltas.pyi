@@ -1,7 +1,6 @@
 from datetime import timedelta
 from typing import (
     ClassVar,
-    Literal,
     Type,
     TypeVar,
     overload,
@@ -10,7 +9,6 @@ from typing import (
 import numpy as np
 
 from pandas._libs.tslibs import (
-    NaT,
     NaTType,
     Tick,
 )
@@ -35,33 +33,12 @@ class Timedelta(timedelta):
     max: ClassVar[Timedelta]
     resolution: ClassVar[Timedelta]
     value: int  # np.int64
-    @overload
     def __new__(
         cls: Type[_S],
         value=...,
         unit: str = ...,
         **kwargs: int | float | np.integer | np.floating,
     ) -> _S: ...
-    @overload
-    # : error: Incompatible return type for "__new__" (returns "NaTType", but must
-    # return a subtype of "Timedelta")
-    def __new__(  # type: ignore[misc]
-        cls: Type[_S],
-        # error: Unsupported left operand type for | ("float")
-        value=np.nan  # type: ignore[operator]
-        | NaT
-        | np.datetime64("NaT")
-        | NaT.value
-        | Literal["NaT"]
-        | Literal["nat"]
-        | Literal["NAT"]
-        | Literal["nan"]
-        | Literal["NaN"]
-        | Literal["NAN"]
-        | None,
-        unit: str = ...,
-        **kwargs: int | float | np.integer | np.floating,
-    ) -> NaTType: ...
     @property
     def days(self) -> int: ...
     @property
