@@ -1,4 +1,4 @@
-__all__ = ["Period", "Timestamp", "Timedelta", "NaT", "NaTType", "iNaT", "nat_strings", "BaseOffset", "OutofBoundsDatetime"]
+__all__ = ["Period", "Timestamp", "Timedelta", "NaT", "NaTType", "iNaT", "nat_strings", "BaseOffset", "Tick", "OutofBoundsDatetime"]
 
 from .period import Period
 from .timestamps import Timestamp
@@ -9,5 +9,5 @@ from .nattype import (
     iNaT,
     nat_strings,
 )
-from .offsets import BaseOffset
+from .offsets import BaseOffset, Tick
 from np_datetime import OutOfBoundsDatetime as OutOfBoundsDatetime

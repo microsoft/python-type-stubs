@@ -24,9 +24,8 @@ def test_types_arithmetic() -> None:
 
     tsr: pd.Timedelta = ts - ts2
     tsr2: pd.Timestamp = ts + delta
-
-    ts3 = pd.Timestamp("NAN")
-    reveal_type(ts3)
+    tsr3: pd.Timestamp = ts - delta
+    tsr4: pd.Timedelta = ts - dt.datetime(2021, 1, 3)
 
 
 def test_types_comparison() -> None:
