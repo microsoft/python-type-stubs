@@ -8,7 +8,7 @@ from pandas.core.indexing import _iLocIndexer, _LocIndexer
 from matplotlib.axes import Axes as PlotAxes
 from pandas._typing import Axes as Axes, Axis as Axis, FilePathOrBuffer as FilePathOrBuffer, Level as Level, Renamer as Renamer
 from pandas._typing import num, SeriesAxisType, AxisType, Dtype, DtypeNp, Label, StrLike, Scalar, IndexType, MaskType, S1
-from pandas._typing import ArrayLike as ArrayLike
+from pandas._typing import ArrayLike as ArrayLike, np_ndarray_str
 from pandas.core.arraylike import OpsMixin
 from pandas.core.generic import NDFrame as NDFrame
 from pandas.core.groupby.generic import DataFrameGroupBy as DataFrameGroupBy
@@ -120,9 +120,9 @@ class _LocIndexerFrame(_LocIndexer):
         idx: Union[
             MaskType,
             StrLike,
-            Tuple[Union[MaskType, Index, Sequence[Scalar], Series[_bool], Scalar], Union[MaskType, Sequence[Scalar], Scalar]],
+            Tuple[Union[MaskType, Index, Sequence[Scalar], Scalar, slice], ...],
         ],
-        value: Union[S1, _np.ndarray, Series[S1], DataFrame],
+        value: Union[S1, ArrayLike, Series[S1], DataFrame],
     ) -> None: ...
 
 class DataFrame(NDFrame, OpsMixin):
@@ -146,28 +146,6 @@ class DataFrame(NDFrame, OpsMixin):
     def axes(self) -> List[Index]: ...
     @property
     def shape(self) -> Tuple[int, int]: ...
-    def to_string(
-        self,
-        buf: Optional[FilePathOrBuffer[_str]] = ...,
-        columns: Optional[Sequence[str]] = ...,
-        col_space: Optional[Union[int, List[int], Dict[Union[_str, int], int]]] = ...,
-        header: Union[bool, Sequence[str]] = ...,
-        index: bool = ...,
-        na_rep: str = ...,
-        formatters: Optional[fmt.formatters_type] = ...,
-        float_format: Optional[fmt.float_format_type] = ...,
-        sparsify: Optional[bool] = ...,
-        index_names: bool = ...,
-        justify: Optional[str] = ...,
-        max_rows: Optional[int] = ...,
-        min_rows: Optional[int] = ...,
-        max_cols: Optional[int] = ...,
-        show_dimensions: bool = ...,
-        decimal: str = ...,
-        line_width: Optional[int] = ...,
-        max_colwidth: Optional[int] = ...,
-        encoding: Optional[str] = ...,
-    ) -> Optional[str]: ...
     @property
     def style(self) -> Styler: ...
     def items(self) -> Iterable[Tuple[Optional[Hashable], Series[S1]]]: ...
@@ -323,9 +301,8 @@ class DataFrame(NDFrame, OpsMixin):
     @overload
     def __getitem__(
         self,
-        idx: Union[Tuple, Series[_bool], DataFrame, List[_str], Index[_str], np.ndarray_str],
+        idx: Union[Scalar, Tuple, Series[_bool], DataFrame, List[_str], Index[_str], np_ndarray_str],
     ) -> DataFrame: ...
-    @overload
     def __setitem__(self, key, value): ...
     @overload
     def query(self, expr: _str, *, inplace: Literal[True], **kwargs) -> None: ...
@@ -1558,7 +1535,7 @@ class DataFrame(NDFrame, OpsMixin):
         on: Optional[_str] = ...,
         level: Optional[Level] = ...,
         origin: Union[Timestamp, Literal["epoch", "start", "start_day", "end", "end_day"]] = ...,
-        offset: Optional[Timedelta, _str] = None,
+        offset: Optional[Union[Timedelta, _str]] = None,
     ) -> Resampler: ...
     def rfloordiv(
         self,
