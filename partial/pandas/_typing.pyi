@@ -2,7 +2,7 @@ import datetime
 from io import BufferedIOBase, RawIOBase, TextIOBase, TextIOWrapper
 from mmap import mmap
 import numpy as np
-import numpy.typing as npt
+from numpy import typing as npt
 import sys
 from os import PathLike
 from pathlib import Path

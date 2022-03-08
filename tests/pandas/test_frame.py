@@ -862,6 +862,18 @@ def test_groupby_series_methods() -> None:
     gb.nth(0).loc[2]
 
 
+def test_indexslice_setitem():
+    df = pd.DataFrame({"x": [1, 2, 2, 3], "y": [1, 2, 3, 4], "z": [10, 20, 30, 40]}).set_index(["x", "y"])
+    s = pd.Series([-1, -2])
+    df.loc[pd.IndexSlice[2, :]] = s.values
+
+
+def test_compute_values():
+    df = pd.DataFrame({"x": [1, 2, 3, 4]})
+    s: pd.Series = pd.Series([10, 20, 30, 40])
+    result: pd.Series = df["x"] + s.values
+
+
 # https://github.com/microsoft/python-type-stubs/issues/164
 # Comment out for now until issue is resolved.
 # def test_sum_get_add() -> None:

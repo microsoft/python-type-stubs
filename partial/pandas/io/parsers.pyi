@@ -3,7 +3,7 @@ from collections import abc
 import sys
 from pandas._typing import FilePathOrBuffer as FilePathOrBuffer, Scalar
 from pandas.core.frame import DataFrame as DataFrame
-from typing import Any, Callable, List, Mapping, Optional, Sequence, Union, overload
+from typing import Any, Callable, Dict, List, Mapping, Optional, Sequence, Union, overload
 
 if sys.version_info >= (3, 8):
     from typing import Literal
