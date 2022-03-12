@@ -86,3 +86,7 @@ def test_timestamp_timedelta_series_arithmetic() -> None:
     check_series_result(r3, td1.dtype)
     r4 = pd.Timedelta(5, "days") / r1
     check_series_result(r4, float)
+    sb = pd.Series([1, 2]) == pd.Series([1, 3])
+    check_series_result(sb, bool)
+    r5 = sb * r1
+    check_series_result(r5, r1.dtype)
