@@ -1,10 +1,9 @@
 # flake8: noqa: F841
 from datetime import date, datetime
 import io
-import os
 import tempfile
 from pathlib import Path
-from typing import Dict, List, Tuple, Iterable, Any, TYPE_CHECKING
+from typing import Dict, Hashable, List, Tuple, Iterable, Any, TYPE_CHECKING
 
 import pandas as pd
 from pandas.io.parsers import TextFileReader
@@ -527,7 +526,7 @@ def test_types_merge() -> None:
     df.merge(df2, on=("col1", "col2"), how="left", suffixes=(None, "s"))
     df.merge(df2, on=("col1", "col2"), how="left", suffixes=("t", "s"))
     df.merge(df2, on=("col1", "col2"), how="left", suffixes=("a", None))
-    l: List[str] = ["col1", "col2"]
+    l = ["col1", "col2"]
     df.merge(df2, on=l)
 
 

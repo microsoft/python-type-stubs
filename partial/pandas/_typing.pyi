@@ -28,7 +28,7 @@ from pandas.core.generic import NDFrame
 from pandas._libs.tslibs import Period, Timedelta as Timedelta, Timestamp as Timestamp
 from pandas.core.arrays import ExtensionArray
 from pandas.core.series import Series
-from pandas.core.frame import DataFrame
+from pandas.core.frame import DataFrame as DataFrame
 from pandas.core.indexes.base import Index
 
 if sys.version_info >= (3, 8):
@@ -52,6 +52,7 @@ FilePathOrBuffer = Union["PathLike[str]", FileOrBuffer[AnyStr]]
 FrameOrSeries = TypeVar("FrameOrSeries", bound=NDFrame)
 FrameOrSeriesUnion = Union[DataFrame, Series]
 Axis = Union[str, int]
+IndexLevel = Union[Hashable, Sequence[Hashable]]
 Label = Optional[Hashable]
 Level = Union[Label, int]
 Ordered = Optional[bool]
