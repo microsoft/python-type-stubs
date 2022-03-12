@@ -1,20 +1,65 @@
 from datetime import timedelta
 from typing import (
     ClassVar,
-    Sequence,
+    Literal,
     Type,
     TypeVar,
     overload,
 )
 
 import numpy as np
-from pandas._typing import npt
 
 from pandas._libs.tslibs import (
     NaTType,
     Tick,
 )
+from pandas._typing import npt
 
+# Copied from pandas/_libs/tslibs/timedeltas.pyx
+
+UnitChoices = Literal[
+    "Y",
+    "y",
+    "M",
+    "W",
+    "w",
+    "D",
+    "d",
+    "days",
+    "day",
+    "hours",
+    "hour",
+    "hr",
+    "h",
+    "m",
+    "minute",
+    "min",
+    "minutes",
+    "t",
+    "s",
+    "seconds",
+    "sec",
+    "second",
+    "ms",
+    "milliseconds",
+    "millisecond",
+    "milli",
+    "millis",
+    "l",
+    "us",
+    "microseconds",
+    "microsecond",
+    "µs",
+    "micro",
+    "micros",
+    "u",
+    "ns",
+    "nanoseconds",
+    "nano",
+    "nanos",
+    "nanosecond",
+    "n",
+]
 _S = TypeVar("_S", bound=timedelta)
 
 def ints_to_pytimedelta(
@@ -26,7 +71,7 @@ def array_to_timedelta64(
     unit: str | None = ...,
     errors: str = ...,
 ) -> np.ndarray: ...  # np.ndarray[m8ns]
-def parse_timedelta_unit(unit: str | None) -> str: ...
+def parse_timedelta_unit(unit: str | None) -> UnitChoices: ...
 def delta_to_nanoseconds(delta: np.timedelta64 | timedelta | Tick) -> int: ...
 
 class Timedelta(timedelta):
@@ -75,9 +120,13 @@ class Timedelta(timedelta):
     @overload
     def __floordiv__(self, other: int | float) -> Timedelta: ...
     @overload
-    def __floordiv__(self, other: npt.NDArray[np.timedelta64]) -> npt.NDArray[np.intp]: ...
+    def __floordiv__(
+        self, other: npt.NDArray[np.timedelta64]
+    ) -> npt.NDArray[np.intp]: ...
     @overload
-    def __floordiv__(self, other: npt.NDArray[np.number]) -> npt.NDArray[np.timedelta64] | Timedelta: ...
+    def __floordiv__(
+        self, other: npt.NDArray[np.number]
+    ) -> npt.NDArray[np.timedelta64] | Timedelta: ...
     @overload
     def __rfloordiv__(self, other: timedelta | str) -> int: ...
     @overload

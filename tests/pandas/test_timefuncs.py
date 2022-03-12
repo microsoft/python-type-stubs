@@ -3,6 +3,8 @@
 import pandas as pd
 import datetime as dt
 
+from pandas.testing import assert_series_equal
+
 from . import check_series_result
 
 
@@ -70,9 +72,17 @@ def test_timedelta_series_arithmetic() -> None:
 
 
 def test_timestamp_timedelta_series_arithmetic() -> None:
-    ts = pd.Timestamp("2022-03-05")
+    tscheck = pd.Series([pd.Timestamp("2022-03-05"), pd.Timestamp("2022-03-06")])
     ts1 = pd.to_datetime(pd.Series(["2022-03-05", "2022-03-06"]))
+    check_series_result(ts1, tscheck.dtype)
+    assert_series_equal(tscheck, ts1)
     ts2 = pd.to_datetime(pd.Series(["2022-03-08", "2022-03-10"]))
     td1 = pd.to_timedelta([2, 3], "seconds")
     r1 = ts1 - ts2
     check_series_result(r1, td1.dtype)
+    r2 = r1 / td1
+    check_series_result(r2, float)
+    r3 = r1 - td1
+    check_series_result(r3, td1.dtype)
+    r4 = pd.Timedelta(5, "days") / r1
+    check_series_result(r4, float)

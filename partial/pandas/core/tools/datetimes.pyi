@@ -6,6 +6,7 @@ from pandas._typing import (
     ArrayLike as ArrayLike,
     Index as Index,
     AnyArrayLike as AnyArrayLike,
+    DateTimeErrorChoices as DateTimeErrorChoices,
     ExtensionArray as ExtensionArray,
     Timestamp as Timestamp,
 )
@@ -46,7 +47,7 @@ def should_cache(arg: ArrayConvertible, unique_share: float = ..., check_count: 
 @overload
 def to_datetime(
     arg: DatetimeScalar,
-    errors: str = ...,
+    errors: DateTimeErrorChoices = ...,
     dayfirst: bool = ...,
     yearfirst: bool = ...,
     utc: bool | None = ...,
@@ -60,7 +61,7 @@ def to_datetime(
 @overload
 def to_datetime(
     arg: Series | DictConvertible,
-    errors: str = ...,
+    errors: DateTimeErrorChoices = ...,
     dayfirst: bool = ...,
     yearfirst: bool = ...,
     utc: bool | None = ...,
@@ -74,7 +75,7 @@ def to_datetime(
 @overload
 def to_datetime(
     arg: list | tuple | np.ndarray | Index | ExtensionArray,
-    errors: str = ...,
+    errors: DateTimeErrorChoices = ...,
     dayfirst: bool = ...,
     yearfirst: bool = ...,
     utc: bool | None = ...,
