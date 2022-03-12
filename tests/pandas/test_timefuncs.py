@@ -3,7 +3,7 @@
 import pandas as pd
 import datetime as dt
 
-from pandas.core.api import Timestamp
+from . import check_series_result
 
 
 def test_types_init() -> None:
@@ -70,15 +70,9 @@ def test_timedelta_series_arithmetic() -> None:
 
 
 def test_timestamp_timedelta_series_arithmetic() -> None:
-    q = 3
-    reveal_type(q)
-    ts = Timestamp("2022-03-05")
-    reveal_type(ts)
-    s1 = pd.Series(["2022-03-05", "2022-03-06"])
-    reveal_type(s1)
+    ts = pd.Timestamp("2022-03-05")
     ts1 = pd.to_datetime(pd.Series(["2022-03-05", "2022-03-06"]))
-    assert isinstance(ts1.iloc[0], pd.Timestamp)
     ts2 = pd.to_datetime(pd.Series(["2022-03-08", "2022-03-10"]))
+    td1 = pd.to_timedelta([2, 3], "seconds")
     r1 = ts1 - ts2
-    reveal_type(ts1)
-    reveal_type(r1)
+    check_series_result(r1, td1.dtype)
