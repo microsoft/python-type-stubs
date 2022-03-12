@@ -3,6 +3,8 @@
 import pandas as pd
 import datetime as dt
 
+from pandas.core.api import Timestamp
+
 
 def test_types_init() -> None:
     ts: pd.Timestamp = pd.Timestamp("2021-03-01T12")
@@ -42,3 +44,41 @@ def test_types_pydatetime() -> None:
     datet: dt.datetime = ts.to_pydatetime()
     datet2: dt.datetime = ts.to_pydatetime(False)
     datet3: dt.datetime = ts.to_pydatetime(warn=True)
+
+
+def test_to_timedelta() -> None:
+    td: pd.Timedelta = pd.to_timedelta(3, "days")
+    tds: pd.Series = pd.to_timedelta([2, 3], "minutes")
+
+
+def test_timedelta_arithmetic() -> None:
+    td1: pd.Timedelta = pd.to_timedelta(3, "days")
+    td2: pd.Timedelta = pd.to_timedelta(4, "hours")
+    td3: pd.Timedelta = td1 + td2
+    td4: pd.Timedelta = td1 - td2
+    td5: pd.Timedelta = td1 * 4.3
+    td6: pd.Timedelta = td3 / 10.2
+
+
+def test_timedelta_series_arithmetic() -> None:
+    tds1: pd.Series = pd.to_timedelta([2, 3], "minutes")
+    td1: pd.Timedelta = pd.Timedelta("2 days")
+    r1: pd.Series = tds1 + td1
+    r2: pd.Series = tds1 - td1
+    r3: pd.Series = tds1 * 4.3
+    r4: pd.Series = tds1 / 10.2
+
+
+def test_timestamp_timedelta_series_arithmetic() -> None:
+    q = 3
+    reveal_type(q)
+    ts = Timestamp("2022-03-05")
+    reveal_type(ts)
+    s1 = pd.Series(["2022-03-05", "2022-03-06"])
+    reveal_type(s1)
+    ts1 = pd.to_datetime(pd.Series(["2022-03-05", "2022-03-06"]))
+    assert isinstance(ts1.iloc[0], pd.Timestamp)
+    ts2 = pd.to_datetime(pd.Series(["2022-03-08", "2022-03-10"]))
+    r1 = ts1 - ts2
+    reveal_type(ts1)
+    reveal_type(r1)

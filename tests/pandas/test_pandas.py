@@ -16,6 +16,7 @@ def test_types_to_datetime() -> None:
     r5: pd.DatetimeIndex = pd.to_datetime([1, 2], unit="D", origin=3)
     r6: pd.DatetimeIndex = pd.to_datetime(["2022-01-03", "2022-02-22"])
     r7: pd.DatetimeIndex = pd.to_datetime(pd.Index(["2022-01-03", "2022-02-22"]))
+    r8: pd.Series = pd.to_datetime({"year": [2015, 2016], "month": [2, 3], "day": [4, 5]})
 
 
 def test_types_concat() -> None:
