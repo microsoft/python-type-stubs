@@ -2,54 +2,12 @@
 from datetime import timedelta
 from typing import Literal, Optional, Union, overload
 from pandas._libs.tslibs import Timedelta
-from pandas._typing import DateTimeErrorChoices, AnyArrayLike, ArrayLike
+from pandas._libs.tslibs.timedeltas import UnitChoices
+from pandas._typing import DateTimeErrorChoices, ArrayLike, Index as Index
 from pandas.core.frame import Series as Series
+from pandas.core.indexes.timedeltas import TimedeltaIndex
 
 # Copied from pandas/_libs/tslibs/timedeltas.pyx
-
-UnitChoices = Literal[
-    "Y",
-    "y",
-    "M",
-    "W",
-    "w",
-    "D",
-    "d",
-    "days",
-    "day",
-    "hours",
-    "hour",
-    "hr",
-    "h",
-    "m",
-    "minute",
-    "min",
-    "minutes",
-    "t",
-    "s",
-    "seconds",
-    "sec",
-    "second",
-    "ms",
-    "milliseconds",
-    "millisecond",
-    "milli",
-    "millis",
-    "l",
-    "us",
-    "microseconds",
-    "microsecond",
-    "µs",
-    "micro",
-    "micros",
-    "u",
-    "ns",
-    "nanoseconds",
-    "nano",
-    "nanos",
-    "nanosecond",
-    "n",
-]
 
 @overload
 def to_timedelta(
@@ -59,7 +17,13 @@ def to_timedelta(
 ) -> Timedelta: ...
 @overload
 def to_timedelta(
-    arg: Union[list, tuple, range, AnyArrayLike, ArrayLike],
+    arg: Series,
     unit: Optional[UnitChoices] = ...,
     errors: DateTimeErrorChoices = ...,
-) -> Series[Timedelta]: ...
+) -> Series: ...
+@overload
+def to_timedelta(
+    arg: Union[list, tuple, range, ArrayLike, Index],
+    unit: Optional[UnitChoices] = ...,
+    errors: DateTimeErrorChoices = ...,
+) -> TimedeltaIndex: ...

@@ -50,7 +50,8 @@ def test_types_pydatetime() -> None:
 
 def test_to_timedelta() -> None:
     td: pd.Timedelta = pd.to_timedelta(3, "days")
-    tds: pd.Series = pd.to_timedelta([2, 3], "minutes")
+    tdi: pd.TimedeltaIndex = pd.to_timedelta([2, 3], "minutes")
+    tds: pd.Series = pd.to_timedelta(pd.Series([2, 3]), "hours")
 
 
 def test_timedelta_arithmetic() -> None:
@@ -63,7 +64,7 @@ def test_timedelta_arithmetic() -> None:
 
 
 def test_timedelta_series_arithmetic() -> None:
-    tds1: pd.Series = pd.to_timedelta([2, 3], "minutes")
+    tds1: pd.Series = pd.to_timedelta(pd.Series([2, 3]), "minutes")
     td1: pd.Timedelta = pd.Timedelta("2 days")
     r1: pd.Series = tds1 + td1
     r2: pd.Series = tds1 - td1
@@ -74,7 +75,8 @@ def test_timedelta_series_arithmetic() -> None:
 def test_timestamp_timedelta_series_arithmetic() -> None:
     tscheck = pd.Series([pd.Timestamp("2022-03-05"), pd.Timestamp("2022-03-06")])
     ts1 = pd.to_datetime(pd.Series(["2022-03-05", "2022-03-06"]))
-    check_series_result(ts1, tscheck.dtype)
+    # ignore type on next, because `tscheck` has Unknown dtype
+    check_series_result(ts1, tscheck.dtype)  # type: ignore
     assert_series_equal(tscheck, ts1)
     ts2 = pd.to_datetime(pd.Series(["2022-03-08", "2022-03-10"]))
     td1 = pd.to_timedelta([2, 3], "seconds")
