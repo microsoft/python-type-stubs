@@ -298,7 +298,16 @@ class DataFrame(NDFrame, OpsMixin):
     @overload
     def __getitem__(
         self,
-        idx: Union[S1, Tuple, Series[_bool], DataFrame, List[_str], Index[_str], np_ndarray_str],
+        idx: Union[
+            S1,
+            Tuple,
+            Series[_bool],
+            DataFrame,
+            List[_str],
+            Index[_str],
+            np_ndarray_str,
+            Sequence[Tuple[Scalar, ...]],
+        ],
     ) -> DataFrame: ...
     def __setitem__(self, key, value): ...
     @overload

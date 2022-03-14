@@ -1,10 +1,9 @@
 # flake8: noqa: F841
 from datetime import date, datetime
 import io
-import os
 import tempfile
 from pathlib import Path
-from typing import Dict, List, Tuple, Iterable, Any, TYPE_CHECKING
+from typing import List, Tuple, Iterable, Any
 
 import pandas as pd
 from pandas.io.parsers import TextFileReader
@@ -889,9 +888,18 @@ def test_sum_get_add() -> None:
     s3: pd.Series = s + df["y"]
     s4: pd.Series = summer + summer
 
+
 def test_getset_untyped() -> None:
     result: int = 10
     df = pd.DataFrame({"x": [1, 2, 3, 4, 5], "y": [10, 20, 30, 40, 50]})
     # Tests that Dataframe.__getitem__ needs to return untyped series.
     result = df["x"].max()
-    
+
+
+def test_getmultiindex_columns() -> None:
+    mi = pd.MultiIndex.from_product([[1, 2], ["a", "b"]])
+    df = pd.DataFrame([[1, 2, 3, 4], [10, 20, 30, 40]], columns=mi)
+    li: List[Tuple[int, str]] = [(1, "a"), (2, "b")]
+    res1: pd.DataFrame = df[[(1, "a"), (2, "b")]]
+    res2: pd.DataFrame = df[li]
+    res3: pd.DataFrame = df[[(i, s) for i in [1] for s in df.columns.get_level_values(1)]]
