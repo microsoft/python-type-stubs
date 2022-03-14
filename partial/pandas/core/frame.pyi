@@ -1,6 +1,5 @@
 from __future__ import annotations
 import datetime
-from sqlite3 import Timestamp
 import numpy as np
 import sys
 
@@ -8,7 +7,7 @@ from pandas.core.indexing import _iLocIndexer, _LocIndexer
 from matplotlib.axes import Axes as PlotAxes
 from pandas._typing import Axes as Axes, Axis as Axis, FilePathOrBuffer as FilePathOrBuffer, Level as Level, Renamer as Renamer
 from pandas._typing import num, SeriesAxisType, AxisType, Dtype, DtypeNp, Label, StrLike, Scalar, IndexType, MaskType, S1
-from pandas._typing import ArrayLike as ArrayLike, np_ndarray_str
+from pandas._typing import ArrayLike as ArrayLike, np_ndarray_str, Timestamp as Timestamp, Timedelta as Timedelta
 from pandas.core.arraylike import OpsMixin
 from pandas.core.generic import NDFrame as NDFrame
 from pandas.core.groupby.generic import DataFrameGroupBy as DataFrameGroupBy
@@ -37,8 +36,6 @@ from typing import (
     overload,
     Pattern,
 )
-
-from pandas._libs.tslibs.timedeltas import Timedelta
 
 if sys.version_info >= (3, 8):
     from typing import Literal
@@ -295,13 +292,13 @@ class DataFrame(NDFrame, OpsMixin):
     @property
     def T(self) -> DataFrame: ...
     @overload
-    def __getitem__(self, idx: _str) -> Series[S1]: ...
+    def __getitem__(self, idx: _str) -> Series: ...
     @overload
     def __getitem__(self, rows: slice) -> DataFrame: ...
     @overload
     def __getitem__(
         self,
-        idx: Union[Scalar, Tuple, Series[_bool], DataFrame, List[_str], Index[_str], np_ndarray_str],
+        idx: Union[S1, Tuple, Series[_bool], DataFrame, List[_str], Index[_str], np_ndarray_str],
     ) -> DataFrame: ...
     def __setitem__(self, key, value): ...
     @overload

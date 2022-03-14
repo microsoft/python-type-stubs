@@ -498,6 +498,9 @@ def test_types_groupby() -> None:
     df5: pd.DataFrame = df.groupby(by=["col1", "col2"]).filter(lambda x: x["col1"] > 0)
     df6: pd.DataFrame = df.groupby(by=["col1", "col2"]).nunique()
     df7: pd.DataFrame = df.groupby(by="col1").apply(sum)
+    df8: pd.DataFrame = df.groupby("col1").transform("sum")
+    s1: pd.Series = df.set_index("col1")["col2"]
+    s2: pd.Series = s1.groupby("col1").transform("sum")
 
 
 # This was added in 1.1.0 https://pandas.pydata.org/docs/whatsnew/v1.1.0.html
@@ -875,14 +878,20 @@ def test_compute_values():
 
 
 # https://github.com/microsoft/python-type-stubs/issues/164
-# Comment out for now until issue is resolved.
-# def test_sum_get_add() -> None:
-#     df = pd.DataFrame({"x": [1, 2, 3, 4, 5], "y": [10, 20, 30, 40, 50]})
-#     s = df["x"]
-#     check_series_result(s)
-#     summer = df.sum(axis=1)
-#     check_dataframe_result(summer)
+def test_sum_get_add() -> None:
+    df = pd.DataFrame({"x": [1, 2, 3, 4, 5], "y": [10, 20, 30, 40, 50]})
+    s = df["x"]
+    check_series_result(s)
+    summer: pd.Series = df.sum(axis=1)
+    check_series_result(summer)
 
-#     s2 = s + summer
-#     s3 = s + df["y"]
-#     s4 = summer + summer
+    s2: pd.Series = s + summer
+    s3: pd.Series = s + df["y"]
+    s4: pd.Series = summer + summer
+
+def test_getset_untyped() -> None:
+    result: int = 10
+    df = pd.DataFrame({"x": [1, 2, 3, 4, 5], "y": [10, 20, 30, 40, 50]})
+    # Tests that Dataframe.__getitem__ needs to return untyped series.
+    result = df["x"].max()
+    
