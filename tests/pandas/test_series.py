@@ -601,3 +601,9 @@ def test_series_invert() -> None:
     s3 = pd.Series([1, 2, 3])
     check_series_result(s3[s2])
     check_series_result(s3.loc[s2])
+
+def test_series_multiindex_getitem() -> None:
+    s = pd.Series([1,2,3,4], index=pd.MultiIndex.from_product([["a", "b"], ["x", "y"]]))
+    s1: pd.Series = s["a", :]
+    
+    
