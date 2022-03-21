@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 
 
-from . import check_index_result, check_numpy_result
+from . import check_index_result, check_multiindex_result, check_numpy_result
 
 
 def test_index_unique():
@@ -23,6 +23,10 @@ def test_index_astype():
     indi = pd.Index([1, 2, 3])
     inds = pd.Index(["a", "b", "c"])
     indc = indi.astype(inds.dtype)
+    check_index_result(indc)
+    mi = pd.MultiIndex.from_product([["a", "b"], ["c", "d"]], names=["ab", "cd"])
+    mia = mi.astype(object)  # object is only valid parameter for MultiIndex.astype()
+    check_multiindex_result(mia)
 
 
 def test_multiindex_get_level_values():

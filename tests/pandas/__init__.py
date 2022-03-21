@@ -55,6 +55,31 @@ def check_index_result(result: pd.Index, dtype: Optional[Dtype] = None):
         assert result.dtype == dtype
 
 
+def check_multiindex_result(result: pd.MultiIndex):
+    """
+    Check that the result is a MultiIndex
+
+    Parameters
+    ----------
+    result : pd.MultiIndex
+        A multiindex
+    """
+
+    assert isinstance(result, pd.MultiIndex)
+
+
+def check_datetimeindex_result(result: pd.DatetimeIndex):
+    """
+    Check that the result is a DatetimeIndex
+
+    Parameters
+    ----------
+    result : pd.DatetimeIndex
+       result to check
+    """
+    assert isinstance(result, pd.DatetimeIndex)
+
+
 def check_numpy_result(result: np.ndarray, dtype: Optional[Union[Type[np.int64], Type[np.bool_], Type[np.str_]]] = None):
     assert isinstance(result, np.ndarray)
     if dtype is not None:
@@ -83,3 +108,7 @@ def check_int_result(result: int):
 
 def check_float_result(result: float):
     assert isinstance(result, float)
+
+
+def check_bool_result(result: bool):
+    assert isinstance(result, bool)
