@@ -23,3 +23,15 @@ def test_index_astype():
     indi = pd.Index([1, 2, 3])
     inds = pd.Index(["a", "b", "c"])
     indc = indi.astype(inds.dtype)
+
+
+def test_multiindex_get_level_values():
+    mi = pd.MultiIndex.from_product([["a", "b"], ["c", "d"]], names=["ab", "cd"])
+    i1 = mi.get_level_values("ab")
+    check_index_result(i1)
+
+def test_index_tolist() -> None:
+    i1 = pd.Index([1,2,3])
+    l1 = i1.tolist()
+    i2 = i1.to_list()
+    

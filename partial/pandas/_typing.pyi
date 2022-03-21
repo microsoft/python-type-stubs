@@ -108,3 +108,5 @@ T2 = TypeVar("T2", str, int)
 # Interval closed type
 
 IntervalClosedType = Literal["left", "right", "both", "neither"]
+
+DateTimeErrorChoices = Literal["ignore", "raise", "coerce"]

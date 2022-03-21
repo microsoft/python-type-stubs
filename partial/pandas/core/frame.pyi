@@ -7,7 +7,7 @@ from pandas.core.indexing import _iLocIndexer, _LocIndexer
 from matplotlib.axes import Axes as PlotAxes
 from pandas._typing import Axes as Axes, Axis as Axis, FilePathOrBuffer as FilePathOrBuffer, Level as Level, Renamer as Renamer
 from pandas._typing import num, SeriesAxisType, AxisType, Dtype, DtypeNp, Label, StrLike, Scalar, IndexType, MaskType, S1
-from pandas._typing import ArrayLike as ArrayLike, np_ndarray_str, Timestamp, Timedelta, IndexLevel
+from pandas._typing import ArrayLike as ArrayLike, np_ndarray_str, Timestamp as Timestamp, Timedelta as Timedelta
 from pandas.core.arraylike import OpsMixin
 from pandas.core.generic import NDFrame as NDFrame
 from pandas.core.groupby.generic import DataFrameGroupBy as DataFrameGroupBy
@@ -298,7 +298,16 @@ class DataFrame(NDFrame, OpsMixin):
     @overload
     def __getitem__(
         self,
-        idx: Union[Scalar, Tuple, Series[_bool], DataFrame, List[_str], Index[_str], np_ndarray_str],
+        idx: Union[
+            S1,
+            Tuple,
+            Series[_bool],
+            DataFrame,
+            List[_str],
+            Index[_str],
+            np_ndarray_str,
+            Sequence[Tuple[Scalar, ...]],
+        ],
     ) -> DataFrame: ...
     def __setitem__(self, key, value): ...
     @overload
