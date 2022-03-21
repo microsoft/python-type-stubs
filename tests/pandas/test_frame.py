@@ -868,6 +868,7 @@ def test_indexslice_setitem():
     df = pd.DataFrame({"x": [1, 2, 2, 3], "y": [1, 2, 3, 4], "z": [10, 20, 30, 40]}).set_index(["x", "y"])
     s = pd.Series([-1, -2])
     df.loc[pd.IndexSlice[2, :]] = s.values
+    df.loc[pd.IndexSlice[2, :], "z"] = [200, 300]
 
 
 def test_compute_values():

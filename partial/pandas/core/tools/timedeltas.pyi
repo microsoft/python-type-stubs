@@ -20,7 +20,7 @@ def to_timedelta(
     arg: Series,
     unit: Optional[UnitChoices] = ...,
     errors: DateTimeErrorChoices = ...,
-) -> Series: ...
+) -> Series[Timedelta]: ...
 @overload
 def to_timedelta(
     arg: Union[list, tuple, range, ArrayLike, Index],
