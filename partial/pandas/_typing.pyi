@@ -102,7 +102,7 @@ S1 = TypeVar(
     Timedelta,
     np.datetime64,
 )
-T1 = TypeVar("T1", str, int)
+T1 = TypeVar("T1", str, int, np.int64, np.uint64, np.float64, float)
 T2 = TypeVar("T2", str, int)
 
 # Interval closed type
