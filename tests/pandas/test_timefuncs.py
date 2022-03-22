@@ -79,11 +79,11 @@ def test_timestamp_timedelta_series_arithmetic() -> None:
     td1 = pd.to_timedelta([2, 3], "seconds")
     ts2 = pd.to_datetime(pd.Series(["2022-03-08", "2022-03-10"]))
     r1 = ts1 - ts2
-    check_series_result(r1, td1.dtype)
+    check_series_result(r1, td1.dtype)  # type: ignore
     r2 = r1 / td1
     check_series_result(r2, float)
     r3 = r1 - td1
-    check_series_result(r3, td1.dtype)
+    check_series_result(r3, td1.dtype)  # type: ignore
     r4 = pd.Timedelta(5, "days") / r1
     check_series_result(r4, float)
     sb = pd.Series([1, 2]) == pd.Series([1, 3])

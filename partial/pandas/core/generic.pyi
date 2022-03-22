@@ -3,6 +3,7 @@ import sys
 import pandas.core.indexing as indexing
 from pandas._typing import (
     Axis as Axis,
+    AxisType as AxisType,
     Dtype as Dtype,
     FilePathOrBuffer as FilePathOrBuffer,
     JSONSerializable as JSONSerializable,
@@ -13,10 +14,13 @@ from pandas._typing import (
     SeriesAxisType as SeriesAxisType,
     FrameOrSeries as FrameOrSeries,
     S1 as S1,
+    Timestamp as Timestamp,
+    Timedelta as Timedelta,
 )
 from pandas.core.base import PandasObject as PandasObject, SelectionMixin as SelectionMixin
 from pandas.core.indexes.api import Index as Index
 from pandas.core.internals import BlockManager as BlockManager
+from pandas.core.resample import Resampler
 from typing import Any, Callable, Dict, Hashable, Iterator, List, Mapping, Optional, Sequence, Tuple, Union, overload
 
 if sys.version_info >= (3, 8):
@@ -396,7 +400,7 @@ class NDFrame(PandasObject, SelectionMixin, indexing.IndexingMixin):
         on: Optional[_str] = ...,
         level: Optional[Level] = ...,
         origin: Union[Timestamp, Literal["epoch", "start", "start_day", "end", "end_day"]] = ...,
-        offset: Optional[Timedelta, _str] = None,
+        offset: Optional[Union[Timedelta, _str]] = None,
     ) -> Resampler: ...
     def first(self, offset) -> NDFrame: ...
     def last(self, offset) -> NDFrame: ...

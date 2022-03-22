@@ -26,10 +26,10 @@ from typing import (
 
 from pandas.core.generic import NDFrame
 from pandas._libs.tslibs import Period, Timedelta as Timedelta, Timestamp as Timestamp
-from pandas.core.arrays import ExtensionArray
+from pandas.core.arrays import ExtensionArray as ExtensionArray
 from pandas.core.series import Series
 from pandas.core.frame import DataFrame as DataFrame
-from pandas.core.indexes.base import Index
+from pandas.core.indexes.base import Index as Index
 
 if sys.version_info >= (3, 8):
     from typing import Literal

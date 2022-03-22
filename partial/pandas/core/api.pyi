@@ -31,7 +31,7 @@ from pandas.core.indexes.period import period_range as period_range
 from pandas.core.indexes.timedeltas import timedelta_range as timedelta_range
 from pandas.core.arrays import Categorical as Categorical
 
-# from pandas.core.groupby import Grouper as Grouper, NamedAgg as NamedAgg
+from pandas.core.groupby import Grouper as Grouper, NamedAgg as NamedAgg
 from pandas.core.indexes.api import (
     CategoricalIndex as CategoricalIndex,
     DatetimeIndex as DatetimeIndex,
