@@ -27,7 +27,7 @@ from typing import (
 from pandas.core.generic import NDFrame
 from pandas._libs.tslibs import Period, Timedelta as Timedelta, Timestamp as Timestamp
 from pandas.core.arrays import ExtensionArray as ExtensionArray
-from pandas.core.series import Series
+from pandas.core.series import Series as Series
 from pandas.core.frame import DataFrame as DataFrame
 from pandas.core.indexes.base import Index as Index
 

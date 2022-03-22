@@ -151,7 +151,7 @@ class DataFrame(NDFrame, OpsMixin):
     def shape(self) -> Tuple[int, int]: ...
     @property
     def style(self) -> Styler: ...
-    def items(self) -> Iterable[Tuple[Optional[Hashable], Series]]: ...
+    def items(self) -> Iterable[Tuple[Hashable, Series]]: ...
     def iteritems(self) -> Iterable[Tuple[Label, Series]]: ...
     def iterrows(self) -> Iterable[Tuple[Label, Series]]: ...
     def itertuples(self, index: _bool = ..., name: Optional[str] = ...): ...
@@ -911,7 +911,7 @@ class DataFrame(NDFrame, OpsMixin):
     @overload
     def quantile(
         self,
-        q: List = ...,
+        q: List[float],
         axis: AxisType = ...,
         numeric_only: _bool = ...,
         interpolation: Union[_str, Literal["linear", "lower", "higher", "midpoint", "nearest"]] = ...,
@@ -1063,40 +1063,21 @@ class DataFrame(NDFrame, OpsMixin):
     @overload
     def bfill(
         self,
-        value: Optional[Union[float, Dict, Series, DataFrame]] = ...,
         axis: Optional[AxisType] = ...,
-        limit: int = ...,
-        downcast: Optional[Dict] = ...,
         *,
         inplace: Literal[True],
+        limit: Optional[int] = ...,
+        downcast: Optional[Dict] = ...,
     ) -> None: ...
     @overload
     def bfill(
         self,
-        value: Optional[Union[float, Dict, Series, DataFrame]] = ...,
         axis: Optional[AxisType] = ...,
-        limit: int = ...,
-        downcast: Optional[Dict] = ...,
         *,
         inplace: Literal[False],
-    ) -> DataFrame: ...
-    @overload
-    def bfill(
-        self,
-        value: Optional[Union[float, Dict, Series, DataFrame]] = ...,
-        axis: Optional[AxisType] = ...,
-        limit: int = ...,
+        limit: Optional[int] = ...,
         downcast: Optional[Dict] = ...,
     ) -> DataFrame: ...
-    @overload
-    def bfill(
-        self,
-        value: Optional[Union[float, Dict, Series, DataFrame]] = ...,
-        axis: Optional[AxisType] = ...,
-        inplace: Optional[_bool] = ...,
-        limit: int = ...,
-        downcast: Optional[Dict] = ...,
-    ) -> Union[None, DataFrame]: ...
     def clip(
         self,
         lower: Optional[float] = ...,
@@ -1164,40 +1145,21 @@ class DataFrame(NDFrame, OpsMixin):
     @overload
     def ffill(
         self,
-        value: Optional[Union[Scalar, Dict, Series, DataFrame]] = ...,
         axis: Optional[AxisType] = ...,
-        limit: int = ...,
-        downcast: Optional[Dict] = ...,
         *,
         inplace: Literal[True],
+        limit: Optional[int] = ...,
+        downcast: Optional[Dict] = ...,
     ) -> None: ...
     @overload
     def ffill(
         self,
-        value: Optional[Union[Scalar, Dict, Series, DataFrame]] = ...,
         axis: Optional[AxisType] = ...,
-        limit: int = ...,
-        downcast: Optional[Dict] = ...,
         *,
         inplace: Literal[False],
-    ) -> DataFrame: ...
-    @overload
-    def ffill(
-        self,
-        value: Optional[Union[Scalar, Dict, Series, DataFrame]] = ...,
-        axis: Optional[AxisType] = ...,
-        limit: int = ...,
+        limit: Optional[int] = ...,
         downcast: Optional[Dict] = ...,
     ) -> DataFrame: ...
-    @overload
-    def ffill(
-        self,
-        value: Optional[Union[Scalar, Dict, Series, DataFrame]] = ...,
-        axis: Optional[AxisType] = ...,
-        inplace: Optional[_bool] = ...,
-        limit: int = ...,
-        downcast: Optional[Dict] = ...,
-    ) -> Union[None, DataFrame]: ...
     def filter(
         self,
         items: Optional[List] = ...,

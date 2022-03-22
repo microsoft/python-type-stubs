@@ -3,7 +3,21 @@ from pandas._typing import Dtype, Label, Level, T1 as T1, T2, np_ndarray_str, np
 from pandas.core.arrays import ExtensionArray
 from pandas.core.base import IndexOpsMixin, PandasObject
 from pandas.core.strings import StringMethods
-from typing import Callable, Dict, Generic, Hashable, Iterable, Iterator, List, Optional, Sequence, Tuple, Union, overload
+from typing import (
+    Callable,
+    Dict,
+    Generic,
+    Hashable,
+    Iterable,
+    Iterator,
+    List,
+    Literal,
+    Optional,
+    Sequence,
+    Tuple,
+    Union,
+    overload,
+)
 
 class InvalidIndexError(Exception): ...
 
@@ -91,7 +105,7 @@ class Index(IndexOpsMixin[T1], PandasObject, Generic[T1]):
     def fillna(self, value=..., downcast=...): ...
     def dropna(self, how: _str = ...): ...
     def unique(self, level=...) -> Index[T1]: ...
-    def drop_duplicates(self, keep: _str = ...) -> IndexOpsMixin[T1]: ...
+    def drop_duplicates(self, keep: Literal["first", "last", False] = ...) -> IndexOpsMixin[T1]: ...
     def duplicated(self, keep: _str = ...): ...
     def __add__(self, other) -> Index[T1]: ...
     def __radd__(self, other) -> Index[T1]: ...
