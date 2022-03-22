@@ -6,7 +6,7 @@ import sys
 from pandas.core.indexing import _iLocIndexer, _LocIndexer
 from matplotlib.axes import Axes as PlotAxes
 from pandas._typing import Axes as Axes, Axis as Axis, FilePathOrBuffer as FilePathOrBuffer, Level as Level, Renamer as Renamer
-from pandas._typing import num, SeriesAxisType, AxisType, Dtype, DtypeNp, Label, StrLike, Scalar, IndexType, MaskType, S1
+from pandas._typing import num, SeriesAxisType, AxisType, Dtype, DtypeNp, Label, StrLike, Scalar, IndexType, MaskType, S1, T
 from pandas._typing import ArrayLike as ArrayLike, np_ndarray_str, Timestamp as Timestamp, Timedelta as Timedelta
 from pandas.core.arraylike import OpsMixin
 from pandas.core.generic import NDFrame as NDFrame
@@ -1439,7 +1439,7 @@ class DataFrame(NDFrame, OpsMixin):
     def pct_change(
         self, periods: int = ..., fill_method: _str = ..., limit: Optional[int] = ..., freq=..., **kwargs
     ) -> DataFrame: ...
-    def pipe(self, func: Callable, *args, **kwargs): ...
+    def pipe(self, func: Callable[..., T] | tuple[Callable[..., T], str], *args, **kwargs) -> T: ...
     def pop(self, item: _str) -> Series[S1]: ...
     def pow(
         self,
