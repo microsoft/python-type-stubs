@@ -1,0 +1,16 @@
+from openpyxl.worksheet.worksheet import Worksheet
+from typing import (
+    Optional,
+    Union,
+)
+
+class WorksheetCopy:
+    def __init__(
+        self,
+        source_worksheet: Union[str, Worksheet],
+        target_worksheet: Optional[Worksheet],
+    ) -> None: ...
+    def _copy_cells(self) -> None: ...
+    def _copy_dimensions(self) -> None: ...
+    def _verify_resources(self) -> None: ...
+    def copy_worksheet(self) -> None: ...

@@ -1,7 +1,7 @@
 # COMPLETE
 
 from typing import Any, AnyStr, ContextManager, Dict, Literal, Mapping, MutableMapping, Optional, Pattern, Sequence, Union
-
+from . import colors as colors
 
 def use(backend: str, warn: bool = ..., force: bool = ...) -> None: ...
 
