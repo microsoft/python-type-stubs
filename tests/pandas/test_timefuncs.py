@@ -5,7 +5,7 @@ import datetime as dt
 
 from pandas.testing import assert_series_equal
 
-from . import check_series_result
+from . import check_datetimeindex_result, check_series_result
 
 
 def test_types_init() -> None:
@@ -92,3 +92,44 @@ def test_timestamp_timedelta_series_arithmetic() -> None:
     check_series_result(sb, bool)
     r5 = sb * r1
     check_series_result(r5, r1.dtype)
+    r6 = r1 * 4
+    check_series_result(r6, r1.dtype)
+
+
+def test_timestamp_dateoffset_arithmetic() -> None:
+    ts = pd.Timestamp("2022-03-18")
+    do = pd.DateOffset(days=366)
+    r1: pd.Timestamp = ts + do
+
+
+def test_datetimeindex_plus_timedelta() -> None:
+    tscheck = pd.Series([pd.Timestamp("2022-03-05"), pd.Timestamp("2022-03-06")])
+    dti = pd.to_datetime(["2022-03-08", "2022-03-15"])
+    td_s = pd.to_timedelta(pd.Series([10, 20]), "minutes")
+    dti_td_s = dti + td_s
+    # ignore type on next, because `tscheck` has Unknown dtype
+    check_series_result(dti_td_s, tscheck.dtype)  # type: ignore
+    td_dti_s = td_s + dti
+    check_series_result(td_dti_s, tscheck.dtype)  # type: ignore
+    tdi = pd.to_timedelta([10, 20], "minutes")
+    dti_tdi_dti = dti + tdi
+    check_datetimeindex_result(dti_tdi_dti)
+    tdi_dti_dti = tdi + dti
+    check_datetimeindex_result(tdi_dti_dti)
+    dti_td_dti = dti + pd.Timedelta(10, "minutes")
+    check_datetimeindex_result(dti_td_dti)
+
+
+def test_timestamp_plus_timedelta_series() -> None:
+    tscheck = pd.Series([pd.Timestamp("2022-03-05"), pd.Timestamp("2022-03-06")])
+    ts = pd.Timestamp("2022-03-05")
+    td = pd.to_timedelta(pd.Series([10, 20]), "minutes")
+    r3 = td + ts
+    # ignore type on next, because `tscheck` has Unknown dtype
+    check_series_result(r3, tscheck.dtype)  # type: ignore
+
+
+def test_timedelta_series_mult() -> None:
+    df = pd.DataFrame({"x": [1, 3, 5], "y": [2, 2, 6]})
+    std = (df["x"] < df["y"]) * pd.Timedelta(10, "minutes")
+    check_series_result(std, pd.to_timedelta(pd.Series([10]), "minutes").dtype)

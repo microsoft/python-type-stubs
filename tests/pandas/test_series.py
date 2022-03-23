@@ -2,7 +2,7 @@
 
 import tempfile
 from pathlib import Path
-from typing import List, Union, TYPE_CHECKING
+from typing import List, Union
 
 from pandas._typing import Scalar
 from pandas.api.extensions import ExtensionArray
@@ -602,8 +602,17 @@ def test_series_invert() -> None:
     check_series_result(s3[s2])
     check_series_result(s3.loc[s2])
 
+
 def test_series_multiindex_getitem() -> None:
-    s = pd.Series([1,2,3,4], index=pd.MultiIndex.from_product([["a", "b"], ["x", "y"]]))
+    s = pd.Series([1, 2, 3, 4], index=pd.MultiIndex.from_product([["a", "b"], ["x", "y"]]))
     s1: pd.Series = s["a", :]
-    
-    
+
+
+def test_series_mul() -> None:
+    s = pd.Series([1, 2, 3])
+    sm = s * 4
+    check_series_result(sm)
+    ss = s - 4
+    check_series_result(ss)
+    sm2 = s * s
+    check_series_result(sm2)

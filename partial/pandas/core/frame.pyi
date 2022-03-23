@@ -112,6 +112,7 @@ class _LocIndexerFrame(_LocIndexer):
     ) -> Series[S1]: ...
     @overload
     def __getitem__(self, idx: Index) -> DataFrame: ...
+    @overload
     def __setitem__(
         self,
         idx: Union[
@@ -120,6 +121,10 @@ class _LocIndexerFrame(_LocIndexer):
             Tuple[Union[MaskType, Index, Sequence[Scalar], Scalar, slice], ...],
         ],
         value: Union[S1, ArrayLike, Series[S1], DataFrame],
+    ) -> None: ...
+    @overload
+    def __setitem__(
+        self, idx: Tuple[Tuple[Union[StrLike, Scalar, slice], ...], StrLike], value: Union[S1, ArrayLike, Series[S1], List]
     ) -> None: ...
 
 class DataFrame(NDFrame, OpsMixin):
