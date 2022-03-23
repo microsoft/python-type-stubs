@@ -18,6 +18,7 @@ from pandas.core.window.rolling import Rolling, Window
 from pandas.core.series import Series as Series
 from pandas.io.formats import console as console, format as fmt
 from pandas.io.formats.style import Styler as Styler
+from pandas.plotting import PlotAccessor
 from typing import (
     Any,
     Callable,
@@ -924,7 +925,7 @@ class DataFrame(NDFrame, OpsMixin):
     ) -> DataFrame: ...
     def to_period(self, freq: Optional[_str] = ..., axis: AxisType = ..., copy: _bool = ...) -> DataFrame: ...
     def isin(self, values: Union[Iterable, Series[S1], DataFrame, Dict]) -> DataFrame: ...
-    def plot(self, *args, **kwargs) -> PlotAxes: ...
+    def plot(self, *args, **kwargs) -> PlotAccessor: ...
     def hist(
         self,
         column: Optional[Union[_str, List[_str]]] = ...,
