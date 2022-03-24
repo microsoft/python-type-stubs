@@ -111,7 +111,7 @@ class _LocIndexerSeries(_LocIndexer, Generic[S1]):
 
 class Series(IndexOpsMixin, NDFrame, Generic[S1]):
 
-    _ListLike = Union[ArrayLike, Dict[_str, np.ndarray], List, Tuple]  # , Index]
+    _ListLike = Union[ArrayLike, Dict[_str, np.ndarray], List, Tuple, Index]
     def __init__(
         self,
         data: Optional[Union[object, _ListLike, Series[S1], Dict[int, S1], Dict[_str, S1]]] = ...,
