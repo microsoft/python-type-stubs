@@ -1,8 +1,22 @@
 import numpy as np
-from pandas._typing import Dtype, Label, Level, T1 as T1, T2, np_ndarray_str, np_ndarray_int64, np_ndarray_bool
+from pandas._typing import (
+    Dtype as Dtype,
+    Label as Label,
+    Level as Level,
+    T1 as T1,
+    np_ndarray_str,
+    np_ndarray_int64,
+    np_ndarray_bool,
+)
+
+from pandas._typing import Series as Series, DataFrame as DataFrame
+
 from pandas.core.arrays import ExtensionArray
+
 from pandas.core.base import IndexOpsMixin, PandasObject
+
 from pandas.core.strings import StringMethods
+
 from typing import (
     Callable,
     Dict,
@@ -135,7 +149,7 @@ class Index(IndexOpsMixin[T1], PandasObject, Generic[T1]):
     def __hash__(self) -> int: ...
     def __setitem__(self, key, value) -> None: ...
     @overload
-    def __getitem__(self, idx: Union[Series[bool], slice, np_ndarray_int64, Index[T1]]) -> Index[T1]: ...
+    def __getitem__(self, idx: Union[slice, np_ndarray_int64, Index[T1]]) -> Index[T1]: ...
     @overload
     def __getitem__(self, idx: Union[int, Tuple[np_ndarray_int64, ...]]) -> T1: ...
     def append(self, other): ...
@@ -164,7 +178,7 @@ class Index(IndexOpsMixin[T1], PandasObject, Generic[T1]):
     @property
     def shape(self) -> Tuple[int, ...]: ...
     # Extra methods from old stubs
-    def __eq__(self, other: object) -> Series: ...  # type: ignore
+    def __eq__(self, other: object) -> bool: ...  # Series: ...  # type: ignore
     def __iter__(self) -> Iterator: ...
     def __ne__(self, other: _str) -> Index[T1]: ...  # type: ignore
     @overload
@@ -177,6 +191,3 @@ class Index(IndexOpsMixin[T1], PandasObject, Generic[T1]):
 def ensure_index_from_sequences(sequences: Sequence[Sequence[Dtype]], names: Sequence[str] = ...) -> Index: ...
 def ensure_index(index_like: Union[Sequence, Index], copy: bool = ...) -> Index: ...
 def maybe_extract_name(name, obj, cls) -> Label: ...
-
-from pandas.core.series import Series
-from pandas.core.frame import DataFrame

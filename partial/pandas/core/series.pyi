@@ -18,12 +18,15 @@ from pandas.core.window.rolling import Rolling, Window
 from pandas.core.window import ExponentialMovingWindow
 from pandas._typing import (
     ArrayLike as ArrayLike,
+    Axis as Axis,
     AxisType as AxisType,
     Dtype as Dtype,
     DtypeNp as DtypeNp,
     FilePathOrBuffer as FilePathOrBuffer,
+    IgnoreRaise as IgnoreRaise,
     Level as Level,
     MaskType as MaskType,
+    Renamer as Renamer,
     S1 as S1,
     Scalar as Scalar,
     SeriesAxisType as SeriesAxisType,
@@ -108,7 +111,7 @@ class _LocIndexerSeries(_LocIndexer, Generic[S1]):
 
 class Series(IndexOpsMixin, NDFrame, Generic[S1]):
 
-    _ListLike = Union[ArrayLike, Dict[_str, np.ndarray], Sequence, Index]
+    _ListLike = Union[ArrayLike, Dict[_str, np.ndarray], List, Tuple]  # , Index]
     def __init__(
         self,
         data: Optional[Union[object, _ListLike, Series[S1], Dict[int, S1], Dict[_str, S1]]] = ...,
@@ -284,7 +287,7 @@ class Series(IndexOpsMixin, NDFrame, Generic[S1]):
     @overload
     def quantile(
         self,
-        q: _ListLike = ...,
+        q: _ListLike,
         interpolation: Union[_str, Literal["linear", "lower", "higher", "midpoint", "nearest"]] = ...,
     ) -> Series[S1]: ...
     def corr(
@@ -310,7 +313,7 @@ class Series(IndexOpsMixin, NDFrame, Generic[S1]):
         value: _ListLike,
         side: Union[_str, Literal["left", "right"]] = ...,
         sorter: Optional[_ListLike] = ...,
-    ) -> Union[int, List[int]]: ...
+    ) -> List[int]: ...
     @overload
     def searchsorted(
         self,
@@ -328,7 +331,7 @@ class Series(IndexOpsMixin, NDFrame, Generic[S1]):
     def compare(
         self,
         other: Series,
-        align_axis: Union[Literal[0], Literal["index"]],
+        align_axis: SeriesAxisType,
         keep_shape: bool = ...,
         keep_equal: bool = ...,
     ) -> Series: ...
@@ -336,7 +339,7 @@ class Series(IndexOpsMixin, NDFrame, Generic[S1]):
     def compare(
         self,
         other: Series,
-        align_axis: AxisType = ...,
+        align_axis: Literal["columns", 1] = ...,
         keep_shape: bool = ...,
         keep_equal: bool = ...,
     ) -> DataFrame: ...
@@ -504,25 +507,36 @@ class Series(IndexOpsMixin, NDFrame, Generic[S1]):
     @overload
     def rename(
         self,
-        index=...,
+        index: Renamer | Hashable | None = ...,
         *,
+        axis: Axis | None = ...,
+        copy: bool = ...,
         inplace: Literal[True],
-        axis: Optional[SeriesAxisType] = ...,
-        copy: _bool = ...,
-        level: Optional[Level] = ...,
-        errors: Union[_str, Literal["raise", "ignore"]] = ...,
+        level: Level | None = ...,
+        errors: IgnoreRaise = ...,
     ) -> None: ...
     @overload
     def rename(
         self,
-        index=...,
+        index: Renamer | Hashable | None = ...,
         *,
-        axis: Optional[SeriesAxisType] = ...,
-        copy: _bool = ...,
-        inplace: _bool = ...,
-        level: Optional[Level] = ...,
-        errors: Union[_str, Literal["raise", "ignore"]] = ...,
+        axis: Axis | None = ...,
+        copy: bool = ...,
+        inplace: Literal[False] = ...,
+        level: Level | None = ...,
+        errors: IgnoreRaise = ...,
     ) -> Series: ...
+    @overload
+    def rename(
+        self,
+        index: Renamer | Hashable | None = ...,
+        *,
+        axis: Axis | None = ...,
+        copy: bool = ...,
+        inplace: bool = ...,
+        level: Level | None = ...,
+        errors: IgnoreRaise = ...,
+    ) -> Series | None: ...
     def reindex_like(
         self,
         other: Series[S1],
@@ -534,26 +548,39 @@ class Series(IndexOpsMixin, NDFrame, Generic[S1]):
     @overload
     def drop(
         self,
-        labels: Optional[Union[_str, int, List]] = ...,
-        axis: SeriesAxisType = ...,
-        index: Optional[Union[List[_str], List[int], Index]] = ...,
-        columns: Optional[Union[_str, List]] = ...,
-        level: Optional[Level] = ...,
-        errors: Literal["ignore", "raise"] = ...,
+        labels: Hashable | list[Hashable] = ...,
         *,
+        axis: Axis = ...,
+        index: Hashable | list[Hashable] = ...,
+        columns: Hashable | list[Hashable] = ...,
+        level: Level | None = ...,
         inplace: Literal[True],
+        errors: IgnoreRaise = ...,
     ) -> None: ...
     @overload
     def drop(
         self,
-        labels: Optional[Union[_str, int, List]] = ...,
-        axis: SeriesAxisType = ...,
-        index: Optional[Union[List[_str], List[int], Index]] = ...,
-        columns: Optional[Union[_str, List]] = ...,
-        level: Optional[Level] = ...,
-        inplace: _bool = ...,
-        errors: Literal["ignore", "raise"] = ...,
+        labels: Hashable | list[Hashable] = ...,
+        *,
+        axis: Axis = ...,
+        index: Hashable | list[Hashable] = ...,
+        columns: Hashable | list[Hashable] = ...,
+        level: Level | None = ...,
+        inplace: Literal[False] = ...,
+        errors: IgnoreRaise = ...,
     ) -> Series: ...
+    @overload
+    def drop(
+        self,
+        labels: Hashable | list[Hashable] = ...,
+        *,
+        axis: Axis = ...,
+        index: Hashable | list[Hashable] = ...,
+        columns: Hashable | list[Hashable] = ...,
+        level: Level | None = ...,
+        inplace: bool = ...,
+        errors: IgnoreRaise = ...,
+    ) -> Series | None: ...
     @overload
     def fillna(
         self,

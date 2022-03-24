@@ -8,7 +8,7 @@ from matplotlib.axes import Axes as PlotAxes
 from pandas._typing import Axes as Axes, Axis as Axis, FilePathOrBuffer as FilePathOrBuffer, Level as Level, Renamer as Renamer
 from pandas._typing import num, SeriesAxisType, AxisType, Dtype, DtypeNp, Label, StrLike, Scalar, IndexType, MaskType, S1
 from pandas._typing import ArrayLike as ArrayLike, np_ndarray_str, Timestamp as Timestamp, Timedelta as Timedelta
-from pandas._typing import IndexLevel as IndexLevel
+from pandas._typing import IndexLevel as IndexLevel, IgnoreRaise as IgnoreRaise
 from pandas.core.arraylike import OpsMixin
 from pandas.core.generic import NDFrame as NDFrame
 from pandas.core.groupby.generic import DataFrameGroupBy as DataFrameGroupBy
@@ -354,38 +354,39 @@ class DataFrame(NDFrame, OpsMixin):
     @overload
     def drop(
         self,
-        labels: Optional[Union[Dtype, List, Set]] = ...,
-        axis: AxisType = ...,
-        index: Optional[Union[Dtype, List[_str], List[int], Index, Set]] = ...,
-        columns: Optional[Union[Dtype, List, Index, Set]] = ...,
-        level: Optional[Level] = ...,
+        labels: Hashable | list[Hashable] = ...,
         *,
+        axis: Axis = ...,
+        index: Hashable | list[Hashable] = ...,
+        columns: Hashable | list[Hashable] = ...,
+        level: Level | None = ...,
         inplace: Literal[True],
-        errors: Union[_str, Literal["ignore", "raise"]] = ...,
+        errors: IgnoreRaise = ...,
     ) -> None: ...
     @overload
     def drop(
         self,
-        labels: Optional[Union[Dtype, List, Set]] = ...,
-        axis: AxisType = ...,
-        index: Optional[Union[Dtype, List[_str], List[int], Index, Set]] = ...,
-        columns: Optional[Union[Dtype, List, Index, Set]] = ...,
-        level: Optional[Level] = ...,
+        labels: Hashable | list[Hashable] = ...,
         *,
-        inplace: Literal[False],
-        errors: Union[_str, Literal["ignore", "raise"]] = ...,
+        axis: Axis = ...,
+        index: Hashable | list[Hashable] = ...,
+        columns: Hashable | list[Hashable] = ...,
+        level: Level | None = ...,
+        inplace: Literal[False] = ...,
+        errors: IgnoreRaise = ...,
     ) -> DataFrame: ...
     @overload
     def drop(
         self,
-        labels: Optional[Union[Dtype, List, Set]] = ...,
-        axis: AxisType = ...,
-        index: Optional[Union[Dtype, List[_str], List[int], Index, Set]] = ...,
-        columns: Optional[Union[Dtype, List, Index, Set]] = ...,
-        level: Optional[Level] = ...,
-        inplace: Optional[_bool] = ...,
-        errors: Union[_str, Literal["ignore", "raise"]] = ...,
-    ) -> DataFrame: ...
+        labels: Hashable | list[Hashable] = ...,
+        *,
+        axis: Axis = ...,
+        index: Hashable | list[Hashable] = ...,
+        columns: Hashable | list[Hashable] = ...,
+        level: Level | None = ...,
+        inplace: bool = ...,
+        errors: IgnoreRaise = ...,
+    ) -> DataFrame | None: ...
     @overload
     def rename(
         self,

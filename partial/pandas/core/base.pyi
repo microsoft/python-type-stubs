@@ -1,12 +1,20 @@
 from __future__ import annotations
 import numpy as np
+
 from pandas.core.arrays.categorical import Categorical
-from pandas._typing import Scalar, SeriesAxisType, T1 as T1, np_ndarray_int64, np_ndarray_str
+from pandas._typing import (
+    Scalar,
+    SeriesAxisType,
+    T1 as T1,
+    np_ndarray_int64,
+    np_ndarray_str,
+    Index as Index,
+    Series as Series,
+    DataFrame as DataFrame,
+)
+
 from pandas.core.accessor import DirNamesMixin as DirNamesMixin
 from pandas.core.arrays import ExtensionArray as ExtensionArray
-from pandas.core.indexes.api import Index as Index
-from pandas.core.series import Series
-from pandas.core.frame import DataFrame
 from typing import Callable, Generic, List, Literal, Optional, Tuple, Union, overload
 
 class PandasObject(DirNamesMixin):
@@ -30,7 +38,8 @@ class ShallowMixin: ...
 class IndexOpsMixin(Generic[T1]):
     __array_priority__: int = ...
     def transpose(self, *args, **kwargs) -> Index[T1]: ...
-    T = transpose
+    @property
+    def T(self) -> IndexOpsMixin[T1]: ...
     @property
     def shape(self) -> tuple: ...
     @property
@@ -67,7 +76,6 @@ class IndexOpsMixin(Generic[T1]):
     def is_monotonic_decreasing(self) -> bool: ...
     @property
     def is_monotonic_increasing(self) -> bool: ...
-    def memory_usage(self, deep: bool = ...) -> int: ...
     def factorize(self, sort: bool = ..., na_sentinel: int = ...) -> Tuple[np.ndarray, Union[np.ndarray, Index, Categorical]]: ...
     def searchsorted(self, value, side: str = ..., sorter=...) -> Union[int, List[int]]: ...
     def drop_duplicates(self, keep: Literal["first", "last", False] = ...) -> IndexOpsMixin[T1]: ...

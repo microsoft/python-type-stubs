@@ -72,8 +72,8 @@ AggFuncType = Union[
 ]
 
 num = Union[int, float]
-SeriesAxisType = Union[str, int, Literal["index", 0]]  # Restricted subset of _AxisType for series
-AxisType = Union[str, int, Literal["columns", "index", 0, 1]]
+SeriesAxisType = Literal["index", 0]  # Restricted subset of _AxisType for series
+AxisType = Literal["columns", "index", 0, 1]
 Dtype = TypeVar("Dtype", bool, int, float, object)
 DtypeNp = TypeVar("DtypeNp", bound=np.dtype)
 KeysArgType = Any
@@ -110,3 +110,9 @@ T2 = TypeVar("T2", str, int)
 IntervalClosedType = Literal["left", "right", "both", "neither"]
 
 DateTimeErrorChoices = Literal["ignore", "raise", "coerce"]
+
+# For functions like rename that convert one label to another
+Renamer = Union[Mapping[Hashable, Any], Callable[[Hashable], Hashable]]
+
+# Shared by functions such as drop and astype
+IgnoreRaise = Literal["ignore", "raise"]
