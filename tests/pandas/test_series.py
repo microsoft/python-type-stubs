@@ -616,3 +616,5 @@ def test_series_mul() -> None:
     check_series_result(ss)
     sm2 = s * s
     check_series_result(sm2)
+    sp = s + 4
+    check_series_result(sp)

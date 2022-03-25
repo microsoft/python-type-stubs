@@ -1196,7 +1196,7 @@ class Series(IndexOpsMixin, NDFrame, Generic[S1]):
         level: None = ...,
         numeric_only: Optional[_bool] = ...,
         **kwargs,
-    ) -> S1: ...
+    ) -> float: ...
     @overload
     def median(
         self,
@@ -1215,7 +1215,7 @@ class Series(IndexOpsMixin, NDFrame, Generic[S1]):
         level: None = ...,
         numeric_only: Optional[_bool] = ...,
         **kwargs,
-    ) -> S1: ...
+    ) -> float: ...
     @overload
     def min(
         self,
