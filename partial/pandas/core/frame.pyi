@@ -6,7 +6,19 @@ import sys
 from pandas.core.indexing import _iLocIndexer, _LocIndexer
 from matplotlib.axes import Axes as PlotAxes
 from pandas._typing import Axes as Axes, Axis as Axis, FilePathOrBuffer as FilePathOrBuffer, Level as Level, Renamer as Renamer
-from pandas._typing import num, SeriesAxisType, AxisType, Dtype, DtypeNp, Label, StrLike, Scalar, IndexType, MaskType, S1
+from pandas._typing import (
+    num,
+    SeriesAxisType,
+    AxisType,
+    Dtype,
+    DtypeNp,
+    Label,
+    StrLike,
+    Scalar as Scalar,
+    IndexType,
+    MaskType,
+    S1,
+)
 from pandas._typing import ArrayLike as ArrayLike, np_ndarray_str, Timestamp as Timestamp, Timedelta as Timedelta
 from pandas._typing import IndexLevel as IndexLevel, IgnoreRaise as IgnoreRaise
 from pandas.core.arraylike import OpsMixin
@@ -139,7 +151,7 @@ class DataFrame(NDFrame, OpsMixin):
     ]
     def __init__(
         self,
-        data: Optional[Union[_ListLike, DataFrame, Dict[Dtype, Any]]] = ...,
+        data: Optional[Union[_ListLike, DataFrame, Dict[Scalar, Any]]] = ...,
         index: Optional[Union[Index, _ListLike]] = ...,
         columns: Optional[_ListLike] = ...,
         dtype=...,
@@ -310,7 +322,7 @@ class DataFrame(NDFrame, OpsMixin):
             Series[_bool],
             DataFrame,
             List[_str],
-            Index[_str],
+            Index,
             np_ndarray_str,
             Sequence[Tuple[Scalar, ...]],
         ],
@@ -843,7 +855,7 @@ class DataFrame(NDFrame, OpsMixin):
     def applymap(self, func: Callable, na_action: Optional[Literal["ignore"]] = None, **kwargs) -> DataFrame: ...
     def append(
         self,
-        other: Union[DataFrame, Series, Dict[Any, Any], List[Dtype]],
+        other: Union[DataFrame, Series, Dict[Any, Any], List[Scalar], List[_ListLike]],
         ignore_index: _bool = ...,
         verify_integrity: _bool = ...,
         sort: _bool = ...,
@@ -1542,7 +1554,7 @@ class DataFrame(NDFrame, OpsMixin):
         *,
         win_type: _str,
         on: Optional[_str] = ...,
-        axis: SeriesAxisType = ...,
+        axis: AxisType = ...,
         closed: Optional[_str] = ...,
     ) -> Window: ...
     @overload
@@ -1553,7 +1565,7 @@ class DataFrame(NDFrame, OpsMixin):
         center: _bool = ...,
         *,
         on: Optional[_str] = ...,
-        axis: SeriesAxisType = ...,
+        axis: AxisType = ...,
         closed: Optional[_str] = ...,
     ) -> Rolling: ...
     def rpow(

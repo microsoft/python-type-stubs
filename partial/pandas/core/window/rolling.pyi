@@ -1,5 +1,5 @@
 import numpy as np
-from pandas._typing import Axis as Axis, FrameOrSeries as FrameOrSeries, Scalar as Scalar
+from pandas._typing import Axis as Axis, FrameOrSeriesUnion as FrameOrSeries, Scalar as Scalar
 from pandas.core.base import PandasObject as PandasObject, SelectionMixin as SelectionMixin, ShallowMixin as ShallowMixin
 from pandas.core.indexes.api import Index as Index
 from pandas.core.window.common import WindowGroupByMixin as WindowGroupByMixin
@@ -35,9 +35,7 @@ class _Window(PandasObject, ShallowMixin, SelectionMixin):
     def validate(self) -> None: ...
     def __getattr__(self, attr: str): ...
     def __iter__(self): ...
-    def aggregate(
-        self, func: Optional[Union[Callable, str, Sequence[Callable], Mapping[str, Callable]]] = ..., *args, **kwargs
-    ) -> Union[Scalar, FrameOrSeries]: ...
+    def aggregate(self, func: Optional[Callable] = ..., *args, **kwargs) -> Union[Scalar, FrameOrSeries]: ...
     agg = aggregate
 
 class Window(_Window):
