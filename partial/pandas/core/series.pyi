@@ -112,15 +112,15 @@ class _LocIndexerSeries(_LocIndexer, Generic[S1]):
 class Series(IndexOpsMixin, NDFrame, Generic[S1]):
 
     _ListLike = Union[ArrayLike, Dict[_str, np.ndarray], List, Tuple, Index]
-    def __init__(
-        self,
+    def __new__(
+        cls,
         data: Optional[Union[object, _ListLike, Series[S1], Dict[int, S1], Dict[_str, S1]]] = ...,
         index: Union[_str, int, Series, List, Index] = ...,
         dtype=...,
         name: Optional[Hashable] = ...,
         copy: bool = ...,
         fastpath: bool = ...,
-    ): ...
+    ) -> Series: ...
     @property
     def hasnans(self) -> bool: ...
     def div(
@@ -271,7 +271,7 @@ class Series(IndexOpsMixin, NDFrame, Generic[S1]):
     @overload
     def drop_duplicates(self, *, inplace: Literal[True]) -> None: ...
     @overload
-    def drop_duplicates(self, keep: Literal["first", "last", False] = ..., inplace: bool = ...) -> Series[S1] | None: ...
+    def drop_duplicates(self, keep: Literal["first", "last", False] = ..., inplace: bool = ...) -> Optional[Series[S1]]: ...
     def duplicated(self, keep: Literal["first", "last", False] = ...) -> Series[_bool]: ...
     def idxmax(self, axis: SeriesAxisType = ..., skipna: _bool = ..., *args, **kwargs) -> Union[int, _str]: ...
     def idxmin(self, axis: SeriesAxisType = ..., skipna: _bool = ..., *args, **kwargs) -> Union[int, _str]: ...
@@ -505,36 +505,47 @@ class Series(IndexOpsMixin, NDFrame, Generic[S1]):
     @overload
     def rename(
         self,
-        index: Renamer | Hashable | None = ...,
+        index: Optional[Union[Renamer, Hashable]] = ...,
         *,
-        axis: Axis | None = ...,
+        axis: Optional[Axis] = ...,
         copy: bool = ...,
         inplace: Literal[True],
-        level: Level | None = ...,
+        level: Optional[Level] = ...,
         errors: IgnoreRaise = ...,
     ) -> None: ...
     @overload
     def rename(
         self,
-        index: Renamer | Hashable | None = ...,
+        index: Renamer = ...,
         *,
-        axis: Axis | None = ...,
+        axis: Optional[Axis] = ...,
         copy: bool = ...,
         inplace: Literal[False] = ...,
-        level: Level | None = ...,
+        level: Optional[Level] = ...,
         errors: IgnoreRaise = ...,
     ) -> Series: ...
     @overload
     def rename(
         self,
-        index: Renamer | Hashable | None = ...,
+        index: Hashable = ...,
         *,
-        axis: Axis | None = ...,
+        axis: Optional[Axis] = ...,
+        copy: bool = ...,
+        inplace: Literal[False] = ...,
+        level: Optional[Level] = ...,
+        errors: IgnoreRaise = ...,
+    ) -> Series: ...
+    @overload
+    def rename(
+        self,
+        index: Optional[Union[Renamer, Hashable]] = ...,
+        *,
+        axis: Optional[Axis] = ...,
         copy: bool = ...,
         inplace: bool = ...,
-        level: Level | None = ...,
+        level: Optional[Level] = ...,
         errors: IgnoreRaise = ...,
-    ) -> Series | None: ...
+    ) -> Optional[Series]: ...
     def reindex_like(
         self,
         other: Series[S1],
@@ -546,39 +557,39 @@ class Series(IndexOpsMixin, NDFrame, Generic[S1]):
     @overload
     def drop(
         self,
-        labels: Hashable | list[Hashable] = ...,
+        labels: Union[Hashable, List[Hashable]] = ...,
         *,
         axis: Axis = ...,
-        index: Hashable | list[Hashable] = ...,
-        columns: Hashable | list[Hashable] = ...,
-        level: Level | None = ...,
+        index: Union[Hashable, List[Hashable]] = ...,
+        columns: Union[Hashable, List[Hashable]] = ...,
+        level: Optional[Level] = ...,
         inplace: Literal[True],
         errors: IgnoreRaise = ...,
     ) -> None: ...
     @overload
     def drop(
         self,
-        labels: Hashable | list[Hashable] = ...,
+        labels: Union[Hashable, List[Hashable]] = ...,
         *,
         axis: Axis = ...,
-        index: Hashable | list[Hashable] = ...,
-        columns: Hashable | list[Hashable] = ...,
-        level: Level | None = ...,
+        index: Union[Hashable, List[Hashable]] = ...,
+        columns: Union[Hashable, List[Hashable]] = ...,
+        level: Optional[Level] = ...,
         inplace: Literal[False] = ...,
         errors: IgnoreRaise = ...,
     ) -> Series: ...
     @overload
     def drop(
         self,
-        labels: Hashable | list[Hashable] = ...,
+        labels: Union[Hashable, List[Hashable]] = ...,
         *,
         axis: Axis = ...,
-        index: Hashable | list[Hashable] = ...,
-        columns: Hashable | list[Hashable] = ...,
-        level: Level | None = ...,
+        index: Union[Hashable, List[Hashable]] = ...,
+        columns: Union[Hashable, List[Hashable]] = ...,
+        level: Optional[Level] = ...,
         inplace: bool = ...,
         errors: IgnoreRaise = ...,
-    ) -> Series | None: ...
+    ) -> Optional[Series]: ...
     @overload
     def fillna(
         self,
@@ -1164,9 +1175,9 @@ class Series(IndexOpsMixin, NDFrame, Generic[S1]):
         self,
         axis: Optional[SeriesAxisType] = ...,
         skipna: _bool = ...,
-        numeric_only: Optional[_bool] = ...,
         *,
         level: Level,
+        numeric_only: Optional[_bool] = ...,
         **kwargs,
     ) -> Series[S1]: ...
     @overload
@@ -1174,6 +1185,7 @@ class Series(IndexOpsMixin, NDFrame, Generic[S1]):
         self,
         axis: Optional[SeriesAxisType] = ...,
         skipna: _bool = ...,
+        *,
         level: None = ...,
         numeric_only: Optional[_bool] = ...,
         **kwargs,

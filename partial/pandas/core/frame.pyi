@@ -5,7 +5,14 @@ import sys
 
 from pandas.core.indexing import _iLocIndexer, _LocIndexer
 from matplotlib.axes import Axes as PlotAxes
-from pandas._typing import Axes as Axes, Axis as Axis, FilePathOrBuffer as FilePathOrBuffer, Level as Level, Renamer as Renamer
+from pandas._typing import (
+    Axes as Axes,
+    Axis as Axis,
+    FilePathOrBuffer as FilePathOrBuffer,
+    FilePathOrBytesBuffer as FilePathOrBytesBuffer,
+    Level as Level,
+    Renamer as Renamer,
+)
 from pandas._typing import (
     num,
     SeriesAxisType,
@@ -71,7 +78,7 @@ class _iLocIndexerFrame(_iLocIndexer):
     @overload
     def __getitem__(self, idx: Tuple[int, Union[IndexType, MaskType]]) -> Series: ...
     @overload
-    def __getitem__(self, idx: Union[int, Tuple[Union[IndexType, MaskType], Union[IndexType, MaskType, int]]]) -> DataFrame: ...
+    def __getitem__(self, idx: Tuple[Union[IndexType, MaskType], Union[IndexType, MaskType]]) -> DataFrame: ...
     def __setitem__(
         self,
         idx: Union[
@@ -111,20 +118,13 @@ class _LocIndexerFrame(_LocIndexer):
     @overload
     def __getitem__(
         self,
-        idx: Tuple[int, Union[slice, StrLike]],
-    ) -> Series: ...
-    @overload
-    def __getitem__(
-        self,
         idx: Tuple[Union[IndexType, MaskType], StrLike],
     ) -> Series: ...
     @overload
     def __getitem__(
         self,
-        idx: Tuple[Tuple[Union[StrLike, slice], ...], StrLike],
+        idx: Tuple[Tuple[slice, ...], StrLike],
     ) -> Series: ...
-    @overload
-    def __getitem__(self, idx: Index) -> DataFrame: ...
     @overload
     def __setitem__(
         self,
@@ -149,14 +149,14 @@ class DataFrame(NDFrame, OpsMixin):
         Index,
         Series,
     ]
-    def __init__(
-        self,
+    def __new__(
+        cls,
         data: Optional[Union[_ListLike, DataFrame, Dict[Scalar, Any]]] = ...,
         index: Optional[Union[Index, _ListLike]] = ...,
         columns: Optional[_ListLike] = ...,
         dtype=...,
         copy: _bool = ...,
-    ) -> None: ...
+    ) -> DataFrame: ...
     @property
     def axes(self) -> List[Index]: ...
     @property
@@ -180,17 +180,15 @@ class DataFrame(NDFrame, OpsMixin):
         self, dtype: Optional[Union[Type[DtypeNp], Dtype]] = ..., copy: _bool = ..., na_value: Optional[Any] = ...
     ) -> _np.ndarray: ...
     @overload
-    def to_dict(self) -> Dict[_str, Any]: ...
-    @overload
     def to_dict(
         self,
-        orient: Literal["records"] = ...,
+        orient: Literal["records"],
         into: Hashable = ...,
     ) -> List[Dict[_str, Any]]: ...
     @overload
     def to_dict(
         self,
-        orient: Union[_str, Literal["dict", "list", "series", "split", "index"]] = ...,
+        orient: Literal["dict", "list", "series", "split", "index"] = ...,
         into: Hashable = ...,
     ) -> Dict[_str, Any]: ...
     def to_gbq(
@@ -234,7 +232,8 @@ class DataFrame(NDFrame, OpsMixin):
     @overload
     def to_parquet(
         self,
-        path: Optional[FilePathOrBuffer],
+        path: FilePathOrBytesBuffer,
+        *,
         engine: Union[_str, Literal["auto", "pyarrow", "fastparquet"]] = ...,
         compression: Union[_str, Literal["snappy", "gzip", "brotli"]] = ...,
         index: Optional[_bool] = ...,
@@ -244,7 +243,8 @@ class DataFrame(NDFrame, OpsMixin):
     @overload
     def to_parquet(
         self,
-        path: Optional[FilePathOrBuffer] = ...,
+        *,
+        path: None = ...,
         engine: Union[_str, Literal["auto", "pyarrow", "fastparquet"]] = ...,
         compression: Union[_str, Literal["snappy", "gzip", "brotli"]] = ...,
         index: Optional[_bool] = ...,
@@ -310,19 +310,18 @@ class DataFrame(NDFrame, OpsMixin):
     @property
     def T(self) -> DataFrame: ...
     @overload
-    def __getitem__(self, idx: _str) -> Series: ...
+    def __getitem__(self, idx: S1) -> Series: ...
     @overload
     def __getitem__(self, rows: slice) -> DataFrame: ...
     @overload
     def __getitem__(
         self,
         idx: Union[
-            S1,
             Tuple,
             Series[_bool],
             DataFrame,
             List[_str],
-            Index,
+            Index,  # leaving Index in overlaps with S1 ??
             np_ndarray_str,
             Sequence[Tuple[Scalar, ...]],
         ],
@@ -331,9 +330,7 @@ class DataFrame(NDFrame, OpsMixin):
     @overload
     def query(self, expr: _str, *, inplace: Literal[True], **kwargs) -> None: ...
     @overload
-    def query(self, expr: _str, *, inplace: Literal[False], **kwargs) -> DataFrame: ...
-    @overload
-    def query(self, expr: _str, inplace: _bool = ..., **kwargs) -> DataFrame: ...
+    def query(self, expr: _str, *, inplace: Literal[False] = ..., **kwargs) -> DataFrame: ...
     def eval(self, expr: _str, inplace: _bool = ..., **kwargs): ...
     def select_dtypes(
         self,
@@ -371,7 +368,7 @@ class DataFrame(NDFrame, OpsMixin):
         axis: Axis = ...,
         index: Hashable | list[Hashable] = ...,
         columns: Hashable | list[Hashable] = ...,
-        level: Level | None = ...,
+        level: Optional[Level] = ...,
         inplace: Literal[True],
         errors: IgnoreRaise = ...,
     ) -> None: ...
@@ -383,7 +380,7 @@ class DataFrame(NDFrame, OpsMixin):
         axis: Axis = ...,
         index: Hashable | list[Hashable] = ...,
         columns: Hashable | list[Hashable] = ...,
-        level: Level | None = ...,
+        level: Optional[Level] = ...,
         inplace: Literal[False] = ...,
         errors: IgnoreRaise = ...,
     ) -> DataFrame: ...
@@ -395,30 +392,49 @@ class DataFrame(NDFrame, OpsMixin):
         axis: Axis = ...,
         index: Hashable | list[Hashable] = ...,
         columns: Hashable | list[Hashable] = ...,
-        level: Level | None = ...,
+        level: Optional[Level] = ...,
         inplace: bool = ...,
         errors: IgnoreRaise = ...,
     ) -> DataFrame | None: ...
     @overload
     def rename(
         self,
-        mapper: Optional[Renamer],
-        axis: Optional[AxisType] = ...,
-        copy: _bool = ...,
-        inplace: _bool = ...,
+        mapper: Optional[Renamer] = ...,
+        *,
+        index: Optional[Renamer] = ...,
+        columns: Optional[Renamer] = ...,
+        axis: Optional[Axis] = ...,
+        copy: bool = ...,
+        inplace: Literal[True],
         level: Optional[Level] = ...,
-        errors: Union[_str, Literal["ignore", "raise"]] = ...,
+        errors: IgnoreRaise = ...,
+    ) -> None: ...
+    @overload
+    def rename(
+        self,
+        mapper: Optional[Renamer] = ...,
+        *,
+        index: Optional[Renamer] = ...,
+        columns: Optional[Renamer] = ...,
+        axis: Optional[Axis] = ...,
+        copy: bool = ...,
+        inplace: Literal[False] = ...,
+        level: Optional[Level] = ...,
+        errors: IgnoreRaise = ...,
     ) -> DataFrame: ...
     @overload
     def rename(
         self,
-        index: Optional[Union[Dict[Union[_str, int], _str], Callable]] = ...,
+        mapper: Optional[Renamer] = ...,
+        *,
+        index: Optional[Renamer] = ...,
         columns: Optional[Renamer] = ...,
-        copy: _bool = ...,
-        inplace: _bool = ...,
+        axis: Optional[Axis] = ...,
+        copy: bool = ...,
+        inplace: bool = ...,
         level: Optional[Level] = ...,
-        errors: Union[_str, Literal["ignore", "raise"]] = ...,
-    ) -> DataFrame: ...
+        errors: IgnoreRaise = ...,
+    ) -> Optional[DataFrame]: ...
     @overload
     def fillna(
         self,
@@ -847,15 +863,15 @@ class DataFrame(NDFrame, OpsMixin):
         self, func: Union[List[Callable], Dict[_str, Callable]], axis: AxisType = ..., *args, **kwargs
     ) -> DataFrame: ...
     @overload
-    def apply(self, f: Callable[..., int]) -> Series: ...
+    def apply(self, f: Callable) -> Series: ...
     @overload
     def apply(
-        self, f: Callable, axis: AxisType = ..., raw: _bool = ..., result_type: Optional[_str] = ..., args=..., **kwargs
+        self, f: Callable, axis: AxisType, raw: _bool = ..., result_type: Optional[_str] = ..., args=..., **kwargs
     ) -> DataFrame: ...
     def applymap(self, func: Callable, na_action: Optional[Literal["ignore"]] = None, **kwargs) -> DataFrame: ...
     def append(
         self,
-        other: Union[DataFrame, Series, Dict[Any, Any], List[Scalar], List[_ListLike]],
+        other: Union[DataFrame, Series, Dict[Any, Any], Sequence[Scalar], Sequence[_ListLike]],
         ignore_index: _bool = ...,
         verify_integrity: _bool = ...,
         sort: _bool = ...,

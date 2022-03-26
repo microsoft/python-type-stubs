@@ -18,7 +18,9 @@ from typing import (
     Mapping,
     NewType,
     Optional,
+    Protocol,
     Sequence,
+    Tuple,
     Type,
     TypeVar,
     Union,
@@ -53,9 +55,19 @@ DtypeArg = Union[Dtype, Dict[Hashable, Dtype]]
 DtypeObj = Union[np.dtype, "ExtensionDtype"]
 
 # filenames and file-like-objects
+AnyStr_cov = TypeVar("AnyStr_cov", str, bytes, covariant=True)
+AnyStr_con = TypeVar("AnyStr_con", str, bytes, contravariant=True)
+
+class BaseBuffer(Protocol): ...
+class ReadBuffer(BaseBuffer, Protocol[AnyStr_cov]): ...
+class WriteBuffer(BaseBuffer, Protocol[AnyStr_cov]): ...
+
+FilePath = Union[str, PathLike[str]]
+
 Buffer = Union[IO[AnyStr], RawIOBase, BufferedIOBase, TextIOBase, TextIOWrapper, mmap]
 FileOrBuffer = Union[str, Buffer[AnyStr]]
 FilePathOrBuffer = Union["PathLike[str]", FileOrBuffer[AnyStr]]
+FilePathOrBytesBuffer = Union[PathLike[str], WriteBuffer[bytes]]
 
 FrameOrSeries = TypeVar("FrameOrSeries", bound=NDFrame)
 FrameOrSeriesUnion = Union[DataFrame, Series]
@@ -118,7 +130,7 @@ IntervalClosedType = Literal["left", "right", "both", "neither"]
 DateTimeErrorChoices = Literal["ignore", "raise", "coerce"]
 
 # For functions like rename that convert one label to another
-Renamer = Union[Mapping[Hashable, Any], Callable[[Hashable], Hashable]]
+Renamer = Union[Mapping[Any, Any], Callable[[Hashable], Hashable]]
 
 # Shared by functions such as drop and astype
 IgnoreRaise = Literal["ignore", "raise"]

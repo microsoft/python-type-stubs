@@ -34,15 +34,15 @@ _bool = bool
 _str = str
 
 class NDFrame(PandasObject, indexing.IndexingMixin):
-    def __init__(
-        self,
+    def __new__(
+        cls,
         data: BlockManager,
         axes: Optional[List[Index]] = ...,
         copy: _bool = ...,
         dtype: Optional[Dtype] = ...,
         attrs: Optional[Mapping[Optional[Hashable], Any]] = ...,
         fastpath: _bool = ...,
-    ) -> None: ...
+    ) -> NDFrame: ...
     def set_flags(self: FrameOrSeries, *, copy: bool = ..., allows_duplicate_labels: Optional[bool] = ...) -> FrameOrSeries: ...
     @property
     def attrs(self) -> Dict[Optional[Hashable], Any]: ...
