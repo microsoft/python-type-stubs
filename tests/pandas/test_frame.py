@@ -3,7 +3,7 @@ from datetime import date, datetime
 import io
 import tempfile
 from pathlib import Path
-from typing import List, Tuple, Iterable, Any
+from typing import List, Tuple, Iterable, Any, Dict, Hashable
 
 import pandas as pd
 from pandas.io.parsers import TextFileReader
@@ -727,7 +727,9 @@ def test_types_explode() -> None:
 
 def test_types_rename() -> None:
     df = pd.DataFrame(columns=["a"])
-    col_map = {"a": "b"}
+    # See https://github.com/python/mypy/issues/12464 as to why type declaration is
+    # needed
+    col_map: Dict[Hashable, str] = {"a": "b"}
     df.rename(columns=col_map)
     df.rename(columns={"a": "b"})
     df.rename(columns={1: "b"})

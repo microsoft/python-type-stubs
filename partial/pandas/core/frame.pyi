@@ -32,7 +32,8 @@ from pandas.core.arraylike import OpsMixin
 from pandas.core.generic import NDFrame as NDFrame
 from pandas.core.groupby.generic import DataFrameGroupBy as DataFrameGroupBy
 from pandas.core.groupby.grouper import Grouper
-from pandas.core.indexes.api import Index as Index, MultiIndex as MultiIndex
+from pandas.core.indexes.base import Index as Index
+from pandas.core.indexes.multi import MultiIndex as MultiIndex
 from pandas.core.resample import Resampler
 from pandas.core.window.rolling import Rolling, Window
 from pandas.core.series import Series as Series
@@ -151,7 +152,7 @@ class DataFrame(NDFrame, OpsMixin):
     ]
     def __new__(
         cls,
-        data: Optional[Union[_ListLike, DataFrame, Dict[Scalar, Any]]] = ...,
+        data: Optional[Union[_ListLike, DataFrame, Dict[Any, Any]]] = ...,
         index: Optional[Union[Index, _ListLike]] = ...,
         columns: Optional[_ListLike] = ...,
         dtype=...,
@@ -321,7 +322,7 @@ class DataFrame(NDFrame, OpsMixin):
             Series[_bool],
             DataFrame,
             List[_str],
-            Index,  # leaving Index in overlaps with S1 ??
+            Index,
             np_ndarray_str,
             Sequence[Tuple[Scalar, ...]],
         ],
@@ -2024,3 +2025,6 @@ class DataFrame(NDFrame, OpsMixin):
         level: Optional[Level] = ...,
         drop_level: _bool = ...,
     ) -> DataFrame: ...
+    # Move from generic because Series is Generic and it returns Series[bool] there
+    def __invert__(self) -> DataFrame: ...
+    
