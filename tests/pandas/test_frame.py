@@ -727,9 +727,7 @@ def test_types_explode() -> None:
 
 def test_types_rename() -> None:
     df = pd.DataFrame(columns=["a"])
-    # See https://github.com/python/mypy/issues/12464 as to why type declaration is
-    # needed
-    col_map: Dict[Hashable, str] = {"a": "b"}
+    col_map = {"a": "b"}
     df.rename(columns=col_map)
     df.rename(columns={"a": "b"})
     df.rename(columns={1: "b"})
