@@ -998,7 +998,6 @@ class DataFrame(NDFrame, OpsMixin):
     Name: _str
     #
     # dunder methods
-    def __delitem__(self, key: _str) -> None: ...
     def __exp__(
         self,
         other: Union[num, _ListLike, DataFrame],
@@ -1607,22 +1606,16 @@ class DataFrame(NDFrame, OpsMixin):
         fill_value: Optional[float] = ...,
     ) -> DataFrame: ...
     # sample is missing a weights arg
-    @overload
     def sample(
         self,
-        frac: Optional[float],
-        random_state: Optional[int] = ...,
+        n: Optional[int] = ...,
+        frac: Optional[float] = ...,
         replace: _bool = ...,
-        axis: Optional[AxisType] = ...,
-    ) -> DataFrame: ...
-    @overload
-    def sample(
-        self,
-        n: Optional[int],
+        weights: Optional[Union[_str, _ListLike, np.ndarray]] = ...,
         random_state: Optional[int] = ...,
-        replace: _bool = ...,
-        axis: Optional[AxisType] = ...,
-    ) -> DataFrame: ...
+        axis: Optional[SeriesAxisType] = ...,
+        ignore_index: _bool = ...,
+    ) -> Series[S1]: ...
     @overload
     def sem(
         self,
@@ -1645,15 +1638,15 @@ class DataFrame(NDFrame, OpsMixin):
         **kwargs,
     ) -> Series: ...
     @overload
-    def set_axis(self, labels: List, inplace: Literal[True], axis: AxisType = ...) -> None: ...
+    def set_axis(self, labels, inplace: Literal[True], axis: AxisType = ...) -> None: ...
     @overload
-    def set_axis(self, labels: List, inplace: Literal[False], axis: AxisType = ...) -> DataFrame: ...
+    def set_axis(self, labels, inplace: Literal[False], axis: AxisType = ...) -> DataFrame: ...
     @overload
-    def set_axis(self, labels: List, *, axis: AxisType = ...) -> DataFrame: ...
+    def set_axis(self, labels, *, axis: AxisType = ...) -> DataFrame: ...
     @overload
     def set_axis(
         self,
-        labels: List,
+        labels,
         axis: AxisType = ...,
         inplace: Optional[_bool] = ...,
     ) -> Union[None, DataFrame]: ...
@@ -1822,7 +1815,7 @@ class DataFrame(NDFrame, OpsMixin):
         date_unit: Union[_str, Literal["s", "ms", "us", "ns"]] = ...,
         default_handler: Optional[Callable[[Any], Union[_str, int, float, _bool, List, Dict]]] = ...,
         lines: _bool = ...,
-        compression: Union[_str, Literal["infer", "gzip", "bz2", "zip", "xz"]] = ...,
+        compression: Union[_str, None, Literal["infer", "gzip", "bz2", "zip", "xz"]] = ...,
         index: _bool = ...,
         indent: Optional[int] = ...,
     ) -> None: ...
@@ -1836,7 +1829,7 @@ class DataFrame(NDFrame, OpsMixin):
         date_unit: Union[_str, Literal["s", "ms", "us", "ns"]] = ...,
         default_handler: Optional[Callable[[Any], Union[_str, int, float, _bool, List, Dict]]] = ...,
         lines: _bool = ...,
-        compression: Union[_str, Literal["infer", "gzip", "bz2", "zip", "xz"]] = ...,
+        compression: Union[_str, None, Literal["infer", "gzip", "bz2", "zip", "xz"]] = ...,
         index: _bool = ...,
         indent: Optional[int] = ...,
     ) -> _str: ...
@@ -2017,13 +2010,6 @@ class DataFrame(NDFrame, OpsMixin):
         level: Optional[Level] = ...,
         errors: _str = ...,
         try_cast: _bool = ...,
-    ) -> DataFrame: ...
-    def xs(
-        self,
-        key: Union[_str, Tuple[_str]],
-        axis: AxisType = ...,
-        level: Optional[Level] = ...,
-        drop_level: _bool = ...,
     ) -> DataFrame: ...
     # Move from generic because Series is Generic and it returns Series[bool] there
     def __invert__(self) -> DataFrame: ...

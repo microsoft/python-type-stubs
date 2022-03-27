@@ -134,3 +134,10 @@ Renamer = Union[Mapping[Hashable, Any], Callable[[Hashable], Hashable]]
 
 # Shared by functions such as drop and astype
 IgnoreRaise = Literal["ignore", "raise"]
+
+# for arbitrary kwargs passed during reading/writing files
+StorageOptions = Optional[Dict[str, Any]]
+
+# compression keywords and compression
+CompressionDict = Dict[str, Any]
+CompressionOptions = Optional[Union[Literal["infer", "gzip", "bz2", "zip", "xz", "zstd"], CompressionDict]]

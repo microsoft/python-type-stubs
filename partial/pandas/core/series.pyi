@@ -25,6 +25,7 @@ from pandas._typing import (
     FilePathOrBuffer as FilePathOrBuffer,
     IgnoreRaise as IgnoreRaise,
     Level as Level,
+    ListLike as ListLike,
     MaskType as MaskType,
     Renamer as Renamer,
     S1 as S1,
@@ -516,7 +517,7 @@ class Series(IndexOpsMixin, NDFrame, Generic[S1]):
     @overload
     def rename(
         self,
-        index: Renamer = ...,
+        index: Optional[Renamer] = ...,
         *,
         axis: Optional[Axis] = ...,
         copy: bool = ...,
@@ -527,7 +528,7 @@ class Series(IndexOpsMixin, NDFrame, Generic[S1]):
     @overload
     def rename(
         self,
-        index: Hashable = ...,
+        index: Optional[Hashable] = ...,
         *,
         axis: Optional[Axis] = ...,
         copy: bool = ...,
@@ -711,6 +712,7 @@ class Series(IndexOpsMixin, NDFrame, Generic[S1]):
         weights: Optional[Union[_str, _ListLike, np.ndarray]] = ...,
         random_state: Optional[int] = ...,
         axis: Optional[SeriesAxisType] = ...,
+        ignore_index: _bool = ...,
     ) -> Series[S1]: ...
     def astype(
         self,
@@ -1525,3 +1527,32 @@ class Series(IndexOpsMixin, NDFrame, Generic[S1]):
         numeric_only: Optional[_bool] = ...,
         **kwargs,
     ) -> Scalar: ...
+    @overload
+    def rename_axis(
+        self,
+        mapper: Union[Scalar, ListLike] = ...,
+        index: Optional[Union[Scalar, ListLike, Callable, Dict]] = ...,
+        columns: Optional[Union[Scalar, ListLike, Callable, Dict]] = ...,
+        axis: Optional[SeriesAxisType] = ...,
+        copy: _bool = ...,
+        *,
+        inplace: Literal[True],
+    ) -> None: ...
+    @overload
+    def rename_axis(
+        self,
+        mapper: Union[Scalar, ListLike] = ...,
+        index: Optional[Union[Scalar, ListLike, Callable, Dict]] = ...,
+        columns: Optional[Union[Scalar, ListLike, Callable, Dict]] = ...,
+        axis: Optional[SeriesAxisType] = ...,
+        copy: _bool = ...,
+        inplace: Literal[False] = ...,
+    ) -> Series: ...
+    @overload
+    def set_axis(self, labels, axis: Axis = ..., inplace: Literal[False] = ...) -> Series[S1]: ...
+    @overload
+    def set_axis(self, labels, axis: Axis, inplace: Literal[True]) -> None: ...
+    @overload
+    def set_axis(self, labels, *, inplace: Literal[True]) -> None: ...
+    @overload
+    def set_axis(self, labels, axis: Axis = ..., inplace: bool = ...) -> Optional[Series[S1]]: ...
