@@ -8,6 +8,9 @@ from matplotlib.axes import Axes as PlotAxes
 from pandas._typing import (
     Axes as Axes,
     Axis as Axis,
+    HashableT as HashableT,
+    HashableTa as HashableTa,
+    HashableTb as HashableTb,    
     FilePathOrBuffer as FilePathOrBuffer,
     FilePathOrBytesBuffer as FilePathOrBytesBuffer,
     Level as Level,
@@ -400,10 +403,10 @@ class DataFrame(NDFrame, OpsMixin):
     @overload
     def rename(
         self,
-        mapper: Optional[Renamer] = ...,
+        mapper: Optional[Renamer[HashableT]] = ...,
         *,
-        index: Optional[Renamer] = ...,
-        columns: Optional[Renamer] = ...,
+        index: Optional[Renamer[HashableTa]] = ...,
+        columns: Optional[Renamer[HashableTb]] = ...,
         axis: Optional[Axis] = ...,
         copy: bool = ...,
         inplace: Literal[True],
@@ -413,10 +416,10 @@ class DataFrame(NDFrame, OpsMixin):
     @overload
     def rename(
         self,
-        mapper: Optional[Renamer] = ...,
+        mapper: Optional[Renamer[HashableT]] = ...,
         *,
-        index: Optional[Renamer] = ...,
-        columns: Optional[Renamer] = ...,
+        index: Optional[Renamer[HashableTa]] = ...,
+        columns: Optional[Renamer[HashableTb]] = ...,
         axis: Optional[Axis] = ...,
         copy: bool = ...,
         inplace: Literal[False] = ...,
@@ -426,10 +429,10 @@ class DataFrame(NDFrame, OpsMixin):
     @overload
     def rename(
         self,
-        mapper: Optional[Renamer] = ...,
+        mapper: Optional[Renamer[HashableT]] = ...,
         *,
-        index: Optional[Renamer] = ...,
-        columns: Optional[Renamer] = ...,
+        index: Optional[Renamer[HashableTa]] = ...,
+        columns: Optional[Renamer[HashableTb]] = ...,
         axis: Optional[Axis] = ...,
         copy: bool = ...,
         inplace: bool = ...,

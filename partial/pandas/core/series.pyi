@@ -23,6 +23,7 @@ from pandas._typing import (
     Dtype as Dtype,
     DtypeNp as DtypeNp,
     FilePathOrBuffer as FilePathOrBuffer,
+    HashableT as HashableT,
     IgnoreRaise as IgnoreRaise,
     Level as Level,
     ListLike as ListLike,
@@ -506,7 +507,7 @@ class Series(IndexOpsMixin, NDFrame, Generic[S1]):
     @overload
     def rename(
         self,
-        index: Optional[Union[Renamer, Hashable]] = ...,
+        index: Optional[Union[Renamer[HashableT], Hashable]] = ...,
         *,
         axis: Optional[Axis] = ...,
         copy: bool = ...,
@@ -517,7 +518,7 @@ class Series(IndexOpsMixin, NDFrame, Generic[S1]):
     @overload
     def rename(
         self,
-        index: Optional[Renamer] = ...,
+        index: Optional[Renamer[HashableT]] = ...,
         *,
         axis: Optional[Axis] = ...,
         copy: bool = ...,
@@ -539,7 +540,7 @@ class Series(IndexOpsMixin, NDFrame, Generic[S1]):
     @overload
     def rename(
         self,
-        index: Optional[Union[Renamer, Hashable]] = ...,
+        index: Optional[Union[Renamer[HashableT], Hashable]] = ...,
         *,
         axis: Optional[Axis] = ...,
         copy: bool = ...,

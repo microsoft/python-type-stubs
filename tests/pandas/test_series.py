@@ -2,7 +2,7 @@
 
 import tempfile
 from pathlib import Path
-from typing import List, Union
+from typing import List, Union, TYPE_CHECKING
 
 from pandas._typing import Scalar
 from pandas.api.extensions import ExtensionArray
@@ -529,6 +529,9 @@ def test_types_rename() -> None:
     check_series_result(s5)
     # inplace
     s6: None = pd.Series([1, 2, 3]).rename("A", inplace=True)
+
+    if TYPE_CHECKING:
+        s7 = pd.Series([1, 2, 3]).rename({1: [3, 4, 5]})  # type: ignore
 
 
 def test_types_ne() -> None:

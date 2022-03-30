@@ -130,7 +130,11 @@ IntervalClosedType = Literal["left", "right", "both", "neither"]
 DateTimeErrorChoices = Literal["ignore", "raise", "coerce"]
 
 # For functions like rename that convert one label to another
-Renamer = Union[Mapping[Any, Hashable], Callable[[Hashable], Hashable]]
+# For functions like rename that convert one label to another
+HashableT = TypeVar("HashableT", bound=Hashable)
+HashableTa = TypeVar("HashableTa", bound=Hashable)
+HashableTb = TypeVar("HashableTb", bound=Hashable)
+Renamer = Union[Mapping[HashableT, Hashable], Callable[[HashableT], Hashable]]
 
 # Shared by functions such as drop and astype
 IgnoreRaise = Literal["ignore", "raise"]
