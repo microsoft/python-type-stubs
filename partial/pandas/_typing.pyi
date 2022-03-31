@@ -134,7 +134,7 @@ DateTimeErrorChoices = Literal["ignore", "raise", "coerce"]
 HashableT = TypeVar("HashableT", bound=Hashable)
 HashableTa = TypeVar("HashableTa", bound=Hashable)
 HashableTb = TypeVar("HashableTb", bound=Hashable)
-Renamer = Union[Mapping[HashableT, Hashable], Callable[[HashableT], Hashable]]
+Renamer = Union[Mapping[HashableT, Hashable], Callable]
 
 # Shared by functions such as drop and astype
 IgnoreRaise = Literal["ignore", "raise"]

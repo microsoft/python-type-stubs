@@ -735,6 +735,7 @@ def test_types_rename() -> None:
     df.rename(columns={None: "b"})
     df.rename(columns={type("AnyObject")(): "b"})
     df.rename(columns={(2, 1): "b"})
+    df.rename(columns=lambda s: s.upper())
 
 
 def test_types_eq() -> None:
