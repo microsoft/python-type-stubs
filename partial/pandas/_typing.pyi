@@ -57,7 +57,7 @@ Level = Union[Label, int]
 Ordered = Optional[bool]
 JSONSerializable = Union[PythonScalar, List, Dict]
 Axes = Collection
-Renamer = Union[Mapping[Label, Any], Callable[[Label], Label]]
+Renamer = Union[Mapping[Any, Label], Callable[[Any], Label]]
 T = TypeVar("T")
 FuncType = Callable[..., Any]
 F = TypeVar("F", bound=FuncType)

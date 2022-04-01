@@ -399,7 +399,7 @@ class DataFrame(NDFrame, OpsMixin):
     @overload
     def rename(
         self,
-        index: Optional[Union[Dict[Union[_str, int], _str], Callable]] = ...,
+        index: Optional[Union[Renamer, Callable]] = ...,
         columns: Optional[Renamer] = ...,
         copy: _bool = ...,
         inplace: _bool = ...,
@@ -860,9 +860,9 @@ class DataFrame(NDFrame, OpsMixin):
         self,
         right: Union[DataFrame, Series[S1]],
         how: Union[_str, Literal["left", "right", "inner", "outer"]] = ...,
-        on: Optional[Union[Level, List[Level]]] = ...,
-        left_on: Optional[Union[Level, List[Level]]] = ...,
-        right_on: Optional[Union[Level, List[Level]]] = ...,
+        on: Optional[Union[Level, Sequence[Level]]] = ...,
+        left_on: Optional[Union[Level, Sequence[Level]]] = ...,
+        right_on: Optional[Union[Level, Sequence[Level]]] = ...,
         left_index: _bool = ...,
         right_index: _bool = ...,
         sort: _bool = ...,
