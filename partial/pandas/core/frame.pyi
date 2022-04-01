@@ -25,6 +25,7 @@ from pandas._typing import (
     IndexType,
     MaskType,
     S1,
+    T as TType,
 )
 from pandas._typing import ArrayLike as ArrayLike, np_ndarray_str, Timestamp as Timestamp, Timedelta as Timedelta
 from pandas._typing import IndexLevel as IndexLevel, IgnoreRaise as IgnoreRaise
@@ -39,6 +40,7 @@ from pandas.core.window.rolling import Rolling, Window
 from pandas.core.series import Series as Series
 from pandas.io.formats import console as console, format as fmt
 from pandas.io.formats.style import Styler as Styler
+from pandas.plotting import PlotAccessor
 from typing import (
     Any,
     Callable,
@@ -135,6 +137,10 @@ class _LocIndexerFrame(_LocIndexer):
             Tuple[Union[MaskType, Index, Sequence[Scalar], Scalar, slice], ...],
         ],
         value: Union[S1, ArrayLike, Series, DataFrame],
+    ) -> None: ...
+    @overload
+    def __setitem__(
+        self, idx: Tuple[Tuple[Union[StrLike, Scalar, slice], ...], StrLike], value: Union[S1, ArrayLike, Series[S1], List]
     ) -> None: ...
     @overload
     def __setitem__(
@@ -955,7 +961,7 @@ class DataFrame(NDFrame, OpsMixin):
     ) -> DataFrame: ...
     def to_period(self, freq: Optional[_str] = ..., axis: AxisType = ..., copy: _bool = ...) -> DataFrame: ...
     def isin(self, values: Union[Iterable, Series, DataFrame, Dict]) -> DataFrame: ...
-    def plot(self, *args, **kwargs) -> PlotAxes: ...
+    def plot(self, *args, **kwargs) -> PlotAccessor: ...
     def hist(
         self,
         column: Optional[Union[_str, List[_str]]] = ...,
@@ -1431,7 +1437,7 @@ class DataFrame(NDFrame, OpsMixin):
     def pct_change(
         self, periods: int = ..., fill_method: _str = ..., limit: Optional[int] = ..., freq=..., **kwargs
     ) -> DataFrame: ...
-    def pipe(self, func: Callable, *args, **kwargs): ...
+    def pipe(self, func: Callable[..., TType] | tuple[Callable[..., TType], str], *args, **kwargs) -> TType: ...
     def pop(self, item: _str) -> Series: ...
     def pow(
         self,

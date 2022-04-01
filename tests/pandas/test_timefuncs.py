@@ -129,6 +129,5 @@ def test_timestamp_plus_timedelta_series() -> None:
 
 def test_timedelta_series_mult() -> None:
     df = pd.DataFrame({"x": [1, 3, 5], "y": [2, 2, 6]})
-    foo = df["x"] < df["y"]
-    std = foo * pd.Timedelta(10, "minutes")
+    std = (df["x"] < df["y"]) * pd.Timedelta(10, "minutes")
     check_series_result(std, pd.to_timedelta(pd.Series([10]), "minutes").dtype)

@@ -4,7 +4,6 @@ from matplotlib._typing import ArrayLike
 from matplotlib.artist import Artist
 from matplotlib.colors import _ColorLike
 from matplotlib.markers import MarkerStyle
-from matplotlib.path import Path
 
 _LineStyle = Union[
     Literal['-', 'solid', '--', 'dashed', '-.', 'dashdot', ':', 'dotted', 'None', '  ', ''],
@@ -19,7 +18,7 @@ class Line2D(Artist):
         linewidth: Optional[float] = ...,
         linestyle: Optional[_LineStyle] = ...,
         color: Optional[_ColorLike] = ...,
-        marker: Optional[Union[MarkerStyle, Path, str]] = ...,
+        marker: Optional[MarkerStyle] = ...,
         markersize: Optional[float] = ...,
         markeredgewidth: Optional[float] = ...,
         markeredgecolor: Optional[_ColorLike] = ...,
