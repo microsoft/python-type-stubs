@@ -317,7 +317,7 @@ class DataFrame(NDFrame, OpsMixin):
     @property
     def T(self) -> DataFrame: ...
     @overload
-    def __getitem__(self, idx: S1) -> Series: ...
+    def __getitem__(self, idx: Scalar) -> Series: ...
     @overload
     def __getitem__(self, rows: slice) -> DataFrame: ...
     @overload
@@ -328,6 +328,7 @@ class DataFrame(NDFrame, OpsMixin):
             Series[_bool],
             DataFrame,
             List[_str],
+            List[Hashable],
             Index,
             np_ndarray_str,
             Sequence[Tuple[Scalar, ...]],
@@ -897,8 +898,8 @@ class DataFrame(NDFrame, OpsMixin):
         right: Union[DataFrame, Series],
         how: Union[_str, Literal["left", "right", "inner", "outer"]] = ...,
         on: Optional[IndexLevel] = ...,
-        left_on: Optional[Union[Level, List[Level]]] = ...,
-        right_on: Optional[Union[Level, List[Level]]] = ...,
+        left_on: Optional[Union[Level, Sequence[Level]]] = ...,
+        right_on: Optional[Union[Level, Sequence[Level]]] = ...,
         left_index: _bool = ...,
         right_index: _bool = ...,
         sort: _bool = ...,

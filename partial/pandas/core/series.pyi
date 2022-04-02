@@ -171,26 +171,52 @@ class Series(IndexOpsMixin, NDFrame, Generic[S1]):
     @overload
     def reset_index(
         self,
-        level: Optional[Union[Level, Sequence[Level]]],
+        level: Optional[Sequence[Level]],
         drop: Literal[True],
+        *,
         name: Optional[object] = ...,
         inplace: _bool = ...,
     ) -> Series[S1]: ...
     @overload
     def reset_index(
         self,
+        level: Optional[Level],
         drop: Literal[True],
         *,
-        level: Optional[Union[Level, Sequence[Level]]] = ...,
         name: Optional[object] = ...,
         inplace: _bool = ...,
     ) -> Series[S1]: ...
     @overload
     def reset_index(
         self,
-        *,
-        level: Optional[Union[Level, Sequence[Level]]] = ...,
-        drop: _bool = ...,
+        /,
+        drop: Literal[True],
+        level: Optional[Sequence[Level]] = ...,
+        name: Optional[object] = ...,
+        inplace: _bool = ...,
+    ) -> Series[S1]: ...
+    @overload
+    def reset_index(
+        self,
+        /,
+        drop: Literal[True],
+        level: Optional[Level] = ...,
+        name: Optional[object] = ...,
+        inplace: _bool = ...,
+    ) -> Series[S1]: ...
+    @overload
+    def reset_index(
+        self,
+        level: Optional[Sequence[Level]] = ...,
+        drop: Literal[False] = ...,
+        name: Optional[object] = ...,
+        inplace: _bool = ...,
+    ) -> DataFrame: ...
+    @overload
+    def reset_index(
+        self,
+        level: Optional[Level] = ...,
+        drop: Literal[False] = ...,
         name: Optional[object] = ...,
         inplace: _bool = ...,
     ) -> DataFrame: ...
@@ -950,7 +976,7 @@ class Series(IndexOpsMixin, NDFrame, Generic[S1]):
     @overload
     def __add__(self: Series[Timedelta], other: Timestamp) -> Series[Timestamp]: ...
     @overload
-    def __add__(self, other: Union[num, Timedelta, _ListLike, Series[S1]]) -> Series: ...
+    def __add__(self, other: Union[num, _str, Timedelta, _ListLike, Series[S1]]) -> Series: ...
     def __and__(self, other: Union[_ListLike, Series[S1]]) -> Series[_bool]: ...
     # def __array__(self, dtype: Optional[_bool] = ...) -> _np_ndarray
     def __div__(self, other: Union[num, _ListLike, Series[S1]]) -> Series[S1]: ...
@@ -982,7 +1008,7 @@ class Series(IndexOpsMixin, NDFrame, Generic[S1]):
     def __ne__(self, other: object) -> Series[_bool]: ...  # type: ignore
     def __pow__(self, other: Union[num, _ListLike, Series[S1]]) -> Series[S1]: ...
     def __or__(self, other: Union[_ListLike, Series[S1]]) -> Series[_bool]: ...
-    def __radd__(self, other: Union[num, _ListLike, Series[S1]]) -> Series[S1]: ...
+    def __radd__(self, other: Union[num, _str, _ListLike, Series[S1]]) -> Series[S1]: ...
     def __rand__(self, other: Union[num, _ListLike, Series[S1]]) -> Series[_bool]: ...
     def __rdiv__(self, other: Union[num, _ListLike, Series[S1]]) -> Series[S1]: ...
     def __rdivmod__(self, other: Union[num, _ListLike, Series[S1]]) -> Series[S1]: ...

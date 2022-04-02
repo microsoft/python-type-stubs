@@ -627,3 +627,23 @@ def test_series_mul() -> None:
     check_series_result(sm2)
     sp = s + 4
     check_series_result(sp)
+
+
+def test_reset_index() -> None:
+    s = pd.Series([1, 2, 3, 4], index=pd.MultiIndex.from_product([["a", "b"], ["c", "d"]], names=["ab", "cd"]))
+    r1 = s.reset_index()
+    check_dataframe_result(r1)
+    r2 = s.reset_index(["ab"])
+    check_dataframe_result(r2)
+    r3 = s.reset_index("ab")
+    check_dataframe_result(r3)
+    r4 = s.reset_index(drop=True)
+    check_series_result(r4)
+    r5 = s.reset_index(["ab"], drop=True)
+    check_series_result(r5)
+    
+def test_series_add_str() -> None:
+    s = pd.Series(["abc", "def"])
+    check_series_result(s + "x")
+    check_series_result("x" + s)
+    

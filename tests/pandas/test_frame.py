@@ -907,3 +907,4 @@ def test_getmultiindex_columns() -> None:
     res1: pd.DataFrame = df[[(1, "a"), (2, "b")]]
     res2: pd.DataFrame = df[li]
     res3: pd.DataFrame = df[[(i, s) for i in [1] for s in df.columns.get_level_values(1)]]
+    ndf: pd.DataFrame = df[[df.columns[0]]]
