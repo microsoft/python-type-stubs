@@ -1,9 +1,11 @@
 from pandas import DataFrame as DataFrame, Series as Series
-from typing import Hashable, Iterable, Mapping, Optional, Union, overload, Literal, Any
+from typing import Hashable, Iterable, Mapping, Optional, Union, overload, Literal, TypeVar
+
+HashableT = TypeVar("HashableT", bound=Hashable)
 
 @overload
 def concat(
-    objs: Union[Iterable[Optional[Series]], Mapping[Any, Optional[Series]]],
+    objs: Union[Iterable[Optional[Series]], Mapping[HashableT, Optional[Series]]],
     join: str = ...,
     ignore_index: bool = ...,
     keys=...,
@@ -16,7 +18,7 @@ def concat(
 ) -> Series: ...
 @overload
 def concat(
-    objs: Union[Iterable[Optional[Series]], Mapping[Any, Optional[Series]]],
+    objs: Union[Iterable[Optional[Series]], Mapping[HashableT, Optional[Series]]],
     axis: Literal[1, "columns"],
     join: str = ...,
     ignore_index: bool = ...,
@@ -29,7 +31,7 @@ def concat(
 ) -> DataFrame: ...
 @overload
 def concat(
-    objs: Union[Iterable[Optional[Union[DataFrame, Series]]], Mapping[Any, Optional[Union[DataFrame, Series]]]],
+    objs: Union[Iterable[Optional[Union[DataFrame, Series]]], Mapping[HashableT, Optional[Union[DataFrame, Series]]]],
     axis: Literal[0, "index", 1, "columns"] = ...,
     join: str = ...,
     ignore_index: bool = ...,

@@ -54,6 +54,8 @@ def test_types_concat() -> None:
     rdf3: pd.DataFrame = pd.concat({1: df, None: df2})
 
     rdf4: pd.DataFrame = pd.concat(list(map(lambda x: s2, ["some_value", 3])), axis=1)
+    adict = {"a": df, 2: df2}
+    rdict: pd.DataFrame = pd.concat(adict)
 
 
 def test_types_json_normalize() -> None:
