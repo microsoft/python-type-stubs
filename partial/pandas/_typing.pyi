@@ -78,6 +78,7 @@ Level = Union[Hashable, int]
 Ordered = Optional[bool]
 JSONSerializable = Union[PythonScalar, List, Dict]
 Axes = Collection
+Renamer = Union[Mapping[Any, Label], Callable[[Any], Label]]
 T = TypeVar("T")
 FuncType = Callable[..., Any]
 F = TypeVar("F", bound=FuncType)
@@ -128,9 +129,6 @@ T2 = TypeVar("T2", str, int)
 IntervalClosedType = Literal["left", "right", "both", "neither"]
 
 DateTimeErrorChoices = Literal["ignore", "raise", "coerce"]
-
-# For functions like rename that convert one label to another
-Renamer = Union[Mapping[Any, Hashable], Callable[[Any], Hashable]]
 
 # Shared by functions such as drop and astype
 IgnoreRaise = Literal["ignore", "raise"]
