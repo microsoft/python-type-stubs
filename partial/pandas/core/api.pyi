@@ -1,4 +1,5 @@
-from pandas._libs import NaT as NaT, Period as Period, Timedelta as Timedelta, Timestamp as Timestamp
+from pandas._libs import NaT as NaT, Period as Period, Timedelta as Timedelta
+from pandas._libs.tslibs import Timestamp as Timestamp
 from pandas._libs.missing import NA as NA
 from pandas.core.arrays.boolean import BooleanDtype as BooleanDtype
 from pandas.core.arrays.integer import (
@@ -29,6 +30,7 @@ from pandas.core.indexes.interval import Interval as Interval, interval_range as
 from pandas.core.indexes.period import period_range as period_range
 from pandas.core.indexes.timedeltas import timedelta_range as timedelta_range
 from pandas.core.arrays import Categorical as Categorical
+
 from pandas.core.groupby import Grouper as Grouper, NamedAgg as NamedAgg
 from pandas.core.indexes.api import (
     CategoricalIndex as CategoricalIndex,

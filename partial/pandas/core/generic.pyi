@@ -2,9 +2,13 @@ import numpy as np
 import sys
 import pandas.core.indexing as indexing
 from pandas._typing import (
+    ArrayLike as ArrayLike,
     Axis as Axis,
+    AxisType as AxisType,
     Dtype as Dtype,
     FilePathOrBuffer as FilePathOrBuffer,
+    FrameOrSeriesUnion as FrameOrSeriesUnion,
+    IgnoreRaise as IgnoreRaise,
     JSONSerializable as JSONSerializable,
     Level as Level,
     Renamer as Renamer,
@@ -13,12 +17,15 @@ from pandas._typing import (
     SeriesAxisType as SeriesAxisType,
     FrameOrSeries as FrameOrSeries,
     S1 as S1,
-    T
+    Timestamp as Timestamp,
+    Timedelta as Timedelta,
+    T,
 )
-from pandas.core.base import PandasObject as PandasObject, SelectionMixin as SelectionMixin
-from pandas.core.indexes.api import Index as Index
+from pandas.core.base import PandasObject as PandasObject
+from pandas.core.indexes.base import Index as Index
 from pandas.core.internals import BlockManager as BlockManager
-from typing import Any, Callable, Dict, Hashable, Iterator, List, Mapping, Optional, Sequence, Tuple, Union, overload
+from pandas.core.resample import Resampler
+from typing import Any, Callable, Dict, Hashable, Iterator, List, Mapping, Optional, Sequence, Tuple, TypeVar, Union, overload
 
 if sys.version_info >= (3, 8):
     from typing import Literal
@@ -28,16 +35,16 @@ else:
 _bool = bool
 _str = str
 
-class NDFrame(PandasObject, SelectionMixin, indexing.IndexingMixin):
-    def __init__(
-        self,
+class NDFrame(PandasObject, indexing.IndexingMixin):
+    def __new__(
+        cls,
         data: BlockManager,
         axes: Optional[List[Index]] = ...,
         copy: _bool = ...,
         dtype: Optional[Dtype] = ...,
         attrs: Optional[Mapping[Optional[Hashable], Any]] = ...,
         fastpath: _bool = ...,
-    ) -> None: ...
+    ) -> NDFrame: ...
     def set_flags(self: FrameOrSeries, *, copy: bool = ..., allows_duplicate_labels: Optional[bool] = ...) -> FrameOrSeries: ...
     @property
     def attrs(self) -> Dict[Optional[Hashable], Any]: ...
@@ -51,57 +58,14 @@ class NDFrame(PandasObject, SelectionMixin, indexing.IndexingMixin):
     def ndim(self) -> int: ...
     @property
     def size(self) -> int: ...
-    @overload
-    def set_axis(self, labels: Union[Index, ListLike], axis: SeriesAxisType = ..., *, inplace: Literal[True]) -> None: ...
-    @overload
-    def set_axis(
-        self,
-        labels: Union[Index, ListLike],
-        axis: SeriesAxisType = ...,
-        inplace: _bool = ...,
-    ) -> Union[None, Series[S1]]: ...
     def swapaxes(self, axis1: SeriesAxisType, axis2: SeriesAxisType, copy: _bool = ...) -> NDFrame: ...
     def droplevel(self, level: Level, axis: SeriesAxisType = ...) -> NDFrame: ...
     def pop(self, item: _str) -> NDFrame: ...
     def squeeze(self, axis=...): ...
     def swaplevel(self, i=..., j=..., axis=...) -> NDFrame: ...
-    def rename(
-        self,
-        mapper: Optional[Renamer] = ...,
-        *,
-        index: Optional[Renamer] = ...,
-        columns: Optional[Renamer] = ...,
-        axis: Optional[Axis] = ...,
-        copy: _bool = ...,
-        inplace: _bool = ...,
-        level: Optional[Level] = ...,
-        errors: str = ...,
-    ) -> Optional[NDFrame]: ...
-    @overload
-    def rename_axis(
-        self,
-        mapper: Union[Scalar, ListLike] = ...,
-        index: Optional[Union[Scalar, ListLike, Callable, Dict]] = ...,
-        columns: Optional[Union[Scalar, ListLike, Callable, Dict]] = ...,
-        axis: Optional[SeriesAxisType] = ...,
-        copy: _bool = ...,
-        *,
-        inplace: Literal[True],
-    ) -> None: ...
-    @overload
-    def rename_axis(
-        self,
-        mapper: Union[Scalar, ListLike] = ...,
-        index: Optional[Union[Scalar, ListLike, Callable, Dict]] = ...,
-        columns: Optional[Union[Scalar, ListLike, Callable, Dict]] = ...,
-        axis: Optional[SeriesAxisType] = ...,
-        copy: _bool = ...,
-        inplace: Literal[False] = ...,
-    ) -> Series: ...
     def equals(self, other: Series[S1]) -> _bool: ...
     def __neg__(self) -> None: ...
     def __pos__(self) -> None: ...
-    def __invert__(self) -> NDFrame: ...
     def __nonzero__(self) -> None: ...
     def bool(self) -> _bool: ...
     def __abs__(self) -> NDFrame: ...
@@ -109,7 +73,6 @@ class NDFrame(PandasObject, SelectionMixin, indexing.IndexingMixin):
     def __hash__(self): ...
     def __iter__(self) -> Iterator: ...
     def keys(self): ...
-    def items(self) -> None: ...
     def iteritems(self): ...
     def __len__(self) -> int: ...
     def __contains__(self, key) -> _bool: ...
@@ -310,24 +273,48 @@ class NDFrame(PandasObject, SelectionMixin, indexing.IndexingMixin):
         axis: SeriesAxisType = ...,
         level: Optional[Level] = ...,
         drop_level: _bool = ...,
-    ) -> Series[S1]: ...
-    def __getitem__(self, item) -> None: ...
-    def __delitem__(self, idx: Union[int, _str]): ...
+    ) -> FrameOrSeriesUnion: ...
+    def __delitem__(self, idx: Hashable): ...
     def get(self, key: object, default: Optional[Dtype] = ...) -> Dtype: ...
     def reindex_like(self, other, method: Optional[_str] = ..., copy: _bool = ..., limit=..., tolerance=...) -> NDFrame: ...
-    def drop(self, labels=..., axis=..., index=..., columns=..., level=..., inplace: _bool = ..., errors: _str = ...): ...
+    @overload
+    def drop(
+        self,
+        labels: Hashable | list[Hashable] = ...,
+        *,
+        axis: Axis = ...,
+        index: Hashable | list[Hashable] = ...,
+        columns: Hashable | list[Hashable] = ...,
+        level: Level | None = ...,
+        inplace: Literal[True],
+        errors: IgnoreRaise = ...,
+    ) -> None: ...
+    @overload
+    def drop(
+        self: NDFrame,
+        labels: Hashable | list[Hashable] = ...,
+        *,
+        axis: Axis = ...,
+        index: Hashable | list[Hashable] = ...,
+        columns: Hashable | list[Hashable] = ...,
+        level: Level | None = ...,
+        inplace: Literal[False] = ...,
+        errors: IgnoreRaise = ...,
+    ) -> NDFrame: ...
+    @overload
+    def drop(
+        self: NDFrame,
+        labels: Hashable | list[Hashable] = ...,
+        *,
+        axis: Axis = ...,
+        index: Hashable | list[Hashable] = ...,
+        columns: Hashable | list[Hashable] = ...,
+        level: Level | None = ...,
+        inplace: _bool = ...,
+        errors: IgnoreRaise = ...,
+    ) -> NDFrame | None: ...
     def add_prefix(self, prefix: _str) -> NDFrame: ...
     def add_suffix(self, suffix: _str) -> NDFrame: ...
-    def sort_values(
-        self,
-        by=...,
-        axis=...,
-        ascending=...,
-        inplace: _bool = ...,
-        kind: _str = ...,
-        na_position: _str = ...,
-        ignore_index: _bool = ...,
-    ): ...
     def sort_index(
         self,
         axis=...,
@@ -339,17 +326,15 @@ class NDFrame(PandasObject, SelectionMixin, indexing.IndexingMixin):
         sort_remaining: _bool = ...,
         ignore_index: _bool = ...,
     ): ...
-    def reindex(self, *args, **kwargs) -> NDFrame: ...
     def filter(self, items=..., like: Optional[_str] = ..., regex: Optional[_str] = ..., axis=...) -> NDFrame: ...
     def head(self: FrameOrSeries, n: int = ...) -> FrameOrSeries: ...
     def tail(self: FrameOrSeries, n: int = ...) -> FrameOrSeries: ...
-    def sample(self, n=..., frac=..., replace=..., weights=..., random_state=..., axis=...) -> NDFrame: ...
     def pipe(self, func: Callable[..., T] | tuple[Callable[..., T], str], *args, **kwargs) -> T: ...
     def __finalize__(self, other, method=..., **kwargs) -> NDFrame: ...
     def __getattr__(self, name: _str): ...
     def __setattr__(self, name: _str, value) -> None: ...
     @property
-    def values(self) -> np.ndarray: ...
+    def values(self) -> ArrayLike: ...
     @property
     def dtypes(self): ...
     def astype(self: FrameOrSeries, dtype, copy: _bool = ..., errors: str = ...) -> FrameOrSeries: ...
@@ -361,20 +346,7 @@ class NDFrame(PandasObject, SelectionMixin, indexing.IndexingMixin):
         self, infer_objects: _bool = ..., convert_string: _bool = ..., convert_integer: _bool = ..., convert_boolean: _bool = ...
     ) -> NDFrame: ...
     def fillna(self, value=..., method=..., axis=..., inplace: _bool = ..., limit=..., downcast=...) -> Optional[NDFrame]: ...
-    def ffill(self, axis=..., inplace: _bool = ..., limit=..., downcast=...) -> Optional[NDFrame]: ...
-    def bfill(self, axis=..., inplace: _bool = ..., limit=..., downcast=...) -> Optional[NDFrame]: ...
     def replace(self, to_replace=..., value=..., inplace: _bool = ..., limit=..., regex: _bool = ..., method: _str = ...): ...
-    def interpolate(
-        self,
-        method: _str = ...,
-        axis: int = ...,
-        limit=...,
-        inplace: _bool = ...,
-        limit_direction: str = ...,
-        limit_area=...,
-        downcast=...,
-        **kwargs,
-    ): ...
     def asof(self, where, subset=...): ...
     def isna(self) -> NDFrame: ...
     def isnull(self) -> NDFrame: ...
@@ -384,21 +356,6 @@ class NDFrame(PandasObject, SelectionMixin, indexing.IndexingMixin):
     def asfreq(self, freq, method=..., how: Optional[_str] = ..., normalize: _bool = ..., fill_value=...) -> NDFrame: ...
     def at_time(self, time, asof: _bool = ..., axis=...) -> NDFrame: ...
     def between_time(self, start_time, end_time, include_start: _bool = ..., include_end: _bool = ..., axis=...) -> NDFrame: ...
-    def resample(
-        self,
-        rule,
-        axis: AxisType = ...,
-        closed: Optional[_str] = ...,
-        label: Optional[_str] = ...,
-        convention: Union[_str, Literal["start", "end", "s", "e"]] = ...,
-        kind: Union[_str, Optional[Literal["timestamp", "period"]]] = ...,
-        loffset=...,
-        base: int = ...,
-        on: Optional[_str] = ...,
-        level: Optional[Level] = ...,
-        origin: Union[Timestamp, Literal["epoch", "start", "start_day", "end", "end_day"]] = ...,
-        offset: Optional[Timedelta, _str] = None,
-    ) -> Resampler: ...
     def first(self, offset) -> NDFrame: ...
     def last(self, offset) -> NDFrame: ...
     def rank(
@@ -410,19 +367,6 @@ class NDFrame(PandasObject, SelectionMixin, indexing.IndexingMixin):
         ascending: _bool = ...,
         pct: _bool = ...,
     ) -> NDFrame: ...
-    def align(
-        self,
-        other,
-        join: _str = ...,
-        axis=...,
-        level=...,
-        copy: _bool = ...,
-        fill_value=...,
-        method=...,
-        limit=...,
-        fill_axis: int = ...,
-        broadcast_axis=...,
-    ): ...
     def where(self, cond, other=..., inplace: _bool = ..., axis=..., level=..., errors: _str = ..., try_cast: _bool = ...): ...
     def mask(self, cond, other=..., inplace: _bool = ..., axis=..., level=..., errors: _str = ..., try_cast: _bool = ...): ...
     def shift(self, periods=..., freq=..., axis=..., fill_value=...) -> NDFrame: ...

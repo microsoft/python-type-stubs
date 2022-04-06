@@ -6,6 +6,8 @@ from pandas.io.parsers import TextFileReader
 
 import pandas as pd
 
+from . import check_series_result, check_dataframe_result
+
 
 def test_types_to_datetime() -> None:
     df = pd.DataFrame({"year": [2015, 2016], "month": [2, 3], "day": [4, 5]})
@@ -23,10 +25,10 @@ def test_types_concat() -> None:
     s = pd.Series([0, 1, -10])
     s2 = pd.Series([7, -5, 10])
 
-    pd.concat([s, s2])
-    pd.concat([s, s2], axis=1)
-    pd.concat([s, s2], keys=["first", "second"], sort=True)
-    pd.concat([s, s2], keys=["first", "second"], names=["source", "row"])
+    check_series_result(pd.concat([s, s2]))
+    check_dataframe_result(pd.concat([s, s2], axis=1))
+    check_series_result(pd.concat([s, s2], keys=["first", "second"], sort=True))
+    check_series_result(pd.concat([s, s2], keys=["first", "second"], names=["source", "row"]))
 
     # Depends on the axis
     rs1: Union[pd.Series, pd.DataFrame] = pd.concat({"a": s, "b": s2})
@@ -39,10 +41,10 @@ def test_types_concat() -> None:
     df = pd.DataFrame(data={"col1": [1, 2], "col2": [3, 4]})
     df2 = pd.DataFrame(data={"col1": [10, 20], "col2": [30, 40]})
 
-    pd.concat([df, df2])
-    pd.concat([df, df2], axis=1)
-    pd.concat([df, df2], keys=["first", "second"], sort=True)
-    pd.concat([df, df2], keys=["first", "second"], names=["source", "row"])
+    check_dataframe_result(pd.concat([df, df2]))
+    check_dataframe_result(pd.concat([df, df2], axis=1))
+    check_dataframe_result(pd.concat([df, df2], keys=["first", "second"], sort=True))
+    check_dataframe_result(pd.concat([df, df2], keys=["first", "second"], names=["source", "row"]))
 
     result: pd.DataFrame = pd.concat({"a": pd.DataFrame([1, 2, 3]), "b": pd.DataFrame([4, 5, 6])}, axis=1)
     result2: Union[pd.DataFrame, pd.Series] = pd.concat({"a": pd.Series([1, 2, 3]), "b": pd.Series([4, 5, 6])}, axis=1)
@@ -52,6 +54,8 @@ def test_types_concat() -> None:
     rdf3: pd.DataFrame = pd.concat({1: df, None: df2})
 
     rdf4: pd.DataFrame = pd.concat(list(map(lambda x: s2, ["some_value", 3])), axis=1)
+    adict = {"a": df, 2: df2}
+    rdict: pd.DataFrame = pd.concat(adict)
 
 
 def test_types_json_normalize() -> None:
@@ -81,6 +85,9 @@ def test_types_read_csv() -> None:
         df5: pd.DataFrame = pd.read_csv(file.name, engine="python", true_values=[0, 1, 3], na_filter=False)
         df6: pd.DataFrame = pd.read_csv(file.name, skiprows=lambda x: x in [0, 2], skip_blank_lines=True, dayfirst=False)
         df7: pd.DataFrame = pd.read_csv(file.name, nrows=2)
+        dtypemap = {"a": float, "b": int}
+        df8: pd.DataFrame = pd.read_csv(file.name, dtype=dtypemap)
+
         tfr1: TextFileReader = pd.read_csv(file.name, nrows=2, iterator=True, chunksize=3)
         tfr2: TextFileReader = pd.read_csv(file.name, nrows=2, chunksize=1)
         tfr3: TextFileReader = pd.read_csv(file.name, nrows=2, iterator=False, chunksize=1)

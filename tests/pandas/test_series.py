@@ -2,7 +2,7 @@
 
 import tempfile
 from pathlib import Path
-from typing import List, Union
+from typing import List, Union, TYPE_CHECKING
 
 from pandas._typing import Scalar
 from pandas.api.extensions import ExtensionArray
@@ -508,21 +508,30 @@ def test_types_values() -> None:
 def test_types_rename() -> None:
     # Scalar
     s1 = pd.Series([1, 2, 3]).rename("A")
+    check_series_result(s1)
     # Hashable Sequence
     s2 = pd.Series([1, 2, 3]).rename(("A", "B"))
+    check_series_result(s2)
+
     # Optional
     s3 = pd.Series([1, 2, 3]).rename(None)
+    check_series_result(s3)
 
     # Functions
     def add1(x: int) -> int:
         return x + 1
 
     s4 = pd.Series([1, 2, 3]).rename(add1)
+    check_series_result(s4)
 
     # Dictionary
     s5 = pd.Series([1, 2, 3]).rename({1: 10})
+    check_series_result(s5)
     # inplace
     s6: None = pd.Series([1, 2, 3]).rename("A", inplace=True)
+
+    if TYPE_CHECKING:
+        s7 = pd.Series([1, 2, 3]).rename({1: [3, 4, 5]})  # type: ignore[dict-item]
 
 
 def test_types_ne() -> None:
@@ -616,3 +625,25 @@ def test_series_mul() -> None:
     check_series_result(ss)
     sm2 = s * s
     check_series_result(sm2)
+    sp = s + 4
+    check_series_result(sp)
+
+
+def test_reset_index() -> None:
+    s = pd.Series([1, 2, 3, 4], index=pd.MultiIndex.from_product([["a", "b"], ["c", "d"]], names=["ab", "cd"]))
+    r1 = s.reset_index()
+    check_dataframe_result(r1)
+    r2 = s.reset_index(["ab"])
+    check_dataframe_result(r2)
+    r3 = s.reset_index("ab")
+    check_dataframe_result(r3)
+    r4 = s.reset_index(drop=True)
+    check_series_result(r4)
+    r5 = s.reset_index(["ab"], drop=True)
+    check_series_result(r5)
+    
+def test_series_add_str() -> None:
+    s = pd.Series(["abc", "def"])
+    check_series_result(s + "x")
+    check_series_result("x" + s)
+    

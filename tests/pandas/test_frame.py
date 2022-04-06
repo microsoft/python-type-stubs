@@ -3,7 +3,7 @@ from datetime import date, datetime
 import io
 import tempfile
 from pathlib import Path
-from typing import List, Tuple, Iterable, Any
+from typing import List, Tuple, Iterable, Any, Dict, Hashable
 
 import pandas as pd
 from pandas.io.parsers import TextFileReader
@@ -186,9 +186,9 @@ def test_types_drop() -> None:
     df = pd.DataFrame(data={"col1": [1, 2], "col2": [3, 4]})
     res: pd.DataFrame = df.drop("col1", axis=1)
     res2: pd.DataFrame = df.drop(columns=["col1"])
-    res3: pd.DataFrame = df.drop(set([0]))
-    res4: pd.DataFrame = df.drop(index=set([0]))
-    res5: pd.DataFrame = df.drop(columns=set(["col1"]))
+    res3: pd.DataFrame = df.drop([0])
+    res4: pd.DataFrame = df.drop(index=[0])
+    res5: pd.DataFrame = df.drop(columns=["col1"])
     res6: pd.DataFrame = df.drop(index=1)
     res7: pd.DataFrame = df.drop(labels=0)
     res8: None = df.drop([0, 0], inplace=True)
@@ -529,7 +529,7 @@ def test_types_merge() -> None:
     df.merge(df2, on=("col1", "col2"), how="left", suffixes=(None, "s"))
     df.merge(df2, on=("col1", "col2"), how="left", suffixes=("t", "s"))
     df.merge(df2, on=("col1", "col2"), how="left", suffixes=("a", None))
-    l: List[str] = ["col1", "col2"]
+    l = ["col1", "col2"]
     df.merge(df2, on=l)
 
 
@@ -735,6 +735,9 @@ def test_types_rename() -> None:
     df.rename(columns={None: "b"})
     df.rename(columns={type("AnyObject")(): "b"})
     df.rename(columns={(2, 1): "b"})
+    df.rename(columns=lambda s: s.upper())
+    f = lambda s: s.upper()
+    df.rename(columns=f)
 
 
 def test_types_eq() -> None:
@@ -904,3 +907,4 @@ def test_getmultiindex_columns() -> None:
     res1: pd.DataFrame = df[[(1, "a"), (2, "b")]]
     res2: pd.DataFrame = df[li]
     res3: pd.DataFrame = df[[(i, s) for i in [1] for s in df.columns.get_level_values(1)]]
+    ndf: pd.DataFrame = df[[df.columns[0]]]

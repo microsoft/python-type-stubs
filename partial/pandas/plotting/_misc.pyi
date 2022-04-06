@@ -1,11 +1,16 @@
 from matplotlib.axes import Axes as PlotAxes
-from matplotlib.pyplot import Figure
+from matplotlib.figure import Figure
 import numpy as np
 from pandas.core.series import Series
 from pandas.core.frame import DataFrame
 from typing import Any, Dict, Optional, Sequence, Tuple, Union
 
-def table(ax, data, rowLabels=None, colLabels=None,) : ... 
+def table(
+    ax,
+    data,
+    rowLabels=None,
+    colLabels=None,
+): ...
 def register() -> None: ...
 def deregister() -> None: ...
 def scatter_matrix(
@@ -16,8 +21,8 @@ def scatter_matrix(
     grid: bool = ...,
     diagonal: str = ...,
     marker: str = ...,
-    density_kwds = ...,
-    hist_kwds = ...,
+    density_kwds=...,
+    hist_kwds=...,
     range_padding: float = ...,
 ) -> np.ndarray: ...
 def radviz(
@@ -25,7 +30,7 @@ def radviz(
     class_column: str,
     ax: Optional[PlotAxes] = ...,
     color: Optional[Union[Sequence[str], Tuple[str]]] = ...,
-    colormap = ...,
+    colormap=...,
 ) -> PlotAxes: ...
 def andrews_curves(
     frame: DataFrame,
@@ -33,10 +38,13 @@ def andrews_curves(
     ax: Optional[PlotAxes] = ...,
     samples: int = ...,
     color: Optional[Union[Sequence[str], Tuple[str]]] = ...,
-    colormap = ...,
+    colormap=...,
 ) -> PlotAxes: ...
 def bootstrap_plot(
-    series: Series, fig: Optional[Figure] = ..., size: int = ..., samples: int = ...,
+    series: Series,
+    fig: Optional[Figure] = ...,
+    size: int = ...,
+    samples: int = ...,
 ) -> Figure: ...
 def parallel_coordinates(
     frame: DataFrame,
@@ -46,13 +54,20 @@ def parallel_coordinates(
     color: Optional[Union[Sequence[str], Tuple[str]]] = ...,
     use_columns: bool = ...,
     xticks: Optional[Union[Sequence, Tuple]] = ...,
-    colormap = ...,
+    colormap=...,
     axvlines: bool = ...,
-    axvlines_kwds = ...,
+    axvlines_kwds=...,
     sort_labels: bool = ...,
 ) -> PlotAxes: ...
-def lag_plot(series: Series, lag: int = ..., ax: Optional[PlotAxes] = ...,) -> PlotAxes: ...
-def autocorrelation_plot(series: Series, ax: Optional[PlotAxes] = ...,) -> PlotAxes: ...
+def lag_plot(
+    series: Series,
+    lag: int = ...,
+    ax: Optional[PlotAxes] = ...,
+) -> PlotAxes: ...
+def autocorrelation_plot(
+    series: Series,
+    ax: Optional[PlotAxes] = ...,
+) -> PlotAxes: ...
 
 class _Options(dict):
     def __init__(self, deprecated: bool = ...) -> None: ...
