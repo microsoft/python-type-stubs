@@ -50,8 +50,7 @@ def test_types_pydatetime() -> None:
 
 def test_to_timedelta() -> None:
     td: pd.Timedelta = pd.to_timedelta(3, "days")
-    tdi: pd.TimedeltaIndex = pd.to_timedelta([2, 3], "minutes")
-    tds: pd.Series = pd.to_timedelta(pd.Series([2, 3]), "hours")
+    tds: pd.TimedeltaIndex = pd.to_timedelta([2, 3], "minutes")
 
 
 def test_timedelta_arithmetic() -> None:
@@ -64,28 +63,27 @@ def test_timedelta_arithmetic() -> None:
 
 
 def test_timedelta_series_arithmetic() -> None:
-    tds1: pd.Series = pd.to_timedelta(pd.Series([2, 3]), "minutes")
+    tds1: pd.TimedeltaIndex = pd.to_timedelta([2, 3], "minutes")
     td1: pd.Timedelta = pd.Timedelta("2 days")
-    r1: pd.Series = tds1 + td1
-    r2: pd.Series = tds1 - td1
-    r3: pd.Series = tds1 * 4.3
-    r4: pd.Series = tds1 / 10.2
+    r1: pd.TimedeltaIndex = tds1 + td1
+    r2: pd.TimedeltaIndex = tds1 - td1
+    r3: pd.TimedeltaIndex = tds1 * 4.3
+    r4: pd.TimedeltaIndex = tds1 / 10.2
 
 
 def test_timestamp_timedelta_series_arithmetic() -> None:
-    tscheck = pd.Series([pd.Timestamp("2022-03-05"), pd.Timestamp("2022-03-06")])
+    ts = pd.Timestamp("2022-03-05")
+    s1 = pd.Series(["2022-03-05", "2022-03-06"])
     ts1 = pd.to_datetime(pd.Series(["2022-03-05", "2022-03-06"]))
-    # ignore type on next, because `tscheck` has Unknown dtype
-    check_series_result(ts1, tscheck.dtype)  # type: ignore
-    assert_series_equal(tscheck, ts1)
-    ts2 = pd.to_datetime(pd.Series(["2022-03-08", "2022-03-10"]))
+    assert isinstance(ts1.iloc[0], pd.Timestamp)
     td1 = pd.to_timedelta([2, 3], "seconds")
+    ts2 = pd.to_datetime(pd.Series(["2022-03-08", "2022-03-10"]))
     r1 = ts1 - ts2
-    check_series_result(r1, td1.dtype)
+    check_series_result(r1, td1.dtype)  # type: ignore
     r2 = r1 / td1
     check_series_result(r2, float)
     r3 = r1 - td1
-    check_series_result(r3, td1.dtype)
+    check_series_result(r3, td1.dtype)  # type: ignore
     r4 = pd.Timedelta(5, "days") / r1
     check_series_result(r4, float)
     sb = pd.Series([1, 2]) == pd.Series([1, 3])
