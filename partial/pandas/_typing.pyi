@@ -47,12 +47,12 @@ PandasScalar = Union[bytes, datetime.date, datetime.datetime, datetime.timedelta
 # Scalar = Union[PythonScalar, PandasScalar]
 
 # dtypes
-NpDtype = Union[str, np.dtype, Type[Union[str, float, int, complex, bool, object]]]
+NpDtype = Union[str, np.dtype[np.generic], Type[Union[str, float, int, complex, bool, object]]]
 Dtype = Union[ExtensionDtype, NpDtype]
 AstypeArg = Union[ExtensionDtype, npt.DTypeLike]
 # DtypeArg specifies all allowable dtypes in a functions its dtype argument
 DtypeArg = Union[Dtype, Dict[Any, Dtype]]
-DtypeObj = Union[np.dtype, "ExtensionDtype"]
+DtypeObj = Union[np.dtype[np.generic], "ExtensionDtype"]
 
 # filenames and file-like-objects
 AnyStr_cov = TypeVar("AnyStr_cov", str, bytes, covariant=True)
@@ -94,7 +94,7 @@ AggFuncType = Union[
 num = Union[int, float]
 SeriesAxisType = Literal["index", 0]  # Restricted subset of _AxisType for series
 AxisType = Literal["columns", "index", 0, 1]
-DtypeNp = TypeVar("DtypeNp", bound=np.dtype)
+DtypeNp = TypeVar("DtypeNp", bound=np.dtype[np.generic])
 KeysArgType = Any
 ListLike = TypeVar("ListLike", Sequence, np.ndarray, "Series")
 StrLike = Union[str, np.str_]
@@ -121,7 +121,7 @@ S1 = TypeVar(
     Timedelta,
     np.datetime64,
 )
-T1 = TypeVar("T1", str, int, np.int64, np.uint64, np.float64, float, np.dtype)
+T1 = TypeVar("T1", str, int, np.int64, np.uint64, np.float64, float, np.dtype[np.generic])
 T2 = TypeVar("T2", str, int)
 
 # Interval closed type
