@@ -908,3 +908,8 @@ def test_getmultiindex_columns() -> None:
     res2: pd.DataFrame = df[li]
     res3: pd.DataFrame = df[[(i, s) for i in [1] for s in df.columns.get_level_values(1)]]
     ndf: pd.DataFrame = df[[df.columns[0]]]
+
+
+def test_frame_getitem_isin() -> None:
+    df = pd.DataFrame({"x": [1, 2, 3, 4, 5]}, index=[1, 2, 3, 4, 5])
+    check_dataframe_result(df[df.index.isin([1, 3, 5])])
