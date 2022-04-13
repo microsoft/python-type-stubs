@@ -126,6 +126,16 @@ class Series(IndexOpsMixin, NDFrame, Generic[S1]):
     @overload
     def __new__(
         cls,
+        data: Optional[Union[object, _ListLike, Series[S1], Dict[int, S1], Dict[_str, S1]]],
+        dtype: Type[S1],
+        index: Union[_str, int, Series, List, Index] = ...,
+        name: Optional[Hashable] = ...,
+        copy: bool = ...,
+        fastpath: bool = ...,
+    ) -> Series[S1]: ...
+    @overload
+    def __new__(
+        cls,
         data: Optional[Union[object, _ListLike, Series[S1], Dict[int, S1], Dict[_str, S1]]] = ...,
         index: Union[_str, int, Series, List, Index] = ...,
         dtype=...,

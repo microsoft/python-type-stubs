@@ -647,3 +647,7 @@ def test_series_add_str() -> None:
     check_series_result(s + "x")
     check_series_result("x" + s)
     
+def test_series_dtype() -> None:
+    s = pd.Series(["abc", "def"], dtype=str)
+    check_series_result(s, object)
+    
