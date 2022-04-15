@@ -27,7 +27,7 @@ from pandas._typing import (
     S1,
     T as TType,
 )
-from pandas._typing import ArrayLike as ArrayLike, np_ndarray_str, Timestamp as Timestamp, Timedelta as Timedelta
+from pandas._typing import ArrayLike as ArrayLike, np_ndarray_str, np_ndarray_bool, Timestamp as Timestamp, Timedelta as Timedelta
 from pandas._typing import IndexLevel as IndexLevel, IgnoreRaise as IgnoreRaise
 from pandas.core.arraylike import OpsMixin
 from pandas.core.generic import NDFrame as NDFrame
@@ -331,6 +331,7 @@ class DataFrame(NDFrame, OpsMixin):
             List[Hashable],
             Index,
             np_ndarray_str,
+            np_ndarray_bool,
             Sequence[Tuple[Scalar, ...]],
         ],
     ) -> DataFrame: ...

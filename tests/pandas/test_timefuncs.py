@@ -131,3 +131,13 @@ def test_timedelta_series_mult() -> None:
     df = pd.DataFrame({"x": [1, 3, 5], "y": [2, 2, 6]})
     std = (df["x"] < df["y"]) * pd.Timedelta(10, "minutes")
     check_series_result(std, pd.to_timedelta(pd.Series([10]), "minutes").dtype)
+
+def test_timedelta_series_sum() -> None:
+    s = pd.Series(pd.to_datetime(["04/05/2022 11:00", "04/03/2022 10:00"])) - pd.Series(pd.to_datetime(["04/05/2022 08:00", "04/03/2022 09:00"]))
+    ssum = s.sum()
+    ires: int = ssum.days
+    
+    sf = pd.Series([1.0, 2.2, 3.3])
+    sfsum: float = sf.sum()
+    
+    

@@ -113,6 +113,27 @@ class _LocIndexerSeries(_LocIndexer, Generic[S1]):
 class Series(IndexOpsMixin, NDFrame, Generic[S1]):
 
     _ListLike = Union[ArrayLike, Dict[_str, np.ndarray], List, Tuple, Index]
+    @overload
+    def __new__(
+        cls,
+        data: DatetimeIndex,
+        index: Union[_str, int, Series, List, Index] = ...,
+        dtype=...,
+        name: Optional[Hashable] = ...,
+        copy: bool = ...,
+        fastpath: bool = ...,
+    ) -> Series[Timestamp]: ...
+    @overload
+    def __new__(
+        cls,
+        data: Optional[Union[object, _ListLike, Series[S1], Dict[int, S1], Dict[_str, S1]]],
+        dtype: Type[S1],
+        index: Union[_str, int, Series, List, Index] = ...,
+        name: Optional[Hashable] = ...,
+        copy: bool = ...,
+        fastpath: bool = ...,
+    ) -> Series[S1]: ...
+    @overload
     def __new__(
         cls,
         data: Optional[Union[object, _ListLike, Series[S1], Dict[int, S1], Dict[_str, S1]]] = ...,
@@ -1508,14 +1529,14 @@ class Series(IndexOpsMixin, NDFrame, Generic[S1]):
         axis: Optional[SeriesAxisType] = ...,
     ) -> Series[S1]: ...
     def sum(
-        self,
+        self: Series[S1],
         axis: Optional[SeriesAxisType] = ...,
         skipna: Optional[_bool] = ...,
         level: Optional[Level] = ...,
         numeric_only: Optional[_bool] = ...,
         min_count: int = ...,
         **kwargs,
-    ) -> float: ...
+    ) -> S1: ...
     def to_list(self) -> List: ...
     def to_numpy(self, dtype: Optional[Type[DtypeNp]] = ..., copy: _bool = ..., na_value=..., **kwargs) -> np.ndarray: ...
     def to_records(
