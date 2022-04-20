@@ -913,3 +913,8 @@ def test_getmultiindex_columns() -> None:
 def test_frame_getitem_isin() -> None:
     df = pd.DataFrame({"x": [1, 2, 3, 4, 5]}, index=[1, 2, 3, 4, 5])
     check_dataframe_result(df[df.index.isin([1, 3, 5])])
+
+
+def test_iloc_list() -> None:
+    df = pd.DataFrame({"x": [i for i in range(10)], "y": [i * 10 for i in range(10)]}, index=[100 + i for i in range(10)])
+    cdf: pd.DataFrame = pd.concat([df.iloc[[i * 2 for i in range(5)]]])

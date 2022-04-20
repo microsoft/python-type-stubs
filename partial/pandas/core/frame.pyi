@@ -81,7 +81,9 @@ class _iLocIndexerFrame(_iLocIndexer):
     @overload
     def __getitem__(self, idx: Tuple[int, Union[IndexType, MaskType]]) -> Series: ...
     @overload
-    def __getitem__(self, idx: Tuple[Union[IndexType, MaskType], Union[IndexType, MaskType]]) -> DataFrame: ...
+    def __getitem__(self, idx: Union[IndexType, MaskType,
+                                     Tuple[Union[IndexType, MaskType], 
+                                           Union[IndexType, MaskType]]]) -> DataFrame: ...
     def __setitem__(
         self,
         idx: Union[
