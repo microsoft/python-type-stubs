@@ -500,6 +500,8 @@ def test_types_groupby() -> None:
     df8: pd.DataFrame = df.groupby("col1").transform("sum")
     s1: pd.Series = df.set_index("col1")["col2"]
     s2: pd.Series = s1.groupby("col1").transform("sum")
+    s3: pd.Series = df.groupby("col1")["col3"].agg(min)
+    df9: pd.DataFrame = df.groupby("col1")["col3"].agg([min, max])
 
 
 # This was added in 1.1.0 https://pandas.pydata.org/docs/whatsnew/v1.1.0.html
