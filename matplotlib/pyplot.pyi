@@ -774,16 +774,44 @@ def subplot_mosaic(layout: Union[ArrayLike, str], *, subplot_kw: Optional[Dict[s
 
 def subplot_tool(targetfig: Optional[Figure]) -> SubplotTool: ...
 
+@overload
+def subplots(
+    nrows: Literal[1] = ...,
+    ncols: Literal[1] = ...,
+    *,
+    sharex: Union[bool, Literal["none", "all", "row", "col"]] = ...,
+    sharey: Union[bool, Literal["none", "all", "row", "col"]] = ...,
+    squeeze: Literal[True] = ...,
+    subplot_kw: Optional[Dict[Any, Any]] = ...,
+    gridspec_kw: Optional[Dict[Any, Any]] = ...,
+    **fig_kw: Any
+) -> Tuple[Figure, Axes]: ...
+
+@overload
 def subplots(
     nrows: int = ...,
     ncols: int = ...,
+    *,
+    sharex: Union[bool, Literal["none", "all", "row", "col"]] = ...,
+    sharey: Union[bool, Literal["none", "all", "row", "col"]] = ...,
+    squeeze: Literal[False],
+    subplot_kw: Optional[Dict[Any, Any]] = ...,
+    gridspec_kw: Optional[Dict[Any, Any]] = ...,
+    **fig_kw: Any
+) -> Tuple[Figure, ndarray]: ...
+
+@overload
+def subplots(
+    nrows: int = ...,
+    ncols: int = ...,
+    *,
     sharex: Union[bool, Literal["none", "all", "row", "col"]] = ...,
     sharey: Union[bool, Literal["none", "all", "row", "col"]] = ...,
     squeeze: bool = ...,
     subplot_kw: Optional[Dict[Any, Any]] = ...,
     gridspec_kw: Optional[Dict[Any, Any]] = ...,
     **fig_kw: Any
-) -> Tuple[Figure, Axes]: ...
+) -> Tuple[Figure, Union[Axes, ndarray]]: ...
 
 def subplots_adjust(left: Optional[float] = ..., bottom: Optional[float] = ..., right: Optional[float] = ..., top: Optional[float] = ..., wspace: Optional[float] = ..., hspace: Optional[float] = ...) -> None: ...
 
