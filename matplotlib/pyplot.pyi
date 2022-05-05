@@ -389,7 +389,7 @@ def hist(
     range: Optional[Tuple] = ...,
     density: Optional[bool] = ...,
     weights: Optional[ArrayLike] = ...,
-    cumulative: bool = ...,
+    cumulative: Union[bool, int] = ...,
     bottom: Optional[Union[ArrayLike, Scalar]] = ...,
     histtype: Literal["bar", "barstacked", "step", "stepfilled"] = ...,
     align: Literal["left", "mid", "right"] = ...,
