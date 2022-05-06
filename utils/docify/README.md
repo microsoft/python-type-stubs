@@ -3,9 +3,12 @@ We use this because we sometimes want to put docstrings for functions into
 the stubs, because it is hard to extract them from source. This is primarily
 used for some pandas APIs for now.
 
-To install:
+## Building
 
-    PBR_VERSION=1.0.0 pip install .
+1) Install flit of needed: python -m pip install flit
+2) Run 'flit install'
+
+You should then have a local copy available as 'docify'.
 
 
 Usage:
