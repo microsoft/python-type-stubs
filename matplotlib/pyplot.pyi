@@ -534,7 +534,7 @@ def pcolormesh(
     cmap: Optional[Union[str, Colormap]] = ...,
     vmin: Optional[Scalar] = ...,
     vmax: Optional[Scalar] = ...,
-    shading: Literal["flat", "gouraud"] = ...,
+    shading: Optional[Literal["flat", "nearest", "gouraud", "auto"]] = ...,
     antialiased: Union[bool, Sequence[bool]] = ...,
     data: Optional[Any] = ...,
     **kwargs: Any
