@@ -1,6 +1,7 @@
 # flake8: noqa: F841
 import tempfile
 from typing import Any, Dict, List, Union
+from pathlib import Path
 
 from pandas.io.parsers import TextFileReader
 
@@ -102,3 +103,15 @@ def test_isna() -> None:
     check_series_result(pd.notna(s), bool)
     b2: bool = pd.notna(np.nan)
     ar2: np.ndarray = pd.notna(list(s))
+
+
+def test_option_context() -> None:
+    # See https://github.com/microsoft/python-type-stubs/issues/192
+    with pd.option_context('display.max_rows', 10):
+        print(pd.DataFrame(list(range(50))))
+
+
+def test_read_from_path() -> None:
+    # See https://github.com/microsoft/python-type-stubs/pull/116
+    pd.read_excel(Path(__file__))
+

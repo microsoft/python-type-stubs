@@ -361,6 +361,7 @@ MigrationBackup/
 *.egg-info
 utils/*/build
 utils/build_bundle/stubs
+utils/build_bundle/docs
 AUTHORS
 ChangeLog
 

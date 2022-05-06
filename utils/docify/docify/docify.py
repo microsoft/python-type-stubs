@@ -2,7 +2,27 @@ import os
 import sys
 
 
+docfiles = set()
+
+
+def writedoc(docfile, class_, method, doc, verbose):
+    docfile += '.pyi.d'
+    mode = 'w'
+    if docfile in docfiles:
+        mode = 'a'
+    else:
+        os.makedirs(docfile[:docfile.rfind('/')], exist_ok=True)
+        docfiles.add(docfile)
+
+    with open(docfile, mode) as f:
+        f.write(f"===[{class_}.{method}]===\n{doc}\n")
+
+    if verbose:
+        print(f'Wrote docstring for {class_} {method} to {docfile}')
+
+
 def docify(stubfile, class_, method, doc, verbose):
+    stubfile += '.pyi'
     if not os.path.exists(stubfile):
         raise Exception(f'Missing stub file {stubfile}')
     with open(stubfile) as f:
@@ -84,5 +104,6 @@ def docify(stubfile, class_, method, doc, verbose):
     with open(stubfile, 'w') as f:
         f.writelines(stublines)
 
-    print(f'Patched {class_} {method} in {stubfile}')
+    if verbose:
+        print(f'Patched {class_} {method} in {stubfile}')
 

@@ -139,6 +139,7 @@ def test_timedelta_series_mult() -> None:
     std = (df["x"] < df["y"]) * pd.Timedelta(10, "minutes")
     assert_type(std, "TimedeltaSeries")
 
+
 def test_timedelta_series_sum() -> None:
     s = pd.Series(pd.to_datetime(["04/05/2022 11:00", "04/03/2022 10:00"])) - pd.Series(pd.to_datetime(["04/05/2022 08:00", "04/03/2022 09:00"]))
     ssum = s.sum()
@@ -146,5 +147,9 @@ def test_timedelta_series_sum() -> None:
     
     sf = pd.Series([1.0, 2.2, 3.3])
     sfsum: float = sf.sum()
-    
-    
+ 
+   
+def test_date_range_strftime() -> None:
+    dr = pd.date_range(start='2021-12-01', periods=24, freq='H')
+    time = dr.strftime('%H:%M:%S')
+

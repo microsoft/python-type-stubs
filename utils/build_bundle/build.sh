@@ -21,8 +21,10 @@ cp -R ../../partial/pandas stubs
 
 # Install docify and patch the pandas stubs with docstrings
 
-(cd ../docify; rm -rf .eggs; PBR_VERSION=1.0.0 pip install .)
-(cd stubs/pandas; docify ../../docify-pandas.cfg)
+(cd ../docify; flit install)
+(cd stubs/pandas; docify --verbose --inject ../../docify-pandas.cfg)
+-mkdir -p docs
+docify --verbose docify-pandas.cfg docs
 
 
 
