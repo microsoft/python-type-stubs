@@ -648,7 +648,7 @@ def scatter(
     s: Optional[Union[Scalar, ArrayLike]] = ...,
     c: Optional[Union[_ColorLike, Sequence[_ColorLike], ArrayLike]] = ...,
     marker: Optional[Union[MarkerStyle, str]] = ...,
-    cmap: Optional[Colormap] = ...,
+    cmap: Optional[Union[Colormap, str]] = ...,
     norm: Optional[Normalize] = ...,
     vmin: Optional[Scalar] = ...,
     vmax: Optional[Scalar] = ...,
