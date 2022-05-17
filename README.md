@@ -43,6 +43,7 @@ and are no longer maintained here:
 - PIL
 - retry
 - slugify
+- pandas (see https://github.com/pandas-dev/pandas-stubs; please open pandas stub issues there)
 
 # Trademarks
 
