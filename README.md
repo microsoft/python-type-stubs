@@ -40,9 +40,11 @@ and are no longer maintained here:
 - freezegun
 - markdown
 - packaging
+- pandas (see https://github.com/pandas-dev/pandas-stubs; please open pandas stub issues there)
 - PIL
 - retry
 - slugify
+
 
 # Trademarks
 
