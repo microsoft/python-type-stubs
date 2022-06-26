@@ -38,7 +38,7 @@ from matplotlib.colorbar import Colorbar
 from matplotlib.colors import Normalize as Normalize, _ColorLike  # undocumented
 from matplotlib.container import BarContainer, ErrorbarContainer, StemContainer
 from matplotlib.contour import ContourSet, QuadContourSet
-from matplotlib.figure import Figure
+from matplotlib.figure import Figure as Figure # undocumented
 from matplotlib.image import AxesImage, FigureImage
 from matplotlib.legend import Legend
 from matplotlib.lines import Line2D as Line2D  # undocumented
