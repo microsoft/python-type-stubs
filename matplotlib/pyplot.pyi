@@ -789,16 +789,29 @@ def subplots(
 
 @overload
 def subplots(
-    nrows: int = ...,
+    nrows: Literal[1] = ...,
     ncols: int = ...,
     *,
     sharex: Union[bool, Literal["none", "all", "row", "col"]] = ...,
     sharey: Union[bool, Literal["none", "all", "row", "col"]] = ...,
-    squeeze: Literal[False],
+    squeeze: Literal[True] = ...,
     subplot_kw: Optional[Dict[Any, Any]] = ...,
     gridspec_kw: Optional[Dict[Any, Any]] = ...,
     **fig_kw: Any
-) -> Tuple[Figure, ndarray]: ...
+) -> Tuple[Figure, Sequence[Axes]]: ...
+
+@overload
+def subplots(
+    nrows: int = ...,
+    ncols: Literal[1] = ...,
+    *,
+    sharex: Union[bool, Literal["none", "all", "row", "col"]] = ...,
+    sharey: Union[bool, Literal["none", "all", "row", "col"]] = ...,
+    squeeze: Literal[True] = ...,
+    subplot_kw: Optional[Dict[Any, Any]] = ...,
+    gridspec_kw: Optional[Dict[Any, Any]] = ...,
+    **fig_kw: Any
+) -> Tuple[Figure, Sequence[Axes]]: ...
 
 @overload
 def subplots(
@@ -811,7 +824,7 @@ def subplots(
     subplot_kw: Optional[Dict[Any, Any]] = ...,
     gridspec_kw: Optional[Dict[Any, Any]] = ...,
     **fig_kw: Any
-) -> Tuple[Figure, Union[Axes, ndarray]]: ...
+) -> Tuple[Figure, Sequence[Sequence[Axes]]]: ...
 
 def subplots_adjust(left: Optional[float] = ..., bottom: Optional[float] = ..., right: Optional[float] = ..., top: Optional[float] = ..., wspace: Optional[float] = ..., hspace: Optional[float] = ...) -> None: ...
 
