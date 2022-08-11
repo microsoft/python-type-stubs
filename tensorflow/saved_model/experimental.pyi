@@ -1,0 +1,3 @@
+from enum import Enum
+
+class VariablePolicy(Enum): ...

@@ -1,0 +1,16 @@
+from typing import Any, Callable, overload
+
+from tensorflow import Tensor
+
+class Constraint:
+    def get_config(self) -> dict[str, Any]: ...
+    def __call__(self, w: Tensor, /) -> Tensor: ...
+
+ConstraintT = str | dict[str, Any] | Constraint | None
+
+@overload
+def get(identifer: None) -> None: ...
+@overload
+def get(identifer: Callable[[Tensor], Tensor]) -> Callable[[Tensor], Tensor]: ...
+@overload
+def get(identifer: str | dict[str, Any]) -> Constraint: ...
