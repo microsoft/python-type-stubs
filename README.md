@@ -6,7 +6,9 @@ As the Python team, we are helping to ensure that packages have high-quality typ
 In cases where this must be done through type stubs, we are contributing stubs to
 [typeshed](https://github.com/python/typeshed). This repository contains our “work in progress”.
 Once the stubs for a package meet the requirements of typeshed, we will contribute them to
-typeshed and delete them from this repository.
+typeshed and delete them from this repository. We also support partial stubs in our tooling 
+in which case the stubs may never graduate from here, but we want to share them publicly so
+that others can contribute to or make use of what coverage we have.
 
 ## Our Use of Type Stubs
 
@@ -40,10 +42,12 @@ and are no longer maintained here:
 - freezegun
 - markdown
 - packaging
+- pandas (see https://github.com/pandas-dev/pandas-stubs; please open pandas stub issues there)
 - PIL
 - retry
 - slugify
 - pandas (see https://github.com/pandas-dev/pandas-stubs; please open pandas stub issues there)
+
 
 # Trademarks
 
