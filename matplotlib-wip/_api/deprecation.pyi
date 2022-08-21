@@ -2,10 +2,7 @@ from functools import partial
 import contextlib
 from typing import Callable, Iterator
 
-class MatplotlibDeprecationWarning(DeprecationWarning):
-    """A class for issuing deprecation warnings for Matplotlib users."""
-
-    ...
+class MatplotlibDeprecationWarning(DeprecationWarning): ...
 
 def warn_deprecated(
     since: str,

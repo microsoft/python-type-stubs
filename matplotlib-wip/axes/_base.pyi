@@ -62,11 +62,7 @@ class _AxesBase(Artist):
     def set_axes_locator(
         self, locator: Callable[[Axes, RendererBase], Bbox]
     ) -> None: ...
-    def get_axes_locator(self):
-        """
-        Return the axes_locator.
-        """
-        ...
+    def get_axes_locator(self): ...
     def sharex(self, other: Axes) -> None: ...
     def sharey(self, other: Axes) -> None: ...
     def clear(self) -> None: ...
@@ -84,77 +80,10 @@ class _AxesBase(Artist):
     def tables(self): ...
     @property
     def texts(self): ...
-    def cla(self) -> None:
-        """Clear the Axes."""
-        ...
-    def get_facecolor(self) -> Color:
-        """Get the facecolor of the Axes."""
-        ...
+    def cla(self) -> None: ...
+    def get_facecolor(self) -> Color: ...
     def set_facecolor(self, color: Color): ...
-    def set_prop_cycle(self, *args, **kwargs):
-        """
-        Set the property cycle of the Axes.
-
-        The property cycle controls the style properties such as color,
-        marker and linestyle of future plot commands. The style properties
-        of data already added to the Axes are not modified.
-
-        Call signatures::
-
-          set_prop_cycle(cycler)
-          set_prop_cycle(label=values[, label2=values2[, ...]])
-          set_prop_cycle(label, values)
-
-        Form 1 sets given `~cycler.Cycler` object.
-
-        Form 2 creates a `~cycler.Cycler` which cycles over one or more
-        properties simultaneously and set it as the property cycle of the
-        Axes. If multiple properties are given, their value lists must have
-        the same length. This is just a shortcut for explicitly creating a
-        cycler and passing it to the function, i.e. it's short for
-        ``set_prop_cycle(cycler(label=values label2=values2, ...))``.
-
-        Form 3 creates a `~cycler.Cycler` for a single property and set it
-        as the property cycle of the Axes. This form exists for compatibility
-        with the original `cycler.cycler` interface. Its use is discouraged
-        in favor of the kwarg form, i.e. ``set_prop_cycle(label=values)``.
-
-        Parameters
-        ----------
-        cycler : Cycler
-            Set the given Cycler. *None* resets to the cycle defined by the
-            current style.
-
-        label : str
-            The property key. Must be a valid `.Artist` property.
-            For example, 'color' or 'linestyle'. Aliases are allowed,
-            such as 'c' for 'color' and 'lw' for 'linewidth'.
-
-        values : iterable
-            Finite-length iterable of the property values. These values
-            are validated and will raise a ValueError if invalid.
-
-        See Also
-        --------
-        matplotlib.rcsetup.cycler
-            Convenience function for creating validated cyclers for properties.
-        cycler.cycler
-            The original function for creating unvalidated cyclers.
-
-        Examples
-        --------
-        Setting the property cycle for a single property:
-
-        >>> ax.set_prop_cycle(color=['red', 'green', 'blue'])
-
-        Setting the property cycle for simultaneously cycling over multiple
-        properties (e.g. red circle, green plus, blue cross):
-
-        >>> ax.set_prop_cycle(color=['red', 'green', 'blue'],
-        ...                   marker=['o', '+', 'x'])
-
-        """
-        ...
+    def set_prop_cycle(self, *args, **kwargs): ...
     def get_aspect(self) -> Literal["auto"] | float: ...
     def set_aspect(
         self,
@@ -177,68 +106,8 @@ class _AxesBase(Artist):
     ): ...
     def get_data_ratio(self): ...
     def apply_aspect(self, position=...): ...
-    def axis(self, *args, emit: bool = ..., **kwargs):
-        """
-        Convenience method to get or set some axis properties.
-
-        Call signatures::
-
-          xmin, xmax, ymin, ymax = axis()
-          xmin, xmax, ymin, ymax = axis([xmin, xmax, ymin, ymax])
-          xmin, xmax, ymin, ymax = axis(option)
-          xmin, xmax, ymin, ymax = axis(**kwargs)
-
-        Parameters
-        ----------
-        xmin, xmax, ymin, ymax : float, optional
-            The axis limits to be set.  This can also be achieved using ::
-
-                ax.set(xlim=(xmin, xmax), ylim=(ymin, ymax))
-
-        option : bool or str
-            If a bool, turns axis lines and labels on or off. If a string,
-            possible values are:
-
-            ======== ==========================================================
-            Value    Description
-            ======== ==========================================================
-            'on'     Turn on axis lines and labels. Same as ``True``.
-            'off'    Turn off axis lines and labels. Same as ``False``.
-            'equal'  Set equal scaling (i.e., make circles circular) by
-                     changing axis limits. This is the same as
-                     ``ax.set_aspect('equal', adjustable='datalim')``.
-                     Explicit data limits may not be respected in this case.
-            'scaled' Set equal scaling (i.e., make circles circular) by
-                     changing dimensions of the plot box. This is the same as
-                     ``ax.set_aspect('equal', adjustable='box', anchor='C')``.
-                     Additionally, further autoscaling will be disabled.
-            'tight'  Set limits just large enough to show all data, then
-                     disable further autoscaling.
-            'auto'   Automatic scaling (fill plot box with data).
-            'image'  'scaled' with axis limits equal to data limits.
-            'square' Square plot; similar to 'scaled', but initially forcing
-                     ``xmax-xmin == ymax-ymin``.
-            ======== ==========================================================
-
-        emit : bool, default: True
-            Whether observers are notified of the axis limit change.
-            This option is passed on to `~.Axes.set_xlim` and
-            `~.Axes.set_ylim`.
-
-        Returns
-        -------
-        xmin, xmax, ymin, ymax : float
-            The axis limits.
-
-        See Also
-        --------
-        Axes.set_xlim
-        Axes.set_ylim
-        """
-        ...
-    def get_legend(self) -> Legend | None:
-        """Return the `.Legend` instance, or None if no legend is defined."""
-        ...
+    def axis(self, *args, emit: bool = ..., **kwargs): ...
+    def get_legend(self) -> Legend | None: ...
     def get_images(self) -> list[AxesImage]: ...
     def get_lines(self) -> list[Line2D]: ...
     def get_xaxis(self) -> XAxis: ...
@@ -434,9 +303,5 @@ class _AxesBase(Artist):
     ) -> BboxBase: ...
     def twinx(self) -> Axes: ...
     def twiny(self) -> Axes: ...
-    def get_shared_x_axes(self):
-        """Return an immutable view on the shared x-axes Grouper."""
-        ...
-    def get_shared_y_axes(self):
-        """Return an immutable view on the shared y-axes Grouper."""
-        ...
+    def get_shared_x_axes(self): ...
+    def get_shared_y_axes(self): ...

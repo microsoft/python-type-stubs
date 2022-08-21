@@ -4,128 +4,30 @@ from .transforms import Transform
 from .axis import Axis
 
 class ScaleBase:
-    """
-    The base class for all scales.
-
-    Scales are separable transformations, working on a single dimension.
-
-    Subclasses should override
-
-    :attr:`name`
-        The scale's name.
-    :meth:`get_transform`
-        A method returning a `.Transform`, which converts data coordinates to
-        scaled coordinates.  This transform should be invertible, so that e.g.
-        mouse positions can be converted back to data coordinates.
-    :meth:`set_default_locators_and_formatters`
-        A method that sets default locators and formatters for an `~.axis.Axis`
-        that uses this scale.
-    :meth:`limit_range_for_scale`
-        An optional method that "fixes" the axis range to acceptable values,
-        e.g. restricting log-scaled axes to positive values.
-    """
-
-    def __init__(self, axis: Axis) -> None:
-        r"""
-        Construct a new scale.
-
-        Notes
-        -----
-        The following note is for scale implementors.
-
-        For back-compatibility reasons, scales take an `~Axis`
-        object as first argument.  However, this argument should not
-        be used: a single scale object should be usable by multiple
-        `~Axis`\es at the same time.
-        """
-        ...
-    def get_transform(self) -> Transform:
-        """
-        Return the `.Transform` object associated with this scale.
-        """
-        ...
-    def set_default_locators_and_formatters(self, axis: Axis):
-        """
-        Set the locators and formatters of *axis* to instances suitable for
-        this scale.
-        """
-        ...
-    def limit_range_for_scale(self, vmin: float, vmax: float, minpos: float):
-        """
-        Return the range *vmin*, *vmax*, restricted to the
-        domain supported by this scale (if any).
-
-        *minpos* should be the minimum positive value in the data.
-        This is used by log scales to determine a minimum value.
-        """
-        ...
+    def __init__(self, axis: Axis) -> None: ...
+    def get_transform(self) -> Transform: ...
+    def set_default_locators_and_formatters(self, axis: Axis): ...
+    def limit_range_for_scale(self, vmin: float, vmax: float, minpos: float): ...
 
 class LinearScale(ScaleBase):
-    """
-    The default linear scale.
-    """
 
     name = ...
-    def __init__(self, axis: Axis) -> None:
-        """ """
-        ...
+    def __init__(self, axis: Axis) -> None: ...
     def set_default_locators_and_formatters(self, axis: Axis): ...
-    def get_transform(self) -> Transform:
-        """
-        Return the transform for linear scaling, which is just the
-        `~matplotlib.transforms.IdentityTransform`.
-        """
-        ...
+    def get_transform(self) -> Transform: ...
 
 class FuncTransform(Transform):
-    """
-    A simple transform that takes and arbitrary function for the
-    forward and inverse transform.
-    """
 
     input_dims = ...
-    def __init__(self, forward: Callable, inverse: Callable) -> None:
-        """
-        Parameters
-        ----------
-        forward : callable
-            The forward function for the transform.  This function must have
-            an inverse and, for best behavior, be monotonic.
-            It must have the signature::
-
-               def forward(values: array-like) -> array-like
-
-        inverse : callable
-            The inverse of the forward function.  Signature as ``forward``.
-        """
-        ...
+    def __init__(self, forward: Callable, inverse: Callable) -> None: ...
     def transform_non_affine(self, values: ArrayLike) -> list: ...
     def inverted(self): ...
 
 class FuncScale(ScaleBase):
-    """
-    Provide an arbitrary scale with user-supplied function for the axis.
-    """
 
     name = ...
-    def __init__(self, axis: Axis, functions: Sequence[Callable]) -> None:
-        """
-        Parameters
-        ----------
-        axis : `~Axis`
-            The axis for the scale.
-        functions : (callable, callable)
-            two-tuple of the forward and inverse functions for the scale.
-            The forward function must be monotonic.
-
-            Both functions must have the signature::
-
-               def forward(values: array-like) -> array-like
-        """
-        ...
-    def get_transform(self) -> FuncTransform:
-        """Return the `.FuncTransform` associated with this scale."""
-        ...
+    def __init__(self, axis: Axis, functions: Sequence[Callable]) -> None: ...
+    def get_transform(self) -> FuncTransform: ...
     def set_default_locators_and_formatters(self, axis): ...
 
 class LogTransform(Transform):
@@ -143,9 +45,6 @@ class InvertedLogTransform(Transform):
     def inverted(self): ...
 
 class LogScale(ScaleBase):
-    """
-    A standard logarithmic scale.  Care is taken to only plot positive values.
-    """
 
     name = ...
     def __init__(
@@ -155,64 +54,21 @@ class LogScale(ScaleBase):
         base: float = 10,
         subs=Sequence[int],
         nonpositive: Literal["clip", "mask"] = "clip"
-    ) -> None:
-        """
-        Parameters
-        ----------
-        axis : `~Axis`
-            The axis for the scale.
-        base : float, default: 10
-            The base of the logarithm.
-        nonpositive : {'clip', 'mask'}, default: 'clip'
-            Determines the behavior for non-positive values. They can either
-            be masked as invalid, or clipped to a very small positive number.
-        subs : sequence of int, default: None
-            Where to place the subticks between each major tick.  For example,
-            in a log10 scale, ``[2, 3, 4, 5, 6, 7, 8, 9]`` will place 8
-            logarithmically spaced minor ticks between each major tick.
-        """
-        ...
+    ) -> None: ...
     base = ...
     def set_default_locators_and_formatters(self, axis: Axis): ...
-    def get_transform(self) -> LogTransform:
-        """Return the `.LogTransform` associated with this scale."""
-        ...
-    def limit_range_for_scale(self, vmin: float, vmax: float, minpos: float):
-        """Limit the domain to positive values."""
-        ...
+    def get_transform(self) -> LogTransform: ...
+    def limit_range_for_scale(self, vmin: float, vmax: float, minpos: float): ...
 
 class FuncScaleLog(LogScale):
-    """
-    Provide an arbitrary scale with user-supplied function for the axis and
-    then put on a logarithmic axes.
-    """
 
     name = ...
     def __init__(
         self, axis: Axis, functions: Sequence[Callable], base: float = 10
-    ) -> None:
-        """
-        Parameters
-        ----------
-        axis : `Axis`
-            The axis for the scale.
-        functions : (callable, callable)
-            two-tuple of the forward and inverse functions for the scale.
-            The forward function must be monotonic.
-
-            Both functions must have the signature::
-
-                def forward(values: array-like) -> array-like
-
-        base : float, default: 10
-            Logarithmic base of the scale.
-        """
-        ...
+    ) -> None: ...
     @property
     def base(self): ...
-    def get_transform(self) -> Transform:
-        """Return the `.Transform` associated with this scale."""
-        ...
+    def get_transform(self) -> Transform: ...
 
 class SymmetricalLogTransform(Transform):
     input_dims = ...
@@ -227,37 +83,6 @@ class InvertedSymmetricalLogTransform(Transform):
     def inverted(self): ...
 
 class SymmetricalLogScale(ScaleBase):
-    """
-    The symmetrical logarithmic scale is logarithmic in both the
-    positive and negative directions from the origin.
-
-    Since the values close to zero tend toward infinity, there is a
-    need to have a range around zero that is linear.  The parameter
-    *linthresh* allows the user to specify the size of this range
-    (-*linthresh*, *linthresh*).
-
-    Parameters
-    ----------
-    base : float, default: 10
-        The base of the logarithm.
-
-    linthresh : float, default: 2
-        Defines the range ``(-x, x)``, within which the plot is linear.
-        This avoids having the plot go to infinity around zero.
-
-    subs : sequence of int
-        Where to place the subticks between each major tick.
-        For example, in a log10 scale: ``[2, 3, 4, 5, 6, 7, 8, 9]`` will place
-        8 logarithmically spaced minor ticks between each major tick.
-
-    linscale : float, optional
-        This allows the linear range ``(-linthresh, linthresh)`` to be
-        stretched relative to the logarithmic range. Its value is the number of
-        decades to use for each half of the linear range. For example, when
-        *linscale* == 1.0 (the default), the space used for the positive and
-        negative halves of the linear range will be equal to one decade in
-        the logarithmic range.
-    """
 
     name = ...
     def __init__(
@@ -274,12 +99,9 @@ class SymmetricalLogScale(ScaleBase):
     linthresh = ...
     linscale = ...
     def set_default_locators_and_formatters(self, axis: Axis): ...
-    def get_transform(self) -> SymmetricalLogTransform:
-        """Return the `.SymmetricalLogTransform` associated with this scale."""
-        ...
+    def get_transform(self) -> SymmetricalLogTransform: ...
 
 class AsinhTransform(Transform):
-    """Inverse hyperbolic-sine transformation used by `.AsinhScale`"""
 
     input_dims = ...
     def __init__(self, linear_width) -> None: ...
@@ -287,7 +109,6 @@ class AsinhTransform(Transform):
     def inverted(self): ...
 
 class InvertedAsinhTransform(Transform):
-    """Hyperbolic sine transformation used by `.AsinhScale`"""
 
     input_dims = ...
     def __init__(self, linear_width) -> None: ...
@@ -295,29 +116,6 @@ class InvertedAsinhTransform(Transform):
     def inverted(self): ...
 
 class AsinhScale(ScaleBase):
-    """
-    A quasi-logarithmic scale based on the inverse hyperbolic sine (asinh)
-
-    For values close to zero, this is essentially a linear scale,
-    but for large magnitude values (either positive or negative)
-    it is asymptotically logarithmic. The transition between these
-    linear and logarithmic regimes is smooth, and has no discontinuities
-    in the function gradient in contrast to
-    the `.SymmetricalLogScale` ("symlog") scale.
-
-    Specifically, the transformation of an axis coordinate :math:`a` is
-    :math:`a \\rightarrow a_0 \\sinh^{-1} (a / a_0)` where :math:`a_0`
-    is the effective width of the linear region of the transformation.
-    In that region, the transformation is
-    :math:`a \\rightarrow a + \\mathcal{O}(a^3)`.
-    For large values of :math:`a` the transformation behaves as
-    :math:`a \\rightarrow a_0 \\, \\mathrm{sgn}(a) \\ln |a| + \\mathcal{O}(1)`.
-
-    .. note::
-
-       This API is provisional and may be revised in the future
-       based on early user feedback.
-    """
 
     name = ...
     auto_tick_multipliers = ...
@@ -329,26 +127,7 @@ class AsinhScale(ScaleBase):
         base: float = 10,
         subs: Sequence[int] = ...,
         **kwargs
-    ) -> None:
-        """
-        Parameters
-        ----------
-        linear_width : float, default: 1
-            The scale parameter (elsewhere referred to as :math:`a_0`)
-            defining the extent of the quasi-linear region,
-            and the coordinate values beyond which the transformation
-            becomes asymptotically logarithmic.
-        base : int, default: 10
-            The number base used for rounding tick locations
-            on a logarithmic scale. If this is less than one,
-            then rounding is to the nearest integer multiple
-            of powers of ten.
-        subs : sequence of int
-            Multiples of the number base used for minor ticks.
-            If set to 'auto', this will use built-in defaults,
-            e.g. (2, 5) for base=10.
-        """
-        ...
+    ) -> None: ...
     linear_width = ...
     def get_transform(self): ...
     def set_default_locators_and_formatters(self, axis): ...
@@ -356,28 +135,18 @@ class AsinhScale(ScaleBase):
 class LogitTransform(Transform):
     input_dims = ...
     def __init__(self, nonpositive: Literal["mask", "clip"] = ...) -> None: ...
-    def transform_non_affine(self, a):
-        """logit transform (base 10), masked or clipped"""
-        ...
+    def transform_non_affine(self, a): ...
     def inverted(self): ...
     def __str__(self) -> str: ...
 
 class LogisticTransform(Transform):
     input_dims = ...
     def __init__(self, nonpositive: Literal["mask", "clip"] = ...) -> None: ...
-    def transform_non_affine(self, a):
-        """logistic transform (base 10)"""
-        ...
+    def transform_non_affine(self, a): ...
     def inverted(self): ...
     def __str__(self) -> str: ...
 
 class LogitScale(ScaleBase):
-    """
-    Logit scale for data between zero and one, both excluded.
-
-    This scale is similar to a log scale close to zero and to one, and almost
-    linear around 0.5. It maps the interval ]0, 1[ onto ]-infty, +infty[.
-    """
 
     name = ...
     def __init__(
@@ -387,61 +156,17 @@ class LogitScale(ScaleBase):
         *,
         one_half: str = ...,
         use_overline=...
-    ) -> None:
-        r"""
-        Parameters
-        ----------
-        axis : `Axis`
-            Currently unused.
-        nonpositive : {'mask', 'clip'}
-            Determines the behavior for values beyond the open interval ]0, 1[.
-            They can either be masked as invalid, or clipped to a number very
-            close to 0 or 1.
-        use_overline : bool, default: False
-            Indicate the usage of survival notation (\overline{x}) in place of
-            standard notation (1-x) for probability close to one.
-        one_half : str, default: r"\frac{1}{2}"
-            The string used for ticks formatter to represent 1/2.
-        """
-        ...
-    def get_transform(self) -> LogitTransform:
-        """Return the `.LogitTransform` associated with this scale."""
-        ...
+    ) -> None: ...
+    def get_transform(self) -> LogitTransform: ...
     def set_default_locators_and_formatters(self, axis: Axis): ...
-    def limit_range_for_scale(self, vmin: float, vmax: float, minpos: float):
-        """
-        Limit the domain to values between 0 and 1 (excluded).
-        """
-        ...
+    def limit_range_for_scale(self, vmin: float, vmax: float, minpos: float): ...
 
-def get_scale_names():
-    """Return the names of the available scales."""
-    ...
-
+def get_scale_names(): ...
 def scale_factory(
     scale: Literal[
         "asinh", "function", "functionlog", "linear", "log", "logit", "symlog"
     ],
     axis: Axis,
     **kwargs
-):
-    """
-    Return a scale class by name.
-
-    Parameters
-    ----------
-    scale : {%(names)s}
-    axis : `Axis`
-    """
-    ...
-
-def register_scale(scale_class):
-    """
-    Register a new kind of scale.
-
-    Parameters
-    ----------
-    scale_class : subclass of `ScaleBase`
-        The scale to register.
-    """
-    ...
+): ...
+def register_scale(scale_class): ...
