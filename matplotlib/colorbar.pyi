@@ -1,11 +1,114 @@
-from typing import Any
+from typing import Literal, Sequence
+from matplotlib.text import Text
+from matplotlib.cm import ScalarMappable
+from matplotlib.colors import Normalize
+from matplotlib.collections import LineCollection
+from matplotlib.ticker import Formatter, Locator
+from matplotlib.colors import Colormap
+from matplotlib.axes import Axes
+from matplotlib.axis import Tick
+from matplotlib.spines import Spine
 
+class _ColorbarSpine(Spine):
+    def __init__(self, axes) -> None: ...
+    def get_window_extent(self, renderer=...): ...
+    def set_xy(self, xy): ...
+    def draw(self, renderer): ...
 
-class ColorbarBase:
-    def __getattr__(self, name: str) -> Any: ...  # incomplete
+class _ColorbarAxesLocator:
+    def __init__(self, cbar) -> None: ...
+    def __call__(self, ax, renderer): ...
+    def get_subplotspec(self): ...
 
-class Colorbar(ColorbarBase):
-    def __getattr__(self, name: str) -> Any: ...  # incomplete
+class Colorbar:
+    ax: Axes
+    lines: list[LineCollection]
+    dividers: LineCollection
+    n_rasterize = ...
 
+    def __init__(
+        self,
+        ax: Axes,
+        mappable: ScalarMappable = ...,
+        *,
+        cmap: Colormap = ...,
+        norm: Normalize = ...,
+        alpha: float = ...,
+        values: None = ...,
+        boundaries: None = ...,
+        orientation: Literal["vertical", "horizontal"] = ...,
+        ticklocation: Literal["auto", "left", "right", "top", "bottom"] = ...,
+        extend: Literal["neither", "both", "min", "max"] = ...,
+        spacing: Literal["uniform", "proportional"] = ...,
+        ticks: None | Sequence[Tick] | Locator = ...,
+        format: None | str | Formatter = ...,
+        drawedges: bool = ...,
+        filled: bool = ...,
+        extendfrac=...,
+        extendrect: bool = ...,
+        label: str = ...
+    ) -> None: ...
+    @property
+    def locator(self): ...
+    @locator.setter
+    def locator(self, loc): ...
+    @property
+    def minorlocator(self): ...
+    @minorlocator.setter
+    def minorlocator(self, loc): ...
+    @property
+    def formatter(self): ...
+    @formatter.setter
+    def formatter(self, fmt): ...
+    @property
+    def minorformatter(self): ...
+    @minorformatter.setter
+    def minorformatter(self, fmt): ...
 
-def __getattr__(name: str) -> Any: ...  # incomplete
+    patch = ...
+    filled = ...
+    def update_normal(self, mappable): ...
+    def draw_all(self): ...
+    def add_lines(self, *args, **kwargs): ...
+    def update_ticks(self): ...
+    def set_ticks(
+        self,
+        ticks: list[float],
+        update_ticks=...,
+        labels: list[str] = ...,
+        *,
+        minor: bool = ...,
+        **kwargs
+    ): ...
+    def get_ticks(self, minor: bool = ...): ...
+    def set_ticklabels(
+        self, ticklabels: Text, update_ticks: bool = ..., *, minor=..., **kwargs
+    ): ...
+    def minorticks_on(self): ...
+    def minorticks_off(self): ...
+    def set_label(self, label: str, *, loc: str = ..., **kwargs): ...
+    def set_alpha(self, alpha): ...
+    def remove(self): ...
+    def drag_pan(self, button, key, x, y): ...
+
+ColorbarBase = Colorbar
+
+def make_axes(
+    parents: Axes | list[Axes],
+    location: None | Literal["left", "right", "top", "bottom"] = ...,
+    orientation: None | Literal["vertical", "horizontal"] = ...,
+    fraction: float = ...,
+    shrink: float = ...,
+    aspect: float = ...,
+    **kwargs
+): ...
+def make_axes_gridspec(
+    parent: Axes,
+    *,
+    location: None | Literal["left", "right", "top", "bottom"] = ...,
+    orientation: None | Literal["vertical", "horizontal"] = ...,
+    fraction: float = ...,
+    shrink: float = ...,
+    aspect: float = ...,
+    **kwargs
+): ...
