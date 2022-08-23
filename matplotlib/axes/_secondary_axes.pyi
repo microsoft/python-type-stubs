@@ -12,15 +12,15 @@ class SecondaryAxis(_AxesBase):
     def set_location(
         self, location: Literal["top", "bottom", "left", "right"] | float
     ) -> None: ...
-    def apply_aspect(self, position=...): ...
+    def apply_aspect(self, position=None) -> None: ...
     def set_ticks(
         self,
         ticks: list[float],
-        labels: list[str] = ...,
+        labels: list[str]|None = None,
         *,
-        minor: bool = ...,
+        minor: bool = False,
         **kwargs
-    ): ...
+    ) -> list: ...
     def set_functions(
         self, functions: tuple[Callable, Callable] | Transform
     ) -> None: ...

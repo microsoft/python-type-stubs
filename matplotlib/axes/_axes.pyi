@@ -1,15 +1,17 @@
 import datetime
 from re import L
 from matplotlib.backend_tools import Cursors
+from matplotlib.contour import QuadContourSet
 import numpy as np
 from typing import Callable, Literal, Sequence, overload
 from matplotlib._typing import *
 from matplotlib.transforms import Bbox, BboxTransformTo, Transform
-from matplotlib.text import Text
+from matplotlib.text import Annotation, Text
 from matplotlib.container import BarContainer, ErrorbarContainer, StemContainer
-from matplotlib.patches import FancyArrow, Polygon, Rectangle, Wedge
-from matplotlib.quiver import Quiver
+from matplotlib.patches import FancyArrow, Polygon, Rectangle, StepPatch, Wedge
+from matplotlib.quiver import Barbs, Quiver
 from matplotlib.colors import Colormap, Normalize
+from matplotlib.axes._secondary_axes import SecondaryAxis
 from matplotlib.collections import (
     EventCollection,
     LineCollection,
@@ -30,6 +32,14 @@ from matplotlib.artist import Artist
 from matplotlib.spines import Spines
 from ._base import _AxesBase
 
+from matplotlib.table import table as table_table
+from matplotlib.tri import \
+    tricontour as tri_tricontour, \
+    tricontour as tri_tricontourf, \
+    tripcolor as tri_tripcolor, \
+    triplot as tri_triplot
+
+    
 class Axes(_AxesBase):
 
     dataLim: Bbox
@@ -55,7 +65,7 @@ class Axes(_AxesBase):
         y: float = ...,
         **kwargs
     ) -> Text: ...
-    def get_legend_handles_labels(self, legend_handler_map=...) -> tuple: ...
+    def get_legend_handles_labels(self, legend_handler_map=...) -> tuple[list, list]: ...
     def legend(self, *args, **kwargs) -> Legend: ...
     def inset_axes(
         self,
@@ -84,14 +94,14 @@ class Axes(_AxesBase):
         *,
         functions=...,
         **kwargs
-    ): ...
+    ) -> SecondaryAxis: ...
     def secondary_yaxis(
         self,
         location: Literal["top", "bottom", "left", "right"] | float,
         *,
         functions=...,
         **kwargs
-    ): ...
+    ) -> SecondaryAxis: ...
     def text(
         self, x: float, y: float, s: str, fontdict: dict = ..., **kwargs
     ) -> Text: ...
@@ -105,7 +115,7 @@ class Axes(_AxesBase):
         arrowprops: dict = ...,
         annotation_clip: bool | None = ...,
         **kwargs
-    ) -> Text: ...
+    ) -> Annotation: ...
     def axhline(
         self, y: float = 0, xmin: float = 0, xmax: float = 1, **kwargs
     ) -> Line2D: ...
@@ -183,7 +193,7 @@ class Axes(_AxesBase):
         usevlines: bool = True,
         maxlags: int = 10,
         **kwargs
-    ): ...
+    ) -> tuple[np.ndarray, np.ndarray, bool, int]: ...
     def step(
         self,
         x: ArrayLike,
@@ -309,7 +319,7 @@ class Axes(_AxesBase):
         autorange: bool = False,
         zorder: float = 2,
         capwidths=...,
-    ) -> dict: ...
+    ) -> dict[str, list[Line2D]]: ...
     def bxp(
         self,
         bxpstats: list[dict],
@@ -380,7 +390,7 @@ class Axes(_AxesBase):
         self, Q: Quiver, X: float, Y: float, U: float, label: str, **kwargs
     ): ...
     def quiver(self, *args, **kwargs) -> Quiver: ...
-    def barbs(self, *args, **kwargs): ...
+    def barbs(self, *args, **kwargs) -> Barbs: ...
     def fill(self, *args, data=..., **kwargs) -> list[Polygon]: ...
     def fill_between(
         self,
@@ -455,8 +465,8 @@ class Axes(_AxesBase):
         vmax: float | None = None,
         **kwargs
     ) -> tuple[AxesImage, PcolorImage, QuadMesh]: ...
-    def contour(self, *args, **kwargs) -> contour.QuadContourSet: ...
-    def contourf(self, *args, **kwargs) -> contour.QuadContourSet: ...
+    def contour(self, *args, **kwargs) -> QuadContourSet: ...
+    def contourf(self, *args, **kwargs) -> QuadContourSet: ...
     def clabel(self, CS, levels: ArrayLike = ..., **kwargs): ...
     @overload
     def hist(
@@ -507,7 +517,7 @@ class Axes(_AxesBase):
         baseline: float | ArrayLike | None = 0,
         fill: bool = False,
         **kwargs
-    ): ...
+    ) -> StepPatch: ...
     def hist2d(
         self,
         x,
@@ -519,7 +529,7 @@ class Axes(_AxesBase):
         cmin: float | None = None,
         cmax: float | None = None,
         **kwargs
-    ): ...
+    ) -> tuple[np.ndarray, np.ndarray, np.ndarray, tuple[float, float]|None]: ...
     def psd(
         self,
         x: Sequence,
@@ -534,7 +544,7 @@ class Axes(_AxesBase):
         scale_by_freq: bool = ...,
         return_line: bool = False,
         **kwargs
-    ): ...
+    ) -> tuple[np.ndarray, np.ndarray, Line2D]: ...
     def csd(
         self,
         x: ArrayLike,
@@ -550,7 +560,7 @@ class Axes(_AxesBase):
         scale_by_freq: bool = ...,
         return_line: bool = False,
         **kwargs
-    ): ...
+    ) -> tuple[np.ndarray, np.ndarray, Line2D]: ...
     def magnitude_spectrum(
         self,
         x: Sequence,
@@ -561,7 +571,7 @@ class Axes(_AxesBase):
         sides: Literal["default", "onesided", "twosided"] = ...,
         scale: Literal["default", "linear", "dB"] = "linear",
         **kwargs
-    ): ...
+    ) -> tuple[np.ndarray, np.ndarray, Line2D]: ...
     def angle_spectrum(
         self,
         x: Sequence,
@@ -571,7 +581,7 @@ class Axes(_AxesBase):
         pad_to: int = ...,
         sides: Literal["default", "onesided", "twosided"] = ...,
         **kwargs
-    ): ...
+    ) -> tuple[np.ndarray, np.ndarray, Line2D]: ...
     def phase_spectrum(
         self,
         x: Sequence,
@@ -581,7 +591,7 @@ class Axes(_AxesBase):
         pad_to: int = ...,
         sides: Literal["default", "onesided", "twosided"] = ...,
         **kwargs
-    ): ...
+    ) -> tuple[np.ndarray, np.ndarray, Line2D]: ...
     def cohere(
         self,
         x,
@@ -596,7 +606,7 @@ class Axes(_AxesBase):
         sides: Literal["default", "onesided", "twosided"] = ...,
         scale_by_freq: bool = ...,
         **kwargs
-    ) -> tuple[list, list]: ...
+    ) -> tuple[np.ndarray, np.ndarray]: ...
     def specgram(
         self,
         x: Sequence,
@@ -616,7 +626,7 @@ class Axes(_AxesBase):
         vmin=...,
         vmax=...,
         **kwargs
-    ) -> tuple[list, list, list, AxesImage]: ...
+    ) -> tuple[np.ndarray, np.ndarray, np.ndarray, AxesImage]: ...
     def spy(
         self,
         Z,
@@ -651,10 +661,10 @@ class Axes(_AxesBase):
         showextrema: bool = True,
         showmedians: bool = False,
     ) -> dict[str, Collection]: ...
-    table = ...
+    table = table_table
     stackplot = ...
     streamplot = ...
-    tricontour = ...
-    tricontourf = ...
-    tripcolor = ...
-    triplot = ...
+    tricontour = tri_tricontour
+    tricontourf = tri_tricontourf
+    tripcolor = tri_tripcolor
+    triplot = tri_triplot

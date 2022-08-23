@@ -1,4 +1,6 @@
 from typing import Literal
+
+from matplotlib.artist import Artist
 from ._typing import *
 from .collections import LineCollection
 from .lines import Line2D
@@ -12,11 +14,11 @@ class Container(tuple):
     def remove(self) -> None: ...
     def get_children(self) -> list[Rectangle]: ...
 
-    get_label = ...
-    set_label = ...
-    add_callback = ...
-    remove_callback = ...
-    pchanged = ...
+    get_label = Artist.get_label
+    set_label = Artist.set_label
+    add_callback = Artist.add_callback
+    remove_callback = Artist.remove_callback
+    pchanged = Artist.pchanged
 
 class BarContainer(Container):
 
