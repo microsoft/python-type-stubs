@@ -1,44 +1,64 @@
-# COMPLETE
+from typing import Literal
 
-from typing import Any, Callable, List, Optional, Tuple, TypeVar, Union
+from matplotlib.artist import Artist
+from ._typing import *
+from .collections import LineCollection
+from .lines import Line2D
+from .patches import Rectangle
+from typing import Type
 
-from matplotlib.collections import LineCollection
-from matplotlib.lines import Line2D
-from matplotlib.patches import Rectangle
+class Container(tuple):
+    def __repr__(self) -> str: ...
+    def __new__(cls: Type[Container], *args, **kwargs) -> Container: ...
+    def __init__(self, kl: list[Rectangle], label: str = ...) -> None: ...
+    def remove(self) -> None: ...
+    def get_children(self) -> list[Rectangle]: ...
 
-_T = TypeVar("_T")
+    get_label = Artist.get_label
+    set_label = Artist.set_label
+    add_callback = Artist.add_callback
+    remove_callback = Artist.remove_callback
+    pchanged = Artist.pchanged
 
+class BarContainer(Container):
 
-# These would be better represented as variadic types, which are not yet accepted.
-class Container(Tuple[_T]):
-    eventson: bool
+    patches: list[Rectangle]
+    errorbar: None | ErrorbarContainer
+    datavalues: None | ArrayLike
+    orientation: None | Literal["horizontal", "vertical"]
 
-    def __init__(self, kl: Any, label: Optional[str] = ...) -> None: ... 
+    def __init__(
+        self,
+        patches: list[Rectangle],
+        errorbar: ErrorbarContainer | None = ...,
+        *,
+        datavalues=...,
+        orientation=...,
+        **kwargs
+    ) -> None: ...
 
-    def get_children(self) -> List[_T]: ...
+class ErrorbarContainer(Container):
 
-    # Copied from Artist.
-    def add_callback(self, func: Callable[[_T], Any]) -> int: ...
-    def remove_callback(self, oid: int) -> None: ...
-    def get_label(self) -> str: ...
-    def set_label(self, s: object) -> None: ...
-    def pchanged(self) -> None: ...
-
-class BarContainer(Container[Rectangle]):
-    patches: List[Rectangle]
-    errorbar: Optional[ErrorbarContainer]
-
-    def __init__(self, patches: List[Rectangle], errorbar: Optional[ErrorbarContainer] = ..., **kwargs: Any) -> None: ...
-
-class ErrorbarContainer(Container[Union[LineCollection, Line2D]]):
+    lines: tuple[Line2D, tuple[Line2D, ...], list[LineCollection]]
     has_xerr: bool
     has_yerr: bool
 
-    def __init__(self, lines: Tuple[Line2D, Tuple[Line2D, ...], List[LineCollection]], has_xerr: bool = ..., has_yerr: bool = ..., **kwargs: Any) -> None: ...
+    def __init__(
+        self,
+        lines: tuple[Line2D, tuple[Line2D, ...], list[LineCollection]],
+        has_xerr: bool = ...,
+        has_yerr: bool = ...,
+        **kwargs
+    ) -> None: ...
 
-class StemContainer(Container[Union[LineCollection, Line2D]]):
-    markerline: LineCollection
-    stemlines: LineCollection
+class StemContainer(Container):
+
+    markerline: Line2D
+    stemlines: list[Line2D]
     baseline: Line2D
 
-    def __init__(self, markerline_stemlines_baseline: Tuple[LineCollection, LineCollection, Line2D], **kwargs: Any) -> None: ...
+    def __init__(
+        self,
+        markerline_stemlines_baseline: tuple[Line2D, list[Line2D], Line2D],
+        **kwargs
+    ) -> None: ...

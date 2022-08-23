@@ -1,205 +1,190 @@
-# COMPLETE
+from typing import Callable, Generator, Iterable, Iterator
+
+from matplotlib.backend_bases import NonGuiException
+from .figure import Figure
+
+from itertools import count
+from typing import Callable, List
 
 import abc
-from typing import (
-    Any,
-    Callable,
-    ContextManager,
-    Dict,
-    Generic,
-    Iterable,
-    Iterator,
-    List,
-    Literal,
-    Optional,
-    Protocol,
-    Sequence,
-    Tuple,
-    TypeVar,
-    Union,
-)
+import contextlib
 
-from matplotlib.artist import Artist
-from matplotlib.figure import Figure
+subprocess_creation_flags = ...
 
-_Frame = TypeVar("_Frame")
+def adjusted_figsize(w: float, h: float, dpi: float, n: int) -> tuple[float, float]: ...
 
-class Animation(Generic[_Frame]):
-    def __init__(self, fig: Figure, event_source: Optional[object] = ..., blit: bool = ...) -> None: ...
-    def new_frame_seq(self) -> Iterator[_Frame]: ...
-    def new_saved_frame_seq(self) -> Iterator[_Frame]: ...
-    def save(
-        self,
-        filename: str,
-        writer: Optional[Union[MovieWriter, str]],
-        fps: Optional[int] = ...,
-        dpi: Optional[Union[float, Literal['figure']]] = ...,
-        codec: Optional[str] = ...,
-        bitrate: Optional[int] = ...,
-        extra_args: Optional[Sequence[str]] = ...,
-        metadata: Optional[Dict[str, str]] = ...,
-        extra_anim: Optional[Sequence[Animation[Any]]] = ...,
-        savefig_kwargs: Optional[Dict[str, Any]] = ...,
-        *,
-        progress_callback: Optional[Callable[[int, int], Any]] = ...
-    ) -> None: ...
-    def to_html5_video(self, embed_limit: Optional[float] = ...) -> str: ...
-    def to_jshtml(self, fps: Optional[int] = ..., embed_frames: bool = ..., default_mode: Optional[Literal['loop', 'once']] = ...) -> str: ...
+class MovieWriterRegistry:
+    def __init__(self) -> None: ...
+    def register(self, name: str) -> Callable: ...
+    def is_available(self, name: str) -> bool: ...
+    def __iter__(self)-> Generator: ...
+    def list(self) -> list[MovieWriter]: ...
+    def __getitem__(self, name) -> MovieWriter: ...
 
-
-class TimedAnimation(Animation[_Frame]):
-    def __init__(
-        self,
-        fig: Figure,
-        interval: int = ...,
-        repeat_delay: int = ...,
-        repeat: bool = ...,
-        event_source: Optional[object] = ...,
-        *args: Any,
-        **kwarg: Any
-    ) -> None: ...
-
-
-class _AnimationFunc(Protocol[_Frame]):
-    def __call__(self, frame: _Frame, *fargs: Any) -> Iterable[Artist]: ...
-
-class FuncAnimation(TimedAnimation[_Frame]):
-    def __init__(
-        self,
-        fig: Figure,
-        func: _AnimationFunc[_Frame],
-        frames: Optional[Union[Iterable[_Frame], int, Callable[[], Any]]] = ...,
-        init_func: Optional[Callable[[], Iterable[_Frame]]] = ...,
-        fargs: Optional[Tuple[Any, ...]] = ...,
-        save_count: Optional[int] = ...,
-        *,
-        cache_frame_data: bool = ...,
-        **kwargs: Any
-    ) -> None: ...
-
-
-class ArtistAnimation(TimedAnimation[Artist]):
-    def __init__(
-        self,
-        fig: Figure,
-        artists: Sequence[Artist],
-        *args: Any,
-        **kwargs: Any
-    ) -> None: ...
-
-_T = TypeVar("_T", bound=AbstractMovieWriter)
+writers: MovieWriterRegistry = ...
 
 class AbstractMovieWriter(abc.ABC):
     def __init__(
         self,
-        fps: int = ...,
-        metadata: Optional[Dict[str, str]] = ...,
-        codec: Optional[str] = ...,
-        bitrate: Optional[int] = ...
+        fps: float = 5,
+        metadata: dict[str, str]|None = None,
+        codec=None,
+        bitrate=None,
     ) -> None: ...
-
     @abc.abstractmethod
-    def setup(self, fig: Figure, outfile: str, dpi: Optional[float] = ...) -> None: ...
-
+    def setup(self, fig: Figure, outfile: str, dpi: float|None = None)-> None: ...
     @property
-    def frame_size(self) -> Tuple[int, int]: ...
-
+    def frame_size(self) -> tuple[int, int]: ...
     @abc.abstractmethod
-    def grab_frame(self, **savefig_kwargs: Any) -> None: ...
-
+    def grab_frame(self, **savefig_kwargs)-> None: ...
     @abc.abstractmethod
-    def finish(self) -> None: ...
-
-    def saving(self: _T, fig: Figure, outfile: str, dpi: float, *args: Any, **kwargs: Any) -> ContextManager[_T]: ...
+    def finish(self)-> None: ...
+    @contextlib.contextmanager
+    def saving(self, fig: Figure, outfile, dpi: float, *args, **kwargs)->Generator[AbstractMovieWriter, None, None]: ...
 
 class MovieWriter(AbstractMovieWriter):
+
+    frame_format: str
+    fig: Figure
+
+    supported_formats = ...
     def __init__(
         self,
-        fps: int = ...,
-        codec: Optional[str] = ...,
-        bitrate:  Optional[int] = ...,
-        extra_args: Optional[Sequence[str]] = ...,
-        metadata: Optional[Dict[str, str]] = ...
+        fps: int = 5,
+        codec: str | None = None,
+        bitrate: int|None = None,
+        extra_args: list[str] | None = None,
+        metadata: dict[str, str]|None = None,
     ) -> None: ...
-
+    def setup(self, fig: Figure, outfile: str, dpi: float|None = None)-> None: ...
+    def finish(self)-> None: ...
+    def grab_frame(self, **savefig_kwargs)-> None: ...
     @classmethod
     def bin_path(cls) -> str: ...
-
     @classmethod
     def isAvailable(cls) -> bool: ...
 
 class FileMovieWriter(MovieWriter):
-    ...
+    def __init__(self, *args, **kwargs) -> None: ...
+    def setup(
+        self, fig: Figure, outfile: str, dpi: float|None = None, frame_prefix: str|None = None
+    ): ...
+    def __del__(self)-> None: ...
+    @property
+    def frame_format(self)-> str: ...
+    @frame_format.setter
+    def frame_format(self, frame_format: str)-> None: ...
+    def grab_frame(self, **savefig_kwargs)-> None: ...
+    def finish(self)-> None: ...
 
 class PillowWriter(AbstractMovieWriter):
     @classmethod
-    def isAvailable(cls) -> bool: ...
-
-class HTMLWriter(FileMovieWriter):
-    supported_formats: List[str]
-
-    def __init__(
-        self,
-        fps: int = ...,
-        codec: Optional[str] = ...,
-        bitrate:  Optional[int] = ...,
-        extra_args: Optional[Sequence[str]] = ...,
-        metadata: Optional[Dict[str, str]] = ...,
-        embed_frames: bool = ...,
-        default_mode: Literal['loop', 'once', 'reflect'] = ...,
-        embed_limit: Optional[int] = ...
-    ) -> None: ...
-
-    @classmethod
-    def isAvailable(cls) -> bool: ...
+    def isAvailable(cls)-> bool: ...
+    def setup(self, fig: Figure, outfile: str, dpi: float|None = None)-> None: ...
+    def grab_frame(self, **savefig_kwargs)-> None: ...
+    def finish(self)-> None: ...
 
 class FFMpegBase:
     @property
-    def output_args(self) -> List[str]: ...
-
-    @classmethod
-    def isAvailable(cls) -> bool: ...
+    def output_args(self) -> list[str]: ...
 
 class FFMpegWriter(FFMpegBase, MovieWriter): ...
 
 class FFMpegFileWriter(FFMpegBase, FileMovieWriter):
-    supported_formats: List[str]
 
-class AVConvBase(FFMpegBase): ...
-
-class AVConvWriter(AVConvBase, FFMpegWriter): ...
-
-class AVConvFileWriter(AVConvBase, FFMpegFileWriter): ...
+    supported_formats: list[str] = ...
 
 class ImageMagickBase:
-    @property
-    def delay(self) -> float: ...
-
-    @property
-    def output_args(self) -> List[str]: ...
-
     @classmethod
-    def bin_path(cls) -> str: ...
-
+    def bin_path(cls)-> str: ...
     @classmethod
-    def isAvailable(cls) -> bool: ...
+    def isAvailable(cls)-> bool: ...
 
-class ImageMagickWriter(ImageMagickBase, MovieWriter): ...
+class ImageMagickWriter(ImageMagickBase, MovieWriter):
+
+    input_names: str = ...
 
 class ImageMagickFileWriter(ImageMagickBase, FileMovieWriter):
-    supported_formats: List[str]
 
+    supported_formats: list[str] = ...
+    input_names: str = ...
 
-class MovieWriterRegistry:
-    def ensure_not_dirty(self) -> None: ...
-    def is_available(self, name: str) -> bool: ...
-    def list(self) -> List[MovieWriter]: ...
-    def register(self, name: str) -> Any: ...  # TODO: ParamSpec
-    def reset_available_writers(self) -> None: ...
-    def set_dirty(self) -> None: ...
+class HTMLWriter(FileMovieWriter):
 
-    def __iter__(self) -> Iterator[MovieWriter]: ...
-    def __getitem__(self, name: str) -> MovieWriter: ...
+    supported_formats: list[str] = ...
+    @classmethod
+    def isAvailable(cls): ...
+    def __init__(
+        self,
+        fps: float=30,
+        codec=None,
+        bitrate: float|None=None,
+        extra_args=None,
+        metadata=None,
+        embed_frames: bool=False,
+        default_mode: str='loop',
+        embed_limit=None,
+    ) -> None: ...
+    def setup(self, fig: Figure, outfile: str, dpi: float, frame_dir=None)-> None: ...
+    def grab_frame(self, **savefig_kwargs)-> None: ...
+    def finish(self)-> None: ...
 
-    @property
-    def avail(self) -> Dict[str, MovieWriter]: ...
+class Animation:
+    def __init__(
+        self, fig: Figure, event_source: object = None, blit: bool = False
+    ) -> None: ...
+    def __del__(self)-> None: ...
+    def save(
+        self,
+        filename: str,
+        writer: MovieWriter | str|None = None,
+        fps: int|None = None,
+        dpi: float|None = None,
+        codec: str|None = None,
+        bitrate: int|None = None,
+        extra_args: list[str] | None = None,
+        metadata: dict[str, str]|None = None,
+        extra_anim: list|None = None,
+        savefig_kwargs: dict|None = None,
+        *,
+        progress_callback: Callable|None = None
+    )-> None: ...
+    def new_frame_seq(self) -> Iterator: ...
+    def new_saved_frame_seq(self)-> Iterable: ...
+    def to_html5_video(self, embed_limit: float|None = None) -> str: ...
+    def to_jshtml(
+        self, fps: int|None = None, embed_frames: bool = True, default_mode: str|None = None
+    ): ...
+    def pause(self)-> None: ...
+    def resume(self)-> None: ...
+
+class TimedAnimation(Animation):
+    def __init__(
+        self,
+        fig: Figure,
+        interval: int = 200,
+        repeat_delay: int = 0,
+        repeat: bool = True,
+        event_source=None,
+        *args,
+        **kwargs
+    ) -> None: ...
+
+class ArtistAnimation(TimedAnimation):
+    def __init__(self, fig: Figure, artists: list, *args, **kwargs) -> None: ...
+
+class FuncAnimation(TimedAnimation):
+    def __init__(
+        self,
+        fig: Figure,
+        func: Callable,
+        frames: Callable | Iterable | int | None = None,
+        init_func: Callable|None = None,
+        fargs: tuple | None =None,
+        save_count: int|None = None,
+        *,
+        cache_frame_data: bool = True,
+        **kwargs
+    ) -> None: ...
+    def new_frame_seq(self) -> count: ...
+    def new_saved_frame_seq(self)-> Iterator: ...

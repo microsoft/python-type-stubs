@@ -1,15 +1,25 @@
-from typing import Callable
-from numpy import ndarray as ndarray
-from numpy.typing import ArrayLike as ArrayLike
-from numpy.typing import _ScalarLike
+import decimal
+import io
+import numpy.typing
+import pandas as pd
 
-Scalar = _ScalarLike
+Decimal = decimal.Decimal
+PythonScalar = str | int | float | bool
 
+ArrayLike = numpy.typing.ArrayLike
+FileLike = io.IOBase
+PathLike = str
 
-# For writing stubs without numpy installed.
-# from typing import Any
-# ndarray = Any
-# ArrayLike = Any
-# Scalar = Any
+PandasScalar = pd.Period | pd.Timestamp | pd.Timedelta | pd.Interval
+Scalar = PythonScalar | PandasScalar
 
-_DetrendCallable = Callable[[ArrayLike], ArrayLike]
+Color = tuple[float, float, float] | str
+
+__all__ = [
+    "ArrayLike",
+    "Color",
+    "Decimal",
+    "FileLike",
+    "PathLike",
+    "Scalar",
+]
