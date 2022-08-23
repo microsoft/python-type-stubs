@@ -1,5 +1,5 @@
 import contextlib
-from email.generator import Generator
+from typing import Generator
 
 __all__ = ["use", "context", "available", "library", "reload_library"]
 

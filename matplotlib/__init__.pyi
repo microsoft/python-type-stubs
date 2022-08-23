@@ -1,6 +1,5 @@
-from email.generator import Generator
 import numpy as np
-from typing import Literal
+from typing import Generator, Literal
 from ._typing import *
 import contextlib
 from packaging.version import parse as parse_version
