@@ -4,7 +4,7 @@ from ._typing import *
 import contextlib
 from packaging.version import parse as parse_version
 from . import _docstring, _version, cbook, rcsetup
-from . import color as color
+from . import colors as colors
 
 class __getattr__:
 
