@@ -27,7 +27,7 @@ from .image import AxesImage, FigureImage
 from .figure import Figure, SubFigure
 from .scale import ScaleBase
 from .backend_bases import _Backend
-from .axes import Axes
+from .axes import Axes as Axes
 from .artist import Artist
 from .table import Table
 from .widgets import SubplotTool
