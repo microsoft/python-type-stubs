@@ -3,6 +3,7 @@ from matplotlib.contour import QuadContourSet
 import numpy as np
 from typing import Callable, ContextManager, Literal, Sequence, overload
 from matplotlib import rcParams as rcParams
+from matplotlib import style as style
 from ._typing import *
 from .tri.tricontour import TriContourSet
 from .transforms import Bbox, Transform
