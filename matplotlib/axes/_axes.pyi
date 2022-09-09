@@ -664,7 +664,7 @@ class Axes(_AxesBase):
     table = table_table
     stackplot = ...
     streamplot = ...
-    tricontour = tri_tricontour
-    tricontourf = tri_tricontourf
-    tripcolor = tri_tripcolor
-    triplot = tri_triplot
+    tricontour = tri_tricontour.tricontour
+    tricontourf = tri_tricontourf.tricontourf
+    tripcolor = tri_tripcolor.tripcolor
+    triplot = tri_triplot.triplot
