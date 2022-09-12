@@ -2508,10 +2508,12 @@ def haveOpenVX() -> typing.Any:
     'haveOpenVX() -> retval\n.'
     ...
 
+@overload
 def hconcat(src: list[Mat], dts: Mat = ...) -> Mat:
     'hconcat(src[, dst]) -> dst\n.   @overload\n.    @code{.cpp}\n.       std::vector<cv::Mat> matrices = { cv::Mat(4, 1, CV_8UC1, cv::Scalar(1)),\n.                                         cv::Mat(4, 1, CV_8UC1, cv::Scalar(2)),\n.                                         cv::Mat(4, 1, CV_8UC1, cv::Scalar(3)),};\n.   \n.       cv::Mat out;\n.       cv::hconcat( matrices, out );\n.       //out:\n.       //[1, 2, 3;\n.       // 1, 2, 3;\n.       // 1, 2, 3;\n.       // 1, 2, 3]\n.    @endcode\n.    @param src input array or vector of matrices. all of the matrices must have the same number of rows and the same depth.\n.    @param dst output array. It has the same number of rows and depth as the src, and the sum of cols of the src.\n.   same depth.'
     ...
 
+@overload
 def hconcat(src1: Mat, src2: Mat, dts: Mat = ...) -> Mat:
     ...
 
@@ -3069,10 +3071,12 @@ def validateDisparity(disparity, cost, minDisparity, numberOfDisparities, disp12
     'validateDisparity(disparity, cost, minDisparity, numberOfDisparities[, disp12MaxDisp]) -> disparity\n.'
     ...
 
+@overload
 def vconcat(src: list[Mat], dts: Mat = ...) -> Mat:
     'vconcat(src[, dst]) -> dst\n.   @overload\n.    @code{.cpp}\n.       std::vector<cv::Mat> matrices = { cv::Mat(1, 4, CV_8UC1, cv::Scalar(1)),\n.                                         cv::Mat(1, 4, CV_8UC1, cv::Scalar(2)),\n.                                         cv::Mat(1, 4, CV_8UC1, cv::Scalar(3)),};\n.   \n.       cv::Mat out;\n.       cv::vconcat( matrices, out );\n.       //out:\n.       //[1,   1,   1,   1;\n.       // 2,   2,   2,   2;\n.       // 3,   3,   3,   3]\n.    @endcode\n.    @param src input array or vector of matrices. all of the matrices must have the same number of cols and the same depth\n.    @param dst output array. It has the same number of cols and depth as the src, and the sum of rows of the src.\n.   same depth.'
     ...
 
+@overload
 def vconcat(src1: Mat, src2: Mat, dts: Mat = ...) -> Mat:
     ...
 
