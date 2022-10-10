@@ -44,9 +44,9 @@ and are no longer maintained here:
 - packaging
 - pandas (see <https://github.com/pandas-dev/pandas-stubs>; please open pandas stub issues there)
 - PIL
+- pywin32 (pythonwin, win32 and win32com pakcages)
 - retry
 - slugify
-- pywin32 (pythonwin, win32 and win32com pakcages)
 
 # Trademarks
 
