@@ -229,7 +229,7 @@ def subplot_mosaic(
     gridspec_kw: dict = ...,
     empty_sentinel: object = ...,
     **fig_kw
-) -> dict[Text, Axes]: ...
+) -> tuple[Figure, dict[Text, Axes]]: ...
 def subplot2grid(
     shape: Sequence[int],
     loc: Sequence[int],
