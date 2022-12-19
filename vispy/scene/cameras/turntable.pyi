@@ -21,7 +21,7 @@ class TurntableCamera(Base3DRotationCamera):
         roll: float = 0.0,
         distance: None | float = None,
         translate_speed: float = 1.0,
-        **kwargs
+        **kwargs,
     ): ...
     @property
     def elevation(self): ...

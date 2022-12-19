@@ -19,11 +19,9 @@ class InfiniteLineVisual(Visual):
         line_width: float = 1.0,
         antialias: bool = False,
         vertical=True,
-        **kwargs
+        **kwargs,
     ): ...
-    def set_data(
-        self, pos: float | None = None, color: ArrayLike | tuple | None = None
-    ): ...
+    def set_data(self, pos: float | None = None, color: ArrayLike | tuple | None = None): ...
     @property
     def color(self): ...
     @property

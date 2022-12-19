@@ -65,9 +65,7 @@ class VolumeVisual(Visual):
         self,
         vol: NDArray,
         clim: str | tuple = "auto",
-        method: Literal[
-            "mip", "attenuated_mip", "minip", "translucent", "additive"
-        ] = "mip",
+        method: Literal["mip", "attenuated_mip", "minip", "translucent", "additive"] = "mip",
         threshold: float | None = None,
         attenuation: float = 1.0,
         relative_step_size: float = 0.8,

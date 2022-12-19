@@ -19,7 +19,7 @@ class IsosurfaceVisual(MeshVisual):
         vertex_colors: NDArray | None = None,
         face_colors: NDArray | None = None,
         color: NDArray | None = ...,
-        **kwargs
+        **kwargs,
     ): ...
     @property
     def level(self): ...

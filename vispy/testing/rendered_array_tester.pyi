@@ -8,7 +8,6 @@ from typing import Optional, Any
 import numpy as np
 from numpy.typing import ArrayLike, DTypeLike
 
-
 def compare_render(
     orig_data: ArrayLike,
     rendered_data: ArrayLike,

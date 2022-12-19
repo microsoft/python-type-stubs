@@ -97,7 +97,7 @@ class CubeHelixColormap(Colormap):
         maxSat: Scalar = 1.2,
         minLight: Scalar = 0.0,
         maxLight: Scalar = 1.0,
-        **kwargs
+        **kwargs,
     ): ...
 
 class _Fire(BaseColormap):
@@ -165,9 +165,7 @@ class _HUSL(HSLuv):
     def __init__(self, *args, **kwargs): ...
 
 class Diverging(Colormap):
-    def __init__(
-        self, h_pos=20, h_neg=250, saturation=1.0, value=0.7, center="light"
-    ): ...
+    def __init__(self, h_pos=20, h_neg=250, saturation=1.0, value=0.7, center="light"): ...
 
 class RedYellowBlueCyan(Colormap):
     def __init__(self, limits: ArrayLike = ...): ...

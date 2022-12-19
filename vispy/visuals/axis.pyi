@@ -34,7 +34,7 @@ class AxisVisual(CompoundVisual):
         scale_type: str = "linear",
         axis_color: tuple = ...,
         tick_color: tuple = ...,
-        text_color: Color|str = "w",
+        text_color: Color | str = "w",
         minor_tick_length: float = 5,
         major_tick_length: float = 10,
         tick_width: float = 2,

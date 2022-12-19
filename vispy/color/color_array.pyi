@@ -35,7 +35,7 @@ class ColorArray(object):
         color: str | tuple | Sequence = ...,
         alpha: None | float = None,
         clip: bool = False,
-        color_space: Literal["hsv","rgb"] = "rgb",
+        color_space: Literal["hsv", "rgb"] = "rgb",
     ): ...
 
     ###########################################################################

@@ -18,8 +18,6 @@ class RawPathCollection(Collection):
         transform: Transform | None = None,
         vertex: str | None = None,
         fragment: str | None = None,
-        **kwargs
+        **kwargs,
     ): ...
-    def append(
-        self, P: NDArray, closed: bool = False, itemsize: int | None = None, **kwargs
-    ): ...
+    def append(self, P: NDArray, closed: bool = False, itemsize: int | None = None, **kwargs): ...

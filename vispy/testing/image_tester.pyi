@@ -27,12 +27,7 @@ from . import IS_CI
 tester: None = ...
 
 def _get_tester(): ...
-def assert_image_approved(
-    image: NDArray | Literal["screenshot"],
-    standard_file: str,
-    message: str | None = None,
-    **kwargs
-): ...
+def assert_image_approved(image: NDArray | Literal["screenshot"], standard_file: str, message: str | None = None, **kwargs): ...
 def assert_image_match(
     im1: NDArray,
     im2: NDArray,

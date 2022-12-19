@@ -5,7 +5,6 @@ from vispy._typing import Scalar
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 
-
 import math
 import numpy as np
 
@@ -17,13 +16,7 @@ class PerspectiveCamera(BaseCamera):
 
     _state_props = ...
 
-    def __init__(
-        self,
-        fov: float = 60.0,
-        scale_factor: Scalar | None = None,
-        center=None,
-        **kwargs
-    ): ...
+    def __init__(self, fov: float = 60.0, scale_factor: Scalar | None = None, center=None, **kwargs): ...
     def viewbox_mouse_event(self, event: Event): ...
     @property
     def scale_factor(self): ...

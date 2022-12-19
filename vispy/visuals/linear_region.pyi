@@ -18,7 +18,7 @@ class LinearRegionVisual(Visual):
         pos: ArrayLike | tuple | NDArray | None = None,
         color: ArrayLike | tuple = [1.0, 1.0, 1.0, 1.0],
         vertical=True,
-        **kwargs
+        **kwargs,
     ): ...
     def set_data(
         self,

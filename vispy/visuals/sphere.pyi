@@ -25,7 +25,7 @@ class SphereVisual(CompoundVisual):
         color: Color = ...,
         edge_color: tuple | Color | None = None,
         shading: str | None = None,
-        **kwargs
+        **kwargs,
     ): ...
     @property
     def mesh(self): ...

@@ -4,7 +4,6 @@ from vispy.scene.widgets.widget import Widget
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 
-
 import numpy as np
 
 from ..visuals import Compound
@@ -25,7 +24,7 @@ class Widget(Compound):
         bgcolor=None,
         padding: int = 0,
         margin: int = 0,
-        **kwargs
+        **kwargs,
     ): ...
     @property
     def pos(self): ...

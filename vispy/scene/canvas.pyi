@@ -14,7 +14,6 @@ from ..app.canvas import Canvas, DrawEvent
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 
-
 import weakref
 import numpy as np
 
@@ -28,7 +27,6 @@ from ..util.profiler import Profiler
 from .subscene import SubScene
 from .events import SceneMouseEvent
 from .widgets import Widget
-
 
 class SceneCanvas(app.Canvas, Frozen):
     def __init__(
@@ -51,7 +49,7 @@ class SceneCanvas(app.Canvas, Frozen):
         dpi: None | float = None,
         always_on_top: bool = False,
         px_scale: int = 1,
-        bgcolor: Color|str = "black",
+        bgcolor: Color | str = "black",
     ): ...
     @property
     def scene(self): ...

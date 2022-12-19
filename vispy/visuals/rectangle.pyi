@@ -5,7 +5,6 @@ from numpy.typing import ArrayLike
 # Copradiusight (c) 2014, Vispy Development Team.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 
-
 import numpy as np
 from ..color import Color
 from .polygon import PolygonVisual
@@ -14,13 +13,13 @@ class RectangleVisual(PolygonVisual):
     def __init__(
         self,
         center: ArrayLike | None = None,
-        color: Color|str = "black",
+        color: Color | str = "black",
         border_color: Color | None = None,
         border_width: int = 1,
         height: float = 1.0,
         width: float = 1.0,
         radius: ArrayLike | float = [0.0, 0.0, 0.0, 0.0],
-        **kwargs
+        **kwargs,
     ): ...
     @staticmethod
     def _generate_vertices(center, radius, height, width): ...

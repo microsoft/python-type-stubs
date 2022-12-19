@@ -18,5 +18,5 @@ class CubeVisual(BoxVisual):
         face_colors: NDArray | None = None,
         color: Color = ...,
         edge_color: tuple | Color | None = None,
-        **kwargs
+        **kwargs,
     ): ...

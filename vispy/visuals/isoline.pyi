@@ -25,7 +25,7 @@ class IsolineVisual(LineVisual):
         data: NDArray | None = None,
         levels: NDArray | None = None,
         color_lev: Color | tuple | ArrayLike | str | None = None,
-        **kwargs
+        **kwargs,
     ): ...
     @property
     def levels(self): ...

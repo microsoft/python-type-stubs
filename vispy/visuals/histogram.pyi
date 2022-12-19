@@ -17,6 +17,6 @@ class HistogramVisual(MeshVisual):
         self,
         data: ArrayLike,
         bins: ArrayLike | int = 10,
-        color: Color|str = "w",
+        color: Color | str = "w",
         orientation: Literal["h", "v"] = "h",
     ): ...

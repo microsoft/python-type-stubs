@@ -16,5 +16,5 @@ def cubehelix(
     maxSat: Scalar = 1.2,
     minLight: Scalar = 0.0,
     maxLight: Scalar = 1.0,
-    **kwargs
+    **kwargs,
 ) -> np.ndarray: ...

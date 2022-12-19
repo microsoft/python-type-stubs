@@ -16,7 +16,7 @@ class TubeVisual(MeshVisual):
         points: NDArray,
         radius: NDArray | float = 1.0,
         closed: bool = False,
-        color: ColorArray | Color|str = "purple",
+        color: ColorArray | Color | str = "purple",
         tube_points: int = 8,
         shading: str | None = "smooth",
         vertex_colors: NDArray | None = None,

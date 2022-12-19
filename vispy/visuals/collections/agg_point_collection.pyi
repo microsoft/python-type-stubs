@@ -16,5 +16,5 @@ class AggPointCollection(RawPointCollection):
         transform: Transform | None = None,
         vertex: str | None = None,
         fragment: str | None = None,
-        **kwargs
+        **kwargs,
     ): ...

@@ -21,13 +21,13 @@ class LinePlotVisual(CompoundVisual):
     def __init__(
         self,
         data: ArrayLike | None = None,
-        color: Color|str = "k",
+        color: Color | str = "k",
         symbol: str | None = None,
         line_kind: str = "-",
         width: float = 1.0,
         marker_size: float = 10.0,
-        edge_color: Color|str = "k",
-        face_color: Color|str = "w",
+        edge_color: Color | str = "k",
+        face_color: Color | str = "w",
         edge_width: float = 1.0,
         connect: str | ArrayLike = "strip",
     ): ...

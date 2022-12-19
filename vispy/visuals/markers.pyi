@@ -71,7 +71,7 @@ class MarkersVisual(Visual):
         light_color: ColorArray | Color = "white",
         light_position: ArrayLike = ...,
         light_ambient: float = 0.3,
-        **kwargs
+        **kwargs,
     ): ...
     def set_data(
         self,

@@ -25,7 +25,7 @@ from ..visual import Visual
 from ...io import load_spatial_filters
 
 class TextureFont(object):
-    def __init__(self, font: Mapping, renderer:SDFRendererGPU): ...
+    def __init__(self, font: Mapping, renderer: SDFRendererGPU): ...
     @property
     def ratio(self): ...
     @property
@@ -56,7 +56,7 @@ class TextVisual(Visual):
     def __init__(
         self,
         text: str | ArrayLike | None = None,
-        color: Color|str = "black",
+        color: Color | str = "black",
         bold: bool = False,
         italic: bool = False,
         face: str = "OpenSans",

@@ -8,6 +8,4 @@ from numpy.typing import NDArray
 
 import numpy as np
 
-def isocurve(
-    data: NDArray, level: float, connected: bool = False, extend_to_edge: bool = False
-): ...
+def isocurve(data: NDArray, level: float, connected: bool = False, extend_to_edge: bool = False): ...

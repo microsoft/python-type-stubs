@@ -24,16 +24,11 @@ class PlotWidget(scene.Widget):
         self,
         data: ArrayLike,
         bins: ArrayLike | int = 10,
-        color: Color|str = "w",
+        color: Color | str = "w",
         orientation: Literal["h", "v"] = "h",
     ) -> Polygon: ...
     def image(
-        self,
-        data: NDArray,
-        cmap: str = "cubehelix",
-        clim: str | tuple = "auto",
-        fg_color: Color | None = None,
-        **kwargs
+        self, data: NDArray, cmap: str = "cubehelix", clim: str | tuple = "auto", fg_color: Color | None = None, **kwargs
     ) -> Image: ...
     def mesh(
         self,
@@ -49,13 +44,13 @@ class PlotWidget(scene.Widget):
     def plot(
         self,
         data,
-        color: Color|str = "k",
+        color: Color | str = "k",
         symbol: str | None = None,
         line_kind: str = "-",
         width: float = 1.0,
         marker_size: float = 10.0,
-        edge_color: Color|str = "k",
-        face_color: Color|str = "b",
+        edge_color: Color | str = "k",
+        face_color: Color | str = "b",
         edge_width: float = 1.0,
         title: str | None = None,
         xlabel: str | None = None,
@@ -81,7 +76,7 @@ class PlotWidget(scene.Widget):
         method: Literal["mip", "iso", "translucent", "additive"] = "mip",
         threshold: float | None = None,
         cmap: str = "grays",
-        **kwargs
+        **kwargs,
     ) -> Volume: ...
     def surface(self, zdata: ArrayLike, **kwargs): ...
     def colorbar(
@@ -92,5 +87,5 @@ class PlotWidget(scene.Widget):
         clim: tuple[float, float] = ...,
         border_width: float = 0.0,
         border_color: str | Color = "black",
-        **kwargs
+        **kwargs,
     ) -> ColorBarWidget: ...

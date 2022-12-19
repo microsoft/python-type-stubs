@@ -5,7 +5,6 @@ from numpy.typing import ArrayLike
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 
-
 import numpy as np
 from .polygon import PolygonVisual
 
@@ -13,14 +12,14 @@ class EllipseVisual(PolygonVisual):
     def __init__(
         self,
         center: ArrayLike | None = None,
-        color: Color|str = "black",
+        color: Color | str = "black",
         border_color: Color | None = None,
         border_width: float = 1,
         radius: float | tuple = ...,
         start_angle: float = 0.0,
         span_angle: float = 360.0,
         num_segments: int = 100,
-        **kwargs
+        **kwargs,
     ): ...
     @staticmethod
     def _generate_vertices(center, radius, start_angle, span_angle, num_segments): ...

@@ -5,7 +5,6 @@ from typing import Sequence
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 
-
 import numpy as np
 
 from .visual import CompoundVisual
@@ -13,7 +12,6 @@ from .mesh import MeshVisual
 from .line import LineVisual
 from ..color import Color
 from ..geometry import PolygonData
-
 
 class PolygonVisual(CompoundVisual):
     def __init__(
@@ -24,7 +22,7 @@ class PolygonVisual(CompoundVisual):
         border_width: int = 1,
         border_method: str = "gl",
         triangulate: bool = True,
-        **kwargs
+        **kwargs,
     ): ...
     def _update(self): ...
     @property

@@ -17,8 +17,7 @@ class Variable(ShaderObject):
         self,
         name: str,
         value: float | int | tuple | GLObject | None = None,
-        vtype: Literal["const", "uniform", "attribute", "varying", "inout"]
-        | None = None,
+        vtype: Literal["const", "uniform", "attribute", "varying", "inout"] | None = None,
         dtype: str | None = None,
     ): ...
     @property

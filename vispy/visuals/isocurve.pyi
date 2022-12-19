@@ -20,7 +20,7 @@ class IsocurveVisual(LineVisual):
         levels: NDArray | None = None,
         color_lev: Color | str | tuple | list | np.ndarray | None = None,
         clim: tuple | None = None,
-        **kwargs
+        **kwargs,
     ): ...
     @property
     def levels(self): ...

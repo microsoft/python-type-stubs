@@ -19,7 +19,7 @@ class MeshNormalsVisual(LineVisual):
         length: float | ArrayLike | None = None,
         length_method: Literal["median_edge", "max_extent"] = "median_edge",
         length_scale: float = 1.0,
-        **kwargs
+        **kwargs,
     ): ...
     def set_data(
         self,
@@ -28,5 +28,5 @@ class MeshNormalsVisual(LineVisual):
         length: float | ArrayLike | None = None,
         length_method: Literal["median_edge", "max_extent"] = "median_edge",
         length_scale: float = 1.0,
-        **kwargs
+        **kwargs,
     ): ...

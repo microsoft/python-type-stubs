@@ -46,9 +46,7 @@ class Program(GLObject):
     _gtypes: dict = ...
 
     # ---------------------------------
-    def __init__(
-        self, vert: str | None = None, frag: str | None = None, count: int | None = 0
-    ): ...
+    def __init__(self, vert: str | None = None, frag: str | None = None, count: int | None = 0): ...
     def set_shaders(
         self,
         vert: str,

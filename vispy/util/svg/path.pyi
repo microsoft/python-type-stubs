@@ -43,9 +43,7 @@ class Close(Command):
 
 # --------------------------------------------------------------------- Arc ---
 class Arc(Command):
-    def __init__(
-        self, r1=1, r2=1, angle=..., large=True, sweep=True, x=0, y=0, relative=True
-    ): ...
+    def __init__(self, r1=1, r2=1, angle=..., large=True, sweep=True, x=0, y=0, relative=True): ...
     def vertices(self, current, previous=None): ...
 
 # ------------------------------------------------------------------- Cubic ---

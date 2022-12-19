@@ -1,5 +1,6 @@
 from numpy.typing import ArrayLike
 from typing import Sequence
+
 # -*- coding: utf-8 -*-
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
@@ -15,7 +16,7 @@ class RegularPolygonVisual(EllipseVisual):
         border_width: float = 1,
         radius: float = 0.1,
         sides: int = 4,
-        **kwargs
+        **kwargs,
     ): ...
     @property
     def sides(self): ...

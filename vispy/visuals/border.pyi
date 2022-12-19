@@ -27,7 +27,7 @@ class _BorderVisual(Visual):
         halfdim: tuple[float, float],
         border_width: float = 1.0,
         border_color: str | Color | None = None,
-        **kwargs
+        **kwargs,
     ): ...
     @staticmethod
     def _prepare_transforms(view): ...

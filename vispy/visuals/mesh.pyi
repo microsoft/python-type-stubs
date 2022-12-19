@@ -40,7 +40,7 @@ class MeshVisual(Visual):
         meshdata: None | MeshData = None,
         shading: str | None = None,
         mode: str = "triangles",
-        **kwargs
+        **kwargs,
     ): ...
     @property
     def shading(self): ...

@@ -7,7 +7,6 @@ from numpy.typing import ArrayLike, NDArray
 import numpy as np
 from numpy.random import RandomState
 
-
 from ..util import _straight_line_vertices
 
 def random(

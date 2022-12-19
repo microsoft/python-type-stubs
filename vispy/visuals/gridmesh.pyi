@@ -5,13 +5,7 @@ from ..geometry import create_grid_mesh, MeshData
 
 class GridMeshVisual(MeshVisual):
     def __init__(
-        self,
-        xs: NDArray,
-        ys: NDArray,
-        zs: NDArray,
-        colors: NDArray | None = None,
-        shading: str | None = "smooth",
-        **kwargs
+        self, xs: NDArray, ys: NDArray, zs: NDArray, colors: NDArray | None = None, shading: str | None = "smooth", **kwargs
     ): ...
     def set_data(
         self,

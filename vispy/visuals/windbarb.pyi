@@ -32,8 +32,8 @@ class WindbarbVisual(Visual):
         size: float | ArrayLike = 50.0,
         antialias: float = 1.0,
         edge_width: None | float = 1.0,
-        edge_color: ColorArray | Color|str = "black",
-        face_color: ColorArray | Color|str = "white",
+        edge_color: ColorArray | Color | str = "black",
+        face_color: ColorArray | Color | str = "white",
     ): ...
     def _prepare_transforms(self, view): ...
     def _prepare_draw(self, view): ...

@@ -14,9 +14,7 @@ from vispy.visuals.filters import Filter
 from ...color import Color
 
 class TextureFilter(Filter):
-    def __init__(
-        self, texture: tuple | ArrayLike, texcoords: ArrayLike, enabled: bool = True
-    ): ...
+    def __init__(self, texture: tuple | ArrayLike, texcoords: ArrayLike, enabled: bool = True): ...
     @property
     def enabled(self): ...
     @enabled.setter

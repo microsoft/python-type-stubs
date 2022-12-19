@@ -7,7 +7,6 @@ from numpy.typing import ArrayLike, NDArray
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 # -----------------------------------------------------------------------------
 
-
 import numpy as np
 from ... import glsl
 from .collection import Collection
@@ -20,6 +19,6 @@ class RawPointCollection(Collection):
         transform: Transform | None = None,
         vertex: str | None = None,
         fragment: str | None = None,
-        **kwargs
+        **kwargs,
     ): ...
     def append(self, P: NDArray, itemsize: int | None = None, **kwargs): ...

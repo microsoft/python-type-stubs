@@ -7,7 +7,6 @@ from numpy.typing import ArrayLike
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 
-
 from ...util import keys
 from ..node import Node
 from ...visuals.transforms import (
@@ -87,7 +86,7 @@ class BaseCamera(Node):
         self,
         camera: BaseCamera,
         props: ArrayLike | None = None,
-        axis: Literal["y" ,"x"] | None = None,
+        axis: Literal["y", "x"] | None = None,
     ): ...
 
     # Event-related methods

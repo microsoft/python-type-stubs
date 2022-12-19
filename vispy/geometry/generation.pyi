@@ -10,7 +10,6 @@ from numpy.typing import ArrayLike, NDArray
 # Date:   04/03/2014
 # -----------------------------------------------------------------------------
 
-
 import numpy as np
 
 from .meshdata import MeshData
@@ -60,6 +59,4 @@ def create_arrow(
     cone_radius: float | None = None,
     cone_length: float | None = None,
 ) -> MeshData: ...
-def create_grid_mesh(
-    xs: NDArray, ys: NDArray, zs: NDArray
-) -> tuple[NDArray, NDArray]: ...
+def create_grid_mesh(xs: NDArray, ys: NDArray, zs: NDArray) -> tuple[NDArray, NDArray]: ...

@@ -18,6 +18,6 @@ class RawPolygonCollection(Collection):
         transform=None,
         vertex: str | tuple[str, ...] | None = None,
         fragment: str | tuple[str, ...] | None = None,
-        **kwargs: str
+        **kwargs: str,
     ): ...
     def append(self, points: NDArray, **kwargs): ...

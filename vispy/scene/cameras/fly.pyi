@@ -4,10 +4,8 @@ from vispy.util.event import Event
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 
-
 import math
 import numpy as np
-
 
 from ...util.quaternion import Quaternion
 from ...util import keys

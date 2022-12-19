@@ -17,6 +17,6 @@ class AggSegmentCollection(Collection):
         transform: str | None = None,
         vertex: str | None = None,
         fragment: str | None = None,
-        **kwargs
+        **kwargs,
     ): ...
     def append(self, P0, P1, itemsize: int | None = None, **kwargs): ...
