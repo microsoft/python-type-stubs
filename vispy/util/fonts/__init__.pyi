@@ -7,7 +7,7 @@
 __all__ = ["list_fonts"]
 
 from ._triage import (
-    _load_glyph as _load_glyph,
+
     list_fonts as list_fonts,
 )  # noqa, analysis:ignore
 from ._vispy_fonts import _vispy_fonts as _vispy_fonts  # noqa, analysis:ignore

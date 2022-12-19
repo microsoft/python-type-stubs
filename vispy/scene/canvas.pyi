@@ -1,20 +1,19 @@
-from vispy.scene.node import Node
-from vispy.gloo.framebuffer import FrameBuffer
-from vispy.util.event import Event
+from ..scene.node import Node
+from ..gloo.framebuffer import FrameBuffer
+from ..util.event import Event
 from numpy.typing import ArrayLike
-from vispy.visuals.visual import Visual
+from ..visuals.visual import Visual
 from typing import Mapping
-from vispy.gloo.context import GLContext
-from vispy.scene.widgets.widget import Widget
-from vispy.util.svg.color import Color
-from vispy.app.application import Application
-from vispy.app.canvas import Canvas, DrawEvent
+from ..gloo.context import GLContext
+from ..scene.widgets.widget import Widget
+from ..util.svg.color import Color
+from ..app.application import Application
+from ..app.canvas import Canvas, DrawEvent
 
 # -*- coding: utf-8 -*-
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 
-from __future__ import division
 
 import weakref
 import numpy as np
@@ -29,6 +28,7 @@ from ..util.profiler import Profiler
 from .subscene import SubScene
 from .events import SceneMouseEvent
 from .widgets import Widget
+
 
 class SceneCanvas(app.Canvas, Frozen):
     def __init__(

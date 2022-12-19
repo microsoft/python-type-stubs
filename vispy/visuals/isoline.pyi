@@ -1,4 +1,4 @@
-from np import ndarray
+from numpy import ndarray
 from vispy.util.svg.color import Color
 from numpy.typing import NDArray
 from vispy._typing import ArrayLike
@@ -6,8 +6,6 @@ from vispy._typing import ArrayLike
 # -*- coding: utf-8 -*-
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
-
-from __future__ import division
 
 import numpy as np
 

@@ -6,8 +6,6 @@ from numpy.typing import NDArray
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 # -----------------------------------------------------------------------------
 
-from __future__ import division
-
 import numpy as np
 
 def isocurve(

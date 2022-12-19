@@ -1,4 +1,4 @@
-from np import dtype
+from numpy import dtype
 from typing import Mapping, Literal
 from numpy.typing import ArrayLike
 

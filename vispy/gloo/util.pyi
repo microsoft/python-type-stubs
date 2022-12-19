@@ -1,4 +1,4 @@
-from vispy.gloo.texture import Texture2D
+from ..gloo.texture import Texture2D
 
 # -*- coding: utf-8 -*-
 # -----------------------------------------------------------------------------

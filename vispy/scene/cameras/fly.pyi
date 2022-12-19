@@ -4,12 +4,11 @@ from vispy.util.event import Event
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 
-from __future__ import division
 
 import math
 import numpy as np
 
-from ...app import Timer
+
 from ...util.quaternion import Quaternion
 from ...util import keys
 from .perspective import PerspectiveCamera

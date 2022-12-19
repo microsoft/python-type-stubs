@@ -1,22 +1,36 @@
-from ast import Str
-from tkinter import Image
-import numpy as np
-from typing import Callable, Literal, Sequence
-from ._typing import *
-from .text import Text
-from .patches import Circle
-from .backend_bases import (
-    DrawEvent,
-    Event,
-    FigureCanvasBase,
-    KeyEvent,
-    MouseButton,
-    MouseEvent,
+from matplotlib.axes._axes import Axes
+from numpy.typing import ArrayLike
+from matplotlib.widgets import Slider
+from typing import (
+    Dict,
+    List,
+    Optional,
+    Tuple,
+    Union,
+    Literal,
+    Mapping,
+    Callable,
+    Any,
+    Sequence,
 )
+from matplotlib.backend_bases import MouseButton
+from matplotlib.figure import Figure
+
+from contextlib import ExitStack
+import copy
+from numbers import Integral, Number
+
+import numpy as np
+
+import matplotlib as mpl
+from . import _api, _docstring, backend_tools, cbook, colors, ticker, transforms
 from .lines import Line2D
-from .figure import Figure
-from .axes import Axes
-from .artist import Artist
+from .patches import Circle, Rectangle, Ellipse, Polygon
+from .transforms import TransformedPatchPath, Affine2D
+from matplotlib.lines import Line2D
+from matplotlib.patches import Ellipse, Rectangle
+from matplotlib.transforms import Affine2D
+from numpy import float64, ndarray
 
 class LockDraw:
     def __init__(self) -> None: ...
@@ -27,9 +41,9 @@ class LockDraw:
     def locked(self) -> bool: ...
 
 class Widget:
-
-    drawon = ...
-    eventson = ...
+    drawon: bool = ...
+    eventson: bool = ...
+    _active: bool = ...
 
     def set_active(self, active: Widget): ...
     def get_active(self) -> bool: ...
@@ -45,10 +59,10 @@ class Button(AxesWidget):
     def __init__(
         self,
         ax: Axes,
-        label: Str,
-        image: Image | ArrayLike = ...,
-        color: Color = ...,
-        hovercolor: Color = ...,
+        label: str,
+        image: ArrayLike | Image | None = None,
+        color: Color = "0.85",
+        hovercolor: Color = "0.95",
     ) -> None: ...
     def on_clicked(self, func: Callable) -> int: ...
     def disconnect(self, cid): ...
@@ -79,8 +93,8 @@ class Slider(SliderBase):
         label: str,
         valmin: float,
         valmax: float,
-        valinit: float = ...,
-        valfmt: str | None = ...,
+        valinit: float = 0.5,
+        valfmt: str | None = None,
         closedmin: bool = True,
         closedmax: bool = True,
         slidermin: Slider | None = None,
@@ -89,10 +103,10 @@ class Slider(SliderBase):
         valstep: float | ArrayLike | None = None,
         orientation: Literal["horizontal", "vertical"] = "horizontal",
         *,
-        initcolo: Color = "r",
+        initcolor: Color = "r",
         track_color: Color = "lightgrey",
-        handle_style: dict = ...,
-        **kwargs
+        handle_style: Mapping | None = None,
+        **kwargs,
     ) -> None: ...
     def set_val(self, val: float) -> None: ...
     def on_changed(self, func: Callable) -> int: ...
@@ -107,7 +121,7 @@ class RangeSlider(SliderBase):
         label: str,
         valmin: float,
         valmax: float,
-        valinit: Sequence[float] | None = None,
+        valinit: tuple[float, ...] | None = None,
         valfmt: str | None = None,
         closedmin: bool = True,
         closedmax: bool = True,
@@ -115,8 +129,8 @@ class RangeSlider(SliderBase):
         valstep: float | None = None,
         orientation: Literal["horizontal", "vertical"] = "horizontal",
         track_color: Color = "lightgrey",
-        handle_style: dict = ...,
-        **kwargs
+        handle_style: Mapping | None = None,
+        **kwargs,
     ) -> None: ...
     def set_min(self, min: float): ...
     def set_max(self, max: float): ...
@@ -139,11 +153,11 @@ class TextBox(AxesWidget):
         self,
         ax: Axes,
         label: str,
-        initial: str = ...,
-        color: Color = ...,
-        hovercolor: Color = ...,
-        label_pad: float = ...,
-        textalignment: Literal["left", "center", "right"] = ...,
+        initial: str = "",
+        color: Color = ".95",
+        hovercolor: Color = "1",
+        label_pad: float = 0.01,
+        textalignment: Literal["left", "center", "right"] = "left",
     ) -> None: ...
     @property
     def text(self) -> str: ...
@@ -167,8 +181,8 @@ class RadioButtons(AxesWidget):
         self,
         ax: Axes,
         labels: Sequence[Text],
-        active: int = ...,
-        activecolor: Color = ...,
+        active: int = 0,
+        activecolor: Color = "blue",
     ) -> None: ...
     def set_active(self, index: int): ...
     def on_clicked(self, func: Callable) -> int: ...
@@ -209,11 +223,11 @@ class _SelectorWidget(AxesWidget):
         self,
         ax: Axes,
         onselect: Callable,
-        useblit: bool = ...,
-        button=...,
-        state_modifier_keys=...,
-        use_data_coordinates=...,
-    ) -> None: ...
+        useblit: bool = False,
+        button=None,
+        state_modifier_keys=None,
+        use_data_coordinates=False,
+    ): ...
 
     eventpress = ...
     eventrelease = ...
@@ -249,17 +263,17 @@ class SpanSelector(_SelectorWidget):
         direction: Literal["horizontal", "vertical"],
         minspan: float = 0,
         useblit: bool = False,
-        props: dict = ...,
-        onmove_callback: Callable = ...,
+        props: Mapping | None = None,
+        onmove_callback: Callable[[float, float]] | None = None,
         interactive: bool = False,
-        button: MouseButton | Sequence[MouseButton] = ...,
-        handle_props: dict = ...,
+        button: MouseButton | Sequence[MouseButton] | None = None,
+        handle_props: Mapping | None = None,
         grab_range: float = 10,
-        state_modifier_keys: dict = ...,
+        state_modifier_keys: Mapping | None = None,
         drag_from_anywhere: bool = False,
         ignore_event_outside: bool = False,
-        snap_values: ArrayLike = ...,
-    ) -> None: ...
+        snap_values: ArrayLike | None = None,
+    ): ...
 
     rect = ...
     rectprops = ...
@@ -284,7 +298,7 @@ class ToolLineHandles:
         ax: Axes,
         positions: ArrayLike,
         direction: Literal["horizontal", "vertical"],
-        line_props: dict = ...,
+        line_props: Mapping | None = None,
         useblit: bool = True,
     ) -> None: ...
     @property
@@ -306,7 +320,7 @@ class ToolHandles:
         x: ArrayLike,
         y: ArrayLike,
         marker: str = "o",
-        marker_props: dict = ...,
+        marker_props: Mapping | None = None,
         useblit: bool = True,
     ) -> None: ...
     @property
@@ -314,8 +328,12 @@ class ToolHandles:
     @property
     def y(self): ...
     @property
-    def artists(self) -> tuple[Line2D, ...]: ...
-    def set_data(self, pts: Sequence[float], y: Sequence[float] = ...) -> None: ...
+    def artists(self) -> tuple[Line2D]: ...
+    def set_data(
+        self,
+        pts: tuple[float, float, float],
+        y: tuple[float, float, float]|None = None,
+    ) -> None: ...
     def set_visible(self, val): ...
     def set_animated(self, val): ...
     def closest(self, x: float, y: float) -> tuple[int, float]: ...
@@ -325,22 +343,22 @@ class RectangleSelector(_SelectorWidget):
         self,
         ax: Axes,
         onselect: Callable,
-        drawtype=...,
-        minspanx=...,
-        minspany=...,
-        useblit=...,
-        lineprops=...,
-        props=...,
-        spancoords=...,
-        button=...,
-        grab_range=...,
-        handle_props=...,
-        interactive=...,
-        state_modifier_keys=...,
-        drag_from_anywhere=...,
-        ignore_event_outside=...,
-        use_data_coordinates=...,
-    ) -> None: ...
+        drawtype="box",
+        minspanx: float = 0,
+        minspany: float = 0,
+        useblit: bool = False,
+        lineprops=None,
+        props: Mapping | None = None,
+        spancoords: Literal["data", "pixels"] = "data",
+        button: MouseButton | Sequence[MouseButton] | None = None,
+        grab_range: float = 10,
+        handle_props: Mapping | None = None,
+        interactive: bool = False,
+        state_modifier_keys: Mapping | None = None,
+        drag_from_anywhere: bool = False,
+        ignore_event_outside: bool = False,
+        use_data_coordinates: bool = False,
+    ): ...
 
     to_draw = ...
     drawtype = ...
@@ -348,9 +366,9 @@ class RectangleSelector(_SelectorWidget):
     interactive = ...
     maxdist = ...
     @property
-    def corners(self): ...
+    def corners(self) -> tuple[ndarray, ndarray]: ...
     @property
-    def edge_centers(self): ...
+    def edge_centers(self) -> tuple[ndarray, ndarray]: ...
     @property
     def center(self) -> tuple[float, float]: ...
     @property
@@ -374,11 +392,12 @@ class LassoSelector(_SelectorWidget):
     def __init__(
         self,
         ax: Axes,
-        onselect: Callable = ...,
+        onselect: Callable | None = None,
         useblit: bool = True,
-        props: dict = ...,
-        button: MouseButton | Sequence[MouseButton] = ...,
-    ) -> None: ...
+        props: Mapping | None = None,
+        button: MouseButton | Sequence[MouseButton] | None = None,
+    ): ...
+    @_api.deprecated("3.5", alternative="press")
     def onpress(self, event): ...
     def onrelease(self, event): ...
 
@@ -387,15 +406,16 @@ class PolygonSelector(_SelectorWidget):
         self,
         ax: Axes,
         onselect: Callable,
-        useblit: bool = True,
-        props: dict = ...,
-        handle_props: dict = ...,
+        useblit: bool = False,
+        props: Mapping | None = None,
+        handle_props: Mapping | None = None,
         grab_range: float = 10,
         *,
-        draw_bounding_box: bool = ...,
-        box_handle_props: dict = ...,
-        box_props: dict = ...
-    ) -> None: ...
+        draw_bounding_box: bool = False,
+        box_handle_props: Mapping | None = None,
+        box_props: Mapping | None = None,
+    ): ...
+
 
     line = ...
     vertex_select_radius = ...
@@ -409,8 +429,8 @@ class Lasso(AxesWidget):
     def __init__(
         self,
         ax: Axes,
-        xy: Sequence[float],
-        callback: Callable = ...,
+        xy: tuple[float, float],
+        callback: Callable | None = None,
         useblit: bool = True,
     ) -> None: ...
     def onrelease(self, event: MouseEvent) -> None: ...

@@ -5,7 +5,7 @@ from numpy.typing import ArrayLike
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 
 import subprocess
-from .config import _get_args
+
 
 def use(app: str | None = None, gl: str | None = None): ...
 def run_subprocess(

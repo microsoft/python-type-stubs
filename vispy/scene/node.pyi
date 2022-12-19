@@ -1,14 +1,12 @@
-from vispy.scene.node import Node
-from vispy.util.event import Event
+from ..scene.node import Node
+from ..util.event import Event
 from numpy.typing import ArrayLike
-from vispy.visuals.transforms.chain import ChainTransform
-from vispy.visuals.transforms.transform_system import TransformSystem
+from ..visuals.transforms.chain import ChainTransform
+from ..visuals.transforms.transform_system import TransformSystem
 
 # -*- coding: utf-8 -*-
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
-
-from __future__ import division
 
 import weakref
 

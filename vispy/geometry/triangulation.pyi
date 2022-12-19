@@ -2,7 +2,6 @@ from numpy.typing import ArrayLike
 
 # -*- coding: utf-8 -*-
 
-from __future__ import division, print_function
 
 from itertools import permutations
 import numpy as np

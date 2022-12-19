@@ -1,4 +1,4 @@
-from vispy.geometry.meshdata import MeshData
+from ..geometry.meshdata import MeshData
 from numpy.typing import ArrayLike, NDArray
 
 # -*- coding: utf-8 -*-
@@ -9,7 +9,7 @@ from numpy.typing import ArrayLike, NDArray
 # Author: Nicolas P .Rougier
 # Date:   04/03/2014
 # -----------------------------------------------------------------------------
-from __future__ import division
+
 
 import numpy as np
 

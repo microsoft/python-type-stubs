@@ -14,7 +14,6 @@ from .config import (
     get_config_keys as get_config_keys,  # noqa
     set_data_dir as set_data_dir,
     _TempDir as _TempDir,
-    _get_args as _get_args,
 )  # noqa
 from .fetching import load_data_file as load_data_file  # noqa
 from .frozen import Frozen as Frozen  # noqa

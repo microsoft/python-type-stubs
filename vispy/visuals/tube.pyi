@@ -1,7 +1,6 @@
 from vispy.util.svg.color import Color
 from vispy.color.color_array import ColorArray
 from numpy.typing import NDArray
-from __future__ import division
 
 from .mesh import MeshVisual
 import numpy as np

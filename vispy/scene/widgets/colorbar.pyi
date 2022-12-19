@@ -1,6 +1,6 @@
 from vispy.util.event import Event
 from typing import Literal
-from vispy.color import ColorMap, Color
+from vispy.color import Colormap, Color
 
 # -*- coding: utf-8 -*-
 # -----------------------------------------------------------------------------
@@ -15,7 +15,7 @@ from ...visuals import ColorBarVisual
 class ColorBarWidget(Widget):
     def __init__(
         self,
-        cmap: str | ColorMap,
+        cmap: str | Colormap,
         orientation: Literal["left", "right", "top", "bottom"],
         label: str = "",
         label_color: str | Color = "black",

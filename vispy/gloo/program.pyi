@@ -1,4 +1,4 @@
-from vispy.gloo.buffer import VertexBuffer
+from ..gloo.buffer import VertexBuffer
 from numpy.typing import ArrayLike
 
 # -*- coding: utf-8 -*-

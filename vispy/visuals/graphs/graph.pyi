@@ -1,5 +1,6 @@
 from numpy.typing import ArrayLike, NDArray
 
+
 # -*- coding: utf-8 -*-
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
@@ -7,6 +8,7 @@ from numpy.typing import ArrayLike, NDArray
 from ..visual import CompoundVisual
 from ..line import ArrowVisual
 from ..markers import MarkersVisual
+from ...color import Colormap
 from . import layouts
 
 class GraphVisual(CompoundVisual):
@@ -25,14 +27,14 @@ class GraphVisual(CompoundVisual):
         directed: bool = False,
         layout: str | None = None,
         animate: bool = False,
-        line_color: str | ColorMap | None = None,
+        line_color: str | Colormap | None = None,
         line_width: float | None = None,
         arrow_type: str | None = None,
         arrow_size: float | None = None,
         node_symbol: str | None = None,
         node_size: float | None = None,
-        border_color: str | ColorMap | None = None,
-        face_color: str | ColorMap | None = None,
+        border_color: str | Colormap | None = None,
+        face_color: str | Colormap | None = None,
         border_width: float | None = None,
     ): ...
     @property

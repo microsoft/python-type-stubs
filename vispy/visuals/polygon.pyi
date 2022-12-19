@@ -5,7 +5,6 @@ from typing import Sequence
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 
-from __future__ import division
 
 import numpy as np
 
@@ -14,7 +13,7 @@ from .mesh import MeshVisual
 from .line import LineVisual
 from ..color import Color
 from ..geometry import PolygonData
-from ..gloo import set_state
+
 
 class PolygonVisual(CompoundVisual):
     def __init__(

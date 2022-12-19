@@ -1,4 +1,4 @@
-from vispy.gloo.framebuffer import RenderBuffer
+from ..gloo.framebuffer import RenderBuffer
 from typing import Literal
 from numpy.typing import ArrayLike
 

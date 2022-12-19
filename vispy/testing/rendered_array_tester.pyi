@@ -6,8 +6,8 @@
 
 from typing import Optional, Any
 import numpy as np
-from numpy.typing import ArrayLike, DtypeLike
-import pytest
+from numpy.typing import ArrayLike, DTypeLike
+
 
 def compare_render(
     orig_data: ArrayLike,
@@ -15,5 +15,5 @@ def compare_render(
     previous_render: Optional[ArrayLike] = None,
     atol: Optional[float] = 1.0,
 ): ...
-def max_for_dtype(input_dtype: DtypeLike): ...
+def max_for_dtype(input_dtype: DTypeLike): ...
 def make_rgba(data_in: ArrayLike) -> ArrayLike: ...

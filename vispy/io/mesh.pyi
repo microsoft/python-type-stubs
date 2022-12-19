@@ -6,13 +6,14 @@ from numpy.typing import ArrayLike
 
 import os
 from os import path as op
+import numpy as np
 
 from .wavefront import WavefrontReader, WavefrontWriter
 from .stl import load_stl
 
 def read_mesh(
     fname: str,
-) -> tuple[ArrayLike, ArrayLike | None, ArrayLike, ArrayLike | None]: ...
+) -> tuple[np.ndarray, np.ndarray | None, np.ndarray, np.ndarray | None]: ...
 def write_mesh(
     fname: str,
     vertices: ArrayLike,

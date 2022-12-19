@@ -1,5 +1,5 @@
-from np import ndarray
-from vispy._typing import Scalar
+from numpy import ndarray
+from .._typing import Scalar
 
 # -*- coding: utf-8 -*-
 

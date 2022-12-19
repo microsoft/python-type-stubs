@@ -1,4 +1,4 @@
-from np import dtype
+from numpy import dtype
 from numpy.typing import NDArray
 
 # -*- coding: utf-8 -*-

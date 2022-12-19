@@ -1,4 +1,4 @@
-from np import dtype
+from numpy import dtype
 from numpy.typing import ArrayLike
 
 # -*- coding: utf-8 -*-
@@ -22,7 +22,7 @@ class Collection(BaseCollection):
         self,
         dtype: ArrayLike,
         itype: np.dtype | None,
-        mode: GL_ENUM,
+        mode,
         vertex: str | tuple[str, ...],
         fragment: str | tuple[str, ...],
         program=None,

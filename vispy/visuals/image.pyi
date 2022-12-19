@@ -1,15 +1,13 @@
-from np import dtype
+from numpy import dtype
 from numpy.typing import NDArray, ArrayLike
 
 # -*- coding: utf-8 -*-
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 
-from __future__ import division
-
 import numpy as np
 
-from vispy.color import colormap
+from ..color import Colormap
 
 from ..gloo import Texture2D, VertexBuffer
 from ..gloo.texture import should_cast_to_f32

@@ -1,9 +1,10 @@
-from vispy.geometry.meshdata import MeshData
-from vispy.color import Color, ColorMap
 from numpy.typing import ArrayLike, NDArray
 from typing import Literal
-from vispy.util.svg.shapes import Polygon
-from vispy.scene.widgets.colorbar import ColorBarWidget
+from ..scene.visuals import LinePlot, Spectrogram, Image, Mesh, Polygon, Volume
+from ..util.svg.shapes import Polygon
+from ..scene.widgets.colorbar import ColorBarWidget
+from ..color import Color, Colormap
+from ..geometry.meshdata import MeshData
 
 # -*- coding: utf-8 -*-
 # Copyright (c) Vispy Development Team. All Rights Reserved.
@@ -48,13 +49,13 @@ class PlotWidget(scene.Widget):
     def plot(
         self,
         data,
-        color: Color = "k",
+        color: Color|str = "k",
         symbol: str | None = None,
         line_kind: str = "-",
         width: float = 1.0,
         marker_size: float = 10.0,
-        edge_color: Color = "k",
-        face_color: Color = "b",
+        edge_color: Color|str = "k",
+        face_color: Color|str = "b",
         edge_width: float = 1.0,
         title: str | None = None,
         xlabel: str | None = None,
@@ -85,7 +86,7 @@ class PlotWidget(scene.Widget):
     def surface(self, zdata: ArrayLike, **kwargs): ...
     def colorbar(
         self,
-        cmap: str | ColorMap,
+        cmap: str | Colormap,
         position: Literal["left", "right", "top", "bottom"] = "right",
         label: str = "",
         clim: tuple[float, float] = ...,

@@ -1,11 +1,9 @@
 from typing import Literal, Sequence
-from vispy.color.color_array import ColorArray
+from ..color.color_array import ColorArray
 
 # -*- coding: utf-8 -*-
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
-
-from __future__ import division  # just to be safe...
 
 import numpy as np
 from copy import deepcopy

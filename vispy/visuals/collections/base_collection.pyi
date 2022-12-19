@@ -7,8 +7,6 @@ from numpy.typing import ArrayLike, NDArray
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 # -----------------------------------------------------------------------------
 
-from __future__ import division
-
 import math
 import numpy as np
 from ...gloo import Texture2D, VertexBuffer, IndexBuffer

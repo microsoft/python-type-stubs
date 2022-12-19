@@ -1,4 +1,4 @@
-from vispy.scene.node import Node
+from ..scene.node import Node
 
 # -*- coding: utf-8 -*-
 # Copyright (c) Vispy Development Team. All Rights Reserved.

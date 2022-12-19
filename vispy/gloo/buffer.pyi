@@ -1,4 +1,4 @@
-from vispy.gloo.buffer import DataBuffer
+from ..gloo.buffer import DataBuffer
 from numpy.typing import NDArray
 
 # -*- coding: utf-8 -*-

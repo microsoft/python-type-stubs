@@ -11,7 +11,7 @@ import sys
 import os
 import inspect
 import gc
-import pytest
+
 import functools
 
 from distutils.version import LooseVersion

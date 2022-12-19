@@ -1,5 +1,5 @@
-from vispy.color.colormap import Colormap
-from vispy._typing import Scalar
+from ..color.colormap import Colormap
+from .._typing import Scalar
 from numpy.typing import NDArray, ArrayLike
 from typing import Sequence
 
@@ -7,14 +7,12 @@ from typing import Sequence
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 
-from __future__ import division  # just to be safe...
 import warnings
 
 import numpy as np
 
 from .color_array import ColorArray
 from ..ext.cubehelix import cubehelix
-from hsluv import hsluv_to_rgb
 from ..util.check_environment import has_matplotlib
 import vispy.gloo
 

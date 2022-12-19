@@ -11,25 +11,21 @@ from numpy.typing import ArrayLike
 ##############################################################################
 # Load font into texture
 
-from __future__ import division
-
 import numpy as np
 from copy import deepcopy
 import sys
 
 from ._sdf_gpu import SDFRendererGPU
-from ._sdf_cpu import _calc_distance_field
 from ...gloo import TextureAtlas, IndexBuffer, VertexBuffer
 from ...gloo import context
 from ...gloo.wrappers import _check_valid
-from ...util.fonts import _load_glyph
 from ..transforms import STTransform
 from ...color import ColorArray
 from ..visual import Visual
 from ...io import load_spatial_filters
 
 class TextureFont(object):
-    def __init__(self, font: Mapping, renderer: SDFRenderer): ...
+    def __init__(self, font: Mapping, renderer:SDFRendererGPU): ...
     @property
     def ratio(self): ...
     @property
@@ -60,7 +56,7 @@ class TextVisual(Visual):
     def __init__(
         self,
         text: str | ArrayLike | None = None,
-        color: Color = "black",
+        color: Color|str = "black",
         bold: bool = False,
         italic: bool = False,
         face: str = "OpenSans",
