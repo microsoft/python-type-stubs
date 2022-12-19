@@ -17,9 +17,7 @@ from ..base import BaseEstimator, TransformerMixin, _ClassNamePrefixFeaturesOutM
 from ..utils.validation import check_is_fitted
 from abc import ABCMeta, abstractmethod
 
-class _BasePCA(
-    _ClassNamePrefixFeaturesOutMixin, TransformerMixin, BaseEstimator, metaclass=ABCMeta
-):
+class _BasePCA(_ClassNamePrefixFeaturesOutMixin, TransformerMixin, BaseEstimator, metaclass=ABCMeta):
     def get_covariance(self) -> NDArray: ...
     def get_precision(self) -> NDArray: ...
     @abstractmethod

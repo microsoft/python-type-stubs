@@ -26,9 +26,7 @@ class RocCurveDisplay:
         estimator_name: str | None = None,
         pos_label: str | int | None = None,
     ) -> None: ...
-    def plot(
-        self, ax: Axes | None = None, *, name: str | None = None, **kwargs
-    ) -> RocCurveDisplay: ...
+    def plot(self, ax: Axes | None = None, *, name: str | None = None, **kwargs) -> RocCurveDisplay: ...
     @classmethod
     def from_estimator(
         cls,

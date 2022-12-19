@@ -36,12 +36,8 @@ class IterativeImputer(_BaseImputer):
         max_iter: int = 10,
         tol: float = 1e-3,
         n_nearest_features: int | None = None,
-        initial_strategy: Literal[
-            "mean", "median", "most_frequent", "constant"
-        ] = "mean",
-        imputation_order: Literal[
-            "ascending", "descending", "roman", "arabic", "random"
-        ] = "ascending",
+        initial_strategy: Literal["mean", "median", "most_frequent", "constant"] = "mean",
+        imputation_order: Literal["ascending", "descending", "roman", "arabic", "random"] = "ascending",
         skip_complete: bool = False,
         min_value: float | ArrayLike = ...,
         max_value: float | ArrayLike = ...,
@@ -55,9 +51,7 @@ class IterativeImputer(_BaseImputer):
         mask_missing_values: ndarray,
         feat_idx: int64,
         neighbor_feat_idx: ndarray,
-        estimator: Optional[
-            Union[KNeighborsRegressor, BayesianRidge, Pipeline, RandomForestRegressor]
-        ] = None,
+        estimator: Optional[Union[KNeighborsRegressor, BayesianRidge, Pipeline, RandomForestRegressor]] = None,
         fit_mode: bool = True,
     ) -> Union[
         Tuple[ndarray, RandomForestRegressor],
@@ -65,21 +59,13 @@ class IterativeImputer(_BaseImputer):
         Tuple[ndarray, KNeighborsRegressor],
         Tuple[ndarray, Pipeline],
     ]: ...
-    def _get_neighbor_feat_idx(
-        self, n_features: int, feat_idx: int64, abs_corr_mat: Optional[ndarray]
-    ) -> ndarray: ...
+    def _get_neighbor_feat_idx(self, n_features: int, feat_idx: int64, abs_corr_mat: Optional[ndarray]) -> ndarray: ...
     def _get_ordered_idx(self, mask_missing_values: ndarray) -> ndarray: ...
-    def _get_abs_corr_mat(
-        self, X_filled: ndarray, tolerance: float = 1e-6
-    ) -> Optional[ndarray]: ...
-    def _initial_imputation(
-        self, X: ndarray, in_fit: bool = False
-    ) -> Tuple[ndarray, ndarray, ndarray, ndarray]: ...
+    def _get_abs_corr_mat(self, X_filled: ndarray, tolerance: float = 1e-6) -> Optional[ndarray]: ...
+    def _initial_imputation(self, X: ndarray, in_fit: bool = False) -> Tuple[ndarray, ndarray, ndarray, ndarray]: ...
     @staticmethod
     def _validate_limit(limit: float, limit_type: str, n_features: int) -> ndarray: ...
     def fit_transform(self, X: ArrayLike, y: Optional[ndarray] = None) -> ArrayLike: ...
     def transform(self, X: ArrayLike) -> ArrayLike: ...
     def fit(self, X: ArrayLike, y=None) -> Any: ...
-    def get_feature_names_out(
-        self, input_features: ArrayLike | None = None
-    ) -> np.ndarray: ...
+    def get_feature_names_out(self, input_features: ArrayLike | None = None) -> np.ndarray: ...

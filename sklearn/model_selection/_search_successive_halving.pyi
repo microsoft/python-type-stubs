@@ -38,9 +38,7 @@ __all__ = ["HalvingGridSearchCV", "HalvingRandomSearchCV"]
 
 class _SubsampleMetaSplitter:
     def __init__(self, *, base_cv, fraction, subsample_test, random_state) -> None: ...
-    def split(
-        self, X: ndarray, y: ndarray, groups: None = None
-    ) -> Iterator[Tuple[ndarray, ndarray]]: ...
+    def split(self, X: ndarray, y: ndarray, groups: None = None) -> Iterator[Tuple[ndarray, ndarray]]: ...
 
 def _top_k(
     results: Dict[
@@ -125,7 +123,7 @@ class HalvingGridSearchCV(BaseSuccessiveHalving):
         *,
         factor: int | float = 3,
         resource: str | Literal["n_samples"] = "n_samples",
-        max_resources: int|str = "auto",
+        max_resources: int | str = "auto",
         min_resources: Literal["exhaust", "smallest"] | int = "exhaust",
         aggressive_elimination: bool = False,
         cv: int | Generator | Iterable = 5,
@@ -148,10 +146,10 @@ class HalvingRandomSearchCV(BaseSuccessiveHalving):
         estimator: BaseEstimator,
         param_distributions: Mapping,
         *,
-        n_candidates: int|str = "exhaust",
+        n_candidates: int | str = "exhaust",
         factor: int | float = 3,
         resource: str | Literal["n_samples"] = "n_samples",
-        max_resources: int|str = "auto",
+        max_resources: int | str = "auto",
         min_resources: Literal["exhaust", "smallest"] | int = "smallest",
         aggressive_elimination: bool = False,
         cv: int | Generator | Iterable = 5,

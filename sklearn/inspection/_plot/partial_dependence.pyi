@@ -14,7 +14,6 @@ from matplotlib.axes import Axes
 from scipy import sparse
 from scipy.stats.mstats import mquantiles
 
-
 from .. import partial_dependence
 from ...base import is_regressor
 from ...utils import Bunch
@@ -40,7 +39,7 @@ from sklearn.tree._classes import DecisionTreeRegressor
 def plot_partial_dependence(
     estimator: BaseEstimator,
     X: ArrayLike | DataFrame,
-    features: Sequence[int| str|tuple[int, int]| tuple[str, str]],
+    features: Sequence[int | str | tuple[int, int] | tuple[str, str]],
     *,
     feature_names: ArrayLike | None = None,
     target: int | None = None,
@@ -102,7 +101,7 @@ class PartialDependenceDisplay:
         feature_names: ArrayLike,
         target_idx: int,
         deciles: Mapping,
-        pdp_lim: Mapping | None|str = "deprecated",
+        pdp_lim: Mapping | None | str = "deprecated",
         kind: Literal["average", "individual", "both"] | Sequence[str] = "average",
         subsample: float | int | None = 1000,
         random_state: int | RandomState | None = None,
@@ -112,7 +111,7 @@ class PartialDependenceDisplay:
         cls,
         estimator: BaseEstimator,
         X: ArrayLike | DataFrame,
-        features: Sequence[int| str| tuple[int, int]|tuple[str, str]],
+        features: Sequence[int | str | tuple[int, int] | tuple[str, str]],
         *,
         feature_names: ArrayLike | None = None,
         target: int | None = None,

@@ -36,9 +36,7 @@ class GaussianProcessRegressor(MultiOutputMixin, RegressorMixin, BaseEstimator):
         copy_X_train: bool = True,
         random_state: int | RandomState | None = None,
     ) -> None: ...
-    def fit(
-        self, X: ArrayLike | Sequence[Any], y: ArrayLike
-    ) -> "GaussianProcessRegressor": ...
+    def fit(self, X: ArrayLike | Sequence[Any], y: ArrayLike) -> "GaussianProcessRegressor": ...
     def predict(
         self,
         X: ArrayLike | Sequence[Any],

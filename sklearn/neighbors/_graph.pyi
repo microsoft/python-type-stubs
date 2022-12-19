@@ -16,14 +16,8 @@ from scipy.sparse._csr import csr_matrix
 from sklearn.neighbors._unsupervised import NearestNeighbors
 from ._ball_tree import BallTree
 
-
-
-def _check_params(
-    X: NearestNeighbors, metric: str, p: int, metric_params: None
-) -> None: ...
-def _query_include_self(
-    X: Union[ndarray, csr_matrix], include_self: bool, mode: str
-) -> Optional[ndarray]: ...
+def _check_params(X: NearestNeighbors, metric: str, p: int, metric_params: None) -> None: ...
+def _query_include_self(X: Union[ndarray, csr_matrix], include_self: bool, mode: str) -> Optional[ndarray]: ...
 def kneighbors_graph(
     X: ArrayLike | BallTree,
     n_neighbors: int,
@@ -47,9 +41,7 @@ def radius_neighbors_graph(
     n_jobs: int | None = None,
 ) -> NDArray: ...
 
-class KNeighborsTransformer(
-    _ClassNamePrefixFeaturesOutMixin, KNeighborsMixin, TransformerMixin, NeighborsBase
-):
+class KNeighborsTransformer(_ClassNamePrefixFeaturesOutMixin, KNeighborsMixin, TransformerMixin, NeighborsBase):
     def __init__(
         self,
         *,

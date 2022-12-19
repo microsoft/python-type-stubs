@@ -23,9 +23,7 @@ from scipy.sparse._lil import lil_matrix
 ###############################################################################
 # For non fully-connected graphs
 
-def _fix_connectivity(
-    X: ndarray, connectivity: Union[csr_matrix, coo_matrix], affinity: str
-) -> Tuple[lil_matrix, int]: ...
+def _fix_connectivity(X: ndarray, connectivity: Union[csr_matrix, coo_matrix], affinity: str) -> Tuple[lil_matrix, int]: ...
 def _single_linkage_tree(
     connectivity: coo_matrix,
     n_samples: int,
@@ -57,15 +55,9 @@ def linkage_tree(
 ) -> tuple[np.ndarray, int, int, NDArray | None, np.ndarray]: ...
 
 # Matching names to tree-building strategies
-def _complete_linkage(
-    *args, **kwargs
-) -> Union[Tuple[ndarray, int, int, ndarray], Tuple[ndarray, int, int, None]]: ...
-def _average_linkage(
-    *args, **kwargs
-) -> Union[Tuple[ndarray, int, int, ndarray], Tuple[ndarray, int, int, None]]: ...
-def _single_linkage(
-    *args, **kwargs
-) -> Union[Tuple[ndarray, int, int, ndarray], Tuple[ndarray, int, int, None]]: ...
+def _complete_linkage(*args, **kwargs) -> Union[Tuple[ndarray, int, int, ndarray], Tuple[ndarray, int, int, None]]: ...
+def _average_linkage(*args, **kwargs) -> Union[Tuple[ndarray, int, int, ndarray], Tuple[ndarray, int, int, None]]: ...
+def _single_linkage(*args, **kwargs) -> Union[Tuple[ndarray, int, int, ndarray], Tuple[ndarray, int, int, None]]: ...
 
 _TREE_BUILDERS = ...
 
@@ -82,7 +74,7 @@ class AgglomerativeClustering(ClusterMixin, BaseEstimator):
         n_clusters: int | None = 2,
         *,
         affinity: str | Callable = "euclidean",
-        memory = None,
+        memory=None,
         connectivity: ArrayLike | Callable | None = None,
         compute_full_tree: bool | Literal["auto"] = "auto",
         linkage: Literal["ward", "complete", "average", "single"] = "ward",
@@ -90,20 +82,16 @@ class AgglomerativeClustering(ClusterMixin, BaseEstimator):
         compute_distances: bool = False,
     ) -> None: ...
     def fit(self, X: ArrayLike, y: None = None) -> "AgglomerativeClustering": ...
-    def _fit(
-        self, X: ndarray
-    ) -> Union[AgglomerativeClustering, FeatureAgglomeration]: ...
+    def _fit(self, X: ndarray) -> Union[AgglomerativeClustering, FeatureAgglomeration]: ...
     def fit_predict(self, X: ArrayLike, y: None = None) -> NDArray: ...
 
-class FeatureAgglomeration(
-    _ClassNamePrefixFeaturesOutMixin, AgglomerativeClustering, AgglomerationTransform
-):
+class FeatureAgglomeration(_ClassNamePrefixFeaturesOutMixin, AgglomerativeClustering, AgglomerationTransform):
     def __init__(
         self,
         n_clusters: int = 2,
         *,
         affinity: str | Callable = "euclidean",
-        memory = None,
+        memory=None,
         connectivity: ArrayLike | Callable | None = None,
         compute_full_tree: bool | Literal["auto"] = "auto",
         linkage: Literal["ward", "complete", "average", "single"] = "ward",
@@ -111,8 +99,6 @@ class FeatureAgglomeration(
         distance_threshold: float | None = None,
         compute_distances: bool = False,
     ) -> None: ...
-    def fit(
-        self, X: ArrayLike, y: Optional[ndarray] = None
-    ) -> "FeatureAgglomeration": ...
+    def fit(self, X: ArrayLike, y: Optional[ndarray] = None) -> "FeatureAgglomeration": ...
     @property
     def fit_predict(self): ...

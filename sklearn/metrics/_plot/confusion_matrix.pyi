@@ -17,9 +17,7 @@ from sklearn.model_selection._search import RandomizedSearchCV
 from sklearn.svm._classes import SVC
 
 class ConfusionMatrixDisplay:
-    def __init__(
-        self, confusion_matrix: NDArray, *, display_labels: NDArray | None = None
-    ) -> None: ...
+    def __init__(self, confusion_matrix: NDArray, *, display_labels: NDArray | None = None) -> None: ...
     def plot(
         self,
         *,

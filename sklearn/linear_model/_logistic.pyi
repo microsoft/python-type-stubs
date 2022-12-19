@@ -16,7 +16,6 @@ import warnings
 import numpy as np
 from scipy import optimize
 
-
 from ._base import LinearClassifierMixin, SparseCoefMixin, BaseEstimator
 from ._linear_loss import LinearModelLoss
 from ._sag import sag_solver
@@ -146,7 +145,5 @@ class LogisticRegressionCV(LogisticRegression, LinearClassifierMixin, BaseEstima
         y: ArrayLike,
         sample_weight: ArrayLike | None = None,
     ) -> Any: ...
-    def score(
-        self, X: ArrayLike, y: ArrayLike, sample_weight: ArrayLike | None = None
-    ) -> float: ...
+    def score(self, X: ArrayLike, y: ArrayLike, sample_weight: ArrayLike | None = None) -> float: ...
     def _more_tags(self): ...

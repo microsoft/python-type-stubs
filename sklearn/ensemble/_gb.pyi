@@ -113,9 +113,7 @@ class BaseGradientBoosting(BaseEnsemble, metaclass=ABCMeta):
     def _make_estimator(self, append=True): ...
     def _raw_predict_init(self, X: ndarray) -> ndarray: ...
     def _raw_predict(self, X: ndarray) -> ndarray: ...
-    def _staged_raw_predict(
-        self, X: ndarray, check_input: bool = True
-    ) -> Iterator[ndarray]: ...
+    def _staged_raw_predict(self, X: ndarray, check_input: bool = True) -> Iterator[ndarray]: ...
     @property
     def feature_importances_(self) -> NDArray: ...
     def _compute_partial_dependence_recursion(self, grid, target_features): ...
@@ -124,17 +122,14 @@ class BaseGradientBoosting(BaseEnsemble, metaclass=ABCMeta):
     # TODO(1.2): Remove
     # mypy error: Decorated property not supported
     @deprecated(  # type: ignore
-        "Attribute `n_features_` was deprecated in version 1.0 and will be "
-        "removed in 1.2. Use `n_features_in_` instead."
+        "Attribute `n_features_` was deprecated in version 1.0 and will be " "removed in 1.2. Use `n_features_in_` instead."
     )
     @property
     def n_features_(self): ...
 
     # TODO(1.3): Remove
     # mypy error: Decorated property not supported
-    @deprecated(  # type: ignore
-        "Attribute `loss_` was deprecated in version 1.1 and will be removed in 1.3."
-    )
+    @deprecated("Attribute `loss_` was deprecated in version 1.1 and will be removed in 1.3.")  # type: ignore
     @property
     def loss_(self): ...
 
@@ -184,9 +179,7 @@ class GradientBoostingRegressor(RegressorMixin, BaseGradientBoosting):
     def __init__(
         self,
         *,
-        loss: Literal[
-            "squared_error", "absolute_error", "huber", "quantile"
-        ] = "squared_error",
+        loss: Literal["squared_error", "absolute_error", "huber", "quantile"] = "squared_error",
         learning_rate: float = 0.1,
         n_estimators: int = 100,
         subsample: float = 1.0,

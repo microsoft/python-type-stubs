@@ -35,14 +35,10 @@ class OPTICS(ClusterMixin, BaseEstimator):
     ) -> None: ...
     def fit(self, X: NDArray, y: None = None) -> "OPTICS": ...
 
-def _validate_size(
-    size: Union[int, float], n_samples: int, param_name: str
-) -> None: ...
+def _validate_size(size: Union[int, float], n_samples: int, param_name: str) -> None: ...
 
 # OPTICS helper functions
-def _compute_core_distances_(
-    X: ndarray, neighbors: NearestNeighbors, min_samples: int, working_memory: None
-) -> ndarray: ...
+def _compute_core_distances_(X: ndarray, neighbors: NearestNeighbors, min_samples: int, working_memory: None) -> ndarray: ...
 def compute_optics_graph(
     X: NDArray,
     *,
@@ -85,13 +81,9 @@ def cluster_optics_xi(
     xi: float = 0.05,
     predecessor_correction: bool = True,
 ) -> tuple[NDArray, np.ndarray]: ...
-def _extend_region(
-    steep_point: ndarray, xward_point: ndarray, start: int64, min_samples: int
-) -> int64: ...
+def _extend_region(steep_point: ndarray, xward_point: ndarray, start: int64, min_samples: int) -> int64: ...
 def _update_filter_sdas(
-    sdas: List[
-        Union[Dict[str, Union[int64, float64]], Dict[str, Union[int64, float]], Any]
-    ],
+    sdas: List[Union[Dict[str, Union[int64, float64]], Dict[str, Union[int64, float]], Any]],
     mib: float64,
     xi_complement: float,
     reachability_plot: ndarray,

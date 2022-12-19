@@ -29,14 +29,10 @@ from .._config import config_context
 from typing import List, Optional, Tuple
 
 def _iterate_sparse_X(X): ...
-def _split_node(
-    node: "_CFNode", threshold: float, branching_factor: int
-) -> Tuple[_CFSubcluster, _CFSubcluster]: ...
+def _split_node(node: "_CFNode", threshold: float, branching_factor: int) -> Tuple[_CFSubcluster, _CFSubcluster]: ...
 
 class _CFNode:
-    def __init__(
-        self, *, threshold: float, branching_factor: int, is_leaf: bool, n_features: int
-    ) -> None: ...
+    def __init__(self, *, threshold: float, branching_factor: int, is_leaf: bool, n_features: int) -> None: ...
     def append_subcluster(self, subcluster: "_CFSubcluster") -> None: ...
     def update_split_subclusters(
         self,
@@ -49,15 +45,11 @@ class _CFNode:
 class _CFSubcluster:
     def __init__(self, *, linear_sum: NDArray | None = None) -> None: ...
     def update(self, subcluster: "_CFSubcluster") -> None: ...
-    def merge_subcluster(
-        self, nominee_cluster: "_CFSubcluster", threshold: float
-    ) -> bool: ...
+    def merge_subcluster(self, nominee_cluster: "_CFSubcluster", threshold: float) -> bool: ...
     @property
     def radius(self): ...
 
-class Birch(
-    _ClassNamePrefixFeaturesOutMixin, ClusterMixin, TransformerMixin, BaseEstimator
-):
+class Birch(_ClassNamePrefixFeaturesOutMixin, ClusterMixin, TransformerMixin, BaseEstimator):
     def __init__(
         self,
         *,
@@ -70,17 +62,13 @@ class Birch(
 
     # TODO: Remove in 1.2
     # mypy error: Decorated property not supported
-    @deprecated(  # type: ignore
-        "`fit_` is deprecated in 1.0 and will be removed in 1.2."
-    )
+    @deprecated("`fit_` is deprecated in 1.0 and will be removed in 1.2.")  # type: ignore
     @property
     def fit_(self): ...
 
     # TODO: Remove in 1.2
     # mypy error: Decorated property not supported
-    @deprecated(  # type: ignore
-        "`partial_fit_` is deprecated in 1.0 and will be removed in 1.2."
-    )
+    @deprecated("`partial_fit_` is deprecated in 1.0 and will be removed in 1.2.")  # type: ignore
     @property
     def partial_fit_(self): ...
     def fit(self, X: NDArray | ArrayLike, y: None = None) -> "Birch": ...

@@ -16,7 +16,6 @@ from sklearn.pipeline import Pipeline
 from typing import Union, Sequence, Literal, Mapping
 from matplotlib.axes import Axes
 
-
 class DetCurveDisplay:
     def __init__(
         self,
@@ -52,9 +51,7 @@ class DetCurveDisplay:
         ax: Axes | None = None,
         **kwargs,
     ) -> DetCurveDisplay: ...
-    def plot(
-        self, ax: Axes | None = None, *, name: str | None = None, **kwargs
-    ) -> DetCurveDisplay: ...
+    def plot(self, ax: Axes | None = None, *, name: str | None = None, **kwargs) -> DetCurveDisplay: ...
 
 @deprecated(
     "Function plot_det_curve is deprecated in 1.0 and will be "

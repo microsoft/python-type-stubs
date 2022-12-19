@@ -2,7 +2,6 @@ from numpy import bool_, ndarray
 from typing import Tuple, Union, Literal
 from numpy.typing import ArrayLike, NDArray
 
-
 # Author: Alexandre Gramfort alexandre.gramfort@inria.fr
 #        Gael Varoquaux gael.varoquaux@normalesup.org
 

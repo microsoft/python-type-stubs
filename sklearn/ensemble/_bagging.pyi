@@ -30,9 +30,7 @@ __all__ = ["BaggingClassifier", "BaggingRegressor"]
 
 MAX_INT = ...
 
-def _generate_indices(
-    random_state: RandomState, bootstrap: bool, n_population: int, n_samples: int
-) -> ndarray: ...
+def _generate_indices(random_state: RandomState, bootstrap: bool, n_population: int, n_samples: int) -> ndarray: ...
 def _generate_bagging_indices(
     random_state: int64,
     bootstrap_features: bool,
@@ -52,10 +50,7 @@ def _parallel_build_estimators(
     total_n_estimators: int,
     verbose: int,
     check_input: bool,
-) -> Union[
-    Tuple[List[DecisionTreeRegressor], List[ndarray]],
-    Tuple[List[ExtraTreeRegressor], List[ndarray]],
-]: ...
+) -> Union[Tuple[List[DecisionTreeRegressor], List[ndarray]], Tuple[List[ExtraTreeRegressor], List[ndarray]],]: ...
 def _parallel_predict_proba(estimators, estimators_features, X, n_classes): ...
 def _parallel_predict_log_proba(estimators, estimators_features, X, n_classes): ...
 def _parallel_decision_function(estimators, estimators_features, X): ...
@@ -70,9 +65,7 @@ class BaseBagging(BaseEnsemble, metaclass=ABCMeta):
     @abstractmethod
     def __init__(
         self,
-        base_estimator: Optional[
-            Union[DecisionTreeRegressor, ExtraTreeRegressor]
-        ] = None,
+        base_estimator: Optional[Union[DecisionTreeRegressor, ExtraTreeRegressor]] = None,
         n_estimators: int = 10,
         *,
         max_samples=1.0,
@@ -111,8 +104,7 @@ class BaseBagging(BaseEnsemble, metaclass=ABCMeta):
     # TODO: Remove in 1.2
     # mypy error: Decorated property not supported
     @deprecated(  # type: ignore
-        "Attribute `n_features_` was deprecated in version 1.0 and will be "
-        "removed in 1.2. Use `n_features_in_` instead."
+        "Attribute `n_features_` was deprecated in version 1.0 and will be " "removed in 1.2. Use `n_features_in_` instead."
     )
     @property
     def n_features_(self): ...

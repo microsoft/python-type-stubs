@@ -30,9 +30,7 @@ class KernelPCA(_ClassNamePrefixFeaturesOutMixin, TransformerMixin, BaseEstimato
         self,
         n_components: int | None = None,
         *,
-        kernel: Literal[
-            "linear", "poly", "rbf", "sigmoid", "cosine", "precomputed"
-        ] = "linear",
+        kernel: Literal["linear", "poly", "rbf", "sigmoid", "cosine", "precomputed"] = "linear",
         gamma: float | None = None,
         degree: int = 3,
         coef0: float = 1,
@@ -52,16 +50,14 @@ class KernelPCA(_ClassNamePrefixFeaturesOutMixin, TransformerMixin, BaseEstimato
     # TODO: Remove in 1.2
     # mypy error: Decorated property not supported
     @deprecated(  # type: ignore
-        "Attribute `lambdas_` was deprecated in version 1.0 and will be "
-        "removed in 1.2. Use `eigenvalues_` instead."
+        "Attribute `lambdas_` was deprecated in version 1.0 and will be " "removed in 1.2. Use `eigenvalues_` instead."
     )
     @property
     def lambdas_(self): ...
 
     # mypy error: Decorated property not supported
     @deprecated(  # type: ignore
-        "Attribute `alphas_` was deprecated in version 1.0 and will be "
-        "removed in 1.2. Use `eigenvectors_` instead."
+        "Attribute `alphas_` was deprecated in version 1.0 and will be " "removed in 1.2. Use `eigenvectors_` instead."
     )
     @property
     def alphas_(self): ...
@@ -69,9 +65,7 @@ class KernelPCA(_ClassNamePrefixFeaturesOutMixin, TransformerMixin, BaseEstimato
     def _fit_transform(self, K: ndarray) -> ndarray: ...
     def _fit_inverse_transform(self, X_transformed: ndarray, X: ndarray) -> None: ...
     def fit(self, X: NDArray | ArrayLike, y: None = None) -> "KernelPCA": ...
-    def fit_transform(
-        self, X: NDArray | ArrayLike, y: None = None, **params
-    ) -> NDArray: ...
+    def fit_transform(self, X: NDArray | ArrayLike, y: None = None, **params) -> NDArray: ...
     def transform(self, X: NDArray | ArrayLike) -> NDArray: ...
     def inverse_transform(self, X: NDArray | ArrayLike) -> NDArray: ...
     def _more_tags(self): ...

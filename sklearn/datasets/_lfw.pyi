@@ -42,18 +42,14 @@ TARGETS = ...
 # local disk caching, and image decoding.
 #
 
-def _check_fetch_lfw(
-    data_home: None = None, funneled: bool = True, download_if_missing: bool = True
-) -> Tuple[str, str]: ...
+def _check_fetch_lfw(data_home: None = None, funneled: bool = True, download_if_missing: bool = True) -> Tuple[str, str]: ...
 def _load_imgs(file_paths, slice_, color, resize): ...
 
 #
 # Task #1:  Face Identification on picture with names
 #
 
-def _fetch_lfw_people(
-    data_folder_path, slice_=None, color=False, resize=None, min_faces_per_person=0
-): ...
+def _fetch_lfw_people(data_folder_path, slice_=None, color=False, resize=None, min_faces_per_person=0): ...
 def fetch_lfw_people(
     *,
     data_home: str | None = None,
@@ -70,9 +66,7 @@ def fetch_lfw_people(
 # Task #2:  Face Verification on pairs of face pictures
 #
 
-def _fetch_lfw_pairs(
-    index_file_path, data_folder_path, slice_=None, color=False, resize=None
-): ...
+def _fetch_lfw_pairs(index_file_path, data_folder_path, slice_=None, color=False, resize=None): ...
 def fetch_lfw_pairs(
     *,
     subset: Literal["train", "test", "10_folds"] = "train",

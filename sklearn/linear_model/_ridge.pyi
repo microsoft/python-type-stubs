@@ -4,7 +4,6 @@ from typing import List, Optional, Tuple, Union, Literal, Any, Mapping, Callable
 from numpy.typing import NDArray, ArrayLike
 from numpy.random import RandomState
 
-
 # Author: Mathieu Blondel <mathieu@mblondel.org>
 #         Reuben Fletcher-Costin <reuben.fletchercostin@gmail.com>
 #         Fabian Pedregosa <fabian@fseoane.net>
@@ -45,9 +44,7 @@ from scipy.sparse._coo import coo_matrix
 from scipy.sparse._csr import csr_matrix
 from scipy.sparse.linalg._interface import _CustomLinearOperator
 
-def _get_rescaled_operator(
-    X: csr_matrix, X_offset: ndarray, sample_weight_sqrt: ndarray
-) -> _CustomLinearOperator: ...
+def _get_rescaled_operator(X: csr_matrix, X_offset: ndarray, sample_weight_sqrt: ndarray) -> _CustomLinearOperator: ...
 def _solve_sparse_cg(
     X: csr_matrix,
     y: ndarray,
@@ -91,18 +88,14 @@ def _solve_lbfgs(
     X_scale=None,
     sample_weight_sqrt=None,
 ): ...
-def _get_valid_accept_sparse(
-    is_X_sparse: bool, solver: str
-) -> Union[List[str], str]: ...
+def _get_valid_accept_sparse(is_X_sparse: bool, solver: str) -> Union[List[str], str]: ...
 def ridge_regression(
     X: NDArray,
     y: NDArray,
     alpha: float | ArrayLike,
     *,
     sample_weight: float | ArrayLike | None = None,
-    solver: Literal[
-        "auto", "svd", "cholesky", "lsqr", "sparse_cg", "sag", "saga", "lbfgs"
-    ] = "auto",
+    solver: Literal["auto", "svd", "cholesky", "lsqr", "sparse_cg", "sag", "saga", "lbfgs"] = "auto",
     max_iter: int | None = None,
     tol: float = 1e-3,
     verbose: int = 0,
@@ -163,15 +156,11 @@ class Ridge(MultiOutputMixin, RegressorMixin, _BaseRidge):
         copy_X: bool = True,
         max_iter: int | None = None,
         tol: float = 1e-3,
-        solver: Literal[
-            "auto", "svd", "cholesky", "lsqr", "sparse_cg", "sag", "saga", "lbfgs"
-        ] = "auto",
+        solver: Literal["auto", "svd", "cholesky", "lsqr", "sparse_cg", "sag", "saga", "lbfgs"] = "auto",
         positive: bool = False,
         random_state: int | RandomState | None = None,
     ) -> None: ...
-    def fit(
-        self, X: NDArray, y: NDArray, sample_weight: float | NDArray | None = None
-    ) -> "Ridge": ...
+    def fit(self, X: NDArray, y: NDArray, sample_weight: float | NDArray | None = None) -> "Ridge": ...
 
 class _RidgeClassifierMixin(LinearClassifierMixin):
     def _prepare_data(
@@ -193,15 +182,11 @@ class RidgeClassifier(_RidgeClassifierMixin, _BaseRidge):
         max_iter: int | None = None,
         tol: float = 1e-3,
         class_weight: Mapping | Literal["balanced"] | None = None,
-        solver: Literal[
-            "auto", "svd", "cholesky", "lsqr", "sparse_cg", "sag", "saga", "lbfgs"
-        ] = "auto",
+        solver: Literal["auto", "svd", "cholesky", "lsqr", "sparse_cg", "sag", "saga", "lbfgs"] = "auto",
         positive: bool = False,
         random_state: int | RandomState | None = None,
     ) -> None: ...
-    def fit(
-        self, X: NDArray, y: NDArray, sample_weight: float | NDArray | None = None
-    ) -> "RidgeClassifier": ...
+    def fit(self, X: NDArray, y: NDArray, sample_weight: float | NDArray | None = None) -> "RidgeClassifier": ...
 
 def _check_gcv_mode(X: ndarray, gcv_mode: None) -> str: ...
 def _find_smallest_angle(query: ndarray, vectors: ndarray) -> int64: ...
@@ -243,14 +228,10 @@ class _RidgeGCV(LinearModel):
     def _decomp_diag(v_prime: ndarray, Q: ndarray) -> ndarray: ...
     @staticmethod
     def _diag_dot(D: ndarray, B: ndarray) -> ndarray: ...
-    def _compute_gram(
-        self, X: ndarray, sqrt_sw: ndarray
-    ) -> Tuple[ndarray, ndarray]: ...
+    def _compute_gram(self, X: ndarray, sqrt_sw: ndarray) -> Tuple[ndarray, ndarray]: ...
     def _compute_covariance(self, X, sqrt_sw): ...
     def _sparse_multidot_diag(self, X, A, X_mean, sqrt_sw): ...
-    def _eigen_decompose_gram(
-        self, X: ndarray, y: ndarray, sqrt_sw: ndarray
-    ) -> Tuple[ndarray, ndarray, ndarray, ndarray]: ...
+    def _eigen_decompose_gram(self, X: ndarray, y: ndarray, sqrt_sw: ndarray) -> Tuple[ndarray, ndarray, ndarray, ndarray]: ...
     def _solve_eigen_gram(
         self,
         alpha: float,
@@ -262,12 +243,8 @@ class _RidgeGCV(LinearModel):
         QT_y: ndarray,
     ) -> Tuple[ndarray, ndarray]: ...
     def _eigen_decompose_covariance(self, X, y, sqrt_sw): ...
-    def _solve_eigen_covariance_no_intercept(
-        self, alpha, y, sqrt_sw, X_mean, eigvals, V, X
-    ): ...
-    def _solve_eigen_covariance_intercept(
-        self, alpha, y, sqrt_sw, X_mean, eigvals, V, X
-    ): ...
+    def _solve_eigen_covariance_no_intercept(self, alpha, y, sqrt_sw, X_mean, eigvals, V, X): ...
+    def _solve_eigen_covariance_intercept(self, alpha, y, sqrt_sw, X_mean, eigvals, V, X): ...
     def _solve_eigen_covariance(self, alpha, y, sqrt_sw, X_mean, eigvals, V, X): ...
     def _svd_decompose_design_matrix(
         self, X: ndarray, y: ndarray, sqrt_sw: ndarray
@@ -282,9 +259,7 @@ class _RidgeGCV(LinearModel):
         U: ndarray,
         UT_y: ndarray,
     ) -> Tuple[ndarray, ndarray]: ...
-    def fit(
-        self, X: NDArray, y: NDArray, sample_weight: float | NDArray | None = None
-    ) -> "_RidgeGCV": ...
+    def fit(self, X: NDArray, y: NDArray, sample_weight: float | NDArray | None = None) -> "_RidgeGCV": ...
 
 class _BaseRidgeCV(LinearModel):
     def __init__(
@@ -299,9 +274,7 @@ class _BaseRidgeCV(LinearModel):
         store_cv_values=False,
         alpha_per_target=False,
     ) -> None: ...
-    def fit(
-        self, X: NDArray, y: NDArray, sample_weight: float | NDArray | None = None
-    ) -> "RidgeCV": ...
+    def fit(self, X: NDArray, y: NDArray, sample_weight: float | NDArray | None = None) -> "RidgeCV": ...
 
 class RidgeCV(MultiOutputMixin, RegressorMixin, _BaseRidgeCV):
     pass
@@ -318,7 +291,5 @@ class RidgeClassifierCV(_RidgeClassifierMixin, _BaseRidgeCV):
         class_weight: Mapping | Literal["balanced"] | None = None,
         store_cv_values: bool = False,
     ): ...
-    def fit(
-        self, X: NDArray, y: NDArray, sample_weight: float | NDArray | None = None
-    ) -> Any: ...
+    def fit(self, X: NDArray, y: NDArray, sample_weight: float | NDArray | None = None) -> Any: ...
     def _more_tags(self): ...

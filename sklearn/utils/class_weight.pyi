@@ -9,15 +9,7 @@ import numpy as np
 
 from scipy import sparse
 
-def compute_class_weight(
-    class_weight: Mapping | Literal["balanced"] | None,
-    *,
-    classes: NDArray,
-    y: ArrayLike
-) -> NDArray: ...
+def compute_class_weight(class_weight: Mapping | Literal["balanced"] | None, *, classes: NDArray, y: ArrayLike) -> NDArray: ...
 def compute_sample_weight(
-    class_weight: dict | Sequence[dicts] | Literal["balanced"] | None,
-    y: NDArray | ArrayLike,
-    *,
-    indices: ArrayLike | None = None
+    class_weight: dict | Sequence[dicts] | Literal["balanced"] | None, y: NDArray | ArrayLike, *, indices: ArrayLike | None = None
 ) -> NDArray: ...

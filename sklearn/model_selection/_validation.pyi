@@ -67,9 +67,7 @@ def cross_validate(
     return_estimator: bool = False,
     error_score: float | Literal["raise"] = ...,
 ) -> dict: ...
-def _insert_error_scores(
-    results: List[Dict[str, Optional[Union[float, int]]]], error_score: float
-) -> None: ...
+def _insert_error_scores(results: List[Dict[str, Optional[Union[float, int]]]], error_score: float) -> None: ...
 def _normalize_score_results(
     scores: Union[List[Dict[str, float]], ndarray], scaler_score_key: str = "score"
 ) -> Dict[str, ndarray]: ...
@@ -127,7 +125,7 @@ def _score(
         _PredictScorer,
         Dict[str, _PredictScorer],
     ],
-    error_score: float|str = "raise",
+    error_score: float | str = "raise",
 ) -> Union[Dict[str, float], float]: ...
 def cross_val_predict(
     estimator: BaseEstimator,
@@ -140,9 +138,7 @@ def cross_val_predict(
     verbose: int = 0,
     fit_params: Mapping | None = None,
     pre_dispatch: int | str = "2*n_jobs",
-    method: Literal[
-        "predict", "predict_proba", "predict_log_proba", "decision_function"
-    ] = "predict",
+    method: Literal["predict", "predict_proba", "predict_log_proba", "decision_function"] = "predict",
 ) -> NDArray: ...
 def _fit_and_predict(
     estimator: Union[Pipeline, LinearRegression, RandomForestClassifier],
@@ -154,9 +150,7 @@ def _fit_and_predict(
     fit_params: None,
     method: str,
 ) -> ndarray: ...
-def _enforce_prediction_order(
-    classes: ndarray, predictions: ndarray, n_classes: int, method: str
-) -> ndarray: ...
+def _enforce_prediction_order(classes: ndarray, predictions: ndarray, n_classes: int, method: str) -> ndarray: ...
 def _check_is_permutation(indices: ndarray, n_samples: int) -> bool: ...
 def permutation_test_score(
     estimator: BaseEstimator,

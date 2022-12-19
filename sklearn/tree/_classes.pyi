@@ -41,7 +41,6 @@ from ..utils import compute_sample_weight
 from ..utils.multiclass import check_classification_targets
 from ..utils.validation import check_is_fitted
 
-
 import sklearn.utils._bunch
 from pandas.core.frame import DataFrame
 from scipy.sparse._csc import csc_matrix
@@ -99,22 +98,11 @@ class BaseDecisionTree(MultiOutputMixin, BaseEstimator, metaclass=ABCMeta):
         y: ndarray,
         sample_weight: Optional[ndarray] = None,
         check_input: bool = True,
-    ) -> Union[
-        DecisionTreeRegressor,
-        DecisionTreeClassifier,
-        ExtraTreeRegressor,
-        ExtraTreeClassifier,
-    ]: ...
-    def _validate_X_predict(
-        self, X: Union[ndarray, csr_matrix], check_input: bool
-    ) -> Union[ndarray, csr_matrix]: ...
-    def predict(
-        self, X: NDArray | ArrayLike, check_input: bool = True
-    ) -> ArrayLike: ...
+    ) -> Union[DecisionTreeRegressor, DecisionTreeClassifier, ExtraTreeRegressor, ExtraTreeClassifier,]: ...
+    def _validate_X_predict(self, X: Union[ndarray, csr_matrix], check_input: bool) -> Union[ndarray, csr_matrix]: ...
+    def predict(self, X: NDArray | ArrayLike, check_input: bool = True) -> ArrayLike: ...
     def apply(self, X: NDArray | ArrayLike, check_input: bool = True) -> ArrayLike: ...
-    def decision_path(
-        self, X: NDArray | ArrayLike, check_input: bool = True
-    ) -> NDArray: ...
+    def decision_path(self, X: NDArray | ArrayLike, check_input: bool = True) -> NDArray: ...
     def _prune_tree(self) -> None: ...
     def cost_complexity_pruning_path(
         self,
@@ -153,13 +141,10 @@ class DecisionTreeClassifier(ClassifierMixin, BaseDecisionTree):
         sample_weight: ArrayLike | None = None,
         check_input: bool = True,
     ) -> DecisionTreeClassifier: ...
-    def predict_proba(
-        self, X: NDArray | ArrayLike, check_input: bool = True
-    ) -> NDArray | list[NDArray]: ...
+    def predict_proba(self, X: NDArray | ArrayLike, check_input: bool = True) -> NDArray | list[NDArray]: ...
     def predict_log_proba(self, X: NDArray | ArrayLike) -> NDArray | list[NDArray]: ...
     @deprecated(  # type: ignore
-        "The attribute `n_features_` is deprecated in 1.0 and will be removed "
-        "in 1.2. Use `n_features_in_` instead."
+        "The attribute `n_features_` is deprecated in 1.0 and will be removed " "in 1.2. Use `n_features_in_` instead."
     )
     @property
     def n_features_(self): ...
@@ -169,9 +154,7 @@ class DecisionTreeRegressor(RegressorMixin, BaseDecisionTree):
     def __init__(
         self,
         *,
-        criterion: Literal[
-            "squared_error", "friedman_mse", "absolute_error", "poisson"
-        ] = "squared_error",
+        criterion: Literal["squared_error", "friedman_mse", "absolute_error", "poisson"] = "squared_error",
         splitter: Literal["best", "random"] = "best",
         max_depth: int | None = None,
         min_samples_split: int | float = 2,
@@ -190,12 +173,9 @@ class DecisionTreeRegressor(RegressorMixin, BaseDecisionTree):
         sample_weight: ArrayLike | None = None,
         check_input: bool = True,
     ) -> DecisionTreeRegressor: ...
-    def _compute_partial_dependence_recursion(
-        self, grid: ndarray, target_features: ndarray
-    ) -> ndarray: ...
+    def _compute_partial_dependence_recursion(self, grid: ndarray, target_features: ndarray) -> ndarray: ...
     @deprecated(  # type: ignore
-        "The attribute `n_features_` is deprecated in 1.0 and will be removed "
-        "in 1.2. Use `n_features_in_` instead."
+        "The attribute `n_features_` is deprecated in 1.0 and will be removed " "in 1.2. Use `n_features_in_` instead."
     )
     @property
     def n_features_(self): ...

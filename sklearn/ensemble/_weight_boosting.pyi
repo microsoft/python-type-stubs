@@ -43,9 +43,7 @@ class BaseWeightBoosting(BaseEnsemble, metaclass=ABCMeta):
     @abstractmethod
     def __init__(
         self,
-        base_estimator: Optional[
-            Union[DecisionTreeRegressor, DecisionTreeClassifier]
-        ] = None,
+        base_estimator: Optional[Union[DecisionTreeRegressor, DecisionTreeClassifier]] = None,
         *,
         n_estimators=50,
         estimator_params=...,
@@ -70,9 +68,7 @@ class BaseWeightBoosting(BaseEnsemble, metaclass=ABCMeta):
     @property
     def feature_importances_(self) -> NDArray: ...
 
-def _samme_proba(
-    estimator: DecisionTreeClassifier, n_classes: int, X: ndarray
-) -> ndarray: ...
+def _samme_proba(estimator: DecisionTreeClassifier, n_classes: int, X: ndarray) -> ndarray: ...
 
 class AdaBoostClassifier(ClassifierMixin, BaseWeightBoosting):
     def __init__(

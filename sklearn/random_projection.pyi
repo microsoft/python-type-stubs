@@ -30,22 +30,18 @@ __all__ = [
     "johnson_lindenstrauss_min_dim",
 ]
 
-def johnson_lindenstrauss_min_dim(
-    n_samples: int | ArrayLike, *, eps: float | NDArray = 0.1
-) -> int | np.ndarray: ...
+def johnson_lindenstrauss_min_dim(n_samples: int | ArrayLike, *, eps: float | NDArray = 0.1) -> int | np.ndarray: ...
 def _check_density(density: Union[str, float64], n_features: int) -> float64: ...
 def _check_input_size(n_components: int64, n_features: int) -> None: ...
 def _gaussian_random_matrix(n_components, n_features, random_state=None): ...
 def _sparse_random_matrix(
     n_components: int64,
     n_features: int,
-    density: float64|str = "auto",
+    density: float64 | str = "auto",
     random_state: Optional[RandomState] = None,
 ) -> csr_matrix: ...
 
-class BaseRandomProjection(
-    TransformerMixin, BaseEstimator, _ClassNamePrefixFeaturesOutMixin, metaclass=ABCMeta
-):
+class BaseRandomProjection(TransformerMixin, BaseEstimator, _ClassNamePrefixFeaturesOutMixin, metaclass=ABCMeta):
     @abstractmethod
     def __init__(
         self,
@@ -87,7 +83,5 @@ class SparseRandomProjection(BaseRandomProjection):
         compute_inverse_components: bool = False,
         random_state: int | RandomState | None = None,
     ) -> None: ...
-    def _make_random_matrix(
-        self, n_components: int64, n_features: int
-    ) -> csr_matrix: ...
+    def _make_random_matrix(self, n_components: int64, n_features: int) -> csr_matrix: ...
     def transform(self, X: NDArray) -> NDArray: ...

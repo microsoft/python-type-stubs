@@ -26,7 +26,6 @@ from scipy import sparse
 from scipy.sparse.linalg import lsqr
 from scipy.special import expit
 
-
 from ..base import BaseEstimator, ClassifierMixin, RegressorMixin, MultiOutputMixin
 from ..preprocessing._data import _is_constant_feature
 from ..utils import check_array
@@ -43,7 +42,6 @@ from scipy.sparse._csc import csc_matrix
 from scipy.sparse._csr import csr_matrix
 from sklearn.linear_model._stochastic_gradient import SGDClassifier
 
-
 # TODO: bayesian_ridge_regression and bayesian_regression_ard
 # should be squashed into its respective objects.
 
@@ -54,9 +52,7 @@ SPARSE_INTERCEPT_DECAY: float = ...
 # FIXME in 1.2: parameter 'normalize' should be removed from linear models
 # in cases where now normalize=False. The default value of 'normalize' should
 # be changed to False in linear models where now normalize=True
-def _deprecate_normalize(
-    normalize: Union[str, bool], default: bool, estimator_name: str
-) -> bool: ...
+def _deprecate_normalize(normalize: Union[str, bool], default: bool, estimator_name: str) -> bool: ...
 def make_dataset(
     X: ArrayLike,
     y: ArrayLike,
@@ -92,9 +88,7 @@ class LinearModel(BaseEstimator, metaclass=ABCMeta):
     def fit(self, X, y): ...
     def _decision_function(self, X: Union[ndarray, csr_matrix]) -> ndarray: ...
     def predict(self, X: ArrayLike | NDArray) -> NDArray: ...
-    def _set_intercept(
-        self, X_offset: ndarray, y_offset: Union[ndarray, float64], X_scale: ndarray
-    ) -> None: ...
+    def _set_intercept(self, X_offset: ndarray, y_offset: Union[ndarray, float64], X_scale: ndarray) -> None: ...
     def _more_tags(self) -> Dict[str, bool]: ...
 
 # XXX Should this derive from LinearModel? It should be a mixin, not an ABC.
@@ -113,7 +107,7 @@ class LinearRegression(MultiOutputMixin, RegressorMixin, LinearModel):
         self,
         *,
         fit_intercept: bool = True,
-        normalize: bool|str = "deprecated",
+        normalize: bool | str = "deprecated",
         copy_X: bool = True,
         n_jobs: int | None = None,
         positive: bool = False,

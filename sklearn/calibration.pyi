@@ -91,12 +91,8 @@ def _fit_classifier_calibrator_pair(
     sample_weight: Optional[ndarray] = None,
     **fit_params,
 ) -> "_CalibratedClassifier": ...
-def _get_prediction_method(
-    clf: Union[GaussianNB, RandomForestClassifier]
-) -> Tuple[Callable, str]: ...
-def _compute_predictions(
-    pred_method: Callable, method_name: str, X: ndarray, n_classes: int
-) -> ndarray: ...
+def _get_prediction_method(clf: Union[GaussianNB, RandomForestClassifier]) -> Tuple[Callable, str]: ...
+def _compute_predictions(pred_method: Callable, method_name: str, X: ndarray, n_classes: int) -> ndarray: ...
 def _fit_calibrator(
     clf: Union[GaussianNB, RandomForestClassifier],
     predictions: ndarray,
@@ -122,9 +118,7 @@ def _sigmoid_calibration(
 ) -> Tuple[float64, float64]: ...
 
 class _SigmoidCalibration(RegressorMixin, BaseEstimator):
-    def fit(
-        self, X: ArrayLike, y: ArrayLike, sample_weight: ArrayLike | None = None
-    ) -> "_SigmoidCalibration": ...
+    def fit(self, X: ArrayLike, y: ArrayLike, sample_weight: ArrayLike | None = None) -> "_SigmoidCalibration": ...
     def predict(self, T: ArrayLike) -> NDArray: ...
 
 def calibration_curve(
@@ -132,7 +126,7 @@ def calibration_curve(
     y_prob: ArrayLike,
     *,
     pos_label: int | str | None = None,
-    normalize: bool|str = "deprecated",
+    normalize: bool | str = "deprecated",
     n_bins: int = 5,
     strategy: Literal["uniform", "quantile"] = "uniform",
 ) -> tuple[NDArray, NDArray]: ...

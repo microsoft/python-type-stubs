@@ -6,7 +6,6 @@ import numpy as np
 from numpy.random import RandomState
 from pandas import DataFrame
 
-
 from ..ensemble._bagging import _generate_indices
 from ..metrics import check_scoring
 from ..metrics._scorer import _check_multimetric_scoring, _MultimetricScorer
@@ -37,9 +36,7 @@ def _calculate_permutation_scores(
     scorer: Callable,
     max_samples: int,
 ) -> ndarray: ...
-def _create_importances_bunch(
-    baseline_score: float64, permuted_score: ndarray
-) -> Bunch: ...
+def _create_importances_bunch(baseline_score: float64, permuted_score: ndarray) -> Bunch: ...
 def permutation_importance(
     estimator: Union[RandomForestClassifier, GradientBoostingRegressor],
     X: NDArray | DataFrame,

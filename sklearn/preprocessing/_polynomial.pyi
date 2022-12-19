@@ -35,9 +35,7 @@ class PolynomialFeatures(TransformerMixin, BaseEstimator):
         order: Literal["C", "F"] = "C",
     ) -> None: ...
     @staticmethod
-    def _combinations(
-        n_features, min_degree, max_degree, interaction_only, include_bias
-    ): ...
+    def _combinations(n_features, min_degree, max_degree, interaction_only, include_bias): ...
     @staticmethod
     def _num_combinations(
         n_features: int,
@@ -48,27 +46,15 @@ class PolynomialFeatures(TransformerMixin, BaseEstimator):
     ) -> int: ...
     @property
     def powers_(self): ...
-    @deprecated(
-        "get_feature_names is deprecated in 1.0 and will be removed "
-        "in 1.2. Please use get_feature_names_out instead."
-    )
-    def get_feature_names(
-        self, input_features: Sequence[str] | None = None
-    ) -> list[str]: ...
-    def get_feature_names_out(
-        self, input_features: ArrayLike | None = None
-    ) -> np.ndarray: ...
-    def fit(
-        self, X: NDArray | ArrayLike, y: Optional[ndarray] = None
-    ) -> "PolynomialFeatures": ...
+    @deprecated("get_feature_names is deprecated in 1.0 and will be removed " "in 1.2. Please use get_feature_names_out instead.")
+    def get_feature_names(self, input_features: Sequence[str] | None = None) -> list[str]: ...
+    def get_feature_names_out(self, input_features: ArrayLike | None = None) -> np.ndarray: ...
+    def fit(self, X: NDArray | ArrayLike, y: Optional[ndarray] = None) -> "PolynomialFeatures": ...
     def transform(self, X: NDArray | ArrayLike) -> NDArray: ...
 
     # TODO: Remove in 1.2
     # mypy error: Decorated property not supported
-    @deprecated(  # type: ignore
-        "The attribute `n_input_features_` was "
-        "deprecated in version 1.0 and will be removed in 1.2."
-    )
+    @deprecated("The attribute `n_input_features_` was " "deprecated in version 1.0 and will be removed in 1.2.")  # type: ignore
     @property
     def n_input_features_(self): ...
 
@@ -81,9 +67,7 @@ class SplineTransformer(TransformerMixin, BaseEstimator):
         degree: int = 3,
         *,
         knots: Literal["uniform", "quantile"] | ArrayLike = "uniform",
-        extrapolation: Literal[
-            "error", "constant", "linear", "continue", "periodic"
-        ] = "constant",
+        extrapolation: Literal["error", "constant", "linear", "continue", "periodic"] = "constant",
         include_bias: bool = True,
         order: Literal["C", "F"] = "C",
     ) -> None: ...
@@ -94,16 +78,9 @@ class SplineTransformer(TransformerMixin, BaseEstimator):
         knots: str = "uniform",
         sample_weight: None = None,
     ) -> ndarray: ...
-    @deprecated(
-        "get_feature_names is deprecated in 1.0 and will be removed "
-        "in 1.2. Please use get_feature_names_out instead."
-    )
-    def get_feature_names(
-        self, input_features: Sequence[str] | None = None
-    ) -> list[str]: ...
-    def get_feature_names_out(
-        self, input_features: ArrayLike | None = None
-    ) -> np.ndarray: ...
+    @deprecated("get_feature_names is deprecated in 1.0 and will be removed " "in 1.2. Please use get_feature_names_out instead.")
+    def get_feature_names(self, input_features: Sequence[str] | None = None) -> list[str]: ...
+    def get_feature_names_out(self, input_features: ArrayLike | None = None) -> np.ndarray: ...
     def fit(
         self,
         X: ArrayLike,

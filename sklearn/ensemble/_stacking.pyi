@@ -47,9 +47,7 @@ class _BaseStacking(TransformerMixin, _BaseHeterogeneousEnsemble, metaclass=ABCM
     @abstractmethod
     def __init__(
         self,
-        estimators: List[
-            Union[Tuple[str, RandomForestClassifier], Tuple[str, Pipeline]]
-        ],
+        estimators: List[Union[Tuple[str, RandomForestClassifier], Tuple[str, Pipeline]]],
         final_estimator: Optional[LogisticRegression] = None,
         *,
         cv=None,
@@ -59,13 +57,9 @@ class _BaseStacking(TransformerMixin, _BaseHeterogeneousEnsemble, metaclass=ABCM
         passthrough=False,
     ) -> None: ...
     def _clone_final_estimator(self, default: LogisticRegression) -> None: ...
-    def _concatenate_predictions(
-        self, X: ndarray, predictions: List[ndarray]
-    ) -> ndarray: ...
+    def _concatenate_predictions(self, X: ndarray, predictions: List[ndarray]) -> ndarray: ...
     @staticmethod
-    def _method_name(
-        name: str, estimator: Union[Pipeline, RandomForestClassifier], method: str
-    ) -> str: ...
+    def _method_name(name: str, estimator: Union[Pipeline, RandomForestClassifier], method: str) -> str: ...
     def fit(
         self,
         X: NDArray | ArrayLike,
@@ -75,9 +69,7 @@ class _BaseStacking(TransformerMixin, _BaseHeterogeneousEnsemble, metaclass=ABCM
     @property
     def n_features_in_(self): ...
     def _transform(self, X: ndarray) -> ndarray: ...
-    def get_feature_names_out(
-        self, input_features: ArrayLike | None = None
-    ) -> np.ndarray: ...
+    def get_feature_names_out(self, input_features: ArrayLike | None = None) -> np.ndarray: ...
     @available_if(_estimator_has("predict"))
     def predict(self, X: NDArray | ArrayLike, **predict_params) -> np.ndarray: ...
     def _sk_visual_block_(self, final_estimator): ...
@@ -89,9 +81,7 @@ class StackingClassifier(ClassifierMixin, _BaseStacking):
         final_estimator: BaseEstimator | None = None,
         *,
         cv: int | Generator | Iterable | Literal["prefit"] | None = None,
-        stack_method: Literal[
-            "auto", "predict_proba", "decision_function", "predict"
-        ] = "auto",
+        stack_method: Literal["auto", "predict_proba", "decision_function", "predict"] = "auto",
         n_jobs: int | None = None,
         passthrough: bool = False,
         verbose: int = 0,

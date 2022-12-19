@@ -21,13 +21,9 @@ from ..exceptions import ConvergenceWarning
 
 _EPSILON = ...
 
-def _dynamic_max_trials(
-    n_inliers: int64, n_samples: int, min_samples: int, probability: float
-) -> float: ...
+def _dynamic_max_trials(n_inliers: int64, n_samples: int, min_samples: int, probability: float) -> float: ...
 
-class RANSACRegressor(
-    MetaEstimatorMixin, RegressorMixin, MultiOutputMixin, BaseEstimator
-):
+class RANSACRegressor(MetaEstimatorMixin, RegressorMixin, MultiOutputMixin, BaseEstimator):
     def __init__(
         self,
         estimator: None = None,

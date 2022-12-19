@@ -15,9 +15,7 @@ from pandas import DataFrame
 from matplotlib.axes import Axes
 from sklearn.base import BaseEstimator
 
-def _check_boundary_response_method(
-    estimator: BaseEstimator, response_method: str
-) -> Callable: ...
+def _check_boundary_response_method(estimator: BaseEstimator, response_method: str) -> Callable: ...
 
 class DecisionBoundaryDisplay:
     def __init__(
@@ -46,9 +44,7 @@ class DecisionBoundaryDisplay:
         grid_resolution: int = 100,
         eps: float = 1.0,
         plot_method: Literal["contourf", "contour", "pcolormesh"] = "contourf",
-        response_method: Literal[
-            "auto", "predict_proba", "decision_function", "predict"
-        ] = "auto",
+        response_method: Literal["auto", "predict_proba", "decision_function", "predict"] = "auto",
         xlabel: str | None = None,
         ylabel: str | None = None,
         ax: Axes | None = None,

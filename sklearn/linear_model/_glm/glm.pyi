@@ -57,9 +57,7 @@ class _GeneralizedLinearRegressor(RegressorMixin, BaseEstimator):
     def _get_loss(self): ...
 
     # TODO(1.3): remove
-    @deprecated(  # type: ignore
-        "Attribute `family` was deprecated in version 1.1 and will be removed in 1.3."
-    )
+    @deprecated("Attribute `family` was deprecated in version 1.1 and will be removed in 1.3.")  # type: ignore
     @property
     def family(self): ...
 

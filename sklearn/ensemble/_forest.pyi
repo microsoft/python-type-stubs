@@ -64,12 +64,8 @@ __all__ = [
 MAX_INT = ...
 
 def _get_n_samples_bootstrap(n_samples: int, max_samples: Optional[float]) -> int: ...
-def _generate_sample_indices(
-    random_state: int, n_samples: int, n_samples_bootstrap: int
-) -> ndarray: ...
-def _generate_unsampled_indices(
-    random_state: int, n_samples: int, n_samples_bootstrap: int
-) -> ndarray: ...
+def _generate_sample_indices(random_state: int, n_samples: int, n_samples_bootstrap: int) -> ndarray: ...
+def _generate_unsampled_indices(random_state: int, n_samples: int, n_samples_bootstrap: int) -> ndarray: ...
 def _parallel_build_trees(
     tree: Union[
         DecisionTreeRegressor,
@@ -86,12 +82,7 @@ def _parallel_build_trees(
     verbose: int = 0,
     class_weight: None = None,
     n_samples_bootstrap: Optional[int] = None,
-) -> Union[
-    DecisionTreeRegressor,
-    DecisionTreeClassifier,
-    ExtraTreeRegressor,
-    ExtraTreeClassifier,
-]: ...
+) -> Union[DecisionTreeRegressor, DecisionTreeClassifier, ExtraTreeRegressor, ExtraTreeClassifier,]: ...
 
 class BaseForest(MultiOutputMixin, BaseEnsemble, metaclass=ABCMeta):
     @abstractmethod
@@ -133,17 +124,14 @@ class BaseForest(MultiOutputMixin, BaseEnsemble, metaclass=ABCMeta):
     def _set_oob_score_and_attributes(self, X, y): ...
     def _compute_oob_predictions(self, X: ndarray, y: ndarray) -> ndarray: ...
     def _validate_y_class_weight(self, y: ndarray) -> Tuple[ndarray, None]: ...
-    def _validate_X_predict(
-        self, X: Union[ndarray, csr_matrix]
-    ) -> Union[ndarray, csr_matrix]: ...
+    def _validate_X_predict(self, X: Union[ndarray, csr_matrix]) -> Union[ndarray, csr_matrix]: ...
     @property
     def feature_importances_(self) -> NDArray: ...
 
     # TODO: Remove in 1.2
     # mypy error: Decorated property not supported
     @deprecated(  # type: ignore
-        "Attribute `n_features_` was deprecated in version 1.0 and will be "
-        "removed in 1.2. Use `n_features_in_` instead."
+        "Attribute `n_features_` was deprecated in version 1.0 and will be " "removed in 1.2. Use `n_features_in_` instead."
     )
     @property
     def n_features_(self): ...
@@ -173,9 +161,7 @@ class ForestClassifier(ClassifierMixin, BaseForest, metaclass=ABCMeta):
     def _validate_y_class_weight(self, y: ndarray) -> Tuple[ndarray, None]: ...
     def predict(self, X: NDArray | ArrayLike) -> NDArray: ...
     def predict_proba(self, X: NDArray | ArrayLike) -> NDArray | list[ArrayLike]: ...
-    def predict_log_proba(
-        self, X: NDArray | ArrayLike
-    ) -> NDArray | list[ArrayLike]: ...
+    def predict_log_proba(self, X: NDArray | ArrayLike) -> NDArray | list[ArrayLike]: ...
     def _more_tags(self) -> Dict[str, bool]: ...
 
 class ForestRegressor(RegressorMixin, BaseForest, metaclass=ABCMeta):
@@ -220,10 +206,7 @@ class RandomForestClassifier(ForestClassifier):
         random_state: int | RandomState | None = None,
         verbose: int = 0,
         warm_start: bool = False,
-        class_weight: Literal["balanced", "balanced_subsample"]
-        | dict
-        | Sequence[dict]
-        | None = None,
+        class_weight: Literal["balanced", "balanced_subsample"] | dict | Sequence[dict] | None = None,
         ccp_alpha: float = 0.0,
         max_samples: int | float | None = None,
     ) -> None: ...
@@ -233,9 +216,7 @@ class RandomForestRegressor(ForestRegressor):
         self,
         n_estimators: int = 100,
         *,
-        criterion: Literal[
-            "squared_error", "absolute_error", "poisson"
-        ] = "squared_error",
+        criterion: Literal["squared_error", "absolute_error", "poisson"] = "squared_error",
         max_depth: int | None = None,
         min_samples_split: int | float = 2,
         min_samples_leaf: int | float = 1,
@@ -272,10 +253,7 @@ class ExtraTreesClassifier(ForestClassifier):
         random_state: int | RandomState | None = None,
         verbose: int = 0,
         warm_start: bool = False,
-        class_weight: Literal["balanced", "balanced_subsample"]
-        | dict
-        | Sequence[dict]
-        | None = None,
+        class_weight: Literal["balanced", "balanced_subsample"] | dict | Sequence[dict] | None = None,
         ccp_alpha: float = 0.0,
         max_samples: int | float | None = None,
     ) -> None: ...
@@ -325,16 +303,12 @@ class RandomTreesEmbedding(TransformerMixin, BaseForest):
         warm_start: bool = False,
     ) -> None: ...
     def _set_oob_score_and_attributes(self, X, y): ...
-    def fit(
-        self, X: NDArray | ArrayLike, y=None, sample_weight: ArrayLike | None = None
-    ) -> Any: ...
+    def fit(self, X: NDArray | ArrayLike, y=None, sample_weight: ArrayLike | None = None) -> Any: ...
     def fit_transform(
         self,
         X: NDArray | ArrayLike,
         y: Optional[ndarray] = None,
         sample_weight: ArrayLike | None = None,
     ) -> NDArray: ...
-    def get_feature_names_out(
-        self, input_features: ArrayLike | None = None
-    ) -> np.ndarray: ...
+    def get_feature_names_out(self, input_features: ArrayLike | None = None) -> np.ndarray: ...
     def transform(self, X: NDArray | ArrayLike) -> NDArray: ...

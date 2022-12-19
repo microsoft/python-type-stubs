@@ -24,9 +24,7 @@ class PrecisionRecallDisplay:
         estimator_name: str | None = None,
         pos_label: str | int | None = None,
     ) -> None: ...
-    def plot(
-        self, ax: Axes | None = None, *, name: str | None = None, **kwargs
-    ) -> PrecisionRecallDisplay: ...
+    def plot(self, ax: Axes | None = None, *, name: str | None = None, **kwargs) -> PrecisionRecallDisplay: ...
     @classmethod
     def from_estimator(
         cls,

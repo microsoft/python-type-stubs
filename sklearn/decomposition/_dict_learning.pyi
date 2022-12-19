@@ -48,9 +48,7 @@ def sparse_encode(
     *,
     gram: NDArray | None = None,
     cov: NDArray | None = None,
-    algorithm: Literal[
-        "lasso_lars", "lasso_cd", "lars", "omp", "threshold"
-    ] = "lasso_lars",
+    algorithm: Literal["lasso_lars", "lasso_cd", "lars", "omp", "threshold"] = "lasso_lars",
     n_nonzero_coefs: int | None = None,
     alpha: float | None = None,
     copy_cov: bool = True,
@@ -96,21 +94,21 @@ def dict_learning_online(
     n_components: int | None = 2,
     *,
     alpha: float = 1,
-    n_iter: int|str = "deprecated",
+    n_iter: int | str = "deprecated",
     max_iter: int | None = None,
     return_code: bool = True,
     dict_init: NDArray | None = None,
     callback: Callable | None = None,
-    batch_size: int|str = "warn",
+    batch_size: int | str = "warn",
     verbose: bool = False,
     shuffle: bool = True,
     n_jobs: int | None = None,
     method: Literal["lars", "cd"] = "lars",
-    iter_offset: int|str = "deprecated",
+    iter_offset: int | str = "deprecated",
     random_state: int | RandomState | None = None,
-    return_inner_stats: bool|str = "deprecated",
-    inner_stats: tuple[NDArray, ...]|str = "deprecated",
-    return_n_iter: bool|str = "deprecated",
+    return_inner_stats: bool | str = "deprecated",
+    inner_stats: tuple[NDArray, ...] | str = "deprecated",
+    return_n_iter: bool | str = "deprecated",
     positive_dict: bool = False,
     positive_code: bool = False,
     method_max_iter: int = 1000,
@@ -140,9 +138,7 @@ class SparseCoder(_BaseSparseCoding, BaseEstimator):
         self,
         dictionary: NDArray,
         *,
-        transform_algorithm: Literal[
-            "lasso_lars", "lasso_cd", "lars", "omp", "threshold"
-        ] = "omp",
+        transform_algorithm: Literal["lasso_lars", "lasso_cd", "lars", "omp", "threshold"] = "omp",
         transform_n_nonzero_coefs: int | None = None,
         transform_alpha: float | None = None,
         split_sign: bool = False,
@@ -169,9 +165,7 @@ class DictionaryLearning(_BaseSparseCoding, BaseEstimator):
         max_iter: int = 1000,
         tol: float = 1e-8,
         fit_algorithm: Literal["lars", "cd"] = "lars",
-        transform_algorithm: Literal[
-            "lasso_lars", "lasso_cd", "lars", "omp", "threshold"
-        ] = "omp",
+        transform_algorithm: Literal["lasso_lars", "lasso_cd", "lars", "omp", "threshold"] = "omp",
         transform_n_nonzero_coefs: int | None = None,
         transform_alpha: float | None = None,
         n_jobs: int | None = None,
@@ -195,16 +189,14 @@ class MiniBatchDictionaryLearning(_BaseSparseCoding, BaseEstimator):
         n_components: int | None = None,
         *,
         alpha: float = 1,
-        n_iter: int|str = "deprecated",
+        n_iter: int | str = "deprecated",
         max_iter: int | None = None,
         fit_algorithm: Literal["lars", "cd"] = "lars",
         n_jobs: int | None = None,
-        batch_size: int|str = "warn",
+        batch_size: int | str = "warn",
         shuffle: bool = True,
         dict_init: NDArray | None = None,
-        transform_algorithm: Literal[
-            "lasso_lars", "lasso_cd", "lars", "omp", "threshold"
-        ] = "omp",
+        transform_algorithm: Literal["lasso_lars", "lasso_cd", "lars", "omp", "threshold"] = "omp",
         transform_n_nonzero_coefs: int | None = None,
         transform_alpha: float | None = None,
         verbose: bool | int = False,
@@ -217,29 +209,19 @@ class MiniBatchDictionaryLearning(_BaseSparseCoding, BaseEstimator):
         tol: float = 1e-3,
         max_no_improvement: int = 10,
     ) -> None: ...
-    @deprecated(  # type: ignore
-        "The attribute `iter_offset_` is deprecated in 1.1 and will be removed in 1.3."
-    )
+    @deprecated("The attribute `iter_offset_` is deprecated in 1.1 and will be removed in 1.3.")  # type: ignore
     @property
     def iter_offset_(self): ...
-    @deprecated(  # type: ignore
-        "The attribute `random_state_` is deprecated in 1.1 and will be removed in 1.3."
-    )
+    @deprecated("The attribute `random_state_` is deprecated in 1.1 and will be removed in 1.3.")  # type: ignore
     @property
     def random_state_(self): ...
-    @deprecated(  # type: ignore
-        "The attribute `inner_stats_` is deprecated in 1.1 and will be removed in 1.3."
-    )
+    @deprecated("The attribute `inner_stats_` is deprecated in 1.1 and will be removed in 1.3.")  # type: ignore
     @property
     def inner_stats_(self): ...
     def _check_params(self, X: ndarray) -> None: ...
     def _initialize_dict(self, X: ndarray, random_state: RandomState) -> ndarray: ...
-    def _update_inner_stats(
-        self, X: ndarray, code: ndarray, batch_size: int, step: int
-    ) -> None: ...
-    def _minibatch_step(
-        self, X: ndarray, dictionary: ndarray, random_state: RandomState, step: int
-    ) -> float64: ...
+    def _update_inner_stats(self, X: ndarray, code: ndarray, batch_size: int, step: int) -> None: ...
+    def _minibatch_step(self, X: ndarray, dictionary: ndarray, random_state: RandomState, step: int) -> float64: ...
     def _check_convergence(
         self,
         X: ndarray,
@@ -251,9 +233,7 @@ class MiniBatchDictionaryLearning(_BaseSparseCoding, BaseEstimator):
         n_steps: int,
     ) -> bool: ...
     def fit(self, X: ArrayLike, y: None = None) -> "MiniBatchDictionaryLearning": ...
-    def partial_fit(
-        self, X: ArrayLike, y=None, iter_offset: int|str = "deprecated"
-    ) -> Any: ...
+    def partial_fit(self, X: ArrayLike, y=None, iter_offset: int | str = "deprecated") -> Any: ...
     @property
     def _n_features_out(self): ...
     def _more_tags(self): ...

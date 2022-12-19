@@ -27,9 +27,5 @@ ARCHIVE = ...
 logger = ...
 
 def fetch_california_housing(
-    *,
-    data_home: str | None = None,
-    download_if_missing: bool = True,
-    return_X_y: bool = False,
-    as_frame: bool = False
+    *, data_home: str | None = None, download_if_missing: bool = True, return_X_y: bool = False, as_frame: bool = False
 ) -> tuple[Bunch, tuple]: ...

@@ -28,10 +28,7 @@ import scipy.sparse._csr
 from numpy.random import RandomState
 from scipy.sparse.linalg import LinearOperator
 
-
-def barycenter_weights(
-    X: ArrayLike, Y: ArrayLike, indices: ArrayLike, reg: float = 1e-3
-) -> ArrayLike: ...
+def barycenter_weights(X: ArrayLike, Y: ArrayLike, indices: ArrayLike, reg: float = 1e-3) -> ArrayLike: ...
 def barycenter_kneighbors_graph(
     X: NearestNeighbors | ArrayLike,
     n_neighbors: int,

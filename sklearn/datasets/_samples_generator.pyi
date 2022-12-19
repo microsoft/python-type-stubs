@@ -54,9 +54,7 @@ def make_multilabel_classification(
     return_distributions: bool = False,
     random_state: int | RandomState | None = None,
 ) -> tuple[NDArray, NDArray, NDArray, np.ndarray]: ...
-def make_hastie_10_2(
-    n_samples: int = 12000, *, random_state: int | RandomState | None = None
-) -> tuple[np.ndarray, NDArray]: ...
+def make_hastie_10_2(n_samples: int = 12000, *, random_state: int | RandomState | None = None) -> tuple[np.ndarray, NDArray]: ...
 def make_regression(
     n_samples: int = 100,
     n_features: int = 100,
@@ -142,9 +140,7 @@ def make_sparse_uncorrelated(
     *,
     random_state: int | RandomState | None = None,
 ) -> tuple[NDArray, NDArray]: ...
-def make_spd_matrix(
-    n_dim: int, *, random_state: int | RandomState | None = None
-) -> np.ndarray: ...
+def make_spd_matrix(n_dim: int, *, random_state: int | RandomState | None = None) -> np.ndarray: ...
 def make_sparse_spd_matrix(
     dim: int = 1,
     *,

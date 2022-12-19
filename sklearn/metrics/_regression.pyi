@@ -48,8 +48,7 @@ def mean_absolute_error(
     y_pred: ArrayLike,
     *,
     sample_weight: ArrayLike | None = None,
-    multioutput: Literal["raw_values", "uniform_average"]
-    | ArrayLike = "uniform_average",
+    multioutput: Literal["raw_values", "uniform_average"] | ArrayLike = "uniform_average",
 ) -> float | np.ndarray: ...
 def mean_pinball_loss(
     y_true: ArrayLike,
@@ -57,24 +56,21 @@ def mean_pinball_loss(
     *,
     sample_weight: ArrayLike | None = None,
     alpha: float = 0.5,
-    multioutput: Literal["raw_values", "uniform_average"]
-    | ArrayLike = "uniform_average",
+    multioutput: Literal["raw_values", "uniform_average"] | ArrayLike = "uniform_average",
 ) -> float | np.ndarray: ...
 def mean_absolute_percentage_error(
     y_true: ArrayLike,
     y_pred: ArrayLike,
     *,
     sample_weight: ArrayLike | None = None,
-    multioutput: Literal["raw_values", "uniform_average"]
-    | ArrayLike = "uniform_average",
+    multioutput: Literal["raw_values", "uniform_average"] | ArrayLike = "uniform_average",
 ) -> float | np.ndarray: ...
 def mean_squared_error(
     y_true: ArrayLike,
     y_pred: ArrayLike,
     *,
     sample_weight: ArrayLike | None = None,
-    multioutput: Literal["raw_values", "uniform_average"]
-    | ArrayLike = "uniform_average",
+    multioutput: Literal["raw_values", "uniform_average"] | ArrayLike = "uniform_average",
     squared: bool = True,
 ) -> float | np.ndarray: ...
 def mean_squared_log_error(
@@ -82,16 +78,14 @@ def mean_squared_log_error(
     y_pred: ArrayLike,
     *,
     sample_weight: ArrayLike | None = None,
-    multioutput: Literal["raw_values", "uniform_average"]
-    | ArrayLike = "uniform_average",
+    multioutput: Literal["raw_values", "uniform_average"] | ArrayLike = "uniform_average",
     squared: bool = True,
 ) -> float | np.ndarray: ...
 def median_absolute_error(
     y_true: ArrayLike | tuple[int, int],
     y_pred: ArrayLike | tuple[int, int],
     *,
-    multioutput: Literal["raw_values", "uniform_average"]
-    | ArrayLike = "uniform_average",
+    multioutput: Literal["raw_values", "uniform_average"] | ArrayLike = "uniform_average",
     sample_weight: ArrayLike | None = None,
 ) -> float | np.ndarray: ...
 def _assemble_r2_explained_variance(
@@ -106,8 +100,7 @@ def explained_variance_score(
     y_pred: ArrayLike,
     *,
     sample_weight: ArrayLike | None = None,
-    multioutput: Literal["raw_values", "uniform_average", "variance_weighted"]
-    | ArrayLike = "uniform_average",
+    multioutput: Literal["raw_values", "uniform_average", "variance_weighted"] | ArrayLike = "uniform_average",
     force_finite: bool = True,
 ) -> float | np.ndarray: ...
 def r2_score(
@@ -115,9 +108,7 @@ def r2_score(
     y_pred: ArrayLike,
     *,
     sample_weight: ArrayLike | None = None,
-    multioutput: Literal["raw_values", "uniform_average", "variance_weighted"]
-    | ArrayLike
-    | None = "uniform_average",
+    multioutput: Literal["raw_values", "uniform_average", "variance_weighted"] | ArrayLike | None = "uniform_average",
     force_finite: bool = True,
 ) -> float | np.ndarray: ...
 def max_error(y_true: ArrayLike, y_pred: ArrayLike) -> float: ...
@@ -129,12 +120,8 @@ def mean_tweedie_deviance(
     sample_weight: ArrayLike | None = None,
     power: float = 0,
 ) -> float: ...
-def mean_poisson_deviance(
-    y_true: ArrayLike, y_pred: ArrayLike, *, sample_weight: ArrayLike | None = None
-) -> float: ...
-def mean_gamma_deviance(
-    y_true: ArrayLike, y_pred: ArrayLike, *, sample_weight: ArrayLike | None = None
-) -> float: ...
+def mean_poisson_deviance(y_true: ArrayLike, y_pred: ArrayLike, *, sample_weight: ArrayLike | None = None) -> float: ...
+def mean_gamma_deviance(y_true: ArrayLike, y_pred: ArrayLike, *, sample_weight: ArrayLike | None = None) -> float: ...
 def d2_tweedie_score(
     y_true: ArrayLike,
     y_pred: ArrayLike,
@@ -148,14 +135,12 @@ def d2_pinball_score(
     *,
     sample_weight: ArrayLike | None = None,
     alpha: float = 0.5,
-    multioutput: Literal["raw_values", "uniform_average"]
-    | ArrayLike = "uniform_average",
+    multioutput: Literal["raw_values", "uniform_average"] | ArrayLike = "uniform_average",
 ) -> float | np.ndarray: ...
 def d2_absolute_error_score(
     y_true: ArrayLike,
     y_pred: ArrayLike,
     *,
     sample_weight: ArrayLike | None = None,
-    multioutput: Literal["raw_values", "uniform_average"]
-    | ArrayLike = "uniform_average",
+    multioutput: Literal["raw_values", "uniform_average"] | ArrayLike = "uniform_average",
 ) -> float | np.ndarray: ...

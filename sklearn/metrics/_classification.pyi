@@ -42,9 +42,7 @@ def _check_zero_division(zero_division: str) -> None: ...
 def _check_targets(
     y_true: Union[List[int], ndarray, Series], y_pred: Union[List[int], ndarray]
 ) -> Tuple[str, ndarray, ndarray]: ...
-def _weighted_sum(
-    sample_score: ndarray, sample_weight: Optional[ndarray], normalize: bool = False
-) -> float64: ...
+def _weighted_sum(sample_score: ndarray, sample_weight: Optional[ndarray], normalize: bool = False) -> float64: ...
 def accuracy_score(
     y_true: ArrayLike,
     y_pred: ArrayLike,
@@ -82,14 +80,11 @@ def jaccard_score(
     *,
     labels: ArrayLike | None = None,
     pos_label: str | int = 1,
-    average: Literal["micro", "macro", "samples", "weighted", "binary"]
-    | None = "binary",
+    average: Literal["micro", "macro", "samples", "weighted", "binary"] | None = "binary",
     sample_weight: ArrayLike | None = None,
     zero_division: float | Literal["warn"] = "warn",
 ) -> float | np.ndarray: ...
-def matthews_corrcoef(
-    y_true: NDArray, y_pred: NDArray, *, sample_weight: ArrayLike | None = None
-) -> float: ...
+def matthews_corrcoef(y_true: NDArray, y_pred: NDArray, *, sample_weight: ArrayLike | None = None) -> float: ...
 def zero_one_loss(
     y_true: ArrayLike,
     y_pred: ArrayLike,
@@ -103,8 +98,7 @@ def f1_score(
     *,
     labels: ArrayLike | None = None,
     pos_label: str | int = 1,
-    average: Literal["micro", "macro", "samples", "weighted", "binary"]
-    | None = "binary",
+    average: Literal["micro", "macro", "samples", "weighted", "binary"] | None = "binary",
     sample_weight: ArrayLike | None = None,
     zero_division: Literal["warn", 0, 1] = "warn",
 ) -> float | NDArray: ...
@@ -115,8 +109,7 @@ def fbeta_score(
     beta: float,
     labels: ArrayLike | None = None,
     pos_label: str | int = 1,
-    average: Literal["micro", "macro", "samples", "weighted", "binary"]
-    | None = "binary",
+    average: Literal["micro", "macro", "samples", "weighted", "binary"] | None = "binary",
     sample_weight: ArrayLike | None = None,
     zero_division: Literal["warn", 0, 1] = "warn",
 ) -> float | NDArray: ...
@@ -155,8 +148,7 @@ def precision_score(
     *,
     labels: ArrayLike | None = None,
     pos_label: str | int = 1,
-    average: Literal["micro", "macro", "samples", "weighted", "binary"]
-    | None = "binary",
+    average: Literal["micro", "macro", "samples", "weighted", "binary"] | None = "binary",
     sample_weight: ArrayLike | None = None,
     zero_division: Literal["warn", 0, 1] = "warn",
 ) -> float | NDArray: ...
@@ -166,8 +158,7 @@ def recall_score(
     *,
     labels: ArrayLike | None = None,
     pos_label: str | int = 1,
-    average: Literal["micro", "macro", "samples", "weighted", "binary"]
-    | None = "binary",
+    average: Literal["micro", "macro", "samples", "weighted", "binary"] | None = "binary",
     sample_weight: ArrayLike | None = None,
     zero_division: Literal["warn", 0, 1] = "warn",
 ) -> float | NDArray: ...
@@ -189,9 +180,7 @@ def classification_report(
     output_dict: bool = False,
     zero_division: Literal["warn", 0, 1] = "warn",
 ) -> str | dict: ...
-def hamming_loss(
-    y_true: ArrayLike, y_pred: ArrayLike, *, sample_weight: ArrayLike | None = None
-) -> float | int: ...
+def hamming_loss(y_true: ArrayLike, y_pred: ArrayLike, *, sample_weight: ArrayLike | None = None) -> float | int: ...
 def log_loss(
     y_true: ArrayLike,
     y_pred: ArrayLike,

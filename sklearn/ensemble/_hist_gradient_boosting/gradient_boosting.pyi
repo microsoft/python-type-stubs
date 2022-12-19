@@ -34,7 +34,6 @@ from ...metrics import check_scoring
 from ...model_selection import train_test_split
 from ...preprocessing import LabelEncoder
 
-
 from .binning import _BinMapper
 from .grower import TreeGrower
 from pandas.core.frame import DataFrame
@@ -88,9 +87,7 @@ class BaseHistGradientBoosting(BaseEstimator, ABC):
     ) -> Union[HistGradientBoostingRegressor, HistGradientBoostingClassifier]: ...
     def _is_fitted(self) -> bool: ...
     def _clear_state(self) -> None: ...
-    def _get_small_trainset(
-        self, X_binned_train, y_train, sample_weight_train, seed
-    ): ...
+    def _get_small_trainset(self, X_binned_train, y_train, sample_weight_train, seed): ...
     def _check_early_stopping_scorer(
         self,
         X_binned_small_train,
@@ -123,9 +120,7 @@ class BaseHistGradientBoosting(BaseEstimator, ABC):
         n_threads: int,
     ) -> None: ...
     def _staged_raw_predict(self, X): ...
-    def _compute_partial_dependence_recursion(
-        self, grid: ndarray, target_features: ndarray
-    ) -> ndarray: ...
+    def _compute_partial_dependence_recursion(self, grid: ndarray, target_features: ndarray) -> ndarray: ...
     def _more_tags(self): ...
     @abstractmethod
     def _get_loss(self, sample_weight): ...
@@ -141,9 +136,7 @@ class HistGradientBoostingRegressor(RegressorMixin, BaseHistGradientBoosting):
 
     def __init__(
         self,
-        loss: Literal[
-            "squared_error", "absolute_error", "poisson", "quantile"
-        ] = "squared_error",
+        loss: Literal["squared_error", "absolute_error", "poisson", "quantile"] = "squared_error",
         *,
         quantile: float | None = None,
         learning_rate: float = 0.1,
@@ -167,9 +160,7 @@ class HistGradientBoostingRegressor(RegressorMixin, BaseHistGradientBoosting):
     def predict(self, X: ArrayLike) -> NDArray: ...
     def staged_predict(self, X: ArrayLike): ...
     def _encode_y(self, y: ndarray) -> ndarray: ...
-    def _get_loss(
-        self, sample_weight: None
-    ) -> Union[HalfPoissonLoss, PinballLoss, HalfSquaredError]: ...
+    def _get_loss(self, sample_weight: None) -> Union[HalfPoissonLoss, PinballLoss, HalfSquaredError]: ...
 
 class HistGradientBoostingClassifier(ClassifierMixin, BaseHistGradientBoosting):
 
@@ -178,9 +169,7 @@ class HistGradientBoostingClassifier(ClassifierMixin, BaseHistGradientBoosting):
 
     def __init__(
         self,
-        loss: Literal[
-            "log_loss", "auto", "binary_crossentropy", "categorical_crossentropy"
-        ] = "log_loss",
+        loss: Literal["log_loss", "auto", "binary_crossentropy", "categorical_crossentropy"] = "log_loss",
         *,
         learning_rate: float = 0.1,
         max_iter: int = 100,

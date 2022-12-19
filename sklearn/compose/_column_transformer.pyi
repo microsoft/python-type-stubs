@@ -3,7 +3,6 @@ from typing import Any, Dict, Iterator, List, Optional, Tuple, Union, Mapping, C
 from numpy.typing import ArrayLike, NDArray, DTypeLike
 from numpy import ndarray
 
-
 # Author: Andreas Mueller
 #         Joris Van den Bossche
 # License: BSD
@@ -13,7 +12,6 @@ from typing import Literal, Callable, Sequence
 
 import numpy as np
 from scipy import sparse
-
 
 from ..base import BaseEstimator, clone, TransformerMixin
 from ..utils._estimator_html_repr import _VisualBlock
@@ -76,10 +74,7 @@ class ColumnTransformer(TransformerMixin, _BaseComposition):
     def _validate_remainder(self, X: Union[DataFrame, ndarray]) -> None: ...
     @property
     def named_transformers_(self): ...
-    @deprecated(
-        "get_feature_names is deprecated in 1.0 and will be removed "
-        "in 1.2. Please use get_feature_names_out instead."
-    )
+    @deprecated("get_feature_names is deprecated in 1.0 and will be removed " "in 1.2. Please use get_feature_names_out instead.")
     def get_feature_names(self) -> ArrayLike: ...
     def _get_feature_name_out_for_transformer(
         self,
@@ -88,9 +83,7 @@ class ColumnTransformer(TransformerMixin, _BaseComposition):
         column: List[str],
         feature_names_in: ndarray,
     ) -> ndarray: ...
-    def get_feature_names_out(
-        self, input_features: ArrayLike | None = None
-    ) -> np.ndarray: ...
+    def get_feature_names_out(self, input_features: ArrayLike | None = None) -> np.ndarray: ...
     def _update_fitted_transformers(
         self,
         transformers: Union[
@@ -119,12 +112,8 @@ class ColumnTransformer(TransformerMixin, _BaseComposition):
         fitted: bool = False,
         column_as_strings: bool = False,
     ) -> List[Any]: ...
-    def fit(
-        self, X: ArrayLike | DataFrame, y: ArrayLike | None = None
-    ) -> ColumnTransformer: ...
-    def fit_transform(
-        self, X: ArrayLike | DataFrame, y: ArrayLike | None = None
-    ) -> NDArray | ArrayLike: ...
+    def fit(self, X: ArrayLike | DataFrame, y: ArrayLike | None = None) -> ColumnTransformer: ...
+    def fit_transform(self, X: ArrayLike | DataFrame, y: ArrayLike | None = None) -> NDArray | ArrayLike: ...
     def transform(self, X: ArrayLike | DataFrame) -> NDArray | ArrayLike: ...
     def _hstack(self, Xs: List[Union[csr_matrix, ndarray]]) -> ndarray: ...
     def _sk_visual_block_(self): ...
@@ -132,9 +121,7 @@ class ColumnTransformer(TransformerMixin, _BaseComposition):
 def _check_X(X: Union[DataFrame, ndarray]) -> Union[DataFrame, ndarray]: ...
 def _is_empty_column_selection(column: Union[int, List[str]]) -> bool: ...
 def _get_transformer_list(
-    estimators: Tuple[
-        Tuple[Pipeline, Tuple[str, str]], Tuple[Pipeline, Tuple[str, str]]
-    ]
+    estimators: Tuple[Tuple[Pipeline, Tuple[str, str]], Tuple[Pipeline, Tuple[str, str]]]
 ) -> List[Tuple[str, Pipeline, Tuple[str, str]]]: ...
 def make_column_transformer(
     *transformers,

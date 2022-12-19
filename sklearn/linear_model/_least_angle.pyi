@@ -17,7 +17,6 @@ from numpy.random import RandomState
 from scipy import linalg, interpolate
 from scipy.linalg.lapack import get_lapack_funcs
 
-
 from ._base import LinearModel, LinearRegression
 from ._base import _deprecate_normalize, _preprocess_data
 from ..base import RegressorMixin, MultiOutputMixin
@@ -111,9 +110,7 @@ class Lars(MultiOutputMixin, RegressorMixin, LinearModel):
         random_state: int | RandomState | None = None,
     ) -> None: ...
     @staticmethod
-    def _get_gram(
-        precompute: Union[ndarray, str], X: ndarray, y: ndarray
-    ) -> ndarray: ...
+    def _get_gram(precompute: Union[ndarray, str], X: ndarray, y: ndarray) -> ndarray: ...
     def _fit(
         self,
         X: ndarray,
@@ -124,9 +121,7 @@ class Lars(MultiOutputMixin, RegressorMixin, LinearModel):
         normalize: bool,
         Xy: Optional[ndarray] = None,
     ) -> Union[LassoLars, LassoLarsCV, Lars]: ...
-    def fit(
-        self, X: ArrayLike, y: ArrayLike, Xy: ArrayLike | None = None
-    ) -> Union[LassoLars, Lars]: ...
+    def fit(self, X: ArrayLike, y: ArrayLike, Xy: ArrayLike | None = None) -> Union[LassoLars, Lars]: ...
 
 class LassoLars(Lars):
 
@@ -226,9 +221,5 @@ class LassoLarsIC(LassoLars):
         noise_variance: float | None = None,
     ) -> None: ...
     def _more_tags(self): ...
-    def fit(
-        self, X: ArrayLike, y: ArrayLike, copy_X: bool | None = None
-    ) -> "LassoLarsIC": ...
-    def _estimate_noise_variance(
-        self, X: ndarray, y: ndarray, positive: bool
-    ) -> float64: ...
+    def fit(self, X: ArrayLike, y: ArrayLike, copy_X: bool | None = None) -> "LassoLarsIC": ...
+    def _estimate_noise_variance(self, X: ndarray, y: ndarray, positive: bool) -> float64: ...

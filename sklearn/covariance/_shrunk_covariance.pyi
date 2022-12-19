@@ -21,32 +21,16 @@ from numpy import float64, ndarray
 def shrunk_covariance(emp_cov: ArrayLike, shrinkage: float = 0.1) -> NDArray: ...
 
 class ShrunkCovariance(EmpiricalCovariance):
-    def __init__(
-        self,
-        *,
-        store_precision: bool = True,
-        assume_centered: bool = False,
-        shrinkage: float = 0.1
-    ) -> None: ...
+    def __init__(self, *, store_precision: bool = True, assume_centered: bool = False, shrinkage: float = 0.1) -> None: ...
     def fit(self, X: ArrayLike, y: None = None) -> "ShrunkCovariance": ...
 
 # Ledoit-Wolf estimator
 
-def ledoit_wolf_shrinkage(
-    X: ArrayLike, assume_centered: bool = False, block_size: int = 1000
-) -> float: ...
-def ledoit_wolf(
-    X: ArrayLike, *, assume_centered: bool = False, block_size: int = 1000
-) -> tuple[NDArray, float]: ...
+def ledoit_wolf_shrinkage(X: ArrayLike, assume_centered: bool = False, block_size: int = 1000) -> float: ...
+def ledoit_wolf(X: ArrayLike, *, assume_centered: bool = False, block_size: int = 1000) -> tuple[NDArray, float]: ...
 
 class LedoitWolf(EmpiricalCovariance):
-    def __init__(
-        self,
-        *,
-        store_precision: bool = True,
-        assume_centered: bool = False,
-        block_size: int = 1000
-    ) -> None: ...
+    def __init__(self, *, store_precision: bool = True, assume_centered: bool = False, block_size: int = 1000) -> None: ...
     def fit(self, X: ArrayLike, y: None = None) -> "LedoitWolf": ...
 
 # OAS estimator

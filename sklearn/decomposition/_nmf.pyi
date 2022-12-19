@@ -94,9 +94,7 @@ def _multiplicative_update_w(
     HHt: None = None,
     XHt: None = None,
     update_H: bool = True,
-) -> Union[
-    Tuple[ndarray, ndarray, None, None], Tuple[ndarray, None, ndarray, ndarray]
-]: ...
+) -> Union[Tuple[ndarray, ndarray, None, None], Tuple[ndarray, None, ndarray, ndarray]]: ...
 def _multiplicative_update_h(
     X: csr_matrix,
     W: ndarray,
@@ -113,7 +111,7 @@ def _fit_multiplicative_update(
     X: csr_matrix,
     W: ndarray,
     H: ndarray,
-    beta_loss: int|str = "frobenius",
+    beta_loss: int | str = "frobenius",
     max_iter: int = 200,
     tol: float = 1e-4,
     l1_reg_W: float = 0,
@@ -132,15 +130,14 @@ def non_negative_factorization(
     init: Literal["random", "nndsvd", "nndsvda", "nndsvdar", "custom"] | None = None,
     update_H: bool = True,
     solver: Literal["cd", "mu"] = "cd",
-    beta_loss: float
-    | Literal["frobenius", "kullback-leibler", "itakura-saito"] = "frobenius",
+    beta_loss: float | Literal["frobenius", "kullback-leibler", "itakura-saito"] = "frobenius",
     tol: float = 1e-4,
     max_iter: int = 200,
-    alpha: float|str = "deprecated",
+    alpha: float | str = "deprecated",
     alpha_W: float = 0.0,
     alpha_H: float | Literal["same"] = "same",
     l1_ratio: float = 0.0,
-    regularization: Literal["both", "components", "transformation"]|str = "deprecated",
+    regularization: Literal["both", "components", "transformation"] | str = "deprecated",
     random_state: int | RandomState | None = None,
     verbose: int = 0,
     shuffle: bool = False,
@@ -151,27 +148,22 @@ class NMF(_ClassNamePrefixFeaturesOutMixin, TransformerMixin, BaseEstimator):
         self,
         n_components: int | None = None,
         *,
-        init: Literal["random", "nndsvd", "nndsvda", "nndsvdar", "custom"]
-        | None = None,
+        init: Literal["random", "nndsvd", "nndsvda", "nndsvdar", "custom"] | None = None,
         solver: Literal["cd", "mu"] = "cd",
-        beta_loss: float
-        | Literal["frobenius", "kullback-leibler", "itakura-saito"] = "frobenius",
+        beta_loss: float | Literal["frobenius", "kullback-leibler", "itakura-saito"] = "frobenius",
         tol: float = 1e-4,
         max_iter: int = 200,
         random_state: int | RandomState | None = None,
-        alpha: float|str = "deprecated",
+        alpha: float | str = "deprecated",
         alpha_W: float = 0.0,
         alpha_H: float | Literal["same"] = "same",
         l1_ratio: float = 0.0,
         verbose: int = 0,
         shuffle: bool = False,
-        regularization: None
-        | Literal["both", "components", "transformation"]|str = "deprecated",
+        regularization: None | Literal["both", "components", "transformation"] | str = "deprecated",
     ) -> None: ...
     def _more_tags(self) -> Dict[str, bool]: ...
-    def _check_params(
-        self, X: Union[ndarray, csr_matrix]
-    ) -> Union[NMF, MiniBatchNMF]: ...
+    def _check_params(self, X: Union[ndarray, csr_matrix]) -> Union[NMF, MiniBatchNMF]: ...
     def _check_w_h(
         self,
         X: Union[ndarray, csr_matrix],
@@ -179,9 +171,7 @@ class NMF(_ClassNamePrefixFeaturesOutMixin, TransformerMixin, BaseEstimator):
         H: Optional[ndarray],
         update_H: bool,
     ) -> Tuple[ndarray, ndarray]: ...
-    def _scale_regularization(
-        self, X: Union[ndarray, csr_matrix]
-    ) -> Tuple[float, float, float, float]: ...
+    def _scale_regularization(self, X: Union[ndarray, csr_matrix]) -> Tuple[float, float, float, float]: ...
     def fit_transform(
         self,
         X: NDArray | ArrayLike,
@@ -197,9 +187,7 @@ class NMF(_ClassNamePrefixFeaturesOutMixin, TransformerMixin, BaseEstimator):
         H: Optional[ndarray] = None,
         update_H: bool = True,
     ) -> Tuple[ndarray, ndarray, int]: ...
-    def fit(
-        self, X: NDArray | ArrayLike, y: None = None, **params
-    ) -> Union[NMF, MiniBatchNMF]: ...
+    def fit(self, X: NDArray | ArrayLike, y: None = None, **params) -> Union[NMF, MiniBatchNMF]: ...
     def transform(self, X: NDArray | ArrayLike) -> NDArray: ...
     def inverse_transform(self, W: NDArray) -> NDArray: ...
     @property
@@ -210,11 +198,9 @@ class MiniBatchNMF(NMF):
         self,
         n_components: int | None = None,
         *,
-        init: Literal["random", "nndsvd", "nndsvda", "nndsvdar", "custom"]
-        | None = None,
+        init: Literal["random", "nndsvd", "nndsvda", "nndsvdar", "custom"] | None = None,
         batch_size: int = 1024,
-        beta_loss: float
-        | Literal["frobenius", "kullback-leibler", "itakura-saito"] = "frobenius",
+        beta_loss: float | Literal["frobenius", "kullback-leibler", "itakura-saito"] = "frobenius",
         tol: float = 1e-4,
         max_no_improvement: int = 10,
         max_iter: int = 200,
@@ -230,9 +216,7 @@ class MiniBatchNMF(NMF):
     ) -> None: ...
     def _check_params(self, X: csr_matrix) -> "MiniBatchNMF": ...
     def _solve_W(self, X, H, max_iter): ...
-    def _minibatch_step(
-        self, X: csr_matrix, W: ndarray, H: ndarray, update_H: bool
-    ) -> float64: ...
+    def _minibatch_step(self, X: csr_matrix, W: ndarray, H: ndarray, update_H: bool) -> float64: ...
     def _minibatch_convergence(
         self,
         X: csr_matrix,

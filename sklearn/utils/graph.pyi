@@ -16,9 +16,7 @@ from ..metrics.pairwise import pairwise_distances
 ###############################################################################
 # Path and connected component analysis.
 # Code adapted from networkx
-def single_source_shortest_path_length(
-    graph: NDArray, source: int, *, cutoff: int | None = None
-): ...
+def single_source_shortest_path_length(graph: NDArray, source: int, *, cutoff: int | None = None): ...
 @deprecated(
     "`graph_shortest_path` is deprecated in 1.0 (renaming of 0.25) and will "
     "be removed in 1.2. Use `scipy.sparse.csgraph.shortest_path` instead."

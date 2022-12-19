@@ -18,8 +18,6 @@ from ..base import BaseEstimator, ClusterMixin
 from ..utils.validation import _check_sample_weight
 from ..neighbors import NearestNeighbors
 
-
-
 def dbscan(
     X: ArrayLike,
     eps: float = 0.5,

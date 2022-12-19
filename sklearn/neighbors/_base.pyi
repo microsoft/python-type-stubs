@@ -18,8 +18,6 @@ import numbers
 import numpy as np
 from scipy.sparse import csr_matrix, issparse
 
-
-
 from ..base import BaseEstimator, MultiOutputMixin
 from ..base import is_classifier
 from ..metrics import pairwise_distances_chunked
@@ -78,23 +76,13 @@ class NeighborsBase(MultiOutputMixin, BaseEstimator, metaclass=ABCMeta):
         self,
         X: Union[ndarray, scipy.sparse._csr.csr_matrix, NearestNeighbors],
         y: Optional[Union[ndarray, Series]] = None,
-    ) -> Union[
-        KNeighborsTransformer,
-        NearestNeighbors,
-        KNeighborsRegressor,
-        KNeighborsClassifier,
-        LocalOutlierFactor,
-    ]: ...
+    ) -> Union[KNeighborsTransformer, NearestNeighbors, KNeighborsRegressor, KNeighborsClassifier, LocalOutlierFactor,]: ...
     def _more_tags(self) -> Dict[str, bool]: ...
 
-def _tree_query_parallel_helper(
-    tree: KDTree, *args, **kwargs
-) -> Union[Tuple[ndarray, ndarray], ndarray]: ...
+def _tree_query_parallel_helper(tree: KDTree, *args, **kwargs) -> Union[Tuple[ndarray, ndarray], ndarray]: ...
 
 class KNeighborsMixin:
-    def _kneighbors_reduce_func(
-        self, dist: ndarray, start: int, n_neighbors: int, return_distance: bool
-    ) -> ndarray: ...
+    def _kneighbors_reduce_func(self, dist: ndarray, start: int, n_neighbors: int, return_distance: bool) -> ndarray: ...
     def kneighbors(
         self,
         X: ArrayLike | None = None,

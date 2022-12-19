@@ -32,9 +32,7 @@ from scipy.sparse._dia import dia_matrix
 
 def _graph_connected_component(graph, node_id): ...
 def _graph_is_connected(graph: Union[csr_matrix, coo_matrix]) -> bool: ...
-def _set_diag(
-    laplacian: coo_matrix, value: int, norm_laplacian: bool
-) -> Union[csr_matrix, dia_matrix]: ...
+def _set_diag(laplacian: coo_matrix, value: int, norm_laplacian: bool) -> Union[csr_matrix, dia_matrix]: ...
 def spectral_embedding(
     adjacency: ArrayLike,
     *,
@@ -51,9 +49,7 @@ class SpectralEmbedding(BaseEstimator):
         self,
         n_components: int = 2,
         *,
-        affinity: Literal[
-            "nearest_neighbors", "rbf", "precomputed", "precomputed_nearest_neighbors"
-        ]
+        affinity: Literal["nearest_neighbors", "rbf", "precomputed", "precomputed_nearest_neighbors"]
         | Callable = "nearest_neighbors",
         gamma: float | None = None,
         random_state: int | RandomState | None = None,

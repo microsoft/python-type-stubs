@@ -26,13 +26,9 @@ from typing import Tuple
 _EPSILON = ...
 
 def _modified_weiszfeld_step(X: ndarray, x_old: ndarray) -> ndarray: ...
-def _spatial_median(
-    X: ndarray, max_iter: int = 300, tol: float = 1.0e-3
-) -> Tuple[int, ndarray]: ...
+def _spatial_median(X: ndarray, max_iter: int = 300, tol: float = 1.0e-3) -> Tuple[int, ndarray]: ...
 def _breakdown_point(n_samples: int, n_subsamples: int) -> float: ...
-def _lstsq(
-    X: ndarray, y: ndarray, indices: ndarray, fit_intercept: bool
-) -> ndarray: ...
+def _lstsq(X: ndarray, y: ndarray, indices: ndarray, fit_intercept: bool) -> ndarray: ...
 
 class TheilSenRegressor(RegressorMixin, LinearModel):
     def __init__(
@@ -40,7 +36,7 @@ class TheilSenRegressor(RegressorMixin, LinearModel):
         *,
         fit_intercept: bool = True,
         copy_X: bool = True,
-        max_subpopulation: int|float = 1e4,
+        max_subpopulation: int | float = 1e4,
         n_subsamples: int | None = None,
         max_iter: int = 300,
         tol: float = 1.0e-3,

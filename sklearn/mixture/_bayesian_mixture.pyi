@@ -21,9 +21,7 @@ from numpy import float64, ndarray
 from numpy.random import RandomState
 
 def _log_dirichlet_norm(dirichlet_concentration: ndarray) -> float64: ...
-def _log_wishart_norm(
-    degrees_of_freedom: ndarray, log_det_precisions_chol: ndarray, n_features: int
-) -> ndarray: ...
+def _log_wishart_norm(degrees_of_freedom: ndarray, log_det_precisions_chol: ndarray, n_features: int) -> ndarray: ...
 
 class BayesianGaussianMixture(BaseMixture):
     def __init__(
@@ -35,9 +33,7 @@ class BayesianGaussianMixture(BaseMixture):
         reg_covar: float = 1e-6,
         max_iter: int = 100,
         n_init: int = 1,
-        init_params: Literal[
-            "kmeans", "k-means++", "random", "random_from_data"
-        ] = "kmeans",
+        init_params: Literal["kmeans", "k-means++", "random", "random_from_data"] = "kmeans",
         weight_concentration_prior_type: str = "dirichlet_process",
         weight_concentration_prior: float | None = None,
         mean_precision_prior: float | None = None,
@@ -65,9 +61,7 @@ class BayesianGaussianMixture(BaseMixture):
     def _m_step(self, X: ndarray, log_resp: ndarray) -> None: ...
     def _estimate_log_weights(self) -> ndarray: ...
     def _estimate_log_prob(self, X: ndarray) -> ndarray: ...
-    def _compute_lower_bound(
-        self, log_resp: ndarray, log_prob_norm: float64
-    ) -> float64: ...
+    def _compute_lower_bound(self, log_resp: ndarray, log_prob_norm: float64) -> float64: ...
     def _get_parameters(
         self,
     ) -> Union[

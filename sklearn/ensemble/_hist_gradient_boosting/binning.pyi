@@ -11,7 +11,6 @@ from ...utils import check_random_state, check_array
 from ...base import BaseEstimator, TransformerMixin
 from ...utils.validation import check_is_fitted
 
-
 def _find_binning_thresholds(col_data: ndarray, max_bins: int) -> ndarray: ...
 
 class _BinMapper(TransformerMixin, BaseEstimator):

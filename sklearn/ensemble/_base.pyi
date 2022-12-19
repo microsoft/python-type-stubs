@@ -78,7 +78,7 @@ class BaseEnsemble(MetaEstimatorMixin, BaseEstimator, metaclass=ABCMeta):
         ],
         *,
         n_estimators: int = 10,
-        estimator_params: ArrayLike = ...
+        estimator_params: ArrayLike = ...,
     ) -> None: ...
     def _validate_estimator(
         self,
@@ -88,23 +88,14 @@ class BaseEnsemble(MetaEstimatorMixin, BaseEstimator, metaclass=ABCMeta):
         self,
         append: bool = True,
         random_state: Optional[Union[int64, RandomState]] = None,
-    ) -> Union[
-        DecisionTreeRegressor,
-        DecisionTreeClassifier,
-        ExtraTreeRegressor,
-        ExtraTreeClassifier,
-    ]: ...
+    ) -> Union[DecisionTreeRegressor, DecisionTreeClassifier, ExtraTreeRegressor, ExtraTreeClassifier,]: ...
     def __len__(self) -> int: ...
     def __getitem__(self, index): ...
     def __iter__(self): ...
 
-def _partition_estimators(
-    n_estimators: int, n_jobs: Optional[int]
-) -> Tuple[int, List[int], List[int]]: ...
+def _partition_estimators(n_estimators: int, n_jobs: Optional[int]) -> Tuple[int, List[int], List[int]]: ...
 
-class _BaseHeterogeneousEnsemble(
-    MetaEstimatorMixin, _BaseComposition, metaclass=ABCMeta
-):
+class _BaseHeterogeneousEnsemble(MetaEstimatorMixin, _BaseComposition, metaclass=ABCMeta):
 
     _required_parameters: list = ...
 

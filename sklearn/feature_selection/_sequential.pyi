@@ -30,9 +30,7 @@ class SequentialFeatureSelector(SelectorMixin, MetaEstimatorMixin, BaseEstimator
         cv: int | Generator | Iterable = 5,
         n_jobs: int | None = None,
     ) -> None: ...
-    def fit(
-        self, X: ArrayLike, y: ArrayLike | None = None
-    ) -> "SequentialFeatureSelector": ...
+    def fit(self, X: ArrayLike, y: ArrayLike | None = None) -> "SequentialFeatureSelector": ...
     def _get_best_new_feature_score(
         self,
         estimator: Union[RidgeCV, KNeighborsClassifier],

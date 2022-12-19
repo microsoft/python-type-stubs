@@ -44,9 +44,7 @@ class LinearSVR(RegressorMixin, LinearModel):
         epsilon: float = 0.0,
         tol: float = 1e-4,
         C: float = 1.0,
-        loss: Literal[
-            "epsilon_insensitive", "squared_epsilon_insensitive"
-        ] = "epsilon_insensitive",
+        loss: Literal["epsilon_insensitive", "squared_epsilon_insensitive"] = "epsilon_insensitive",
         fit_intercept: bool = True,
         intercept_scaling: float = 1.0,
         dual: bool = True,
@@ -70,8 +68,7 @@ class SVC(BaseSVC):
         self,
         *,
         C: float = 1.0,
-        kernel: Literal["linear", "poly", "rbf", "sigmoid", "precomputed"]
-        | Callable = "rbf",
+        kernel: Literal["linear", "poly", "rbf", "sigmoid", "precomputed"] | Callable = "rbf",
         degree: int = 3,
         gamma: Literal["scale", "auto"] | float = "scale",
         coef0: float = 0.0,
@@ -96,8 +93,7 @@ class NuSVC(BaseSVC):
         self,
         *,
         nu: float = 0.5,
-        kernel: Literal["linear", "poly", "rbf", "sigmoid", "precomputed"]
-        | Callable = "rbf",
+        kernel: Literal["linear", "poly", "rbf", "sigmoid", "precomputed"] | Callable = "rbf",
         degree: int = 3,
         gamma: Literal["scale", "auto"] | float = "scale",
         coef0: float = 0.0,
@@ -121,8 +117,7 @@ class SVR(RegressorMixin, BaseLibSVM):
     def __init__(
         self,
         *,
-        kernel: Literal["linear", "poly", "rbf", "sigmoid", "precomputed"]
-        | Callable = "rbf",
+        kernel: Literal["linear", "poly", "rbf", "sigmoid", "precomputed"] | Callable = "rbf",
         degree: int = 3,
         gamma: Literal["scale", "auto"] | float = "scale",
         coef0: float = 0.0,
@@ -145,8 +140,7 @@ class NuSVR(RegressorMixin, BaseLibSVM):
         *,
         nu: float = 0.5,
         C: float = 1.0,
-        kernel: Literal["linear", "poly", "rbf", "sigmoid", "precomputed"]
-        | Callable = "rbf",
+        kernel: Literal["linear", "poly", "rbf", "sigmoid", "precomputed"] | Callable = "rbf",
         degree: int = 3,
         gamma: Literal["scale", "auto"] | float = "scale",
         coef0: float = 0.0,
@@ -165,8 +159,7 @@ class OneClassSVM(OutlierMixin, BaseLibSVM):
     def __init__(
         self,
         *,
-        kernel: Literal["linear", "poly", "rbf", "sigmoid", "precomputed"]
-        | Callable = "rbf",
+        kernel: Literal["linear", "poly", "rbf", "sigmoid", "precomputed"] | Callable = "rbf",
         degree: int = 3,
         gamma: Literal["scale", "auto"] | float = "scale",
         coef0: float = 0.0,

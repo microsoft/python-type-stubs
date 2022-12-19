@@ -11,7 +11,6 @@ import numpy as np
 from numpy.random import RandomState
 import warnings
 
-
 from collections import defaultdict
 from ..utils.validation import check_is_fitted
 from ..utils.fixes import delayed
@@ -46,9 +45,7 @@ def mean_shift(
     max_iter: int = 300,
     n_jobs: int | None = None,
 ) -> tuple[np.ndarray, NDArray]: ...
-def get_bin_seeds(
-    X: ArrayLike, bin_size: float, min_bin_freq: int = 1
-) -> ArrayLike: ...
+def get_bin_seeds(X: ArrayLike, bin_size: float, min_bin_freq: int = 1) -> ArrayLike: ...
 
 class MeanShift(ClusterMixin, BaseEstimator):
     def __init__(

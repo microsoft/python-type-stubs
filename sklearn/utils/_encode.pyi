@@ -6,9 +6,7 @@ import numpy as np
 from . import is_scalar_nan
 from numpy import float64, int64, ndarray
 
-def _unique(
-    values: ndarray, *, return_inverse=False, return_counts=False
-) -> Union[Tuple[ndarray, ndarray], ndarray]: ...
+def _unique(values: ndarray, *, return_inverse=False, return_counts=False) -> Union[Tuple[ndarray, ndarray], ndarray]: ...
 def _unique_np(
     values: ndarray, return_inverse: bool = False, return_counts: bool = False
 ) -> Union[Tuple[ndarray, ndarray], ndarray]: ...
@@ -31,11 +29,7 @@ def _unique_python(values: ndarray, *, return_inverse, return_counts) -> ndarray
 def _encode(values: ndarray, *, uniques, check_unknown=True) -> ndarray: ...
 def _check_unknown(
     values: ndarray, known_values: ndarray, return_mask: bool = False
-) -> Union[
-    Tuple[List[float64], ndarray],
-    Tuple[List[Any], ndarray],
-    Tuple[List[int64], ndarray],
-]: ...
+) -> Union[Tuple[List[float64], ndarray], Tuple[List[Any], ndarray], Tuple[List[int64], ndarray],]: ...
 
 class _NaNCounter(Counter):
     def __init__(self, items): ...

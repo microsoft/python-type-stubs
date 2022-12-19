@@ -25,9 +25,7 @@ class QuantileRegressor(LinearModel, RegressorMixin, BaseEstimator):
         quantile: float = 0.5,
         alpha: float = 1.0,
         fit_intercept: bool = True,
-        solver: Literal[
-            "highs-ds", "highs-ipm", "highs", "interior-point", "revised simplex"
-        ] = "interior-point",
+        solver: Literal["highs-ds", "highs-ipm", "highs", "interior-point", "revised simplex"] = "interior-point",
         solver_options: Mapping | None = None,
     ) -> None: ...
     def fit(

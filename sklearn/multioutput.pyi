@@ -33,15 +33,9 @@ __all__ = [
 ]
 
 def _fit_estimator(
-    estimator: RandomForestRegressor,
-    X: ndarray,
-    y: ndarray,
-    sample_weight: None = None,
-    **fit_params
+    estimator: RandomForestRegressor, X: ndarray, y: ndarray, sample_weight: None = None, **fit_params
 ) -> RandomForestRegressor: ...
-def _partial_fit_estimator(
-    estimator, X, y, classes=None, sample_weight=None, first_time=True
-): ...
+def _partial_fit_estimator(estimator, X, y, classes=None, sample_weight=None, first_time=True): ...
 def _available_if_estimator_has(attr: str) -> Callable: ...
 
 class _MultiOutputEstimator(MetaEstimatorMixin, BaseEstimator, metaclass=ABCMeta):
@@ -56,11 +50,7 @@ class _MultiOutputEstimator(MetaEstimatorMixin, BaseEstimator, metaclass=ABCMeta
         sample_weight: ArrayLike | None = None,
     ) -> Any: ...
     def fit(
-        self,
-        X: NDArray | ArrayLike,
-        y: NDArray | ArrayLike,
-        sample_weight: ArrayLike | None = None,
-        **fit_params
+        self, X: NDArray | ArrayLike, y: NDArray | ArrayLike, sample_weight: ArrayLike | None = None, **fit_params
     ) -> "MultiOutputRegressor": ...
     def predict(self, X: NDArray | ArrayLike) -> NDArray | ArrayLike: ...
     def _more_tags(self): ...
@@ -77,13 +67,7 @@ class MultiOutputRegressor(RegressorMixin, _MultiOutputEstimator):
 
 class MultiOutputClassifier(ClassifierMixin, _MultiOutputEstimator):
     def __init__(self, estimator: Estimator, *, n_jobs: int | None = None): ...
-    def fit(
-        self,
-        X: NDArray | ArrayLike,
-        Y: ArrayLike,
-        sample_weight: ArrayLike | None = None,
-        **fit_params
-    ) -> Any: ...
+    def fit(self, X: NDArray | ArrayLike, Y: ArrayLike, sample_weight: ArrayLike | None = None, **fit_params) -> Any: ...
     def _check_predict_proba(self): ...
     @available_if(_check_predict_proba)
     def predict_proba(self, X: ArrayLike) -> NDArray | list[NDArray]: ...

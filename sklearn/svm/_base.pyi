@@ -33,9 +33,7 @@ from sklearn.svm._classes import NuSVC, NuSVR, OneClassSVM, SVC, SVR
 
 LIBSVM_IMPL: list = ...
 
-def _one_vs_one_coef(
-    dual_coef: ndarray, n_support: ndarray, support_vectors: ndarray
-) -> List[ndarray]: ...
+def _one_vs_one_coef(dual_coef: ndarray, n_support: ndarray, support_vectors: ndarray) -> List[ndarray]: ...
 
 class BaseLibSVM(BaseEstimator, metaclass=ABCMeta):
 
@@ -138,9 +136,7 @@ class BaseSVC(ClassifierMixin, BaseLibSVM, metaclass=ABCMeta):
     @property
     def probB_(self) -> NDArray: ...
 
-def _get_liblinear_solver_type(
-    multi_class: str, penalty: str, loss: str, dual: bool
-) -> int: ...
+def _get_liblinear_solver_type(multi_class: str, penalty: str, loss: str, dual: bool) -> int: ...
 def _fit_liblinear(
     X: Union[ndarray, csr_matrix],
     y: ndarray,

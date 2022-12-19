@@ -16,5 +16,5 @@ def l1_min_c(
     *,
     loss: Literal["squared_hinge", "log"] = "squared_hinge",
     fit_intercept: bool = True,
-    intercept_scaling: float = 1.0
+    intercept_scaling: float = 1.0,
 ) -> float: ...

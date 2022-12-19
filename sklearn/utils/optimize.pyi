@@ -23,11 +23,8 @@ def _line_search_wolfe12(
     gfk: ndarray,
     old_fval: Union[float, float64],
     old_old_fval: Optional[Union[float, float64]],
-    **kwargs
-) -> Union[
-    Tuple[float, int, int, float, float, ndarray],
-    Tuple[float, int, int, float, float64, ndarray],
-]: ...
+    **kwargs,
+) -> Union[Tuple[float, int, int, float, float, ndarray], Tuple[float, int, int, float, float64, ndarray],]: ...
 def _cg(fhess_p: Callable, fgrad: ndarray, maxiter: int, tol: float64) -> ndarray: ...
 def _newton_cg(
     grad_hess: Callable,

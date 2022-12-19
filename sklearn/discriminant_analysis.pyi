@@ -75,12 +75,7 @@ class LinearDiscriminantAnalysis(
 
 class QuadraticDiscriminantAnalysis(ClassifierMixin, BaseEstimator):
     def __init__(
-        self,
-        *,
-        priors: NDArray | None = None,
-        reg_param: float = 0.0,
-        store_covariance: bool = False,
-        tol: float = 1.0e-4
+        self, *, priors: NDArray | None = None, reg_param: float = 0.0, store_covariance: bool = False, tol: float = 1.0e-4
     ) -> None: ...
     def fit(self, X: ArrayLike, y: ArrayLike) -> "QuadraticDiscriminantAnalysis": ...
     def _decision_function(self, X: ndarray) -> ndarray: ...

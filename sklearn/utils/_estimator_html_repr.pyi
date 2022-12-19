@@ -23,7 +23,7 @@ class _VisualBlock:
         *,
         names: ArrayLike | None = None,
         name_details: Sequence[str] | str | None = None,
-        dash_wrapped: bool = True
+        dash_wrapped: bool = True,
     ): ...
     def _sk_visual_block_(self): ...
 
@@ -36,9 +36,7 @@ def _write_label_html(
     checked=False,
 ): ...
 def _get_visual_block(estimator): ...
-def _write_estimator_html(
-    out, estimator, estimator_label, estimator_label_details, first_call=False
-): ...
+def _write_estimator_html(out, estimator, estimator_label, estimator_label_details, first_call=False): ...
 
 _STYLE = ...  # noqa
 

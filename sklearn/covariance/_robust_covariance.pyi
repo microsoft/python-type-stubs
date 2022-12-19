@@ -11,7 +11,6 @@ import numbers
 import numpy as np
 from scipy import linalg
 
-
 from . import empirical_covariance, EmpiricalCovariance
 from ..utils.extmath import fast_logdet
 from ..utils import check_random_state, check_array
@@ -72,10 +71,6 @@ class MinCovDet(EmpiricalCovariance):
         support_fraction: float | None = None,
         random_state: int | RandomState | None = None,
     ) -> None: ...
-    def fit(
-        self, X: ArrayLike, y: None = None
-    ) -> Union[MinCovDet, EllipticEnvelope]: ...
+    def fit(self, X: ArrayLike, y: None = None) -> Union[MinCovDet, EllipticEnvelope]: ...
     def correct_covariance(self, data: ArrayLike) -> NDArray: ...
-    def reweight_covariance(
-        self, data: ArrayLike
-    ) -> tuple[NDArray, NDArray, np.ndarray]: ...
+    def reweight_covariance(self, data: ArrayLike) -> tuple[NDArray, NDArray, np.ndarray]: ...
