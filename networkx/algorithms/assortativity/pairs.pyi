@@ -1,0 +1,6 @@
+from ...classes.graph import Graph
+
+__all__ = ["node_attribute_xy", "node_degree_xy"]
+
+def node_attribute_xy(G: Graph, attribute, nodes=None): ...
+def node_degree_xy(G: Graph, x="out", y="in", weight=None, nodes=None): ...

@@ -1,0 +1,16 @@
+from ..classes.graph import Graph
+from ..classes.graph import Graph
+
+__all__ = [
+    "laplacian_spectrum",
+    "adjacency_spectrum",
+    "modularity_spectrum",
+    "normalized_laplacian_spectrum",
+    "bethe_hessian_spectrum",
+]
+
+def laplacian_spectrum(G: Graph, weight="weight"): ...
+def normalized_laplacian_spectrum(G: Graph, weight="weight"): ...
+def adjacency_spectrum(G: Graph, weight="weight"): ...
+def modularity_spectrum(G: Graph): ...
+def bethe_hessian_spectrum(G: Graph, r: float | None = None): ...

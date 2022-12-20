@@ -1,0 +1,9 @@
+from typing import Mapping
+
+from ...classes.graph import Graph
+
+__all__ = ["degree_centrality", "betweenness_centrality", "closeness_centrality"]
+
+def degree_centrality(G: Graph, nodes) -> Mapping: ...
+def betweenness_centrality(G: Graph, nodes) -> Mapping: ...
+def closeness_centrality(G: Graph, nodes, normalized: bool = True) -> Mapping: ...
