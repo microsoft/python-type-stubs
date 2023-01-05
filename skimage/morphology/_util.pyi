@@ -1,0 +1,16 @@
+import numpy as np
+from scipy import ndimage as ndi
+
+def _validate_connectivity(image_dim, connectivity, offset): ...
+def _raveled_offsets_and_distances(
+    image_shape,
+    *,
+    footprint=None,
+    connectivity=1,
+    center=None,
+    spacing=None,
+    order="C",
+): ...
+def _offsets_to_raveled_neighbors(image_shape, footprint, center, order="C"): ...
+def _resolve_neighborhood(footprint, connectivity, ndim): ...
+def _set_border_values(image, value): ...
