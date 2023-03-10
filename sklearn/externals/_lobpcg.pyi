@@ -1,31 +1,35 @@
-from numpy import ndarray
-from sklearn._typing import Scalar
-from numpy.typing import NDArray
-
+from typing import Callable
+from scipy.linalg import (
+    inv as inv,
+    eigh as eigh,
+    cho_factor as cho_factor,
+    cho_solve as cho_solve,
+    cholesky as cholesky,
+    LinAlgError as LinAlgError,
+)
+from scipy.sparse.linalg import LinearOperator
+from .._typing import ArrayLike, MatrixLike, Float, Scalar, Int
+from numpy import block as bmat, ndarray
+from scipy.sparse import isspmatrix as isspmatrix
+import inspect
 import warnings
 import numpy as np
-from scipy.linalg import inv, eigh, cho_factor, cho_solve, cholesky, LinAlgError
-from scipy.sparse.linalg import aslinearoperator
-from numpy import block as bmat
 
 __all__ = ["lobpcg"]
 
-def _report_nonhermitian(M, name): ...
-def _as2d(ar): ...
-def _makeOperator(operatorInput, expectedShape): ...
-def _applyConstraints(blockVectorV, factYBY, blockVectorBY, blockVectorY): ...
-def _b_orthonormalize(B, blockVectorV, blockVectorBV=None, retInvR=False): ...
-def _get_indx(_lambda, num, largest): ...
+
 def lobpcg(
-    A,
-    X: NDArray | float,
-    B: NDArray | LinearOperator | None = None,
-    M: NDArray | LinearOperator | None = None,
-    Y: NDArray | float | None = None,
+    A: LinearOperator | Callable | MatrixLike | ArrayLike,
+    X: Float | ArrayLike,
+    B: MatrixLike | Callable | ArrayLike | None | LinearOperator = None,
+    M: MatrixLike | Callable | ArrayLike | None | LinearOperator = None,
+    Y: float | None | ArrayLike = None,
     tol: Scalar | None = None,
     maxiter: int | None = None,
-    largest: bool = True,
-    verbosityLevel: int = 0,
-    retLambdaHistory: bool = False,
-    retResidualNormsHistory: bool = False,
-) -> tuple[NDArray, NDArray, list[np.ndarray], list[np.ndarray]]: ...
+    largest: bool | None = True,
+    verbosityLevel: Int = 0,
+    retLambdaHistory: bool | None = False,
+    retResidualNormsHistory: bool | None = False,
+    restartControl: int | None = 20,
+) -> tuple[ndarray, ndarray, ndarray, ndarray]:
+    ...

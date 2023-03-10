@@ -1,86 +1,73 @@
-from typing import Optional, Tuple, Union, Literal
-from numpy.typing import ArrayLike, NDArray
-
-# Author: Chyi-Kwei Yau
-# Author: Matthew D. Hoffman (original onlineldavb implementation)
+from typing import Any, Literal, Self
+from ..utils._param_validation import Interval as Interval, StrOptions as StrOptions
+from numpy.random import RandomState
+from scipy.special import gammaln as gammaln, logsumexp as logsumexp
+from .._typing import Int, Float, ArrayLike, MatrixLike
+from ._online_lda_fast import mean_change as cy_mean_change
+from ..base import BaseEstimator, TransformerMixin, ClassNamePrefixFeaturesOutMixin
+from joblib import effective_n_jobs as effective_n_jobs
+from ..utils.validation import (
+    check_non_negative as check_non_negative,
+    check_is_fitted as check_is_fitted,
+)
+from numpy import ndarray
+from ..utils import (
+    check_random_state as check_random_state,
+    gen_batches as gen_batches,
+    gen_even_slices as gen_even_slices,
+)
+from numbers import Integral as Integral, Real as Real
+from ..utils.parallel import delayed as delayed, Parallel as Parallel
 
 import numpy as np
 import scipy.sparse as sp
-from scipy.special import gammaln, logsumexp
-
-from ..base import BaseEstimator, TransformerMixin, _ClassNamePrefixFeaturesOutMixin
-from ..utils import check_random_state, gen_batches, gen_even_slices
-from ..utils.validation import check_non_negative
-from ..utils.validation import check_is_fitted
-from ..utils.fixes import delayed
-
-from numpy import float64, ndarray
-from numpy.random import RandomState
-from scipy.sparse._csr import csr_matrix
 
 EPS = ...
 
-def _update_doc_distribution(
-    X: csr_matrix,
-    exp_topic_word_distr: ndarray,
-    doc_topic_prior: float,
-    max_doc_update_iter: int,
-    mean_change_tol: float,
-    cal_sstats: bool,
-    random_state: Optional[RandomState],
-) -> Union[Tuple[ndarray, ndarray], Tuple[ndarray, None]]: ...
 
-class LatentDirichletAllocation(_ClassNamePrefixFeaturesOutMixin, TransformerMixin, BaseEstimator):
+class LatentDirichletAllocation(
+    ClassNamePrefixFeaturesOutMixin, TransformerMixin, BaseEstimator
+):
+
+    _parameter_constraints: dict = ...
+
     def __init__(
         self,
-        n_components: int = 10,
+        n_components: Int = 10,
         *,
-        doc_topic_prior: float | None = None,
-        topic_word_prior: float | None = None,
-        learning_method: Literal["batch", "online"] = "batch",
-        learning_decay: float = 0.7,
-        learning_offset: float = 10.0,
-        max_iter: int = 10,
-        batch_size: int = 128,
-        evaluate_every: int = ...,
-        total_samples: float | int = 1e6,
-        perp_tol: float = 1e-1,
-        mean_change_tol: float = 1e-3,
-        max_doc_update_iter: int = 100,
-        n_jobs: int | None = None,
-        verbose: int = 0,
-        random_state: int | RandomState | None = None,
-    ) -> None: ...
-    def _check_params(self) -> None: ...
-    def _init_latent_vars(self, n_features: int) -> None: ...
-    def _e_step(
-        self,
-        X: csr_matrix,
-        cal_sstats: bool,
-        random_init: bool,
-        parallel=None,
-    ) -> Union[Tuple[ndarray, ndarray], Tuple[ndarray, None]]: ...
-    def _em_step(
-        self,
-        X: csr_matrix,
-        total_samples: int,
-        batch_update: bool,
-        parallel=None,
-    ) -> None: ...
-    def _more_tags(self): ...
-    def _check_non_neg_array(self, X: csr_matrix, reset_n_features: bool, whom: str) -> csr_matrix: ...
-    def partial_fit(self, X: NDArray | ArrayLike, y=None): ...
-    def fit(self, X: NDArray | ArrayLike, y: None = None) -> "LatentDirichletAllocation": ...
-    def _unnormalized_transform(self, X): ...
-    def transform(self, X: NDArray | ArrayLike) -> NDArray: ...
-    def _approx_bound(self, X: csr_matrix, doc_topic_distr: ndarray, sub_sampling: bool) -> float64: ...
-    def score(self, X: NDArray | ArrayLike, y=None) -> float: ...
-    def _perplexity_precomp_distr(
-        self,
-        X: csr_matrix,
-        doc_topic_distr: Optional[ndarray] = None,
-        sub_sampling: bool = False,
-    ) -> float64: ...
-    def perplexity(self, X: NDArray | ArrayLike, sub_sampling: bool = False) -> float: ...
-    @property
-    def _n_features_out(self): ...
+        doc_topic_prior: None | Float = None,
+        topic_word_prior: None | Float = None,
+        learning_method: Literal["batch", "online", "batch"] = "batch",
+        learning_decay: Float = 0.7,
+        learning_offset: Float = 10.0,
+        max_iter: Int = 10,
+        batch_size: Int = 128,
+        evaluate_every: Int = ...,
+        total_samples: float | Int = 1e6,
+        perp_tol: Float = 1e-1,
+        mean_change_tol: Float = 1e-3,
+        max_doc_update_iter: Int = 100,
+        n_jobs: None | Int = None,
+        verbose: Int = 0,
+        random_state: RandomState | None | Int = None,
+    ) -> None:
+        ...
+
+    def partial_fit(self, X: MatrixLike | ArrayLike, y: Any = None) -> Self:
+        ...
+
+    def fit(
+        self, X: MatrixLike | ArrayLike, y: Any = None
+    ) -> LatentDirichletAllocation | Self:
+        ...
+
+    def transform(self, X: MatrixLike | ArrayLike) -> ndarray:
+        ...
+
+    def score(self, X: MatrixLike | ArrayLike, y: Any = None) -> float:
+        ...
+
+    def perplexity(
+        self, X: MatrixLike | ArrayLike, sub_sampling: bool = False
+    ) -> float:
+        ...

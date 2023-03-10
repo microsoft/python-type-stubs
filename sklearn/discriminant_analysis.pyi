@@ -1,6 +1,34 @@
+from typing import Any, Literal
+from .linear_model._base import LinearClassifierMixin
+from ._typing import ArrayLike, Int, Float, Estimator, MatrixLike
+from .covariance import (
+    ledoit_wolf as ledoit_wolf,
+    empirical_covariance as empirical_covariance,
+    shrunk_covariance as shrunk_covariance,
+)
+from scipy import linalg
+from .base import (
+    BaseEstimator,
+    TransformerMixin,
+    ClassifierMixin,
+    ClassNamePrefixFeaturesOutMixin,
+)
+from .utils.multiclass import (
+    unique_labels as unique_labels,
+    check_classification_targets as check_classification_targets,
+)
 from numpy import ndarray
-from typing import Optional, Literal, Any
-from numpy.typing import ArrayLike, NDArray
+from .utils.extmath import softmax as softmax
+from .utils._array_api import get_namespace as get_namespace
+from numbers import Real as Real, Integral as Integral
+from .utils.validation import check_is_fitted as check_is_fitted
+from .utils._param_validation import (
+    StrOptions as StrOptions,
+    Interval as Interval,
+    HasMethods as HasMethods,
+)
+from .preprocessing import StandardScaler as StandardScaler
+from .covariance._shrunk_covariance import OAS
 
 # Authors: Clemens Brunner
 #          Martin Billinger
@@ -11,75 +39,74 @@ from numpy.typing import ArrayLike, NDArray
 
 import warnings
 import numpy as np
-from scipy import linalg
-from scipy.special import expit
-from numbers import Real
+import scipy.linalg
 
-from .base import BaseEstimator, TransformerMixin, ClassifierMixin
-from .base import _ClassNamePrefixFeaturesOutMixin
-from .linear_model._base import LinearClassifierMixin
-from .covariance import ledoit_wolf, empirical_covariance, shrunk_covariance
-from .utils.multiclass import unique_labels
-from .utils.validation import check_is_fitted
-from .utils.multiclass import check_classification_targets
-from .utils.extmath import softmax
-from .preprocessing import StandardScaler
-from sklearn.covariance._shrunk_covariance import OAS
 
 __all__ = ["LinearDiscriminantAnalysis", "QuadraticDiscriminantAnalysis"]
 
-def _cov(
-    X: ndarray,
-    shrinkage: Optional[str] = None,
-    covariance_estimator: Optional[OAS] = None,
-) -> ndarray: ...
-def _class_means(X: ndarray, y: ndarray) -> ndarray: ...
-def _class_cov(
-    X: ndarray,
-    y: ndarray,
-    priors: ndarray,
-    shrinkage: Optional[str] = None,
-    covariance_estimator: Optional[OAS] = None,
-) -> ndarray: ...
 
 class LinearDiscriminantAnalysis(
-    _ClassNamePrefixFeaturesOutMixin,
+    ClassNamePrefixFeaturesOutMixin,
     LinearClassifierMixin,
     TransformerMixin,
     BaseEstimator,
 ):
+
+    _parameter_constraints: dict = ...
+
     def __init__(
         self,
-        solver: Literal["svd", "lsqr", "eigen"] = "svd",
-        shrinkage: float | Literal["auto"] | None = None,
-        priors: ArrayLike | None = None,
-        n_components: int | None = None,
+        solver: Literal["svd", "svd", "lsqr", "eigen"] = "svd",
+        shrinkage: float | None | str = None,
+        priors: None | ArrayLike = None,
+        n_components: None | Int = None,
         store_covariance: bool = False,
-        tol: float = 1e-4,
-        covariance_estimator: Estimator | None = None,
-    ) -> None: ...
-    def _solve_lsqr(
-        self,
-        X: ndarray,
-        y: ndarray,
-        shrinkage: Optional[str],
-        covariance_estimator: Optional[OAS],
-    ) -> None: ...
-    def _solve_eigen(self, X, y, shrinkage, covariance_estimator): ...
-    def _solve_svd(self, X: ndarray, y: ndarray) -> None: ...
-    def fit(self, X: ArrayLike, y: ArrayLike) -> "LinearDiscriminantAnalysis": ...
-    def transform(self, X: ArrayLike) -> ndarray: ...
-    def predict_proba(self, X: ArrayLike) -> np.ndarray: ...
-    def predict_log_proba(self, X: ArrayLike) -> np.ndarray: ...
-    def decision_function(self, X: ArrayLike) -> NDArray: ...
+        tol: Float = 1e-4,
+        covariance_estimator: OAS | Estimator | None = None,
+    ) -> None:
+        ...
+
+    def fit(self, X: MatrixLike, y: ArrayLike) -> Any:
+        ...
+
+    def transform(self, X: MatrixLike) -> ndarray:
+        ...
+
+    def predict_proba(self, X: MatrixLike) -> ndarray:
+        ...
+
+    def predict_log_proba(self, X: MatrixLike) -> ndarray:
+        ...
+
+    def decision_function(self, X: MatrixLike) -> ndarray:
+        ...
+
 
 class QuadraticDiscriminantAnalysis(ClassifierMixin, BaseEstimator):
+
+    _parameter_constraints: dict = ...
+
     def __init__(
-        self, *, priors: NDArray | None = None, reg_param: float = 0.0, store_covariance: bool = False, tol: float = 1.0e-4
-    ) -> None: ...
-    def fit(self, X: ArrayLike, y: ArrayLike) -> "QuadraticDiscriminantAnalysis": ...
-    def _decision_function(self, X: ndarray) -> ndarray: ...
-    def decision_function(self, X: ArrayLike) -> NDArray: ...
-    def predict(self, X: ArrayLike) -> NDArray: ...
-    def predict_proba(self, X: ArrayLike) -> np.ndarray: ...
-    def predict_log_proba(self, X: ArrayLike) -> np.ndarray: ...
+        self,
+        *,
+        priors: None | ArrayLike = None,
+        reg_param: Float = 0.0,
+        store_covariance: bool = False,
+        tol: Float = 1.0e-4
+    ) -> None:
+        ...
+
+    def fit(self, X: MatrixLike, y: ArrayLike) -> Any:
+        ...
+
+    def decision_function(self, X: MatrixLike) -> ndarray:
+        ...
+
+    def predict(self, X: MatrixLike) -> ndarray:
+        ...
+
+    def predict_proba(self, X: MatrixLike) -> ndarray:
+        ...
+
+    def predict_log_proba(self, X: MatrixLike) -> ndarray:
+        ...

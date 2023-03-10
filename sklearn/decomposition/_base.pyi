@@ -1,6 +1,10 @@
-from numpy import ndarray
 from typing import Any
-from numpy.typing import NDArray, ArrayLike
+from .._typing import MatrixLike
+from scipy import linalg as linalg
+from ..base import BaseEstimator, TransformerMixin, ClassNamePrefixFeaturesOutMixin
+from ..utils.validation import check_is_fitted as check_is_fitted
+from abc import ABCMeta, abstractmethod
+from numpy import ndarray
 
 # Author: Alexandre Gramfort <alexandre.gramfort@inria.fr>
 #         Olivier Grisel <olivier.grisel@ensta.org>
@@ -11,18 +15,23 @@ from numpy.typing import NDArray, ArrayLike
 # License: BSD 3 clause
 
 import numpy as np
-from scipy import linalg
 
-from ..base import BaseEstimator, TransformerMixin, _ClassNamePrefixFeaturesOutMixin
-from ..utils.validation import check_is_fitted
-from abc import ABCMeta, abstractmethod
 
-class _BasePCA(_ClassNamePrefixFeaturesOutMixin, TransformerMixin, BaseEstimator, metaclass=ABCMeta):
-    def get_covariance(self) -> NDArray: ...
-    def get_precision(self) -> NDArray: ...
+class _BasePCA(
+    ClassNamePrefixFeaturesOutMixin, TransformerMixin, BaseEstimator, metaclass=ABCMeta
+):
+    def get_covariance(self) -> ndarray:
+        ...
+
+    def get_precision(self) -> ndarray:
+        ...
+
     @abstractmethod
-    def fit(self, X: ArrayLike, y=None) -> Any: ...
-    def transform(self, X: ArrayLike) -> ArrayLike: ...
-    def inverse_transform(self, X: ArrayLike) -> ArrayLike: ...
-    @property
-    def _n_features_out(self): ...
+    def fit(self, X: MatrixLike, y=None) -> Any:
+        ...
+
+    def transform(self, X: MatrixLike) -> ndarray:
+        ...
+
+    def inverse_transform(self, X: MatrixLike) -> ndarray:
+        ...

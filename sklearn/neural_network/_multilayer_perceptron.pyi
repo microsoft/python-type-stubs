@@ -1,55 +1,67 @@
-from numpy import float64, ndarray
-from typing import List, Optional, Tuple, Union, Any, Literal
-from numpy.typing import NDArray, ArrayLike
-from numpy.random import RandomState
-
-# Authors: Issam H. Laradji <issam.laradji@gmail.com>
-#          Andreas Mueller
-#          Jiyuan Qian
-# License: BSD 3 clause
-
-import numpy as np
-
+from typing import Any, Literal
+from .._typing import Float, MatrixLike, ArrayLike, Int
+from ..preprocessing import LabelBinarizer as LabelBinarizer
+from ..utils._param_validation import (
+    StrOptions as StrOptions,
+    Options as Options,
+    Interval as Interval,
+)
+from ..utils.extmath import safe_sparse_dot as safe_sparse_dot
+from ..model_selection import train_test_split as train_test_split
 from abc import ABCMeta, abstractmethod
-import warnings
-from itertools import chain
-
-import scipy.optimize
-
+from ._base import (
+    ACTIVATIONS as ACTIVATIONS,
+    DERIVATIVES as DERIVATIVES,
+    LOSS_FUNCTIONS as LOSS_FUNCTIONS,
+)
+from ._stochastic_optimizers import (
+    SGDOptimizer as SGDOptimizer,
+    AdamOptimizer as AdamOptimizer,
+)
+from itertools import chain as chain
+from ..utils import (
+    gen_batches as gen_batches,
+    check_random_state as check_random_state,
+    shuffle,
+    column_or_1d as column_or_1d,
+)
+from ..metrics import accuracy_score as accuracy_score, r2_score as r2_score
+from ..utils.validation import check_is_fitted as check_is_fitted
+from numpy import ndarray
+from numpy.random import RandomState
+from ..exceptions import ConvergenceWarning as ConvergenceWarning
+from ..utils.multiclass import (
+    unique_labels as unique_labels,
+    type_of_target as type_of_target,
+)
 from ..base import (
     BaseEstimator,
     ClassifierMixin,
     RegressorMixin,
+    is_classifier as is_classifier,
 )
-from ..base import is_classifier
-from ._base import ACTIVATIONS, DERIVATIVES, LOSS_FUNCTIONS
-from ._stochastic_optimizers import SGDOptimizer, AdamOptimizer
-from ..model_selection import train_test_split
-from ..preprocessing import LabelBinarizer
-from ..utils import gen_batches, check_random_state
-from ..utils import shuffle
-from ..utils import _safe_indexing
-from ..utils import column_or_1d
-from ..exceptions import ConvergenceWarning
-from ..utils.extmath import safe_sparse_dot
-from ..utils.validation import check_is_fitted
-from ..utils.multiclass import _check_partial_fit_first_call, unique_labels
-from ..utils.multiclass import type_of_target
-from ..utils.optimize import _check_optimize_result
-from ..utils.metaestimators import available_if
+from numbers import Integral as Integral, Real as Real
+from ..utils.metaestimators import available_if as available_if
+import numpy as np
+import warnings
+
+import scipy.optimize
+
 
 _STOCHASTIC_SOLVERS: list = ...
 
-def _pack(coefs_: List[ndarray], intercepts_: List[ndarray]) -> ndarray: ...
 
 class BaseMultilayerPerceptron(BaseEstimator, metaclass=ABCMeta):
+
+    _parameter_constraints: dict = ...
+
     @abstractmethod
     def __init__(
         self,
-        hidden_layer_sizes: Union[List[int], Tuple[int], Tuple[int, int]],
+        hidden_layer_sizes: tuple[int, int] | list[int] | tuple[int],
         activation: str,
         solver: str,
-        alpha: Union[int, float, float64],
+        alpha: Float,
         batch_size: str,
         learning_rate: str,
         learning_rate_init: float,
@@ -57,11 +69,11 @@ class BaseMultilayerPerceptron(BaseEstimator, metaclass=ABCMeta):
         max_iter: int,
         loss: str,
         shuffle: bool,
-        random_state: Optional[int],
+        random_state: int | None,
         tol: float,
-        verbose: bool,
+        verbose: int | bool,
         warm_start: bool,
-        momentum: Union[int, float],
+        momentum: int | float,
         nesterovs_momentum: bool,
         early_stopping: bool,
         validation_fraction: float,
@@ -70,132 +82,94 @@ class BaseMultilayerPerceptron(BaseEstimator, metaclass=ABCMeta):
         epsilon: float,
         n_iter_no_change: int,
         max_fun: int,
-    ) -> None: ...
-    def _unpack(self, packed_parameters: ndarray) -> None: ...
-    def _forward_pass(self, activations: List[Optional[ndarray]]) -> List[ndarray]: ...
-    def _forward_pass_fast(self, X: ndarray) -> ndarray: ...
-    def _compute_loss_grad(
-        self,
-        layer: int,
-        n_samples: int,
-        activations: List[ndarray],
-        deltas: List[Optional[ndarray]],
-        coef_grads: List[ndarray],
-        intercept_grads: List[ndarray],
-    ) -> None: ...
-    def _loss_grad_lbfgs(
-        self,
-        packed_coef_inter: ndarray,
-        X: ndarray,
-        y: ndarray,
-        activations: List[Optional[ndarray]],
-        deltas: List[Optional[ndarray]],
-        coef_grads: List[ndarray],
-        intercept_grads: List[ndarray],
-    ) -> Tuple[float64, ndarray]: ...
-    def _backprop(
-        self,
-        X: ndarray,
-        y: ndarray,
-        activations: List[Optional[ndarray]],
-        deltas: List[Optional[ndarray]],
-        coef_grads: List[ndarray],
-        intercept_grads: List[ndarray],
-    ) -> Tuple[float64, List[ndarray], List[ndarray]]: ...
-    def _initialize(self, y, layer_units, dtype): ...
-    def _init_coef(self, fan_in, fan_out, dtype): ...
-    def _fit(self, X: ndarray, y: ndarray, incremental: bool = False) -> Union[MLPRegressor, MLPClassifier]: ...
-    def _validate_hyperparameters(self) -> None: ...
-    def _fit_lbfgs(
-        self,
-        X: ndarray,
-        y: ndarray,
-        activations: List[Optional[ndarray]],
-        deltas: List[None],
-        coef_grads: List[ndarray],
-        intercept_grads: List[ndarray],
-        layer_units: List[int],
-    ) -> None: ...
-    def _fit_stochastic(
-        self,
-        X: ndarray,
-        y: ndarray,
-        activations: List[Optional[ndarray]],
-        deltas: List[None],
-        coef_grads: List[ndarray],
-        intercept_grads: List[ndarray],
-        layer_units: List[int],
-        incremental: bool,
-    ) -> None: ...
-    def _update_no_improvement_count(self, early_stopping: bool, X_val: None, y_val: None) -> None: ...
-    def fit(self, X: NDArray, y: NDArray) -> Union[MLPRegressor, MLPClassifier]: ...
-    def _check_solver(self): ...
-    @available_if(_check_solver)
-    def partial_fit(self, X: NDArray | ArrayLike, y: NDArray) -> Any: ...
+    ) -> None:
+        ...
+
+    def fit(self, X: MatrixLike, y: MatrixLike | ArrayLike) -> Any:
+        ...
+
 
 class MLPClassifier(ClassifierMixin, BaseMultilayerPerceptron):
     def __init__(
         self,
-        hidden_layer_sizes: tuple = ...,
-        activation: Literal["identity", "logistic", "tanh", "relu"] = "relu",
+        hidden_layer_sizes: ArrayLike | tuple[int] = ...,
+        activation: Literal["relu", "identity", "logistic", "tanh", "relu"] = "relu",
         *,
-        solver: Literal["lbfgs", "sgd", "adam"] = "adam",
-        alpha: float = 0.0001,
-        batch_size: int | str = "auto",
-        learning_rate: Literal["constant", "invscaling", "adaptive"] = "constant",
-        learning_rate_init: float = 0.001,
-        power_t: float = 0.5,
-        max_iter: int = 200,
+        solver: Literal["lbfgs", "sgd", "adam", "adam"] = "adam",
+        alpha: Float = 0.0001,
+        batch_size: str | Int = "auto",
+        learning_rate: Literal[
+            "constant", "invscaling", "adaptive", "constant"
+        ] = "constant",
+        learning_rate_init: Float = 0.001,
+        power_t: Float = 0.5,
+        max_iter: Int = 200,
         shuffle: bool = True,
-        random_state: int | RandomState | None = None,
-        tol: float = 1e-4,
+        random_state: RandomState | None | Int = None,
+        tol: Float = 1e-4,
         verbose: bool = False,
         warm_start: bool = False,
-        momentum: float = 0.9,
+        momentum: Float = 0.9,
         nesterovs_momentum: bool = True,
         early_stopping: bool = False,
-        validation_fraction: float = 0.1,
-        beta_1: float = 0.9,
-        beta_2: float = 0.999,
-        epsilon: float = 1e-8,
-        n_iter_no_change: int = 10,
-        max_fun: int = 15000,
-    ) -> None: ...
-    def _validate_input(self, X: ndarray, y: ndarray, incremental: bool, reset: bool) -> Tuple[ndarray, ndarray]: ...
-    def predict(self, X: NDArray | ArrayLike) -> NDArray: ...
-    @available_if(lambda est: est._check_solver())
-    def partial_fit(self, X: NDArray | ArrayLike, y: ArrayLike, classes: ArrayLike | None = None) -> Any: ...
-    def predict_log_proba(self, X: NDArray) -> np.ndarray: ...
-    def predict_proba(self, X: NDArray | ArrayLike) -> np.ndarray: ...
-    def _more_tags(self): ...
+        validation_fraction: Float = 0.1,
+        beta_1: Float = 0.9,
+        beta_2: Float = 0.999,
+        epsilon: Float = 1e-8,
+        n_iter_no_change: Int = 10,
+        max_fun: Int = 15000,
+    ) -> None:
+        ...
+
+    def predict(self, X: MatrixLike | ArrayLike) -> ndarray:
+        ...
+
+    def partial_fit(
+        self, X: MatrixLike | ArrayLike, y: ArrayLike, classes: None | ArrayLike = None
+    ) -> Any:
+        ...
+
+    def predict_log_proba(self, X: ArrayLike) -> ndarray:
+        ...
+
+    def predict_proba(self, X: MatrixLike | ArrayLike) -> ndarray:
+        ...
+
 
 class MLPRegressor(RegressorMixin, BaseMultilayerPerceptron):
     def __init__(
         self,
-        hidden_layer_sizes: tuple = ...,
-        activation: Literal["identity", "logistic", "tanh", "relu"] = "relu",
+        hidden_layer_sizes: tuple[int, int] | ArrayLike = ...,
+        activation: Literal["relu", "identity", "logistic", "tanh", "relu"] = "relu",
         *,
-        solver: Literal["lbfgs", "sgd", "adam"] = "adam",
-        alpha: float = 0.0001,
-        batch_size: int | str = "auto",
-        learning_rate: Literal["constant", "invscaling", "adaptive"] = "constant",
-        learning_rate_init: float = 0.001,
-        power_t: float = 0.5,
-        max_iter: int = 200,
+        solver: Literal["lbfgs", "sgd", "adam", "adam"] = "adam",
+        alpha: Float = 0.0001,
+        batch_size: str | Int = "auto",
+        learning_rate: Literal[
+            "constant", "invscaling", "adaptive", "constant"
+        ] = "constant",
+        learning_rate_init: Float = 0.001,
+        power_t: Float = 0.5,
+        max_iter: Int = 200,
         shuffle: bool = True,
-        random_state: int | RandomState | None = None,
-        tol: float = 1e-4,
+        random_state: RandomState | None | Int = None,
+        tol: Float = 1e-4,
         verbose: bool = False,
         warm_start: bool = False,
-        momentum: float = 0.9,
+        momentum: Float = 0.9,
         nesterovs_momentum: bool = True,
         early_stopping: bool = False,
-        validation_fraction: float = 0.1,
-        beta_1: float = 0.9,
-        beta_2: float = 0.999,
-        epsilon: float = 1e-8,
-        n_iter_no_change: int = 10,
-        max_fun: int = 15000,
-    ) -> None: ...
-    def predict(self, X: NDArray | ArrayLike) -> np.ndarray: ...
-    def _validate_input(self, X: ndarray, y: ndarray, incremental: bool, reset: bool) -> Tuple[ndarray, ndarray]: ...
+        validation_fraction: Float = 0.1,
+        beta_1: Float = 0.9,
+        beta_2: Float = 0.999,
+        epsilon: Float = 1e-8,
+        n_iter_no_change: Int = 10,
+        max_fun: Int = 15000,
+    ) -> None:
+        ...
+
+    def predict(self, X: MatrixLike | ArrayLike) -> ndarray:
+        ...
+
+    def partial_fit(self, X: MatrixLike | ArrayLike, y: ArrayLike) -> Any:
+        ...

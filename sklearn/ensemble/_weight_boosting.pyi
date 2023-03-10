@@ -1,151 +1,134 @@
-from numpy import float64, ndarray
-from typing import Iterator, Optional, Tuple, Union, Any, Literal
-from numpy.typing import ArrayLike, NDArray
-
-# Authors: Noel Dawe <noel@dawe.me>
-#          Gilles Louppe <g.louppe@gmail.com>
-#          Hamzeh Alsalhi <ha258@cornell.edu>
-#          Arnaud Joly <arnaud.v.joly@gmail.com>
-#
-# License: BSD 3 clause
-
+from typing import Any, Iterator, Literal
+from ..utils._param_validation import (
+    HasMethods as HasMethods,
+    Interval as Interval,
+    StrOptions as StrOptions,
+)
+from ..utils.extmath import softmax as softmax, stable_cumsum as stable_cumsum
+from numpy.random import RandomState
+from scipy.special import xlogy as xlogy
+from .._typing import ArrayLike, MatrixLike, Int, Float
+from ..base import (
+    ClassifierMixin,
+    RegressorMixin,
+    is_classifier as is_classifier,
+    is_regressor as is_regressor,
+)
+from ..utils.validation import (
+    check_is_fitted as check_is_fitted,
+    has_fit_parameter as has_fit_parameter,
+)
 from abc import ABCMeta, abstractmethod
-
-import numbers
+from ._base import BaseEnsemble
+from numpy import ndarray
+from ..utils import check_random_state as check_random_state
+from numbers import Integral as Integral, Real as Real
+from ..tree._classes import DecisionTreeClassifier, DecisionTreeRegressor
+from ..metrics import accuracy_score as accuracy_score, r2_score as r2_score
 import numpy as np
 
 import warnings
-
-from scipy.special import xlogy
-
-from ._base import BaseEnsemble
-from ..base import ClassifierMixin, RegressorMixin, is_classifier, is_regressor
-
-from ..tree import DecisionTreeClassifier, DecisionTreeRegressor
-from ..utils import check_random_state, _safe_indexing
-from ..utils import check_scalar
-from ..utils.extmath import softmax
-from ..utils.extmath import stable_cumsum
-from ..metrics import accuracy_score, r2_score
-from ..utils.validation import check_is_fitted
-from ..utils.validation import _check_sample_weight
-from ..utils.validation import has_fit_parameter
-from ..utils.validation import _num_samples
-from numpy.random import RandomState
-from sklearn.tree._classes import DecisionTreeClassifier, DecisionTreeRegressor
 
 __all__ = [
     "AdaBoostClassifier",
     "AdaBoostRegressor",
 ]
 
+
 class BaseWeightBoosting(BaseEnsemble, metaclass=ABCMeta):
+
+    _parameter_constraints: dict = ...
+
     @abstractmethod
     def __init__(
         self,
-        base_estimator: Optional[Union[DecisionTreeRegressor, DecisionTreeClassifier]] = None,
+        estimator: None | DecisionTreeRegressor | DecisionTreeClassifier = None,
         *,
-        n_estimators=50,
+        n_estimators: int = 50,
         estimator_params=...,
-        learning_rate=1.0,
+        learning_rate: float = 1.0,
         random_state=None,
-    ) -> None: ...
-    def _check_X(self, X: ndarray) -> ndarray: ...
+        base_estimator: str = "deprecated",
+    ) -> None:
+        ...
+
     def fit(
         self,
-        X: NDArray | ArrayLike,
+        X: MatrixLike | ArrayLike,
         y: ArrayLike,
-        sample_weight: ArrayLike | None = None,
-    ) -> Union[AdaBoostClassifier, AdaBoostRegressor]: ...
-    @abstractmethod
-    def _boost(self, iboost, X, y, sample_weight, random_state): ...
+        sample_weight: None | ArrayLike = None,
+    ) -> Any:
+        ...
+
     def staged_score(
         self,
-        X: NDArray | ArrayLike,
+        X: MatrixLike | ArrayLike,
         y: ArrayLike,
-        sample_weight: ArrayLike | None = None,
-    ): ...
-    @property
-    def feature_importances_(self) -> NDArray: ...
+        sample_weight: None | ArrayLike = None,
+    ):
+        ...
 
-def _samme_proba(estimator: DecisionTreeClassifier, n_classes: int, X: ndarray) -> ndarray: ...
+    @property
+    def feature_importances_(self) -> ndarray:
+        ...
+
 
 class AdaBoostClassifier(ClassifierMixin, BaseWeightBoosting):
+
+    _parameter_constraints: dict = ...
+
     def __init__(
         self,
-        base_estimator: Optional[DecisionTreeClassifier] = None,
+        estimator: Any = None,
         *,
-        n_estimators: int = 50,
-        learning_rate: float = 1.0,
-        algorithm: Literal["SAMME", "SAMME.R"] = "SAMME.R",
-        random_state: int | RandomState | None = None,
-    ) -> None: ...
-    def fit(
-        self,
-        X: NDArray | ArrayLike,
-        y: ArrayLike,
-        sample_weight: ArrayLike | None = None,
-    ) -> "AdaBoostClassifier": ...
-    def _validate_estimator(self) -> None: ...
-    def _boost(
-        self,
-        iboost: int,
-        X: ndarray,
-        y: ndarray,
-        sample_weight: ndarray,
-        random_state: RandomState,
-    ) -> Union[Tuple[ndarray, float64, float64], Tuple[ndarray, float, float64]]: ...
-    def _boost_real(
-        self,
-        iboost: int,
-        X: ndarray,
-        y: ndarray,
-        sample_weight: ndarray,
-        random_state: RandomState,
-    ) -> Tuple[ndarray, float, float64]: ...
-    def _boost_discrete(
-        self,
-        iboost: int,
-        X: ndarray,
-        y: ndarray,
-        sample_weight: ndarray,
-        random_state: RandomState,
-    ) -> Tuple[ndarray, float64, float64]: ...
-    def predict(self, X: NDArray | ArrayLike) -> NDArray: ...
-    def staged_predict(self, X: ArrayLike) -> Iterator[ndarray]: ...
-    def decision_function(self, X: NDArray | ArrayLike) -> NDArray: ...
-    def staged_decision_function(self, X: NDArray | ArrayLike) -> Iterator[ndarray]: ...
-    @staticmethod
-    def _compute_proba_from_decision(decision, n_classes): ...
-    def predict_proba(self, X: NDArray | ArrayLike) -> np.ndarray: ...
-    def staged_predict_proba(self, X: NDArray | ArrayLike): ...
-    def predict_log_proba(self, X: NDArray | ArrayLike) -> np.ndarray: ...
+        n_estimators: Int = 50,
+        learning_rate: Float = 1.0,
+        algorithm="SAMME.R",
+        random_state: RandomState | None | Int = None,
+        base_estimator: Any = "deprecated",
+    ) -> None:
+        ...
+
+    def predict(self, X: MatrixLike | ArrayLike) -> ndarray:
+        ...
+
+    def staged_predict(self, X: MatrixLike) -> Iterator[ndarray]:
+        ...
+
+    def decision_function(self, X: MatrixLike | ArrayLike) -> ndarray:
+        ...
+
+    def staged_decision_function(self, X: MatrixLike | ArrayLike) -> Iterator[ndarray]:
+        ...
+
+    def predict_proba(self, X: MatrixLike | ArrayLike) -> ndarray:
+        ...
+
+    def staged_predict_proba(self, X: MatrixLike | ArrayLike):
+        ...
+
+    def predict_log_proba(self, X: MatrixLike | ArrayLike) -> ndarray:
+        ...
+
 
 class AdaBoostRegressor(RegressorMixin, BaseWeightBoosting):
+
+    _parameter_constraints: dict = ...
+
     def __init__(
         self,
-        base_estimator: Optional[DecisionTreeRegressor] = None,
+        estimator: Any = None,
         *,
-        n_estimators: int = 50,
-        learning_rate: float = 1.0,
-        loss: Literal["linear", "square", "exponential"] = "linear",
-        random_state: int | RandomState | None = None,
-    ) -> None: ...
-    def fit(
-        self,
-        X: NDArray | ArrayLike,
-        y: ArrayLike,
-        sample_weight: ArrayLike | None = None,
-    ) -> "AdaBoostRegressor": ...
-    def _validate_estimator(self) -> None: ...
-    def _boost(
-        self,
-        iboost: int,
-        X: ndarray,
-        y: ndarray,
-        sample_weight: ndarray,
-        random_state: RandomState,
-    ) -> Tuple[ndarray, float64, float64]: ...
-    def _get_median_predict(self, X: ndarray, limit: int) -> ndarray: ...
-    def predict(self, X: NDArray | ArrayLike) -> NDArray: ...
-    def staged_predict(self, X: NDArray | ArrayLike): ...
+        n_estimators: Int = 50,
+        learning_rate: Float = 1.0,
+        loss: Literal["linear", "square", "exponential", "linear"] = "linear",
+        random_state: RandomState | None | Int = None,
+        base_estimator: Any = "deprecated",
+    ) -> None:
+        ...
+
+    def predict(self, X: MatrixLike | ArrayLike) -> ndarray:
+        ...
+
+    def staged_predict(self, X: MatrixLike | ArrayLike):
+        ...

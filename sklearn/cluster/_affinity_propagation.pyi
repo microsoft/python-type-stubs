@@ -1,57 +1,68 @@
-from numpy import bool_, ndarray
-from typing import Tuple, Union, Literal
-from numpy.typing import ArrayLike, NDArray
-
-# Author: Alexandre Gramfort alexandre.gramfort@inria.fr
-#        Gael Varoquaux gael.varoquaux@normalesup.org
-
-# License: BSD 3 clause
-
-import numbers
+from typing import Any, Literal, Self
+from ..utils._param_validation import Interval as Interval, StrOptions as StrOptions
+from numpy.random import RandomState
+from ..exceptions import ConvergenceWarning as ConvergenceWarning
+from .._typing import MatrixLike, ArrayLike, Int, Float
+from ..base import BaseEstimator, ClusterMixin
+from ..utils.validation import check_is_fitted as check_is_fitted
+from numpy import ndarray
+from ..utils import (
+    as_float_array as as_float_array,
+    check_random_state as check_random_state,
+)
+from numbers import Integral as Integral, Real as Real
+from .._config import config_context as config_context
+from ..metrics import (
+    euclidean_distances as euclidean_distances,
+    pairwise_distances_argmin as pairwise_distances_argmin,
+)
 import warnings
 
 import numpy as np
-from numpy.random import RandomState
 
-from ..exceptions import ConvergenceWarning
-from ..base import BaseEstimator, ClusterMixin
-from ..utils import as_float_array, check_random_state
-from ..utils import check_scalar
-from ..utils.validation import check_is_fitted
-from ..metrics import euclidean_distances
-from ..metrics import pairwise_distances_argmin
-from .._config import config_context
 
-def _equal_similarities_and_preferences(S: ndarray, preference: ndarray) -> bool_: ...
+###############################################################################
+# Public API
+
+
 def affinity_propagation(
-    S: ArrayLike,
+    S: MatrixLike,
     *,
-    preference: ArrayLike | float | None = None,
-    convergence_iter: int = 15,
-    max_iter: int = 200,
-    damping: float = 0.5,
+    preference: float | None | ArrayLike = None,
+    convergence_iter: Int = 15,
+    max_iter: Int = 200,
+    damping: Float = 0.5,
     copy: bool = True,
     verbose: bool = False,
     return_n_iter: bool = False,
-    random_state: int | RandomState | None = None,
-) -> tuple[np.ndarray, NDArray, int]: ...
+    random_state: RandomState | None | Int = None,
+) -> tuple[ndarray, ndarray, int] | tuple[ndarray, ndarray]:
+    ...
 
-###############################################################################
 
 class AffinityPropagation(ClusterMixin, BaseEstimator):
+
+    _parameter_constraints: dict = ...
+
     def __init__(
         self,
         *,
-        damping: float = 0.5,
-        max_iter: int = 200,
-        convergence_iter: int = 15,
+        damping: Float = 0.5,
+        max_iter: Int = 200,
+        convergence_iter: Int = 15,
         copy: bool = True,
-        preference: ArrayLike | float | None = None,
-        affinity: Literal["euclidean", "precomputed"] = "euclidean",
+        preference: float | None | ArrayLike = None,
+        affinity: Literal["euclidean", "precomputed", "euclidean"] = "euclidean",
         verbose: bool = False,
-        random_state: int | RandomState | None = None,
-    ) -> None: ...
-    def _more_tags(self): ...
-    def fit(self, X: NDArray | ArrayLike, y: None = None) -> "AffinityPropagation": ...
-    def predict(self, X: NDArray | ArrayLike) -> NDArray: ...
-    def fit_predict(self, X: NDArray | ArrayLike, y=None) -> NDArray: ...
+        random_state: RandomState | None | Int = None,
+    ) -> None:
+        ...
+
+    def fit(self, X: MatrixLike, y: Any = None) -> AffinityPropagation | Self:
+        ...
+
+    def predict(self, X: MatrixLike | ArrayLike) -> ndarray:
+        ...
+
+    def fit_predict(self, X: MatrixLike, y: Any = None) -> ndarray:
+        ...

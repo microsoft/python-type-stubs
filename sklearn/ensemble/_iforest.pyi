@@ -1,5 +1,22 @@
-from typing import Dict, List, Union, Literal, Any
-from numpy.typing import ArrayLike, NDArray
+from typing import Any, Literal
+from ..utils._param_validation import Interval as Interval, StrOptions as StrOptions
+from numpy.random import RandomState
+from .._typing import Int, ArrayLike, MatrixLike
+from ..base import OutlierMixin
+from ..tree import ExtraTreeRegressor as ExtraTreeRegressor
+from ..utils.validation import check_is_fitted as check_is_fitted
+from ..tree._tree import DTYPE as tree_dtype
+from numpy import ndarray
+from ._bagging import BaseBagging
+from ..utils import (
+    check_random_state as check_random_state,
+    check_array as check_array,
+    gen_batches as gen_batches,
+    get_chunk_n_rows as get_chunk_n_rows,
+)
+from numbers import Integral as Integral, Real as Real
+from scipy.sparse import issparse as issparse
+from warnings import warn as warn
 
 # Authors: Nicolas Goix <nicolas.goix@telecom-paristech.fr>
 #          Alexandre Gramfort <alexandre.gramfort@telecom-paristech.fr>
@@ -7,52 +24,42 @@ from numpy.typing import ArrayLike, NDArray
 
 import numbers
 import numpy as np
-from numpy.random import RandomState
-from scipy.sparse import issparse
-from warnings import warn
-
-from ..tree import ExtraTreeRegressor
-from ..utils import (
-    check_random_state,
-    check_array,
-    gen_batches,
-    get_chunk_n_rows,
-)
-from ..utils.validation import check_is_fitted, _num_samples
-from ..base import OutlierMixin
-
-from ._bagging import BaseBagging
-from numpy import ndarray
 
 __all__ = ["IsolationForest"]
 
+
 class IsolationForest(OutlierMixin, BaseBagging):
+
+    _parameter_constraints: dict = ...
+
     def __init__(
         self,
         *,
-        n_estimators: int = 100,
-        max_samples: int | float | Literal["auto"] = "auto",
-        contamination: float | Literal["auto"] = "auto",
+        n_estimators: Int = 100,
+        max_samples: int | float | Literal["auto", "auto"] = "auto",
+        contamination: float | str = "auto",
         max_features: int | float = 1.0,
         bootstrap: bool = False,
-        n_jobs: int | None = None,
-        random_state: int | RandomState | None = None,
-        verbose: int = 0,
+        n_jobs: None | Int = None,
+        random_state: RandomState | None | Int = None,
+        verbose: Int = 0,
         warm_start: bool = False,
-    ) -> None: ...
-    def _set_oob_score(self, X, y): ...
-    def _parallel_args(self) -> Dict[str, str]: ...
+    ) -> None:
+        ...
+
     def fit(
         self,
-        X: NDArray | ArrayLike,
-        y: None = None,
-        sample_weight: ArrayLike | None = None,
-    ) -> "IsolationForest": ...
-    def predict(self, X: NDArray | ArrayLike) -> NDArray: ...
-    def decision_function(self, X: NDArray | ArrayLike) -> NDArray: ...
-    def score_samples(self, X: NDArray | ArrayLike) -> NDArray: ...
-    def _compute_chunked_score_samples(self, X: ndarray) -> ndarray: ...
-    def _compute_score_samples(self, X: ndarray, subsample_features: bool) -> ndarray: ...
-    def _more_tags(self): ...
+        X: MatrixLike | ArrayLike,
+        y: Any = None,
+        sample_weight: None | ArrayLike = None,
+    ) -> Any:
+        ...
 
-def _average_path_length(n_samples_leaf: Union[List[int], ndarray]) -> ndarray: ...
+    def predict(self, X: MatrixLike | ArrayLike) -> ndarray:
+        ...
+
+    def decision_function(self, X: MatrixLike | ArrayLike) -> ndarray:
+        ...
+
+    def score_samples(self, X: MatrixLike | ArrayLike) -> ndarray:
+        ...

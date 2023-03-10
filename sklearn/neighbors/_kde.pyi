@@ -1,41 +1,68 @@
-from typing import Literal, Mapping, Any
-from numpy.typing import ArrayLike, NDArray
+from typing import Any, Literal
+from ..utils._param_validation import Interval as Interval, StrOptions as StrOptions
+from ..utils.extmath import row_norms as row_norms
+from ._kd_tree import KDTree as KDTree
+from ..neighbors._base import VALID_METRICS as VALID_METRICS
+from scipy.special import gammainc as gammainc
+from .._typing import Float, Int, MatrixLike, ArrayLike
+from numpy.random import RandomState
+from ..base import BaseEstimator
+from ._ball_tree import BallTree as BallTree, DTYPE as DTYPE
+from ..utils.validation import check_is_fitted as check_is_fitted
+from numpy import ndarray
+from ..utils import check_random_state as check_random_state
+from numbers import Integral as Integral, Real as Real
 
 # Author: Jake Vanderplas <jakevdp@cs.washington.edu>
+import itertools
 
 import numpy as np
-from scipy.special import gammainc
-from ..base import BaseEstimator
-from ..utils import check_random_state
-from ..utils.validation import _check_sample_weight, check_is_fitted
 
-from ..utils.extmath import row_norms
-from numpy import ndarray
-from numpy.random import RandomState
 
 VALID_KERNELS: list = ...
+
 TREE_DICT: dict = ...
 
+
 # TODO: implement a brute force version for testing purposes
-# TODO: bandwidth estimation
 # TODO: create a density estimation base class?
 class KernelDensity(BaseEstimator):
+
+    _parameter_constraints: dict = ...
+
     def __init__(
         self,
         *,
-        bandwidth: float = 1.0,
-        algorithm: Literal["kd_tree", "ball_tree", "auto"] = "auto",
-        kernel: Literal["gaussian", "tophat", "epanechnikov", "exponential", "linear", "cosine"] = "gaussian",
+        bandwidth: float | Literal["scott", "silverman"] = 1.0,
+        algorithm: Literal["kd_tree", "ball_tree", "auto", "auto"] = "auto",
+        kernel: Literal[
+            "gaussian",
+            "tophat",
+            "epanechnikov",
+            "exponential",
+            "linear",
+            "cosine",
+            "gaussian",
+        ] = "gaussian",
         metric: str = "euclidean",
-        atol: float = 0,
-        rtol: float = 0,
+        atol: Float = 0,
+        rtol: Float = 0,
         breadth_first: bool = True,
-        leaf_size: int = 40,
-        metric_params: Mapping | None = None,
-    ) -> None: ...
-    def _choose_algorithm(self, algorithm: str, metric: str) -> str: ...
-    def fit(self, X: ArrayLike, y: None = None, sample_weight: ArrayLike | None = None) -> "KernelDensity": ...
-    def score_samples(self, X: ArrayLike) -> NDArray: ...
-    def score(self, X: ArrayLike, y=None) -> float: ...
-    def sample(self, n_samples: int = 1, random_state: int | RandomState | None = None) -> ArrayLike: ...
-    def _more_tags(self): ...
+        leaf_size: Int = 40,
+        metric_params: dict | None = None,
+    ) -> None:
+        ...
+
+    def fit(self, X: MatrixLike, y=None, sample_weight: None | ArrayLike = None) -> Any:
+        ...
+
+    def score_samples(self, X: MatrixLike) -> ndarray:
+        ...
+
+    def score(self, X: MatrixLike, y=None) -> Float:
+        ...
+
+    def sample(
+        self, n_samples: Int = 1, random_state: RandomState | None | Int = None
+    ) -> ndarray:
+        ...

@@ -1,31 +1,40 @@
-from numpy import ndarray
-from numpy.typing import DTypeLike, NDArray
-from typing import Iterator, List, Optional, Any, Iterable
+from typing import Any, Iterator
+from ..utils._param_validation import Interval as Interval, StrOptions as StrOptions
+from ._hashing_fast import transform as _hashing_transform
+from .._typing import Int
+from ..base import BaseEstimator, TransformerMixin
+from scipy.sparse._csr import csr_matrix
+from numpy import dtype
+from itertools import chain as chain
+from numbers import Integral as Integral
+from scipy.sparse import spmatrix
 
 # Author: Lars Buitinck
 # License: BSD 3 clause
 
-import numbers
 
 import numpy as np
 import scipy.sparse as sp
 
-from ..base import BaseEstimator, TransformerMixin
-from scipy.sparse._csr import csr_matrix
-
-def _iteritems(d): ...
 
 class FeatureHasher(TransformerMixin, BaseEstimator):
+
+    _parameter_constraints: dict = ...
+
     def __init__(
         self,
-        n_features: int = ...,
+        n_features: Int = ...,
         *,
         input_type: str = "dict",
-        dtype: DTypeLike = ...,
+        dtype: dtype = ...,
         alternate_sign: bool = True,
-    ) -> None: ...
-    @staticmethod
-    def _validate_params(n_features: int, input_type: str) -> None: ...
-    def fit(self, X: Optional[List[str]] = None, y: None = None) -> "FeatureHasher": ...
-    def transform(self, raw_X: Iterable[Iterable]) -> NDArray: ...
-    def _more_tags(self): ...
+    ) -> None:
+        ...
+
+    def fit(self, X: Any = None, y: Any = None) -> Any:
+        ...
+
+    def transform(
+        self, raw_X: Iterator[Any] | Iterator[Iterator]
+    ) -> spmatrix | csr_matrix:
+        ...

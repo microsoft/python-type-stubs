@@ -1,4 +1,6 @@
-from typing import Sequence, Mapping
+from typing import Mapping, Sequence
+from distutils.errors import DistutilsExecError
+from numpy.distutils import log
 
 # Copyright (c) 2005-2022, NumPy Developers.
 # All rights reserved.
@@ -34,10 +36,20 @@ import os
 import sys
 import subprocess
 import re
-from distutils.errors import DistutilsExecError
 
-from numpy.distutils import log
 
-def is_sequence(seq): ...
-def forward_bytes_to_stdout(val): ...
-def CCompiler_spawn(self, cmd: str, display: str | Sequence[str] | None = None, env: dict | None = None) -> None: ...
+def is_sequence(seq):
+    ...
+
+
+def forward_bytes_to_stdout(val):
+    ...
+
+
+def CCompiler_spawn(
+    self,
+    cmd: str,
+    display: None | Sequence[str] | str = None,
+    env: Mapping[str, str] | None = None,
+) -> None:
+    ...

@@ -1,71 +1,90 @@
-from numpy import ndarray
-from typing import Optional, Any, Literal
-from numpy.typing import ArrayLike, NDArray
+from typing import Any, Mapping
+from ..utils._param_validation import Interval as Interval, StrOptions as StrOptions
+from ._stochastic_gradient import (
+    BaseSGDClassifier,
+    BaseSGDRegressor,
+    DEFAULT_EPSILON as DEFAULT_EPSILON,
+)
 from numpy.random import RandomState
+from .._typing import Float, Int, ArrayLike, MatrixLike
+from numbers import Real as Real
 
 # Authors: Rob Zinkov, Mathieu Blondel
 # License: BSD 3 clause
 
-from ._stochastic_gradient import BaseSGDClassifier
-from ._stochastic_gradient import BaseSGDRegressor
-from ._stochastic_gradient import DEFAULT_EPSILON
-from scipy.sparse._csr import csr_matrix
 
 class PassiveAggressiveClassifier(BaseSGDClassifier):
+
+    _parameter_constraints: dict = ...
+
     def __init__(
         self,
         *,
-        C: float = 1.0,
+        C: Float = 1.0,
         fit_intercept: bool = True,
-        max_iter: int = 1000,
-        tol: float | None = 1e-3,
+        max_iter: Int = 1000,
+        tol: None | Float = 1e-3,
         early_stopping: bool = False,
-        validation_fraction: float = 0.1,
-        n_iter_no_change: int = 5,
+        validation_fraction: Float = 0.1,
+        n_iter_no_change: Int = 5,
         shuffle: bool = True,
-        verbose: int = 0,
+        verbose: Int = 0,
         loss: str = "hinge",
         n_jobs: int | None = None,
-        random_state: int | RandomState | None = None,
+        random_state: RandomState | None | Int = None,
         warm_start: bool = False,
-        class_weight: dict | Literal["balanced"] | None = None,
+        class_weight: str | None | Mapping[str, float] = None,
         average: bool | int = False,
-    ) -> None: ...
+    ) -> None:
+        ...
+
     def partial_fit(
-        self, X: NDArray | ArrayLike, y: ArrayLike, classes: NDArray | None = None
-    ) -> "PassiveAggressiveClassifier": ...
+        self, X: MatrixLike | ArrayLike, y: ArrayLike, classes: None | ArrayLike = None
+    ) -> Any:
+        ...
+
     def fit(
         self,
-        X: NDArray | ArrayLike,
+        X: MatrixLike | ArrayLike,
         y: ArrayLike,
-        coef_init: NDArray | None = None,
-        intercept_init: NDArray | None = None,
-    ) -> "PassiveAggressiveClassifier": ...
+        coef_init: None | MatrixLike = None,
+        intercept_init: None | ArrayLike = None,
+    ) -> Any:
+        ...
+
 
 class PassiveAggressiveRegressor(BaseSGDRegressor):
+
+    _parameter_constraints: dict = ...
+
     def __init__(
         self,
         *,
-        C: float = 1.0,
+        C: Float = 1.0,
         fit_intercept: bool = True,
-        max_iter: int = 1000,
-        tol: float | None = 1e-3,
+        max_iter: Int = 1000,
+        tol: None | Float = 1e-3,
         early_stopping: bool = False,
-        validation_fraction: float = 0.1,
-        n_iter_no_change: int = 5,
+        validation_fraction: Float = 0.1,
+        n_iter_no_change: Int = 5,
         shuffle: bool = True,
-        verbose: int = 0,
+        verbose: Int = 0,
         loss: str = "epsilon_insensitive",
-        epsilon: float = ...,
-        random_state: int | RandomState | None = None,
+        epsilon: Float = ...,
+        random_state: RandomState | None | Int = None,
         warm_start: bool = False,
         average: bool | int = False,
-    ): ...
-    def partial_fit(self, X: NDArray | ArrayLike, y: NDArray) -> Any: ...
+    ) -> None:
+        ...
+
+    def partial_fit(self, X: MatrixLike | ArrayLike, y: ArrayLike) -> Any:
+        ...
+
     def fit(
         self,
-        X: NDArray | ArrayLike,
-        y: NDArray,
-        coef_init: NDArray | None = None,
-        intercept_init: NDArray | None = None,
-    ) -> Any: ...
+        X: MatrixLike | ArrayLike,
+        y: ArrayLike,
+        coef_init: None | ArrayLike = None,
+        intercept_init: None | ArrayLike = None,
+    ) -> Any:
+        ...

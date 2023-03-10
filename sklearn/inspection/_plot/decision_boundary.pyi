@@ -1,52 +1,56 @@
-from typing import Callable, Literal, Any
-from numpy.typing import NDArray, ArrayLike
-from sklearn.inspection import DecisionBoundaryDisplay
-from functools import reduce
+from typing import Any, Literal
+from ...preprocessing import LabelEncoder as LabelEncoder
+from ...base import is_regressor as is_regressor
+from ..._typing import MatrixLike, Int, Float
+from ...utils.validation import check_is_fitted as check_is_fitted
+from matplotlib.axes import Axes
+from ...utils import check_matplotlib_support as check_matplotlib_support
+from functools import reduce as reduce
 
 import numpy as np
 
-from ...preprocessing import LabelEncoder
-from ...utils import check_matplotlib_support
-from ...utils import _safe_indexing
-from ...base import is_regressor
-from ...utils.validation import check_is_fitted, _is_arraylike_not_scalar
-from numpy import ndarray
-from pandas import DataFrame
-from matplotlib.axes import Axes
-from sklearn.base import BaseEstimator
-
-def _check_boundary_response_method(estimator: BaseEstimator, response_method: str) -> Callable: ...
 
 class DecisionBoundaryDisplay:
     def __init__(
         self,
         *,
-        xx0: NDArray,
-        xx1: NDArray,
-        response: NDArray,
+        xx0: MatrixLike,
+        xx1: MatrixLike,
+        response: MatrixLike,
         xlabel: str | None = None,
         ylabel: str | None = None,
-    ) -> None: ...
+    ) -> None:
+        ...
+
     def plot(
         self,
-        plot_method: Literal["contourf", "contour", "pcolormesh"] = "contourf",
+        plot_method: Literal[
+            "contourf", "contour", "pcolormesh", "contourf"
+        ] = "contourf",
         ax: Axes | None = None,
         xlabel: str | None = None,
         ylabel: str | None = None,
         **kwargs,
-    ) -> DecisionBoundaryDisplay: ...
+    ) -> DecisionBoundaryDisplay:
+        ...
+
     @classmethod
     def from_estimator(
         cls,
-        estimator: BaseEstimator,
-        X: ArrayLike | DataFrame,
+        estimator: Any,
+        X: MatrixLike,
         *,
-        grid_resolution: int = 100,
-        eps: float = 1.0,
-        plot_method: Literal["contourf", "contour", "pcolormesh"] = "contourf",
-        response_method: Literal["auto", "predict_proba", "decision_function", "predict"] = "auto",
+        grid_resolution: Int = 100,
+        eps: Float = 1.0,
+        plot_method: Literal[
+            "contourf", "contour", "pcolormesh", "contourf"
+        ] = "contourf",
+        response_method: Literal[
+            "auto", "predict_proba", "decision_function", "predict", "auto"
+        ] = "auto",
         xlabel: str | None = None,
         ylabel: str | None = None,
         ax: Axes | None = None,
         **kwargs,
-    ) -> DecisionBoundaryDisplay: ...
+    ) -> DecisionBoundaryDisplay:
+        ...

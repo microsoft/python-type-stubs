@@ -1,5 +1,17 @@
-from typing import Literal, Mapping, Any
-from numpy.typing import ArrayLike, NDArray
+from typing import Any, Literal
+from ..utils._param_validation import (
+    Hidden as Hidden,
+    Interval as Interval,
+    StrOptions as StrOptions,
+)
+from ..exceptions import ConvergenceWarning as ConvergenceWarning
+from .._typing import Float, ArrayLike, MatrixLike
+from scipy import sparse as sparse
+from ..base import BaseEstimator, RegressorMixin
+from ._base import LinearModel
+from numbers import Real as Real
+from scipy.optimize import linprog as linprog
+from ..utils.fixes import sp_version as sp_version, parse_version as parse_version
 
 # Authors: David Dale <dale.david@mail.ru>
 #          Christian Lorentzen <lorentzen.ch@gmail.com>
@@ -7,30 +19,34 @@ from numpy.typing import ArrayLike, NDArray
 import warnings
 
 import numpy as np
-from scipy import sparse
-from scipy.optimize import linprog
 
-from ..base import BaseEstimator, RegressorMixin
-from ._base import LinearModel
-from ..exceptions import ConvergenceWarning
-from ..utils import _safe_indexing
-from ..utils.validation import _check_sample_weight
-from ..utils.fixes import sp_version, parse_version
-from numpy import ndarray
 
 class QuantileRegressor(LinearModel, RegressorMixin, BaseEstimator):
+
+    _parameter_constraints: dict = ...
+
     def __init__(
         self,
         *,
-        quantile: float = 0.5,
-        alpha: float = 1.0,
+        quantile: Float = 0.5,
+        alpha: Float = 1.0,
         fit_intercept: bool = True,
-        solver: Literal["highs-ds", "highs-ipm", "highs", "interior-point", "revised simplex"] = "interior-point",
-        solver_options: Mapping | None = None,
-    ) -> None: ...
+        solver: Literal[
+            "highs-ds",
+            "highs-ipm",
+            "highs",
+            "interior-point",
+            "revised simplex",
+            "warn",
+        ] = "warn",
+        solver_options: dict | None = None,
+    ) -> None:
+        ...
+
     def fit(
         self,
-        X: NDArray | ArrayLike,
+        X: MatrixLike | ArrayLike,
         y: ArrayLike,
-        sample_weight: ArrayLike | None = None,
-    ) -> "QuantileRegressor": ...
+        sample_weight: None | ArrayLike = None,
+    ) -> Any:
+        ...

@@ -1,22 +1,36 @@
-from typing import Optional, Any
-from numpy.typing import ArrayLike, NDArray
-
-# Author: Kyle Kastner <kastnerkyle@gmail.com>
-#         Giorgio Patrini
-# License: BSD 3 clause
-
-import numpy as np
-from scipy import linalg, sparse
-
+from typing import Any
+from ..utils._param_validation import Interval as Interval
+from ..utils.extmath import svd_flip as svd_flip
+from .._typing import Int, ArrayLike, MatrixLike
+from scipy import linalg as linalg, sparse as sparse
 from ._base import _BasePCA
-from ..utils import gen_batches
-from ..utils.extmath import svd_flip, _incremental_mean_and_var
 from numpy import ndarray
+from ..utils import gen_batches as gen_batches
+from numbers import Integral as Integral
+import numpy as np
+
 
 class IncrementalPCA(_BasePCA):
+
+    _parameter_constraints: dict = ...
+
     def __init__(
-        self, n_components: int | None = None, *, whiten: bool = False, copy: bool = True, batch_size: int | None = None
-    ) -> None: ...
-    def fit(self, X: NDArray | ArrayLike, y: None = None) -> "IncrementalPCA": ...
-    def partial_fit(self, X: ArrayLike, y: None = None, check_input: bool = True) -> "IncrementalPCA": ...
-    def transform(self, X: NDArray | ArrayLike) -> NDArray: ...
+        self,
+        n_components: None | Int = None,
+        *,
+        whiten: bool = False,
+        copy: bool = True,
+        batch_size: None | Int = None
+    ) -> None:
+        ...
+
+    def fit(self, X: MatrixLike | ArrayLike, y: Any = None) -> Any:
+        ...
+
+    def partial_fit(
+        self, X: MatrixLike, y: Any = None, check_input: bool = True
+    ) -> Any:
+        ...
+
+    def transform(self, X: MatrixLike | ArrayLike) -> ndarray:
+        ...

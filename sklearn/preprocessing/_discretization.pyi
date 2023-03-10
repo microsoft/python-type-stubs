@@ -1,41 +1,60 @@
-from numpy import int64, ndarray, float64, float32
-from typing import Optional, Union, Literal, Any
-from numpy.typing import ArrayLike, NDArray
+from typing import Any, Literal
+from ..utils._param_validation import (
+    Hidden as Hidden,
+    Interval as Interval,
+    StrOptions as StrOptions,
+    Options as Options,
+)
 from numpy.random import RandomState
+from .._typing import ArrayLike, Int, Float, MatrixLike
+from ..base import BaseEstimator, TransformerMixin
+from ..utils.validation import (
+    check_array as check_array,
+    check_is_fitted as check_is_fitted,
+    check_random_state as check_random_state,
+)
+from scipy.sparse._csr import csr_matrix
+from numpy import ndarray
+from . import OneHotEncoder as OneHotEncoder
+from numbers import Integral as Integral
+from scipy.sparse import spmatrix
+from ..cluster import KMeans as KMeans
+from pandas.core.series import Series
 
 # Author: Henry Lin <hlin117@gmail.com>
 #         Tom Dupré la Tour
 
 # License: BSD
 
-import numbers
+
 import numpy as np
 import warnings
 
-from . import OneHotEncoder
-
-from ..base import BaseEstimator, TransformerMixin
-from ..utils.validation import check_array
-from ..utils.validation import check_is_fitted
-from ..utils.validation import check_random_state
-from ..utils.validation import _check_feature_names_in
-from ..utils.validation import check_scalar
-from ..utils import _safe_indexing
-from scipy.sparse._csr import csr_matrix
 
 class KBinsDiscretizer(TransformerMixin, BaseEstimator):
+
+    _parameter_constraints: dict = ...
+
     def __init__(
         self,
-        n_bins: int | ArrayLike = 5,
+        n_bins: Int | ArrayLike = 5,
         *,
-        encode: Literal["onehot", "onehot-dense", "ordinal"] = "onehot",
-        strategy: Literal["uniform", "quantile", "kmeans"] = "quantile",
-        dtype: float64 | float32 | None = None,
-        subsample: int | Literal["warn"] | None = "warn",
-        random_state: int | RandomState | None = None,
-    ) -> None: ...
-    def fit(self, X: ArrayLike, y: Optional[ndarray] = None) -> "KBinsDiscretizer": ...
-    def _validate_n_bins(self, n_features: int) -> ndarray: ...
-    def transform(self, X: ArrayLike) -> NDArray: ...
-    def inverse_transform(self, Xt: ArrayLike) -> NDArray: ...
-    def get_feature_names_out(self, input_features: ArrayLike | None = None) -> np.ndarray: ...
+        encode: Literal["onehot", "onehot-dense", "ordinal", "onehot"] = "onehot",
+        strategy: Literal["uniform", "quantile", "kmeans", "quantile"] = "quantile",
+        dtype: None | Float = None,
+        subsample: int | None | Literal["warn", "warn"] = "warn",
+        random_state: RandomState | None | Int = None,
+    ) -> None:
+        ...
+
+    def fit(self, X: MatrixLike, y: Series | None | ndarray = None) -> Any:
+        ...
+
+    def transform(self, X: MatrixLike) -> csr_matrix | spmatrix | ndarray:
+        ...
+
+    def inverse_transform(self, Xt: MatrixLike) -> ndarray:
+        ...
+
+    def get_feature_names_out(self, input_features: None | ArrayLike = None) -> ndarray:
+        ...

@@ -1,96 +1,81 @@
-from collections.abc import Generator, Iterable
-from typing import List, Optional, Tuple, Union, Literal, Any
-from numpy.typing import ArrayLike
-
-# Author: Fabian Pedregosa <fabian.pedregosa@inria.fr>
-#         Alexandre Gramfort <alexandre.gramfort@inria.fr>
-#         Gael Varoquaux
-#
-# License: BSD 3 clause
-
-from math import log
+from typing import Any, Iterable, Literal
+from ..utils._param_validation import (
+    Hidden as Hidden,
+    Interval as Interval,
+    StrOptions as StrOptions,
+)
+from collections.abc import Iterable
+from numpy.random import RandomState
+from ..exceptions import ConvergenceWarning as ConvergenceWarning
+from .._typing import MatrixLike, ArrayLike, Int, Float
+from math import log as log
+from scipy import linalg as linalg, interpolate as interpolate
+from ..base import RegressorMixin, MultiOutputMixin
+from ..model_selection import check_cv as check_cv
+from ._base import LinearModel, LinearRegression as LinearRegression
+from numpy import ndarray
+from ..utils import (
+    arrayfuncs as arrayfuncs,
+    as_float_array as as_float_array,
+    check_random_state as check_random_state,
+)
+from numbers import Integral as Integral, Real as Real
+from ..utils.parallel import delayed as delayed, Parallel as Parallel
+from scipy.linalg.lapack import get_lapack_funcs as get_lapack_funcs
+from ..model_selection import BaseCrossValidator
 import sys
 import warnings
-
 import numpy as np
-from numpy.random import RandomState
-from scipy import linalg, interpolate
-from scipy.linalg.lapack import get_lapack_funcs
-
-from ._base import LinearModel, LinearRegression
-from ._base import _deprecate_normalize, _preprocess_data
-from ..base import RegressorMixin, MultiOutputMixin
-
-# mypy error: Module 'sklearn.utils' has no attribute 'arrayfuncs'
-from ..utils import arrayfuncs, as_float_array  # type: ignore
-from ..utils import check_random_state
-from ..model_selection import check_cv
-from ..exceptions import ConvergenceWarning
-from ..utils.fixes import delayed
-from numpy import float64, int64, ndarray
-from pandas.core.series import Series
 
 SOLVE_TRIANGULAR_ARGS: dict = ...
 
+
 def lars_path(
-    X: ArrayLike | None,
-    y: ArrayLike | None,
-    Xy: ArrayLike | None = None,
+    X: None | MatrixLike,
+    y: None | ArrayLike,
+    Xy: None | MatrixLike | ArrayLike = None,
     *,
-    Gram: ArrayLike | Literal["auto"] | None = None,
-    max_iter: int = 500,
-    alpha_min: float = 0,
-    method: Literal["lar", "lasso"] = "lar",
+    Gram: str | None | MatrixLike = None,
+    max_iter: Int = 500,
+    alpha_min: Float = 0,
+    method: Literal["lar", "lasso", "lar"] = "lar",
     copy_X: bool = True,
-    eps: float = ...,
+    eps: Float = ...,
     copy_Gram: bool = True,
-    verbose: int = 0,
+    verbose: Int = 0,
     return_path: bool = True,
     return_n_iter: bool = False,
     positive: bool = False,
-) -> tuple[ArrayLike, ArrayLike, ArrayLike, int]: ...
+) -> tuple[ndarray, ndarray, ndarray, int]:
+    ...
+
+
 def lars_path_gram(
-    Xy: ArrayLike,
-    Gram: ArrayLike,
+    Xy: MatrixLike | ArrayLike,
+    Gram: MatrixLike,
     *,
     n_samples: int | float,
-    max_iter: int = 500,
-    alpha_min: float = 0,
-    method: Literal["lar", "lasso"] = "lar",
+    max_iter: Int = 500,
+    alpha_min: Float = 0,
+    method: Literal["lar", "lasso", "lar"] = "lar",
     copy_X: bool = True,
-    eps: float = ...,
+    eps: Float = ...,
     copy_Gram: bool = True,
-    verbose: int = 0,
+    verbose: Int = 0,
     return_path: bool = True,
     return_n_iter: bool = False,
     positive: bool = False,
-) -> tuple[ArrayLike, ArrayLike, ArrayLike, int]: ...
-def _lars_path_solver(
-    X: ndarray,
-    y: ndarray,
-    Xy: Optional[ndarray] = None,
-    Gram: Optional[Union[ndarray, str]] = None,
-    n_samples: None = None,
-    max_iter: int = 500,
-    alpha_min: Union[int, float, float64] = 0,
-    method: str = "lar",
-    copy_X: bool = True,
-    eps: float64 = np.finfo(float).eps,
-    copy_Gram: bool = True,
-    verbose: Union[int, bool] = 0,
-    return_path: bool = True,
-    return_n_iter: bool = False,
-    positive: bool = False,
-) -> Union[
-    Tuple[ndarray, List[int64], ndarray, int],
-    Tuple[ndarray, List[int64], ndarray],
-    Tuple[ndarray, List[Any], ndarray, int],
-]: ...
+) -> tuple[ndarray, ndarray, ndarray, int]:
+    ...
+
 
 ###############################################################################
 # Estimator classes
 
+
 class Lars(MultiOutputMixin, RegressorMixin, LinearModel):
+
+    _parameter_constraints: dict = ...
 
     method: str = ...
     positive: bool = ...
@@ -100,72 +85,58 @@ class Lars(MultiOutputMixin, RegressorMixin, LinearModel):
         *,
         fit_intercept: bool = True,
         verbose: bool | int = False,
-        normalize: bool = ...,
-        precompute: bool | ArrayLike | Literal["auto"] = "auto",
-        n_nonzero_coefs: int = 500,
-        eps: float = ...,
+        normalize: bool | str = "deprecated",
+        precompute: bool | Literal["auto", "auto"] | ArrayLike = "auto",
+        n_nonzero_coefs: Int = 500,
+        eps: Float = ...,
         copy_X: bool = True,
         fit_path: bool = True,
-        jitter: float | None = None,
-        random_state: int | RandomState | None = None,
-    ) -> None: ...
-    @staticmethod
-    def _get_gram(precompute: Union[ndarray, str], X: ndarray, y: ndarray) -> ndarray: ...
-    def _fit(
+        jitter: None | Float = None,
+        random_state: RandomState | None | Int = None,
+    ) -> None:
+        ...
+
+    def fit(
         self,
-        X: ndarray,
-        y: ndarray,
-        max_iter: int,
-        alpha: Union[float, float64],
-        fit_path: bool,
-        normalize: bool,
-        Xy: Optional[ndarray] = None,
-    ) -> Union[LassoLars, LassoLarsCV, Lars]: ...
-    def fit(self, X: ArrayLike, y: ArrayLike, Xy: ArrayLike | None = None) -> Union[LassoLars, Lars]: ...
+        X: MatrixLike,
+        y: MatrixLike | ArrayLike,
+        Xy: None | MatrixLike | ArrayLike = None,
+    ) -> Any:
+        ...
+
 
 class LassoLars(Lars):
 
+    _parameter_constraints: dict = ...
+
     method: str = ...
 
     def __init__(
         self,
-        alpha: float = 1.0,
+        alpha: Float = 1.0,
         *,
         fit_intercept: bool = True,
         verbose: bool | int = False,
-        normalize: bool = ...,
-        precompute: bool | ArrayLike | Literal["auto"] = "auto",
-        max_iter: int = 500,
-        eps: float = ...,
+        normalize: bool | str = "deprecated",
+        precompute: bool | Literal["auto", "auto"] | ArrayLike = "auto",
+        max_iter: Int = 500,
+        eps: Float = ...,
         copy_X: bool = True,
         fit_path: bool = True,
         positive: bool = False,
-        jitter: float | None = None,
-        random_state: int | RandomState | None = None,
-    ) -> None: ...
+        jitter: None | Float = None,
+        random_state: RandomState | None | Int = None,
+    ) -> None:
+        ...
 
-###############################################################################
-# Cross-validated estimator classes
-
-def _check_copy_and_writeable(array: ndarray, copy: bool = False) -> ndarray: ...
-def _lars_path_residues(
-    X_train: ndarray,
-    y_train: ndarray,
-    X_test: ndarray,
-    y_test: ndarray,
-    Gram: Optional[str] = None,
-    copy: bool = True,
-    method: str = "lars",
-    verbose: int = False,
-    fit_intercept: bool = True,
-    normalize: bool = True,
-    max_iter: int = 500,
-    eps: float64 = np.finfo(float).eps,
-    positive: bool = False,
-) -> Tuple[ndarray, List[int64], ndarray, ndarray]: ...
 
 class LarsCV(Lars):
 
+    _parameter_constraints: dict = ...
+
+    for parameter in ["n_nonzero_coefs", "jitter", "fit_path", "random_state"]:
+        pass
+
     method: str = ...
 
     def __init__(
@@ -173,20 +144,25 @@ class LarsCV(Lars):
         *,
         fit_intercept: bool = True,
         verbose: bool | int = False,
-        max_iter: int = 500,
-        normalize: bool = ...,
-        precompute: bool | ArrayLike | Literal["auto"] = "auto",
-        cv: int | Generator | Iterable | None = None,
-        max_n_alphas: int = 1000,
+        max_iter: Int = 500,
+        normalize: bool | str = "deprecated",
+        precompute: bool | Literal["auto", "auto"] | ArrayLike = "auto",
+        cv: Iterable | BaseCrossValidator | int | None = None,
+        max_n_alphas: Int = 1000,
         n_jobs: int | None = None,
-        eps: float = ...,
+        eps: Float = ...,
         copy_X: bool = True,
-    ): ...
-    def _more_tags(self): ...
-    def fit(self, X: ArrayLike, y: ArrayLike) -> "LassoLarsCV": ...
+    ) -> None:
+        ...
+
+    def fit(self, X: MatrixLike, y: ArrayLike) -> Any:
+        ...
+
 
 class LassoLarsCV(LarsCV):
 
+    _parameter_constraints: dict = ...
+
     method: str = ...
 
     def __init__(
@@ -194,32 +170,41 @@ class LassoLarsCV(LarsCV):
         *,
         fit_intercept: bool = True,
         verbose: bool | int = False,
-        max_iter: int = 500,
-        normalize: bool = ...,
-        precompute: bool | Literal["auto"] = "auto",
-        cv: int | Generator | Iterable | None = None,
-        max_n_alphas: int = 1000,
+        max_iter: Int = 500,
+        normalize: bool | str = "deprecated",
+        precompute: bool | Literal["auto", "auto"] = "auto",
+        cv: Iterable | BaseCrossValidator | int | None = None,
+        max_n_alphas: Int = 1000,
         n_jobs: int | None = None,
-        eps: float = ...,
+        eps: Float = ...,
         copy_X: bool = True,
         positive: bool = False,
-    ) -> None: ...
+    ) -> None:
+        ...
+
 
 class LassoLarsIC(LassoLars):
+
+    _parameter_constraints: dict = ...
+
+    for parameter in ["jitter", "fit_path", "alpha", "random_state"]:
+        pass
+
     def __init__(
         self,
-        criterion: Literal["aic", "bic"] = "aic",
+        criterion: Literal["aic", "bic", "aic"] = "aic",
         *,
         fit_intercept: bool = True,
         verbose: bool | int = False,
-        normalize: bool = ...,
-        precompute: bool | ArrayLike | Literal["auto"] = "auto",
-        max_iter: int = 500,
-        eps: float = ...,
+        normalize: bool | str = "deprecated",
+        precompute: bool | Literal["auto", "auto"] | ArrayLike = "auto",
+        max_iter: Int = 500,
+        eps: Float = ...,
         copy_X: bool = True,
         positive: bool = False,
-        noise_variance: float | None = None,
-    ) -> None: ...
-    def _more_tags(self): ...
-    def fit(self, X: ArrayLike, y: ArrayLike, copy_X: bool | None = None) -> "LassoLarsIC": ...
-    def _estimate_noise_variance(self, X: ndarray, y: ndarray, positive: bool) -> float64: ...
+        noise_variance: None | Float = None,
+    ) -> None:
+        ...
+
+    def fit(self, X: MatrixLike, y: ArrayLike, copy_X: bool | None = None) -> Any:
+        ...

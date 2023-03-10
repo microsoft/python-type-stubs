@@ -1,43 +1,40 @@
-from sklearn.utils._estimator_html_repr import _VisualBlock
 from typing import Literal, Sequence
-from numpy.typing import ArrayLike
-from contextlib import closing
-from io import StringIO
-from string import Template
+from inspect import isclass as isclass
+from .._typing import Estimator
+from contextlib import closing as closing
+from io import StringIO as StringIO
+from .. import config_context as config_context
+from string import Template as Template
 import html
 
-from .. import config_context
 
 class _IDCounter:
-    def __init__(self, prefix: str) -> None: ...
-    def get_id(self): ...
+    def __init__(self, prefix: str) -> None:
+        ...
+
+    def get_id(self):
+        ...
+
 
 _CONTAINER_ID_COUNTER = ...
 _ESTIMATOR_ID_COUNTER = ...
+
 
 class _VisualBlock:
     def __init__(
         self,
         kind: Literal["serial", "parallel", "single"],
-        estimators: Sequence[Estimator | _VisualBlock] | Estimator,
+        estimators: Estimator | Sequence[_VisualBlock] | Sequence[Estimator],
         *,
-        names: ArrayLike | None = None,
+        names: Sequence[str] | None = None,
         name_details: Sequence[str] | str | None = None,
-        dash_wrapped: bool = True,
-    ): ...
-    def _sk_visual_block_(self): ...
+        dash_wrapped: bool = True
+    ) -> None:
+        ...
 
-def _write_label_html(
-    out,
-    name,
-    name_details,
-    outer_class="sk-label-container",
-    inner_class="sk-label",
-    checked=False,
-): ...
-def _get_visual_block(estimator): ...
-def _write_estimator_html(out, estimator, estimator_label, estimator_label_details, first_call=False): ...
 
 _STYLE = ...  # noqa
 
-def estimator_html_repr(estimator: Estimator) -> str: ...
+
+def estimator_html_repr(estimator: Estimator) -> str:
+    ...
