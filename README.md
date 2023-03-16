@@ -38,13 +38,14 @@ and are no longer maintained here:
 - aiofiles
 - cachetools
 - deprecated
+- django (see <https://github.com/sbdchd/django-types>)
 - filelock
 - freezegun
 - markdown
 - packaging
 - pandas (see <https://github.com/pandas-dev/pandas-stubs>; please open pandas stub issues there)
 - PIL
-- pywin32 (pythonwin, win32 and win32com pakcages)
+- pywin32 (pythonwin, win32 and win32com packages)
 - retry
 - slugify
 
