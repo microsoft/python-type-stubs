@@ -1,20 +1,25 @@
-from typing import Any, Callable, Literal
-from ..utils._param_validation import Interval as Interval, StrOptions as StrOptions
-from ..utils.extmath import safe_sparse_dot as safe_sparse_dot
+from typing import Callable, ClassVar, Literal, TypeVar
+from abc import ABCMeta, abstractmethod as abstractmethod
+from scipy import sparse as sparse
 from ..exceptions import ConvergenceWarning as ConvergenceWarning
-from .._typing import Float, Int, MatrixLike, ArrayLike
+from numpy import ndarray
+from ..utils.extmath import safe_sparse_dot as safe_sparse_dot
+from ..utils._param_validation import Interval as Interval, StrOptions as StrOptions
+from numbers import Integral as Integral, Real as Real
+from ..neighbors import NearestNeighbors as NearestNeighbors
 from ..utils.multiclass import (
     check_classification_targets as check_classification_targets,
 )
-from scipy import sparse as sparse
-from ..base import BaseEstimator, ClassifierMixin
-from ..neighbors import NearestNeighbors as NearestNeighbors
-from ..utils.validation import check_is_fitted as check_is_fitted
-from abc import ABCMeta, abstractmethod as abstractmethod
-from ..metrics.pairwise import rbf_kernel as rbf_kernel
-from numpy import ndarray
-from numbers import Integral as Integral, Real as Real
 from scipy.sparse import csgraph as csgraph
+from ..base import BaseEstimator, ClassifierMixin
+from ..metrics.pairwise import rbf_kernel as rbf_kernel
+from .._typing import Float, Int, MatrixLike, ArrayLike
+from ..utils.validation import check_is_fitted as check_is_fitted
+
+BaseLabelPropagation_Self = TypeVar(
+    "BaseLabelPropagation_Self", bound="BaseLabelPropagation"
+)
+LabelPropagation_Self = TypeVar("LabelPropagation_Self", bound="LabelPropagation")
 
 # coding=utf8
 
@@ -24,7 +29,7 @@ import numpy as np
 
 class BaseLabelPropagation(ClassifierMixin, BaseEstimator, metaclass=ABCMeta):
 
-    _parameter_constraints: dict = ...
+    _parameter_constraints: ClassVar[dict] = ...
 
     def __init__(
         self,
@@ -45,15 +50,24 @@ class BaseLabelPropagation(ClassifierMixin, BaseEstimator, metaclass=ABCMeta):
     def predict_proba(self, X: MatrixLike) -> ndarray:
         ...
 
-    def fit(self, X: MatrixLike, y: ArrayLike) -> Any:
+    def fit(
+        self: BaseLabelPropagation_Self, X: MatrixLike, y: ArrayLike
+    ) -> BaseLabelPropagation_Self | LabelSpreading:
         ...
 
 
 class LabelPropagation(BaseLabelPropagation):
+    n_iter_: int = ...
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    transduction_: ndarray = ...
+    label_distributions_: ndarray = ...
+    classes_: ndarray = ...
+    X_: ndarray = ...
 
-    _variant: str = ...
+    _variant: ClassVar[str] = ...
 
-    _parameter_constraints: dict = ...
+    _parameter_constraints: ClassVar[dict] = ...
 
     def __init__(
         self,
@@ -67,15 +81,24 @@ class LabelPropagation(BaseLabelPropagation):
     ) -> None:
         ...
 
-    def fit(self, X: MatrixLike, y: ArrayLike) -> Any:
+    def fit(
+        self: LabelPropagation_Self, X: MatrixLike, y: ArrayLike
+    ) -> LabelPropagation_Self:
         ...
 
 
 class LabelSpreading(BaseLabelPropagation):
+    n_iter_: int = ...
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    transduction_: ndarray = ...
+    label_distributions_: ndarray = ...
+    classes_: ndarray = ...
+    X_: ndarray = ...
 
-    _variant: str = ...
+    _variant: ClassVar[str] = ...
 
-    _parameter_constraints: dict = ...
+    _parameter_constraints: ClassVar[dict] = ...
 
     def __init__(
         self,

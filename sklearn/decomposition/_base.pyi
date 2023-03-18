@@ -1,10 +1,13 @@
-from typing import Any
-from .._typing import MatrixLike
-from scipy import linalg as linalg
-from ..base import BaseEstimator, TransformerMixin, ClassNamePrefixFeaturesOutMixin
-from ..utils.validation import check_is_fitted as check_is_fitted
+from typing import TypeVar
 from abc import ABCMeta, abstractmethod
+from scipy import linalg as linalg
 from numpy import ndarray
+from ..base import BaseEstimator, TransformerMixin, ClassNamePrefixFeaturesOutMixin
+from .._typing import MatrixLike
+from ..utils.validation import check_is_fitted as check_is_fitted
+
+_BasePCA_Self = TypeVar("_BasePCA_Self", bound="_BasePCA")
+
 
 # Author: Alexandre Gramfort <alexandre.gramfort@inria.fr>
 #         Olivier Grisel <olivier.grisel@ensta.org>
@@ -27,7 +30,7 @@ class _BasePCA(
         ...
 
     @abstractmethod
-    def fit(self, X: MatrixLike, y=None) -> Any:
+    def fit(self: _BasePCA_Self, X: MatrixLike, y=None) -> _BasePCA_Self:
         ...
 
     def transform(self, X: MatrixLike) -> ndarray:

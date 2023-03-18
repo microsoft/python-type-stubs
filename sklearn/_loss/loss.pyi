@@ -1,6 +1,15 @@
-from typing import Literal, Type
-from .link import IdentityLink, LogLink, LogitLink, MultinomialLogit
+from typing import ClassVar, Literal, Type
+from ..utils._readonly_array_wrapper import ReadonlyArrayWrapper as ReadonlyArrayWrapper
 from scipy.special import xlogy as xlogy
+from numpy import ndarray
+from .link import (
+    Interval,
+    IdentityLink,
+    LogLink as LogLink,
+    LogitLink as LogitLink,
+    MultinomialLogit as MultinomialLogit,
+)
+from .link import BaseLink
 from ._loss import (
     CyHalfSquaredError,
     CyAbsoluteError as CyAbsoluteError,
@@ -13,10 +22,8 @@ from ._loss import (
     CyHalfMultinomialLoss as CyHalfMultinomialLoss,
 )
 from .._typing import ArrayLike, MatrixLike, Int, Float, Scalar
-from ..utils._readonly_array_wrapper import ReadonlyArrayWrapper as ReadonlyArrayWrapper
-from numpy import ndarray
 from ..utils import check_scalar as check_scalar
-from .link import Interval as Interval
+from ._loss import CyLossFunction
 
 # Goals:
 # - Provide a common private module for loss functions/classes.
@@ -51,6 +58,12 @@ import numpy as np
 # mentioned Cython edge case and have easier to understand code (which method calls
 # which code).
 class BaseLoss:
+    constant_hessian: bool = ...
+    approx_hessian: bool = ...
+    interval_y_pred: Interval = ...
+    interval_y_true: Interval = ...
+    link: BaseLink = ...
+    closs: CyLossFunction = ...
 
     # For decision trees:
     # This variable indicates whether the loss requires the leaves values to
@@ -61,16 +74,11 @@ class BaseLoss:
     # procedure. See the original paper Greedy Function Approximation: A
     # Gradient Boosting Machine by Friedman
     # (https://statweb.stanford.edu/~jhf/ftp/trebst.pdf) for the theory.
-    need_update_leaves_values: bool = ...
-    differentiable: bool = ...
-    is_multiclass: bool = ...
+    need_update_leaves_values: ClassVar[bool] = ...
+    differentiable: ClassVar[bool] = ...
+    is_multiclass: ClassVar[bool] = ...
 
-    def __init__(
-        self,
-        closs,
-        link: IdentityLink | MultinomialLogit | LogitLink | LogLink,
-        n_classes: int | None = None,
-    ) -> None:
+    def __init__(self, closs, link, n_classes: None | int = None) -> None:
         ...
 
     def in_y_true_range(self, y: ArrayLike) -> bool:
@@ -132,7 +140,7 @@ class BaseLoss:
 
     def fit_intercept_only(
         self, y_true: ArrayLike, sample_weight: None | ArrayLike = None
-    ) -> Scalar | Float | ndarray:
+    ) -> ndarray | Scalar | Float:
         ...
 
     def constant_to_optimal_zero(self, y_true, sample_weight=None):
@@ -141,7 +149,7 @@ class BaseLoss:
     def init_gradient_and_hessian(
         self,
         n_samples: Int,
-        dtype: Float | Type[Float] = ...,
+        dtype: Type[Float] | Float = ...,
         order: Literal["C", "F", "F"] = "F",
     ) -> tuple[ndarray, ndarray]:
         ...
@@ -158,8 +166,8 @@ class HalfSquaredError(BaseLoss):
 
 class AbsoluteError(BaseLoss):
 
-    differentiable: bool = ...
-    need_update_leaves_values: bool = ...
+    differentiable: ClassVar[bool] = ...
+    need_update_leaves_values: ClassVar[bool] = ...
 
     def __init__(self, sample_weight=None) -> None:
         ...
@@ -170,8 +178,8 @@ class AbsoluteError(BaseLoss):
 
 class PinballLoss(BaseLoss):
 
-    differentiable: bool = ...
-    need_update_leaves_values: bool = ...
+    differentiable: ClassVar[bool] = ...
+    need_update_leaves_values: ClassVar[bool] = ...
 
     def __init__(self, sample_weight=None, quantile: float = 0.5) -> None:
         ...
@@ -222,7 +230,7 @@ class HalfBinomialLoss(BaseLoss):
 
 class HalfMultinomialLoss(BaseLoss):
 
-    is_multiclass: bool = ...
+    is_multiclass: ClassVar[bool] = ...
 
     def __init__(self, sample_weight=None, n_classes: int = 3) -> None:
         ...

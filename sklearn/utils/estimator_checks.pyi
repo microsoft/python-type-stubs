@@ -1,54 +1,67 @@
 from typing import Sequence
+from scipy import sparse as sparse
+from ..exceptions import (
+    DataConversionWarning as DataConversionWarning,
+    NotFittedError as NotFittedError,
+    SkipTestWarning as SkipTestWarning,
+)
+from ..base import BaseEstimator
+from ..random_projection import BaseRandomProjection as BaseRandomProjection
+from inspect import signature as signature
+from .validation import has_fit_parameter as has_fit_parameter
+from ..metrics import (
+    accuracy_score as accuracy_score,
+    adjusted_rand_score as adjusted_rand_score,
+    f1_score as f1_score,
+)
+from ..utils.fixes import sp_version as sp_version, parse_version as parse_version
 from ._param_validation import Interval as Interval
-from .._typing import Estimator, ArrayLike
+from ..preprocessing import StandardScaler as StandardScaler, scale as scale
 from ..linear_model import (
     LinearRegression as LinearRegression,
+    LogisticRegression as LogisticRegression,
     RANSACRegressor as RANSACRegressor,
     Ridge as Ridge,
     SGDRegressor as SGDRegressor,
 )
-from ..preprocessing import StandardScaler as StandardScaler, scale as scale
+from copy import deepcopy as deepcopy
 from ..datasets import (
     load_iris as load_iris,
     make_blobs as make_blobs,
     make_multilabel_classification as make_multilabel_classification,
     make_regression as make_regression,
 )
-from ..random_projection import BaseRandomProjection as BaseRandomProjection
-from ..utils._param_validation import (
-    make_constraint as make_constraint,
-    generate_invalid_param_val as generate_invalid_param_val,
-    InvalidParameterError as InvalidParameterError,
-)
-from ..model_selection import (
-    train_test_split as train_test_split,
-    ShuffleSplit as ShuffleSplit,
-)
 from ..metrics.pairwise import (
     rbf_kernel as rbf_kernel,
     linear_kernel as linear_kernel,
     pairwise_distances as pairwise_distances,
 )
-from . import IS_PYPY as IS_PYPY, is_scalar_nan as is_scalar_nan, shuffle as shuffle
-from copy import deepcopy as deepcopy
-from _pytest.mark.structures import MarkDecorator
-from ..tree._classes import DecisionTreeRegressor
-from ..metrics import (
-    accuracy_score as accuracy_score,
-    adjusted_rand_score as adjusted_rand_score,
-    f1_score as f1_score,
-)
-from scipy import sparse as sparse
+from .. import config_context as config_context
+from collections.abc import Generator
 from ..utils.validation import check_is_fitted as check_is_fitted
 from ..pipeline import make_pipeline as make_pipeline
-from .. import config_context as config_context
-from inspect import signature as signature
-from .validation import has_fit_parameter as has_fit_parameter
-from ..feature_selection import (
-    SelectKBest as SelectKBest,
-    SelectFromModel as SelectFromModel,
+from scipy.stats import rankdata as rankdata
+from _pytest.mark.structures import MarkDecorator
+from ..utils._param_validation import (
+    make_constraint as make_constraint,
+    generate_invalid_param_val as generate_invalid_param_val,
+    InvalidParameterError as InvalidParameterError,
 )
-from collections.abc import Generator
+from numbers import Real as Real
+from functools import partial as partial, wraps as wraps
+from ..base import (
+    clone as clone,
+    ClusterMixin as ClusterMixin,
+    is_classifier as is_classifier,
+    is_regressor as is_regressor,
+    is_outlier_detector as is_outlier_detector,
+    RegressorMixin as RegressorMixin,
+)
+from ..model_selection import (
+    train_test_split as train_test_split,
+    ShuffleSplit as ShuffleSplit,
+)
+from . import IS_PYPY as IS_PYPY, is_scalar_nan as is_scalar_nan, shuffle as shuffle
 from ._testing import (
     assert_raise_message as assert_raise_message,
     assert_array_equal as assert_array_equal,
@@ -62,24 +75,12 @@ from ._testing import (
     create_memmap_backed_data as create_memmap_backed_data,
     raises as raises,
 )
-from ..exceptions import (
-    DataConversionWarning as DataConversionWarning,
-    NotFittedError as NotFittedError,
-    SkipTestWarning as SkipTestWarning,
+from ..feature_selection import (
+    SelectKBest as SelectKBest,
+    SelectFromModel as SelectFromModel,
 )
-from ..base import (
-    clone as clone,
-    ClusterMixin as ClusterMixin,
-    is_classifier as is_classifier,
-    is_regressor as is_regressor,
-    is_outlier_detector as is_outlier_detector,
-    RegressorMixin as RegressorMixin,
-)
-from functools import partial as partial, wraps as wraps
-from scipy.stats import rankdata as rankdata
-from numbers import Real as Real
-from ..linear_model._logistic import LogisticRegression
-from ..utils.fixes import sp_version as sp_version, parse_version as parse_version
+from pytest.mark import parameterize
+from .._typing import ArrayLike
 import types
 import warnings
 import pickle
@@ -97,15 +98,15 @@ def check_supervised_y_no_nan(name, estimator_orig):
 
 
 def parametrize_with_checks(
-    estimators: list[LogisticRegression | DecisionTreeRegressor] | Sequence[Estimator],
-) -> MarkDecorator:
+    estimators: Sequence[BaseEstimator],
+) -> MarkDecorator | parameterize:
     ...
 
 
 def check_estimator(
-    estimator: Estimator | None = None,
+    estimator: None | BaseEstimator = None,
     generate_only: bool = False,
-    Estimator: Estimator | str = "deprecated",
+    Estimator: str | BaseEstimator = "deprecated",
 ) -> Generator:
     ...
 

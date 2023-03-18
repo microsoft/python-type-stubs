@@ -1,14 +1,13 @@
-from ..._typing import ArrayLike, Float, MatrixLike
-from math import log as log
 from scipy import sparse as sp
+from numpy import ndarray
+from ...utils.multiclass import type_of_target as type_of_target
 from ...utils.validation import (
     check_array as check_array,
     check_consistent_length as check_consistent_length,
 )
-from scipy.sparse._csr import csr_matrix
-from numpy import ndarray
+from math import log as log
 from scipy.sparse import spmatrix
-from ...utils.multiclass import type_of_target as type_of_target
+from ..._typing import ArrayLike, Float, MatrixLike
 from ._expected_mutual_info_fast import (
     expected_mutual_information as expected_mutual_information,
 )
@@ -42,8 +41,8 @@ def contingency_matrix(
     *,
     eps: None | Float = None,
     sparse: bool = False,
-    dtype: int | float = ...
-) -> spmatrix | ndarray | csr_matrix:
+    dtype: float | int = ...
+) -> ndarray | spmatrix:
     ...
 
 
@@ -64,7 +63,7 @@ def adjusted_rand_score(labels_true: ArrayLike, labels_pred: ArrayLike) -> float
 
 def homogeneity_completeness_v_measure(
     labels_true: ArrayLike, labels_pred: ArrayLike, *, beta: Float = 1.0
-) -> tuple[Float, Float, Float] | tuple[float, float, float]:
+) -> tuple[float, float, float] | tuple[Float, Float, Float]:
     ...
 
 

@@ -1,14 +1,14 @@
 from typing import Literal
-from ..exceptions import UndefinedMetricWarning as UndefinedMetricWarning
 from scipy.special import xlogy as xlogy
-from .._typing import ArrayLike, MatrixLike, Float
+from ..exceptions import UndefinedMetricWarning as UndefinedMetricWarning
+from numpy import ndarray
+from .._typing import MatrixLike, ArrayLike, Float
 from ..utils.validation import (
     check_array as check_array,
     check_consistent_length as check_consistent_length,
     check_scalar as check_scalar,
     column_or_1d as column_or_1d,
 )
-from numpy import ndarray
 
 # Authors: Alexandre Gramfort <alexandre.gramfort@inria.fr>
 #          Mathieu Blondel <mathieu@mblondel.org>
@@ -43,9 +43,9 @@ def mean_absolute_error(
     y_pred: MatrixLike | ArrayLike,
     *,
     sample_weight: None | ArrayLike = None,
-    multioutput: Literal["raw_values", "uniform_average", "uniform_average"]
-    | ArrayLike = "uniform_average",
-) -> Float | ndarray:
+    multioutput: ArrayLike
+    | Literal["raw_values", "uniform_average", "uniform_average"] = "uniform_average",
+) -> ndarray | Float:
     ...
 
 
@@ -55,9 +55,9 @@ def mean_pinball_loss(
     *,
     sample_weight: None | ArrayLike = None,
     alpha: float = 0.5,
-    multioutput: Literal["raw_values", "uniform_average", "uniform_average"]
-    | ArrayLike = "uniform_average",
-) -> Float | ndarray:
+    multioutput: ArrayLike
+    | Literal["raw_values", "uniform_average", "uniform_average"] = "uniform_average",
+) -> ndarray | Float:
     ...
 
 
@@ -66,9 +66,9 @@ def mean_absolute_percentage_error(
     y_pred: MatrixLike | ArrayLike,
     *,
     sample_weight: None | ArrayLike = None,
-    multioutput: Literal["raw_values", "uniform_average", "uniform_average"]
-    | ArrayLike = "uniform_average",
-) -> Float | ndarray:
+    multioutput: ArrayLike
+    | Literal["raw_values", "uniform_average", "uniform_average"] = "uniform_average",
+) -> ndarray | Float:
     ...
 
 
@@ -77,10 +77,10 @@ def mean_squared_error(
     y_pred: MatrixLike | ArrayLike,
     *,
     sample_weight: None | ArrayLike = None,
-    multioutput: Literal["raw_values", "uniform_average", "uniform_average"]
-    | ArrayLike = "uniform_average",
+    multioutput: ArrayLike
+    | Literal["raw_values", "uniform_average", "uniform_average"] = "uniform_average",
     squared: bool = True,
-) -> Float | ndarray:
+) -> ndarray | Float:
     ...
 
 
@@ -89,8 +89,8 @@ def mean_squared_log_error(
     y_pred: MatrixLike | ArrayLike,
     *,
     sample_weight: None | ArrayLike = None,
-    multioutput: Literal["raw_values", "uniform_average", "uniform_average"]
-    | ArrayLike = "uniform_average",
+    multioutput: ArrayLike
+    | Literal["raw_values", "uniform_average", "uniform_average"] = "uniform_average",
     squared: bool = True,
 ) -> float | ndarray:
     ...
@@ -100,10 +100,10 @@ def median_absolute_error(
     y_true: MatrixLike | ArrayLike,
     y_pred: MatrixLike | ArrayLike,
     *,
-    multioutput: Literal["raw_values", "uniform_average", "uniform_average"]
-    | ArrayLike = "uniform_average",
+    multioutput: ArrayLike
+    | Literal["raw_values", "uniform_average", "uniform_average"] = "uniform_average",
     sample_weight: None | ArrayLike = None,
-) -> Float | ndarray:
+) -> ndarray | Float:
     ...
 
 
@@ -132,7 +132,7 @@ def r2_score(
     | None
     | ArrayLike = "uniform_average",
     force_finite: bool = True,
-) -> Float | ndarray:
+) -> ndarray | Float:
     ...
 
 
@@ -178,8 +178,8 @@ def d2_pinball_score(
     *,
     sample_weight: None | ArrayLike = None,
     alpha: Float = 0.5,
-    multioutput: Literal["raw_values", "uniform_average", "uniform_average"]
-    | ArrayLike = "uniform_average",
+    multioutput: ArrayLike
+    | Literal["raw_values", "uniform_average", "uniform_average"] = "uniform_average",
 ) -> float | ndarray:
     ...
 
@@ -189,7 +189,7 @@ def d2_absolute_error_score(
     y_pred: MatrixLike | ArrayLike,
     *,
     sample_weight: None | ArrayLike = None,
-    multioutput: Literal["raw_values", "uniform_average", "uniform_average"]
-    | ArrayLike = "uniform_average",
+    multioutput: ArrayLike
+    | Literal["raw_values", "uniform_average", "uniform_average"] = "uniform_average",
 ) -> float | ndarray:
     ...

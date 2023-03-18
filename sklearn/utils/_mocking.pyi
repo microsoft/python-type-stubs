@@ -1,8 +1,12 @@
-from typing import Callable, Literal, Self, Sequence
-from .validation import check_array as check_array, check_is_fitted as check_is_fitted
-from .._typing import Int, MatrixLike, ArrayLike, Estimator
-from ..base import BaseEstimator, ClassifierMixin
+from typing import Callable, Literal, Sequence, TypeVar
+from ..base import BaseEstimator
 from numpy import ndarray
+from ..base import ClassifierMixin
+from .validation import check_array as check_array, check_is_fitted as check_is_fitted
+from .._typing import Int, MatrixLike, ArrayLike
+
+CheckingClassifier_Self = TypeVar("CheckingClassifier_Self", bound="CheckingClassifier")
+
 import numpy as np
 
 
@@ -38,27 +42,30 @@ class MockDataFrame:
 
 
 class CheckingClassifier(ClassifierMixin, BaseEstimator):
+    n_features_in_: int = ...
+    classes_: int = ...
+
     def __init__(
         self,
         *,
         check_y: None | Callable = None,
-        check_y_params: dict | None = None,
+        check_y_params: None | dict = None,
         check_X: None | Callable = None,
-        check_X_params: dict | None = None,
-        methods_to_check: Sequence[str] | Literal["all", "all"] = "all",
+        check_X_params: None | dict = None,
+        methods_to_check: Literal["all", "all"] | Sequence[str] = "all",
         foo_param: Int = 0,
-        expected_sample_weight: bool | None = None,
-        expected_fit_params: Sequence[str] | None = None,
+        expected_sample_weight: None | bool = None,
+        expected_fit_params: None | Sequence[str] = None,
     ) -> None:
         ...
 
     def fit(
-        self,
+        self: CheckingClassifier_Self,
         X: MatrixLike,
         y: MatrixLike | ArrayLike,
         sample_weight: None | ArrayLike = None,
         **fit_params,
-    ) -> Self:
+    ) -> CheckingClassifier_Self:
         ...
 
     def predict(self, X: MatrixLike) -> ndarray:
@@ -77,7 +84,7 @@ class CheckingClassifier(ClassifierMixin, BaseEstimator):
 
 
 class NoSampleWeightWrapper(BaseEstimator):
-    def __init__(self, est: Estimator | None = None) -> None:
+    def __init__(self, est: None | BaseEstimator = None) -> None:
         ...
 
     def fit(self, X, y):

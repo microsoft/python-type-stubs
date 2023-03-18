@@ -1,6 +1,6 @@
 from typing import Literal, Sequence
-from numpy import ndarray
 from .._typing import Float, Int
+from numpy import ndarray
 
 # Authors: Jiyuan Qian <jq401@nyu.edu>
 # License: BSD 3 clause
@@ -9,6 +9,8 @@ import numpy as np
 
 
 class BaseOptimizer:
+    learning_rate: float = ...
+
     def __init__(self, learning_rate_init: Float = 0.1) -> None:
         ...
 
@@ -25,12 +27,15 @@ class BaseOptimizer:
 
 
 class SGDOptimizer(BaseOptimizer):
+    velocities: list = ...
+    learning_rate: float = ...
+
     def __init__(
         self,
         params: Sequence | list[ndarray],
         learning_rate_init: Float = 0.1,
         lr_schedule: Literal[
-            "constant", "constant", "adaptive", "invscaling"
+            "constant", "adaptive", "invscaling", "constant"
         ] = "constant",
         momentum: Float = 0.9,
         nesterov: bool = True,
@@ -46,6 +51,11 @@ class SGDOptimizer(BaseOptimizer):
 
 
 class AdamOptimizer(BaseOptimizer):
+    vs: list = ...
+    ms: list = ...
+    t: int = ...
+    learning_rate: float = ...
+
     def __init__(
         self,
         params: Sequence | list[ndarray],

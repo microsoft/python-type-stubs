@@ -1,15 +1,15 @@
 from typing import Literal, Sequence
-from .validation import check_array as check_array
 from numpy.random import RandomState
-from .._typing import ArrayLike, Float, MatrixLike, Int
-from scipy.sparse._dia import dia_matrix
+from scipy.sparse._csr import csr_matrix
 from scipy import linalg as linalg, sparse as sparse
+from numpy import ndarray
+from scipy.sparse._dia import dia_matrix
 from .sparsefuncs_fast import csr_row_norms as csr_row_norms
 from ._array_api import get_namespace as get_namespace
-from scipy.sparse._csr import csr_matrix
-from numpy import ndarray
-from . import check_random_state as check_random_state
 from scipy.sparse import spmatrix
+from .validation import check_array as check_array
+from .._typing import ArrayLike, Float, MatrixLike, Int
+from . import check_random_state as check_random_state
 
 # Authors: Gael Varoquaux
 #          Alexandre Gramfort
@@ -43,11 +43,11 @@ def density(w: ArrayLike, **kwargs) -> float:
 
 
 def safe_sparse_dot(
-    a: dia_matrix | MatrixLike | ArrayLike,
+    a: MatrixLike | ArrayLike | dia_matrix,
     b: MatrixLike | ArrayLike,
     *,
     dense_output: bool = False,
-) -> csr_matrix | spmatrix | ndarray:
+) -> ndarray | spmatrix:
     ...
 
 
@@ -69,7 +69,7 @@ def randomized_svd(
     n_oversamples: Int = 10,
     n_iter: Literal["auto", "auto"] | Int = "auto",
     power_iteration_normalizer: Literal["auto", "QR", "LU", "none", "auto"] = "auto",
-    transpose: bool | Literal["auto", "auto"] = "auto",
+    transpose: Literal["auto", "auto"] | bool = "auto",
     flip_sign: bool = True,
     random_state: RandomState | None | Int = None,
     svd_lapack_driver: Literal["gesdd", "gesvd", "gesdd"] = "gesdd",

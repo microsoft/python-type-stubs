@@ -1,16 +1,10 @@
 from typing import Any, Iterable, Iterator, Sequence, SupportsIndex
-from .._typing import ArrayLike, MatrixLike, Int, Float as Float
-from .discovery import all_estimators as all_estimators
-from scipy.sparse import issparse as issparse
+from numpy.random import RandomState
+from .fixes import parse_version as parse_version, threadpool_info as threadpool_info
 from ._bunch import Bunch as Bunch
-from contextlib import contextmanager as contextmanager, suppress as suppress
+from .murmurhash import murmurhash3_32 as murmurhash3_32
 from itertools import compress as compress, islice as islice
-from . import _joblib as _joblib
-from pandas.core.series import Series
-from ._estimator_html_repr import estimator_html_repr as estimator_html_repr
-from numpy import ndarray, int32 as int32, str_ as str_, bool_ as bool_
-from .deprecation import deprecated as deprecated
-from .. import get_config as get_config
+from ..exceptions import DataConversionWarning as DataConversionWarning
 from .validation import (
     as_float_array as as_float_array,
     assert_all_finite as assert_all_finite,
@@ -23,16 +17,19 @@ from .validation import (
     check_symmetric as check_symmetric,
     check_scalar as check_scalar,
 )
-from collections.abc import Sequence as Sequence, Iterable
-from .murmurhash import murmurhash3_32 as murmurhash3_32
-from numpy.random import RandomState
-from ..exceptions import DataConversionWarning as DataConversionWarning
+from contextlib import contextmanager as contextmanager, suppress as suppress
+from .discovery import all_estimators as all_estimators
+from scipy.sparse import issparse as issparse
+from .. import get_config as get_config
+from collections.abc import Sequence as Sequence
+from .deprecation import deprecated as deprecated
+from numpy import ndarray
 from .class_weight import (
     compute_class_weight as compute_class_weight,
     compute_sample_weight as compute_sample_weight,
 )
-from pandas.core.frame import DataFrame
-from .fixes import parse_version as parse_version, threadpool_info as threadpool_info
+from ._estimator_html_repr import estimator_html_repr as estimator_html_repr
+from .._typing import MatrixLike, ArrayLike, Int
 import math as math
 import numbers as numbers
 import platform as platform
@@ -98,13 +95,13 @@ def resample(
     n_samples: None | Int = None,
     random_state: RandomState | None | Int = None,
     stratify: None | MatrixLike | ArrayLike = None
-) -> ndarray | list[DataFrame | Series] | list[ndarray]:
+) -> list[ndarray]:
     ...
 
 
 def shuffle(
     *arrays, random_state: RandomState | None | Int = None, n_samples: None | Int = None
-) -> list[SupportsIndex] | ndarray | list[DataFrame | Series] | list[ndarray]:
+) -> list[SupportsIndex]:
     ...
 
 
@@ -134,7 +131,7 @@ def get_chunk_n_rows(
     row_bytes: Int,
     *,
     max_n_rows: None | Int = None,
-    working_memory: int | float | None = None
+    working_memory: float | None | int = None
 ) -> int:
     ...
 

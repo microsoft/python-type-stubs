@@ -1,30 +1,32 @@
-from typing import Any, Iterator, Literal
+from typing import Any, ClassVar, Iterator, Literal, TypeVar
+from numpy.random import RandomState
+from scipy.special import xlogy as xlogy
+from abc import ABCMeta, abstractmethod
+from ..tree import (
+    DecisionTreeClassifier as DecisionTreeClassifier,
+    DecisionTreeRegressor as DecisionTreeRegressor,
+)
+from ..base import ClassifierMixin, RegressorMixin, BaseEstimator
+from ._base import BaseEnsemble
+from numpy import ndarray
+from ..utils.extmath import softmax as softmax, stable_cumsum as stable_cumsum
 from ..utils._param_validation import (
     HasMethods as HasMethods,
     Interval as Interval,
     StrOptions as StrOptions,
 )
-from ..utils.extmath import softmax as softmax, stable_cumsum as stable_cumsum
-from numpy.random import RandomState
-from scipy.special import xlogy as xlogy
-from .._typing import ArrayLike, MatrixLike, Int, Float
-from ..base import (
-    ClassifierMixin,
-    RegressorMixin,
-    is_classifier as is_classifier,
-    is_regressor as is_regressor,
-)
+from numbers import Integral as Integral, Real as Real
+from ..metrics import accuracy_score as accuracy_score, r2_score as r2_score
+from ..base import is_classifier as is_classifier, is_regressor as is_regressor
+from .._typing import MatrixLike, ArrayLike, Int, Float
+from ..utils import check_random_state as check_random_state
 from ..utils.validation import (
     check_is_fitted as check_is_fitted,
     has_fit_parameter as has_fit_parameter,
 )
-from abc import ABCMeta, abstractmethod
-from ._base import BaseEnsemble
-from numpy import ndarray
-from ..utils import check_random_state as check_random_state
-from numbers import Integral as Integral, Real as Real
-from ..tree._classes import DecisionTreeClassifier, DecisionTreeRegressor
-from ..metrics import accuracy_score as accuracy_score, r2_score as r2_score
+
+BaseWeightBoosting_Self = TypeVar("BaseWeightBoosting_Self", bound="BaseWeightBoosting")
+
 import numpy as np
 
 import warnings
@@ -37,12 +39,12 @@ __all__ = [
 
 class BaseWeightBoosting(BaseEnsemble, metaclass=ABCMeta):
 
-    _parameter_constraints: dict = ...
+    _parameter_constraints: ClassVar[dict] = ...
 
     @abstractmethod
     def __init__(
         self,
-        estimator: None | DecisionTreeRegressor | DecisionTreeClassifier = None,
+        estimator=None,
         *,
         n_estimators: int = 50,
         estimator_params=...,
@@ -53,11 +55,11 @@ class BaseWeightBoosting(BaseEnsemble, metaclass=ABCMeta):
         ...
 
     def fit(
-        self,
+        self: BaseWeightBoosting_Self,
         X: MatrixLike | ArrayLike,
         y: ArrayLike,
         sample_weight: None | ArrayLike = None,
-    ) -> Any:
+    ) -> BaseWeightBoosting_Self:
         ...
 
     def staged_score(
@@ -74,8 +76,18 @@ class BaseWeightBoosting(BaseEnsemble, metaclass=ABCMeta):
 
 
 class AdaBoostClassifier(ClassifierMixin, BaseWeightBoosting):
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    feature_importances_: ndarray = ...
+    estimator_errors_: ndarray = ...
+    estimator_weights_: ndarray = ...
+    n_classes_: int = ...
+    classes_: ndarray = ...
+    estimators_: list[ClassifierMixin] = ...
+    base_estimator_: BaseEstimator = ...
+    estimator_: BaseEstimator = ...
 
-    _parameter_constraints: dict = ...
+    _parameter_constraints: ClassVar[dict] = ...
 
     def __init__(
         self,
@@ -83,7 +95,7 @@ class AdaBoostClassifier(ClassifierMixin, BaseWeightBoosting):
         *,
         n_estimators: Int = 50,
         learning_rate: Float = 1.0,
-        algorithm="SAMME.R",
+        algorithm: Literal["SAMME", "SAMME.R", "SAMME.R"] = "SAMME.R",
         random_state: RandomState | None | Int = None,
         base_estimator: Any = "deprecated",
     ) -> None:
@@ -112,8 +124,16 @@ class AdaBoostClassifier(ClassifierMixin, BaseWeightBoosting):
 
 
 class AdaBoostRegressor(RegressorMixin, BaseWeightBoosting):
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    feature_importances_: ndarray = ...
+    estimator_errors_: ndarray = ...
+    estimator_weights_: ndarray = ...
+    estimators_: list[RegressorMixin] = ...
+    base_estimator_: BaseEstimator = ...
+    estimator_: BaseEstimator = ...
 
-    _parameter_constraints: dict = ...
+    _parameter_constraints: ClassVar[dict] = ...
 
     def __init__(
         self,

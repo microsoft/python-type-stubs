@@ -1,20 +1,17 @@
-from typing import Any, Callable, Iterable, Iterator, Type
+from typing import Any, Callable, Iterable, Iterator
+from numpy.random import RandomState
+from ..utils import indexable as indexable, check_random_state as check_random_state
 from scipy.special import comb as comb
-from .._typing import MatrixLike, ArrayLike, Int, Float
+from collections import defaultdict as defaultdict
 from abc import ABCMeta, abstractmethod
 from itertools import chain as chain, combinations as combinations
-from ..utils import indexable as indexable, check_random_state as check_random_state
-from pandas.core.series import Series
-from ..utils.validation import column_or_1d as column_or_1d, check_array as check_array
-from scipy.sparse._csr import csr_matrix
 from numpy import ndarray
-from inspect import signature as signature
-from collections.abc import Iterable
-from numpy.random import RandomState
-from math import ceil as ceil, floor as floor
 from ..utils.multiclass import type_of_target as type_of_target
-from pandas.core.frame import DataFrame
-from collections import defaultdict as defaultdict
+from math import ceil as ceil, floor as floor
+from inspect import signature as signature
+from .._typing import MatrixLike, ArrayLike, Int, Float
+from collections.abc import Iterable
+from ..utils.validation import column_or_1d as column_or_1d, check_array as check_array
 import warnings
 import numbers
 
@@ -44,7 +41,7 @@ __all__ = [
 class BaseCrossValidator(metaclass=ABCMeta):
     def split(
         self,
-        X: MatrixLike | list[str],
+        X: list[str] | MatrixLike,
         y: None | ArrayLike = None,
         groups: None | ArrayLike = None,
     ) -> Iterator[tuple[ndarray, ndarray]]:
@@ -78,7 +75,7 @@ class _BaseKFold(BaseCrossValidator, metaclass=ABCMeta):
 
     def split(
         self,
-        X: MatrixLike | list[str],
+        X: list[str] | MatrixLike,
         y: None | ArrayLike = None,
         groups: None | ArrayLike = None,
     ) -> Iterator[tuple[ndarray, ndarray]]:
@@ -120,7 +117,7 @@ class StratifiedKFold(_BaseKFold):
         ...
 
     def split(
-        self, X: MatrixLike | list[str], y: ArrayLike, groups: Any = None
+        self, X: list[str] | MatrixLike, y: ArrayLike, groups: Any = None
     ) -> Iterator[Any]:
         ...
 
@@ -130,7 +127,7 @@ class StratifiedGroupKFold(_BaseKFold):
         self,
         n_splits: Int = 5,
         shuffle: bool = False,
-        random_state: int | RandomState | None = None,
+        random_state: None | RandomState | int = None,
     ) -> None:
         ...
 
@@ -182,7 +179,7 @@ class LeavePGroupsOut(BaseCrossValidator):
 class _RepeatedSplits(metaclass=ABCMeta):
     def __init__(
         self,
-        cv: Type[KFold] | Type[StratifiedKFold] | Callable,
+        cv: Callable,
         *,
         n_repeats: Int = 10,
         random_state: RandomState | None | Int = None,
@@ -261,7 +258,7 @@ class GroupShuffleSplit(ShuffleSplit):
         self,
         n_splits: Int = 5,
         *,
-        test_size: int | float | None = None,
+        test_size: float | None | int = None,
         train_size: None | Float = None,
         random_state: RandomState | None | Int = None,
     ) -> None:
@@ -311,7 +308,7 @@ class _CVIterableWrapper(BaseCrossValidator):
 
 
 def check_cv(
-    cv: Iterable | BaseCrossValidator | int = 5,
+    cv: Iterable | int | BaseShuffleSplit | BaseCrossValidator = 5,
     y: None | ArrayLike = None,
     *,
     classifier: bool = False,
@@ -326,5 +323,5 @@ def train_test_split(
     random_state: RandomState | None | Int = None,
     shuffle: bool = True,
     stratify: None | ArrayLike = None,
-) -> list[DataFrame | ndarray | list[str] | Series | csr_matrix] | list:
+) -> list:
     ...

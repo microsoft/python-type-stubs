@@ -1,20 +1,21 @@
-from ..utils.extmath import softmax as softmax
-from dataclasses import dataclass
+from typing import ClassVar
 from scipy.special import expit as expit, logit as logit
-from .._typing import ArrayLike, Float
-from abc import ABC, abstractmethod
 from scipy.stats import gmean as gmean
+from abc import ABC, abstractmethod
+from dataclasses import dataclass
 from numpy import ndarray
+from ..utils.extmath import softmax as softmax
+from .._typing import ArrayLike, Float
 
 import numpy as np
 
 
 @dataclass
 class Interval:
-    low: float = ...
-    high: float = ...
-    low_inclusive: bool = ...
-    high_inclusive: bool = ...
+    low: ClassVar[float] = ...
+    high: ClassVar[float] = ...
+    low_inclusive: ClassVar[bool] = ...
+    high_inclusive: ClassVar[bool] = ...
 
     def __post_init__(self) -> None:
         ...
@@ -25,7 +26,7 @@ class Interval:
 
 class BaseLink(ABC):
 
-    is_multiclass: bool = ...  # used for testing only
+    is_multiclass: ClassVar[bool] = ...  # used for testing only
 
     # Usually, raw_prediction may be any real number and y_pred is an open
     # interval.
@@ -45,13 +46,13 @@ class BaseLink(ABC):
 
 class IdentityLink(BaseLink):
     def link(
-        self, y_pred: Float | ArrayLike, out: None | ArrayLike = None
-    ) -> Float | ndarray:
+        self, y_pred: ArrayLike | Float, out: None | ArrayLike = None
+    ) -> ndarray | Float:
         ...
 
     def inverse(
-        self, y_pred: Float | ArrayLike, out: None | ArrayLike = None
-    ) -> Float | ndarray:
+        self, y_pred: ArrayLike | Float, out: None | ArrayLike = None
+    ) -> ndarray | Float:
         ...
 
 
@@ -60,8 +61,8 @@ class LogLink(BaseLink):
     interval_y_pred = ...
 
     def link(
-        self, y_pred: Float | ArrayLike, out: None | ArrayLike = None
-    ) -> Float | ndarray:
+        self, y_pred: ArrayLike | Float, out: None | ArrayLike = None
+    ) -> ndarray | Float:
         ...
 
     def inverse(
@@ -75,8 +76,8 @@ class LogitLink(BaseLink):
     interval_y_pred = ...
 
     def link(
-        self, y_pred: Float | ArrayLike, out: None | ArrayLike = None
-    ) -> Float | ndarray:
+        self, y_pred: ArrayLike | Float, out: None | ArrayLike = None
+    ) -> ndarray | Float:
         ...
 
     def inverse(
@@ -87,7 +88,7 @@ class LogitLink(BaseLink):
 
 class MultinomialLogit(BaseLink):
 
-    is_multiclass: bool = ...
+    is_multiclass: ClassVar[bool] = ...
     interval_y_pred = ...
 
     def symmetrize_raw_prediction(self, raw_prediction):

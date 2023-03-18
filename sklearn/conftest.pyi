@@ -1,4 +1,11 @@
 from typing import Sequence
+from threadpoolctl import threadpool_limits as threadpool_limits
+from .utils.fixes import parse_version as parse_version
+from _pytest.doctest import DoctestItem as DoctestItem
+from os import environ as environ
+from .tests import random_seed as random_seed
+from ._min_dependencies import PYTEST_MIN_VERSION as PYTEST_MIN_VERSION
+from functools import wraps as wraps
 from .datasets import (
     fetch_20newsgroups as fetch_20newsgroups,
     fetch_20newsgroups_vectorized as fetch_20newsgroups_vectorized,
@@ -8,13 +15,6 @@ from .datasets import (
     fetch_olivetti_faces as fetch_olivetti_faces,
     fetch_rcv1 as fetch_rcv1,
 )
-from functools import wraps as wraps
-from ._min_dependencies import PYTEST_MIN_VERSION as PYTEST_MIN_VERSION
-from os import environ as environ
-from threadpoolctl import threadpool_limits as threadpool_limits
-from _pytest.doctest import DoctestItem as DoctestItem
-from .utils.fixes import parse_version as parse_version
-from .tests import random_seed as random_seed
 import platform
 import sys
 

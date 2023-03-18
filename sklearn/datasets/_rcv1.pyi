@@ -1,14 +1,13 @@
 from typing import Literal
-from ._svmlight_format_io import load_svmlight_files as load_svmlight_files
-from ..utils._bunch import Bunch
 from numpy.random import RandomState
-from .._typing import Int
-from ._base import RemoteFileMetadata as RemoteFileMetadata, load_descr as load_descr
-from os.path import exists as exists, join as join
-from . import get_data_home as get_data_home
+from ._svmlight_format_io import load_svmlight_files as load_svmlight_files
 from os import remove as remove, makedirs as makedirs
-from ..utils import shuffle as shuffle_
+from os.path import exists as exists, join as join
+from ._base import RemoteFileMetadata as RemoteFileMetadata, load_descr as load_descr
 from gzip import GzipFile as GzipFile
+from .._typing import Int
+from ..utils import shuffle as shuffle_, Bunch
+from . import get_data_home as get_data_home
 
 # Author: Tom Dupre la Tour
 # License: BSD 3 clause
@@ -40,7 +39,7 @@ logger = ...
 
 def fetch_rcv1(
     *,
-    data_home: str | None = None,
+    data_home: None | str = None,
     subset: Literal["train", "test", "all", "all"] = "all",
     download_if_missing: bool = True,
     random_state: RandomState | None | Int = None,

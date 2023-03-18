@@ -1,12 +1,12 @@
 from typing import Literal
-from ..utils._bunch import Bunch
 from numpy.random import RandomState
-from .._typing import Int
-from ._base import RemoteFileMetadata as RemoteFileMetadata, load_descr as load_descr
 from os.path import exists as exists, join as join
-from . import get_data_home as get_data_home
-from ..utils import check_random_state as check_random_state, shuffle as shuffle_method
+from ._base import RemoteFileMetadata as RemoteFileMetadata, load_descr as load_descr
+from ..utils._bunch import Bunch
 from gzip import GzipFile as GzipFile
+from .._typing import Int
+from ..utils import check_random_state as check_random_state, shuffle as shuffle_method
+from . import get_data_home as get_data_home
 
 import errno
 import logging
@@ -30,7 +30,7 @@ logger = ...
 def fetch_kddcup99(
     *,
     subset: None | Literal["SA", "SF", "http", "smtp"] = None,
-    data_home: str | None = None,
+    data_home: None | str = None,
     shuffle: bool = False,
     random_state: RandomState | None | Int = None,
     percent10: bool = True,

@@ -1,19 +1,24 @@
-from typing import Any, Callable, Literal
+from typing import Any, Callable, ClassVar, Literal, TypeVar
+from numpy.random import RandomState
+from operator import itemgetter as itemgetter
+from .kernels import Kernel
+from numpy import ndarray
 from ..utils._param_validation import Interval as Interval, StrOptions as StrOptions
 from scipy.linalg import (
     cholesky as cholesky,
     cho_solve as cho_solve,
     solve_triangular as solve_triangular,
 )
-from numpy.random import RandomState
-from .._typing import ArrayLike, Int, MatrixLike, Float
-from ..base import BaseEstimator, RegressorMixin, clone as clone, MultiOutputMixin
-from operator import itemgetter as itemgetter
-from numpy import ndarray
-from ..utils import check_random_state as check_random_state
 from numbers import Integral as Integral, Real as Real
+from ..base import BaseEstimator, RegressorMixin, clone as clone, MultiOutputMixin
 from .kernels import RBF as RBF, ConstantKernel as C
-from .kernels import Kernel, Product, Sum
+from .._typing import ArrayLike, Int, MatrixLike, Float
+from ..utils import check_random_state as check_random_state
+
+GaussianProcessRegressor_Self = TypeVar(
+    "GaussianProcessRegressor_Self", bound="GaussianProcessRegressor"
+)
+
 
 # Authors: Jan Hendrik Metzen <jhm@informatik.uni-bremen.de>
 # Modified by: Pete Green <p.l.green@liverpool.ac.uk>
@@ -28,12 +33,20 @@ GPR_CHOLESKY_LOWER: bool = ...
 
 
 class GaussianProcessRegressor(MultiOutputMixin, RegressorMixin, BaseEstimator):
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    log_marginal_likelihood_value_: float = ...
+    alpha_: ArrayLike = ...
+    L_: ArrayLike = ...
+    kernel_: Kernel = ...
+    y_train_: ArrayLike = ...
+    X_train_: ArrayLike | list[Any] = ...
 
-    _parameter_constraints: dict = ...
+    _parameter_constraints: ClassVar[dict] = ...
 
     def __init__(
         self,
-        kernel: Product | None | Kernel | Sum = None,
+        kernel: None | Kernel = None,
         *,
         alpha: float | ArrayLike = 1e-10,
         optimizer: Literal["fmin_l_bfgs_b", "fmin_l_bfgs_b"]
@@ -46,7 +59,11 @@ class GaussianProcessRegressor(MultiOutputMixin, RegressorMixin, BaseEstimator):
     ) -> None:
         ...
 
-    def fit(self, X: MatrixLike | ArrayLike, y: MatrixLike | ArrayLike) -> Any:
+    def fit(
+        self: GaussianProcessRegressor_Self,
+        X: MatrixLike | ArrayLike,
+        y: MatrixLike | ArrayLike,
+    ) -> GaussianProcessRegressor_Self:
         ...
 
     def predict(
@@ -54,7 +71,7 @@ class GaussianProcessRegressor(MultiOutputMixin, RegressorMixin, BaseEstimator):
         X: MatrixLike | ArrayLike,
         return_std: bool = False,
         return_cov: bool = False,
-    ) -> tuple[ndarray, ndarray] | tuple[ndarray, ndarray, ndarray] | ndarray:
+    ) -> ndarray | tuple[ndarray, ndarray, ndarray] | tuple[ndarray, ndarray]:
         ...
 
     def sample_y(
@@ -70,5 +87,5 @@ class GaussianProcessRegressor(MultiOutputMixin, RegressorMixin, BaseEstimator):
         theta: None | ArrayLike = None,
         eval_gradient: bool = False,
         clone_kernel: bool = True,
-    ) -> tuple[Float, ndarray] | Float | tuple[float, ndarray]:
+    ) -> tuple[float, ndarray] | tuple[Float, ndarray] | Float:
         ...

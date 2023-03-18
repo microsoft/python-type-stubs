@@ -1,19 +1,23 @@
-from ..utils._param_validation import Interval as Interval
+from typing import ClassVar, TypeVar
+from numpy.random import RandomState
+from scipy.special import expit as expit
+from numpy import ndarray
 from ..utils.extmath import (
     safe_sparse_dot as safe_sparse_dot,
     log_logistic as log_logistic,
 )
-from numpy.random import RandomState
-from scipy.special import expit as expit
-from .._typing import Int, Float, ArrayLike, MatrixLike
+from ..utils._param_validation import Interval as Interval
+from numbers import Integral as Integral, Real as Real
 from ..base import BaseEstimator, TransformerMixin, ClassNamePrefixFeaturesOutMixin
-from ..utils.validation import check_is_fitted as check_is_fitted
-from numpy import ndarray
+from .._typing import Int, Float, MatrixLike, ArrayLike
 from ..utils import (
     check_random_state as check_random_state,
     gen_even_slices as gen_even_slices,
 )
-from numbers import Integral as Integral, Real as Real
+from ..utils.validation import check_is_fitted as check_is_fitted
+
+BernoulliRBM_Self = TypeVar("BernoulliRBM_Self", bound="BernoulliRBM")
+
 
 # Authors: Yann N. Dauphin <dauphiya@iro.umontreal.ca>
 #          Vlad Niculae
@@ -28,8 +32,14 @@ import scipy.sparse as sp
 
 
 class BernoulliRBM(ClassNamePrefixFeaturesOutMixin, TransformerMixin, BaseEstimator):
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    h_samples_: ArrayLike = ...
+    components_: ArrayLike = ...
+    intercept_visible_: ArrayLike = ...
+    intercept_hidden_: ArrayLike = ...
 
-    _parameter_constraints: dict = ...
+    _parameter_constraints: ClassVar[dict] = ...
 
     def __init__(
         self,
@@ -50,14 +60,16 @@ class BernoulliRBM(ClassNamePrefixFeaturesOutMixin, TransformerMixin, BaseEstima
         ...
 
     def partial_fit(
-        self, X: ArrayLike, y: None | MatrixLike | ArrayLike = None
-    ) -> BernoulliRBM:
+        self: BernoulliRBM_Self, X: ArrayLike, y: None | MatrixLike | ArrayLike = None
+    ) -> BernoulliRBM_Self:
         ...
 
     def score_samples(self, X: MatrixLike | ArrayLike) -> ndarray:
         ...
 
     def fit(
-        self, X: MatrixLike | ArrayLike, y: None | MatrixLike | ArrayLike = None
-    ) -> BernoulliRBM:
+        self: BernoulliRBM_Self,
+        X: MatrixLike | ArrayLike,
+        y: None | MatrixLike | ArrayLike = None,
+    ) -> BernoulliRBM_Self:
         ...

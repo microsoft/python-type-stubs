@@ -1,16 +1,16 @@
 from typing import Literal, Mapping
-from scipy.linalg import eigh as _eigh
-from ..externals._packaging.version import parse as parse_version
+from threadpoolctl import _ThreadpoolLimiter
 from ..externals._lobpcg import lobpcg as lobpcg
-from importlib import resources as resources
-from numpy import percentile as percentile
+from .parallel import delayed
 from .deprecation import deprecated
+from numpy import percentile as percentile
+from scipy.linalg import eigh as _eigh
 from scipy.optimize.linesearch import (
     line_search_wolfe2 as line_search_wolfe2,
     line_search_wolfe1 as line_search_wolfe1,
 )
-from threadpoolctl import _ThreadpoolLimiter
-from .parallel import delayed
+from ..externals._packaging.version import parse as parse_version
+from importlib import resources as resources
 import sys
 
 import sklearn
@@ -25,12 +25,12 @@ sp_version = ...
 
 
 class loguniform(scipy.stats.reciprocal):
-    pass
+    ...
 
 
 def threadpool_limits(
-    limits: int | str | Mapping | None = None,
-    user_api: Literal["blas", "openmp"] | None = None,
+    limits: None | Mapping | str | int = None,
+    user_api: None | Literal["blas", "openmp"] = None,
 ) -> _ThreadpoolLimiter:
     ...
 

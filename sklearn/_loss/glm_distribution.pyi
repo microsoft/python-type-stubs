@@ -1,8 +1,8 @@
 from scipy.special import xlogy as xlogy
-from .._typing import ArrayLike, Float
-from abc import ABCMeta, abstractmethod
 from collections import namedtuple as namedtuple
+from abc import ABCMeta, abstractmethod
 from numpy import ndarray
+from .._typing import ArrayLike, Float
 import numbers
 
 import numpy as np
@@ -28,11 +28,11 @@ class ExponentialDispersionModel(metaclass=ABCMeta):
     def unit_deviance_derivative(self, y: ArrayLike, y_pred: ArrayLike):
         ...
 
-    def deviance(self, y: ArrayLike, y_pred: ArrayLike, weights: int | ArrayLike = 1):
+    def deviance(self, y: ArrayLike, y_pred: ArrayLike, weights: ArrayLike | int = 1):
         ...
 
     def deviance_derivative(
-        self, y: ArrayLike, y_pred: ArrayLike, weights: int | ArrayLike = 1
+        self, y: ArrayLike, y_pred: ArrayLike, weights: ArrayLike | int = 1
     ):
         ...
 

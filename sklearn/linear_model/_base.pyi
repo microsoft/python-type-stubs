@@ -1,31 +1,36 @@
-from typing import Any, Self
-from scipy.special import expit as expit
-from .._typing import MatrixLike, ArrayLike, Int
+from typing import ClassVar, TypeVar
+from scipy import linalg as linalg, optimize as optimize, sparse
+from ..utils.extmath import safe_sparse_dot as safe_sparse_dot
+from numpy.random.mtrand import RandomState
 from ..utils._array_api import get_namespace as get_namespace
 from ..utils.sparsefuncs import (
     mean_variance_axis as mean_variance_axis,
     inplace_column_scale as inplace_column_scale,
 )
-from ..utils.extmath import safe_sparse_dot as safe_sparse_dot
-from scipy.sparse.linalg import lsqr as lsqr
-from abc import ABCMeta, abstractmethod
-from ..utils import check_array as check_array, check_random_state as check_random_state
-from scipy import linalg as linalg, optimize as optimize, sparse
-from ..utils.validation import (
-    FLOAT_DTYPES as FLOAT_DTYPES,
-    check_is_fitted as check_is_fitted,
-)
-from numpy import ndarray
-from ._stochastic_gradient import SGDClassifier
-from numpy.random import RandomState
-from ..base import BaseEstimator, ClassifierMixin, RegressorMixin, MultiOutputMixin
-from ..utils._seq_dataset import ArrayDataset64, CSRDataset64
-from numbers import Integral as Integral
+from scipy.special import expit as expit
 from ..utils.parallel import delayed as delayed, Parallel as Parallel
 from ..utils._seq_dataset import (
     ArrayDataset32 as ArrayDataset32,
     CSRDataset32 as CSRDataset32,
+    ArrayDataset64,
+    CSRDataset64,
 )
+from ..utils.validation import (
+    FLOAT_DTYPES as FLOAT_DTYPES,
+    check_is_fitted as check_is_fitted,
+)
+from scipy.sparse.linalg import lsqr as lsqr
+from abc import ABCMeta, abstractmethod
+from numpy import ndarray
+from numbers import Integral as Integral
+from ..base import BaseEstimator, ClassifierMixin, RegressorMixin, MultiOutputMixin
+from ..utils import check_array as check_array, check_random_state as check_random_state
+from ._stochastic_gradient import SGDClassifier
+from .._typing import MatrixLike, ArrayLike, Int
+
+LinearRegression_Self = TypeVar("LinearRegression_Self", bound="LinearRegression")
+SparseCoefMixin_Self = TypeVar("SparseCoefMixin_Self", bound="SparseCoefMixin")
+
 import numbers
 import warnings
 
@@ -42,10 +47,8 @@ def make_dataset(
     X: MatrixLike,
     y: ArrayLike,
     sample_weight: ArrayLike,
-    random_state: RandomState | None | Int = None,
-) -> tuple[ArrayDataset64, float] | tuple[ArrayDataset64 | CSRDataset64, float] | tuple[
-    CSRDataset64, float
-]:
+    random_state: None | Int | RandomState = None,
+) -> tuple[ArrayDataset64 | CSRDataset64, float]:
     ...
 
 
@@ -69,16 +72,22 @@ class LinearClassifierMixin(ClassifierMixin):
 
 
 class SparseCoefMixin:
-    def densify(self) -> Self:
+    def densify(self: SparseCoefMixin_Self) -> SparseCoefMixin_Self:
         ...
 
-    def sparsify(self) -> SGDClassifier | Self:
+    def sparsify(self: SparseCoefMixin_Self) -> SGDClassifier | SparseCoefMixin_Self:
         ...
 
 
 class LinearRegression(MultiOutputMixin, RegressorMixin, LinearModel):
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    intercept_: float | ndarray = ...
+    singular_: ndarray = ...
+    rank_: int = ...
+    coef_: ndarray = ...
 
-    _parameter_constraints: dict = ...
+    _parameter_constraints: ClassVar[dict] = ...
 
     def __init__(
         self,
@@ -91,9 +100,9 @@ class LinearRegression(MultiOutputMixin, RegressorMixin, LinearModel):
         ...
 
     def fit(
-        self,
+        self: LinearRegression_Self,
         X: MatrixLike | ArrayLike,
         y: MatrixLike | ArrayLike,
         sample_weight: None | ArrayLike = None,
-    ) -> Any:
+    ) -> LinearRegression_Self:
         ...

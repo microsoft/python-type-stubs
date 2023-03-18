@@ -1,36 +1,28 @@
-from typing import Any, Literal, Mapping, Sequence
-from .._typing import ArrayLike, MatrixLike, Int, Float
-from ..preprocessing import OneHotEncoder as OneHotEncoder
-from scipy.sparse import issparse as issparse, hstack as sparse_hstack, spmatrix
-from ..utils._param_validation import Interval as Interval, StrOptions as StrOptions
-from abc import ABCMeta, abstractmethod
-from ._base import BaseEnsemble
-from ..utils import (
-    check_random_state as check_random_state,
-    compute_sample_weight as compute_sample_weight,
-)
-from ..tree._classes import (
-    DecisionTreeClassifier,
-    DecisionTreeRegressor,
-    ExtraTreeClassifier,
-    ExtraTreeRegressor,
-)
-from ..metrics import accuracy_score as accuracy_score, r2_score as r2_score
-from ..utils.validation import check_is_fitted as check_is_fitted
-from ..tree._tree import DTYPE as DTYPE, DOUBLE as DOUBLE
-from scipy.sparse._csr import csr_matrix
-from numpy import ndarray
+from typing import Any, ClassVar, Literal, Mapping, Sequence, TypeVar
 from warnings import (
     catch_warnings as catch_warnings,
     simplefilter as simplefilter,
     warn as warn,
 )
 from numpy.random import RandomState
+from ..tree._tree import DTYPE as DTYPE, DOUBLE as DOUBLE
 from ..exceptions import DataConversionWarning as DataConversionWarning
-from ..utils.multiclass import (
-    check_classification_targets as check_classification_targets,
-    type_of_target as type_of_target,
+from ..metrics import accuracy_score as accuracy_score, r2_score as r2_score
+from ..preprocessing import OneHotEncoder
+from scipy.sparse import issparse as issparse, hstack as sparse_hstack, spmatrix
+from ..utils.parallel import delayed as delayed, Parallel as Parallel
+from ..utils.validation import check_is_fitted as check_is_fitted
+from abc import ABCMeta, abstractmethod
+from ..tree import (
+    BaseDecisionTree as BaseDecisionTree,
+    DecisionTreeClassifier,
+    DecisionTreeRegressor,
+    ExtraTreeClassifier as ExtraTreeClassifier,
+    ExtraTreeRegressor,
 )
+from numpy import ndarray
+from ..utils._param_validation import Interval as Interval, StrOptions as StrOptions
+from numbers import Integral as Integral, Real as Real
 from ..base import (
     is_classifier as is_classifier,
     ClassifierMixin,
@@ -38,9 +30,22 @@ from ..base import (
     RegressorMixin,
     TransformerMixin,
 )
-from ..tree import BaseDecisionTree as BaseDecisionTree
-from numbers import Integral as Integral, Real as Real
-from ..utils.parallel import delayed as delayed, Parallel as Parallel
+from ..utils import (
+    check_random_state as check_random_state,
+    compute_sample_weight as compute_sample_weight,
+)
+from ._base import BaseEnsemble
+from ..utils.multiclass import (
+    check_classification_targets as check_classification_targets,
+    type_of_target as type_of_target,
+)
+from .._typing import MatrixLike, ArrayLike, Int, Float
+
+BaseForest_Self = TypeVar("BaseForest_Self", bound="BaseForest")
+RandomTreesEmbedding_Self = TypeVar(
+    "RandomTreesEmbedding_Self", bound="RandomTreesEmbedding"
+)
+
 import threading
 import numpy as np
 
@@ -58,7 +63,7 @@ MAX_INT = ...
 
 class BaseForest(MultiOutputMixin, BaseEnsemble, metaclass=ABCMeta):
 
-    _parameter_constraints: dict = ...
+    _parameter_constraints: ClassVar[dict] = ...
 
     @abstractmethod
     def __init__(
@@ -86,11 +91,11 @@ class BaseForest(MultiOutputMixin, BaseEnsemble, metaclass=ABCMeta):
         ...
 
     def fit(
-        self,
+        self: BaseForest_Self,
         X: MatrixLike | ArrayLike,
         y: MatrixLike | ArrayLike,
         sample_weight: None | ArrayLike = None,
-    ) -> Any:
+    ) -> BaseForest_Self:
         ...
 
     @property
@@ -102,7 +107,7 @@ class ForestClassifier(ClassifierMixin, BaseForest, metaclass=ABCMeta):
     @abstractmethod
     def __init__(
         self,
-        estimator: ExtraTreeClassifier | DecisionTreeClassifier,
+        estimator,
         n_estimators: int = 100,
         *,
         estimator_params=...,
@@ -132,7 +137,7 @@ class ForestRegressor(RegressorMixin, BaseForest, metaclass=ABCMeta):
     @abstractmethod
     def __init__(
         self,
-        estimator: ExtraTreeRegressor | DecisionTreeRegressor,
+        estimator,
         n_estimators: int = 100,
         *,
         estimator_params=...,
@@ -152,8 +157,19 @@ class ForestRegressor(RegressorMixin, BaseForest, metaclass=ABCMeta):
 
 
 class RandomForestClassifier(ForestClassifier):
+    oob_decision_function_: ndarray = ...
+    oob_score_: float = ...
+    feature_importances_: ndarray = ...
+    n_outputs_: int = ...
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    n_classes_: list | int = ...
+    classes_: ndarray = ...
+    estimators_: list[DecisionTreeClassifier] = ...
+    base_estimator_: DecisionTreeClassifier = ...
+    estimator_: DecisionTreeClassifier = ...
 
-    _parameter_constraints: dict = ...
+    _parameter_constraints: ClassVar[dict] = ...
 
     def __init__(
         self,
@@ -161,10 +177,10 @@ class RandomForestClassifier(ForestClassifier):
         *,
         criterion: Literal["gini", "entropy", "log_loss", "gini"] = "gini",
         max_depth: None | Int = None,
-        min_samples_split: int | float = 2,
-        min_samples_leaf: int | float = 1,
+        min_samples_split: float | int = 2,
+        min_samples_leaf: float | int = 1,
         min_weight_fraction_leaf: Float = 0.0,
-        max_features: int | float | Literal["sqrt", "log2", "sqrt"] = "sqrt",
+        max_features: float | Literal["sqrt", "log2", "sqrt"] | int = "sqrt",
         max_leaf_nodes: None | Int = None,
         min_impurity_decrease: Float = 0.0,
         bootstrap: bool = True,
@@ -174,18 +190,27 @@ class RandomForestClassifier(ForestClassifier):
         verbose: Int = 0,
         warm_start: bool = False,
         class_weight: Literal["balanced", "balanced_subsample"]
-        | Sequence[Mapping]
+        | None
         | Mapping
-        | None = None,
+        | Sequence[Mapping] = None,
         ccp_alpha: float = 0.0,
-        max_samples: int | float | None = None,
+        max_samples: float | None | int = None,
     ) -> None:
         ...
 
 
 class RandomForestRegressor(ForestRegressor):
+    oob_prediction_: ndarray = ...
+    oob_score_: float = ...
+    n_outputs_: int = ...
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    feature_importances_: ndarray = ...
+    estimators_: list[DecisionTreeRegressor] = ...
+    base_estimator_: DecisionTreeRegressor = ...
+    estimator_: DecisionTreeRegressor = ...
 
-    _parameter_constraints: dict = ...
+    _parameter_constraints: ClassVar[dict] = ...
 
     def __init__(
         self,
@@ -199,10 +224,10 @@ class RandomForestRegressor(ForestRegressor):
             "squared_error",
         ] = "squared_error",
         max_depth: None | Int = None,
-        min_samples_split: int | float = 2,
-        min_samples_leaf: int | float = 1,
+        min_samples_split: float | int = 2,
+        min_samples_leaf: float | int = 1,
         min_weight_fraction_leaf: Float = 0.0,
-        max_features: Literal["sqrt", "log2"] | int | float = 1.0,
+        max_features: float | Literal["sqrt", "log2"] | int = 1.0,
         max_leaf_nodes: None | Int = None,
         min_impurity_decrease: Float = 0.0,
         bootstrap: bool = True,
@@ -212,14 +237,25 @@ class RandomForestRegressor(ForestRegressor):
         verbose: Int = 0,
         warm_start: bool = False,
         ccp_alpha: float = 0.0,
-        max_samples: int | float | None = None,
+        max_samples: float | None | int = None,
     ) -> None:
         ...
 
 
 class ExtraTreesClassifier(ForestClassifier):
+    oob_decision_function_: ndarray = ...
+    oob_score_: float = ...
+    n_outputs_: int = ...
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    feature_importances_: ndarray = ...
+    n_classes_: list | int = ...
+    classes_: ndarray = ...
+    estimators_: list[DecisionTreeClassifier] = ...
+    base_estimator_: ExtraTreesClassifier = ...
+    estimator_: ExtraTreesClassifier = ...
 
-    _parameter_constraints: dict = ...
+    _parameter_constraints: ClassVar[dict] = ...
 
     def __init__(
         self,
@@ -227,10 +263,10 @@ class ExtraTreesClassifier(ForestClassifier):
         *,
         criterion: Literal["gini", "entropy", "log_loss", "gini"] = "gini",
         max_depth: None | Int = None,
-        min_samples_split: int | float = 2,
-        min_samples_leaf: int | float = 1,
+        min_samples_split: float | int = 2,
+        min_samples_leaf: float | int = 1,
         min_weight_fraction_leaf: Float = 0.0,
-        max_features: int | float | Literal["sqrt", "log2", "sqrt"] = "sqrt",
+        max_features: float | Literal["sqrt", "log2", "sqrt"] | int = "sqrt",
         max_leaf_nodes: None | Int = None,
         min_impurity_decrease: Float = 0.0,
         bootstrap: bool = False,
@@ -240,18 +276,27 @@ class ExtraTreesClassifier(ForestClassifier):
         verbose: Int = 0,
         warm_start: bool = False,
         class_weight: Literal["balanced", "balanced_subsample"]
-        | Sequence[Mapping]
+        | None
         | Mapping
-        | None = None,
+        | Sequence[Mapping] = None,
         ccp_alpha: float = 0.0,
-        max_samples: int | float | None = None,
+        max_samples: float | None | int = None,
     ) -> None:
         ...
 
 
 class ExtraTreesRegressor(ForestRegressor):
+    oob_prediction_: ndarray = ...
+    oob_score_: float = ...
+    n_outputs_: int = ...
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    feature_importances_: ndarray = ...
+    estimators_: list[DecisionTreeRegressor] = ...
+    base_estimator_: ExtraTreeRegressor = ...
+    estimator_: ExtraTreeRegressor = ...
 
-    _parameter_constraints: dict = ...
+    _parameter_constraints: ClassVar[dict] = ...
 
     def __init__(
         self,
@@ -265,10 +310,10 @@ class ExtraTreesRegressor(ForestRegressor):
             "squared_error",
         ] = "squared_error",
         max_depth: None | Int = None,
-        min_samples_split: int | float = 2,
-        min_samples_leaf: int | float = 1,
+        min_samples_split: float | int = 2,
+        min_samples_leaf: float | int = 1,
         min_weight_fraction_leaf: Float = 0.0,
-        max_features: Literal["sqrt", "log2"] | int | float = 1.0,
+        max_features: float | Literal["sqrt", "log2"] | int = 1.0,
         max_leaf_nodes: None | Int = None,
         min_impurity_decrease: Float = 0.0,
         bootstrap: bool = False,
@@ -278,27 +323,35 @@ class ExtraTreesRegressor(ForestRegressor):
         verbose: Int = 0,
         warm_start: bool = False,
         ccp_alpha: float = 0.0,
-        max_samples: int | float | None = None,
+        max_samples: float | None | int = None,
     ) -> None:
         ...
 
 
 class RandomTreesEmbedding(TransformerMixin, BaseForest):
+    one_hot_encoder_: OneHotEncoder = ...
+    n_outputs_: int = ...
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    feature_importances_: ndarray = ...
+    estimators_: list[ExtraTreeRegressor] = ...
+    base_estimator_: ExtraTreeRegressor = ...
+    estimator_: ExtraTreeRegressor = ...
 
-    _parameter_constraints: dict = ...
+    _parameter_constraints: ClassVar[dict] = ...
     for param in ("max_features", "ccp_alpha", "splitter"):
         pass
 
-    criterion: str = ...
-    max_features: int = ...
+    criterion: ClassVar[str] = ...
+    max_features: ClassVar[int] = ...
 
     def __init__(
         self,
         n_estimators: Int = 100,
         *,
         max_depth: Int = 5,
-        min_samples_split: int | float = 2,
-        min_samples_leaf: int | float = 1,
+        min_samples_split: float | int = 2,
+        min_samples_leaf: float | int = 1,
         min_weight_fraction_leaf: Float = 0.0,
         max_leaf_nodes: None | Int = None,
         min_impurity_decrease: Float = 0.0,
@@ -311,11 +364,11 @@ class RandomTreesEmbedding(TransformerMixin, BaseForest):
         ...
 
     def fit(
-        self,
+        self: RandomTreesEmbedding_Self,
         X: MatrixLike | ArrayLike,
         y: Any = None,
         sample_weight: None | ArrayLike = None,
-    ) -> Any:
+    ) -> RandomTreesEmbedding_Self:
         ...
 
     def fit_transform(
@@ -323,11 +376,11 @@ class RandomTreesEmbedding(TransformerMixin, BaseForest):
         X: MatrixLike | ArrayLike,
         y: Any = None,
         sample_weight: None | ArrayLike = None,
-    ) -> spmatrix | csr_matrix:
+    ) -> spmatrix:
         ...
 
     def get_feature_names_out(self, input_features: None | ArrayLike = None) -> ndarray:
         ...
 
-    def transform(self, X: MatrixLike | ArrayLike) -> spmatrix | csr_matrix:
+    def transform(self, X: MatrixLike | ArrayLike) -> spmatrix:
         ...

@@ -1,21 +1,24 @@
-from typing import Any
-from ..utils._param_validation import Interval as Interval
+from typing import Any, ClassVar, TypeVar
 from numpy.random import RandomState
-from .._typing import MatrixLike, Float, Int
-from ..base import BaseEstimator, ClusterMixin
-from ..neighbors import NearestNeighbors as NearestNeighbors
-from ..utils.validation import check_is_fitted as check_is_fitted
-from ..metrics.pairwise import pairwise_distances_argmin as pairwise_distances_argmin
 from collections import defaultdict as defaultdict
 from numpy import ndarray
+from ..utils._param_validation import Interval as Interval
+from numbers import Integral as Integral, Real as Real
+from .._config import config_context as config_context
+from ..neighbors import NearestNeighbors as NearestNeighbors
+from ..base import BaseEstimator, ClusterMixin
+from ..metrics.pairwise import pairwise_distances_argmin as pairwise_distances_argmin
+from ..utils.parallel import delayed as delayed, Parallel as Parallel
+from .._typing import MatrixLike, Float, Int
 from ..utils import (
     check_random_state as check_random_state,
     gen_batches as gen_batches,
     check_array as check_array,
 )
-from ..utils.parallel import delayed as delayed, Parallel as Parallel
-from numbers import Integral as Integral, Real as Real
-from .._config import config_context as config_context
+from ..utils.validation import check_is_fitted as check_is_fitted
+
+MeanShift_Self = TypeVar("MeanShift_Self", bound="MeanShift")
+
 
 # Authors: Conrad Lee <conradlee@gmail.com>
 #          Alexandre Gramfort <alexandre.gramfort@inria.fr>
@@ -56,8 +59,13 @@ def get_bin_seeds(X: MatrixLike, bin_size: Float, min_bin_freq: Int = 1) -> ndar
 
 
 class MeanShift(ClusterMixin, BaseEstimator):
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    n_iter_: int = ...
+    labels_: ndarray = ...
+    cluster_centers_: ndarray = ...
 
-    _parameter_constraints: dict = ...
+    _parameter_constraints: ClassVar[dict] = ...
 
     def __init__(
         self,
@@ -72,7 +80,7 @@ class MeanShift(ClusterMixin, BaseEstimator):
     ) -> None:
         ...
 
-    def fit(self, X: MatrixLike, y: Any = None) -> Any:
+    def fit(self: MeanShift_Self, X: MatrixLike, y: Any = None) -> MeanShift_Self:
         ...
 
     def predict(self, X: MatrixLike) -> ndarray:

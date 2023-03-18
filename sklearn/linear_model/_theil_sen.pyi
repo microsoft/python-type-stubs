@@ -1,18 +1,22 @@
-from typing import Self
-from ..utils._param_validation import Interval as Interval
+from typing import ClassVar, TypeVar
 from numpy.random import RandomState
 from scipy.special import binom as binom
-from ..exceptions import ConvergenceWarning as ConvergenceWarning
-from .._typing import Int, Float, ArrayLike
 from scipy import linalg as linalg
-from ..base import RegressorMixin
-from joblib import effective_n_jobs as effective_n_jobs
-from ._base import LinearModel
 from itertools import combinations as combinations
-from ..utils import check_random_state as check_random_state
+from ._base import LinearModel
+from ..exceptions import ConvergenceWarning as ConvergenceWarning
+from ..utils._param_validation import Interval as Interval
+from numpy import ndarray
 from numbers import Integral as Integral, Real as Real
-from ..utils.parallel import delayed as delayed, Parallel as Parallel
 from scipy.linalg.lapack import get_lapack_funcs as get_lapack_funcs
+from joblib import effective_n_jobs as effective_n_jobs
+from ..base import RegressorMixin
+from ..utils.parallel import delayed as delayed, Parallel as Parallel
+from .._typing import Int, Float, ArrayLike
+from ..utils import check_random_state as check_random_state
+
+TheilSenRegressor_Self = TypeVar("TheilSenRegressor_Self", bound="TheilSenRegressor")
+
 
 # Author: Florian Wilhelm <florian.wilhelm@gmail.com>
 #
@@ -27,8 +31,15 @@ _EPSILON = ...
 
 
 class TheilSenRegressor(RegressorMixin, LinearModel):
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    n_subpopulation_: int = ...
+    n_iter_: int = ...
+    breakdown_: float = ...
+    intercept_: float = ...
+    coef_: ndarray = ...
 
-    _parameter_constraints: dict = ...
+    _parameter_constraints: ClassVar[dict] = ...
 
     def __init__(
         self,
@@ -45,5 +56,7 @@ class TheilSenRegressor(RegressorMixin, LinearModel):
     ) -> None:
         ...
 
-    def fit(self, X: ArrayLike, y: ArrayLike) -> Self | TheilSenRegressor:
+    def fit(
+        self: TheilSenRegressor_Self, X: ArrayLike, y: ArrayLike
+    ) -> TheilSenRegressor_Self:
         ...

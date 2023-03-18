@@ -1,5 +1,5 @@
-from scipy.special import expit as logistic_sigmoid, xlogy as xlogy
 from .._typing import MatrixLike, ArrayLike, Float
+from scipy.special import expit as logistic_sigmoid, xlogy as xlogy
 
 # Author: Issam H. Laradji <issam.laradji@gmail.com>
 # License: BSD 3 clause

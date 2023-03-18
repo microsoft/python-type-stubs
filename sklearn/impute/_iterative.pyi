@@ -1,33 +1,35 @@
-from typing import Any, Literal
-from .._typing import Estimator, Int, Float, ArrayLike, MatrixLike
-from time import time as time
-from ..linear_model import BayesianRidge
+from typing import Any, ClassVar, Literal, TypeVar
+from numpy.random import RandomState
+from scipy import stats as stats
+from ..base import BaseEstimator
+from ..exceptions import ConvergenceWarning as ConvergenceWarning
 from ..preprocessing import normalize as normalize
+from ..linear_model import BayesianRidge as BayesianRidge
+from ..utils.validation import (
+    FLOAT_DTYPES as FLOAT_DTYPES,
+    check_is_fitted as check_is_fitted,
+)
+from ._base import MissingIndicator
+from collections import namedtuple as namedtuple
+from numpy import ndarray
 from ..utils._param_validation import (
     HasMethods as HasMethods,
     Interval as Interval,
     StrOptions as StrOptions,
 )
-from ._base import _BaseImputer, SimpleImputer as SimpleImputer
+from numbers import Integral as Integral, Real as Real
+from ..base import clone as clone
+from time import time as time
 from ..utils import (
     check_array as check_array,
     check_random_state as check_random_state,
     is_scalar_nan as is_scalar_nan,
 )
-from ..neighbors._regression import KNeighborsRegressor
-from ..pipeline import Pipeline
-from scipy import stats as stats
-from ..utils.validation import (
-    FLOAT_DTYPES as FLOAT_DTYPES,
-    check_is_fitted as check_is_fitted,
-)
-from numpy import ndarray
-from ..ensemble._forest import RandomForestRegressor
-from numpy.random import RandomState
-from ..exceptions import ConvergenceWarning as ConvergenceWarning
-from ..base import clone as clone
-from collections import namedtuple as namedtuple
-from numbers import Integral as Integral, Real as Real
+from ._base import _BaseImputer, SimpleImputer
+from .._typing import Int, Float, ArrayLike, MatrixLike
+
+IterativeImputer_Self = TypeVar("IterativeImputer_Self", bound="IterativeImputer")
+
 import warnings
 import numpy as np
 
@@ -36,19 +38,22 @@ _ImputerTriplet = ...
 
 
 class IterativeImputer(_BaseImputer):
+    random_state_: RandomState = ...
+    indicator_: MissingIndicator = ...
+    n_features_with_missing_: int = ...
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    n_iter_: int = ...
+    imputation_sequence_: list[tuple] = ...
+    initial_imputer_: SimpleImputer = ...
 
-    _parameter_constraints: dict = ...
+    _parameter_constraints: ClassVar[dict] = ...
 
     def __init__(
         self,
-        estimator: Pipeline
-        | Estimator
-        | KNeighborsRegressor
-        | BayesianRidge
-        | None
-        | RandomForestRegressor = None,
+        estimator: None | BaseEstimator = None,
         *,
-        missing_values: int | float = ...,
+        missing_values: float | int = ...,
         sample_posterior: bool = False,
         max_iter: Int = 10,
         tol: Float = 1e-3,
@@ -75,7 +80,9 @@ class IterativeImputer(_BaseImputer):
     def transform(self, X: MatrixLike) -> ndarray:
         ...
 
-    def fit(self, X: MatrixLike, y: Any = None) -> Any:
+    def fit(
+        self: IterativeImputer_Self, X: MatrixLike, y: Any = None
+    ) -> IterativeImputer_Self:
         ...
 
     def get_feature_names_out(self, input_features: None | ArrayLike = None) -> ndarray:

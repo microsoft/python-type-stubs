@@ -1,19 +1,21 @@
-from typing import Any, Literal, Self, Sequence
+from typing import ClassVar, Literal, Sequence, TypeVar
+from scipy import sparse
+from numpy import ndarray
 from ..utils._param_validation import (
     Interval as Interval,
     StrOptions as StrOptions,
     Hidden as Hidden,
 )
-from .._typing import ArrayLike, Int, MatrixLike
-from scipy import sparse
-from ..base import BaseEstimator, TransformerMixin, OneToOneFeatureMixin
-from ..utils.validation import check_is_fitted as check_is_fitted
-from scipy.sparse._csr import csr_matrix
-from numpy import ndarray
-from ..utils import check_array as check_array, is_scalar_nan as is_scalar_nan
 from numbers import Integral as Integral, Real as Real
-from scipy.sparse import spmatrix
 from pandas.core.series import Series
+from ..base import BaseEstimator, TransformerMixin, OneToOneFeatureMixin
+from scipy.sparse import spmatrix
+from .._typing import ArrayLike, Int, MatrixLike
+from ..utils import check_array as check_array, is_scalar_nan as is_scalar_nan
+from ..utils.validation import check_is_fitted as check_is_fitted
+
+OrdinalEncoder_Self = TypeVar("OrdinalEncoder_Self", bound="OrdinalEncoder")
+OneHotEncoder_Self = TypeVar("OneHotEncoder_Self", bound="OneHotEncoder")
 
 # Authors: Andreas Mueller <amueller@ais.uni-bonn.de>
 #          Joris Van den Bossche <jorisvandenbossche@gmail.com>
@@ -29,25 +31,29 @@ __all__ = ["OneHotEncoder", "OrdinalEncoder"]
 
 
 class _BaseEncoder(TransformerMixin, BaseEstimator):
-    pass
+    ...
 
 
 class OneHotEncoder(_BaseEncoder):
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    drop_idx_: ndarray = ...
+    categories_: list[ArrayLike] = ...
 
-    _parameter_constraints: dict = ...
+    _parameter_constraints: ClassVar[dict] = ...
 
     def __init__(
         self,
         *,
         categories: Sequence[ArrayLike] | Literal["auto", "auto"] = "auto",
-        drop: Literal["first", "if_binary"] | None | ArrayLike = None,
-        sparse: bool | str = "deprecated",
+        drop: None | ArrayLike | Literal["first", "if_binary"] = None,
+        sparse: str | bool = "deprecated",
         sparse_output: bool = True,
         dtype=...,
         handle_unknown: Literal[
             "error", "ignore", "infrequent_if_exist", "error"
         ] = "error",
-        min_frequency: int | float | None = None,
+        min_frequency: float | None | int = None,
         max_categories: None | Int = None,
     ) -> None:
         ...
@@ -57,11 +63,13 @@ class OneHotEncoder(_BaseEncoder):
         ...
 
     def fit(
-        self, X: MatrixLike, y: Series | list[int] | None | ndarray = None
-    ) -> OneHotEncoder | Self:
+        self: OneHotEncoder_Self,
+        X: MatrixLike,
+        y: Series | None | ndarray | list[int] = None,
+    ) -> OneHotEncoder_Self:
         ...
 
-    def transform(self, X: MatrixLike) -> csr_matrix | spmatrix | ndarray:
+    def transform(self, X: MatrixLike) -> ndarray | spmatrix:
         ...
 
     def inverse_transform(self, X: MatrixLike) -> ndarray:
@@ -72,8 +80,11 @@ class OneHotEncoder(_BaseEncoder):
 
 
 class OrdinalEncoder(OneToOneFeatureMixin, _BaseEncoder):
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    categories_: list[ArrayLike] = ...
 
-    _parameter_constraints: dict = ...
+    _parameter_constraints: ClassVar[dict] = ...
 
     def __init__(
         self,
@@ -81,12 +92,14 @@ class OrdinalEncoder(OneToOneFeatureMixin, _BaseEncoder):
         categories: Sequence[ArrayLike] | Literal["auto", "auto"] = "auto",
         dtype=...,
         handle_unknown: Literal["error", "use_encoded_value", "error"] = "error",
-        unknown_value: int | float | None = None,
-        encoded_missing_value: int | float = ...,
+        unknown_value: float | None | int = None,
+        encoded_missing_value: float | int = ...,
     ) -> None:
         ...
 
-    def fit(self, X: MatrixLike, y: None | Series = None) -> Any:
+    def fit(
+        self: OrdinalEncoder_Self, X: MatrixLike, y: Series | None = None
+    ) -> OrdinalEncoder_Self:
         ...
 
     def transform(self, X: MatrixLike) -> ndarray:

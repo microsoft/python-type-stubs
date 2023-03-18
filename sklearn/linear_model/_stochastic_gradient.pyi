@@ -1,22 +1,19 @@
-from typing import Any, Literal, Mapping
-from .._typing import Float, Estimator, Int, MatrixLike, ArrayLike
+from typing import Any, ClassVar, Literal, Mapping, TypeVar
+from numpy.random import RandomState
+from ..base import BaseEstimator
+from ..exceptions import ConvergenceWarning as ConvergenceWarning
+from ..utils.extmath import safe_sparse_dot as safe_sparse_dot
+from scipy.sparse._csr import csr_matrix
+from ..utils.parallel import delayed as delayed, Parallel as Parallel
+from ..utils.validation import check_is_fitted as check_is_fitted
+from abc import ABCMeta, abstractmethod
+from numpy import ndarray
 from ..utils._param_validation import (
     Interval as Interval,
     StrOptions as StrOptions,
     Hidden as Hidden,
 )
-from ..utils.extmath import safe_sparse_dot as safe_sparse_dot
-from ..model_selection import (
-    StratifiedShuffleSplit as StratifiedShuffleSplit,
-    ShuffleSplit as ShuffleSplit,
-)
-from ._passive_aggressive import PassiveAggressiveClassifier
-from abc import ABCMeta, abstractmethod
-from ._base import LinearClassifierMixin, SparseCoefMixin, make_dataset as make_dataset
-from ..utils import (
-    check_random_state as check_random_state,
-    compute_class_weight as compute_class_weight,
-)
+from numbers import Integral as Integral, Real as Real
 from ._sgd_fast import (
     Hinge as Hinge,
     SquaredHinge as SquaredHinge,
@@ -27,22 +24,27 @@ from ._sgd_fast import (
     EpsilonInsensitive as EpsilonInsensitive,
     SquaredEpsilonInsensitive as SquaredEpsilonInsensitive,
 )
-from ..utils.validation import check_is_fitted as check_is_fitted
-from scipy.sparse._csr import csr_matrix
-from numpy import ndarray
-from ._perceptron import Perceptron
-from numpy.random import RandomState
-from ..exceptions import ConvergenceWarning as ConvergenceWarning
 from ..base import (
     clone as clone,
     is_classifier as is_classifier,
-    BaseEstimator,
     RegressorMixin,
     OutlierMixin,
 )
-from numbers import Integral as Integral, Real as Real
-from ..utils.parallel import delayed as delayed, Parallel as Parallel
+from ..model_selection import (
+    StratifiedShuffleSplit as StratifiedShuffleSplit,
+    ShuffleSplit as ShuffleSplit,
+)
+from ..utils import (
+    check_random_state as check_random_state,
+    compute_class_weight as compute_class_weight,
+)
+from ._base import LinearClassifierMixin, SparseCoefMixin, make_dataset as make_dataset
 from ..utils.metaestimators import available_if as available_if
+from .._typing import Float, Int, MatrixLike, ArrayLike
+
+BaseSGDClassifier_Self = TypeVar("BaseSGDClassifier_Self", bound="BaseSGDClassifier")
+SGDOneClassSVM_Self = TypeVar("SGDOneClassSVM_Self", bound="SGDOneClassSVM")
+BaseSGDRegressor_Self = TypeVar("BaseSGDRegressor_Self", bound="BaseSGDRegressor")
 
 # Authors: Peter Prettenhofer <peter.prettenhofer@gmail.com> (main author)
 #          Mathieu Blondel (partial_fit support)
@@ -79,7 +81,7 @@ class _ValidationScoreCallback:
 
 class BaseSGD(SparseCoefMixin, BaseEstimator, metaclass=ABCMeta):
 
-    _parameter_constraints: dict = ...
+    _parameter_constraints: ClassVar[dict] = ...
 
     def __init__(
         self,
@@ -113,7 +115,7 @@ class BaseSGD(SparseCoefMixin, BaseEstimator, metaclass=ABCMeta):
 
 
 def fit_binary(
-    est: Perceptron | PassiveAggressiveClassifier | SGDClassifier | Estimator,
+    est: BaseEstimator,
     i: Int,
     X: MatrixLike,
     y: ArrayLike,
@@ -133,9 +135,9 @@ def fit_binary(
 class BaseSGDClassifier(LinearClassifierMixin, BaseSGD, metaclass=ABCMeta):
 
     # TODO(1.3): Remove "log""
-    loss_functions: dict = ...
+    loss_functions: ClassVar[dict] = ...
 
-    _parameter_constraints: dict = ...
+    _parameter_constraints: ClassVar[dict] = ...
 
     @abstractmethod
     def __init__(
@@ -166,28 +168,36 @@ class BaseSGDClassifier(LinearClassifierMixin, BaseSGD, metaclass=ABCMeta):
         ...
 
     def partial_fit(
-        self,
+        self: BaseSGDClassifier_Self,
         X: MatrixLike,
         y: ArrayLike,
         classes: None | ArrayLike = None,
         sample_weight: None | ArrayLike = None,
-    ) -> Any:
+    ) -> BaseSGDClassifier_Self:
         ...
 
     def fit(
-        self,
+        self: BaseSGDClassifier_Self,
         X: MatrixLike,
         y: ArrayLike,
         coef_init: None | MatrixLike = None,
         intercept_init: None | ArrayLike = None,
         sample_weight: None | ArrayLike = None,
-    ) -> Any:
+    ) -> BaseSGDClassifier_Self:
         ...
 
 
 class SGDClassifier(BaseSGDClassifier):
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    t_: int = ...
+    classes_: ndarray = ...
+    loss_function_: LossFunction = ...
+    n_iter_: int = ...
+    intercept_: ndarray = ...
+    coef_: ndarray = ...
 
-    _parameter_constraints: dict = ...
+    _parameter_constraints: ClassVar[dict] = ...
 
     def __init__(
         self,
@@ -205,7 +215,7 @@ class SGDClassifier(BaseSGDClassifier):
             "hinge",
         ] = "hinge",
         *,
-        penalty: Literal["l2", "l1", "elasticnet", "l2"] | None = "l2",
+        penalty: None | Literal["l2", "l1", "elasticnet", "l2"] = "l2",
         alpha: Float = 0.0001,
         l1_ratio: Float = 0.15,
         fit_intercept: bool = True,
@@ -222,9 +232,9 @@ class SGDClassifier(BaseSGDClassifier):
         early_stopping: bool = False,
         validation_fraction: Float = 0.1,
         n_iter_no_change: Int = 5,
-        class_weight: Mapping[str, float] | str | None = None,
+        class_weight: Mapping[str, float] | None | str = None,
         warm_start: bool = False,
-        average: bool | int = False,
+        average: int | bool = False,
     ) -> None:
         ...
 
@@ -237,9 +247,9 @@ class SGDClassifier(BaseSGDClassifier):
 
 class BaseSGDRegressor(RegressorMixin, BaseSGD):
 
-    loss_functions: dict = ...
+    loss_functions: ClassVar[dict] = ...
 
-    _parameter_constraints: dict = ...
+    _parameter_constraints: ClassVar[dict] = ...
 
     @abstractmethod
     def __init__(
@@ -268,18 +278,21 @@ class BaseSGDRegressor(RegressorMixin, BaseSGD):
         ...
 
     def partial_fit(
-        self, X: MatrixLike, y: ArrayLike, sample_weight: None | ArrayLike = None
-    ) -> Any:
+        self: BaseSGDRegressor_Self,
+        X: MatrixLike,
+        y: ArrayLike,
+        sample_weight: None | ArrayLike = None,
+    ) -> BaseSGDRegressor_Self:
         ...
 
     def fit(
-        self,
+        self: BaseSGDRegressor_Self,
         X: MatrixLike,
         y: ArrayLike,
         coef_init: None | ArrayLike = None,
         intercept_init: None | ArrayLike = None,
         sample_weight: None | ArrayLike = None,
-    ) -> Any:
+    ) -> SGDRegressor | BaseSGDRegressor_Self:
         ...
 
     def predict(self, X: MatrixLike) -> ndarray:
@@ -287,14 +300,20 @@ class BaseSGDRegressor(RegressorMixin, BaseSGD):
 
 
 class SGDRegressor(BaseSGDRegressor):
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    t_: int = ...
+    n_iter_: int = ...
+    intercept_: ndarray = ...
+    coef_: ndarray = ...
 
-    _parameter_constraints: dict = ...
+    _parameter_constraints: ClassVar[dict] = ...
 
     def __init__(
         self,
         loss: str = "squared_error",
         *,
-        penalty: Literal["l2", "l1", "elasticnet", "l2"] | None = "l2",
+        penalty: None | Literal["l2", "l1", "elasticnet", "l2"] = "l2",
         alpha: Float = 0.0001,
         l1_ratio: Float = 0.15,
         fit_intercept: bool = True,
@@ -311,16 +330,23 @@ class SGDRegressor(BaseSGDRegressor):
         validation_fraction: Float = 0.1,
         n_iter_no_change: Int = 5,
         warm_start: bool = False,
-        average: bool | int = False,
+        average: int | bool = False,
     ) -> None:
         ...
 
 
 class SGDOneClassSVM(BaseSGD, OutlierMixin):
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    loss_function_: LossFunction = ...
+    t_: int = ...
+    n_iter_: int = ...
+    offset_: ndarray = ...
+    coef_: ndarray = ...
 
-    loss_functions: dict = ...
+    loss_functions: ClassVar[dict] = ...
 
-    _parameter_constraints: dict = ...
+    _parameter_constraints: ClassVar[dict] = ...
 
     def __init__(
         self,
@@ -337,23 +363,26 @@ class SGDOneClassSVM(BaseSGD, OutlierMixin):
         eta0: Float = 0.0,
         power_t: Float = 0.5,
         warm_start: bool = False,
-        average: bool | int = False,
+        average: int | bool = False,
     ) -> None:
         ...
 
     def partial_fit(
-        self, X: MatrixLike, y: Any = None, sample_weight: None | ArrayLike = None
-    ) -> Any:
+        self: SGDOneClassSVM_Self,
+        X: MatrixLike,
+        y: Any = None,
+        sample_weight: None | ArrayLike = None,
+    ) -> SGDOneClassSVM_Self:
         ...
 
     def fit(
-        self,
+        self: SGDOneClassSVM_Self,
         X: MatrixLike,
         y: Any = None,
         coef_init: None | MatrixLike = None,
         offset_init: None | ArrayLike = None,
         sample_weight: None | ArrayLike = None,
-    ) -> Any:
+    ) -> SGDOneClassSVM_Self:
         ...
 
     def decision_function(self, X: MatrixLike) -> ndarray:

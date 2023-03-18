@@ -1,8 +1,8 @@
 from typing import Mapping
-from numpy import ndarray
 from scipy import sparse as sparse
-from ..preprocessing import LabelEncoder as LabelEncoder
 from .._typing import ArrayLike, MatrixLike
+from numpy import ndarray
+from ..preprocessing import LabelEncoder as LabelEncoder
 
 # Authors: Andreas Mueller
 #          Manoj Kumar
@@ -21,7 +21,7 @@ def compute_class_weight(
 
 
 def compute_sample_weight(
-    class_weight: str | Mapping | None | ArrayLike,
+    class_weight: None | Mapping | str | ArrayLike,
     y: MatrixLike | ArrayLike,
     *,
     indices: None | ArrayLike = None

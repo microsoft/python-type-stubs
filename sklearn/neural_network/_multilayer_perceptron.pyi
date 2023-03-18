@@ -1,47 +1,54 @@
-from typing import Any, Literal
-from .._typing import Float, MatrixLike, ArrayLike, Int
+from typing import ClassVar, Literal, TypeVar
+from numpy.random import RandomState
+from itertools import chain as chain
+from ..exceptions import ConvergenceWarning as ConvergenceWarning
+from ..utils.extmath import safe_sparse_dot as safe_sparse_dot
+from ..metrics import accuracy_score as accuracy_score, r2_score as r2_score
 from ..preprocessing import LabelBinarizer as LabelBinarizer
+from ..utils.validation import check_is_fitted as check_is_fitted
+from abc import ABCMeta, abstractmethod
+from numpy import ndarray
 from ..utils._param_validation import (
     StrOptions as StrOptions,
     Options as Options,
     Interval as Interval,
 )
-from ..utils.extmath import safe_sparse_dot as safe_sparse_dot
-from ..model_selection import train_test_split as train_test_split
-from abc import ABCMeta, abstractmethod
-from ._base import (
-    ACTIVATIONS as ACTIVATIONS,
-    DERIVATIVES as DERIVATIVES,
-    LOSS_FUNCTIONS as LOSS_FUNCTIONS,
-)
-from ._stochastic_optimizers import (
-    SGDOptimizer as SGDOptimizer,
-    AdamOptimizer as AdamOptimizer,
-)
-from itertools import chain as chain
-from ..utils import (
-    gen_batches as gen_batches,
-    check_random_state as check_random_state,
-    shuffle,
-    column_or_1d as column_or_1d,
-)
-from ..metrics import accuracy_score as accuracy_score, r2_score as r2_score
-from ..utils.validation import check_is_fitted as check_is_fitted
-from numpy import ndarray
-from numpy.random import RandomState
-from ..exceptions import ConvergenceWarning as ConvergenceWarning
-from ..utils.multiclass import (
-    unique_labels as unique_labels,
-    type_of_target as type_of_target,
-)
+from numbers import Integral as Integral, Real as Real
 from ..base import (
     BaseEstimator,
     ClassifierMixin,
     RegressorMixin,
     is_classifier as is_classifier,
 )
-from numbers import Integral as Integral, Real as Real
+from ..model_selection import train_test_split as train_test_split
+from ..utils import (
+    gen_batches as gen_batches,
+    check_random_state as check_random_state,
+    shuffle,
+    column_or_1d as column_or_1d,
+)
+from ._stochastic_optimizers import (
+    SGDOptimizer as SGDOptimizer,
+    AdamOptimizer as AdamOptimizer,
+)
+from ._base import (
+    ACTIVATIONS as ACTIVATIONS,
+    DERIVATIVES as DERIVATIVES,
+    LOSS_FUNCTIONS as LOSS_FUNCTIONS,
+)
+from ..utils.multiclass import (
+    unique_labels as unique_labels,
+    type_of_target as type_of_target,
+)
 from ..utils.metaestimators import available_if as available_if
+from .._typing import Float, MatrixLike, ArrayLike, Int
+
+BaseMultilayerPerceptron_Self = TypeVar(
+    "BaseMultilayerPerceptron_Self", bound="BaseMultilayerPerceptron"
+)
+MLPRegressor_Self = TypeVar("MLPRegressor_Self", bound="MLPRegressor")
+MLPClassifier_Self = TypeVar("MLPClassifier_Self", bound="MLPClassifier")
+
 import numpy as np
 import warnings
 
@@ -53,12 +60,12 @@ _STOCHASTIC_SOLVERS: list = ...
 
 class BaseMultilayerPerceptron(BaseEstimator, metaclass=ABCMeta):
 
-    _parameter_constraints: dict = ...
+    _parameter_constraints: ClassVar[dict] = ...
 
     @abstractmethod
     def __init__(
         self,
-        hidden_layer_sizes: tuple[int, int] | list[int] | tuple[int],
+        hidden_layer_sizes: tuple[int, int] | tuple[int] | list[int],
         activation: str,
         solver: str,
         alpha: Float,
@@ -69,11 +76,11 @@ class BaseMultilayerPerceptron(BaseEstimator, metaclass=ABCMeta):
         max_iter: int,
         loss: str,
         shuffle: bool,
-        random_state: int | None,
+        random_state: None | int,
         tol: float,
         verbose: int | bool,
         warm_start: bool,
-        momentum: int | float,
+        momentum: float | int,
         nesterovs_momentum: bool,
         early_stopping: bool,
         validation_fraction: float,
@@ -85,11 +92,29 @@ class BaseMultilayerPerceptron(BaseEstimator, metaclass=ABCMeta):
     ) -> None:
         ...
 
-    def fit(self, X: MatrixLike, y: MatrixLike | ArrayLike) -> Any:
+    def fit(
+        self: BaseMultilayerPerceptron_Self, X: MatrixLike, y: MatrixLike | ArrayLike
+    ) -> BaseMultilayerPerceptron_Self:
         ...
 
 
 class MLPClassifier(ClassifierMixin, BaseMultilayerPerceptron):
+    out_activation_: str = ...
+    n_outputs_: int = ...
+    n_layers_: int = ...
+    n_iter_: int = ...
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    intercepts_: list = ...
+    coefs_: list = ...
+    t_: int = ...
+    best_validation_score_: float | None = ...
+    validation_scores_: None | list = ...
+    loss_curve_: list = ...
+    best_loss_: float | None = ...
+    loss_: float = ...
+    classes_: ndarray | list[ndarray] = ...
+
     def __init__(
         self,
         hidden_layer_sizes: ArrayLike | tuple[int] = ...,
@@ -125,8 +150,11 @@ class MLPClassifier(ClassifierMixin, BaseMultilayerPerceptron):
         ...
 
     def partial_fit(
-        self, X: MatrixLike | ArrayLike, y: ArrayLike, classes: None | ArrayLike = None
-    ) -> Any:
+        self: MLPClassifier_Self,
+        X: MatrixLike | ArrayLike,
+        y: ArrayLike,
+        classes: None | ArrayLike = None,
+    ) -> MLPClassifier_Self:
         ...
 
     def predict_log_proba(self, X: ArrayLike) -> ndarray:
@@ -137,9 +165,24 @@ class MLPClassifier(ClassifierMixin, BaseMultilayerPerceptron):
 
 
 class MLPRegressor(RegressorMixin, BaseMultilayerPerceptron):
+    out_activation_: str = ...
+    n_outputs_: int = ...
+    n_layers_: int = ...
+    n_iter_: int = ...
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    intercepts_: list = ...
+    coefs_: list = ...
+    t_: int = ...
+    best_validation_score_: float | None = ...
+    validation_scores_: None | list = ...
+    loss_curve_: list = ...
+    best_loss_: float = ...
+    loss_: float = ...
+
     def __init__(
         self,
-        hidden_layer_sizes: tuple[int, int] | ArrayLike = ...,
+        hidden_layer_sizes: ArrayLike | tuple[int, int] = ...,
         activation: Literal["relu", "identity", "logistic", "tanh", "relu"] = "relu",
         *,
         solver: Literal["lbfgs", "sgd", "adam", "adam"] = "adam",
@@ -171,5 +214,7 @@ class MLPRegressor(RegressorMixin, BaseMultilayerPerceptron):
     def predict(self, X: MatrixLike | ArrayLike) -> ndarray:
         ...
 
-    def partial_fit(self, X: MatrixLike | ArrayLike, y: ArrayLike) -> Any:
+    def partial_fit(
+        self: MLPRegressor_Self, X: MatrixLike | ArrayLike, y: ArrayLike
+    ) -> MLPRegressor_Self:
         ...

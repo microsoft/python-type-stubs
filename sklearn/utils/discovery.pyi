@@ -1,5 +1,7 @@
 from typing import Literal, Sequence
 from ._testing import ignore_warnings as ignore_warnings
+from operator import itemgetter as itemgetter
+from numpy import ndarray
 from ..base import (
     BaseEstimator as BaseEstimator,
     ClassifierMixin as ClassifierMixin,
@@ -7,11 +9,9 @@ from ..base import (
     TransformerMixin as TransformerMixin,
     ClusterMixin as ClusterMixin,
 )
-from operator import itemgetter as itemgetter
-from importlib import import_module as import_module
-from numpy import ndarray
-from . import IS_PYPY as IS_PYPY
 from pathlib import Path as Path
+from importlib import import_module as import_module
+from . import IS_PYPY as IS_PYPY
 import pkgutil
 import inspect
 

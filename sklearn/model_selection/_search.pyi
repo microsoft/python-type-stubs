@@ -1,37 +1,42 @@
-from typing import Any, Callable, Iterable, Iterator, Mapping, Sequence
-from .._typing import Int, MatrixLike, ArrayLike, Float, Estimator
-from ..utils.random import sample_without_replacement as sample_without_replacement
-from scipy.sparse import spmatrix
-from . import BaseCrossValidator
-from abc import ABCMeta, abstractmethod
+from typing import (
+    Any,
+    Callable,
+    ClassVar,
+    Iterable,
+    Iterator,
+    Mapping,
+    Sequence,
+    TypeVar,
+)
+from numpy.random import RandomState
 from itertools import product as product
-from ..utils import check_random_state as check_random_state
-from ..svm._classes import SVC
-from ..pipeline import Pipeline
+from ..base import BaseEstimator
+from ..exceptions import NotFittedError as NotFittedError
+from ._split import BaseShuffleSplit
+from ..utils.random import sample_without_replacement as sample_without_replacement
 from ..metrics import check_scoring as check_scoring
+from ._split import check_cv as check_cv
+from scipy.sparse import spmatrix
+from ..utils.parallel import delayed as delayed, Parallel as Parallel
+from collections.abc import Mapping, Sequence, Iterable
 from ..utils.validation import (
     indexable as indexable,
     check_is_fitted as check_is_fitted,
 )
-from numpy import ndarray
-from ..linear_model._stochastic_gradient import SGDClassifier
-from collections.abc import Iterable
-from numpy.random import RandomState
-from ..exceptions import NotFittedError as NotFittedError
-from ._split import check_cv as check_cv
-from ..base import (
-    BaseEstimator,
-    is_classifier as is_classifier,
-    clone as clone,
-    MetaEstimatorMixin,
-)
-from functools import partial as partial, reduce as reduce
 from scipy.stats import rankdata as rankdata
 from collections import defaultdict as defaultdict
-from ..utils.parallel import delayed as delayed, Parallel as Parallel
+from abc import ABCMeta, abstractmethod
+from numpy import ndarray
+from functools import partial as partial, reduce as reduce
+from ..base import is_classifier as is_classifier, clone as clone, MetaEstimatorMixin
+from ..utils import check_random_state as check_random_state
 from ..utils.metaestimators import available_if as available_if
 from numpy.ma import MaskedArray as MaskedArray
-from ..kernel_ridge import KernelRidge
+from .._typing import Int, MatrixLike, ArrayLike, Float
+from . import BaseCrossValidator
+
+BaseSearchCV_Self = TypeVar("BaseSearchCV_Self", bound="BaseSearchCV")
+
 import numbers
 import operator
 import time
@@ -43,7 +48,9 @@ __all__ = ["GridSearchCV", "ParameterGrid", "ParameterSampler", "RandomizedSearc
 
 
 class ParameterGrid:
-    def __init__(self, param_grid) -> None:
+    def __init__(
+        self, param_grid: Sequence[Mapping[str, Sequence]] | Mapping[str, Sequence]
+    ) -> None:
         ...
 
     def __iter__(self) -> Iterator[dict[str, Any]]:
@@ -91,7 +98,7 @@ class BaseSearchCV(MetaEstimatorMixin, BaseEstimator, metaclass=ABCMeta):
         ...
 
     def score(
-        self, X: MatrixLike | list[str], y: None | MatrixLike | ArrayLike = None
+        self, X: list[str] | MatrixLike, y: None | MatrixLike | ArrayLike = None
     ) -> Float:
         ...
 
@@ -110,46 +117,56 @@ class BaseSearchCV(MetaEstimatorMixin, BaseEstimator, metaclass=ABCMeta):
     def decision_function(self, X: ArrayLike) -> ndarray:
         ...
 
-    def transform(self, X: ArrayLike) -> spmatrix:
+    def transform(self, X: ArrayLike) -> ndarray | spmatrix:
         ...
 
-    def inverse_transform(self, Xt: ArrayLike) -> spmatrix:
+    def inverse_transform(self, Xt: ArrayLike) -> ndarray | spmatrix:
         ...
 
-    @property
     def n_features_in_(self):
         ...
 
-    @property
     def classes_(self):
         ...
 
     def fit(
-        self,
-        X: MatrixLike | list[str],
+        self: BaseSearchCV_Self,
+        X: list[str] | MatrixLike,
         y: None | MatrixLike | ArrayLike = None,
         *,
         groups: None | ArrayLike = None,
         **fit_params,
-    ) -> Any:
+    ) -> BaseSearchCV_Self:
         ...
 
 
 class GridSearchCV(BaseSearchCV):
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    classes_: ndarray = ...
+    multimetric_: bool = ...
+    refit_time_: float = ...
+    n_splits_: int = ...
+    scorer_: Callable | dict = ...
+    best_index_: int = ...
+    best_params_: dict = ...
+    best_score_: float = ...
+    best_estimator_: BaseEstimator = ...
+    cv_results_: dict[str, ndarray] = ...
 
-    _required_parameters: list = ...
+    _required_parameters: ClassVar[list] = ...
 
     def __init__(
         self,
-        estimator: Estimator,
-        param_grid: Sequence[dict] | Mapping,
+        estimator: BaseEstimator,
+        param_grid: Mapping | Sequence[dict],
         *,
-        scoring: tuple | str | Callable | None | ArrayLike | Mapping = None,
+        scoring: ArrayLike | None | tuple | Callable | Mapping | str = None,
         n_jobs: None | Int = None,
-        refit: bool | str | Callable = True,
-        cv: Iterable | BaseCrossValidator | int | None = None,
+        refit: str | Callable | bool = True,
+        cv: int | BaseCrossValidator | Iterable | None | BaseShuffleSplit = None,
         verbose: Int = 0,
-        pre_dispatch: int | str = "2*n_jobs",
+        pre_dispatch: str | int = "2*n_jobs",
         error_score: str | Float = ...,
         return_train_score: bool = False,
     ) -> None:
@@ -157,21 +174,33 @@ class GridSearchCV(BaseSearchCV):
 
 
 class RandomizedSearchCV(BaseSearchCV):
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    classes_: ndarray = ...
+    multimetric_: bool = ...
+    refit_time_: float = ...
+    n_splits_: int = ...
+    scorer_: Callable | dict = ...
+    best_index_: int = ...
+    best_params_: dict = ...
+    best_score_: float = ...
+    best_estimator_: BaseEstimator = ...
+    cv_results_: dict[str, ndarray] = ...
 
-    _required_parameters: list = ...
+    _required_parameters: ClassVar[list] = ...
 
     def __init__(
         self,
-        estimator: Pipeline | SVC | Estimator | KernelRidge | SGDClassifier,
+        estimator: BaseEstimator,
         param_distributions: Sequence[Mapping] | Mapping,
         *,
         n_iter: Int = 10,
-        scoring: tuple | str | Callable | None | ArrayLike | Mapping = None,
+        scoring: ArrayLike | None | tuple | Callable | Mapping | str = None,
         n_jobs: None | Int = None,
-        refit: bool | str | Callable = True,
-        cv: Iterable | BaseCrossValidator | int | None = None,
+        refit: str | Callable | bool = True,
+        cv: int | BaseCrossValidator | Iterable | None | BaseShuffleSplit = None,
         verbose: Int = 0,
-        pre_dispatch: int | str = "2*n_jobs",
+        pre_dispatch: str | int = "2*n_jobs",
         random_state: RandomState | None | Int = None,
         error_score: str | Float = ...,
         return_train_score: bool = False,

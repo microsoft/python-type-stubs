@@ -1,4 +1,4 @@
-from typing import Optional, Tuple, Union
+from typing import ClassVar, Optional, Tuple, Union
 from ._structures import (
     Infinity as Infinity,
     InfinityType as InfinityType,
@@ -53,11 +53,11 @@ def parse(version: str) -> Union["LegacyVersion", "Version"]:
 
 
 class InvalidVersion(ValueError):
-    pass
+    ...
 
 
 class _BaseVersion:
-    _key: Union[CmpKey, LegacyCmpKey] = ...
+    _key: ClassVar[Union[CmpKey, LegacyCmpKey]] = ...
 
     def __hash__(self) -> int:
         ...
@@ -94,47 +94,36 @@ class LegacyVersion(_BaseVersion):
     def __repr__(self) -> str:
         ...
 
-    @property
     def public(self) -> str:
         ...
 
-    @property
     def base_version(self) -> str:
         ...
 
-    @property
     def epoch(self) -> int:
         ...
 
-    @property
     def release(self) -> None:
         ...
 
-    @property
     def pre(self) -> None:
         ...
 
-    @property
     def post(self) -> None:
         ...
 
-    @property
     def dev(self) -> None:
         ...
 
-    @property
     def local(self) -> None:
         ...
 
-    @property
     def is_prerelease(self) -> bool:
         ...
 
-    @property
     def is_postrelease(self) -> bool:
         ...
 
-    @property
     def is_devrelease(self) -> bool:
         ...
 
@@ -162,59 +151,45 @@ class Version(_BaseVersion):
     def __str__(self) -> str:
         ...
 
-    @property
     def epoch(self) -> int:
         ...
 
-    @property
     def release(self) -> Tuple[int, ...]:
         ...
 
-    @property
     def pre(self) -> Optional[Tuple[str, int]]:
         ...
 
-    @property
     def post(self) -> Optional[int]:
         ...
 
-    @property
     def dev(self) -> Optional[int]:
         ...
 
-    @property
     def local(self) -> Optional[str]:
         ...
 
-    @property
     def public(self) -> str:
         ...
 
-    @property
     def base_version(self) -> str:
         ...
 
-    @property
     def is_prerelease(self) -> bool:
         ...
 
-    @property
     def is_postrelease(self) -> bool:
         ...
 
-    @property
     def is_devrelease(self) -> bool:
         ...
 
-    @property
     def major(self) -> int:
         ...
 
-    @property
     def minor(self) -> int:
         ...
 
-    @property
     def micro(self) -> int:
         ...
 

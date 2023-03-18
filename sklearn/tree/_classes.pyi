@@ -1,31 +1,18 @@
-from typing import Literal, Mapping, Sequence
-from ..utils._bunch import Bunch
-from .._typing import ArrayLike, MatrixLike, Int, Float
+from typing import ClassVar, Literal, Mapping, Sequence, TypeVar
+from numpy.random import RandomState
 from scipy.sparse import issparse as issparse, spmatrix
+from ..utils._bunch import Bunch
+from ._criterion import Criterion as Criterion
+from ..utils.validation import check_is_fitted as check_is_fitted
+from abc import ABCMeta, abstractmethod
+from ._splitter import Splitter as Splitter
 from ..utils._param_validation import (
     Hidden as Hidden,
     Interval as Interval,
     StrOptions as StrOptions,
 )
-from ._criterion import Criterion as Criterion
-from scipy.sparse._csc import csc_matrix
-from abc import ABCMeta, abstractmethod
-from ..utils import (
-    check_random_state as check_random_state,
-    compute_sample_weight as compute_sample_weight,
-)
-from ._tree import (
-    DepthFirstTreeBuilder as DepthFirstTreeBuilder,
-    BestFirstTreeBuilder as BestFirstTreeBuilder,
-    Tree as Tree,
-    ccp_pruning_path as ccp_pruning_path,
-)
-from ..utils.validation import check_is_fitted as check_is_fitted
-from scipy.sparse._csr import csr_matrix
 from numpy import ndarray
-from ._splitter import Splitter as Splitter
-from numpy.random import RandomState
-from math import ceil as ceil
+from numbers import Integral as Integral, Real as Real
 from ..base import (
     BaseEstimator,
     ClassifierMixin,
@@ -34,11 +21,26 @@ from ..base import (
     is_classifier as is_classifier,
     MultiOutputMixin,
 )
+from ..utils import (
+    check_random_state as check_random_state,
+    compute_sample_weight as compute_sample_weight,
+)
 from ..utils.multiclass import (
     check_classification_targets as check_classification_targets,
 )
-from pandas.core.frame import DataFrame
-from numbers import Integral as Integral, Real as Real
+from math import ceil as ceil
+from .._typing import MatrixLike, ArrayLike, Int, Float
+from ._tree import (
+    DepthFirstTreeBuilder as DepthFirstTreeBuilder,
+    BestFirstTreeBuilder as BestFirstTreeBuilder,
+    Tree,
+    ccp_pruning_path as ccp_pruning_path,
+)
+
+DecisionTreeRegressor_Self = TypeVar(
+    "DecisionTreeRegressor_Self", bound="DecisionTreeRegressor"
+)
+
 
 # Authors: Gilles Louppe <g.louppe@gmail.com>
 #          Peter Prettenhofer <peter.prettenhofer@gmail.com>
@@ -86,7 +88,7 @@ SPARSE_SPLITTERS: dict = ...
 
 class BaseDecisionTree(MultiOutputMixin, BaseEstimator, metaclass=ABCMeta):
 
-    _parameter_constraints: dict = ...
+    _parameter_constraints: ClassVar[dict] = ...
 
     @abstractmethod
     def __init__(
@@ -115,7 +117,7 @@ class BaseDecisionTree(MultiOutputMixin, BaseEstimator, metaclass=ABCMeta):
 
     def fit(
         self,
-        X: csr_matrix | ndarray | DataFrame | csc_matrix,
+        X,
         y: ndarray,
         sample_weight: None | ndarray = None,
         check_input: bool = True,
@@ -130,7 +132,7 @@ class BaseDecisionTree(MultiOutputMixin, BaseEstimator, metaclass=ABCMeta):
 
     def decision_path(
         self, X: MatrixLike | ArrayLike, check_input: bool = True
-    ) -> spmatrix | csr_matrix:
+    ) -> spmatrix:
         ...
 
     def cost_complexity_pruning_path(
@@ -152,8 +154,16 @@ class BaseDecisionTree(MultiOutputMixin, BaseEstimator, metaclass=ABCMeta):
 
 
 class DecisionTreeClassifier(ClassifierMixin, BaseDecisionTree):
+    tree_: Tree = ...
+    n_outputs_: int = ...
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    n_classes_: int | list[int] = ...
+    max_features_: int = ...
+    feature_importances_: ndarray = ...
+    classes_: ndarray | list[ndarray] = ...
 
-    _parameter_constraints: dict = ...
+    _parameter_constraints: ClassVar[dict] = ...
 
     def __init__(
         self,
@@ -161,14 +171,14 @@ class DecisionTreeClassifier(ClassifierMixin, BaseDecisionTree):
         criterion: Literal["gini", "entropy", "log_loss", "gini"] = "gini",
         splitter: Literal["best", "random", "best"] = "best",
         max_depth: None | Int = None,
-        min_samples_split: int | float = 2,
-        min_samples_leaf: int | float = 1,
+        min_samples_split: float | int = 2,
+        min_samples_leaf: float | int = 1,
         min_weight_fraction_leaf: Float = 0.0,
-        max_features: Literal["auto", "sqrt", "log2"] | int | float | None = None,
+        max_features: float | None | Literal["auto", "sqrt", "log2"] | int = None,
         random_state: RandomState | None | Int = None,
         max_leaf_nodes: None | Int = None,
         min_impurity_decrease: Float = 0.0,
-        class_weight: Sequence[Mapping] | Mapping | str | None = None,
+        class_weight: None | Mapping | str | Sequence[Mapping] = None,
         ccp_alpha: float = 0.0,
     ) -> None:
         ...
@@ -179,21 +189,27 @@ class DecisionTreeClassifier(ClassifierMixin, BaseDecisionTree):
         y: MatrixLike | ArrayLike,
         sample_weight: None | ArrayLike = None,
         check_input: bool = True,
-    ) -> ExtraTreeClassifier | DecisionTreeClassifier:
+    ) -> DecisionTreeClassifier | ExtraTreeClassifier:
         ...
 
     def predict_proba(
         self, X: MatrixLike | ArrayLike, check_input: bool = True
-    ) -> list[ndarray] | ndarray:
+    ) -> ndarray | list[ndarray]:
         ...
 
-    def predict_log_proba(self, X: MatrixLike | ArrayLike) -> list[ndarray] | ndarray:
+    def predict_log_proba(self, X: MatrixLike | ArrayLike) -> ndarray | list[ndarray]:
         ...
 
 
 class DecisionTreeRegressor(RegressorMixin, BaseDecisionTree):
+    tree_: Tree = ...
+    n_outputs_: int = ...
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    max_features_: int = ...
+    feature_importances_: ndarray = ...
 
-    _parameter_constraints: dict = ...
+    _parameter_constraints: ClassVar[dict] = ...
 
     def __init__(
         self,
@@ -207,10 +223,10 @@ class DecisionTreeRegressor(RegressorMixin, BaseDecisionTree):
         ] = "squared_error",
         splitter: Literal["best", "random", "best"] = "best",
         max_depth: None | Int = None,
-        min_samples_split: int | float = 2,
-        min_samples_leaf: int | float = 1,
+        min_samples_split: float | int = 2,
+        min_samples_leaf: float | int = 1,
         min_weight_fraction_leaf: Float = 0.0,
-        max_features: Literal["auto", "sqrt", "log2"] | int | float | None = None,
+        max_features: float | None | Literal["auto", "sqrt", "log2"] | int = None,
         random_state: RandomState | None | Int = None,
         max_leaf_nodes: None | Int = None,
         min_impurity_decrease: Float = 0.0,
@@ -219,39 +235,55 @@ class DecisionTreeRegressor(RegressorMixin, BaseDecisionTree):
         ...
 
     def fit(
-        self,
+        self: DecisionTreeRegressor_Self,
         X: MatrixLike | ArrayLike,
         y: MatrixLike | ArrayLike,
         sample_weight: None | ArrayLike = None,
         check_input: bool = True,
-    ) -> ExtraTreeRegressor | DecisionTreeRegressor:
+    ) -> DecisionTreeRegressor_Self:
         ...
 
 
 class ExtraTreeClassifier(DecisionTreeClassifier):
+    tree_: Tree = ...
+    n_outputs_: int = ...
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    feature_importances_: ndarray = ...
+    n_classes_: int | list[int] = ...
+    max_features_: int = ...
+    classes_: ndarray | list[ndarray] = ...
+
     def __init__(
         self,
         *,
         criterion: Literal["gini", "entropy", "log_loss", "gini"] = "gini",
         splitter: Literal["random", "best", "random"] = "random",
         max_depth: None | Int = None,
-        min_samples_split: int | float = 2,
-        min_samples_leaf: int | float = 1,
+        min_samples_split: float | int = 2,
+        min_samples_leaf: float | int = 1,
         min_weight_fraction_leaf: Float = 0.0,
-        max_features: Literal["auto", "sqrt", "log2", "sqrt"]
+        max_features: float
+        | None
         | int
-        | float
-        | None = "sqrt",
+        | Literal["auto", "sqrt", "log2", "sqrt"] = "sqrt",
         random_state: RandomState | None | Int = None,
         max_leaf_nodes: None | Int = None,
         min_impurity_decrease: Float = 0.0,
-        class_weight: Sequence[Mapping] | Mapping | str | None = None,
+        class_weight: None | Mapping | str | Sequence[Mapping] = None,
         ccp_alpha: float = 0.0,
     ) -> None:
         ...
 
 
 class ExtraTreeRegressor(DecisionTreeRegressor):
+    tree_: Tree = ...
+    n_outputs_: int = ...
+    feature_importances_: ndarray = ...
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    max_features_: int = ...
+
     def __init__(
         self,
         *,
@@ -264,10 +296,10 @@ class ExtraTreeRegressor(DecisionTreeRegressor):
         ] = "squared_error",
         splitter: Literal["random", "best", "random"] = "random",
         max_depth: None | Int = None,
-        min_samples_split: int | float = 2,
-        min_samples_leaf: int | float = 1,
+        min_samples_split: float | int = 2,
+        min_samples_leaf: float | int = 1,
         min_weight_fraction_leaf: Float = 0.0,
-        max_features: Literal["auto", "sqrt", "log2"] | int | float | None = 1.0,
+        max_features: float | None | Literal["auto", "sqrt", "log2"] | int = 1.0,
         random_state: RandomState | None | Int = None,
         min_impurity_decrease: Float = 0.0,
         max_leaf_nodes: None | Int = None,

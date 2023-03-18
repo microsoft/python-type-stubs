@@ -1,20 +1,20 @@
 from typing import Literal
-from ..utils.extmath import stable_cumsum as stable_cumsum
-from ..exceptions import UndefinedMetricWarning as UndefinedMetricWarning
-from .._typing import ArrayLike, Float, MatrixLike, Int
-from ..utils.multiclass import type_of_target as type_of_target
-from ..preprocessing import label_binarize as label_binarize
-from functools import partial as partial
+from ..utils.sparsefuncs import count_nonzero as count_nonzero
 from scipy.stats import rankdata as rankdata
+from ..preprocessing import label_binarize as label_binarize
+from ..exceptions import UndefinedMetricWarning as UndefinedMetricWarning
+from ..utils.extmath import stable_cumsum as stable_cumsum
 from numpy import ndarray
+from ..utils.multiclass import type_of_target as type_of_target
+from functools import partial as partial
+from scipy.sparse import csr_matrix as csr_matrix, issparse as issparse
+from .._typing import ArrayLike, Float, MatrixLike, Int
 from ..utils import (
     assert_all_finite as assert_all_finite,
     check_consistent_length as check_consistent_length,
     column_or_1d as column_or_1d,
     check_array as check_array,
 )
-from scipy.sparse import csr_matrix as csr_matrix, issparse as issparse
-from ..utils.sparsefuncs import count_nonzero as count_nonzero
 
 # Authors: Alexandre Gramfort <alexandre.gramfort@inria.fr>
 #          Mathieu Blondel <mathieu@mblondel.org>
@@ -41,7 +41,7 @@ def average_precision_score(
     y_true: MatrixLike | ArrayLike,
     y_score: MatrixLike | ArrayLike,
     *,
-    average: Literal["micro", "samples", "weighted", "macro", "macro"] | None = "macro",
+    average: None | Literal["micro", "samples", "weighted", "macro", "macro"] = "macro",
     pos_label: str | Int = 1,
     sample_weight: None | ArrayLike = None,
 ) -> Float:
@@ -51,7 +51,7 @@ def average_precision_score(
 def det_curve(
     y_true: ArrayLike,
     y_score: ArrayLike,
-    pos_label: str | None | Int = None,
+    pos_label: None | str | Int = None,
     sample_weight: None | ArrayLike = None,
 ) -> tuple[ndarray, ndarray, ndarray]:
     ...
@@ -74,7 +74,7 @@ def precision_recall_curve(
     y_true: ArrayLike,
     probas_pred: ArrayLike,
     *,
-    pos_label: str | None | Int = None,
+    pos_label: None | str | Int = None,
     sample_weight: None | ArrayLike = None,
 ) -> tuple[ndarray, ndarray, ndarray]:
     ...
@@ -84,7 +84,7 @@ def roc_curve(
     y_true: ArrayLike,
     y_score: ArrayLike,
     *,
-    pos_label: str | None | Int = None,
+    pos_label: None | str | Int = None,
     sample_weight: None | ArrayLike = None,
     drop_intermediate: bool = True,
 ) -> tuple[ndarray, ndarray, ndarray]:

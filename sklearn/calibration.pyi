@@ -1,79 +1,92 @@
-from typing import Any, Iterable, Literal
+from typing import ClassVar, Iterable, Literal, TypeVar
+from .model_selection import (
+    check_cv as check_cv,
+    cross_val_predict as cross_val_predict,
+)
+from .isotonic import IsotonicRegression
+from .utils.validation import (
+    check_consistent_length as check_consistent_length,
+    check_is_fitted as check_is_fitted,
+)
+from .base import BaseEstimator
+from .model_selection._split import BaseShuffleSplit
+from scipy.optimize import fmin_bfgs as fmin_bfgs
+from inspect import signature as signature
 from scipy.special import expit as expit, xlogy as xlogy
-from ._typing import Estimator, Int, MatrixLike, ArrayLike
+from .utils.multiclass import (
+    check_classification_targets as check_classification_targets,
+)
+from matplotlib.artist import Artist
 from .base import (
-    BaseEstimator,
     ClassifierMixin,
     RegressorMixin,
     clone as clone,
     MetaEstimatorMixin,
     is_classifier as is_classifier,
 )
-from .model_selection import BaseCrossValidator
-from .svm import LinearSVC as LinearSVC
-from scipy.optimize import fmin_bfgs as fmin_bfgs
-from .utils import (
-    column_or_1d as column_or_1d,
-    indexable as indexable,
-    check_matplotlib_support as check_matplotlib_support,
-)
-from .isotonic import IsotonicRegression
-from .naive_bayes import GaussianNB
-from matplotlib.axes import Axes
 from numpy import ndarray
-from .utils.parallel import delayed as delayed, Parallel as Parallel
-from .preprocessing import (
-    label_binarize as label_binarize,
-    LabelEncoder as LabelEncoder,
-)
-from .ensemble._forest import RandomForestClassifier
-from inspect import signature as signature
-from math import log as log
-from .utils.multiclass import (
-    check_classification_targets as check_classification_targets,
-)
+from matplotlib.axes import Axes
+from numbers import Integral as Integral
+from .svm import LinearSVC as LinearSVC
 from functools import partial as partial
 from .utils._param_validation import (
     StrOptions as StrOptions,
     HasMethods as HasMethods,
     Hidden as Hidden,
 )
-from numbers import Integral as Integral
-from .utils.validation import (
-    check_consistent_length as check_consistent_length,
-    check_is_fitted as check_is_fitted,
+from ._typing import Int, MatrixLike, ArrayLike
+from matplotlib.figure import Figure
+from .preprocessing import (
+    label_binarize as label_binarize,
+    LabelEncoder as LabelEncoder,
 )
-from .model_selection import (
-    check_cv as check_cv,
-    cross_val_predict as cross_val_predict,
+from .utils import (
+    column_or_1d as column_or_1d,
+    indexable as indexable,
+    check_matplotlib_support as check_matplotlib_support,
 )
+from math import log as log
+from .utils.parallel import delayed as delayed, Parallel as Parallel
+from .model_selection import BaseCrossValidator
+
+CalibratedClassifierCV_Self = TypeVar(
+    "CalibratedClassifierCV_Self", bound="CalibratedClassifierCV"
+)
+_SigmoidCalibration_Self = TypeVar(
+    "_SigmoidCalibration_Self", bound="_SigmoidCalibration"
+)
+
 import warnings
 import numpy as np
 
 
 class CalibratedClassifierCV(ClassifierMixin, MetaEstimatorMixin, BaseEstimator):
+    calibrated_classifiers_: list = ...
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    classes_: ndarray = ...
 
-    _parameter_constraints: dict = ...
+    _parameter_constraints: ClassVar[dict] = ...
 
     def __init__(
         self,
-        estimator: GaussianNB | Estimator | None | RandomForestClassifier = None,
+        estimator: None | BaseEstimator = None,
         *,
         method: Literal["sigmoid", "isotonic", "sigmoid"] = "sigmoid",
-        cv: BaseCrossValidator | int | str | Iterable | None = None,
+        cv: int | BaseCrossValidator | Iterable | None | str | BaseShuffleSplit = None,
         n_jobs: None | Int = None,
         ensemble: bool = True,
-        base_estimator: Estimator | str = "deprecated",
+        base_estimator: str | BaseEstimator = "deprecated",
     ) -> None:
         ...
 
     def fit(
-        self,
+        self: CalibratedClassifierCV_Self,
         X: MatrixLike,
         y: ArrayLike,
         sample_weight: None | ArrayLike = None,
         **fit_params,
-    ) -> Any:
+    ) -> CalibratedClassifierCV_Self:
         ...
 
     def predict_proba(self, X: MatrixLike) -> ndarray:
@@ -86,10 +99,9 @@ class CalibratedClassifierCV(ClassifierMixin, MetaEstimatorMixin, BaseEstimator)
 class _CalibratedClassifier:
     def __init__(
         self,
-        estimator: GaussianNB | Estimator | RandomForestClassifier,
-        calibrators: list[_SigmoidCalibration | IsotonicRegression]
-        | list[Estimator]
-        | list[IsotonicRegression | _SigmoidCalibration],
+        estimator: BaseEstimator,
+        calibrators: list[IsotonicRegression | _SigmoidCalibration]
+        | list[BaseEstimator],
         *,
         classes: ArrayLike,
         method: Literal["sigmoid", "isotonic", "sigmoid"] = "sigmoid",
@@ -101,9 +113,15 @@ class _CalibratedClassifier:
 
 
 class _SigmoidCalibration(RegressorMixin, BaseEstimator):
+    b_: float = ...
+    a_: float = ...
+
     def fit(
-        self, X: ArrayLike, y: ArrayLike, sample_weight: None | ArrayLike = None
-    ) -> Any:
+        self: _SigmoidCalibration_Self,
+        X: ArrayLike,
+        y: ArrayLike,
+        sample_weight: None | ArrayLike = None,
+    ) -> _SigmoidCalibration_Self:
         ...
 
     def predict(self, T: ArrayLike) -> ndarray:
@@ -114,8 +132,8 @@ def calibration_curve(
     y_true: ArrayLike,
     y_prob: ArrayLike,
     *,
-    pos_label: str | None | Int = None,
-    normalize: bool | str = "deprecated",
+    pos_label: None | str | Int = None,
+    normalize: str | bool = "deprecated",
     n_bins: Int = 5,
     strategy: Literal["uniform", "quantile", "uniform"] = "uniform",
 ) -> tuple[ndarray, ndarray]:
@@ -123,22 +141,26 @@ def calibration_curve(
 
 
 class CalibrationDisplay:
+    figure_: Figure = ...
+    ax_: Axes = ...
+    line_: Artist = ...
+
     def __init__(
         self,
         prob_true: ArrayLike,
         prob_pred: ArrayLike,
         y_prob: ArrayLike,
         *,
-        estimator_name: str | None = None,
-        pos_label: int | str | None = None,
+        estimator_name: None | str = None,
+        pos_label: None | str | int = None,
     ) -> None:
         ...
 
     def plot(
         self,
         *,
-        ax: Axes | None = None,
-        name: str | None = None,
+        ax: None | Axes = None,
+        name: None | str = None,
         ref_line: bool = True,
         **kwargs,
     ) -> CalibrationDisplay:
@@ -147,16 +169,16 @@ class CalibrationDisplay:
     @classmethod
     def from_estimator(
         cls,
-        estimator: Estimator,
+        estimator: BaseEstimator,
         X: MatrixLike | ArrayLike,
         y: ArrayLike,
         *,
         n_bins: Int = 5,
         strategy: Literal["uniform", "quantile", "uniform"] = "uniform",
-        pos_label: int | str | None = None,
-        name: str | None = None,
+        pos_label: None | str | int = None,
+        name: None | str = None,
         ref_line: bool = True,
-        ax: Axes | None = None,
+        ax: None | Axes = None,
         **kwargs,
     ) -> CalibrationDisplay:
         ...
@@ -169,10 +191,10 @@ class CalibrationDisplay:
         *,
         n_bins: Int = 5,
         strategy: Literal["uniform", "quantile", "uniform"] = "uniform",
-        pos_label: int | str | None = None,
-        name: str | None = None,
+        pos_label: None | str | int = None,
+        name: None | str = None,
         ref_line: bool = True,
-        ax: Axes | None = None,
+        ax: None | Axes = None,
         **kwargs,
     ) -> CalibrationDisplay:
         ...

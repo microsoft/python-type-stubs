@@ -1,8 +1,7 @@
 from typing import Any, Callable, Iterable, Iterator
-from collections.abc import Iterable
-from functools import update_wrapper as update_wrapper
 from numpy import ndarray
 from .._config import config_context as config_context, get_config as get_config
+from functools import update_wrapper as update_wrapper
 
 import functools
 import warnings
@@ -24,7 +23,7 @@ class _FuncWrapper:
     def __init__(self, function: Callable) -> None:
         ...
 
-    def with_config(self, config: dict[str, int | bool | str]) -> _FuncWrapper:
+    def with_config(self, config: dict[str, bool | int | str]) -> _FuncWrapper:
         ...
 
     def __call__(self, *args, **kwargs):

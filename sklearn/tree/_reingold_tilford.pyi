@@ -16,10 +16,10 @@ class DrawTree:
     ) -> None:
         ...
 
-    def left(self) -> int | DrawTree:
+    def left(self) -> DrawTree | int:
         ...
 
-    def right(self) -> int | DrawTree:
+    def right(self) -> DrawTree | int:
         ...
 
     def lbrother(self) -> DrawTree | None:
@@ -69,13 +69,13 @@ def ancestor(vil: DrawTree, v: DrawTree, default_ancestor: DrawTree) -> DrawTree
 
 
 def second_walk(
-    v: DrawTree, m: int | float = 0, depth: int = 0, min: float | None = None
+    v: DrawTree, m: float | int = 0, depth: int = 0, min: float | None = None
 ) -> float:
     ...
 
 
 class Tree:
     def __init__(
-        self, label: str = "", node_id: int | longlong = ..., *children
+        self, label: str = "", node_id: longlong | int = ..., *children
     ) -> None:
         ...

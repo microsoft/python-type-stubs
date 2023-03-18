@@ -14,13 +14,13 @@ from ._supervised import (
     fowlkes_mallows_score as fowlkes_mallows_score,
     entropy as entropy,
 )
-from ._bicluster import consensus_score as consensus_score
 from ._unsupervised import (
     silhouette_samples as silhouette_samples,
     silhouette_score as silhouette_score,
     calinski_harabasz_score as calinski_harabasz_score,
     davies_bouldin_score as davies_bouldin_score,
 )
+from ._bicluster import consensus_score as consensus_score
 
 __all__ = [
     "adjusted_mutual_info_score",

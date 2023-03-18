@@ -1,40 +1,47 @@
-from typing import Any, Callable, Iterator, Literal
-from .._typing import Int, Estimator, ArrayLike, MatrixLike, Float
-from time import time as time
+from typing import Callable, ClassVar, Iterator, Literal, TypeVar
+from numpy.random import RandomState
+from ..tree._tree import DTYPE as DTYPE, DOUBLE as DOUBLE
+from ..base import BaseEstimator
+from ..exceptions import NotFittedError as NotFittedError
+from ._gradient_boosting import (
+    predict_stages as predict_stages,
+    predict_stage as predict_stage,
+)
 from scipy.sparse import (
     csc_matrix as csc_matrix,
     csr_matrix as csr_matrix,
     issparse as issparse,
 )
+from ..utils.validation import check_is_fitted as check_is_fitted
+from abc import ABCMeta, abstractmethod
+from ..tree import DecisionTreeRegressor as DecisionTreeRegressor
+from numpy import ndarray
 from ..utils._param_validation import (
     HasMethods as HasMethods,
     Interval as Interval,
     StrOptions as StrOptions,
 )
+from numbers import Integral as Integral, Real as Real
+from ..base import ClassifierMixin, RegressorMixin, is_classifier as is_classifier
 from ..model_selection import train_test_split as train_test_split
-from abc import ABCMeta, abstractmethod
-from ._base import BaseEnsemble
+from time import time as time
 from ..utils import (
     deprecated,
     check_array as check_array,
     check_random_state as check_random_state,
     column_or_1d as column_or_1d,
 )
-from ._gradient_boosting import (
-    predict_stages as predict_stages,
-    predict_stage as predict_stage,
-)
-from ..utils.validation import check_is_fitted as check_is_fitted
-from ..tree._tree import DTYPE as DTYPE, DOUBLE as DOUBLE
-from numpy import ndarray
-from numpy.random import RandomState
-from ..exceptions import NotFittedError as NotFittedError
+from ._base import BaseEnsemble
 from ..utils.multiclass import (
     check_classification_targets as check_classification_targets,
 )
-from ..base import ClassifierMixin, RegressorMixin, is_classifier as is_classifier
-from ..tree import DecisionTreeRegressor as DecisionTreeRegressor
-from numbers import Integral as Integral, Real as Real
+from ._gb_losses import LossFunction
+from .._typing import Int, MatrixLike, ArrayLike, Float
+
+BaseGradientBoosting_Self = TypeVar(
+    "BaseGradientBoosting_Self", bound="BaseGradientBoosting"
+)
+
 import warnings
 
 import numpy as np
@@ -44,16 +51,16 @@ class VerboseReporter:
     def __init__(self, verbose: Int) -> None:
         ...
 
-    def init(self, est: Estimator, begin_at_stage: Int = 0):
+    def init(self, est: BaseEstimator, begin_at_stage: Int = 0):
         ...
 
-    def update(self, j: Int, est: Estimator):
+    def update(self, j: Int, est: BaseEstimator):
         ...
 
 
 class BaseGradientBoosting(BaseEnsemble, metaclass=ABCMeta):
 
-    _parameter_constraints: dict = ...
+    _parameter_constraints: ClassVar[dict] = ...
 
     @abstractmethod
     def __init__(
@@ -84,12 +91,12 @@ class BaseGradientBoosting(BaseEnsemble, metaclass=ABCMeta):
         ...
 
     def fit(
-        self,
+        self: BaseGradientBoosting_Self,
         X: MatrixLike | ArrayLike,
         y: ArrayLike,
         sample_weight: None | ArrayLike = None,
         monitor: None | Callable = None,
-    ) -> Any:
+    ) -> BaseGradientBoosting_Self:
         ...
 
     @property
@@ -104,15 +111,26 @@ class BaseGradientBoosting(BaseEnsemble, metaclass=ABCMeta):
     @deprecated(  # type: ignore
         "Attribute `loss_` was deprecated in version 1.1 and will be removed in 1.3."
     )
-    @property
     def loss_(self):
         ...
 
 
 class GradientBoostingClassifier(ClassifierMixin, BaseGradientBoosting):
+    max_features_: int = ...
+    n_classes_: int = ...
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    classes_: ndarray = ...
+    estimators_: ndarray = ...
+    init_: BaseEstimator = ...
+    loss_: LossFunction = ...
+    train_score_: ndarray = ...
+    oob_improvement_: ndarray = ...
+    feature_importances_: ndarray = ...
+    n_estimators_: int = ...
 
     # TODO(1.3): remove "deviance"
-    _parameter_constraints: dict = ...
+    _parameter_constraints: ClassVar[dict] = ...
 
     def __init__(
         self,
@@ -124,14 +142,14 @@ class GradientBoostingClassifier(ClassifierMixin, BaseGradientBoosting):
         criterion: Literal[
             "friedman_mse", "squared_error", "friedman_mse"
         ] = "friedman_mse",
-        min_samples_split: int | float = 2,
-        min_samples_leaf: int | float = 1,
+        min_samples_split: float | int = 2,
+        min_samples_leaf: float | int = 1,
         min_weight_fraction_leaf: Float = 0.0,
-        max_depth: int | None = 3,
+        max_depth: None | int = 3,
         min_impurity_decrease: Float = 0.0,
-        init: Estimator | str | None = None,
+        init: None | str | BaseEstimator = None,
         random_state: RandomState | None | Int = None,
-        max_features: Literal["auto", "sqrt", "log2"] | int | float | None = None,
+        max_features: float | None | Literal["auto", "sqrt", "log2"] | int = None,
         verbose: Int = 0,
         max_leaf_nodes: None | Int = None,
         warm_start: bool = False,
@@ -165,8 +183,18 @@ class GradientBoostingClassifier(ClassifierMixin, BaseGradientBoosting):
 
 
 class GradientBoostingRegressor(RegressorMixin, BaseGradientBoosting):
+    max_features_: int = ...
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    n_estimators_: int = ...
+    estimators_: ndarray = ...
+    init_: BaseEstimator = ...
+    loss_: LossFunction = ...
+    train_score_: ndarray = ...
+    oob_improvement_: ndarray = ...
+    feature_importances_: ndarray = ...
 
-    _parameter_constraints: dict = ...
+    _parameter_constraints: ClassVar[dict] = ...
 
     def __init__(
         self,
@@ -180,14 +208,14 @@ class GradientBoostingRegressor(RegressorMixin, BaseGradientBoosting):
         criterion: Literal[
             "friedman_mse", "squared_error", "friedman_mse"
         ] = "friedman_mse",
-        min_samples_split: int | float = 2,
-        min_samples_leaf: int | float = 1,
+        min_samples_split: float | int = 2,
+        min_samples_leaf: float | int = 1,
         min_weight_fraction_leaf: Float = 0.0,
-        max_depth: int | None = 3,
+        max_depth: None | int = 3,
         min_impurity_decrease: Float = 0.0,
-        init: Estimator | str | None = None,
+        init: None | str | BaseEstimator = None,
         random_state: RandomState | None | Int = None,
-        max_features: Literal["auto", "sqrt", "log2"] | int | float | None = None,
+        max_features: float | None | Literal["auto", "sqrt", "log2"] | int = None,
         alpha: Float = 0.9,
         verbose: Int = 0,
         max_leaf_nodes: None | Int = None,

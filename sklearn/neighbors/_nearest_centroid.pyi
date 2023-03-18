@@ -1,17 +1,20 @@
-from typing import Any, Callable
+from typing import Callable, ClassVar, TypeVar
+from ..utils.sparsefuncs import csc_median_axis_0 as csc_median_axis_0
+from ..utils.validation import check_is_fitted as check_is_fitted
+from scipy import sparse as sp
+from numpy import ndarray
 from ..utils._param_validation import Interval as Interval, StrOptions as StrOptions
-from .._typing import Float, ArrayLike, MatrixLike
+from numbers import Real as Real
 from ..utils.multiclass import (
     check_classification_targets as check_classification_targets,
 )
-from scipy import sparse as sp
 from ..base import BaseEstimator, ClassifierMixin
-from ..preprocessing import LabelEncoder as LabelEncoder
-from ..utils.validation import check_is_fitted as check_is_fitted
 from ..metrics.pairwise import pairwise_distances_argmin as pairwise_distances_argmin
-from numpy import ndarray
-from numbers import Real as Real
-from ..utils.sparsefuncs import csc_median_axis_0 as csc_median_axis_0
+from .._typing import Float, MatrixLike, ArrayLike
+from ..preprocessing import LabelEncoder as LabelEncoder
+
+NearestCentroid_Self = TypeVar("NearestCentroid_Self", bound="NearestCentroid")
+
 
 # Author: Robert Layton <robertlayton@gmail.com>
 #         Olivier Grisel <olivier.grisel@ensta.org>
@@ -23,8 +26,12 @@ import numpy as np
 
 
 class NearestCentroid(ClassifierMixin, BaseEstimator):
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    classes_: ndarray = ...
+    centroids_: ArrayLike = ...
 
-    _parameter_constraints: dict = ...
+    _parameter_constraints: ClassVar[dict] = ...
 
     def __init__(
         self,
@@ -34,7 +41,9 @@ class NearestCentroid(ClassifierMixin, BaseEstimator):
     ) -> None:
         ...
 
-    def fit(self, X: MatrixLike | ArrayLike, y: ArrayLike) -> Any:
+    def fit(
+        self: NearestCentroid_Self, X: MatrixLike | ArrayLike, y: ArrayLike
+    ) -> NearestCentroid_Self:
         ...
 
     def predict(self, X: MatrixLike | ArrayLike) -> ndarray:

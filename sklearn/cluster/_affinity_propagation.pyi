@@ -1,21 +1,26 @@
-from typing import Any, Literal, Self
-from ..utils._param_validation import Interval as Interval, StrOptions as StrOptions
+from typing import Any, ClassVar, Literal, TypeVar
 from numpy.random import RandomState
 from ..exceptions import ConvergenceWarning as ConvergenceWarning
-from .._typing import MatrixLike, ArrayLike, Int, Float
-from ..base import BaseEstimator, ClusterMixin
-from ..utils.validation import check_is_fitted as check_is_fitted
 from numpy import ndarray
-from ..utils import (
-    as_float_array as as_float_array,
-    check_random_state as check_random_state,
-)
+from ..utils._param_validation import Interval as Interval, StrOptions as StrOptions
 from numbers import Integral as Integral, Real as Real
 from .._config import config_context as config_context
 from ..metrics import (
     euclidean_distances as euclidean_distances,
     pairwise_distances_argmin as pairwise_distances_argmin,
 )
+from ..base import BaseEstimator, ClusterMixin
+from .._typing import MatrixLike, ArrayLike, Int, Float
+from ..utils import (
+    as_float_array as as_float_array,
+    check_random_state as check_random_state,
+)
+from ..utils.validation import check_is_fitted as check_is_fitted
+
+AffinityPropagation_Self = TypeVar(
+    "AffinityPropagation_Self", bound="AffinityPropagation"
+)
+
 import warnings
 
 import numpy as np
@@ -41,8 +46,15 @@ def affinity_propagation(
 
 
 class AffinityPropagation(ClusterMixin, BaseEstimator):
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    n_iter_: int = ...
+    affinity_matrix_: ndarray = ...
+    labels_: ndarray = ...
+    cluster_centers_: ndarray = ...
+    cluster_centers_indices_: ndarray = ...
 
-    _parameter_constraints: dict = ...
+    _parameter_constraints: ClassVar[dict] = ...
 
     def __init__(
         self,
@@ -58,7 +70,9 @@ class AffinityPropagation(ClusterMixin, BaseEstimator):
     ) -> None:
         ...
 
-    def fit(self, X: MatrixLike, y: Any = None) -> AffinityPropagation | Self:
+    def fit(
+        self: AffinityPropagation_Self, X: MatrixLike, y: Any = None
+    ) -> AffinityPropagation_Self:
         ...
 
     def predict(self, X: MatrixLike | ArrayLike) -> ndarray:

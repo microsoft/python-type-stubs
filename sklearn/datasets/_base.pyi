@@ -1,27 +1,25 @@
 from typing import Literal, Sequence
-from ..utils._bunch import Bunch
 from numpy.random import RandomState
-from .._typing import Int
-from PIL import Image as Image
-from urllib.request import urlretrieve as urlretrieve
-from ..preprocessing import scale as scale
-from pandas.core.frame import DataFrame
-from importlib import resources as resources
 from collections import namedtuple as namedtuple
+from os import environ as environ, listdir as listdir, makedirs as makedirs
+from ..utils._bunch import Bunch
 from os.path import (
     expanduser as expanduser,
     isdir as isdir,
     join as join,
     splitext as splitext,
 )
-from os import environ as environ, listdir as listdir, makedirs as makedirs
+from numpy import ndarray
+from urllib.request import urlretrieve as urlretrieve
+from pathlib import Path as Path
+from PIL import Image as Image
+from importlib import resources as resources
+from .._typing import Int
 from ..utils import (
     check_random_state as check_random_state,
     check_pandas_support as check_pandas_support,
 )
-from numpy import ndarray
-from pathlib import Path as Path
-from pandas.core.series import Series
+from ..preprocessing import scale as scale
 
 # Copyright (c) 2007 David Cournapeau <cournape@gmail.com>
 #               2010 Fabian Pedregosa <fabian.pedregosa@inria.fr>
@@ -42,25 +40,25 @@ IMAGES_MODULE: str = ...
 RemoteFileMetadata = ...
 
 
-def get_data_home(data_home: str | None = None) -> str:
+def get_data_home(data_home: None | str = None) -> str:
     ...
 
 
-def clear_data_home(data_home: str | None = None):
+def clear_data_home(data_home: None | str = None):
     ...
 
 
 def load_files(
     container_path: str,
     *,
-    description: str | None = None,
-    categories: Sequence[str] | None = None,
+    description: None | str = None,
+    categories: None | Sequence[str] = None,
     load_content: bool = True,
     shuffle: bool = True,
-    encoding: str | None = None,
+    encoding: None | str = None,
     decode_error: Literal["strict", "ignore", "replace", "strict"] = "strict",
     random_state: RandomState | None | Int = 0,
-    allowed_extensions: Sequence[str] | None = None,
+    allowed_extensions: None | Sequence[str] = None,
 ) -> Bunch:
     ...
 
@@ -69,7 +67,7 @@ def load_csv_data(
     data_file_name: str,
     *,
     data_module: str = ...,
-    descr_file_name: str | None = None,
+    descr_file_name: None | str = None,
     descr_module: str = ...,
 ) -> tuple[ndarray, ndarray, ndarray, str]:
     ...
@@ -79,11 +77,11 @@ def load_gzip_compressed_csv_data(
     data_file_name: str,
     *,
     data_module: str = ...,
-    descr_file_name: str | None = None,
+    descr_file_name: None | str = None,
     descr_module: str = ...,
     encoding: str = "utf-8",
     **kwargs,
-) -> tuple[ndarray, str] | ndarray:
+) -> ndarray | tuple[ndarray, str]:
     ...
 
 
@@ -93,13 +91,13 @@ def load_descr(descr_file_name: str, *, descr_module: str = ...) -> str:
 
 def load_wine(
     *, return_X_y: bool = False, as_frame: bool = False
-) -> tuple[DataFrame, Series] | tuple[Bunch, tuple] | Bunch | tuple[ndarray, ndarray]:
+) -> tuple[Bunch, tuple]:
     ...
 
 
 def load_iris(
     *, return_X_y: bool = False, as_frame: bool = False
-) -> tuple[DataFrame, Series] | tuple[Bunch, tuple] | Bunch | tuple[ndarray, ndarray]:
+) -> tuple[Bunch, tuple]:
     ...
 
 
@@ -117,7 +115,7 @@ def load_digits(
 
 def load_diabetes(
     *, return_X_y: bool = False, as_frame: bool = False, scaled: bool = True
-) -> tuple[DataFrame, Series] | tuple[Bunch, tuple] | Bunch | tuple[ndarray, ndarray]:
+) -> tuple[Bunch, tuple]:
     ...
 
 

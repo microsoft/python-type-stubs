@@ -1,7 +1,7 @@
-from typing import Callable, Type
-from .._typing import Float
-from numpy import int32, ufunc, ndarray
+from typing import Type
 from .._config import get_config as get_config
+from .._typing import Float
+from numpy import ndarray, int32
 import numpy
 import scipy.special as special
 
@@ -18,9 +18,7 @@ class _ArrayAPIWrapper:
 
 
 class _NumPyApiWrapper:
-    def __getattr__(
-        self, name: str
-    ) -> str | Type[Float] | ufunc | Type[int32] | Callable:
+    def __getattr__(self, name: str):
         ...
 
     def astype(

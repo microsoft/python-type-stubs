@@ -1,5 +1,5 @@
-from . import check_random_state as check_random_state
 from ._random import sample_without_replacement
+from . import check_random_state as check_random_state
 
 # Author: Hamzeh Alsalhi <ha258@cornell.edu>
 #

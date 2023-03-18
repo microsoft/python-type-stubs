@@ -1,14 +1,16 @@
-from typing import Any, Callable, Iterator, Literal, Self
-from ..utils._param_validation import StrOptions as StrOptions
-from ..utils.extmath import row_norms as row_norms
+from typing import Any, Callable, ClassVar, Iterator, Literal, TypeVar
+from ._kmeans import _BaseKMeans
 from numpy.random import RandomState
-from .._typing import Float, Int, ArrayLike, MatrixLike
+from numpy import ndarray
+from ..utils.extmath import row_norms as row_norms
+from ..utils._param_validation import StrOptions as StrOptions
+from .._typing import Float, Int, MatrixLike, ArrayLike
 from ..utils.validation import (
     check_is_fitted as check_is_fitted,
     check_random_state as check_random_state,
 )
-from numpy import ndarray
-from ._kmeans import _BaseKMeans
+
+BisectingKMeans_Self = TypeVar("BisectingKMeans_Self", bound="BisectingKMeans")
 
 # Author: Michal Krawczyk <mkrwczyk.1@gmail.com>
 
@@ -33,8 +35,13 @@ class _BisectingTree:
 
 
 class BisectingKMeans(_BaseKMeans):
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    inertia_: float = ...
+    labels_: ndarray = ...
+    cluster_centers_: ndarray = ...
 
-    _parameter_constraints: dict = ...
+    _parameter_constraints: ClassVar[dict] = ...
 
     def __init__(
         self,
@@ -55,11 +62,11 @@ class BisectingKMeans(_BaseKMeans):
         ...
 
     def fit(
-        self,
+        self: BisectingKMeans_Self,
         X: MatrixLike | ArrayLike,
         y: Any = None,
         sample_weight: None | ArrayLike = None,
-    ) -> BisectingKMeans | Self:
+    ) -> BisectingKMeans_Self:
         ...
 
     def predict(self, X: MatrixLike | ArrayLike) -> ndarray:

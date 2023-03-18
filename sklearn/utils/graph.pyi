@@ -1,6 +1,6 @@
-from .._typing import MatrixLike, Int
 from scipy import sparse as sparse
 from ..metrics.pairwise import pairwise_distances as pairwise_distances
+from .._typing import MatrixLike, Int
 
 # Authors: Aric Hagberg <hagberg@lanl.gov>
 #          Gael Varoquaux <gael.varoquaux@normalesup.org>

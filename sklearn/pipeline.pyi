@@ -1,27 +1,29 @@
-from typing import Any, Iterable, Literal, Sequence
-from .utils._bunch import Bunch
-from ._typing import Estimator, Int, MatrixLike, ArrayLike, Float
-from .base import clone as clone
-from scipy.sparse import spmatrix
-from .base import TransformerMixin
-from .exceptions import NotFittedError as NotFittedError
-from joblib import Memory
-from itertools import islice as islice
-from .utils.metaestimators import available_if as available_if, _BaseComposition
-from pandas.core.series import Series
-from .utils import check_pandas_support as check_pandas_support
+from typing import Any, ClassVar, Iterable, Literal, Sequence, TypeVar
 from scipy import sparse as sparse
-from scipy.sparse._csr import csr_matrix
-from numpy import ndarray
-from .utils.parallel import delayed as delayed, Parallel as Parallel
-from .preprocessing import FunctionTransformer as FunctionTransformer
-from collections.abc import Iterable
-from pandas.core.frame import DataFrame
-from collections import defaultdict as defaultdict
 from .utils.validation import (
     check_memory as check_memory,
     check_is_fitted as check_is_fitted,
 )
+from itertools import islice as islice
+from .base import BaseEstimator
+from joblib import Memory
+from .utils.metaestimators import available_if as available_if, _BaseComposition
+from pandas.core.frame import DataFrame
+from scipy.sparse import spmatrix
+from .utils._bunch import Bunch
+from collections import defaultdict as defaultdict
+from .base import clone as clone, TransformerMixin
+from numpy import ndarray
+from .exceptions import NotFittedError as NotFittedError
+from ._typing import Int, MatrixLike, ArrayLike, Float
+from .preprocessing import FunctionTransformer as FunctionTransformer
+from pandas.core.series import Series
+from .utils import check_pandas_support as check_pandas_support
+from .utils.parallel import delayed as delayed, Parallel as Parallel
+
+FeatureUnion_Self = TypeVar("FeatureUnion_Self", bound="FeatureUnion")
+Pipeline_Self = TypeVar("Pipeline_Self", bound="Pipeline")
+
 
 import numpy as np
 
@@ -31,26 +33,26 @@ __all__ = ["Pipeline", "FeatureUnion", "make_pipeline", "make_union"]
 class Pipeline(_BaseComposition):
 
     # BaseEstimator interface
-    _required_parameters: list = ...
+    _required_parameters: ClassVar[list] = ...
 
     def __init__(
         self,
         steps: Sequence[tuple],
         *,
-        memory: Memory | str | None = None,
+        memory: None | Memory | str = None,
         verbose: bool = False
     ) -> None:
         ...
 
     def set_output(
-        self, *, transform: Literal["default", "pandas"] | None = None
-    ) -> Pipeline | Estimator:
+        self, *, transform: None | Literal["default", "pandas"] = None
+    ) -> BaseEstimator:
         ...
 
     def get_params(self, deep: bool = True) -> dict[str, Any]:
         ...
 
-    def set_params(self, **kwargs) -> Any:
+    def set_params(self: Pipeline_Self, **kwargs) -> Pipeline_Self:
         ...
 
     def __len__(self) -> int:
@@ -64,24 +66,21 @@ class Pipeline(_BaseComposition):
         ...
 
     def fit(
-        self,
-        X: Iterable | DataFrame | list[str] | ndarray,
-        y: list[Int] | list[int] | Iterable | ndarray | None | Series = None,
+        self: Pipeline_Self,
+        X: list[str] | ndarray | Iterable | DataFrame,
+        y: list[Int] | list[int] | Iterable | None | Series | ndarray = None,
         **fit_params
-    ) -> Any:
+    ) -> Pipeline_Self:
         ...
 
     def fit_transform(
-        self,
-        X: csr_matrix | list[str] | DataFrame | Iterable | ndarray,
-        y: Iterable | Series | None | ndarray = None,
-        **fit_params
-    ) -> csr_matrix | DataFrame | ndarray:
+        self, X: Iterable, y: Iterable | Series | None | ndarray = None, **fit_params
+    ) -> ndarray:
         ...
 
     def predict(
-        self, X: Iterable | DataFrame | list[str] | ndarray, **predict_params
-    ) -> tuple[ndarray, ndarray] | ndarray:
+        self, X: list[str] | ndarray | Iterable | DataFrame, **predict_params
+    ) -> ndarray | tuple[ndarray, ndarray]:
         ...
 
     def fit_predict(
@@ -90,11 +89,11 @@ class Pipeline(_BaseComposition):
         ...
 
     def predict_proba(
-        self, X: Iterable | DataFrame | ndarray, **predict_proba_params
+        self, X: Iterable | ndarray | DataFrame, **predict_proba_params
     ) -> ndarray:
         ...
 
-    def decision_function(self, X: Iterable | DataFrame | ndarray) -> ndarray:
+    def decision_function(self, X: Iterable | ndarray | DataFrame) -> ndarray:
         ...
 
     def score_samples(self, X: Iterable) -> ndarray:
@@ -103,9 +102,7 @@ class Pipeline(_BaseComposition):
     def predict_log_proba(self, X: Iterable, **predict_log_proba_params) -> ndarray:
         ...
 
-    def transform(
-        self, X: Iterable | DataFrame | ndarray
-    ) -> csr_matrix | DataFrame | ndarray:
+    def transform(self, X: Iterable | ndarray | DataFrame) -> ndarray:
         ...
 
     def inverse_transform(self, Xt: MatrixLike) -> ndarray:
@@ -113,7 +110,7 @@ class Pipeline(_BaseComposition):
 
     def score(
         self,
-        X: Iterable | DataFrame | list[str] | ndarray,
+        X: list[str] | ndarray | Iterable | DataFrame,
         y: Iterable | Series | None | ndarray = None,
         sample_weight: None | ArrayLike = None,
     ) -> Float:
@@ -139,28 +136,28 @@ class Pipeline(_BaseComposition):
 
 
 def make_pipeline(
-    *steps, memory: Memory | str | None = None, verbose: bool = False
+    *steps, memory: None | Memory | str = None, verbose: bool = False
 ) -> Pipeline:
     ...
 
 
 class FeatureUnion(TransformerMixin, _BaseComposition):
 
-    _required_parameters: list = ...
+    _required_parameters: ClassVar[list] = ...
 
     def __init__(
         self,
-        transformer_list: Sequence[tuple[str, TransformerMixin]],
+        transformer_list: Sequence[tuple[str, TransformerMixin | Pipeline]],
         *,
         n_jobs: None | Int = None,
-        transformer_weights: dict | None = None,
+        transformer_weights: None | dict = None,
         verbose: bool = False
     ) -> None:
         ...
 
     def set_output(
-        self, *, transform: Literal["default", "pandas"] | None = None
-    ) -> Estimator:
+        self, *, transform: None | Literal["default", "pandas"] = None
+    ) -> BaseEstimator:
         ...
 
     @property
@@ -170,26 +167,29 @@ class FeatureUnion(TransformerMixin, _BaseComposition):
     def get_params(self, deep: bool = True) -> dict[str, Any]:
         ...
 
-    def set_params(self, **kwargs) -> Any:
+    def set_params(self: FeatureUnion_Self, **kwargs) -> FeatureUnion_Self:
         ...
 
     def get_feature_names_out(self, input_features: None | ArrayLike = None) -> ndarray:
         ...
 
     def fit(
-        self, X: Iterable | ArrayLike, y: None | MatrixLike = None, **fit_params
-    ) -> Any:
+        self: FeatureUnion_Self,
+        X: Iterable | ArrayLike,
+        y: None | MatrixLike = None,
+        **fit_params
+    ) -> FeatureUnion_Self:
         ...
 
     def fit_transform(
         self,
-        X: Iterable | DataFrame | ArrayLike,
-        y: None | MatrixLike | Series = None,
+        X: Iterable | ArrayLike | DataFrame,
+        y: Series | None | MatrixLike = None,
         **fit_params
-    ) -> spmatrix | ndarray:
+    ) -> ndarray | spmatrix:
         ...
 
-    def transform(self, X: Iterable | DataFrame | ArrayLike) -> spmatrix | ndarray:
+    def transform(self, X: Iterable | ArrayLike | DataFrame) -> ndarray | spmatrix:
         ...
 
     @property

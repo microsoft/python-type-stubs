@@ -1,15 +1,22 @@
-from typing import Any, Callable, Sequence
-from inspect import signature as signature
-from . import IS_PYPY as IS_PYPY
+from typing import Any, Callable, ClassVar, Sequence
+from numpy.random import RandomState
+from .fixes import threadpool_info as threadpool_info
+from ..metrics import accuracy_score as accuracy_score, r2_score as r2_score
+from .validation import (
+    check_array as check_array,
+    check_is_fitted as check_is_fitted,
+    check_X_y as check_X_y,
+)
+from unittest import TestCase as TestCase
+from numpy import ndarray
+from numpydoc import docscrape as docscrape
 from subprocess import (
     check_output as check_output,
     STDOUT as STDOUT,
     CalledProcessError as CalledProcessError,
     TimeoutExpired as TimeoutExpired,
 )
-from collections.abc import Iterable as Iterable
-from numpy.random import RandomState
-from .._typing import ArrayLike, MatrixLike, Float, Int
+from functools import wraps as wraps
 from numpy.testing import (
     assert_allclose as np_assert_allclose,
     assert_almost_equal,
@@ -18,18 +25,11 @@ from numpy.testing import (
     assert_array_almost_equal,
     assert_array_less,
 )
-from .validation import (
-    check_array as check_array,
-    check_is_fitted as check_is_fitted,
-    check_X_y as check_X_y,
-)
-from functools import wraps as wraps
+from . import IS_PYPY as IS_PYPY
 from .multiclass import check_classification_targets as check_classification_targets
-from numpy import ndarray
-from ..metrics import accuracy_score as accuracy_score, r2_score as r2_score
-from unittest import TestCase as TestCase
-from numpydoc import docscrape as docscrape
-from .fixes import threadpool_info as threadpool_info
+from inspect import signature as signature
+from .._typing import ArrayLike, MatrixLike, Float, Int
+from collections.abc import Iterable as Iterable, Sequence
 
 # Copyright (c) 2011, 2012
 # Authors: Pietro Berkes,
@@ -115,7 +115,13 @@ class _IgnoreWarnings:
         ...
 
 
-def assert_raise_message(exceptions, message: str, function: Callable, *args, **kwargs):
+def assert_raise_message(
+    exceptions: tuple[Exception, ...] | Exception,
+    message: str,
+    function: Callable,
+    *args,
+    **kwargs
+):
     ...
 
 
@@ -124,9 +130,9 @@ def assert_allclose(
     desired: ArrayLike,
     rtol: float | None = None,
     atol: float | None = 0.0,
-    equal_nan: bool | None = True,
-    err_msg: str | None = "",
-    verbose: bool | None = True,
+    equal_nan: None | bool = True,
+    err_msg: None | str = "",
+    verbose: None | bool = True,
 ):
     ...
 
@@ -167,7 +173,7 @@ def create_memmap_backed_data(
 
 
 def check_docstring_parameters(
-    func: Callable, doc: str | None = None, ignore: Sequence | None = None
+    func: Callable, doc: None | str = None, ignore: Sequence | None = None
 ) -> ndarray:
     ...
 
@@ -178,9 +184,9 @@ def assert_run_python_script(source_code: str, timeout: Int = 60):
 
 def raises(
     expected_exc_type,
-    match: Sequence[str] | str | None = None,
+    match: None | str | Sequence[str] = None,
     may_pass: bool = False,
-    err_msg: str | None = None,
+    err_msg: None | str = None,
 ):
     ...
 
@@ -196,7 +202,7 @@ class _Raises(contextlib.AbstractContextManager):
 
 class MinimalClassifier:
 
-    _estimator_type: str = ...
+    _estimator_type: ClassVar[str] = ...
 
     def __init__(self, param=None) -> None:
         ...
@@ -222,7 +228,7 @@ class MinimalClassifier:
 
 class MinimalRegressor:
 
-    _estimator_type: str = ...
+    _estimator_type: ClassVar[str] = ...
 
     def __init__(self, param=None) -> None:
         ...

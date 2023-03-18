@@ -1,14 +1,13 @@
 from typing import Literal
-from ..utils._bunch import Bunch
 from numpy.random import RandomState
-from .._typing import ArrayLike, Int
 from ._base import RemoteFileMetadata as RemoteFileMetadata, load_descr as load_descr
 from numpy import ndarray
-from scipy.sparse._csr import csr_matrix
-from . import get_data_home as get_data_home, load_files as load_files
+from .. import preprocessing as preprocessing
+from ..utils._bunch import Bunch
+from .._typing import ArrayLike, Int
 from ..utils import check_random_state as check_random_state
 from ..feature_extraction.text import CountVectorizer as CountVectorizer
-from .. import preprocessing as preprocessing
+from . import get_data_home as get_data_home, load_files as load_files
 
 # Copyright (c) 2011 Olivier Grisel <olivier.grisel@ensta.org>
 # License: BSD 3 clause
@@ -53,7 +52,7 @@ def strip_newsgroup_footer(text: str) -> str:
 
 def fetch_20newsgroups(
     *,
-    data_home: str | None = None,
+    data_home: None | str = None,
     subset: Literal["train", "test", "all", "train"] = "train",
     categories: None | ArrayLike = None,
     shuffle: bool = True,
@@ -61,7 +60,7 @@ def fetch_20newsgroups(
     remove: tuple = ...,
     download_if_missing: bool = True,
     return_X_y: bool = False,
-) -> Bunch | tuple[Bunch, tuple] | tuple[list[str], ndarray]:
+) -> Bunch | tuple[list[str], ndarray] | tuple[Bunch, tuple]:
     ...
 
 
@@ -69,10 +68,10 @@ def fetch_20newsgroups_vectorized(
     *,
     subset: Literal["train", "test", "all", "train"] = "train",
     remove: tuple = ...,
-    data_home: str | None = None,
+    data_home: None | str = None,
     download_if_missing: bool = True,
     return_X_y: bool = False,
     normalize: bool = True,
     as_frame: bool = False,
-) -> Bunch | tuple[Bunch, tuple] | tuple[csr_matrix, ndarray]:
+) -> tuple[Bunch, tuple]:
     ...

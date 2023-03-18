@@ -1,13 +1,13 @@
-from ..utils._bunch import Bunch
 from numpy.random import RandomState
-from .._typing import Int
+from os import makedirs as makedirs, remove as remove
 from ._base import RemoteFileMetadata as RemoteFileMetadata, load_descr as load_descr
 from os.path import exists as exists
-from scipy.io import loadmat as loadmat
-from . import get_data_home as get_data_home
-from os import makedirs as makedirs, remove as remove
-from ..utils import check_random_state as check_random_state
 from numpy import ndarray
+from ..utils._bunch import Bunch
+from scipy.io import loadmat as loadmat
+from .._typing import Int
+from ..utils import check_random_state as check_random_state
+from . import get_data_home as get_data_home
 
 import numpy as np
 import joblib
@@ -19,7 +19,7 @@ FACES = ...
 
 def fetch_olivetti_faces(
     *,
-    data_home: str | None = None,
+    data_home: None | str = None,
     shuffle: bool = False,
     random_state: RandomState | None | Int = 0,
     download_if_missing: bool = True,

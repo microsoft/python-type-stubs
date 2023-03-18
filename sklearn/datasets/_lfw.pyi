@@ -1,14 +1,14 @@
 from typing import Literal
-from ..utils._bunch import Bunch
-from .._typing import Float, Int
-from joblib import Memory as Memory
+from os import listdir as listdir, makedirs as makedirs, remove as remove
 from ._base import (
     get_data_home as get_data_home,
     RemoteFileMetadata as RemoteFileMetadata,
     load_descr as load_descr,
 )
 from os.path import join as join, exists as exists, isdir as isdir
-from os import listdir as listdir, makedirs as makedirs, remove as remove
+from joblib import Memory as Memory
+from ..utils._bunch import Bunch
+from .._typing import Float, Int
 
 import logging
 
@@ -33,12 +33,12 @@ TARGETS = ...
 
 def fetch_lfw_people(
     *,
-    data_home: str | None = None,
+    data_home: None | str = None,
     funneled: bool = True,
     resize: None | Float = 0.5,
     min_faces_per_person: Int = 0,
     color: bool = False,
-    slice_=...,
+    slice_: tuple[slice, ...] = ...,
     download_if_missing: bool = True,
     return_X_y: bool = False,
 ) -> Bunch | tuple[Bunch, tuple]:
@@ -48,11 +48,11 @@ def fetch_lfw_people(
 def fetch_lfw_pairs(
     *,
     subset: Literal["train", "test", "10_folds", "train"] = "train",
-    data_home: str | None = None,
+    data_home: None | str = None,
     funneled: bool = True,
     resize: Float = 0.5,
     color: bool = False,
-    slice_=...,
+    slice_: tuple[slice, ...] = ...,
     download_if_missing: bool = True,
 ) -> Bunch:
     ...

@@ -1,8 +1,12 @@
 from ._variance_threshold import VarianceThreshold as VarianceThreshold
-from ._sequential import SequentialFeatureSelector as SequentialFeatureSelector
-from ._from_model import SelectFromModel as SelectFromModel
-from ._base import SelectorMixin as SelectorMixin
 from ._rfe import RFE as RFE, RFECV as RFECV
+from ._base import SelectorMixin as SelectorMixin
+from ._from_model import SelectFromModel as SelectFromModel
+from ._mutual_info import (
+    mutual_info_regression as mutual_info_regression,
+    mutual_info_classif as mutual_info_classif,
+)
+from ._sequential import SequentialFeatureSelector as SequentialFeatureSelector
 from ._univariate_selection import (
     chi2 as chi2,
     f_classif as f_classif,
@@ -15,10 +19,6 @@ from ._univariate_selection import (
     SelectFdr as SelectFdr,
     SelectFwe as SelectFwe,
     GenericUnivariateSelect as GenericUnivariateSelect,
-)
-from ._mutual_info import (
-    mutual_info_regression as mutual_info_regression,
-    mutual_info_classif as mutual_info_classif,
 )
 
 

@@ -1,4 +1,4 @@
-from typing import Literal, Optional
+from typing import ClassVar, Literal, Optional
 from typing_extensions import TypedDict as TypedDict
 
 # =============================================================================
@@ -54,9 +54,6 @@ ArffDenseDataType = ...
 ArffSparseDataType = ...
 
 
-_RE_DENSE_VALUES, _RE_SPARSE_KEY_VALUES = ...
-
-
 _ESCAPE_SUB_MAP: dict = ...
 _UNESCAPE_SUB_MAP: dict = ...
 
@@ -72,7 +69,7 @@ _SUPPORTED_DATA_STRUCTURES: list = ...
 
 # EXCEPTIONS ==================================================================
 class ArffException(Exception):
-    message: Optional[str] = ...
+    message: ClassVar[Optional[str]] = ...
 
     def __init__(self) -> None:
         ...
@@ -82,11 +79,11 @@ class ArffException(Exception):
 
 
 class BadRelationFormat(ArffException):
-    message: Literal["Bad @RELATION format, at line %d."] = ...
+    message: ClassVar[Literal["Bad @RELATION format, at line %d."]] = ...
 
 
 class BadAttributeFormat(ArffException):
-    message: Literal["Bad @ATTRIBUTE format, at line %d."] = ...
+    message: ClassVar[Literal["Bad @ATTRIBUTE format, at line %d."]] = ...
 
 
 class BadDataFormat(ArffException):
@@ -95,7 +92,7 @@ class BadDataFormat(ArffException):
 
 
 class BadAttributeType(ArffException):
-    message: Literal["Bad @ATTRIBUTE type, at line %d."] = ...
+    message: ClassVar[Literal["Bad @ATTRIBUTE type, at line %d."]] = ...
 
 
 class BadAttributeName(ArffException):
@@ -114,15 +111,15 @@ class BadNominalFormatting(ArffException):
 
 
 class BadNumericalValue(ArffException):
-    message: Literal["Invalid numerical value, at line %d."] = ...
+    message: ClassVar[Literal["Invalid numerical value, at line %d."]] = ...
 
 
 class BadStringValue(ArffException):
-    message: str = ...
+    message: ClassVar[str] = ...
 
 
 class BadLayout(ArffException):
-    message: Literal["Invalid layout of the ARFF file, at line %d."] = ...
+    message: ClassVar[Literal["Invalid layout of the ARFF file, at line %d."]] = ...
 
     def __init__(self, msg: str = "") -> None:
         ...
@@ -170,7 +167,7 @@ class _DataListMixin:
 
 
 class Data(_DataListMixin, DenseGeneratorData):
-    pass
+    ...
 
 
 class COOData:
@@ -190,7 +187,7 @@ class LODGeneratorData:
 
 
 class LODData(_DataListMixin, LODGeneratorData):
-    pass
+    ...
 
 
 # =============================================================================

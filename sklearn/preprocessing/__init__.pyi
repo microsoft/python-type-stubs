@@ -1,16 +1,3 @@
-from ._function_transformer import FunctionTransformer as FunctionTransformer
-from ._discretization import KBinsDiscretizer as KBinsDiscretizer
-from ._label import (
-    label_binarize as label_binarize,
-    LabelBinarizer as LabelBinarizer,
-    LabelEncoder as LabelEncoder,
-    MultiLabelBinarizer as MultiLabelBinarizer,
-)
-from ._encoders import OneHotEncoder as OneHotEncoder, OrdinalEncoder as OrdinalEncoder
-from ._polynomial import (
-    PolynomialFeatures as PolynomialFeatures,
-    SplineTransformer as SplineTransformer,
-)
 from ._data import (
     Binarizer as Binarizer,
     KernelCenterer as KernelCenterer,
@@ -31,6 +18,19 @@ from ._data import (
     power_transform as power_transform,
     PowerTransformer as PowerTransformer,
 )
+from ._encoders import OneHotEncoder as OneHotEncoder, OrdinalEncoder as OrdinalEncoder
+from ._function_transformer import FunctionTransformer as FunctionTransformer
+from ._polynomial import (
+    PolynomialFeatures as PolynomialFeatures,
+    SplineTransformer as SplineTransformer,
+)
+from ._label import (
+    label_binarize as label_binarize,
+    LabelBinarizer as LabelBinarizer,
+    LabelEncoder as LabelEncoder,
+    MultiLabelBinarizer as MultiLabelBinarizer,
+)
+from ._discretization import KBinsDiscretizer as KBinsDiscretizer
 
 
 __all__ = [

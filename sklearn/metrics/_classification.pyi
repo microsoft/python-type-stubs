@@ -1,25 +1,25 @@
 from typing import Literal
-from ..utils._param_validation import validate_params as validate_params
+from ..utils.sparsefuncs import count_nonzero as count_nonzero
 from scipy.special import xlogy as xlogy
 from ..exceptions import UndefinedMetricWarning as UndefinedMetricWarning
+from ..utils._param_validation import validate_params as validate_params
+from numpy import ndarray
 from ..utils.multiclass import (
     unique_labels as unique_labels,
     type_of_target as type_of_target,
 )
-from .._typing import ArrayLike, MatrixLike, Float, Int
-from ..preprocessing import (
-    LabelBinarizer as LabelBinarizer,
-    LabelEncoder as LabelEncoder,
-)
-from numpy import ndarray
+from scipy.sparse import coo_matrix as coo_matrix, csr_matrix as csr_matrix
+from .._typing import MatrixLike, ArrayLike, Float, Int
 from ..utils import (
     assert_all_finite as assert_all_finite,
     check_array as check_array,
     check_consistent_length as check_consistent_length,
     column_or_1d as column_or_1d,
 )
-from scipy.sparse import coo_matrix as coo_matrix, csr_matrix as csr_matrix
-from ..utils.sparsefuncs import count_nonzero as count_nonzero
+from ..preprocessing import (
+    LabelBinarizer as LabelBinarizer,
+    LabelEncoder as LabelEncoder,
+)
 
 # Authors: Alexandre Gramfort <alexandre.gramfort@inria.fr>
 #          Mathieu Blondel <mathieu@mblondel.org>
@@ -57,7 +57,7 @@ def confusion_matrix(
     *,
     labels: None | ArrayLike = None,
     sample_weight: None | ArrayLike = None,
-    normalize: None | Literal["true", "pred", "all"] = None,
+    normalize: Literal["true", "pred", "all"] | None = None,
 ) -> ndarray:
     ...
 
@@ -89,12 +89,12 @@ def jaccard_score(
     y_pred: MatrixLike | ArrayLike,
     *,
     labels: None | ArrayLike = None,
-    pos_label: int | str = 1,
+    pos_label: str | int = 1,
     average: None
     | Literal["micro", "macro", "samples", "weighted", "binary", "binary"] = "binary",
     sample_weight: None | ArrayLike = None,
     zero_division: float | Literal["warn", "warn"] = "warn",
-) -> Float | ndarray:
+) -> ndarray | Float:
     ...
 
 
@@ -119,12 +119,12 @@ def f1_score(
     y_pred: MatrixLike | ArrayLike,
     *,
     labels: None | ArrayLike = None,
-    pos_label: int | str = 1,
+    pos_label: str | int = 1,
     average: None
     | Literal["micro", "macro", "samples", "weighted", "binary", "binary"] = "binary",
     sample_weight: None | ArrayLike = None,
-    zero_division: int | Literal["warn", "warn"] = "warn",
-) -> Float | ndarray:
+    zero_division: Literal["warn", "warn"] | int = "warn",
+) -> ndarray | Float:
     ...
 
 
@@ -134,12 +134,12 @@ def fbeta_score(
     *,
     beta: Float,
     labels: None | ArrayLike = None,
-    pos_label: int | str = 1,
+    pos_label: str | int = 1,
     average: None
     | Literal["micro", "macro", "samples", "weighted", "binary", "binary"] = "binary",
     sample_weight: None | ArrayLike = None,
-    zero_division: int | Literal["warn", "warn"] = "warn",
-) -> Float | ndarray:
+    zero_division: Literal["warn", "warn"] | int = "warn",
+) -> ndarray | Float:
     ...
 
 
@@ -149,11 +149,11 @@ def precision_recall_fscore_support(
     *,
     beta: Float = 1.0,
     labels: None | ArrayLike = None,
-    pos_label: int | str = 1,
+    pos_label: str | int = 1,
     average: None | Literal["binary", "micro", "macro", "samples", "weighted"] = None,
     warn_for: set | tuple = ...,
     sample_weight: None | ArrayLike = None,
-    zero_division: int | Literal["warn", "warn"] = "warn",
+    zero_division: Literal["warn", "warn"] | int = "warn",
 ) -> tuple[float | ndarray, float | ndarray, float | ndarray, None | ndarray]:
     ...
 
@@ -165,7 +165,7 @@ def class_likelihood_ratios(
     labels: None | ArrayLike = None,
     sample_weight: None | ArrayLike = None,
     raise_warning: bool = True,
-) -> tuple | tuple[Float, Float] | tuple[float, Float]:
+) -> tuple[float, Float] | tuple | tuple[Float, Float]:
     ...
 
 
@@ -174,12 +174,12 @@ def precision_score(
     y_pred: MatrixLike | ArrayLike,
     *,
     labels: None | ArrayLike = None,
-    pos_label: int | str = 1,
+    pos_label: str | int = 1,
     average: None
     | Literal["micro", "macro", "samples", "weighted", "binary", "binary"] = "binary",
     sample_weight: None | ArrayLike = None,
-    zero_division: int | Literal["warn", "warn"] = "warn",
-) -> Float | ndarray:
+    zero_division: Literal["warn", "warn"] | int = "warn",
+) -> ndarray | Float:
     ...
 
 
@@ -188,12 +188,12 @@ def recall_score(
     y_pred: MatrixLike | ArrayLike,
     *,
     labels: None | ArrayLike = None,
-    pos_label: int | str = 1,
+    pos_label: str | int = 1,
     average: None
     | Literal["micro", "macro", "samples", "weighted", "binary", "binary"] = "binary",
     sample_weight: None | ArrayLike = None,
-    zero_division: int | Literal["warn", "warn"] = "warn",
-) -> Float | ndarray:
+    zero_division: Literal["warn", "warn"] | int = "warn",
+) -> ndarray | Float:
     ...
 
 
@@ -216,7 +216,7 @@ def classification_report(
     sample_weight: None | ArrayLike = None,
     digits: Int = 2,
     output_dict: bool = False,
-    zero_division: int | Literal["warn", "warn"] = "warn",
+    zero_division: Literal["warn", "warn"] | int = "warn",
 ) -> str | dict:
     ...
 
@@ -257,6 +257,6 @@ def brier_score_loss(
     y_prob: ArrayLike,
     *,
     sample_weight: None | ArrayLike = None,
-    pos_label: str | None | Int = None,
+    pos_label: None | str | Int = None,
 ) -> Float:
     ...

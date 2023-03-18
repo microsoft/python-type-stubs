@@ -1,10 +1,10 @@
 from typing import Literal
-from .._typing import Estimator
-from functools import wraps as wraps
-from . import check_pandas_support as check_pandas_support
+from ..base import BaseEstimator
 from ._available_if import available_if as available_if
-from scipy.sparse import issparse as issparse
 from .._config import get_config as get_config
+from functools import wraps as wraps
+from scipy.sparse import issparse as issparse
+from . import check_pandas_support as check_pandas_support
 
 
 class _SetOutputMixin:
@@ -14,6 +14,6 @@ class _SetOutputMixin:
         ...
 
     def set_output(
-        self, *, transform: Literal["default", "pandas"] | None = None
-    ) -> Estimator:
+        self, *, transform: None | Literal["default", "pandas"] = None
+    ) -> BaseEstimator:
         ...

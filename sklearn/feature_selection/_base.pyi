@@ -1,15 +1,15 @@
-from .._typing import MatrixLike, ArrayLike
-from ..base import TransformerMixin
 from operator import attrgetter as attrgetter
 from abc import ABCMeta, abstractmethod as abstractmethod
-from scipy.sparse._csr import csr_matrix
 from numpy import ndarray
+from ..base import TransformerMixin
+from scipy.sparse import issparse as issparse, csc_matrix as csc_matrix
+from scipy.sparse._csr import csr_matrix
+from .._typing import MatrixLike, ArrayLike
 from ..utils import (
     check_array as check_array,
     safe_mask as safe_mask,
     safe_sqr as safe_sqr,
 )
-from scipy.sparse import issparse as issparse, csc_matrix as csc_matrix
 
 # Authors: G. Varoquaux, A. Gramfort, L. Buitinck, J. Nothman
 # License: BSD 3 clause

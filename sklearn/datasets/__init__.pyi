@@ -1,3 +1,7 @@
+from ._twenty_newsgroups import (
+    fetch_20newsgroups as fetch_20newsgroups,
+    fetch_20newsgroups_vectorized as fetch_20newsgroups_vectorized,
+)
 from ._svmlight_format_io import (
     load_svmlight_file as load_svmlight_file,
     load_svmlight_files as load_svmlight_files,
@@ -25,10 +29,6 @@ from ._samples_generator import (
     make_biclusters as make_biclusters,
     make_checkerboard as make_checkerboard,
 )
-from ._covtype import fetch_covtype as fetch_covtype
-from ._california_housing import fetch_california_housing as fetch_california_housing
-from ._openml import fetch_openml as fetch_openml
-from ._olivetti_faces import fetch_olivetti_faces as fetch_olivetti_faces
 from ._base import (
     load_breast_cancer as load_breast_cancer,
     load_diabetes as load_diabetes,
@@ -42,19 +42,19 @@ from ._base import (
     get_data_home as get_data_home,
     clear_data_home as clear_data_home,
 )
-from ._twenty_newsgroups import (
-    fetch_20newsgroups as fetch_20newsgroups,
-    fetch_20newsgroups_vectorized as fetch_20newsgroups_vectorized,
-)
-from ._kddcup99 import fetch_kddcup99 as fetch_kddcup99
-from ._species_distributions import (
-    fetch_species_distributions as fetch_species_distributions,
-)
-from ._rcv1 import fetch_rcv1 as fetch_rcv1
 from ._lfw import (
     fetch_lfw_pairs as fetch_lfw_pairs,
     fetch_lfw_people as fetch_lfw_people,
 )
+from ._kddcup99 import fetch_kddcup99 as fetch_kddcup99
+from ._covtype import fetch_covtype as fetch_covtype
+from ._openml import fetch_openml as fetch_openml
+from ._california_housing import fetch_california_housing as fetch_california_housing
+from ._olivetti_faces import fetch_olivetti_faces as fetch_olivetti_faces
+from ._species_distributions import (
+    fetch_species_distributions as fetch_species_distributions,
+)
+from ._rcv1 import fetch_rcv1 as fetch_rcv1
 import textwrap as textwrap
 
 

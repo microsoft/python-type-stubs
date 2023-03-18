@@ -1,4 +1,6 @@
 from typing import Callable
+from scipy.sparse.linalg import LinearOperator
+from numpy import block as bmat, ndarray
 from scipy.linalg import (
     inv as inv,
     eigh as eigh,
@@ -7,10 +9,8 @@ from scipy.linalg import (
     cholesky as cholesky,
     LinAlgError as LinAlgError,
 )
-from scipy.sparse.linalg import LinearOperator
-from .._typing import ArrayLike, MatrixLike, Float, Scalar, Int
-from numpy import block as bmat, ndarray
 from scipy.sparse import isspmatrix as isspmatrix
+from .._typing import MatrixLike, ArrayLike, Float, Scalar, Int
 import inspect
 import warnings
 import numpy as np
@@ -19,17 +19,17 @@ __all__ = ["lobpcg"]
 
 
 def lobpcg(
-    A: LinearOperator | Callable | MatrixLike | ArrayLike,
-    X: Float | ArrayLike,
-    B: MatrixLike | Callable | ArrayLike | None | LinearOperator = None,
-    M: MatrixLike | Callable | ArrayLike | None | LinearOperator = None,
+    A: MatrixLike | LinearOperator | ArrayLike | Callable,
+    X: ArrayLike | Float,
+    B: ArrayLike | None | Callable | MatrixLike | LinearOperator = None,
+    M: ArrayLike | None | Callable | MatrixLike | LinearOperator = None,
     Y: float | None | ArrayLike = None,
-    tol: Scalar | None = None,
-    maxiter: int | None = None,
-    largest: bool | None = True,
+    tol: None | Scalar = None,
+    maxiter: None | int = None,
+    largest: None | bool = True,
     verbosityLevel: Int = 0,
-    retLambdaHistory: bool | None = False,
-    retResidualNormsHistory: bool | None = False,
-    restartControl: int | None = 20,
+    retLambdaHistory: None | bool = False,
+    retResidualNormsHistory: None | bool = False,
+    restartControl: None | int = 20,
 ) -> tuple[ndarray, ndarray, ndarray, ndarray]:
     ...

@@ -1,8 +1,8 @@
 from typing import Any, Type
-from ..base import BaseEstimator as BaseEstimator
 from collections import OrderedDict as OrderedDict
-from . import is_scalar_nan as is_scalar_nan
 from .._config import get_config as get_config
+from ..base import BaseEstimator as BaseEstimator
+from . import is_scalar_nan as is_scalar_nan
 
 # Copyright (c) 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010,
 # 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018 Python Software Foundation;
@@ -76,7 +76,7 @@ class KeyValTuple(tuple):
 
 
 class KeyValTupleParam(KeyValTuple):
-    pass
+    ...
 
 
 class _EstimatorPrettyPrinter(pprint.PrettyPrinter):
@@ -94,7 +94,7 @@ class _EstimatorPrettyPrinter(pprint.PrettyPrinter):
         ...
 
     def format(
-        self, object, context: dict[int, int] | dict[Any, Any], maxlevels, level: int
+        self, object, context: dict[Any, Any] | dict[int, int], maxlevels, level: int
     ) -> tuple[str, bool, bool]:
         ...
 

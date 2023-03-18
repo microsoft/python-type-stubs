@@ -1,10 +1,10 @@
 from typing import Literal, Sequence
-from inspect import isclass as isclass
-from .._typing import Estimator
-from contextlib import closing as closing
-from io import StringIO as StringIO
-from .. import config_context as config_context
 from string import Template as Template
+from contextlib import closing as closing
+from ..base import BaseEstimator
+from io import StringIO as StringIO
+from inspect import isclass as isclass
+from .. import config_context as config_context
 import html
 
 
@@ -24,10 +24,10 @@ class _VisualBlock:
     def __init__(
         self,
         kind: Literal["serial", "parallel", "single"],
-        estimators: Estimator | Sequence[_VisualBlock] | Sequence[Estimator],
+        estimators: Sequence[BaseEstimator] | BaseEstimator | Sequence[_VisualBlock],
         *,
-        names: Sequence[str] | None = None,
-        name_details: Sequence[str] | str | None = None,
+        names: None | Sequence[str] = None,
+        name_details: Sequence[str] | None | str = None,
         dash_wrapped: bool = True
     ) -> None:
         ...
@@ -36,5 +36,5 @@ class _VisualBlock:
 _STYLE = ...  # noqa
 
 
-def estimator_html_repr(estimator: Estimator) -> str:
+def estimator_html_repr(estimator: BaseEstimator) -> str:
     ...

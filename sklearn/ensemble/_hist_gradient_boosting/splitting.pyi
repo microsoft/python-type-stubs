@@ -1,3 +1,4 @@
+
 import numpy as np
 
 
@@ -166,8 +167,7 @@ class Splitter:
         ----------
         n_samples : int
             The number of samples at the node.
-        histograms : ndarray of HISTOGRAM_DTYPE of \
-                shape (n_features, max_bins)
+        histograms : ndarray of HISTOGRAM_DTYPE of                 shape (n_features, max_bins)
             The histograms of the current node.
         sum_gradients : float
             The sum of the gradients for each sample at the node.
@@ -198,4 +198,5 @@ class Splitter:
             The info about the best possible split among all features.
         """   
         ...  
+
 

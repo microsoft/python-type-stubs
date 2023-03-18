@@ -1,13 +1,13 @@
-from tempfile import TemporaryDirectory as TemporaryDirectory
-from ..utils._bunch import Bunch
 from numpy.random import RandomState
-from .._typing import Int
-from ._base import RemoteFileMetadata as RemoteFileMetadata, load_descr as load_descr
+from tempfile import TemporaryDirectory as TemporaryDirectory
 from os.path import exists as exists, join as join
+from ._base import RemoteFileMetadata as RemoteFileMetadata, load_descr as load_descr
 from numpy import ndarray
-from . import get_data_home as get_data_home
-from ..utils import check_random_state as check_random_state
+from ..utils._bunch import Bunch
 from gzip import GzipFile as GzipFile
+from .._typing import Int
+from ..utils import check_random_state as check_random_state
+from . import get_data_home as get_data_home
 import logging
 import os
 
@@ -29,7 +29,7 @@ TARGET_NAMES: list = ...
 
 def fetch_covtype(
     *,
-    data_home: str | None = None,
+    data_home: None | str = None,
     download_if_missing: bool = True,
     random_state: RandomState | None | Int = None,
     shuffle: bool = False,

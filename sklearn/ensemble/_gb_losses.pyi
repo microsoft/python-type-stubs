@@ -1,18 +1,19 @@
-from typing import Any
-from ..dummy import DummyClassifier, DummyRegressor
+from typing import Any, ClassVar
 from scipy.special import expit as expit, logsumexp as logsumexp
-from .._typing import Int, ArrayLike, MatrixLike, Float
-from ..tree._tree import Tree
 from ..tree._tree import TREE_LEAF as TREE_LEAF
 from abc import ABCMeta, abstractmethod
 from numpy import ndarray
+from ..dummy import DummyClassifier, DummyRegressor
+from .._typing import Int, ArrayLike, MatrixLike, Float
+from ..tree._tree import Tree
 
 import numpy as np
 
 
 class LossFunction(metaclass=ABCMeta):
+    K: int = ...
 
-    is_multi_class: bool = ...
+    is_multi_class: ClassVar[bool] = ...
 
     def __init__(self, n_classes: Int) -> None:
         ...
@@ -189,7 +190,7 @@ class BinomialDeviance(ClassificationLossFunction):
 
 class MultinomialDeviance(ClassificationLossFunction):
 
-    is_multi_class: bool = ...
+    is_multi_class: ClassVar[bool] = ...
 
     def __init__(self, n_classes: Int) -> None:
         ...

@@ -1,15 +1,16 @@
 from typing import Any, Literal, Sequence
-from .._typing import Classifier, Regressor, Int
-from ..base import is_classifier as is_classifier
-from matplotlib.axes import Axes
-from ..utils.validation import check_is_fitted as check_is_fitted
-from ._tree import Tree
-from matplotlib.text import Annotation
+from ._reingold_tilford import buchheim as buchheim
+from ..base import ClassifierMixin, RegressorMixin
 from numpy import ndarray, longlong
+from matplotlib.axes import Axes
 from numbers import Integral as Integral
 from io import StringIO as StringIO
-from ._reingold_tilford import buchheim as buchheim
+from matplotlib.text import Annotation
+from ..base import is_classifier as is_classifier
 from ._classes import DecisionTreeClassifier
+from .._typing import Int
+from ._tree import Tree
+from ..utils.validation import check_is_fitted as check_is_fitted
 
 import numpy as np
 
@@ -23,10 +24,10 @@ SENTINEL = ...
 
 
 def plot_tree(
-    decision_tree: Regressor | Classifier | DecisionTreeClassifier,
+    decision_tree: ClassifierMixin | DecisionTreeClassifier | RegressorMixin,
     *,
     max_depth: None | Int = None,
-    feature_names: Sequence[str] | None = None,
+    feature_names: None | Sequence[str] = None,
     class_names: Sequence[str | bool] | None = None,
     label: Literal["all", "root", "none", "all"] = "all",
     filled: bool = False,
@@ -35,7 +36,7 @@ def plot_tree(
     proportion: bool = False,
     rounded: bool = False,
     precision: Int = 3,
-    ax: Axes | None = None,
+    ax: None | Axes = None,
     fontsize: None | Int = None,
 ) -> list[Annotation]:
     ...
@@ -61,10 +62,10 @@ class _BaseTreeExporter:
     def get_color(self, value: ndarray) -> str:
         ...
 
-    def get_fill_color(self, tree: Tree, node_id: int | longlong) -> str:
+    def get_fill_color(self, tree: Tree, node_id: longlong | int) -> str:
         ...
 
-    def node_to_str(self, tree: Tree, node_id: int | longlong, criterion: str) -> str:
+    def node_to_str(self, tree: Tree, node_id: longlong | int, criterion: str) -> str:
         ...
 
 
@@ -129,11 +130,11 @@ class _MPLTreeExporter(_BaseTreeExporter):
 
 
 def export_graphviz(
-    decision_tree: Classifier,
+    decision_tree: ClassifierMixin,
     out_file: Any = None,
     *,
     max_depth: None | Int = None,
-    feature_names: Sequence[str] | None = None,
+    feature_names: None | Sequence[str] = None,
     class_names: Sequence[str | bool] | None = None,
     label: Literal["all", "root", "none", "all"] = "all",
     filled: bool = False,
@@ -153,7 +154,7 @@ def export_graphviz(
 def export_text(
     decision_tree: Any,
     *,
-    feature_names: Sequence[str] | None = None,
+    feature_names: None | Sequence[str] = None,
     max_depth: Int = 10,
     spacing: Int = 3,
     decimals: Int = 2,

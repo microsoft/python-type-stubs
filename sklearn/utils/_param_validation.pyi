@@ -1,11 +1,10 @@
 from typing import Any, Callable, Literal, Mapping, Sequence, Type
-from inspect import signature as signature
-from collections.abc import Iterable as Iterable
-from .._typing import Float
 from abc import ABC, abstractmethod
 from numbers import Integral, Real
 from scipy.sparse import issparse as issparse, csr_matrix as csr_matrix
-from ..tree._criterion import Criterion
+from inspect import signature as signature
+from .._typing import Float
+from collections.abc import Iterable as Iterable
 import functools
 import math
 import operator
@@ -16,13 +15,11 @@ import numpy as np
 
 
 class InvalidParameterError(ValueError, TypeError):
-    pass
-
-    # Inherits from ValueError and TypeError to keep backward compatibility.
+    ...
 
 
 def validate_parameter_constraints(
-    parameter_constraints: str | Mapping, params: dict, caller_name: str
+    parameter_constraints: Mapping | str, params: dict, caller_name: str
 ) -> None:
     ...
 
@@ -86,8 +83,8 @@ class _PandasNAConstraint(_Constraint):
 class Options(_Constraint):
     def __init__(
         self,
-        type: Type[str] | Type[Real] | Type[type],
-        options: set[str] | set | set[float] | set[Type[Float] | Type[Float]],
+        type: Type[str] | Type[type] | Type[Real],
+        options: set | set[float] | set[str] | set[Type[Float] | Type[Float]],
         *,
         deprecated: set | None = None
     ) -> None:
@@ -110,9 +107,9 @@ class StrOptions(Options):
 class Interval(_Constraint):
     def __init__(
         self,
-        type: Type[Integral] | Type[Real] | Real,
-        left: int | float | None,
-        right: int | float | None,
+        type: Real | Type[Integral] | Type[Real] | Integral,
+        left: float | None | int,
+        right: float | None | int,
         *,
         closed: Literal["left", "right", "both", "neither"]
     ) -> None:
@@ -197,7 +194,7 @@ class _MissingValues(_Constraint):
 
 
 class HasMethods(_Constraint):
-    def __init__(self, methods: Sequence[str] | str | list[str]) -> None:
+    def __init__(self, methods: list[str] | str | Sequence[str]) -> None:
         ...
 
     def is_satisfied_by(self, val: Any) -> bool:
@@ -227,23 +224,15 @@ class _CVObjects(_Constraint):
 
 
 class Hidden:
-    def __init__(
-        self,
-        constraint: str
-        | StrOptions
-        | Type[Criterion]
-        | _Constraint
-        | None
-        | Type[type],
-    ) -> None:
+    def __init__(self, constraint: _Constraint | str) -> None:
         ...
 
 
 def generate_invalid_param_val(
-    constraint: _Constraint, constraints: list[_Constraint] | None = None
+    constraint: _Constraint, constraints: None | list[_Constraint] = None
 ) -> Any:
     ...
 
 
-def generate_valid_param(constraint: _Constraint) -> Any: 
+def generate_valid_param(constraint: _Constraint) -> Any:
     ...

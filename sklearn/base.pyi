@@ -1,21 +1,22 @@
-from typing import Any, Iterable
-from ._typing import Estimator, MatrixLike, ArrayLike, Float, Int
-from .utils._set_output import _SetOutputMixin
+from typing import Any, ClassVar, Iterable, TypeVar
 from ._config import get_config as get_config
-from pandas.core.frame import DataFrame
-from scipy.sparse._csr import csr_matrix
-from collections import defaultdict as defaultdict
+from .utils._set_output import _SetOutputMixin
 from .utils._estimator_html_repr import estimator_html_repr as estimator_html_repr
-from .utils._param_validation import (
-    validate_parameter_constraints as validate_parameter_constraints,
-)
+from collections import defaultdict as defaultdict
 from .utils.validation import (
     check_X_y as check_X_y,
     check_array as check_array,
     check_is_fitted as check_is_fitted,
 )
-from numpy import ndarray
 from .metrics import accuracy_score as accuracy_score, r2_score as r2_score
+from numpy import ndarray
+from .utils._param_validation import (
+    validate_parameter_constraints as validate_parameter_constraints,
+)
+from ._typing import MatrixLike, ArrayLike, Float, Int
+
+BaseEstimator_Self = TypeVar("BaseEstimator_Self", bound="BaseEstimator")
+
 
 # Author: Gael Varoquaux <gael.varoquaux@normalesup.org>
 # License: BSD 3 clause
@@ -29,7 +30,9 @@ import re
 import numpy as np
 
 
-def clone(estimator: Estimator | Iterable[Estimator], *, safe: bool = True) -> Any:
+def clone(
+    estimator: BaseEstimator | Iterable[BaseEstimator], *, safe: bool = True
+) -> Any:
     ...
 
 
@@ -37,7 +40,7 @@ class BaseEstimator:
     def get_params(self, deep: bool = True) -> dict:
         ...
 
-    def set_params(self, **params) -> Estimator:
+    def set_params(self: BaseEstimator_Self, **params) -> BaseEstimator_Self:
         ...
 
     def __repr__(self, N_CHAR_MAX: int = 700) -> str:
@@ -46,15 +49,13 @@ class BaseEstimator:
     def __getstate__(self):
         ...
 
-    def __setstate__(
-        self, state: dict[str, int | None | str | dict[Any, Any] | ndarray]
-    ) -> None:
+    def __setstate__(self, state) -> None:
         ...
 
 
 class ClassifierMixin:
 
-    _estimator_type: str = ...
+    _estimator_type: ClassVar[str] = ...
 
     def score(
         self,
@@ -67,7 +68,7 @@ class ClassifierMixin:
 
 class RegressorMixin:
 
-    _estimator_type: str = ...
+    _estimator_type: ClassVar[str] = ...
 
     def score(
         self,
@@ -80,14 +81,13 @@ class RegressorMixin:
 
 class ClusterMixin:
 
-    _estimator_type: str = ...
+    _estimator_type: ClassVar[str] = ...
 
     def fit_predict(self, X: MatrixLike, y: Any = None) -> ndarray:
         ...
 
 
 class BiclusterMixin:
-    @property
     def biclusters_(self):
         ...
 
@@ -104,7 +104,7 @@ class BiclusterMixin:
 class TransformerMixin(_SetOutputMixin):
     def fit_transform(
         self, X: MatrixLike, y: None | MatrixLike | ArrayLike = None, **fit_params
-    ) -> csr_matrix | DataFrame | ndarray:
+    ) -> ndarray:
         ...
 
 
@@ -120,7 +120,7 @@ class ClassNamePrefixFeaturesOutMixin:
 
 class DensityMixin:
 
-    _estimator_type: str = ...
+    _estimator_type: ClassVar[str] = ...
 
     def score(self, X: MatrixLike, y: Any = None) -> float:
         ...
@@ -128,31 +128,31 @@ class DensityMixin:
 
 class OutlierMixin:
 
-    _estimator_type: str = ...
+    _estimator_type: ClassVar[str] = ...
 
     def fit_predict(self, X: MatrixLike | ArrayLike, y: Any = None) -> ndarray:
         ...
 
 
 class MetaEstimatorMixin:
-    _required_parameters: list = ...
+    _required_parameters: ClassVar[list] = ...
 
 
 class MultiOutputMixin:
-    pass
+    ...
 
 
 class _UnstableArchMixin:
-    pass
+    ...
 
 
 def is_classifier(estimator: Any) -> bool:
     ...
 
 
-def is_regressor(estimator: Estimator) -> bool:
+def is_regressor(estimator: BaseEstimator) -> bool:
     ...
 
 
-def is_outlier_detector(estimator: Estimator) -> bool:
+def is_outlier_detector(estimator: BaseEstimator) -> bool:
     ...

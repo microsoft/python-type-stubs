@@ -1,6 +1,6 @@
-from typing import Any, NamedTuple
-from contextlib import suppress as suppress
+from typing import Any, ClassVar, NamedTuple
 from collections import Counter
+from contextlib import suppress as suppress
 from numpy import str_, ndarray
 from . import is_scalar_nan as is_scalar_nan
 
@@ -9,10 +9,10 @@ import numpy as np
 
 class MissingValues(NamedTuple):
 
-    nan: bool = ...
-    none: bool = ...
+    nan: ClassVar[bool] = ...
+    none: ClassVar[bool] = ...
 
-    def to_list(self) -> list[Any | float]:
+    def to_list(self) -> list[float | Any]:
         ...
 
 

@@ -1,21 +1,27 @@
-from typing import Any, Iterable, Self
-from .._typing import ArrayLike, Int, MatrixLike, Float
+from typing import Any, ClassVar, Iterable, TypeVar
+from ..utils.sparsefuncs import min_max_axis as min_max_axis
+from collections import defaultdict as defaultdict
+from numpy import ndarray
+from numbers import Integral as Integral
 from ..utils.multiclass import (
     unique_labels as unique_labels,
     type_of_target as type_of_target,
 )
+from pandas.core.frame import DataFrame
 from ..base import BaseEstimator, TransformerMixin
+from scipy.sparse import spmatrix, csr_matrix
+from .._typing import ArrayLike, Int, MatrixLike, Float
+from ..utils import column_or_1d as column_or_1d
 from ..utils.validation import (
     check_array as check_array,
     check_is_fitted as check_is_fitted,
 )
-from pandas.core.frame import DataFrame
-from collections import defaultdict as defaultdict
-from numpy import ndarray
-from ..utils import column_or_1d as column_or_1d
-from numbers import Integral as Integral
-from scipy.sparse import spmatrix, csr_matrix
-from ..utils.sparsefuncs import min_max_axis as min_max_axis
+
+MultiLabelBinarizer_Self = TypeVar(
+    "MultiLabelBinarizer_Self", bound="MultiLabelBinarizer"
+)
+LabelEncoder_Self = TypeVar("LabelEncoder_Self", bound="LabelEncoder")
+LabelBinarizer_Self = TypeVar("LabelBinarizer_Self", bound="LabelBinarizer")
 
 # Authors: Alexandre Gramfort <alexandre.gramfort@inria.fr>
 #          Mathieu Blondel <mathieu@mblondel.org>
@@ -42,7 +48,9 @@ __all__ = [
 
 
 class LabelEncoder(TransformerMixin, BaseEstimator):
-    def fit(self, y: ArrayLike) -> LabelEncoder | Self:
+    classes_: ndarray = ...
+
+    def fit(self: LabelEncoder_Self, y: ArrayLike) -> LabelEncoder_Self:
         ...
 
     def fit_transform(self, y: ArrayLike) -> ArrayLike:
@@ -56,55 +64,61 @@ class LabelEncoder(TransformerMixin, BaseEstimator):
 
 
 class LabelBinarizer(TransformerMixin, BaseEstimator):
+    sparse_input_: bool = ...
+    y_type_: str = ...
+    classes_: ndarray = ...
 
-    _parameter_constraints: dict = ...
+    _parameter_constraints: ClassVar[dict] = ...
 
     def __init__(
         self, *, neg_label: Int = 0, pos_label: Int = 1, sparse_output: bool = False
     ) -> None:
         ...
 
-    def fit(self, y: MatrixLike | ArrayLike) -> Any:
+    def fit(
+        self: LabelBinarizer_Self, y: MatrixLike | ArrayLike
+    ) -> LabelBinarizer_Self:
         ...
 
-    def fit_transform(
-        self, y: MatrixLike | ArrayLike
-    ) -> csr_matrix | spmatrix | ndarray:
+    def fit_transform(self, y: MatrixLike | ArrayLike) -> ndarray | spmatrix:
         ...
 
-    def transform(self, y: MatrixLike | ArrayLike) -> csr_matrix | spmatrix | ndarray:
+    def transform(self, y: MatrixLike | ArrayLike) -> ndarray | spmatrix:
         ...
 
     def inverse_transform(
         self, Y: MatrixLike, threshold: None | Float = None
-    ) -> spmatrix | ndarray:
+    ) -> ndarray | spmatrix:
         ...
 
 
 def label_binarize(
-    y: DataFrame | ArrayLike,
+    y: ArrayLike | DataFrame,
     *,
     classes: ArrayLike,
     neg_label: Int = 0,
     pos_label: Int = 1,
     sparse_output: bool = False
-) -> csr_matrix | spmatrix | ndarray:
+) -> ndarray | spmatrix:
     ...
 
 
 class MultiLabelBinarizer(TransformerMixin, BaseEstimator):
+    classes_: ndarray = ...
 
-    _parameter_constraints: dict = ...
+    _parameter_constraints: ClassVar[dict] = ...
 
     def __init__(
         self, *, classes: None | ArrayLike = None, sparse_output: bool = False
     ) -> None:
         ...
 
-    def fit(self, y: list[range] | Iterable[Iterable]) -> Any:
+    def fit(
+        self: MultiLabelBinarizer_Self, y: Iterable[Iterable] | list[range]
+    ) -> MultiLabelBinarizer_Self:
         ...
 
-    def fit_transform(self, y: Iterable[Iterable]) -> spmatrix:
+    def fit_transform(self, y: Iterable[Iterable]) -> ndarray | spmatrix:
         ...
 
     def transform(

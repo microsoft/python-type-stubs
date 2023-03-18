@@ -1,10 +1,9 @@
 from typing import IO, Literal
-from .._typing import Int, ArrayLike, MatrixLike
 from contextlib import closing as closing
 from numpy import dtype, ndarray
-from ..utils import check_array as check_array, IS_PYPY as IS_PYPY
-from os import PathLike
 from scipy.sparse import spmatrix
+from .._typing import PathLike, Int, ArrayLike, MatrixLike
+from ..utils import check_array as check_array, IS_PYPY as IS_PYPY
 import io
 import os.path
 
@@ -13,12 +12,12 @@ import scipy.sparse as sp
 
 
 def load_svmlight_file(
-    f: IO | PathLike | int | str,
+    f: PathLike | str | IO | int,
     *,
     n_features: None | Int = None,
     dtype: dtype = ...,
     multilabel: bool = False,
-    zero_based: bool | Literal["auto", "auto"] = "auto",
+    zero_based: Literal["auto", "auto"] | bool = "auto",
     query_id: bool = False,
     offset: Int = 0,
     length: Int = ...,
@@ -27,12 +26,12 @@ def load_svmlight_file(
 
 
 def load_svmlight_files(
-    files: IO | int | PathLike | ArrayLike,
+    files: PathLike | ArrayLike | IO | int,
     *,
     n_features: None | Int = None,
     dtype: dtype = ...,
     multilabel: bool = False,
-    zero_based: bool | Literal["auto", "auto"] = "auto",
+    zero_based: Literal["auto", "auto"] | bool = "auto",
     query_id: bool = False,
     offset: Int = 0,
     length: Int = ...,
@@ -43,10 +42,10 @@ def load_svmlight_files(
 def dump_svmlight_file(
     X: MatrixLike | ArrayLike,
     y: MatrixLike,
-    f: IO | str,
+    f: str | IO,
     *,
     zero_based: bool = True,
-    comment: str | None = None,
+    comment: None | str = None,
     query_id: None | ArrayLike = None,
     multilabel: bool = False,
 ):

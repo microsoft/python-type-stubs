@@ -1,31 +1,44 @@
-from typing import Any, Literal
+from typing import Any, ClassVar, Literal, TypeVar
+from numpy.random import RandomState
 from scipy.special import gammaln as gammaln
-from .._typing import Int, Float, MatrixLike
-from scipy.sparse import issparse as issparse
-from ..utils._param_validation import Interval as Interval, StrOptions as StrOptions
+from scipy.sparse.linalg import svds as svds
+from scipy import linalg as linalg
+from ..utils.deprecation import deprecated
+from ._base import _BasePCA
+from numpy import ndarray
 from ..utils.extmath import (
     fast_logdet as fast_logdet,
     randomized_svd as randomized_svd,
     svd_flip as svd_flip,
     stable_cumsum as stable_cumsum,
 )
-from scipy.sparse.linalg import svds as svds
-from ._base import _BasePCA
-from ..utils import check_random_state as check_random_state
-from ..utils.deprecation import deprecated
-from scipy import linalg as linalg
-from ..utils.validation import check_is_fitted as check_is_fitted
-from numpy import ndarray
-from numpy.random import RandomState
-from math import log as log, sqrt as sqrt
+from ..utils._param_validation import Interval as Interval, StrOptions as StrOptions
 from numbers import Integral as Integral, Real as Real
+from math import log as log, sqrt as sqrt
+from scipy.sparse import issparse as issparse
+from .._typing import Int, Float, MatrixLike
+from ..utils import check_random_state as check_random_state
+from ..utils.validation import check_is_fitted as check_is_fitted
+
+PCA_Self = TypeVar("PCA_Self", bound="PCA")
+
 
 import numpy as np
 
 
 class PCA(_BasePCA):
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    noise_variance_: float = ...
+    n_samples_: int = ...
+    n_components_: int = ...
+    mean_: ndarray = ...
+    singular_values_: ndarray = ...
+    explained_variance_ratio_: ndarray = ...
+    explained_variance_: ndarray = ...
+    components_: ndarray = ...
 
-    _parameter_constraints: dict = ...
+    _parameter_constraints: ClassVar[dict] = ...
 
     def __init__(
         self,
@@ -54,7 +67,7 @@ class PCA(_BasePCA):
     def n_features_(self) -> int:
         ...
 
-    def fit(self, X: MatrixLike, y: Any = None) -> Any:
+    def fit(self: PCA_Self, X: MatrixLike, y: Any = None) -> PCA_Self:
         ...
 
     def fit_transform(self, X: MatrixLike, y: Any = None) -> ndarray:

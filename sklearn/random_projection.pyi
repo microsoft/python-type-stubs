@@ -1,22 +1,25 @@
-from typing import Any, Literal, Sequence
-from .exceptions import DataDimensionalityWarning as DataDimensionalityWarning
-from .utils import check_random_state as check_random_state
+from typing import Any, ClassVar, Literal, Sequence, TypeVar
 from numpy.random import RandomState
-from ._typing import Float, ArrayLike, Int, MatrixLike
+from abc import ABCMeta, abstractmethod
 from scipy import linalg as linalg
 from .base import BaseEstimator, TransformerMixin, ClassNamePrefixFeaturesOutMixin
-from abc import ABCMeta, abstractmethod
-from scipy.sparse._csr import csr_matrix
-from numpy import ndarray
-from .utils.extmath import safe_sparse_dot as safe_sparse_dot
-from .utils._param_validation import Interval as Interval, StrOptions as StrOptions
-from numbers import Integral as Integral, Real as Real
-from .utils.random import sample_without_replacement as sample_without_replacement
 from .utils.validation import (
     check_array as check_array,
     check_is_fitted as check_is_fitted,
 )
+from numpy import ndarray
+from numbers import Integral as Integral, Real as Real
+from .utils.extmath import safe_sparse_dot as safe_sparse_dot
+from .exceptions import DataDimensionalityWarning as DataDimensionalityWarning
+from .utils import check_random_state as check_random_state
+from .utils._param_validation import Interval as Interval, StrOptions as StrOptions
+from .utils.random import sample_without_replacement as sample_without_replacement
 from scipy.sparse import spmatrix
+from ._typing import Float, ArrayLike, Int, MatrixLike
+
+BaseRandomProjection_Self = TypeVar(
+    "BaseRandomProjection_Self", bound="BaseRandomProjection"
+)
 
 # Authors: Olivier Grisel <olivier.grisel@ensta.org>,
 #          Arnaud Joly <a.joly@ulg.ac.be>
@@ -35,8 +38,8 @@ __all__ = [
 
 
 def johnson_lindenstrauss_min_dim(
-    n_samples: Sequence[int] | Float | ndarray, *, eps: float | ArrayLike = 0.1
-) -> int | ndarray:
+    n_samples: Sequence[int] | ndarray | Float, *, eps: float | ArrayLike = 0.1
+) -> ndarray | int:
     ...
 
 
@@ -44,7 +47,7 @@ class BaseRandomProjection(
     TransformerMixin, BaseEstimator, ClassNamePrefixFeaturesOutMixin, metaclass=ABCMeta
 ):
 
-    _parameter_constraints: dict = ...
+    _parameter_constraints: ClassVar[dict] = ...
 
     @abstractmethod
     def __init__(
@@ -57,7 +60,9 @@ class BaseRandomProjection(
     ) -> None:
         ...
 
-    def fit(self, X: MatrixLike, y: Any = None) -> Any:
+    def fit(
+        self: BaseRandomProjection_Self, X: MatrixLike, y: Any = None
+    ) -> BaseRandomProjection_Self | SparseRandomProjection:
         ...
 
     def inverse_transform(self, X: MatrixLike) -> ndarray:
@@ -65,6 +70,12 @@ class BaseRandomProjection(
 
 
 class GaussianRandomProjection(BaseRandomProjection):
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    inverse_components_: ndarray = ...
+    components_: ndarray = ...
+    n_components_: int = ...
+
     def __init__(
         self,
         n_components: Literal["auto", "auto"] | Int = "auto",
@@ -80,8 +91,14 @@ class GaussianRandomProjection(BaseRandomProjection):
 
 
 class SparseRandomProjection(BaseRandomProjection):
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    density_: float = ...
+    inverse_components_: ndarray = ...
+    components_: spmatrix = ...
+    n_components_: int = ...
 
-    _parameter_constraints: dict = ...
+    _parameter_constraints: ClassVar[dict] = ...
 
     def __init__(
         self,
@@ -95,5 +112,5 @@ class SparseRandomProjection(BaseRandomProjection):
     ) -> None:
         ...
 
-    def transform(self, X: MatrixLike) -> csr_matrix | spmatrix | ndarray:
+    def transform(self, X: MatrixLike) -> ndarray | spmatrix:
         ...

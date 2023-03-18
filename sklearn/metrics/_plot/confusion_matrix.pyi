@@ -1,19 +1,26 @@
 from typing import Literal
-from ...base import is_classifier as is_classifier
-from .. import confusion_matrix
-from ...model_selection._search import RandomizedSearchCV
-from ..._typing import MatrixLike, ArrayLike, Estimator
-from matplotlib.axes import Axes
 from matplotlib.colors import Colormap
-from ...utils import check_matplotlib_support as check_matplotlib_support
 from itertools import product as product
-from ...svm._classes import SVC
+from ...base import BaseEstimator
+from numpy import ndarray
+from matplotlib.axes import Axes
 from ...utils.multiclass import unique_labels as unique_labels
+from ...utils import check_matplotlib_support as check_matplotlib_support
+from ..._typing import MatrixLike, ArrayLike
+from .. import confusion_matrix
+from ...base import is_classifier as is_classifier
+from matplotlib.image import AxesImage
+from matplotlib.figure import Figure
 
 import numpy as np
 
 
 class ConfusionMatrixDisplay:
+    figure_: Figure = ...
+    ax_: Axes = ...
+    text_: None | ndarray = ...
+    im_: AxesImage = ...
+
     def __init__(
         self, confusion_matrix: MatrixLike, *, display_labels: None | ArrayLike = None
     ) -> None:
@@ -24,36 +31,36 @@ class ConfusionMatrixDisplay:
         *,
         include_values: bool = True,
         cmap: Colormap | str = "viridis",
-        xticks_rotation: Literal["vertical", "horizontal", "horizontal"]
-        | float = "horizontal",
-        values_format: str | None = None,
-        ax: Axes | None = None,
+        xticks_rotation: float
+        | Literal["vertical", "horizontal", "horizontal"] = "horizontal",
+        values_format: None | str = None,
+        ax: None | Axes = None,
         colorbar: bool = True,
-        im_kw: dict | None = None,
-        text_kw: dict | None = None,
+        im_kw: None | dict = None,
+        text_kw: None | dict = None,
     ) -> ConfusionMatrixDisplay:
         ...
 
     @classmethod
     def from_estimator(
         cls,
-        estimator: SVC | Estimator | RandomizedSearchCV,
+        estimator: BaseEstimator,
         X: MatrixLike | ArrayLike,
         y: ArrayLike,
         *,
         labels: None | ArrayLike = None,
         sample_weight: None | ArrayLike = None,
-        normalize: None | Literal["true", "pred", "all"] = None,
+        normalize: Literal["true", "pred", "all"] | None = None,
         display_labels: None | ArrayLike = None,
         include_values: bool = True,
-        xticks_rotation: Literal["vertical", "horizontal", "horizontal"]
-        | float = "horizontal",
-        values_format: str | None = None,
+        xticks_rotation: float
+        | Literal["vertical", "horizontal", "horizontal"] = "horizontal",
+        values_format: None | str = None,
         cmap: Colormap | str = "viridis",
-        ax: Axes | None = None,
+        ax: None | Axes = None,
         colorbar: bool = True,
-        im_kw: dict | None = None,
-        text_kw: dict | None = None,
+        im_kw: None | dict = None,
+        text_kw: None | dict = None,
     ) -> ConfusionMatrixDisplay:
         ...
 
@@ -65,16 +72,16 @@ class ConfusionMatrixDisplay:
         *,
         labels: None | ArrayLike = None,
         sample_weight: None | ArrayLike = None,
-        normalize: None | Literal["true", "pred", "all"] = None,
+        normalize: Literal["true", "pred", "all"] | None = None,
         display_labels: None | ArrayLike = None,
         include_values: bool = True,
-        xticks_rotation: Literal["vertical", "horizontal", "horizontal"]
-        | float = "horizontal",
-        values_format: str | None = None,
+        xticks_rotation: float
+        | Literal["vertical", "horizontal", "horizontal"] = "horizontal",
+        values_format: None | str = None,
         cmap: Colormap | str = "viridis",
-        ax: Axes | None = None,
+        ax: None | Axes = None,
         colorbar: bool = True,
-        im_kw: dict | None = None,
-        text_kw: dict | None = None,
+        im_kw: None | dict = None,
+        text_kw: None | dict = None,
     ) -> ConfusionMatrixDisplay:
         ...

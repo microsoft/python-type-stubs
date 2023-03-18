@@ -1,3 +1,5 @@
+from ._plot.det_curve import DetCurveDisplay as DetCurveDisplay
+from ._plot.regression import PredictionErrorDisplay as PredictionErrorDisplay
 from ._classification import (
     accuracy_score as accuracy_score,
     balanced_accuracy_score as balanced_accuracy_score,
@@ -19,27 +21,6 @@ from ._classification import (
     brier_score_loss as brier_score_loss,
     multilabel_confusion_matrix as multilabel_confusion_matrix,
 )
-from ._plot.det_curve import DetCurveDisplay as DetCurveDisplay
-from ._dist_metrics import DistanceMetric as DistanceMetric
-from ._plot.regression import PredictionErrorDisplay as PredictionErrorDisplay
-from ._plot.precision_recall_curve import (
-    PrecisionRecallDisplay as PrecisionRecallDisplay,
-)
-from ._ranking import (
-    auc as auc,
-    average_precision_score as average_precision_score,
-    coverage_error as coverage_error,
-    det_curve as det_curve,
-    dcg_score as dcg_score,
-    label_ranking_average_precision_score as label_ranking_average_precision_score,
-    label_ranking_loss as label_ranking_loss,
-    ndcg_score as ndcg_score,
-    precision_recall_curve as precision_recall_curve,
-    roc_auc_score as roc_auc_score,
-    roc_curve as roc_curve,
-    top_k_accuracy_score as top_k_accuracy_score,
-)
-from . import cluster as cluster
 from .pairwise import (
     euclidean_distances as euclidean_distances,
     nan_euclidean_distances as nan_euclidean_distances,
@@ -49,13 +30,8 @@ from .pairwise import (
     pairwise_kernels as pairwise_kernels,
     pairwise_distances_chunked as pairwise_distances_chunked,
 )
-from ._plot.confusion_matrix import ConfusionMatrixDisplay as ConfusionMatrixDisplay
-from ._scorer import (
-    check_scoring as check_scoring,
-    make_scorer as make_scorer,
-    SCORERS as SCORERS,
-    get_scorer as get_scorer,
-    get_scorer_names as get_scorer_names,
+from ._plot.precision_recall_curve import (
+    PrecisionRecallDisplay as PrecisionRecallDisplay,
 )
 from .cluster import (
     adjusted_mutual_info_score as adjusted_mutual_info_score,
@@ -75,6 +51,14 @@ from .cluster import (
     v_measure_score as v_measure_score,
     davies_bouldin_score as davies_bouldin_score,
 )
+from ._plot.confusion_matrix import ConfusionMatrixDisplay as ConfusionMatrixDisplay
+from ._scorer import (
+    check_scoring as check_scoring,
+    make_scorer as make_scorer,
+    SCORERS as SCORERS,
+    get_scorer as get_scorer,
+    get_scorer_names as get_scorer_names,
+)
 from ._regression import (
     explained_variance_score as explained_variance_score,
     max_error as max_error,
@@ -93,6 +77,22 @@ from ._regression import (
     d2_absolute_error_score as d2_absolute_error_score,
 )
 from ._plot.roc_curve import RocCurveDisplay as RocCurveDisplay
+from ._dist_metrics import DistanceMetric as DistanceMetric
+from ._ranking import (
+    auc as auc,
+    average_precision_score as average_precision_score,
+    coverage_error as coverage_error,
+    det_curve as det_curve,
+    dcg_score as dcg_score,
+    label_ranking_average_precision_score as label_ranking_average_precision_score,
+    label_ranking_loss as label_ranking_loss,
+    ndcg_score as ndcg_score,
+    precision_recall_curve as precision_recall_curve,
+    roc_auc_score as roc_auc_score,
+    roc_curve as roc_curve,
+    top_k_accuracy_score as top_k_accuracy_score,
+)
+from . import cluster as cluster
 
 
 __all__ = [

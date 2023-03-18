@@ -1,17 +1,17 @@
 from typing import Iterable, Literal, Sequence
-from collections.abc import Iterable
 from numpy.random import RandomState
-from .._typing import Int, ArrayLike, Float, MatrixLike
 from scipy import linalg as linalg
-from ..preprocessing import MultiLabelBinarizer as MultiLabelBinarizer
 from numpy import ndarray
+from collections.abc import Iterable
+from scipy.sparse import spmatrix
+from ..utils.random import sample_without_replacement as sample_without_replacement
+from .._typing import Int, ArrayLike, Float, MatrixLike
 from ..utils import (
     check_array as check_array,
     check_random_state as check_random_state,
     shuffle as util_shuffle,
 )
-from ..utils.random import sample_without_replacement as sample_without_replacement
-from scipy.sparse import spmatrix
+from ..preprocessing import MultiLabelBinarizer as MultiLabelBinarizer
 
 # Authors: B. Thirion, G. Varoquaux, A. Gramfort, V. Michel, O. Grisel,
 #          G. Louppe, J. Nothman
@@ -55,12 +55,10 @@ def make_multilabel_classification(
     length: Int = 50,
     allow_unlabeled: bool = True,
     sparse: bool = False,
-    return_indicator: bool | Literal["dense", "sparse", "dense"] = "dense",
+    return_indicator: Literal["dense", "sparse", "dense"] | bool = "dense",
     return_distributions: bool = False,
     random_state: RandomState | None | Int = None,
-) -> tuple[ndarray, ndarray, ndarray, ndarray] | tuple[
-    ndarray, spmatrix, ndarray, ndarray
-] | tuple[ndarray, ndarray]:
+) -> tuple[ndarray, ndarray | spmatrix, ndarray, ndarray]:
     ...
 
 
@@ -83,12 +81,12 @@ def make_regression(
     shuffle: bool = True,
     coef: bool = False,
     random_state: RandomState | None | Int = None,
-) -> tuple[ndarray, ndarray, ndarray] | tuple[ndarray, ndarray]:
+) -> tuple[ndarray, ndarray, ndarray]:
     ...
 
 
 def make_circles(
-    n_samples: tuple[int, int] | int = 100,
+    n_samples: int | tuple[int, int] = 100,
     *,
     shuffle: bool = True,
     noise: None | Float = None,
@@ -99,7 +97,7 @@ def make_circles(
 
 
 def make_moons(
-    n_samples: tuple[int, int] | int = 100,
+    n_samples: int | tuple[int, int] = 100,
     *,
     shuffle: bool = True,
     noise: None | Float = None,
@@ -109,11 +107,11 @@ def make_moons(
 
 
 def make_blobs(
-    n_samples: int | ArrayLike = 100,
+    n_samples: ArrayLike | int = 100,
     n_features: Int = 2,
     *,
-    centers: int | None | MatrixLike = None,
-    cluster_std: Sequence[float] | float = 1.0,
+    centers: None | MatrixLike | int = None,
+    cluster_std: float | Sequence[float] = 1.0,
     center_box: tuple[float, float] = ...,
     shuffle: bool = True,
     random_state: RandomState | None | Int = None,
@@ -170,7 +168,7 @@ def make_sparse_coded_signal(
     n_features: Int,
     n_nonzero_coefs: Int,
     random_state: RandomState | None | Int = None,
-    data_transposed: bool | str = "warn",
+    data_transposed: str | bool = "warn",
 ) -> map | tuple[ndarray, ndarray, ndarray]:
     ...
 
@@ -198,7 +196,7 @@ def make_sparse_spd_matrix(
     smallest_coef: Float = 0.1,
     largest_coef: Float = 0.9,
     random_state: RandomState | None | Int = None,
-) -> spmatrix | ndarray:
+) -> ndarray | spmatrix:
     ...
 
 
@@ -235,7 +233,7 @@ def make_gaussian_quantiles(
 
 
 def make_biclusters(
-    shape: tuple[int, int] | Iterable[MatrixLike],
+    shape: Iterable[MatrixLike] | tuple[int, int],
     n_clusters: Int,
     *,
     noise: Float = 0.0,
@@ -249,7 +247,7 @@ def make_biclusters(
 
 def make_checkerboard(
     shape: tuple | tuple[int, int],
-    n_clusters: MatrixLike | tuple[int, int] | Int,
+    n_clusters: MatrixLike | Int | tuple[int, int],
     *,
     noise: Float = 0.0,
     minval: Int = 10,

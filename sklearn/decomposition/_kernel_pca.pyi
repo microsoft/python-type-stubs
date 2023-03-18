@@ -1,17 +1,20 @@
-from typing import Any, Callable, Literal
-from ..utils._param_validation import Interval as Interval, StrOptions as StrOptions
-from ..utils.extmath import svd_flip as svd_flip
-from scipy.sparse.linalg import eigsh as eigsh
-from ..exceptions import NotFittedError as NotFittedError
-from .._typing import Int, Float, ArrayLike, MatrixLike
-from scipy import linalg as linalg
-from ..base import BaseEstimator, TransformerMixin, ClassNamePrefixFeaturesOutMixin
+from typing import Any, Callable, ClassVar, Literal, TypeVar
 from numpy.random import RandomState
+from scipy.sparse.linalg import eigsh as eigsh
 from ..preprocessing import KernelCenterer as KernelCenterer
-from ..utils.validation import check_is_fitted as check_is_fitted
-from ..metrics.pairwise import pairwise_kernels as pairwise_kernels
+from scipy import linalg as linalg
+from ..exceptions import NotFittedError as NotFittedError
 from numpy import ndarray
+from ..utils.extmath import svd_flip as svd_flip
+from ..utils._param_validation import Interval as Interval, StrOptions as StrOptions
 from numbers import Integral as Integral, Real as Real
+from ..base import BaseEstimator, TransformerMixin, ClassNamePrefixFeaturesOutMixin
+from ..metrics.pairwise import pairwise_kernels as pairwise_kernels
+from .._typing import Int, Float, MatrixLike, ArrayLike
+from ..utils.validation import check_is_fitted as check_is_fitted
+
+KernelPCA_Self = TypeVar("KernelPCA_Self", bound="KernelPCA")
+
 
 # Author: Mathieu Blondel <mathieu@mblondel.org>
 #         Sylvain Marie <sylvain.marie@schneider-electric.com>
@@ -21,27 +24,34 @@ import numpy as np
 
 
 class KernelPCA(ClassNamePrefixFeaturesOutMixin, TransformerMixin, BaseEstimator):
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    X_fit_: ndarray = ...
+    X_transformed_fit_: ndarray = ...
+    dual_coef_: ndarray = ...
+    eigenvectors_: ndarray = ...
+    eigenvalues_: ndarray = ...
 
-    _parameter_constraints: dict = ...
+    _parameter_constraints: ClassVar[dict] = ...
 
     def __init__(
         self,
         n_components: None | Int = None,
         *,
-        kernel: Literal[
+        kernel: Callable
+        | Literal[
             "linear", "poly", "rbf", "sigmoid", "cosine", "precomputed", "linear"
-        ]
-        | Callable = "linear",
+        ] = "linear",
         gamma: None | Float = None,
         degree: Int = 3,
         coef0: Float = 1,
-        kernel_params: dict | None = None,
+        kernel_params: None | dict = None,
         alpha: Float = 1.0,
         fit_inverse_transform: bool = False,
         eigen_solver: Literal["auto", "dense", "arpack", "randomized", "auto"] = "auto",
         tol: Float = 0,
         max_iter: None | Int = None,
-        iterated_power: int | Literal["auto", "auto"] = "auto",
+        iterated_power: Literal["auto", "auto"] | int = "auto",
         remove_zero_eig: bool = False,
         random_state: RandomState | None | Int = None,
         copy_X: bool = True,
@@ -49,7 +59,9 @@ class KernelPCA(ClassNamePrefixFeaturesOutMixin, TransformerMixin, BaseEstimator
     ) -> None:
         ...
 
-    def fit(self, X: MatrixLike | ArrayLike, y: Any = None) -> Any:
+    def fit(
+        self: KernelPCA_Self, X: MatrixLike | ArrayLike, y: Any = None
+    ) -> KernelPCA_Self:
         ...
 
     def fit_transform(

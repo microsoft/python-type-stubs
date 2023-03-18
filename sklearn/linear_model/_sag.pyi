@@ -1,11 +1,11 @@
 from typing import Literal
-from ..utils.extmath import row_norms as row_norms
-from numpy.random import RandomState
-from ..exceptions import ConvergenceWarning as ConvergenceWarning
-from .._typing import Float, Int, ArrayLike, MatrixLike
 from ._sag_fast import sag32 as sag32, sag64 as sag64
+from ..exceptions import ConvergenceWarning as ConvergenceWarning
 from ._base import make_dataset as make_dataset
+from ..utils.extmath import row_norms as row_norms
 from numpy import ndarray
+from numpy.random.mtrand import RandomState
+from .._typing import Float, Int, MatrixLike, ArrayLike
 from ..utils import check_array as check_array
 
 # Authors: Tom Dupre la Tour <tom.dupre-la-tour@m4x.org>
@@ -38,10 +38,10 @@ def sag_solver(
     max_iter: Int = 1000,
     tol: Float = 0.001,
     verbose: Int = 0,
-    random_state: RandomState | None | Int = None,
+    random_state: None | Int | RandomState = None,
     check_input: bool = True,
     max_squared_sum: None | Float = None,
-    warm_start_mem: dict[str, ndarray] | dict | None = None,
+    warm_start_mem: dict[str, ndarray] | None | dict = None,
     is_saga: bool = False,
-) -> tuple[ndarray, int, dict[str, ndarray | int]] | tuple[ndarray, int, dict]:
+) -> tuple[ndarray, int, dict] | tuple[ndarray, int, dict[str, ndarray | int]]:
     ...

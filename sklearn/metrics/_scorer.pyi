@@ -1,10 +1,24 @@
 from typing import Any, Callable
-from collections.abc import Iterable as Iterable
-from .._typing import Float, ArrayLike, MatrixLike, Estimator
-from ..utils.multiclass import type_of_target as type_of_target
-from ..base import is_regressor as is_regressor
-from functools import partial as partial
+from traceback import format_exc as format_exc
 from collections import Counter as Counter
+from ..base import BaseEstimator
+from numpy import ndarray
+from ..utils.multiclass import type_of_target as type_of_target
+from functools import partial as partial
+from .cluster import (
+    adjusted_rand_score as adjusted_rand_score,
+    rand_score as rand_score,
+    homogeneity_score as homogeneity_score,
+    completeness_score as completeness_score,
+    v_measure_score as v_measure_score,
+    mutual_info_score as mutual_info_score,
+    adjusted_mutual_info_score as adjusted_mutual_info_score,
+    normalized_mutual_info_score as normalized_mutual_info_score,
+    fowlkes_mallows_score as fowlkes_mallows_score,
+)
+from ..base import is_regressor as is_regressor
+from .._typing import Float, MatrixLike, ArrayLike
+from collections.abc import Iterable as Iterable
 from . import (
     r2_score as r2_score,
     median_absolute_error as median_absolute_error,
@@ -30,19 +44,6 @@ from . import (
     matthews_corrcoef as matthews_corrcoef,
     class_likelihood_ratios as class_likelihood_ratios,
 )
-from numpy import ndarray
-from .cluster import (
-    adjusted_rand_score as adjusted_rand_score,
-    rand_score as rand_score,
-    homogeneity_score as homogeneity_score,
-    completeness_score as completeness_score,
-    v_measure_score as v_measure_score,
-    mutual_info_score as mutual_info_score,
-    adjusted_mutual_info_score as adjusted_mutual_info_score,
-    normalized_mutual_info_score as normalized_mutual_info_score,
-    fowlkes_mallows_score as fowlkes_mallows_score,
-)
-from traceback import format_exc as format_exc
 
 import numpy as np
 import copy
@@ -75,29 +76,27 @@ class _BaseScorer:
 
 
 class _PredictScorer(_BaseScorer):
-    pass
+    ...
 
 
 class _ProbaScorer(_BaseScorer):
-    pass
+    ...
 
 
 class _ThresholdScorer(_BaseScorer):
-    pass
+    ...
 
 
-def get_scorer(
-    scoring: _PredictScorer | None | Callable | str,
-) -> _ThresholdScorer | _PredictScorer | None | Callable:
+def get_scorer(scoring: _PredictScorer | None | str | Callable) -> Callable:
     ...
 
 
 def check_scoring(
-    estimator: Estimator,
-    scoring: _PredictScorer | None | Callable | str = None,
+    estimator: BaseEstimator,
+    scoring: _PredictScorer | None | str | Callable = None,
     *,
     allow_none: bool = False,
-) -> _ThresholdScorer | _PredictScorer | None | Callable:
+) -> Callable:
     ...
 
 
@@ -108,7 +107,7 @@ def make_scorer(
     needs_proba: bool = False,
     needs_threshold: bool = False,
     **kwargs,
-) -> _ProbaScorer | _ThresholdScorer | _PredictScorer | Callable:
+) -> Callable:
     ...
 
 

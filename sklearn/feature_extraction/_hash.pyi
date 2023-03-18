@@ -1,13 +1,14 @@
-from typing import Any, Iterator
+from typing import Any, ClassVar, Iterator, TypeVar
+from itertools import chain as chain
+from numpy import dtype
 from ..utils._param_validation import Interval as Interval, StrOptions as StrOptions
 from ._hashing_fast import transform as _hashing_transform
-from .._typing import Int
-from ..base import BaseEstimator, TransformerMixin
-from scipy.sparse._csr import csr_matrix
-from numpy import dtype
-from itertools import chain as chain
 from numbers import Integral as Integral
+from ..base import BaseEstimator, TransformerMixin
 from scipy.sparse import spmatrix
+from .._typing import Int
+
+FeatureHasher_Self = TypeVar("FeatureHasher_Self", bound="FeatureHasher")
 
 # Author: Lars Buitinck
 # License: BSD 3 clause
@@ -19,7 +20,7 @@ import scipy.sparse as sp
 
 class FeatureHasher(TransformerMixin, BaseEstimator):
 
-    _parameter_constraints: dict = ...
+    _parameter_constraints: ClassVar[dict] = ...
 
     def __init__(
         self,
@@ -31,10 +32,10 @@ class FeatureHasher(TransformerMixin, BaseEstimator):
     ) -> None:
         ...
 
-    def fit(self, X: Any = None, y: Any = None) -> Any:
+    def fit(
+        self: FeatureHasher_Self, X: Any = None, y: Any = None
+    ) -> FeatureHasher_Self:
         ...
 
-    def transform(
-        self, raw_X: Iterator[Any] | Iterator[Iterator]
-    ) -> spmatrix | csr_matrix:
+    def transform(self, raw_X: Iterator[Any] | Iterator[Iterator]) -> spmatrix:
         ...

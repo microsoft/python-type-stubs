@@ -1,27 +1,30 @@
-from typing import Any, Callable, Literal, Mapping
+from typing import Any, Callable, ClassVar, Literal, Mapping, TypeVar
+from ._kmeans import k_means as k_means
+from numpy.random import RandomState
+from ..manifold import spectral_embedding as spectral_embedding
+from scipy.sparse._coo import coo_matrix
+from numpy import ndarray
 from ..utils._param_validation import Interval as Interval, StrOptions as StrOptions
 from scipy.linalg import LinAlgError as LinAlgError, qr as qr, svd as svd
-from ..manifold import spectral_embedding as spectral_embedding
-from numpy.random import RandomState
-from .._typing import MatrixLike, Int, Float
-from ..base import BaseEstimator, ClusterMixin
+from numbers import Integral as Integral, Real as Real
 from ..neighbors import (
     kneighbors_graph as kneighbors_graph,
     NearestNeighbors as NearestNeighbors,
 )
+from scipy.sparse import csc_matrix as csc_matrix
+from ..base import BaseEstimator, ClusterMixin
 from ..metrics.pairwise import (
     pairwise_kernels as pairwise_kernels,
     KERNEL_PARAMS as KERNEL_PARAMS,
 )
-from numpy import ndarray
+from .._typing import MatrixLike, Int, Float, ArrayLike
 from ..utils import (
     check_random_state as check_random_state,
     as_float_array as as_float_array,
 )
-from ._kmeans import k_means as k_means
-from numbers import Integral as Integral, Real as Real
-from scipy.sparse import csc_matrix as csc_matrix
-from scipy.sparse._coo import coo_matrix
+
+SpectralClustering_Self = TypeVar("SpectralClustering_Self", bound="SpectralClustering")
+
 import warnings
 
 import numpy as np
@@ -43,7 +46,7 @@ def discretize(
 
 
 def spectral_clustering(
-    affinity: MatrixLike | coo_matrix,
+    affinity: coo_matrix | MatrixLike,
     *,
     n_clusters: Int = 8,
     n_components: None | Int = None,
@@ -58,14 +61,18 @@ def spectral_clustering(
 
 
 class SpectralClustering(ClusterMixin, BaseEstimator):
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    labels_: ndarray = ...
+    affinity_matrix_: ArrayLike = ...
 
-    _parameter_constraints: dict = ...
+    _parameter_constraints: ClassVar[dict] = ...
 
     def __init__(
         self,
         n_clusters: Int = 8,
         *,
-        eigen_solver: Literal["arpack", "lobpcg", "amg"] | None = None,
+        eigen_solver: None | Literal["arpack", "lobpcg", "amg"] = None,
         n_components: None | Int = None,
         random_state: RandomState | None | Int = None,
         n_init: Int = 10,
@@ -78,13 +85,15 @@ class SpectralClustering(ClusterMixin, BaseEstimator):
         ] = "kmeans",
         degree: Float = 3,
         coef0: Float = 1,
-        kernel_params: Mapping[str, Any] | None = None,
+        kernel_params: None | Mapping[str, Any] = None,
         n_jobs: None | Int = None,
         verbose: bool = False,
     ) -> None:
         ...
 
-    def fit(self, X: MatrixLike, y: Any = None) -> Any:
+    def fit(
+        self: SpectralClustering_Self, X: MatrixLike, y: Any = None
+    ) -> SpectralClustering_Self:
         ...
 
     def fit_predict(self, X: MatrixLike, y: Any = None) -> ndarray:

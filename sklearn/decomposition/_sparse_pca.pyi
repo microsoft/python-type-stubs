@@ -1,36 +1,39 @@
-from typing import Any, Callable, Literal
+from typing import Any, Callable, ClassVar, Literal, TypeVar
+from numpy.random import RandomState
+from ._dict_learning import (
+    dict_learning as dict_learning,
+    MiniBatchDictionaryLearning as MiniBatchDictionaryLearning,
+)
+from ..linear_model import ridge_regression as ridge_regression
+from numpy import ndarray
 from ..utils._param_validation import (
     Hidden as Hidden,
     Interval as Interval,
     StrOptions as StrOptions,
 )
 from ..utils.extmath import svd_flip as svd_flip
-from numpy.random import RandomState
-from .._typing import MatrixLike, ArrayLike, Int, Float
+from numbers import Integral as Integral, Real as Real
 from ..base import BaseEstimator, TransformerMixin, ClassNamePrefixFeaturesOutMixin
-from ..linear_model import ridge_regression as ridge_regression
+from .._typing import MatrixLike, ArrayLike, Int, Float
+from ..utils import check_random_state as check_random_state
 from ..utils.validation import (
     check_array as check_array,
     check_is_fitted as check_is_fitted,
 )
-from numpy import ndarray
-from ..utils import check_random_state as check_random_state
-from numbers import Integral as Integral, Real as Real
-from ._dict_learning import (
-    dict_learning as dict_learning,
-    MiniBatchDictionaryLearning as MiniBatchDictionaryLearning,
-)
+
+_BaseSparsePCA_Self = TypeVar("_BaseSparsePCA_Self", bound="_BaseSparsePCA")
+
 
 import numpy as np
 
 
 class _BaseSparsePCA(ClassNamePrefixFeaturesOutMixin, TransformerMixin, BaseEstimator):
 
-    _parameter_constraints: dict = ...
+    _parameter_constraints: ClassVar[dict] = ...
 
     def __init__(
         self,
-        n_components: int | None = None,
+        n_components: None | int = None,
         *,
         alpha: int = 1,
         ridge_alpha: float = 0.01,
@@ -43,7 +46,9 @@ class _BaseSparsePCA(ClassNamePrefixFeaturesOutMixin, TransformerMixin, BaseEsti
     ) -> None:
         ...
 
-    def fit(self, X: MatrixLike, y: Any = None) -> Any:
+    def fit(
+        self: _BaseSparsePCA_Self, X: MatrixLike, y: Any = None
+    ) -> _BaseSparsePCA_Self | MiniBatchSparsePCA:
         ...
 
     def transform(self, X: ArrayLike) -> ndarray:
@@ -54,8 +59,15 @@ class _BaseSparsePCA(ClassNamePrefixFeaturesOutMixin, TransformerMixin, BaseEsti
 
 
 class SparsePCA(_BaseSparsePCA):
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    mean_: ndarray = ...
+    n_iter_: int = ...
+    n_components_: int = ...
+    error_: ndarray = ...
+    components_: ndarray = ...
 
-    _parameter_constraints: dict = ...
+    _parameter_constraints: ClassVar[dict] = ...
 
     def __init__(
         self,
@@ -76,8 +88,14 @@ class SparsePCA(_BaseSparsePCA):
 
 
 class MiniBatchSparsePCA(_BaseSparsePCA):
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    mean_: ndarray = ...
+    n_iter_: int = ...
+    n_components_: int = ...
+    components_: ndarray = ...
 
-    _parameter_constraints: dict = ...
+    _parameter_constraints: ClassVar[dict] = ...
 
     def __init__(
         self,
@@ -95,6 +113,6 @@ class MiniBatchSparsePCA(_BaseSparsePCA):
         method: Literal["lars", "cd", "lars"] = "lars",
         random_state: RandomState | None | Int = None,
         tol: Float = 1e-3,
-        max_no_improvement: int | None = 10,
+        max_no_improvement: None | int = 10,
     ) -> None:
         ...

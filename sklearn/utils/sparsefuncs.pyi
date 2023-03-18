@@ -1,10 +1,10 @@
+from .._typing import MatrixLike, ArrayLike, Int
 from numpy import ndarray
 from .sparsefuncs_fast import (
     csr_mean_variance_axis0 as _csr_mean_var_axis0,
     csc_mean_variance_axis0 as _csc_mean_var_axis0,
     incr_mean_variance_axis0 as _incr_mean_var_axis0,
 )
-from .._typing import MatrixLike, ArrayLike, Int
 
 # Authors: Manoj Kumar
 #          Thomas Unterthiner
@@ -75,8 +75,8 @@ def min_max_axis(
 
 
 def count_nonzero(
-    X: MatrixLike, axis: int | None = None, sample_weight: None | ArrayLike = None
-) -> int | float | ndarray:
+    X: MatrixLike, axis: None | int = None, sample_weight: None | ArrayLike = None
+) -> float | ndarray | int:
     ...
 
 

@@ -1,17 +1,20 @@
-from typing import Any, Literal
+from typing import ClassVar, Literal, TypeVar
+from scipy import sparse as sparse
+from ._base import LinearModel
+from ..exceptions import ConvergenceWarning as ConvergenceWarning
 from ..utils._param_validation import (
     Hidden as Hidden,
     Interval as Interval,
     StrOptions as StrOptions,
 )
-from ..exceptions import ConvergenceWarning as ConvergenceWarning
-from .._typing import Float, ArrayLike, MatrixLike
-from scipy import sparse as sparse
-from ..base import BaseEstimator, RegressorMixin
-from ._base import LinearModel
-from numbers import Real as Real
+from numpy import ndarray
 from scipy.optimize import linprog as linprog
+from numbers import Real as Real
+from ..base import BaseEstimator, RegressorMixin
+from .._typing import Float, MatrixLike, ArrayLike
 from ..utils.fixes import sp_version as sp_version, parse_version as parse_version
+
+QuantileRegressor_Self = TypeVar("QuantileRegressor_Self", bound="QuantileRegressor")
 
 # Authors: David Dale <dale.david@mail.ru>
 #          Christian Lorentzen <lorentzen.ch@gmail.com>
@@ -22,8 +25,13 @@ import numpy as np
 
 
 class QuantileRegressor(LinearModel, RegressorMixin, BaseEstimator):
+    n_iter_: int = ...
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    intercept_: float = ...
+    coef_: ndarray = ...
 
-    _parameter_constraints: dict = ...
+    _parameter_constraints: ClassVar[dict] = ...
 
     def __init__(
         self,
@@ -39,14 +47,14 @@ class QuantileRegressor(LinearModel, RegressorMixin, BaseEstimator):
             "revised simplex",
             "warn",
         ] = "warn",
-        solver_options: dict | None = None,
+        solver_options: None | dict = None,
     ) -> None:
         ...
 
     def fit(
-        self,
+        self: QuantileRegressor_Self,
         X: MatrixLike | ArrayLike,
         y: ArrayLike,
         sample_weight: None | ArrayLike = None,
-    ) -> Any:
+    ) -> QuantileRegressor_Self:
         ...

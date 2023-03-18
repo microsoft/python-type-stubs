@@ -1,15 +1,14 @@
 from typing import List, Optional, Union
-from ._arff_parser import load_arff_from_gzip_file as load_arff_from_gzip_file
-from tempfile import TemporaryDirectory as TemporaryDirectory
-from ..utils._bunch import Bunch
+from warnings import warn
 from contextlib import closing as closing
+from tempfile import TemporaryDirectory as TemporaryDirectory
+from urllib.error import HTTPError as HTTPError, URLError as URLError
+from os.path import join as join
 from urllib.request import urlopen as urlopen, Request as Request
 from functools import wraps as wraps
-from os.path import join as join
+from ._arff_parser import load_arff_from_gzip_file as load_arff_from_gzip_file
+from ..utils import Bunch, check_pandas_support as check_pandas_support
 from . import get_data_home as get_data_home
-from ..utils import check_pandas_support as check_pandas_support
-from urllib.error import HTTPError as HTTPError, URLError as URLError
-from warnings import warn
 import gzip
 import hashlib
 import json
@@ -33,7 +32,7 @@ OpenmlFeaturesType = ...
 
 
 class OpenMLError(ValueError):
-    pass
+    ...
 
 
 def fetch_openml(

@@ -1,9 +1,3 @@
-from ._search import (
-    GridSearchCV as GridSearchCV,
-    RandomizedSearchCV as RandomizedSearchCV,
-    ParameterGrid as ParameterGrid,
-    ParameterSampler as ParameterSampler,
-)
 from ._split import (
     BaseCrossValidator as BaseCrossValidator,
     BaseShuffleSplit as BaseShuffleSplit,
@@ -25,6 +19,10 @@ from ._split import (
     train_test_split as train_test_split,
     check_cv as check_cv,
 )
+from ._search_successive_halving import (
+    HalvingGridSearchCV as HalvingGridSearchCV,
+    HalvingRandomSearchCV as HalvingRandomSearchCV,
+)
 from ._validation import (
     cross_val_score as cross_val_score,
     cross_val_predict as cross_val_predict,
@@ -33,11 +31,13 @@ from ._validation import (
     permutation_test_score as permutation_test_score,
     validation_curve as validation_curve,
 )
-from ._plot import LearningCurveDisplay as LearningCurveDisplay
-from ._search_successive_halving import (
-    HalvingGridSearchCV as HalvingGridSearchCV,
-    HalvingRandomSearchCV as HalvingRandomSearchCV,
+from ._search import (
+    GridSearchCV as GridSearchCV,
+    RandomizedSearchCV as RandomizedSearchCV,
+    ParameterGrid as ParameterGrid,
+    ParameterSampler as ParameterSampler,
 )
+from ._plot import LearningCurveDisplay as LearningCurveDisplay
 import typing as typing
 
 

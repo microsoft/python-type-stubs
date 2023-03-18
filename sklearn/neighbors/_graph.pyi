@@ -1,49 +1,60 @@
-from typing import Any, Callable, Literal
-from ..utils._param_validation import StrOptions as StrOptions
-from .._typing import Int, Float, MatrixLike
-from ..base import TransformerMixin, ClassNamePrefixFeaturesOutMixin
+from typing import Any, Callable, ClassVar, Literal, TypeVar
 from ._ball_tree import BallTree
-from ..utils.validation import check_is_fitted as check_is_fitted
 from ._base import KNeighborsMixin, RadiusNeighborsMixin, NeighborsBase
 from numpy import ndarray
-from scipy.sparse._csr import csr_matrix
-from scipy.sparse import spmatrix
+from ..utils._param_validation import StrOptions as StrOptions
+from ..base import TransformerMixin, ClassNamePrefixFeaturesOutMixin
 from ._unsupervised import NearestNeighbors
+from scipy.sparse import spmatrix
+from .._typing import MatrixLike, Int, Float
+from ..utils.validation import check_is_fitted as check_is_fitted
+
+RadiusNeighborsTransformer_Self = TypeVar(
+    "RadiusNeighborsTransformer_Self", bound="RadiusNeighborsTransformer"
+)
+KNeighborsTransformer_Self = TypeVar(
+    "KNeighborsTransformer_Self", bound="KNeighborsTransformer"
+)
 
 
 def kneighbors_graph(
-    X: NearestNeighbors | BallTree | ndarray,
+    X: MatrixLike | BallTree | NearestNeighbors,
     n_neighbors: Int,
     *,
     mode: Literal["connectivity", "distance", "connectivity"] = "connectivity",
     metric: str = "minkowski",
     p: Int = 2,
-    metric_params: dict | None = None,
-    include_self: bool | str = False,
+    metric_params: None | dict = None,
+    include_self: str | bool = False,
     n_jobs: None | Int = None,
-) -> spmatrix | csr_matrix:
+) -> spmatrix:
     ...
 
 
 def radius_neighbors_graph(
-    X: BallTree,
+    X: MatrixLike | BallTree,
     radius: Float,
     *,
     mode: Literal["connectivity", "distance", "connectivity"] = "connectivity",
     metric: str = "minkowski",
     p: Int = 2,
-    metric_params: dict | None = None,
-    include_self: bool | str = False,
+    metric_params: None | dict = None,
+    include_self: str | bool = False,
     n_jobs: None | Int = None,
-) -> spmatrix:
+):
     ...
 
 
 class KNeighborsTransformer(
     ClassNamePrefixFeaturesOutMixin, KNeighborsMixin, TransformerMixin, NeighborsBase
 ):
+    n_samples_fit_: int = ...
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    effective_metric_params_: dict = ...
+    effective_metric_: str | Callable = ...
 
-    _parameter_constraints: dict = ...
+    _parameter_constraints: ClassVar[dict] = ...
 
     def __init__(
         self,
@@ -54,18 +65,20 @@ class KNeighborsTransformer(
         leaf_size: Int = 30,
         metric: str | Callable = "minkowski",
         p: Int = 2,
-        metric_params: dict | None = None,
+        metric_params: None | dict = None,
         n_jobs: None | Int = None,
     ) -> None:
         ...
 
-    def fit(self, X: MatrixLike, y: Any = None) -> KNeighborsTransformer:
+    def fit(
+        self: KNeighborsTransformer_Self, X: MatrixLike, y: Any = None
+    ) -> KNeighborsTransformer_Self:
         ...
 
-    def transform(self, X: MatrixLike) -> spmatrix | csr_matrix:
+    def transform(self, X: MatrixLike) -> spmatrix:
         ...
 
-    def fit_transform(self, X: MatrixLike, y: Any = None) -> spmatrix | csr_matrix:
+    def fit_transform(self, X: MatrixLike, y: Any = None) -> spmatrix:
         ...
 
 
@@ -75,8 +88,13 @@ class RadiusNeighborsTransformer(
     TransformerMixin,
     NeighborsBase,
 ):
+    n_samples_fit_: int = ...
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    effective_metric_params_: dict = ...
+    effective_metric_: str | Callable = ...
 
-    _parameter_constraints: dict = ...
+    _parameter_constraints: ClassVar[dict] = ...
 
     def __init__(
         self,
@@ -87,16 +105,18 @@ class RadiusNeighborsTransformer(
         leaf_size: Int = 30,
         metric: str | Callable = "minkowski",
         p: Int = 2,
-        metric_params: dict | None = None,
+        metric_params: None | dict = None,
         n_jobs: None | Int = None,
     ) -> None:
         ...
 
-    def fit(self, X: MatrixLike, y: Any = None) -> RadiusNeighborsTransformer:
+    def fit(
+        self: RadiusNeighborsTransformer_Self, X: MatrixLike, y: Any = None
+    ) -> RadiusNeighborsTransformer_Self:
         ...
 
-    def transform(self, X: MatrixLike) -> spmatrix:
+    def transform(self, X: MatrixLike):
         ...
 
-    def fit_transform(self, X: MatrixLike, y: Any = None) -> spmatrix:
+    def fit_transform(self, X: MatrixLike, y: Any = None):
         ...

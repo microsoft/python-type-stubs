@@ -1,22 +1,25 @@
-from typing import Any, Callable, Literal
+from typing import Any, Callable, ClassVar, Literal, TypeVar
+from numpy.random import RandomState
+from scipy import linalg as linalg
+from ..exceptions import ConvergenceWarning as ConvergenceWarning
+from numpy import ndarray
 from ..utils._param_validation import (
     Hidden as Hidden,
     Interval as Interval,
     StrOptions as StrOptions,
 )
-from numpy.random import RandomState
-from ..exceptions import ConvergenceWarning as ConvergenceWarning
-from .._typing import MatrixLike, Int, Float
-from scipy import linalg as linalg
+from numbers import Integral as Integral, Real as Real
 from ..base import BaseEstimator, TransformerMixin, ClassNamePrefixFeaturesOutMixin
-from ..utils.validation import check_is_fitted as check_is_fitted
-from numpy import ndarray
+from .._typing import MatrixLike, Int, Float
 from ..utils import (
     check_array as check_array,
     as_float_array as as_float_array,
     check_random_state as check_random_state,
 )
-from numbers import Integral as Integral, Real as Real
+from ..utils.validation import check_is_fitted as check_is_fitted
+
+FastICA_Self = TypeVar("FastICA_Self", bound="FastICA")
+
 
 # Authors: Pierre Lafaye de Micheaux, Stefan van der Walt, Gael Varoquaux,
 #          Bertrand Thirion, Alexandre Gramfort, Denis A. Engemann
@@ -34,9 +37,9 @@ def fastica(
     n_components: None | Int = None,
     *,
     algorithm: Literal["parallel", "deflation", "parallel"] = "parallel",
-    whiten: bool | str = "warn",
+    whiten: str | bool = "warn",
     fun: Literal["logcosh", "exp", "cube", "logcosh"] | Callable = "logcosh",
-    fun_args: dict | None = None,
+    fun_args: None | dict = None,
     max_iter: Int = 200,
     tol: Float = 1e-04,
     w_init: None | MatrixLike = None,
@@ -50,17 +53,24 @@ def fastica(
 
 
 class FastICA(ClassNamePrefixFeaturesOutMixin, TransformerMixin, BaseEstimator):
+    whitening_: ndarray = ...
+    n_iter_: int = ...
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    mean_: ndarray = ...
+    mixing_: ndarray = ...
+    components_: ndarray = ...
 
-    _parameter_constraints: dict = ...
+    _parameter_constraints: ClassVar[dict] = ...
 
     def __init__(
         self,
         n_components: None | Int = None,
         *,
         algorithm: Literal["parallel", "deflation", "parallel"] = "parallel",
-        whiten: bool | str = "warn",
+        whiten: str | bool = "warn",
         fun: Literal["logcosh", "exp", "cube", "logcosh"] | Callable = "logcosh",
-        fun_args: dict | None = None,
+        fun_args: None | dict = None,
         max_iter: Int = 200,
         tol: Float = 1e-4,
         w_init: None | MatrixLike = None,
@@ -72,7 +82,7 @@ class FastICA(ClassNamePrefixFeaturesOutMixin, TransformerMixin, BaseEstimator):
     def fit_transform(self, X: MatrixLike, y: Any = None) -> ndarray:
         ...
 
-    def fit(self, X: MatrixLike, y: Any = None) -> Any:
+    def fit(self: FastICA_Self, X: MatrixLike, y: Any = None) -> FastICA_Self:
         ...
 
     def transform(self, X: MatrixLike, copy: bool = True) -> ndarray:

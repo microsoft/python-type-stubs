@@ -1,9 +1,9 @@
 from typing import Callable, Type
-from ..utils.extmath import squared_norm as squared_norm
-from .._typing import Float, ArrayLike, MatrixLike, Int
 from scipy import sparse as sparse
-from .._loss.loss import BaseLoss
 from numpy import ndarray, bool_
+from ..utils.extmath import squared_norm as squared_norm
+from .._loss.loss import BaseLoss
+from .._typing import Float, MatrixLike, ArrayLike, Int
 import numpy as np
 
 
@@ -16,16 +16,14 @@ class LinearModelLoss:
 
     def weight_intercept(
         self, coef: MatrixLike | ArrayLike
-    ) -> tuple[ndarray, Float] | tuple[ndarray, float | ndarray] | tuple[
-        ndarray, ndarray
+    ) -> tuple[ndarray, Float] | tuple[ndarray, ndarray] | tuple[
+        ndarray, float | ndarray
     ]:
         ...
 
     def weight_intercept_raw(
         self, coef: MatrixLike | ArrayLike, X: MatrixLike | ArrayLike
-    ) -> tuple[ndarray, float | ndarray, ndarray] | tuple[
-        ndarray, Float, ndarray
-    ] | tuple[ndarray, ndarray, ndarray]:
+    ) -> tuple[ndarray, float | ndarray, ndarray]:
         ...
 
     def l2_penalty(self, weights: ndarray, l2_reg_strength: Float) -> Float:
@@ -52,7 +50,7 @@ class LinearModelLoss:
         l2_reg_strength: Float = 0.0,
         n_threads: Int = 1,
         raw_prediction: None | MatrixLike | ArrayLike = None,
-    ) -> tuple[Float, ndarray] | tuple[float, ndarray]:
+    ) -> tuple[float, ndarray] | tuple[Float, ndarray]:
         ...
 
     def gradient(

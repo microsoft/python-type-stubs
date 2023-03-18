@@ -1,28 +1,33 @@
-from typing import Any, Iterable, Literal
+from typing import ClassVar, Iterable, Literal, TypeVar
+from ..model_selection import BaseCrossValidator
+from numpy.random import RandomState
+from scipy import linalg as linalg, interpolate as interpolate
+from ._base import LinearModel, LinearRegression as LinearRegression
+from ..exceptions import ConvergenceWarning as ConvergenceWarning
 from ..utils._param_validation import (
     Hidden as Hidden,
     Interval as Interval,
     StrOptions as StrOptions,
 )
-from collections.abc import Iterable
-from numpy.random import RandomState
-from ..exceptions import ConvergenceWarning as ConvergenceWarning
-from .._typing import MatrixLike, ArrayLike, Int, Float
+from numpy import ndarray
+from numbers import Integral as Integral, Real as Real
+from scipy.linalg.lapack import get_lapack_funcs as get_lapack_funcs
+from ..model_selection._split import BaseShuffleSplit
+from ..utils.parallel import delayed as delayed, Parallel as Parallel
 from math import log as log
-from scipy import linalg as linalg, interpolate as interpolate
 from ..base import RegressorMixin, MultiOutputMixin
 from ..model_selection import check_cv as check_cv
-from ._base import LinearModel, LinearRegression as LinearRegression
-from numpy import ndarray
+from .._typing import MatrixLike, ArrayLike, Int, Float
 from ..utils import (
     arrayfuncs as arrayfuncs,
     as_float_array as as_float_array,
     check_random_state as check_random_state,
 )
-from numbers import Integral as Integral, Real as Real
-from ..utils.parallel import delayed as delayed, Parallel as Parallel
-from scipy.linalg.lapack import get_lapack_funcs as get_lapack_funcs
-from ..model_selection import BaseCrossValidator
+
+LassoLarsIC_Self = TypeVar("LassoLarsIC_Self", bound="LassoLarsIC")
+Lars_Self = TypeVar("Lars_Self", bound="Lars")
+LarsCV_Self = TypeVar("LarsCV_Self", bound="LarsCV")
+
 import sys
 import warnings
 import numpy as np
@@ -35,7 +40,7 @@ def lars_path(
     y: None | ArrayLike,
     Xy: None | MatrixLike | ArrayLike = None,
     *,
-    Gram: str | None | MatrixLike = None,
+    Gram: None | MatrixLike | str = None,
     max_iter: Int = 500,
     alpha_min: Float = 0,
     method: Literal["lar", "lasso", "lar"] = "lar",
@@ -54,7 +59,7 @@ def lars_path_gram(
     Xy: MatrixLike | ArrayLike,
     Gram: MatrixLike,
     *,
-    n_samples: int | float,
+    n_samples: float | int,
     max_iter: Int = 500,
     alpha_min: Float = 0,
     method: Literal["lar", "lasso", "lar"] = "lar",
@@ -74,19 +79,27 @@ def lars_path_gram(
 
 
 class Lars(MultiOutputMixin, RegressorMixin, LinearModel):
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    n_iter_: ArrayLike | int = ...
+    intercept_: float | ArrayLike = ...
+    coef_: ArrayLike = ...
+    coef_path_: ArrayLike | list[ArrayLike] = ...
+    active_: list[list] | list = ...
+    alphas_: ArrayLike | list[ArrayLike] = ...
 
-    _parameter_constraints: dict = ...
+    _parameter_constraints: ClassVar[dict] = ...
 
-    method: str = ...
-    positive: bool = ...
+    method: ClassVar[str] = ...
+    positive: ClassVar[bool] = ...
 
     def __init__(
         self,
         *,
         fit_intercept: bool = True,
-        verbose: bool | int = False,
-        normalize: bool | str = "deprecated",
-        precompute: bool | Literal["auto", "auto"] | ArrayLike = "auto",
+        verbose: int | bool = False,
+        normalize: str | bool = "deprecated",
+        precompute: Literal["auto", "auto"] | ArrayLike | bool = "auto",
         n_nonzero_coefs: Int = 500,
         eps: Float = ...,
         copy_X: bool = True,
@@ -97,28 +110,36 @@ class Lars(MultiOutputMixin, RegressorMixin, LinearModel):
         ...
 
     def fit(
-        self,
+        self: Lars_Self,
         X: MatrixLike,
         y: MatrixLike | ArrayLike,
         Xy: None | MatrixLike | ArrayLike = None,
-    ) -> Any:
+    ) -> Lars_Self:
         ...
 
 
 class LassoLars(Lars):
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    n_iter_: ArrayLike | int = ...
+    intercept_: float | ArrayLike = ...
+    coef_: ArrayLike = ...
+    coef_path_: ArrayLike | list[ArrayLike] = ...
+    active_: list[list] | list = ...
+    alphas_: ArrayLike | list[ArrayLike] = ...
 
-    _parameter_constraints: dict = ...
+    _parameter_constraints: ClassVar[dict] = ...
 
-    method: str = ...
+    method: ClassVar[str] = ...
 
     def __init__(
         self,
         alpha: Float = 1.0,
         *,
         fit_intercept: bool = True,
-        verbose: bool | int = False,
-        normalize: bool | str = "deprecated",
-        precompute: bool | Literal["auto", "auto"] | ArrayLike = "auto",
+        verbose: int | bool = False,
+        normalize: str | bool = "deprecated",
+        precompute: Literal["auto", "auto"] | ArrayLike | bool = "auto",
         max_iter: Int = 500,
         eps: Float = ...,
         copy_X: bool = True,
@@ -131,51 +152,73 @@ class LassoLars(Lars):
 
 
 class LarsCV(Lars):
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    n_iter_: ArrayLike | int = ...
+    mse_path_: ArrayLike = ...
+    cv_alphas_: ArrayLike = ...
+    alphas_: ArrayLike = ...
+    alpha_: float = ...
+    coef_path_: ArrayLike = ...
+    intercept_: float = ...
+    coef_: ArrayLike = ...
+    active_: list[list] | list = ...
 
-    _parameter_constraints: dict = ...
+    _parameter_constraints: ClassVar[dict] = ...
 
     for parameter in ["n_nonzero_coefs", "jitter", "fit_path", "random_state"]:
         pass
 
-    method: str = ...
+    method: ClassVar[str] = ...
 
     def __init__(
         self,
         *,
         fit_intercept: bool = True,
-        verbose: bool | int = False,
+        verbose: int | bool = False,
         max_iter: Int = 500,
-        normalize: bool | str = "deprecated",
-        precompute: bool | Literal["auto", "auto"] | ArrayLike = "auto",
-        cv: Iterable | BaseCrossValidator | int | None = None,
+        normalize: str | bool = "deprecated",
+        precompute: Literal["auto", "auto"] | ArrayLike | bool = "auto",
+        cv: int | BaseCrossValidator | Iterable | None | BaseShuffleSplit = None,
         max_n_alphas: Int = 1000,
-        n_jobs: int | None = None,
+        n_jobs: None | int = None,
         eps: Float = ...,
         copy_X: bool = True,
     ) -> None:
         ...
 
-    def fit(self, X: MatrixLike, y: ArrayLike) -> Any:
+    def fit(self: LarsCV_Self, X: MatrixLike, y: ArrayLike) -> LarsCV_Self:
         ...
 
 
 class LassoLarsCV(LarsCV):
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    active_: list[int] = ...
+    n_iter_: ArrayLike | int = ...
+    mse_path_: ArrayLike = ...
+    cv_alphas_: ArrayLike = ...
+    alphas_: ArrayLike = ...
+    alpha_: float = ...
+    coef_path_: ArrayLike = ...
+    intercept_: float = ...
+    coef_: ArrayLike = ...
 
-    _parameter_constraints: dict = ...
+    _parameter_constraints: ClassVar[dict] = ...
 
-    method: str = ...
+    method: ClassVar[str] = ...
 
     def __init__(
         self,
         *,
         fit_intercept: bool = True,
-        verbose: bool | int = False,
+        verbose: int | bool = False,
         max_iter: Int = 500,
-        normalize: bool | str = "deprecated",
-        precompute: bool | Literal["auto", "auto"] = "auto",
-        cv: Iterable | BaseCrossValidator | int | None = None,
+        normalize: str | bool = "deprecated",
+        precompute: Literal["auto", "auto"] | bool = "auto",
+        cv: int | BaseCrossValidator | Iterable | None | BaseShuffleSplit = None,
         max_n_alphas: Int = 1000,
-        n_jobs: int | None = None,
+        n_jobs: None | int = None,
         eps: Float = ...,
         copy_X: bool = True,
         positive: bool = False,
@@ -184,8 +227,17 @@ class LassoLarsCV(LarsCV):
 
 
 class LassoLarsIC(LassoLars):
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    noise_variance_: float = ...
+    criterion_: ArrayLike = ...
+    n_iter_: int = ...
+    alphas_: ArrayLike | list[ArrayLike] = ...
+    alpha_: float = ...
+    intercept_: float = ...
+    coef_: ArrayLike = ...
 
-    _parameter_constraints: dict = ...
+    _parameter_constraints: ClassVar[dict] = ...
 
     for parameter in ["jitter", "fit_path", "alpha", "random_state"]:
         pass
@@ -195,9 +247,9 @@ class LassoLarsIC(LassoLars):
         criterion: Literal["aic", "bic", "aic"] = "aic",
         *,
         fit_intercept: bool = True,
-        verbose: bool | int = False,
-        normalize: bool | str = "deprecated",
-        precompute: bool | Literal["auto", "auto"] | ArrayLike = "auto",
+        verbose: int | bool = False,
+        normalize: str | bool = "deprecated",
+        precompute: Literal["auto", "auto"] | ArrayLike | bool = "auto",
         max_iter: Int = 500,
         eps: Float = ...,
         copy_X: bool = True,
@@ -206,5 +258,7 @@ class LassoLarsIC(LassoLars):
     ) -> None:
         ...
 
-    def fit(self, X: MatrixLike, y: ArrayLike, copy_X: bool | None = None) -> Any:
+    def fit(
+        self: LassoLarsIC_Self, X: MatrixLike, y: ArrayLike, copy_X: None | bool = None
+    ) -> LassoLarsIC_Self:
         ...

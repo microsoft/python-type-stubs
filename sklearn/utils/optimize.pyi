@@ -14,4 +14,4 @@ import warnings
 
 
 class _LineSearchError(RuntimeError):
-    pass
+    ...

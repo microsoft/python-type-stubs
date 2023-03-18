@@ -1,15 +1,17 @@
-from typing import Any, Literal
+from typing import Callable, ClassVar, Literal, TypeVar
+from scipy.stats import spearmanr as spearmanr
+from scipy import interpolate as interpolate
+from .base import BaseEstimator, TransformerMixin, RegressorMixin
+from numpy import ndarray
+from numbers import Real as Real
 from .utils import (
     check_array as check_array,
     check_consistent_length as check_consistent_length,
 )
-from ._typing import ArrayLike, Float
-from scipy import interpolate as interpolate
-from .base import BaseEstimator, TransformerMixin, RegressorMixin
-from scipy.stats import spearmanr as spearmanr
-from numpy import ndarray
 from .utils._param_validation import Interval as Interval, StrOptions as StrOptions
-from numbers import Real as Real
+from ._typing import ArrayLike, Float
+
+IsotonicRegression_Self = TypeVar("IsotonicRegression_Self", bound="IsotonicRegression")
 
 # Authors: Fabian Pedregosa <fabian@fseoane.net>
 #          Alexandre Gramfort <alexandre.gramfort@inria.fr>
@@ -35,27 +37,36 @@ def isotonic_regression(
     y_min: None | Float = None,
     y_max: None | Float = None,
     increasing: bool = True
-) -> list[float] | ndarray:
+) -> ndarray | list[float]:
     ...
 
 
 class IsotonicRegression(RegressorMixin, TransformerMixin, BaseEstimator):
+    increasing_: bool = ...
+    f_: Callable = ...
+    y_thresholds_: ndarray = ...
+    X_thresholds_: ndarray = ...
+    X_max_: float = ...
+    X_min_: float = ...
 
-    _parameter_constraints: dict = ...
+    _parameter_constraints: ClassVar[dict] = ...
 
     def __init__(
         self,
         *,
         y_min: None | Float = None,
         y_max: None | Float = None,
-        increasing: bool | str = True,
+        increasing: str | bool = True,
         out_of_bounds: Literal["nan", "clip", "raise", "nan"] = "nan"
     ) -> None:
         ...
 
     def fit(
-        self, X: ArrayLike, y: ArrayLike, sample_weight: None | ArrayLike = None
-    ) -> Any:
+        self: IsotonicRegression_Self,
+        X: ArrayLike,
+        y: ArrayLike,
+        sample_weight: None | ArrayLike = None,
+    ) -> IsotonicRegression_Self:
         ...
 
     def transform(self, T: ArrayLike) -> ndarray:

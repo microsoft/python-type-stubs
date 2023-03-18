@@ -1,9 +1,9 @@
-from ._quantile import QuantileRegressor as QuantileRegressor
 from ._glm import (
     PoissonRegressor as PoissonRegressor,
     GammaRegressor as GammaRegressor,
     TweedieRegressor as TweedieRegressor,
 )
+from ._perceptron import Perceptron as Perceptron
 from ._stochastic_gradient import (
     SGDClassifier as SGDClassifier,
     SGDRegressor as SGDRegressor,
@@ -18,15 +18,28 @@ from ._least_angle import (
     LassoLarsCV as LassoLarsCV,
     LassoLarsIC as LassoLarsIC,
 )
-from ._perceptron import Perceptron as Perceptron
-from ._ransac import RANSACRegressor as RANSACRegressor
-from ._ridge import (
-    Ridge as Ridge,
-    RidgeCV as RidgeCV,
-    RidgeClassifier as RidgeClassifier,
-    RidgeClassifierCV as RidgeClassifierCV,
-    ridge_regression as ridge_regression,
+from ._huber import HuberRegressor as HuberRegressor
+from ._base import LinearRegression as LinearRegression
+from ._theil_sen import TheilSenRegressor as TheilSenRegressor
+from ._omp import (
+    orthogonal_mp as orthogonal_mp,
+    orthogonal_mp_gram as orthogonal_mp_gram,
+    OrthogonalMatchingPursuit as OrthogonalMatchingPursuit,
+    OrthogonalMatchingPursuitCV as OrthogonalMatchingPursuitCV,
 )
+from ._logistic import (
+    LogisticRegression as LogisticRegression,
+    LogisticRegressionCV as LogisticRegressionCV,
+)
+from ._ransac import RANSACRegressor as RANSACRegressor
+from ._sgd_fast import (
+    Hinge as Hinge,
+    Log as Log,
+    ModifiedHuber as ModifiedHuber,
+    SquaredLoss as SquaredLoss,
+    Huber as Huber,
+)
+from ._bayes import BayesianRidge as BayesianRidge, ARDRegression as ARDRegression
 from ._coordinate_descent import (
     Lasso as Lasso,
     ElasticNet as ElasticNet,
@@ -39,31 +52,18 @@ from ._coordinate_descent import (
     MultiTaskElasticNetCV as MultiTaskElasticNetCV,
     MultiTaskLassoCV as MultiTaskLassoCV,
 )
-from ._base import LinearRegression as LinearRegression
 from ._passive_aggressive import (
     PassiveAggressiveClassifier as PassiveAggressiveClassifier,
     PassiveAggressiveRegressor as PassiveAggressiveRegressor,
 )
-from ._theil_sen import TheilSenRegressor as TheilSenRegressor
-from ._sgd_fast import (
-    Hinge as Hinge,
-    Log as Log,
-    ModifiedHuber as ModifiedHuber,
-    SquaredLoss as SquaredLoss,
-    Huber as Huber,
+from ._quantile import QuantileRegressor as QuantileRegressor
+from ._ridge import (
+    Ridge as Ridge,
+    RidgeCV as RidgeCV,
+    RidgeClassifier as RidgeClassifier,
+    RidgeClassifierCV as RidgeClassifierCV,
+    ridge_regression as ridge_regression,
 )
-from ._omp import (
-    orthogonal_mp as orthogonal_mp,
-    orthogonal_mp_gram as orthogonal_mp_gram,
-    OrthogonalMatchingPursuit as OrthogonalMatchingPursuit,
-    OrthogonalMatchingPursuitCV as OrthogonalMatchingPursuitCV,
-)
-from ._huber import HuberRegressor as HuberRegressor
-from ._logistic import (
-    LogisticRegression as LogisticRegression,
-    LogisticRegressionCV as LogisticRegressionCV,
-)
-from ._bayes import BayesianRidge as BayesianRidge, ARDRegression as ARDRegression
 
 __all__ = [
     "ARDRegression",
