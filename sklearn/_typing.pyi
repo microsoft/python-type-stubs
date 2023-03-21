@@ -10,7 +10,7 @@ import numpy as np
 import pandas as pd
 from .base import BaseEstimator, ClassifierMixin, RegressorMixin
 from scipy.sparse import spmatrix
-from typing import TypeAlias
+from typing_extensions import TypeAlias
 
 
 Decimal: TypeAlias = decimal.Decimal
