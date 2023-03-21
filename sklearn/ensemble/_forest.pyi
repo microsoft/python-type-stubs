@@ -1,57 +1,54 @@
-from numpy import ndarray
-from typing import Dict, Optional, Tuple, Union, Any, Literal
-from numpy.typing import ArrayLike, NDArray
-
-# Authors: Gilles Louppe <g.louppe@gmail.com>
-#          Brian Holt <bdholt1@gmail.com>
-#          Joly Arnaud <arnaud.v.joly@gmail.com>
-#          Fares Hedayati <fares.hedayati@gmail.com>
-#
-# License: BSD 3 clause
-
-import numbers
-from warnings import catch_warnings, simplefilter, warn
-import threading
-
-from abc import ABCMeta, abstractmethod
-import numpy as np
+from typing import Any, ClassVar, Literal, Mapping, Sequence, TypeVar
+from warnings import (
+    catch_warnings as catch_warnings,
+    simplefilter as simplefilter,
+    warn as warn,
+)
 from numpy.random import RandomState
-from scipy.sparse import issparse
-from scipy.sparse import hstack as sparse_hstack
-from typing import Sequence
-
-from ..base import is_classifier
-from ..base import ClassifierMixin, MultiOutputMixin, RegressorMixin, TransformerMixin
-
-from ..metrics import accuracy_score, r2_score
+from ..tree._tree import DTYPE as DTYPE, DOUBLE as DOUBLE
+from ..exceptions import DataConversionWarning as DataConversionWarning
+from ..metrics import accuracy_score as accuracy_score, r2_score as r2_score
 from ..preprocessing import OneHotEncoder
+from scipy.sparse import issparse as issparse, hstack as sparse_hstack, spmatrix
+from ..utils.parallel import delayed as delayed, Parallel as Parallel
+from ..utils.validation import check_is_fitted as check_is_fitted
+from abc import ABCMeta, abstractmethod
 from ..tree import (
+    BaseDecisionTree as BaseDecisionTree,
     DecisionTreeClassifier,
     DecisionTreeRegressor,
-    ExtraTreeClassifier,
+    ExtraTreeClassifier as ExtraTreeClassifier,
     ExtraTreeRegressor,
 )
-from ..utils import check_random_state, compute_sample_weight, deprecated
-from ..exceptions import DataConversionWarning
-from ._base import BaseEnsemble, _partition_estimators
-from ..utils.fixes import delayed
-from ..utils.multiclass import check_classification_targets, type_of_target
-from ..utils.validation import (
-    check_is_fitted,
-    _check_sample_weight,
-    _check_feature_names_in,
+from numpy import ndarray
+from ..utils._param_validation import Interval as Interval, StrOptions as StrOptions
+from numbers import Integral as Integral, Real as Real
+from ..base import (
+    is_classifier as is_classifier,
+    ClassifierMixin,
+    MultiOutputMixin,
+    RegressorMixin,
+    TransformerMixin,
 )
-from ..utils.validation import _num_samples
-from pandas.core.frame import DataFrame
-from pandas.core.series import Series
-from scipy.sparse._csc import csc_matrix
-from scipy.sparse._csr import csr_matrix
-from sklearn.tree._classes import (
-    DecisionTreeClassifier,
-    DecisionTreeRegressor,
-    ExtraTreeClassifier,
-    ExtraTreeRegressor,
+from ..utils import (
+    check_random_state as check_random_state,
+    compute_sample_weight as compute_sample_weight,
 )
+from ._base import BaseEnsemble
+from ..utils.multiclass import (
+    check_classification_targets as check_classification_targets,
+    type_of_target as type_of_target,
+)
+from .._typing import MatrixLike, ArrayLike, Int, Float
+
+BaseForest_Self = TypeVar("BaseForest_Self", bound="BaseForest")
+RandomTreesEmbedding_Self = TypeVar(
+    "RandomTreesEmbedding_Self", bound="RandomTreesEmbedding"
+)
+
+import threading
+import numpy as np
+
 
 __all__ = [
     "RandomForestClassifier",
@@ -63,252 +60,327 @@ __all__ = [
 
 MAX_INT = ...
 
-def _get_n_samples_bootstrap(n_samples: int, max_samples: Optional[float]) -> int: ...
-def _generate_sample_indices(random_state: int, n_samples: int, n_samples_bootstrap: int) -> ndarray: ...
-def _generate_unsampled_indices(random_state: int, n_samples: int, n_samples_bootstrap: int) -> ndarray: ...
-def _parallel_build_trees(
-    tree: Union[
-        DecisionTreeRegressor,
-        DecisionTreeClassifier,
-        ExtraTreeRegressor,
-        ExtraTreeClassifier,
-    ],
-    bootstrap: bool,
-    X: Union[csc_matrix, ndarray],
-    y: ndarray,
-    sample_weight: None,
-    tree_idx: int,
-    n_trees: int,
-    verbose: int = 0,
-    class_weight: None = None,
-    n_samples_bootstrap: Optional[int] = None,
-) -> Union[DecisionTreeRegressor, DecisionTreeClassifier, ExtraTreeRegressor, ExtraTreeClassifier,]: ...
 
 class BaseForest(MultiOutputMixin, BaseEnsemble, metaclass=ABCMeta):
+
+    _parameter_constraints: ClassVar[dict] = ...
+
     @abstractmethod
     def __init__(
         self,
-        base_estimator: Union[
-            DecisionTreeRegressor,
-            DecisionTreeClassifier,
-            ExtraTreeRegressor,
-            ExtraTreeClassifier,
-        ],
+        estimator,
         n_estimators: int = 100,
         *,
         estimator_params=...,
-        bootstrap=False,
-        oob_score=False,
+        bootstrap: bool = False,
+        oob_score: bool = False,
         n_jobs=None,
         random_state=None,
-        verbose=0,
-        warm_start=False,
+        verbose: int = 0,
+        warm_start: bool = False,
         class_weight=None,
         max_samples=None,
-    ) -> None: ...
-    def apply(self, X: NDArray | ArrayLike) -> np.ndarray: ...
-    def decision_path(self, X: NDArray | ArrayLike) -> tuple[NDArray, np.ndarray]: ...
+        base_estimator: str = "deprecated",
+    ) -> None:
+        ...
+
+    def apply(self, X: MatrixLike | ArrayLike) -> ndarray:
+        ...
+
+    def decision_path(self, X: MatrixLike | ArrayLike) -> tuple[spmatrix, ndarray]:
+        ...
+
     def fit(
-        self,
-        X: NDArray | ArrayLike,
-        y: ArrayLike,
-        sample_weight: ArrayLike | None = None,
-    ) -> Union[
-        RandomForestRegressor,
-        ExtraTreesClassifier,
-        ExtraTreesRegressor,
-        RandomForestClassifier,
-        RandomTreesEmbedding,
-    ]: ...
-    @abstractmethod
-    def _set_oob_score_and_attributes(self, X, y): ...
-    def _compute_oob_predictions(self, X: ndarray, y: ndarray) -> ndarray: ...
-    def _validate_y_class_weight(self, y: ndarray) -> Tuple[ndarray, None]: ...
-    def _validate_X_predict(self, X: Union[ndarray, csr_matrix]) -> Union[ndarray, csr_matrix]: ...
-    @property
-    def feature_importances_(self) -> NDArray: ...
+        self: BaseForest_Self,
+        X: MatrixLike | ArrayLike,
+        y: MatrixLike | ArrayLike,
+        sample_weight: None | ArrayLike = None,
+    ) -> BaseForest_Self:
+        ...
 
-    # TODO: Remove in 1.2
-    # mypy error: Decorated property not supported
-    @deprecated(  # type: ignore
-        "Attribute `n_features_` was deprecated in version 1.0 and will be " "removed in 1.2. Use `n_features_in_` instead."
-    )
     @property
-    def n_features_(self): ...
+    def feature_importances_(self) -> ndarray:
+        ...
 
-def _accumulate_prediction(predict, X, out, lock): ...
 
 class ForestClassifier(ClassifierMixin, BaseForest, metaclass=ABCMeta):
     @abstractmethod
     def __init__(
         self,
-        base_estimator: Union[DecisionTreeClassifier, ExtraTreeClassifier],
+        estimator,
         n_estimators: int = 100,
         *,
         estimator_params=...,
-        bootstrap=False,
-        oob_score=False,
+        bootstrap: bool = False,
+        oob_score: bool = False,
         n_jobs=None,
         random_state=None,
-        verbose=0,
-        warm_start=False,
+        verbose: int = 0,
+        warm_start: bool = False,
         class_weight=None,
         max_samples=None,
-    ) -> None: ...
-    @staticmethod
-    def _get_oob_predictions(tree: DecisionTreeClassifier, X: ndarray) -> ndarray: ...
-    def _set_oob_score_and_attributes(self, X: ndarray, y: ndarray) -> None: ...
-    def _validate_y_class_weight(self, y: ndarray) -> Tuple[ndarray, None]: ...
-    def predict(self, X: NDArray | ArrayLike) -> NDArray: ...
-    def predict_proba(self, X: NDArray | ArrayLike) -> NDArray | list[ArrayLike]: ...
-    def predict_log_proba(self, X: NDArray | ArrayLike) -> NDArray | list[ArrayLike]: ...
-    def _more_tags(self) -> Dict[str, bool]: ...
+        base_estimator: str = "deprecated",
+    ) -> None:
+        ...
+
+    def predict(self, X: MatrixLike | ArrayLike) -> ndarray:
+        ...
+
+    def predict_proba(self, X: MatrixLike | ArrayLike) -> ndarray:
+        ...
+
+    def predict_log_proba(self, X: MatrixLike | ArrayLike) -> ndarray:
+        ...
+
 
 class ForestRegressor(RegressorMixin, BaseForest, metaclass=ABCMeta):
     @abstractmethod
     def __init__(
         self,
-        base_estimator: Union[DecisionTreeRegressor, ExtraTreeRegressor],
+        estimator,
         n_estimators: int = 100,
         *,
         estimator_params=...,
-        bootstrap=False,
-        oob_score=False,
+        bootstrap: bool = False,
+        oob_score: bool = False,
         n_jobs=None,
         random_state=None,
-        verbose=0,
-        warm_start=False,
+        verbose: int = 0,
+        warm_start: bool = False,
         max_samples=None,
-    ) -> None: ...
-    def predict(self, X: NDArray | ArrayLike) -> NDArray: ...
-    @staticmethod
-    def _get_oob_predictions(tree, X): ...
-    def _set_oob_score_and_attributes(self, X, y): ...
-    def _compute_partial_dependence_recursion(self, grid, target_features): ...
-    def _more_tags(self) -> Dict[str, bool]: ...
+        base_estimator: str = "deprecated",
+    ) -> None:
+        ...
+
+    def predict(self, X: MatrixLike | ArrayLike) -> ndarray:
+        ...
+
 
 class RandomForestClassifier(ForestClassifier):
+    oob_decision_function_: ndarray = ...
+    oob_score_: float = ...
+    feature_importances_: ndarray = ...
+    n_outputs_: int = ...
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    n_classes_: list | int = ...
+    classes_: ndarray = ...
+    estimators_: list[DecisionTreeClassifier] = ...
+    base_estimator_: DecisionTreeClassifier = ...
+    estimator_: DecisionTreeClassifier = ...
+
+    _parameter_constraints: ClassVar[dict] = ...
+
     def __init__(
         self,
-        n_estimators: int = 100,
+        n_estimators: Int = 100,
         *,
-        criterion: Literal["gini", "entropy", "log_loss"] = "gini",
-        max_depth: int | None = None,
-        min_samples_split: int | float = 2,
-        min_samples_leaf: int | float = 1,
-        min_weight_fraction_leaf: float = 0.0,
-        max_features: None | Literal["sqrt", "log2"] | int | float = "sqrt",
-        max_leaf_nodes: int | None = None,
-        min_impurity_decrease: float = 0.0,
+        criterion: Literal["gini", "entropy", "log_loss", "gini"] = "gini",
+        max_depth: None | Int = None,
+        min_samples_split: float | int = 2,
+        min_samples_leaf: float | int = 1,
+        min_weight_fraction_leaf: Float = 0.0,
+        max_features: float | Literal["sqrt", "log2", "sqrt"] | int = "sqrt",
+        max_leaf_nodes: None | Int = None,
+        min_impurity_decrease: Float = 0.0,
         bootstrap: bool = True,
         oob_score: bool = False,
-        n_jobs: int | None = None,
-        random_state: int | RandomState | None = None,
-        verbose: int = 0,
+        n_jobs: None | Int = None,
+        random_state: RandomState | None | Int = None,
+        verbose: Int = 0,
         warm_start: bool = False,
-        class_weight: Literal["balanced", "balanced_subsample"] | dict | Sequence[dict] | None = None,
+        class_weight: Literal["balanced", "balanced_subsample"]
+        | None
+        | Mapping
+        | Sequence[Mapping] = None,
         ccp_alpha: float = 0.0,
-        max_samples: int | float | None = None,
-    ) -> None: ...
+        max_samples: float | None | int = None,
+    ) -> None:
+        ...
+
 
 class RandomForestRegressor(ForestRegressor):
+    oob_prediction_: ndarray = ...
+    oob_score_: float = ...
+    n_outputs_: int = ...
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    feature_importances_: ndarray = ...
+    estimators_: list[DecisionTreeRegressor] = ...
+    base_estimator_: DecisionTreeRegressor = ...
+    estimator_: DecisionTreeRegressor = ...
+
+    _parameter_constraints: ClassVar[dict] = ...
+
     def __init__(
         self,
-        n_estimators: int = 100,
+        n_estimators: Int = 100,
         *,
-        criterion: Literal["squared_error", "absolute_error", "poisson"] = "squared_error",
-        max_depth: int | None = None,
-        min_samples_split: int | float = 2,
-        min_samples_leaf: int | float = 1,
-        min_weight_fraction_leaf: float = 0.0,
-        max_features: None | Literal["sqrt", "log2"] | int | float = 1.0,
-        max_leaf_nodes: int | None = None,
-        min_impurity_decrease: float = 0.0,
+        criterion: Literal[
+            "squared_error",
+            "absolute_error",
+            "friedman_mse",
+            "poisson",
+            "squared_error",
+        ] = "squared_error",
+        max_depth: None | Int = None,
+        min_samples_split: float | int = 2,
+        min_samples_leaf: float | int = 1,
+        min_weight_fraction_leaf: Float = 0.0,
+        max_features: float | Literal["sqrt", "log2"] | int = 1.0,
+        max_leaf_nodes: None | Int = None,
+        min_impurity_decrease: Float = 0.0,
         bootstrap: bool = True,
         oob_score: bool = False,
-        n_jobs: int | None = None,
-        random_state: int | RandomState | None = None,
-        verbose: int = 0,
+        n_jobs: None | Int = None,
+        random_state: RandomState | None | Int = None,
+        verbose: Int = 0,
         warm_start: bool = False,
         ccp_alpha: float = 0.0,
-        max_samples: int | float | None = None,
-    ) -> None: ...
+        max_samples: float | None | int = None,
+    ) -> None:
+        ...
+
 
 class ExtraTreesClassifier(ForestClassifier):
+    oob_decision_function_: ndarray = ...
+    oob_score_: float = ...
+    n_outputs_: int = ...
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    feature_importances_: ndarray = ...
+    n_classes_: list | int = ...
+    classes_: ndarray = ...
+    estimators_: list[DecisionTreeClassifier] = ...
+    base_estimator_: ExtraTreesClassifier = ...
+    estimator_: ExtraTreesClassifier = ...
+
+    _parameter_constraints: ClassVar[dict] = ...
+
     def __init__(
         self,
-        n_estimators: int = 100,
+        n_estimators: Int = 100,
         *,
-        criterion: Literal["gini", "entropy", "log_loss"] = "gini",
-        max_depth: int | None = None,
-        min_samples_split: int | float = 2,
-        min_samples_leaf: int | float = 1,
-        min_weight_fraction_leaf: float = 0.0,
-        max_features: None | Literal["sqrt", "log2"] | int | float = "sqrt",
-        max_leaf_nodes: int | None = None,
-        min_impurity_decrease: float = 0.0,
+        criterion: Literal["gini", "entropy", "log_loss", "gini"] = "gini",
+        max_depth: None | Int = None,
+        min_samples_split: float | int = 2,
+        min_samples_leaf: float | int = 1,
+        min_weight_fraction_leaf: Float = 0.0,
+        max_features: float | Literal["sqrt", "log2", "sqrt"] | int = "sqrt",
+        max_leaf_nodes: None | Int = None,
+        min_impurity_decrease: Float = 0.0,
         bootstrap: bool = False,
         oob_score: bool = False,
-        n_jobs: int | None = None,
-        random_state: int | RandomState | None = None,
-        verbose: int = 0,
+        n_jobs: None | Int = None,
+        random_state: RandomState | None | Int = None,
+        verbose: Int = 0,
         warm_start: bool = False,
-        class_weight: Literal["balanced", "balanced_subsample"] | dict | Sequence[dict] | None = None,
+        class_weight: Literal["balanced", "balanced_subsample"]
+        | None
+        | Mapping
+        | Sequence[Mapping] = None,
         ccp_alpha: float = 0.0,
-        max_samples: int | float | None = None,
-    ) -> None: ...
+        max_samples: float | None | int = None,
+    ) -> None:
+        ...
+
 
 class ExtraTreesRegressor(ForestRegressor):
+    oob_prediction_: ndarray = ...
+    oob_score_: float = ...
+    n_outputs_: int = ...
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    feature_importances_: ndarray = ...
+    estimators_: list[DecisionTreeRegressor] = ...
+    base_estimator_: ExtraTreeRegressor = ...
+    estimator_: ExtraTreeRegressor = ...
+
+    _parameter_constraints: ClassVar[dict] = ...
+
     def __init__(
         self,
-        n_estimators: int = 100,
+        n_estimators: Int = 100,
         *,
-        criterion: Literal["squared_error", "absolute_error"] = "squared_error",
-        max_depth: int | None = None,
-        min_samples_split: int | float = 2,
-        min_samples_leaf: int | float = 1,
-        min_weight_fraction_leaf: float = 0.0,
-        max_features: None | Literal["sqrt", "log2"] | int | float = 1.0,
-        max_leaf_nodes: int | None = None,
-        min_impurity_decrease: float = 0.0,
+        criterion: Literal[
+            "squared_error",
+            "absolute_error",
+            "friedman_mse",
+            "poisson",
+            "squared_error",
+        ] = "squared_error",
+        max_depth: None | Int = None,
+        min_samples_split: float | int = 2,
+        min_samples_leaf: float | int = 1,
+        min_weight_fraction_leaf: Float = 0.0,
+        max_features: float | Literal["sqrt", "log2"] | int = 1.0,
+        max_leaf_nodes: None | Int = None,
+        min_impurity_decrease: Float = 0.0,
         bootstrap: bool = False,
         oob_score: bool = False,
-        n_jobs: int | None = None,
-        random_state: int | RandomState | None = None,
-        verbose: int = 0,
+        n_jobs: None | Int = None,
+        random_state: RandomState | None | Int = None,
+        verbose: Int = 0,
         warm_start: bool = False,
         ccp_alpha: float = 0.0,
-        max_samples: int | float | None = None,
-    ) -> None: ...
+        max_samples: float | None | int = None,
+    ) -> None:
+        ...
+
 
 class RandomTreesEmbedding(TransformerMixin, BaseForest):
+    one_hot_encoder_: OneHotEncoder = ...
+    n_outputs_: int = ...
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    feature_importances_: ndarray = ...
+    estimators_: list[ExtraTreeRegressor] = ...
+    base_estimator_: ExtraTreeRegressor = ...
+    estimator_: ExtraTreeRegressor = ...
 
-    criterion: str = ...
-    max_features: int = ...
+    _parameter_constraints: ClassVar[dict] = ...
+    for param in ("max_features", "ccp_alpha", "splitter"):
+        pass
+
+    criterion: ClassVar[str] = ...
+    max_features: ClassVar[int] = ...
 
     def __init__(
         self,
-        n_estimators: int = 100,
+        n_estimators: Int = 100,
         *,
-        max_depth: int = 5,
-        min_samples_split: int | float = 2,
-        min_samples_leaf: int | float = 1,
-        min_weight_fraction_leaf: float = 0.0,
-        max_leaf_nodes: int | None = None,
-        min_impurity_decrease: float = 0.0,
+        max_depth: Int = 5,
+        min_samples_split: float | int = 2,
+        min_samples_leaf: float | int = 1,
+        min_weight_fraction_leaf: Float = 0.0,
+        max_leaf_nodes: None | Int = None,
+        min_impurity_decrease: Float = 0.0,
         sparse_output: bool = True,
-        n_jobs: int | None = None,
-        random_state: int | RandomState | None = None,
-        verbose: int = 0,
+        n_jobs: None | Int = None,
+        random_state: RandomState | None | Int = None,
+        verbose: Int = 0,
         warm_start: bool = False,
-    ) -> None: ...
-    def _set_oob_score_and_attributes(self, X, y): ...
-    def fit(self, X: NDArray | ArrayLike, y=None, sample_weight: ArrayLike | None = None) -> Any: ...
+    ) -> None:
+        ...
+
+    def fit(
+        self: RandomTreesEmbedding_Self,
+        X: MatrixLike | ArrayLike,
+        y: Any = None,
+        sample_weight: None | ArrayLike = None,
+    ) -> RandomTreesEmbedding_Self:
+        ...
+
     def fit_transform(
         self,
-        X: NDArray | ArrayLike,
-        y: Optional[ndarray] = None,
-        sample_weight: ArrayLike | None = None,
-    ) -> NDArray: ...
-    def get_feature_names_out(self, input_features: ArrayLike | None = None) -> np.ndarray: ...
-    def transform(self, X: NDArray | ArrayLike) -> NDArray: ...
+        X: MatrixLike | ArrayLike,
+        y: Any = None,
+        sample_weight: None | ArrayLike = None,
+    ) -> spmatrix:
+        ...
+
+    def get_feature_names_out(self, input_features: None | ArrayLike = None) -> ndarray:
+        ...
+
+    def transform(self, X: MatrixLike | ArrayLike) -> spmatrix:
+        ...

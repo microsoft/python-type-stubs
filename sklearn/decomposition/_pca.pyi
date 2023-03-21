@@ -1,55 +1,80 @@
-from typing import Dict, List, Optional, Tuple, Type, Union, Literal, Any
-from numpy.typing import ArrayLike, NDArray
+from typing import Any, ClassVar, Literal, TypeVar
+from numpy.random import RandomState
+from scipy.special import gammaln as gammaln
+from scipy.sparse.linalg import svds as svds
+from scipy import linalg as linalg
+from ..utils.deprecation import deprecated
+from ._base import _BasePCA
+from numpy import ndarray
+from ..utils.extmath import (
+    fast_logdet as fast_logdet,
+    randomized_svd as randomized_svd,
+    svd_flip as svd_flip,
+    stable_cumsum as stable_cumsum,
+)
+from ..utils._param_validation import Interval as Interval, StrOptions as StrOptions
+from numbers import Integral as Integral, Real as Real
+from math import log as log, sqrt as sqrt
+from scipy.sparse import issparse as issparse
+from .._typing import Int, Float, MatrixLike
+from ..utils import check_random_state as check_random_state
+from ..utils.validation import check_is_fitted as check_is_fitted
 
-# Author: Alexandre Gramfort <alexandre.gramfort@inria.fr>
-#         Olivier Grisel <olivier.grisel@ensta.org>
-#         Mathieu Blondel <mathieu@mblondel.org>
-#         Denis A. Engemann <denis-alexander.engemann@inria.fr>
-#         Michael Eickenberg <michael.eickenberg@inria.fr>
-#         Giorgio Patrini <giorgio.patrini@anu.edu.au>
-#
-# License: BSD 3 clause
+PCA_Self = TypeVar("PCA_Self", bound="PCA")
 
-from math import log, sqrt
-import numbers
 
 import numpy as np
-from numpy.random import RandomState
-from scipy import linalg
-from scipy.special import gammaln
-from scipy.sparse import issparse
-from scipy.sparse.linalg import svds
 
-from ._base import _BasePCA
-from ..utils import check_random_state, check_scalar
-from ..utils._arpack import _init_arpack_v0
-from ..utils.extmath import fast_logdet, randomized_svd, svd_flip
-from ..utils.extmath import stable_cumsum
-from ..utils.validation import check_is_fitted
-from numpy import float64, int64, ndarray
-
-def _assess_dimension(spectrum: ndarray, rank: int, n_samples: int) -> float64: ...
-def _infer_dimension(spectrum: ndarray, n_samples: int) -> int64: ...
 
 class PCA(_BasePCA):
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    noise_variance_: float = ...
+    n_samples_: int = ...
+    n_components_: int = ...
+    mean_: ndarray = ...
+    singular_values_: ndarray = ...
+    explained_variance_ratio_: ndarray = ...
+    explained_variance_: ndarray = ...
+    components_: ndarray = ...
+
+    _parameter_constraints: ClassVar[dict] = ...
+
     def __init__(
         self,
-        n_components: int | float | Literal["mle"] | None = None,
+        n_components: float | None | str | Int = None,
         *,
         copy: bool = True,
         whiten: bool = False,
-        svd_solver: Literal["auto", "full", "arpack", "randomized"] = "auto",
-        tol: float = 0.0,
-        iterated_power: int | Literal["auto"] = "auto",
-        n_oversamples: int = 10,
-        power_iteration_normalizer: Literal["auto", "QR", "LU", "none"] = "auto",
-        random_state: int | RandomState | None = None,
-    ) -> None: ...
-    def fit(self, X: ArrayLike, y: Optional[ndarray] = None) -> "PCA": ...
-    def fit_transform(self, X: ArrayLike, y: Optional[ndarray] = None) -> NDArray: ...
-    def _fit(self, X: ndarray) -> Tuple[ndarray, ndarray, ndarray]: ...
-    def _fit_full(self, X: ndarray, n_components: Union[int64, str, int]) -> Tuple[ndarray, ndarray, ndarray]: ...
-    def _fit_truncated(self, X: ndarray, n_components: int, svd_solver: str) -> Tuple[ndarray, ndarray, ndarray]: ...
-    def score_samples(self, X: ArrayLike) -> NDArray: ...
-    def score(self, X: ArrayLike, y: None = None) -> float: ...
-    def _more_tags(self) -> Dict[str, List[Union[Type[float64], Type[np.float32]]]]: ...
+        svd_solver: Literal["auto", "full", "arpack", "randomized", "auto"] = "auto",
+        tol: Float = 0.0,
+        iterated_power: Literal["auto", "auto"] | Int = "auto",
+        n_oversamples: Int = 10,
+        power_iteration_normalizer: Literal[
+            "auto", "QR", "LU", "none", "auto"
+        ] = "auto",
+        random_state: RandomState | None | Int = None,
+    ) -> None:
+        ...
+
+    # TODO(1.4): remove in 1.4
+    # mypy error: Decorated property not supported
+    @deprecated(  # type: ignore
+        "Attribute `n_features_` was deprecated in version 1.2 and will be "
+        "removed in 1.4. Use `n_features_in_` instead."
+    )
+    @property
+    def n_features_(self) -> int:
+        ...
+
+    def fit(self: PCA_Self, X: MatrixLike, y: Any = None) -> PCA_Self:
+        ...
+
+    def fit_transform(self, X: MatrixLike, y: Any = None) -> ndarray:
+        ...
+
+    def score_samples(self, X: MatrixLike) -> ndarray:
+        ...
+
+    def score(self, X: MatrixLike, y: Any = None) -> float:
+        ...

@@ -1,7 +1,28 @@
-from numpy import float64, ndarray
-from collections.abc import Generator, Iterable
-from typing import List, Optional, Tuple, Union, Literal, Any
-from numpy.typing import NDArray, ArrayLike
+from typing import Any, ClassVar, Iterable, Literal, TypeVar
+from scipy import linalg as linalg
+from ..linear_model import lars_path_gram as lars_path_gram
+from ..exceptions import ConvergenceWarning as ConvergenceWarning
+from numpy import ndarray
+from ..utils._param_validation import Interval as Interval, StrOptions as StrOptions
+from ..model_selection._split import BaseShuffleSplit
+from numbers import Integral as Integral, Real as Real
+from ..model_selection import check_cv as check_cv, cross_val_score as cross_val_score
+from ..utils.parallel import delayed as delayed, Parallel as Parallel
+from .._typing import MatrixLike, Float, Int, ArrayLike
+from ..model_selection import BaseCrossValidator
+from ..utils.validation import (
+    check_random_state as check_random_state,
+    check_scalar as check_scalar,
+)
+from . import (
+    empirical_covariance as empirical_covariance,
+    EmpiricalCovariance,
+    log_likelihood as log_likelihood,
+)
+
+GraphicalLassoCV_Self = TypeVar("GraphicalLassoCV_Self", bound="GraphicalLassoCV")
+GraphicalLasso_Self = TypeVar("GraphicalLasso_Self", bound="GraphicalLasso")
+
 
 # Author: Gael Varoquaux <gael.varoquaux@normalesup.org>
 # License: BSD 3 clause
@@ -10,88 +31,126 @@ import warnings
 import operator
 import sys
 import time
-
 import numpy as np
-from scipy import linalg
 
-from . import empirical_covariance, EmpiricalCovariance, log_likelihood
 
-from ..exceptions import ConvergenceWarning
-from ..utils.validation import _is_arraylike_not_scalar, check_random_state
-from ..utils.fixes import delayed
+def alpha_max(emp_cov: MatrixLike) -> Float:
+    ...
 
-# mypy error: Module 'sklearn.linear_model' has no attribute '_cd_fast'
-from ..linear_model import _cd_fast as cd_fast  # type: ignore
-from ..linear_model import lars_path_gram
-from ..model_selection import check_cv, cross_val_score
-
-# Helper functions to compute the objective and dual objective functions
-# of the l1-penalized estimator
-def _objective(mle: ndarray, precision_: ndarray, alpha: float64) -> float64: ...
-def _dual_gap(emp_cov: ndarray, precision_: ndarray, alpha: float64) -> float64: ...
-def alpha_max(emp_cov: NDArray) -> float64: ...
-
-class _DictWithDeprecatedKeys(dict):
-    def __init__(self, **kwargs) -> None: ...
-    def __getitem__(self, key: str) -> ndarray: ...
-    def _set_deprecated(self, value: ndarray, *, new_key, deprecated_key) -> None: ...
 
 # The g-lasso algorithm
 def graphical_lasso(
-    emp_cov: NDArray,
-    alpha: float,
+    emp_cov: MatrixLike,
+    alpha: Float,
     *,
-    cov_init: ArrayLike | None = None,
-    mode: Literal["cd", "lars"] = "cd",
-    tol: float = 1e-4,
-    enet_tol: float = 1e-4,
-    max_iter: int = 100,
+    cov_init: None | MatrixLike = None,
+    mode: Literal["cd", "lars", "cd"] = "cd",
+    tol: Float = 1e-4,
+    enet_tol: Float = 1e-4,
+    max_iter: Int = 100,
     verbose: bool = False,
     return_costs: bool = False,
-    eps: float = ...,
+    eps: Float = ...,
     return_n_iter: bool = False,
-) -> tuple[NDArray, NDArray, list[tuple[float, float]], int]: ...
+) -> tuple[ndarray, ndarray, list[tuple], int]:
+    ...
 
-class GraphicalLasso(EmpiricalCovariance):
+
+class BaseGraphicalLasso(EmpiricalCovariance):
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    precision_: ndarray = ...
+    covariance_: ndarray = ...
+    location_: ndarray = ...
+    _parameter_constraints: ClassVar[dict] = ...
+
     def __init__(
         self,
-        alpha: float = 0.01,
-        *,
-        mode: Literal["cd", "lars"] = "cd",
         tol: float = 1e-4,
         enet_tol: float = 1e-4,
         max_iter: int = 100,
+        mode: str = "cd",
         verbose: bool = False,
         assume_centered: bool = False,
-    ) -> None: ...
-    def fit(self, X: ArrayLike, y=None) -> Any: ...
+    ) -> None:
+        ...
+
+
+class GraphicalLasso(BaseGraphicalLasso):
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    n_iter_: int = ...
+    precision_: ndarray = ...
+    covariance_: ndarray = ...
+    location_: ndarray = ...
+
+    _parameter_constraints: ClassVar[dict] = ...
+
+    def __init__(
+        self,
+        alpha: Float = 0.01,
+        *,
+        mode: Literal["cd", "lars", "cd"] = "cd",
+        tol: Float = 1e-4,
+        enet_tol: Float = 1e-4,
+        max_iter: Int = 100,
+        verbose: bool = False,
+        assume_centered: bool = False,
+    ) -> None:
+        ...
+
+    def fit(
+        self: GraphicalLasso_Self, X: MatrixLike, y: Any = None
+    ) -> GraphicalLasso_Self:
+        ...
+
 
 # Cross-validation with GraphicalLasso
 def graphical_lasso_path(
-    X: NDArray,
+    X: ArrayLike,
     alphas: ArrayLike,
-    cov_init: ArrayLike | None = None,
-    X_test: ArrayLike | None = None,
-    mode: Literal["cd", "lars"] = "cd",
-    tol: float = 1e-4,
-    enet_tol: float = 1e-4,
-    max_iter: int = 100,
+    cov_init: None | MatrixLike = None,
+    X_test: None | MatrixLike = None,
+    mode: Literal["cd", "lars", "cd"] = "cd",
+    tol: Float = 1e-4,
+    enet_tol: Float = 1e-4,
+    max_iter: Int = 100,
     verbose: int | bool = False,
-) -> tuple[list[NDArray], list[NDArray], list[float]]: ...
+) -> tuple[list[ndarray], list[ndarray], list[Float]] | tuple[
+    list[ndarray], list[ndarray], list[float]
+]:
+    ...
 
-class GraphicalLassoCV(GraphicalLasso):
+
+class GraphicalLassoCV(BaseGraphicalLasso):
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    n_iter_: int = ...
+    cv_results_: dict[str, ndarray] = ...
+    alpha_: float = ...
+    precision_: ndarray = ...
+    covariance_: ndarray = ...
+    location_: ndarray = ...
+
+    _parameter_constraints: ClassVar[dict] = ...
+
     def __init__(
         self,
         *,
-        alphas: int | ArrayLike = 4,
-        n_refinements: int = 4,
-        cv: int | Generator | Iterable | None = None,
-        tol: float = 1e-4,
-        enet_tol: float = 1e-4,
-        max_iter: int = 100,
-        mode: Literal["cd", "lars"] = "cd",
-        n_jobs: int | None = None,
+        alphas: ArrayLike | int = 4,
+        n_refinements: Int = 4,
+        cv: int | BaseCrossValidator | Iterable | None | BaseShuffleSplit = None,
+        tol: Float = 1e-4,
+        enet_tol: Float = 1e-4,
+        max_iter: Int = 100,
+        mode: Literal["cd", "lars", "cd"] = "cd",
+        n_jobs: None | Int = None,
         verbose: bool = False,
         assume_centered: bool = False,
-    ) -> None: ...
-    def fit(self, X: ArrayLike, y: None = None) -> "GraphicalLassoCV": ...
+    ) -> None:
+        ...
+
+    def fit(
+        self: GraphicalLassoCV_Self, X: MatrixLike, y: Any = None
+    ) -> GraphicalLassoCV_Self:
+        ...

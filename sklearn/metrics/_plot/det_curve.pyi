@@ -1,73 +1,62 @@
+from typing import Literal
 from ...base import BaseEstimator
-from sklearn.metrics import DetCurveDisplay
-from numpy.typing import NDArray, ArrayLike
+from matplotlib.axes import Axes
+from matplotlib.artist import Artist
+from ...utils import check_matplotlib_support as check_matplotlib_support
+from ..._typing import ArrayLike, MatrixLike
+from .. import det_curve as det_curve
+from matplotlib.figure import Figure
 import scipy as sp
 
-from .base import _get_response
-
-from .. import det_curve
-from .._base import _check_pos_label_consistency
-
-from ...utils import check_matplotlib_support
-from ...utils import deprecated
-from numpy import ndarray
-from sklearn.ensemble._forest import RandomForestClassifier
-from sklearn.pipeline import Pipeline
-from typing import Union, Sequence, Literal, Mapping
-from matplotlib.axes import Axes
 
 class DetCurveDisplay:
+    figure_: Figure = ...
+    ax_: Axes = ...
+    line_: Artist = ...
+
     def __init__(
         self,
         *,
-        fpr: NDArray,
-        fnr: NDArray,
-        estimator_name: str | None = None,
-        pos_label: str | int | None = None,
-    ) -> None: ...
+        fpr: ArrayLike,
+        fnr: ArrayLike,
+        estimator_name: None | str = None,
+        pos_label: None | str | int = None,
+    ) -> None:
+        ...
+
     @classmethod
     def from_estimator(
         cls,
         estimator: BaseEstimator,
-        X: NDArray | ArrayLike,
+        X: MatrixLike | ArrayLike,
         y: ArrayLike,
         *,
-        sample_weight: ArrayLike | None = None,
-        response_method: Literal["predict_proba", "decision_function", "auto"] = "auto",
-        pos_label: str | int | None = None,
-        name: str | None = None,
-        ax: Axes | None = None,
+        sample_weight: None | ArrayLike = None,
+        response_method: Literal[
+            "predict_proba", "decision_function", "auto", "auto"
+        ] = "auto",
+        pos_label: None | str | int = None,
+        name: None | str = None,
+        ax: None | Axes = None,
         **kwargs,
-    ) -> DetCurveDisplay: ...
+    ) -> DetCurveDisplay:
+        ...
+
     @classmethod
     def from_predictions(
         cls,
         y_true: ArrayLike,
         y_pred: ArrayLike,
         *,
-        sample_weight: ArrayLike | None = None,
-        pos_label: str | int | None = None,
-        name: str | None = None,
-        ax: Axes | None = None,
+        sample_weight: None | ArrayLike = None,
+        pos_label: None | str | int = None,
+        name: None | str = None,
+        ax: None | Axes = None,
         **kwargs,
-    ) -> DetCurveDisplay: ...
-    def plot(self, ax: Axes | None = None, *, name: str | None = None, **kwargs) -> DetCurveDisplay: ...
+    ) -> DetCurveDisplay:
+        ...
 
-@deprecated(
-    "Function plot_det_curve is deprecated in 1.0 and will be "
-    "removed in 1.2. Use one of the class methods: "
-    "DetCurveDisplay.from_predictions or "
-    "DetCurveDisplay.from_estimator."
-)
-def plot_det_curve(
-    estimator: BaseEstimator,
-    X: NDArray | ArrayLike,
-    y: ArrayLike,
-    *,
-    sample_weight: ArrayLike | None = None,
-    response_method: Literal["predict_proba", "decision_function", "auto"] = "auto",
-    name: str | None = None,
-    ax: Axes | None = None,
-    pos_label: str | int | None = None,
-    **kwargs,
-) -> DetCurveDisplay: ...
+    def plot(
+        self, ax: None | Axes = None, *, name: None | str = None, **kwargs
+    ) -> DetCurveDisplay:
+        ...

@@ -1,29 +1,46 @@
-from typing import Literal
+from typing import ClassVar, Literal, Mapping
 from numpy.random import RandomState
+from ._stochastic_gradient import BaseSGDClassifier
+from numpy import ndarray
+from ..utils._param_validation import StrOptions as StrOptions, Interval as Interval
+from numbers import Real as Real
+from .._typing import Float, Int
+from ._sgd_fast import LossFunction
 
 # Author: Mathieu Blondel
 # License: BSD 3 clause
 
-from ._stochastic_gradient import BaseSGDClassifier
 
 class Perceptron(BaseSGDClassifier):
+    t_: int = ...
+    n_iter_: int = ...
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    loss_function_: LossFunction = ...
+    intercept_: ndarray = ...
+    coef_: ndarray = ...
+    classes_: ndarray = ...
+
+    _parameter_constraints: ClassVar[dict] = ...
+
     def __init__(
         self,
         *,
-        penalty: Literal["l2", "l1", "elasticnet"] | None = None,
-        alpha: float = 0.0001,
-        l1_ratio: float = 0.15,
+        penalty: None | Literal["l2", "l1", "elasticnet"] = None,
+        alpha: Float = 0.0001,
+        l1_ratio: Float = 0.15,
         fit_intercept: bool = True,
-        max_iter: int = 1000,
-        tol: float = 1e-3,
+        max_iter: Int = 1000,
+        tol: None | Float = 1e-3,
         shuffle: bool = True,
-        verbose: int = 0,
-        eta0: float = 1.0,
-        n_jobs: int | None = None,
-        random_state: int | RandomState | None = 0,
+        verbose: Int = 0,
+        eta0: Float = 1.0,
+        n_jobs: None | Int = None,
+        random_state: RandomState | None | Int = 0,
         early_stopping: bool = False,
-        validation_fraction: float = 0.1,
-        n_iter_no_change: int = 5,
-        class_weight: dict | Literal["balanced"] | None = None,
+        validation_fraction: Float = 0.1,
+        n_iter_no_change: Int = 5,
+        class_weight: Mapping[str, float] | None | str = None,
         warm_start: bool = False,
-    ) -> None: ...
+    ) -> None:
+        ...

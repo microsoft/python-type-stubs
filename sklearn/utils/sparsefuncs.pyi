@@ -1,5 +1,10 @@
+from .._typing import MatrixLike, ArrayLike, Int
 from numpy import ndarray
-from numpy.typing import NDArray, ArrayLike
+from .sparsefuncs_fast import (
+    csr_mean_variance_axis0 as _csr_mean_var_axis0,
+    csc_mean_variance_axis0 as _csc_mean_var_axis0,
+    incr_mean_variance_axis0 as _incr_mean_var_axis0,
+)
 
 # Authors: Manoj Kumar
 #          Thomas Unterthiner
@@ -9,46 +14,71 @@ from numpy.typing import NDArray, ArrayLike
 import scipy.sparse as sp
 import numpy as np
 
-from .sparsefuncs_fast import (
-    csr_mean_variance_axis0 as _csr_mean_var_axis0,
-    csc_mean_variance_axis0 as _csc_mean_var_axis0,
-    incr_mean_variance_axis0 as _incr_mean_var_axis0,
-)
-from ..utils.validation import _check_sample_weight
-from scipy.sparse._csc import csc_matrix
-from scipy.sparse._csr import csr_matrix
-from typing import Optional, Tuple, Union
 
-def _raise_typeerror(X): ...
-def _raise_error_wrong_axis(axis: int) -> None: ...
-def inplace_csr_column_scale(X: NDArray, scale: NDArray): ...
-def inplace_csr_row_scale(X: NDArray, scale: NDArray): ...
+def inplace_csr_column_scale(X: MatrixLike, scale: MatrixLike):
+    ...
+
+
+def inplace_csr_row_scale(X: MatrixLike, scale: ArrayLike):
+    ...
+
+
 def mean_variance_axis(
-    X: NDArray,
-    axis: Literal[0, 1],
-    weights: NDArray | None = None,
+    X: MatrixLike,
+    axis: int,
+    weights: None | ArrayLike = None,
     return_sum_weights: bool = False,
-) -> tuple[np.ndarray, np.ndarray, np.ndarray]: ...
+) -> tuple[ndarray, ndarray, ndarray] | tuple[ndarray, ndarray]:
+    ...
+
+
 def incr_mean_variance_axis(
-    X, *, axis: Literal[0, 1], last_mean: NDArray, last_var: NDArray, last_n: float | NDArray, weights: NDArray | None = None
-) -> tuple[NDArray, NDArray, np.ndarray]: ...
-def inplace_column_scale(X: NDArray, scale: NDArray): ...
-def inplace_row_scale(X: NDArray, scale: NDArray): ...
-def inplace_swap_row_csc(X: NDArray, m: int, n: int): ...
-def inplace_swap_row_csr(X: NDArray, m: int, n: int): ...
-def inplace_swap_row(X: NDArray, m: int, n: int): ...
-def inplace_swap_column(X: NDArray, m: int, n: int): ...
-def _minor_reduce(X, ufunc): ...
-def _min_or_max_axis(X, axis, min_or_max): ...
-def _sparse_min_or_max(X, axis, min_or_max): ...
-def _sparse_min_max(X, axis): ...
-def _sparse_nan_min_max(X, axis): ...
-def min_max_axis(X: NDArray, axis: Literal[0, 1], ignore_nan: bool = False) -> tuple[NDArray, NDArray]: ...
+    X: MatrixLike,
+    *,
+    axis: int,
+    last_mean: ArrayLike,
+    last_var: ArrayLike,
+    last_n: float | ArrayLike,
+    weights: None | ArrayLike = None
+) -> tuple[ndarray, ndarray, ndarray]:
+    ...
+
+
+def inplace_column_scale(X: MatrixLike, scale: MatrixLike):
+    ...
+
+
+def inplace_row_scale(X: MatrixLike, scale: MatrixLike):
+    ...
+
+
+def inplace_swap_row_csc(X: MatrixLike, m: Int, n: Int):
+    ...
+
+
+def inplace_swap_row_csr(X: MatrixLike, m: Int, n: Int):
+    ...
+
+
+def inplace_swap_row(X: MatrixLike, m: Int, n: Int):
+    ...
+
+
+def inplace_swap_column(X: MatrixLike, m: Int, n: Int):
+    ...
+
+
+def min_max_axis(
+    X: MatrixLike, axis: int, ignore_nan: bool = False
+) -> tuple[ndarray, ndarray]:
+    ...
+
+
 def count_nonzero(
-    X: NDArray,
-    axis: Literal[0, 1] | None = None,
-    sample_weight: ArrayLike | None = None,
-): ...
-def _get_median(data, n_zeros): ...
-def _get_elem_at_rank(rank, data, n_negative, n_zeros): ...
-def csc_median_axis_0(X: NDArray) -> NDArray: ...
+    X: MatrixLike, axis: None | int = None, sample_weight: None | ArrayLike = None
+) -> float | ndarray | int:
+    ...
+
+
+def csc_median_axis_0(X: MatrixLike) -> ndarray:
+    ...

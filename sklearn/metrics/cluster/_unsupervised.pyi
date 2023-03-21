@@ -1,36 +1,49 @@
-from typing import Tuple, Union, Callable
-from numpy.typing import ArrayLike
+from typing import Callable
+from numpy.random import RandomState
+from ..pairwise import (
+    pairwise_distances_chunked as pairwise_distances_chunked,
+    pairwise_distances as pairwise_distances,
+)
+from ...preprocessing import LabelEncoder as LabelEncoder
+from ...utils import check_random_state as check_random_state, check_X_y as check_X_y
+from ..._typing import Int, MatrixLike, ArrayLike, Float
 
 # Authors: Robert Layton <robertlayton@gmail.com>
 #          Arnaud Fouchet <foucheta@gmail.com>
 #          Thierry Guillemot <thierry.guillemot.work@gmail.com>
 # License: BSD 3 clause
 
+
 import functools
 
 import numpy as np
-from numpy.random import RandomState
 
-from ...utils import check_random_state
-from ...utils import check_X_y
-from ...utils import _safe_indexing
-from ..pairwise import pairwise_distances_chunked
-from ..pairwise import pairwise_distances
-from ...preprocessing import LabelEncoder
-from numpy import float64, ndarray
-from scipy.sparse._csr import csr_matrix
 
-def check_number_of_labels(n_labels: int, n_samples: int) -> None: ...
+def check_number_of_labels(n_labels: Int, n_samples: Int) -> None:
+    ...
+
+
 def silhouette_score(
-    X: ArrayLike,
+    X: MatrixLike,
     labels: ArrayLike,
     *,
     metric: str | Callable = "euclidean",
-    sample_size: int | None = None,
-    random_state: int | RandomState | None = None,
-    **kwds,
-) -> float: ...
-def _silhouette_reduce(D_chunk: ndarray, start: int, labels: ndarray, label_freqs: ndarray) -> Tuple[ndarray, ndarray]: ...
-def silhouette_samples(X: ArrayLike, labels: ArrayLike, *, metric: str | Callable = "euclidean", **kwds) -> ArrayLike: ...
-def calinski_harabasz_score(X: ArrayLike, labels: ArrayLike) -> float: ...
-def davies_bouldin_score(X: ArrayLike, labels: ArrayLike) -> float: ...
+    sample_size: None | Int = None,
+    random_state: RandomState | None | Int = None,
+    **kwds
+) -> Float:
+    ...
+
+
+def silhouette_samples(
+    X: MatrixLike, labels: ArrayLike, *, metric: str | Callable = "euclidean", **kwds
+) -> ArrayLike:
+    ...
+
+
+def calinski_harabasz_score(X: MatrixLike, labels: ArrayLike) -> float:
+    ...
+
+
+def davies_bouldin_score(X: MatrixLike, labels: ArrayLike) -> float:
+    ...

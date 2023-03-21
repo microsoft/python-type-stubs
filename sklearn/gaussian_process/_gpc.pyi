@@ -1,27 +1,36 @@
-from numpy import float64, ndarray
-from sklearn.gaussian_process.kernels import CompoundKernel, Product, Kernel
-from typing import List, Optional, Tuple, Union, Callable, Literal, Any, Sequence
-from numpy.typing import ArrayLike, NDArray
+from typing import Any, Callable, ClassVar, Literal, TypeVar
+from ..multiclass import (
+    OneVsRestClassifier as OneVsRestClassifier,
+    OneVsOneClassifier as OneVsOneClassifier,
+)
+from numpy.random import RandomState
+from scipy.special import erf, expit as expit
+from operator import itemgetter as itemgetter
+from ..preprocessing import LabelEncoder as LabelEncoder
+from .kernels import Kernel, Product
+from ..base import BaseEstimator
+from numpy import ndarray
+from ..utils._param_validation import Interval as Interval, StrOptions as StrOptions
+from scipy.linalg import cholesky as cholesky, cho_solve as cho_solve, solve as solve
+from numbers import Integral as Integral
+from ..base import ClassifierMixin, clone as clone
+from .kernels import RBF as RBF, CompoundKernel as CompoundKernel, ConstantKernel as C
+from .._typing import Int, MatrixLike, ArrayLike, Float
+from ..utils import check_random_state as check_random_state
+from ..utils.validation import check_is_fitted as check_is_fitted
 
-# Authors: Jan Hendrik Metzen <jhm@informatik.uni-bremen.de>
-#
-# License: BSD 3 clause
+_BinaryGaussianProcessClassifierLaplace_Self = TypeVar(
+    "_BinaryGaussianProcessClassifierLaplace_Self",
+    bound="_BinaryGaussianProcessClassifierLaplace",
+)
+GaussianProcessClassifier_Self = TypeVar(
+    "GaussianProcessClassifier_Self", bound="GaussianProcessClassifier"
+)
 
-from operator import itemgetter
 
 import numpy as np
-from numpy.random import RandomState
-from scipy.linalg import cholesky, cho_solve, solve
 import scipy.optimize
-from scipy.special import erf, expit
 
-from ..base import BaseEstimator, ClassifierMixin, clone
-from .kernels import RBF, CompoundKernel, ConstantKernel as C
-from ..utils.validation import check_is_fitted
-from ..utils import check_random_state
-from ..utils.optimize import _check_optimize_result
-from ..preprocessing import LabelEncoder
-from ..multiclass import OneVsRestClassifier, OneVsOneClassifier
 
 # Values required for approximating the logistic sigmoid by
 # error functions. coefs are obtained via:
@@ -32,56 +41,101 @@ from ..multiclass import OneVsRestClassifier, OneVsOneClassifier
 LAMBDAS = ...
 COEFS = ...
 
+
 class _BinaryGaussianProcessClassifierLaplace(BaseEstimator):
+    log_marginal_likelihood_value_: float = ...
+    W_sr_: ArrayLike = ...
+    pi_: ArrayLike = ...
+    L_: ArrayLike = ...
+    kernel_: Kernel = ...
+    classes_: ArrayLike = ...
+    y_train_: ArrayLike = ...
+    X_train_: ArrayLike | list[Any] = ...
+
     def __init__(
         self,
-        kernel: Kernel | None = None,
+        kernel: Product | None | Kernel = None,
         *,
-        optimizer: Callable | Literal["fmin_l_bfgs_b"] = "fmin_l_bfgs_b",
-        n_restarts_optimizer: int = 0,
-        max_iter_predict: int = 100,
+        optimizer: Literal["fmin_l_bfgs_b", "fmin_l_bfgs_b"]
+        | Callable = "fmin_l_bfgs_b",
+        n_restarts_optimizer: Int = 0,
+        max_iter_predict: Int = 100,
         warm_start: bool = False,
         copy_X_train: bool = True,
-        random_state: int | RandomState | None = None,
-    ) -> None: ...
-    def fit(self, X: ArrayLike | Sequence[Any], y: ArrayLike) -> "_BinaryGaussianProcessClassifierLaplace": ...
-    def predict(self, X: ArrayLike | Sequence[Any]) -> NDArray: ...
-    def predict_proba(self, X: ArrayLike | Sequence[Any]) -> ArrayLike: ...
+        random_state: RandomState | None | Int = None,
+    ) -> None:
+        ...
+
+    def fit(
+        self: _BinaryGaussianProcessClassifierLaplace_Self,
+        X: MatrixLike | ArrayLike,
+        y: ArrayLike,
+    ) -> _BinaryGaussianProcessClassifierLaplace_Self:
+        ...
+
+    def predict(self, X: MatrixLike | ArrayLike) -> ndarray:
+        ...
+
+    def predict_proba(self, X: MatrixLike | ArrayLike) -> ndarray:
+        ...
+
     def log_marginal_likelihood(
         self,
-        theta: ArrayLike | None = None,
+        theta: None | ArrayLike = None,
         eval_gradient: bool = False,
         clone_kernel: bool = True,
-    ) -> tuple[float, np.ndarray]: ...
-    def _posterior_mode(
-        self, K: ndarray, return_temporaries: bool = False
-    ) -> Tuple[float64, Tuple[ndarray, ndarray, ndarray, ndarray, ndarray]]: ...
-    def _constrained_optimization(
-        self, obj_func: Callable, initial_theta: ndarray, bounds: ndarray
-    ) -> Tuple[ndarray, float64]: ...
+    ) -> tuple[float, ndarray] | tuple[Float, ndarray] | Float:
+        ...
+
 
 class GaussianProcessClassifier(ClassifierMixin, BaseEstimator):
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    n_classes_: int = ...
+    classes_: ArrayLike = ...
+    log_marginal_likelihood_value_: float = ...
+    base_estimator_: BaseEstimator = ...
+
+    _parameter_constraints: ClassVar[dict] = ...
+
     def __init__(
         self,
-        kernel: Kernel | None = None,
+        kernel: Product | None | Kernel = None,
         *,
-        optimizer: Callable | Literal["fmin_l_bfgs_b"] = "fmin_l_bfgs_b",
-        n_restarts_optimizer: int = 0,
-        max_iter_predict: int = 100,
+        optimizer: Literal["fmin_l_bfgs_b", "fmin_l_bfgs_b"]
+        | None
+        | Callable = "fmin_l_bfgs_b",
+        n_restarts_optimizer: Int = 0,
+        max_iter_predict: Int = 100,
         warm_start: bool = False,
         copy_X_train: bool = True,
-        random_state: int | RandomState | None = None,
-        multi_class: Literal["one_vs_rest", "one_vs_one"] = "one_vs_rest",
-        n_jobs: int | None = None,
-    ) -> None: ...
-    def fit(self, X: ArrayLike | Sequence[Any], y: ArrayLike) -> "GaussianProcessClassifier": ...
-    def predict(self, X: ArrayLike | Sequence[Any]) -> NDArray: ...
-    def predict_proba(self, X: ArrayLike | Sequence[Any]) -> ArrayLike: ...
+        random_state: RandomState | None | Int = None,
+        multi_class: Literal[
+            "one_vs_rest", "one_vs_one", "one_vs_rest"
+        ] = "one_vs_rest",
+        n_jobs: None | Int = None,
+    ) -> None:
+        ...
+
+    def fit(
+        self: GaussianProcessClassifier_Self, X: MatrixLike | ArrayLike, y: ArrayLike
+    ) -> GaussianProcessClassifier_Self:
+        ...
+
+    def predict(self, X: MatrixLike | ArrayLike) -> ndarray:
+        ...
+
+    def predict_proba(self, X: MatrixLike | ArrayLike) -> ndarray:
+        ...
+
     @property
-    def kernel_(self) -> Union[CompoundKernel, Product]: ...
+    def kernel_(self) -> Product | Kernel:
+        ...
+
     def log_marginal_likelihood(
         self,
-        theta: ArrayLike | None = None,
+        theta: None | ArrayLike = None,
         eval_gradient: bool = False,
         clone_kernel: bool = True,
-    ) -> tuple[float, np.ndarray]: ...
+    ) -> tuple[float, ndarray] | Float:
+        ...

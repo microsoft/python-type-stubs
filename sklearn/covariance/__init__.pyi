@@ -1,3 +1,10 @@
+from ._elliptic_envelope import EllipticEnvelope as EllipticEnvelope
+from ._graph_lasso import (
+    graphical_lasso as graphical_lasso,
+    GraphicalLasso as GraphicalLasso,
+    GraphicalLassoCV as GraphicalLassoCV,
+)
+from ._robust_covariance import fast_mcd as fast_mcd, MinCovDet as MinCovDet
 from ._empirical_covariance import (
     empirical_covariance as empirical_covariance,
     EmpiricalCovariance as EmpiricalCovariance,
@@ -12,13 +19,7 @@ from ._shrunk_covariance import (
     oas as oas,
     OAS as OAS,
 )
-from ._robust_covariance import fast_mcd as fast_mcd, MinCovDet as MinCovDet
-from ._graph_lasso import (
-    graphical_lasso as graphical_lasso,
-    GraphicalLasso as GraphicalLasso,
-    GraphicalLassoCV as GraphicalLassoCV,
-)
-from ._elliptic_envelope import EllipticEnvelope as EllipticEnvelope
+
 
 __all__ = [
     "EllipticEnvelope",

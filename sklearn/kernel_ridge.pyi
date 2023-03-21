@@ -1,35 +1,49 @@
-from typing import Dict, Optional, Union, Callable, Any, Mapping
-from numpy.typing import ArrayLike, NDArray
+from typing import Callable, ClassVar, TypeVar
+from .base import BaseEstimator, RegressorMixin, MultiOutputMixin
+from .utils.validation import check_is_fitted as check_is_fitted
+from numpy import ndarray
+from numbers import Integral as Integral, Real as Real
+from .utils._param_validation import Interval as Interval, StrOptions as StrOptions
+from scipy.sparse import spmatrix
+from .metrics.pairwise import (
+    PAIRWISE_KERNEL_FUNCTIONS as PAIRWISE_KERNEL_FUNCTIONS,
+    pairwise_kernels as pairwise_kernels,
+)
+from ._typing import Float, ArrayLike, Int, MatrixLike
 
-# Authors: Mathieu Blondel <mathieu@mblondel.org>
-#          Jan Hendrik Metzen <jhm@informatik.uni-bremen.de>
-# License: BSD 3 clause
+KernelRidge_Self = TypeVar("KernelRidge_Self", bound="KernelRidge")
+
 
 import numpy as np
 
-from .base import BaseEstimator, RegressorMixin, MultiOutputMixin
-from .metrics.pairwise import pairwise_kernels
-from .linear_model._ridge import _solve_cholesky_kernel
-from .utils.validation import check_is_fitted, _check_sample_weight
-from numpy import float64, ndarray
 
 class KernelRidge(MultiOutputMixin, RegressorMixin, BaseEstimator):
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    X_fit_: ndarray | spmatrix = ...
+    dual_coef_: ndarray = ...
+
+    _parameter_constraints: ClassVar[dict] = ...
+
     def __init__(
         self,
-        alpha: float | ArrayLike = 1,
+        alpha: ArrayLike | Float = 1,
         *,
         kernel: str | Callable = "linear",
-        gamma: float | None = None,
-        degree: float = 3,
-        coef0: float = 1,
-        kernel_params: Mapping[str, Any] | None = None,
-    ) -> None: ...
-    def _get_kernel(self, X: ndarray, Y: Optional[ndarray] = None) -> ndarray: ...
-    def _more_tags(self) -> Dict[str, bool]: ...
+        gamma: None | Float = None,
+        degree: Int = 3,
+        coef0: Float = 1,
+        kernel_params: None | dict = None,
+    ) -> None:
+        ...
+
     def fit(
-        self,
-        X: NDArray | ArrayLike,
-        y: ArrayLike,
-        sample_weight: float | ArrayLike | None = None,
-    ) -> "KernelRidge": ...
-    def predict(self, X: NDArray | ArrayLike) -> NDArray: ...
+        self: KernelRidge_Self,
+        X: MatrixLike | ArrayLike,
+        y: MatrixLike | ArrayLike,
+        sample_weight: None | ArrayLike = None,
+    ) -> KernelRidge_Self:
+        ...
+
+    def predict(self, X: MatrixLike | ArrayLike) -> ndarray:
+        ...

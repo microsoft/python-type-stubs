@@ -1,75 +1,108 @@
-from typing import Optional, Tuple, Union, Any, Literal
-from numpy.typing import ArrayLike, NDArray
-
-# Author: Edouard Duchesnay <edouard.duchesnay@cea.fr>
-# License: BSD 3 clause
-
-import numbers
-import warnings
+from typing import ClassVar, Literal, TypeVar
 from abc import ABCMeta, abstractmethod
+from ..exceptions import ConvergenceWarning as ConvergenceWarning
+from numpy import ndarray
+from ..utils.extmath import svd_flip as svd_flip
+from scipy.linalg import svd, pinv as pinv2, pinv2 as pinv2
+from numbers import Integral as Integral, Real as Real
+from ..utils._param_validation import Interval as Interval, StrOptions as StrOptions
+from ..base import (
+    BaseEstimator,
+    RegressorMixin,
+    TransformerMixin,
+    MultiOutputMixin,
+    ClassNamePrefixFeaturesOutMixin,
+)
+from .._typing import MatrixLike, ArrayLike, Int, Float
+from ..utils import (
+    check_array as check_array,
+    check_consistent_length as check_consistent_length,
+)
+from ..utils.fixes import sp_version as sp_version, parse_version as parse_version
+from ..utils.validation import (
+    check_is_fitted as check_is_fitted,
+    FLOAT_DTYPES as FLOAT_DTYPES,
+)
+
+PLSSVD_Self = TypeVar("PLSSVD_Self", bound="PLSSVD")
+PLSRegression_Self = TypeVar("PLSRegression_Self", bound="PLSRegression")
+_PLS_Self = TypeVar("_PLS_Self", bound="_PLS")
+
+
+import warnings
 
 import numpy as np
-from scipy.linalg import svd
-
-from ..base import BaseEstimator, RegressorMixin, TransformerMixin
-from ..base import MultiOutputMixin
-from ..base import _ClassNamePrefixFeaturesOutMixin
-from ..utils import check_array, check_scalar, check_consistent_length
-from ..utils.fixes import sp_version
-from ..utils.fixes import parse_version
-from ..utils.extmath import svd_flip
-from ..utils.validation import check_is_fitted, FLOAT_DTYPES
-from ..exceptions import ConvergenceWarning
-from numpy import ndarray
 
 __all__ = ["PLSCanonical", "PLSRegression", "PLSSVD"]
 
-def _pinv2_old(a: ndarray) -> ndarray: ...
-def _get_first_singular_vectors_power_method(
-    X: ndarray,
-    Y: ndarray,
-    mode: str = "A",
-    max_iter: int = 500,
-    tol: float = 1e-06,
-    norm_y_weights: bool = False,
-) -> Tuple[ndarray, ndarray, int]: ...
-def _get_first_singular_vectors_svd(X, Y): ...
-def _center_scale_xy(
-    X: ndarray, Y: ndarray, scale: bool = True
-) -> Tuple[ndarray, ndarray, ndarray, ndarray, ndarray, ndarray]: ...
-def _svd_flip_1d(u: ndarray, v: ndarray) -> None: ...
 
 class _PLS(
-    _ClassNamePrefixFeaturesOutMixin,
+    ClassNamePrefixFeaturesOutMixin,
     TransformerMixin,
     RegressorMixin,
     MultiOutputMixin,
     BaseEstimator,
     metaclass=ABCMeta,
 ):
+
+    _parameter_constraints: ClassVar[dict] = ...
+
     @abstractmethod
     def __init__(
         self,
         n_components: int = 2,
         *,
-        scale=True,
-        deflation_mode="regression",
-        mode="A",
-        algorithm="nipals",
-        max_iter=500,
-        tol=1e-06,
-        copy=True,
-    ) -> None: ...
-    def fit(self, X: ArrayLike, Y: ArrayLike) -> Union[PLSCanonical, CCA, PLSRegression]: ...
-    def transform(self, X: ArrayLike, Y: ArrayLike | None = None, copy: bool = True) -> ArrayLike | tuple[ArrayLike, ...]: ...
-    def inverse_transform(self, X: ArrayLike, Y: ArrayLike | None = None) -> tuple[NDArray, NDArray]: ...
-    def predict(self, X: ArrayLike, copy: bool = True) -> NDArray: ...
-    def fit_transform(self, X: ArrayLike, y: ArrayLike | None = None) -> NDArray: ...
-    @property
-    def coef_(self) -> ndarray: ...
-    def _more_tags(self): ...
+        scale: bool = True,
+        deflation_mode: str = "regression",
+        mode: str = "A",
+        algorithm: str = "nipals",
+        max_iter: int = 500,
+        tol: float = 1e-06,
+        copy: bool = True,
+    ) -> None:
+        ...
+
+    def fit(self: _PLS_Self, X: MatrixLike, Y: MatrixLike | ArrayLike) -> _PLS_Self:
+        ...
+
+    def transform(
+        self, X: MatrixLike, Y: None | MatrixLike = None, copy: bool = True
+    ) -> tuple[ndarray, ...] | ndarray | tuple[ndarray, ndarray]:
+        ...
+
+    def inverse_transform(
+        self, X: MatrixLike, Y: None | MatrixLike = None
+    ) -> tuple[ndarray, ndarray]:
+        ...
+
+    def predict(self, X: MatrixLike, copy: bool = True) -> ndarray:
+        ...
+
+    def fit_transform(self, X: MatrixLike, y: None | MatrixLike = None) -> ndarray:
+        ...
+
+    def coef_(self) -> ndarray:
+        ...
+
 
 class PLSRegression(_PLS):
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    n_iter_: list = ...
+    intercept_: ndarray = ...
+    coef_: ndarray = ...
+    y_rotations_: ndarray = ...
+    x_rotations_: ndarray = ...
+    y_scores_: ndarray = ...
+    x_scores_: ndarray = ...
+    y_loadings_: ndarray = ...
+    x_loadings_: ndarray = ...
+    y_weights_: ndarray = ...
+    x_weights_: ndarray = ...
+
+    _parameter_constraints: ClassVar[dict] = ...
+    for param in ("deflation_mode", "mode", "algorithm"):
+        pass
 
     # This implementation provides the same results that 3 PLS packages
     # provided in the R language (R-project):
@@ -79,16 +112,37 @@ class PLSRegression(_PLS):
 
     def __init__(
         self,
-        n_components: int = 2,
+        n_components: Int = 2,
         *,
         scale: bool = True,
-        max_iter: int = 500,
-        tol: float = 1e-06,
+        max_iter: Int = 500,
+        tol: Float = 1e-06,
         copy: bool = True,
-    ) -> None: ...
-    def fit(self, X: ArrayLike, Y: ArrayLike) -> "PLSRegression": ...
+    ) -> None:
+        ...
+
+    def fit(
+        self: PLSRegression_Self, X: MatrixLike, Y: MatrixLike | ArrayLike
+    ) -> PLSRegression_Self:
+        ...
+
 
 class PLSCanonical(_PLS):
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    n_iter_: list = ...
+    intercept_: ndarray = ...
+    coef_: ndarray = ...
+    y_rotations_: ndarray = ...
+    x_rotations_: ndarray = ...
+    y_loadings_: ndarray = ...
+    x_loadings_: ndarray = ...
+    y_weights_: ndarray = ...
+    x_weights_: ndarray = ...
+
+    _parameter_constraints: ClassVar[dict] = ...
+    for param in ("deflation_mode", "mode"):
+        pass
 
     # This implementation provides the same results that the "plspm" package
     # provided in the R language (R-project), using the function plsca(X, Y).
@@ -100,28 +154,68 @@ class PLSCanonical(_PLS):
 
     def __init__(
         self,
-        n_components: int = 2,
+        n_components: Int = 2,
         *,
         scale: bool = True,
-        algorithm: Literal["nipals", "svd"] = "nipals",
-        max_iter: int = 500,
-        tol: float = 1e-06,
+        algorithm: Literal["nipals", "svd", "nipals"] = "nipals",
+        max_iter: Int = 500,
+        tol: Float = 1e-06,
         copy: bool = True,
-    ) -> None: ...
+    ) -> None:
+        ...
+
 
 class CCA(_PLS):
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    n_iter_: list = ...
+    intercept_: ndarray = ...
+    coef_: ndarray = ...
+    y_rotations_: ndarray = ...
+    x_rotations_: ndarray = ...
+    y_loadings_: ndarray = ...
+    x_loadings_: ndarray = ...
+    y_weights_: ndarray = ...
+    x_weights_: ndarray = ...
+
+    _parameter_constraints: ClassVar[dict] = ...
+    for param in ("deflation_mode", "mode", "algorithm"):
+        pass
+
     def __init__(
         self,
-        n_components: int = 2,
+        n_components: Int = 2,
         *,
         scale: bool = True,
-        max_iter: int = 500,
-        tol: float = 1e-06,
+        max_iter: Int = 500,
+        tol: Float = 1e-06,
         copy: bool = True,
-    ) -> None: ...
+    ) -> None:
+        ...
 
-class PLSSVD(_ClassNamePrefixFeaturesOutMixin, TransformerMixin, BaseEstimator):
-    def __init__(self, n_components: int = 2, *, scale: bool = True, copy: bool = True): ...
-    def fit(self, X: ArrayLike, Y: ArrayLike) -> Any: ...
-    def transform(self, X: ArrayLike, Y: ArrayLike | None = None) -> ArrayLike | tuple[ArrayLike, ...]: ...
-    def fit_transform(self, X: ArrayLike, y: ArrayLike | None = None) -> ArrayLike | tuple[ArrayLike, ...]: ...
+
+class PLSSVD(ClassNamePrefixFeaturesOutMixin, TransformerMixin, BaseEstimator):
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    y_weights_: ndarray = ...
+    x_weights_: ndarray = ...
+
+    _parameter_constraints: ClassVar[dict] = ...
+
+    def __init__(
+        self, n_components: Int = 2, *, scale: bool = True, copy: bool = True
+    ) -> None:
+        ...
+
+    def fit(self: PLSSVD_Self, X: MatrixLike, Y: MatrixLike | ArrayLike) -> PLSSVD_Self:
+        ...
+
+    def transform(
+        self, X: MatrixLike, Y: None | MatrixLike | ArrayLike = None
+    ) -> ndarray | tuple[ndarray, ndarray]:
+        ...
+
+    def fit_transform(
+        self, X: MatrixLike, y: None | MatrixLike | ArrayLike = None
+    ) -> ndarray | tuple[ndarray, ndarray]:
+        ...

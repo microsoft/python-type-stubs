@@ -1,9 +1,46 @@
-from sklearn.tree._classes import DecisionTreeClassifier, DecisionTreeRegressor
-from sklearn.utils import Bunch
-from numpy.typing import ArrayLike, NDArray
-from numpy import ndarray
+from typing import ClassVar, Literal, Mapping, Sequence, TypeVar
 from numpy.random import RandomState
-from typing import Optional, Union, Literal, Sequence
+from scipy.sparse import issparse as issparse, spmatrix
+from ..utils._bunch import Bunch
+from ._criterion import Criterion as Criterion
+from ..utils.validation import check_is_fitted as check_is_fitted
+from abc import ABCMeta, abstractmethod
+from ._splitter import Splitter as Splitter
+from ..utils._param_validation import (
+    Hidden as Hidden,
+    Interval as Interval,
+    StrOptions as StrOptions,
+)
+from numpy import ndarray
+from numbers import Integral as Integral, Real as Real
+from ..base import (
+    BaseEstimator,
+    ClassifierMixin,
+    clone as clone,
+    RegressorMixin,
+    is_classifier as is_classifier,
+    MultiOutputMixin,
+)
+from ..utils import (
+    check_random_state as check_random_state,
+    compute_sample_weight as compute_sample_weight,
+)
+from ..utils.multiclass import (
+    check_classification_targets as check_classification_targets,
+)
+from math import ceil as ceil
+from .._typing import MatrixLike, ArrayLike, Int, Float
+from ._tree import (
+    DepthFirstTreeBuilder as DepthFirstTreeBuilder,
+    BestFirstTreeBuilder as BestFirstTreeBuilder,
+    Tree,
+    ccp_pruning_path as ccp_pruning_path,
+)
+
+DecisionTreeRegressor_Self = TypeVar(
+    "DecisionTreeRegressor_Self", bound="DecisionTreeRegressor"
+)
+
 
 # Authors: Gilles Louppe <g.louppe@gmail.com>
 #          Peter Prettenhofer <peter.prettenhofer@gmail.com>
@@ -19,32 +56,8 @@ from typing import Optional, Union, Literal, Sequence
 import numbers
 import warnings
 import copy
-from abc import ABCMeta
-from abc import abstractmethod
-from math import ceil
 
 import numpy as np
-from scipy.sparse import issparse
-
-from ..base import BaseEstimator
-from ..base import ClassifierMixin
-from ..base import clone
-from ..base import RegressorMixin
-from ..base import is_classifier
-from ..base import MultiOutputMixin
-from ..utils import Bunch
-from ..utils import check_random_state
-from ..utils import check_scalar
-from ..utils.deprecation import deprecated
-from ..utils.validation import _check_sample_weight
-from ..utils import compute_sample_weight
-from ..utils.multiclass import check_classification_targets
-from ..utils.validation import check_is_fitted
-
-import sklearn.utils._bunch
-from pandas.core.frame import DataFrame
-from scipy.sparse._csc import csc_matrix
-from scipy.sparse._csr import csr_matrix
 
 __all__ = [
     "DecisionTreeClassifier",
@@ -52,6 +65,7 @@ __all__ = [
     "ExtraTreeClassifier",
     "ExtraTreeRegressor",
 ]
+
 
 # =============================================================================
 # Types and constants
@@ -61,7 +75,6 @@ DTYPE = ...
 DOUBLE = ...
 
 CRITERIA_CLF: dict = ...
-# TODO(1.2): Remove "mse" and "mae".
 CRITERIA_REG: dict = ...
 
 DENSE_SPLITTERS: dict = ...
@@ -72,7 +85,11 @@ SPARSE_SPLITTERS: dict = ...
 # Base decision tree
 # =============================================================================
 
+
 class BaseDecisionTree(MultiOutputMixin, BaseEstimator, metaclass=ABCMeta):
+
+    _parameter_constraints: ClassVar[dict] = ...
+
     @abstractmethod
     def __init__(
         self,
@@ -88,129 +105,204 @@ class BaseDecisionTree(MultiOutputMixin, BaseEstimator, metaclass=ABCMeta):
         random_state,
         min_impurity_decrease,
         class_weight=None,
-        ccp_alpha=0.0,
-    ) -> None: ...
-    def get_depth(self) -> int: ...
-    def get_n_leaves(self) -> int: ...
+        ccp_alpha: float = 0.0,
+    ) -> None:
+        ...
+
+    def get_depth(self) -> int:
+        ...
+
+    def get_n_leaves(self) -> int:
+        ...
+
     def fit(
         self,
-        X: Union[DataFrame, ndarray, csr_matrix, csc_matrix],
+        X,
         y: ndarray,
-        sample_weight: Optional[ndarray] = None,
+        sample_weight: None | ndarray = None,
         check_input: bool = True,
-    ) -> Union[DecisionTreeRegressor, DecisionTreeClassifier, ExtraTreeRegressor, ExtraTreeClassifier,]: ...
-    def _validate_X_predict(self, X: Union[ndarray, csr_matrix], check_input: bool) -> Union[ndarray, csr_matrix]: ...
-    def predict(self, X: NDArray | ArrayLike, check_input: bool = True) -> ArrayLike: ...
-    def apply(self, X: NDArray | ArrayLike, check_input: bool = True) -> ArrayLike: ...
-    def decision_path(self, X: NDArray | ArrayLike, check_input: bool = True) -> NDArray: ...
-    def _prune_tree(self) -> None: ...
+    ):
+        ...
+
+    def predict(self, X: MatrixLike | ArrayLike, check_input: bool = True) -> ndarray:
+        ...
+
+    def apply(self, X: MatrixLike | ArrayLike, check_input: bool = True) -> ArrayLike:
+        ...
+
+    def decision_path(
+        self, X: MatrixLike | ArrayLike, check_input: bool = True
+    ) -> spmatrix:
+        ...
+
     def cost_complexity_pruning_path(
         self,
-        X: NDArray | ArrayLike,
-        y: ArrayLike,
-        sample_weight: ArrayLike | None = None,
-    ) -> Bunch: ...
+        X: MatrixLike | ArrayLike,
+        y: MatrixLike | ArrayLike,
+        sample_weight: None | ArrayLike = None,
+    ) -> Bunch:
+        ...
+
     @property
-    def feature_importances_(self) -> NDArray: ...
+    def feature_importances_(self) -> ndarray:
+        ...
+
 
 # =============================================================================
 # Public estimators
 # =============================================================================
 
+
 class DecisionTreeClassifier(ClassifierMixin, BaseDecisionTree):
+    tree_: Tree = ...
+    n_outputs_: int = ...
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    n_classes_: int | list[int] = ...
+    max_features_: int = ...
+    feature_importances_: ndarray = ...
+    classes_: ndarray | list[ndarray] = ...
+
+    _parameter_constraints: ClassVar[dict] = ...
+
     def __init__(
         self,
         *,
-        criterion: Literal["gini", "entropy", "log_loss"] = "gini",
-        splitter: Literal["best", "random"] = "best",
-        max_depth: int | None = None,
-        min_samples_split: int | float = 2,
-        min_samples_leaf: int | float = 1,
-        min_weight_fraction_leaf: float = 0.0,
-        max_features: int | float | Literal["auto", "sqrt", "log2"] | None = None,
-        random_state: int | RandomState | None = None,
-        max_leaf_nodes: int | None = None,
-        min_impurity_decrease: float = 0.0,
-        class_weight: dict | Sequence[dict] | Literal["balanced"] | None = None,
+        criterion: Literal["gini", "entropy", "log_loss", "gini"] = "gini",
+        splitter: Literal["best", "random", "best"] = "best",
+        max_depth: None | Int = None,
+        min_samples_split: float | int = 2,
+        min_samples_leaf: float | int = 1,
+        min_weight_fraction_leaf: Float = 0.0,
+        max_features: float | None | Literal["auto", "sqrt", "log2"] | int = None,
+        random_state: RandomState | None | Int = None,
+        max_leaf_nodes: None | Int = None,
+        min_impurity_decrease: Float = 0.0,
+        class_weight: None | Mapping | str | Sequence[Mapping] = None,
         ccp_alpha: float = 0.0,
-    ) -> None: ...
+    ) -> None:
+        ...
+
     def fit(
         self,
-        X: NDArray | ArrayLike,
-        y: ArrayLike,
-        sample_weight: ArrayLike | None = None,
+        X: MatrixLike | ArrayLike,
+        y: MatrixLike | ArrayLike,
+        sample_weight: None | ArrayLike = None,
         check_input: bool = True,
-    ) -> DecisionTreeClassifier: ...
-    def predict_proba(self, X: NDArray | ArrayLike, check_input: bool = True) -> NDArray | list[NDArray]: ...
-    def predict_log_proba(self, X: NDArray | ArrayLike) -> NDArray | list[NDArray]: ...
-    @deprecated(  # type: ignore
-        "The attribute `n_features_` is deprecated in 1.0 and will be removed " "in 1.2. Use `n_features_in_` instead."
-    )
-    @property
-    def n_features_(self): ...
-    def _more_tags(self): ...
+    ) -> DecisionTreeClassifier | ExtraTreeClassifier:
+        ...
+
+    def predict_proba(
+        self, X: MatrixLike | ArrayLike, check_input: bool = True
+    ) -> ndarray | list[ndarray]:
+        ...
+
+    def predict_log_proba(self, X: MatrixLike | ArrayLike) -> ndarray | list[ndarray]:
+        ...
+
 
 class DecisionTreeRegressor(RegressorMixin, BaseDecisionTree):
+    tree_: Tree = ...
+    n_outputs_: int = ...
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    max_features_: int = ...
+    feature_importances_: ndarray = ...
+
+    _parameter_constraints: ClassVar[dict] = ...
+
     def __init__(
         self,
         *,
-        criterion: Literal["squared_error", "friedman_mse", "absolute_error", "poisson"] = "squared_error",
-        splitter: Literal["best", "random"] = "best",
-        max_depth: int | None = None,
-        min_samples_split: int | float = 2,
-        min_samples_leaf: int | float = 1,
-        min_weight_fraction_leaf: float = 0.0,
-        max_features: int | float | Literal["auto", "sqrt", "log2"] | None = None,
-        random_state: int | RandomState | None = None,
-        max_leaf_nodes: int | None = None,
-        min_impurity_decrease: float = 0.0,
+        criterion: Literal[
+            "squared_error",
+            "friedman_mse",
+            "absolute_error",
+            "poisson",
+            "squared_error",
+        ] = "squared_error",
+        splitter: Literal["best", "random", "best"] = "best",
+        max_depth: None | Int = None,
+        min_samples_split: float | int = 2,
+        min_samples_leaf: float | int = 1,
+        min_weight_fraction_leaf: Float = 0.0,
+        max_features: float | None | Literal["auto", "sqrt", "log2"] | int = None,
+        random_state: RandomState | None | Int = None,
+        max_leaf_nodes: None | Int = None,
+        min_impurity_decrease: Float = 0.0,
         ccp_alpha: float = 0.0,
-    ) -> None: ...
+    ) -> None:
+        ...
+
     def fit(
-        self,
-        X: NDArray | ArrayLike,
-        y: ArrayLike,
-        sample_weight: ArrayLike | None = None,
+        self: DecisionTreeRegressor_Self,
+        X: MatrixLike | ArrayLike,
+        y: MatrixLike | ArrayLike,
+        sample_weight: None | ArrayLike = None,
         check_input: bool = True,
-    ) -> DecisionTreeRegressor: ...
-    def _compute_partial_dependence_recursion(self, grid: ndarray, target_features: ndarray) -> ndarray: ...
-    @deprecated(  # type: ignore
-        "The attribute `n_features_` is deprecated in 1.0 and will be removed " "in 1.2. Use `n_features_in_` instead."
-    )
-    @property
-    def n_features_(self): ...
+    ) -> DecisionTreeRegressor_Self:
+        ...
+
 
 class ExtraTreeClassifier(DecisionTreeClassifier):
+    tree_: Tree = ...
+    n_outputs_: int = ...
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    feature_importances_: ndarray = ...
+    n_classes_: int | list[int] = ...
+    max_features_: int = ...
+    classes_: ndarray | list[ndarray] = ...
+
     def __init__(
         self,
         *,
-        criterion: Literal["gini", "entropy", "log_loss"] = "gini",
-        splitter: Literal["random", "best"] = "random",
-        max_depth: int | None = None,
-        min_samples_split: int | float = 2,
-        min_samples_leaf: int | float = 1,
-        min_weight_fraction_leaf: float = 0.0,
-        max_features: int | float | Literal["auto", "sqrt", "log2"] | None = "sqrt",
-        random_state: int | RandomState | None = None,
-        max_leaf_nodes: int | None = None,
-        min_impurity_decrease: float = 0.0,
-        class_weight: dict | Sequence[dict] | Literal["balanced"] | None = None,
+        criterion: Literal["gini", "entropy", "log_loss", "gini"] = "gini",
+        splitter: Literal["random", "best", "random"] = "random",
+        max_depth: None | Int = None,
+        min_samples_split: float | int = 2,
+        min_samples_leaf: float | int = 1,
+        min_weight_fraction_leaf: Float = 0.0,
+        max_features: float
+        | None
+        | int
+        | Literal["auto", "sqrt", "log2", "sqrt"] = "sqrt",
+        random_state: RandomState | None | Int = None,
+        max_leaf_nodes: None | Int = None,
+        min_impurity_decrease: Float = 0.0,
+        class_weight: None | Mapping | str | Sequence[Mapping] = None,
         ccp_alpha: float = 0.0,
-    ) -> None: ...
+    ) -> None:
+        ...
+
 
 class ExtraTreeRegressor(DecisionTreeRegressor):
+    tree_: Tree = ...
+    n_outputs_: int = ...
+    feature_importances_: ndarray = ...
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    max_features_: int = ...
+
     def __init__(
         self,
         *,
-        criterion: Literal["squared_error", "friedman_mse"] = "squared_error",
-        splitter: Literal["random", "best"] = "random",
-        max_depth: int | None = None,
-        min_samples_split: int | float = 2,
-        min_samples_leaf: int | float = 1,
-        min_weight_fraction_leaf: float = 0.0,
-        max_features: int | float | Literal["auto", "sqrt", "log2"] | None = 1.0,
-        random_state: int | RandomState | None = None,
-        min_impurity_decrease: float = 0.0,
-        max_leaf_nodes: int | None = None,
+        criterion: Literal[
+            "squared_error",
+            "friedman_mse",
+            "absolute_error",
+            "poisson",
+            "squared_error",
+        ] = "squared_error",
+        splitter: Literal["random", "best", "random"] = "random",
+        max_depth: None | Int = None,
+        min_samples_split: float | int = 2,
+        min_samples_leaf: float | int = 1,
+        min_weight_fraction_leaf: Float = 0.0,
+        max_features: float | None | Literal["auto", "sqrt", "log2"] | int = 1.0,
+        random_state: RandomState | None | Int = None,
+        min_impurity_decrease: Float = 0.0,
+        max_leaf_nodes: None | Int = None,
         ccp_alpha: float = 0.0,
-    ) -> None: ...
+    ) -> None:
+        ...

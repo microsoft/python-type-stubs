@@ -1,44 +1,63 @@
-from typing import Optional, Literal, Any
-from numpy.typing import ArrayLike, NDArray
-
-# Author: Lars Buitinck
-#         Olivier Grisel <olivier.grisel@ensta.org>
-#         Michael Becker <mike@beckerfuffle.com>
-# License: 3-clause BSD.
-
-from numbers import Integral
-import numpy as np
+from typing import Any, ClassVar, Literal, TypeVar
+from ..utils.sparsefuncs import mean_variance_axis as mean_variance_axis
 from numpy.random import RandomState
-import scipy.sparse as sp
-from scipy.sparse.linalg import svds
-
-from ..base import BaseEstimator, TransformerMixin, _ClassNamePrefixFeaturesOutMixin
-from ..utils import check_array, check_random_state
-from ..utils._arpack import _init_arpack_v0
-from ..utils.extmath import randomized_svd, safe_sparse_dot, svd_flip
-from ..utils.sparsefuncs import mean_variance_axis
-from ..utils.validation import check_is_fitted, check_scalar
+from scipy.sparse.linalg import svds as svds
 from numpy import ndarray
-from scipy.sparse._csr import csr_matrix
+from ..utils.extmath import (
+    randomized_svd as randomized_svd,
+    safe_sparse_dot as safe_sparse_dot,
+    svd_flip as svd_flip,
+)
+from ..utils._param_validation import Interval as Interval, StrOptions as StrOptions
+from numbers import Integral as Integral, Real as Real
+from ..base import BaseEstimator, TransformerMixin, ClassNamePrefixFeaturesOutMixin
+from .._typing import Int, Float, MatrixLike, ArrayLike
+from ..utils import check_array as check_array, check_random_state as check_random_state
+from ..utils.validation import check_is_fitted as check_is_fitted
+
+TruncatedSVD_Self = TypeVar("TruncatedSVD_Self", bound="TruncatedSVD")
+
+import numpy as np
+import scipy.sparse as sp
 
 __all__ = ["TruncatedSVD"]
 
-class TruncatedSVD(_ClassNamePrefixFeaturesOutMixin, TransformerMixin, BaseEstimator):
+
+class TruncatedSVD(ClassNamePrefixFeaturesOutMixin, TransformerMixin, BaseEstimator):
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    singular_values_: ndarray = ...
+    explained_variance_ratio_: ndarray = ...
+    explained_variance_: ndarray = ...
+    components_: ndarray = ...
+
+    _parameter_constraints: ClassVar[dict] = ...
+
     def __init__(
         self,
-        n_components: int = 2,
+        n_components: Int = 2,
         *,
-        algorithm: Literal["arpack", "randomized"] = "randomized",
-        n_iter: int = 5,
-        n_oversamples: int = 10,
-        power_iteration_normalizer: Literal["auto", "QR", "LU", "none"] = "auto",
-        random_state: int | RandomState | None = None,
-        tol: float = 0.0,
-    ) -> None: ...
-    def fit(self, X: NDArray | ArrayLike, y=None) -> Any: ...
-    def fit_transform(self, X: NDArray | ArrayLike, y: Optional[ndarray] = None) -> NDArray: ...
-    def transform(self, X: NDArray | ArrayLike) -> NDArray: ...
-    def inverse_transform(self, X: ArrayLike) -> NDArray: ...
-    def _more_tags(self): ...
-    @property
-    def _n_features_out(self): ...
+        algorithm: Literal["arpack", "randomized", "randomized"] = "randomized",
+        n_iter: Int = 5,
+        n_oversamples: Int = 10,
+        power_iteration_normalizer: Literal[
+            "auto", "QR", "LU", "none", "auto"
+        ] = "auto",
+        random_state: RandomState | None | Int = None,
+        tol: Float = 0.0,
+    ) -> None:
+        ...
+
+    def fit(
+        self: TruncatedSVD_Self, X: MatrixLike | ArrayLike, y: Any = None
+    ) -> TruncatedSVD_Self:
+        ...
+
+    def fit_transform(self, X: MatrixLike | ArrayLike, y: Any = None) -> ndarray:
+        ...
+
+    def transform(self, X: MatrixLike | ArrayLike) -> ndarray:
+        ...
+
+    def inverse_transform(self, X: MatrixLike) -> ndarray:
+        ...

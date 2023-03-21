@@ -1,73 +1,76 @@
-from typing import Optional, Literal, Mapping, Any
-from numpy.typing import ArrayLike, NDArray
+from typing import Any, Callable, ClassVar, Literal, TypeVar
+from numpy.random import RandomState
+from scipy.sparse.linalg import eigsh as eigsh
+from ..preprocessing import KernelCenterer as KernelCenterer
+from scipy import linalg as linalg
+from ..exceptions import NotFittedError as NotFittedError
+from numpy import ndarray
+from ..utils.extmath import svd_flip as svd_flip
+from ..utils._param_validation import Interval as Interval, StrOptions as StrOptions
+from numbers import Integral as Integral, Real as Real
+from ..base import BaseEstimator, TransformerMixin, ClassNamePrefixFeaturesOutMixin
+from ..metrics.pairwise import pairwise_kernels as pairwise_kernels
+from .._typing import Int, Float, MatrixLike, ArrayLike
+from ..utils.validation import check_is_fitted as check_is_fitted
+
+KernelPCA_Self = TypeVar("KernelPCA_Self", bound="KernelPCA")
+
 
 # Author: Mathieu Blondel <mathieu@mblondel.org>
 #         Sylvain Marie <sylvain.marie@schneider-electric.com>
 # License: BSD 3 clause
 
 import numpy as np
-from numpy.random import RandomState
-import numbers
-from scipy import linalg
-from scipy.sparse.linalg import eigsh
 
-from ..utils._arpack import _init_arpack_v0
-from ..utils.extmath import svd_flip, _randomized_eigsh
-from ..utils.validation import (
-    check_is_fitted,
-    _check_psd_eigenvalues,
-    check_scalar,
-)
-from ..utils.deprecation import deprecated
-from ..exceptions import NotFittedError
-from ..base import BaseEstimator, TransformerMixin, _ClassNamePrefixFeaturesOutMixin
-from ..preprocessing import KernelCenterer
-from ..metrics.pairwise import pairwise_kernels
-from numpy import ndarray
 
-class KernelPCA(_ClassNamePrefixFeaturesOutMixin, TransformerMixin, BaseEstimator):
+class KernelPCA(ClassNamePrefixFeaturesOutMixin, TransformerMixin, BaseEstimator):
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    X_fit_: ndarray = ...
+    X_transformed_fit_: ndarray = ...
+    dual_coef_: ndarray = ...
+    eigenvectors_: ndarray = ...
+    eigenvalues_: ndarray = ...
+
+    _parameter_constraints: ClassVar[dict] = ...
+
     def __init__(
         self,
-        n_components: int | None = None,
+        n_components: None | Int = None,
         *,
-        kernel: Literal["linear", "poly", "rbf", "sigmoid", "cosine", "precomputed"] = "linear",
-        gamma: float | None = None,
-        degree: int = 3,
-        coef0: float = 1,
-        kernel_params: Mapping | None = None,
-        alpha: float = 1.0,
+        kernel: Callable
+        | Literal[
+            "linear", "poly", "rbf", "sigmoid", "cosine", "precomputed", "linear"
+        ] = "linear",
+        gamma: None | Float = None,
+        degree: Int = 3,
+        coef0: Float = 1,
+        kernel_params: None | dict = None,
+        alpha: Float = 1.0,
         fit_inverse_transform: bool = False,
-        eigen_solver: Literal["auto", "dense", "arpack", "randomized"] = "auto",
-        tol: float = 0,
-        max_iter: int | None = None,
-        iterated_power: int | Literal["auto"] = "auto",
+        eigen_solver: Literal["auto", "dense", "arpack", "randomized", "auto"] = "auto",
+        tol: Float = 0,
+        max_iter: None | Int = None,
+        iterated_power: Literal["auto", "auto"] | int = "auto",
         remove_zero_eig: bool = False,
-        random_state: int | RandomState | None = None,
+        random_state: RandomState | None | Int = None,
         copy_X: bool = True,
-        n_jobs: int | None = None,
-    ) -> None: ...
+        n_jobs: None | Int = None,
+    ) -> None:
+        ...
 
-    # TODO: Remove in 1.2
-    # mypy error: Decorated property not supported
-    @deprecated(  # type: ignore
-        "Attribute `lambdas_` was deprecated in version 1.0 and will be " "removed in 1.2. Use `eigenvalues_` instead."
-    )
-    @property
-    def lambdas_(self): ...
+    def fit(
+        self: KernelPCA_Self, X: MatrixLike | ArrayLike, y: Any = None
+    ) -> KernelPCA_Self:
+        ...
 
-    # mypy error: Decorated property not supported
-    @deprecated(  # type: ignore
-        "Attribute `alphas_` was deprecated in version 1.0 and will be " "removed in 1.2. Use `eigenvectors_` instead."
-    )
-    @property
-    def alphas_(self): ...
-    def _get_kernel(self, X: ndarray, Y: Optional[ndarray] = None) -> ndarray: ...
-    def _fit_transform(self, K: ndarray) -> ndarray: ...
-    def _fit_inverse_transform(self, X_transformed: ndarray, X: ndarray) -> None: ...
-    def fit(self, X: NDArray | ArrayLike, y: None = None) -> "KernelPCA": ...
-    def fit_transform(self, X: NDArray | ArrayLike, y: None = None, **params) -> NDArray: ...
-    def transform(self, X: NDArray | ArrayLike) -> NDArray: ...
-    def inverse_transform(self, X: NDArray | ArrayLike) -> NDArray: ...
-    def _more_tags(self): ...
-    @property
-    def _n_features_out(self): ...
+    def fit_transform(
+        self, X: MatrixLike | ArrayLike, y: Any = None, **params
+    ) -> ndarray:
+        ...
+
+    def transform(self, X: MatrixLike | ArrayLike) -> ndarray:
+        ...
+
+    def inverse_transform(self, X: MatrixLike) -> ndarray:
+        ...

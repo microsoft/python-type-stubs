@@ -1,5 +1,35 @@
-from typing import Type, Callable, Any
-from numpy.typing import ArrayLike, NDArray
+from typing import Any, Callable, ClassVar, Sequence
+from numpy.random import RandomState
+from .fixes import threadpool_info as threadpool_info
+from ..metrics import accuracy_score as accuracy_score, r2_score as r2_score
+from .validation import (
+    check_array as check_array,
+    check_is_fitted as check_is_fitted,
+    check_X_y as check_X_y,
+)
+from unittest import TestCase as TestCase
+from numpy import ndarray
+from numpydoc import docscrape as docscrape
+from subprocess import (
+    check_output as check_output,
+    STDOUT as STDOUT,
+    CalledProcessError as CalledProcessError,
+    TimeoutExpired as TimeoutExpired,
+)
+from functools import wraps as wraps
+from numpy.testing import (
+    assert_allclose as np_assert_allclose,
+    assert_almost_equal,
+    assert_approx_equal,
+    assert_array_equal,
+    assert_array_almost_equal,
+    assert_array_less,
+)
+from . import IS_PYPY as IS_PYPY
+from .multiclass import check_classification_targets as check_classification_targets
+from inspect import signature as signature
+from .._typing import ArrayLike, MatrixLike, Float, Int
+from collections.abc import Iterable as Iterable, Sequence
 
 # Copyright (c) 2011, 2012
 # Authors: Pietro Berkes,
@@ -18,45 +48,19 @@ import warnings
 import sys
 import functools
 import tempfile
-from subprocess import check_output, STDOUT, CalledProcessError
-from subprocess import TimeoutExpired
 import re
 import contextlib
-from collections.abc import Iterable
-from collections.abc import Sequence
 
 import scipy as sp
-from functools import wraps
-from inspect import signature
 
 import shutil
 import atexit
 import unittest
-from unittest import TestCase
-
-from numpy.testing import assert_allclose as np_assert_allclose
-from numpy.testing import assert_almost_equal
-from numpy.testing import assert_approx_equal
-from numpy.testing import assert_array_equal
-from numpy.testing import assert_array_almost_equal
-from numpy.testing import assert_array_less
 import numpy as np
 import joblib
 
 import sklearn
-from sklearn.utils import (
-    IS_PYPY,
-    _IS_32BIT,
-    deprecated,
-    _in_unstable_openblas_configuration,
-)
-from sklearn.utils.multiclass import check_classification_targets
-from sklearn.utils.validation import (
-    check_array,
-    check_is_fitted,
-    check_X_y,
-)
-from sklearn.utils.fixes import threadpool_info
+
 
 __all__ = [
     "assert_raises",
@@ -82,103 +86,184 @@ assert_raises_regex = ...
 # the old name for now
 assert_raises_regexp = ...
 
-# TODO: Remove in 1.2
-@deprecated("`assert_warns` is deprecated in 1.0 and will be removed in 1.2." "Use `pytest.warns` instead.")  # type: ignore
-def assert_warns(warning_class: Warning, func: Callable, *args, **kw) -> Any: ...
-
-# TODO: Remove in 1.2
-@deprecated(  # type: ignore
-    "`assert_warns_message` is deprecated in 1.0 and will be removed in 1.2." "Use `pytest.warns` instead."
-)
-def assert_warns_message(warning_class: Warning, message: str | Callable, func: Callable, *args, **kw) -> Any: ...
 
 # To remove when we support numpy 1.7
-def assert_no_warnings(func, *args, **kw): ...
-def ignore_warnings(obj: Callable | None = None, category: Warning = ...) -> "_IgnoreWarnings": ...
+def assert_no_warnings(func, *args, **kw):
+    ...
+
+
+def ignore_warnings(
+    obj: None | Callable = None, category: Warning = ...
+) -> _IgnoreWarnings | Callable:
+    ...
+
 
 class _IgnoreWarnings:
-    def __init__(self, category: tuple[Warning, ...]) -> None: ...
-    def __call__(self, fn: Callable) -> Callable: ...
-    def __repr__(self): ...
-    def __enter__(self) -> None: ...
-    def __exit__(self, *exc_info) -> None: ...
+    def __init__(self, category: tuple[Warning]) -> None:
+        ...
 
-def assert_raise_message(exceptions: Exception | tuple[Exception, ...], message: str, function: Callable, *args, **kwargs): ...
+    def __call__(self, fn: Callable) -> Callable:
+        ...
+
+    def __repr__(self) -> str:
+        ...
+
+    def __enter__(self) -> None:
+        ...
+
+    def __exit__(self, *exc_info) -> None:
+        ...
+
+
+def assert_raise_message(
+    exceptions: tuple[Exception, ...] | Exception,
+    message: str,
+    function: Callable,
+    *args,
+    **kwargs
+):
+    ...
+
+
 def assert_allclose(
     actual: ArrayLike,
     desired: ArrayLike,
     rtol: float | None = None,
     atol: float | None = 0.0,
-    equal_nan: bool | None = True,
-    err_msg: str | None = "",
-    verbose: bool | None = True,
-): ...
+    equal_nan: None | bool = True,
+    err_msg: None | str = "",
+    verbose: None | bool = True,
+):
+    ...
+
+
 def assert_allclose_dense_sparse(
-    x: NDArray | ArrayLike,
-    y: NDArray | ArrayLike,
-    rtol: float = 1e-07,
-    atol: float = 1e-9,
+    x: MatrixLike | ArrayLike,
+    y: MatrixLike | ArrayLike,
+    rtol: Float = 1e-07,
+    atol: Float = 1e-9,
     err_msg: str = "",
-): ...
-def set_random_state(estimator: Any, random_state: int | RandomState | None = 0): ...
-def check_skip_network(): ...
-def _delete_folder(folder_path, warn=False): ...
+):
+    ...
+
+
+def set_random_state(estimator: Any, random_state: RandomState | None | Int = 0):
+    ...
+
+
+def check_skip_network():
+    ...
+
 
 class TempMemmap:
-    def __init__(self, data, mmap_mode: str = "r"): ...
-    def __enter__(self): ...
-    def __exit__(self, exc_type, exc_val, exc_tb): ...
+    def __init__(self, data, mmap_mode: str = "r") -> None:
+        ...
 
-def _create_memmap_backed_array(array, filename, mmap_mode): ...
-def _create_aligned_memmap_backed_arrays(data, mmap_mode, folder): ...
-def create_memmap_backed_data(data, mmap_mode: str = "r", return_folder: bool = False, aligned: bool = False): ...
+    def __enter__(self):
+        ...
 
-# Utils to test docstrings
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        ...
 
-def _get_args(function, varargs=False): ...
-def _get_func_name(func): ...
-def check_docstring_parameters(func: Callable, doc: str | None = None, ignore: ArrayLike | None = None) -> ArrayLike: ...
-def assert_run_python_script(source_code: str, timeout: int = 60): ...
-def _convert_container(container, constructor_name, columns_name=None, dtype=None): ...
+
+def create_memmap_backed_data(
+    data, mmap_mode: str = "r", return_folder: bool = False, aligned: bool = False
+):
+    ...
+
+
+def check_docstring_parameters(
+    func: Callable, doc: None | str = None, ignore: Sequence | None = None
+) -> ndarray:
+    ...
+
+
+def assert_run_python_script(source_code: str, timeout: Int = 60):
+    ...
+
+
 def raises(
     expected_exc_type,
-    match: str | ArrayLike | None = None,
+    match: None | str | Sequence[str] = None,
     may_pass: bool = False,
-    err_msg: str | None = None,
-): ...
+    err_msg: None | str = None,
+):
+    ...
+
 
 class _Raises(contextlib.AbstractContextManager):
     # see raises() for parameters
-    def __init__(self, expected_exc_type, match, may_pass, err_msg): ...
-    def __exit__(self, exc_type, exc_value, _): ...
+    def __init__(self, expected_exc_type, match, may_pass, err_msg) -> None:
+        ...
+
+    def __exit__(self, exc_type, exc_value, _):
+        ...
+
 
 class MinimalClassifier:
 
-    _estimator_type: str = ...
+    _estimator_type: ClassVar[str] = ...
 
-    def __init__(self, param=None): ...
-    def get_params(self, deep=True): ...
-    def set_params(self, **params): ...
-    def fit(self, X, y): ...
-    def predict_proba(self, X): ...
-    def predict(self, X): ...
-    def score(self, X, y): ...
+    def __init__(self, param=None) -> None:
+        ...
+
+    def get_params(self, deep: bool = True):
+        ...
+
+    def set_params(self, **params):
+        ...
+
+    def fit(self, X, y):
+        ...
+
+    def predict_proba(self, X):
+        ...
+
+    def predict(self, X):
+        ...
+
+    def score(self, X, y):
+        ...
+
 
 class MinimalRegressor:
 
-    _estimator_type: str = ...
+    _estimator_type: ClassVar[str] = ...
 
-    def __init__(self, param=None): ...
-    def get_params(self, deep=True): ...
-    def set_params(self, **params): ...
-    def fit(self, X, y): ...
-    def predict(self, X): ...
-    def score(self, X, y): ...
+    def __init__(self, param=None) -> None:
+        ...
+
+    def get_params(self, deep: bool = True):
+        ...
+
+    def set_params(self, **params):
+        ...
+
+    def fit(self, X, y):
+        ...
+
+    def predict(self, X):
+        ...
+
+    def score(self, X, y):
+        ...
+
 
 class MinimalTransformer:
-    def __init__(self, param=None): ...
-    def get_params(self, deep=True): ...
-    def set_params(self, **params): ...
-    def fit(self, X, y=None): ...
-    def transform(self, X, y=None): ...
-    def fit_transform(self, X, y=None): ...
+    def __init__(self, param=None) -> None:
+        ...
+
+    def get_params(self, deep: bool = True):
+        ...
+
+    def set_params(self, **params):
+        ...
+
+    def fit(self, X, y=None):
+        ...
+
+    def transform(self, X, y=None):
+        ...
+
+    def fit_transform(self, X, y=None):
+        ...

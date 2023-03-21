@@ -10,6 +10,7 @@ from .loss import (
     HalfMultinomialLoss as HalfMultinomialLoss,
 )
 
+
 __all__ = [
     "HalfSquaredError",
     "AbsoluteError",

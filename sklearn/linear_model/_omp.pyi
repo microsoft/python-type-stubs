@@ -1,102 +1,121 @@
-from collections.abc import Generator, Iterable
-from typing import Tuple, Union, Literal, Any
-from numpy.typing import NDArray, ArrayLike
+from typing import ClassVar, Iterable, Literal, TypeVar
+from ..model_selection import BaseCrossValidator
+from scipy import linalg as linalg
+from ._base import LinearModel
+from numpy import ndarray
+from ..utils._param_validation import (
+    Hidden as Hidden,
+    Interval as Interval,
+    StrOptions as StrOptions,
+)
+from ..model_selection._split import BaseShuffleSplit
+from numbers import Integral as Integral, Real as Real
+from scipy.linalg.lapack import get_lapack_funcs as get_lapack_funcs
+from math import sqrt as sqrt
+from ..base import RegressorMixin, MultiOutputMixin
+from ..model_selection import check_cv as check_cv
+from ..utils.parallel import delayed as delayed, Parallel as Parallel
+from .._typing import ArrayLike, MatrixLike, Int, Float
+from ..utils import as_float_array as as_float_array, check_array as check_array
+
+OrthogonalMatchingPursuitCV_Self = TypeVar(
+    "OrthogonalMatchingPursuitCV_Self", bound="OrthogonalMatchingPursuitCV"
+)
+OrthogonalMatchingPursuit_Self = TypeVar(
+    "OrthogonalMatchingPursuit_Self", bound="OrthogonalMatchingPursuit"
+)
+
 
 # Author: Vlad Niculae
 #
 # License: BSD 3 clause
 
 import warnings
-from math import sqrt
-
 import numpy as np
-from scipy import linalg
-from scipy.linalg.lapack import get_lapack_funcs
-
-from ._base import LinearModel, _pre_fit, _deprecate_normalize
-from ..base import RegressorMixin, MultiOutputMixin
-from ..utils import as_float_array, check_array
-from ..utils.fixes import delayed
-from ..model_selection import check_cv
-from numpy import int64, ndarray
 
 premature: str = ...
 
-def _cholesky_omp(
-    X: ndarray,
-    y: ndarray,
-    n_nonzero_coefs: Union[int64, int],
-    tol: None = None,
-    copy_X: bool = True,
-    return_path: bool = False,
-) -> Union[Tuple[ndarray, ndarray, int], Tuple[ndarray, ndarray, ndarray, int]]: ...
-def _gram_omp(
-    Gram: ndarray,
-    Xy: ndarray,
-    n_nonzero_coefs: int,
-    tol_0: None = None,
-    tol: None = None,
-    copy_Gram: bool = True,
-    copy_Xy: bool = True,
-    return_path: bool = False,
-) -> Tuple[ndarray, ndarray, int]: ...
+
 def orthogonal_mp(
-    X: NDArray,
-    y: NDArray,
+    X: ArrayLike,
+    y: MatrixLike | ArrayLike,
     *,
-    n_nonzero_coefs: int | None = None,
-    tol: float | None = None,
-    precompute: bool | Literal["auto"] = False,
+    n_nonzero_coefs: None | Int = None,
+    tol: None | Float = None,
+    precompute: str | bool = False,
     copy_X: bool = True,
     return_path: bool = False,
     return_n_iter: bool = False,
-) -> tuple[NDArray, ArrayLike | int]: ...
+) -> ndarray | tuple[ndarray, int] | tuple[ndarray, ndarray | int]:
+    ...
+
+
 def orthogonal_mp_gram(
-    Gram: NDArray,
-    Xy: NDArray,
+    Gram: MatrixLike,
+    Xy: MatrixLike | ArrayLike,
     *,
-    n_nonzero_coefs: int | None = None,
-    tol: float | None = None,
-    norms_squared: ArrayLike | None = None,
+    n_nonzero_coefs: None | Int = None,
+    tol: None | Float = None,
+    norms_squared: None | ArrayLike = None,
     copy_Gram: bool = True,
     copy_Xy: bool = True,
     return_path: bool = False,
     return_n_iter: bool = False,
-) -> tuple[NDArray, ArrayLike | int]: ...
+) -> ndarray | tuple[ndarray, ndarray | int]:
+    ...
+
 
 class OrthogonalMatchingPursuit(MultiOutputMixin, RegressorMixin, LinearModel):
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    n_nonzero_coefs_: int = ...
+    n_iter_: ArrayLike | int = ...
+    intercept_: float | ndarray = ...
+    coef_: ndarray = ...
+
+    _parameter_constraints: ClassVar[dict] = ...
+
     def __init__(
         self,
         *,
-        n_nonzero_coefs: int | None = None,
-        tol: float | None = None,
+        n_nonzero_coefs: None | Int = None,
+        tol: None | Float = None,
         fit_intercept: bool = True,
-        normalize: bool = ...,
-        precompute: bool | Literal["auto"] = "auto",
-    ) -> None: ...
-    def fit(self, X: ArrayLike, y: ArrayLike) -> "OrthogonalMatchingPursuit": ...
+        normalize: str | bool = "deprecated",
+        precompute: Literal["auto", "auto"] | bool = "auto",
+    ) -> None:
+        ...
 
-def _omp_path_residues(
-    X_train: ndarray,
-    y_train: ndarray,
-    X_test: ndarray,
-    y_test: ndarray,
-    copy: bool = True,
-    fit_intercept: bool = True,
-    normalize: bool = True,
-    max_iter: int = 100,
-) -> ndarray: ...
+    def fit(
+        self: OrthogonalMatchingPursuit_Self, X: MatrixLike, y: MatrixLike | ArrayLike
+    ) -> OrthogonalMatchingPursuit_Self:
+        ...
+
 
 class OrthogonalMatchingPursuitCV(RegressorMixin, LinearModel):
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    n_iter_: ArrayLike | int = ...
+    n_nonzero_coefs_: int = ...
+    coef_: ndarray = ...
+    intercept_: float | ndarray = ...
+
+    _parameter_constraints: ClassVar[dict] = ...
+
     def __init__(
         self,
         *,
         copy: bool = True,
         fit_intercept: bool = True,
-        normalize: bool = ...,
-        max_iter: int | None = None,
-        cv: int | Generator | Iterable | None = None,
-        n_jobs: int | None = None,
-        verbose: bool | int = False,
-    ) -> None: ...
-    def fit(self, X: ArrayLike, y: ArrayLike) -> "OrthogonalMatchingPursuitCV": ...
+        normalize: str | bool = "deprecated",
+        max_iter: None | Int = None,
+        cv: int | BaseCrossValidator | Iterable | None | BaseShuffleSplit = None,
+        n_jobs: None | Int = None,
+        verbose: int | bool = False,
+    ) -> None:
+        ...
+
+    def fit(
+        self: OrthogonalMatchingPursuitCV_Self, X: MatrixLike, y: ArrayLike
+    ) -> OrthogonalMatchingPursuitCV_Self:
+        ...

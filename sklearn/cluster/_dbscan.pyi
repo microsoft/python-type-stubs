@@ -1,6 +1,15 @@
+from typing import Any, Callable, ClassVar, Literal, TypeVar
+from scipy import sparse as sparse
 from numpy import ndarray
-from typing import Callable, Mapping, Literal, Any
-from numpy.typing import ArrayLike, NDArray
+from ..utils._param_validation import Interval as Interval, StrOptions as StrOptions
+from numbers import Integral as Integral, Real as Real
+from ._dbscan_inner import dbscan_inner as dbscan_inner
+from ..neighbors import NearestNeighbors as NearestNeighbors
+from ..base import BaseEstimator, ClusterMixin
+from .._typing import MatrixLike, Float, Int, ArrayLike
+
+DBSCAN_Self = TypeVar("DBSCAN_Self", bound="DBSCAN")
+
 
 # Author: Robert Layton <robertlayton@gmail.com>
 #         Joel Nothman <joel.nothman@gmail.com>
@@ -8,53 +17,59 @@ from numpy.typing import ArrayLike, NDArray
 #
 # License: BSD 3 clause
 
-import numpy as np
-import numbers
 import warnings
-from scipy import sparse
 
-from ..utils import check_scalar
-from ..base import BaseEstimator, ClusterMixin
-from ..utils.validation import _check_sample_weight
-from ..neighbors import NearestNeighbors
+import numpy as np
+
 
 def dbscan(
-    X: ArrayLike,
-    eps: float = 0.5,
+    X: MatrixLike,
+    eps: Float = 0.5,
     *,
-    min_samples: int = 5,
+    min_samples: Int = 5,
     metric: str | Callable = "minkowski",
-    metric_params: Mapping | None = None,
-    algorithm: Literal["auto", "ball_tree", "kd_tree", "brute"] = "auto",
-    leaf_size: int = 30,
-    p: float = 2,
-    sample_weight: ArrayLike | None = None,
-    n_jobs: int | None = None,
-) -> tuple[np.ndarray, NDArray]: ...
+    metric_params: None | dict = None,
+    algorithm: Literal["auto", "ball_tree", "kd_tree", "brute", "auto"] = "auto",
+    leaf_size: Int = 30,
+    p: Float = 2,
+    sample_weight: None | ArrayLike = None,
+    n_jobs: None | Int = None,
+) -> tuple[ndarray, ndarray]:
+    ...
+
 
 class DBSCAN(ClusterMixin, BaseEstimator):
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    labels_: ndarray = ...
+    components_: ndarray = ...
+    core_sample_indices_: ndarray = ...
+
+    _parameter_constraints: ClassVar[dict] = ...
+
     def __init__(
         self,
-        eps: float = 0.5,
+        eps: Float = 0.5,
         *,
-        min_samples: int = 5,
+        min_samples: Int = 5,
         metric: str | Callable = "euclidean",
-        metric_params: Mapping | None = None,
-        algorithm: Literal["auto", "ball_tree", "kd_tree", "brute"] = "auto",
-        leaf_size: int = 30,
-        p: float | None = None,
-        n_jobs: int | None = None,
-    ) -> None: ...
+        metric_params: None | dict = None,
+        algorithm: Literal["auto", "ball_tree", "kd_tree", "brute", "auto"] = "auto",
+        leaf_size: Int = 30,
+        p: None | Float = None,
+        n_jobs: None | Int = None,
+    ) -> None:
+        ...
+
     def fit(
-        self,
-        X: NDArray | ArrayLike | tuple[int, int],
-        y: None = None,
-        sample_weight: ArrayLike | None = None,
-    ) -> "DBSCAN": ...
+        self: DBSCAN_Self,
+        X: MatrixLike,
+        y: Any = None,
+        sample_weight: None | ArrayLike = None,
+    ) -> DBSCAN_Self:
+        ...
+
     def fit_predict(
-        self,
-        X: NDArray | ArrayLike | tuple[int, int],
-        y=None,
-        sample_weight: ArrayLike | None = None,
-    ) -> NDArray: ...
-    def _more_tags(self): ...
+        self, X: MatrixLike, y: Any = None, sample_weight: None | ArrayLike = None
+    ) -> ndarray:
+        ...

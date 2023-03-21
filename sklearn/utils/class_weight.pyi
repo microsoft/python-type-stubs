@@ -1,5 +1,8 @@
-from typing import Literal, Mapping
-from numpy.typing import NDArray, ArrayLike
+from typing import Mapping
+from scipy import sparse as sparse
+from .._typing import ArrayLike, MatrixLike
+from numpy import ndarray
+from ..preprocessing import LabelEncoder as LabelEncoder
 
 # Authors: Andreas Mueller
 #          Manoj Kumar
@@ -7,9 +10,20 @@ from numpy.typing import NDArray, ArrayLike
 
 import numpy as np
 
-from scipy import sparse
 
-def compute_class_weight(class_weight: Mapping | Literal["balanced"] | None, *, classes: NDArray, y: ArrayLike) -> NDArray: ...
+def compute_class_weight(
+    class_weight: dict[int, int] | None | Mapping | str,
+    *,
+    classes: ArrayLike,
+    y: ArrayLike
+) -> ndarray:
+    ...
+
+
 def compute_sample_weight(
-    class_weight: dict | Sequence[dicts] | Literal["balanced"] | None, y: NDArray | ArrayLike, *, indices: ArrayLike | None = None
-) -> NDArray: ...
+    class_weight: None | Mapping | str | ArrayLike,
+    y: MatrixLike | ArrayLike,
+    *,
+    indices: None | ArrayLike = None
+) -> ndarray:
+    ...

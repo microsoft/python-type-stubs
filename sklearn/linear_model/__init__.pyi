@@ -1,9 +1,14 @@
-# See http://scikit-learn.sourceforge.net/modules/sgd.html and
-# http://scikit-learn.sourceforge.net/modules/linear_model.html for
-# complete documentation.
-
-from ._base import LinearRegression as LinearRegression
-from ._bayes import BayesianRidge as BayesianRidge, ARDRegression as ARDRegression
+from ._glm import (
+    PoissonRegressor as PoissonRegressor,
+    GammaRegressor as GammaRegressor,
+    TweedieRegressor as TweedieRegressor,
+)
+from ._perceptron import Perceptron as Perceptron
+from ._stochastic_gradient import (
+    SGDClassifier as SGDClassifier,
+    SGDRegressor as SGDRegressor,
+    SGDOneClassSVM as SGDOneClassSVM,
+)
 from ._least_angle import (
     Lars as Lars,
     LassoLars as LassoLars,
@@ -13,6 +18,28 @@ from ._least_angle import (
     LassoLarsCV as LassoLarsCV,
     LassoLarsIC as LassoLarsIC,
 )
+from ._huber import HuberRegressor as HuberRegressor
+from ._base import LinearRegression as LinearRegression
+from ._theil_sen import TheilSenRegressor as TheilSenRegressor
+from ._omp import (
+    orthogonal_mp as orthogonal_mp,
+    orthogonal_mp_gram as orthogonal_mp_gram,
+    OrthogonalMatchingPursuit as OrthogonalMatchingPursuit,
+    OrthogonalMatchingPursuitCV as OrthogonalMatchingPursuitCV,
+)
+from ._logistic import (
+    LogisticRegression as LogisticRegression,
+    LogisticRegressionCV as LogisticRegressionCV,
+)
+from ._ransac import RANSACRegressor as RANSACRegressor
+from ._sgd_fast import (
+    Hinge as Hinge,
+    Log as Log,
+    ModifiedHuber as ModifiedHuber,
+    SquaredLoss as SquaredLoss,
+    Huber as Huber,
+)
+from ._bayes import BayesianRidge as BayesianRidge, ARDRegression as ARDRegression
 from ._coordinate_descent import (
     Lasso as Lasso,
     ElasticNet as ElasticNet,
@@ -25,24 +52,11 @@ from ._coordinate_descent import (
     MultiTaskElasticNetCV as MultiTaskElasticNetCV,
     MultiTaskLassoCV as MultiTaskLassoCV,
 )
-from ._glm import (
-    PoissonRegressor as PoissonRegressor,
-    GammaRegressor as GammaRegressor,
-    TweedieRegressor as TweedieRegressor,
+from ._passive_aggressive import (
+    PassiveAggressiveClassifier as PassiveAggressiveClassifier,
+    PassiveAggressiveRegressor as PassiveAggressiveRegressor,
 )
-from ._huber import HuberRegressor as HuberRegressor
-from ._sgd_fast import (
-    Hinge as Hinge,
-    Log as Log,
-    ModifiedHuber as ModifiedHuber,
-    SquaredLoss as SquaredLoss,
-    Huber as Huber,
-)
-from ._stochastic_gradient import (
-    SGDClassifier as SGDClassifier,
-    SGDRegressor as SGDRegressor,
-    SGDOneClassSVM as SGDOneClassSVM,
-)
+from ._quantile import QuantileRegressor as QuantileRegressor
 from ._ridge import (
     Ridge as Ridge,
     RidgeCV as RidgeCV,
@@ -50,27 +64,6 @@ from ._ridge import (
     RidgeClassifierCV as RidgeClassifierCV,
     ridge_regression as ridge_regression,
 )
-from ._logistic import (
-    LogisticRegression as LogisticRegression,
-    LogisticRegressionCV as LogisticRegressionCV,
-)
-from ._omp import (
-    orthogonal_mp as orthogonal_mp,
-    orthogonal_mp_gram as orthogonal_mp_gram,
-    OrthogonalMatchingPursuit as OrthogonalMatchingPursuit,
-    OrthogonalMatchingPursuitCV as OrthogonalMatchingPursuitCV,
-)
-from ._passive_aggressive import (
-    PassiveAggressiveClassifier as PassiveAggressiveClassifier,
-)
-from ._passive_aggressive import (
-    PassiveAggressiveRegressor as PassiveAggressiveRegressor,
-)
-from ._perceptron import Perceptron as Perceptron
-
-from ._quantile import QuantileRegressor as QuantileRegressor
-from ._ransac import RANSACRegressor as RANSACRegressor
-from ._theil_sen import TheilSenRegressor as TheilSenRegressor
 
 __all__ = [
     "ARDRegression",

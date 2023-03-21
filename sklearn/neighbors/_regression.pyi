@@ -1,7 +1,17 @@
+from typing import Callable, ClassVar, Literal, TypeVar
+from ._base import NeighborsBase, KNeighborsMixin, RadiusNeighborsMixin
 from numpy import ndarray
-from typing import Dict, Callable, Literal, Mapping
-from numpy.typing import ArrayLike, NDArray
-from sklearn.neighbors._regression import KNeighborsRegressor, RadiusNeighborsRegressor
+from ..utils._param_validation import StrOptions as StrOptions
+from ..base import RegressorMixin
+from .._typing import Int, MatrixLike, ArrayLike, Float
+
+KNeighborsRegressor_Self = TypeVar(
+    "KNeighborsRegressor_Self", bound="KNeighborsRegressor"
+)
+RadiusNeighborsRegressor_Self = TypeVar(
+    "RadiusNeighborsRegressor_Self", bound="RadiusNeighborsRegressor"
+)
+
 
 # Authors: Jake Vanderplas <vanderplas@astro.washington.edu>
 #          Fabian Pedregosa <fabian.pedregosa@inria.fr>
@@ -17,39 +27,70 @@ import warnings
 
 import numpy as np
 
-from ._base import _get_weights, _check_weights
-from ._base import NeighborsBase, KNeighborsMixin, RadiusNeighborsMixin
-from ..base import RegressorMixin
 
 class KNeighborsRegressor(KNeighborsMixin, RegressorMixin, NeighborsBase):
+    n_samples_fit_: int = ...
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    effective_metric_params_: dict = ...
+    effective_metric_: str | Callable = ...
+
+    _parameter_constraints: ClassVar[dict] = ...
+
     def __init__(
         self,
-        n_neighbors: int = 5,
+        n_neighbors: Int = 5,
         *,
-        weights: Literal["uniform", "distance"] | Callable = "uniform",
-        algorithm: Literal["auto", "ball_tree", "kd_tree", "brute"] = "auto",
-        leaf_size: int = 30,
-        p: int = 2,
+        weights: None
+        | Literal["uniform", "distance", "uniform"]
+        | Callable = "uniform",
+        algorithm: Literal["auto", "ball_tree", "kd_tree", "brute", "auto"] = "auto",
+        leaf_size: Int = 30,
+        p: Int = 2,
         metric: str | Callable = "minkowski",
-        metric_params: Mapping | None = None,
-        n_jobs: int | None = None,
-    ) -> None: ...
-    def _more_tags(self) -> Dict[str, bool]: ...
-    def fit(self, X: ArrayLike, y: NDArray | ArrayLike) -> KNeighborsRegressor: ...
-    def predict(self, X: ArrayLike) -> np.ndarray: ...
+        metric_params: None | dict = None,
+        n_jobs: None | Int = None,
+    ) -> None:
+        ...
+
+    def fit(
+        self: KNeighborsRegressor_Self, X: MatrixLike, y: MatrixLike | ArrayLike
+    ) -> KNeighborsRegressor_Self:
+        ...
+
+    def predict(self, X: MatrixLike) -> ndarray:
+        ...
+
 
 class RadiusNeighborsRegressor(RadiusNeighborsMixin, RegressorMixin, NeighborsBase):
+    n_samples_fit_: int = ...
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    effective_metric_params_: dict = ...
+    effective_metric_: str | Callable = ...
+
+    _parameter_constraints: ClassVar[dict] = ...
+
     def __init__(
         self,
-        radius: float = 1.0,
+        radius: Float = 1.0,
         *,
-        weights: Literal["uniform", "distance"] | Callable = "uniform",
-        algorithm: Literal["auto", "ball_tree", "kd_tree", "brute"] = "auto",
-        leaf_size: int = 30,
-        p: int = 2,
+        weights: None
+        | Literal["uniform", "distance", "uniform"]
+        | Callable = "uniform",
+        algorithm: Literal["auto", "ball_tree", "kd_tree", "brute", "auto"] = "auto",
+        leaf_size: Int = 30,
+        p: Int = 2,
         metric: str | Callable = "minkowski",
-        metric_params: Mapping | None = None,
-        n_jobs: int | None = None,
-    ): ...
-    def fit(self, X: ArrayLike, y: NDArray | ArrayLike) -> RadiusNeighborsRegressor: ...
-    def predict(self, X: ArrayLike) -> NDArray: ...
+        metric_params: None | dict = None,
+        n_jobs: None | Int = None,
+    ) -> None:
+        ...
+
+    def fit(
+        self: RadiusNeighborsRegressor_Self, X: MatrixLike, y: MatrixLike | ArrayLike
+    ) -> RadiusNeighborsRegressor_Self:
+        ...
+
+    def predict(self, X: MatrixLike) -> ndarray:
+        ...

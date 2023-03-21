@@ -1,9 +1,6 @@
-import typing as typing
-
 from ._base import MissingIndicator as MissingIndicator, SimpleImputer as SimpleImputer
 from ._knn import KNNImputer as KNNImputer
+from ._iterative import IterativeImputer as IterativeImputer
+import typing as typing
 
 __all__ = ["MissingIndicator", "SimpleImputer", "KNNImputer"]
-
-# TODO: remove this check once the estimator is no longer experimental.
-def __getattr__(name): ...

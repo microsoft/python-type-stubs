@@ -1,21 +1,24 @@
-from numpy import float64, ndarray
-from typing import Optional, Tuple, Union, Callable, Any
-from numpy.typing import ArrayLike, NDArray
+from typing import Any, Callable, ClassVar, TypeVar
+from numpy.random import RandomState
+from scipy.stats import chi2 as chi2
+from scipy import linalg as linalg
+from numpy import ndarray
+from ..utils.extmath import fast_logdet as fast_logdet
+from ..utils._param_validation import Interval as Interval
+from numbers import Integral as Integral, Real as Real
+from .._typing import MatrixLike, Int, Float
+from ..utils import check_random_state as check_random_state, check_array as check_array
+from . import empirical_covariance as empirical_covariance, EmpiricalCovariance
+
+MinCovDet_Self = TypeVar("MinCovDet_Self", bound="MinCovDet")
 
 # Author: Virgile Fritsch <virgile.fritsch@inria.fr>
 #
 # License: BSD 3 clause
 
 import warnings
-import numbers
 import numpy as np
-from scipy import linalg
 
-from . import empirical_covariance, EmpiricalCovariance
-from ..utils.extmath import fast_logdet
-from ..utils import check_random_state, check_array
-from numpy.random import RandomState
-from sklearn.covariance._elliptic_envelope import EllipticEnvelope
 
 # Minimum Covariance Determinant
 #   Implementing of an algorithm by Rousseeuw & Van Driessen described in
@@ -25,42 +28,52 @@ from sklearn.covariance._elliptic_envelope import EllipticEnvelope
 # XXX Is this really a public function? It's not listed in the docs or
 # exported by sklearn.covariance. Deprecate?
 def c_step(
-    X: ArrayLike,
-    n_support: int,
-    remaining_iterations: int = 30,
-    initial_estimates: tuple | None = None,
+    X: MatrixLike,
+    n_support: Int,
+    remaining_iterations: Int = 30,
+    initial_estimates: None | tuple[Any, Any] = None,
     verbose: bool = False,
     cov_computation_method: Callable = ...,
-    random_state: int | RandomState | None = None,
-) -> tuple[NDArray, NDArray, NDArray]: ...
-def _c_step(
-    X: ndarray,
-    n_support: int,
-    random_state: RandomState,
-    remaining_iterations: int = 30,
-    initial_estimates: Optional[Tuple[ndarray, ndarray]] = None,
-    verbose: bool = False,
-    cov_computation_method: Callable = empirical_covariance,
-) -> Tuple[ndarray, ndarray, float64, ndarray, ndarray]: ...
+    random_state: RandomState | None | Int = None,
+) -> tuple[ndarray, ndarray, ndarray]:
+    ...
+
+
 def select_candidates(
-    X: ArrayLike,
-    n_support: int,
-    n_trials: int | tuple,
-    select: int = 1,
-    n_iter: int = 30,
+    X: MatrixLike,
+    n_support: Int,
+    n_trials: int | tuple[ndarray, ndarray] | tuple[Any, Any],
+    select: Int = 1,
+    n_iter: Int = 30,
     verbose: bool = False,
     cov_computation_method: Callable = ...,
-    random_state: int | RandomState | None = None,
-) -> tuple[np.ndarray, np.ndarray, np.ndarray]: ...
+    random_state: None | Int | RandomState = None,
+) -> tuple[ndarray, ndarray, ndarray, ndarray] | tuple[ndarray, ndarray, ndarray]:
+    ...
+
+
 def fast_mcd(
-    X: ArrayLike,
-    support_fraction: float | None = None,
+    X: MatrixLike,
+    support_fraction: None | Float = None,
     cov_computation_method: Callable = ...,
-    random_state: int | RandomState | None = None,
-) -> tuple[NDArray, NDArray, np.ndarray]: ...
+    random_state: None | Int | RandomState = None,
+) -> tuple[ndarray, ndarray, ndarray, ndarray] | tuple[ndarray, ndarray, ndarray]:
+    ...
+
 
 class MinCovDet(EmpiricalCovariance):
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    dist_: ndarray = ...
+    support_: ndarray = ...
+    precision_: ndarray = ...
+    covariance_: ndarray = ...
+    location_: ndarray = ...
+    raw_support_: ndarray = ...
+    raw_covariance_: ndarray = ...
+    raw_location_: ndarray = ...
 
+    _parameter_constraints: ClassVar[dict] = ...
     _nonrobust_covariance = ...
 
     def __init__(
@@ -68,9 +81,16 @@ class MinCovDet(EmpiricalCovariance):
         *,
         store_precision: bool = True,
         assume_centered: bool = False,
-        support_fraction: float | None = None,
-        random_state: int | RandomState | None = None,
-    ) -> None: ...
-    def fit(self, X: ArrayLike, y: None = None) -> Union[MinCovDet, EllipticEnvelope]: ...
-    def correct_covariance(self, data: ArrayLike) -> NDArray: ...
-    def reweight_covariance(self, data: ArrayLike) -> tuple[NDArray, NDArray, np.ndarray]: ...
+        support_fraction: None | Float = None,
+        random_state: RandomState | None | Int = None,
+    ) -> None:
+        ...
+
+    def fit(self: MinCovDet_Self, X: MatrixLike, y: Any = None) -> MinCovDet_Self:
+        ...
+
+    def correct_covariance(self, data: MatrixLike) -> ndarray:
+        ...
+
+    def reweight_covariance(self, data: MatrixLike) -> tuple[ndarray, ndarray, ndarray]:
+        ...

@@ -1,6 +1,9 @@
-import os
 from os.path import join
+from numpy.distutils.misc_util import Configuration
+from numpy.distutils.core import setup
+from .._build_utils import gen_from_templates
+import os
 
-from sklearn._build_utils import gen_from_templates
 
-def configuration(parent_package="", top_path=None): ...
+def configuration(parent_package: str = "", top_path=None):
+    ...

@@ -1,89 +1,112 @@
-from typing import Tuple, Union, Any
-from numpy.typing import NDArray, ArrayLike
-
-# Authors: V. Michel, F. Pedregosa, A. Gramfort
-# License: BSD 3 clause
-
-from math import log
-import numpy as np
-from scipy import linalg
-
-from ._base import LinearModel, _preprocess_data, _rescale_data
+from typing import ClassVar, TypeVar
+from scipy import linalg as linalg
+from ._base import LinearModel
+from numpy import ndarray
+from ..utils.extmath import fast_logdet as fast_logdet
+from scipy.linalg import pinvh as pinvh
+from numbers import Integral as Integral, Real as Real
+from ..utils._param_validation import Interval as Interval
+from math import log as log
 from ..base import RegressorMixin
-from ._base import _deprecate_normalize
-from ..utils.extmath import fast_logdet
-from scipy.linalg import pinvh
-from ..utils.validation import _check_sample_weight
-from numpy import float64, ndarray
+from .._typing import Int, Float, ArrayLike, MatrixLike
+
+BayesianRidge_Self = TypeVar("BayesianRidge_Self", bound="BayesianRidge")
+ARDRegression_Self = TypeVar("ARDRegression_Self", bound="ARDRegression")
+
+import numpy as np
 
 ###############################################################################
 # BayesianRidge regression
 
+
 class BayesianRidge(RegressorMixin, LinearModel):
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    X_scale_: ndarray = ...
+    X_offset_: ndarray = ...
+    n_iter_: int = ...
+    scores_: ArrayLike = ...
+    sigma_: ArrayLike = ...
+    lambda_: float = ...
+    alpha_: float = ...
+    intercept_: float = ...
+    coef_: ArrayLike = ...
+
+    _parameter_constraints: ClassVar[dict] = ...
+
     def __init__(
         self,
         *,
-        n_iter: int = 300,
-        tol: float = 1.0e-3,
-        alpha_1: float = 1.0e-6,
-        alpha_2: float = 1.0e-6,
-        lambda_1: float = 1.0e-6,
-        lambda_2: float = 1.0e-6,
-        alpha_init: float | None = None,
-        lambda_init: float | None = None,
+        n_iter: Int = 300,
+        tol: Float = 1.0e-3,
+        alpha_1: Float = 1.0e-6,
+        alpha_2: Float = 1.0e-6,
+        lambda_1: Float = 1.0e-6,
+        lambda_2: Float = 1.0e-6,
+        alpha_init: None | Float = None,
+        lambda_init: None | Float = None,
         compute_score: bool = False,
         fit_intercept: bool = True,
-        normalize: bool | str = "deprecated",
         copy_X: bool = True,
         verbose: bool = False,
-    ) -> None: ...
-    def fit(self, X: NDArray, y: NDArray, sample_weight: NDArray | None = None) -> "BayesianRidge": ...
-    def predict(self, X: NDArray | ArrayLike, return_std: bool = False) -> tuple[ArrayLike, ArrayLike]: ...
-    def _update_coef_(
-        self,
-        X: ndarray,
-        y: ndarray,
-        n_samples: int,
-        n_features: int,
-        XT_y: ndarray,
-        U: ndarray,
-        Vh: ndarray,
-        eigen_vals_: ndarray,
-        alpha_: Union[float, float64],
-        lambda_: Union[float, float64],
-    ) -> Tuple[ndarray, float64]: ...
-    def _log_marginal_likelihood(
-        self,
-        n_samples: int,
-        n_features: int,
-        eigen_vals: ndarray,
-        alpha_: Union[float, float64],
-        lambda_: Union[float, float64],
-        coef: ndarray,
-        rmse: float64,
-    ) -> float64: ...
+    ) -> None:
+        ...
+
+    def fit(
+        self: BayesianRidge_Self,
+        X: ArrayLike,
+        y: ArrayLike,
+        sample_weight: None | ArrayLike = None,
+    ) -> BayesianRidge_Self:
+        ...
+
+    def predict(
+        self, X: MatrixLike | ArrayLike, return_std: bool = False
+    ) -> ArrayLike | tuple[ndarray, ndarray] | tuple[ArrayLike, ArrayLike]:
+        ...
+
 
 ###############################################################################
 # ARD (Automatic Relevance Determination) regression
 
+
 class ARDRegression(RegressorMixin, LinearModel):
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    X_scale_: float = ...
+    X_offset_: float = ...
+    intercept_: float = ...
+    scores_: float = ...
+    sigma_: ArrayLike = ...
+    lambda_: ArrayLike = ...
+    alpha_: float = ...
+    coef_: ArrayLike = ...
+
+    _parameter_constraints: ClassVar[dict] = ...
+
     def __init__(
         self,
         *,
-        n_iter: int = 300,
-        tol: float = 1.0e-3,
-        alpha_1: float = 1.0e-6,
-        alpha_2: float = 1.0e-6,
-        lambda_1: float = 1.0e-6,
-        lambda_2: float = 1.0e-6,
+        n_iter: Int = 300,
+        tol: Float = 1.0e-3,
+        alpha_1: Float = 1.0e-6,
+        alpha_2: Float = 1.0e-6,
+        lambda_1: Float = 1.0e-6,
+        lambda_2: Float = 1.0e-6,
         compute_score: bool = False,
-        threshold_lambda: float = 1.0e4,
+        threshold_lambda: Float = 1.0e4,
         fit_intercept: bool = True,
-        normalize: bool | str = "deprecated",
         copy_X: bool = True,
         verbose: bool = False,
-    ) -> None: ...
-    def fit(self, X: ArrayLike, y: ArrayLike) -> "ARDRegression": ...
-    def _update_sigma_woodbury(self, X, alpha_, lambda_, keep_lambda): ...
-    def _update_sigma(self, X: ndarray, alpha_: float64, lambda_: ndarray, keep_lambda: ndarray) -> ndarray: ...
-    def predict(self, X: NDArray | ArrayLike, return_std: bool = False) -> tuple[ArrayLike, ArrayLike]: ...
+    ) -> None:
+        ...
+
+    def fit(
+        self: ARDRegression_Self, X: MatrixLike, y: ArrayLike
+    ) -> ARDRegression_Self:
+        ...
+
+    def predict(
+        self, X: MatrixLike | ArrayLike, return_std: bool = False
+    ) -> tuple[ndarray, ndarray] | tuple[ArrayLike, ArrayLike]:
+        ...

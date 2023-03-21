@@ -1,65 +1,100 @@
-from sklearn.neighbors._classification import (
-    KNeighborsClassifier,
-    RadiusNeighborsClassifier,
-)
+from typing import Callable, ClassVar, Literal, TypeVar
+from ._base import NeighborsBase, KNeighborsMixin, RadiusNeighborsMixin
 from numpy import ndarray
-from typing import Dict, Union, Callable, Literal, Mapping
-from numpy.typing import ArrayLike, NDArray
+from ..utils.extmath import weighted_mode as weighted_mode
+from ..utils._param_validation import StrOptions as StrOptions
+from numbers import Integral as Integral
+from ..base import ClassifierMixin
+from .._typing import Int, MatrixLike, ArrayLike, Float
 
-# Authors: Jake Vanderplas <vanderplas@astro.washington.edu>
-#          Fabian Pedregosa <fabian.pedregosa@inria.fr>
-#          Alexandre Gramfort <alexandre.gramfort@inria.fr>
-#          Sparseness support by Lars Buitinck
-#          Multi-output support by Arnaud Joly <a.joly@ulg.ac.be>
-#
-# License: BSD 3 clause (C) INRIA, University of Amsterdam
+RadiusNeighborsClassifier_Self = TypeVar(
+    "RadiusNeighborsClassifier_Self", bound="RadiusNeighborsClassifier"
+)
+KNeighborsClassifier_Self = TypeVar(
+    "KNeighborsClassifier_Self", bound="KNeighborsClassifier"
+)
+
 
 import numpy as np
-from ..utils.fixes import _mode
-from ..utils.extmath import weighted_mode
-from ..utils.validation import _is_arraylike, _num_samples
 
 import warnings
-from ._base import _check_weights, _get_weights
-from ._base import NeighborsBase, KNeighborsMixin, RadiusNeighborsMixin
-from ..base import ClassifierMixin
-from pandas.core.series import Series
-from scipy.sparse._csr import csr_matrix
+
 
 class KNeighborsClassifier(KNeighborsMixin, ClassifierMixin, NeighborsBase):
+    outputs_2d_: bool = ...
+    n_samples_fit_: int = ...
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    effective_metric_params_: dict = ...
+    effective_metric_: str | Callable = ...
+    classes_: ndarray = ...
+
+    _parameter_constraints: ClassVar[dict] = ...
+
     def __init__(
         self,
-        n_neighbors: int = 5,
+        n_neighbors: Int = 5,
         *,
-        weights: Literal["uniform", "distance"] | Callable = "uniform",
-        algorithm: Literal["auto", "ball_tree", "kd_tree", "brute"] = "auto",
-        leaf_size: int = 30,
-        p: int = 2,
+        weights: None
+        | Literal["uniform", "distance", "uniform"]
+        | Callable = "uniform",
+        algorithm: Literal["auto", "ball_tree", "kd_tree", "brute", "auto"] = "auto",
+        leaf_size: Int = 30,
+        p: Int = 2,
         metric: str | Callable = "minkowski",
-        metric_params: Mapping | None = None,
-        n_jobs: int | None = None,
-    ) -> None: ...
-    def fit(self, X: ArrayLike, y: NDArray | ArrayLike) -> KNeighborsClassifier: ...
-    def predict(self, X: ArrayLike) -> np.ndarray: ...
-    def predict_proba(self, X: ArrayLike) -> NDArray | list[NDArray]: ...
-    def _more_tags(self) -> Dict[str, bool]: ...
+        metric_params: None | dict = None,
+        n_jobs: None | Int = None,
+    ) -> None:
+        ...
+
+    def fit(
+        self: KNeighborsClassifier_Self, X: MatrixLike, y: MatrixLike | ArrayLike
+    ) -> KNeighborsClassifier_Self:
+        ...
+
+    def predict(self, X: MatrixLike) -> ndarray:
+        ...
+
+    def predict_proba(self, X: MatrixLike) -> ndarray | list[ndarray]:
+        ...
+
 
 class RadiusNeighborsClassifier(RadiusNeighborsMixin, ClassifierMixin, NeighborsBase):
+    outputs_2d_: bool = ...
+    outlier_label_: ArrayLike | int = ...
+    n_samples_fit_: int = ...
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    effective_metric_params_: dict = ...
+    effective_metric_: str | Callable = ...
+    classes_: ndarray = ...
+
+    _parameter_constraints: ClassVar[dict] = ...
+
     def __init__(
         self,
-        radius: float = 1.0,
+        radius: Float = 1.0,
         *,
-        weights: Literal["uniform", "distance"] | Callable = "uniform",
-        algorithm: Literal["auto", "ball_tree", "kd_tree", "brute"] = "auto",
-        leaf_size: int = 30,
-        p: int = 2,
+        weights: None
+        | Literal["uniform", "distance", "uniform"]
+        | Callable = "uniform",
+        algorithm: Literal["auto", "ball_tree", "kd_tree", "brute", "auto"] = "auto",
+        leaf_size: Int = 30,
+        p: Int = 2,
         metric: str | Callable = "minkowski",
-        outlier_label=None,
-        metric_params: Mapping | None = None,
-        n_jobs: int | None = None,
-        **kwargs,
-    ): ...
-    def fit(self, X: ArrayLike, y: NDArray | ArrayLike) -> RadiusNeighborsClassifier: ...
-    def predict(self, X: ArrayLike) -> np.ndarray: ...
-    def predict_proba(self, X: ArrayLike) -> NDArray | list[NDArray]: ...
-    def _more_tags(self): ...
+        outlier_label: None | str = None,
+        metric_params: None | dict = None,
+        n_jobs: None | Int = None,
+    ) -> None:
+        ...
+
+    def fit(
+        self: RadiusNeighborsClassifier_Self, X: MatrixLike, y: MatrixLike | ArrayLike
+    ) -> RadiusNeighborsClassifier_Self:
+        ...
+
+    def predict(self, X: MatrixLike) -> ndarray:
+        ...
+
+    def predict_proba(self, X: MatrixLike) -> ndarray:
+        ...

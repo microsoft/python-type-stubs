@@ -1,3 +1,9 @@
+from typing import Any, Type
+from collections import OrderedDict as OrderedDict
+from .._config import get_config as get_config
+from ..base import BaseEstimator as BaseEstimator
+from . import is_scalar_nan as is_scalar_nan
+
 # Copyright (c) 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010,
 # 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018 Python Software Foundation;
 # All Rights Reserved
@@ -53,6 +59,7 @@
 # 8. By copying, installing or otherwise using Python, Licensee agrees to be
 # bound by the terms and conditions of this License Agreement.
 
+
 # Brief summary of changes to original code:
 # - "compact" parameter is supported for dicts, not just lists or tuples
 # - estimators have a custom handler, they're not just treated as objects
@@ -61,89 +68,38 @@
 
 import inspect
 import pprint
-from collections import OrderedDict
 
-from ..base import BaseEstimator
-from .._config import get_config
-from . import is_scalar_nan
-from io import StringIO
-from sklearn.base import BaseEstimator
-from sklearn.decomposition._pca import PCA
-from sklearn.feature_selection._univariate_selection import SelectKBest
-from sklearn.linear_model._stochastic_gradient import SGDClassifier
-from sklearn.pipeline import FeatureUnion, Pipeline
-from sklearn.svm._classes import SVC
-from typing import Any, Dict, List, Tuple, Union
 
 class KeyValTuple(tuple):
-    def __repr__(self) -> str: ...
+    def __repr__(self) -> str:
+        ...
+
 
 class KeyValTupleParam(KeyValTuple):
-    pass
+    ...
 
-def _changed_params(estimator: BaseEstimator) -> Dict[str, Any]: ...
 
 class _EstimatorPrettyPrinter(pprint.PrettyPrinter):
     def __init__(
         self,
         indent: int = 1,
         width: int = 80,
-        depth: None = None,
-        stream: None = None,
+        depth=None,
+        stream=None,
         *,
-        compact=False,
-        indent_at_name=True,
+        compact: bool = False,
+        indent_at_name: bool = True,
         n_max_elements_to_show=None,
-    ) -> None: ...
-    def format(self, object: Any, context: Dict[int, int], maxlevels: None, level: int) -> Tuple[str, bool, bool]: ...
-    def _pprint_estimator(
-        self,
-        object: Union[Pipeline, FeatureUnion, SGDClassifier],
-        stream: StringIO,
-        indent: int,
-        allowance: int,
-        context: Dict[int, int],
-        level: int,
-    ) -> None: ...
-    def _format_dict_items(self, items, stream, indent, allowance, context, level): ...
-    def _format_params(self, items, stream, indent, allowance, context, level): ...
-    def _format_params_or_dict_items(self, object, stream, indent, allowance, context, level, is_dict): ...
-    def _format_items(
-        self,
-        items: Union[
-            List[Union[Tuple[str, FeatureUnion], Tuple[str, SVC]]],
-            Tuple[str, SelectKBest],
-            Tuple[str, FeatureUnion],
-            List[Union[Tuple[str, PCA], Tuple[str, SelectKBest]]],
-        ],
-        stream: StringIO,
-        indent: int,
-        allowance: int,
-        context: Dict[int, int],
-        level: int,
-    ) -> None: ...
-    def _pprint_key_val_tuple(
-        self,
-        object: KeyValTupleParam,
-        stream: StringIO,
-        indent: int,
-        allowance: int,
-        context: Dict[int, int],
-        level: int,
-    ) -> None: ...
+    ) -> None:
+        ...
+
+    def format(
+        self, object, context: dict[Any, Any] | dict[int, int], maxlevels, level: int
+    ) -> tuple[str, bool, bool]:
+        ...
 
     # Note: need to copy _dispatch to prevent instances of the builtin
     # PrettyPrinter class to call methods of _EstimatorPrettyPrinter (see issue
     # 12906)
     # mypy error: "Type[PrettyPrinter]" has no attribute "_dispatch"
     _dispatch = ...  # type: ignore
-    _dispatch[BaseEstimator.__repr__] = ...
-    _dispatch[KeyValTuple.__repr__] = ...
-
-def _safe_repr(
-    object: Any,
-    context: Dict[int, int],
-    maxlevels: None,
-    level: int,
-    changed_only: bool = False,
-) -> Tuple[str, bool, bool]: ...
