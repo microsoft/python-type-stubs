@@ -1,5 +1,5 @@
 from vispy.util.svg.color import Color
-from vispy.color.color_array import ColorArray
+
 from numpy.typing import ArrayLike
 
 # -*- coding: utf-8 -*-

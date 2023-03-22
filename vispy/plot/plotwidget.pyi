@@ -1,7 +1,6 @@
 from numpy.typing import ArrayLike, NDArray
 from typing import Literal
 from ..scene.visuals import LinePlot, Spectrogram, Image, Mesh, Polygon, Volume
-from ..util.svg.shapes import Polygon
 from ..scene.widgets.colorbar import ColorBarWidget
 from ..color import Color, Colormap
 from ..geometry.meshdata import MeshData

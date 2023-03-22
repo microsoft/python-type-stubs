@@ -1,10 +1,4 @@
-from numpy.typing import ArrayLike
-from typing import Mapping, Callable
-from vispy.gloo.context import GLContext
-from vispy.scene.widgets.widget import Widget
-from vispy.app.application import Application
-from vispy.keys import Key
-from vispy.app.canvas import Canvas, MouseEvent
+
 
 # -*- coding: utf-8 -*-
 # Copyright (c) Vispy Development Team. All Rights Reserved.
@@ -23,6 +17,13 @@ from ..util import config as util_config, logger
 from . import Application, use_app
 from ..gloo.context import GLContext, set_current_canvas, forget_canvas
 from ..gloo import FrameBuffer, RenderBuffer
+
+from numpy.typing import ArrayLike
+from typing import Mapping, Callable
+from vispy.gloo.context import GLContext
+from vispy.scene.widgets.widget import Widget
+from vispy.app.application import Application
+from vispy.util.keys import Key 
 
 # todo: add functions for asking about current mouse/keyboard state
 # todo: add hover enter/exit events

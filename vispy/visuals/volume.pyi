@@ -1,6 +1,4 @@
-from np import dtype
-from typing import Literal
-from numpy.typing import NDArray, ArrayLike
+
 
 # -*- coding: utf-8 -*-
 # Copyright (c) Vispy Development Team. All Rights Reserved.
@@ -20,6 +18,8 @@ from ..color import get_colormap
 from ..io import load_spatial_filters
 
 import numpy as np
+from typing import Literal
+from numpy.typing import NDArray, ArrayLike
 
 # todo: implement more render methods (port from visvis)
 # todo: allow anisotropic data
