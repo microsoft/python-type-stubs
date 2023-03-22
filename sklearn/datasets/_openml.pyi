@@ -1,4 +1,4 @@
-from typing import List, Optional, Union
+from typing import List, Optional, Union, overload, Literal
 from warnings import warn
 from contextlib import closing as closing
 from tempfile import TemporaryDirectory as TemporaryDirectory
@@ -35,6 +35,7 @@ class OpenMLError(ValueError):
     ...
 
 
+@overload
 def fetch_openml(
     name: Optional[str] = None,
     *,
@@ -43,7 +44,23 @@ def fetch_openml(
     data_home: Optional[str] = None,
     target_column: Optional[Union[str, List]] = "default-target",
     cache: bool = True,
-    return_X_y: bool = False,
+    return_X_y : Literal[False] = ...,
+    as_frame: Union[str, bool] = "auto",
+    n_retries: int = 3,
+    delay: float = 1.0,
+    parser: Optional[str] = "warn",
+) -> Bunch:
+    ...
+@overload
+def fetch_openml(
+    name: Optional[str] = None,
+    *,
+    version: Union[str, int] = "active",
+    data_id: Optional[int] = None,
+    data_home: Optional[str] = None,
+    target_column: Optional[Union[str, List]] = "default-target",
+    cache: bool = True,
+    return_X_y : Literal[True] = ...,
     as_frame: Union[str, bool] = "auto",
     n_retries: int = 3,
     delay: float = 1.0,
