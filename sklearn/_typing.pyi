@@ -10,25 +10,25 @@ import numpy as np
 import pandas as pd
 from .base import BaseEstimator, ClassifierMixin, RegressorMixin
 from scipy.sparse import spmatrix
-from typing_extensions import TypeAlias
 
 
-Decimal: TypeAlias = decimal.Decimal
-PythonScalar: TypeAlias = str | int | float | bool
 
-ArrayLike: TypeAlias = numpy.typing.ArrayLike
-MatrixLike: TypeAlias = np.ndarray | pd.DataFrame | spmatrix
-FileLike: TypeAlias = io.IOBase
-PathLike: TypeAlias = str
-Int: TypeAlias = int | np.int8 | np.int16 | np.int32 | np.int64
-Float: TypeAlias = float | np.float16 | np.float32 | np.float64
+Decimal = decimal.Decimal
+PythonScalar = str | int | float | bool
 
-PandasScalar: TypeAlias = pd.Period | pd.Timestamp | pd.Timedelta | pd.Interval
-Scalar: TypeAlias = PythonScalar | PandasScalar
+ArrayLike = numpy.typing.ArrayLike
+MatrixLike = np.ndarray | pd.DataFrame | spmatrix
+FileLike = io.IOBase
+PathLike = str
+Int = int | np.int8 | np.int16 | np.int32 | np.int64
+Float = float | np.float16 | np.float32 | np.float64
 
-Estimator: TypeAlias = BaseEstimator
-Classifier: TypeAlias = ClassifierMixin
-Regressor: TypeAlias = RegressorMixin
+PandasScalar = pd.Period | pd.Timestamp | pd.Timedelta | pd.Interval
+Scalar = PythonScalar | PandasScalar
+
+Estimator = BaseEstimator
+Classifier = ClassifierMixin
+Regressor = RegressorMixin
 
 Color = tuple[float, float, float] | str
 
