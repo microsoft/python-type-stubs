@@ -1,5 +1,5 @@
 from typing import Any, Callable
-from vispy.util.event import Event
+
 from numpy.typing import ArrayLike
 
 # -*- coding: utf-8 -*-

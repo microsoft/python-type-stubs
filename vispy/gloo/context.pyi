@@ -1,6 +1,6 @@
 from typing import Mapping, Any
 from ..util.event import Event
-from ..gloo.context import GLContext
+
 
 # -*- coding: utf-8 -*-
 # Copyright (c) Vispy Development Team. All Rights Reserved.

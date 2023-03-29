@@ -1,6 +1,6 @@
 from collections.abc import Iterable
 from vispy.util.svg.color import Color
-from vispy.visuals.axis import AxisVisual
+
 from numpy.typing import ArrayLike
 
 # -*- coding: utf-8 -*-

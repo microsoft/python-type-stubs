@@ -1,6 +1,5 @@
-from vispy.visuals.visual import VisualShare, VisualView, Visual
-from typing import Any, Sequence
-from vispy.gloo.program import Program
+
+
 
 # -*- coding: utf-8 -*-
 # Copyright (c) Vispy Development Team. All Rights Reserved.
@@ -15,6 +14,8 @@ from ..util.event import EmitterGroup, Event
 from ..util import logger, Frozen
 from .shaders import StatementList, MultiProgram
 from .transforms import TransformSystem
+from typing import Any, Sequence
+from vispy.gloo.program import Program
 
 class VisualShare(object):
     def __init__(self): ...

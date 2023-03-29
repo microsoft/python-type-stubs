@@ -1,4 +1,3 @@
-from ..color.colormap import Colormap
 from .._typing import Scalar
 from numpy.typing import NDArray, ArrayLike
 from typing import Sequence
