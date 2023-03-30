@@ -126,7 +126,7 @@ def subplots(
 @overload
 def subplots(
     nrows: Literal[1],
-    ncols: Literal[1],
+    ncols: Literal[1] = ...,
     *,
     sharex: bool | Literal["none", "all", "row", "col"] = ...,
     sharey: bool | Literal["none", "all", "row", "col"] = ...,
