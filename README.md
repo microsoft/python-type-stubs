@@ -42,6 +42,7 @@ and are no longer maintained here:
 - filelock
 - freezegun
 - markdown
+- netaddr
 - packaging
 - pandas (see <https://github.com/pandas-dev/pandas-stubs>; please open pandas stub issues there)
 - PIL
