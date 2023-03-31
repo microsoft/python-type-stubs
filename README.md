@@ -41,6 +41,7 @@ and are no longer maintained here:
 - django (see <https://github.com/sbdchd/django-types>)
 - filelock
 - freezegun
+- jmespath
 - markdown
 - netaddr
 - packaging
