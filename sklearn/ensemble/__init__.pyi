@@ -1,23 +1,35 @@
-from ._base import BaseEnsemble as BaseEnsemble
-from ._forest import RandomForestClassifier as RandomForestClassifier
-from ._forest import RandomForestRegressor as RandomForestRegressor
-from ._forest import RandomTreesEmbedding as RandomTreesEmbedding
-from ._forest import ExtraTreesClassifier as ExtraTreesClassifier
-from ._forest import ExtraTreesRegressor as ExtraTreesRegressor
-from ._bagging import BaggingClassifier as BaggingClassifier
-from ._bagging import BaggingRegressor as BaggingRegressor
-from ._iforest import IsolationForest as IsolationForest
-from ._weight_boosting import AdaBoostClassifier as AdaBoostClassifier
-from ._weight_boosting import AdaBoostRegressor as AdaBoostRegressor
-from ._gb import GradientBoostingClassifier as GradientBoostingClassifier
-from ._gb import GradientBoostingRegressor as GradientBoostingRegressor
-from ._voting import VotingClassifier as VotingClassifier
-from ._voting import VotingRegressor as VotingRegressor
-from ._stacking import StackingClassifier as StackingClassifier
-from ._stacking import StackingRegressor as StackingRegressor
 from ._hist_gradient_boosting.gradient_boosting import (
     HistGradientBoostingRegressor as HistGradientBoostingRegressor,
     HistGradientBoostingClassifier as HistGradientBoostingClassifier,
+)
+from ._voting import (
+    VotingClassifier as VotingClassifier,
+    VotingRegressor as VotingRegressor,
+)
+from ._iforest import IsolationForest as IsolationForest
+from ._base import BaseEnsemble as BaseEnsemble
+from ._gb import (
+    GradientBoostingClassifier as GradientBoostingClassifier,
+    GradientBoostingRegressor as GradientBoostingRegressor,
+)
+from ._stacking import (
+    StackingClassifier as StackingClassifier,
+    StackingRegressor as StackingRegressor,
+)
+from ._bagging import (
+    BaggingClassifier as BaggingClassifier,
+    BaggingRegressor as BaggingRegressor,
+)
+from ._forest import (
+    RandomForestClassifier as RandomForestClassifier,
+    RandomForestRegressor as RandomForestRegressor,
+    RandomTreesEmbedding as RandomTreesEmbedding,
+    ExtraTreesClassifier as ExtraTreesClassifier,
+    ExtraTreesRegressor as ExtraTreesRegressor,
+)
+from ._weight_boosting import (
+    AdaBoostClassifier as AdaBoostClassifier,
+    AdaBoostRegressor as AdaBoostRegressor,
 )
 
 __all__ = [

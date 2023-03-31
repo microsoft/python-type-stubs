@@ -1,77 +1,64 @@
+from typing import Literal
 from ...base import BaseEstimator
-from ...metrics import RocCurveDisplay
-from numpy.typing import NDArray, ArrayLike
-from .base import _get_response
-
-from .. import auc
-from .. import roc_curve
-from .._base import _check_pos_label_consistency
-
-from ...utils import check_matplotlib_support, deprecated
-from numpy import ndarray
-from pandas.core.series import Series
-from ...ensemble._gb import GradientBoostingClassifier
-from ...pipeline import Pipeline
-from ...svm._classes import SVC
-from typing import Union, Sequence, Literal, Mapping
 from matplotlib.axes import Axes
+from matplotlib.artist import Artist
+from ...utils import check_matplotlib_support as check_matplotlib_support
+from ..._typing import ArrayLike, Float, MatrixLike
+from .. import auc as auc, roc_curve as roc_curve
+from matplotlib.figure import Figure
+
 
 class RocCurveDisplay:
+    figure_: Figure = ...
+    ax_: Axes = ...
+    line_: Artist = ...
+
     def __init__(
         self,
         *,
-        fpr: NDArray,
-        tpr: NDArray,
-        roc_auc: float | None = None,
-        estimator_name: str | None = None,
-        pos_label: str | int | None = None,
-    ) -> None: ...
-    def plot(self, ax: Axes | None = None, *, name: str | None = None, **kwargs) -> RocCurveDisplay: ...
+        fpr: ArrayLike,
+        tpr: ArrayLike,
+        roc_auc: None | Float = None,
+        estimator_name: None | str = None,
+        pos_label: None | str | int = None,
+    ) -> None:
+        ...
+
+    def plot(
+        self, ax: None | Axes = None, *, name: None | str = None, **kwargs
+    ) -> RocCurveDisplay:
+        ...
+
     @classmethod
     def from_estimator(
         cls,
         estimator: BaseEstimator,
-        X: NDArray | ArrayLike,
+        X: MatrixLike | ArrayLike,
         y: ArrayLike,
         *,
-        sample_weight: ArrayLike | None = None,
+        sample_weight: None | ArrayLike = None,
         drop_intermediate: bool = True,
-        response_method: Literal["predict_proba", "decision_function", "auto"] = "auto",
-        pos_label: str | int | None = None,
-        name: str | None = None,
-        ax: Axes | None = None,
+        response_method: Literal[
+            "predict_proba", "decision_function", "auto", "auto"
+        ] = "auto",
+        pos_label: None | str | int = None,
+        name: None | str = None,
+        ax: None | Axes = None,
         **kwargs,
-    ) -> RocCurveDisplay: ...
+    ) -> RocCurveDisplay:
+        ...
+
     @classmethod
     def from_predictions(
         cls,
         y_true: ArrayLike,
         y_pred: ArrayLike,
         *,
-        sample_weight: ArrayLike | None = None,
+        sample_weight: None | ArrayLike = None,
         drop_intermediate: bool = True,
-        pos_label: str | int | None = None,
-        name: str | None = None,
-        ax: Axes | None = None,
+        pos_label: None | str | int = None,
+        name: None | str = None,
+        ax: None | Axes = None,
         **kwargs,
-    ) -> RocCurveDisplay: ...
-
-@deprecated(
-    "Function :func:`plot_roc_curve` is deprecated in 1.0 and will be "
-    "removed in 1.2. Use one of the class methods: "
-    ":meth:`sklearn.metrics.RocCurveDisplay.from_predictions` or "
-    ":meth:`sklearn.metrics.RocCurveDisplay.from_estimator`."
-)
-def plot_roc_curve(
-    estimator: BaseEstimator,
-    X: NDArray | ArrayLike,
-    y: ArrayLike,
-    *,
-    sample_weight: ArrayLike | None = None,
-    drop_intermediate: bool = True,
-    response_method: Literal["predict_proba", "decision_function", "auto"] = "auto",
-    name: str | None = None,
-    ax: Axes | None = None,
-    pos_label: str | int | None = None,
-    **kwargs,
-) -> RocCurveDisplay: ...
+    ) -> RocCurveDisplay:
+        ...

@@ -1,18 +1,21 @@
 from numpy import ndarray
-from numpy.typing import ArrayLike
+from scipy.sparse import issparse as issparse
+from ..base import TransformerMixin
+from .._typing import MatrixLike, ArrayLike
+from ..utils.validation import check_is_fitted as check_is_fitted
 
 # Author: V. Michel, A. Gramfort
 # License: BSD 3 clause
 
 import numpy as np
 
-from ..base import TransformerMixin
-from ..utils.validation import check_is_fitted
-from scipy.sparse import issparse
-
 ###############################################################################
 # Mixin class for feature agglomeration.
 
+
 class AgglomerationTransform(TransformerMixin):
-    def transform(self, X: ArrayLike) -> np.ndarray: ...
-    def inverse_transform(self, Xred: ArrayLike) -> np.ndarray: ...
+    def transform(self, X: MatrixLike) -> ndarray:
+        ...
+
+    def inverse_transform(self, Xred: MatrixLike | ArrayLike) -> ndarray:
+        ...

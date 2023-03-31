@@ -1,23 +1,33 @@
-from sklearn.neighbors._unsupervised import NearestNeighbors
-from typing import Union, Literal, Callable, Mapping
-from numpy.typing import ArrayLike
-from ._base import NeighborsBase
-from ._base import KNeighborsMixin
-from ._base import RadiusNeighborsMixin
+from typing import Any, Callable, Literal, TypeVar
 from numpy import ndarray
-from scipy.sparse._csr import csr_matrix
+from ._base import NeighborsBase, KNeighborsMixin, RadiusNeighborsMixin
+from .._typing import Int, Float, MatrixLike
+
+NearestNeighbors_Self = TypeVar("NearestNeighbors_Self", bound="NearestNeighbors")
+
 
 class NearestNeighbors(KNeighborsMixin, RadiusNeighborsMixin, NeighborsBase):
+    n_samples_fit_: int = ...
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    effective_metric_params_: dict = ...
+    effective_metric_: str = ...
+
     def __init__(
         self,
         *,
-        n_neighbors: int = 5,
-        radius: float = 1.0,
-        algorithm: Literal["auto", "ball_tree", "kd_tree", "brute"] = "auto",
-        leaf_size: int = 30,
+        n_neighbors: Int = 5,
+        radius: Float = 1.0,
+        algorithm: Literal["auto", "ball_tree", "kd_tree", "brute", "auto"] = "auto",
+        leaf_size: Int = 30,
         metric: str | Callable = "minkowski",
-        p: int = 2,
-        metric_params: Mapping | None = None,
-        n_jobs: int | None = None,
-    ) -> None: ...
-    def fit(self, X: ArrayLike, y: None = None) -> NearestNeighbors: ...
+        p: Float = 2,
+        metric_params: None | dict = None,
+        n_jobs: None | Int = None,
+    ) -> None:
+        ...
+
+    def fit(
+        self: NearestNeighbors_Self, X: MatrixLike, y: Any = None
+    ) -> NearestNeighbors_Self:
+        ...

@@ -1,6 +1,19 @@
+from typing import Any, ClassVar, Literal, TypeVar
+from collections import Counter as Counter
+from scipy import sparse as sp
 from numpy import ndarray
-from typing import Dict, Optional, Tuple, Any, Literal
-from numpy.typing import ArrayLike, NDArray
+from ..utils._param_validation import StrOptions as StrOptions, Hidden as Hidden
+from ..base import BaseEstimator, TransformerMixin
+from scipy.sparse import spmatrix
+from .._typing import Int, MatrixLike, ArrayLike
+from ..utils import is_scalar_nan as is_scalar_nan
+from ..utils.validation import (
+    check_is_fitted as check_is_fitted,
+    FLOAT_DTYPES as FLOAT_DTYPES,
+)
+
+SimpleImputer_Self = TypeVar("SimpleImputer_Self", bound="SimpleImputer")
+MissingIndicator_Self = TypeVar("MissingIndicator_Self", bound="MissingIndicator")
 
 # Authors: Nicolas Tresegnie <nicolas.tresegnie@gmail.com>
 #          Sergey Feldman <sergeyfeldman@gmail.com>
@@ -8,67 +21,90 @@ from numpy.typing import ArrayLike, NDArray
 
 import numbers
 import warnings
-from collections import Counter
 
 import numpy as np
 import numpy.ma as ma
-from scipy import sparse as sp
 
-from ..base import BaseEstimator, TransformerMixin
-from ..utils.fixes import _mode
-from ..utils.sparsefuncs import _get_median
-from ..utils.validation import check_is_fitted
-from ..utils.validation import FLOAT_DTYPES
-from ..utils.validation import _check_feature_names_in
-from ..utils._mask import _get_mask
-from ..utils import _is_pandas_na
-from ..utils import is_scalar_nan
-
-def _check_inputs_dtype(X: ndarray, missing_values: float) -> None: ...
-def _most_frequent(array, extra_value, n_repeat): ...
 
 class _BaseImputer(TransformerMixin, BaseEstimator):
-    def __init__(self, *, missing_values=..., add_indicator=False) -> None: ...
-    def _fit_indicator(self, X: ndarray) -> None: ...
-    def _transform_indicator(self, X: ndarray) -> Optional[ndarray]: ...
-    def _concatenate_indicator(self, X_imputed: ndarray, X_indicator: Optional[ndarray]) -> ndarray: ...
-    def _concatenate_indicator_feature_names_out(self, names, input_features): ...
-    def _more_tags(self) -> Dict[str, bool]: ...
+
+    _parameter_constraints: ClassVar[dict] = ...
+
+    def __init__(
+        self,
+        *,
+        missing_values=...,
+        add_indicator: bool = False,
+        keep_empty_features: bool = False,
+    ) -> None:
+        ...
+
 
 class SimpleImputer(_BaseImputer):
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    indicator_: MissingIndicator = ...
+    statistics_: ndarray = ...
+
+    _parameter_constraints: ClassVar[dict] = ...
+
     def __init__(
         self,
         *,
-        missing_values: int | float | str | None = ...,
+        missing_values: float | None | str | int = ...,
         strategy: str = "mean",
-        fill_value: str | int | float | None = None,
-        verbose: int | str = "deprecated",
+        fill_value: float | None | str | int = None,
+        verbose: str | Int = "deprecated",
         copy: bool = True,
         add_indicator: bool = False,
-    ) -> None: ...
-    def _validate_input(self, X: ndarray, in_fit: bool) -> ndarray: ...
-    def fit(self, X: NDArray | ArrayLike, y: Optional[ndarray] = None) -> "SimpleImputer": ...
-    def _sparse_fit(self, X, strategy, missing_values, fill_value): ...
-    def _dense_fit(self, X: ndarray, strategy: str, missing_values: float, fill_value: int) -> ndarray: ...
-    def transform(self, X: NDArray | ArrayLike) -> NDArray: ...
-    def inverse_transform(self, X: ArrayLike) -> NDArray: ...
-    def _more_tags(self) -> Dict[str, bool]: ...
-    def get_feature_names_out(self, input_features: ArrayLike | None = None) -> np.ndarray: ...
+        keep_empty_features: bool = False,
+    ) -> None:
+        ...
+
+    def fit(
+        self: SimpleImputer_Self, X: MatrixLike, y: Any = None
+    ) -> SimpleImputer_Self:
+        ...
+
+    def transform(self, X: MatrixLike) -> ndarray | spmatrix:
+        ...
+
+    def inverse_transform(self, X: MatrixLike) -> ndarray:
+        ...
+
+    def get_feature_names_out(self, input_features: None | ArrayLike = None) -> ndarray:
+        ...
+
 
 class MissingIndicator(TransformerMixin, BaseEstimator):
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    features_: ndarray = ...
+
+    _parameter_constraints: ClassVar[dict] = ...
+
     def __init__(
         self,
         *,
-        missing_values: int | float | str | None = ...,
-        features: Literal["missing-only", "all"] = "missing-only",
-        sparse: bool | Literal["auto"] = "auto",
+        missing_values: float | None | str | int = ...,
+        features: Literal["missing-only", "all", "missing-only"] = "missing-only",
+        sparse: Literal["auto", "auto"] | bool = "auto",
         error_on_new: bool = True,
-    ) -> None: ...
-    def _get_missing_features_info(self, X: ndarray) -> Tuple[ndarray, ndarray]: ...
-    def _validate_input(self, X, in_fit): ...
-    def _fit(self, X: ndarray, y: None = None, precomputed: bool = False) -> ndarray: ...
-    def fit(self, X: NDArray | ArrayLike, y=None) -> Any: ...
-    def transform(self, X: NDArray | ArrayLike) -> NDArray: ...
-    def fit_transform(self, X: NDArray | ArrayLike, y=None) -> NDArray: ...
-    def get_feature_names_out(self, input_features: ArrayLike | None = None) -> np.ndarray: ...
-    def _more_tags(self): ...
+    ) -> None:
+        ...
+
+    def fit(
+        self: MissingIndicator_Self, X: MatrixLike | ArrayLike, y: Any = None
+    ) -> MissingIndicator_Self:
+        ...
+
+    def transform(self, X: MatrixLike | ArrayLike) -> ndarray | spmatrix:
+        ...
+
+    def fit_transform(
+        self, X: MatrixLike | ArrayLike, y: Any = None
+    ) -> ndarray | spmatrix:
+        ...
+
+    def get_feature_names_out(self, input_features: None | ArrayLike = None) -> ndarray:
+        ...

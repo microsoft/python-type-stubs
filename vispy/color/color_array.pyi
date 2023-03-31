@@ -1,5 +1,5 @@
 from typing import Literal, Sequence
-from ..color.color_array import ColorArray
+
 
 # -*- coding: utf-8 -*-
 # Copyright (c) Vispy Development Team. All Rights Reserved.

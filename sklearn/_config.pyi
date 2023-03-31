@@ -1,28 +1,39 @@
-from typing import Dict, Iterator, Optional, Union, Mapping, Literal
-import os
+from typing import Iterator, Literal
+from ._typing import Int
 from contextlib import contextmanager as contextmanager
+import os
 import threading
 
 _global_config: dict = ...
 _threadlocal = ...
 
-def _get_threadlocal_config() -> Dict[str, Union[bool, int, str]]: ...
-def get_config() -> Mapping: ...
+
+def get_config() -> dict | dict[str, bool | int | str]:
+    ...
+
+
 def set_config(
-    assume_finite: bool | None = None,
-    working_memory: int | None = None,
-    print_changed_only: bool | None = None,
-    display: Literal["text", "diagram"] | None = None,
-    pairwise_dist_chunk_size: int | None = None,
-    enable_cython_pairwise_dist: bool | None = None,
-) -> None: ...
-@contextmanager
+    assume_finite: None | bool = None,
+    working_memory: None | Int = None,
+    print_changed_only: None | bool = None,
+    display: None | Literal["text", "diagram"] = None,
+    pairwise_dist_chunk_size: None | Int = None,
+    enable_cython_pairwise_dist: None | bool = None,
+    array_api_dispatch: None | bool = None,
+    transform_output: None | str = None,
+) -> None:
+    ...
+
+
 def config_context(
     *,
-    assume_finite: bool | None = None,
-    working_memory: int | None = None,
-    print_changed_only: bool | None = None,
-    display: Literal["text", "diagram"] | None = None,
-    pairwise_dist_chunk_size: int | None = None,
-    enable_cython_pairwise_dist: bool | None = None,
-) -> Iterator[None]: ...
+    assume_finite: None | bool = None,
+    working_memory: None | Int = None,
+    print_changed_only: None | bool = None,
+    display: None | Literal["text", "diagram"] = None,
+    pairwise_dist_chunk_size: None | Int = None,
+    enable_cython_pairwise_dist: None | bool = None,
+    array_api_dispatch: None | bool = None,
+    transform_output: None | str = None,
+) -> Iterator[None]:
+    ...

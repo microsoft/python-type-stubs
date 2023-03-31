@@ -38,10 +38,12 @@ and are no longer maintained here:
 - aiofiles
 - cachetools
 - deprecated
+- django (see <https://github.com/sbdchd/django-types>)
 - filelock
 - freezegun
 - jmespath
 - markdown
+- netaddr
 - packaging
 - pandas (see <https://github.com/pandas-dev/pandas-stubs>; please open pandas stub issues there)
 - PIL

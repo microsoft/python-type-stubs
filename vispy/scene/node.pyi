@@ -1,5 +1,4 @@
-from ..scene.node import Node
-from ..util.event import Event
+
 from numpy.typing import ArrayLike
 from ..visuals.transforms.chain import ChainTransform
 from ..visuals.transforms.transform_system import TransformSystem

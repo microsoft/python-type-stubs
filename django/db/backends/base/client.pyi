@@ -1,9 +1,0 @@
-from typing import Any, Iterable
-
-from django.db.backends.base.base import BaseDatabaseWrapper
-
-class BaseDatabaseClient:
-    executable_name: Any = ...
-    connection: BaseDatabaseWrapper
-    def __init__(self, connection: BaseDatabaseWrapper) -> None: ...
-    def runshell(self, parameters: Iterable[str]) -> None: ...

@@ -1,27 +1,23 @@
 from typing import Literal
-from sklearn.utils import Bunch
+from numpy.random import RandomState
+from ._svmlight_format_io import load_svmlight_files as load_svmlight_files
+from os import remove as remove, makedirs as makedirs
+from os.path import exists as exists, join as join
+from ._base import RemoteFileMetadata as RemoteFileMetadata, load_descr as load_descr
+from gzip import GzipFile as GzipFile
+from .._typing import Int
+from ..utils import shuffle as shuffle_, Bunch
+from . import get_data_home as get_data_home
 
 # Author: Tom Dupre la Tour
 # License: BSD 3 clause
 
 import logging
 
-from os import remove, makedirs
-from os.path import exists, join
-from gzip import GzipFile
-
 import numpy as np
 import scipy.sparse as sp
 import joblib
 
-from . import get_data_home
-from ._base import _pkl_filepath
-from ._base import _fetch_remote
-from ._base import RemoteFileMetadata
-from ._base import load_descr
-from ._svmlight_format_io import load_svmlight_files
-from ..utils import shuffle as shuffle_
-from ..utils import Bunch
 
 # The original vectorized data can be found at:
 #    http://www.ai.mit.edu/projects/jmlr/papers/volume5/lewis04a/a13-vector-files/lyrl2004_vectors_test_pt0.dat.gz
@@ -40,14 +36,14 @@ TOPICS_METADATA = ...
 
 logger = ...
 
+
 def fetch_rcv1(
     *,
-    data_home: str | None = None,
-    subset: Literal["train", "test", "all"] = "all",
+    data_home: None | str = None,
+    subset: Literal["train", "test", "all", "all"] = "all",
     download_if_missing: bool = True,
-    random_state: int | RandomState | None = None,
+    random_state: RandomState | None | Int = None,
     shuffle: bool = False,
     return_X_y: bool = False,
-) -> tuple[Bunch, tuple]: ...
-def _inverse_permutation(p): ...
-def _find_permutation(a, b): ...
+) -> tuple[Bunch, tuple]:
+    ...

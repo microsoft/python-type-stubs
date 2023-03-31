@@ -1,38 +1,21 @@
-from collections.abc import Generator, Iterable
-from typing import Iterator, List, Optional, Tuple, Type, Union, Any, Callable
-from numpy.typing import ArrayLike
+from typing import Any, Callable, Iterable, Iterator
 from numpy.random import RandomState
-
-# Author: Alexandre Gramfort <alexandre.gramfort@inria.fr>
-#         Gael Varoquaux <gael.varoquaux@normalesup.org>
-#         Olivier Grisel <olivier.grisel@ensta.org>
-#         Raghav RV <rvraghav93@gmail.com>
-#         Leandro Hermida <hermidal@cs.umd.edu>
-#         Rodion Martynov <marrodion@gmail.com>
-# License: BSD 3 clause
-
-from collections.abc import Iterable
-from collections import defaultdict
-import warnings
-from itertools import chain, combinations
-from math import ceil, floor
-import numbers
+from ..utils import indexable as indexable, check_random_state as check_random_state
+from scipy.special import comb as comb
+from collections import defaultdict as defaultdict
 from abc import ABCMeta, abstractmethod
-from inspect import signature
+from itertools import chain as chain, combinations as combinations
+from numpy import ndarray
+from ..utils.multiclass import type_of_target as type_of_target
+from math import ceil as ceil, floor as floor
+from inspect import signature as signature
+from .._typing import MatrixLike, ArrayLike, Int, Float
+from collections.abc import Iterable
+from ..utils.validation import column_or_1d as column_or_1d, check_array as check_array
+import warnings
+import numbers
 
 import numpy as np
-from scipy.special import comb
-
-from ..utils import indexable, check_random_state, _safe_indexing
-from ..utils import _approximate_mode
-from ..utils.validation import _num_samples, column_or_1d
-from ..utils.validation import check_array
-from ..utils.multiclass import type_of_target
-from ..base import _pprint
-from numpy import float64, ndarray
-from pandas.core.frame import DataFrame
-from pandas.core.series import Series
-from scipy.sparse._csr import csr_matrix
 
 __all__ = [
     "BaseCrossValidator",
@@ -54,235 +37,291 @@ __all__ = [
     "check_cv",
 ]
 
+
 class BaseCrossValidator(metaclass=ABCMeta):
     def split(
-        self, X: ArrayLike, y: ArrayLike | None = None, groups: ArrayLike | None = None
-    ) -> Iterator[Tuple[ndarray, ndarray]]: ...
-
-    # Since subclasses must implement either _iter_test_masks or
-    # _iter_test_indices, neither can be abstract.
-    def _iter_test_masks(
         self,
-        X: Optional[ndarray] = None,
-        y: Optional[ndarray] = None,
-        groups: Optional[ndarray] = None,
-    ) -> Iterator[ndarray]: ...
-    def _iter_test_indices(self, X=None, y=None, groups=None): ...
+        X: list[str] | MatrixLike,
+        y: None | ArrayLike = None,
+        groups: None | ArrayLike = None,
+    ) -> Iterator[tuple[ndarray, ndarray]]:
+        ...
+
     @abstractmethod
-    def get_n_splits(self, X=None, y=None, groups=None): ...
-    def __repr__(self): ...
+    def get_n_splits(self, X=None, y=None, groups=None):
+        ...
+
+    def __repr__(self) -> str:
+        ...
+
 
 class LeaveOneOut(BaseCrossValidator):
-    def _iter_test_indices(self, X, y=None, groups=None): ...
-    def get_n_splits(self, X: ArrayLike, y: Any = None, groups: Any = None) -> int: ...
+    def get_n_splits(self, X: MatrixLike, y: Any = None, groups: Any = None) -> int:
+        ...
+
 
 class LeavePOut(BaseCrossValidator):
-    def __init__(self, p: int): ...
-    def _iter_test_indices(self, X, y=None, groups=None): ...
-    def get_n_splits(self, X: ArrayLike, y: Any = None, groups: Any = None): ...
+    def __init__(self, p: Int) -> None:
+        ...
+
+    def get_n_splits(self, X: MatrixLike, y: Any = None, groups: Any = None):
+        ...
+
 
 class _BaseKFold(BaseCrossValidator, metaclass=ABCMeta):
     @abstractmethod
-    def __init__(self, n_splits: int, *, shuffle, random_state) -> None: ...
+    def __init__(self, n_splits: int, *, shuffle, random_state) -> None:
+        ...
+
     def split(
-        self, X: ArrayLike, y: ArrayLike | None = None, groups: ArrayLike | None = None
-    ) -> Iterator[Tuple[ndarray, ndarray]]: ...
-    def get_n_splits(
         self,
-        X: Optional[Union[ndarray, List[str]]] = None,
-        y: Optional[ndarray] = None,
-        groups: None = None,
-    ) -> int: ...
+        X: list[str] | MatrixLike,
+        y: None | ArrayLike = None,
+        groups: None | ArrayLike = None,
+    ) -> Iterator[tuple[ndarray, ndarray]]:
+        ...
+
+    def get_n_splits(self, X: Any = None, y: Any = None, groups: Any = None) -> int:
+        ...
+
 
 class KFold(_BaseKFold):
     def __init__(
         self,
-        n_splits: int = 5,
+        n_splits: Int = 5,
         *,
         shuffle: bool = False,
-        random_state: int | RandomState | None = None,
-    ) -> None: ...
-    def _iter_test_indices(
-        self, X: ndarray, y: Optional[ndarray] = None, groups: Optional[ndarray] = None
-    ) -> Iterator[ndarray]: ...
+        random_state: RandomState | None | Int = None,
+    ) -> None:
+        ...
+
 
 class GroupKFold(_BaseKFold):
-    def __init__(self, n_splits: int = 5) -> None: ...
-    def _iter_test_indices(self, X: ndarray, y: ndarray, groups: ndarray) -> Iterator[ndarray]: ...
-    def split(self, X: ArrayLike, y: ArrayLike | None = None, groups: ArrayLike | None = None) -> Iterator[Any]: ...
+    def __init__(self, n_splits: Int = 5) -> None:
+        ...
+
+    def split(
+        self, X: MatrixLike, y: None | ArrayLike = None, groups: None | ArrayLike = None
+    ) -> Iterator[Any]:
+        ...
+
 
 class StratifiedKFold(_BaseKFold):
     def __init__(
         self,
-        n_splits: int = 5,
+        n_splits: Int = 5,
         *,
         shuffle: bool = False,
-        random_state: int | RandomState | None = None,
-    ) -> None: ...
-    def _make_test_folds(self, X: Union[ndarray, List[str]], y: Optional[ndarray] = None) -> ndarray: ...
-    def _iter_test_masks(
-        self,
-        X: Union[ndarray, List[str]],
-        y: Optional[ndarray] = None,
-        groups: Optional[ndarray] = None,
-    ) -> Iterator[ndarray]: ...
-    def split(self, X: ArrayLike, y: ArrayLike, groups: Optional[ndarray] = None) -> Iterator[Any]: ...
+        random_state: RandomState | None | Int = None,
+    ) -> None:
+        ...
+
+    def split(
+        self, X: list[str] | MatrixLike, y: ArrayLike, groups: Any = None
+    ) -> Iterator[Any]:
+        ...
+
 
 class StratifiedGroupKFold(_BaseKFold):
     def __init__(
         self,
-        n_splits: int = 5,
+        n_splits: Int = 5,
         shuffle: bool = False,
-        random_state: int | RandomState | None = None,
-    ) -> None: ...
-    def _iter_test_indices(self, X: ndarray, y: ndarray, groups: ndarray) -> Iterator[List[int]]: ...
-    def _find_best_fold(self, y_counts_per_fold: ndarray, y_cnt: ndarray, group_y_counts: ndarray) -> int: ...
+        random_state: None | RandomState | int = None,
+    ) -> None:
+        ...
+
 
 class TimeSeriesSplit(_BaseKFold):
     def __init__(
         self,
-        n_splits: int = 5,
+        n_splits: Int = 5,
         *,
-        max_train_size: int | None = None,
-        test_size: int | None = None,
-        gap: int = 0,
-    ) -> None: ...
+        max_train_size: None | Int = None,
+        test_size: None | Int = None,
+        gap: Int = 0,
+    ) -> None:
+        ...
+
     def split(
-        self, X: ArrayLike, y: ArrayLike | None = None, groups: ArrayLike | None = None
-    ) -> Iterator[Tuple[ndarray, ndarray]]: ...
+        self, X: MatrixLike, y: None | ArrayLike = None, groups: None | ArrayLike = None
+    ) -> Iterator[tuple[ndarray, ndarray]]:
+        ...
+
 
 class LeaveOneGroupOut(BaseCrossValidator):
-    def _iter_test_masks(self, X, y, groups): ...
-    def get_n_splits(self, X: Any = None, y: Any = None, groups: ArrayLike | None = None) -> int: ...
-    def split(self, X: ArrayLike, y: ArrayLike | None = None, groups: ArrayLike | None = None): ...
+    def get_n_splits(
+        self, X: Any = None, y: Any = None, groups: None | ArrayLike = None
+    ) -> int:
+        ...
+
+    def split(
+        self, X: MatrixLike, y: None | ArrayLike = None, groups: None | ArrayLike = None
+    ):
+        ...
+
 
 class LeavePGroupsOut(BaseCrossValidator):
-    def __init__(self, n_groups: int): ...
-    def _iter_test_masks(self, X, y, groups): ...
-    def get_n_splits(self, X: Any = None, y: Any = None, groups: ArrayLike | None = None) -> int: ...
-    def split(self, X: ArrayLike, y: ArrayLike | None = None, groups: ArrayLike | None = None): ...
+    def __init__(self, n_groups: Int) -> None:
+        ...
+
+    def get_n_splits(
+        self, X: Any = None, y: Any = None, groups: None | ArrayLike = None
+    ) -> int:
+        ...
+
+    def split(
+        self, X: MatrixLike, y: None | ArrayLike = None, groups: None | ArrayLike = None
+    ):
+        ...
+
 
 class _RepeatedSplits(metaclass=ABCMeta):
     def __init__(
         self,
         cv: Callable,
         *,
-        n_repeats: int = 10,
-        random_state: int | RandomState | None = None,
+        n_repeats: Int = 10,
+        random_state: RandomState | None | Int = None,
         **cvargs,
-    ) -> None: ...
+    ) -> None:
+        ...
+
     def split(
-        self, X: ArrayLike, y: ArrayLike | None = None, groups: ArrayLike | None = None
-    ) -> Iterator[Tuple[ndarray, ndarray]]: ...
+        self, X: MatrixLike, y: None | ArrayLike = None, groups: None | ArrayLike = None
+    ) -> Iterator[tuple[ndarray, ndarray]]:
+        ...
+
     def get_n_splits(
-        self,
-        X: Optional[ndarray] = None,
-        y: Optional[ndarray] = None,
-        groups: ArrayLike | None = None,
-    ) -> int: ...
-    def __repr__(self): ...
+        self, X: Any = None, y: Any = None, groups: None | ArrayLike = None
+    ) -> int:
+        ...
+
+    def __repr__(self) -> str:
+        ...
+
 
 class RepeatedKFold(_RepeatedSplits):
     def __init__(
         self,
         *,
-        n_splits: int = 5,
-        n_repeats: int = 10,
-        random_state: int | RandomState | None = None,
-    ): ...
+        n_splits: Int = 5,
+        n_repeats: Int = 10,
+        random_state: RandomState | None | Int = None,
+    ) -> None:
+        ...
+
 
 class RepeatedStratifiedKFold(_RepeatedSplits):
     def __init__(
         self,
         *,
-        n_splits: int = 5,
-        n_repeats: int = 10,
-        random_state: int | RandomState | None = None,
-    ) -> None: ...
+        n_splits: Int = 5,
+        n_repeats: Int = 10,
+        random_state: RandomState | None | Int = None,
+    ) -> None:
+        ...
+
 
 class BaseShuffleSplit(metaclass=ABCMeta):
-    def __init__(self, n_splits: int = 10, *, test_size=None, train_size=None, random_state=None) -> None: ...
+    def __init__(
+        self, n_splits: int = 10, *, test_size=None, train_size=None, random_state=None
+    ) -> None:
+        ...
+
     def split(
-        self, X: ArrayLike, y: ArrayLike | None = None, groups: ArrayLike | None = None
-    ) -> Iterator[Tuple[ndarray, ndarray]]: ...
-    @abstractmethod
-    def _iter_indices(self, X, y=None, groups=None): ...
-    def get_n_splits(
-        self,
-        X: Optional[ndarray] = None,
-        y: Optional[ndarray] = None,
-        groups: None = None,
-    ) -> int: ...
-    def __repr__(self): ...
+        self, X: MatrixLike, y: None | ArrayLike = None, groups: None | ArrayLike = None
+    ) -> Iterator[tuple[ndarray, ndarray]]:
+        ...
+
+    def get_n_splits(self, X: Any = None, y: Any = None, groups: Any = None) -> int:
+        ...
+
+    def __repr__(self) -> str:
+        ...
+
 
 class ShuffleSplit(BaseShuffleSplit):
     def __init__(
         self,
-        n_splits: int = 10,
+        n_splits: Int = 10,
         *,
-        test_size: float | int | None = None,
-        train_size: float | int | None = None,
-        random_state: int | RandomState | None = None,
-    ) -> None: ...
-    def _iter_indices(
-        self, X: ndarray, y: Optional[ndarray] = None, groups: Optional[ndarray] = None
-    ) -> Iterator[Tuple[ndarray, ndarray]]: ...
+        test_size: None | Float = None,
+        train_size: None | Float = None,
+        random_state: RandomState | None | Int = None,
+    ) -> None:
+        ...
+
 
 class GroupShuffleSplit(ShuffleSplit):
     def __init__(
         self,
-        n_splits: int = 5,
+        n_splits: Int = 5,
         *,
-        test_size: float | int | None = None,
-        train_size: float | int | None = None,
-        random_state: int | RandomState | None = None,
-    ) -> None: ...
-    def _iter_indices(self, X: ndarray, y: ndarray, groups: ndarray) -> Iterator[Tuple[ndarray, ndarray]]: ...
-    def split(self, X: ArrayLike, y: ArrayLike | None = None, groups: ArrayLike | None = None) -> Iterator[Any]: ...
+        test_size: float | None | int = None,
+        train_size: None | Float = None,
+        random_state: RandomState | None | Int = None,
+    ) -> None:
+        ...
+
+    def split(
+        self, X: MatrixLike, y: None | ArrayLike = None, groups: None | ArrayLike = None
+    ) -> Iterator[Any]:
+        ...
+
 
 class StratifiedShuffleSplit(BaseShuffleSplit):
     def __init__(
         self,
-        n_splits: int = 10,
+        n_splits: Int = 10,
         *,
-        test_size: float | int | None = None,
-        train_size: float | int | None = None,
-        random_state: int | RandomState | None = None,
-    ) -> None: ...
-    def _iter_indices(self, X: ndarray, y: ndarray, groups: Optional[ndarray] = None) -> Iterator[Tuple[ndarray, ndarray]]: ...
-    def split(self, X: ArrayLike, y: ArrayLike, groups: Optional[ndarray] = None) -> Iterator[Any]: ...
+        test_size: None | Float = None,
+        train_size: None | Float = None,
+        random_state: RandomState | None | Int = None,
+    ) -> None:
+        ...
 
-def _validate_shuffle_split(
-    n_samples: int,
-    test_size: Optional[Union[int, float]],
-    train_size: Optional[Union[int, float, float64]],
-    default_test_size: Optional[float] = None,
-) -> Tuple[int, int]: ...
+    def split(self, X: MatrixLike, y: ArrayLike, groups: Any = None) -> Iterator[Any]:
+        ...
+
 
 class PredefinedSplit(BaseCrossValidator):
-    def __init__(self, test_fold: ArrayLike): ...
-    def split(self, X: Any = None, y: Any = None, groups: Any = None): ...
-    def _iter_test_masks(self): ...
-    def get_n_splits(self, X: Any = None, y: Any = None, groups: Any = None) -> int: ...
+    def __init__(self, test_fold: ArrayLike) -> None:
+        ...
+
+    def split(self, X: Any = None, y: Any = None, groups: Any = None):
+        ...
+
+    def get_n_splits(self, X: Any = None, y: Any = None, groups: Any = None) -> int:
+        ...
+
 
 class _CVIterableWrapper(BaseCrossValidator):
-    def __init__(self, cv): ...
-    def get_n_splits(self, X: Any = None, y: Any = None, groups: Any = None) -> int: ...
-    def split(self, X: Any = None, y: Any = None, groups: Any = None): ...
+    def __init__(self, cv) -> None:
+        ...
+
+    def get_n_splits(self, X: Any = None, y: Any = None, groups: Any = None) -> int:
+        ...
+
+    def split(self, X: Any = None, y: Any = None, groups: Any = None):
+        ...
+
 
 def check_cv(
-    cv: int | Generator | Iterable = 5,
-    y: ArrayLike | None = None,
+    cv: Iterable | int | BaseShuffleSplit | BaseCrossValidator = 5,
+    y: None | ArrayLike = None,
     *,
     classifier: bool = False,
-) -> BaseCrossValidator: ...
+) -> BaseCrossValidator:
+    ...
+
+
 def train_test_split(
     *arrays,
-    test_size: float | int | None = None,
-    train_size: float | int | None = None,
-    random_state: int | RandomState | None = None,
+    test_size: None | Float = None,
+    train_size: None | Float = None,
+    random_state: RandomState | None | Int = None,
     shuffle: bool = True,
-    stratify: ArrayLike | None = None,
-) -> list: ...
-def _build_repr(self): ...
-def _yields_constant_splits(cv: Union[StratifiedKFold, KFold]) -> bool: ...
+    stratify: None | ArrayLike = None,
+) -> list:
+    ...

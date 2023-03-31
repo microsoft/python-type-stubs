@@ -1,5 +1,23 @@
-from sklearn.neural_network._rbm import BernoulliRBM
-from numpy.typing import ArrayLike, NDArray
+from typing import ClassVar, TypeVar
+from numpy.random import RandomState
+from scipy.special import expit as expit
+from numpy import ndarray
+from ..utils.extmath import (
+    safe_sparse_dot as safe_sparse_dot,
+    log_logistic as log_logistic,
+)
+from ..utils._param_validation import Interval as Interval
+from numbers import Integral as Integral, Real as Real
+from ..base import BaseEstimator, TransformerMixin, ClassNamePrefixFeaturesOutMixin
+from .._typing import Int, Float, MatrixLike, ArrayLike
+from ..utils import (
+    check_random_state as check_random_state,
+    gen_even_slices as gen_even_slices,
+)
+from ..utils.validation import check_is_fitted as check_is_fitted
+
+BernoulliRBM_Self = TypeVar("BernoulliRBM_Self", bound="BernoulliRBM")
+
 
 # Authors: Yann N. Dauphin <dauphiya@iro.umontreal.ca>
 #          Vlad Niculae
@@ -11,39 +29,47 @@ import time
 
 import numpy as np
 import scipy.sparse as sp
-from scipy.special import expit  # logistic function
 
-from ..base import BaseEstimator
-from ..base import TransformerMixin
-from ..base import _ClassNamePrefixFeaturesOutMixin
-from ..utils import check_random_state
-from ..utils import gen_even_slices
-from ..utils.extmath import safe_sparse_dot
-from ..utils.extmath import log_logistic
-from ..utils.validation import check_is_fitted
-from numpy import ndarray
-from numpy.random import RandomState
-from typing import Optional
 
-class BernoulliRBM(_ClassNamePrefixFeaturesOutMixin, TransformerMixin, BaseEstimator):
+class BernoulliRBM(ClassNamePrefixFeaturesOutMixin, TransformerMixin, BaseEstimator):
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    h_samples_: ArrayLike = ...
+    components_: ArrayLike = ...
+    intercept_visible_: ArrayLike = ...
+    intercept_hidden_: ArrayLike = ...
+
+    _parameter_constraints: ClassVar[dict] = ...
+
     def __init__(
         self,
-        n_components: int = 256,
+        n_components: Int = 256,
         *,
-        learning_rate: float = 0.1,
-        batch_size: int = 10,
-        n_iter: int = 10,
-        verbose: int = 0,
-        random_state: int | RandomState | None = None,
-    ) -> None: ...
-    def transform(self, X: NDArray | ArrayLike) -> NDArray: ...
-    def _mean_hiddens(self, v: ndarray) -> ndarray: ...
-    def _sample_hiddens(self, v, rng): ...
-    def _sample_visibles(self, h: ndarray, rng: RandomState) -> ndarray: ...
-    def _free_energy(self, v: ndarray) -> ndarray: ...
-    def gibbs(self, v: NDArray) -> NDArray: ...
-    def partial_fit(self, X: NDArray, y: ArrayLike | None = None) -> BernoulliRBM: ...
-    def _fit(self, v_pos: ndarray, rng: RandomState) -> None: ...
-    def score_samples(self, X: NDArray | ArrayLike) -> NDArray: ...
-    def fit(self, X: NDArray | ArrayLike, y: ArrayLike | None = None) -> BernoulliRBM: ...
-    def _more_tags(self): ...
+        learning_rate: Float = 0.1,
+        batch_size: Int = 10,
+        n_iter: Int = 10,
+        verbose: Int = 0,
+        random_state: RandomState | None | Int = None,
+    ) -> None:
+        ...
+
+    def transform(self, X: MatrixLike | ArrayLike) -> ndarray:
+        ...
+
+    def gibbs(self, v: ArrayLike) -> ndarray:
+        ...
+
+    def partial_fit(
+        self: BernoulliRBM_Self, X: ArrayLike, y: None | MatrixLike | ArrayLike = None
+    ) -> BernoulliRBM_Self:
+        ...
+
+    def score_samples(self, X: MatrixLike | ArrayLike) -> ndarray:
+        ...
+
+    def fit(
+        self: BernoulliRBM_Self,
+        X: MatrixLike | ArrayLike,
+        y: None | MatrixLike | ArrayLike = None,
+    ) -> BernoulliRBM_Self:
+        ...

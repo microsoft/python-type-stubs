@@ -1,71 +1,89 @@
-from numpy import int64, ndarray
-from typing import Optional, Tuple, Union, Literal, Any
-from numpy.typing import ArrayLike
-from time import time
-from collections import namedtuple
-import warnings
+from typing import Any, ClassVar, Literal, TypeVar
+from numpy.random import RandomState
+from scipy import stats as stats
+from ..base import BaseEstimator
+from ..exceptions import ConvergenceWarning as ConvergenceWarning
+from ..preprocessing import normalize as normalize
+from ..linear_model import BayesianRidge as BayesianRidge
+from ..utils.validation import (
+    FLOAT_DTYPES as FLOAT_DTYPES,
+    check_is_fitted as check_is_fitted,
+)
+from ._base import MissingIndicator
+from collections import namedtuple as namedtuple
+from numpy import ndarray
+from ..utils._param_validation import (
+    HasMethods as HasMethods,
+    Interval as Interval,
+    StrOptions as StrOptions,
+)
+from numbers import Integral as Integral, Real as Real
+from ..base import clone as clone
+from time import time as time
+from ..utils import (
+    check_array as check_array,
+    check_random_state as check_random_state,
+    is_scalar_nan as is_scalar_nan,
+)
+from ._base import _BaseImputer, SimpleImputer
+from .._typing import Int, Float, ArrayLike, MatrixLike
 
-from scipy import stats
+IterativeImputer_Self = TypeVar("IterativeImputer_Self", bound="IterativeImputer")
+
+import warnings
 import numpy as np
 
-from ..base import clone
-from ..exceptions import ConvergenceWarning
-from ..preprocessing import normalize
-from ..utils import check_array, check_random_state, _safe_indexing, is_scalar_nan
-from ..utils.validation import FLOAT_DTYPES, check_is_fitted
-from ..utils.validation import _check_feature_names_in
-from ..utils._mask import _get_mask
-
-from ._base import _BaseImputer
-from ._base import SimpleImputer
-from ._base import _check_inputs_dtype
-from sklearn.ensemble._forest import RandomForestRegressor
-from sklearn.linear_model._bayes import BayesianRidge
-from sklearn.neighbors._regression import KNeighborsRegressor
-from sklearn.pipeline import Pipeline
 
 _ImputerTriplet = ...
 
+
 class IterativeImputer(_BaseImputer):
+    random_state_: RandomState = ...
+    indicator_: MissingIndicator = ...
+    n_features_with_missing_: int = ...
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    n_iter_: int = ...
+    imputation_sequence_: list[tuple] = ...
+    initial_imputer_: SimpleImputer = ...
+
+    _parameter_constraints: ClassVar[dict] = ...
+
     def __init__(
         self,
-        estimator: Estimator | None = None,
+        estimator: None | BaseEstimator = None,
         *,
-        missing_values: int = ...,
+        missing_values: float | int = ...,
         sample_posterior: bool = False,
-        max_iter: int = 10,
-        tol: float = 1e-3,
-        n_nearest_features: int | None = None,
-        initial_strategy: Literal["mean", "median", "most_frequent", "constant"] = "mean",
-        imputation_order: Literal["ascending", "descending", "roman", "arabic", "random"] = "ascending",
+        max_iter: Int = 10,
+        tol: Float = 1e-3,
+        n_nearest_features: None | Int = None,
+        initial_strategy: Literal[
+            "mean", "median", "most_frequent", "constant", "mean"
+        ] = "mean",
+        imputation_order: Literal[
+            "ascending", "descending", "roman", "arabic", "random", "ascending"
+        ] = "ascending",
         skip_complete: bool = False,
         min_value: float | ArrayLike = ...,
         max_value: float | ArrayLike = ...,
-        verbose: int = 0,
-        random_state: int | RandomState | None = None,
+        verbose: Int = 0,
+        random_state: RandomState | None | Int = None,
         add_indicator: bool = False,
-    ) -> None: ...
-    def _impute_one_feature(
-        self,
-        X_filled: ndarray,
-        mask_missing_values: ndarray,
-        feat_idx: int64,
-        neighbor_feat_idx: ndarray,
-        estimator: Optional[Union[KNeighborsRegressor, BayesianRidge, Pipeline, RandomForestRegressor]] = None,
-        fit_mode: bool = True,
-    ) -> Union[
-        Tuple[ndarray, RandomForestRegressor],
-        Tuple[ndarray, BayesianRidge],
-        Tuple[ndarray, KNeighborsRegressor],
-        Tuple[ndarray, Pipeline],
-    ]: ...
-    def _get_neighbor_feat_idx(self, n_features: int, feat_idx: int64, abs_corr_mat: Optional[ndarray]) -> ndarray: ...
-    def _get_ordered_idx(self, mask_missing_values: ndarray) -> ndarray: ...
-    def _get_abs_corr_mat(self, X_filled: ndarray, tolerance: float = 1e-6) -> Optional[ndarray]: ...
-    def _initial_imputation(self, X: ndarray, in_fit: bool = False) -> Tuple[ndarray, ndarray, ndarray, ndarray]: ...
-    @staticmethod
-    def _validate_limit(limit: float, limit_type: str, n_features: int) -> ndarray: ...
-    def fit_transform(self, X: ArrayLike, y: Optional[ndarray] = None) -> ArrayLike: ...
-    def transform(self, X: ArrayLike) -> ArrayLike: ...
-    def fit(self, X: ArrayLike, y=None) -> Any: ...
-    def get_feature_names_out(self, input_features: ArrayLike | None = None) -> np.ndarray: ...
+        keep_empty_features: bool = False,
+    ) -> None:
+        ...
+
+    def fit_transform(self, X: MatrixLike, y: Any = None) -> ndarray:
+        ...
+
+    def transform(self, X: MatrixLike) -> ndarray:
+        ...
+
+    def fit(
+        self: IterativeImputer_Self, X: MatrixLike, y: Any = None
+    ) -> IterativeImputer_Self:
+        ...
+
+    def get_feature_names_out(self, input_features: None | ArrayLike = None) -> ndarray:
+        ...

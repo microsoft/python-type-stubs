@@ -1,5 +1,12 @@
-from typing import Literal, Mapping
-from numpy.typing import ArrayLike, NDArray
+from typing import Literal
+from ._sag_fast import sag32 as sag32, sag64 as sag64
+from ..exceptions import ConvergenceWarning as ConvergenceWarning
+from ._base import make_dataset as make_dataset
+from ..utils.extmath import row_norms as row_norms
+from numpy import ndarray
+from numpy.random.mtrand import RandomState
+from .._typing import Float, Int, MatrixLike, ArrayLike
+from ..utils import check_array as check_array
 
 # Authors: Tom Dupre la Tour <tom.dupre-la-tour@m4x.org>
 #
@@ -8,35 +15,33 @@ from numpy.typing import ArrayLike, NDArray
 import warnings
 
 import numpy as np
-from numpy.random import RandomState
 
-from ._base import make_dataset
-from ..exceptions import ConvergenceWarning
-from ..utils import check_array
-from ..utils.validation import _check_sample_weight
-from ..utils.extmath import row_norms
 
 def get_auto_step_size(
-    max_squared_sum: float,
-    alpha_scaled: float,
+    max_squared_sum: Float,
+    alpha_scaled: Float,
     loss: Literal["log", "squared", "multinomial"],
     fit_intercept: bool,
-    n_samples: int | None = None,
+    n_samples: None | Int = None,
     is_saga: bool = False,
-) -> float: ...
+) -> Float:
+    ...
+
+
 def sag_solver(
-    X: NDArray | ArrayLike,
-    y: NDArray,
-    sample_weight: ArrayLike | None = None,
-    loss: Literal["log", "squared", "multinomial"] = "log",
-    alpha: float = 1.0,
-    beta: float = 0.0,
-    max_iter: int = 1000,
-    tol: float = 0.001,
-    verbose: int = 0,
-    random_state: int | RandomState | None = None,
+    X: MatrixLike | ArrayLike,
+    y: ArrayLike,
+    sample_weight: None | ArrayLike = None,
+    loss: Literal["log", "log", "squared", "multinomial"] = "log",
+    alpha: Float = 1.0,
+    beta: Float = 0.0,
+    max_iter: Int = 1000,
+    tol: Float = 0.001,
+    verbose: Int = 0,
+    random_state: None | Int | RandomState = None,
     check_input: bool = True,
-    max_squared_sum: float | None = None,
-    warm_start_mem: Mapping | None = None,
+    max_squared_sum: None | Float = None,
+    warm_start_mem: dict[str, ndarray] | None | dict = None,
     is_saga: bool = False,
-) -> tuple[NDArray, int, Mapping]: ...
+) -> tuple[ndarray, int, dict] | tuple[ndarray, int, dict[str, ndarray | int]]:
+    ...

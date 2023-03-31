@@ -1,6 +1,50 @@
-from numpy import float64, int64, ndarray
-from typing import Dict, List, Optional, Tuple, Type, Union, Any, Literal
-from numpy.typing import ArrayLike, NDArray
+from typing import Any, ClassVar, Literal, TypeVar
+from ..utils.sparsefuncs import (
+    inplace_column_scale as inplace_column_scale,
+    mean_variance_axis as mean_variance_axis,
+    incr_mean_variance_axis as incr_mean_variance_axis,
+    min_max_axis as min_max_axis,
+)
+from numpy.random import RandomState
+from scipy.special import boxcox as boxcox
+from scipy import sparse as sparse, stats as stats, optimize as optimize
+from ..utils.sparsefuncs_fast import (
+    inplace_csr_row_normalize_l1 as inplace_csr_row_normalize_l1,
+    inplace_csr_row_normalize_l2 as inplace_csr_row_normalize_l2,
+)
+from ._encoders import OneHotEncoder
+from numpy import ndarray
+from ..utils._param_validation import Interval as Interval, StrOptions as StrOptions
+from ..utils.extmath import row_norms as row_norms
+from numbers import Integral as Integral, Real as Real
+from pandas.core.series import Series
+from ..base import (
+    BaseEstimator,
+    TransformerMixin,
+    OneToOneFeatureMixin,
+    ClassNamePrefixFeaturesOutMixin,
+)
+from scipy.sparse import spmatrix
+from scipy.sparse._csr import csr_matrix
+from .._typing import MatrixLike, ArrayLike, Int, Float
+from ..utils import check_array as check_array
+from ..utils.validation import (
+    check_is_fitted as check_is_fitted,
+    check_random_state as check_random_state,
+    FLOAT_DTYPES as FLOAT_DTYPES,
+)
+
+RobustScaler_Self = TypeVar("RobustScaler_Self", bound="RobustScaler")
+KernelCenterer_Self = TypeVar("KernelCenterer_Self", bound="KernelCenterer")
+Binarizer_Self = TypeVar("Binarizer_Self", bound="Binarizer")
+QuantileTransformer_Self = TypeVar(
+    "QuantileTransformer_Self", bound="QuantileTransformer"
+)
+MaxAbsScaler_Self = TypeVar("MaxAbsScaler_Self", bound="MaxAbsScaler")
+StandardScaler_Self = TypeVar("StandardScaler_Self", bound="StandardScaler")
+MinMaxScaler_Self = TypeVar("MinMaxScaler_Self", bound="MinMaxScaler")
+Normalizer_Self = TypeVar("Normalizer_Self", bound="Normalizer")
+PowerTransformer_Self = TypeVar("PowerTransformer_Self", bound="PowerTransformer")
 
 # Authors: Alexandre Gramfort <alexandre.gramfort@inria.fr>
 #          Mathieu Blondel <mathieu@mblondel.org>
@@ -11,41 +55,11 @@ from numpy.typing import ArrayLike, NDArray
 #          Eric Chang <ericchang2017@u.northwestern.edu>
 # License: BSD 3 clause
 
+
 import warnings
 
 import numpy as np
-from scipy import sparse
-from scipy import stats
-from scipy import optimize
-from scipy.special import boxcox
 
-from ..base import (
-    BaseEstimator,
-    TransformerMixin,
-    _OneToOneFeatureMixin,
-    _ClassNamePrefixFeaturesOutMixin,
-)
-from ..utils import check_array
-from ..utils.extmath import _incremental_mean_and_var, row_norms
-
-from ..utils.sparsefuncs import (
-    inplace_column_scale,
-    mean_variance_axis,
-    incr_mean_variance_axis,
-    min_max_axis,
-)
-from ..utils.validation import (
-    check_is_fitted,
-    check_random_state,
-    _check_sample_weight,
-    FLOAT_DTYPES,
-)
-
-from ._encoders import OneHotEncoder
-from pandas.core.frame import DataFrame
-from pandas.core.series import Series
-from scipy.sparse._csr import csr_matrix
-from numpy.random import RandomState
 
 BOUNDS_THRESHOLD: float = ...
 
@@ -71,77 +85,147 @@ __all__ = [
     "power_transform",
 ]
 
-def _is_constant_feature(var: ndarray, mean: ndarray, n_samples: Union[int64, int]) -> ndarray: ...
-def _handle_zeros_in_scale(
-    scale: Union[ndarray, float64],
-    copy: bool = True,
-    constant_mask: Optional[ndarray] = None,
-) -> Union[ndarray, float64]: ...
+
 def scale(
-    X: NDArray | ArrayLike,
+    X: MatrixLike | ArrayLike,
     *,
-    axis: int = 0,
+    axis: Int = 0,
     with_mean: bool = True,
     with_std: bool = True,
     copy: bool = True,
-) -> NDArray: ...
+) -> ndarray | spmatrix:
+    ...
 
-class MinMaxScaler(_OneToOneFeatureMixin, TransformerMixin, BaseEstimator):
+
+class MinMaxScaler(OneToOneFeatureMixin, TransformerMixin, BaseEstimator):
+    feature_names_in_: ndarray = ...
+    n_samples_seen_: int = ...
+    n_features_in_: int = ...
+    data_range_: ndarray = ...
+    data_max_: ndarray = ...
+    data_min_: ndarray = ...
+    scale_: ndarray = ...
+    min_: ndarray = ...
+
+    _parameter_constraints: ClassVar[dict] = ...
+
     def __init__(
         self,
-        feature_range: tuple[float, float] = ...,
+        feature_range: tuple[int, int] = ...,
         *,
         copy: bool = True,
         clip: bool = False,
-    ) -> None: ...
-    def _reset(self) -> None: ...
-    def fit(self, X: ArrayLike, y: Optional[ndarray] = None) -> "MinMaxScaler": ...
-    def partial_fit(self, X: ArrayLike, y: Optional[ndarray] = None) -> "MinMaxScaler": ...
-    def transform(self, X: ArrayLike) -> NDArray: ...
-    def inverse_transform(self, X: ArrayLike) -> NDArray: ...
-    def _more_tags(self): ...
+    ) -> None:
+        ...
+
+    def fit(
+        self: MinMaxScaler_Self, X: MatrixLike, y: Series | None | ndarray = None
+    ) -> MinMaxScaler_Self:
+        ...
+
+    def partial_fit(
+        self: MinMaxScaler_Self, X: MatrixLike, y: Series | None | ndarray = None
+    ) -> MinMaxScaler_Self:
+        ...
+
+    def transform(self, X: MatrixLike) -> ndarray:
+        ...
+
+    def inverse_transform(self, X: MatrixLike) -> ndarray:
+        ...
+
 
 def minmax_scale(
-    X: ArrayLike,
-    feature_range: tuple[float, float] = ...,
+    X: MatrixLike,
+    feature_range: tuple[int, int] = ...,
     *,
-    axis: int = 0,
+    axis: Int = 0,
     copy: bool = True,
-) -> ndarray: ...
+) -> ndarray:
+    ...
 
-class StandardScaler(_OneToOneFeatureMixin, TransformerMixin, BaseEstimator):
-    def __init__(self, *, copy: bool = True, with_mean: bool = True, with_std: bool = True) -> None: ...
-    def _reset(self) -> None: ...
+
+class StandardScaler(OneToOneFeatureMixin, TransformerMixin, BaseEstimator):
+    n_samples_seen_: ndarray | int = ...
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    var_: None | ndarray = ...
+    mean_: None | ndarray = ...
+    scale_: None | ndarray = ...
+
+    _parameter_constraints: ClassVar[dict] = ...
+
+    def __init__(
+        self, *, copy: bool = True, with_mean: bool = True, with_std: bool = True
+    ) -> None:
+        ...
+
     def fit(
-        self,
-        X: NDArray | ArrayLike,
-        y: Optional[Union[ndarray, List[int], Series]] = None,
-        sample_weight: ArrayLike | None = None,
-    ) -> "StandardScaler": ...
+        self: StandardScaler_Self,
+        X: MatrixLike | ArrayLike,
+        y: Series | None | ndarray | list[int] = None,
+        sample_weight: None | ArrayLike = None,
+    ) -> StandardScaler_Self:
+        ...
+
     def partial_fit(
-        self,
-        X: NDArray | ArrayLike,
-        y: Optional[Union[List[int], ndarray, Series]] = None,
-        sample_weight: ArrayLike | None = None,
-    ) -> "StandardScaler": ...
-    def transform(self, X: ArrayLike, copy: bool | None = None) -> NDArray: ...
-    def inverse_transform(self, X: NDArray | ArrayLike, copy: bool | None = None) -> NDArray: ...
-    def _more_tags(
-        self,
-    ) -> Dict[str, Union[bool, List[Union[Type[float64], Type[np.float32]]]]]: ...
+        self: StandardScaler_Self,
+        X: MatrixLike | ArrayLike,
+        y: Series | None | ndarray | list[int] = None,
+        sample_weight: None | ArrayLike = None,
+    ) -> StandardScaler_Self:
+        ...
 
-class MaxAbsScaler(_OneToOneFeatureMixin, TransformerMixin, BaseEstimator):
-    def __init__(self, *, copy: bool = True) -> None: ...
-    def _reset(self) -> None: ...
-    def fit(self, X: NDArray | ArrayLike, y: None = None) -> "MaxAbsScaler": ...
-    def partial_fit(self, X: NDArray | ArrayLike, y: None = None) -> "MaxAbsScaler": ...
-    def transform(self, X: NDArray | ArrayLike) -> NDArray: ...
-    def inverse_transform(self, X: NDArray | ArrayLike) -> NDArray: ...
-    def _more_tags(self): ...
+    def transform(self, X: MatrixLike, copy: None | bool = None) -> ndarray | spmatrix:
+        ...
 
-def maxabs_scale(X: NDArray | ArrayLike, *, axis: int = 0, copy: bool = True): ...
+    def inverse_transform(
+        self, X: MatrixLike | ArrayLike, copy: None | bool = None
+    ) -> ndarray | spmatrix:
+        ...
 
-class RobustScaler(_OneToOneFeatureMixin, TransformerMixin, BaseEstimator):
+
+class MaxAbsScaler(OneToOneFeatureMixin, TransformerMixin, BaseEstimator):
+    n_samples_seen_: int = ...
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    max_abs_: ndarray = ...
+    scale_: ndarray = ...
+
+    _parameter_constraints: ClassVar[dict] = ...
+
+    def __init__(self, *, copy: bool = True) -> None:
+        ...
+
+    def fit(
+        self: MaxAbsScaler_Self, X: MatrixLike | ArrayLike, y=None
+    ) -> MaxAbsScaler_Self:
+        ...
+
+    def partial_fit(
+        self: MaxAbsScaler_Self, X: MatrixLike | ArrayLike, y=None
+    ) -> MaxAbsScaler_Self:
+        ...
+
+    def transform(self, X: MatrixLike | ArrayLike) -> ndarray | spmatrix:
+        ...
+
+    def inverse_transform(self, X: MatrixLike | ArrayLike) -> ndarray | spmatrix:
+        ...
+
+
+def maxabs_scale(X: MatrixLike | ArrayLike, *, axis: Int = 0, copy: bool = True):
+    ...
+
+
+class RobustScaler(OneToOneFeatureMixin, TransformerMixin, BaseEstimator):
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    scale_: ndarray = ...
+    center_: ndarray = ...
+
+    _parameter_constraints: ClassVar[dict] = ...
+
     def __init__(
         self,
         *,
@@ -150,126 +234,198 @@ class RobustScaler(_OneToOneFeatureMixin, TransformerMixin, BaseEstimator):
         quantile_range: tuple[float, float] = ...,
         copy: bool = True,
         unit_variance: bool = False,
-    ) -> None: ...
-    def fit(self, X: NDArray | ArrayLike, y: None = None) -> "RobustScaler": ...
-    def transform(self, X: NDArray | ArrayLike) -> NDArray: ...
-    def inverse_transform(self, X: NDArray | ArrayLike) -> NDArray: ...
-    def _more_tags(self): ...
+    ) -> None:
+        ...
+
+    def fit(
+        self: RobustScaler_Self, X: MatrixLike | ArrayLike, y: Any = None
+    ) -> RobustScaler_Self:
+        ...
+
+    def transform(self, X: MatrixLike | ArrayLike) -> ndarray | spmatrix:
+        ...
+
+    def inverse_transform(self, X: MatrixLike | ArrayLike) -> ndarray | spmatrix:
+        ...
+
 
 def robust_scale(
-    X: NDArray | ArrayLike,
+    X: MatrixLike,
     *,
-    axis: int = 0,
+    axis: Int = 0,
     with_centering: bool = True,
     with_scaling: bool = True,
     quantile_range: tuple[float, float] = ...,
     copy: bool = True,
     unit_variance: bool = False,
-) -> NDArray: ...
+) -> ndarray | spmatrix:
+    ...
+
+
 def normalize(
-    X: NDArray | ArrayLike,
-    norm: Literal["l1", "l2", "max"] = "l2",
+    X: MatrixLike | ArrayLike,
+    norm: Literal["l1", "l2", "max", "l2"] = "l2",
     *,
-    axis: Literal[0, 1] = 1,
+    axis: int = 1,
     copy: bool = True,
     return_norm: bool = False,
-) -> Union[ndarray, csr_matrix]: ...
+) -> csr_matrix | tuple[ndarray | spmatrix, ndarray] | ndarray:
+    ...
 
-class Normalizer(_OneToOneFeatureMixin, TransformerMixin, BaseEstimator):
-    def __init__(self, norm: Literal["l1", "l2", "max"] = "l2", *, copy: bool = True) -> None: ...
-    def fit(self, X: NDArray | ArrayLike, y: None = None) -> "Normalizer": ...
-    def transform(self, X: NDArray | ArrayLike, copy: bool | None = None) -> NDArray: ...
-    def _more_tags(self): ...
 
-def binarize(X: NDArray | ArrayLike, *, threshold: float = 0.0, copy: bool = True) -> NDArray: ...
+class Normalizer(OneToOneFeatureMixin, TransformerMixin, BaseEstimator):
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
 
-class Binarizer(_OneToOneFeatureMixin, TransformerMixin, BaseEstimator):
-    def __init__(self, *, threshold: float = 0.0, copy: bool = True): ...
-    def fit(self, X: NDArray | ArrayLike, y=None) -> Any: ...
-    def transform(self, X: NDArray | ArrayLike, copy: bool | None = None) -> NDArray: ...
-    def _more_tags(self): ...
+    _parameter_constraints: ClassVar[dict] = ...
 
-class KernelCenterer(_ClassNamePrefixFeaturesOutMixin, TransformerMixin, BaseEstimator):
-    def __init__(self) -> None: ...
-    def fit(self, K: NDArray, y: None = None) -> "KernelCenterer": ...
-    def transform(self, K: NDArray, copy: bool = True) -> NDArray: ...
-    @property
-    def _n_features_out(self): ...
-    def _more_tags(self): ...
+    def __init__(
+        self, norm: Literal["l1", "l2", "max", "l2"] = "l2", *, copy: bool = True
+    ) -> None:
+        ...
 
-def add_dummy_feature(X: NDArray | ArrayLike, value: float = 1.0) -> NDArray: ...
+    def fit(
+        self: Normalizer_Self, X: MatrixLike | ArrayLike, y: Any = None
+    ) -> Normalizer_Self:
+        ...
 
-class QuantileTransformer(_OneToOneFeatureMixin, TransformerMixin, BaseEstimator):
+    def transform(
+        self, X: MatrixLike | ArrayLike, copy: None | bool = None
+    ) -> ndarray | spmatrix:
+        ...
+
+
+def binarize(
+    X: MatrixLike | ArrayLike, *, threshold: Float = 0.0, copy: bool = True
+) -> ndarray | spmatrix:
+    ...
+
+
+class Binarizer(OneToOneFeatureMixin, TransformerMixin, BaseEstimator):
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+
+    _parameter_constraints: ClassVar[dict] = ...
+
+    def __init__(self, *, threshold: Float = 0.0, copy: bool = True) -> None:
+        ...
+
+    def fit(self: Binarizer_Self, X: MatrixLike | ArrayLike, y=None) -> Binarizer_Self:
+        ...
+
+    def transform(
+        self, X: MatrixLike | ArrayLike, copy: None | bool = None
+    ) -> ndarray | spmatrix:
+        ...
+
+
+class KernelCenterer(ClassNamePrefixFeaturesOutMixin, TransformerMixin, BaseEstimator):
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    K_fit_all_: float = ...
+    K_fit_rows_: ndarray = ...
+
+    def __init__(self) -> None:
+        ...
+
+    def fit(self: KernelCenterer_Self, K: MatrixLike, y=None) -> KernelCenterer_Self:
+        ...
+
+    def transform(self, K: MatrixLike, copy: bool = True) -> ndarray:
+        ...
+
+
+def add_dummy_feature(
+    X: MatrixLike | ArrayLike, value: Float = 1.0
+) -> ndarray | spmatrix:
+    ...
+
+
+class QuantileTransformer(OneToOneFeatureMixin, TransformerMixin, BaseEstimator):
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    references_: ndarray = ...
+    quantiles_: ndarray = ...
+    n_quantiles_: int = ...
+
+    _parameter_constraints: ClassVar[dict] = ...
+
     def __init__(
         self,
         *,
-        n_quantiles: int = 1000,
-        output_distribution: Literal["uniform", "normal"] = "uniform",
+        n_quantiles: Int = 1000,
+        output_distribution: Literal["uniform", "normal", "uniform"] = "uniform",
         ignore_implicit_zeros: bool = False,
-        subsample: int = ...,
-        random_state: int | RandomState | None = None,
+        subsample: Int = 10_000,
+        random_state: RandomState | None | Int = None,
         copy: bool = True,
-    ) -> None: ...
-    def _dense_fit(self, X: ndarray, random_state: RandomState) -> None: ...
-    def _sparse_fit(self, X, random_state): ...
-    def fit(self, X: NDArray | ArrayLike, y: None = None) -> "QuantileTransformer": ...
-    def _transform_col(self, X_col: ndarray, quantiles: ndarray, inverse: bool) -> ndarray: ...
-    def _check_inputs(
-        self,
-        X: ndarray,
-        in_fit: bool,
-        accept_sparse_negative: bool = False,
-        copy: bool = False,
-    ) -> ndarray: ...
-    def _transform(self, X: ndarray, inverse: bool = False) -> ndarray: ...
-    def transform(self, X: NDArray | ArrayLike) -> NDArray: ...
-    def inverse_transform(self, X: NDArray | ArrayLike) -> NDArray: ...
-    def _more_tags(self): ...
+    ) -> None:
+        ...
+
+    def fit(
+        self: QuantileTransformer_Self,
+        X: MatrixLike | ArrayLike,
+        y: Series | None = None,
+    ) -> QuantileTransformer_Self:
+        ...
+
+    def transform(self, X: MatrixLike | ArrayLike) -> ndarray | spmatrix:
+        ...
+
+    def inverse_transform(self, X: MatrixLike | ArrayLike) -> ndarray | spmatrix:
+        ...
+
 
 def quantile_transform(
-    X: NDArray | ArrayLike,
+    X: MatrixLike | ArrayLike,
     *,
-    axis: int = 0,
-    n_quantiles: int = 1000,
-    output_distribution: Literal["uniform", "normal"] = "uniform",
+    axis: Int = 0,
+    n_quantiles: Int = 1000,
+    output_distribution: Literal["uniform", "normal", "uniform"] = "uniform",
     ignore_implicit_zeros: bool = False,
-    subsample: int = ...,
-    random_state: int | RandomState | None = None,
+    subsample: Int = ...,
+    random_state: RandomState | None | Int = None,
     copy: bool = True,
-) -> NDArray: ...
+) -> ndarray | spmatrix:
+    ...
 
-class PowerTransformer(_OneToOneFeatureMixin, TransformerMixin, BaseEstimator):
+
+class PowerTransformer(OneToOneFeatureMixin, TransformerMixin, BaseEstimator):
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    lambdas_: ndarray = ...
+
+    _parameter_constraints: ClassVar[dict] = ...
+
     def __init__(
         self,
-        method: Literal["yeo-johnson", "box-cox"] = "yeo-johnson",
+        method: Literal["yeo-johnson", "box-cox", "yeo-johnson"] = "yeo-johnson",
         *,
         standardize: bool = True,
         copy: bool = True,
-    ) -> None: ...
-    def fit(self, X: ArrayLike, y: None = None) -> "PowerTransformer": ...
-    def fit_transform(self, X: ArrayLike, y: None = None) -> NDArray: ...
-    def _fit(self, X: ndarray, y: None = None, force_transform: bool = False) -> ndarray: ...
-    def transform(self, X: ArrayLike) -> NDArray: ...
-    def inverse_transform(self, X: ArrayLike) -> NDArray: ...
-    def _box_cox_inverse_tranform(self, x, lmbda): ...
-    def _yeo_johnson_inverse_transform(self, x, lmbda): ...
-    def _yeo_johnson_transform(self, x: ndarray, lmbda: Union[int, float, float64]) -> ndarray: ...
-    def _box_cox_optimize(self, x: ndarray) -> float64: ...
-    def _yeo_johnson_optimize(self, x: ndarray) -> float64: ...
-    def _check_input(
-        self,
-        X: ndarray,
-        in_fit: bool,
-        check_positive: bool = False,
-        check_shape: bool = False,
-        check_method: bool = False,
-    ) -> ndarray: ...
-    def _more_tags(self): ...
+    ) -> None:
+        ...
+
+    def fit(
+        self: PowerTransformer_Self, X: MatrixLike, y=None
+    ) -> PowerTransformer_Self:
+        ...
+
+    def fit_transform(self, X: MatrixLike, y: Any = None) -> ndarray:
+        ...
+
+    def transform(self, X: MatrixLike) -> ndarray:
+        ...
+
+    def inverse_transform(self, X: MatrixLike) -> ndarray:
+        ...
+
 
 def power_transform(
-    X: ArrayLike,
-    method: Literal["yeo-johnson", "box-cox"] = "yeo-johnson",
+    X: MatrixLike,
+    method: Literal["yeo-johnson", "box-cox", "yeo-johnson"] = "yeo-johnson",
     *,
     standardize: bool = True,
     copy: bool = True,
-) -> NDArray: ...
+) -> ndarray:
+    ...

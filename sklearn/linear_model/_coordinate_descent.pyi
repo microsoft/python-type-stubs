@@ -1,7 +1,39 @@
-from numpy import float64, ndarray
-from collections.abc import Generator, Iterable
-from typing import Callable, Dict, List, Optional, Tuple, Type, Union, Literal, Any
-from numpy.typing import ArrayLike, NDArray
+from typing import ClassVar, Iterable, Literal, Sequence, TypeVar
+from numpy.random import RandomState
+from scipy import sparse as sparse
+from scipy.sparse._coo import coo_matrix
+from ..model_selection._split import BaseShuffleSplit
+from ..utils.extmath import safe_sparse_dot as safe_sparse_dot
+from joblib import effective_n_jobs as effective_n_jobs
+from scipy.sparse import spmatrix
+from ..utils.parallel import delayed as delayed, Parallel as Parallel
+from ..utils.validation import (
+    check_random_state as check_random_state,
+    check_consistent_length as check_consistent_length,
+    check_is_fitted as check_is_fitted,
+    column_or_1d as column_or_1d,
+)
+from abc import ABC, abstractmethod
+from numpy import ndarray
+from ..utils._param_validation import Interval as Interval, StrOptions as StrOptions
+from numbers import Integral as Integral, Real as Real
+from functools import partial as partial
+from ..base import RegressorMixin, MultiOutputMixin
+from ..model_selection import check_cv as check_cv
+from ..utils import check_array as check_array, check_scalar as check_scalar
+from ._base import LinearModel
+from .._typing import MatrixLike, ArrayLike, Float, Int
+from ..model_selection import BaseCrossValidator
+
+LinearModelCV_Self = TypeVar("LinearModelCV_Self", bound="LinearModelCV")
+MultiTaskElasticNetCV_Self = TypeVar(
+    "MultiTaskElasticNetCV_Self", bound="MultiTaskElasticNetCV"
+)
+MultiTaskLassoCV_Self = TypeVar("MultiTaskLassoCV_Self", bound="MultiTaskLassoCV")
+ElasticNet_Self = TypeVar("ElasticNet_Self", bound="ElasticNet")
+MultiTaskElasticNet_Self = TypeVar(
+    "MultiTaskElasticNet_Self", bound="MultiTaskElasticNet"
+)
 
 # Author: Alexandre Gramfort <alexandre.gramfort@inria.fr>
 #         Fabian Pedregosa <fabian.pedregosa@inria.fr>
@@ -13,345 +45,386 @@ from numpy.typing import ArrayLike, NDArray
 import sys
 import warnings
 import numbers
-from abc import ABC, abstractmethod
-from functools import partial
 
 import numpy as np
-from numpy.random import RandomState
-from scipy import sparse
 
-from ._base import LinearModel, _pre_fit
-from ..base import RegressorMixin, MultiOutputMixin
-from ._base import _preprocess_data, _deprecate_normalize
-from ..utils import check_array
-from ..utils import check_scalar
-from ..utils.validation import check_random_state
-from ..model_selection import check_cv
-from ..utils.extmath import safe_sparse_dot
-from ..utils.validation import (
-    _check_sample_weight,
-    check_consistent_length,
-    check_is_fitted,
-    column_or_1d,
-)
-from ..utils.fixes import delayed
 
-# mypy error: Module 'sklearn.linear_model' has no attribute '_cd_fast'
-from . import _cd_fast as cd_fast  # type: ignore
-from pandas.core.series import Series
-from scipy.sparse._coo import coo_matrix
-from scipy.sparse._csc import csc_matrix
-
-def _set_order(
-    X: Union[ndarray, csc_matrix], y: ndarray, order: str = "C"
-) -> Union[Tuple[ndarray, ndarray], Tuple[csc_matrix, ndarray]]: ...
-
-###############################################################################
-# Paths functions
-
-def _alpha_grid(
-    X: ndarray,
-    y: ndarray,
-    Xy: Optional[ndarray] = None,
-    l1_ratio: Union[int, float] = 1.0,
-    fit_intercept: bool = True,
-    eps: float = 1e-3,
-    n_alphas: int = 100,
-    normalize: bool = False,
-    copy_X: bool = True,
-) -> ndarray: ...
 def lasso_path(
-    X: NDArray | ArrayLike,
-    y: NDArray | ArrayLike,
+    X: MatrixLike | ArrayLike,
+    y: MatrixLike | ArrayLike,
     *,
-    eps: float = 1e-3,
-    n_alphas: int = 100,
-    alphas: NDArray | None = None,
-    precompute: bool | ArrayLike | Literal["auto"] = "auto",
-    Xy: ArrayLike | None = None,
+    eps: Float = 1e-3,
+    n_alphas: Int = 100,
+    alphas: None | ArrayLike = None,
+    precompute: Literal["auto", "auto"] | MatrixLike | bool = "auto",
+    Xy: None | MatrixLike | ArrayLike = None,
     copy_X: bool = True,
-    coef_init: NDArray | None = None,
-    verbose: bool | int = False,
+    coef_init: None | ArrayLike = None,
+    verbose: int | bool = False,
     return_n_iter: bool = False,
     positive: bool = False,
     **params,
-) -> tuple[NDArray, np.ndarray, NDArray, list[int]]: ...
+) -> tuple[ndarray, ndarray, ndarray] | tuple[ndarray, ndarray, ndarray, list[int]]:
+    ...
+
+
 def enet_path(
-    X: NDArray | ArrayLike,
-    y: NDArray | ArrayLike,
+    X: MatrixLike | ArrayLike,
+    y: MatrixLike | ArrayLike,
     *,
-    l1_ratio: float = 0.5,
-    eps: float = 1e-3,
-    n_alphas: int = 100,
-    alphas: NDArray | None = None,
-    precompute: bool | ArrayLike | Literal["auto"] = "auto",
-    Xy: ArrayLike | None = None,
+    l1_ratio: Float = 0.5,
+    eps: Float = 1e-3,
+    n_alphas: Int = 100,
+    alphas: None | ArrayLike = None,
+    precompute: Literal["auto", "auto"] | MatrixLike | bool = "auto",
+    Xy: None | MatrixLike | ArrayLike = None,
     copy_X: bool = True,
-    coef_init: NDArray | None = None,
-    verbose: bool | int = False,
+    coef_init: None | ArrayLike = None,
+    verbose: int | bool = False,
     return_n_iter: bool = False,
     positive: bool = False,
     check_input: bool = True,
     **params,
-) -> tuple[NDArray, np.ndarray, NDArray, list[int]]: ...
+) -> tuple[ndarray, ndarray, ndarray, list[int]]:
+    ...
+
 
 ###############################################################################
 # ElasticNet model
 
+
 class ElasticNet(MultiOutputMixin, RegressorMixin, LinearModel):
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    dual_gap_: float | ndarray = ...
+    n_iter_: list[int] = ...
+    intercept_: float | ndarray = ...
+    coef_: ndarray = ...
+
+    _parameter_constraints: ClassVar[dict] = ...
 
     path = ...
 
     def __init__(
         self,
-        alpha: float = 1.0,
+        alpha: Float = 1.0,
         *,
-        l1_ratio: float = 0.5,
+        l1_ratio: Float = 0.5,
         fit_intercept: bool = True,
-        normalize: bool = ...,
-        precompute: bool | ArrayLike = False,
-        max_iter: int = 1000,
+        precompute: MatrixLike | bool = False,
+        max_iter: Int = 1000,
         copy_X: bool = True,
-        tol: float = 1e-4,
+        tol: Float = 1e-4,
         warm_start: bool = False,
         positive: bool = False,
-        random_state: int | RandomState | None = None,
-        selection: Literal["cyclic", "random"] = "cyclic",
-    ) -> None: ...
+        random_state: RandomState | None | Int = None,
+        selection: Literal["cyclic", "random", "cyclic"] = "cyclic",
+    ) -> None:
+        ...
+
     def fit(
-        self,
-        X: NDArray,
-        y: NDArray,
-        sample_weight: float | ArrayLike | None = None,
+        self: ElasticNet_Self,
+        X: coo_matrix | MatrixLike,
+        y: MatrixLike | ArrayLike,
+        sample_weight: None | ArrayLike = None,
         check_input: bool = True,
-    ) -> Union[Lasso, ElasticNet]: ...
+    ) -> ElasticNet_Self:
+        ...
+
     @property
-    def sparse_coef_(self): ...
-    def _decision_function(self, X: ndarray) -> ndarray: ...
+    def sparse_coef_(self) -> spmatrix:
+        ...
+
 
 ###############################################################################
 # Lasso model
 
+
 class Lasso(ElasticNet):
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    n_iter_: int | list[int] = ...
+    intercept_: float | ndarray = ...
+    sparse_coef_: spmatrix = ...
+    dual_gap_: float | ndarray = ...
+    coef_: ndarray = ...
+
+    _parameter_constraints: ClassVar[dict] = ...
 
     path = ...
 
     def __init__(
         self,
-        alpha: float = 1.0,
+        alpha: Float = 1.0,
         *,
         fit_intercept: bool = True,
-        normalize: bool = ...,
-        precompute: bool | ArrayLike = False,
+        precompute: MatrixLike | bool = False,
         copy_X: bool = True,
-        max_iter: int = 1000,
-        tol: float = 1e-4,
+        max_iter: Int = 1000,
+        tol: Float = 1e-4,
         warm_start: bool = False,
         positive: bool = False,
-        random_state: int | RandomState | None = None,
-        selection: Literal["cyclic", "random"] = "cyclic",
-    ) -> None: ...
+        random_state: RandomState | None | Int = None,
+        selection: Literal["cyclic", "random", "cyclic"] = "cyclic",
+    ) -> None:
+        ...
 
-###############################################################################
-# Functions for CV with paths functions
-
-def _path_residuals(
-    X: ndarray,
-    y: ndarray,
-    sample_weight: None,
-    train: ndarray,
-    test: ndarray,
-    normalize: bool,
-    fit_intercept: bool,
-    path: Callable,
-    path_params: Dict[str, Any],
-    alphas: Optional[ndarray] = None,
-    l1_ratio: int = 1,
-    X_order: Optional[str] = None,
-    dtype: Optional[Type[float64]] = None,
-) -> ndarray: ...
 
 class LinearModelCV(MultiOutputMixin, LinearModel, ABC):
+
+    _parameter_constraints: ClassVar[dict] = ...
+
     @abstractmethod
     def __init__(
         self,
         eps: float = 1e-3,
         n_alphas: int = 100,
-        alphas: Optional[ndarray] = None,
+        alphas: None | ndarray = None,
         fit_intercept: bool = True,
-        normalize: str = "deprecated",
         precompute: str = "auto",
         max_iter: int = 1000,
         tol: float = 1e-4,
         copy_X: bool = True,
-        cv: Optional[int] = None,
+        cv: None | int = None,
         verbose: bool = False,
-        n_jobs: None = None,
+        n_jobs=None,
         positive: bool = False,
-        random_state: Optional[int] = None,
+        random_state: None | int = None,
         selection: str = "cyclic",
-    ) -> None: ...
-    @abstractmethod
-    def _get_estimator(self): ...
-    @abstractmethod
-    def _is_multitask(self): ...
+    ) -> None:
+        ...
+
     @staticmethod
     @abstractmethod
-    def path(X, y, **kwargs): ...
+    def path(X, y, **kwargs):
+        ...
+
     def fit(
-        self,
-        X: NDArray | ArrayLike,
-        y: ArrayLike,
-        sample_weight: float | ArrayLike | None = None,
-    ) -> "LassoCV": ...
-    def _more_tags(self): ...
+        self: LinearModelCV_Self,
+        X: MatrixLike | ArrayLike,
+        y: MatrixLike | ArrayLike,
+        sample_weight: None | ArrayLike = None,
+    ) -> LinearModelCV_Self | LassoCV:
+        ...
+
 
 class LassoCV(RegressorMixin, LinearModelCV):
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    n_iter_: int = ...
+    dual_gap_: float | ndarray = ...
+    alphas_: ndarray = ...
+    mse_path_: ndarray = ...
+    intercept_: float | ndarray = ...
+    coef_: ndarray = ...
+    alpha_: float = ...
 
     path = ...
 
     def __init__(
         self,
         *,
-        eps: float = 1e-3,
-        n_alphas: int = 100,
-        alphas: NDArray | None = None,
+        eps: Float = 1e-3,
+        n_alphas: Int = 100,
+        alphas: None | ArrayLike = None,
         fit_intercept: bool = True,
-        normalize: bool = ...,
-        precompute: bool | ArrayLike | Literal["auto"] = "auto",
-        max_iter: int = 1000,
-        tol: float = 1e-4,
+        precompute: Literal["auto", "auto"] | MatrixLike | bool = "auto",
+        max_iter: Int = 1000,
+        tol: Float = 1e-4,
         copy_X: bool = True,
-        cv: int | Generator | Iterable | None = None,
-        verbose: bool | int = False,
-        n_jobs: int | None = None,
+        cv: int | BaseCrossValidator | Iterable | None | BaseShuffleSplit = None,
+        verbose: int | bool = False,
+        n_jobs: None | Int = None,
         positive: bool = False,
-        random_state: int | RandomState | None = None,
-        selection: Literal["cyclic", "random"] = "cyclic",
-    ) -> None: ...
-    def _get_estimator(self) -> Lasso: ...
-    def _is_multitask(self) -> bool: ...
-    def _more_tags(self): ...
+        random_state: RandomState | None | Int = None,
+        selection: Literal["cyclic", "random", "cyclic"] = "cyclic",
+    ) -> None:
+        ...
+
 
 class ElasticNetCV(RegressorMixin, LinearModelCV):
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    n_iter_: int = ...
+    dual_gap_: float = ...
+    alphas_: ndarray = ...
+    mse_path_: ndarray = ...
+    intercept_: float | ndarray = ...
+    coef_: ndarray = ...
+    l1_ratio_: float = ...
+    alpha_: float = ...
+
+    _parameter_constraints: ClassVar[dict] = ...
 
     path = ...
 
     def __init__(
         self,
         *,
-        l1_ratio: float | ArrayLike = 0.5,
-        eps: float = 1e-3,
-        n_alphas: int = 100,
-        alphas: NDArray | None = None,
+        l1_ratio: float | Sequence[float] = 0.5,
+        eps: Float = 1e-3,
+        n_alphas: Int = 100,
+        alphas: None | ArrayLike = None,
         fit_intercept: bool = True,
-        normalize: bool = ...,
-        precompute: bool | ArrayLike | Literal["auto"] = "auto",
-        max_iter: int = 1000,
-        tol: float = 1e-4,
-        cv: int | Generator | Iterable | None = None,
+        precompute: Literal["auto", "auto"] | MatrixLike | bool = "auto",
+        max_iter: Int = 1000,
+        tol: Float = 1e-4,
+        cv: int | BaseCrossValidator | Iterable | None | BaseShuffleSplit = None,
         copy_X: bool = True,
-        verbose: bool | int = 0,
-        n_jobs: int | None = None,
+        verbose: int | bool = 0,
+        n_jobs: None | Int = None,
         positive: bool = False,
-        random_state: int | RandomState | None = None,
-        selection: Literal["cyclic", "random"] = "cyclic",
-    ): ...
-    def _get_estimator(self): ...
-    def _is_multitask(self): ...
-    def _more_tags(self): ...
+        random_state: RandomState | None | Int = None,
+        selection: Literal["cyclic", "random", "cyclic"] = "cyclic",
+    ) -> None:
+        ...
+
 
 ###############################################################################
 # Multi Task ElasticNet and Lasso models (with joint feature selection)
 
+
 class MultiTaskElasticNet(Lasso):
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    sparse_coef_: spmatrix = ...
+    eps_: float = ...
+    dual_gap_: float = ...
+    n_iter_: int = ...
+    coef_: ndarray = ...
+    intercept_: ndarray = ...
+
+    _parameter_constraints: ClassVar[dict] = ...
+    for param in ("precompute", "positive"):
+        pass
+
     def __init__(
         self,
-        alpha: float = 1.0,
+        alpha: Float = 1.0,
         *,
-        l1_ratio: float = 0.5,
+        l1_ratio: Float = 0.5,
         fit_intercept: bool = True,
-        normalize: bool = ...,
         copy_X: bool = True,
-        max_iter: int = 1000,
-        tol: float = 1e-4,
+        max_iter: Int = 1000,
+        tol: Float = 1e-4,
         warm_start: bool = False,
-        random_state: int | RandomState | None = None,
-        selection: Literal["cyclic", "random"] = "cyclic",
-    ): ...
-    def fit(self, X: NDArray, y: NDArray) -> "MultiTaskLasso": ...
-    def _more_tags(self): ...
+        random_state: RandomState | None | Int = None,
+        selection: Literal["cyclic", "random", "cyclic"] = "cyclic",
+    ) -> None:
+        ...
+
+    def fit(
+        self: MultiTaskElasticNet_Self, X: ArrayLike, y: MatrixLike
+    ) -> MultiTaskElasticNet_Self | MultiTaskLasso:
+        ...
+
 
 class MultiTaskLasso(MultiTaskElasticNet):
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    sparse_coef_: spmatrix = ...
+    eps_: float = ...
+    dual_gap_: ndarray = ...
+    n_iter_: int = ...
+    intercept_: ndarray = ...
+    coef_: ndarray = ...
+
+    _parameter_constraints: ClassVar[dict] = ...
+
     def __init__(
         self,
-        alpha: float = 1.0,
+        alpha: Float = 1.0,
         *,
         fit_intercept: bool = True,
-        normalize: bool = ...,
         copy_X: bool = True,
-        max_iter: int = 1000,
-        tol: float = 1e-4,
+        max_iter: Int = 1000,
+        tol: Float = 1e-4,
         warm_start: bool = False,
-        random_state: int | RandomState | None = None,
-        selection: Literal["cyclic", "random"] = "cyclic",
-    ) -> None: ...
+        random_state: RandomState | None | Int = None,
+        selection: Literal["cyclic", "random", "cyclic"] = "cyclic",
+    ) -> None:
+        ...
+
 
 class MultiTaskElasticNetCV(RegressorMixin, LinearModelCV):
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    dual_gap_: float = ...
+    n_iter_: int = ...
+    l1_ratio_: float = ...
+    alphas_: ndarray = ...
+    mse_path_: ndarray = ...
+    alpha_: float = ...
+    coef_: ndarray = ...
+    intercept_: ndarray = ...
+
+    _parameter_constraints: ClassVar[dict] = ...
 
     path = ...
 
     def __init__(
         self,
         *,
-        l1_ratio: float | ArrayLike = 0.5,
-        eps: float = 1e-3,
-        n_alphas: int = 100,
-        alphas: ArrayLike | None = None,
+        l1_ratio: float | Sequence[float] = 0.5,
+        eps: Float = 1e-3,
+        n_alphas: Int = 100,
+        alphas: None | ArrayLike = None,
         fit_intercept: bool = True,
-        normalize: bool = ...,
-        max_iter: int = 1000,
-        tol: float = 1e-4,
-        cv: int | Generator | Iterable | None = None,
+        max_iter: Int = 1000,
+        tol: Float = 1e-4,
+        cv: int | BaseCrossValidator | Iterable | None | BaseShuffleSplit = None,
         copy_X: bool = True,
-        verbose: bool | int = 0,
-        n_jobs: int | None = None,
-        random_state: int | RandomState | None = None,
-        selection: Literal["cyclic", "random"] = "cyclic",
-    ): ...
-    def _get_estimator(self): ...
-    def _is_multitask(self): ...
-    def _more_tags(self): ...
+        verbose: int | bool = 0,
+        n_jobs: None | Int = None,
+        random_state: RandomState | None | Int = None,
+        selection: Literal["cyclic", "random", "cyclic"] = "cyclic",
+    ) -> None:
+        ...
 
     # This is necessary as LinearModelCV now supports sample_weight while
     # MultiTaskElasticNet does not (yet).
-    def fit(self, X: NDArray, y: NDArray) -> Any: ...
+    def fit(
+        self: MultiTaskElasticNetCV_Self, X: ArrayLike, y: MatrixLike
+    ) -> MultiTaskElasticNetCV_Self:
+        ...
+
 
 class MultiTaskLassoCV(RegressorMixin, LinearModelCV):
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    dual_gap_: float = ...
+    n_iter_: int = ...
+    alphas_: ndarray = ...
+    mse_path_: ndarray = ...
+    alpha_: float = ...
+    coef_: ndarray = ...
+    intercept_: ndarray = ...
+
+    _parameter_constraints: ClassVar[dict] = ...
 
     path = ...
 
     def __init__(
         self,
         *,
-        eps: float = 1e-3,
-        n_alphas: int = 100,
-        alphas: ArrayLike | None = None,
+        eps: Float = 1e-3,
+        n_alphas: Int = 100,
+        alphas: None | ArrayLike = None,
         fit_intercept: bool = True,
-        normalize: bool = ...,
-        max_iter: int = 1000,
-        tol: float = 1e-4,
+        max_iter: Int = 1000,
+        tol: Float = 1e-4,
         copy_X: bool = True,
-        cv: int | Generator | Iterable | None = None,
-        verbose: bool | int = False,
-        n_jobs: int | None = None,
-        random_state: int | RandomState | None = None,
-        selection: Literal["cyclic", "random"] = "cyclic",
-    ): ...
-    def _get_estimator(self): ...
-    def _is_multitask(self): ...
-    def _more_tags(self): ...
+        cv: int | BaseCrossValidator | Iterable | None | BaseShuffleSplit = None,
+        verbose: int | bool = False,
+        n_jobs: None | Int = None,
+        random_state: RandomState | None | Int = None,
+        selection: Literal["cyclic", "random", "cyclic"] = "cyclic",
+    ) -> None:
+        ...
 
     # This is necessary as LinearModelCV now supports sample_weight while
     # MultiTaskElasticNet does not (yet).
-    def fit(self, X: NDArray, y: NDArray) -> Any: ...
+    def fit(
+        self: MultiTaskLassoCV_Self, X: ArrayLike, y: MatrixLike
+    ) -> MultiTaskLassoCV_Self:
+        ...

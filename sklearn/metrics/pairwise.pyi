@@ -1,19 +1,28 @@
-from numpy import float64, ndarray
-import numpy as np
-
-from typing import (
-    Any,
-    Dict,
-    Iterator,
-    Optional,
-    Tuple,
-    Union,
-    Literal,
-    Callable,
-    Mapping,
-    Sequence,
+from typing import Callable, Iterator, Sequence
+from ..exceptions import DataConversionWarning as DataConversionWarning
+from ..utils.extmath import row_norms as row_norms, safe_sparse_dot as safe_sparse_dot
+from joblib import effective_n_jobs as effective_n_jobs
+from scipy.spatial import distance
+from ..metrics import DistanceMetric as DistanceMetric
+from ..utils.fixes import sp_version as sp_version, parse_version as parse_version
+from ..preprocessing import normalize as normalize
+from scipy.sparse import csr_matrix as csr_matrix, issparse as issparse
+from ..utils.parallel import delayed as delayed, Parallel as Parallel
+from .. import config_context as config_context
+from ..utils.validation import check_non_negative as check_non_negative
+from ..gaussian_process.kernels import ExpSineSquared
+from numpy import ndarray
+from functools import partial as partial
+from ..utils import (
+    check_array as check_array,
+    gen_even_slices as gen_even_slices,
+    gen_batches as gen_batches,
+    get_chunk_n_rows as get_chunk_n_rows,
+    is_scalar_nan as is_scalar_nan,
 )
-from numpy.typing import ArrayLike, NDArray
+from ..gaussian_process.kernels import Kernel as GPKernel
+from ._pairwise_distances_reduction import ArgKmin as ArgKmin
+from .._typing import MatrixLike, ArrayLike, Int, Float
 
 # Authors: Alexandre Gramfort <alexandre.gramfort@inria.fr>
 #          Mathieu Blondel <mathieu@mblondel.org>
@@ -25,170 +34,203 @@ from numpy.typing import ArrayLike, NDArray
 # License: BSD 3 clause
 
 import itertools
-from functools import partial
 import warnings
 
 import numpy as np
-from scipy.spatial import distance
-from scipy.sparse import csr_matrix
-from scipy.sparse import issparse
 
-from .. import config_context
-from ..utils.validation import _num_samples
-from ..utils.validation import check_non_negative
-from ..utils import check_array
-from ..utils import gen_even_slices
-from ..utils import gen_batches, get_chunk_n_rows
-from ..utils import is_scalar_nan
-from ..utils.extmath import row_norms, safe_sparse_dot
-from ..preprocessing import normalize
-from ..utils._mask import _get_mask
-from ..utils.fixes import delayed
-from ..utils.fixes import sp_version, parse_version
 
-from ..exceptions import DataConversionWarning
-import scipy.sparse._csr
-from sklearn.gaussian_process.kernels import ExpSineSquared
-
-# Utility Functions
-def _return_float_dtype(
-    X: Union[ndarray, scipy.sparse._csr.csr_matrix],
-    Y: Optional[Union[scipy.sparse._csr.csr_matrix, ndarray]],
-) -> Any: ...
 def check_pairwise_arrays(
-    X: NDArray | ArrayLike,
-    Y: NDArray | ArrayLike,
+    X: MatrixLike,
+    Y: None | MatrixLike,
     *,
     precomputed: bool = False,
-    dtype: str | type | ArrayLike | None = None,
-    accept_sparse: str | bool | Sequence[str] | tuple[str, ...] = "csr",
-    force_all_finite: bool | Literal["allow-nan"] = True,
+    dtype: None | Sequence[type] | str | type = None,
+    accept_sparse: Sequence[str] | str | bool = "csr",
+    force_all_finite: str | bool = True,
     copy: bool = False,
-) -> tuple[NDArray | ArrayLike, NDArray | ArrayLike]: ...
-def check_paired_arrays(X: NDArray | ArrayLike, Y: NDArray | ArrayLike) -> tuple[NDArray | ArrayLike, NDArray | ArrayLike]: ...
+) -> tuple[ndarray, ndarray]:
+    ...
+
+
+def check_paired_arrays(X: MatrixLike, Y: MatrixLike) -> tuple[ndarray, ndarray]:
+    ...
+
 
 # Pairwise distances
 def euclidean_distances(
-    X: NDArray | ArrayLike,
-    Y: NDArray | ArrayLike | None = None,
+    X: MatrixLike,
+    Y: None | MatrixLike = None,
     *,
-    Y_norm_squared: ArrayLike | None = None,
+    Y_norm_squared: None | MatrixLike | ArrayLike = None,
     squared: bool = False,
-    X_norm_squared: ArrayLike | None = None,
-) -> np.ndarray: ...
-def _euclidean_distances(
-    X: Union[ndarray, scipy.sparse._csr.csr_matrix],
-    Y: Union[ndarray, scipy.sparse._csr.csr_matrix],
-    X_norm_squared: None = None,
-    Y_norm_squared: Optional[ndarray] = None,
-    squared: bool = False,
-) -> ndarray: ...
+    X_norm_squared: None | MatrixLike | ArrayLike = None,
+) -> ndarray:
+    ...
+
+
 def nan_euclidean_distances(
-    X: ArrayLike,
-    Y: ArrayLike | None = None,
+    X: MatrixLike,
+    Y: None | MatrixLike = None,
     *,
     squared: bool = False,
     missing_values: float | int = ...,
     copy: bool = True,
-) -> np.ndarray: ...
-def _euclidean_distances_upcast(
-    X: ndarray,
-    XX: None = None,
-    Y: Optional[ndarray] = None,
-    YY: None = None,
-    batch_size: None = None,
-) -> ndarray: ...
-def _argmin_min_reduce(dist, start): ...
-def _argmin_reduce(dist, start): ...
+) -> ndarray:
+    ...
+
+
 def pairwise_distances_argmin_min(
-    X: NDArray | ArrayLike,
-    Y: NDArray | ArrayLike,
+    X: MatrixLike,
+    Y: MatrixLike,
     *,
-    axis: int = 1,
+    axis: Int = 1,
     metric: str | Callable = "euclidean",
-    metric_kwargs: Mapping | None = None,
-) -> tuple[NDArray, NDArray]: ...
+    metric_kwargs: None | dict = None,
+) -> tuple[ndarray, ndarray]:
+    ...
+
+
 def pairwise_distances_argmin(
-    X: ArrayLike,
-    Y: ArrayLike,
+    X: MatrixLike,
+    Y: MatrixLike,
     *,
-    axis: int = 1,
+    axis: Int = 1,
     metric: str | Callable = "euclidean",
-    metric_kwargs: Mapping | None = None,
-) -> NDArray: ...
-def haversine_distances(X: ArrayLike, Y: ArrayLike | None = None) -> np.ndarray: ...
-def manhattan_distances(X: ArrayLike, Y: ArrayLike | None = None, *, sum_over_features: bool = True) -> np.ndarray: ...
-def cosine_distances(X: NDArray | ArrayLike, Y: NDArray | ArrayLike | None = None) -> np.ndarray: ...
+    metric_kwargs: None | dict = None,
+) -> ndarray:
+    ...
+
+
+def haversine_distances(X: MatrixLike, Y: None | MatrixLike = None) -> ndarray:
+    ...
+
+
+def manhattan_distances(
+    X: MatrixLike,
+    Y: None | MatrixLike = None,
+    *,
+    sum_over_features: str | bool = "deprecated",
+) -> ndarray:
+    ...
+
+
+def cosine_distances(X: MatrixLike, Y: None | MatrixLike = None) -> ndarray:
+    ...
+
 
 # Paired distances
-def paired_euclidean_distances(X: ArrayLike, Y: ArrayLike) -> NDArray: ...
-def paired_manhattan_distances(X: ArrayLike, Y: ArrayLike) -> NDArray: ...
-def paired_cosine_distances(X: ArrayLike, Y: ArrayLike) -> NDArray: ...
+def paired_euclidean_distances(X: MatrixLike, Y: MatrixLike) -> ndarray:
+    ...
+
+
+def paired_manhattan_distances(X: MatrixLike, Y: MatrixLike) -> ndarray:
+    ...
+
+
+def paired_cosine_distances(X: MatrixLike, Y: MatrixLike) -> ndarray:
+    ...
+
 
 PAIRED_DISTANCES: dict = ...
 
-def paired_distances(X: NDArray, Y: NDArray, *, metric: str | Callable = "euclidean", **kwds) -> NDArray: ...
+
+def paired_distances(
+    X: ArrayLike, Y: ArrayLike, *, metric: str | Callable = "euclidean", **kwds
+) -> ndarray:
+    ...
+
 
 # Kernels
-def linear_kernel(X: NDArray, Y: NDArray | None = None, dense_output: bool = True) -> np.ndarray: ...
+def linear_kernel(
+    X: MatrixLike, Y: None | MatrixLike = None, dense_output: bool = True
+) -> ndarray:
+    ...
+
+
 def polynomial_kernel(
-    X: NDArray,
-    Y: NDArray | None = None,
-    degree: int = 3,
-    gamma: float | None = None,
-    coef0: float = 1,
-) -> np.ndarray: ...
-def sigmoid_kernel(X: NDArray, Y: NDArray | None = None, gamma: float | None = None, coef0: float = 1) -> np.ndarray: ...
-def rbf_kernel(X: NDArray, Y: NDArray | None = None, gamma: float | None = None) -> np.ndarray: ...
-def laplacian_kernel(X: NDArray, Y: NDArray | None = None, gamma: float | None = None) -> np.ndarray: ...
-def cosine_similarity(X: NDArray, Y: NDArray | None = None, dense_output: bool = True) -> np.ndarray: ...
-def additive_chi2_kernel(X: ArrayLike, Y: NDArray | None = None) -> np.ndarray: ...
-def chi2_kernel(X: ArrayLike, Y: NDArray | None = None, gamma: float = 1.0) -> np.ndarray: ...
+    X: MatrixLike,
+    Y: None | MatrixLike = None,
+    degree: Int = 3,
+    gamma: None | Float = None,
+    coef0: Float = 1,
+) -> ndarray:
+    ...
+
+
+def sigmoid_kernel(
+    X: MatrixLike,
+    Y: None | MatrixLike = None,
+    gamma: None | Float = None,
+    coef0: Float = 1,
+) -> ndarray:
+    ...
+
+
+def rbf_kernel(
+    X: MatrixLike, Y: None | MatrixLike = None, gamma: None | Float = None
+) -> ndarray:
+    ...
+
+
+def laplacian_kernel(
+    X: MatrixLike, Y: None | MatrixLike = None, gamma: None | Float = None
+) -> ndarray:
+    ...
+
+
+def cosine_similarity(
+    X: MatrixLike, Y: None | MatrixLike = None, dense_output: bool = True
+) -> ndarray:
+    ...
+
+
+def additive_chi2_kernel(X: MatrixLike, Y: None | MatrixLike = None) -> ndarray:
+    ...
+
+
+def chi2_kernel(
+    X: MatrixLike, Y: None | MatrixLike = None, gamma: Float = 1.0
+) -> ndarray:
+    ...
+
 
 # Helper functions - distance
 PAIRWISE_DISTANCE_FUNCTIONS: dict = ...
 
-def distance_metrics() -> Mapping: ...
-def _dist_wrapper(dist_func, dist_matrix, slice_, *args, **kwargs): ...
-def _parallel_pairwise(
-    X: Union[ndarray, scipy.sparse._csr.csr_matrix],
-    Y: Optional[Union[scipy.sparse._csr.csr_matrix, ndarray]],
-    func: Union[Callable, partial],
-    n_jobs: Optional[int],
-    **kwds,
-) -> ndarray: ...
-def _pairwise_callable(X, Y, metric, force_all_finite=True, **kwds): ...
+
+def distance_metrics() -> dict:
+    ...
+
 
 _VALID_METRICS: list = ...
 
 _NAN_METRICS: list = ...
 
-def _check_chunk_size(reduced: Optional[Union[Tuple[ndarray, ndarray], ndarray]], chunk_size: int) -> None: ...
-def _precompute_metric_params(
-    X: Union[ndarray, scipy.sparse._csr.csr_matrix],
-    Y: Union[ndarray, scipy.sparse._csr.csr_matrix],
-    metric: Optional[str] = None,
-    **kwds,
-) -> Dict[Any, Any]: ...
+
 def pairwise_distances_chunked(
-    X: NDArray,
-    Y: NDArray | None = None,
+    X: MatrixLike,
+    Y: None | MatrixLike = None,
     *,
-    reduce_func: Callable | None = None,
+    reduce_func: None | Callable = None,
     metric: str | Callable = "euclidean",
-    n_jobs: int | None = None,
-    working_memory: int | None = None,
+    n_jobs: None | Int = None,
+    working_memory: None | Int = None,
     **kwds,
-) -> Iterator[Union[Tuple[ndarray, ndarray], None, ndarray]]: ...
+) -> Iterator[None | ndarray | tuple[ndarray, ndarray]]:
+    ...
+
+
 def pairwise_distances(
-    X: NDArray,
-    Y: NDArray | None = None,
+    X: MatrixLike,
+    Y: None | MatrixLike = None,
     metric: str | Callable = "euclidean",
     *,
-    n_jobs: int | None = None,
-    force_all_finite: bool | Literal["allow-nan"] = True,
+    n_jobs: None | Int = None,
+    force_all_finite: str | bool = True,
     **kwds,
-) -> np.ndarray: ...
+) -> ndarray:
+    ...
+
 
 # These distances require boolean arrays, when using scipy.spatial.distance
 PAIRWISE_BOOLEAN_FUNCTIONS: list = ...
@@ -196,16 +238,21 @@ PAIRWISE_BOOLEAN_FUNCTIONS: list = ...
 # Helper functions - distance
 PAIRWISE_KERNEL_FUNCTIONS: dict = ...
 
-def kernel_metrics() -> Mapping: ...
+
+def kernel_metrics() -> dict:
+    ...
+
 
 KERNEL_PARAMS: dict = ...
 
+
 def pairwise_kernels(
-    X: NDArray,
-    Y: NDArray | None = None,
-    metric: str | Callable = "linear",
+    X: MatrixLike,
+    Y: None | MatrixLike = None,
+    metric: ExpSineSquared | str | Callable = "linear",
     *,
     filter_params: bool = False,
-    n_jobs: int | None = None,
+    n_jobs: None | Int = None,
     **kwds,
-) -> np.ndarray: ...
+) -> ndarray:
+    ...

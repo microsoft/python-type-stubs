@@ -1,4 +1,3 @@
-from vispy.scene.widgets.widget import Widget
 
 # -*- coding: utf-8 -*-
 # Copyright (c) Vispy Development Team. All Rights Reserved.

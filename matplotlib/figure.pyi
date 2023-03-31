@@ -100,7 +100,7 @@ class FigureBase(Artist):
     @overload
     def subplots(
         self,
-        nrows: Literal[1],
+        nrows: Literal[1] = ...,
         ncols: Literal[1] = ...,
         *,
         squeeze: Literal[True] = ...,
@@ -112,8 +112,8 @@ class FigureBase(Artist):
     @overload
     def subplots(
         self,
-        nrows: int = ...,
-        ncols: int = ...,
+        nrows: int,
+        ncols: int,
         *,
         squeeze: bool = ...,
         sharex: bool | Literal["none", "all", "row", "col"] = ...,

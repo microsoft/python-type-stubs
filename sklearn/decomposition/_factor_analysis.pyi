@@ -1,5 +1,23 @@
-from typing import Optional, Literal, Any
-from numpy.typing import NDArray, ArrayLike
+from typing import Any, ClassVar, Literal, TypeVar
+from numpy.random import RandomState
+from scipy import linalg as linalg
+from ..exceptions import ConvergenceWarning as ConvergenceWarning
+from numpy import ndarray
+from ..utils._param_validation import Interval as Interval, StrOptions as StrOptions
+from ..utils.extmath import (
+    fast_logdet as fast_logdet,
+    randomized_svd as randomized_svd,
+    squared_norm as squared_norm,
+)
+from numbers import Integral as Integral, Real as Real
+from math import sqrt as sqrt, log as log
+from ..base import BaseEstimator, TransformerMixin, ClassNamePrefixFeaturesOutMixin
+from .._typing import Int, Float, ArrayLike, MatrixLike
+from ..utils import check_random_state as check_random_state
+from ..utils.validation import check_is_fitted as check_is_fitted
+
+FactorAnalysis_Self = TypeVar("FactorAnalysis_Self", bound="FactorAnalysis")
+
 
 # Author: Christian Osendorfer <osendorf@gmail.com>
 #         Alexandre Gramfort <alexandre.gramfort@inria.fr>
@@ -8,40 +26,51 @@ from numpy.typing import NDArray, ArrayLike
 # License: BSD3
 
 import warnings
-from math import sqrt, log
 import numpy as np
-from numpy.random import RandomState
-from scipy import linalg
 
-from ..base import BaseEstimator, TransformerMixin, _ClassNamePrefixFeaturesOutMixin
-from ..utils import check_random_state
-from ..utils.extmath import fast_logdet, randomized_svd, squared_norm
-from ..utils.validation import check_is_fitted
-from ..exceptions import ConvergenceWarning
-from numpy import float64, int64, ndarray
 
-class FactorAnalysis(_ClassNamePrefixFeaturesOutMixin, TransformerMixin, BaseEstimator):
+class FactorAnalysis(ClassNamePrefixFeaturesOutMixin, TransformerMixin, BaseEstimator):
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    mean_: ndarray = ...
+    n_iter_: int = ...
+    noise_variance_: ndarray = ...
+    loglike_: list = ...
+    components_: ndarray = ...
+
+    _parameter_constraints: ClassVar[dict] = ...
+
     def __init__(
         self,
-        n_components: int | None = None,
+        n_components: None | Int = None,
         *,
-        tol: float = 1e-2,
+        tol: Float = 1e-2,
         copy: bool = True,
-        max_iter: int = 1000,
-        noise_variance_init: NDArray | None = None,
-        svd_method: Literal["lapack", "randomized"] = "randomized",
-        iterated_power: int = 3,
-        rotation: Literal["varimax", "quartimax"] | None = None,
-        random_state: int | RandomState = 0,
-    ) -> None: ...
-    def fit(self, X: ArrayLike, y: None = None) -> "FactorAnalysis": ...
-    def transform(self, X: ArrayLike) -> NDArray: ...
-    def get_covariance(self) -> NDArray: ...
-    def get_precision(self) -> NDArray: ...
-    def score_samples(self, X: NDArray) -> NDArray: ...
-    def score(self, X: NDArray, y: None = None) -> float: ...
-    def _rotate(self, components: ndarray, n_components: None = None, tol: float = 1e-6) -> ndarray: ...
-    @property
-    def _n_features_out(self): ...
+        max_iter: Int = 1000,
+        noise_variance_init: None | ArrayLike = None,
+        svd_method: Literal["lapack", "randomized", "randomized"] = "randomized",
+        iterated_power: Int = 3,
+        rotation: None | Literal["varimax", "quartimax"] = None,
+        random_state: None | RandomState | int = 0,
+    ) -> None:
+        ...
 
-def _ortho_rotation(components: ndarray, method: str = "varimax", tol: float = 1e-6, max_iter: int = 100) -> ndarray: ...
+    def fit(
+        self: FactorAnalysis_Self, X: MatrixLike, y: Any = None
+    ) -> FactorAnalysis_Self:
+        ...
+
+    def transform(self, X: MatrixLike) -> ndarray:
+        ...
+
+    def get_covariance(self) -> ndarray:
+        ...
+
+    def get_precision(self) -> ndarray:
+        ...
+
+    def score_samples(self, X: ArrayLike) -> ndarray:
+        ...
+
+    def score(self, X: ArrayLike, y: Any = None) -> float:
+        ...

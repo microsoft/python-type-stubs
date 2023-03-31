@@ -1,107 +1,101 @@
-from numpy import float64, int64, ndarray
-from typing import Dict, List, Tuple, Union, Callable, Mapping, Literal, Any
-from numpy.typing import ArrayLike, NDArray
+from typing import Any, Callable, ClassVar, Literal, TypeVar
+from ..exceptions import DataConversionWarning as DataConversionWarning
+from numpy import ndarray
+from ..utils._param_validation import (
+    Interval as Interval,
+    HasMethods as HasMethods,
+    StrOptions as StrOptions,
+)
+from numbers import Integral as Integral, Real as Real
+from joblib import Memory
+from ..neighbors import NearestNeighbors as NearestNeighbors
+from ..metrics import pairwise_distances as pairwise_distances
+from ..base import BaseEstimator, ClusterMixin
+from scipy.sparse import (
+    issparse as issparse,
+    SparseEfficiencyWarning as SparseEfficiencyWarning,
+)
+from ..metrics.pairwise import PAIRWISE_BOOLEAN_FUNCTIONS as PAIRWISE_BOOLEAN_FUNCTIONS
+from .._typing import Float, Int, MatrixLike, ArrayLike
+from ..utils import gen_batches as gen_batches, get_chunk_n_rows as get_chunk_n_rows
+from ..utils.validation import check_memory as check_memory
+
+OPTICS_Self = TypeVar("OPTICS_Self", bound="OPTICS")
+
 
 import warnings
 import numpy as np
 
-from ..exceptions import DataConversionWarning
-from ..metrics.pairwise import PAIRWISE_BOOLEAN_FUNCTIONS
-from ..utils import gen_batches, get_chunk_n_rows
-from ..utils.validation import check_memory
-from ..neighbors import NearestNeighbors
-from ..base import BaseEstimator, ClusterMixin
-from ..metrics import pairwise_distances
-from sklearn.neighbors._unsupervised import NearestNeighbors
 
 class OPTICS(ClusterMixin, BaseEstimator):
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    cluster_hierarchy_: ndarray = ...
+    predecessor_: ndarray = ...
+    core_distances_: ndarray = ...
+    ordering_: ndarray = ...
+    reachability_: ndarray = ...
+    labels_: ndarray = ...
+
+    _parameter_constraints: ClassVar[dict] = ...
+
     def __init__(
         self,
         *,
-        min_samples: int | float = 5,
-        max_eps: float = ...,
+        min_samples: float | int = 5,
+        max_eps: Float = ...,
         metric: str | Callable = "minkowski",
-        p: int = 2,
-        metric_params: Mapping | None = None,
+        p: Float = 2,
+        metric_params: None | dict = None,
         cluster_method: str = "xi",
-        eps: float | None = None,
+        eps: None | Float = None,
         xi: float = 0.05,
         predecessor_correction: bool = True,
-        min_cluster_size: int | float | None = None,
-        algorithm: Literal["auto", "ball_tree", "kd_tree", "brute"] = "auto",
-        leaf_size: int = 30,
-        memory: str | Memory | None = None,
-        n_jobs: int | None = None,
-    ) -> None: ...
-    def fit(self, X: NDArray, y: None = None) -> "OPTICS": ...
+        min_cluster_size: float | None | int = None,
+        algorithm: Literal["auto", "ball_tree", "kd_tree", "brute", "auto"] = "auto",
+        leaf_size: Int = 30,
+        memory: None | Memory | str = None,
+        n_jobs: None | Int = None,
+    ) -> None:
+        ...
 
-def _validate_size(size: Union[int, float], n_samples: int, param_name: str) -> None: ...
+    def fit(self: OPTICS_Self, X: MatrixLike, y: Any = None) -> OPTICS_Self:
+        ...
 
-# OPTICS helper functions
-def _compute_core_distances_(X: ndarray, neighbors: NearestNeighbors, min_samples: int, working_memory: None) -> ndarray: ...
+
 def compute_optics_graph(
-    X: NDArray,
+    X: MatrixLike,
     *,
-    min_samples: int | float,
-    max_eps: float,
+    min_samples: float | int,
+    max_eps: Float,
     metric: str | Callable,
-    p: int,
-    metric_params: Mapping,
+    p: Int,
+    metric_params: dict,
     algorithm: Literal["auto", "ball_tree", "kd_tree", "brute"],
-    leaf_size: int,
-    n_jobs: int,
-) -> tuple[ArrayLike, ArrayLike, ArrayLike, ArrayLike]: ...
-def _set_reach_dist(
-    core_distances_: ndarray,
-    reachability_: ndarray,
-    predecessor_: ndarray,
-    point_index: int64,
-    processed: ndarray,
-    X: ndarray,
-    nbrs: NearestNeighbors,
-    metric: str,
-    metric_params: None,
-    p: int,
-    max_eps: float,
-) -> None: ...
+    leaf_size: Int,
+    n_jobs: Int,
+) -> tuple[ndarray, ndarray, ndarray, ndarray]:
+    ...
+
+
 def cluster_optics_dbscan(
     *,
     reachability: ArrayLike,
     core_distances: ArrayLike,
     ordering: ArrayLike,
-    eps: float,
-) -> ArrayLike: ...
+    eps: Float,
+) -> ndarray:
+    ...
+
+
 def cluster_optics_xi(
     *,
-    reachability: NDArray,
-    predecessor: NDArray,
-    ordering: NDArray,
-    min_samples: int | float,
-    min_cluster_size: int | float | None = None,
+    reachability: ArrayLike,
+    predecessor: ArrayLike,
+    ordering: ArrayLike,
+    min_samples: float | int,
+    min_cluster_size: float | None | int = None,
     xi: float = 0.05,
     predecessor_correction: bool = True,
-) -> tuple[NDArray, np.ndarray]: ...
-def _extend_region(steep_point: ndarray, xward_point: ndarray, start: int64, min_samples: int) -> int64: ...
-def _update_filter_sdas(
-    sdas: List[Union[Dict[str, Union[int64, float64]], Dict[str, Union[int64, float]], Any]],
-    mib: float64,
-    xi_complement: float,
-    reachability_plot: ndarray,
-) -> List[Union[Dict[str, Union[int64, float64]], Any]]: ...
-def _correct_predecessor(
-    reachability_plot: ndarray,
-    predecessor_plot: ndarray,
-    ordering: ndarray,
-    s: int64,
-    e: int64,
-) -> Tuple[int64, int64]: ...
-def _xi_cluster(
-    reachability_plot: ndarray,
-    predecessor_plot: ndarray,
-    ordering: ndarray,
-    xi: float,
-    min_samples: int,
-    min_cluster_size: int,
-    predecessor_correction: bool,
-) -> ndarray: ...
-def _extract_xi_labels(ordering: ndarray, clusters: ndarray) -> ndarray: ...
+) -> tuple[ndarray, ndarray]:
+    ...

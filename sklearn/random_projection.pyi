@@ -1,28 +1,34 @@
-from numpy import float64, int64, ndarray
-from typing import Optional, Union, Any, Literal
-from numpy.typing import ArrayLike, NDArray
+from typing import Any, ClassVar, Literal, Sequence, TypeVar
+from numpy.random import RandomState
+from abc import ABCMeta, abstractmethod
+from scipy import linalg as linalg
+from .base import BaseEstimator, TransformerMixin, ClassNamePrefixFeaturesOutMixin
+from .utils.validation import (
+    check_array as check_array,
+    check_is_fitted as check_is_fitted,
+)
+from numpy import ndarray
+from numbers import Integral as Integral, Real as Real
+from .utils.extmath import safe_sparse_dot as safe_sparse_dot
+from .exceptions import DataDimensionalityWarning as DataDimensionalityWarning
+from .utils import check_random_state as check_random_state
+from .utils._param_validation import Interval as Interval, StrOptions as StrOptions
+from .utils.random import sample_without_replacement as sample_without_replacement
+from scipy.sparse import spmatrix
+from ._typing import Float, ArrayLike, Int, MatrixLike
+
+BaseRandomProjection_Self = TypeVar(
+    "BaseRandomProjection_Self", bound="BaseRandomProjection"
+)
 
 # Authors: Olivier Grisel <olivier.grisel@ensta.org>,
 #          Arnaud Joly <a.joly@ulg.ac.be>
 # License: BSD 3 clause
 
 import warnings
-from abc import ABCMeta, abstractmethod
 
 import numpy as np
-from scipy import linalg
 import scipy.sparse as sp
-
-from .base import BaseEstimator, TransformerMixin
-from .base import _ClassNamePrefixFeaturesOutMixin
-
-from .utils import check_random_state
-from .utils.extmath import safe_sparse_dot
-
-from .utils.validation import check_array, check_is_fitted
-from .exceptions import DataDimensionalityWarning
-from numpy.random import RandomState
-from scipy.sparse._csr import csr_matrix
 
 __all__ = [
     "SparseRandomProjection",
@@ -30,58 +36,81 @@ __all__ = [
     "johnson_lindenstrauss_min_dim",
 ]
 
-def johnson_lindenstrauss_min_dim(n_samples: int | ArrayLike, *, eps: float | NDArray = 0.1) -> int | np.ndarray: ...
-def _check_density(density: Union[str, float64], n_features: int) -> float64: ...
-def _check_input_size(n_components: int64, n_features: int) -> None: ...
-def _gaussian_random_matrix(n_components, n_features, random_state=None): ...
-def _sparse_random_matrix(
-    n_components: int64,
-    n_features: int,
-    density: float64 | str = "auto",
-    random_state: Optional[RandomState] = None,
-) -> csr_matrix: ...
 
-class BaseRandomProjection(TransformerMixin, BaseEstimator, _ClassNamePrefixFeaturesOutMixin, metaclass=ABCMeta):
+def johnson_lindenstrauss_min_dim(
+    n_samples: Sequence[int] | ndarray | Float, *, eps: float | ArrayLike = 0.1
+) -> ndarray | int:
+    ...
+
+
+class BaseRandomProjection(
+    TransformerMixin, BaseEstimator, ClassNamePrefixFeaturesOutMixin, metaclass=ABCMeta
+):
+
+    _parameter_constraints: ClassVar[dict] = ...
+
     @abstractmethod
     def __init__(
         self,
-        n_components: Union[int64, int, str] = "auto",
+        n_components: str | Int = "auto",
         *,
-        eps=0.1,
-        compute_inverse_components=False,
+        eps: float = 0.1,
+        compute_inverse_components: bool = False,
         random_state=None,
-    ) -> None: ...
-    @abstractmethod
-    def _make_random_matrix(self, n_components, n_features): ...
-    def _compute_inverse_components(self): ...
-    def fit(self, X: NDArray, y: None = None) -> "SparseRandomProjection": ...
-    @property
-    def _n_features_out(self): ...
-    def inverse_transform(self, X: NDArray | ArrayLike) -> NDArray: ...
-    def _more_tags(self): ...
+    ) -> None:
+        ...
+
+    def fit(
+        self: BaseRandomProjection_Self, X: MatrixLike, y: Any = None
+    ) -> BaseRandomProjection_Self | SparseRandomProjection:
+        ...
+
+    def inverse_transform(self, X: MatrixLike) -> ndarray:
+        ...
+
 
 class GaussianRandomProjection(BaseRandomProjection):
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    inverse_components_: ndarray = ...
+    components_: ndarray = ...
+    n_components_: int = ...
+
     def __init__(
         self,
-        n_components: int | Literal["auto"] = "auto",
+        n_components: Literal["auto", "auto"] | Int = "auto",
         *,
-        eps: float = 0.1,
+        eps: Float = 0.1,
         compute_inverse_components: bool = False,
-        random_state: int | RandomState | None = None,
-    ): ...
-    def _make_random_matrix(self, n_components, n_features): ...
-    def transform(self, X: NDArray) -> NDArray: ...
+        random_state: RandomState | None | Int = None,
+    ) -> None:
+        ...
+
+    def transform(self, X: MatrixLike) -> ndarray:
+        ...
+
 
 class SparseRandomProjection(BaseRandomProjection):
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    density_: float = ...
+    inverse_components_: ndarray = ...
+    components_: spmatrix = ...
+    n_components_: int = ...
+
+    _parameter_constraints: ClassVar[dict] = ...
+
     def __init__(
         self,
-        n_components: int | Literal["auto"] = "auto",
+        n_components: Literal["auto", "auto"] | Int = "auto",
         *,
-        density: float | Literal["auto"] = "auto",
-        eps: float = 0.1,
+        density: float | Literal["auto", "auto"] = "auto",
+        eps: Float = 0.1,
         dense_output: bool = False,
         compute_inverse_components: bool = False,
-        random_state: int | RandomState | None = None,
-    ) -> None: ...
-    def _make_random_matrix(self, n_components: int64, n_features: int) -> csr_matrix: ...
-    def transform(self, X: NDArray) -> NDArray: ...
+        random_state: RandomState | None | Int = None,
+    ) -> None:
+        ...
+
+    def transform(self, X: MatrixLike) -> ndarray | spmatrix:
+        ...

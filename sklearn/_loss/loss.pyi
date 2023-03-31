@@ -1,7 +1,29 @@
-from numpy import float64, ndarray
-from sklearn._typing import Scalar
-from typing import Optional, Tuple, Type, Union, Literal
-from numpy.typing import NDArray, ArrayLike
+from typing import ClassVar, Literal, Type
+from ..utils._readonly_array_wrapper import ReadonlyArrayWrapper as ReadonlyArrayWrapper
+from scipy.special import xlogy as xlogy
+from numpy import ndarray
+from .link import (
+    Interval,
+    IdentityLink,
+    LogLink as LogLink,
+    LogitLink as LogitLink,
+    MultinomialLogit as MultinomialLogit,
+)
+from .link import BaseLink
+from ._loss import (
+    CyHalfSquaredError,
+    CyAbsoluteError as CyAbsoluteError,
+    CyPinballLoss as CyPinballLoss,
+    CyHalfPoissonLoss as CyHalfPoissonLoss,
+    CyHalfGammaLoss as CyHalfGammaLoss,
+    CyHalfTweedieLoss as CyHalfTweedieLoss,
+    CyHalfTweedieLossIdentity as CyHalfTweedieLossIdentity,
+    CyHalfBinomialLoss as CyHalfBinomialLoss,
+    CyHalfMultinomialLoss as CyHalfMultinomialLoss,
+)
+from .._typing import ArrayLike, MatrixLike, Int, Float, Scalar
+from ..utils import check_scalar as check_scalar
+from ._loss import CyLossFunction
 
 # Goals:
 # - Provide a common private module for loss functions/classes.
@@ -15,33 +37,7 @@ from numpy.typing import NDArray, ArrayLike
 
 import numbers
 import numpy as np
-from scipy.special import xlogy
 
-from .link import (
-    Interval,
-    IdentityLink,
-    LogLink,
-    LogitLink,
-    MultinomialLogit,
-)
-from ..utils import check_scalar
-from ..utils.stats import _weighted_percentile
-from sklearn._loss.link import IdentityLink, LogLink, LogitLink, MultinomialLogit
-
-class CyLossFunction:
-    def cy_loss(self, y_true: float, raw_prediction: float) -> float: ...
-    def cy_gradient(self, y_true: float, raw_prediction: float) -> float: ...
-    def cy_grad_hess(self, y_true: float, raw_prediction: float) -> tuple[float, float]: ...
-
-class CyHalfSquaredError(CyLossFunction): ...
-class CyAbsoluteError(CyLossFunction): ...
-class CyPinballLoss(CyLossFunction): ...
-class CyHalfPoissonLoss(CyLossFunction): ...
-class CyHalfGammaLoss(CyLossFunction): ...
-class CyHalfTweedieLoss(CyLossFunction): ...
-class CyHalfTweedieLossIdentity(CyLossFunction): ...
-class CyHalfBinomialLoss(CyLossFunction): ...
-class CyHalfMultinomialLoss(CyLossFunction): ...
 
 # Note: The shape of raw_prediction for multiclass classifications are
 # - GradientBoostingClassifier: (n_samples, n_classes)
@@ -62,6 +58,12 @@ class CyHalfMultinomialLoss(CyLossFunction): ...
 # mentioned Cython edge case and have easier to understand code (which method calls
 # which code).
 class BaseLoss:
+    constant_hessian: bool = ...
+    approx_hessian: bool = ...
+    interval_y_pred: Interval = ...
+    interval_y_true: Interval = ...
+    link: BaseLink = ...
+    closs: CyLossFunction = ...
 
     # For decision trees:
     # This variable indicates whether the loss requires the leaves values to
@@ -72,133 +74,186 @@ class BaseLoss:
     # procedure. See the original paper Greedy Function Approximation: A
     # Gradient Boosting Machine by Friedman
     # (https://statweb.stanford.edu/~jhf/ftp/trebst.pdf) for the theory.
-    need_update_leaves_values: bool = ...
-    differentiable: bool = ...
-    is_multiclass: bool = ...
+    need_update_leaves_values: ClassVar[bool] = ...
+    differentiable: ClassVar[bool] = ...
+    is_multiclass: ClassVar[bool] = ...
 
-    def __init__(
-        self,
-        closs: Union[
-            CyHalfPoissonLoss,
-            CyHalfMultinomialLoss,
-            CyHalfBinomialLoss,
-            CyPinballLoss,
-            CyHalfSquaredError,
-        ],
-        link: Union[LogitLink, IdentityLink, MultinomialLogit, LogLink],
-        n_classes: int | None = None,
-    ) -> None: ...
-    def in_y_true_range(self, y: NDArray) -> bool: ...
-    def in_y_pred_range(self, y: NDArray): ...
+    def __init__(self, closs, link, n_classes: None | int = None) -> None:
+        ...
+
+    def in_y_true_range(self, y: ArrayLike) -> bool:
+        ...
+
+    def in_y_pred_range(self, y: ArrayLike):
+        ...
+
     def loss(
         self,
-        y_true: NDArray,
-        raw_prediction: NDArray,
-        sample_weight: NDArray | None = None,
-        loss_out: NDArray | None = None,
-        n_threads: int = 1,
-    ) -> ArrayLike: ...
+        y_true: ArrayLike,
+        raw_prediction: MatrixLike | ArrayLike,
+        sample_weight: None | ArrayLike = None,
+        loss_out: None | ArrayLike = None,
+        n_threads: Int = 1,
+    ) -> ndarray:
+        ...
+
     def loss_gradient(
         self,
-        y_true: NDArray,
-        raw_prediction: NDArray,
-        sample_weight: NDArray | None = None,
-        loss_out: NDArray | None = None,
-        gradient_out: NDArray | None = None,
-        n_threads: int = 1,
-    ) -> tuple[ArrayLike, ArrayLike]: ...
+        y_true: ArrayLike,
+        raw_prediction: MatrixLike | ArrayLike,
+        sample_weight: None | ArrayLike = None,
+        loss_out: None | ArrayLike = None,
+        gradient_out: None | MatrixLike | ArrayLike = None,
+        n_threads: Int = 1,
+    ) -> tuple[ndarray, ndarray]:
+        ...
+
     def gradient(
         self,
-        y_true: NDArray,
-        raw_prediction: NDArray,
-        sample_weight: NDArray | None = None,
-        gradient_out: NDArray | None = None,
-        n_threads: int = 1,
-    ) -> ArrayLike: ...
+        y_true: ArrayLike,
+        raw_prediction: MatrixLike | ArrayLike,
+        sample_weight: None | ArrayLike = None,
+        gradient_out: None | MatrixLike | ArrayLike = None,
+        n_threads: Int = 1,
+    ) -> ndarray:
+        ...
+
     def gradient_hessian(
         self,
-        y_true: NDArray,
-        raw_prediction: NDArray,
-        sample_weight: NDArray | None = None,
-        gradient_out: NDArray | None = None,
-        hessian_out: NDArray | None = None,
-        n_threads: int = 1,
-    ) -> tuple[NDArray, NDArray]: ...
+        y_true: ArrayLike,
+        raw_prediction: MatrixLike | ArrayLike,
+        sample_weight: None | ArrayLike = None,
+        gradient_out: None | MatrixLike | ArrayLike = None,
+        hessian_out: None | MatrixLike | ArrayLike = None,
+        n_threads: Int = 1,
+    ) -> tuple[ndarray, ndarray]:
+        ...
+
     def __call__(
         self,
-        y_true: NDArray,
-        raw_prediction: NDArray,
-        sample_weight: NDArray | None = None,
-        n_threads: int = 1,
-    ) -> float: ...
-    def fit_intercept_only(self, y_true: ArrayLike, sample_weight: ArrayLike | None = None) -> Scalar | NDArray: ...
-    def constant_to_optimal_zero(self, y_true, sample_weight=None): ...
+        y_true: ArrayLike,
+        raw_prediction: MatrixLike | ArrayLike,
+        sample_weight: None | ArrayLike = None,
+        n_threads: Int = 1,
+    ) -> Float:
+        ...
+
+    def fit_intercept_only(
+        self, y_true: ArrayLike, sample_weight: None | ArrayLike = None
+    ) -> ndarray | Scalar | Float:
+        ...
+
+    def constant_to_optimal_zero(self, y_true, sample_weight=None):
+        ...
+
     def init_gradient_and_hessian(
         self,
-        n_samples: int,
-        dtype: float64 | np.float32 = ...,
-        order: Literal["C", "F"] = "F",
-    ) -> tuple[NDArray, NDArray]: ...
+        n_samples: Int,
+        dtype: Type[Float] | Float = ...,
+        order: Literal["C", "F", "F"] = "F",
+    ) -> tuple[ndarray, ndarray]:
+        ...
+
 
 # Note: Naturally, we would inherit in the following order
 #         class HalfSquaredError(IdentityLink, CyHalfSquaredError, BaseLoss)
 #       But because of https://github.com/cython/cython/issues/4350 we
 #       set BaseLoss as the last one. This, of course, changes the MRO.
 class HalfSquaredError(BaseLoss):
-    def __init__(self, sample_weight: None = None) -> None: ...
+    def __init__(self, sample_weight=None) -> None:
+        ...
+
 
 class AbsoluteError(BaseLoss):
 
-    differentiable: bool = ...
-    need_update_leaves_values: bool = ...
+    differentiable: ClassVar[bool] = ...
+    need_update_leaves_values: ClassVar[bool] = ...
 
-    def __init__(self, sample_weight=None): ...
-    def fit_intercept_only(self, y_true, sample_weight=None): ...
+    def __init__(self, sample_weight=None) -> None:
+        ...
+
+    def fit_intercept_only(self, y_true, sample_weight=None):
+        ...
+
 
 class PinballLoss(BaseLoss):
 
-    differentiable: bool = ...
-    need_update_leaves_values: bool = ...
+    differentiable: ClassVar[bool] = ...
+    need_update_leaves_values: ClassVar[bool] = ...
 
-    def __init__(self, sample_weight: None = None, quantile: float = 0.5) -> None: ...
-    def fit_intercept_only(self, y_true: ndarray, sample_weight: None = None) -> float64: ...
+    def __init__(self, sample_weight=None, quantile: float = 0.5) -> None:
+        ...
+
+    def fit_intercept_only(self, y_true: ndarray, sample_weight=None) -> Float:
+        ...
+
 
 class HalfPoissonLoss(BaseLoss):
-    def __init__(self, sample_weight: None = None) -> None: ...
-    def constant_to_optimal_zero(self, y_true: ndarray, sample_weight: None = None) -> ndarray: ...
+    def __init__(self, sample_weight: None | ndarray = None) -> None:
+        ...
+
+    def constant_to_optimal_zero(self, y_true: ndarray, sample_weight=None) -> ndarray:
+        ...
+
 
 class HalfGammaLoss(BaseLoss):
-    def __init__(self, sample_weight=None): ...
-    def constant_to_optimal_zero(self, y_true, sample_weight=None): ...
+    def __init__(self, sample_weight=None) -> None:
+        ...
+
+    def constant_to_optimal_zero(self, y_true: ndarray, sample_weight=None) -> ndarray:
+        ...
+
 
 class HalfTweedieLoss(BaseLoss):
-    def __init__(self, sample_weight=None, power=1.5): ...
-    def constant_to_optimal_zero(self, y_true, sample_weight=None): ...
+    def __init__(self, sample_weight=None, power: float = 1.5) -> None:
+        ...
+
+    def constant_to_optimal_zero(self, y_true: ndarray, sample_weight=None) -> ndarray:
+        ...
+
 
 class HalfTweedieLossIdentity(BaseLoss):
-    def __init__(self, sample_weight=None, power=1.5): ...
+    def __init__(self, sample_weight=None, power: float = 1.5) -> None:
+        ...
+
 
 class HalfBinomialLoss(BaseLoss):
-    def __init__(self, sample_weight: None = None) -> None: ...
-    def constant_to_optimal_zero(self, y_true, sample_weight=None): ...
-    def predict_proba(self, raw_prediction: ArrayLike) -> NDArray: ...
+    def __init__(self, sample_weight=None) -> None:
+        ...
+
+    def constant_to_optimal_zero(self, y_true, sample_weight=None):
+        ...
+
+    def predict_proba(self, raw_prediction: MatrixLike | ArrayLike) -> ndarray:
+        ...
+
 
 class HalfMultinomialLoss(BaseLoss):
 
-    is_multiclass: bool = ...
+    is_multiclass: ClassVar[bool] = ...
 
-    def __init__(self, sample_weight: None = None, n_classes: int = 3) -> None: ...
-    def in_y_true_range(self, y: NDArray): ...
-    def fit_intercept_only(self, y_true, sample_weight=None): ...
-    def predict_proba(self, raw_prediction: ArrayLike) -> ArrayLike: ...
+    def __init__(self, sample_weight=None, n_classes: int = 3) -> None:
+        ...
+
+    def in_y_true_range(self, y: ArrayLike):
+        ...
+
+    def fit_intercept_only(self, y_true, sample_weight=None):
+        ...
+
+    def predict_proba(self, raw_prediction: MatrixLike) -> ndarray:
+        ...
+
     def gradient_proba(
         self,
-        y_true: NDArray,
-        raw_prediction: ArrayLike,
-        sample_weight: NDArray | None = None,
-        gradient_out: ArrayLike | None = None,
-        proba_out: ArrayLike | None = None,
-        n_threads: int = 1,
-    ) -> tuple[ArrayLike, ArrayLike]: ...
+        y_true: ArrayLike,
+        raw_prediction: MatrixLike,
+        sample_weight: None | ArrayLike = None,
+        gradient_out: None | MatrixLike = None,
+        proba_out: None | MatrixLike = None,
+        n_threads: Int = 1,
+    ) -> tuple[ndarray, ndarray]:
+        ...
+
 
 _LOSSES: dict = ...

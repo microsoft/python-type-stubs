@@ -126,7 +126,7 @@ def subplots(
 @overload
 def subplots(
     nrows: Literal[1],
-    ncols: Literal[1],
+    ncols: Literal[1] = ...,
     *,
     sharex: bool | Literal["none", "all", "row", "col"] = ...,
     sharey: bool | Literal["none", "all", "row", "col"] = ...,
@@ -229,7 +229,7 @@ def subplot_mosaic(
     gridspec_kw: dict = ...,
     empty_sentinel: object = ...,
     **fig_kw
-) -> dict[Text, Axes]: ...
+) -> tuple[Figure, dict[Text, Axes]]: ...
 def subplot2grid(
     shape: Sequence[int],
     loc: Sequence[int],

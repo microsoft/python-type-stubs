@@ -1,164 +1,173 @@
-from collections.abc import Generator, Iterable
 from typing import (
-    Dict,
-    Iterator,
-    List,
-    Optional,
-    Tuple,
-    Union,
-    Any,
-    Mapping,
-    Literal,
     Callable,
+    ClassVar,
+    Iterable,
+    Iterator,
+    Literal,
+    Mapping,
+    Sequence,
+    TypeVar,
 )
-from numpy.typing import ArrayLike
-from copy import deepcopy
-from math import ceil, floor, log
-from abc import abstractmethod
-from numbers import Integral
+from numpy.random import RandomState
+from ..base import BaseEstimator
+from ._split import BaseShuffleSplit
+from ._split import check_cv as check_cv
+from copy import deepcopy as deepcopy
+from ..svm._classes import SVC
+from abc import abstractmethod as abstractmethod
+from numpy import ndarray
+from numbers import Integral as Integral
+from ..base import is_classifier as is_classifier
+from ..utils import resample as resample
+from . import ParameterGrid as ParameterGrid, ParameterSampler as ParameterSampler
+from ..utils.multiclass import (
+    check_classification_targets as check_classification_targets,
+)
+from math import ceil as ceil, floor as floor, log as log
+from ._search import BaseSearchCV
+from .._typing import MatrixLike, ArrayLike, Int, Float
+from . import BaseCrossValidator
+
+BaseSuccessiveHalving_Self = TypeVar(
+    "BaseSuccessiveHalving_Self", bound="BaseSuccessiveHalving"
+)
+
 
 import numpy as np
-from numpy.random import RandomState
-from ._search import BaseSearchCV
-from . import ParameterGrid, ParameterSampler
-from ..base import BaseEstimator, is_classifier
-from ._split import check_cv, _yields_constant_splits
-from ..utils import resample
-from ..utils.multiclass import check_classification_targets
-from ..utils.validation import _num_samples
-from numpy.ma.core import MaskedArray
-from numpy import int64, ndarray
-from scipy.stats._distn_infrastructure import rv_discrete_frozen
-from sklearn.ensemble._forest import RandomForestClassifier
-from sklearn.ensemble._gb import GradientBoostingRegressor
-from sklearn.model_selection._search import ParameterGrid, ParameterSampler
-from sklearn.svm._classes import SVC
+
 
 __all__ = ["HalvingGridSearchCV", "HalvingRandomSearchCV"]
 
-class _SubsampleMetaSplitter:
-    def __init__(self, *, base_cv, fraction, subsample_test, random_state) -> None: ...
-    def split(self, X: ndarray, y: ndarray, groups: None = None) -> Iterator[Tuple[ndarray, ndarray]]: ...
 
-def _top_k(
-    results: Dict[
-        str,
-        Union[
-            ndarray,
-            MaskedArray,
-            List[Union[Dict[str, Union[int, float]], Dict[str, float]]],
-            List[Dict[str, Union[int, float]]],
-            List[
-                Union[
-                    Dict[str, Union[bool, int, str]],
-                    Dict[str, Optional[Union[int, bool, str]]],
-                ]
-            ],
-        ],
-    ],
-    k: int,
-    itr: int,
-) -> ndarray: ...
+class _SubsampleMetaSplitter:
+    def __init__(self, *, base_cv, fraction, subsample_test, random_state) -> None:
+        ...
+
+    def split(
+        self, X: ndarray, y: ndarray, groups=None
+    ) -> Iterator[tuple[ndarray, ndarray]]:
+        ...
+
 
 class BaseSuccessiveHalving(BaseSearchCV):
     def __init__(
         self,
-        estimator: Union[RandomForestClassifier, GradientBoostingRegressor, SVC],
+        estimator,
         *,
         scoring=None,
         n_jobs=None,
-        refit=True,
-        cv=5,
-        verbose=0,
+        refit: bool = True,
+        cv: int = 5,
+        verbose: int = 0,
         random_state=None,
         error_score=...,
-        return_train_score=True,
-        max_resources="auto",
-        min_resources="exhaust",
-        resource="n_samples",
-        factor=3,
-        aggressive_elimination=False,
-    ) -> None: ...
-    def _check_input_parameters(self, X: ndarray, y: ndarray, groups: None) -> None: ...
-    @staticmethod
-    def _select_best_index(
-        refit: bool,
-        refit_metric: str,
-        results: Dict[
-            str,
-            Union[
-                ndarray,
-                MaskedArray,
-                List[Union[Dict[str, Union[int, float]], Dict[str, float]]],
-                List[Dict[str, Union[int, float]]],
-                List[
-                    Union[
-                        Dict[str, Union[bool, int, str]],
-                        Dict[str, Optional[Union[int, bool, str]]],
-                    ]
-                ],
-            ],
-        ],
-    ) -> int64: ...
+        return_train_score: bool = True,
+        max_resources: str = "auto",
+        min_resources: str = "exhaust",
+        resource: str = "n_samples",
+        factor: int = 3,
+        aggressive_elimination: bool = False,
+    ) -> None:
+        ...
+
     def fit(
-        self,
-        X: ArrayLike,
-        y: ArrayLike | None = None,
-        groups: ArrayLike | None = None,
+        self: BaseSuccessiveHalving_Self,
+        X: MatrixLike,
+        y: None | MatrixLike | ArrayLike = None,
+        groups: None | ArrayLike = None,
         **fit_params,
-    ) -> Union[HalvingGridSearchCV, HalvingRandomSearchCV]: ...
-    def _run_search(self, evaluate_candidates: Callable) -> None: ...
-    @abstractmethod
-    def _generate_candidate_params(self): ...
-    def _more_tags(self): ...
+    ) -> BaseSuccessiveHalving_Self:
+        ...
+
 
 class HalvingGridSearchCV(BaseSuccessiveHalving):
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    classes_: ndarray = ...
+    multimetric_: bool = ...
+    refit_time_: float = ...
+    n_splits_: int = ...
+    scorer_: Callable | dict = ...
+    best_index_: int = ...
+    best_params_: dict = ...
+    best_score_: float = ...
+    best_estimator_: BaseEstimator | dict = ...
+    cv_results_: dict[str, ndarray] = ...
+    n_required_iterations_: int = ...
+    n_possible_iterations_: int = ...
+    n_iterations_: int = ...
+    min_resources_: int = ...
+    max_resources_: int = ...
+    n_remaining_candidates_: int = ...
+    n_candidates_: list[int] = ...
+    n_resources_: list[int] = ...
 
-    _required_parameters: list = ...
+    _required_parameters: ClassVar[list] = ...
 
     def __init__(
         self,
-        estimator: BaseEstimator,
-        param_grid: Mapping | ArrayLike,
+        estimator: BaseEstimator | SVC,
+        param_grid: Mapping | dict[str, list[int | float]] | Sequence[dict],
         *,
-        factor: int | float = 3,
-        resource: str | Literal["n_samples"] = "n_samples",
-        max_resources: int | str = "auto",
-        min_resources: Literal["exhaust", "smallest"] | int = "exhaust",
+        factor: float | int = 3,
+        resource: str = "n_samples",
+        max_resources: str | Int = "auto",
+        min_resources: int | Literal["exhaust", "smallest", "exhaust"] = "exhaust",
         aggressive_elimination: bool = False,
-        cv: int | Generator | Iterable = 5,
-        scoring: str | Callable | None = None,
+        cv: Iterable | int | BaseShuffleSplit | BaseCrossValidator = 5,
+        scoring: None | str | Callable = None,
         refit: bool = True,
-        error_score: float | Literal["raise"] = ...,
+        error_score: str | Float = ...,
         return_train_score: bool = True,
-        random_state: int | RandomState | None = None,
-        n_jobs: int | None = None,
-        verbose: int = 0,
-    ) -> None: ...
-    def _generate_candidate_params(self) -> ParameterGrid: ...
+        random_state: RandomState | None | Int = None,
+        n_jobs: None | int = None,
+        verbose: Int = 0,
+    ) -> None:
+        ...
+
 
 class HalvingRandomSearchCV(BaseSuccessiveHalving):
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    classes_: ndarray = ...
+    multimetric_: bool = ...
+    refit_time_: float = ...
+    n_splits_: int = ...
+    scorer_: Callable | dict = ...
+    best_index_: int = ...
+    best_params_: dict = ...
+    best_score_: float = ...
+    best_estimator_: BaseEstimator | dict = ...
+    cv_results_: dict[str, ndarray] = ...
+    n_required_iterations_: int = ...
+    n_possible_iterations_: int = ...
+    n_iterations_: int = ...
+    min_resources_: int = ...
+    max_resources_: int = ...
+    n_remaining_candidates_: int = ...
+    n_candidates_: list[int] = ...
+    n_resources_: list[int] = ...
 
-    _required_parameters: list = ...
+    _required_parameters: ClassVar[list] = ...
 
     def __init__(
         self,
         estimator: BaseEstimator,
-        param_distributions: Mapping,
+        param_distributions: dict,
         *,
-        n_candidates: int | str = "exhaust",
-        factor: int | float = 3,
-        resource: str | Literal["n_samples"] = "n_samples",
-        max_resources: int | str = "auto",
-        min_resources: Literal["exhaust", "smallest"] | int = "smallest",
+        n_candidates: str | Int = "exhaust",
+        factor: float | int = 3,
+        resource: str = "n_samples",
+        max_resources: str | Int = "auto",
+        min_resources: Literal["exhaust", "smallest", "smallest"] | int = "smallest",
         aggressive_elimination: bool = False,
-        cv: int | Generator | Iterable = 5,
-        scoring: str | Callable | None = None,
+        cv: Iterable | int | BaseShuffleSplit | BaseCrossValidator = 5,
+        scoring: None | str | Callable = None,
         refit: bool = True,
-        error_score: float | Literal["raise"] = ...,
+        error_score: str | Float = ...,
         return_train_score: bool = True,
-        random_state: int | RandomState | None = None,
-        n_jobs: int | None = None,
-        verbose: int = 0,
-    ) -> None: ...
-    def _generate_candidate_params(self) -> ParameterSampler: ...
+        random_state: RandomState | None | Int = None,
+        n_jobs: None | int = None,
+        verbose: Int = 0,
+    ) -> None:
+        ...

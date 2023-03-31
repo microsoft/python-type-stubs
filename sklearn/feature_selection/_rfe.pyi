@@ -1,6 +1,23 @@
-from collections.abc import Generator, Iterable
-from typing import Dict, Union, Callable, Any
-from numpy.typing import NDArray, ArrayLike
+from typing import Callable, ClassVar, Iterable, TypeVar
+from ..base import BaseEstimator
+from ..model_selection._split import BaseShuffleSplit
+from joblib import effective_n_jobs as effective_n_jobs
+from ..metrics import check_scoring as check_scoring
+from ..linear_model._logistic import LogisticRegression
+from ..utils.parallel import delayed as delayed, Parallel as Parallel
+from ..utils.validation import check_is_fitted as check_is_fitted
+from numpy import ndarray
+from ..utils._param_validation import HasMethods as HasMethods, Interval as Interval
+from numbers import Integral as Integral, Real as Real
+from ..base import MetaEstimatorMixin, clone as clone, is_classifier as is_classifier
+from ..model_selection import check_cv as check_cv
+from ._base import SelectorMixin
+from ..utils.metaestimators import available_if as available_if
+from .._typing import Int, MatrixLike, ArrayLike
+from ..model_selection import BaseCrossValidator
+
+RFECV_Self = TypeVar("RFECV_Self", bound="RFECV")
+RFE_Self = TypeVar("RFE_Self", bound="RFE")
 
 # Authors: Alexandre Gramfort <alexandre.gramfort@inria.fr>
 #          Vincent Michel <vincent.michel@inria.fr>
@@ -8,80 +25,86 @@ from numpy.typing import NDArray, ArrayLike
 #
 # License: BSD 3 clause
 
+
 import numpy as np
-import numbers
 
-from ..utils.metaestimators import available_if
-from ..utils.metaestimators import _safe_split
-from ..utils._tags import _safe_tags
-from ..utils.validation import check_is_fitted
-from ..utils.fixes import delayed
-from ..utils.deprecation import deprecated
-from ..base import BaseEstimator
-from ..base import MetaEstimatorMixin
-from ..base import clone
-from ..base import is_classifier
-from ..model_selection import check_cv
-from ..model_selection._validation import _score
-from ..metrics import check_scoring
-from ._base import SelectorMixin
-from ._base import _get_feature_importances
-from numpy import ndarray
-from sklearn.linear_model._logistic import LogisticRegression
-from sklearn.svm._classes import SVC
-
-def _rfe_single_fit(rfe, estimator, X, y, train, test, scorer): ...
-def _estimator_has(attr: str) -> Callable: ...
 
 class RFE(SelectorMixin, MetaEstimatorMixin, BaseEstimator):
+    support_: ndarray = ...
+    ranking_: ndarray = ...
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    n_features_: int = ...
+    estimator_: BaseEstimator = ...
+
+    _parameter_constraints: ClassVar[dict] = ...
+
     def __init__(
         self,
         estimator: BaseEstimator,
         *,
-        n_features_to_select: int | float | None = None,
-        step: int | float = 1,
-        verbose: int = 0,
+        n_features_to_select: float | None | int = None,
+        step: float | int = 1,
+        verbose: Int = 0,
         importance_getter: str | Callable = "auto",
-    ) -> None: ...
+    ) -> None:
+        ...
+
     @property
-    def _estimator_type(self): ...
-    @property
-    def classes_(self) -> NDArray: ...
-    def fit(self, X: NDArray | ArrayLike, y: ArrayLike, **fit_params) -> "RFE": ...
-    def _fit(self, X: ndarray, y: ndarray, step_score: None = None, **fit_params) -> "RFE": ...
-    @available_if(_estimator_has("predict"))
-    def predict(self, X: ArrayLike) -> ArrayLike: ...
-    @available_if(_estimator_has("score"))
-    def score(self, X: ArrayLike, y: ArrayLike, **fit_params) -> float: ...
-    def _get_support_mask(self) -> ndarray: ...
-    @available_if(_estimator_has("decision_function"))
-    def decision_function(self, X: ArrayLike) -> NDArray | tuple: ...
-    @available_if(_estimator_has("predict_proba"))
-    def predict_proba(self, X: ArrayLike) -> ArrayLike: ...
-    @available_if(_estimator_has("predict_log_proba"))
-    def predict_log_proba(self, X: ArrayLike) -> ArrayLike: ...
-    def _more_tags(self) -> Dict[str, bool]: ...
+    def classes_(self) -> ndarray:
+        ...
+
+    def fit(
+        self: RFE_Self, X: MatrixLike | ArrayLike, y: ArrayLike, **fit_params
+    ) -> RFE_Self:
+        ...
+
+    def predict(self, X: MatrixLike) -> ndarray:
+        ...
+
+    def score(self, X: MatrixLike, y: ArrayLike, **fit_params) -> float:
+        ...
+
+    def decision_function(self, X: MatrixLike) -> ndarray:
+        ...
+
+    def predict_proba(self, X: MatrixLike) -> ndarray:
+        ...
+
+    def predict_log_proba(self, X: MatrixLike) -> ndarray:
+        ...
+
 
 class RFECV(RFE):
+    support_: ndarray = ...
+    ranking_: ndarray = ...
+    feature_names_in_: ndarray = ...
+    n_features_in_: int = ...
+    n_features_: int = ...
+    cv_results_: dict[str, ndarray] = ...
+    estimator_: BaseEstimator = ...
+    classes_: ndarray = ...
+
+    _parameter_constraints: ClassVar[dict] = ...
+
     def __init__(
         self,
-        estimator: BaseEstimator,
+        estimator: BaseEstimator | LogisticRegression,
         *,
-        step: int | float = 1,
-        min_features_to_select: int = 1,
-        cv: int | Generator | Iterable | None = None,
-        scoring: str | Callable | None = None,
-        verbose: int = 0,
-        n_jobs: int | None = None,
+        step: float | int = 1,
+        min_features_to_select: Int = 1,
+        cv: int | BaseCrossValidator | Iterable | None | BaseShuffleSplit = None,
+        scoring: None | str | Callable = None,
+        verbose: Int = 0,
+        n_jobs: None | int = None,
         importance_getter: str | Callable = "auto",
-    ) -> None: ...
-    def fit(self, X: NDArray | ArrayLike, y: ArrayLike, groups: ArrayLike | None = None) -> "RFECV": ...
+    ) -> None:
+        ...
 
-    # TODO: Remove in v1.2 when grid_scores_ is removed
-    # mypy error: Decorated property not supported
-    @deprecated(  # type: ignore
-        "The `grid_scores_` attribute is deprecated in version 1.0 in favor "
-        "of `cv_results_` and will be removed in version 1.2."
-    )
-    @property
-    def grid_scores_(self): ...
+    def fit(
+        self: RFECV_Self,
+        X: MatrixLike | ArrayLike,
+        y: ArrayLike,
+        groups: None | ArrayLike = None,
+    ) -> RFECV_Self:
+        ...
