@@ -1,7 +1,6 @@
 import datetime
 from matplotlib.contour import QuadContourSet
 import numpy as np
-import numpy.typing as npt
 from typing import Callable, ContextManager, Literal, Sequence, overload
 from matplotlib import rcParams as rcParams
 from matplotlib import style as style
@@ -123,7 +122,7 @@ def subplots(
     subplot_kw: dict = ...,
     gridspec_kw: dict = ...,
     **fig_kw
-) -> tuple[Figure, npt.NDArray]: ...
+) -> tuple[Figure, np.ndarray]: ...
 
 # 1x1 with squeeze = True
 @overload
@@ -149,7 +148,7 @@ def subplots(
     subplot_kw: dict = ...,
     gridspec_kw: dict = ...,
     **fig_kw
-) -> tuple[Figure, npt.NDArray]: ...
+) -> tuple[Figure, np.ndarray]: ...
 @overload
 def subplots(
     nrows: int = ...,
@@ -161,7 +160,7 @@ def subplots(
     subplot_kw: dict = ...,
     gridspec_kw: dict = ...,
     **fig_kw
-) -> tuple[Figure, npt.NDArray]: ...
+) -> tuple[Figure, np.ndarray]: ...
 @overload
 def subplots(
     *,
@@ -173,7 +172,7 @@ def subplots(
     subplot_kw: dict = ...,
     gridspec_kw: dict = ...,
     **fig_kw
-) -> tuple[Figure, npt.NDArray]: ...
+) -> tuple[Figure, np.ndarray]: ...
 @overload
 def subplots(
     *,
@@ -184,7 +183,7 @@ def subplots(
     subplot_kw: dict = ...,
     gridspec_kw: dict = ...,
     **fig_kw
-) -> tuple[Figure, npt.NDArray]: ...
+) -> tuple[Figure, np.ndarray]: ...
 @overload
 def subplots(
     nrows: int = ...,
@@ -195,7 +194,7 @@ def subplots(
     subplot_kw: dict = ...,
     gridspec_kw: dict = ...,
     **fig_kw
-) -> tuple[Figure, npt.NDArray]: ...
+) -> tuple[Figure, np.ndarray]: ...
 
 @overload
 def subplots(
@@ -219,7 +218,7 @@ def subplots(
     subplot_kw: dict = ...,
     gridspec_kw: dict = ...,
     **fig_kw
-) -> tuple[Figure, npt.NDArray]: ...
+) -> tuple[Figure, np.ndarray]: ...
 
 def subplot_mosaic(
     mosaic: list | str,
