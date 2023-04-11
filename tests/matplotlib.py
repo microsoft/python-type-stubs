@@ -2,6 +2,7 @@ from typing import Any, assert_type
 from matplotlib.axes import Axes
 import matplotlib.pyplot as plt
 import numpy as np
+import numpy.typing as npt
 
 # Squeeze default value
 fig, ax = plt.subplots(1)
@@ -11,10 +12,10 @@ fig, ax = plt.subplots(1, 1)
 assert_type(ax, Axes)
 
 fig, axs = plt.subplots(2, 1)
-assert_type(axs, np.ndarray[Axes, Any])
+assert_type(axs, npt.NDArray)
 
 fig, axs = plt.subplots(2, 2)
-assert_type(axs, np.ndarray[np.ndarray[Axes, Any], Any])
+assert_type(axs, npt.NDArray)
 
 # Squeeze true
 fig, ax = plt.subplots(1, squeeze=True)
@@ -24,20 +25,20 @@ fig, ax = plt.subplots(1, 1, squeeze=True)
 assert_type(ax, Axes)
 
 fig, axs = plt.subplots(2, 1, squeeze=True)
-assert_type(axs, np.ndarray[Axes, Any])
+assert_type(axs, npt.NDArray)
 
 fig, axs = plt.subplots(2, 2, squeeze=True)
-assert_type(axs, np.ndarray[np.ndarray[Axes, Any], Any])
+assert_type(axs, npt.NDArray)
 
 # Squeeze false
 fig, axs = plt.subplots(1, squeeze=False)
-assert_type(axs, np.ndarray[np.ndarray[Axes, Any], Any])
+assert_type(axs, npt.NDArray)
 
 fig, axs = plt.subplots(1, 1, squeeze=False)
-assert_type(axs, np.ndarray[np.ndarray[Axes, Any], Any])
+assert_type(axs, npt.NDArray)
 
 fig, axs = plt.subplots(2, 1, squeeze=False)
-assert_type(axs, np.ndarray[np.ndarray[Axes, Any], Any])
+assert_type(axs, npt.NDArray)
 
 fig, axs = plt.subplots(2, 2, squeeze=False)
-assert_type(axs, np.ndarray[np.ndarray[Axes, Any], Any])
+assert_type(axs, npt.NDArray)
