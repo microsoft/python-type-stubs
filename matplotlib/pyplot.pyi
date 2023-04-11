@@ -122,10 +122,12 @@ def subplots(
     subplot_kw: dict = ...,
     gridspec_kw: dict = ...,
     **fig_kw
-) -> tuple[Figure, list[list[Axes]]]: ...
+) -> tuple[Figure, np.ndarray[np.ndarray[Axes]]]: ...
+
+# 1x1 with squeeze = True
 @overload
 def subplots(
-    nrows: Literal[1],
+    nrows: Literal[1] = ...,
     ncols: Literal[1] = ...,
     *,
     sharex: bool | Literal["none", "all", "row", "col"] = ...,
@@ -135,13 +137,10 @@ def subplots(
     gridspec_kw: dict = ...,
     **fig_kw
 ) -> tuple[Figure, Axes]: ...
-
-##
-
 @overload
 def subplots(
-    nrows: Literal[1],
-    ncols: int,
+    nrows: Literal[1] = ...,
+    ncols: int = ...,
     *,
     sharex: bool | Literal["none", "all", "row", "col"] = ...,
     sharey: bool | Literal["none", "all", "row", "col"] = ...,
@@ -149,11 +148,11 @@ def subplots(
     subplot_kw: dict = ...,
     gridspec_kw: dict = ...,
     **fig_kw
-) -> tuple[Figure, list[Axes]]: ...
+) -> tuple[Figure, np.ndarray[Axes]]: ...
 @overload
 def subplots(
-    nrows: int,
-    ncols: Literal[1],
+    nrows: int = ...,
+    ncols: Literal[1] = ...,
     *,
     sharex: bool | Literal["none", "all", "row", "col"] = ...,
     sharey: bool | Literal["none", "all", "row", "col"] = ...,
@@ -161,33 +160,33 @@ def subplots(
     subplot_kw: dict = ...,
     gridspec_kw: dict = ...,
     **fig_kw
-) -> tuple[Figure, list[Axes]]: ...
+) -> tuple[Figure, np.ndarray[Axes]]: ...
 @overload
 def subplots(
     *,
-    nrows: int,
-    ncols: int,
+    nrows: int = ...,
+    ncols: int = ...,
     sharex: bool | Literal["none", "all", "row", "col"] = ...,
     sharey: bool | Literal["none", "all", "row", "col"] = ...,
     squeeze: Literal[True] = ...,
     subplot_kw: dict = ...,
     gridspec_kw: dict = ...,
     **fig_kw
-) -> tuple[Figure, list[list[Axes]]]: ...
+) -> tuple[Figure, np.ndarray[np.ndarray[Axes]]]: ...
 @overload
 def subplots(
     *,
-    ncols: int,
+    ncols: int = ...,
     sharex: bool | Literal["none", "all", "row", "col"] = ...,
     sharey: bool | Literal["none", "all", "row", "col"] = ...,
     squeeze: Literal[True] = ...,
     subplot_kw: dict = ...,
     gridspec_kw: dict = ...,
     **fig_kw
-) -> tuple[Figure, list[Axes]]: ...
+) -> tuple[Figure, np.ndarray[Axes]]: ...
 @overload
 def subplots(
-    nrows: int,
+    nrows: int = ...,
     *,
     sharex: bool | Literal["none", "all", "row", "col"] = ...,
     sharey: bool | Literal["none", "all", "row", "col"] = ...,
@@ -195,7 +194,7 @@ def subplots(
     subplot_kw: dict = ...,
     gridspec_kw: dict = ...,
     **fig_kw
-) -> tuple[Figure, list[Axes]]: ...
+) -> tuple[Figure, np.ndarray[Axes]]: ...
 
 @overload
 def subplots(
@@ -219,7 +218,8 @@ def subplots(
     subplot_kw: dict = ...,
     gridspec_kw: dict = ...,
     **fig_kw
-) -> tuple[Figure, list[list[Axes]]]: ...
+) -> tuple[Figure, np.ndarray[np.ndarray[Axes]]]: ...
+
 def subplot_mosaic(
     mosaic: list | str,
     *,
