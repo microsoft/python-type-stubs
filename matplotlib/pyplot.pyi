@@ -123,8 +123,6 @@ def subplots(
     gridspec_kw: dict = ...,
     **fig_kw
 ) -> tuple[Figure, np.ndarray]: ...
-
-# 1x1 with squeeze = True
 @overload
 def subplots(
     nrows: Literal[1] = ...,
@@ -137,6 +135,9 @@ def subplots(
     gridspec_kw: dict = ...,
     **fig_kw
 ) -> tuple[Figure, Axes]: ...
+
+##
+
 @overload
 def subplots(
     nrows: Literal[1] = ...,
