@@ -1,6 +1,5 @@
 from matplotlib.axes._axes import Axes
 from numpy.typing import ArrayLike
-from matplotlib.widgets import Slider
 from typing import (
     Dict,
     List,
