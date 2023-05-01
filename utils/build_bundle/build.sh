@@ -8,7 +8,7 @@ mkdir -p stubs
 
 # Copy over the stubs from here
 
-for d in cv2-stubs gym-stubs matplotlib openpyxl scipy-stubs sklearn-stubs sqlalchemy sympy-stubs transformers-stubs
+for d in cv2-stubs gym-stubs matplotlib openpyxl scipy-stubs sklearn-stubs sqlalchemy transformers-stubs
 do
     cp -R ../../$d stubs
 done
