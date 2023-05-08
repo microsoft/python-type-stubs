@@ -50,6 +50,7 @@ and are no longer maintained here:
 - pywin32 (pythonwin, win32 and win32com packages)
 - retry
 - slugify
+- SQLAlchemy (see <https://pypi.org/project/types-SQLAlchemy/> for SQLAlchemy 1.4; 2.0.0 and above include type annotations)
 
 # Trademarks
 
