@@ -1,3 +1,0 @@
-from .parsing.exceptions import ParserError as ParserError
-
-class PendulumException(Exception): ...
