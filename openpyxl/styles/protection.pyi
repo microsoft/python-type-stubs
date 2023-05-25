@@ -1,6 +1,0 @@
-from typing import Union
-
-class Protection:
-    def __init__(
-        self, locked: Union[str, bool] = ..., hidden: Union[str, bool] = ...
-    ) -> None: ...
