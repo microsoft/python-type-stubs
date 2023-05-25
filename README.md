@@ -32,8 +32,7 @@ We recognize that there may be cases where type stubs are more appropriate, such
 
 ## Upstreamed libraries
 
-The following libraries have been contributed upstream (to typeshed or the libraries themselves)
-and are no longer maintained here:
+Stubs for the following libraries now exist in typeshed or the libraries themselves and are no longer maintained here:
 
 - aiofiles
 - cachetools
@@ -44,13 +43,18 @@ and are no longer maintained here:
 - jmespath
 - markdown
 - netaddr
+- openpyxl
 - packaging
 - pandas (see <https://github.com/pandas-dev/pandas-stubs>; please open pandas stub issues there)
+- pendulum
 - PIL
+- pygame
 - pywin32 (pythonwin, win32 and win32com packages)
 - retry
 - slugify
 - SQLAlchemy (see <https://pypi.org/project/types-SQLAlchemy/> for SQLAlchemy 1.4; 2.0.0 and above include type annotations)
+- sympy
+- tenacity
 
 # Trademarks
 
