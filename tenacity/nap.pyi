@@ -1,9 +1,0 @@
-import time
-from typing import Any
-
-sleep = time.sleep
-
-class sleep_using_event:
-    event: Any = ...
-    def __init__(self, event: Any) -> None: ...
-    def __call__(self, timeout: Any) -> None: ...
