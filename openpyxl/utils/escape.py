@@ -1,6 +1,0 @@
-def escape(value: str) -> str:
-    ...
-
-
-def unescape(value: str) -> str:
-    ...
