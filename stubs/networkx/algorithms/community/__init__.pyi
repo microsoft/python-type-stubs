@@ -3,9 +3,9 @@ from .centrality import girvan_newman as girvan_newman
 from .kclique import k_clique_communities as k_clique_communities
 from .kernighan_lin import kernighan_lin_bisection as kernighan_lin_bisection
 from .label_propagation import (
-    label_propagation_communities,
+    label_propagation_communities as label_propagation_communities,
     asyn_lpa_communities as label_propagation_communities,
-    asyn_lpa_communities,
+    asyn_lpa_communities as asyn_lpa_communities,
 )
 from .lukes import lukes_partitioning as lukes_partitioning
 from .modularity_max import (
