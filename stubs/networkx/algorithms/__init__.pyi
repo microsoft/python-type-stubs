@@ -200,27 +200,27 @@ from .polynomials import tutte_polynomial, chromatic_polynomial
 
 # Make certain subpackages available to the user as direct imports from
 # the `networkx` namespace.
-import approximation as approximation
-import assortativity as assortativity
-import bipartite as bipartite
-import node_classification as node_classification
-import centrality as centrality
-import chordal as chordal
-import cluster as cluster
-import clique as clique
-import components as components
-import connectivity as connectivity
-import community as community
-import coloring as coloring
-import flow as flow
-import isomorphism as isomorphism
-import link_analysis as link_analysis
-import lowest_common_ancestors as lowest_common_ancestors
-import operators as operators
-import shortest_paths as shortest_paths
-import tournament as tournament
-import traversal as traversal
-import tree as tree
+from . import approximation as approximation
+from . import assortativity as assortativity
+from . import bipartite as bipartite
+from . import node_classification as node_classification
+from . import centrality as centrality
+from . import chordal as chordal
+from . import cluster as cluster
+from . import clique as clique
+from . import components as components
+from . import connectivity as connectivity
+from . import community as community
+from . import coloring as coloring
+from . import flow as flow
+from . import isomorphism as isomorphism
+from . import link_analysis as link_analysis
+from . import lowest_common_ancestors as lowest_common_ancestors
+from . import operators as operators
+from . import shortest_paths as shortest_paths
+from . import tournament as tournament
+from . import traversal as traversal
+from . import tree as tree
 
 # Make certain functions from some of the previous subpackages available
 # to the user as direct imports from the `networkx` namespace.
