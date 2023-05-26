@@ -19,7 +19,7 @@ from .matchhelpers import (
     numerical_multiedge_match as numerical_multiedge_match,
     generic_node_match as generic_node_match,
     generic_edge_match as generic_edge_match,
-    generic_multiedge_match,
+    generic_multiedge_match as generic_multiedge_match,
 )
 from .temporalisomorphvf2 import (
     TimeRespectingGraphMatcher as TimeRespectingGraphMatcher,
