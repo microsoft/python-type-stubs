@@ -47,8 +47,8 @@ from .function import (
     is_path,
 )
 
-from ..classes import filters as filters
+from . import filters as filters
 
-from ..classes import coreviews as coreviews
-from ..classes import graphviews as graphviews
-from ..classes import reportviews as reportviews
+from . import coreviews as coreviews
+from . import graphviews as graphviews
+from . import reportviews as reportviews

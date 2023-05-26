@@ -1,16 +1,16 @@
-from ...algorithms.isomorphism.isomorph import (
+from .isomorph import (
     could_be_isomorphic as could_be_isomorphic,
     fast_could_be_isomorphic as fast_could_be_isomorphic,
     faster_could_be_isomorphic as faster_could_be_isomorphic,
     is_isomorphic as is_isomorphic,
 )
-from ...algorithms.isomorphism.vf2userfunc import (
+from .vf2userfunc import (
     GraphMatcher as GraphMatcher,
     DiGraphMatcher as DiGraphMatcher,
     MultiGraphMatcher as MultiGraphMatcher,
     MultiDiGraphMatcher as MultiDiGraphMatcher,
 )
-from ...algorithms.isomorphism.matchhelpers import (
+from .matchhelpers import (
     categorical_node_match as categorical_node_match,
     categorical_edge_match as categorical_edge_match,
     categorical_multiedge_match as categorical_multiedge_match,
@@ -21,12 +21,12 @@ from ...algorithms.isomorphism.matchhelpers import (
     generic_edge_match as generic_edge_match,
     generic_multiedge_match,
 )
-from ...algorithms.isomorphism.temporalisomorphvf2 import (
+from .temporalisomorphvf2 import (
     TimeRespectingGraphMatcher as TimeRespectingGraphMatcher,
     TimeRespectingDiGraphMatcher as TimeRespectingDiGraphMatcher,
 )
-from ...algorithms.isomorphism.ismags import ISMAGS as ISMAGS
-from ...algorithms.isomorphism.tree_isomorphism import (
+from .ismags import ISMAGS as ISMAGS
+from .tree_isomorphism import (
     rooted_tree_isomorphism as rooted_tree_isomorphism,
     tree_isomorphism as tree_isomorphism,
 )
