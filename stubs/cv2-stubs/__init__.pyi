@@ -5,8 +5,7 @@ import typing
 import builtins as _mod_builtins
 import cv2 as _mod_cv2
 import numpy as np
-import cv2.Error as Error
-__all__ = ["Error"]
+from . import Error as Error
 
 Mat = np.ndarray[int, np.dtype[np.generic]]
 
