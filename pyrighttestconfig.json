@@ -1,8 +1,0 @@
-{
-    "typeCheckingMode": "basic",
-    "include": [ "tests" ],
-    "reportMissingModuleSource": false,
-    "reportUnusedVariable": false,
-    "useLibraryCodeForTypes": true,
-    "reportUnknownArgumentType": true
-}

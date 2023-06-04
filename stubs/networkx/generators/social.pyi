@@ -1,0 +1,13 @@
+from ..classes.graph import Graph
+
+__all__ = [
+    "karate_club_graph",
+    "davis_southern_women_graph",
+    "florentine_families_graph",
+    "les_miserables_graph",
+]
+
+def karate_club_graph(): ...
+def davis_southern_women_graph(): ...
+def florentine_families_graph(): ...
+def les_miserables_graph(): ...

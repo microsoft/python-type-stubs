@@ -6,7 +6,9 @@ As the Python team, we are helping to ensure that packages have high-quality typ
 In cases where this must be done through type stubs, we are contributing stubs to
 [typeshed](https://github.com/python/typeshed). This repository contains our “work in progress”.
 Once the stubs for a package meet the requirements of typeshed, we will contribute them to
-typeshed and delete them from this repository.
+typeshed and delete them from this repository. We also support partial stubs in our tooling
+in which case the stubs may never graduate from here, but we want to share them publicly so
+that others can contribute to or make use of what coverage we have.
 
 ## Our Use of Type Stubs
 
@@ -30,21 +32,29 @@ We recognize that there may be cases where type stubs are more appropriate, such
 
 ## Upstreamed libraries
 
-The following libraries have been contributed upstream (to typeshed or the libraries themselves)
-and are no longer maintained here:
+Stubs for the following libraries now exist in typeshed or the libraries themselves and are no longer maintained here:
 
 - aiofiles
 - cachetools
 - deprecated
+- django (see <https://github.com/sbdchd/django-types>)
 - filelock
 - freezegun
+- jmespath
 - markdown
+- netaddr
+- openpyxl
 - packaging
-- pandas (see https://github.com/pandas-dev/pandas-stubs; please open pandas stub issues there)
+- pandas (see <https://github.com/pandas-dev/pandas-stubs>; please open pandas stub issues there)
+- pendulum
 - PIL
+- pygame
+- pywin32 (pythonwin, win32 and win32com packages)
 - retry
 - slugify
-
+- SQLAlchemy (see <https://pypi.org/project/types-SQLAlchemy/> for SQLAlchemy 1.4; 2.0.0 and above include type annotations)
+- sympy
+- tenacity
 
 # Trademarks
 
