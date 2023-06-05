@@ -37,7 +37,7 @@ from .._typing import Int, MatrixLike, ArrayLike, Float
 from . import BaseCrossValidator
 
 BaseSearchCV_Self = TypeVar("BaseSearchCV_Self", bound="BaseSearchCV")
-BaseEstimatorT = TypeVar("BaseEstimatorT", bound=BaseEstimator, default = BaseEstimator)
+BaseEstimatorT = TypeVar("BaseEstimatorT", bound=BaseEstimator, default=BaseEstimator, covariant=True)
 
 import numbers
 import operator
