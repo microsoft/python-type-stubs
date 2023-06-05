@@ -2,6 +2,7 @@ from typing import (
     Any,
     Callable,
     ClassVar,
+    Generic,
     Iterable,
     Iterator,
     Mapping,
@@ -36,6 +37,7 @@ from .._typing import Int, MatrixLike, ArrayLike, Float
 from . import BaseCrossValidator
 
 BaseSearchCV_Self = TypeVar("BaseSearchCV_Self", bound="BaseSearchCV")
+BaseEstimatorT = TypeVar("BaseEstimatorT", bound=BaseEstimator, default = BaseEstimator)
 
 import numbers
 import operator
@@ -140,7 +142,7 @@ class BaseSearchCV(MetaEstimatorMixin, BaseEstimator, metaclass=ABCMeta):
         ...
 
 
-class GridSearchCV(BaseSearchCV):
+class GridSearchCV(Generic[BaseEstimatorT], BaseSearchCV):
     feature_names_in_: ndarray = ...
     n_features_in_: int = ...
     classes_: ndarray = ...
@@ -151,14 +153,14 @@ class GridSearchCV(BaseSearchCV):
     best_index_: int = ...
     best_params_: dict = ...
     best_score_: float = ...
-    best_estimator_: BaseEstimator = ...
+    best_estimator_: BaseEstimatorT = ...
     cv_results_: dict[str, ndarray] = ...
 
     _required_parameters: ClassVar[list] = ...
 
     def __init__(
         self,
-        estimator: BaseEstimator,
+        estimator: BaseEstimatorT,
         param_grid: Mapping | Sequence[dict],
         *,
         scoring: ArrayLike | None | tuple | Callable | Mapping | str = None,
