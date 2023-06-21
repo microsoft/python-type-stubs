@@ -6,6 +6,7 @@ import builtins as _mod_builtins
 import cv2 as _mod_cv2
 import numpy as np
 from . import Error as Error
+from typing import overload
 
 Mat = np.ndarray[int, np.dtype[np.generic]]
 
