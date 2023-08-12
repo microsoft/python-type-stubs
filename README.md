@@ -44,6 +44,7 @@ Stubs for the following libraries now exist in typeshed or the libraries themsel
 - markdown
 - netaddr
 - openpyxl
+- opencv-python (see <https://github.com/opencv/opencv>; please upgrade opencv-python to 4.8.0+ and file any issues there)
 - packaging
 - pandas (see <https://github.com/pandas-dev/pandas-stubs>; please open pandas stub issues there)
 - pendulum
