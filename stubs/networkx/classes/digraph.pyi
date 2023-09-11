@@ -26,6 +26,7 @@ class _CachedPropertyResetterPred:
 
 class DiGraph(Graph):
 
+    graph = ...
     _adj = ...  # type: ignore
     _succ = ...  # type: ignore
     _pred = ...
