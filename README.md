@@ -41,7 +41,6 @@ Stubs for the following libraries now exist in typeshed or the libraries themsel
 - filelock
 - freezegun
 - jmespath
-- matplotlib
 - markdown
 - netaddr
 - openpyxl
