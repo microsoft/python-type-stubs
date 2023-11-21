@@ -1,7 +1,8 @@
 from typing import Mapping
-from .pairs import node_attribute_xy, node_degree_xy
+
 from ...classes.graph import Graph
 from ...utils import dict_to_numpy_array
+from .pairs import node_attribute_xy, node_degree_xy
 
 __all__ = [
     "attribute_mixing_matrix",
@@ -12,9 +13,7 @@ __all__ = [
     "mixing_dict",
 ]
 
-def attribute_mixing_dict(
-    G: Graph, attribute: str, nodes=None, normalized=False
-) -> Mapping: ...
+def attribute_mixing_dict(G: Graph, attribute: str, nodes=None, normalized=False) -> Mapping: ...
 def attribute_mixing_matrix(
     G: Graph,
     attribute: str,
@@ -22,9 +21,7 @@ def attribute_mixing_matrix(
     mapping: Mapping | None = None,
     normalized=True,
 ): ...
-def degree_mixing_dict(
-    G: Graph, x="out", y="in", weight=None, nodes=None, normalized=False
-) -> Mapping: ...
+def degree_mixing_dict(G: Graph, x="out", y="in", weight=None, nodes=None, normalized=False) -> Mapping: ...
 def degree_mixing_matrix(
     G: Graph,
     x="out",

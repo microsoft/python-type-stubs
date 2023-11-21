@@ -1,11 +1,7 @@
-
 from enum import IntEnum
+
 import numpy as np
 
+class FiniteStatus(IntEnum): ...
 
-class FiniteStatus(IntEnum):
-    ...
-
-def cy_isfinite(a: np.ndarray, allow_nan: bool=False) -> bool: ...
-
-
+def cy_isfinite(a: np.ndarray, allow_nan: bool = False) -> bool: ...

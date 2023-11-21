@@ -1,18 +1,10 @@
-from vispy.gloo.texture import Texture2D
+import numpy as np
 from numpy.typing import ArrayLike
+from vispy.gloo.texture import Texture2D
+
+from ...gloo import FrameBuffer, Program, Texture2D, VertexBuffer, set_state, set_viewport
 
 # -*- coding: utf-8 -*-
-
-import numpy as np
-
-from ...gloo import (
-    Program,
-    FrameBuffer,
-    VertexBuffer,
-    Texture2D,
-    set_viewport,
-    set_state,
-)
 
 vert_seed: str = ...
 

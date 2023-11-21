@@ -1,3 +1,6 @@
+import math
+
+import numpy as np
 from numpy import dtype
 from numpy.typing import ArrayLike, NDArray
 
@@ -5,9 +8,6 @@ from numpy.typing import ArrayLike, NDArray
 # -*- coding: utf-8 -*-
 
 # Note: we use functions (e.g. sin) from math module because they're faster
-
-import math
-import numpy as np
 
 def translate(offset: ArrayLike, dtype: np.dtype | None = None) -> NDArray: ...
 def scale(s: ArrayLike, dtype: np.dtype | None = None) -> NDArray: ...

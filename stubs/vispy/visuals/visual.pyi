@@ -1,21 +1,20 @@
-
-
-
 # -*- coding: utf-8 -*-
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 
 from __future__ import division
+
 import weakref
+from typing import Any, Sequence
+
 import numpy as np
+from vispy.gloo.program import Program
 
 from .. import gloo
+from ..util import Frozen, logger
 from ..util.event import EmitterGroup, Event
-from ..util import logger, Frozen
-from .shaders import StatementList, MultiProgram
+from .shaders import MultiProgram, StatementList
 from .transforms import TransformSystem
-from typing import Any, Sequence
-from vispy.gloo.program import Program
 
 class VisualShare(object):
     def __init__(self): ...

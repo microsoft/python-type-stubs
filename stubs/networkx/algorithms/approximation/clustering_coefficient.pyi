@@ -1,5 +1,5 @@
-from ...utils import not_implemented_for, py_random_state
 from ...classes.graph import Graph
+from ...utils import not_implemented_for, py_random_state
 
 __all__ = ["average_clustering"]
 

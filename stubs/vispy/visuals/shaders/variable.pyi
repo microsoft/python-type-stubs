@@ -4,12 +4,12 @@ from typing import Literal
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 import numpy as np
+
 from .shader_object import ShaderObject
 
 VARIABLE_TYPES = ...
 
 class Variable(ShaderObject):
-
     _vtype_32_conversion: dict = ...
     _vtype_23_conversion: dict = ...
 

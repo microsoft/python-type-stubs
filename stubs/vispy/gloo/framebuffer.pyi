@@ -1,6 +1,12 @@
-from ..gloo.framebuffer import RenderBuffer
 from typing import Literal
+
 from numpy.typing import ArrayLike
+
+from ..gloo.framebuffer import RenderBuffer
+from .context import get_current_canvas
+from .globject import GLObject
+from .texture import Texture2D
+from .wrappers import _check_valid, read_pixels
 
 # -*- coding: utf-8 -*-
 # -----------------------------------------------------------------------------
@@ -8,15 +14,9 @@ from numpy.typing import ArrayLike
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 # -----------------------------------------------------------------------------
 
-from .globject import GLObject
-from .texture import Texture2D
-from .wrappers import _check_valid, read_pixels
-from .context import get_current_canvas
-
 # ------------------------------------------------------ RenderBuffer class ---
 
 class RenderBuffer(GLObject):
-
     _GLIR_TYPE: str = ...
 
     def __init__(
@@ -37,7 +37,6 @@ class RenderBuffer(GLObject):
 
 # ------------------------------------------------------- FrameBuffer class ---
 class FrameBuffer(GLObject):
-
     _GLIR_TYPE: str = ...
 
     def __init__(

@@ -1,17 +1,16 @@
+import numpy as np
 from numpy import ndarray
-from vispy.util.svg.color import Color
 from numpy.typing import NDArray
 from vispy._typing import ArrayLike
+from vispy.util.svg.color import Color
+
+from ..color import ColorArray
+from ..color.colormap import _normalize, get_colormap
+from .line import LineVisual
 
 # -*- coding: utf-8 -*-
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
-
-import numpy as np
-
-from .line import LineVisual
-from ..color import ColorArray
-from ..color.colormap import _normalize, get_colormap
 
 def iso_mesh_line(
     vertices: NDArray, tris: NDArray, vertex_data: NDArray, levels: NDArray

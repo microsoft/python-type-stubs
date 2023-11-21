@@ -1,8 +1,9 @@
 import math
+
 import numpy as np
 
-from . import polygon as draw_polygon, disk as draw_disk, ellipse as draw_ellipse
 from .._shared.utils import deprecate_multichannel_kwarg, warn
+from . import disk as draw_disk, ellipse as draw_ellipse, polygon as draw_polygon
 
 def _generate_rectangle_mask(point, image, shape, random): ...
 def _generate_circle_mask(point, image, shape, random): ...
@@ -29,5 +30,5 @@ def random_shapes(
     num_trials: int = 100,
     random_seed=None,
     *,
-    channel_axis: int | None = ...
+    channel_axis: int | None = ...,
 ): ...

@@ -1,7 +1,8 @@
 from typing import Any, assert_type
-from matplotlib.axes import Axes
+
 import matplotlib.pyplot as plt
 import numpy as np
+from matplotlib.axes import Axes
 
 # Squeeze default value
 fig, ax = plt.subplots(1)

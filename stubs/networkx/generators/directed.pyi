@@ -1,8 +1,7 @@
-from ..classes import MultiDiGraph
-
 import numbers
 from collections import Counter
 
+from ..classes import MultiDiGraph
 from ..classes.graph import Graph
 from ..generators.classic import empty_graph
 from ..utils import discrete_sequence, py_random_state, weighted_choice
@@ -34,10 +33,6 @@ def scale_free_graph(
     initial_graph=None,
 ) -> MultiDiGraph: ...
 @py_random_state(4)
-def random_uniform_k_out_graph(
-    n: int, k: int, self_loops: bool = True, with_replacement: bool = True, seed=None
-): ...
+def random_uniform_k_out_graph(n: int, k: int, self_loops: bool = True, with_replacement: bool = True, seed=None): ...
 @py_random_state(4)
-def random_k_out_graph(
-    n: int, k: int, alpha: float, self_loops: bool = True, seed=None
-) -> MultiDiGraph: ...
+def random_k_out_graph(n: int, k: int, alpha: float, self_loops: bool = True, seed=None) -> MultiDiGraph: ...

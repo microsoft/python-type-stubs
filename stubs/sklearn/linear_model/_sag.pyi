@@ -1,21 +1,20 @@
+import warnings
 from typing import Literal
-from ._sag_fast import sag32 as sag32, sag64 as sag64
-from ..exceptions import ConvergenceWarning as ConvergenceWarning
-from ._base import make_dataset as make_dataset
-from ..utils.extmath import row_norms as row_norms
+
+import numpy as np
 from numpy import ndarray
 from numpy.random.mtrand import RandomState
-from .._typing import Float, Int, MatrixLike, ArrayLike
+
+from .._typing import ArrayLike, Float, Int, MatrixLike
+from ..exceptions import ConvergenceWarning as ConvergenceWarning
 from ..utils import check_array as check_array
+from ..utils.extmath import row_norms as row_norms
+from ._base import make_dataset as make_dataset
+from ._sag_fast import sag32 as sag32, sag64 as sag64
 
 # Authors: Tom Dupre la Tour <tom.dupre-la-tour@m4x.org>
 #
 # License: BSD 3 clause
-
-import warnings
-
-import numpy as np
-
 
 def get_auto_step_size(
     max_squared_sum: Float,
@@ -24,10 +23,7 @@ def get_auto_step_size(
     fit_intercept: bool,
     n_samples: None | Int = None,
     is_saga: bool = False,
-) -> Float:
-    ...
-
-
+) -> Float: ...
 def sag_solver(
     X: MatrixLike | ArrayLike,
     y: ArrayLike,
@@ -43,5 +39,4 @@ def sag_solver(
     max_squared_sum: None | Float = None,
     warm_start_mem: dict[str, ndarray] | None | dict = None,
     is_saga: bool = False,
-) -> tuple[ndarray, int, dict] | tuple[ndarray, int, dict[str, ndarray | int]]:
-    ...
+) -> tuple[ndarray, int, dict] | tuple[ndarray, int, dict[str, ndarray | int]]: ...

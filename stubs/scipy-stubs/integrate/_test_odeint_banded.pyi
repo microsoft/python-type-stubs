@@ -1,14 +1,15 @@
 # Python: 3.8.2 (tags/v3.8.2:7b3ab59, Feb 25 2020, 23:03:10) [MSC v.1916 64 bit (AMD64)]
 # Library: scipy, version: 1.6.2
 # Module: scipy.integrate._test_odeint_banded, version: $Revision: $
-import typing
 import builtins as _mod_builtins
+import typing
 
 __doc__: str
 __file__: str
 __name__: str
 __package__: str
 __version__: bytes
+
 def banded5x5(t, y, f, n=...) -> typing.Any:
     "banded5x5(t,y,f,[n])\n\nWrapper for ``banded5x5``.\n\nParameters\n----------\nt : input float\ny : input rank-1 array('d') with bounds (n)\nf : input rank-1 array('d') with bounds (n)\n\nOther Parameters\n----------------\nn : input int, optional\n    Default: len(y)\n"
     ...
@@ -33,6 +34,4 @@ def jac() -> typing.Any:
     "'d'-array(4,5)\n"
     ...
 
-def __getattr__(name) -> typing.Any:
-    ...
-
+def __getattr__(name) -> typing.Any: ...

@@ -1,6 +1,6 @@
+from ...classes.graph import Graph
 from ...utils import not_implemented_for
 from ..matching import maximal_matching
-from ...classes.graph import Graph
 
 __all__ = ["min_weighted_dominating_set", "min_edge_dominating_set"]
 

@@ -1,14 +1,15 @@
 # Python: 3.8.2 (tags/v3.8.2:7b3ab59, Feb 25 2020, 23:03:10) [MSC v.1916 64 bit (AMD64)]
 # Library: scipy, version: 1.6.2
 # Module: scipy.linalg._fblas, version: $Revision: $
-import typing
 import builtins as _mod_builtins
+import typing
 
 __doc__: str
 __file__: str
 __name__: str
 __package__: str
 __version__: bytes
+
 def caxpy(x, y, n=..., a=..., offx=..., incx=..., offy=..., incy=...) -> typing.Any:
     "z = caxpy(x,y,[n,a,offx,incx,offy,incy])\n\nWrapper for ``caxpy``.\n\nParameters\n----------\nx : input rank-1 array('F') with bounds (*)\ny : input rank-1 array('F') with bounds (*)\n\nOther Parameters\n----------------\nn : input int, optional\n    Default: (len(x)-offx)/abs(incx)\na : input complex, optional\n    Default: (1.0, 0.0)\noffx : input int, optional\n    Default: 0\nincx : input int, optional\n    Default: 1\noffy : input int, optional\n    Default: 0\nincy : input int, optional\n    Default: 1\n\nReturns\n-------\nz : rank-1 array('F') with bounds (*) and y storage\n"
     ...
@@ -25,7 +26,9 @@ def cdotu(x, y, n=..., offx=..., incx=..., offy=..., incy=...) -> typing.Any:
     "xy = cdotu(x,y,[n,offx,incx,offy,incy])\n\nWrapper for ``cdotu``.\n\nParameters\n----------\nx : input rank-1 array('F') with bounds (*)\ny : input rank-1 array('F') with bounds (*)\n\nOther Parameters\n----------------\nn : input int, optional\n    Default: (len(x)-offx)/abs(incx)\noffx : input int, optional\n    Default: 0\nincx : input int, optional\n    Default: 1\noffy : input int, optional\n    Default: 0\nincy : input int, optional\n    Default: 1\n\nReturns\n-------\nxy : complex\n"
     ...
 
-def cgbmv(m, n, kl, ku, alpha, a, x, incx=..., offx=..., beta=..., y=..., incy=..., offy=..., trans=..., overwrite_y=...) -> typing.Any:
+def cgbmv(
+    m, n, kl, ku, alpha, a, x, incx=..., offx=..., beta=..., y=..., incy=..., offy=..., trans=..., overwrite_y=...
+) -> typing.Any:
     "yout = cgbmv(m,n,kl,ku,alpha,a,x,[incx,offx,beta,y,incy,offy,trans,overwrite_y])\n\nWrapper for ``cgbmv``.\n\nParameters\n----------\nm : input int\nn : input int\nkl : input int\nku : input int\nalpha : input complex\na : input rank-2 array('F') with bounds (lda,n)\nx : input rank-1 array('F') with bounds (*)\n\nOther Parameters\n----------------\nincx : input int, optional\n    Default: 1\noffx : input int, optional\n    Default: 0\nbeta : input complex, optional\n    Default: (0.0, 0.0)\ny : input rank-1 array('F') with bounds (ly)\noverwrite_y : input int, optional\n    Default: 0\nincy : input int, optional\n    Default: 1\noffy : input int, optional\n    Default: 0\ntrans : input int, optional\n    Default: 0\n\nReturns\n-------\nyout : rank-1 array('F') with bounds (ly) and y storage\n"
     ...
 
@@ -86,7 +89,7 @@ def chpr2(n, alpha, x, y, ap, incx=..., offx=..., incy=..., offy=..., lower=...,
     ...
 
 def crotg(a, b) -> typing.Any:
-    'c,s = crotg(a,b)\n\nWrapper for ``crotg``.\n\nParameters\n----------\na : input complex\nb : input complex\n\nReturns\n-------\nc : complex\ns : complex\n'
+    "c,s = crotg(a,b)\n\nWrapper for ``crotg``.\n\nParameters\n----------\na : input complex\nb : input complex\n\nReturns\n-------\nc : complex\ns : complex\n"
     ...
 
 def cscal(a, x, n=..., offx=..., incx=...) -> typing.Any:
@@ -177,7 +180,9 @@ def ddot(x, y, n=..., offx=..., incx=..., offy=..., incy=...) -> typing.Any:
     "xy = ddot(x,y,[n,offx,incx,offy,incy])\n\nWrapper for ``ddot``.\n\nParameters\n----------\nx : input rank-1 array('d') with bounds (*)\ny : input rank-1 array('d') with bounds (*)\n\nOther Parameters\n----------------\nn : input int, optional\n    Default: (len(x)-offx)/abs(incx)\noffx : input int, optional\n    Default: 0\nincx : input int, optional\n    Default: 1\noffy : input int, optional\n    Default: 0\nincy : input int, optional\n    Default: 1\n\nReturns\n-------\nxy : float\n"
     ...
 
-def dgbmv(m, n, kl, ku, alpha, a, x, incx=..., offx=..., beta=..., y=..., incy=..., offy=..., trans=..., overwrite_y=...) -> typing.Any:
+def dgbmv(
+    m, n, kl, ku, alpha, a, x, incx=..., offx=..., beta=..., y=..., incy=..., offy=..., trans=..., overwrite_y=...
+) -> typing.Any:
     "yout = dgbmv(m,n,kl,ku,alpha,a,x,[incx,offx,beta,y,incy,offy,trans,overwrite_y])\n\nWrapper for ``dgbmv``.\n\nParameters\n----------\nm : input int\nn : input int\nkl : input int\nku : input int\nalpha : input float\na : input rank-2 array('d') with bounds (lda,n)\nx : input rank-1 array('d') with bounds (*)\n\nOther Parameters\n----------------\nincx : input int, optional\n    Default: 1\noffx : input int, optional\n    Default: 0\nbeta : input float, optional\n    Default: 0.0\ny : input rank-1 array('d') with bounds (ly)\noverwrite_y : input int, optional\n    Default: 0\nincy : input int, optional\n    Default: 1\noffy : input int, optional\n    Default: 0\ntrans : input int, optional\n    Default: 0\n\nReturns\n-------\nyout : rank-1 array('d') with bounds (ly) and y storage\n"
     ...
 
@@ -202,7 +207,7 @@ def drot(x, y, c, s, n=..., offx=..., incx=..., offy=..., incy=..., overwrite_x=
     ...
 
 def drotg(a, b) -> typing.Any:
-    'c,s = drotg(a,b)\n\nWrapper for ``drotg``.\n\nParameters\n----------\na : input float\nb : input float\n\nReturns\n-------\nc : float\ns : float\n'
+    "c,s = drotg(a,b)\n\nWrapper for ``drotg``.\n\nParameters\n----------\na : input float\nb : input float\n\nReturns\n-------\nc : float\ns : float\n"
     ...
 
 def drotm(x, y, param, n=..., offx=..., incx=..., offy=..., incy=..., overwrite_x=..., overwrite_y=...) -> typing.Any:
@@ -341,7 +346,9 @@ def sdot(x, y, n=..., offx=..., incx=..., offy=..., incy=...) -> typing.Any:
     "xy = sdot(x,y,[n,offx,incx,offy,incy])\n\nWrapper for ``sdot``.\n\nParameters\n----------\nx : input rank-1 array('f') with bounds (*)\ny : input rank-1 array('f') with bounds (*)\n\nOther Parameters\n----------------\nn : input int, optional\n    Default: (len(x)-offx)/abs(incx)\noffx : input int, optional\n    Default: 0\nincx : input int, optional\n    Default: 1\noffy : input int, optional\n    Default: 0\nincy : input int, optional\n    Default: 1\n\nReturns\n-------\nxy : float\n"
     ...
 
-def sgbmv(m, n, kl, ku, alpha, a, x, incx=..., offx=..., beta=..., y=..., incy=..., offy=..., trans=..., overwrite_y=...) -> typing.Any:
+def sgbmv(
+    m, n, kl, ku, alpha, a, x, incx=..., offx=..., beta=..., y=..., incy=..., offy=..., trans=..., overwrite_y=...
+) -> typing.Any:
     "yout = sgbmv(m,n,kl,ku,alpha,a,x,[incx,offx,beta,y,incy,offy,trans,overwrite_y])\n\nWrapper for ``sgbmv``.\n\nParameters\n----------\nm : input int\nn : input int\nkl : input int\nku : input int\nalpha : input float\na : input rank-2 array('f') with bounds (lda,n)\nx : input rank-1 array('f') with bounds (*)\n\nOther Parameters\n----------------\nincx : input int, optional\n    Default: 1\noffx : input int, optional\n    Default: 0\nbeta : input float, optional\n    Default: 0.0\ny : input rank-1 array('f') with bounds (ly)\noverwrite_y : input int, optional\n    Default: 0\nincy : input int, optional\n    Default: 1\noffy : input int, optional\n    Default: 0\ntrans : input int, optional\n    Default: 0\n\nReturns\n-------\nyout : rank-1 array('f') with bounds (ly) and y storage\n"
     ...
 
@@ -366,7 +373,7 @@ def srot(x, y, c, s, n=..., offx=..., incx=..., offy=..., incy=..., overwrite_x=
     ...
 
 def srotg(a, b) -> typing.Any:
-    'c,s = srotg(a,b)\n\nWrapper for ``srotg``.\n\nParameters\n----------\na : input float\nb : input float\n\nReturns\n-------\nc : float\ns : float\n'
+    "c,s = srotg(a,b)\n\nWrapper for ``srotg``.\n\nParameters\n----------\na : input float\nb : input float\n\nReturns\n-------\nc : float\ns : float\n"
     ...
 
 def srotm(x, y, param, n=..., offx=..., incx=..., offy=..., incy=..., overwrite_x=..., overwrite_y=...) -> typing.Any:
@@ -481,7 +488,9 @@ def zdscal(a, x, n=..., offx=..., incx=..., overwrite_x=...) -> typing.Any:
     "x = zdscal(a,x,[n,offx,incx,overwrite_x])\n\nWrapper for ``zdscal``.\n\nParameters\n----------\na : input float\nx : input rank-1 array('D') with bounds (*)\n\nOther Parameters\n----------------\nn : input int, optional\n    Default: (len(x)-offx)/abs(incx)\noverwrite_x : input int, optional\n    Default: 0\noffx : input int, optional\n    Default: 0\nincx : input int, optional\n    Default: 1\n\nReturns\n-------\nx : rank-1 array('D') with bounds (*)\n"
     ...
 
-def zgbmv(m, n, kl, ku, alpha, a, x, incx=..., offx=..., beta=..., y=..., incy=..., offy=..., trans=..., overwrite_y=...) -> typing.Any:
+def zgbmv(
+    m, n, kl, ku, alpha, a, x, incx=..., offx=..., beta=..., y=..., incy=..., offy=..., trans=..., overwrite_y=...
+) -> typing.Any:
     "yout = zgbmv(m,n,kl,ku,alpha,a,x,[incx,offx,beta,y,incy,offy,trans,overwrite_y])\n\nWrapper for ``zgbmv``.\n\nParameters\n----------\nm : input int\nn : input int\nkl : input int\nku : input int\nalpha : input complex\na : input rank-2 array('D') with bounds (lda,n)\nx : input rank-1 array('D') with bounds (*)\n\nOther Parameters\n----------------\nincx : input int, optional\n    Default: 1\noffx : input int, optional\n    Default: 0\nbeta : input complex, optional\n    Default: (0.0, 0.0)\ny : input rank-1 array('D') with bounds (ly)\noverwrite_y : input int, optional\n    Default: 0\nincy : input int, optional\n    Default: 1\noffy : input int, optional\n    Default: 0\ntrans : input int, optional\n    Default: 0\n\nReturns\n-------\nyout : rank-1 array('D') with bounds (ly) and y storage\n"
     ...
 
@@ -542,7 +551,7 @@ def zhpr2(n, alpha, x, y, ap, incx=..., offx=..., incy=..., offy=..., lower=...,
     ...
 
 def zrotg(a, b) -> typing.Any:
-    'c,s = zrotg(a,b)\n\nWrapper for ``zrotg``.\n\nParameters\n----------\na : input complex\nb : input complex\n\nReturns\n-------\nc : complex\ns : complex\n'
+    "c,s = zrotg(a,b)\n\nWrapper for ``zrotg``.\n\nParameters\n----------\na : input complex\nb : input complex\n\nReturns\n-------\nc : complex\ns : complex\n"
     ...
 
 def zscal(a, x, n=..., offx=..., incx=...) -> typing.Any:
@@ -609,6 +618,4 @@ def ztrsv(a, x, incx=..., offx=..., lower=..., trans=..., diag=..., overwrite_x=
     "xout = ztrsv(a,x,[incx,offx,lower,trans,diag,overwrite_x])\n\nWrapper for ``ztrsv``.\n\nParameters\n----------\na : input rank-2 array('D') with bounds (n,n)\nx : input rank-1 array('D') with bounds (*)\n\nOther Parameters\n----------------\noverwrite_x : input int, optional\n    Default: 0\nincx : input int, optional\n    Default: 1\noffx : input int, optional\n    Default: 0\nlower : input int, optional\n    Default: 0\ntrans : input int, optional\n    Default: 0\ndiag : input int, optional\n    Default: 0\n\nReturns\n-------\nxout : rank-1 array('D') with bounds (*) and x storage\n"
     ...
 
-def __getattr__(name) -> typing.Any:
-    ...
-
+def __getattr__(name) -> typing.Any: ...

@@ -1,14 +1,14 @@
-from numpy.typing import ArrayLike
-
 # -*- coding: utf-8 -*-
 # -----------------------------------------------------------------------------
 # Copyright (c) 2014, Nicolas P. Rougier
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 # -----------------------------------------------------------------------------
 import numpy as np
+from numpy.typing import ArrayLike
+
 from ... import glsl
-from .collection import Collection
 from ..transforms import NullTransform
+from .collection import Collection
 
 class AggSegmentCollection(Collection):
     def __init__(

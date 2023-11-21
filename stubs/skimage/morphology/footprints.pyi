@@ -1,5 +1,5 @@
-from numpy.typing import NDArray
 import numpy as np
+from numpy.typing import NDArray
 from scipy import ndimage as ndi
 
 from .. import draw

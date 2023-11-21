@@ -1,29 +1,27 @@
-from numpy.typing import ArrayLike
-
+import functools
 import os
 import re
 import struct
 import threading
-import functools
+import warnings
 from tempfile import NamedTemporaryFile
 
 import numpy as np
 from numpy import testing
 from numpy.testing import (
-    assert_array_equal,
-    assert_array_almost_equal,
-    assert_array_less,
-    assert_array_almost_equal_nulp,
-    assert_equal,
     TestCase,
+    assert_,
     assert_allclose,
     assert_almost_equal,
-    assert_,
-    assert_warns,
+    assert_array_almost_equal,
+    assert_array_almost_equal_nulp,
+    assert_array_equal,
+    assert_array_less,
+    assert_equal,
     assert_no_warnings,
+    assert_warns,
 )
-
-import warnings
+from numpy.typing import ArrayLike
 
 from ..data._fetchers import _fetch
 from ._warnings import expected_warnings

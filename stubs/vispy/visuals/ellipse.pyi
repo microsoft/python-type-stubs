@@ -1,12 +1,12 @@
-from vispy.util.svg.color import Color
+import numpy as np
 from numpy.typing import ArrayLike
+from vispy.util.svg.color import Color
+
+from .polygon import PolygonVisual
 
 # -*- coding: utf-8 -*-
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
-
-import numpy as np
-from .polygon import PolygonVisual
 
 class EllipseVisual(PolygonVisual):
     def __init__(

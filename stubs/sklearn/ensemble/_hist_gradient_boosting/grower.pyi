@@ -1,28 +1,25 @@
+import numbers
+from heapq import heappop as heappop, heappush as heappush
+from timeit import default_timer as time
 from typing import ClassVar
-from .predictor import TreePredictor
-from .splitting import SplitInfo
+
+import numpy as np
+from numpy import ndarray
+
+from ..._typing import ArrayLike, Float, Int, MatrixLike
+from ._bitset import set_raw_bitset_from_binned_bitset as set_raw_bitset_from_binned_bitset
 from .common import (
     PREDICTOR_RECORD_DTYPE as PREDICTOR_RECORD_DTYPE,
     X_BITSET_INNER_DTYPE as X_BITSET_INNER_DTYPE,
     Y_DTYPE as Y_DTYPE,
     MonotonicConstraint as MonotonicConstraint,
 )
-from .splitting import Splitter
-from numpy import ndarray
-from ._bitset import (
-    set_raw_bitset_from_binned_bitset as set_raw_bitset_from_binned_bitset,
-)
-from heapq import heappush as heappush, heappop as heappop
-from .utils import sum_parallel as sum_parallel
-from timeit import default_timer as time
 from .histogram import HistogramBuilder
-from ..._typing import Int, ArrayLike, Float, MatrixLike
-import numpy as np
-import numbers
-
+from .predictor import TreePredictor
+from .splitting import SplitInfo, Splitter
+from .utils import sum_parallel as sum_parallel
 
 EPS = ...  # to avoid zero division errors
-
 
 class TreeNode:
     children_upper_bound: float = ...
@@ -59,15 +56,9 @@ class TreeNode:
         sum_gradients: Float,
         sum_hessians: Float,
         value=None,
-    ) -> None:
-        ...
-
-    def set_children_bounds(self, lower: float, upper: float) -> None:
-        ...
-
-    def __lt__(self, other_node: TreeNode) -> bool:
-        ...
-
+    ) -> None: ...
+    def set_children_bounds(self, lower: float, upper: float) -> None: ...
+    def __lt__(self, other_node: TreeNode) -> bool: ...
 
 class TreeGrower:
     with_monotonic_cst: bool = ...
@@ -103,14 +94,7 @@ class TreeGrower:
         min_hessian_to_split: Float = 1e-3,
         shrinkage: Float = 1.0,
         n_threads: None | Int = None,
-    ) -> None:
-        ...
-
-    def grow(self) -> None:
-        ...
-
-    def split_next(self) -> tuple[TreeNode, TreeNode]:
-        ...
-
-    def make_predictor(self, binning_thresholds: ArrayLike) -> TreePredictor:
-        ...
+    ) -> None: ...
+    def grow(self) -> None: ...
+    def split_next(self) -> tuple[TreeNode, TreeNode]: ...
+    def make_predictor(self, binning_thresholds: ArrayLike) -> TreePredictor: ...

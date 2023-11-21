@@ -1,15 +1,14 @@
-from collections.abc import Iterable
-from numpy.typing import ArrayLike, NDArray
-from typing import Any, Mapping, Literal
-import inspect
 import functools
+import inspect
 import sys
 import warnings
 from collections.abc import Iterable
+from typing import Any, Literal, Mapping
 
 import numpy as np
 import scipy
 from numpy.lib import NumpyVersion
+from numpy.typing import ArrayLike, NDArray
 
 from ._warnings import all_warnings, warn
 
@@ -34,31 +33,19 @@ def _is_wrapped(func): ...
 def _get_stack_length(func): ...
 
 class _DecoratorBaseClass:
-
     _stack_length: dict = ...
 
     def get_stack_length(self, func): ...
 
 class change_default_value(_DecoratorBaseClass):
-    def __init__(
-        self,
-        arg_name: str,
-        *,
-        new_value: Any,
-        changed_version: str,
-        warning_msg: str | None = None
-    ): ...
+    def __init__(self, arg_name: str, *, new_value: Any, changed_version: str, warning_msg: str | None = None): ...
     def __call__(self, func): ...
 
 class remove_arg(_DecoratorBaseClass):
-    def __init__(
-        self, arg_name: str, *, changed_version: str, help_msg: str | None = None
-    ): ...
+    def __init__(self, arg_name: str, *, changed_version: str, help_msg: str | None = None): ...
     def __call__(self, func): ...
 
-def docstring_add_deprecated(
-    func, kwarg_mapping: Mapping, deprecated_version: str
-) -> str: ...
+def docstring_add_deprecated(func, kwarg_mapping: Mapping, deprecated_version: str) -> str: ...
 
 class deprecate_kwarg(_DecoratorBaseClass):
     def __init__(

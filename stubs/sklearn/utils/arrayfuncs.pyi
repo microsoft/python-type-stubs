@@ -1,6 +1,4 @@
-
 import numpy as np
-
 
 def min_pos(X: np.ndarray) -> float:
     """Find the minimum value of an array over positive values
@@ -8,7 +6,5 @@ def min_pos(X: np.ndarray) -> float:
     values are positive.
     """
     ...
-
-
 
 def cholesky_delete(L: np.ndarray, go_out: int) -> None: ...

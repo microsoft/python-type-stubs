@@ -3,8 +3,8 @@
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 
 from OpenGL import GL as _GL
-from . import _pyopengl2
-from . import _constants
+
+from . import _constants, _pyopengl2
 
 def _inject(): ...
 

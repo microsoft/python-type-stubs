@@ -1,6 +1,7 @@
 from typing import Mapping
-from ...utils import not_implemented_for
+
 from ...classes.graph import Graph
+from ...utils import not_implemented_for
 
 __all__ = [
     "subgraph_centrality_exp",

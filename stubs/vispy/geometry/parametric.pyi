@@ -5,6 +5,7 @@
 # -----------------------------------------------------------------------------
 
 import numpy as np
+
 from .normals import normals
 
 def surface(

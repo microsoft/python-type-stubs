@@ -1,4 +1,5 @@
 from typing import Mapping
+
 from networkx import NetworkXError
 
 from ..classes.graph import Graph

@@ -31,9 +31,10 @@
 # -----------------------------------------------------------------------------
 
 import math
-import numpy as np
 from inspect import cleandoc
 from itertools import product
+
+import numpy as np
 
 class SpatialFilter:
     def __init__(self, radius=1): ...

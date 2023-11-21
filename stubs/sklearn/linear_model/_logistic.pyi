@@ -1,46 +1,35 @@
-from typing import Callable, ClassVar, Literal, Mapping, Sequence, TypeVar
-from numpy.random import RandomState
-from ..metrics import get_scorer_names as get_scorer_names
-from scipy import optimize as optimize
-from ..model_selection._split import BaseShuffleSplit
-from ..utils.extmath import softmax as softmax, row_norms as row_norms
-from joblib import effective_n_jobs as effective_n_jobs
-from ..metrics import get_scorer as get_scorer
-from ..preprocessing import (
-    LabelEncoder as LabelEncoder,
-    LabelBinarizer as LabelBinarizer,
-)
-from ._glm.glm import NewtonCholeskySolver as NewtonCholeskySolver
-from ..utils.parallel import delayed as delayed, Parallel as Parallel
-from ..utils.validation import check_is_fitted as check_is_fitted
-from numpy import ndarray
-from ..utils._param_validation import StrOptions as StrOptions, Interval as Interval
 from numbers import Integral as Integral, Real as Real
-from ._sag import sag_solver as sag_solver
-from ..model_selection import check_cv as check_cv
+from typing import Callable, ClassVar, Literal, Mapping, Sequence, TypeVar
+
+from joblib import effective_n_jobs as effective_n_jobs
+from numpy import ndarray
+from numpy.random import RandomState
+from scipy import optimize as optimize
+
+from .._loss.loss import HalfBinomialLoss as HalfBinomialLoss, HalfMultinomialLoss as HalfMultinomialLoss
+from .._typing import ArrayLike, Float, Int, MatrixLike
+from ..metrics import get_scorer as get_scorer, get_scorer_names as get_scorer_names
+from ..model_selection import BaseCrossValidator, check_cv as check_cv
+from ..model_selection._split import BaseShuffleSplit
+from ..preprocessing import LabelBinarizer as LabelBinarizer, LabelEncoder as LabelEncoder
 from ..utils import (
     check_array as check_array,
     check_consistent_length as check_consistent_length,
-    compute_class_weight as compute_class_weight,
     check_random_state as check_random_state,
+    compute_class_weight as compute_class_weight,
 )
-from ._base import LinearClassifierMixin, SparseCoefMixin, BaseEstimator
-from ..utils.multiclass import (
-    check_classification_targets as check_classification_targets,
-)
-from .._loss.loss import (
-    HalfBinomialLoss as HalfBinomialLoss,
-    HalfMultinomialLoss as HalfMultinomialLoss,
-)
+from ..utils._param_validation import Interval as Interval, StrOptions as StrOptions
+from ..utils.extmath import row_norms as row_norms, softmax as softmax
+from ..utils.multiclass import check_classification_targets as check_classification_targets
+from ..utils.parallel import Parallel as Parallel, delayed as delayed
+from ..utils.validation import check_is_fitted as check_is_fitted
+from ._base import BaseEstimator, LinearClassifierMixin, SparseCoefMixin
+from ._glm.glm import NewtonCholeskySolver as NewtonCholeskySolver
 from ._linear_loss import LinearModelLoss as LinearModelLoss
-from .._typing import Float, Int, MatrixLike, ArrayLike
-from ..model_selection import BaseCrossValidator
+from ._sag import sag_solver as sag_solver
 
-LogisticRegressionCV_Self = TypeVar(
-    "LogisticRegressionCV_Self", bound="LogisticRegressionCV"
-)
+LogisticRegressionCV_Self = TypeVar("LogisticRegressionCV_Self", bound="LogisticRegressionCV")
 LogisticRegression_Self = TypeVar("LogisticRegression_Self", bound="LogisticRegression")
-
 
 # Author: Gael Varoquaux <gael.varoquaux@normalesup.org>
 #         Fabian Pedregosa <f@bianp.net>
@@ -55,9 +44,7 @@ import warnings
 
 import numpy as np
 
-
 _LOGISTIC_SOLVER_CONVERGENCE_MSG: str = ...
-
 
 class LogisticRegression(LinearClassifierMixin, SparseCoefMixin, BaseEstimator):
     n_iter_: ndarray = ...
@@ -80,32 +67,22 @@ class LogisticRegression(LinearClassifierMixin, SparseCoefMixin, BaseEstimator):
         intercept_scaling: Float = 1,
         class_weight: None | Mapping | str = None,
         random_state: RandomState | None | Int = None,
-        solver: Literal[
-            "lbfgs", "liblinear", "newton-cg", "newton-cholesky", "sag", "saga", "lbfgs"
-        ] = "lbfgs",
+        solver: Literal["lbfgs", "liblinear", "newton-cg", "newton-cholesky", "sag", "saga", "lbfgs"] = "lbfgs",
         max_iter: Int = 100,
         multi_class: Literal["auto", "ovr", "multinomial", "auto"] = "auto",
         verbose: Int = 0,
         warm_start: bool = False,
         n_jobs: None | Int = None,
         l1_ratio: None | Float = None,
-    ) -> None:
-        ...
-
+    ) -> None: ...
     def fit(
         self: LogisticRegression_Self,
         X: MatrixLike | ArrayLike,
         y: ArrayLike,
         sample_weight: None | ArrayLike = None,
-    ) -> LogisticRegression_Self:
-        ...
-
-    def predict_proba(self, X: MatrixLike) -> ndarray:
-        ...
-
-    def predict_log_proba(self, X: MatrixLike) -> ndarray:
-        ...
-
+    ) -> LogisticRegression_Self: ...
+    def predict_proba(self, X: MatrixLike) -> ndarray: ...
+    def predict_log_proba(self, X: MatrixLike) -> ndarray: ...
 
 class LogisticRegressionCV(LogisticRegression, LinearClassifierMixin, BaseEstimator):
     feature_names_in_: ndarray = ...
@@ -135,9 +112,7 @@ class LogisticRegressionCV(LogisticRegression, LinearClassifierMixin, BaseEstima
         dual: bool = False,
         penalty: Literal["l1", "l2", "elasticnet", "l2"] = "l2",
         scoring: None | str | Callable = None,
-        solver: Literal[
-            "lbfgs", "liblinear", "newton-cg", "newton-cholesky", "sag", "saga", "lbfgs"
-        ] = "lbfgs",
+        solver: Literal["lbfgs", "liblinear", "newton-cg", "newton-cholesky", "sag", "saga", "lbfgs"] = "lbfgs",
         tol: Float = 1e-4,
         max_iter: Int = 100,
         class_weight: None | Mapping | str = None,
@@ -148,18 +123,11 @@ class LogisticRegressionCV(LogisticRegression, LinearClassifierMixin, BaseEstima
         multi_class: Literal["auto", "ovr", "multinomial", "auto"] = "auto",
         random_state: RandomState | None | Int = None,
         l1_ratios: None | Sequence[float] = None,
-    ) -> None:
-        ...
-
+    ) -> None: ...
     def fit(
         self: LogisticRegressionCV_Self,
         X: MatrixLike | ArrayLike,
         y: ArrayLike,
         sample_weight: None | ArrayLike = None,
-    ) -> LogisticRegressionCV_Self:
-        ...
-
-    def score(
-        self, X: MatrixLike, y: ArrayLike, sample_weight: None | ArrayLike = None
-    ) -> float:
-        ...
+    ) -> LogisticRegressionCV_Self: ...
+    def score(self, X: MatrixLike, y: ArrayLike, sample_weight: None | ArrayLike = None) -> float: ...

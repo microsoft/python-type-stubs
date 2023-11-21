@@ -1,27 +1,21 @@
-from typing import Any, Callable, ClassVar, Iterable, Literal, Mapping, TypeVar
-from operator import itemgetter as itemgetter
 from collections import defaultdict as defaultdict
-from ..utils.validation import (
-    check_is_fitted as check_is_fitted,
-    check_array as check_array,
-    FLOAT_DTYPES as FLOAT_DTYPES,
-)
-from ..exceptions import NotFittedError as NotFittedError
-from numpy import ndarray
-from ..utils._param_validation import (
-    StrOptions as StrOptions,
-    Interval as Interval,
-    HasMethods as HasMethods,
-)
-from numbers import Integral as Integral, Real as Real
-from functools import partial
-from ._stop_words import ENGLISH_STOP_WORDS
-from ..base import BaseEstimator, TransformerMixin, OneToOneFeatureMixin
-from scipy.sparse import spmatrix
-from ._hash import FeatureHasher as FeatureHasher
-from .._typing import ArrayLike, Int, MatrixLike, Float
 from collections.abc import Mapping
+from functools import partial
+from numbers import Integral as Integral, Real as Real
+from operator import itemgetter as itemgetter
+from typing import Any, Callable, ClassVar, Iterable, Literal, Mapping, TypeVar
+
+from numpy import ndarray
+from scipy.sparse import spmatrix
+
+from .._typing import ArrayLike, Float, Int, MatrixLike
+from ..base import BaseEstimator, OneToOneFeatureMixin, TransformerMixin
+from ..exceptions import NotFittedError as NotFittedError
 from ..preprocessing import normalize as normalize
+from ..utils._param_validation import HasMethods as HasMethods, Interval as Interval, StrOptions as StrOptions
+from ..utils.validation import FLOAT_DTYPES as FLOAT_DTYPES, check_array as check_array, check_is_fitted as check_is_fitted
+from ._hash import FeatureHasher as FeatureHasher
+from ._stop_words import ENGLISH_STOP_WORDS
 
 TfidfVectorizer_Self = TypeVar("TfidfVectorizer_Self", bound="TfidfVectorizer")
 HashingVectorizer_Self = TypeVar("HashingVectorizer_Self", bound="HashingVectorizer")
@@ -45,7 +39,6 @@ import warnings
 import numpy as np
 import scipy.sparse as sp
 
-
 __all__ = [
     "HashingVectorizer",
     "CountVectorizer",
@@ -57,43 +50,20 @@ __all__ = [
     "strip_tags",
 ]
 
-
-def strip_accents_unicode(s: str) -> str:
-    ...
-
-
-def strip_accents_ascii(s: str) -> str:
-    ...
-
-
-def strip_tags(s: str) -> str:
-    ...
-
+def strip_accents_unicode(s: str) -> str: ...
+def strip_accents_ascii(s: str) -> str: ...
+def strip_tags(s: str) -> str: ...
 
 class _VectorizerMixin:
-
     _white_spaces = ...
 
-    def decode(self, doc: bytes | str) -> str:
-        ...
+    def decode(self, doc: bytes | str) -> str: ...
+    def build_preprocessor(self) -> Callable | partial: ...
+    def build_tokenizer(self) -> Callable: ...
+    def get_stop_words(self) -> frozenset | None | list: ...
+    def build_analyzer(self) -> Callable | partial: ...
 
-    def build_preprocessor(self) -> Callable | partial:
-        ...
-
-    def build_tokenizer(self) -> Callable:
-        ...
-
-    def get_stop_words(self) -> frozenset | None | list:
-        ...
-
-    def build_analyzer(self) -> Callable | partial:
-        ...
-
-
-class HashingVectorizer(
-    TransformerMixin, _VectorizerMixin, BaseEstimator, auto_wrap_output_keys=None
-):
-
+class HashingVectorizer(TransformerMixin, _VectorizerMixin, BaseEstimator, auto_wrap_output_keys=None):
     _parameter_constraints: ClassVar[dict] = ...
 
     def __init__(
@@ -115,25 +85,11 @@ class HashingVectorizer(
         norm: Literal["l1", "l2", "l2"] = "l2",
         alternate_sign: bool = True,
         dtype=...,
-    ) -> None:
-        ...
-
-    def partial_fit(
-        self: HashingVectorizer_Self, X: MatrixLike, y: Any = None
-    ) -> HashingVectorizer_Self:
-        ...
-
-    def fit(
-        self: HashingVectorizer_Self, X: list[str] | MatrixLike, y: Any = None
-    ) -> HashingVectorizer_Self:
-        ...
-
-    def transform(self, X: Iterable[str]) -> spmatrix:
-        ...
-
-    def fit_transform(self, X: list[str] | Iterable[str], y: Any = None) -> spmatrix:
-        ...
-
+    ) -> None: ...
+    def partial_fit(self: HashingVectorizer_Self, X: MatrixLike, y: Any = None) -> HashingVectorizer_Self: ...
+    def fit(self: HashingVectorizer_Self, X: list[str] | MatrixLike, y: Any = None) -> HashingVectorizer_Self: ...
+    def transform(self, X: Iterable[str]) -> spmatrix: ...
+    def fit_transform(self, X: list[str] | Iterable[str], y: Any = None) -> spmatrix: ...
 
 class CountVectorizer(_VectorizerMixin, BaseEstimator):
     stop_words_: set = ...
@@ -162,34 +118,18 @@ class CountVectorizer(_VectorizerMixin, BaseEstimator):
         vocabulary: Iterable | None | Mapping = None,
         binary: bool = False,
         dtype=...,
-    ) -> None:
-        ...
-
-    def fit(
-        self: CountVectorizer_Self, raw_documents: Iterable, y=None
-    ) -> CountVectorizer_Self:
-        ...
-
+    ) -> None: ...
+    def fit(self: CountVectorizer_Self, raw_documents: Iterable, y=None) -> CountVectorizer_Self: ...
     def fit_transform(
         self,
         raw_documents: list[str] | ndarray | Iterable,
         y: None | ndarray | list[Int] = None,
-    ) -> ndarray | spmatrix:
-        ...
+    ) -> ndarray | spmatrix: ...
+    def transform(self, raw_documents: list[str] | ndarray | Iterable) -> spmatrix: ...
+    def inverse_transform(self, X: MatrixLike | ArrayLike) -> list[ndarray]: ...
+    def get_feature_names_out(self, input_features: None | ArrayLike = None) -> ndarray: ...
 
-    def transform(self, raw_documents: list[str] | ndarray | Iterable) -> spmatrix:
-        ...
-
-    def inverse_transform(self, X: MatrixLike | ArrayLike) -> list[ndarray]:
-        ...
-
-    def get_feature_names_out(self, input_features: None | ArrayLike = None) -> ndarray:
-        ...
-
-
-class TfidfTransformer(
-    OneToOneFeatureMixin, TransformerMixin, BaseEstimator, auto_wrap_output_keys=None
-):
+class TfidfTransformer(OneToOneFeatureMixin, TransformerMixin, BaseEstimator, auto_wrap_output_keys=None):
     feature_names_in_: ndarray = ...
     n_features_in_: int = ...
 
@@ -202,25 +142,13 @@ class TfidfTransformer(
         use_idf: bool = True,
         smooth_idf: bool = True,
         sublinear_tf: bool = False,
-    ) -> None:
-        ...
-
-    def fit(
-        self: TfidfTransformer_Self, X: MatrixLike, y: None | ndarray | list[Int] = None
-    ) -> TfidfTransformer_Self:
-        ...
-
-    def transform(self, X: MatrixLike, copy: bool = True) -> spmatrix:
-        ...
-
+    ) -> None: ...
+    def fit(self: TfidfTransformer_Self, X: MatrixLike, y: None | ndarray | list[Int] = None) -> TfidfTransformer_Self: ...
+    def transform(self, X: MatrixLike, copy: bool = True) -> spmatrix: ...
     @property
-    def idf_(self) -> ndarray:
-        ...
-
+    def idf_(self) -> ndarray: ...
     @idf_.setter
-    def idf_(self, value) -> ndarray:
-        ...
-
+    def idf_(self, value) -> ndarray: ...
 
 class TfidfVectorizer(CountVectorizer):
     stop_words_: set = ...
@@ -253,29 +181,15 @@ class TfidfVectorizer(CountVectorizer):
         use_idf: bool = True,
         smooth_idf: bool = True,
         sublinear_tf: bool = False,
-    ) -> None:
-        ...
+    ) -> None: ...
 
     # Broadcast the TF-IDF parameters to the underlying transformer instance
     # for easy grid search and repr
 
     @property
-    def idf_(self) -> ndarray:
-        ...
-
+    def idf_(self) -> ndarray: ...
     @idf_.setter
-    def idf_(self, value) -> ndarray:
-        ...
-
-    def fit(
-        self: TfidfVectorizer_Self, raw_documents: Iterable, y=None
-    ) -> TfidfVectorizer_Self:
-        ...
-
-    def fit_transform(
-        self, raw_documents: list[str] | ndarray | Iterable, y: None | ndarray = None
-    ) -> spmatrix:
-        ...
-
-    def transform(self, raw_documents: list[str] | ndarray | Iterable) -> spmatrix:
-        ...
+    def idf_(self, value) -> ndarray: ...
+    def fit(self: TfidfVectorizer_Self, raw_documents: Iterable, y=None) -> TfidfVectorizer_Self: ...
+    def fit_transform(self, raw_documents: list[str] | ndarray | Iterable, y: None | ndarray = None) -> spmatrix: ...
+    def transform(self, raw_documents: list[str] | ndarray | Iterable) -> spmatrix: ...

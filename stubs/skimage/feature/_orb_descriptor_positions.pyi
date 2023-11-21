@@ -1,4 +1,5 @@
 import os
+
 import numpy as np
 
 # Putting this in cython was giving strange bugs for different versions

@@ -1,4 +1,5 @@
 from typing import Callable
+
 from ...classes.graph import Graph
 from ...exception import NetworkXError
 

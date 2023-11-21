@@ -1,13 +1,11 @@
-from numpy import dtype
-from numpy.typing import NDArray
-
 # -*- coding: utf-8 -*-
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 import warnings
 
 import numpy as np
-
+from numpy import dtype
+from numpy.typing import NDArray
 from vispy.gloo import Texture2D, Texture3D
 from vispy.gloo.texture import should_cast_to_f32
 
@@ -42,7 +40,6 @@ class CPUScaledTextureMixin(_ScaledTextureMixin):
     def scale_and_set_data(self, data, offset=None, copy=True): ...
 
 class GPUScaledTextureMixin(_ScaledTextureMixin):
-
     # dtype -> internalformat
     # 'r' will be replaced (if needed) with rgb or rgba depending on number of bands
     _texture_dtype_format: dict = ...

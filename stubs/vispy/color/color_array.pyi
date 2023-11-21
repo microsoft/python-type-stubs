@@ -1,23 +1,16 @@
+from copy import deepcopy
 from typing import Literal, Sequence
 
+import numpy as np
+
+from ..util import logger
+from ._color_dict import _color_dict
+from .color_space import _rgb_to_hsv  # noqa
+from .color_space import _hex_to_rgba, _hsv_to_rgb, _lab_to_rgb, _rgb_to_hex, _rgb_to_lab  # noqa
 
 # -*- coding: utf-8 -*-
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
-
-import numpy as np
-from copy import deepcopy
-
-from ..util import logger
-from ._color_dict import _color_dict
-from .color_space import (
-    _hex_to_rgba,
-    _rgb_to_hex,
-    _rgb_to_hsv,  # noqa
-    _hsv_to_rgb,
-    _rgb_to_lab,
-    _lab_to_rgb,
-)  # noqa
 
 ###############################################################################
 # User-friendliness helpers

@@ -1,17 +1,16 @@
-
 # -*- coding: utf-8 -*-
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 
 import numpy as np
 
-from ..visuals import Compound
+from ...color import Color
+from ...geometry import Rect
+from ...util.event import Event
+from ...visuals.filters import Clipper
 from ...visuals.mesh import MeshVisual
 from ...visuals.transforms import STTransform
-from ...visuals.filters import Clipper
-from ...util.event import Event
-from ...geometry import Rect
-from ...color import Color
+from ..visuals import Compound
 
 class Widget(Compound):
     def __init__(

@@ -6,15 +6,14 @@
 
 from __future__ import print_function
 
-import numpy as np
-import sys
-import os
-import inspect
-import gc
-
 import functools
-
+import gc
+import inspect
+import os
+import sys
 from distutils.version import LooseVersion
+
+import numpy as np
 
 from ..util.check_environment import has_backend
 

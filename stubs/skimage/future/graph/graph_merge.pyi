@@ -1,8 +1,9 @@
-from skimage.future.graph.rag import RAG
-from numpy.typing import NDArray
-from typing import Callable
-import numpy as np
 import heapq
+from typing import Callable
+
+import numpy as np
+from numpy.typing import NDArray
+from skimage.future.graph.rag import RAG
 
 def _revalidate_node_edges(rag, node, heap_list): ...
 def _rename_node(graph, node_id, copy_id): ...

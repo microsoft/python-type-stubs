@@ -1,10 +1,10 @@
-from numpy.typing import ArrayLike
 from collections import Counter
 from itertools import chain
 
-from ...exception import NetworkXException
+from numpy.typing import ArrayLike
 
 from ...classes.graph import Graph
+from ...exception import NetworkXException
 from ...utils import not_implemented_for
 
 __all__ = [

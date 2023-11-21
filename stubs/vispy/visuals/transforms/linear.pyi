@@ -1,20 +1,18 @@
+import numpy as np
 from numpy import ndarray
-from vispy.visuals.transforms.linear import STTransform
 from numpy.typing import ArrayLike, NDArray
+from vispy.visuals.transforms.linear import STTransform
+
+from ...geometry import Rect
+from ...util import transforms
+from ._util import arg_to_vec4, as_vec4
+from .base_transform import BaseTransform
 
 # -*- coding: utf-8 -*-
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 
-import numpy as np
-
-from ...util import transforms
-from ...geometry import Rect
-from ._util import arg_to_vec4, as_vec4
-from .base_transform import BaseTransform
-
 class NullTransform(BaseTransform):
-
     glsl_map: str = ...
     glsl_imap: str = ...
 
@@ -30,7 +28,6 @@ class NullTransform(BaseTransform):
     def __rmul__(self, tr): ...
 
 class STTransform(BaseTransform):
-
     glsl_map: str = ...
 
     glsl_imap: str = ...
@@ -68,7 +65,6 @@ class STTransform(BaseTransform):
     def __repr__(self): ...
 
 class MatrixTransform(BaseTransform):
-
     glsl_map: str = ...
 
     glsl_imap: str = ...

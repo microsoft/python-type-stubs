@@ -1,35 +1,29 @@
-from typing import ClassVar, Literal, TypeVar
-from ._newton_solver import NewtonCholeskySolver as NewtonCholeskySolver, NewtonSolver
-from .._linear_loss import LinearModelLoss as LinearModelLoss
-from ...utils._param_validation import (
-    Hidden as Hidden,
-    Interval as Interval,
-    StrOptions as StrOptions,
-)
-from numpy import ndarray
 from numbers import Integral as Integral, Real as Real
+from typing import ClassVar, Literal, TypeVar
+
+from numpy import ndarray
+
+from ..._loss.glm_distribution import TweedieDistribution as TweedieDistribution
 from ..._loss.loss import (
+    BaseLoss,
     HalfGammaLoss as HalfGammaLoss,
     HalfPoissonLoss as HalfPoissonLoss,
     HalfSquaredError as HalfSquaredError,
     HalfTweedieLoss as HalfTweedieLoss,
     HalfTweedieLossIdentity as HalfTweedieLossIdentity,
 )
-from ...utils.validation import check_is_fitted as check_is_fitted
-from ..._loss.loss import BaseLoss
-from ..._typing import Float, Int, MatrixLike, ArrayLike
-from ...utils import check_array as check_array, deprecated
-from ..._loss.glm_distribution import TweedieDistribution as TweedieDistribution
+from ..._typing import ArrayLike, Float, Int, MatrixLike
 from ...base import BaseEstimator, RegressorMixin
+from ...utils import check_array as check_array, deprecated
+from ...utils._param_validation import Hidden as Hidden, Interval as Interval, StrOptions as StrOptions
+from ...utils.validation import check_is_fitted as check_is_fitted
+from .._linear_loss import LinearModelLoss as LinearModelLoss
+from ._newton_solver import NewtonCholeskySolver as NewtonCholeskySolver, NewtonSolver
 
-_GeneralizedLinearRegressor_Self = TypeVar(
-    "_GeneralizedLinearRegressor_Self", bound="_GeneralizedLinearRegressor"
-)
-
+_GeneralizedLinearRegressor_Self = TypeVar("_GeneralizedLinearRegressor_Self", bound="_GeneralizedLinearRegressor")
 
 import numpy as np
 import scipy.optimize
-
 
 class _GeneralizedLinearRegressor(RegressorMixin, BaseEstimator):
     _base_loss: BaseLoss = ...
@@ -52,35 +46,24 @@ class _GeneralizedLinearRegressor(RegressorMixin, BaseEstimator):
         tol: Float = 1e-4,
         warm_start: bool = False,
         verbose: Int = 0,
-    ) -> None:
-        ...
-
+    ) -> None: ...
     def fit(
         self: _GeneralizedLinearRegressor_Self,
         X: MatrixLike | ArrayLike,
         y: ArrayLike,
         sample_weight: None | ArrayLike = None,
-    ) -> _GeneralizedLinearRegressor_Self:
-        ...
-
-    def predict(self, X: MatrixLike | ArrayLike) -> ndarray:
-        ...
-
+    ) -> _GeneralizedLinearRegressor_Self: ...
+    def predict(self, X: MatrixLike | ArrayLike) -> ndarray: ...
     def score(
         self,
         X: MatrixLike | ArrayLike,
         y: ArrayLike,
         sample_weight: None | ArrayLike = None,
-    ) -> Float:
-        ...
+    ) -> Float: ...
 
     # TODO(1.3): remove
-    @deprecated(  # type: ignore
-        "Attribute `family` was deprecated in version 1.1 and will be removed in 1.3."
-    )
-    def family(self):
-        ...
-
+    @deprecated("Attribute `family` was deprecated in version 1.1 and will be removed in 1.3.")  # type: ignore
+    def family(self): ...
 
 class PoissonRegressor(_GeneralizedLinearRegressor):
     n_iter_: int = ...
@@ -101,9 +84,7 @@ class PoissonRegressor(_GeneralizedLinearRegressor):
         tol: Float = 1e-4,
         warm_start: bool = False,
         verbose: Int = 0,
-    ) -> None:
-        ...
-
+    ) -> None: ...
 
 class GammaRegressor(_GeneralizedLinearRegressor):
     feature_names_in_: ndarray = ...
@@ -124,9 +105,7 @@ class GammaRegressor(_GeneralizedLinearRegressor):
         tol: Float = 1e-4,
         warm_start: bool = False,
         verbose: Int = 0,
-    ) -> None:
-        ...
-
+    ) -> None: ...
 
 class TweedieRegressor(_GeneralizedLinearRegressor):
     feature_names_in_: ndarray = ...
@@ -149,5 +128,4 @@ class TweedieRegressor(_GeneralizedLinearRegressor):
         tol: Float = 1e-4,
         warm_start: bool = False,
         verbose: Int = 0,
-    ) -> None:
-        ...
+    ) -> None: ...

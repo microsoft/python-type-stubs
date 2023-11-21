@@ -1,14 +1,15 @@
-from vispy.util.svg.color import Color
+import warnings
+
 from numpy.typing import NDArray
+from vispy.util.svg.color import Color
+
+from .box import BoxVisual
 
 # -*- coding: utf-8 -*-
 # -----------------------------------------------------------------------------
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 # -----------------------------------------------------------------------------
-
-import warnings
-from .box import BoxVisual
 
 class CubeVisual(BoxVisual):
     def __init__(

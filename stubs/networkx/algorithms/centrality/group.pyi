@@ -1,7 +1,8 @@
-from numpy.typing import ArrayLike
 from copy import deepcopy
-from ...classes.graph import Graph
 
+from numpy.typing import ArrayLike
+
+from ...classes.graph import Graph
 from ...utils.decorators import not_implemented_for
 
 __all__ = [
@@ -13,9 +14,7 @@ __all__ = [
     "prominent_group",
 ]
 
-def group_betweenness_centrality(
-    G: Graph, C, normalized=True, weight=None, endpoints=False
-): ...
+def group_betweenness_centrality(G: Graph, C, normalized=True, weight=None, endpoints=False): ...
 def prominent_group(
     G: Graph,
     k: int,

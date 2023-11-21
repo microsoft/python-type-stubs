@@ -1,12 +1,12 @@
-
-from numpy import float32 as G_H_DTYPE
-from numpy import float32 as X_BITSET_INNER_DTYPE
-from numpy import float64 as X_DTYPE
-from numpy import float64 as Y_DTYPE
-from numpy import uint32 as X_BINNED_DTYPE
-from numpy import uint8 as X_BINNED_DTYPE_C
 import numpy as np
-
+from numpy import (
+    float32 as G_H_DTYPE,
+    float32 as X_BITSET_INNER_DTYPE,
+    float64 as X_DTYPE,
+    float64 as Y_DTYPE,
+    uint8 as X_BINNED_DTYPE_C,
+    uint32 as X_BINNED_DTYPE,
+)
 
 ALMOST_INF: float = 1e300
 MonotonicConstraint: int
@@ -25,4 +25,3 @@ class PREDICTOR_RECORD_DTYPE:
     bin_threshold: X_BINNED_DTYPE
     is_categorical: np.uint8
     bitset_idx: np.uint32
-

@@ -2,10 +2,10 @@ import os
 from collections import OrderedDict
 from collections.abc import Iterator
 from typing import Any
+from typing_extensions import TypeAlias
 
 from transformers.configuration_utils import PretrainedConfig
 from transformers.tokenization_utils_fast import PreTrainedTokenizerFast
-from typing_extensions import TypeAlias
 
 from .configuration_auto import AutoConfig as AutoConfig
 

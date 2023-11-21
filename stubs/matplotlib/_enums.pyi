@@ -4,10 +4,9 @@ class _AutoStringNameEnum(Enum):
     def __hash__(self) -> int: ...
 
 class JoinStyle(str, _AutoStringNameEnum):
-
-    miter: JoinStyle 
-    round: JoinStyle 
-    bevel: JoinStyle 
+    miter: JoinStyle
+    round: JoinStyle
+    bevel: JoinStyle
     @staticmethod
     def demo() -> None: ...
 
