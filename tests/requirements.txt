@@ -1,3 +1,5 @@
+black
+isort
 pyright
 matplotlib
 pytest

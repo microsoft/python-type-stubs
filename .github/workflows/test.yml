@@ -33,3 +33,11 @@ jobs:
         with:
           project: tests/pyrighttestconfig.json
           warn-partial: true
+
+      - name: Run isort
+        uses: isort/isort-action@v1
+
+      - name: Run Black
+        uses: psf/black@stable
+        with:
+          options: "--check --verbose"
