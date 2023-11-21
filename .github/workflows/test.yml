@@ -30,6 +30,16 @@ jobs:
 
       - name: Run pyright tests
         uses: gramster/pyright-action@main
+
+      - name: Run mypy tests
+        run:
+          python -m mypy .
+
+      - name: Run isort
+        uses: isort/isort-action@v1
+
+      - name: Run Black
+        uses: psf/black@stable
         with:
-          project: tests/pyrighttestconfig.json
-          warn-partial: true
+          options: "--check --verbose"
+          

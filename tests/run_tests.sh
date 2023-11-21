@@ -1,8 +1,11 @@
 #!/bin/bash
 
-python -m pip install --upgrade pyright
-python -m pip install -r requirements.txt
-pyright --pythonversion 3.11 -p pyrighttestconfig.json .
+python -m pip install -r requirements.txt -U
 
-
-
+cd ../
+# TODO: Remove --check-only and fix all
+python -m isort . --check-only
+# TODO: Remove --check and fix all
+python -m black . --check
+python -m mypy .
+npx -y pyright@latest .

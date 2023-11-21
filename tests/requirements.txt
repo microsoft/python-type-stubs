@@ -1,5 +1,24 @@
-pyright
-matplotlib
+# Tools used for testing
+black
+docopt
+isort
+mypy==1.7.0
+
+# Typed libraries and stubs
+matplotlib>=3.8
 pytest
-mypy==0.950
 typing_extensions==4.2.0
+
+# Untyped libraries, used to prevent "reportMissingImports" and get inferred typing
+joblib
+networkx
+PyOpenGL
+scikit-image
+scikit-learn
+scipy
+transformers
+vispy
+numpydoc
+pyamg
+traitlets
+uarray
