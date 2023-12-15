@@ -35,6 +35,14 @@ jobs:
         run:
           python -m mypy .
 
+  lint:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+        
       - name: Run isort
         uses: isort/isort-action@v1
 

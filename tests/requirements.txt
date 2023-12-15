@@ -1,7 +1,5 @@
 # Tools used for testing
-black
 docopt
-isort
 mypy==1.7.0
 
 # Typed libraries and stubs
