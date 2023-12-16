@@ -34,7 +34,7 @@ jobs:
           project: tests/pyrighttestconfig.json
           warn-partial: true
 
-  lint:
+  hygiene:
     runs-on: ubuntu-latest
     timeout-minutes: 10
 
