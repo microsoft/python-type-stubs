@@ -1,4 +1,4 @@
-from typing import assert_type
+from typing_extensions import assert_type
 
 from matplotlib.axes import Axes
 from matplotlib.figure import Figure
