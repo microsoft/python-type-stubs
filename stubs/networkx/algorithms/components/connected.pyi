@@ -1,7 +1,6 @@
 from ...classes.graph import Graph
-from ...utils.decorators import not_implemented_for
-
 from ...utils import arbitrary_element
+from ...utils.decorators import not_implemented_for
 
 __all__ = [
     "number_connected_components",

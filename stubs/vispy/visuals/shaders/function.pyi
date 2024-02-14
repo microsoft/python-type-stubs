@@ -1,21 +1,20 @@
+import logging
+import re
+from collections import OrderedDict
+
+import numpy as np
 from numpy.typing import ArrayLike
+
+from ...util import logger
+from ...util.eq import eq
+from . import parsing
+from .expression import FunctionCall, TextExpression
+from .shader_object import ShaderObject
+from .variable import Variable, Varying
 
 # -*- coding: utf-8 -*-
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
-
-from collections import OrderedDict
-import logging
-import re
-
-import numpy as np
-
-from ...util.eq import eq
-from ...util import logger
-from . import parsing
-from .shader_object import ShaderObject
-from .variable import Variable, Varying
-from .expression import TextExpression, FunctionCall
 
 class Function(ShaderObject):
     def __init__(self, code, dependencies=None): ...

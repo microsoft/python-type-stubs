@@ -1,69 +1,52 @@
-from ._glm import (
-    PoissonRegressor as PoissonRegressor,
-    GammaRegressor as GammaRegressor,
-    TweedieRegressor as TweedieRegressor,
-)
-from ._perceptron import Perceptron as Perceptron
-from ._stochastic_gradient import (
-    SGDClassifier as SGDClassifier,
-    SGDRegressor as SGDRegressor,
-    SGDOneClassSVM as SGDOneClassSVM,
-)
-from ._least_angle import (
-    Lars as Lars,
-    LassoLars as LassoLars,
-    lars_path as lars_path,
-    lars_path_gram as lars_path_gram,
-    LarsCV as LarsCV,
-    LassoLarsCV as LassoLarsCV,
-    LassoLarsIC as LassoLarsIC,
-)
-from ._huber import HuberRegressor as HuberRegressor
 from ._base import LinearRegression as LinearRegression
-from ._theil_sen import TheilSenRegressor as TheilSenRegressor
-from ._omp import (
-    orthogonal_mp as orthogonal_mp,
-    orthogonal_mp_gram as orthogonal_mp_gram,
-    OrthogonalMatchingPursuit as OrthogonalMatchingPursuit,
-    OrthogonalMatchingPursuitCV as OrthogonalMatchingPursuitCV,
-)
-from ._logistic import (
-    LogisticRegression as LogisticRegression,
-    LogisticRegressionCV as LogisticRegressionCV,
-)
-from ._ransac import RANSACRegressor as RANSACRegressor
-from ._sgd_fast import (
-    Hinge as Hinge,
-    Log as Log,
-    ModifiedHuber as ModifiedHuber,
-    SquaredLoss as SquaredLoss,
-    Huber as Huber,
-)
-from ._bayes import BayesianRidge as BayesianRidge, ARDRegression as ARDRegression
+from ._bayes import ARDRegression as ARDRegression, BayesianRidge as BayesianRidge
 from ._coordinate_descent import (
-    Lasso as Lasso,
     ElasticNet as ElasticNet,
-    LassoCV as LassoCV,
     ElasticNetCV as ElasticNetCV,
-    lasso_path as lasso_path,
-    enet_path as enet_path,
-    MultiTaskLasso as MultiTaskLasso,
+    Lasso as Lasso,
+    LassoCV as LassoCV,
     MultiTaskElasticNet as MultiTaskElasticNet,
     MultiTaskElasticNetCV as MultiTaskElasticNetCV,
+    MultiTaskLasso as MultiTaskLasso,
     MultiTaskLassoCV as MultiTaskLassoCV,
+    enet_path as enet_path,
+    lasso_path as lasso_path,
+)
+from ._glm import GammaRegressor as GammaRegressor, PoissonRegressor as PoissonRegressor, TweedieRegressor as TweedieRegressor
+from ._huber import HuberRegressor as HuberRegressor
+from ._least_angle import (
+    Lars as Lars,
+    LarsCV as LarsCV,
+    LassoLars as LassoLars,
+    LassoLarsCV as LassoLarsCV,
+    LassoLarsIC as LassoLarsIC,
+    lars_path as lars_path,
+    lars_path_gram as lars_path_gram,
+)
+from ._logistic import LogisticRegression as LogisticRegression, LogisticRegressionCV as LogisticRegressionCV
+from ._omp import (
+    OrthogonalMatchingPursuit as OrthogonalMatchingPursuit,
+    OrthogonalMatchingPursuitCV as OrthogonalMatchingPursuitCV,
+    orthogonal_mp as orthogonal_mp,
+    orthogonal_mp_gram as orthogonal_mp_gram,
 )
 from ._passive_aggressive import (
     PassiveAggressiveClassifier as PassiveAggressiveClassifier,
     PassiveAggressiveRegressor as PassiveAggressiveRegressor,
 )
+from ._perceptron import Perceptron as Perceptron
 from ._quantile import QuantileRegressor as QuantileRegressor
+from ._ransac import RANSACRegressor as RANSACRegressor
 from ._ridge import (
     Ridge as Ridge,
-    RidgeCV as RidgeCV,
     RidgeClassifier as RidgeClassifier,
     RidgeClassifierCV as RidgeClassifierCV,
+    RidgeCV as RidgeCV,
     ridge_regression as ridge_regression,
 )
+from ._sgd_fast import Hinge as Hinge, Huber as Huber, Log as Log, ModifiedHuber as ModifiedHuber, SquaredLoss as SquaredLoss
+from ._stochastic_gradient import SGDClassifier as SGDClassifier, SGDOneClassSVM as SGDOneClassSVM, SGDRegressor as SGDRegressor
+from ._theil_sen import TheilSenRegressor as TheilSenRegressor
 
 __all__ = [
     "ARDRegression",

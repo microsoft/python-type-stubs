@@ -1,14 +1,15 @@
 # Python: 3.8.2 (tags/v3.8.2:7b3ab59, Feb 25 2020, 23:03:10) [MSC v.1916 64 bit (AMD64)]
 # Library: scipy, version: 1.6.2
 # Module: scipy.special.specfun, version: $Revision: $
-import typing
 import builtins as _mod_builtins
+import typing
 
 __doc__: str
 __file__: str
 __name__: str
 __package__: str
 __version__: bytes
+
 def airyzo(nt, kf=...) -> typing.Any:
     "xa,xb,xc,xd = airyzo(nt,[kf])\n\nWrapper for ``airyzo``.\n\nParameters\n----------\nnt : input int\n\nOther Parameters\n----------------\nkf : input int, optional\n    Default: 1\n\nReturns\n-------\nxa : rank-1 array('d') with bounds (nt)\nxb : rank-1 array('d') with bounds (nt)\nxc : rank-1 array('d') with bounds (nt)\nxd : rank-1 array('d') with bounds (nt)\n"
     ...
@@ -109,6 +110,4 @@ def segv(m, n, c, kd) -> typing.Any:
     "cv,eg = segv(m,n,c,kd)\n\nWrapper for ``segv``.\n\nParameters\n----------\nm : input int\nn : input int\nc : input float\nkd : input int\n\nReturns\n-------\ncv : float\neg : rank-1 array('d') with bounds (n-m+2)\n"
     ...
 
-def __getattr__(name) -> typing.Any:
-    ...
-
+def __getattr__(name) -> typing.Any: ...

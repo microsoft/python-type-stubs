@@ -1,5 +1,3 @@
-from typing import Mapping
-
 # This module uses material from the Wikipedia article Hopcroft--Karp algorithm
 # <https://en.wikipedia.org/wiki/Hopcroft%E2%80%93Karp_algorithm>, accessed on
 # January 3, 2015, which is released under the Creative Commons
@@ -12,9 +10,10 @@ from typing import Mapping
 # proof, see <http://www.ics.uci.edu/~eppstein/PADS/ABOUT-PADS.txt>).
 import collections
 import itertools
+from typing import Mapping
 
-from .matrix import biadjacency_matrix
 from ...classes.graph import Graph
+from .matrix import biadjacency_matrix
 
 __all__ = [
     "maximum_matching",
@@ -35,6 +34,4 @@ def to_vertex_cover(G: Graph, matching: Mapping, top_nodes=None): ...
 #: This function is simply an alias for :func:`hopcroft_karp_matching`.
 maximum_matching = ...
 
-def minimum_weight_full_matching(
-    G: Graph, top_nodes=None, weight="weight"
-) -> Mapping: ...
+def minimum_weight_full_matching(G: Graph, top_nodes=None, weight="weight") -> Mapping: ...

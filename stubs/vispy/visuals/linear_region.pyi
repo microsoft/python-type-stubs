@@ -1,6 +1,5 @@
-from numpy.typing import ArrayLike
 import numpy as np
-from numpy.typing import NDArray
+from numpy.typing import ArrayLike, NDArray
 
 from .. import gloo
 from .visual import Visual
@@ -10,7 +9,6 @@ _VERTEX_SHADER: str = ...
 _FRAGMENT_SHADER: str = ...
 
 class LinearRegionVisual(Visual):
-
     _shaders: dict = ...
 
     def __init__(

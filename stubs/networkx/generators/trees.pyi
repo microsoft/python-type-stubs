@@ -1,6 +1,6 @@
-from ..classes.digraph import DiGraph
 from collections import defaultdict
 
+from ..classes.digraph import DiGraph
 from ..classes.graph import Graph
 from ..utils import py_random_state
 

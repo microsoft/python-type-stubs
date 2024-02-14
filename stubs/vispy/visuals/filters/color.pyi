@@ -2,9 +2,9 @@
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 
-from .base_filter import Filter
+from ...color import Color, colormap
 from ..shaders import Function, Varying
-from ...color import colormap, Color
+from .base_filter import Filter
 
 class IsolineFilter(Filter):
     FRAG_SHADER: str = ...

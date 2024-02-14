@@ -1,6 +1,7 @@
-from typing import Mapping
 import itertools
 from operator import itemgetter
+from typing import Mapping
+
 from ...classes.graph import Graph
 
 __all__ = [

@@ -1,10 +1,11 @@
+from math import pi
+
+import numpy as np
 from numpy import ndarray
+
 from .._typing import Scalar
 
 # -*- coding: utf-8 -*-
-
-from math import pi
-import numpy as np
 
 def cubehelix(
     start: Scalar = 0.5,

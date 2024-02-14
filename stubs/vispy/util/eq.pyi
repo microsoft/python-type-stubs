@@ -1,4 +1,4 @@
 # -*- coding: utf-8 -*-
-from numpy import ndarray, bool_
+from numpy import bool_, ndarray
 
 def eq(a, b): ...

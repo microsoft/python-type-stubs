@@ -1,5 +1,5 @@
-from ...utils.decorators import py_random_state
 from ...classes.graph import Graph
+from ...utils.decorators import py_random_state
 
 __all__ = ["diameter"]
 

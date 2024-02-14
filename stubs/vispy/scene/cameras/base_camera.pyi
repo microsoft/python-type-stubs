@@ -1,26 +1,21 @@
-from vispy.scene.node import Node
 from typing import Literal, Mapping
-from vispy.util.event import Event
+
 from numpy.typing import ArrayLike
+from vispy.scene.node import Node
+from vispy.util.event import Event
+
+from ...util import keys
+from ...visuals.transforms import MatrixTransform, NullTransform, STTransform, TransformCache
+from ..node import Node
 
 # -*- coding: utf-8 -*-
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 
-from ...util import keys
-from ..node import Node
-from ...visuals.transforms import (
-    STTransform,
-    MatrixTransform,
-    NullTransform,
-    TransformCache,
-)
-
 def nested_getattr(obj, names): ...
 def nested_setattr(obj, names, val): ...
 
 class BaseCamera(Node):
-
     # These define the state of the camera
     _state_props = ...
 

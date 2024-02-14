@@ -1,35 +1,23 @@
-from matplotlib.axes._axes import Axes
-from numpy.typing import ArrayLike
-from typing import (
-    Dict,
-    List,
-    Optional,
-    Tuple,
-    Union,
-    Literal,
-    Mapping,
-    Callable,
-    Any,
-    Sequence,
-)
-from matplotlib.backend_bases import MouseButton
-from matplotlib.figure import Figure
-
-from contextlib import ExitStack
 import copy
+from contextlib import ExitStack
 from numbers import Integral, Number
-
-import numpy as np
+from typing import Any, Callable, Dict, List, Literal, Mapping, Optional, Sequence, Tuple, Union
 
 import matplotlib as mpl
-from . import _api, _docstring, backend_tools, cbook, colors, ticker, transforms
-from .lines import Line2D
-from .patches import Circle, Rectangle, Ellipse, Polygon
-from .transforms import TransformedPatchPath, Affine2D
+import numpy as np
+from matplotlib.axes._axes import Axes
+from matplotlib.backend_bases import MouseButton
+from matplotlib.figure import Figure
 from matplotlib.lines import Line2D
 from matplotlib.patches import Ellipse, Rectangle
 from matplotlib.transforms import Affine2D
 from numpy import float64, ndarray
+from numpy.typing import ArrayLike
+
+from . import _api, _docstring, backend_tools, cbook, colors, ticker, transforms
+from .lines import Line2D
+from .patches import Circle, Ellipse, Polygon, Rectangle
+from .transforms import Affine2D, TransformedPatchPath
 
 class LockDraw:
     def __init__(self) -> None: ...
@@ -83,7 +71,6 @@ class SliderBase(AxesWidget):
     def reset(self): ...
 
 class Slider(SliderBase):
-
     val: float
 
     def __init__(
@@ -111,7 +98,6 @@ class Slider(SliderBase):
     def on_changed(self, func: Callable) -> int: ...
 
 class RangeSlider(SliderBase):
-
     val: tuple[float, ...]
 
     def __init__(
@@ -137,16 +123,13 @@ class RangeSlider(SliderBase):
     def on_changed(self, func: Callable) -> int: ...
 
 class CheckButtons(AxesWidget):
-    def __init__(
-        self, ax: Axes, labels: Sequence[str], actives: Sequence[bool] = ...
-    ) -> None: ...
+    def __init__(self, ax: Axes, labels: Sequence[str], actives: Sequence[bool] = ...) -> None: ...
     def set_active(self, index: int): ...
     def get_status(self) -> tuple[bool, ...]: ...
     def on_clicked(self, func: Callable) -> int: ...
     def disconnect(self, cid) -> None: ...
 
 class TextBox(AxesWidget):
-
     DIST_FROM_LEFT = ...
     def __init__(
         self,
@@ -169,7 +152,6 @@ class TextBox(AxesWidget):
     def disconnect(self, cid): ...
 
 class RadioButtons(AxesWidget):
-
     ax: Axes
     activecolor: Color
     labels: list[Text]
@@ -191,14 +173,7 @@ class SubplotTool(Widget):
     def __init__(self, targetfig: Figure, toolfig: Figure) -> None: ...
 
 class Cursor(AxesWidget):
-    def __init__(
-        self,
-        ax: Axes,
-        horizOn: bool = True,
-        vertOn: bool = True,
-        useblit: bool = False,
-        **lineprops
-    ) -> None: ...
+    def __init__(self, ax: Axes, horizOn: bool = True, vertOn: bool = True, useblit: bool = False, **lineprops) -> None: ...
     def clear(self, event: DrawEvent) -> None: ...
     def onmove(self, event: Event): ...
 
@@ -210,7 +185,7 @@ class MultiCursor(Widget):
         useblit: bool = True,
         horizOn: bool = False,
         vertOn: bool = True,
-        **lineprops
+        **lineprops,
     ) -> None: ...
     def connect(self) -> None: ...
     def disconnect(self): ...
@@ -331,7 +306,7 @@ class ToolHandles:
     def set_data(
         self,
         pts: tuple[float, float, float],
-        y: tuple[float, float, float]|None = None,
+        y: tuple[float, float, float] | None = None,
     ) -> None: ...
     def set_visible(self, val): ...
     def set_animated(self, val): ...
@@ -384,7 +359,6 @@ class RectangleSelector(_SelectorWidget):
     def geometry(self) -> np.ndarray: ...
 
 class EllipseSelector(RectangleSelector):
-
     draw_shape = ...
 
 class LassoSelector(_SelectorWidget):
@@ -414,7 +388,6 @@ class PolygonSelector(_SelectorWidget):
         box_handle_props: Mapping | None = None,
         box_props: Mapping | None = None,
     ): ...
-
 
     line = ...
     vertex_select_radius = ...

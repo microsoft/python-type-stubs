@@ -1,15 +1,15 @@
-from typing import IO, Literal
-from contextlib import closing as closing
-from numpy import dtype, ndarray
-from scipy.sparse import spmatrix
-from .._typing import PathLike, Int, ArrayLike, MatrixLike
-from ..utils import check_array as check_array, IS_PYPY as IS_PYPY
 import io
 import os.path
+from contextlib import closing as closing
+from typing import IO, Literal
 
 import numpy as np
 import scipy.sparse as sp
+from numpy import dtype, ndarray
+from scipy.sparse import spmatrix
 
+from .._typing import ArrayLike, Int, MatrixLike, PathLike
+from ..utils import IS_PYPY as IS_PYPY, check_array as check_array
 
 def load_svmlight_file(
     f: PathLike | str | IO | int,
@@ -21,10 +21,7 @@ def load_svmlight_file(
     query_id: bool = False,
     offset: Int = 0,
     length: Int = ...,
-) -> tuple[spmatrix, ndarray, ndarray]:
-    ...
-
-
+) -> tuple[spmatrix, ndarray, ndarray]: ...
 def load_svmlight_files(
     files: PathLike | ArrayLike | IO | int,
     *,
@@ -35,10 +32,7 @@ def load_svmlight_files(
     query_id: bool = False,
     offset: Int = 0,
     length: Int = ...,
-) -> list[ndarray]:
-    ...
-
-
+) -> list[ndarray]: ...
 def dump_svmlight_file(
     X: MatrixLike | ArrayLike,
     y: MatrixLike,
@@ -48,5 +42,4 @@ def dump_svmlight_file(
     comment: None | str = None,
     query_id: None | ArrayLike = None,
     multilabel: bool = False,
-):
-    ...
+): ...

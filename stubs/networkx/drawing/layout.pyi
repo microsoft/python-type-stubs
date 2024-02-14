@@ -1,5 +1,7 @@
 from typing import Mapping
+
 from numpy.typing import ArrayLike
+
 from ..classes.graph import Graph
 from ..utils import np_random_state
 
@@ -20,12 +22,8 @@ __all__ = [
 ]
 
 @np_random_state(3)
-def random_layout(
-    G: Graph, center: ArrayLike | None = None, dim: int = 2, seed=None
-) -> Mapping: ...
-def circular_layout(
-    G: Graph, scale=1, center: ArrayLike | None = None, dim: int = 2
-) -> Mapping: ...
+def random_layout(G: Graph, center: ArrayLike | None = None, dim: int = 2, seed=None) -> Mapping: ...
+def circular_layout(G: Graph, scale=1, center: ArrayLike | None = None, dim: int = 2) -> Mapping: ...
 def shell_layout(
     G: Graph,
     nlist=None,
@@ -68,12 +66,8 @@ def kamada_kawai_layout(
     center: ArrayLike | None = None,
     dim: int = 2,
 ) -> Mapping: ...
-def spectral_layout(
-    G: Graph, weight="weight", scale=1, center: ArrayLike | None = None, dim: int = 2
-) -> Mapping: ...
-def planar_layout(
-    G: Graph, scale=1, center: ArrayLike | None = None, dim: int = 2
-) -> Mapping: ...
+def spectral_layout(G: Graph, weight="weight", scale=1, center: ArrayLike | None = None, dim: int = 2) -> Mapping: ...
+def planar_layout(G: Graph, scale=1, center: ArrayLike | None = None, dim: int = 2) -> Mapping: ...
 def spiral_layout(
     G: Graph,
     scale=1,

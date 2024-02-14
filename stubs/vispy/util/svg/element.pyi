@@ -4,6 +4,7 @@
 # Distributed under the terms of the new BSD License.
 # -----------------------------------------------------------------------------
 import copy
+
 from .style import Style
 
 namespace: str = ...

@@ -1,14 +1,14 @@
-from vispy.util.svg.color import Color
-from vispy.color.color_array import ColorArray
-from numpy.typing import NDArray
+import collections
 
-from .mesh import MeshVisual
 import numpy as np
 from numpy.linalg import norm
-from ..util.transforms import rotate
-from ..color import ColorArray
+from numpy.typing import NDArray
+from vispy.color.color_array import ColorArray
+from vispy.util.svg.color import Color
 
-import collections
+from ..color import ColorArray
+from ..util.transforms import rotate
+from .mesh import MeshVisual
 
 class TubeVisual(MeshVisual):
     def __init__(

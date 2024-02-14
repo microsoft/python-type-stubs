@@ -1,17 +1,17 @@
 from typing import Literal, Sequence
+
 from ._typing import *
-from .text import Text
-from .path import Path
-from .backend_bases import MouseEvent, RendererBase
-from .font_manager import FontProperties
-from .figure import Figure
-from .transforms import Bbox, Transform
-from .axes import Axes
 from .artist import Artist, allow_rasterization
+from .axes import Axes
+from .backend_bases import MouseEvent, RendererBase
+from .figure import Figure
+from .font_manager import FontProperties
 from .patches import Rectangle
+from .path import Path
+from .text import Text
+from .transforms import Bbox, Transform
 
 class Cell(Rectangle):
-
     PAD = ...
 
     def __init__(
@@ -26,7 +26,7 @@ class Cell(Rectangle):
         loc: Literal["left", "center", "right"] = "right",
         fontproperties: FontProperties = ...,
         *,
-        visible_edges: str = "closed"
+        visible_edges: str = "closed",
     ) -> None: ...
     def set_transform(self, trans: Transform): ...
     def set_figure(self, fig: Figure) -> None: ...
@@ -37,6 +37,7 @@ class Cell(Rectangle):
     @allow_rasterization
     def draw(self, renderer):
         RendererBase: ...
+
     def get_text_bounds(self, renderer: RendererBase): ...
     def get_required_width(self, renderer: RendererBase): ...
     def set_text_props(self, **kwargs) -> None: ...
@@ -49,13 +50,10 @@ class Cell(Rectangle):
 CustomCell = Cell
 
 class Table(Artist):
-
     codes = ...
     FONTSIZE = ...
     AXESPAD = ...
-    def __init__(
-        self, ax: Axes, loc: str = ..., bbox: Bbox = ..., **kwargs
-    ) -> None: ...
+    def __init__(self, ax: Axes, loc: str = ..., bbox: Bbox = ..., **kwargs) -> None: ...
     def add_cell(self, row: int, col: int, *args, **kwargs) -> Cell: ...
     def __setitem__(self, position: Sequence[int], cell: Cell) -> None: ...
     def __getitem__(self, position) -> Cell: ...
@@ -89,5 +87,5 @@ def table(
     loc: str = ...,
     bbox: Bbox = ...,
     edges: str | Literal["open", "closed", "horizontal", "vertical"] = ...,
-    **kwargs
+    **kwargs,
 ) -> Table: ...

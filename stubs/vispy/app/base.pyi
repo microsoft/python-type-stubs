@@ -2,9 +2,10 @@
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 
-from ..util import SimpleBunch
 import time
 from timeit import default_timer
+
+from ..util import SimpleBunch
 
 class BaseApplicationBackend(object):
     def _vispy_get_backend_name(self): ...

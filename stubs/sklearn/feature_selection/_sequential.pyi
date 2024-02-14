@@ -1,31 +1,22 @@
-from typing import Callable, ClassVar, Iterable, Literal, TypeVar
-from ..model_selection import BaseCrossValidator
-from ..base import BaseEstimator
-from ._base import SelectorMixin
-from ..model_selection._split import BaseShuffleSplit
-from ..utils._param_validation import (
-    HasMethods as HasMethods,
-    Hidden as Hidden,
-    Interval as Interval,
-    StrOptions as StrOptions,
-)
-from numpy import ndarray
 from numbers import Integral as Integral, Real as Real
-from ..base import MetaEstimatorMixin, clone as clone
-from ..model_selection import cross_val_score as cross_val_score
-from .._typing import Float, Int, MatrixLike, ArrayLike
+from typing import Callable, ClassVar, Iterable, Literal, TypeVar
+
+from numpy import ndarray
+
+from .._typing import ArrayLike, Float, Int, MatrixLike
+from ..base import BaseEstimator, MetaEstimatorMixin, clone as clone
 from ..metrics import get_scorer_names as get_scorer_names
+from ..model_selection import BaseCrossValidator, cross_val_score as cross_val_score
+from ..model_selection._split import BaseShuffleSplit
+from ..utils._param_validation import HasMethods as HasMethods, Hidden as Hidden, Interval as Interval, StrOptions as StrOptions
 from ..utils.validation import check_is_fitted as check_is_fitted
+from ._base import SelectorMixin
 
-SequentialFeatureSelector_Self = TypeVar(
-    "SequentialFeatureSelector_Self", bound="SequentialFeatureSelector"
-)
-
-
-import numpy as np
+SequentialFeatureSelector_Self = TypeVar("SequentialFeatureSelector_Self", bound="SequentialFeatureSelector")
 
 import warnings
 
+import numpy as np
 
 class SequentialFeatureSelector(SelectorMixin, MetaEstimatorMixin, BaseEstimator):
     support_: ndarray = ...
@@ -45,10 +36,7 @@ class SequentialFeatureSelector(SelectorMixin, MetaEstimatorMixin, BaseEstimator
         scoring: None | str | Callable = None,
         cv: Iterable | int | BaseShuffleSplit | BaseCrossValidator = 5,
         n_jobs: None | Int = None,
-    ) -> None:
-        ...
-
+    ) -> None: ...
     def fit(
         self: SequentialFeatureSelector_Self, X: MatrixLike, y: None | ArrayLike = None
-    ) -> SequentialFeatureSelector_Self:
-        ...
+    ) -> SequentialFeatureSelector_Self: ...

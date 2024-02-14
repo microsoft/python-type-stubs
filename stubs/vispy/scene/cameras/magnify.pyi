@@ -1,16 +1,14 @@
+import numpy as np
 from vispy.util.event import Event
+
+from ...visuals.transforms.nonlinear import Magnify1DTransform, MagnifyTransform
+from .panzoom import PanZoomCamera
 
 # -*- coding: utf-8 -*-
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 
-import numpy as np
-
-from .panzoom import PanZoomCamera
-from ...visuals.transforms.nonlinear import MagnifyTransform, Magnify1DTransform
-
 class MagnifyCamera(PanZoomCamera):
-
     transform_class = ...
 
     def __init__(self, size_factor: float = 0.25, radius_ratio: float = 0.9, **kwargs): ...

@@ -1,11 +1,15 @@
-from typing import Sequence
-from threadpoolctl import threadpool_limits as threadpool_limits
-from .utils.fixes import parse_version as parse_version
-from _pytest.doctest import DoctestItem as DoctestItem
-from os import environ as environ
-from .tests import random_seed as random_seed
-from ._min_dependencies import PYTEST_MIN_VERSION as PYTEST_MIN_VERSION
+import platform
+import sys
 from functools import wraps as wraps
+from os import environ as environ
+from typing import Sequence
+
+import numpy as np
+import pytest
+from _pytest.doctest import DoctestItem as DoctestItem
+from threadpoolctl import threadpool_limits as threadpool_limits
+
+from ._min_dependencies import PYTEST_MIN_VERSION as PYTEST_MIN_VERSION
 from .datasets import (
     fetch_20newsgroups as fetch_20newsgroups,
     fetch_20newsgroups_vectorized as fetch_20newsgroups_vectorized,
@@ -15,21 +19,15 @@ from .datasets import (
     fetch_olivetti_faces as fetch_olivetti_faces,
     fetch_rcv1 as fetch_rcv1,
 )
-import platform
-import sys
-
-import pytest
-import numpy as np
+from .tests import random_seed as random_seed
+from .utils.fixes import parse_version as parse_version
 
 dataset_fetchers: dict = ...
 
 _SKIP32_MARK = ...
 
-
 # Global fixtures
-def global_dtype(request):
-    ...
-
+def global_dtype(request): ...
 
 # Adds fixtures for fetching data
 fetch_20newsgroups_fxt = ...
@@ -40,18 +38,7 @@ fetch_kddcup99_fxt = ...
 fetch_olivetti_faces_fxt = ...
 fetch_rcv1_fxt = ...
 
-
-def pytest_collection_modifyitems(config, items: Sequence):
-    ...
-
-
-def pyplot():
-    ...
-
-
-def pytest_runtest_setup(item):
-    ...
-
-
-def pytest_configure(config):
-    ...
+def pytest_collection_modifyitems(config, items: Sequence): ...
+def pyplot(): ...
+def pytest_runtest_setup(item): ...
+def pytest_configure(config): ...

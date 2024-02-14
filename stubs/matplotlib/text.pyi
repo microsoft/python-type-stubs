@@ -1,22 +1,21 @@
 import pathlib
-from matplotlib.path import Path
+from pathlib import PosixPath
 from typing import Any, Callable, Literal, Sequence
+
+from matplotlib.path import Path
+
 from ._typing import *
-from .transforms import Bbox, Transform
-from .backend_bases import MouseEvent, RendererBase
-from .font_manager import FontProperties
-from .figure import Figure
 from .artist import Artist, allow_rasterization
+from .backend_bases import MouseEvent, RendererBase
+from .figure import Figure
+from .font_manager import FontProperties
 from .offsetbox import DraggableAnnotation
 from .patches import FancyBboxPatch
-from pathlib import PosixPath
+from .transforms import Bbox, Transform
 
-def get_rotation(
-    rotation: float | Literal[None, "horizontal", "vertical"]
-) -> float: ...
+def get_rotation(rotation: float | Literal[None, "horizontal", "vertical"]) -> float: ...
 
 class Text(Artist):
-
     zorder = ...
     def __repr__(self): ...
     def __init__(
@@ -37,7 +36,7 @@ class Text(Artist):
         transform_rotates_text: bool = ...,
         *,
         parse_math=...,
-        **kwargs
+        **kwargs,
     ) -> None: ...
     def update(self, kwargs: dict[str, Any]) -> None: ...
     def __getstate__(self): ...
@@ -83,84 +82,75 @@ class Text(Artist):
     ): ...
     def set_backgroundcolor(self, color: Color) -> None: ...
     def set_color(self, color: Color) -> None: ...
-    def set_horizontalalignment(
-        self, align: Literal["left", "right", "center"]
-    ) -> None: ...
+    def set_horizontalalignment(self, align: Literal["left", "right", "center"]) -> None: ...
     def set_multialignment(self, align: Literal["left", "right", "center"]) -> None: ...
     def set_linespacing(self, spacing): ...
     def set_fontfamily(
         self,
-        fontname: str
-        | Literal["serif", "sans-serif", "cursive", "fantasy", "monospace"],
+        fontname: str | Literal["serif", "sans-serif", "cursive", "fantasy", "monospace"],
     ) -> None: ...
     def set_fontvariant(self, variant: Literal["normal", "small-caps"]) -> None: ...
-    def set_fontstyle(
-        self, fontstyle: Literal["normal", "italic", "oblique"]
-    ) -> None: ...
+    def set_fontstyle(self, fontstyle: Literal["normal", "italic", "oblique"]) -> None: ...
     def set_fontsize(
         self,
-        fontsize: float
-        | Literal[
-            "xx-small", "x-small", "small", "medium", "large", "x-large", "xx-large"
-        ],
+        fontsize: float | Literal["xx-small", "x-small", "small", "medium", "large", "x-large", "xx-large"],
     ) -> None: ...
     def get_math_fontfamily(self) -> str: ...
     def set_math_fontfamily(self, fontfamily: str) -> None: ...
     def set_fontweight(
         self,
-        weight: float
-        | Literal[
-            "ultralight",
-            "light",
-            "normal",
-            "regular",
-            "book",
-            "medium",
-            "roman",
-            "semibold",
-            "demibold",
-            "demi",
-            "bold",
-            "heavy",
-            "extra bold",
-            "black",
-        ],
+        weight: (
+            float
+            | Literal[
+                "ultralight",
+                "light",
+                "normal",
+                "regular",
+                "book",
+                "medium",
+                "roman",
+                "semibold",
+                "demibold",
+                "demi",
+                "bold",
+                "heavy",
+                "extra bold",
+                "black",
+            ]
+        ),
     ) -> None: ...
     def set_fontstretch(
         self,
-        stretch: float
-        | Literal[
-            "ultra-condensed",
-            "extra-condensed",
-            "condensed",
-            "semi-condensed",
-            "normal",
-            "semi-expanded",
-            "expanded",
-            "extra-expanded",
-            "ultra-expanded",
-        ],
+        stretch: (
+            float
+            | Literal[
+                "ultra-condensed",
+                "extra-condensed",
+                "condensed",
+                "semi-condensed",
+                "normal",
+                "semi-expanded",
+                "expanded",
+                "extra-expanded",
+                "ultra-expanded",
+            ]
+        ),
     ): ...
     def set_position(self, xy: Sequence[float]) -> None: ...
     def set_x(self, x: float) -> None: ...
     def set_y(self, y: float) -> None: ...
     def set_rotation(self, s: float | Literal["vertical", "horizontal"]) -> None: ...
     def set_transform_rotates_text(self, t: bool): ...
-    def set_verticalalignment(
-        self, align: Literal["bottom", "baseline", "center", "center_baseline", "top"]
-    ) -> None: ...
+    def set_verticalalignment(self, align: Literal["bottom", "baseline", "center", "center_baseline", "top"]) -> None: ...
     def set_text(self, s) -> None: ...
-    def set_fontproperties(
-        self, fp: str | pathlib.Path | PosixPath | FontProperties
-    ) -> None: ...
+    def set_fontproperties(self, fp: str | pathlib.Path | PosixPath | FontProperties) -> None: ...
     def set_usetex(self, usetex: bool) -> None: ...
     def get_usetex(self) -> bool: ...
     def set_parse_math(self, parse_math: bool) -> None: ...
     def get_parse_math(self) -> bool: ...
     def set_fontname(
         self,
-        fontname: str
-        | Literal["serif", "sans-serif", "cursive", "fantasy", "monospace"],
+        fontname: str | Literal["serif", "sans-serif", "cursive", "fantasy", "monospace"],
     ) -> None: ...
 
 class OffsetFrom:
@@ -183,9 +173,7 @@ class _AnnotationBase:
     ) -> None: ...
     def set_annotation_clip(self, b: bool | None) -> None: ...
     def get_annotation_clip(self) -> bool | None: ...
-    def draggable(
-        self, state: bool | None = ..., use_blit: bool = ...
-    ) -> None | DraggableAnnotation: ...
+    def draggable(self, state: bool | None = ..., use_blit: bool = ...) -> None | DraggableAnnotation: ...
 
 class Annotation(Text, _AnnotationBase):
     def __str__(self) -> str: ...
@@ -198,15 +186,13 @@ class Annotation(Text, _AnnotationBase):
         textcoords: str | Artist | Transform | Callable | Sequence[float] = ...,
         arrowprops: dict = ...,
         annotation_clip: bool | None = ...,
-        **kwargs
+        **kwargs,
     ) -> None: ...
     def contains(self, event): ...
     @property
     def xycoords(self) -> str | Artist | Transform | Callable | Sequence[float]: ...
     @xycoords.setter
-    def xycoords(
-        self, xycoords: str | Artist | Transform | Callable | Sequence[float]
-    ): ...
+    def xycoords(self, xycoords: str | Artist | Transform | Callable | Sequence[float]): ...
     @property
     def xyann(self): ...
     @xyann.setter
@@ -214,9 +200,7 @@ class Annotation(Text, _AnnotationBase):
     def get_anncoords(
         self,
     ) -> str | Artist | Transform | Callable | Sequence[float]: ...
-    def set_anncoords(
-        self, coords: str | Artist | Transform | Callable | Sequence[float]
-    ): ...
+    def set_anncoords(self, coords: str | Artist | Transform | Callable | Sequence[float]): ...
     anncoords = ...
     def set_figure(self, fig: Figure) -> None: ...
     def update_positions(self, renderer: RendererBase) -> None: ...

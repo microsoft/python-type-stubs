@@ -1,4 +1,5 @@
 from typing import Mapping
+
 from numpy.typing import ArrayLike
 
 # -*- coding: utf-8 -*-

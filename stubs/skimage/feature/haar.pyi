@@ -1,18 +1,15 @@
-from numpy.typing import ArrayLike
-
 from itertools import chain
 from operator import add
 
 import numpy as np
+from numpy.typing import ArrayLike
 
 from ..draw import rectangle
 
 FEATURE_TYPE = ...
 
 def _validate_feature_type(feature_type): ...
-def haar_like_feature_coord(
-    width: int, height: int, feature_type: str | ArrayLike | None = None
-): ...
+def haar_like_feature_coord(width: int, height: int, feature_type: str | ArrayLike | None = None): ...
 def haar_like_feature(
     int_image,
     r: int,

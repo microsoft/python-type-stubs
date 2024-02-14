@@ -1,9 +1,10 @@
-from numpy.typing import ArrayLike
-from typing import Sequence
 import math
-import numpy as np
-from scipy import spatial
 import textwrap
+from typing import Sequence
+
+import numpy as np
+from numpy.typing import ArrayLike
+from scipy import spatial
 
 from .._shared.utils import get_bound_method_class, safe_as_int
 
@@ -26,9 +27,7 @@ class FundamentalMatrixTransform(GeometricTransform):
     def residuals(self, src, dst): ...
 
 class EssentialMatrixTransform(FundamentalMatrixTransform):
-    def __init__(
-        self, rotation=None, translation=None, matrix=None, *, dimensionality=2
-    ): ...
+    def __init__(self, rotation=None, translation=None, matrix=None, *, dimensionality=2): ...
     def estimate(self, src, dst) -> bool: ...
 
 class ProjectiveTransform(GeometricTransform):
@@ -56,7 +55,7 @@ class AffineTransform(ProjectiveTransform):
         shear: float | None = None,
         translation=None,
         *,
-        dimensionality: int = 2
+        dimensionality: int = 2,
     ): ...
     @property
     def scale(self): ...
@@ -78,12 +77,7 @@ def _euler_rotation_matrix(angles, axes=None): ...
 
 class EuclideanTransform(ProjectiveTransform):
     def __init__(
-        self,
-        matrix=None,
-        rotation: float | Sequence[float] | None = None,
-        translation=None,
-        *,
-        dimensionality: int = 2
+        self, matrix=None, rotation: float | Sequence[float] | None = None, translation=None, *, dimensionality: int = 2
     ): ...
     def estimate(self, src, dst) -> bool: ...
     @property
@@ -93,13 +87,7 @@ class EuclideanTransform(ProjectiveTransform):
 
 class SimilarityTransform(EuclideanTransform):
     def __init__(
-        self,
-        matrix=None,
-        scale: float | None = None,
-        rotation: float | None = None,
-        translation=None,
-        *,
-        dimensionality=2
+        self, matrix=None, scale: float | None = None, rotation: float | None = None, translation=None, *, dimensionality=2
     ): ...
     def estimate(self, src, dst) -> bool: ...
     @property

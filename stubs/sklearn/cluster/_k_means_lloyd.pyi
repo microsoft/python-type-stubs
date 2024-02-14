@@ -1,17 +1,16 @@
-
 import numpy as np
 
-
 def lloyd_iter_chunked_dense(
-        X: np.ndarray,
-        sample_weight: np.ndarray,
-        centers_old: np.ndarray,
-        centers_new: np.ndarray,
-        weight_in_clusters: np.ndarray,
-        labels: np.ndarray,
-        center_shift: np.ndarray,
-        n_threads: int,
-        update_centers: bool=True) -> None:
+    X: np.ndarray,
+    sample_weight: np.ndarray,
+    centers_old: np.ndarray,
+    centers_new: np.ndarray,
+    weight_in_clusters: np.ndarray,
+    labels: np.ndarray,
+    center_shift: np.ndarray,
+    n_threads: int,
+    update_centers: bool = True,
+) -> None:
     """Single iteration of K-means lloyd algorithm with dense input.
     Update labels and centers (inplace), for one iteration, distributed
     over data chunks.
@@ -47,17 +46,17 @@ def lloyd_iter_chunked_dense(
     """
     ...
 
-
 def lloyd_iter_chunked_sparse(
-        X: np.ndarray,
-        sample_weight: np.ndarray,
-        centers_old: np.ndarray,
-        centers_new: np.ndarray,
-        weight_in_clusters: np.ndarray,
-        labels: np.ndarray,
-        center_shift: np.ndarray,
-        n_threads: int,
-        update_centers: bool=True) -> None:
+    X: np.ndarray,
+    sample_weight: np.ndarray,
+    centers_old: np.ndarray,
+    centers_new: np.ndarray,
+    weight_in_clusters: np.ndarray,
+    labels: np.ndarray,
+    center_shift: np.ndarray,
+    n_threads: int,
+    update_centers: bool = True,
+) -> None:
     """Single iteration of K-means lloyd algorithm with sparse input.
     Update labels and centers (inplace), for one iteration, distributed
     over data chunks.

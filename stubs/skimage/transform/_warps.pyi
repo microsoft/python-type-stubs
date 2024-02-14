@@ -1,25 +1,24 @@
 from collections.abc import Iterable
-from numpy.typing import NDArray
-from typing import Mapping, Literal
+from typing import Literal, Mapping
+
 import numpy as np
-from numpy.lib import NumpyVersion
 import scipy
+from numpy.lib import NumpyVersion
+from numpy.typing import NDArray
 from scipy import ndimage as ndi
 
-from ._geometric import SimilarityTransform, AffineTransform, ProjectiveTransform
-
-from ..measure import block_reduce
-
 from .._shared.utils import (
-    get_bound_method_class,
-    safe_as_int,
-    warn,
-    convert_to_float,
     _to_ndimage_mode,
     _validate_interpolation_order,
     channel_as_last_axis,
+    convert_to_float,
     deprecate_multichannel_kwarg,
+    get_bound_method_class,
+    safe_as_int,
+    warn,
 )
+from ..measure import block_reduce
+from ._geometric import AffineTransform, ProjectiveTransform, SimilarityTransform
 
 HOMOGRAPHY_TRANSFORMS = ...
 
@@ -49,7 +48,7 @@ def rescale(
     anti_aliasing=None,
     anti_aliasing_sigma=None,
     *,
-    channel_axis=None
+    channel_axis=None,
 ) -> NDArray: ...
 def rotate(
     image: NDArray,
@@ -62,9 +61,7 @@ def rotate(
     clip=True,
     preserve_range=False,
 ) -> NDArray: ...
-def downscale_local_mean(
-    image: NDArray, factors, cval: float = 0, clip: bool = True
-) -> NDArray: ...
+def downscale_local_mean(image: NDArray, factors, cval: float = 0, clip: bool = True) -> NDArray: ...
 def _swirl_mapping(xy, center, rotation, strength, radius): ...
 def swirl(
     image: NDArray,
@@ -106,14 +103,9 @@ def warp_polar(
     scaling: Literal["linear", "log"] = "linear",
     multichannel: bool = False,
     channel_axis: int | None = None,
-    **kwargs
+    **kwargs,
 ) -> NDArray: ...
 def _local_mean_weights(old_size, new_size, grid_mode, dtype): ...
 def resize_local_mean(
-    image: NDArray,
-    output_shape: Iterable,
-    grid_mode: bool = True,
-    preserve_range: bool = False,
-    *,
-    channel_axis=None
+    image: NDArray, output_shape: Iterable, grid_mode: bool = True, preserve_range: bool = False, *, channel_axis=None
 ) -> NDArray: ...

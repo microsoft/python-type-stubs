@@ -1,6 +1,19 @@
+from __future__ import division
+
+from functools import lru_cache
+
+import numpy as np
+from numpy.typing import ArrayLike
 from vispy.geometry.meshdata import MeshData
 from vispy.util.svg.color import Color
-from numpy.typing import ArrayLike
+
+from ..color import Color, get_colormap
+from ..color.colormap import CubeHelixColormap
+from ..geometry import MeshData
+from ..gloo import VertexBuffer
+from ..util.event import Event
+from .shaders import Function, FunctionChain
+from .visual import Visual
 
 # -*- coding: utf-8 -*-
 # -----------------------------------------------------------------------------
@@ -8,25 +21,11 @@ from numpy.typing import ArrayLike
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 # -----------------------------------------------------------------------------
 
-from __future__ import division
-from functools import lru_cache
-
-import numpy as np
-
-from .visual import Visual
-from .shaders import Function, FunctionChain
-from ..gloo import VertexBuffer
-from ..geometry import MeshData
-from ..color import Color, get_colormap
-from ..color.colormap import CubeHelixColormap
-from ..util.event import Event
-
 _VERTEX_SHADER: str = ...
 
 _FRAGMENT_SHADER: str = ...
 
 class MeshVisual(Visual):
-
     _shaders: dict = ...
 
     def __init__(

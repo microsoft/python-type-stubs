@@ -1,11 +1,11 @@
 from .betweenness import (
     betweenness_centrality as betweenness_centrality,
-    edge_betweenness_centrality as edge_betweenness_centrality,
     edge_betweenness as edge_betweenness,
+    edge_betweenness_centrality as edge_betweenness_centrality,
 )
 from .betweenness_subset import (
-    betweenness_centrality_subset as betweenness_centrality_subset,
     betweenness_centrality_source as betweenness_centrality_source,
+    betweenness_centrality_subset as betweenness_centrality_subset,
     edge_betweenness_centrality_subset as edge_betweenness_centrality_subset,
 )
 from .closeness import (
@@ -13,8 +13,8 @@ from .closeness import (
     incremental_closeness_centrality as incremental_closeness_centrality,
 )
 from .current_flow_betweenness import (
-    current_flow_betweenness_centrality as current_flow_betweenness_centrality,
     approximate_current_flow_betweenness_centrality as approximate_current_flow_betweenness_centrality,
+    current_flow_betweenness_centrality as current_flow_betweenness_centrality,
     edge_current_flow_betweenness_centrality as edge_current_flow_betweenness_centrality,
 )
 from .current_flow_betweenness_subset import (
@@ -44,31 +44,23 @@ from .group import (
     prominent_group as prominent_group,
 )
 from .harmonic import harmonic_centrality as harmonic_centrality
-from .katz import (
-    katz_centrality as katz_centrality,
-    katz_centrality_numpy as katz_centrality_numpy,
-)
-from .load import (
-    load_centrality as load_centrality,
-    edge_load_centrality as edge_load_centrality,
-)
-from .percolation import (
-    percolation_centrality as percolation_centrality,
-)
+from .katz import katz_centrality as katz_centrality, katz_centrality_numpy as katz_centrality_numpy
+from .load import edge_load_centrality as edge_load_centrality, load_centrality as load_centrality
+from .percolation import percolation_centrality as percolation_centrality
 from .reaching import (
     global_reaching_centrality as global_reaching_centrality,
     local_reaching_centrality as local_reaching_centrality,
 )
 from .second_order import second_order_centrality as second_order_centrality
 from .subgraph_alg import (
-    subgraph_centrality_exp as subgraph_centrality_exp,
-    subgraph_centrality as subgraph_centrality,
     communicability_betweenness_centrality as communicability_betweenness_centrality,
     estrada_index as estrada_index,
+    subgraph_centrality as subgraph_centrality,
+    subgraph_centrality_exp as subgraph_centrality_exp,
 )
 from .trophic import (
-    trophic_levels as trophic_levels,
     trophic_differences as trophic_differences,
     trophic_incoherence_parameter as trophic_incoherence_parameter,
+    trophic_levels as trophic_levels,
 )
 from .voterank_alg import voterank as voterank

@@ -11,9 +11,9 @@ from ...gloo import Program
 from ...gloo.preprocessor import preprocess
 from ...util import logger
 from ...util.event import EventEmitter
+from .compiler import Compiler
 from .function import MainFunction
 from .variable import Variable
-from .compiler import Compiler
 
 class ModularProgram(Program):
     def __init__(self, vcode="", fcode="", gcode=None): ...

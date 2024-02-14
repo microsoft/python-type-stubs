@@ -1,7 +1,6 @@
-  
 import numpy as np
-from ..utils._seq_dataset import SequentialDataset32, SequentialDataset64
 
+from ..utils._seq_dataset import SequentialDataset32, SequentialDataset64
 
 def sag32(
     dataset: SequentialDataset32,
@@ -24,10 +23,8 @@ def sag32(
     intercept_sum_gradient_init: np.ndarray,
     intercept_decay: float,
     saga: bool,
-    verbose: bool
+    verbose: bool,
 ) -> tuple[int, int]: ...
-
-
 def sag64(
     dataset: SequentialDataset64,
     weights_array: np.ndarray,
@@ -49,5 +46,5 @@ def sag64(
     intercept_sum_gradient_init: np.ndarray,
     intercept_decay: float,
     saga: bool,
-    verbose: bool
+    verbose: bool,
 ) -> tuple[int, int]: ...

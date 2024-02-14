@@ -1,8 +1,8 @@
-from numpy import ndarray
-from numpy.typing import NDArray
 from typing import Literal
 
 import numpy as np
+from numpy import ndarray
+from numpy.typing import NDArray
 
 from .._shared.utils import check_nD
 
@@ -16,9 +16,7 @@ def graycomatrix(
 ): ...
 def graycoprops(
     P: NDArray,
-    prop: Literal[
-        "contrast", "dissimilarity", "homogeneity", "energy", "correlation", "ASM"
-    ] = "contrast",
+    prop: Literal["contrast", "dissimilarity", "homogeneity", "energy", "correlation", "ASM"] = "contrast",
 ): ...
 def local_binary_pattern(
     image,

@@ -1,4 +1,6 @@
 from typing import IO
+
+import numpy as np
 from vispy._typing import FileLike
 
 # -*- coding: utf-8 -*-
@@ -8,8 +10,6 @@ from vispy._typing import FileLike
 # See https://github.com/mikedh/trimesh for more information.
 # See https://github.com/mikedh/trimesh/blob/master/LICENSE.md for
 # the license.
-
-import numpy as np
 
 class HeaderError(Exception):
     pass

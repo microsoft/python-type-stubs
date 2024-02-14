@@ -1,4 +1,5 @@
 from typing import Mapping
+
 from ...classes.graph import Graph
 
 __all__ = ["hits", "hits_numpy", "hits_scipy", "authority_matrix", "hub_matrix"]

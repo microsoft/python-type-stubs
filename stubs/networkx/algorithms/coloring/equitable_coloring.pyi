@@ -1,4 +1,5 @@
 from collections import defaultdict
+
 from ...classes.graph import Graph
 
 __all__ = ["equitable_color"]

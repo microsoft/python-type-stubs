@@ -1,15 +1,14 @@
-from ..scene.node import Node
-
 # -*- coding: utf-8 -*-
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 import re
 import weakref
+from typing import ClassVar, Type, TypeVar
 
 from .. import visuals
-from .node import Node
+from ..scene.node import Node
 from ..visuals.filters import Alpha, PickingFilter
-from typing import ClassVar, Type, TypeVar
+from .node import Node
 
 _T = ...
 
@@ -66,7 +65,7 @@ Markers = visuals.MarkersVisual
 Mesh = visuals.MeshVisual
 MeshNormals = visuals.MeshNormalsVisual
 Plane = visuals.PlaneVisual
-Polygon = visuals.PolygonVisual 
+Polygon = visuals.PolygonVisual
 Rectangle = visuals.RectangleVisual
 RegularPolygon = visuals.RegularPolygonVisual
 ScrollingLines = visuals.ScrollingLinesVisual

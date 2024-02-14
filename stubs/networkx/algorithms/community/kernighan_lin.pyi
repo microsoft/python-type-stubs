@@ -1,8 +1,8 @@
 from itertools import count
 
 from ...classes.graph import Graph
-from .community_utils import is_partition
 from ...utils import BinaryHeap, not_implemented_for, py_random_state
+from .community_utils import is_partition
 
 __all__ = ["kernighan_lin_bisection"]
 

@@ -1,11 +1,11 @@
 from typing import Literal
-from ._typing import *
-from .transforms import Affine2D, Transform
-from .path import Path
+
 from ._enums import CapStyle, JoinStyle
+from ._typing import *
+from .path import Path
+from .transforms import Affine2D, Transform
 
 class MarkerStyle:
-
     markers: list = ...
     filled_markers: list = ...
     fillstyles: list = ...

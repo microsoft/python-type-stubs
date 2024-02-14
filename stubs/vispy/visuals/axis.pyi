@@ -1,21 +1,19 @@
+import math
 from collections.abc import Iterable
+
+import numpy as np
+from numpy.typing import ArrayLike
 from vispy.util.svg.color import Color
 
-from numpy.typing import ArrayLike
+from .line import LineVisual
+from .text import TextVisual
+from .visual import CompoundVisual, updating_property
 
 # -*- coding: utf-8 -*-
 # -----------------------------------------------------------------------------
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 # -----------------------------------------------------------------------------
-
-import math
-
-import numpy as np
-
-from .visual import CompoundVisual, updating_property
-from .line import LineVisual
-from .text import TextVisual
 
 # XXX TODO list (see code, plus):
 # 1. Automated tick direction?

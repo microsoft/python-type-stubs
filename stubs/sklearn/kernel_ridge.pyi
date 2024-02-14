@@ -1,21 +1,18 @@
-from typing import Callable, ClassVar, TypeVar
-from .base import BaseEstimator, RegressorMixin, MultiOutputMixin
-from .utils.validation import check_is_fitted as check_is_fitted
-from numpy import ndarray
 from numbers import Integral as Integral, Real as Real
-from .utils._param_validation import Interval as Interval, StrOptions as StrOptions
+from typing import Callable, ClassVar, TypeVar
+
+from numpy import ndarray
 from scipy.sparse import spmatrix
-from .metrics.pairwise import (
-    PAIRWISE_KERNEL_FUNCTIONS as PAIRWISE_KERNEL_FUNCTIONS,
-    pairwise_kernels as pairwise_kernels,
-)
-from ._typing import Float, ArrayLike, Int, MatrixLike
+
+from ._typing import ArrayLike, Float, Int, MatrixLike
+from .base import BaseEstimator, MultiOutputMixin, RegressorMixin
+from .metrics.pairwise import PAIRWISE_KERNEL_FUNCTIONS as PAIRWISE_KERNEL_FUNCTIONS, pairwise_kernels as pairwise_kernels
+from .utils._param_validation import Interval as Interval, StrOptions as StrOptions
+from .utils.validation import check_is_fitted as check_is_fitted
 
 KernelRidge_Self = TypeVar("KernelRidge_Self", bound="KernelRidge")
 
-
 import numpy as np
-
 
 class KernelRidge(MultiOutputMixin, RegressorMixin, BaseEstimator):
     feature_names_in_: ndarray = ...
@@ -34,16 +31,11 @@ class KernelRidge(MultiOutputMixin, RegressorMixin, BaseEstimator):
         degree: Int = 3,
         coef0: Float = 1,
         kernel_params: None | dict = None,
-    ) -> None:
-        ...
-
+    ) -> None: ...
     def fit(
         self: KernelRidge_Self,
         X: MatrixLike | ArrayLike,
         y: MatrixLike | ArrayLike,
         sample_weight: None | ArrayLike = None,
-    ) -> KernelRidge_Self:
-        ...
-
-    def predict(self, X: MatrixLike | ArrayLike) -> ndarray:
-        ...
+    ) -> KernelRidge_Self: ...
+    def predict(self, X: MatrixLike | ArrayLike) -> ndarray: ...

@@ -1,4 +1,8 @@
+import numpy as np
 from vispy.color import Color
+
+from ..color import Color
+from . import Visual
 
 # -*- coding: utf-8 -*-
 # -----------------------------------------------------------------------------
@@ -8,17 +12,11 @@ from vispy.color import Color
 # Author: Siddharth Bhat
 # -----------------------------------------------------------------------------
 
-import numpy as np
-
-from . import Visual
-from ..color import Color
-
 _VERTEX_SHADER: str = ...
 
 _FRAGMENT_SHADER: str = ...  # noqa
 
 class _BorderVisual(Visual):
-
     _shaders: dict = ...
 
     def __init__(

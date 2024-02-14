@@ -1,9 +1,10 @@
-from ..classes.digraph import DiGraph
-from numpy.typing import ArrayLike
 from itertools import combinations
 
-from ..classes.graph import Graph
+from numpy.typing import ArrayLike
+
 from ..algorithms.simple_paths import is_simple_path as is_path
+from ..classes.digraph import DiGraph
+from ..classes.graph import Graph
 from ..utils import arbitrary_element, not_implemented_for, py_random_state
 
 __all__ = [

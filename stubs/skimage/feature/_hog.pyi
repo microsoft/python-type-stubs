@@ -17,5 +17,5 @@ def hog(
     feature_vector: bool = True,
     multichannel: bool | None = None,
     *,
-    channel_axis: int | None = None
+    channel_axis: int | None = None,
 ): ...

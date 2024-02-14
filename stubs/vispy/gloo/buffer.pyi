@@ -1,19 +1,19 @@
-from ..gloo.buffer import DataBuffer
+import weakref
+from os import path as op
+from traceback import extract_stack, format_list
+
+import numpy as np
 from numpy.typing import NDArray
+
+from ..gloo.buffer import DataBuffer
+from ..util import logger
+from .globject import GLObject
 
 # -*- coding: utf-8 -*-
 # -----------------------------------------------------------------------------
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 # -----------------------------------------------------------------------------
-
-import numpy as np
-from os import path as op
-from traceback import extract_stack, format_list
-import weakref
-
-from .globject import GLObject
-from ..util import logger
 
 # ------------------------------------------------------------ Buffer class ---
 class Buffer(GLObject):
@@ -48,7 +48,6 @@ class DataBuffer(Buffer):
     def __repr__(self): ...
 
 class DataBufferView(DataBuffer):
-
     # Note that this class is a bit evil: it is a subclass of GLObject,
     # Buffer and DataBuffer, but any of these __init__'s are not called ...
 
@@ -72,7 +71,6 @@ class DataBufferView(DataBuffer):
 
 # ------------------------------------------------------ VertexBuffer class ---
 class VertexBuffer(DataBuffer):
-
     _GLIR_TYPE: str = ...
 
     def _prepare_data(self, data, convert=False): ...
@@ -81,7 +79,6 @@ def _last_stack_str(): ...
 
 # ------------------------------------------------------- IndexBuffer class ---
 class IndexBuffer(DataBuffer):
-
     _GLIR_TYPE: str = ...
 
     def __init__(self, data: NDArray | None = None): ...

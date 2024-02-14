@@ -1,14 +1,8 @@
+import numpy as np
 from numpy.typing import NDArray
 
-import numpy as np
-
 from .._shared.utils import deprecate_kwarg
-
-from ._util import (
-    _offsets_to_raveled_neighbors,
-    _resolve_neighborhood,
-    _set_border_values,
-)
+from ._util import _offsets_to_raveled_neighbors, _resolve_neighborhood, _set_border_values
 
 @deprecate_kwarg(
     kwarg_mapping={"selem": "footprint"},
@@ -23,7 +17,7 @@ def flood_fill(
     footprint: NDArray | None = None,
     connectivity: int | None = None,
     tolerance: float | int | None = None,
-    in_place: bool = False
+    in_place: bool = False,
 ) -> NDArray: ...
 @deprecate_kwarg(
     kwarg_mapping={"selem": "footprint"},
@@ -36,5 +30,5 @@ def flood(
     *,
     footprint: NDArray | None = None,
     connectivity: int | None = None,
-    tolerance: float | int | None = None
+    tolerance: float | int | None = None,
 ) -> NDArray: ...

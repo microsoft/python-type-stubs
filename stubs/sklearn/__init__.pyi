@@ -1,17 +1,13 @@
-from .base import clone as clone
-from ._config import (
-    get_config as get_config,
-    set_config as set_config,
-    config_context as config_context,
-)
-from .utils._show_versions import show_versions as show_versions
-import sys as sys
 import logging as logging
 import os as os
 import random as random
+import sys as sys
+
+from ._config import config_context as config_context, get_config as get_config, set_config as set_config
+from .base import clone as clone
+from .utils._show_versions import show_versions as show_versions
 
 logger = ...
-
 
 # PEP0440 compatible formatted version, see:
 # https://www.python.org/dev/peps/pep-0440/
@@ -31,6 +27,4 @@ logger = ...
 #
 __version__: str = ...
 
-
-def setup_module(module):
-    ...
+def setup_module(module): ...

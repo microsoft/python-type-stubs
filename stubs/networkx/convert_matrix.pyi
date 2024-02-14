@@ -1,9 +1,9 @@
-from typing import Literal, Callable
-from numpy.typing import ArrayLike
-
 import itertools
 import warnings
 from collections import defaultdict
+from typing import Callable, Literal
+
+from numpy.typing import ArrayLike
 
 from .classes.graph import Graph
 from .utils import not_implemented_for
@@ -81,12 +81,8 @@ def to_scipy_sparse_matrix(
     weight="weight",
     format="csr",
 ): ...
-def from_scipy_sparse_matrix(
-    A, parallel_edges: bool = False, create_using=None, edge_attribute: str = "weight"
-): ...
-def from_scipy_sparse_array(
-    A, parallel_edges: bool = False, create_using=None, edge_attribute: str = "weight"
-): ...
+def from_scipy_sparse_matrix(A, parallel_edges: bool = False, create_using=None, edge_attribute: str = "weight"): ...
+def from_scipy_sparse_array(A, parallel_edges: bool = False, create_using=None, edge_attribute: str = "weight"): ...
 def to_numpy_array(
     G: Graph,
     nodelist: ArrayLike | None = None,

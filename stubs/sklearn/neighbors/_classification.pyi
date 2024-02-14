@@ -1,24 +1,20 @@
-from typing import Callable, ClassVar, Literal, TypeVar
-from ._base import NeighborsBase, KNeighborsMixin, RadiusNeighborsMixin
-from numpy import ndarray
-from ..utils.extmath import weighted_mode as weighted_mode
-from ..utils._param_validation import StrOptions as StrOptions
 from numbers import Integral as Integral
+from typing import Callable, ClassVar, Literal, TypeVar
+
+from numpy import ndarray
+
+from .._typing import ArrayLike, Float, Int, MatrixLike
 from ..base import ClassifierMixin
-from .._typing import Int, MatrixLike, ArrayLike, Float
+from ..utils._param_validation import StrOptions as StrOptions
+from ..utils.extmath import weighted_mode as weighted_mode
+from ._base import KNeighborsMixin, NeighborsBase, RadiusNeighborsMixin
 
-RadiusNeighborsClassifier_Self = TypeVar(
-    "RadiusNeighborsClassifier_Self", bound="RadiusNeighborsClassifier"
-)
-KNeighborsClassifier_Self = TypeVar(
-    "KNeighborsClassifier_Self", bound="KNeighborsClassifier"
-)
-
-
-import numpy as np
+RadiusNeighborsClassifier_Self = TypeVar("RadiusNeighborsClassifier_Self", bound="RadiusNeighborsClassifier")
+KNeighborsClassifier_Self = TypeVar("KNeighborsClassifier_Self", bound="KNeighborsClassifier")
 
 import warnings
 
+import numpy as np
 
 class KNeighborsClassifier(KNeighborsMixin, ClassifierMixin, NeighborsBase):
     outputs_2d_: bool = ...
@@ -35,29 +31,17 @@ class KNeighborsClassifier(KNeighborsMixin, ClassifierMixin, NeighborsBase):
         self,
         n_neighbors: Int = 5,
         *,
-        weights: None
-        | Literal["uniform", "distance", "uniform"]
-        | Callable = "uniform",
+        weights: None | Literal["uniform", "distance", "uniform"] | Callable = "uniform",
         algorithm: Literal["auto", "ball_tree", "kd_tree", "brute", "auto"] = "auto",
         leaf_size: Int = 30,
         p: Int = 2,
         metric: str | Callable = "minkowski",
         metric_params: None | dict = None,
         n_jobs: None | Int = None,
-    ) -> None:
-        ...
-
-    def fit(
-        self: KNeighborsClassifier_Self, X: MatrixLike, y: MatrixLike | ArrayLike
-    ) -> KNeighborsClassifier_Self:
-        ...
-
-    def predict(self, X: MatrixLike) -> ndarray:
-        ...
-
-    def predict_proba(self, X: MatrixLike) -> ndarray | list[ndarray]:
-        ...
-
+    ) -> None: ...
+    def fit(self: KNeighborsClassifier_Self, X: MatrixLike, y: MatrixLike | ArrayLike) -> KNeighborsClassifier_Self: ...
+    def predict(self, X: MatrixLike) -> ndarray: ...
+    def predict_proba(self, X: MatrixLike) -> ndarray | list[ndarray]: ...
 
 class RadiusNeighborsClassifier(RadiusNeighborsMixin, ClassifierMixin, NeighborsBase):
     outputs_2d_: bool = ...
@@ -75,9 +59,7 @@ class RadiusNeighborsClassifier(RadiusNeighborsMixin, ClassifierMixin, Neighbors
         self,
         radius: Float = 1.0,
         *,
-        weights: None
-        | Literal["uniform", "distance", "uniform"]
-        | Callable = "uniform",
+        weights: None | Literal["uniform", "distance", "uniform"] | Callable = "uniform",
         algorithm: Literal["auto", "ball_tree", "kd_tree", "brute", "auto"] = "auto",
         leaf_size: Int = 30,
         p: Int = 2,
@@ -85,16 +67,7 @@ class RadiusNeighborsClassifier(RadiusNeighborsMixin, ClassifierMixin, Neighbors
         outlier_label: None | str = None,
         metric_params: None | dict = None,
         n_jobs: None | Int = None,
-    ) -> None:
-        ...
-
-    def fit(
-        self: RadiusNeighborsClassifier_Self, X: MatrixLike, y: MatrixLike | ArrayLike
-    ) -> RadiusNeighborsClassifier_Self:
-        ...
-
-    def predict(self, X: MatrixLike) -> ndarray:
-        ...
-
-    def predict_proba(self, X: MatrixLike) -> ndarray:
-        ...
+    ) -> None: ...
+    def fit(self: RadiusNeighborsClassifier_Self, X: MatrixLike, y: MatrixLike | ArrayLike) -> RadiusNeighborsClassifier_Self: ...
+    def predict(self, X: MatrixLike) -> ndarray: ...
+    def predict_proba(self, X: MatrixLike) -> ndarray: ...

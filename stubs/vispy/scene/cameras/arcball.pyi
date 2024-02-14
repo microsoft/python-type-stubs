@@ -12,7 +12,6 @@ from ...visuals.transforms import MatrixTransform
 from .perspective import Base3DRotationCamera
 
 class ArcballCamera(Base3DRotationCamera):
-
     _state_props = ...
 
     def __init__(self, fov: float = 45.0, distance: None | float = None, translate_speed: float = 1.0, **kwargs): ...

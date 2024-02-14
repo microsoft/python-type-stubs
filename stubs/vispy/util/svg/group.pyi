@@ -5,9 +5,10 @@
 # -----------------------------------------------------------------------------
 
 import copy
+
 from ...util import logger
-from .path import Path
 from .base import namespace
+from .path import Path
 from .transformable import Transformable
 
 class Group(Transformable):

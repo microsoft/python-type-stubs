@@ -1,6 +1,5 @@
-from collections.abc import Iterable
-
 import warnings
+from collections.abc import Iterable
 
 from ..classes.graph import Graph
 from ..utils import open_file

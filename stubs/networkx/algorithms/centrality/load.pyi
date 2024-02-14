@@ -1,13 +1,11 @@
-from typing import Mapping
 from operator import itemgetter
+from typing import Mapping
 
 from ...classes.graph import Graph
 
 __all__ = ["load_centrality", "edge_load_centrality"]
 
-def newman_betweenness_centrality(
-    G: Graph, v=None, cutoff=None, normalized=True, weight=None
-) -> Mapping: ...
+def newman_betweenness_centrality(G: Graph, v=None, cutoff=None, normalized=True, weight=None) -> Mapping: ...
 
 load_centrality = ...
 

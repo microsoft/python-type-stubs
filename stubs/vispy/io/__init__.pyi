@@ -4,21 +4,21 @@
 
 from os import path as _op
 
-from .datasets import (
-    load_iris as load_iris,
+from .datasets import (  # noqa
     load_crate as load_crate,
-    load_data_file as load_data_file,  # noqa
+    load_data_file as load_data_file,
+    load_iris as load_iris,
     load_spatial_filters as load_spatial_filters,
-)  # noqa
-from .mesh import read_mesh as read_mesh, write_mesh as write_mesh  # noqa
-from .image import (
-    read_png as read_png,
-    write_png as write_png,
+)
+from .image import (  # noqa
+    _check_img_lib as _check_img_lib,
+    _make_png as _make_png,
     imread as imread,
     imsave as imsave,
-    _make_png as _make_png,  # noqa
-    _check_img_lib as _check_img_lib,
-)  # noqa
+    read_png as read_png,
+    write_png as write_png,
+)
+from .mesh import read_mesh as read_mesh, write_mesh as write_mesh  # noqa
 
 _data_dir = ...
 

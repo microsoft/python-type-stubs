@@ -1,6 +1,5 @@
-from typing import Any
-
 from itertools import chain
+from typing import Any
 
 from ..classes.graph import Graph
 from .components import is_connected, is_strongly_connected

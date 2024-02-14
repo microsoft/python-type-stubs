@@ -1,14 +1,13 @@
-from os import PathLike
-import numpy as np
+import os
+import os.path as osp
 import shutil
+from os import PathLike
+
+import numpy as np
 from packaging import version
 
-from ._registry import registry, legacy_registry, registry_urls
-
 from .. import __version__
-
-import os.path as osp
-import os
+from ._registry import legacy_registry, registry, registry_urls
 
 legacy_data_dir = ...
 skimage_distribution_dir = ...

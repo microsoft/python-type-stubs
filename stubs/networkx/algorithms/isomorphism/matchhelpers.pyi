@@ -1,8 +1,10 @@
-from typing import Callable
-from numpy.typing import ArrayLike
 import math
 import types
 from itertools import permutations
+from typing import Callable
+
+from numpy.typing import ArrayLike
+
 from ...classes.graph import Graph
 
 __all__ = [
@@ -66,9 +68,7 @@ def generic_node_match(attr: str | ArrayLike, default, op: ArrayLike | Callable)
 
 generic_edge_match = ...
 
-def generic_multiedge_match(
-    attr: str | ArrayLike, default, op: ArrayLike | Callable
-): ...
+def generic_multiedge_match(attr: str | ArrayLike, default, op: ArrayLike | Callable): ...
 
 # Docstrings for numerical functions.
 generic_node_match.__doc__ = ...

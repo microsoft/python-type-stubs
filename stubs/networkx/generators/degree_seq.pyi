@@ -1,15 +1,14 @@
-from numpy.typing import ArrayLike
-from ..classes.digraph import DiGraph
-from ..classes.multigraph import MultiGraph
-from ..classes.multidigraph import MultiDiGraph
-from ..classes.graph import Graph
-
 import heapq
 import math
 from itertools import chain, combinations, zip_longest
 from operator import itemgetter
 
+from numpy.typing import ArrayLike
+
+from ..classes.digraph import DiGraph
 from ..classes.graph import Graph
+from ..classes.multidigraph import MultiDiGraph
+from ..classes.multigraph import MultiGraph
 from ..utils import py_random_state, random_weighted_sample
 
 __all__ = [
@@ -27,15 +26,11 @@ chaini = ...
 @py_random_state(2)
 def configuration_model(deg_sequence, create_using=None, seed=None) -> MultiGraph: ...
 @py_random_state(3)
-def directed_configuration_model(
-    in_degree_sequence, out_degree_sequence, create_using=None, seed=None
-) -> MultiDiGraph: ...
+def directed_configuration_model(in_degree_sequence, out_degree_sequence, create_using=None, seed=None) -> MultiDiGraph: ...
 @py_random_state(1)
 def expected_degree_graph(w: ArrayLike, seed=None, selfloops=True) -> Graph: ...
 def havel_hakimi_graph(deg_sequence, create_using=None): ...
-def directed_havel_hakimi_graph(
-    in_deg_sequence, out_deg_sequence, create_using=None
-) -> DiGraph: ...
+def directed_havel_hakimi_graph(in_deg_sequence, out_deg_sequence, create_using=None) -> DiGraph: ...
 def degree_sequence_tree(deg_sequence, create_using=None): ...
 @py_random_state(1)
 def random_degree_sequence_graph(sequence, seed=None, tries: int = 10) -> Graph: ...

@@ -1,31 +1,23 @@
-from typing import Any, ClassVar, Literal, TypeVar
-from numpy.random import RandomState
-from ..isotonic import IsotonicRegression as IsotonicRegression
-from numpy import ndarray
-from ..utils._param_validation import (
-    Interval as Interval,
-    StrOptions as StrOptions,
-    Hidden as Hidden,
-)
-from joblib import effective_n_jobs as effective_n_jobs
 from numbers import Integral as Integral, Real as Real
-from ..metrics import euclidean_distances as euclidean_distances
+from typing import Any, ClassVar, Literal, TypeVar
+
+from joblib import effective_n_jobs as effective_n_jobs
+from numpy import ndarray
+from numpy.random import RandomState
+
+from .._typing import Float, Int, MatrixLike
 from ..base import BaseEstimator
-from ..utils.parallel import delayed as delayed, Parallel as Parallel
-from .._typing import MatrixLike, Int, Float
-from ..utils import (
-    check_random_state as check_random_state,
-    check_array as check_array,
-    check_symmetric as check_symmetric,
-)
+from ..isotonic import IsotonicRegression as IsotonicRegression
+from ..metrics import euclidean_distances as euclidean_distances
+from ..utils import check_array as check_array, check_random_state as check_random_state, check_symmetric as check_symmetric
+from ..utils._param_validation import Hidden as Hidden, Interval as Interval, StrOptions as StrOptions
+from ..utils.parallel import Parallel as Parallel, delayed as delayed
 
 MDS_Self = TypeVar("MDS_Self", bound="MDS")
 
-
-import numpy as np
-
 import warnings
 
+import numpy as np
 
 def smacof(
     dissimilarities: MatrixLike,
@@ -41,9 +33,7 @@ def smacof(
     random_state: RandomState | None | Int = None,
     return_n_iter: bool = False,
     normalized_stress: Literal["auto", "warn"] | bool = "warn",
-) -> tuple[ndarray, float, int] | tuple[ndarray, Float, int]:
-    ...
-
+) -> tuple[ndarray, float, int] | tuple[ndarray, Float, int]: ...
 
 class MDS(BaseEstimator):
     n_iter_: int = ...
@@ -68,15 +58,6 @@ class MDS(BaseEstimator):
         random_state: RandomState | None | Int = None,
         dissimilarity: Literal["euclidean", "precomputed", "euclidean"] = "euclidean",
         normalized_stress: Literal["auto", "warn"] | bool = "warn",
-    ) -> None:
-        ...
-
-    def fit(
-        self: MDS_Self, X: MatrixLike, y: Any = None, init: None | MatrixLike = None
-    ) -> MDS_Self:
-        ...
-
-    def fit_transform(
-        self, X: MatrixLike, y: Any = None, init: None | MatrixLike = None
-    ) -> ndarray:
-        ...
+    ) -> None: ...
+    def fit(self: MDS_Self, X: MatrixLike, y: Any = None, init: None | MatrixLike = None) -> MDS_Self: ...
+    def fit_transform(self, X: MatrixLike, y: Any = None, init: None | MatrixLike = None) -> ndarray: ...

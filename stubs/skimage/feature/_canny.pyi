@@ -16,5 +16,5 @@ def canny(
     use_quantiles: bool = False,
     *,
     mode="constant",
-    cval: float = 0.0
+    cval: float = 0.0,
 ): ...

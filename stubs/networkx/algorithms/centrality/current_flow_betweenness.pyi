@@ -1,16 +1,8 @@
 from typing import Mapping
-from .flow_matrix import (
-    CGInverseLaplacian,
-    FullInverseLaplacian,
-    SuperLUInverseLaplacian,
-    flow_matrix_row,
-)
+
 from ...classes.graph import Graph
-from ...utils import (
-    not_implemented_for,
-    py_random_state,
-    reverse_cuthill_mckee_ordering,
-)
+from ...utils import not_implemented_for, py_random_state, reverse_cuthill_mckee_ordering
+from .flow_matrix import CGInverseLaplacian, FullInverseLaplacian, SuperLUInverseLaplacian, flow_matrix_row
 
 __all__ = [
     "current_flow_betweenness_centrality",
@@ -29,9 +21,5 @@ def approximate_current_flow_betweenness_centrality(
     kmax: int = 10000,
     seed=None,
 ) -> Mapping: ...
-def current_flow_betweenness_centrality(
-    G: Graph, normalized=True, weight=None, dtype=..., solver="full"
-) -> Mapping: ...
-def edge_current_flow_betweenness_centrality(
-    G: Graph, normalized=True, weight=None, dtype=..., solver="full"
-) -> Mapping: ...
+def current_flow_betweenness_centrality(G: Graph, normalized=True, weight=None, dtype=..., solver="full") -> Mapping: ...
+def edge_current_flow_betweenness_centrality(G: Graph, normalized=True, weight=None, dtype=..., solver="full") -> Mapping: ...

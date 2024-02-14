@@ -1,19 +1,19 @@
+from copy import deepcopy
+from typing import Literal, Mapping
+
+import numpy as np
 from numpy import dtype
-from typing import Mapping, Literal
 from numpy.typing import ArrayLike
+
+from ..color import Color
+from ..util import logger
+from . import gl
 
 # -*- coding: utf-8 -*-
 # -----------------------------------------------------------------------------
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 # -----------------------------------------------------------------------------
-
-import numpy as np
-from copy import deepcopy
-
-from . import gl
-from ..color import Color
-from ..util import logger
 
 __all__ = (
     "set_viewport",
@@ -69,7 +69,6 @@ def _to_args(x): ...
 def _check_conversion(key, valid_dict): ...
 
 class BaseGlooFunctions(object):
-
     ##########################################################################
     # PRIMITIVE/VERTEX
 

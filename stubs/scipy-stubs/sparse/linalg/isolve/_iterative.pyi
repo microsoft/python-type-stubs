@@ -1,14 +1,15 @@
 # Python: 3.8.2 (tags/v3.8.2:7b3ab59, Feb 25 2020, 23:03:10) [MSC v.1916 64 bit (AMD64)]
 # Library: scipy, version: 1.6.2
 # Module: scipy.sparse.linalg.isolve._iterative, version: $Revision: $
-import typing
 import builtins as _mod_builtins
+import typing
 
 __doc__: str
 __file__: str
 __name__: str
 __package__: str
 __version__: bytes
+
 def cbicgrevcom(b, x, work, iter, resid, info, ndx1, ndx2, ijob) -> typing.Any:
     "x,iter,resid,info,ndx1,ndx2,sclr1,sclr2,ijob = cbicgrevcom(b,x,work,iter,resid,info,ndx1,ndx2,ijob)\n\nWrapper for ``cbicgrevcom``.\n\nParameters\n----------\nb : input rank-1 array('F') with bounds (n)\nx : input rank-1 array('F') with bounds (n)\nwork : in/output rank-1 array('F') with bounds (6 * ldw)\niter : input int\nresid : input float\ninfo : input int\nndx1 : input int\nndx2 : input int\nijob : input int\n\nReturns\n-------\nx : rank-1 array('F') with bounds (n)\niter : int\nresid : float\ninfo : int\nndx1 : int\nndx2 : int\nsclr1 : complex\nsclr2 : complex\nijob : int\n"
     ...
@@ -105,6 +106,4 @@ def zqmrrevcom(b, x, work, iter, resid, info, ndx1, ndx2, ijob) -> typing.Any:
     "x,iter,resid,info,ndx1,ndx2,sclr1,sclr2,ijob = zqmrrevcom(b,x,work,iter,resid,info,ndx1,ndx2,ijob)\n\nWrapper for ``zqmrrevcom``.\n\nParameters\n----------\nb : input rank-1 array('D') with bounds (n)\nx : input rank-1 array('D') with bounds (n)\nwork : in/output rank-1 array('D') with bounds (11 * ldw)\niter : input int\nresid : input float\ninfo : input int\nndx1 : input int\nndx2 : input int\nijob : input int\n\nReturns\n-------\nx : rank-1 array('D') with bounds (n)\niter : int\nresid : float\ninfo : int\nndx1 : int\nndx2 : int\nsclr1 : complex\nsclr2 : complex\nijob : int\n"
     ...
 
-def __getattr__(name) -> typing.Any:
-    ...
-
+def __getattr__(name) -> typing.Any: ...

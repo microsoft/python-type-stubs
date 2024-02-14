@@ -1,7 +1,8 @@
-from numpy.typing import ArrayLike
-from typing import Literal
 import os
 import sys
+from typing import Literal
+
+from numpy.typing import ArrayLike
 
 def _show_skimage_info(): ...
 

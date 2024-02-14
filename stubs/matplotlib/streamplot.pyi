@@ -1,8 +1,8 @@
 from typing import Literal, Sequence
+
 from ._typing import *
-from .colors import Normalize
-from .colors import Colormap
 from .axes import Axes
+from .colors import Colormap, Normalize
 
 __all__ = ["streamplot"]
 

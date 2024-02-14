@@ -1,5 +1,3 @@
-
-
 # -*- coding: utf-8 -*-
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
@@ -7,23 +5,23 @@
 from __future__ import division, print_function
 
 import sys
-import numpy as np
 from time import sleep
+from typing import Callable, Mapping
 
-from ..util.event import EmitterGroup, Event, WarningEmitter
-from ..util.ptime import time
-from ..util.dpi import get_dpi
-from ..util import config as util_config, logger
-from . import Application, use_app
-from ..gloo.context import GLContext, set_current_canvas, forget_canvas
-from ..gloo import FrameBuffer, RenderBuffer
-
+import numpy as np
 from numpy.typing import ArrayLike
-from typing import Mapping, Callable
+from vispy.app.application import Application
 from vispy.gloo.context import GLContext
 from vispy.scene.widgets.widget import Widget
-from vispy.app.application import Application
-from vispy.util.keys import Key 
+from vispy.util.keys import Key
+
+from ..gloo import FrameBuffer, RenderBuffer
+from ..gloo.context import GLContext, forget_canvas, set_current_canvas
+from ..util import config as util_config, logger
+from ..util.dpi import get_dpi
+from ..util.event import EmitterGroup, Event, WarningEmitter
+from ..util.ptime import time
+from . import Application, use_app
 
 # todo: add functions for asking about current mouse/keyboard state
 # todo: add hover enter/exit events

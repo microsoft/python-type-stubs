@@ -1,5 +1,5 @@
-from typing import Any
 import math
+from typing import Any
 
 from ..classes.graph import Graph
 from ..utils import not_implemented_for, py_random_state

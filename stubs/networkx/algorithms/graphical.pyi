@@ -1,5 +1,6 @@
-from numpy.typing import ArrayLike
 import heapq
+
+from numpy.typing import ArrayLike
 
 from ..classes.graph import Graph
 

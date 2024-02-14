@@ -1,21 +1,13 @@
 import itertools
 import time
-from xml.etree.ElementTree import (
-    Element,
-    ElementTree,
-    SubElement,
-    register_namespace,
-    tostring,
-)
+from xml.etree.ElementTree import Element, ElementTree, SubElement, register_namespace, tostring
 
 from ..classes.graph import Graph
 from ..utils import open_file
 
 __all__ = ["write_gexf", "read_gexf", "relabel_gexf_graph", "generate_gexf"]
 
-def write_gexf(
-    G: Graph, path, encoding="utf-8", prettyprint=True, version="1.2draft"
-): ...
+def write_gexf(G: Graph, path, encoding="utf-8", prettyprint=True, version="1.2draft"): ...
 def generate_gexf(G: Graph, encoding="utf-8", prettyprint=True, version="1.2draft"): ...
 def read_gexf(path, node_type=None, relabel=False, version="1.2draft"): ...
 
@@ -36,9 +28,7 @@ class GEXF:
 class GEXFWriter(GEXF):
     # class for writing GEXF format files
     # use write_gexf() function
-    def __init__(
-        self, graph=None, encoding="utf-8", prettyprint=True, version="1.2draft"
-    ): ...
+    def __init__(self, graph=None, encoding="utf-8", prettyprint=True, version="1.2draft"): ...
     def __str__(self): ...
     def add_graph(self, G): ...
     def add_nodes(self, G: Graph, graph_element): ...

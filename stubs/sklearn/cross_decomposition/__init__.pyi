@@ -1,8 +1,3 @@
-from ._pls import (
-    PLSCanonical as PLSCanonical,
-    PLSRegression as PLSRegression,
-    PLSSVD as PLSSVD,
-    CCA as CCA,
-)
+from ._pls import CCA as CCA, PLSSVD as PLSSVD, PLSCanonical as PLSCanonical, PLSRegression as PLSRegression
 
 __all__ = ["PLSCanonical", "PLSRegression", "PLSSVD", "CCA"]

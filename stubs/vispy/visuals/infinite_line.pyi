@@ -1,5 +1,5 @@
-from numpy.typing import ArrayLike
 import numpy as np
+from numpy.typing import ArrayLike
 
 from .. import gloo
 from .visual import Visual
@@ -9,7 +9,6 @@ _VERTEX_SHADER: str = ...
 _FRAGMENT_SHADER: str = ...
 
 class InfiniteLineVisual(Visual):
-
     _shaders: dict = ...
 
     def __init__(

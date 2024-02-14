@@ -1,5 +1,8 @@
-from ..geometry.meshdata import MeshData
+import numpy as np
 from numpy.typing import ArrayLike, NDArray
+
+from ..geometry.meshdata import MeshData
+from .meshdata import MeshData
 
 # -*- coding: utf-8 -*-
 # -----------------------------------------------------------------------------
@@ -9,10 +12,6 @@ from numpy.typing import ArrayLike, NDArray
 # Author: Nicolas P .Rougier
 # Date:   04/03/2014
 # -----------------------------------------------------------------------------
-
-import numpy as np
-
-from .meshdata import MeshData
 
 def create_cube() -> tuple[ArrayLike, ArrayLike, ArrayLike]: ...
 def create_plane(

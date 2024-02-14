@@ -1,3 +1,7 @@
+import struct
+import zlib
+
+import numpy as np
 from numpy.typing import ArrayLike
 
 # -*- coding: utf-8 -*-
@@ -7,10 +11,6 @@ from numpy.typing import ArrayLike
 # -----------------------------------------------------------------------------
 # Author: Luke Campagnola
 # -----------------------------------------------------------------------------
-
-import struct
-import zlib
-import numpy as np
 
 def _make_png(data, level=6): ...
 def read_png(filename: str) -> np.ndarray: ...

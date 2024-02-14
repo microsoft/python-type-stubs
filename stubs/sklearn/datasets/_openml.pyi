@@ -1,22 +1,23 @@
-from typing import List, Optional, Union, overload, Literal
-from warnings import warn
-from contextlib import closing as closing
-from tempfile import TemporaryDirectory as TemporaryDirectory
-from urllib.error import HTTPError as HTTPError, URLError as URLError
-from os.path import join as join
-from urllib.request import urlopen as urlopen, Request as Request
-from functools import wraps as wraps
-from ._arff_parser import load_arff_from_gzip_file as load_arff_from_gzip_file
-from ..utils import Bunch, check_pandas_support as check_pandas_support
-from . import get_data_home as get_data_home
 import gzip
 import hashlib
 import json
 import os
 import shutil
 import time
+from contextlib import closing as closing
+from functools import wraps as wraps
+from os.path import join as join
+from tempfile import TemporaryDirectory as TemporaryDirectory
+from typing import List, Literal, Optional, Union, overload
+from urllib.error import HTTPError as HTTPError, URLError as URLError
+from urllib.request import Request as Request, urlopen as urlopen
+from warnings import warn
 
 import numpy as np
+
+from ..utils import Bunch, check_pandas_support as check_pandas_support
+from . import get_data_home as get_data_home
+from ._arff_parser import load_arff_from_gzip_file as load_arff_from_gzip_file
 
 __all__ = ["fetch_openml"]
 
@@ -30,10 +31,7 @@ _DATA_FILE: str = ...
 OpenmlQualitiesType = ...
 OpenmlFeaturesType = ...
 
-
-class OpenMLError(ValueError):
-    ...
-
+class OpenMLError(ValueError): ...
 
 @overload
 def fetch_openml(
@@ -44,13 +42,12 @@ def fetch_openml(
     data_home: Optional[str] = None,
     target_column: Optional[Union[str, List]] = "default-target",
     cache: bool = True,
-    return_X_y : Literal[False] = ...,
+    return_X_y: Literal[False] = ...,
     as_frame: Union[str, bool] = "auto",
     n_retries: int = 3,
     delay: float = 1.0,
     parser: Optional[str] = "warn",
-) -> Bunch:
-    ...
+) -> Bunch: ...
 @overload
 def fetch_openml(
     name: Optional[str] = None,
@@ -60,10 +57,9 @@ def fetch_openml(
     data_home: Optional[str] = None,
     target_column: Optional[Union[str, List]] = "default-target",
     cache: bool = True,
-    return_X_y : Literal[True] = ...,
+    return_X_y: Literal[True] = ...,
     as_frame: Union[str, bool] = "auto",
     n_retries: int = 3,
     delay: float = 1.0,
     parser: Optional[str] = "warn",
-) -> tuple[Bunch, tuple]:
-    ...
+) -> tuple[Bunch, tuple]: ...

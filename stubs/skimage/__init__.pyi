@@ -2,9 +2,8 @@ __version__: str = ...
 
 submodules: list = ...
 
-from ._shared.version_requirements import ensure_python_version as ensure_python_version
-
 from ._shared import lazy as lazy
+from ._shared.version_requirements import ensure_python_version as ensure_python_version
 
 __getattr__, __lazy_dir__, _ = ...
 

@@ -1,8 +1,9 @@
-from typing import Iterable, Sequence
-from ._typing import *
-from .ticker import Formatter, Locator
-from .axis import Axis
 from datetime import date
+from typing import Iterable, Sequence
+
+from ._typing import *
+from .axis import Axis
+from .ticker import Formatter, Locator
 
 class ConversionError(TypeError): ...
 

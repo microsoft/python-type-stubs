@@ -1,8 +1,8 @@
-from numpy.typing import NDArray, ArrayLike
-from typing import Literal
 import math
+from typing import Literal
 
 import numpy as np
+from numpy.typing import ArrayLike, NDArray
 
 from .._shared import utils
 from .._shared.filters import gaussian
@@ -22,7 +22,7 @@ def pyramid_reduce(
     multichannel: bool = False,
     preserve_range: bool = False,
     *,
-    channel_axis: int | None = None
+    channel_axis: int | None = None,
 ) -> ArrayLike: ...
 @utils.deprecate_multichannel_kwarg(multichannel_position=6)
 def pyramid_expand(
@@ -35,7 +35,7 @@ def pyramid_expand(
     multichannel: bool = False,
     preserve_range: bool = False,
     *,
-    channel_axis: int | None = None
+    channel_axis: int | None = None,
 ) -> ArrayLike: ...
 @utils.deprecate_multichannel_kwarg(multichannel_position=7)
 def pyramid_gaussian(
@@ -49,7 +49,7 @@ def pyramid_gaussian(
     multichannel: bool = False,
     preserve_range: bool = False,
     *,
-    channel_axis: int | None = None
+    channel_axis: int | None = None,
 ): ...
 @utils.deprecate_multichannel_kwarg(multichannel_position=7)
 def pyramid_laplacian(
@@ -63,5 +63,5 @@ def pyramid_laplacian(
     multichannel: bool = False,
     preserve_range: bool = False,
     *,
-    channel_axis: int | None = None
+    channel_axis: int | None = None,
 ): ...

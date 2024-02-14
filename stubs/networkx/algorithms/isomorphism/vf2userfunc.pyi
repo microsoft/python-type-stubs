@@ -1,7 +1,7 @@
 from typing import Callable
 
-from . import isomorphvf2 as vf2
 from ...classes.graph import Graph
+from . import isomorphvf2 as vf2
 
 __all__ = ["GraphMatcher", "DiGraphMatcher", "MultiGraphMatcher", "MultiDiGraphMatcher"]
 

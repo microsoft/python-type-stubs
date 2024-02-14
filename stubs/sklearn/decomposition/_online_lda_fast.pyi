@@ -1,4 +1,3 @@
-
 import numpy as np
 
 def mean_change(arr_1: np.ndarray, arr_2: np.ndarray) -> float:
@@ -9,4 +8,3 @@ def mean_change(arr_1: np.ndarray, arr_2: np.ndarray) -> float:
     ...
 
 def psi(x: float) -> float: ...
-

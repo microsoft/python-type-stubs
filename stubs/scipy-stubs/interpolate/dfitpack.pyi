@@ -1,14 +1,15 @@
 # Python: 3.8.2 (tags/v3.8.2:7b3ab59, Feb 25 2020, 23:03:10) [MSC v.1916 64 bit (AMD64)]
 # Library: scipy, version: 1.6.2
 # Module: scipy.interpolate.dfitpack, version: $Revision: $
-import typing
 import builtins as _mod_builtins
+import typing
 
 __doc__: str
 __file__: str
 __name__: str
 __package__: str
 __version__: bytes
+
 def bispeu(tx, ty, c, kx, ky, x, y) -> typing.Any:
     "z,ier = bispeu(tx,ty,c,kx,ky,x,y)\n\nWrapper for ``bispeu``.\n\nParameters\n----------\ntx : input rank-1 array('d') with bounds (nx)\nty : input rank-1 array('d') with bounds (ny)\nc : input rank-1 array('d') with bounds ((nx-kx-1)*(ny-ky-1))\nkx : input int\nky : input int\nx : input rank-1 array('d') with bounds (m)\ny : input rank-1 array('d') with bounds (m)\n\nReturns\n-------\nz : rank-1 array('d') with bounds (m)\nier : int\n"
     ...
@@ -33,7 +34,29 @@ def fpcurf0(x, y, k, w=..., xb=..., xe=..., s=..., nest=...) -> typing.Any:
     "x,y,w,xb,xe,k,s,n,t,c,fp,fpint,nrdata,ier = fpcurf0(x,y,k,[w,xb,xe,s,nest])\n\nWrapper for ``fpcurf0``.\n\nParameters\n----------\nx : input rank-1 array('d') with bounds (m)\ny : input rank-1 array('d') with bounds (m)\nk : input int\n\nOther Parameters\n----------------\nw : input rank-1 array('d') with bounds (m), optional\n    Default: 1.0\nxb : input float, optional\n    Default: x[0]\nxe : input float, optional\n    Default: x[m-1]\ns : input float, optional\n    Default: m\nnest : input int, optional\n    Default: (s==0.0?m+k+1:MAX(m/2,2*k1))\n\nReturns\n-------\nx : rank-1 array('d') with bounds (m)\ny : rank-1 array('d') with bounds (m)\nw : rank-1 array('d') with bounds (m)\nxb : float\nxe : float\nk : int\ns : float\nn : int\nt : rank-1 array('d') with bounds (nest)\nc : rank-1 array('d') with bounds (nest)\nfp : float\nfpint : rank-1 array('d') with bounds (nest)\nnrdata : rank-1 array('i') with bounds (nest)\nier : int\n"
     ...
 
-def fpcurf1(x, y, w, xb, xe, k, s, n, t, c, fp, fpint, nrdata, ier, overwrite_x=..., overwrite_y=..., overwrite_w=..., overwrite_t=..., overwrite_c=..., overwrite_fpint=..., overwrite_nrdata=...) -> typing.Any:
+def fpcurf1(
+    x,
+    y,
+    w,
+    xb,
+    xe,
+    k,
+    s,
+    n,
+    t,
+    c,
+    fp,
+    fpint,
+    nrdata,
+    ier,
+    overwrite_x=...,
+    overwrite_y=...,
+    overwrite_w=...,
+    overwrite_t=...,
+    overwrite_c=...,
+    overwrite_fpint=...,
+    overwrite_nrdata=...,
+) -> typing.Any:
     "x,y,w,xb,xe,k,s,n,t,c,fp,fpint,nrdata,ier = fpcurf1(x,y,w,xb,xe,k,s,n,t,c,fp,fpint,nrdata,ier,[overwrite_x,overwrite_y,overwrite_w,overwrite_t,overwrite_c,overwrite_fpint,overwrite_nrdata])\n\nWrapper for ``fpcurf1``.\n\nParameters\n----------\nx : input rank-1 array('d') with bounds (m)\ny : input rank-1 array('d') with bounds (m)\nw : input rank-1 array('d') with bounds (m)\nxb : input float\nxe : input float\nk : input int\ns : input float\nn : input int\nt : input rank-1 array('d') with bounds (nest)\nc : input rank-1 array('d') with bounds (nest)\nfp : input float\nfpint : input rank-1 array('d') with bounds (nest)\nnrdata : input rank-1 array('i') with bounds (nest)\nier : input int\n\nOther Parameters\n----------------\noverwrite_x : input int, optional\n    Default: 1\noverwrite_y : input int, optional\n    Default: 1\noverwrite_w : input int, optional\n    Default: 1\noverwrite_t : input int, optional\n    Default: 1\noverwrite_c : input int, optional\n    Default: 1\noverwrite_fpint : input int, optional\n    Default: 1\noverwrite_nrdata : input int, optional\n    Default: 1\n\nReturns\n-------\nx : rank-1 array('d') with bounds (m)\ny : rank-1 array('d') with bounds (m)\nw : rank-1 array('d') with bounds (m)\nxb : float\nxe : float\nk : int\ns : float\nn : int\nt : rank-1 array('d') with bounds (nest)\nc : rank-1 array('d') with bounds (nest)\nfp : float\nfpint : rank-1 array('d') with bounds (nest)\nnrdata : rank-1 array('i') with bounds (nest)\nier : int\n"
     ...
 
@@ -93,11 +116,32 @@ def sproot(t, c, mest=...) -> typing.Any:
     "zero,m,ier = sproot(t,c,[mest])\n\nWrapper for ``sproot``.\n\nParameters\n----------\nt : input rank-1 array('d') with bounds (n)\nc : input rank-1 array('d') with bounds (n)\n\nOther Parameters\n----------------\nmest : input int, optional\n    Default: 3*(n-7)\n\nReturns\n-------\nzero : rank-1 array('d') with bounds (mest)\nm : int\nier : int\n"
     ...
 
-def surfit_lsq(x, y, z, nx, tx, ny, ty, w=..., xb=..., xe=..., yb=..., ye=..., kx=..., ky=..., eps=..., lwrk2=..., overwrite_tx=..., overwrite_ty=...) -> typing.Any:
+def surfit_lsq(
+    x,
+    y,
+    z,
+    nx,
+    tx,
+    ny,
+    ty,
+    w=...,
+    xb=...,
+    xe=...,
+    yb=...,
+    ye=...,
+    kx=...,
+    ky=...,
+    eps=...,
+    lwrk2=...,
+    overwrite_tx=...,
+    overwrite_ty=...,
+) -> typing.Any:
     "tx,ty,c,fp,ier = surfit_lsq(x,y,z,nx,tx,ny,ty,[w,xb,xe,yb,ye,kx,ky,eps,lwrk2,overwrite_tx,overwrite_ty])\n\nWrapper for ``surfit_lsq``.\n\nParameters\n----------\nx : input rank-1 array('d') with bounds (m)\ny : input rank-1 array('d') with bounds (m)\nz : input rank-1 array('d') with bounds (m)\nnx : input int\ntx : input rank-1 array('d') with bounds (nmax)\nny : input int\nty : input rank-1 array('d') with bounds (nmax)\n\nOther Parameters\n----------------\nw : input rank-1 array('d') with bounds (m), optional\n    Default: 1.0\nxb : input float, optional\n    Default: calc_b(x,m,tx,nx)\nxe : input float, optional\n    Default: calc_e(x,m,tx,nx)\nyb : input float, optional\n    Default: calc_b(y,m,ty,ny)\nye : input float, optional\n    Default: calc_e(y,m,ty,ny)\nkx : input int, optional\n    Default: 3\nky : input int, optional\n    Default: 3\neps : input float, optional\n    Default: 1e-16\noverwrite_tx : input int, optional\n    Default: 1\noverwrite_ty : input int, optional\n    Default: 1\nlwrk2 : input int, optional\n    Default: calc_surfit_lwrk2(m,kx,ky,nxest,nyest)\n\nReturns\n-------\ntx : rank-1 array('d') with bounds (nmax)\nty : rank-1 array('d') with bounds (nmax)\nc : rank-1 array('d') with bounds ((nx-kx-1)*(ny-ky-1))\nfp : float\nier : int\n"
     ...
 
-def surfit_smth(x, y, z, w=..., xb=..., xe=..., yb=..., ye=..., kx=..., ky=..., s=..., nxest=..., nyest=..., eps=..., lwrk2=...) -> typing.Any:
+def surfit_smth(
+    x, y, z, w=..., xb=..., xe=..., yb=..., ye=..., kx=..., ky=..., s=..., nxest=..., nyest=..., eps=..., lwrk2=...
+) -> typing.Any:
     "nx,tx,ny,ty,c,fp,wrk1,ier = surfit_smth(x,y,z,[w,xb,xe,yb,ye,kx,ky,s,nxest,nyest,eps,lwrk2])\n\nWrapper for ``surfit_smth``.\n\nParameters\n----------\nx : input rank-1 array('d') with bounds (m)\ny : input rank-1 array('d') with bounds (m)\nz : input rank-1 array('d') with bounds (m)\n\nOther Parameters\n----------------\nw : input rank-1 array('d') with bounds (m), optional\n    Default: 1.0\nxb : input float, optional\n    Default: dmin(x,m)\nxe : input float, optional\n    Default: dmax(x,m)\nyb : input float, optional\n    Default: dmin(y,m)\nye : input float, optional\n    Default: dmax(y,m)\nkx : input int, optional\n    Default: 3\nky : input int, optional\n    Default: 3\ns : input float, optional\n    Default: m\nnxest : input int, optional\n    Default: imax(kx+1+sqrt(m/2),2*(kx+1))\nnyest : input int, optional\n    Default: imax(ky+1+sqrt(m/2),2*(ky+1))\neps : input float, optional\n    Default: 1e-16\nlwrk2 : input int, optional\n    Default: calc_surfit_lwrk2(m,kx,ky,nxest,nyest)\n\nReturns\n-------\nnx : int\ntx : rank-1 array('d') with bounds (nmax)\nny : int\nty : rank-1 array('d') with bounds (nmax)\nc : rank-1 array('d') with bounds ((nxest-kx-1)*(nyest-ky-1))\nfp : float\nwrk1 : rank-1 array('d') with bounds (lwrk1)\nier : int\n"
     ...
 
@@ -105,6 +149,4 @@ def types() -> typing.Any:
     "'i'-scalar\n"
     ...
 
-def __getattr__(name) -> typing.Any:
-    ...
-
+def __getattr__(name) -> typing.Any: ...

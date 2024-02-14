@@ -1,6 +1,7 @@
 from typing import Mapping
-from numpy.typing import ArrayLike
 from warnings import warn
+
+from numpy.typing import ArrayLike
 
 from ...classes.graph import Graph
 

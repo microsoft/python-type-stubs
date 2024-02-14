@@ -1,56 +1,36 @@
-from typing import Any, ClassVar, Literal, TypeVar
-from numpy.random import RandomState
 from abc import ABC
-from scipy import linalg as linalg
-from ..exceptions import ConvergenceWarning as ConvergenceWarning
-from numpy import ndarray
-from ..utils.extmath import (
-    randomized_svd as randomized_svd,
-    safe_sparse_dot as safe_sparse_dot,
-    squared_norm as squared_norm,
-)
-from numbers import Integral as Integral, Real as Real
-from .._config import config_context as config_context
-from ..utils._param_validation import (
-    Interval as Interval,
-    StrOptions as StrOptions,
-    validate_params as validate_params,
-)
 from math import sqrt as sqrt
-from ..base import BaseEstimator, TransformerMixin, ClassNamePrefixFeaturesOutMixin
+from numbers import Integral as Integral, Real as Real
+from typing import Any, ClassVar, Literal, TypeVar
+
+from numpy import ndarray
+from numpy.random import RandomState
+from scipy import linalg as linalg
 from scipy.sparse import spmatrix
-from .._typing import ArrayLike, Float, MatrixLike, Int
-from ..utils import (
-    check_random_state as check_random_state,
-    check_array as check_array,
-    gen_batches as gen_batches,
-)
-from ..utils.validation import (
-    check_is_fitted as check_is_fitted,
-    check_non_negative as check_non_negative,
-)
+
+from .._config import config_context as config_context
+from .._typing import ArrayLike, Float, Int, MatrixLike
+from ..base import BaseEstimator, ClassNamePrefixFeaturesOutMixin, TransformerMixin
+from ..exceptions import ConvergenceWarning as ConvergenceWarning
+from ..utils import check_array as check_array, check_random_state as check_random_state, gen_batches as gen_batches
+from ..utils._param_validation import Interval as Interval, StrOptions as StrOptions, validate_params as validate_params
+from ..utils.extmath import randomized_svd as randomized_svd, safe_sparse_dot as safe_sparse_dot, squared_norm as squared_norm
+from ..utils.validation import check_is_fitted as check_is_fitted, check_non_negative as check_non_negative
 
 MiniBatchNMF_Self = TypeVar("MiniBatchNMF_Self", bound="MiniBatchNMF")
 _BaseNMF_Self = TypeVar("_BaseNMF_Self", bound="_BaseNMF")
 
-import numpy as np
-import scipy.sparse as sp
-import time
 import itertools
+import time
 import warnings
 
+import numpy as np
+import scipy.sparse as sp
 
 EPSILON = ...
 
-
-def norm(x: ArrayLike) -> float:
-    ...
-
-
-def trace_dot(X: ArrayLike, Y: ArrayLike) -> Float:
-    ...
-
-
+def norm(x: ArrayLike) -> float: ...
+def trace_dot(X: ArrayLike, Y: ArrayLike) -> Float: ...
 def non_negative_factorization(
     X: MatrixLike | ArrayLike,
     W: None | MatrixLike = None,
@@ -60,10 +40,7 @@ def non_negative_factorization(
     init: Literal["random", "nndsvd", "nndsvda", "nndsvdar", "custom"] | None = None,
     update_H: bool = True,
     solver: Literal["cd", "mu", "cd"] = "cd",
-    beta_loss: float
-    | Literal[
-        "frobenius", "kullback-leibler", "itakura-saito", "frobenius"
-    ] = "frobenius",
+    beta_loss: float | Literal["frobenius", "kullback-leibler", "itakura-saito", "frobenius"] = "frobenius",
     tol: Float = 1e-4,
     max_iter: Int = 200,
     alpha_W: Float = 0.0,
@@ -72,12 +49,9 @@ def non_negative_factorization(
     random_state: RandomState | None | Int = None,
     verbose: Int = 0,
     shuffle: bool = False,
-) -> tuple[ndarray, ndarray, int]:
-    ...
-
+) -> tuple[ndarray, ndarray, int]: ...
 
 class _BaseNMF(ClassNamePrefixFeaturesOutMixin, TransformerMixin, BaseEstimator, ABC):
-
     _parameter_constraints: ClassVar[dict] = ...
 
     def __init__(
@@ -93,17 +67,9 @@ class _BaseNMF(ClassNamePrefixFeaturesOutMixin, TransformerMixin, BaseEstimator,
         alpha_H: str = "same",
         l1_ratio: float = 0.0,
         verbose: int = 0,
-    ) -> None:
-        ...
-
-    def fit(
-        self: _BaseNMF_Self, X: MatrixLike | ArrayLike, y: Any = None, **params
-    ) -> _BaseNMF_Self:
-        ...
-
-    def inverse_transform(self, W: MatrixLike) -> ndarray | spmatrix:
-        ...
-
+    ) -> None: ...
+    def fit(self: _BaseNMF_Self, X: MatrixLike | ArrayLike, y: Any = None, **params) -> _BaseNMF_Self: ...
+    def inverse_transform(self, W: MatrixLike) -> ndarray | spmatrix: ...
 
 class NMF(_BaseNMF):
     feature_names_in_: ndarray = ...
@@ -119,13 +85,9 @@ class NMF(_BaseNMF):
         self,
         n_components: None | Int = None,
         *,
-        init: Literal["random", "nndsvd", "nndsvda", "nndsvdar", "custom"]
-        | None = None,
+        init: Literal["random", "nndsvd", "nndsvda", "nndsvdar", "custom"] | None = None,
         solver: Literal["cd", "mu", "cd"] = "cd",
-        beta_loss: float
-        | Literal[
-            "frobenius", "kullback-leibler", "itakura-saito", "frobenius"
-        ] = "frobenius",
+        beta_loss: float | Literal["frobenius", "kullback-leibler", "itakura-saito", "frobenius"] = "frobenius",
         tol: Float = 1e-4,
         max_iter: Int = 200,
         random_state: RandomState | None | Int = None,
@@ -134,21 +96,15 @@ class NMF(_BaseNMF):
         l1_ratio: Float = 0.0,
         verbose: Int = 0,
         shuffle: bool = False,
-    ) -> None:
-        ...
-
+    ) -> None: ...
     def fit_transform(
         self,
         X: MatrixLike | ArrayLike,
         y: Any = None,
         W: None | MatrixLike = None,
         H: None | ArrayLike = None,
-    ) -> ndarray:
-        ...
-
-    def transform(self, X: MatrixLike | ArrayLike) -> ndarray:
-        ...
-
+    ) -> ndarray: ...
+    def transform(self, X: MatrixLike | ArrayLike) -> ndarray: ...
 
 class MiniBatchNMF(_BaseNMF):
     feature_names_in_: ndarray = ...
@@ -165,13 +121,9 @@ class MiniBatchNMF(_BaseNMF):
         self,
         n_components: None | Int = None,
         *,
-        init: Literal["random", "nndsvd", "nndsvda", "nndsvdar", "custom"]
-        | None = None,
+        init: Literal["random", "nndsvd", "nndsvda", "nndsvdar", "custom"] | None = None,
         batch_size: Int = 1024,
-        beta_loss: float
-        | Literal[
-            "frobenius", "kullback-leibler", "itakura-saito", "frobenius"
-        ] = "frobenius",
+        beta_loss: float | Literal["frobenius", "kullback-leibler", "itakura-saito", "frobenius"] = "frobenius",
         tol: Float = 1e-4,
         max_no_improvement: Int = 10,
         max_iter: Int = 200,
@@ -184,26 +136,19 @@ class MiniBatchNMF(_BaseNMF):
         transform_max_iter: None | Int = None,
         random_state: RandomState | None | Int = None,
         verbose: int | bool = 0,
-    ) -> None:
-        ...
-
+    ) -> None: ...
     def fit_transform(
         self,
         X: MatrixLike | ArrayLike,
         y: Any = None,
         W: None | MatrixLike = None,
         H: None | ArrayLike = None,
-    ) -> ndarray:
-        ...
-
-    def transform(self, X: MatrixLike | ArrayLike) -> ndarray:
-        ...
-
+    ) -> ndarray: ...
+    def transform(self, X: MatrixLike | ArrayLike) -> ndarray: ...
     def partial_fit(
         self: MiniBatchNMF_Self,
         X: MatrixLike | ArrayLike,
         y: Any = None,
         W: None | MatrixLike = None,
         H: None | ArrayLike = None,
-    ) -> MiniBatchNMF_Self:
-        ...
+    ) -> MiniBatchNMF_Self: ...

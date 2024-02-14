@@ -1,41 +1,29 @@
+from collections import namedtuple as namedtuple
+from numbers import Integral as Integral, Real as Real
+from time import time as time
 from typing import Any, ClassVar, Literal, TypeVar
+
+from numpy import ndarray
 from numpy.random import RandomState
 from scipy import stats as stats
-from ..base import BaseEstimator
+
+from .._typing import ArrayLike, Float, Int, MatrixLike
+from ..base import BaseEstimator, clone as clone
 from ..exceptions import ConvergenceWarning as ConvergenceWarning
-from ..preprocessing import normalize as normalize
 from ..linear_model import BayesianRidge as BayesianRidge
-from ..utils.validation import (
-    FLOAT_DTYPES as FLOAT_DTYPES,
-    check_is_fitted as check_is_fitted,
-)
-from ._base import MissingIndicator
-from collections import namedtuple as namedtuple
-from numpy import ndarray
-from ..utils._param_validation import (
-    HasMethods as HasMethods,
-    Interval as Interval,
-    StrOptions as StrOptions,
-)
-from numbers import Integral as Integral, Real as Real
-from ..base import clone as clone
-from time import time as time
-from ..utils import (
-    check_array as check_array,
-    check_random_state as check_random_state,
-    is_scalar_nan as is_scalar_nan,
-)
-from ._base import _BaseImputer, SimpleImputer
-from .._typing import Int, Float, ArrayLike, MatrixLike
+from ..preprocessing import normalize as normalize
+from ..utils import check_array as check_array, check_random_state as check_random_state, is_scalar_nan as is_scalar_nan
+from ..utils._param_validation import HasMethods as HasMethods, Interval as Interval, StrOptions as StrOptions
+from ..utils.validation import FLOAT_DTYPES as FLOAT_DTYPES, check_is_fitted as check_is_fitted
+from ._base import MissingIndicator, SimpleImputer, _BaseImputer
 
 IterativeImputer_Self = TypeVar("IterativeImputer_Self", bound="IterativeImputer")
 
 import warnings
+
 import numpy as np
 
-
 _ImputerTriplet = ...
-
 
 class IterativeImputer(_BaseImputer):
     random_state_: RandomState = ...
@@ -58,12 +46,8 @@ class IterativeImputer(_BaseImputer):
         max_iter: Int = 10,
         tol: Float = 1e-3,
         n_nearest_features: None | Int = None,
-        initial_strategy: Literal[
-            "mean", "median", "most_frequent", "constant", "mean"
-        ] = "mean",
-        imputation_order: Literal[
-            "ascending", "descending", "roman", "arabic", "random", "ascending"
-        ] = "ascending",
+        initial_strategy: Literal["mean", "median", "most_frequent", "constant", "mean"] = "mean",
+        imputation_order: Literal["ascending", "descending", "roman", "arabic", "random", "ascending"] = "ascending",
         skip_complete: bool = False,
         min_value: float | ArrayLike = ...,
         max_value: float | ArrayLike = ...,
@@ -71,19 +55,8 @@ class IterativeImputer(_BaseImputer):
         random_state: RandomState | None | Int = None,
         add_indicator: bool = False,
         keep_empty_features: bool = False,
-    ) -> None:
-        ...
-
-    def fit_transform(self, X: MatrixLike, y: Any = None) -> ndarray:
-        ...
-
-    def transform(self, X: MatrixLike) -> ndarray:
-        ...
-
-    def fit(
-        self: IterativeImputer_Self, X: MatrixLike, y: Any = None
-    ) -> IterativeImputer_Self:
-        ...
-
-    def get_feature_names_out(self, input_features: None | ArrayLike = None) -> ndarray:
-        ...
+    ) -> None: ...
+    def fit_transform(self, X: MatrixLike, y: Any = None) -> ndarray: ...
+    def transform(self, X: MatrixLike) -> ndarray: ...
+    def fit(self: IterativeImputer_Self, X: MatrixLike, y: Any = None) -> IterativeImputer_Self: ...
+    def get_feature_names_out(self, input_features: None | ArrayLike = None) -> ndarray: ...

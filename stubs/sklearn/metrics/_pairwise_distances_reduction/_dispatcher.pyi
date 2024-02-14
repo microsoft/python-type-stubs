@@ -1,14 +1,10 @@
-
 from abc import abstractmethod
-
-import numpy as np
-
 from typing import Any, Literal
 
+import numpy as np
 from scipy.sparse import csr_matrix, spmatrix
 
-
-def sqeuclidean_row_norms(X: np.ndarray|csr_matrix, num_threads: int) -> np.ndarray:
+def sqeuclidean_row_norms(X: np.ndarray | csr_matrix, num_threads: int) -> np.ndarray:
     """Compute the squared euclidean norm of the rows of X in parallel.
 
     Parameters
@@ -26,7 +22,6 @@ def sqeuclidean_row_norms(X: np.ndarray|csr_matrix, num_threads: int) -> np.ndar
     """
     ...
 
-
 class BaseDistancesReductionDispatcher:
     """Abstract base dispatcher for pairwise distance computation & reduction.
 
@@ -36,9 +31,8 @@ class BaseDistancesReductionDispatcher:
 
     @classmethod
     def valid_metrics(cls) -> list[str]: ...
-
     @classmethod
-    def is_usable_for(cls, X: np.ndarray|spmatrix, Y: np.ndarray|spmatrix, metric: str = "euclidean") -> bool:
+    def is_usable_for(cls, X: np.ndarray | spmatrix, Y: np.ndarray | spmatrix, metric: str = "euclidean") -> bool:
         """Return True if the dispatcher can be used for the
         given parameters.
 
@@ -65,12 +59,10 @@ class BaseDistancesReductionDispatcher:
     @abstractmethod
     def compute(
         cls,
-        X: np.ndarray|csr_matrix,
-        Y: np.ndarray|csr_matrix,
+        X: np.ndarray | csr_matrix,
+        Y: np.ndarray | csr_matrix,
         **kwargs,
     ): ...
-
-
 
 class ArgKmin(BaseDistancesReductionDispatcher):
     """Compute the argkmin of row vectors of X on the ones of Y.
@@ -89,13 +81,13 @@ class ArgKmin(BaseDistancesReductionDispatcher):
     @classmethod
     def compute(
         cls,
-        X: np.ndarray|csr_matrix,
-        Y: np.ndarray|csr_matrix,
+        X: np.ndarray | csr_matrix,
+        Y: np.ndarray | csr_matrix,
         k: int,
         metric: str = "euclidean",
-        chunk_size: int|None = None,
-        metric_kwargs: dict[str,Any]|None = None,
-        strategy: Literal['auto', 'parallel_on_X', 'parallel_on_Y']|None = None,
+        chunk_size: int | None = None,
+        metric_kwargs: dict[str, Any] | None = None,
+        strategy: Literal["auto", "parallel_on_X", "parallel_on_Y"] | None = None,
         return_distance: bool = False,
     ) -> np.ndarray | tuple[np.ndarray, np.ndarray]:
         """Compute the argkmin reduction.
@@ -180,7 +172,6 @@ class ArgKmin(BaseDistancesReductionDispatcher):
         """
         ...
 
-
 class RadiusNeighbors(BaseDistancesReductionDispatcher):
     """Compute radius-based neighbors for two sets of vectors.
 
@@ -205,8 +196,8 @@ class RadiusNeighbors(BaseDistancesReductionDispatcher):
         radius: float,
         metric: str = "euclidean",
         chunk_size: int | None = None,
-        metric_kwargs: dict[str,Any] | None = None,
-        strategy: Literal['auto', 'parallel_on_X', 'parallel_on_Y']|None = None,
+        metric_kwargs: dict[str, Any] | None = None,
+        strategy: Literal["auto", "parallel_on_X", "parallel_on_Y"] | None = None,
         return_distance: bool = False,
         sort_results: bool = False,
     ):
@@ -296,4 +287,3 @@ class RadiusNeighbors(BaseDistancesReductionDispatcher):
         returns.
         """
         ...
-

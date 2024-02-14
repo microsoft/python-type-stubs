@@ -1,6 +1,4 @@
 from ..classes.graph import Graph
-
-from ..classes.graph import Graph
 from ..utils import py_random_state
 
 __all__ = [

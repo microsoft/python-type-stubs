@@ -1,15 +1,16 @@
-from typing import Any, Callable, ClassVar, Literal, TypeVar
-from scipy import sparse as sparse
-from numpy import ndarray
-from ..utils._param_validation import Interval as Interval, StrOptions as StrOptions
 from numbers import Integral as Integral, Real as Real
-from ._dbscan_inner import dbscan_inner as dbscan_inner
-from ..neighbors import NearestNeighbors as NearestNeighbors
+from typing import Any, Callable, ClassVar, Literal, TypeVar
+
+from numpy import ndarray
+from scipy import sparse as sparse
+
+from .._typing import ArrayLike, Float, Int, MatrixLike
 from ..base import BaseEstimator, ClusterMixin
-from .._typing import MatrixLike, Float, Int, ArrayLike
+from ..neighbors import NearestNeighbors as NearestNeighbors
+from ..utils._param_validation import Interval as Interval, StrOptions as StrOptions
+from ._dbscan_inner import dbscan_inner as dbscan_inner
 
 DBSCAN_Self = TypeVar("DBSCAN_Self", bound="DBSCAN")
-
 
 # Author: Robert Layton <robertlayton@gmail.com>
 #         Joel Nothman <joel.nothman@gmail.com>
@@ -20,7 +21,6 @@ DBSCAN_Self = TypeVar("DBSCAN_Self", bound="DBSCAN")
 import warnings
 
 import numpy as np
-
 
 def dbscan(
     X: MatrixLike,
@@ -34,9 +34,7 @@ def dbscan(
     p: Float = 2,
     sample_weight: None | ArrayLike = None,
     n_jobs: None | Int = None,
-) -> tuple[ndarray, ndarray]:
-    ...
-
+) -> tuple[ndarray, ndarray]: ...
 
 class DBSCAN(ClusterMixin, BaseEstimator):
     feature_names_in_: ndarray = ...
@@ -58,18 +56,11 @@ class DBSCAN(ClusterMixin, BaseEstimator):
         leaf_size: Int = 30,
         p: None | Float = None,
         n_jobs: None | Int = None,
-    ) -> None:
-        ...
-
+    ) -> None: ...
     def fit(
         self: DBSCAN_Self,
         X: MatrixLike,
         y: Any = None,
         sample_weight: None | ArrayLike = None,
-    ) -> DBSCAN_Self:
-        ...
-
-    def fit_predict(
-        self, X: MatrixLike, y: Any = None, sample_weight: None | ArrayLike = None
-    ) -> ndarray:
-        ...
+    ) -> DBSCAN_Self: ...
+    def fit_predict(self, X: MatrixLike, y: Any = None, sample_weight: None | ArrayLike = None) -> ndarray: ...

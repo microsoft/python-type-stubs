@@ -1,46 +1,36 @@
+from abc import ABCMeta, abstractmethod
+from math import ceil as ceil
+from numbers import Integral as Integral, Real as Real
 from typing import ClassVar, Literal, Mapping, Sequence, TypeVar
+
+from numpy import ndarray
 from numpy.random import RandomState
 from scipy.sparse import issparse as issparse, spmatrix
-from ..utils._bunch import Bunch
-from ._criterion import Criterion as Criterion
-from ..utils.validation import check_is_fitted as check_is_fitted
-from abc import ABCMeta, abstractmethod
-from ._splitter import Splitter as Splitter
-from ..utils._param_validation import (
-    Hidden as Hidden,
-    Interval as Interval,
-    StrOptions as StrOptions,
-)
-from numpy import ndarray
-from numbers import Integral as Integral, Real as Real
+
+from .._typing import ArrayLike, Float, Int, MatrixLike
 from ..base import (
     BaseEstimator,
     ClassifierMixin,
-    clone as clone,
-    RegressorMixin,
-    is_classifier as is_classifier,
     MultiOutputMixin,
+    RegressorMixin,
+    clone as clone,
+    is_classifier as is_classifier,
 )
-from ..utils import (
-    check_random_state as check_random_state,
-    compute_sample_weight as compute_sample_weight,
-)
-from ..utils.multiclass import (
-    check_classification_targets as check_classification_targets,
-)
-from math import ceil as ceil
-from .._typing import MatrixLike, ArrayLike, Int, Float
+from ..utils import check_random_state as check_random_state, compute_sample_weight as compute_sample_weight
+from ..utils._bunch import Bunch
+from ..utils._param_validation import Hidden as Hidden, Interval as Interval, StrOptions as StrOptions
+from ..utils.multiclass import check_classification_targets as check_classification_targets
+from ..utils.validation import check_is_fitted as check_is_fitted
+from ._criterion import Criterion as Criterion
+from ._splitter import Splitter as Splitter
 from ._tree import (
-    DepthFirstTreeBuilder as DepthFirstTreeBuilder,
     BestFirstTreeBuilder as BestFirstTreeBuilder,
+    DepthFirstTreeBuilder as DepthFirstTreeBuilder,
     Tree,
     ccp_pruning_path as ccp_pruning_path,
 )
 
-DecisionTreeRegressor_Self = TypeVar(
-    "DecisionTreeRegressor_Self", bound="DecisionTreeRegressor"
-)
-
+DecisionTreeRegressor_Self = TypeVar("DecisionTreeRegressor_Self", bound="DecisionTreeRegressor")
 
 # Authors: Gilles Louppe <g.louppe@gmail.com>
 #          Peter Prettenhofer <peter.prettenhofer@gmail.com>
@@ -53,9 +43,9 @@ DecisionTreeRegressor_Self = TypeVar(
 #
 # License: BSD 3 clause
 
+import copy
 import numbers
 import warnings
-import copy
 
 import numpy as np
 
@@ -65,7 +55,6 @@ __all__ = [
     "ExtraTreeClassifier",
     "ExtraTreeRegressor",
 ]
-
 
 # =============================================================================
 # Types and constants
@@ -85,9 +74,7 @@ SPARSE_SPLITTERS: dict = ...
 # Base decision tree
 # =============================================================================
 
-
 class BaseDecisionTree(MultiOutputMixin, BaseEstimator, metaclass=ABCMeta):
-
     _parameter_constraints: ClassVar[dict] = ...
 
     @abstractmethod
@@ -106,52 +93,31 @@ class BaseDecisionTree(MultiOutputMixin, BaseEstimator, metaclass=ABCMeta):
         min_impurity_decrease,
         class_weight=None,
         ccp_alpha: float = 0.0,
-    ) -> None:
-        ...
-
-    def get_depth(self) -> int:
-        ...
-
-    def get_n_leaves(self) -> int:
-        ...
-
+    ) -> None: ...
+    def get_depth(self) -> int: ...
+    def get_n_leaves(self) -> int: ...
     def fit(
         self,
         X,
         y: ndarray,
         sample_weight: None | ndarray = None,
         check_input: bool = True,
-    ):
-        ...
-
-    def predict(self, X: MatrixLike | ArrayLike, check_input: bool = True) -> ndarray:
-        ...
-
-    def apply(self, X: MatrixLike | ArrayLike, check_input: bool = True) -> ArrayLike:
-        ...
-
-    def decision_path(
-        self, X: MatrixLike | ArrayLike, check_input: bool = True
-    ) -> spmatrix:
-        ...
-
+    ): ...
+    def predict(self, X: MatrixLike | ArrayLike, check_input: bool = True) -> ndarray: ...
+    def apply(self, X: MatrixLike | ArrayLike, check_input: bool = True) -> ArrayLike: ...
+    def decision_path(self, X: MatrixLike | ArrayLike, check_input: bool = True) -> spmatrix: ...
     def cost_complexity_pruning_path(
         self,
         X: MatrixLike | ArrayLike,
         y: MatrixLike | ArrayLike,
         sample_weight: None | ArrayLike = None,
-    ) -> Bunch:
-        ...
-
+    ) -> Bunch: ...
     @property
-    def feature_importances_(self) -> ndarray:
-        ...
-
+    def feature_importances_(self) -> ndarray: ...
 
 # =============================================================================
 # Public estimators
 # =============================================================================
-
 
 class DecisionTreeClassifier(ClassifierMixin, BaseDecisionTree):
     tree_: Tree = ...
@@ -180,26 +146,16 @@ class DecisionTreeClassifier(ClassifierMixin, BaseDecisionTree):
         min_impurity_decrease: Float = 0.0,
         class_weight: None | Mapping | str | Sequence[Mapping] = None,
         ccp_alpha: float = 0.0,
-    ) -> None:
-        ...
-
+    ) -> None: ...
     def fit(
         self,
         X: MatrixLike | ArrayLike,
         y: MatrixLike | ArrayLike,
         sample_weight: None | ArrayLike = None,
         check_input: bool = True,
-    ) -> DecisionTreeClassifier | ExtraTreeClassifier:
-        ...
-
-    def predict_proba(
-        self, X: MatrixLike | ArrayLike, check_input: bool = True
-    ) -> ndarray | list[ndarray]:
-        ...
-
-    def predict_log_proba(self, X: MatrixLike | ArrayLike) -> ndarray | list[ndarray]:
-        ...
-
+    ) -> DecisionTreeClassifier | ExtraTreeClassifier: ...
+    def predict_proba(self, X: MatrixLike | ArrayLike, check_input: bool = True) -> ndarray | list[ndarray]: ...
+    def predict_log_proba(self, X: MatrixLike | ArrayLike) -> ndarray | list[ndarray]: ...
 
 class DecisionTreeRegressor(RegressorMixin, BaseDecisionTree):
     tree_: Tree = ...
@@ -231,18 +187,14 @@ class DecisionTreeRegressor(RegressorMixin, BaseDecisionTree):
         max_leaf_nodes: None | Int = None,
         min_impurity_decrease: Float = 0.0,
         ccp_alpha: float = 0.0,
-    ) -> None:
-        ...
-
+    ) -> None: ...
     def fit(
         self: DecisionTreeRegressor_Self,
         X: MatrixLike | ArrayLike,
         y: MatrixLike | ArrayLike,
         sample_weight: None | ArrayLike = None,
         check_input: bool = True,
-    ) -> DecisionTreeRegressor_Self:
-        ...
-
+    ) -> DecisionTreeRegressor_Self: ...
 
 class ExtraTreeClassifier(DecisionTreeClassifier):
     tree_: Tree = ...
@@ -263,18 +215,13 @@ class ExtraTreeClassifier(DecisionTreeClassifier):
         min_samples_split: float | int = 2,
         min_samples_leaf: float | int = 1,
         min_weight_fraction_leaf: Float = 0.0,
-        max_features: float
-        | None
-        | int
-        | Literal["auto", "sqrt", "log2", "sqrt"] = "sqrt",
+        max_features: float | None | int | Literal["auto", "sqrt", "log2", "sqrt"] = "sqrt",
         random_state: RandomState | None | Int = None,
         max_leaf_nodes: None | Int = None,
         min_impurity_decrease: Float = 0.0,
         class_weight: None | Mapping | str | Sequence[Mapping] = None,
         ccp_alpha: float = 0.0,
-    ) -> None:
-        ...
-
+    ) -> None: ...
 
 class ExtraTreeRegressor(DecisionTreeRegressor):
     tree_: Tree = ...
@@ -304,5 +251,4 @@ class ExtraTreeRegressor(DecisionTreeRegressor):
         min_impurity_decrease: Float = 0.0,
         max_leaf_nodes: None | Int = None,
         ccp_alpha: float = 0.0,
-    ) -> None:
-        ...
+    ) -> None: ...

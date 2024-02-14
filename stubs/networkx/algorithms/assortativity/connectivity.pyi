@@ -1,5 +1,5 @@
-from typing import Literal, Mapping
 from collections import defaultdict
+from typing import Literal, Mapping
 
 from ...classes.graph import Graph
 
@@ -12,6 +12,4 @@ def average_degree_connectivity(
     nodes=None,
     weight=None,
 ) -> Mapping: ...
-def k_nearest_neighbors(
-    G: Graph, source="in+out", target="in+out", nodes=None, weight=None
-): ...
+def k_nearest_neighbors(G: Graph, source="in+out", target="in+out", nodes=None, weight=None): ...

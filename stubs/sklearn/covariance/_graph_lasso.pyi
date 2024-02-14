@@ -1,42 +1,34 @@
-from typing import Any, ClassVar, Iterable, Literal, TypeVar
-from scipy import linalg as linalg
-from ..linear_model import lars_path_gram as lars_path_gram
-from ..exceptions import ConvergenceWarning as ConvergenceWarning
-from numpy import ndarray
-from ..utils._param_validation import Interval as Interval, StrOptions as StrOptions
-from ..model_selection._split import BaseShuffleSplit
 from numbers import Integral as Integral, Real as Real
-from ..model_selection import check_cv as check_cv, cross_val_score as cross_val_score
-from ..utils.parallel import delayed as delayed, Parallel as Parallel
-from .._typing import MatrixLike, Float, Int, ArrayLike
-from ..model_selection import BaseCrossValidator
-from ..utils.validation import (
-    check_random_state as check_random_state,
-    check_scalar as check_scalar,
-)
-from . import (
-    empirical_covariance as empirical_covariance,
-    EmpiricalCovariance,
-    log_likelihood as log_likelihood,
-)
+from typing import Any, ClassVar, Iterable, Literal, TypeVar
+
+from numpy import ndarray
+from scipy import linalg as linalg
+
+from .._typing import ArrayLike, Float, Int, MatrixLike
+from ..exceptions import ConvergenceWarning as ConvergenceWarning
+from ..linear_model import lars_path_gram as lars_path_gram
+from ..model_selection import BaseCrossValidator, check_cv as check_cv, cross_val_score as cross_val_score
+from ..model_selection._split import BaseShuffleSplit
+from ..utils._param_validation import Interval as Interval, StrOptions as StrOptions
+from ..utils.parallel import Parallel as Parallel, delayed as delayed
+from ..utils.validation import check_random_state as check_random_state, check_scalar as check_scalar
+from . import EmpiricalCovariance, empirical_covariance as empirical_covariance, log_likelihood as log_likelihood
 
 GraphicalLassoCV_Self = TypeVar("GraphicalLassoCV_Self", bound="GraphicalLassoCV")
 GraphicalLasso_Self = TypeVar("GraphicalLasso_Self", bound="GraphicalLasso")
 
+import operator
+import sys
+import time
 
 # Author: Gael Varoquaux <gael.varoquaux@normalesup.org>
 # License: BSD 3 clause
 # Copyright: INRIA
 import warnings
-import operator
-import sys
-import time
+
 import numpy as np
 
-
-def alpha_max(emp_cov: MatrixLike) -> Float:
-    ...
-
+def alpha_max(emp_cov: MatrixLike) -> Float: ...
 
 # The g-lasso algorithm
 def graphical_lasso(
@@ -52,9 +44,7 @@ def graphical_lasso(
     return_costs: bool = False,
     eps: Float = ...,
     return_n_iter: bool = False,
-) -> tuple[ndarray, ndarray, list[tuple], int]:
-    ...
-
+) -> tuple[ndarray, ndarray, list[tuple], int]: ...
 
 class BaseGraphicalLasso(EmpiricalCovariance):
     feature_names_in_: ndarray = ...
@@ -72,9 +62,7 @@ class BaseGraphicalLasso(EmpiricalCovariance):
         mode: str = "cd",
         verbose: bool = False,
         assume_centered: bool = False,
-    ) -> None:
-        ...
-
+    ) -> None: ...
 
 class GraphicalLasso(BaseGraphicalLasso):
     feature_names_in_: ndarray = ...
@@ -96,14 +84,8 @@ class GraphicalLasso(BaseGraphicalLasso):
         max_iter: Int = 100,
         verbose: bool = False,
         assume_centered: bool = False,
-    ) -> None:
-        ...
-
-    def fit(
-        self: GraphicalLasso_Self, X: MatrixLike, y: Any = None
-    ) -> GraphicalLasso_Self:
-        ...
-
+    ) -> None: ...
+    def fit(self: GraphicalLasso_Self, X: MatrixLike, y: Any = None) -> GraphicalLasso_Self: ...
 
 # Cross-validation with GraphicalLasso
 def graphical_lasso_path(
@@ -116,11 +98,7 @@ def graphical_lasso_path(
     enet_tol: Float = 1e-4,
     max_iter: Int = 100,
     verbose: int | bool = False,
-) -> tuple[list[ndarray], list[ndarray], list[Float]] | tuple[
-    list[ndarray], list[ndarray], list[float]
-]:
-    ...
-
+) -> tuple[list[ndarray], list[ndarray], list[Float]] | tuple[list[ndarray], list[ndarray], list[float]]: ...
 
 class GraphicalLassoCV(BaseGraphicalLasso):
     feature_names_in_: ndarray = ...
@@ -147,10 +125,5 @@ class GraphicalLassoCV(BaseGraphicalLasso):
         n_jobs: None | Int = None,
         verbose: bool = False,
         assume_centered: bool = False,
-    ) -> None:
-        ...
-
-    def fit(
-        self: GraphicalLassoCV_Self, X: MatrixLike, y: Any = None
-    ) -> GraphicalLassoCV_Self:
-        ...
+    ) -> None: ...
+    def fit(self: GraphicalLassoCV_Self, X: MatrixLike, y: Any = None) -> GraphicalLassoCV_Self: ...

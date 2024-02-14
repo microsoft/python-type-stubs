@@ -1,13 +1,15 @@
 from tkinter import Label
-from matplotlib.collections import Collection
 from typing import Callable, Iterable, Literal, Sequence
+
+from matplotlib.collections import Collection
+
 from ._typing import *
-from .transforms import Transform
-from .text import Text
-from .cm import ScalarMappable
-from .ticker import Formatter
-from .axes import Axes
 from .artist import Artist
+from .axes import Axes
+from .cm import ScalarMappable
+from .text import Text
+from .ticker import Formatter
+from .transforms import Transform
 
 class ClabelText(Text):
     def get_rotation(self) -> float: ...
@@ -25,7 +27,7 @@ class ContourLabeler:
         use_clabeltext: bool = ...,
         manual: bool | Iterable = ...,
         rightside_up: bool = ...,
-        zorder: float | None = ...
+        zorder: float | None = ...,
     ) -> list[Label]: ...
     def print_label(self, linecontour, labelwidth) -> bool: ...
     def too_close(self, x, y, lw) -> bool: ...
@@ -70,13 +72,11 @@ class ContourSet(ScalarMappable, ContourLabeler):
         nchunk=...,
         locator=...,
         transform=...,
-        **kwargs
+        **kwargs,
     ) -> None: ...
     def get_transform(self) -> Transform: ...
     def __getstate__(self): ...
-    def legend_elements(
-        self, variable_name: str = ..., str_format: Callable = ...
-    ) -> tuple[list[Artist], list[str]]: ...
+    def legend_elements(self, variable_name: str = ..., str_format: Callable = ...) -> tuple[list[Artist], list[str]]: ...
     def changed(self) -> bool: ...
     def get_alpha(self) -> float: ...
     def set_alpha(self, alpha: float) -> None: ...

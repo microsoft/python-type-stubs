@@ -1,16 +1,15 @@
-
 import numpy as np
 from scipy.sparse import spmatrix
 
-
 def init_bounds_dense(
-        X: np.ndarray,
-        centers: np.ndarray,
-        center_half_distances: np.ndarray,
-        labels: np.ndarray,
-        upper_bounds: np.ndarray,
-        lower_bounds: np.ndarray,
-        n_threads: int) -> None:
+    X: np.ndarray,
+    centers: np.ndarray,
+    center_half_distances: np.ndarray,
+    labels: np.ndarray,
+    upper_bounds: np.ndarray,
+    lower_bounds: np.ndarray,
+    n_threads: int,
+) -> None:
     """Initialize upper and lower bounds for each sample for dense input data.
     Given X, centers and the pairwise distances divided by 2.0 between the
     centers this calculates the upper bounds and lower bounds for each sample.
@@ -45,13 +44,14 @@ def init_bounds_dense(
     ...
 
 def init_bounds_sparse(
-        X: spmatrix,
-        centers: np.ndarray,
-        center_half_distances: np.ndarray,
-        labels: np.ndarray,
-        upper_bounds: np.ndarray,
-        lower_bounds: np.ndarray,
-        n_threads: int) -> None:
+    X: spmatrix,
+    centers: np.ndarray,
+    center_half_distances: np.ndarray,
+    labels: np.ndarray,
+    upper_bounds: np.ndarray,
+    lower_bounds: np.ndarray,
+    n_threads: int,
+) -> None:
     """Initialize upper and lower bounds for each sample for sparse input data.
     Given X, centers and the pairwise distances divided by 2.0 between the
     centers this calculates the upper bounds and lower bounds for each sample.
@@ -85,21 +85,21 @@ def init_bounds_sparse(
     """
     ...
 
-
 def elkan_iter_chunked_dense(
-        X: np.ndarray,
-        sample_weight: np.ndarray,
-        centers_old: np.ndarray,
-        centers_new: np.ndarray,
-        weight_in_clusters: np.ndarray,
-        center_half_distances: np.ndarray,
-        distance_next_center: np.ndarray,
-        upper_bounds: np.ndarray,
-        lower_bounds: np.ndarray,
-        labels: np.ndarray,
-        center_shift: np.ndarray,
-        n_threads: int,
-        update_centers: bool=True) -> None:
+    X: np.ndarray,
+    sample_weight: np.ndarray,
+    centers_old: np.ndarray,
+    centers_new: np.ndarray,
+    weight_in_clusters: np.ndarray,
+    center_half_distances: np.ndarray,
+    distance_next_center: np.ndarray,
+    upper_bounds: np.ndarray,
+    lower_bounds: np.ndarray,
+    labels: np.ndarray,
+    center_shift: np.ndarray,
+    n_threads: int,
+    update_centers: bool = True,
+) -> None:
     """Single iteration of K-means Elkan algorithm with dense input.
     Update labels and centers (inplace), for one iteration, distributed
     over data chunks.
@@ -143,21 +143,21 @@ def elkan_iter_chunked_dense(
     """
     ...
 
-
 def elkan_iter_chunked_sparse(
-        X: spmatrix,
-        sample_weight: np.ndarray,
-        centers_old: np.ndarray,
-        centers_new: np.ndarray,
-        weight_in_clusters: np.ndarray,
-        center_half_distances: np.ndarray,
-        distance_next_center: np.ndarray,
-        upper_bounds: np.ndarray,
-        lower_bounds: np.ndarray,
-        labels: np.ndarray,
-        center_shift: np.ndarray,
-        n_threads: int,
-        update_centers: bool=True) -> None:
+    X: spmatrix,
+    sample_weight: np.ndarray,
+    centers_old: np.ndarray,
+    centers_new: np.ndarray,
+    weight_in_clusters: np.ndarray,
+    center_half_distances: np.ndarray,
+    distance_next_center: np.ndarray,
+    upper_bounds: np.ndarray,
+    lower_bounds: np.ndarray,
+    labels: np.ndarray,
+    center_shift: np.ndarray,
+    n_threads: int,
+    update_centers: bool = True,
+) -> None:
     """Single iteration of K-means Elkan algorithm with sparse input.
     Update labels and centers (inplace), for one iteration, distributed
     over data chunks.

@@ -1,12 +1,12 @@
 from ._bounds import l1_min_c as l1_min_c
 from ._classes import (
     SVC as SVC,
-    NuSVC as NuSVC,
     SVR as SVR,
-    NuSVR as NuSVR,
-    OneClassSVM as OneClassSVM,
     LinearSVC as LinearSVC,
     LinearSVR as LinearSVR,
+    NuSVC as NuSVC,
+    NuSVR as NuSVR,
+    OneClassSVM as OneClassSVM,
 )
 
 __all__ = [

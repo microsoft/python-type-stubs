@@ -4,18 +4,8 @@
 
 from __future__ import division as division
 
-from .application import Application as Application  # noqa
-from ._default_app import (
-    use_app as use_app,
-    create as create,
-    run as run,
-    quit as quit,
-    process_events as process_events,
-)  # noqa
-from .canvas import (
-    Canvas as Canvas,
-    MouseEvent as MouseEvent,
-    KeyEvent as KeyEvent,
-)  # noqa
-from .timer import Timer as Timer  # noqa
 from . import base as base  # noqa
+from ._default_app import create as create, process_events as process_events, quit as quit, run as run, use_app as use_app  # noqa
+from .application import Application as Application  # noqa
+from .canvas import Canvas as Canvas, KeyEvent as KeyEvent, MouseEvent as MouseEvent  # noqa
+from .timer import Timer as Timer  # noqa

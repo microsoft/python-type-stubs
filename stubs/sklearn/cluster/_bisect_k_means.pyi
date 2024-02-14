@@ -1,14 +1,13 @@
 from typing import Any, Callable, ClassVar, Iterator, Literal, TypeVar
-from ._kmeans import _BaseKMeans
-from numpy.random import RandomState
+
 from numpy import ndarray
-from ..utils.extmath import row_norms as row_norms
+from numpy.random import RandomState
+
+from .._typing import ArrayLike, Float, Int, MatrixLike
 from ..utils._param_validation import StrOptions as StrOptions
-from .._typing import Float, Int, MatrixLike, ArrayLike
-from ..utils.validation import (
-    check_is_fitted as check_is_fitted,
-    check_random_state as check_random_state,
-)
+from ..utils.extmath import row_norms as row_norms
+from ..utils.validation import check_is_fitted as check_is_fitted, check_random_state as check_random_state
+from ._kmeans import _BaseKMeans
 
 BisectingKMeans_Self = TypeVar("BisectingKMeans_Self", bound="BisectingKMeans")
 
@@ -19,20 +18,11 @@ import warnings
 import numpy as np
 import scipy.sparse as sp
 
-
 class _BisectingTree:
-    def __init__(self, center: ndarray, indices: ndarray, score: Float) -> None:
-        ...
-
-    def split(self, labels: ndarray, centers: ndarray, scores: ndarray) -> None:
-        ...
-
-    def get_cluster_to_bisect(self) -> _BisectingTree:
-        ...
-
-    def iter_leaves(self) -> Iterator[_BisectingTree]:
-        ...
-
+    def __init__(self, center: ndarray, indices: ndarray, score: Float) -> None: ...
+    def split(self, labels: ndarray, centers: ndarray, scores: ndarray) -> None: ...
+    def get_cluster_to_bisect(self) -> _BisectingTree: ...
+    def iter_leaves(self) -> Iterator[_BisectingTree]: ...
 
 class BisectingKMeans(_BaseKMeans):
     feature_names_in_: ndarray = ...
@@ -55,19 +45,12 @@ class BisectingKMeans(_BaseKMeans):
         tol: Float = 1e-4,
         copy_x: bool = True,
         algorithm: Literal["lloyd", "elkan", "lloyd"] = "lloyd",
-        bisecting_strategy: Literal[
-            "biggest_inertia", "largest_cluster", "biggest_inertia"
-        ] = "biggest_inertia",
-    ) -> None:
-        ...
-
+        bisecting_strategy: Literal["biggest_inertia", "largest_cluster", "biggest_inertia"] = "biggest_inertia",
+    ) -> None: ...
     def fit(
         self: BisectingKMeans_Self,
         X: MatrixLike | ArrayLike,
         y: Any = None,
         sample_weight: None | ArrayLike = None,
-    ) -> BisectingKMeans_Self:
-        ...
-
-    def predict(self, X: MatrixLike | ArrayLike) -> ndarray:
-        ...
+    ) -> BisectingKMeans_Self: ...
+    def predict(self, X: MatrixLike | ArrayLike) -> ndarray: ...

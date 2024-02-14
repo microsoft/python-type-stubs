@@ -1,5 +1,4 @@
 from ...classes.graph import Graph
-
 from .isomorphvf2 import DiGraphMatcher, GraphMatcher
 
 __all__ = ["TimeRespectingGraphMatcher", "TimeRespectingDiGraphMatcher"]

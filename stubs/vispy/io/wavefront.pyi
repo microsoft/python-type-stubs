@@ -1,17 +1,17 @@
+import time
+from gzip import GzipFile
+from os import path as op
+
+import numpy as np
 from numpy.typing import NDArray
+
+from ..geometry import _calculate_normals
+from ..util import logger
 
 # -*- coding: utf-8 -*-
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 # This module was taken from visvis
-
-import numpy as np
-import time
-from gzip import GzipFile
-from os import path as op
-
-from ..geometry import _calculate_normals
-from ..util import logger
 
 class WavefrontReader(object):
     def __init__(self, f): ...

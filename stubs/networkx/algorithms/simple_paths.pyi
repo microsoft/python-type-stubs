@@ -1,6 +1,7 @@
-from numpy.typing import ArrayLike
 from heapq import heappop, heappush
 from itertools import count
+
+from numpy.typing import ArrayLike
 
 from ..classes.graph import Graph
 from ..utils import not_implemented_for, pairwise

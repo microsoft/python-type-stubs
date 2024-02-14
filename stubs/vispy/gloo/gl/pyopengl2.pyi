@@ -2,11 +2,10 @@
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 
-from OpenGL import GL as _GL
 import OpenGL.GL.framebufferobjects as _FBO
+from OpenGL import GL as _GL
 
 from ...util import logger
-
 from . import _copy_gl_functions
 from ._constants import *  # noqa
 

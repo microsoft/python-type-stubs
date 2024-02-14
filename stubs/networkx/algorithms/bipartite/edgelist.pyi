@@ -1,4 +1,5 @@
 from numpy.typing import ArrayLike
+
 from ...classes.graph import Graph
 
 __all__ = ["generate_edgelist", "write_edgelist", "parse_edgelist", "read_edgelist"]

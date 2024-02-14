@@ -1,17 +1,14 @@
-from typing import Iterator, Literal
-from ._typing import Int
-from contextlib import contextmanager as contextmanager
 import os
 import threading
+from contextlib import contextmanager as contextmanager
+from typing import Iterator, Literal
+
+from ._typing import Int
 
 _global_config: dict = ...
 _threadlocal = ...
 
-
-def get_config() -> dict | dict[str, bool | int | str]:
-    ...
-
-
+def get_config() -> dict | dict[str, bool | int | str]: ...
 def set_config(
     assume_finite: None | bool = None,
     working_memory: None | Int = None,
@@ -21,10 +18,7 @@ def set_config(
     enable_cython_pairwise_dist: None | bool = None,
     array_api_dispatch: None | bool = None,
     transform_output: None | str = None,
-) -> None:
-    ...
-
-
+) -> None: ...
 def config_context(
     *,
     assume_finite: None | bool = None,
@@ -35,5 +29,4 @@ def config_context(
     enable_cython_pairwise_dist: None | bool = None,
     array_api_dispatch: None | bool = None,
     transform_output: None | str = None,
-) -> Iterator[None]:
-    ...
+) -> Iterator[None]: ...

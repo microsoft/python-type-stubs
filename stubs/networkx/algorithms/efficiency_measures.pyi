@@ -1,6 +1,5 @@
 from ..classes.graph import Graph
 from ..exception import NetworkXNoPath
-
 from ..utils import not_implemented_for
 
 __all__ = ["efficiency", "local_efficiency", "global_efficiency"]

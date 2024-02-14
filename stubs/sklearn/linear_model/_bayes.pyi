@@ -1,14 +1,16 @@
-from typing import ClassVar, TypeVar
-from scipy import linalg as linalg
-from ._base import LinearModel
-from numpy import ndarray
-from ..utils.extmath import fast_logdet as fast_logdet
-from scipy.linalg import pinvh as pinvh
-from numbers import Integral as Integral, Real as Real
-from ..utils._param_validation import Interval as Interval
 from math import log as log
+from numbers import Integral as Integral, Real as Real
+from typing import ClassVar, TypeVar
+
+from numpy import ndarray
+from scipy import linalg as linalg
+from scipy.linalg import pinvh as pinvh
+
+from .._typing import ArrayLike, Float, Int, MatrixLike
 from ..base import RegressorMixin
-from .._typing import Int, Float, ArrayLike, MatrixLike
+from ..utils._param_validation import Interval as Interval
+from ..utils.extmath import fast_logdet as fast_logdet
+from ._base import LinearModel
 
 BayesianRidge_Self = TypeVar("BayesianRidge_Self", bound="BayesianRidge")
 ARDRegression_Self = TypeVar("ARDRegression_Self", bound="ARDRegression")
@@ -17,7 +19,6 @@ import numpy as np
 
 ###############################################################################
 # BayesianRidge regression
-
 
 class BayesianRidge(RegressorMixin, LinearModel):
     feature_names_in_: ndarray = ...
@@ -49,26 +50,19 @@ class BayesianRidge(RegressorMixin, LinearModel):
         fit_intercept: bool = True,
         copy_X: bool = True,
         verbose: bool = False,
-    ) -> None:
-        ...
-
+    ) -> None: ...
     def fit(
         self: BayesianRidge_Self,
         X: ArrayLike,
         y: ArrayLike,
         sample_weight: None | ArrayLike = None,
-    ) -> BayesianRidge_Self:
-        ...
-
+    ) -> BayesianRidge_Self: ...
     def predict(
         self, X: MatrixLike | ArrayLike, return_std: bool = False
-    ) -> ArrayLike | tuple[ndarray, ndarray] | tuple[ArrayLike, ArrayLike]:
-        ...
-
+    ) -> ArrayLike | tuple[ndarray, ndarray] | tuple[ArrayLike, ArrayLike]: ...
 
 ###############################################################################
 # ARD (Automatic Relevance Determination) regression
-
 
 class ARDRegression(RegressorMixin, LinearModel):
     feature_names_in_: ndarray = ...
@@ -98,15 +92,8 @@ class ARDRegression(RegressorMixin, LinearModel):
         fit_intercept: bool = True,
         copy_X: bool = True,
         verbose: bool = False,
-    ) -> None:
-        ...
-
-    def fit(
-        self: ARDRegression_Self, X: MatrixLike, y: ArrayLike
-    ) -> ARDRegression_Self:
-        ...
-
+    ) -> None: ...
+    def fit(self: ARDRegression_Self, X: MatrixLike, y: ArrayLike) -> ARDRegression_Self: ...
     def predict(
         self, X: MatrixLike | ArrayLike, return_std: bool = False
-    ) -> tuple[ndarray, ndarray] | tuple[ArrayLike, ArrayLike]:
-        ...
+    ) -> tuple[ndarray, ndarray] | tuple[ArrayLike, ArrayLike]: ...

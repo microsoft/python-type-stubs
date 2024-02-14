@@ -1,30 +1,18 @@
-from ..classes.multigraph import MultiGraph
-from ..classes.reportviews import (
-    OutMultiEdgeView,
-    InMultiEdgeView,
-    DiMultiDegreeView,
-)
 from copy import deepcopy
 from functools import cached_property
 
-from ..classes.graph import Graph
 import networkx.convert as convert
+
 from ..classes.coreviews import MultiAdjacencyView
 from ..classes.digraph import DiGraph
+from ..classes.graph import Graph
 from ..classes.multigraph import MultiGraph
-from ..classes.reportviews import (
-    DiMultiDegreeView,
-    InMultiDegreeView,
-    InMultiEdgeView,
-    OutMultiDegreeView,
-    OutMultiEdgeView,
-)
+from ..classes.reportviews import DiMultiDegreeView, InMultiDegreeView, InMultiEdgeView, OutMultiDegreeView, OutMultiEdgeView
 from ..exception import NetworkXError
 
 __all__ = ["MultiDiGraph"]
 
 class MultiDiGraph(MultiGraph, DiGraph):
-
     # node_dict_factory = dict    # already assigned in Graph
     # adjlist_outer_dict_factory = dict
     # adjlist_inner_dict_factory = dict

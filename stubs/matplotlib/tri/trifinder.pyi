@@ -1,5 +1,6 @@
 import numpy as np
 from matplotlib._typing import *
+
 from .triangulation import Triangulation
 
 class TriFinder:

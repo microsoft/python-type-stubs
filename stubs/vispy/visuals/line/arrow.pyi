@@ -1,22 +1,20 @@
-from vispy.util.svg.color import Color
+import numpy as np
 from numpy.typing import ArrayLike
+from vispy.util.svg.color import Color
 from vispy.visuals.line.arrow import ArrowVisual
+
+from ... import gloo, glsl
+from ..transforms._util import as_vec4
+from ..visual import Visual
+from .line import LineVisual
 
 # -*- coding: utf-8 -*-
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 
-import numpy as np
-
-from ... import glsl, gloo
-from ..transforms._util import as_vec4
-from ..visual import Visual
-from .line import LineVisual
-
 ARROW_TYPES = ...
 
 class _ArrowHeadVisual(Visual):
-
     ARROWHEAD_VERTEX_SHADER = ...
     ARROWHEAD_FRAGMENT_SHADER = ...
 

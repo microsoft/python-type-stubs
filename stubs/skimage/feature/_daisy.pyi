@@ -1,11 +1,10 @@
-from numpy.typing import ArrayLike
 import math
 
 import numpy as np
 from numpy import arctan2, exp, pi, sqrt
+from numpy.typing import ArrayLike
 
 from .. import draw
-
 from .._shared.filters import gaussian
 from .._shared.utils import check_nD
 

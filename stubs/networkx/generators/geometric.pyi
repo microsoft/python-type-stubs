@@ -1,13 +1,12 @@
-from numpy.typing import ArrayLike
-from collections.abc import Iterable
-from .._typing import Scalar
-from typing import Mapping
-from ..classes.graph import Graph
-
 import math
 from bisect import bisect_left
+from collections.abc import Iterable
 from itertools import accumulate, combinations, product
+from typing import Mapping
 
+from numpy.typing import ArrayLike
+
+from .._typing import Scalar
 from ..classes.graph import Graph
 from ..utils import py_random_state
 
@@ -64,9 +63,7 @@ def waxman_graph(
     seed=None,
 ) -> Graph: ...
 @py_random_state(5)
-def navigable_small_world_graph(
-    n: int, p: int = 1, q: int = 1, r: float = 2, dim: int = 2, seed=None
-): ...
+def navigable_small_world_graph(n: int, p: int = 1, q: int = 1, r: float = 2, dim: int = 2, seed=None): ...
 @py_random_state(7)
 def thresholded_random_geometric_graph(
     n: int | Iterable,

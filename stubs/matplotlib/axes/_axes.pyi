@@ -1,47 +1,47 @@
 import datetime
 from re import L
-from matplotlib.backend_tools import Cursors
-from matplotlib.contour import QuadContourSet
-import numpy as np
 from typing import Callable, Literal, Sequence, overload
+
+import numpy as np
 from matplotlib._typing import *
-from matplotlib.transforms import Bbox, BboxTransformTo, Transform
-from matplotlib.text import Annotation, Text
-from matplotlib.container import BarContainer, ErrorbarContainer, StemContainer
-from matplotlib.patches import FancyArrow, Polygon, Rectangle, StepPatch, Wedge
-from matplotlib.quiver import Barbs, Quiver
-from matplotlib.colors import Colormap, Normalize
+from matplotlib.artist import Artist
 from matplotlib.axes._secondary_axes import SecondaryAxis
+from matplotlib.axis import XAxis, YAxis
+from matplotlib.backend_tools import Cursors
 from matplotlib.collections import (
+    BrokenBarHCollection,
+    Collection,
     EventCollection,
     LineCollection,
-    BrokenBarHCollection,
     PathCollection,
     PolyCollection,
-    Collection,
     QuadMesh,
 )
-from matplotlib.lines import Line2D
-from matplotlib.legend import Legend
-from matplotlib.markers import MarkerStyle
-from matplotlib.ticker import Formatter
+from matplotlib.colors import Colormap, Normalize
+from matplotlib.container import BarContainer, ErrorbarContainer, StemContainer
+from matplotlib.contour import QuadContourSet
 from matplotlib.figure import Figure
 from matplotlib.image import AxesImage, PcolorImage
-from matplotlib.axis import XAxis, YAxis
-from matplotlib.artist import Artist
+from matplotlib.legend import Legend
+from matplotlib.lines import Line2D
+from matplotlib.markers import MarkerStyle
+from matplotlib.patches import FancyArrow, Polygon, Rectangle, StepPatch, Wedge
+from matplotlib.quiver import Barbs, Quiver
 from matplotlib.spines import Spines
+from matplotlib.table import table as table_table
+from matplotlib.text import Annotation, Text
+from matplotlib.ticker import Formatter
+from matplotlib.transforms import Bbox, BboxTransformTo, Transform
+from matplotlib.tri import (
+    tricontour as tri_tricontour,
+    tricontour as tri_tricontourf,
+    tripcolor as tri_tripcolor,
+    triplot as tri_triplot,
+)
+
 from ._base import _AxesBase
 
-from matplotlib.table import table as table_table
-from matplotlib.tri import \
-    tricontour as tri_tricontour, \
-    tricontour as tri_tricontourf, \
-    tripcolor as tri_tripcolor, \
-    triplot as tri_triplot
-
-    
 class Axes(_AxesBase):
-
     dataLim: Bbox
     viewLim: Bbox
     figure: Figure
@@ -63,18 +63,11 @@ class Axes(_AxesBase):
         pad: float = ...,
         *,
         y: float = ...,
-        **kwargs
+        **kwargs,
     ) -> Text: ...
     def get_legend_handles_labels(self, legend_handler_map=...) -> tuple[list, list]: ...
     def legend(self, *args, **kwargs) -> Legend: ...
-    def inset_axes(
-        self,
-        bounds: Sequence[float],
-        *,
-        transform: Transform = ...,
-        zorder: float = ...,
-        **kwargs
-    ) -> Axes: ...
+    def inset_axes(self, bounds: Sequence[float], *, transform: Transform = ..., zorder: float = ..., **kwargs) -> Axes: ...
     def indicate_inset(
         self,
         bounds: Sequence[float],
@@ -85,26 +78,16 @@ class Axes(_AxesBase):
         edgecolor: Color = ...,
         alpha: float = ...,
         zorder: float = ...,
-        **kwargs
+        **kwargs,
     ) -> Rectangle: ...
     def indicate_inset_zoom(self, inset_ax: Axes, **kwargs) -> Rectangle: ...
     def secondary_xaxis(
-        self,
-        location: Literal["top", "bottom", "left", "right"] | float,
-        *,
-        functions=...,
-        **kwargs
+        self, location: Literal["top", "bottom", "left", "right"] | float, *, functions=..., **kwargs
     ) -> SecondaryAxis: ...
     def secondary_yaxis(
-        self,
-        location: Literal["top", "bottom", "left", "right"] | float,
-        *,
-        functions=...,
-        **kwargs
+        self, location: Literal["top", "bottom", "left", "right"] | float, *, functions=..., **kwargs
     ) -> SecondaryAxis: ...
-    def text(
-        self, x: float, y: float, s: str, fontdict: dict = ..., **kwargs
-    ) -> Text: ...
+    def text(self, x: float, y: float, s: str, fontdict: dict = ..., **kwargs) -> Text: ...
     def annotate(
         self,
         text: str,
@@ -114,28 +97,13 @@ class Axes(_AxesBase):
         textcoords: str | Artist | Transform | Callable = ...,
         arrowprops: dict = ...,
         annotation_clip: bool | None = ...,
-        **kwargs
+        **kwargs,
     ) -> Annotation: ...
-    def axhline(
-        self, y: float = 0, xmin: float = 0, xmax: float = 1, **kwargs
-    ) -> Line2D: ...
-    def axvline(
-        self, x: float = ..., ymin: float = ..., ymax: float = ..., **kwargs
-    ) -> Line2D: ...
-    def axline(
-        self,
-        xy1: tuple[float, float],
-        xy2: tuple[float, float] = ...,
-        *,
-        slope: float = ...,
-        **kwargs
-    ) -> Line2D: ...
-    def axhspan(
-        self, ymin: float, ymax: float, xmin: float = ..., xmax: float = ..., **kwargs
-    ) -> Polygon: ...
-    def axvspan(
-        self, xmin: float, xmax: float, ymin: float = 0, ymax: float = 1, **kwargs
-    ) -> Polygon: ...
+    def axhline(self, y: float = 0, xmin: float = 0, xmax: float = 1, **kwargs) -> Line2D: ...
+    def axvline(self, x: float = ..., ymin: float = ..., ymax: float = ..., **kwargs) -> Line2D: ...
+    def axline(self, xy1: tuple[float, float], xy2: tuple[float, float] = ..., *, slope: float = ..., **kwargs) -> Line2D: ...
+    def axhspan(self, ymin: float, ymax: float, xmin: float = ..., xmax: float = ..., **kwargs) -> Polygon: ...
+    def axvspan(self, xmin: float, xmax: float, ymin: float = 0, ymax: float = 1, **kwargs) -> Polygon: ...
     def hlines(
         self,
         y: float | ArrayLike,
@@ -144,7 +112,7 @@ class Axes(_AxesBase):
         colors: list[Color] = ...,
         linestyles: Literal["solid", "dashed", "dashdot", "dotted"] = ...,
         label: str = ...,
-        **kwargs
+        **kwargs,
     ) -> LineCollection: ...
     def vlines(
         self,
@@ -154,7 +122,7 @@ class Axes(_AxesBase):
         colors: list[Color] = ...,
         linestyles: Literal["solid", "dashed", "dashdot", "dotted"] = ...,
         label: str = ...,
-        **kwargs
+        **kwargs,
     ) -> LineCollection: ...
     def eventplot(
         self,
@@ -165,11 +133,9 @@ class Axes(_AxesBase):
         linewidths: float | ArrayLike = ...,
         colors: Color | list[Color] = ...,
         linestyles: str | tuple | list = ...,
-        **kwargs
+        **kwargs,
     ) -> list[EventCollection]: ...
-    def plot(
-        self, *args, scalex=..., scaley=..., data=..., **kwargs
-    ) -> list[Line2D]: ...
+    def plot(self, *args, scalex=..., scaley=..., data=..., **kwargs) -> list[Line2D]: ...
     def plot_date(
         self,
         x: ArrayLike,
@@ -178,30 +144,17 @@ class Axes(_AxesBase):
         tz: datetime.tzinfo = ...,
         xdate: bool = ...,
         ydate: bool = ...,
-        **kwargs
+        **kwargs,
     ) -> list[Line2D]: ...
     def loglog(self, *args, **kwargs) -> list[Line2D]: ...
     def semilogx(self, *args, **kwargs) -> list[Line2D]: ...
     def semilogy(self, *args, **kwargs) -> list[Line2D]: ...
     def acorr(self, x: ArrayLike, **kwargs): ...
     def xcorr(
-        self,
-        x,
-        y,
-        normed: bool = True,
-        detrend: Callable = ...,
-        usevlines: bool = True,
-        maxlags: int = 10,
-        **kwargs
+        self, x, y, normed: bool = True, detrend: Callable = ..., usevlines: bool = True, maxlags: int = 10, **kwargs
     ) -> tuple[np.ndarray, np.ndarray, bool, int]: ...
     def step(
-        self,
-        x: ArrayLike,
-        y: ArrayLike,
-        *args,
-        where: Literal["pre", "post", "mid"] = ...,
-        data=...,
-        **kwargs
+        self, x: ArrayLike, y: ArrayLike, *args, where: Literal["pre", "post", "mid"] = ..., data=..., **kwargs
     ) -> list[Line2D]: ...
     def bar(
         self,
@@ -211,7 +164,7 @@ class Axes(_AxesBase):
         bottom: float | ArrayLike = ...,
         *,
         align: Literal["center", "edge"] = "center",
-        **kwargs
+        **kwargs,
     ) -> BarContainer: ...
     def barh(
         self,
@@ -221,7 +174,7 @@ class Axes(_AxesBase):
         left: float | ArrayLike = ...,
         *,
         align: Literal["center", "edge"] = "center",
-        **kwargs
+        **kwargs,
     ) -> BarContainer: ...
     def bar_label(
         self,
@@ -231,13 +184,10 @@ class Axes(_AxesBase):
         fmt: str = "%g",
         label_type: Literal["edge", "center"] = "edge",
         padding: float = 0,
-        **kwargs
+        **kwargs,
     ) -> list[Text]: ...
     def broken_barh(
-        self,
-        xranges: Sequence[tuple[float, float]],
-        yrange: tuple[float, float],
-        **kwargs
+        self, xranges: Sequence[tuple[float, float]], yrange: tuple[float, float], **kwargs
     ) -> BrokenBarHCollection: ...
     def stem(
         self,
@@ -248,7 +198,7 @@ class Axes(_AxesBase):
         bottom: float = 0,
         label: str | None = None,
         use_line_collection: bool = True,
-        orientation: str = "verical"
+        orientation: str = "verical",
     ) -> StemContainer: ...
     def pie(
         self,
@@ -269,7 +219,7 @@ class Axes(_AxesBase):
         frame: bool = False,
         rotatelabels: bool = False,
         *,
-        normalize: bool = True
+        normalize: bool = True,
     ) -> tuple[list[Wedge], list[Text], list[Text]]: ...
     def errorbar(
         self,
@@ -288,7 +238,7 @@ class Axes(_AxesBase):
         xuplims: bool = False,
         errorevery: int = 1,
         capthick: float | None = None,
-        **kwargs
+        **kwargs,
     ) -> ErrorbarContainer: ...
     def boxplot(
         self,
@@ -359,7 +309,7 @@ class Axes(_AxesBase):
         *,
         edgecolors: Color = ...,
         plotnonfinite: bool = False,
-        **kwargs
+        **kwargs,
     ) -> PathCollection: ...
     def hexbin(
         self,
@@ -381,14 +331,10 @@ class Axes(_AxesBase):
         reduce_C_function=...,
         mincnt: int | None = None,
         marginals: bool = False,
-        **kwargs
+        **kwargs,
     ) -> PolyCollection: ...
-    def arrow(
-        self, x: float, y: float, dx: float, dy: float, **kwargs
-    ) -> FancyArrow: ...
-    def quiverkey(
-        self, Q: Quiver, X: float, Y: float, U: float, label: str, **kwargs
-    ): ...
+    def arrow(self, x: float, y: float, dx: float, dy: float, **kwargs) -> FancyArrow: ...
+    def quiverkey(self, Q: Quiver, X: float, Y: float, U: float, label: str, **kwargs): ...
     def quiver(self, *args, **kwargs) -> Quiver: ...
     def barbs(self, *args, **kwargs) -> Barbs: ...
     def fill(self, *args, data=..., **kwargs) -> list[Polygon]: ...
@@ -400,7 +346,7 @@ class Axes(_AxesBase):
         where: ArrayLike = ...,
         interpolate: bool = ...,
         step: Literal["pre", "post", "mid"] = ...,
-        **kwargs
+        **kwargs,
     ) -> PolyCollection: ...
     def fill_betweenx(
         self,
@@ -410,7 +356,7 @@ class Axes(_AxesBase):
         where: ArrayLike = ...,
         step: Literal["pre", "post", "mid"] = ...,
         interpolate: bool = ...,
-        **kwargs
+        **kwargs,
     ) -> PolyCollection: ...
     def imshow(
         self,
@@ -430,7 +376,7 @@ class Axes(_AxesBase):
         filterrad: float = 4,
         resample: bool = ...,
         url: str = ...,
-        **kwargs
+        **kwargs,
     ) -> AxesImage: ...
     def pcolor(
         self,
@@ -441,7 +387,7 @@ class Axes(_AxesBase):
         cmap: str | Colormap = ...,
         vmin: float | None = None,
         vmax: float | None = None,
-        **kwargs
+        **kwargs,
     ) -> Collection: ...
     def pcolormesh(
         self,
@@ -453,7 +399,7 @@ class Axes(_AxesBase):
         vmax: float | None = None,
         shading: Literal["flat", "nearest", "gouraud", "auto"] = ...,
         antialiased=...,
-        **kwargs
+        **kwargs,
     ) -> QuadMesh: ...
     def pcolorfast(
         self,
@@ -463,7 +409,7 @@ class Axes(_AxesBase):
         cmap: str | Colormap = ...,
         vmin: float | None = None,
         vmax: float | None = None,
-        **kwargs
+        **kwargs,
     ) -> tuple[AxesImage, PcolorImage, QuadMesh]: ...
     def contour(self, *args, **kwargs) -> QuadContourSet: ...
     def contourf(self, *args, **kwargs) -> QuadContourSet: ...
@@ -486,7 +432,7 @@ class Axes(_AxesBase):
         color: Color | None = ...,
         label: str | None = ...,
         stacked: bool = ...,
-        **kwargs
+        **kwargs,
     ) -> tuple[list[list[float]], list[float], BarContainer | list]: ...
     @overload
     def hist(
@@ -506,7 +452,7 @@ class Axes(_AxesBase):
         color: Color | None = None,
         label: str | None = None,
         stacked: bool = False,
-        **kwargs
+        **kwargs,
     ) -> tuple[list[float], list[float], BarContainer | list]: ...
     def stairs(
         self,
@@ -516,7 +462,7 @@ class Axes(_AxesBase):
         orientation: Literal["vertical", "horizontal"] = "vertical",
         baseline: float | ArrayLike | None = 0,
         fill: bool = False,
-        **kwargs
+        **kwargs,
     ) -> StepPatch: ...
     def hist2d(
         self,
@@ -528,8 +474,8 @@ class Axes(_AxesBase):
         weights=...,
         cmin: float | None = None,
         cmax: float | None = None,
-        **kwargs
-    ) -> tuple[np.ndarray, np.ndarray, np.ndarray, tuple[float, float]|None]: ...
+        **kwargs,
+    ) -> tuple[np.ndarray, np.ndarray, np.ndarray, tuple[float, float] | None]: ...
     def psd(
         self,
         x: Sequence,
@@ -543,7 +489,7 @@ class Axes(_AxesBase):
         sides: Literal["default", "onesided", "twosided"] = ...,
         scale_by_freq: bool = ...,
         return_line: bool = False,
-        **kwargs
+        **kwargs,
     ) -> tuple[np.ndarray, np.ndarray, Line2D]: ...
     def csd(
         self,
@@ -559,7 +505,7 @@ class Axes(_AxesBase):
         sides: Literal["default", "onesided", "twosided"] = ...,
         scale_by_freq: bool = ...,
         return_line: bool = False,
-        **kwargs
+        **kwargs,
     ) -> tuple[np.ndarray, np.ndarray, Line2D]: ...
     def magnitude_spectrum(
         self,
@@ -570,7 +516,7 @@ class Axes(_AxesBase):
         pad_to: int = ...,
         sides: Literal["default", "onesided", "twosided"] = ...,
         scale: Literal["default", "linear", "dB"] = "linear",
-        **kwargs
+        **kwargs,
     ) -> tuple[np.ndarray, np.ndarray, Line2D]: ...
     def angle_spectrum(
         self,
@@ -580,7 +526,7 @@ class Axes(_AxesBase):
         window: Callable | np.ndarray = ...,
         pad_to: int = ...,
         sides: Literal["default", "onesided", "twosided"] = ...,
-        **kwargs
+        **kwargs,
     ) -> tuple[np.ndarray, np.ndarray, Line2D]: ...
     def phase_spectrum(
         self,
@@ -590,7 +536,7 @@ class Axes(_AxesBase):
         window: Callable | np.ndarray = ...,
         pad_to: int = ...,
         sides: Literal["default", "onesided", "twosided"] = ...,
-        **kwargs
+        **kwargs,
     ) -> tuple[np.ndarray, np.ndarray, Line2D]: ...
     def cohere(
         self,
@@ -605,7 +551,7 @@ class Axes(_AxesBase):
         pad_to: int = ...,
         sides: Literal["default", "onesided", "twosided"] = ...,
         scale_by_freq: bool = ...,
-        **kwargs
+        **kwargs,
     ) -> tuple[np.ndarray, np.ndarray]: ...
     def specgram(
         self,
@@ -625,7 +571,7 @@ class Axes(_AxesBase):
         scale: Literal["default", "linear", "dB"] = "dB",
         vmin=...,
         vmax=...,
-        **kwargs
+        **kwargs,
     ) -> tuple[np.ndarray, np.ndarray, np.ndarray, AxesImage]: ...
     def spy(
         self,
@@ -635,7 +581,7 @@ class Axes(_AxesBase):
         markersize=...,
         aspect: Literal["equal", "auto", None] | float = "equal",
         origin: Literal["upper", "lower"] = ...,
-        **kwargs
+        **kwargs,
     ) -> AxesImage | Line2D: ...
     def matshow(self, Z: ArrayLike, **kwargs) -> AxesImage: ...
     def violinplot(

@@ -1,19 +1,18 @@
-from .._typing import Scalar
-from numpy.typing import NDArray, ArrayLike
+import warnings
 from typing import Sequence
+
+import numpy as np
+import vispy.gloo
+from numpy.typing import ArrayLike, NDArray
+
+from .._typing import Scalar
+from ..ext.cubehelix import cubehelix
+from ..util.check_environment import has_matplotlib
+from .color_array import ColorArray
 
 # -*- coding: utf-8 -*-
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
-
-import warnings
-
-import numpy as np
-
-from .color_array import ColorArray
-from ..ext.cubehelix import cubehelix
-from ..util.check_environment import has_matplotlib
-import vispy.gloo
 
 ###############################################################################
 # Color maps
@@ -44,7 +43,6 @@ def _glsl_step(controls=None, colors=None, texture_map_data=None): ...
 def _process_glsl_template(template, colors): ...
 
 class BaseColormap(object):
-
     # Control colors used by the colormap.
     colors: None = ...
 

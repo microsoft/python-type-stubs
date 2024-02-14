@@ -29,12 +29,7 @@ from functools import wraps
 
 from ..classes.graph import Graph
 from ..exception import NetworkXError
-from ..generators.classic import (
-    complete_graph,
-    cycle_graph,
-    empty_graph,
-    path_graph,
-)
+from ..generators.classic import complete_graph, cycle_graph, empty_graph, path_graph
 
 def make_small_undirected_graph(graph_description, create_using=None): ...
 def make_small_graph(graph_description, create_using=None): ...

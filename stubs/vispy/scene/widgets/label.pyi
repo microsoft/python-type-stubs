@@ -1,13 +1,13 @@
 from vispy.util.event import Event
 
+from ...visuals import TextVisual
+from .widget import Widget
+
 # -*- coding: utf-8 -*-
 # -----------------------------------------------------------------------------
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 # -----------------------------------------------------------------------------
-
-from .widget import Widget
-from ...visuals import TextVisual
 
 class Label(Widget):
     def __init__(self, text: str, rotation: float = 0.0, **kwargs): ...

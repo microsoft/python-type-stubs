@@ -1,48 +1,47 @@
 # -*- coding: utf-8 -*-
 
+import platform
+import struct
+import sys
 from ctypes import (
-    cdll,
-    util,
-    Structure,
-    cast,
-    byref,
-    POINTER,
     CFUNCTYPE,
-    c_int,
-    c_long,
-    c_ulong,
-    c_ushort,
-    c_wchar,
-    c_uint32,
-    c_double,
-    c_uint,
-    c_float,
-    c_void_p,
-    c_char_p,
+    POINTER,
+    ArgumentError,
+    Structure,
+    alignment,
+    byref,
     c_bool,
     c_buffer,
-    c_ubyte,
     c_byte,
+    c_char,
+    c_char_p,
+    c_double,
+    c_float,
+    c_int,
     c_int8,
     c_int16,
     c_int32,
     c_int64,
-    c_short,
-    c_longlong,
-    c_size_t,
-    sizeof,
-    c_uint8,
+    c_long,
     c_longdouble,
-    c_char,
+    c_longlong,
+    c_short,
+    c_size_t,
+    c_ubyte,
+    c_uint,
+    c_uint8,
+    c_uint32,
+    c_ulong,
     c_ulonglong,
+    c_ushort,
+    c_void_p,
+    c_wchar,
+    cast,
+    cdll,
     py_object,
-    alignment,
-    ArgumentError,
+    sizeof,
+    util,
 )
-
-import platform
-import struct
-import sys
 
 # Based on Pyglet code
 
@@ -344,7 +343,6 @@ def set_instance_variable(obj, varname, value, vartype): ...
 def get_instance_variable(obj, varname, vartype): ...
 
 class ObjCMethod(object):
-
     typecodes: dict = ...
     cfunctype_table: dict = ...
 

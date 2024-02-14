@@ -2,12 +2,11 @@
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 
-from .base_filter import Filter
-from ..transforms import NullTransform
 from ...geometry import Rect
+from ..transforms import NullTransform
+from .base_filter import Filter
 
 class Clipper(Filter):
-
     FRAG_SHADER: str = ...
 
     def __init__(self, bounds=..., transform=None): ...

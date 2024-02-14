@@ -1,20 +1,18 @@
+import base64
+import inspect
+import json
+import logging
+import re
+import sys
+import traceback
+from functools import partial
+
+import numpy as np
 from numpy.typing import ArrayLike
 
 # -*- coding: utf-8 -*-
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
-
-import base64
-import logging
-import sys
-import inspect
-import re
-import traceback
-import json
-from functools import partial
-
-import numpy as np
-from numpy.typing import ArrayLike
 
 ###############################################################################
 # LOGGING (some adapted from mne-python)
@@ -49,7 +47,6 @@ logging_types = ...
 def set_log_level(verbose: bool | str | int | None, match: str | None = None, return_old: bool = False): ...
 
 class use_log_level(object):
-
     # This method mostly wraps to set_log_level, but also takes
     # care of enabling/disabling message recording in the formatter.
 

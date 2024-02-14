@@ -4,9 +4,8 @@
 
 from __future__ import annotations
 
-from typing import Optional
-
 from functools import lru_cache
+from typing import Optional
 
 import numpy as np
 
@@ -14,7 +13,6 @@ from ..shaders import Function, Varying
 from .base_filter import Filter
 
 class PlanesClipper(Filter):
-
     VERT_CODE: str = ...
 
     FRAG_CODE: str = ...

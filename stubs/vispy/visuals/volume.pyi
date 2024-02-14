@@ -1,25 +1,22 @@
-
-
 # -*- coding: utf-8 -*-
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 
 from __future__ import annotations
 
-from typing import Optional
 from functools import lru_cache
-
-from ._scalable_textures import CPUScaledTexture3D, GPUScaledTextured3D, Texture2D
-from ..gloo import VertexBuffer, IndexBuffer
-from ..gloo.texture import should_cast_to_f32
-from . import Visual
-from .shaders import Function
-from ..color import get_colormap
-from ..io import load_spatial_filters
+from typing import Literal, Optional
 
 import numpy as np
-from typing import Literal
-from numpy.typing import NDArray, ArrayLike
+from numpy.typing import ArrayLike, NDArray
+
+from ..color import get_colormap
+from ..gloo import IndexBuffer, VertexBuffer
+from ..gloo.texture import should_cast_to_f32
+from ..io import load_spatial_filters
+from . import Visual
+from ._scalable_textures import CPUScaledTexture3D, GPUScaledTextured3D, Texture2D
+from .shaders import Function
 
 # todo: implement more render methods (port from visvis)
 # todo: allow anisotropic data
@@ -52,7 +49,6 @@ _INTERPOLATION_TEMPLATE: str = ...
 _TEXTURE_LOOKUP: str = ...
 
 class VolumeVisual(Visual):
-
     _rendering_methods: dict = ...
 
     _raycasting_modes: dict = ...

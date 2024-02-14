@@ -1,9 +1,8 @@
 import sys
 import warnings
 
-import pytest
-
 import networkx
+import pytest
 
 def pytest_addoption(parser): ...
 def pytest_configure(config): ...

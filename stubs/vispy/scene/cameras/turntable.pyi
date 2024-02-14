@@ -10,7 +10,6 @@ from ...util import transforms
 from .perspective import Base3DRotationCamera
 
 class TurntableCamera(Base3DRotationCamera):
-
     _state_props = ...
 
     def __init__(

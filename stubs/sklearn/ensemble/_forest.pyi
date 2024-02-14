@@ -1,18 +1,17 @@
+from abc import ABCMeta, abstractmethod
+from numbers import Integral as Integral, Real as Real
 from typing import Any, ClassVar, Literal, Mapping, Sequence, TypeVar
-from warnings import (
-    catch_warnings as catch_warnings,
-    simplefilter as simplefilter,
-    warn as warn,
-)
+from warnings import catch_warnings as catch_warnings, simplefilter as simplefilter, warn as warn
+
+from numpy import ndarray
 from numpy.random import RandomState
-from ..tree._tree import DTYPE as DTYPE, DOUBLE as DOUBLE
+from scipy.sparse import hstack as sparse_hstack, issparse as issparse, spmatrix
+
+from .._typing import ArrayLike, Float, Int, MatrixLike
+from ..base import ClassifierMixin, MultiOutputMixin, RegressorMixin, TransformerMixin, is_classifier as is_classifier
 from ..exceptions import DataConversionWarning as DataConversionWarning
 from ..metrics import accuracy_score as accuracy_score, r2_score as r2_score
 from ..preprocessing import OneHotEncoder
-from scipy.sparse import issparse as issparse, hstack as sparse_hstack, spmatrix
-from ..utils.parallel import delayed as delayed, Parallel as Parallel
-from ..utils.validation import check_is_fitted as check_is_fitted
-from abc import ABCMeta, abstractmethod
 from ..tree import (
     BaseDecisionTree as BaseDecisionTree,
     DecisionTreeClassifier,
@@ -20,35 +19,20 @@ from ..tree import (
     ExtraTreeClassifier as ExtraTreeClassifier,
     ExtraTreeRegressor,
 )
-from numpy import ndarray
+from ..tree._tree import DOUBLE as DOUBLE, DTYPE as DTYPE
+from ..utils import check_random_state as check_random_state, compute_sample_weight as compute_sample_weight
 from ..utils._param_validation import Interval as Interval, StrOptions as StrOptions
-from numbers import Integral as Integral, Real as Real
-from ..base import (
-    is_classifier as is_classifier,
-    ClassifierMixin,
-    MultiOutputMixin,
-    RegressorMixin,
-    TransformerMixin,
-)
-from ..utils import (
-    check_random_state as check_random_state,
-    compute_sample_weight as compute_sample_weight,
-)
+from ..utils.multiclass import check_classification_targets as check_classification_targets, type_of_target as type_of_target
+from ..utils.parallel import Parallel as Parallel, delayed as delayed
+from ..utils.validation import check_is_fitted as check_is_fitted
 from ._base import BaseEnsemble
-from ..utils.multiclass import (
-    check_classification_targets as check_classification_targets,
-    type_of_target as type_of_target,
-)
-from .._typing import MatrixLike, ArrayLike, Int, Float
 
 BaseForest_Self = TypeVar("BaseForest_Self", bound="BaseForest")
-RandomTreesEmbedding_Self = TypeVar(
-    "RandomTreesEmbedding_Self", bound="RandomTreesEmbedding"
-)
+RandomTreesEmbedding_Self = TypeVar("RandomTreesEmbedding_Self", bound="RandomTreesEmbedding")
 
 import threading
-import numpy as np
 
+import numpy as np
 
 __all__ = [
     "RandomForestClassifier",
@@ -60,9 +44,7 @@ __all__ = [
 
 MAX_INT = ...
 
-
 class BaseForest(MultiOutputMixin, BaseEnsemble, metaclass=ABCMeta):
-
     _parameter_constraints: ClassVar[dict] = ...
 
     @abstractmethod
@@ -81,27 +63,17 @@ class BaseForest(MultiOutputMixin, BaseEnsemble, metaclass=ABCMeta):
         class_weight=None,
         max_samples=None,
         base_estimator: str = "deprecated",
-    ) -> None:
-        ...
-
-    def apply(self, X: MatrixLike | ArrayLike) -> ndarray:
-        ...
-
-    def decision_path(self, X: MatrixLike | ArrayLike) -> tuple[spmatrix, ndarray]:
-        ...
-
+    ) -> None: ...
+    def apply(self, X: MatrixLike | ArrayLike) -> ndarray: ...
+    def decision_path(self, X: MatrixLike | ArrayLike) -> tuple[spmatrix, ndarray]: ...
     def fit(
         self: BaseForest_Self,
         X: MatrixLike | ArrayLike,
         y: MatrixLike | ArrayLike,
         sample_weight: None | ArrayLike = None,
-    ) -> BaseForest_Self:
-        ...
-
+    ) -> BaseForest_Self: ...
     @property
-    def feature_importances_(self) -> ndarray:
-        ...
-
+    def feature_importances_(self) -> ndarray: ...
 
 class ForestClassifier(ClassifierMixin, BaseForest, metaclass=ABCMeta):
     @abstractmethod
@@ -120,18 +92,10 @@ class ForestClassifier(ClassifierMixin, BaseForest, metaclass=ABCMeta):
         class_weight=None,
         max_samples=None,
         base_estimator: str = "deprecated",
-    ) -> None:
-        ...
-
-    def predict(self, X: MatrixLike | ArrayLike) -> ndarray:
-        ...
-
-    def predict_proba(self, X: MatrixLike | ArrayLike) -> ndarray:
-        ...
-
-    def predict_log_proba(self, X: MatrixLike | ArrayLike) -> ndarray:
-        ...
-
+    ) -> None: ...
+    def predict(self, X: MatrixLike | ArrayLike) -> ndarray: ...
+    def predict_proba(self, X: MatrixLike | ArrayLike) -> ndarray: ...
+    def predict_log_proba(self, X: MatrixLike | ArrayLike) -> ndarray: ...
 
 class ForestRegressor(RegressorMixin, BaseForest, metaclass=ABCMeta):
     @abstractmethod
@@ -149,12 +113,8 @@ class ForestRegressor(RegressorMixin, BaseForest, metaclass=ABCMeta):
         warm_start: bool = False,
         max_samples=None,
         base_estimator: str = "deprecated",
-    ) -> None:
-        ...
-
-    def predict(self, X: MatrixLike | ArrayLike) -> ndarray:
-        ...
-
+    ) -> None: ...
+    def predict(self, X: MatrixLike | ArrayLike) -> ndarray: ...
 
 class RandomForestClassifier(ForestClassifier):
     oob_decision_function_: ndarray = ...
@@ -189,15 +149,10 @@ class RandomForestClassifier(ForestClassifier):
         random_state: RandomState | None | Int = None,
         verbose: Int = 0,
         warm_start: bool = False,
-        class_weight: Literal["balanced", "balanced_subsample"]
-        | None
-        | Mapping
-        | Sequence[Mapping] = None,
+        class_weight: Literal["balanced", "balanced_subsample"] | None | Mapping | Sequence[Mapping] = None,
         ccp_alpha: float = 0.0,
         max_samples: float | None | int = None,
-    ) -> None:
-        ...
-
+    ) -> None: ...
 
 class RandomForestRegressor(ForestRegressor):
     oob_prediction_: ndarray = ...
@@ -238,9 +193,7 @@ class RandomForestRegressor(ForestRegressor):
         warm_start: bool = False,
         ccp_alpha: float = 0.0,
         max_samples: float | None | int = None,
-    ) -> None:
-        ...
-
+    ) -> None: ...
 
 class ExtraTreesClassifier(ForestClassifier):
     oob_decision_function_: ndarray = ...
@@ -275,15 +228,10 @@ class ExtraTreesClassifier(ForestClassifier):
         random_state: RandomState | None | Int = None,
         verbose: Int = 0,
         warm_start: bool = False,
-        class_weight: Literal["balanced", "balanced_subsample"]
-        | None
-        | Mapping
-        | Sequence[Mapping] = None,
+        class_weight: Literal["balanced", "balanced_subsample"] | None | Mapping | Sequence[Mapping] = None,
         ccp_alpha: float = 0.0,
         max_samples: float | None | int = None,
-    ) -> None:
-        ...
-
+    ) -> None: ...
 
 class ExtraTreesRegressor(ForestRegressor):
     oob_prediction_: ndarray = ...
@@ -324,9 +272,7 @@ class ExtraTreesRegressor(ForestRegressor):
         warm_start: bool = False,
         ccp_alpha: float = 0.0,
         max_samples: float | None | int = None,
-    ) -> None:
-        ...
-
+    ) -> None: ...
 
 class RandomTreesEmbedding(TransformerMixin, BaseForest):
     one_hot_encoder_: OneHotEncoder = ...
@@ -360,27 +306,18 @@ class RandomTreesEmbedding(TransformerMixin, BaseForest):
         random_state: RandomState | None | Int = None,
         verbose: Int = 0,
         warm_start: bool = False,
-    ) -> None:
-        ...
-
+    ) -> None: ...
     def fit(
         self: RandomTreesEmbedding_Self,
         X: MatrixLike | ArrayLike,
         y: Any = None,
         sample_weight: None | ArrayLike = None,
-    ) -> RandomTreesEmbedding_Self:
-        ...
-
+    ) -> RandomTreesEmbedding_Self: ...
     def fit_transform(
         self,
         X: MatrixLike | ArrayLike,
         y: Any = None,
         sample_weight: None | ArrayLike = None,
-    ) -> spmatrix:
-        ...
-
-    def get_feature_names_out(self, input_features: None | ArrayLike = None) -> ndarray:
-        ...
-
-    def transform(self, X: MatrixLike | ArrayLike) -> spmatrix:
-        ...
+    ) -> spmatrix: ...
+    def get_feature_names_out(self, input_features: None | ArrayLike = None) -> ndarray: ...
+    def transform(self, X: MatrixLike | ArrayLike) -> spmatrix: ...

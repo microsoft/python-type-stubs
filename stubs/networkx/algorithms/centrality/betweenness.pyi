@@ -1,8 +1,8 @@
-from typing import Mapping
 import warnings
 from collections import deque
 from heapq import heappop, heappush
 from itertools import count
+from typing import Mapping
 
 from ...classes.graph import Graph
 from ...utils import py_random_state
@@ -20,9 +20,7 @@ def betweenness_centrality(
     seed=None,
 ) -> Mapping: ...
 @py_random_state(4)
-def edge_betweenness_centrality(
-    G: Graph, k=None, normalized: bool = True, weight=None, seed=None
-) -> Mapping: ...
+def edge_betweenness_centrality(G: Graph, k=None, normalized: bool = True, weight=None, seed=None) -> Mapping: ...
 
 # obsolete name
 def edge_betweenness(G: Graph, k=None, normalized=True, weight=None, seed=None): ...

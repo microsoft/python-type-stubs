@@ -1,16 +1,14 @@
 from typing import Literal
-from ...base import is_classifier as is_classifier, BaseEstimator
-from .._classification import check_consistent_length as check_consistent_length
-from matplotlib.axes import Axes
+
 from matplotlib.artist import Artist
-from ...utils import check_matplotlib_support as check_matplotlib_support
-from ..._typing import ArrayLike, Float, MatrixLike
-from .. import (
-    average_precision_score as average_precision_score,
-    precision_recall_curve as precision_recall_curve,
-)
+from matplotlib.axes import Axes
 from matplotlib.figure import Figure
 
+from ..._typing import ArrayLike, Float, MatrixLike
+from ...base import BaseEstimator, is_classifier as is_classifier
+from ...utils import check_matplotlib_support as check_matplotlib_support
+from .. import average_precision_score as average_precision_score, precision_recall_curve as precision_recall_curve
+from .._classification import check_consistent_length as check_consistent_length
 
 class PrecisionRecallDisplay:
     figure_: Figure = ...
@@ -25,14 +23,8 @@ class PrecisionRecallDisplay:
         average_precision: None | Float = None,
         estimator_name: None | str = None,
         pos_label: None | str | int = None,
-    ) -> None:
-        ...
-
-    def plot(
-        self, ax: None | Axes = None, *, name: None | str = None, **kwargs
-    ) -> PrecisionRecallDisplay:
-        ...
-
+    ) -> None: ...
+    def plot(self, ax: None | Axes = None, *, name: None | str = None, **kwargs) -> PrecisionRecallDisplay: ...
     @classmethod
     def from_estimator(
         cls,
@@ -42,15 +34,11 @@ class PrecisionRecallDisplay:
         *,
         sample_weight: None | ArrayLike = None,
         pos_label: None | str | int = None,
-        response_method: Literal[
-            "predict_proba", "decision_function", "auto", "auto"
-        ] = "auto",
+        response_method: Literal["predict_proba", "decision_function", "auto", "auto"] = "auto",
         name: None | str = None,
         ax: None | Axes = None,
         **kwargs,
-    ) -> PrecisionRecallDisplay:
-        ...
-
+    ) -> PrecisionRecallDisplay: ...
     @classmethod
     def from_predictions(
         cls,
@@ -62,5 +50,4 @@ class PrecisionRecallDisplay:
         name: None | str = None,
         ax: None | Axes = None,
         **kwargs,
-    ) -> PrecisionRecallDisplay:
-        ...
+    ) -> PrecisionRecallDisplay: ...

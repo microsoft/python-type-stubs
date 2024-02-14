@@ -1,22 +1,19 @@
+import numpy as np
 from numpy import dtype
-from numpy.typing import NDArray, ArrayLike
+from numpy.typing import ArrayLike, NDArray
+
+from ..color import Colormap, get_colormap
+from ..gloo import Texture2D, VertexBuffer
+from ..gloo.texture import should_cast_to_f32
+from ..io import load_spatial_filters
+from ._scalable_textures import CPUScaledTexture2D, GPUScaledTexture2D
+from .shaders import Function, FunctionChain
+from .transforms import NullTransform
+from .visual import Visual
 
 # -*- coding: utf-8 -*-
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
-
-import numpy as np
-
-from ..color import Colormap
-
-from ..gloo import Texture2D, VertexBuffer
-from ..gloo.texture import should_cast_to_f32
-from ..color import get_colormap
-from .shaders import Function, FunctionChain
-from .transforms import NullTransform
-from .visual import Visual
-from ..io import load_spatial_filters
-from ._scalable_textures import CPUScaledTexture2D, GPUScaledTexture2D
 
 _VERTEX_SHADER: str = ...
 
@@ -41,7 +38,6 @@ _C2L_RED: str = ...
 _CUSTOM_FILTER: str = ...
 
 class ImageVisual(Visual):
-
     _shaders: dict = ...
 
     _func_templates: dict = ...

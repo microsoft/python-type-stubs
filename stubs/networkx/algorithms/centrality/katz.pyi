@@ -1,8 +1,8 @@
-from typing import Mapping
 import math
+from typing import Mapping
 
-from ...utils import not_implemented_for
 from ...classes.graph import Graph
+from ...utils import not_implemented_for
 
 __all__ = ["katz_centrality", "katz_centrality_numpy"]
 

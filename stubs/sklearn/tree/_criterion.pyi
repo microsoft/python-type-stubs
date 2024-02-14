@@ -1,9 +1,6 @@
-
 import numpy as np
 
-
 class Criterion:
-
     y: np.ndarray
     sample_weight: np.ndarray
 
@@ -27,33 +24,18 @@ class Criterion:
         weighted_n_samples: float,
         sample_indices: np.ndarray,
         start: int,
-        end: int
+        end: int,
     ) -> int: ...
     def reset(self) -> int: ...
     def reverse_reset(self) -> int: ...
     def update(self, new_pos: int) -> int: ...
     def node_impurity(self) -> float: ...
-    def children_impurity(
-        self,
-        impurity_left: list[float],
-        impurity_right: list[float]
-    ) -> None: ...
-    def node_value(
-        self,
-        dest: list[float]
-    ) -> None: ...
-    def impurity_improvement(
-        self,
-        impurity_parent: float,
-        impurity_left: float,
-        impurity_right: float
-    ) -> float: ...
+    def children_impurity(self, impurity_left: list[float], impurity_right: list[float]) -> None: ...
+    def node_value(self, dest: list[float]) -> None: ...
+    def impurity_improvement(self, impurity_parent: float, impurity_left: float, impurity_right: float) -> float: ...
     def proxy_impurity_improvement(self) -> float: ...
 
-
 class ClassificationCriterion(Criterion):
-
-
     n_classes: np.ndarray
     max_n_classes: int
 
@@ -61,9 +43,7 @@ class ClassificationCriterion(Criterion):
     sum_left: np.ndarray
     sum_right: np.ndarray
 
-    
 class RegressionCriterion(Criterion):
-
     sq_sum_total: float
 
     sum_total: np.ndarray

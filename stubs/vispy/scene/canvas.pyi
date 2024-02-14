@@ -1,32 +1,31 @@
-from ..scene.node import Node
-from ..gloo.framebuffer import FrameBuffer
-from ..util.event import Event
-from numpy.typing import ArrayLike
-from ..visuals.visual import Visual
+import weakref
 from typing import Mapping
-from ..gloo.context import GLContext
-from ..scene.widgets.widget import Widget
-from ..util.svg.color import Color
+
+import numpy as np
+from numpy.typing import ArrayLike
+
+from .. import app, gloo
 from ..app.application import Application
 from ..app.canvas import Canvas, DrawEvent
+from ..color import Color
+from ..gloo.context import GLContext
+from ..gloo.framebuffer import FrameBuffer
+from ..scene.node import Node
+from ..scene.widgets.widget import Widget
+from ..util import Frozen, logger
+from ..util.event import Event
+from ..util.profiler import Profiler
+from ..util.svg.color import Color
+from ..visuals.transforms import TransformSystem
+from ..visuals.visual import Visual
+from .events import SceneMouseEvent
+from .subscene import SubScene
+from .visuals import VisualNode
+from .widgets import Widget
 
 # -*- coding: utf-8 -*-
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
-
-import weakref
-import numpy as np
-
-from .. import gloo
-from .. import app
-from .visuals import VisualNode
-from ..visuals.transforms import TransformSystem
-from ..color import Color
-from ..util import logger, Frozen
-from ..util.profiler import Profiler
-from .subscene import SubScene
-from .events import SceneMouseEvent
-from .widgets import Widget
 
 class SceneCanvas(app.Canvas, Frozen):
     def __init__(

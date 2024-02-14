@@ -1,15 +1,14 @@
 from .loss import (
-    HalfSquaredError as HalfSquaredError,
     AbsoluteError as AbsoluteError,
-    PinballLoss as PinballLoss,
-    HalfPoissonLoss as HalfPoissonLoss,
+    HalfBinomialLoss as HalfBinomialLoss,
     HalfGammaLoss as HalfGammaLoss,
+    HalfMultinomialLoss as HalfMultinomialLoss,
+    HalfPoissonLoss as HalfPoissonLoss,
+    HalfSquaredError as HalfSquaredError,
     HalfTweedieLoss as HalfTweedieLoss,
     HalfTweedieLossIdentity as HalfTweedieLossIdentity,
-    HalfBinomialLoss as HalfBinomialLoss,
-    HalfMultinomialLoss as HalfMultinomialLoss,
+    PinballLoss as PinballLoss,
 )
-
 
 __all__ = [
     "HalfSquaredError",

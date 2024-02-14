@@ -1,16 +1,15 @@
-from vispy.util.svg.color import Color
-from numpy.typing import ArrayLike
-
 # -*- coding: utf-8 -*-
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 import numbers
 
 import numpy as np
-
+from numpy.typing import ArrayLike
 from vispy.gloo import Texture2D, VertexBuffer
-from vispy.visuals.shaders import Function, Varying
+from vispy.util.svg.color import Color
 from vispy.visuals.filters import Filter
+from vispy.visuals.shaders import Function, Varying
+
 from ...color import Color
 
 class TextureFilter(Filter):

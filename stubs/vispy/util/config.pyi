@@ -1,26 +1,25 @@
+import atexit
+import getopt
+import inspect
+import io
+import json
+import os
+import platform
+import sys
+import tempfile
+import traceback
+from os import path as op
+from shutil import rmtree
 from typing import Mapping
+
+import numpy as np
+
+from .event import EmitterGroup, Event, EventEmitter
+from .logs import logger, set_log_level, use_log_level
 
 # -*- coding: utf-8 -*-
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
-
-import io
-import os
-from os import path as op
-import inspect
-import json
-import sys
-import platform
-import getopt
-import traceback
-import tempfile
-import atexit
-from shutil import rmtree
-
-import numpy as np
-
-from .event import EmitterGroup, EventEmitter, Event
-from .logs import logger, set_log_level, use_log_level
 
 file_types: list = ...
 file_types = ...

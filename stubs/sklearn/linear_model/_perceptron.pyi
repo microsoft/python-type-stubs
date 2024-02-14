@@ -1,15 +1,16 @@
-from typing import ClassVar, Literal, Mapping
-from numpy.random import RandomState
-from ._stochastic_gradient import BaseSGDClassifier
-from numpy import ndarray
-from ..utils._param_validation import StrOptions as StrOptions, Interval as Interval
 from numbers import Real as Real
+from typing import ClassVar, Literal, Mapping
+
+from numpy import ndarray
+from numpy.random import RandomState
+
 from .._typing import Float, Int
+from ..utils._param_validation import Interval as Interval, StrOptions as StrOptions
 from ._sgd_fast import LossFunction
+from ._stochastic_gradient import BaseSGDClassifier
 
 # Author: Mathieu Blondel
 # License: BSD 3 clause
-
 
 class Perceptron(BaseSGDClassifier):
     t_: int = ...
@@ -42,5 +43,4 @@ class Perceptron(BaseSGDClassifier):
         n_iter_no_change: Int = 5,
         class_weight: Mapping[str, float] | None | str = None,
         warm_start: bool = False,
-    ) -> None:
-        ...
+    ) -> None: ...

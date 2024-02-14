@@ -1,13 +1,15 @@
+from numbers import Integral as Integral, Real as Real
 from typing import ClassVar, TypeVar
-from scipy import optimize as optimize
-from ._base import LinearModel
+
 from numpy import ndarray
+from scipy import optimize as optimize
+
+from .._typing import ArrayLike, Float, Int, MatrixLike
+from ..base import BaseEstimator, RegressorMixin
+from ..utils import axis0_safe_slice as axis0_safe_slice
 from ..utils._param_validation import Interval as Interval
 from ..utils.extmath import safe_sparse_dot as safe_sparse_dot
-from numbers import Integral as Integral, Real as Real
-from ..base import BaseEstimator, RegressorMixin
-from .._typing import Float, Int, MatrixLike, ArrayLike
-from ..utils import axis0_safe_slice as axis0_safe_slice
+from ._base import LinearModel
 
 HuberRegressor_Self = TypeVar("HuberRegressor_Self", bound="HuberRegressor")
 
@@ -15,7 +17,6 @@ HuberRegressor_Self = TypeVar("HuberRegressor_Self", bound="HuberRegressor")
 # License: BSD 3 clause
 
 import numpy as np
-
 
 class HuberRegressor(LinearModel, RegressorMixin, BaseEstimator):
     outliers_: ndarray = ...
@@ -37,13 +38,10 @@ class HuberRegressor(LinearModel, RegressorMixin, BaseEstimator):
         warm_start: bool = False,
         fit_intercept: bool = True,
         tol: Float = 1e-05,
-    ) -> None:
-        ...
-
+    ) -> None: ...
     def fit(
         self: HuberRegressor_Self,
         X: MatrixLike,
         y: ArrayLike,
         sample_weight: None | ArrayLike = None,
-    ) -> HuberRegressor_Self:
-        ...
+    ) -> HuberRegressor_Self: ...

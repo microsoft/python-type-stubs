@@ -1,5 +1,5 @@
-from typing import Mapping
 import warnings
+from typing import Mapping
 
 from ...classes.graph import Graph
 
@@ -9,14 +9,8 @@ __all__ = [
     "edge_betweenness_centrality_subset",
 ]
 
-def betweenness_centrality_subset(
-    G: Graph, sources, targets, normalized: bool = False, weight=None
-) -> Mapping: ...
-def edge_betweenness_centrality_subset(
-    G: Graph, sources, targets, normalized: bool = False, weight=None
-) -> Mapping: ...
+def betweenness_centrality_subset(G: Graph, sources, targets, normalized: bool = False, weight=None) -> Mapping: ...
+def edge_betweenness_centrality_subset(G: Graph, sources, targets, normalized: bool = False, weight=None) -> Mapping: ...
 
 # obsolete name
-def betweenness_centrality_source(
-    G: Graph, normalized=True, weight=None, sources=None
-): ...
+def betweenness_centrality_source(G: Graph, normalized=True, weight=None, sources=None): ...

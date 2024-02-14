@@ -1,12 +1,11 @@
-from np import dtype
-from numpy.typing import ArrayLike
-
 # -*- coding: utf-8 -*-
 # -----------------------------------------------------------------------------
 # Copyright (c) 2014, Nicolas P. Rougier. All rights reserved.
 # Distributed under the terms of the new BSD License.
 # -----------------------------------------------------------------------------
 import numpy as np
+from np import dtype
+from numpy.typing import ArrayLike
 
 class ArrayList(object):
     def __init__(

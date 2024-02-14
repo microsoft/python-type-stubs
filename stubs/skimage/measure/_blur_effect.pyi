@@ -1,7 +1,8 @@
-from numpy.typing import NDArray
 from typing import Callable
+
 import numpy as np
 import scipy.ndimage as ndi
+from numpy.typing import NDArray
 
 __all__ = ["blur_effect"]
 

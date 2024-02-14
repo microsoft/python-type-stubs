@@ -1,12 +1,11 @@
 from .glm import (
-    _GeneralizedLinearRegressor as _GeneralizedLinearRegressor,
-    PoissonRegressor as PoissonRegressor,
     GammaRegressor as GammaRegressor,
+    PoissonRegressor as PoissonRegressor,
     TweedieRegressor as TweedieRegressor,
+    _GeneralizedLinearRegressor as _GeneralizedLinearRegressor,
 )
 
 # License: BSD 3 clause
-
 
 __all__ = [
     "_GeneralizedLinearRegressor",

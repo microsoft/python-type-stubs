@@ -1,17 +1,18 @@
-from numpy.typing import ArrayLike, NDArray
 from typing import Literal
-from ..scene.visuals import LinePlot, Spectrogram, Image, Mesh, Polygon, Volume
-from ..scene.widgets.colorbar import ColorBarWidget
+
+from numpy.typing import ArrayLike, NDArray
+
+from .. import scene
 from ..color import Color, Colormap
+from ..geometry import MeshData
 from ..geometry.meshdata import MeshData
+from ..io import read_mesh
+from ..scene.visuals import Image, LinePlot, Mesh, Polygon, Spectrogram, Volume
+from ..scene.widgets.colorbar import ColorBarWidget
 
 # -*- coding: utf-8 -*-
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
-
-from .. import scene
-from ..io import read_mesh
-from ..geometry import MeshData
 
 __all__ = ["PlotWidget"]
 

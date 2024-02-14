@@ -1,17 +1,15 @@
+import numpy as np
 from numpy.typing import ArrayLike
+
+from ... import gloo
+from ._util import arg_to_array, arg_to_vec4, as_vec4
+from .base_transform import BaseTransform
 
 # -*- coding: utf-8 -*-
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 
-import numpy as np
-
-from ._util import arg_to_array, arg_to_vec4, as_vec4
-from .base_transform import BaseTransform
-from ... import gloo
-
 class LogTransform(BaseTransform):
-
     # TODO: Evaluate the performance costs of using conditionals.
     # An alternative approach is to transpose the vector before
     # log-transforming, and then transpose back afterward.
@@ -38,7 +36,6 @@ class LogTransform(BaseTransform):
     def __repr__(self): ...
 
 class PolarTransform(BaseTransform):
-
     glsl_map: str = ...
 
     glsl_imap: str = ...
@@ -63,7 +60,6 @@ class PolarTransform(BaseTransform):
 #    # TODO
 
 class MagnifyTransform(BaseTransform):
-
     glsl_map: str = ...
 
     glsl_imap = ...
@@ -98,7 +94,6 @@ class MagnifyTransform(BaseTransform):
     def _get_transition(self): ...
 
 class Magnify1DTransform(MagnifyTransform):
-
     glsl_map: str = ...
 
     glsl_imap = ...

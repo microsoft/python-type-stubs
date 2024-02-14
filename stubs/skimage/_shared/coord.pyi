@@ -9,5 +9,5 @@ def ensure_spacing(
     min_split_size: int = 50,
     max_out: int | None = None,
     *,
-    max_split_size: int = 2000
+    max_split_size: int = 2000,
 ): ...

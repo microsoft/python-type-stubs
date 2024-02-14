@@ -1,8 +1,3 @@
-from ...classes.multidigraph import MultiDiGraph
-from ...classes.digraph import DiGraph
-from typing import Literal
-from ...algorithms.tree.branchings import ArborescenceIterator
-
 # TODO: Implement method from Gabow, Galil, Spence and Tarjan:
 #
 # @article{
@@ -27,10 +22,13 @@ from dataclasses import dataclass, field
 from enum import Enum
 from operator import itemgetter
 from queue import PriorityQueue
+from typing import Literal
 
+from ...algorithms.tree.branchings import ArborescenceIterator
+from ...classes.digraph import DiGraph
 from ...classes.graph import Graph
+from ...classes.multidigraph import MultiDiGraph
 from ...utils import py_random_state
-
 from .recognition import is_arborescence, is_branching
 
 __all__ = [
@@ -52,13 +50,9 @@ INF = ...
 
 @py_random_state(1)
 def random_string(L=15, seed=None): ...
-def branching_weight(
-    G: DiGraph, attr: str = "weight", default: float = 1
-) -> int | float: ...
+def branching_weight(G: DiGraph, attr: str = "weight", default: float = 1) -> int | float: ...
 @py_random_state(4)
-def greedy_branching(
-    G: DiGraph, attr: str = "weight", default: float = 1, kind: str = "max", seed=None
-): ...
+def greedy_branching(G: DiGraph, attr: str = "weight", default: float = 1, kind: str = "max", seed=None): ...
 
 class MultiDiGraph_EdgeKey(MultiDiGraph):
     def __init__(self, incoming_graph_data=None, **attr): ...

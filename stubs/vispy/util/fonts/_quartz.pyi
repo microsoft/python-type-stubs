@@ -6,28 +6,29 @@
 
 # Use OSX cocoa/quartz to get glyph bitmaps
 
+from ctypes import byref, c_byte, c_int32
+
 import numpy as np
-from ctypes import byref, c_int32, c_byte
 
 from ...ext.cocoapy import (
+    CFSTR,
+    CFRange,
+    CGGlyph,
+    ObjCClass,
+    UniChar,
     cf,
     ct,
-    quartz,
-    CFRange,
-    CFSTR,
-    CGGlyph,
-    UniChar,
-    kCTFontFamilyNameAttribute,
+    kCFNumberSInt32Type,
+    kCGImageAlphaPremultipliedLast,
+    kCTFontAttributeName,
     kCTFontBoldTrait,
+    kCTFontFamilyNameAttribute,
     kCTFontItalicTrait,
     kCTFontSymbolicTrait,
     kCTFontTraitsAttribute,
-    kCTFontAttributeName,
-    kCGImageAlphaPremultipliedLast,
-    kCFNumberSInt32Type,
-    ObjCClass,
+    quartz,
 )
-from ._vispy_fonts import _vispy_fonts, _get_vispy_font_filename
+from ._vispy_fonts import _get_vispy_font_filename, _vispy_fonts
 
 _font_dict: dict = ...
 

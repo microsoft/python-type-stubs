@@ -1,25 +1,18 @@
-from typing import Callable, ClassVar, Mapping, TypeVar
-from numpy.random import RandomState
-from ._stochastic_gradient import (
-    BaseSGDClassifier,
-    BaseSGDRegressor,
-    DEFAULT_EPSILON as DEFAULT_EPSILON,
-)
-from numpy import ndarray
-from ..utils._param_validation import Interval as Interval, StrOptions as StrOptions
 from numbers import Real as Real
-from .._typing import Float, Int, MatrixLike, ArrayLike
+from typing import Callable, ClassVar, Mapping, TypeVar
 
-PassiveAggressiveClassifier_Self = TypeVar(
-    "PassiveAggressiveClassifier_Self", bound="PassiveAggressiveClassifier"
-)
-PassiveAggressiveRegressor_Self = TypeVar(
-    "PassiveAggressiveRegressor_Self", bound="PassiveAggressiveRegressor"
-)
+from numpy import ndarray
+from numpy.random import RandomState
+
+from .._typing import ArrayLike, Float, Int, MatrixLike
+from ..utils._param_validation import Interval as Interval, StrOptions as StrOptions
+from ._stochastic_gradient import DEFAULT_EPSILON as DEFAULT_EPSILON, BaseSGDClassifier, BaseSGDRegressor
+
+PassiveAggressiveClassifier_Self = TypeVar("PassiveAggressiveClassifier_Self", bound="PassiveAggressiveClassifier")
+PassiveAggressiveRegressor_Self = TypeVar("PassiveAggressiveRegressor_Self", bound="PassiveAggressiveRegressor")
 
 # Authors: Rob Zinkov, Mathieu Blondel
 # License: BSD 3 clause
-
 
 class PassiveAggressiveClassifier(BaseSGDClassifier):
     loss_function_: Callable = ...
@@ -51,26 +44,20 @@ class PassiveAggressiveClassifier(BaseSGDClassifier):
         warm_start: bool = False,
         class_weight: None | str | Mapping[str, float] = None,
         average: int | bool = False,
-    ) -> None:
-        ...
-
+    ) -> None: ...
     def partial_fit(
         self: PassiveAggressiveClassifier_Self,
         X: MatrixLike | ArrayLike,
         y: ArrayLike,
         classes: None | ArrayLike = None,
-    ) -> PassiveAggressiveClassifier_Self:
-        ...
-
+    ) -> PassiveAggressiveClassifier_Self: ...
     def fit(
         self: PassiveAggressiveClassifier_Self,
         X: MatrixLike | ArrayLike,
         y: ArrayLike,
         coef_init: None | MatrixLike = None,
         intercept_init: None | ArrayLike = None,
-    ) -> PassiveAggressiveClassifier_Self:
-        ...
-
+    ) -> PassiveAggressiveClassifier_Self: ...
 
 class PassiveAggressiveRegressor(BaseSGDRegressor):
     t_: int = ...
@@ -99,19 +86,14 @@ class PassiveAggressiveRegressor(BaseSGDRegressor):
         random_state: RandomState | None | Int = None,
         warm_start: bool = False,
         average: int | bool = False,
-    ) -> None:
-        ...
-
+    ) -> None: ...
     def partial_fit(
         self: PassiveAggressiveRegressor_Self, X: MatrixLike | ArrayLike, y: ArrayLike
-    ) -> PassiveAggressiveRegressor_Self:
-        ...
-
+    ) -> PassiveAggressiveRegressor_Self: ...
     def fit(
         self: PassiveAggressiveRegressor_Self,
         X: MatrixLike | ArrayLike,
         y: ArrayLike,
         coef_init: None | ArrayLike = None,
         intercept_init: None | ArrayLike = None,
-    ) -> PassiveAggressiveRegressor_Self:
-        ...
+    ) -> PassiveAggressiveRegressor_Self: ...

@@ -1,6 +1,18 @@
-from vispy.util.svg.color import Color
-from typing import Mapping, Any
+import sys
+from copy import deepcopy
+from typing import Any, Mapping
+
+import numpy as np
 from numpy.typing import ArrayLike
+from vispy.util.svg.color import Color
+
+from ...color import ColorArray
+from ...gloo import IndexBuffer, TextureAtlas, VertexBuffer, context
+from ...gloo.wrappers import _check_valid
+from ...io import load_spatial_filters
+from ..transforms import STTransform
+from ..visual import Visual
+from ._sdf_gpu import SDFRendererGPU
 
 # -*- coding: utf-8 -*-
 # -----------------------------------------------------------------------------
@@ -10,19 +22,6 @@ from numpy.typing import ArrayLike
 
 ##############################################################################
 # Load font into texture
-
-import numpy as np
-from copy import deepcopy
-import sys
-
-from ._sdf_gpu import SDFRendererGPU
-from ...gloo import TextureAtlas, IndexBuffer, VertexBuffer
-from ...gloo import context
-from ...gloo.wrappers import _check_valid
-from ..transforms import STTransform
-from ...color import ColorArray
-from ..visual import Visual
-from ...io import load_spatial_filters
 
 class TextureFont(object):
     def __init__(self, font: Mapping, renderer: SDFRendererGPU): ...
@@ -34,7 +33,6 @@ class TextureFont(object):
     def _load_char(self, char): ...
 
 class FontManager(object):
-
     # XXX: should store a font-manager on each context,
     # or let TextureFont use a TextureAtlas for each context
     def __init__(self, method="cpu"): ...
@@ -50,7 +48,6 @@ _FRAGMENT_SHADER: str = ...
 def _text_to_vbo(text, font, anchor_x, anchor_y, lowres_size): ...
 
 class TextVisual(Visual):
-
     _shaders: dict = ...
 
     def __init__(
@@ -111,7 +108,6 @@ class TextVisual(Visual):
     def _update_font(self): ...
 
 class SDFRendererCPU(object):
-
     # This should probably live in _sdf_cpu.pyx, but doing so makes
     # debugging substantially more annoying
     def render_to_texture(self, data, texture, offset, size): ...
