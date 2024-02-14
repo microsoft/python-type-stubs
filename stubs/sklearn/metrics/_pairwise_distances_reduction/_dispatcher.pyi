@@ -54,6 +54,7 @@ class BaseDistancesReductionDispatcher:
         True if the dispatcher can be used, else False.
         """
         ...
+
     @classmethod
     @abstractmethod
     def compute(

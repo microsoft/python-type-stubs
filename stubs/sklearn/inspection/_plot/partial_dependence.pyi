@@ -44,8 +44,9 @@ class PartialDependenceDisplay:
         target_idx: Int,
         deciles: dict,
         pdp_lim: None | Mapping | str = "deprecated",
-        kind: Sequence[Literal["average", "individual", "both"]]
-        | Literal["average", "individual", "both", "average"] = "average",
+        kind: (
+            Sequence[Literal["average", "individual", "both"]] | Literal["average", "individual", "both", "average"]
+        ) = "average",
         subsample: float | None | int = 1000,
         random_state: RandomState | None | Int = None,
         is_categorical: None | ArrayLike = None,

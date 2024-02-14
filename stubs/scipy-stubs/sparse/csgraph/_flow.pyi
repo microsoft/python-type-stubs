@@ -16,6 +16,7 @@ class MaximumFlowResult(_mod_builtins.object):
     def __init__(self, flow_value, residual) -> None:
         "Represents the result of a maximum flow calculation.\n\n    Attributes\n    ----------\n    flow_value : int\n        The value of the maximum flow.\n    residual : csr_matrix\n        The residual graph with respect to the maximum flow.\n"
         ...
+
     @classmethod
     def __init_subclass__(cls) -> None:
         "This method is called when a class is subclassed.\n\nThe default implementation does nothing. It may be\noverridden to extend subclasses.\n"
@@ -26,10 +27,12 @@ class MaximumFlowResult(_mod_builtins.object):
     def __subclasshook__(cls, subclass: typing.Any) -> bool:
         "Abstract classes can override this to customize issubclass().\n\nThis is invoked early on by abc.ABCMeta.__subclasscheck__().\nIt should return True, False or NotImplemented.  If it returns\nNotImplemented, the normal algorithm is used.  Otherwise, it\noverrides the normal algorithm (and the outcome is cached).\n"
         ...
+
     @property
     def __weakref__(self) -> typing.Any:
         "list of weak references to the object (if defined)"
         ...
+
     def __getattr__(self, name) -> typing.Any: ...
 
 __doc__: typing.Any

@@ -20,9 +20,11 @@ from ._testing import ignore_warnings as ignore_warnings
 _MODULE_TO_IGNORE: set = ...
 
 def all_estimators(
-    type_filter: None
-    | Sequence[Literal["classifier", "regressor", "cluster", "transformer"]]
-    | Literal["classifier", "regressor", "cluster", "transformer"] = None
+    type_filter: (
+        None
+        | Sequence[Literal["classifier", "regressor", "cluster", "transformer"]]
+        | Literal["classifier", "regressor", "cluster", "transformer"]
+    ) = None
 ) -> ndarray: ...
 def all_displays() -> ndarray: ...
 def all_functions() -> ndarray: ...

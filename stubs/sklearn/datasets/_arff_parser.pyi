@@ -22,4 +22,9 @@ def load_arff_from_gzip_file(
     feature_names_to_select: list[str] | Sequence[str],
     target_names_to_select: Sequence[str] | list[Any | str],
     shape: None | tuple[int, int] = None,
-) -> tuple[DataFrame | ndarray | spmatrix, DataFrame | ndarray | Series, DataFrame | None, list[str] | None,]: ...
+) -> tuple[
+    DataFrame | ndarray | spmatrix,
+    DataFrame | ndarray | Series,
+    DataFrame | None,
+    list[str] | None,
+]: ...

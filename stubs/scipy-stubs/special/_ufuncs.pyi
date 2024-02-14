@@ -462,6 +462,7 @@ class errstate(_mod_builtins.object):
     def __init__(self, **kwargs) -> None:
         "Context manager for special-function error handling.\n\n    Using an instance of `errstate` as a context manager allows\n    statements in that context to execute with a known error handling\n    behavior. Upon entering the context the error handling is set with\n    `seterr`, and upon exiting it is restored to what it was before.\n\n    Parameters\n    ----------\n    kwargs : {all, singular, underflow, overflow, slow, loss, no_result, domain, arg, other}\n        Keyword arguments. The valid keywords are possible\n        special-function errors. Each keyword should have a string\n        value that defines the treatement for the particular type of\n        error. Values must be 'ignore', 'warn', or 'other'. See\n        `seterr` for details.\n\n    See Also\n    --------\n    geterr : get the current way of handling special-function errors\n    seterr : set how special-function errors are handled\n    numpy.errstate : similar numpy function for floating-point errors\n\n    Examples\n    --------\n    >>> import scipy.special as sc\n    >>> from pytest import raises\n    >>> sc.gammaln(0)\n    inf\n    >>> with sc.errstate(singular='raise'):\n    ...     with raises(sc.SpecialFunctionError):\n    ...         sc.gammaln(0)\n    ...\n    >>> sc.gammaln(0)\n    inf\n\n    We can also raise on every category except one.\n\n    >>> with sc.errstate(all='raise', singular='ignore'):\n    ...     sc.gammaln(0)\n    ...     with raises(sc.SpecialFunctionError):\n    ...         sc.spence(-1)\n    ...\n    inf\n\n"
         ...
+
     @classmethod
     def __init_subclass__(cls) -> None:
         "This method is called when a class is subclassed.\n\nThe default implementation does nothing. It may be\noverridden to extend subclasses.\n"
@@ -471,10 +472,12 @@ class errstate(_mod_builtins.object):
     def __subclasshook__(cls, subclass: typing.Any) -> bool:
         "Abstract classes can override this to customize issubclass().\n\nThis is invoked early on by abc.ABCMeta.__subclasscheck__().\nIt should return True, False or NotImplemented.  If it returns\nNotImplemented, the normal algorithm is used.  Otherwise, it\noverrides the normal algorithm (and the outcome is cached).\n"
         ...
+
     @property
     def __weakref__(self) -> typing.Any:
         "list of weak references to the object (if defined)"
         ...
+
     def __getattr__(self, name) -> typing.Any: ...
 
 def eval_chebyc(

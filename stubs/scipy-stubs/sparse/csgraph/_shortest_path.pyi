@@ -22,10 +22,12 @@ class NegativeCycleError(_mod_builtins.Exception):
     def __subclasshook__(cls, subclass: typing.Any) -> bool:
         "Abstract classes can override this to customize issubclass().\n\nThis is invoked early on by abc.ABCMeta.__subclasscheck__().\nIt should return True, False or NotImplemented.  If it returns\nNotImplemented, the normal algorithm is used.  Otherwise, it\noverrides the normal algorithm (and the outcome is cached).\n"
         ...
+
     @property
     def __weakref__(self) -> typing.Any:
         "list of weak references to the object (if defined)"
         ...
+
     def __getattr__(self, name) -> typing.Any: ...
 
 __doc__: str

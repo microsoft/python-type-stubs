@@ -99,38 +99,42 @@ class Text(Artist):
     def set_math_fontfamily(self, fontfamily: str) -> None: ...
     def set_fontweight(
         self,
-        weight: float
-        | Literal[
-            "ultralight",
-            "light",
-            "normal",
-            "regular",
-            "book",
-            "medium",
-            "roman",
-            "semibold",
-            "demibold",
-            "demi",
-            "bold",
-            "heavy",
-            "extra bold",
-            "black",
-        ],
+        weight: (
+            float
+            | Literal[
+                "ultralight",
+                "light",
+                "normal",
+                "regular",
+                "book",
+                "medium",
+                "roman",
+                "semibold",
+                "demibold",
+                "demi",
+                "bold",
+                "heavy",
+                "extra bold",
+                "black",
+            ]
+        ),
     ) -> None: ...
     def set_fontstretch(
         self,
-        stretch: float
-        | Literal[
-            "ultra-condensed",
-            "extra-condensed",
-            "condensed",
-            "semi-condensed",
-            "normal",
-            "semi-expanded",
-            "expanded",
-            "extra-expanded",
-            "ultra-expanded",
-        ],
+        stretch: (
+            float
+            | Literal[
+                "ultra-condensed",
+                "extra-condensed",
+                "condensed",
+                "semi-condensed",
+                "normal",
+                "semi-expanded",
+                "expanded",
+                "extra-expanded",
+                "ultra-expanded",
+            ]
+        ),
     ): ...
     def set_position(self, xy: Sequence[float]) -> None: ...
     def set_x(self, x: float) -> None: ...

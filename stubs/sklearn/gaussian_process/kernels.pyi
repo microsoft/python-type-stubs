@@ -264,19 +264,21 @@ class PairwiseKernel(Kernel):
         self,
         gamma: Float = 1.0,
         gamma_bounds: str | tuple[float, float] = ...,
-        metric: Literal[
-            "linear",
-            "additive_chi2",
-            "chi2",
-            "poly",
-            "polynomial",
-            "rbf",
-            "laplacian",
-            "sigmoid",
-            "cosine",
-            "linear",
-        ]
-        | Callable = "linear",
+        metric: (
+            Literal[
+                "linear",
+                "additive_chi2",
+                "chi2",
+                "poly",
+                "polynomial",
+                "rbf",
+                "laplacian",
+                "sigmoid",
+                "cosine",
+                "linear",
+            ]
+            | Callable
+        ) = "linear",
         pairwise_kernels_kwargs: None | dict = None,
     ) -> None: ...
     def hyperparameter_gamma(self): ...

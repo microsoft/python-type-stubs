@@ -111,11 +111,13 @@ class PdfFile:
         self,
         id: int,
         len: None | Reference,
-        extra: None
-        | dict[str, int | Name]
-        | dict[str, Name | list[int]]
-        | dict[str, Name | int | Verbatim]
-        | dict[str, Name | int | Verbatim | Reference] = ...,
+        extra: (
+            None
+            | dict[str, int | Name]
+            | dict[str, Name | list[int]]
+            | dict[str, Name | int | Verbatim]
+            | dict[str, Name | int | Verbatim | Reference]
+        ) = ...,
         png: Optional[dict[str, int]] = ...,
     ) -> None: ...
     def endStream(self) -> None: ...

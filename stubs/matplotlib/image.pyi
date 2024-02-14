@@ -49,27 +49,29 @@ class _ImageBase(Artist, ScalarMappable):
     def get_interpolation(self) -> str: ...
     def set_interpolation(
         self,
-        s: Literal[
-            "antialiased",
-            "nearest",
-            "bilinear",
-            "bicubic",
-            "spline16",
-            "spline36",
-            "hanning",
-            "hamming",
-            "hermite",
-            "kaiser",
-            "quadric",
-            "catrom",
-            "gaussian",
-            "bessel",
-            "mitchell",
-            "sinc",
-            "lanczos",
-            "none",
-        ]
-        | None,
+        s: (
+            Literal[
+                "antialiased",
+                "nearest",
+                "bilinear",
+                "bicubic",
+                "spline16",
+                "spline36",
+                "hanning",
+                "hamming",
+                "hermite",
+                "kaiser",
+                "quadric",
+                "catrom",
+                "gaussian",
+                "bessel",
+                "mitchell",
+                "sinc",
+                "lanczos",
+                "none",
+            ]
+            | None
+        ),
     ) -> None: ...
     def set_interpolation_stage(self, s: Literal["data", "rgba"] | None) -> None: ...
     def can_composite(self) -> bool: ...

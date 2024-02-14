@@ -15,16 +15,19 @@ class BGLU(LU):
     def __init__(self) -> None:
         "\n        Given matrix A and basis indices b, perform PLU factorization of\n        basis matrix B\n"
         ...
+
     @classmethod
     def __init_subclass__(cls) -> None:
         "This method is called when a class is subclassed.\n\nThe default implementation does nothing. It may be\noverridden to extend subclasses.\n"
         ...
+
     def __reduce__(self) -> typing.Union[str, typing.Tuple[typing.Any, ...]]: ...
     def __setstate__(self, state: typing.Any) -> None: ...
     @classmethod
     def __subclasshook__(cls, subclass: typing.Any) -> bool:
         "Abstract classes can override this to customize issubclass().\n\nThis is invoked early on by abc.ABCMeta.__subclasscheck__().\nIt should return True, False or NotImplemented.  If it returns\nNotImplemented, the normal algorithm is used.  Otherwise, it\noverrides the normal algorithm (and the outcome is cached).\n"
         ...
+
     @property
     def average_solve_times(self) -> typing.Any: ...
     @property
@@ -38,6 +41,7 @@ class BGLU(LU):
     def perform_perm(self) -> typing.Any:
         "\n        Perform individual row swaps defined in p returned by factor_lu to\n        generate final permutation indices pi\n"
         ...
+
     @property
     def pi(self) -> typing.Any: ...
     @property
@@ -63,16 +67,19 @@ class LU(_mod_builtins.object):
     def __init__(self) -> None:
         "Given matrix A and basis indices b, form basis matrix B"
         ...
+
     @classmethod
     def __init_subclass__(cls) -> None:
         "This method is called when a class is subclassed.\n\nThe default implementation does nothing. It may be\noverridden to extend subclasses.\n"
         ...
+
     def __reduce__(self) -> typing.Union[str, typing.Tuple[typing.Any, ...]]: ...
     def __setstate__(self, state: typing.Any) -> None: ...
     @classmethod
     def __subclasshook__(cls, subclass: typing.Any) -> bool:
         "Abstract classes can override this to customize issubclass().\n\nThis is invoked early on by abc.ABCMeta.__subclasscheck__().\nIt should return True, False or NotImplemented.  If it returns\nNotImplemented, the normal algorithm is used.  Otherwise, it\noverrides the normal algorithm (and the outcome is cached).\n"
         ...
+
     @property
     def b(self) -> typing.Any: ...
     @property
@@ -82,9 +89,11 @@ class LU(_mod_builtins.object):
     def solve(self) -> typing.Any:
         "\n        Solve B @ v = q\n"
         ...
+
     def update(self) -> typing.Any:
         "Rank-one update to basis and basis matrix"
         ...
+
     def __getattr__(self, name) -> typing.Any: ...
 
 LinAlgError = _mod_numpy_linalg.LinAlgError

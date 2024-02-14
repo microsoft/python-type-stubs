@@ -9,6 +9,7 @@ class Heap(_mod_builtins.object):
     def __init__(self, *args, **kwargs) -> None:
         "Binary heap.\n\n    Heap stores values and keys. Values are passed explicitly, whereas keys\n    are assigned implicitly to natural numbers (from 0 to n - 1).\n\n    The supported operations (all have O(log n) time complexity):\n\n        * Return the current minimum value and the corresponding key.\n        * Remove the current minimum value.\n        * Change the value of the given key. Note that the key must be still\n          in the heap.\n\n    The heap is stored as an array, where children of parent i have indices\n    2 * i + 1 and 2 * i + 2. All public methods are based on  `sift_down` and\n    `sift_up` methods, which restore the heap property by moving an element\n    down or up in the heap.\n"
         ...
+
     @classmethod
     def __init_subclass__(cls) -> None:
         "This method is called when a class is subclassed.\n\nThe default implementation does nothing. It may be\noverridden to extend subclasses.\n"
@@ -20,6 +21,7 @@ class Heap(_mod_builtins.object):
     def __subclasshook__(cls, subclass: typing.Any) -> bool:
         "Abstract classes can override this to customize issubclass().\n\nThis is invoked early on by abc.ABCMeta.__subclasscheck__().\nIt should return True, False or NotImplemented.  If it returns\nNotImplemented, the normal algorithm is used.  Otherwise, it\noverrides the normal algorithm (and the outcome is cached).\n"
         ...
+
     def change_value(self) -> typing.Any: ...
     def get_min(self) -> typing.Any: ...
     def remove_min(self) -> typing.Any: ...
@@ -30,6 +32,7 @@ class LinkageUnionFind(_mod_builtins.object):
     def __init__(self, *args, **kwargs) -> None:
         "Structure for fast cluster labeling in unsorted dendrogram."
         ...
+
     @classmethod
     def __init_subclass__(cls) -> None:
         "This method is called when a class is subclassed.\n\nThe default implementation does nothing. It may be\noverridden to extend subclasses.\n"
@@ -41,6 +44,7 @@ class LinkageUnionFind(_mod_builtins.object):
     def __subclasshook__(cls, subclass: typing.Any) -> bool:
         "Abstract classes can override this to customize issubclass().\n\nThis is invoked early on by abc.ABCMeta.__subclasscheck__().\nIt should return True, False or NotImplemented.  If it returns\nNotImplemented, the normal algorithm is used.  Otherwise, it\noverrides the normal algorithm (and the outcome is cached).\n"
         ...
+
     def __getattr__(self, name) -> typing.Any: ...
 
 __doc__: typing.Any

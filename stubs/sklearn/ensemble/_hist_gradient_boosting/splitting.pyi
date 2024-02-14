@@ -160,6 +160,7 @@ class Splitter:
             The position of the right child in ``sample_indices``.
         """
         ...
+
     def find_node_split(
         self,
         n_samples: int,

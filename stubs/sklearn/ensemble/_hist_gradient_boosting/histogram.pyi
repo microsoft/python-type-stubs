@@ -59,6 +59,7 @@ class HistogramBuilder:
             The computed histograms of the current node.
         """
         ...
+
     def compute_histograms_subtraction(
         self,
         parent_histograms: np.ndarray,

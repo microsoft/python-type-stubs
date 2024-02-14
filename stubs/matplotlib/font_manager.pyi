@@ -37,35 +37,39 @@ class FontProperties:
         family: list[str] | str | Literal["sans-serif", "serif", "cursive", "fantasy", "monospace"] = ...,
         style: Literal["normal", "italic", "oblique"] = ...,
         variant: Literal["normal", "small-caps"] = ...,
-        weight: int
-        | Literal[
-            "ultralight",
-            "light",
-            "normal",
-            "regular",
-            "book",
-            "medium",
-            "roman",
-            "semibold",
-            "demibold",
-            "demi",
-            "bold",
-            "heavy",
-            "extra bold",
-            "black",
-        ] = ...,
-        stretch: int
-        | Literal[
-            "ultra-condensed",
-            "extra-condensed",
-            "condensed",
-            "semi-condensed",
-            "normal",
-            "semi-expanded",
-            "expanded",
-            "extra-expanded",
-            "ultra-expanded",
-        ] = ...,
+        weight: (
+            int
+            | Literal[
+                "ultralight",
+                "light",
+                "normal",
+                "regular",
+                "book",
+                "medium",
+                "roman",
+                "semibold",
+                "demibold",
+                "demi",
+                "bold",
+                "heavy",
+                "extra bold",
+                "black",
+            ]
+        ) = ...,
+        stretch: (
+            int
+            | Literal[
+                "ultra-condensed",
+                "extra-condensed",
+                "condensed",
+                "semi-condensed",
+                "normal",
+                "semi-expanded",
+                "expanded",
+                "extra-expanded",
+                "ultra-expanded",
+            ]
+        ) = ...,
         size: float | Literal["xx-small", "x-small", "small", "medium", "large", "x-large", "xx-large"] = ...,
         fname: PosixPath | None = ...,
         math_fontfamily: Literal["dejavusans", "dejavuserif", "cm", "stix", "stixsans", "custom"] = ...,
@@ -90,38 +94,42 @@ class FontProperties:
     def set_variant(self, variant: Literal["normal", "small-caps"]) -> None: ...
     def set_weight(
         self,
-        weight: int
-        | Literal[
-            "ultralight",
-            "light",
-            "normal",
-            "regular",
-            "book",
-            "medium",
-            "roman",
-            "semibold",
-            "demibold",
-            "demi",
-            "bold",
-            "heavy",
-            "extra bold",
-            "black",
-        ],
+        weight: (
+            int
+            | Literal[
+                "ultralight",
+                "light",
+                "normal",
+                "regular",
+                "book",
+                "medium",
+                "roman",
+                "semibold",
+                "demibold",
+                "demi",
+                "bold",
+                "heavy",
+                "extra bold",
+                "black",
+            ]
+        ),
     ) -> None: ...
     def set_stretch(
         self,
-        stretch: int
-        | Literal[
-            "ultra-condensed",
-            "extra-condensed",
-            "condensed",
-            "semi-condensed",
-            "normal",
-            "semi-expanded",
-            "expanded",
-            "extra-expanded",
-            "ultra-expanded",
-        ],
+        stretch: (
+            int
+            | Literal[
+                "ultra-condensed",
+                "extra-condensed",
+                "condensed",
+                "semi-condensed",
+                "normal",
+                "semi-expanded",
+                "expanded",
+                "extra-expanded",
+                "ultra-expanded",
+            ]
+        ),
     ) -> None: ...
     def set_size(
         self,
@@ -156,23 +164,25 @@ class FontManager:
     def get_default_size() -> float: ...
     def set_default_weight(
         self,
-        weight: int
-        | Literal[
-            "ultralight",
-            "light",
-            "normal",
-            "regular",
-            "book",
-            "medium",
-            "roman",
-            "semibold",
-            "demibold",
-            "demi",
-            "bold",
-            "heavy",
-            "extra bold",
-            "black",
-        ],
+        weight: (
+            int
+            | Literal[
+                "ultralight",
+                "light",
+                "normal",
+                "regular",
+                "book",
+                "medium",
+                "roman",
+                "semibold",
+                "demibold",
+                "demi",
+                "bold",
+                "heavy",
+                "extra bold",
+                "black",
+            ]
+        ),
     ): ...
     def score_family(self, families: list[str], family2: str) -> float: ...
     def score_style(self, style1: str, style2: str) -> float: ...
