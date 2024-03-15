@@ -1,3 +1,37 @@
+[tool.poetry]
+name = "python-type-stubs"
+version = "0.1dev"
+description = "A set of type stubs for popular Python packages. These are works in progress from the Microsoft Python team and others, with the intent that they are contributed to typeshed or to the associated packages once sufficiently complete."
+authors = [
+    "microsoft",
+    "Vince Reuter <vince.reuter@gmail.com>",
+]
+readme = "README.md"
+license = "MIT"
+repository = "https://github.com/gerlichlab/python-type-stubs"
+classifiers = [
+    "Development Status :: 1 - Planning",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development",
+    "Topic :: Software Development :: Build Tools",
+    "Topic :: Software Development :: Quality Assurance",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Utilities",
+]
+packages = [
+    { include = "scipy_stubs", from = "stubs" }
+]
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
 [tool.black]
 line_length = 130
 target_version = ["py37"]
