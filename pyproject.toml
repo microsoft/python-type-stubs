@@ -25,7 +25,7 @@ classifiers = [
     "Topic :: Utilities",
 ]
 packages = [
-    { include = "scipy_stubs", from = "stubs" }
+    { include = "scipy-stubs", from = "stubs" }
 ]
 
 [build-system]
