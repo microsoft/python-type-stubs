@@ -54,7 +54,6 @@ Stubs for the following libraries now exist in typeshed or the libraries themsel
 - retry
 - slugify
 - SQLAlchemy (see <https://pypi.org/project/types-SQLAlchemy/> for SQLAlchemy 1.4; 2.0.0 and above include type annotations)
-- sympy
 - tenacity
 
 The following libraries are `py.typed`. We still have stubs for them here, but we are no longer actively maintaining them. We continue to bundle them with Pylance so users on older, non-`py.typed` versions will still get type info. If you find problems in our stubs for these libraries, rather than filing an issue here, you should upgrade to the version shown below to get the official stubs:
