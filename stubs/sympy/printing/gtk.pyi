@@ -1,3 +1,0 @@
-def print_gtk(x, start_viewer=...) -> None:
-    ...
-
