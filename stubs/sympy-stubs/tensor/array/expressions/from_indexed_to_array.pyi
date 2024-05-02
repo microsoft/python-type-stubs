@@ -11,6 +11,18 @@ from sympy.tensor.array.expressions.array_expressions import (
     ZeroArray,
 )
 
-def convert_indexed_to_array(expr, first_indices=...) -> ArrayElement | Basic | ZeroArray | ArrayTensorProduct | ArrayContraction | PermuteDims | ArrayDiagonal | KroneckerDelta | ArrayAdd | ArrayElementwiseApplyFunc | Pow:
-    ...
-
+def convert_indexed_to_array(
+    expr, first_indices=...
+) -> (
+    ArrayElement
+    | Basic
+    | ZeroArray
+    | ArrayTensorProduct
+    | ArrayContraction
+    | PermuteDims
+    | ArrayDiagonal
+    | KroneckerDelta
+    | ArrayAdd
+    | ArrayElementwiseApplyFunc
+    | Pow
+): ...

@@ -14,4 +14,18 @@ from sympy.strategies.branch.core import (
 )
 from sympy.strategies.branch.tools import canon
 
-__all__ = ['traverse', 'condition', 'debug', 'multiplex', 'exhaust', 'notempty', 'chain', 'onaction', 'sfilter', 'yieldify', 'do_one', 'identity', 'canon']
+__all__ = [
+    "traverse",
+    "condition",
+    "debug",
+    "multiplex",
+    "exhaust",
+    "notempty",
+    "chain",
+    "onaction",
+    "sfilter",
+    "yieldify",
+    "do_one",
+    "identity",
+    "canon",
+]

@@ -11,4 +11,22 @@ from sympy.calculus.singularities import (
 )
 from sympy.calculus.util import is_convex, maximum, minimum, not_empty_in, periodicity, stationary_points
 
-__all__ = ['euler_equations', 'singularities', 'is_increasing', 'is_strictly_increasing', 'is_decreasing', 'is_strictly_decreasing', 'is_monotonic', 'finite_diff_weights', 'apply_finite_diff', 'differentiate_finite', 'periodicity', 'not_empty_in', 'is_convex', 'stationary_points', 'minimum', 'maximum', 'AccumBounds']
+__all__ = [
+    "euler_equations",
+    "singularities",
+    "is_increasing",
+    "is_strictly_increasing",
+    "is_decreasing",
+    "is_strictly_decreasing",
+    "is_monotonic",
+    "finite_diff_weights",
+    "apply_finite_diff",
+    "differentiate_finite",
+    "periodicity",
+    "not_empty_in",
+    "is_convex",
+    "stationary_points",
+    "minimum",
+    "maximum",
+    "AccumBounds",
+]

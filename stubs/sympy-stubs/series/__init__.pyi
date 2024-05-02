@@ -12,4 +12,23 @@ from sympy.series.series import series
 
 EmptySequence = ...
 O = Order
-__all__ = ['Order', 'O', 'limit', 'Limit', 'gruntz', 'series', 'approximants', 'residue', 'EmptySequence', 'SeqPer', 'SeqFormula', 'sequence', 'SeqAdd', 'SeqMul', 'fourier_series', 'fps', 'difference_delta', 'limit_seq']
+__all__ = [
+    "Order",
+    "O",
+    "limit",
+    "Limit",
+    "gruntz",
+    "series",
+    "approximants",
+    "residue",
+    "EmptySequence",
+    "SeqPer",
+    "SeqFormula",
+    "sequence",
+    "SeqAdd",
+    "SeqMul",
+    "fourier_series",
+    "fps",
+    "difference_delta",
+    "limit_seq",
+]

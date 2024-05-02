@@ -4,16 +4,8 @@ from sympy.core.basic import Basic
 from sympy.matrices.expressions.matexpr import MatrixExpr
 
 class FunctionMatrix(MatrixExpr):
-    def __new__(cls, rows, cols, lamda) -> Self:
-        ...
-    
+    def __new__(cls, rows, cols, lamda) -> Self: ...
     @property
-    def shape(self) -> tuple[Basic, ...]:
-        ...
-    
+    def shape(self) -> tuple[Basic, ...]: ...
     @property
-    def lamda(self) -> Basic:
-        ...
-    
-
-
+    def lamda(self) -> Basic: ...

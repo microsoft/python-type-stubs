@@ -25,4 +25,29 @@ from sympy.plotting.intervalmath.lib_interval import (
     tanh,
 )
 
-__all__ = ['interval', 'Abs', 'exp', 'log', 'log10', 'sin', 'cos', 'tan', 'sqrt', 'imin', 'imax', 'sinh', 'cosh', 'tanh', 'acosh', 'asinh', 'atanh', 'asin', 'acos', 'atan', 'ceil', 'floor', 'And', 'Or']
+__all__ = [
+    "interval",
+    "Abs",
+    "exp",
+    "log",
+    "log10",
+    "sin",
+    "cos",
+    "tan",
+    "sqrt",
+    "imin",
+    "imax",
+    "sinh",
+    "cosh",
+    "tanh",
+    "acosh",
+    "asinh",
+    "atanh",
+    "asin",
+    "acos",
+    "atan",
+    "ceil",
+    "floor",
+    "And",
+    "Or",
+]

@@ -5,8 +5,4 @@ from sympy.utilities import public
 
 class CharacteristicZero(Domain):
     has_CharacteristicZero = ...
-    def characteristic(self) -> Literal[0]:
-        ...
-    
-
-
+    def characteristic(self) -> Literal[0]: ...

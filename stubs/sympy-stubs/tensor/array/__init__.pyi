@@ -5,4 +5,21 @@ from sympy.tensor.array.ndim_array import ArrayKind, NDimArray
 from sympy.tensor.array.sparse_ndim_array import ImmutableSparseNDimArray, MutableSparseNDimArray, SparseNDimArray
 
 Array = ImmutableDenseNDimArray
-__all__ = ['MutableDenseNDimArray', 'ImmutableDenseNDimArray', 'DenseNDimArray', 'MutableSparseNDimArray', 'ImmutableSparseNDimArray', 'SparseNDimArray', 'NDimArray', 'ArrayKind', 'tensorproduct', 'tensorcontraction', 'tensordiagonal', 'derive_by_array', 'permutedims', 'ArrayComprehension', 'ArrayComprehensionMap', 'Array']
+__all__ = [
+    "MutableDenseNDimArray",
+    "ImmutableDenseNDimArray",
+    "DenseNDimArray",
+    "MutableSparseNDimArray",
+    "ImmutableSparseNDimArray",
+    "SparseNDimArray",
+    "NDimArray",
+    "ArrayKind",
+    "tensorproduct",
+    "tensorcontraction",
+    "tensordiagonal",
+    "derive_by_array",
+    "permutedims",
+    "ArrayComprehension",
+    "ArrayComprehensionMap",
+    "Array",
+]

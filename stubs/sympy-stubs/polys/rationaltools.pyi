@@ -7,6 +7,4 @@ from sympy.series.order import Order
 from sympy.utilities import public
 
 @public
-def together(expr, deep=..., fraction=...) -> Basic | Add | Order | Mul | Dict:
-    ...
-
+def together(expr, deep=..., fraction=...) -> Basic | Add | Order | Mul | Dict: ...

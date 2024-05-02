@@ -3,4 +3,17 @@ from sympy.assumptions.assume import AppliedPredicate, AssumptionsContext, Predi
 from sympy.assumptions.refine import refine
 from sympy.assumptions.relation import AppliedBinaryRelation, BinaryRelation
 
-__all__ = ['AppliedPredicate', 'Predicate', 'AssumptionsContext', 'assuming', 'global_assumptions', 'Q', 'ask', 'register_handler', 'remove_handler', 'refine', 'BinaryRelation', 'AppliedBinaryRelation']
+__all__ = [
+    "AppliedPredicate",
+    "Predicate",
+    "AssumptionsContext",
+    "assuming",
+    "global_assumptions",
+    "Q",
+    "ask",
+    "register_handler",
+    "remove_handler",
+    "refine",
+    "BinaryRelation",
+    "AppliedBinaryRelation",
+]

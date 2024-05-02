@@ -23,4 +23,30 @@ from sympy.utilities.lambdify import lambdify
 from sympy.utilities.misc import filldedent
 from sympy.utilities.timeutils import timed
 
-__all__ = ['flatten', 'group', 'take', 'subsets', 'variations', 'numbered_symbols', 'cartes', 'capture', 'dict_merge', 'prefixes', 'postfixes', 'sift', 'topological_sort', 'unflatten', 'has_dups', 'has_variety', 'reshape', 'rotations', 'filldedent', 'lambdify', 'threaded', 'xthreaded', 'public', 'memoize_property', 'timed']
+__all__ = [
+    "flatten",
+    "group",
+    "take",
+    "subsets",
+    "variations",
+    "numbered_symbols",
+    "cartes",
+    "capture",
+    "dict_merge",
+    "prefixes",
+    "postfixes",
+    "sift",
+    "topological_sort",
+    "unflatten",
+    "has_dups",
+    "has_variety",
+    "reshape",
+    "rotations",
+    "filldedent",
+    "lambdify",
+    "threaded",
+    "xthreaded",
+    "public",
+    "memoize_property",
+    "timed",
+]

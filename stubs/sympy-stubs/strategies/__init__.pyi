@@ -4,4 +4,26 @@ from sympy.strategies.rl import distribute, flatten, glom, rebuild, rm_id, sort,
 from sympy.strategies.tools import canon, typed
 from sympy.strategies.util import new
 
-__all__ = ['rl', 'traverse', 'rm_id', 'unpack', 'flatten', 'sort', 'glom', 'distribute', 'rebuild', 'new', 'condition', 'debug', 'chain', 'null_safe', 'do_one', 'exhaust', 'minimize', 'tryit', 'canon', 'typed', 'branch']
+__all__ = [
+    "rl",
+    "traverse",
+    "rm_id",
+    "unpack",
+    "flatten",
+    "sort",
+    "glom",
+    "distribute",
+    "rebuild",
+    "new",
+    "condition",
+    "debug",
+    "chain",
+    "null_safe",
+    "do_one",
+    "exhaust",
+    "minimize",
+    "tryit",
+    "canon",
+    "typed",
+    "branch",
+]

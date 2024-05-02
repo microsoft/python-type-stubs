@@ -34,46 +34,108 @@ from .rv import (
     where,
 )
 
-__all__ = ['P', 'E', 'H', 'density', 'where', 'given', 'sample', 'cdf', 'characteristic_function', 'pspace', 'sample_iter', 'variance', 'std', 'skewness', 'kurtosis', 'covariance', 'dependent', 'entropy', 'median', 'independent', 'random_symbols', 'correlation', 'factorial_moment', 'moment', 'cmoment', 'sampling_density', 'moment_generating_function', 'smoment', 'quantile', 'sample_stochastic_process']
-def moment(X, n, c=..., condition=..., *, evaluate=..., **kwargs) -> Any | Moment:
-    ...
+__all__ = [
+    "P",
+    "E",
+    "H",
+    "density",
+    "where",
+    "given",
+    "sample",
+    "cdf",
+    "characteristic_function",
+    "pspace",
+    "sample_iter",
+    "variance",
+    "std",
+    "skewness",
+    "kurtosis",
+    "covariance",
+    "dependent",
+    "entropy",
+    "median",
+    "independent",
+    "random_symbols",
+    "correlation",
+    "factorial_moment",
+    "moment",
+    "cmoment",
+    "sampling_density",
+    "moment_generating_function",
+    "smoment",
+    "quantile",
+    "sample_stochastic_process",
+]
 
-def variance(X, condition=..., **kwargs) -> VarianceMatrix | Variance | Any | CentralMoment:
-    ...
-
-def standard_deviation(X, condition=..., **kwargs) -> Pow:
-    ...
+def moment(X, n, c=..., condition=..., *, evaluate=..., **kwargs) -> Any | Moment: ...
+def variance(X, condition=..., **kwargs) -> VarianceMatrix | Variance | Any | CentralMoment: ...
+def standard_deviation(X, condition=..., **kwargs) -> Pow: ...
 
 std = ...
-def entropy(expr, condition=..., **kwargs) -> int | Mul | Basic | Expectation | tuple[Any, ...] | Sum | Order | Any | Piecewise | Equality | Relational | Ne | Integral | ExpectationMatrix | None:
-    ...
 
-def covariance(X, Y, condition=..., **kwargs) -> CrossCovarianceMatrix | Covariance | Basic | Expectation | tuple[Any, ...] | Sum | Order | Any | Piecewise | Equality | Relational | Ne | Integral | ExpectationMatrix | None:
-    ...
-
-def correlation(X, Y, condition=..., **kwargs):
-    ...
-
-def cmoment(X, n, condition=..., *, evaluate=..., **kwargs) -> Any | CentralMoment:
-    ...
-
-def smoment(X, n, condition=..., **kwargs):
-    ...
-
-def skewness(X, condition=..., **kwargs):
-    ...
-
-def kurtosis(X, condition=..., **kwargs):
-    ...
-
-def factorial_moment(X, n, condition=..., **kwargs) -> type[UndefinedFunction] | Basic | Expectation | tuple[Any, ...] | Sum | Order | Any | Piecewise | Equality | Relational | Ne | Integral | ExpectationMatrix | None:
-    ...
-
-def median(X, evaluate=..., **kwargs) -> FiniteSet | Set:
-    ...
-
-def coskewness(X, Y, Z, condition=..., **kwargs):
-    ...
+def entropy(
+    expr, condition=..., **kwargs
+) -> (
+    int
+    | Mul
+    | Basic
+    | Expectation
+    | tuple[Any, ...]
+    | Sum
+    | Order
+    | Any
+    | Piecewise
+    | Equality
+    | Relational
+    | Ne
+    | Integral
+    | ExpectationMatrix
+    | None
+): ...
+def covariance(
+    X, Y, condition=..., **kwargs
+) -> (
+    CrossCovarianceMatrix
+    | Covariance
+    | Basic
+    | Expectation
+    | tuple[Any, ...]
+    | Sum
+    | Order
+    | Any
+    | Piecewise
+    | Equality
+    | Relational
+    | Ne
+    | Integral
+    | ExpectationMatrix
+    | None
+): ...
+def correlation(X, Y, condition=..., **kwargs): ...
+def cmoment(X, n, condition=..., *, evaluate=..., **kwargs) -> Any | CentralMoment: ...
+def smoment(X, n, condition=..., **kwargs): ...
+def skewness(X, condition=..., **kwargs): ...
+def kurtosis(X, condition=..., **kwargs): ...
+def factorial_moment(
+    X, n, condition=..., **kwargs
+) -> (
+    type[UndefinedFunction]
+    | Basic
+    | Expectation
+    | tuple[Any, ...]
+    | Sum
+    | Order
+    | Any
+    | Piecewise
+    | Equality
+    | Relational
+    | Ne
+    | Integral
+    | ExpectationMatrix
+    | None
+): ...
+def median(X, evaluate=..., **kwargs) -> FiniteSet | Set: ...
+def coskewness(X, Y, Z, condition=..., **kwargs): ...
 
 P = ...
 E = ...
