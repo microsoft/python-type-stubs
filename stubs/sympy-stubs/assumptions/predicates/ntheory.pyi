@@ -1,7 +1,7 @@
 from typing import LiteralString
+
 from sympy.assumptions import Predicate
 from sympy.multipledispatch import Dispatcher
-
 
 class PrimePredicate(Predicate):
     name: LiteralString = ...

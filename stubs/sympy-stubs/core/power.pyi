@@ -1,9 +1,10 @@
 from typing import Any, Literal, Self
+
 from sympy.core.basic import Basic
 from sympy.core.cache import cacheit
 from sympy.core.expr import Expr
 from sympy.core.function import UndefinedFunction
-from sympy.core.kind import _UndefinedKind, Kind
+from sympy.core.kind import Kind, _UndefinedKind
 from sympy.core.mul import Mul
 from sympy.core.numbers import Number
 from sympy.functions.elementary.exponential import log

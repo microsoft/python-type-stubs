@@ -1,4 +1,5 @@
 from typing import Any, Callable
+
 from sympy.core import Add, Mul, Number, NumberSymbol, Pow
 from sympy.core.logic import And, Or
 from sympy.core.numbers import ImaginaryUnit

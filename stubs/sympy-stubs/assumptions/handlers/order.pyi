@@ -1,10 +1,23 @@
 from typing import Literal
+
+from sympy.assumptions.predicates.order import (
+    ExtendedNegativePredicate,
+    ExtendedNonNegativePredicate,
+    ExtendedNonPositivePredicate,
+    ExtendedNonZeroPredicate,
+    ExtendedPositivePredicate,
+    NegativePredicate,
+    NonNegativePredicate,
+    NonPositivePredicate,
+    NonZeroPredicate,
+    PositivePredicate,
+    ZeroPredicate,
+)
 from sympy.core import Add, Basic, Expr, Mul, Pow
 from sympy.core.numbers import ImaginaryUnit, NaN
 from sympy.functions import Abs, acos, acot, asin, atan, exp, factorial, log
 from sympy.matrices import Determinant, Trace
 from sympy.matrices.expressions.matexpr import MatrixElement
-from sympy.assumptions.predicates.order import ExtendedNegativePredicate, ExtendedNonNegativePredicate, ExtendedNonPositivePredicate, ExtendedNonZeroPredicate, ExtendedPositivePredicate, NegativePredicate, NonNegativePredicate, NonPositivePredicate, NonZeroPredicate, PositivePredicate, ZeroPredicate
 
 @NegativePredicate.register(Basic)
 def _(expr, assumptions) -> Literal[False] | None:

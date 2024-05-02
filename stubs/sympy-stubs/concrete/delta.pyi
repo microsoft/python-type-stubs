@@ -1,4 +1,5 @@
 from typing import Any
+
 from sympy.concrete.summations import Sum
 from sympy.core.basic import Basic
 from sympy.core.cache import cacheit

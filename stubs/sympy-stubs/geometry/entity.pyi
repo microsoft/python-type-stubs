@@ -1,4 +1,5 @@
 from typing import Any, Self
+
 from sympy.core.basic import Basic
 from sympy.core.evalf import EvalfMixin
 from sympy.multipledispatch import dispatch

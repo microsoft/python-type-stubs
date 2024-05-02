@@ -1,4 +1,5 @@
 from typing import Any, Literal, Self
+
 from sympy.liealgebras.cartan_type import Standard_Cartan
 
 class TypeE(Standard_Cartan):

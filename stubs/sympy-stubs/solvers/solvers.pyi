@@ -1,4 +1,5 @@
 from typing import Any
+
 from sympy.matrices import Matrix
 from sympy.series.order import Order
 from sympy.utilities.decorator import conserve_mpmath_dps

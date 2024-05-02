@@ -1,4 +1,5 @@
 from typing import Any, Self
+
 rgen = ...
 class Point:
     def __init__(self, x_cord, z_cord, a_24, mod) -> None:

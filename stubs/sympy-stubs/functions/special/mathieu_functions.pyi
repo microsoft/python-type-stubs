@@ -1,4 +1,5 @@
 from typing import Self
+
 from sympy.core.function import Function, UndefinedFunction
 from sympy.core.mul import Mul
 

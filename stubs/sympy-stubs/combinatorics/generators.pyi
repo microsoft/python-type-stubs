@@ -1,5 +1,7 @@
 from typing import Any, Generator
+
 from sympy.combinatorics.permutations import Permutation
+
 def symmetric(n) -> Generator[Permutation, Any, None]:
     ...
 

@@ -1,5 +1,6 @@
 from ast import Attribute
 from typing import Self
+
 from sympy.codegen.ast import FunctionCall, Node, String, Token, Variable
 from sympy.core.basic import Basic
 from sympy.core.expr import Expr

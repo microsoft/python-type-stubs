@@ -1,4 +1,5 @@
 from typing import Any, Literal, Self
+
 from sympy import Basic, Equality, Integral, Ne, Piecewise, Sum
 from sympy.core.add import Add
 from sympy.core.expr import Expr

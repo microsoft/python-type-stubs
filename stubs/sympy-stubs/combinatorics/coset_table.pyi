@@ -1,4 +1,5 @@
 from typing import Any, Self
+
 from sympy.printing.defaults import DefaultPrinting
 
 class CosetTable(DefaultPrinting):

@@ -1,4 +1,5 @@
 from typing import Any
+
 from sympy.utilities import public
 
 def dup_bernoulli(n, K) -> list[Any]:

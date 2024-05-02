@@ -1,4 +1,5 @@
 from typing import Any, Self, Tuple as tTuple
+
 from sympy.calculus.accumulationbounds import AccumBounds
 from sympy.core.cache import cacheit
 from sympy.core.expr import Expr

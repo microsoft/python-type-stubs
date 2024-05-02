@@ -1,4 +1,5 @@
 from typing import Any
+
 from sympy.core.basic import Basic
 from sympy.core.function import UndefinedFunction
 from sympy.core.symbol import Symbol

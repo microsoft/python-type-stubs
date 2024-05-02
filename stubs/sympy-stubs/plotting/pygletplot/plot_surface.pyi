@@ -1,4 +1,5 @@
 from typing import Any, Callable
+
 from sympy.plotting.pygletplot.plot_mode_base import PlotModeBase
 
 class PlotSurface(PlotModeBase):

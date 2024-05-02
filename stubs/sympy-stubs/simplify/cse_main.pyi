@@ -1,5 +1,6 @@
 from collections import defaultdict
 from typing import Any
+
 from sympy.core.containers import OrderedSet
 
 basic_optimizations = ...

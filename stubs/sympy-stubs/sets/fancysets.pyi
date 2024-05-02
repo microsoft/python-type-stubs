@@ -1,4 +1,5 @@
 from typing import Any, Generator, Literal, NoReturn, Self
+
 from sympy.core.basic import Basic
 from sympy.core.logic import And
 from sympy.core.numbers import Integer, Rational

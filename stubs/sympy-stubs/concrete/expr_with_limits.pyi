@@ -1,4 +1,5 @@
 from typing import Any, Self
+
 from sympy.core.basic import Basic
 from sympy.core.expr import Expr
 from sympy.core.kind import Kind

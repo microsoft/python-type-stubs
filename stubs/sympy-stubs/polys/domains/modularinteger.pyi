@@ -1,7 +1,8 @@
 from types import NotImplementedType
 from typing import Any, LiteralString, Self
-from sympy.polys.polyutils import PicklableWithSlots
+
 from sympy.polys.domains.domainelement import DomainElement
+from sympy.polys.polyutils import PicklableWithSlots
 from sympy.utilities import public
 
 @public

@@ -1,5 +1,6 @@
 from types import NotImplementedType
 from typing import Any, LiteralString, Self
+
 from sympy.core.basic import Basic
 from sympy.core.power import Pow
 from sympy.functions.elementary.piecewise import Piecewise

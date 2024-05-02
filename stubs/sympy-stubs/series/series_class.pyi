@@ -1,7 +1,8 @@
 from typing import Any, Generator
+
 from sympy.core.basic import Basic
-from sympy.core.expr import Expr
 from sympy.core.cache import cacheit
+from sympy.core.expr import Expr
 
 class SeriesBase(Expr):
     @property

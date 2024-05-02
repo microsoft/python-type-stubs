@@ -1,4 +1,5 @@
 from typing import Any
+
 from sympy.printing.codeprinter import CodePrinter
 
 _known_func_same_name = ...

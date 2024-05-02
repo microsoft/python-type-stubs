@@ -1,6 +1,8 @@
 from typing import Any, Literal
+
 from sympy.combinatorics.permutations import Perm
 from sympy.core.basic import Basic
+
 def dummy_sgs(dummies, sym, n) -> list[Any]:
     ...
 

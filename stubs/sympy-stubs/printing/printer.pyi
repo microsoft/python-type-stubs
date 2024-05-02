@@ -1,6 +1,6 @@
 import inspect
-from typing import Any, Callable, Generator, Type
 from contextlib import contextmanager
+from typing import Any, Callable, Generator, Type
 
 @contextmanager
 def printer_context(printer, **kwargs) -> Generator[None, Any, None]:

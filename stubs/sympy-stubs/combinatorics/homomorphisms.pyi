@@ -1,6 +1,8 @@
 from typing import Any, Literal
+
 from sympy.combinatorics.fp_groups import FpSubgroup
 from sympy.combinatorics.perm_groups import PermutationGroup
+
 class GroupHomomorphism:
     def __init__(self, domain, codomain, images) -> None:
         ...

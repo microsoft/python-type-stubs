@@ -1,10 +1,11 @@
 from collections import defaultdict
 from typing import TYPE_CHECKING, Any, Literal, Self
+
 from sympy import Derivative, Equality, Integer, Mul, Order, Pow
 from sympy.core.basic import Atom, Basic
-from sympy.core.evalf import EvalfMixin
-from sympy.core.decorators import call_highest_priority, sympify_method_args, sympify_return
 from sympy.core.cache import cacheit
+from sympy.core.decorators import call_highest_priority, sympify_method_args, sympify_return
+from sympy.core.evalf import EvalfMixin
 from sympy.core.function import UndefinedFunction
 from sympy.core.numbers import Float, Number, Rational
 from sympy.core.relational import Ne, Relational

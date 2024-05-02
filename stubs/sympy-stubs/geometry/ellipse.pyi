@@ -1,5 +1,6 @@
 from types import NotImplementedType
 from typing import Any, Literal, Self
+
 from sympy.core.basic import Basic
 from sympy.core.power import Pow
 from sympy.geometry.entity import GeometrySet

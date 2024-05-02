@@ -1,8 +1,9 @@
 from typing import Any, Literal, Self
+
 from sympy import Symbol
+from sympy.core._print_helpers import Printable
 from sympy.core.cache import cacheit
 from sympy.core.kind import Kind
-from sympy.core._print_helpers import Printable
 
 def as_Basic(expr):
     ...

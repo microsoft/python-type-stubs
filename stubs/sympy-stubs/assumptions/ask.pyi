@@ -1,10 +1,10 @@
 from sympy.assumptions.assume import UndefinedPredicate
-from sympy.assumptions.predicates.sets import *
 from sympy.assumptions.predicates.calculus import *
-from sympy.assumptions.predicates.order import *
-from sympy.assumptions.predicates.ntheory import *
 from sympy.assumptions.predicates.common import *
 from sympy.assumptions.predicates.matrices import *
+from sympy.assumptions.predicates.ntheory import *
+from sympy.assumptions.predicates.order import *
+from sympy.assumptions.predicates.sets import *
 from sympy.assumptions.relation.equality import *
 from sympy.utilities.decorator import memoize_property
 

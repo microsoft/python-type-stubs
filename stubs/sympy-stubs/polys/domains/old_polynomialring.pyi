@@ -1,4 +1,5 @@
 from typing import Any, Literal, Self
+
 from sympy.polys.agca.modules import FreeModulePolyRing
 from sympy.polys.domains.characteristiczero import CharacteristicZero
 from sympy.polys.domains.compositedomain import CompositeDomain

@@ -1,5 +1,5 @@
-from sympy.core.numbers import Infinity, NegativeInfinity
 from sympy.core import Basic, Expr
+from sympy.core.numbers import Infinity, NegativeInfinity
 from sympy.sets import Interval
 from sympy.sets.sets import FiniteSet
 

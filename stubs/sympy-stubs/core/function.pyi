@@ -1,6 +1,7 @@
 from inspect import Signature
 from types import NotImplementedType
 from typing import Any, Callable, Dict, Literal, Self
+
 from sympy.core.basic import Basic
 from sympy.core.cache import cacheit
 from sympy.core.decorators import _sympifyit

@@ -1,5 +1,6 @@
 from types import NotImplementedType
 from typing import Any, Literal, Self
+
 from sympy.core.numbers import Integer, Rational
 from sympy.external.gmpy import MPQ
 from sympy.external.pythonmpq import PythonMPQ

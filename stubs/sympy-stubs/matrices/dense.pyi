@@ -1,10 +1,11 @@
 from typing import Any
+
+from numpy import ndarray as NDArray
 from sympy.core.basic import Basic
 from sympy.matrices.immutable import ImmutableDenseMatrix
+from sympy.matrices.repmatrix import MutableRepMatrix, RepMatrix
 from sympy.series.order import Order
 from sympy.utilities.decorator import doctest_depends_on
-from sympy.matrices.repmatrix import MutableRepMatrix, RepMatrix
-from numpy import ndarray as NDArray
 
 class DenseMatrix(RepMatrix):
     is_MatrixExpr: bool = ...

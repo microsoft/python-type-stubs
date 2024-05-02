@@ -1,4 +1,5 @@
 from typing import Any, Self
+
 from sympy.core import cacheit
 from sympy.core.basic import Basic
 from sympy.core.function import Function, UndefinedFunction

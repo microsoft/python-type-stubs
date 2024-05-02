@@ -1,4 +1,5 @@
 from typing import Any, Self, Tuple as tTuple
+
 from sympy.core.function import Function, UndefinedFunction
 from sympy.core.numbers import Float, Integer, Rational
 from sympy.series.order import Order

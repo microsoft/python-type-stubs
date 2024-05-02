@@ -1,4 +1,5 @@
 from typing import Any, Callable, Generator
+
 def treeapply(tree, join, leaf=...):
     ...
 

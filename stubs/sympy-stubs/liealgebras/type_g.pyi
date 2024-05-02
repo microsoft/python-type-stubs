@@ -1,4 +1,5 @@
 from typing import Literal, Self
+
 from sympy.liealgebras.cartan_type import Standard_Cartan
 from sympy.matrices import Matrix
 

@@ -1,4 +1,5 @@
 from typing import Any, Text
+
 from sympy.codegen.ast import Element
 from sympy.printing.printer import Printer, print_function
 

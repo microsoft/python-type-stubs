@@ -1,4 +1,5 @@
 from typing import Self
+
 from sympy.core.add import Add
 from sympy.core.expr import Expr
 from sympy.vector.vector import VectorAdd, VectorZero

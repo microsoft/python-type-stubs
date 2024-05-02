@@ -1,4 +1,5 @@
 from typing import Self
+
 from sympy.core.function import Function, UndefinedFunction
 
 def betainc_mpmath_fix(a, b, x1, x2, reg=...):

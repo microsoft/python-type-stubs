@@ -1,9 +1,43 @@
 from typing import Literal
+
 from sympy import MatrixBase
-from sympy.matrices.expressions import BlockDiagMatrix, BlockMatrix, Determinant, DiagMatrix, DiagonalMatrix, HadamardProduct, Identity, Inverse, MatAdd, MatMul, MatPow, MatrixExpr, MatrixSlice, MatrixSymbol, OneMatrix, Trace, Transpose, ZeroMatrix
+from sympy.assumptions.predicates.matrices import (
+    ComplexElementsPredicate,
+    DiagonalPredicate,
+    FullRankPredicate,
+    IntegerElementsPredicate,
+    InvertiblePredicate,
+    LowerTriangularPredicate,
+    OrthogonalPredicate,
+    PositiveDefinitePredicate,
+    RealElementsPredicate,
+    SquarePredicate,
+    SymmetricPredicate,
+    UnitaryPredicate,
+    UpperTriangularPredicate,
+)
+from sympy.matrices.expressions import (
+    BlockDiagMatrix,
+    BlockMatrix,
+    Determinant,
+    DiagMatrix,
+    DiagonalMatrix,
+    HadamardProduct,
+    Identity,
+    Inverse,
+    MatAdd,
+    MatMul,
+    MatPow,
+    MatrixExpr,
+    MatrixSlice,
+    MatrixSymbol,
+    OneMatrix,
+    Trace,
+    Transpose,
+    ZeroMatrix,
+)
 from sympy.matrices.expressions.factorizations import Factorization
 from sympy.matrices.expressions.fourier import DFT
-from sympy.assumptions.predicates.matrices import ComplexElementsPredicate, DiagonalPredicate, FullRankPredicate, IntegerElementsPredicate, InvertiblePredicate, LowerTriangularPredicate, OrthogonalPredicate, PositiveDefinitePredicate, RealElementsPredicate, SquarePredicate, SymmetricPredicate, UnitaryPredicate, UpperTriangularPredicate
 
 @SquarePredicate.register(MatrixExpr)
 def _(expr, assumptions):

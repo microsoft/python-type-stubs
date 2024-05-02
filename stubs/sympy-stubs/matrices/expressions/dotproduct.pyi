@@ -1,4 +1,5 @@
 from typing import Any, Self
+
 from sympy.core import Expr
 from sympy.matrices.expressions.slice import MatrixSlice
 

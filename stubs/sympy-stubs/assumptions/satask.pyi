@@ -1,4 +1,5 @@
 from typing import Any
+
 from sympy.assumptions.cnf import CNF, EncodedCNF
 
 def satask(proposition, assumptions=..., context=..., use_known_facts=..., iterations=...) -> bool | None:

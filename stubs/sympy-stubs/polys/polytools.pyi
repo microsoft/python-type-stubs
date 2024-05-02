@@ -1,6 +1,7 @@
 from functools import _Wrapped
 from types import NotImplementedType
 from typing import Any, Callable, Iterator, Literal, Self, Tuple
+
 from sympy.combinatorics.galois import S1TransitiveSubgroups, S2TransitiveSubgroups, S3TransitiveSubgroups
 from sympy.combinatorics.perm_groups import PermutationGroup
 from sympy.core.add import Add

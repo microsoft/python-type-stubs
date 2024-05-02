@@ -1,4 +1,5 @@
 from typing import Any
+
 from sympy.core import Basic, Expr
 from sympy.sets.fancysets import ImageSet
 from sympy.sets.sets import FiniteSet, Interval, Set, Union

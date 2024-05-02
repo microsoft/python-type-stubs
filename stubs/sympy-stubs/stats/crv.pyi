@@ -1,11 +1,22 @@
 from typing import Any, Literal, Self
+
 from sympy import Basic, Equality, FiniteSet, Integral, Ne
 from sympy.core.cache import cacheit
 from sympy.core.function import Lambda
 from sympy.core.logic import And
 from sympy.core.relational import Relational
 from sympy.sets.sets import Union
-from sympy.stats.rv import ConditionalDomain, Distribution, NamedArgsMixin, PSpace, ProductDomain, RandomDomain, RandomSymbol, SingleDomain, SinglePSpace
+from sympy.stats.rv import (
+    ConditionalDomain,
+    Distribution,
+    NamedArgsMixin,
+    ProductDomain,
+    PSpace,
+    RandomDomain,
+    RandomSymbol,
+    SingleDomain,
+    SinglePSpace,
+)
 
 class ContinuousDomain(RandomDomain):
     is_Continuous = ...

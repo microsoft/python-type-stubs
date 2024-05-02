@@ -1,4 +1,5 @@
 from typing import Any
+
 from sympy.concrete.summations import Sum
 from sympy.core.function import Function, UndefinedFunction
 from sympy.core.mul import Mul

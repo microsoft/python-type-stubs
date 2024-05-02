@@ -1,5 +1,7 @@
 from typing import Any
+
 from sympy.matrices.dense import MutableDenseMatrix
+
 def smith_normal_form(m, domain=...) -> MutableDenseMatrix:
     ...
 

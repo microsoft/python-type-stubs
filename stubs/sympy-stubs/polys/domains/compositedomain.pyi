@@ -1,4 +1,5 @@
 from typing import Self
+
 from sympy.polys.domains.domain import Domain
 
 class CompositeDomain(Domain):

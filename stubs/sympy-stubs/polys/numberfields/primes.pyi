@@ -1,4 +1,5 @@
 from typing import Any
+
 from sympy.polys.polyutils import IntegerPowerable
 from sympy.utilities.decorator import public
 

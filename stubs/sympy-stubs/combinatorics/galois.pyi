@@ -1,5 +1,6 @@
 from enum import Enum
 from typing import Any
+
 from sympy.combinatorics.perm_groups import PermutationGroup
 
 class S1TransitiveSubgroups(Enum):

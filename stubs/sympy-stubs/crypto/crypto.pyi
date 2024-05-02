@@ -1,5 +1,6 @@
 from array import array
 from typing import Any, Literal, LiteralString
+
 from sympy.core.numbers import Integer, Rational
 from sympy.matrices import Matrix
 from sympy.utilities.decorator import doctest_depends_on

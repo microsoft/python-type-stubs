@@ -1,8 +1,25 @@
 from typing import Literal
+
+from sympy.assumptions.predicates.calculus import (
+    FinitePredicate,
+    InfinitePredicate,
+    NegativeInfinitePredicate,
+    PositiveInfinitePredicate,
+)
 from sympy.core import Add, Mul, Pow, Symbol
-from sympy.core.numbers import ComplexInfinity, Exp1, GoldenRatio, ImaginaryUnit, Infinity, NaN, NegativeInfinity, Number, Pi, TribonacciConstant
+from sympy.core.numbers import (
+    ComplexInfinity,
+    Exp1,
+    GoldenRatio,
+    ImaginaryUnit,
+    Infinity,
+    NaN,
+    NegativeInfinity,
+    Number,
+    Pi,
+    TribonacciConstant,
+)
 from sympy.functions import cos, exp, log, sign, sin
-from sympy.assumptions.predicates.calculus import FinitePredicate, InfinitePredicate, NegativeInfinitePredicate, PositiveInfinitePredicate
 
 @FinitePredicate.register(Symbol)
 def _(expr, assumptions) -> Literal[True] | None:

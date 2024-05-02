@@ -1,4 +1,5 @@
 from typing import Any
+
 from sympy.matrices.dense import MutableDenseMatrix
 from sympy.polys.matrices.domainmatrix import DomainMatrix
 

@@ -1,4 +1,5 @@
 from typing import Any
+
 from sympy.concrete.products import Product
 from sympy.core.add import Add
 from sympy.core.basic import Basic
@@ -10,6 +11,7 @@ from sympy.core.relational import Eq, Equality, Ne, Relational
 from sympy.core.symbol import Dummy
 from sympy.functions.elementary.complexes import Abs
 from sympy.series.order import Order
+
 def separatevars(expr, symbols=..., dict=..., force=...) -> dict[str, Any] | dict[Any, list[Any]] | Order | Abs | type[UndefinedFunction] | Any | None:
     ...
 

@@ -1,4 +1,5 @@
 from typing import Any
+
 from sympy.polys.domains.gaussiandomains import GaussianIntegerRing, GaussianRationalField
 from sympy.utilities import public
 

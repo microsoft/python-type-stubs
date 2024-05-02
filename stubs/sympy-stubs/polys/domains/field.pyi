@@ -1,4 +1,5 @@
 from typing import Any, Self
+
 from sympy.polys.domains.ring import Ring
 
 class Field(Ring):

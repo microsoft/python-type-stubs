@@ -1,4 +1,5 @@
 from typing import Any, Literal
+
 from sympy.polys.polymatrix import PolyMatrix
 from sympy.series.order import Order
 

@@ -1,4 +1,5 @@
 from typing import Any, Literal, Self
+
 from sympy.core.expr import Expr
 
 class Prefix(Expr):

@@ -1,5 +1,6 @@
 from functools import _Wrapped
 from typing import Any
+
 from sympy.printing.str import StrPrinter
 
 class requires:

@@ -1,5 +1,6 @@
 from functools import singledispatch
 from typing import Any, Generator, Literal, Self
+
 from sympy import Equality, FiniteSet, Integral, Ne, Piecewise, ProductSet, Sum
 from sympy.core.basic import Basic
 from sympy.core.expr import Expr

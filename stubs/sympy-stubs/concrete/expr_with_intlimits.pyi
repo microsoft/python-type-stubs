@@ -1,4 +1,5 @@
 from typing import Self
+
 from sympy.concrete.expr_with_limits import ExprWithLimits
 
 class ReorderError(NotImplementedError):

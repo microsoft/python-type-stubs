@@ -1,6 +1,7 @@
 from typing import TYPE_CHECKING, Any, Literal, Self
-from sympy.core.decorators import _sympifyit, call_highest_priority
+
 from sympy.core import Add, Mul
+from sympy.core.decorators import _sympifyit, call_highest_priority
 from sympy.core.expr import Expr
 from sympy.series.order import Order
 from sympy.vector.vector import BaseVector

@@ -1,4 +1,5 @@
 from typing import Any, Sequence, TypeVar
+
 from sympy.polys.matrices._typing import RingElement
 
 T = TypeVar('T')

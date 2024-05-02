@@ -1,6 +1,6 @@
 import doctest as pdoctest
-from doctest import DocTestFinder, DocTestRunner
 from contextlib import contextmanager
+from doctest import DocTestFinder, DocTestRunner
 from typing import Any, Generator, Literal
 
 IS_WINDOWS = ...

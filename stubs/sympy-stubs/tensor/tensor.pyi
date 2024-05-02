@@ -1,14 +1,21 @@
+from abc import ABC, abstractmethod
 from types import NotImplementedType
 from typing import Any, Callable, Generator, Literal, LiteralString, Self
-from abc import ABC, abstractmethod
+
 from sympy import ImmutableDenseNDimArray, ImmutableSparseNDimArray, Indexed, MutableDenseNDimArray
 from sympy.combinatorics.permutations import Perm
 from sympy.core import Basic, Expr
 from sympy.core.containers import Tuple
-from sympy.core.sympify import CantSympify
 from sympy.core.operations import AssocOp
+from sympy.core.sympify import CantSympify
 from sympy.matrices import Matrix
-from sympy.tensor.array.expressions.array_expressions import ArrayContraction, ArrayElement, ArrayTensorProduct, PermuteDims, ZeroArray
+from sympy.tensor.array.expressions.array_expressions import (
+    ArrayContraction,
+    ArrayElement,
+    ArrayTensorProduct,
+    PermuteDims,
+    ZeroArray,
+)
 from sympy.utilities.decorator import deprecated, memoize_property
 
 def deprecate_data() -> None:

@@ -1,4 +1,5 @@
 from typing import Any, Generator, Literal
+
 def binomial_coefficients(n) -> dict[tuple[Literal[0], int] | tuple[int, Literal[0]], int]:
     ...
 

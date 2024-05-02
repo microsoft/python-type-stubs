@@ -1,4 +1,5 @@
 from typing import Any, Self
+
 from sympy.core.basic import Basic
 from sympy.logic.boolalg import BooleanFunction
 from sympy.sets.sets import Set

@@ -1,6 +1,7 @@
 from typing import Literal
-from sympy.sets.sets import FiniteSet, Interval, ProductSet, Set, Union
+
 from sympy.sets.fancysets import Complexes, Range, Rationals, Reals
+from sympy.sets.sets import FiniteSet, Interval, ProductSet, Set, Union
 
 _inf_sets = ...
 is_subset_sets = ...

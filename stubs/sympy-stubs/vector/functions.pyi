@@ -1,10 +1,12 @@
 from typing import Any, Literal
+
 from sympy import Equality, Ne
 from sympy.core.add import Add
 from sympy.core.relational import Relational
 from sympy.vector.dyadic import DyadicZero
 from sympy.vector.operators import Divergence
 from sympy.vector.vector import VectorZero
+
 def express(expr, system, system2=..., variables=...) -> VectorZero | DyadicZero:
     ...
 

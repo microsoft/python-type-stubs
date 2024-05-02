@@ -1,4 +1,5 @@
 from typing import Any, Literal, Self
+
 from sympy import Basic, Contains, Equality, FiniteSet, Intersection, Ne, Piecewise, Sum
 from sympy.core.cache import cacheit
 from sympy.core.function import Lambda
@@ -7,7 +8,17 @@ from sympy.core.relational import Relational
 from sympy.logic.boolalg import Boolean
 from sympy.series.order import Order
 from sympy.sets.sets import Complement, Union
-from sympy.stats.rv import ConditionalDomain, Distribution, NamedArgsMixin, PSpace, ProductDomain, RandomDomain, RandomSymbol, SingleDomain, SinglePSpace
+from sympy.stats.rv import (
+    ConditionalDomain,
+    Distribution,
+    NamedArgsMixin,
+    ProductDomain,
+    PSpace,
+    RandomDomain,
+    RandomSymbol,
+    SingleDomain,
+    SinglePSpace,
+)
 from sympy.stats.symbolic_probability import Probability
 
 class DiscreteDistribution(Distribution):

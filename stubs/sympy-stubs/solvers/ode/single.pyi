@@ -1,4 +1,5 @@
 from typing import Any, ClassVar, Iterator
+
 from sympy.core.cache import cached_property
 from sympy.core.expr import Expr
 from sympy.core.function import AppliedUndef, Function

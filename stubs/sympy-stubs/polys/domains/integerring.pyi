@@ -1,4 +1,5 @@
 from typing import Any, Literal
+
 from sympy.core.numbers import Integer
 from sympy.external.gmpy import MPZ
 from sympy.polys.domains.characteristiczero import CharacteristicZero

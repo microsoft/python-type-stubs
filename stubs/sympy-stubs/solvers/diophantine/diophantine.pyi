@@ -1,9 +1,11 @@
 from types import NotImplementedType
 from typing import Any, Generator, Literal, NoReturn
+
 from sympy import Pow
 from sympy.core.function import UndefinedFunction
 from sympy.matrices.dense import MutableDenseMatrix
 from sympy.series.order import Order
+
 __all__ = ['diophantine', 'classify_diop']
 class DiophantineSolutionSet(set):
     def __init__(self, symbols_seq, parameters) -> None:

@@ -1,11 +1,22 @@
-from sympy.sets.sets import Complement, DisjointUnion, FiniteSet, Intersection, Interval, ProductSet, Set, SymmetricDifference, Union, imageset
-from sympy.sets.fancysets import ComplexRegion, ImageSet, Range
-from sympy.sets.contains import Contains
+from sympy.core.singleton import S
 from sympy.sets.conditionset import ConditionSet
+from sympy.sets.contains import Contains
+from sympy.sets.fancysets import ComplexRegion, ImageSet, Range
+from sympy.sets.handlers.comparison import _eval_is_eq
 from sympy.sets.ordinals import OmegaPower, Ordinal, ord0
 from sympy.sets.powerset import PowerSet
-from sympy.core.singleton import S
-from sympy.sets.handlers.comparison import _eval_is_eq
+from sympy.sets.sets import (
+    Complement,
+    DisjointUnion,
+    FiniteSet,
+    Intersection,
+    Interval,
+    ProductSet,
+    Set,
+    SymmetricDifference,
+    Union,
+    imageset,
+)
 
 Complexes = ...
 EmptySet = ...

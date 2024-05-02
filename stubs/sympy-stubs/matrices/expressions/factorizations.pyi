@@ -1,4 +1,5 @@
 from typing import Any
+
 from sympy.matrices.expressions import MatrixExpr
 
 class Factorization(MatrixExpr):

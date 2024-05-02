@@ -1,4 +1,5 @@
 from typing import Any
+
 from sympy.core.relational import Eq, Ne, Relational
 
 allhints = ...

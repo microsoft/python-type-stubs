@@ -1,7 +1,7 @@
 from typing import Any, LiteralString
+
 from sympy.assumptions import Predicate
 from sympy.multipledispatch import Dispatcher
-
 
 class NegativePredicate(Predicate):
     name: LiteralString = ...

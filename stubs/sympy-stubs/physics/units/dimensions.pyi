@@ -1,4 +1,5 @@
 from typing import Any, LiteralString, Self
+
 from sympy.core.basic import Basic
 from sympy.core.expr import Expr
 from sympy.matrices import Matrix

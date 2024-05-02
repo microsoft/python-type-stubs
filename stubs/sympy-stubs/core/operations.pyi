@@ -1,4 +1,5 @@
 from typing import Any, LiteralString, Self
+
 from sympy.core.basic import Basic
 from sympy.core.cache import cacheit
 from sympy.series.order import Order

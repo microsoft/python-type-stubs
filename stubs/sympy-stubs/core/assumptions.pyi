@@ -1,4 +1,5 @@
 from typing import Any, Self
+
 from sympy.core.facts import FactKB
 
 _assume_rules = ...

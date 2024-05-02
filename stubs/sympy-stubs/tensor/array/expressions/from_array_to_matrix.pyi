@@ -1,12 +1,22 @@
 from functools import singledispatch
 from trace import Trace
 from typing import Any, List, Union as tUnion
+
 from sympy import Basic, MatAdd, MatrixExpr, Mul, Transpose, ZeroMatrix
 from sympy.matrices.expressions.applyfunc import ElementwiseApplyFunction
 from sympy.matrices.expressions.matexpr import MatrixElement
 from sympy.matrices.expressions.special import GenericIdentity, GenericZeroMatrix
 from sympy.series.order import Order
-from sympy.tensor.array.expressions.array_expressions import ArrayAdd, ArrayContraction, ArrayDiagonal, ArrayElement, ArrayElementwiseApplyFunc, ArrayTensorProduct, PermuteDims, ZeroArray
+from sympy.tensor.array.expressions.array_expressions import (
+    ArrayAdd,
+    ArrayContraction,
+    ArrayDiagonal,
+    ArrayElement,
+    ArrayElementwiseApplyFunc,
+    ArrayTensorProduct,
+    PermuteDims,
+    ZeroArray,
+)
 
 @singledispatch
 def _array2matrix(expr) -> Any:

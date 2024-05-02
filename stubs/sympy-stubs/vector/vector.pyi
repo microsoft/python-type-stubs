@@ -1,4 +1,5 @@
 from typing import Any, Callable, Literal, Self
+
 from sympy import ImmutableDenseMatrix, Pow
 from sympy.core.add import Add
 from sympy.core.expr import AtomicExpr, Expr

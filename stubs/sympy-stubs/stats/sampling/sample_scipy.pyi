@@ -1,8 +1,28 @@
 from functools import singledispatch
+
 from sympy.stats import DiscreteDistributionHandmade
 from sympy.stats.crv import SingleContinuousDistribution
-from sympy.stats.crv_types import BetaDistribution, CauchyDistribution, ChiSquaredDistribution, ExponentialDistribution, GammaDistribution, LogNormalDistribution, NormalDistribution, ParetoDistribution, StudentTDistribution, UniformDistribution
-from sympy.stats.drv_types import GeometricDistribution, LogarithmicDistribution, NegativeBinomialDistribution, PoissonDistribution, SkellamDistribution, YuleSimonDistribution, ZetaDistribution
+from sympy.stats.crv_types import (
+    BetaDistribution,
+    CauchyDistribution,
+    ChiSquaredDistribution,
+    ExponentialDistribution,
+    GammaDistribution,
+    LogNormalDistribution,
+    NormalDistribution,
+    ParetoDistribution,
+    StudentTDistribution,
+    UniformDistribution,
+)
+from sympy.stats.drv_types import (
+    GeometricDistribution,
+    LogarithmicDistribution,
+    NegativeBinomialDistribution,
+    PoissonDistribution,
+    SkellamDistribution,
+    YuleSimonDistribution,
+    ZetaDistribution,
+)
 from sympy.stats.frv import SingleFiniteDistribution
 
 scipy = ...

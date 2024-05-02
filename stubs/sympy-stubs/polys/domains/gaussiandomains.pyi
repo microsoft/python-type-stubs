@@ -1,10 +1,11 @@
 from types import NotImplementedType
 from typing import Any, Literal, LiteralString, Self
-from sympy.polys.domains.integerring import ZZ
-from sympy.polys.domains.rationalfield import QQ
+
 from sympy.polys.domains.domain import Domain
 from sympy.polys.domains.domainelement import DomainElement
 from sympy.polys.domains.field import Field
+from sympy.polys.domains.integerring import ZZ
+from sympy.polys.domains.rationalfield import QQ
 from sympy.polys.domains.ring import Ring
 
 class GaussianElement(DomainElement): # type: ignore

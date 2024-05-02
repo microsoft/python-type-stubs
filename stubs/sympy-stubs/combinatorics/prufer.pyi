@@ -1,4 +1,5 @@
 from typing import Any, Literal, Self
+
 from sympy.core import Basic
 
 class Prufer(Basic):

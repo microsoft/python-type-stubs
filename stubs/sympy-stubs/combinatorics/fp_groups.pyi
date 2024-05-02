@@ -1,4 +1,5 @@
 from typing import Any, Callable
+
 from sympy.combinatorics.coset_table import CosetTable
 from sympy.combinatorics.free_groups import FreeGroupElement
 from sympy.combinatorics.homomorphisms import GroupHomomorphism

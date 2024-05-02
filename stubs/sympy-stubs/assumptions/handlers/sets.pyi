@@ -1,10 +1,38 @@
 from typing import Literal
+
+from sympy.assumptions.predicates.sets import (
+    AlgebraicPredicate,
+    AntihermitianPredicate,
+    ComplexPredicate,
+    ExtendedRealPredicate,
+    HermitianPredicate,
+    ImaginaryPredicate,
+    IntegerPredicate,
+    IrrationalPredicate,
+    RationalPredicate,
+    RealPredicate,
+)
 from sympy.core import Add, Basic, Expr, Mul, Pow
-from sympy.core.numbers import AlgebraicNumber, ComplexInfinity, Exp1, Float, GoldenRatio, ImaginaryUnit, Infinity, Integer, NaN, NegativeInfinity, Number, NumberSymbol, Pi, Rational, TribonacciConstant
+from sympy.core.numbers import (
+    AlgebraicNumber,
+    ComplexInfinity,
+    Exp1,
+    Float,
+    GoldenRatio,
+    ImaginaryUnit,
+    Infinity,
+    Integer,
+    NaN,
+    NegativeInfinity,
+    Number,
+    NumberSymbol,
+    Pi,
+    Rational,
+    TribonacciConstant,
+)
 from sympy.functions import Abs, acos, acot, asin, atan, cos, cot, exp, im, log, re, sin, tan
 from sympy.matrices import Determinant, MatrixBase, Trace
 from sympy.matrices.expressions.matexpr import MatrixElement
-from sympy.assumptions.predicates.sets import AlgebraicPredicate, AntihermitianPredicate, ComplexPredicate, ExtendedRealPredicate, HermitianPredicate, ImaginaryPredicate, IntegerPredicate, IrrationalPredicate, RationalPredicate, RealPredicate
 
 @IntegerPredicate.register_many(int, Integer)
 def _(expr, assumptions) -> Literal[True]:

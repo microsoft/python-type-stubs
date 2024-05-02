@@ -1,4 +1,5 @@
 from typing import Any, Generator, LiteralString, Self
+
 from sympy.core import Basic
 
 class GrayCode(Basic):

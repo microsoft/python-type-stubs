@@ -1,4 +1,5 @@
 from typing import Any, Self
+
 from sympy.core.basic import Basic
 from sympy.core.cache import cacheit
 from sympy.vector.vector import VectorZero

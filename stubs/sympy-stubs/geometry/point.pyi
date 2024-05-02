@@ -1,4 +1,5 @@
 from typing import Any, Iterator, Self
+
 from sympy.core.basic import Basic
 from sympy.core.power import Pow
 from sympy.geometry.entity import GeometryEntity

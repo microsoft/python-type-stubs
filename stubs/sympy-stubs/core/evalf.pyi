@@ -1,18 +1,31 @@
-from typing import Any, Callable, Dict as tDict, List, Optional, TYPE_CHECKING, Self, Tuple as tTuple, Type, Union as tUnion, overload
+from typing import (
+    TYPE_CHECKING,
+    Any,
+    Callable,
+    Dict as tDict,
+    List,
+    Optional,
+    Self,
+    Tuple as tTuple,
+    Type,
+    Union as tUnion,
+    overload,
+)
+
 from mpmath import mpc, mpf
-from sympy.core.expr import Expr
+from sympy.concrete.products import Product
+from sympy.concrete.summations import Sum
 from sympy.core.add import Add
+from sympy.core.expr import Expr
 from sympy.core.mul import Mul
+from sympy.core.numbers import AlgebraicNumber, Float, Integer, Number, Rational
 from sympy.core.power import Pow
 from sympy.core.symbol import Symbol
-from sympy.integrals.integrals import Integral
-from sympy.concrete.summations import Sum
-from sympy.concrete.products import Product
-from sympy.functions.elementary.exponential import exp, log
 from sympy.functions.elementary.complexes import Abs, im, re
+from sympy.functions.elementary.exponential import exp, log
 from sympy.functions.elementary.integers import ceiling, floor
 from sympy.functions.elementary.trigonometric import atan
-from sympy.core.numbers import AlgebraicNumber, Float, Integer, Number, Rational
+from sympy.integrals.integrals import Integral
 
 if TYPE_CHECKING:
     ...

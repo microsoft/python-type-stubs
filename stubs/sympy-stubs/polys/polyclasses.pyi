@@ -1,9 +1,10 @@
 from types import NotImplementedType
 from typing import Any, Callable, Literal, Never, Self
-from sympy.external.gmpy import GROUND_TYPES
+
 from sympy.core.sympify import CantSympify
-from sympy.polys.polyutils import PicklableWithSlots
+from sympy.external.gmpy import GROUND_TYPES
 from sympy.polys.domains import Domain
+from sympy.polys.polyutils import PicklableWithSlots
 
 class GenericPoly(PicklableWithSlots):
     def ground_to_ring(f):

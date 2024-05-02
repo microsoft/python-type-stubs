@@ -1,14 +1,14 @@
-from sympy.series.order import Order
-from sympy.series.limits import Limit, limit
-from sympy.series.gruntz import gruntz
-from sympy.series.series import series
+from sympy.core.singleton import S
 from sympy.series.approximants import approximants
+from sympy.series.formal import fps
+from sympy.series.fourier import fourier_series
+from sympy.series.gruntz import gruntz
+from sympy.series.limits import Limit, limit
+from sympy.series.limitseq import difference_delta, limit_seq
+from sympy.series.order import Order
 from sympy.series.residues import residue
 from sympy.series.sequences import SeqAdd, SeqFormula, SeqMul, SeqPer, sequence
-from sympy.series.fourier import fourier_series
-from sympy.series.formal import fps
-from sympy.series.limitseq import difference_delta, limit_seq
-from sympy.core.singleton import S
+from sympy.series.series import series
 
 EmptySequence = ...
 O = Order

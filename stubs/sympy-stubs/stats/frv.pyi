@@ -1,4 +1,5 @@
 from typing import Any, Dict, Generator, Literal, Self
+
 from sympy import Basic, Equality, FiniteSet, Ne, Piecewise, Sum
 from sympy.core.cache import cacheit
 from sympy.core.function import Lambda
@@ -7,7 +8,17 @@ from sympy.core.relational import Relational
 from sympy.series.order import Order
 from sympy.stats.crv import ProductContinuousDomain
 from sympy.stats.drv import ProductDiscreteDomain
-from sympy.stats.rv import ConditionalDomain, Density, Distribution, IndependentProductPSpace, NamedArgsMixin, PSpace, ProductDomain, RandomDomain, SinglePSpace
+from sympy.stats.rv import (
+    ConditionalDomain,
+    Density,
+    Distribution,
+    IndependentProductPSpace,
+    NamedArgsMixin,
+    ProductDomain,
+    PSpace,
+    RandomDomain,
+    SinglePSpace,
+)
 
 class FiniteDensity(dict):
     def __call__(self, item) -> Literal[0]:

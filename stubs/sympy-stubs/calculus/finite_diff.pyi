@@ -1,7 +1,6 @@
 
 from typing import Literal
 
-
 def finite_diff_weights(order, x_list, x0=...) -> list[list[list[int]]]:
     ...
 

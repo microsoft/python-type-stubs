@@ -1,4 +1,5 @@
 from typing import Any, Literal, LiteralString, Self
+
 from sympy.core import Basic
 from sympy.core.function import UndefinedFunction
 from sympy.sets.sets import FiniteSet

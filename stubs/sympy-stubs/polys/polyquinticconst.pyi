@@ -1,4 +1,5 @@
 from typing import Any
+
 from sympy.utilities import public
 
 x = ...

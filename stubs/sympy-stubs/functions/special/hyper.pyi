@@ -1,7 +1,8 @@
 from typing import Self
+
 from sympy.core.basic import Basic
-from sympy.core.function import Derivative, Function, UndefinedFunction
 from sympy.core.containers import Tuple
+from sympy.core.function import Derivative, Function, UndefinedFunction
 from sympy.core.logic import Or
 
 class TupleArg(Tuple):

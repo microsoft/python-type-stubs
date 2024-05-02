@@ -1,4 +1,5 @@
 from typing import Any, Callable, Generator
+
 from sympy import Basic
 from sympy.unify.core import Compound, CondVariable, Variable
 

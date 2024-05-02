@@ -1,9 +1,10 @@
 from typing import Any, Self
+
+from sympy import MatrixBase
+from sympy.matrices.common import MatrixKind
 from sympy.matrices.dense import MutableDenseMatrix
 from sympy.matrices.expressions.matexpr import MatrixElement
 from sympy.polys.matrices import DomainMatrix
-from sympy import MatrixBase
-from sympy.matrices.common import MatrixKind
 
 class RepMatrix(MatrixBase):
     _rep: DomainMatrix

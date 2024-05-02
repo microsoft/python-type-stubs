@@ -1,4 +1,5 @@
 from typing import Any, Literal
+
 from sympy.external.gmpy import GROUND_TYPES
 
 def dup_trial_division(f, factors, K) -> list[Any]:

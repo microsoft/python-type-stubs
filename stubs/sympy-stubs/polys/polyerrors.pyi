@@ -1,4 +1,5 @@
 from typing import Self
+
 from sympy.utilities import public
 
 @public

@@ -1,5 +1,6 @@
 from functools import _Wrapped
 from typing import Any, Callable
+
 from numpy import floating, ndarray as NDArray
 from sympy.core.basic import Basic
 from sympy.core.cache import cacheit

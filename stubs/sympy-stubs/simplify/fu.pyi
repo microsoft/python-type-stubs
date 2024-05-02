@@ -1,4 +1,5 @@
 from typing import Any, Callable, Literal
+
 from sympy import SYMPY_DEBUG
 from sympy.series.order import Order
 

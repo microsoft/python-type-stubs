@@ -1,5 +1,6 @@
 from types import NotImplementedType
 from typing import Literal, Self
+
 from sympy.core import Basic
 
 class OmegaPower(Basic):

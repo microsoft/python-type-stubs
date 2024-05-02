@@ -1,4 +1,5 @@
 from typing import Any, Generator, Literal, LiteralString
+
 from sympy import Function
 from sympy.core.function import UndefinedFunction
 from sympy.core.numbers import Integer

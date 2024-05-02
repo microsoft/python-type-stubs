@@ -1,4 +1,5 @@
 from typing import Any, Literal, Self, Tuple as tTuple
+
 from sympy.core.basic import Basic
 from sympy.core.expr import Expr
 from sympy.core.function import Function, UndefinedFunction

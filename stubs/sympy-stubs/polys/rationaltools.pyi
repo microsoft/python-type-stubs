@@ -1,4 +1,5 @@
 from typing import Dict
+
 from sympy.core.add import Add
 from sympy.core.basic import Basic
 from sympy.core.mul import Mul

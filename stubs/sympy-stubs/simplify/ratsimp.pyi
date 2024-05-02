@@ -1,4 +1,5 @@
 from typing import Any
+
 def ratsimp(expr) -> Any:
     ...
 

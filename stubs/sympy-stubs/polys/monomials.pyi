@@ -1,4 +1,5 @@
 from typing import Any, Generator, Iterator, Self
+
 from sympy.polys.polyutils import PicklableWithSlots
 from sympy.series.order import Order
 from sympy.utilities import public

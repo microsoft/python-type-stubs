@@ -1,4 +1,5 @@
 from typing import Any, Literal
+
 from sympy.polys.polymatrix import PolyMatrix
 
 def order_at(a, p, t) -> Literal[0]:

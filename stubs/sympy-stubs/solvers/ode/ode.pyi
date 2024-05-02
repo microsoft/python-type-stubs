@@ -1,4 +1,5 @@
 from typing import Any, Generator, Literal, NoReturn, Tuple
+
 from sympy.core.add import Add
 from sympy.core.basic import Basic
 from sympy.core.multidimensional import vectorize

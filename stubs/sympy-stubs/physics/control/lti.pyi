@@ -1,5 +1,6 @@
 from types import NotImplementedType
 from typing import Any, Callable, Self, Type
+
 from sympy.core.basic import Basic
 from sympy.core.evalf import EvalfMixin
 from sympy.core.power import Pow

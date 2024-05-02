@@ -1,10 +1,11 @@
+from typing import Any, Literal, Self, Tuple
+
 from sympy.core.basic import Atom, Basic
 from sympy.core.cache import cacheit
 from sympy.core.expr import AtomicExpr
 from sympy.core.function import FunctionClass, UndefinedFunction
 from sympy.core.kind import _NumberKind, _UndefinedKind
 from sympy.logic.boolalg import Boolean
-from typing import Any, Literal, Self, Tuple
 
 class Str(Atom):
     __slots__ = ...

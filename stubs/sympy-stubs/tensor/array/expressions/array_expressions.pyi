@@ -1,6 +1,7 @@
-from ctypes import Array
 import typing
+from ctypes import Array
 from typing import Any, Generator, List, Optional, Self, Tuple as tTuple
+
 from sympy import ImmutableSparseNDimArray, NDimArray
 from sympy.core.basic import Basic
 from sympy.core.containers import Tuple

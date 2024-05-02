@@ -1,5 +1,21 @@
 from functools import singledispatch
-from sympy.stats.crv_types import BetaDistribution, ChiSquaredDistribution, ExponentialDistribution, FDistributionDistribution, GammaDistribution, GumbelDistribution, LaplaceDistribution, LogNormalDistribution, LogisticDistribution, NormalDistribution, ParetoDistribution, RayleighDistribution, TriangularDistribution, UniformDistribution
+
+from sympy.stats.crv_types import (
+    BetaDistribution,
+    ChiSquaredDistribution,
+    ExponentialDistribution,
+    FDistributionDistribution,
+    GammaDistribution,
+    GumbelDistribution,
+    LaplaceDistribution,
+    LogisticDistribution,
+    LogNormalDistribution,
+    NormalDistribution,
+    ParetoDistribution,
+    RayleighDistribution,
+    TriangularDistribution,
+    UniformDistribution,
+)
 from sympy.stats.drv_types import GeometricDistribution, PoissonDistribution, ZetaDistribution
 from sympy.stats.frv_types import BinomialDistribution, HypergeometricDistribution
 

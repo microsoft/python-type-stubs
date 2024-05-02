@@ -1,4 +1,5 @@
 from typing import Any
+
 from sympy.core import Basic, Expr, Float
 from sympy.printing.codeprinter import CodePrinter
 

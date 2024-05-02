@@ -1,8 +1,8 @@
 from sympy.core.basic import Basic
-from sympy.sets.sets import Complement, EmptySet, Set
 from sympy.core.function import FunctionClass, Lambda
 from sympy.sets import FiniteSet, Intersection, Interval, Range, Union
 from sympy.sets.fancysets import ImageSet, Integers, Naturals, Reals
+from sympy.sets.sets import Complement, EmptySet, Set
 
 FunctionUnion = ...
 _set_function = ...

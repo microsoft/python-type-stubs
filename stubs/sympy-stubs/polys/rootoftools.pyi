@@ -1,4 +1,5 @@
 from typing import Any, Literal, Self
+
 from sympy.core import Expr
 from sympy.core.numbers import Integer
 from sympy.series.order import Order

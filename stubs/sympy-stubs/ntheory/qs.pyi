@@ -1,4 +1,5 @@
 from typing import Any, Literal
+
 rgen = ...
 class SievePolynomial:
     def __init__(self, modified_coeff=..., a=..., b=...) -> None:

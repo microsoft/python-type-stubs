@@ -1,4 +1,5 @@
 from typing import Any, Self
+
 from sympy.core.logic import And
 
 class Literal:

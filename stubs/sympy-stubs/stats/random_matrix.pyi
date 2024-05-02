@@ -1,4 +1,5 @@
 from typing import Self
+
 from sympy import Basic
 from sympy.stats.rv import PSpace
 

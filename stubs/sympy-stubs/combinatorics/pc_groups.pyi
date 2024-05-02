@@ -1,4 +1,5 @@
 from typing import Any, Literal
+
 from sympy.printing.defaults import DefaultPrinting
 
 class PolycyclicGroup(DefaultPrinting):

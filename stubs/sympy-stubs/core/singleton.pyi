@@ -1,4 +1,5 @@
 from typing import Literal
+
 from sympy.core.core import Registry
 
 class SingletonRegistry(Registry):

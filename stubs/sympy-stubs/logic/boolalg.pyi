@@ -1,4 +1,5 @@
 from typing import Any, Generator, Literal, Self
+
 from sympy.core.basic import Basic
 from sympy.core.cache import cacheit
 from sympy.core.decorators import sympify_method_args, sympify_return

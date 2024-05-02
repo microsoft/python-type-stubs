@@ -1,4 +1,5 @@
 from typing import Any
+
 from sympy.assumptions.relation.binrel import BinaryRelation
 
 __all__ = ['EqualityPredicate', 'UnequalityPredicate', 'StrictGreaterThanPredicate', 'GreaterThanPredicate', 'StrictLessThanPredicate', 'LessThanPredicate']

@@ -1,4 +1,5 @@
-from typing import Any, Callable, TYPE_CHECKING
+from typing import TYPE_CHECKING, Any, Callable
+
 from sympy.printing.printer import Printer, print_function
 
 if TYPE_CHECKING:

@@ -1,4 +1,5 @@
 from typing import Any, Self
+
 from sympy.core import Basic, Symbol
 from sympy.sets import Set
 

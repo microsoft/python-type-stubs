@@ -1,9 +1,10 @@
 from typing import Literal, Self
+
 from sympy.assumptions import AppliedPredicate
+from sympy.assumptions.predicates.common import CommutativePredicate, IsTruePredicate
 from sympy.core import Basic, Symbol
 from sympy.core.numbers import NaN, Number
 from sympy.logic.boolalg import And, BooleanFalse, BooleanTrue, Equivalent, Implies, Not, Or
-from sympy.assumptions.predicates.common import CommutativePredicate, IsTruePredicate
 
 class AskHandler:
     def __new__(cls, *args, **kwargs) -> Self:

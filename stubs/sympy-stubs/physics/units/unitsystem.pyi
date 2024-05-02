@@ -1,9 +1,9 @@
 from typing import Dict as tDict, Set as tSet
+
 from sympy.core.expr import Expr
 from sympy.core.function import UndefinedFunction
-from sympy.physics.units.dimensions import _QuantityMapper
+from sympy.physics.units.dimensions import Dimension, _QuantityMapper
 from sympy.physics.units.quantities import Quantity
-from sympy.physics.units.dimensions import Dimension
 from sympy.series.order import Order
 
 class UnitSystem(_QuantityMapper):

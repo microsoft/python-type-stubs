@@ -1,10 +1,71 @@
 from sympy.matrices.common import MatrixKind, NonSquareMatrixError, ShapeError
-from sympy.matrices.dense import GramSchmidt, MutableDenseMatrix, casoratian, diag, eye, hessian, jordan_cell, list2numpy, matrix2numpy, matrix_multiply_elementwise, ones, randMatrix, rot_axis1, rot_axis2, rot_axis3, rot_ccw_axis1, rot_ccw_axis2, rot_ccw_axis3, rot_givens, symarray, wronskian, zeros
+from sympy.matrices.dense import (
+    GramSchmidt,
+    MutableDenseMatrix,
+    casoratian,
+    diag,
+    eye,
+    hessian,
+    jordan_cell,
+    list2numpy,
+    matrix2numpy,
+    matrix_multiply_elementwise,
+    ones,
+    randMatrix,
+    rot_axis1,
+    rot_axis2,
+    rot_axis3,
+    rot_ccw_axis1,
+    rot_ccw_axis2,
+    rot_ccw_axis3,
+    rot_givens,
+    symarray,
+    wronskian,
+    zeros,
+)
+from sympy.matrices.expressions import (
+    Adjoint,
+    BlockDiagMatrix,
+    BlockMatrix,
+    Determinant,
+    DiagMatrix,
+    DiagonalMatrix,
+    DiagonalOf,
+    DotProduct,
+    FunctionMatrix,
+    HadamardPower,
+    HadamardProduct,
+    Identity,
+    Inverse,
+    KroneckerProduct,
+    MatAdd,
+    MatMul,
+    MatPow,
+    MatrixExpr,
+    MatrixPermute,
+    MatrixSet,
+    MatrixSlice,
+    MatrixSymbol,
+    OneMatrix,
+    Permanent,
+    PermutationMatrix,
+    Trace,
+    Transpose,
+    ZeroMatrix,
+    block_collapse,
+    blockcut,
+    det,
+    diagonalize_vector,
+    hadamard_product,
+    kronecker_product,
+    matrix_symbols,
+    per,
+    trace,
+)
+from sympy.matrices.immutable import ImmutableDenseMatrix, ImmutableSparseMatrix
 from sympy.matrices.matrices import DeferredVector, MatrixBase
 from sympy.matrices.sparse import MutableSparseMatrix
 from sympy.matrices.sparsetools import banded
-from sympy.matrices.immutable import ImmutableDenseMatrix, ImmutableSparseMatrix
-from sympy.matrices.expressions import Adjoint, BlockDiagMatrix, BlockMatrix, Determinant, DiagMatrix, DiagonalMatrix, DiagonalOf, DotProduct, FunctionMatrix, HadamardPower, HadamardProduct, Identity, Inverse, KroneckerProduct, MatAdd, MatMul, MatPow, MatrixExpr, MatrixPermute, MatrixSet, MatrixSlice, MatrixSymbol, OneMatrix, Permanent, PermutationMatrix, Trace, Transpose, ZeroMatrix, block_collapse, blockcut, det, diagonalize_vector, hadamard_product, kronecker_product, matrix_symbols, per, trace
 from sympy.matrices.utilities import dotprodsimp
 
 MutableMatrix = MutableDenseMatrix

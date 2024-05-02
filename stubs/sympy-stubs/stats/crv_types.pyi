@@ -1,4 +1,5 @@
 from typing import Any, Self
+
 from sympy import Equality, FiniteSet, Integral, Interval, Ne, Piecewise, Sum
 from sympy.core.basic import Basic
 from sympy.core.relational import Relational

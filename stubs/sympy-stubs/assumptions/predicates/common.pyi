@@ -1,4 +1,5 @@
 from typing import Any
+
 from sympy.assumptions import Predicate
 from sympy.assumptions.assume import AppliedPredicate
 

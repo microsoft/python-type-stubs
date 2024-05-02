@@ -1,4 +1,5 @@
 from typing import Any
+
 class RewritingSystem:
     def __init__(self, group) -> None:
         ...

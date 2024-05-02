@@ -1,4 +1,5 @@
 from typing import Any
+
 from sympy.core.basic import Basic
 from sympy.matrices import Matrix
 from sympy.sets.conditionset import ConditionSet

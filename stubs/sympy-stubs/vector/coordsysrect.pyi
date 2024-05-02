@@ -1,4 +1,5 @@
 from typing import Any, Callable
+
 from sympy.core.basic import Basic
 from sympy.core.cache import cacheit
 

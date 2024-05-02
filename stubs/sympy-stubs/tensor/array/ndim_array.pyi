@@ -1,5 +1,6 @@
 from types import NotImplementedType
 from typing import Any, Generator, Self
+
 from sympy import ImmutableDenseNDimArray, ImmutableSparseNDimArray
 from sympy.core.basic import Basic
 from sympy.core.function import UndefinedFunction

@@ -1,5 +1,6 @@
 from types import NotImplementedType
 from typing import Any
+
 from sympy.matrices.immutable import ImmutableSparseMatrix
 from sympy.matrices.repmatrix import MutableRepMatrix, RepMatrix
 

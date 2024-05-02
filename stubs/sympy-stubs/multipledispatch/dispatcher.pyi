@@ -1,6 +1,7 @@
 from inspect import Parameter
 from itertools import islice
 from typing import Any, Callable, Generator, LiteralString, Self, ValuesView
+
 class MDNotImplementedError(NotImplementedError):
     ...
 

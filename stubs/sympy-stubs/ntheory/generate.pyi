@@ -1,5 +1,6 @@
 from array import array
 from typing import Any, Generator, Literal
+
 from sympy import Function
 from sympy.core.function import UndefinedFunction
 from sympy.utilities.decorator import deprecated

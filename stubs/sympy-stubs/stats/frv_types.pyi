@@ -1,4 +1,5 @@
 from typing import Any
+
 from sympy import Basic, FiniteSet, Intersection, Piecewise
 from sympy.core.cache import cacheit
 from sympy.core.function import Lambda

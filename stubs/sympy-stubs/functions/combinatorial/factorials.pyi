@@ -1,4 +1,5 @@
 from typing import Any
+
 from sympy.core.function import Function, UndefinedFunction
 from sympy.core.numbers import Integer
 from sympy.series.order import Order

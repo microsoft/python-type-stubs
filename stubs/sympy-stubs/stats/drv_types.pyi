@@ -1,4 +1,5 @@
 from typing import Self
+
 from sympy import Basic
 from sympy.stats.drv import SingleDiscreteDistribution
 from sympy.stats.rv import RandomSymbol

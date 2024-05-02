@@ -1,4 +1,5 @@
 from typing import Any
+
 from sympy.core.numbers import Integer, Rational
 
 def convolution(a, b, cycle=..., dps=..., prime=..., dyadic=..., subset=...) -> list[int] | list[Any | int] | Any | list[Any]:

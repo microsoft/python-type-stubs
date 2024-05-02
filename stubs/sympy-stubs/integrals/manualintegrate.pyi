@@ -1,6 +1,7 @@
-from typing import Any, Callable, NamedTuple, Sequence, Type
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
+from typing import Any, Callable, NamedTuple, Sequence, Type
+
 from sympy.core.cache import cacheit
 from sympy.core.expr import Expr
 from sympy.core.function import Derivative, UndefinedFunction

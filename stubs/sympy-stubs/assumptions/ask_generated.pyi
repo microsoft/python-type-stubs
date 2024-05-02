@@ -1,4 +1,5 @@
 from typing import Any
+
 from sympy.assumptions.cnf import AND, OR, Literal
 from sympy.core.cache import cacheit
 

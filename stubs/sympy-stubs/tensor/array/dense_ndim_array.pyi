@@ -1,4 +1,5 @@
 from typing import List, Self
+
 from sympy import Indexed
 from sympy.core.basic import Basic
 from sympy.matrices import Matrix

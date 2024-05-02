@@ -1,4 +1,5 @@
 from typing import Any, Literal, Self
+
 from sympy.core.basic import Basic
 from sympy.geometry.entity import GeometrySet
 from sympy.geometry.point import Point, Point2D, Point3D

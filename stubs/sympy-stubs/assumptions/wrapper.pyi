@@ -1,4 +1,5 @@
 from typing import Callable, Self
+
 from sympy.core.basic import Basic
 
 def make_eval_method(fact) -> Callable[..., bool | None]:

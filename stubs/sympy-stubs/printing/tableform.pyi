@@ -1,4 +1,5 @@
 from sympy.matrices import Matrix
+
 class TableForm:
     def __init__(self, data, **kwarg) -> None:
         ...

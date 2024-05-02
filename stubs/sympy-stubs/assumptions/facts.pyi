@@ -1,4 +1,5 @@
 from typing import Any
+
 from sympy.core.cache import cacheit
 from sympy.core.logic import And
 

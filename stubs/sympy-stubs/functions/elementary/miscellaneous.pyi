@@ -1,8 +1,9 @@
 from typing import Self, Tuple
+
 from sympy.core import Function
-from sympy.core.operations import LatticeOp
-from sympy.core.function import Application, Lambda
 from sympy.core.expr import Expr
+from sympy.core.function import Application, Lambda
+from sympy.core.operations import LatticeOp
 from sympy.core.power import Pow
 from sympy.core.singleton import Singleton
 from sympy.core.symbol import Dummy

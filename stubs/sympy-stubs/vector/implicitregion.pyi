@@ -1,4 +1,5 @@
 from typing import Any, Self
+
 from sympy import Complement, ConditionSet, FiniteSet, Intersection
 from sympy.core import Basic
 from sympy.sets.sets import Set, Union

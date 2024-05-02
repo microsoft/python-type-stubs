@@ -1,5 +1,6 @@
 from itertools import combinations
 from typing import Any, Self
+
 class Subset:
     _rank_binary = ...
     _rank_lex = ...

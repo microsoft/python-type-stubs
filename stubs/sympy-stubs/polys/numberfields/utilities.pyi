@@ -1,4 +1,5 @@
 from typing import Any, Generator, Literal, NoReturn
+
 from sympy.utilities.decorator import public
 
 def is_rat(c) -> Any | Literal[True]:

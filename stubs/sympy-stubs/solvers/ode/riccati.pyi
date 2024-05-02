@@ -1,4 +1,5 @@
 from typing import Any, Literal
+
 from sympy.core.relational import Eq, Ne, Relational
 
 def riccati_normal(w, x, b1, b2):

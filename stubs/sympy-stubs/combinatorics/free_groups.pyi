@@ -1,5 +1,6 @@
 from types import NotImplementedType
 from typing import Any, Literal, Self
+
 from sympy.core.expr import Expr
 from sympy.core.sympify import CantSympify
 from sympy.printing.defaults import DefaultPrinting

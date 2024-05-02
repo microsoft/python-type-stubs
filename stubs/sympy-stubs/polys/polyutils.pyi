@@ -1,5 +1,6 @@
 from types import NotImplementedType
 from typing import Any, Self
+
 from sympy.external.gmpy import GROUND_TYPES
 from sympy.series.order import Order
 

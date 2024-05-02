@@ -1,4 +1,5 @@
 from typing import Literal
+
 def pprint_nodes(subtrees) -> Literal['']:
     ...
 

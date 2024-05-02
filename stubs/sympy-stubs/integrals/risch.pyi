@@ -1,4 +1,5 @@
 from typing import Any, Literal
+
 from sympy.core.relational import Equality, Ne, Relational
 from sympy.integrals.integrals import Integral
 

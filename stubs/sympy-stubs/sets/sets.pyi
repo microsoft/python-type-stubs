@@ -1,10 +1,11 @@
 from types import NotImplementedType
 from typing import Any, Callable, Generator, Iterator, Literal, Self
-from sympy.core.kind import Kind
+
 from sympy.core.basic import Basic
 from sympy.core.decorators import sympify_method_args, sympify_return
 from sympy.core.evalf import EvalfMixin
 from sympy.core.expr import Expr
+from sympy.core.kind import Kind
 from sympy.core.logic import And, FuzzyBool, Not, Or
 from sympy.core.operations import LatticeOp
 from sympy.core.singleton import Singleton

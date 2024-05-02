@@ -1,6 +1,16 @@
 from typing import Any
+
+from sympy.sets.fancysets import (
+    CartesianComplexRegion,
+    ComplexRegion,
+    Integers,
+    Naturals,
+    Naturals0,
+    PolarComplexRegion,
+    Rationals,
+    Reals,
+)
 from sympy.sets.sets import EmptySet, FiniteSet, Interval, ProductSet, Set, UniversalSet
-from sympy.sets.fancysets import CartesianComplexRegion, ComplexRegion, Integers, Naturals, Naturals0, PolarComplexRegion, Rationals, Reals
 
 union_sets = ...
 @union_sets.register(Naturals0, Naturals)

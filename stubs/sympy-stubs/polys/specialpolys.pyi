@@ -1,4 +1,5 @@
 from typing import Any
+
 from sympy.series.order import Order
 from sympy.utilities import public
 

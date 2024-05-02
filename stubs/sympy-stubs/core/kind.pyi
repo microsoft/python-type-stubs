@@ -1,4 +1,5 @@
 from typing import Callable, Literal, LiteralString, Self
+
 from sympy.core.cache import cacheit
 
 class KindMeta(type):

@@ -1,4 +1,5 @@
 from typing import Any
+
 from sympy.printing.printer import Printer, print_function
 
 class StrPrinter(Printer):

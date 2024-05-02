@@ -1,5 +1,6 @@
 from types import NotImplementedType
 from typing import Any, Self
+
 class MutablePolyDenseMatrix:
     def __new__(cls, *args, ring=...) -> Self:
         ...

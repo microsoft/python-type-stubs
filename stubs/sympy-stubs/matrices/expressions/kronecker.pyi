@@ -1,5 +1,6 @@
 from types import NotImplementedType
 from typing import Any, Self
+
 from sympy.matrices.expressions.matadd import MatAdd
 from sympy.matrices.expressions.matexpr import MatrixExpr
 from sympy.matrices.expressions.special import GenericIdentity, GenericZeroMatrix, Identity

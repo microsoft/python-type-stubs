@@ -1,4 +1,5 @@
 from typing import Any, Generator, Literal, Self
+
 from sympy.combinatorics.fp_groups import FpGroup
 from sympy.combinatorics.pc_groups import PolycyclicGroup
 from sympy.combinatorics.permutations import Permutation

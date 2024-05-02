@@ -1,5 +1,6 @@
 from types import NotImplementedType
 from typing import Any, Self
+
 from sympy.polys.matrices.ddm import DDM
 from sympy.utilities.decorator import doctest_depends_on
 

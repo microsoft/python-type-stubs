@@ -1,4 +1,5 @@
 from typing import Any, Literal, Self
+
 from sympy import Equality, Integral, Ne
 from sympy.core.basic import Basic
 from sympy.core.function import Lambda

@@ -1,4 +1,5 @@
 from typing import Any, Callable, Generator, Literal, NoReturn, Self
+
 from sympy.core.basic import Basic
 from sympy.core.symbol import Symbol
 from sympy.polys.domains.gaussiandomains import GaussianIntegerRing, GaussianRationalField

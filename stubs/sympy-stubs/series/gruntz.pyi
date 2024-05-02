@@ -1,4 +1,5 @@
 from typing import Any, Literal
+
 from sympy.core.basic import Basic
 from sympy.core.cache import cacheit
 from sympy.core.function import UndefinedFunction

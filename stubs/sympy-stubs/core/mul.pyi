@@ -1,9 +1,10 @@
 from collections import defaultdict
 from typing import Any, Literal, Self, Tuple as tTuple
-from sympy.core.kind import _UndefinedKind, Kind
-from sympy.core.operations import AssocOp
+
 from sympy.core.cache import cacheit
 from sympy.core.expr import Expr
+from sympy.core.kind import Kind, _UndefinedKind
+from sympy.core.operations import AssocOp
 
 class NC_Marker:
     is_Order = ...

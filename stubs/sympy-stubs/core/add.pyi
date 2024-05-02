@@ -1,10 +1,11 @@
 from typing import Any, Literal, Self, Tuple as tTuple
+
+from sympy.core.cache import cacheit
+from sympy.core.expr import Expr
 from sympy.core.kind import _UndefinedKind
 from sympy.core.mul import Mul
 from sympy.core.numbers import Integer, Rational
 from sympy.core.operations import AssocOp
-from sympy.core.cache import cacheit
-from sympy.core.expr import Expr
 from sympy.series.order import Order
 
 _args_sortkey = ...

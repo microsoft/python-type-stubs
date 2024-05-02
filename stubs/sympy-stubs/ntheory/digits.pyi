@@ -1,5 +1,6 @@
 from collections import defaultdict
 from typing import Any
+
 def digits(n, b=..., digits=...) -> list[Any]:
     ...
 

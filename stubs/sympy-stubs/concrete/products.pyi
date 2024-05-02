@@ -1,4 +1,5 @@
 from typing import Any, Self, Tuple as tTuple
+
 from sympy.concrete.expr_with_intlimits import ExprWithIntLimits
 from sympy.core.basic import Basic
 from sympy.core.expr import Expr

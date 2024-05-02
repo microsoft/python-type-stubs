@@ -1,4 +1,5 @@
 from typing import Any, Self
+
 from sympy.holonomic.recurrence import HolonomicSequence
 
 def DifferentialOperators(base, generator) -> tuple[DifferentialOperatorAlgebra, DifferentialOperator]:

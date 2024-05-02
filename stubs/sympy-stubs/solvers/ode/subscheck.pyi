@@ -1,4 +1,5 @@
 from typing import Any, Literal
+
 def sub_func_doit(eq, func, new):
     ...
 

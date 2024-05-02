@@ -1,6 +1,7 @@
 from itertools import chain
 from types import NotImplementedType
 from typing import Any, Self
+
 from sympy.polys.matrices.sdm import SDM
 from sympy.utilities.decorator import doctest_depends_on
 

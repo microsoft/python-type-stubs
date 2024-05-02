@@ -1,4 +1,5 @@
 from typing import Any, Callable
+
 from sympy import MatrixBase
 from sympy.core.basic import Basic
 from sympy.core.expr import Expr

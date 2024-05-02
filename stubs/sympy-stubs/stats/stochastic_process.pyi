@@ -1,4 +1,5 @@
 from typing import Self
+
 from sympy import Basic
 from sympy.stats.crv import ProductContinuousDomain
 from sympy.stats.drv import ProductDiscreteDomain

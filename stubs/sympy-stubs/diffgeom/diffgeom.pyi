@@ -1,4 +1,5 @@
 from typing import Any, Literal, Self
+
 from sympy.core import Basic, Expr
 from sympy.core.function import Lambda
 from sympy.core.symbol import Symbol

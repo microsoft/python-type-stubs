@@ -1,4 +1,5 @@
 from typing import Any, Callable
+
 def subs(d, **kwargs) -> Callable[[Any], Any] | Callable[..., Any]:
     ...
 

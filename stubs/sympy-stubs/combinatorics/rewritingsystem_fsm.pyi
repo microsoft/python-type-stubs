@@ -1,4 +1,5 @@
 from typing import LiteralString
+
 class State:
     def __init__(self, name, state_machine, state_type=..., rh_rule=...) -> None:
         ...

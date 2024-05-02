@@ -1,4 +1,5 @@
 from typing import Callable
+
 from sympy.core import Expr
 from sympy.core.basic import Basic
 from sympy.core.function import UndefinedFunction

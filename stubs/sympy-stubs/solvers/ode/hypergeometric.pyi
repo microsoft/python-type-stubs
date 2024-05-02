@@ -1,5 +1,7 @@
 from typing import Any, Literal
+
 from sympy.core.relational import Eq, Ne, Relational
+
 def match_2nd_hypergeometric(eq, func) -> list[Any]:
     ...
 

@@ -1,4 +1,5 @@
 from typing import Any, Self, Tuple
+
 from sympy import Basic, MatrixBase, NDimArray
 from sympy.core import Expr
 from sympy.utilities.iterables import NotIterable

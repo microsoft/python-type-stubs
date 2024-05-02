@@ -1,4 +1,5 @@
 from typing import Any, Literal, Self
+
 from sympy import ImmutableDenseNDimArray
 from sympy.core import Basic
 from sympy.matrices import Matrix

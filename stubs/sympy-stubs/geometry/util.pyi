@@ -1,5 +1,6 @@
 from ast import Add
 from typing import Any, Literal
+
 from sympy.core.basic import Basic
 from sympy.core.mul import Mul
 from sympy.geometry.line import Segment, Segment2D, Segment3D

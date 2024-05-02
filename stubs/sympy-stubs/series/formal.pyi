@@ -1,4 +1,5 @@
 from typing import Any, Generator, Self
+
 from sympy.core.basic import Basic
 from sympy.core.function import Function, UndefinedFunction
 from sympy.core.numbers import Float, Integer, Rational

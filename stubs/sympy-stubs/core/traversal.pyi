@@ -1,5 +1,7 @@
 from typing import Any, Generator, Self
+
 from sympy.core.basic import Basic
+
 def iterargs(expr) -> Generator[Any, Any, None]:
     ...
 

@@ -1,4 +1,5 @@
 from typing import Any, Generator, Iterator, NoReturn, Self
+
 from sympy.core.basic import Basic
 from sympy.core.cache import cacheit
 from sympy.core.decorators import call_highest_priority

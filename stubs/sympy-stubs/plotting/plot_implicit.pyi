@@ -1,4 +1,5 @@
 from typing import Any, Literal
+
 from sympy.plotting.plot import BaseSeries, Plot
 from sympy.utilities.decorator import doctest_depends_on
 

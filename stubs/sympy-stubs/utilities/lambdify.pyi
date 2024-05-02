@@ -1,4 +1,5 @@
 from typing import Any
+
 from sympy.core.function import UndefinedFunction
 from sympy.utilities.decorator import doctest_depends_on
 

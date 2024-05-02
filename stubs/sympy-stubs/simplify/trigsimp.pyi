@@ -1,6 +1,8 @@
 from typing import Any
+
 from sympy.core.basic import Basic
 from sympy.series.order import Order
+
 def trigsimp_groebner(expr, hints=..., quick=..., order=..., polynomial=...) -> Order | Any:
     ...
 

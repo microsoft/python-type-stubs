@@ -1,7 +1,7 @@
 from typing import Any
+
 from sympy import Union
 from sympy.sets.sets import FiniteSet, Set
-
 
 def continuous_domain(f, symbol, domain):
     ...

@@ -1,5 +1,6 @@
 from types import NotImplementedType
 from typing import Any
+
 from sympy.polys.agca.modules import FreeModuleQuotientRing
 from sympy.polys.domains.ring import Ring
 from sympy.utilities import public

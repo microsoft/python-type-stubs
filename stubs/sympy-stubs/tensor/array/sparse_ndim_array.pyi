@@ -1,4 +1,5 @@
 from typing import Any, Self
+
 from sympy import Indexed
 from sympy.matrices import SparseMatrix
 from sympy.tensor.array.mutable_ndim_array import MutableNDimArray

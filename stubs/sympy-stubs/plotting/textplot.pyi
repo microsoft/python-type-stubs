@@ -1,4 +1,5 @@
 from typing import Any, Generator
+
 def is_valid(x) -> bool:
     ...
 

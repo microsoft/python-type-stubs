@@ -1,6 +1,8 @@
 from typing import Any
+
 from sympy.polys.matrices.domainmatrix import DomainMatrix
 from sympy.polys.matrices.domainscalar import DomainScalar
+
 def smith_normal_form(m) -> DomainMatrix:
     ...
 

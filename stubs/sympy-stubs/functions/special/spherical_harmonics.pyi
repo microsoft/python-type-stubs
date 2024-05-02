@@ -1,4 +1,5 @@
 from typing import Any
+
 from sympy.core.function import Function, UndefinedFunction
 
 _x = ...

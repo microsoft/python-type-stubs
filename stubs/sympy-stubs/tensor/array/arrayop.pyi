@@ -1,8 +1,15 @@
 from typing import Any, Literal, Self
+
 from sympy import Basic, Derivative, ImmutableDenseNDimArray, ImmutableSparseNDimArray, NDimArray
 from sympy.core._print_helpers import Printable
 from sympy.tensor.array.array_derivatives import ArrayDerivative
-from sympy.tensor.array.expressions.array_expressions import ArrayContraction, ArrayDiagonal, ArrayTensorProduct, PermuteDims, ZeroArray
+from sympy.tensor.array.expressions.array_expressions import (
+    ArrayContraction,
+    ArrayDiagonal,
+    ArrayTensorProduct,
+    PermuteDims,
+    ZeroArray,
+)
 
 def tensorproduct(*args) -> NDimArray | ImmutableDenseNDimArray | ZeroArray | ArrayTensorProduct | ArrayContraction | Basic | PermuteDims | ImmutableSparseNDimArray:
     ...
