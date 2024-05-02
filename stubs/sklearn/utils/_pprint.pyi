@@ -1,5 +1,8 @@
-from typing import Any, Type
+import inspect
+import pprint
 from collections import OrderedDict as OrderedDict
+from typing import Any, Type
+
 from .._config import get_config as get_config
 from ..base import BaseEstimator as BaseEstimator
 from . import is_scalar_nan as is_scalar_nan
@@ -59,25 +62,16 @@ from . import is_scalar_nan as is_scalar_nan
 # 8. By copying, installing or otherwise using Python, Licensee agrees to be
 # bound by the terms and conditions of this License Agreement.
 
-
 # Brief summary of changes to original code:
 # - "compact" parameter is supported for dicts, not just lists or tuples
 # - estimators have a custom handler, they're not just treated as objects
 # - long sequences (lists, tuples, dict items) with more than N elements are
 #   shortened using ellipsis (', ...') at the end.
 
-import inspect
-import pprint
-
-
 class KeyValTuple(tuple):
-    def __repr__(self) -> str:
-        ...
+    def __repr__(self) -> str: ...
 
-
-class KeyValTupleParam(KeyValTuple):
-    ...
-
+class KeyValTupleParam(KeyValTuple): ...
 
 class _EstimatorPrettyPrinter(pprint.PrettyPrinter):
     def __init__(
@@ -90,13 +84,8 @@ class _EstimatorPrettyPrinter(pprint.PrettyPrinter):
         compact: bool = False,
         indent_at_name: bool = True,
         n_max_elements_to_show=None,
-    ) -> None:
-        ...
-
-    def format(
-        self, object, context: dict[Any, Any] | dict[int, int], maxlevels, level: int
-    ) -> tuple[str, bool, bool]:
-        ...
+    ) -> None: ...
+    def format(self, object, context: dict[Any, Any] | dict[int, int], maxlevels, level: int) -> tuple[str, bool, bool]: ...
 
     # Note: need to copy _dispatch to prevent instances of the builtin
     # PrettyPrinter class to call methods of _EstimatorPrettyPrinter (see issue

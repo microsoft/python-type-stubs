@@ -1,5 +1,11 @@
-from vispy.util.svg.color import Color
+import numpy as np
 from vispy.util.event import Event
+from vispy.util.svg.color import Color
+
+from ...color import Color
+from ...gloo import VertexBuffer
+from ...visuals import Visual
+from .widget import Widget
 
 # -*- coding: utf-8 -*-
 # -----------------------------------------------------------------------------
@@ -8,13 +14,6 @@ from vispy.util.event import Event
 # -----------------------------------------------------------------------------
 
 # Code translated from glumpy
-
-import numpy as np
-
-from .widget import Widget
-from ...visuals import Visual
-from ...gloo import VertexBuffer
-from ...color import Color
 
 # Translated from
 # http://www.piclist.com/tecHREF/datafile/charset/

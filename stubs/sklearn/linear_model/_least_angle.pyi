@@ -1,28 +1,21 @@
-from typing import ClassVar, Iterable, Literal, TypeVar
-from ..model_selection import BaseCrossValidator
-from numpy.random import RandomState
-from scipy import linalg as linalg, interpolate as interpolate
-from ._base import LinearModel, LinearRegression as LinearRegression
-from ..exceptions import ConvergenceWarning as ConvergenceWarning
-from ..utils._param_validation import (
-    Hidden as Hidden,
-    Interval as Interval,
-    StrOptions as StrOptions,
-)
-from numpy import ndarray
-from numbers import Integral as Integral, Real as Real
-from scipy.linalg.lapack import get_lapack_funcs as get_lapack_funcs
-from ..model_selection._split import BaseShuffleSplit
-from ..utils.parallel import delayed as delayed, Parallel as Parallel
 from math import log as log
-from ..base import RegressorMixin, MultiOutputMixin
-from ..model_selection import check_cv as check_cv
-from .._typing import MatrixLike, ArrayLike, Int, Float
-from ..utils import (
-    arrayfuncs as arrayfuncs,
-    as_float_array as as_float_array,
-    check_random_state as check_random_state,
-)
+from numbers import Integral as Integral, Real as Real
+from typing import ClassVar, Iterable, Literal, TypeVar
+
+from numpy import ndarray
+from numpy.random import RandomState
+from scipy import interpolate as interpolate, linalg as linalg
+from scipy.linalg.lapack import get_lapack_funcs as get_lapack_funcs
+
+from .._typing import ArrayLike, Float, Int, MatrixLike
+from ..base import MultiOutputMixin, RegressorMixin
+from ..exceptions import ConvergenceWarning as ConvergenceWarning
+from ..model_selection import BaseCrossValidator, check_cv as check_cv
+from ..model_selection._split import BaseShuffleSplit
+from ..utils import arrayfuncs as arrayfuncs, as_float_array as as_float_array, check_random_state as check_random_state
+from ..utils._param_validation import Hidden as Hidden, Interval as Interval, StrOptions as StrOptions
+from ..utils.parallel import Parallel as Parallel, delayed as delayed
+from ._base import LinearModel, LinearRegression as LinearRegression
 
 LassoLarsIC_Self = TypeVar("LassoLarsIC_Self", bound="LassoLarsIC")
 Lars_Self = TypeVar("Lars_Self", bound="Lars")
@@ -30,10 +23,10 @@ LarsCV_Self = TypeVar("LarsCV_Self", bound="LarsCV")
 
 import sys
 import warnings
+
 import numpy as np
 
 SOLVE_TRIANGULAR_ARGS: dict = ...
-
 
 def lars_path(
     X: None | MatrixLike,
@@ -51,10 +44,7 @@ def lars_path(
     return_path: bool = True,
     return_n_iter: bool = False,
     positive: bool = False,
-) -> tuple[ndarray, ndarray, ndarray, int]:
-    ...
-
-
+) -> tuple[ndarray, ndarray, ndarray, int]: ...
 def lars_path_gram(
     Xy: MatrixLike | ArrayLike,
     Gram: MatrixLike,
@@ -70,13 +60,10 @@ def lars_path_gram(
     return_path: bool = True,
     return_n_iter: bool = False,
     positive: bool = False,
-) -> tuple[ndarray, ndarray, ndarray, int]:
-    ...
-
+) -> tuple[ndarray, ndarray, ndarray, int]: ...
 
 ###############################################################################
 # Estimator classes
-
 
 class Lars(MultiOutputMixin, RegressorMixin, LinearModel):
     feature_names_in_: ndarray = ...
@@ -106,17 +93,13 @@ class Lars(MultiOutputMixin, RegressorMixin, LinearModel):
         fit_path: bool = True,
         jitter: None | Float = None,
         random_state: RandomState | None | Int = None,
-    ) -> None:
-        ...
-
+    ) -> None: ...
     def fit(
         self: Lars_Self,
         X: MatrixLike,
         y: MatrixLike | ArrayLike,
         Xy: None | MatrixLike | ArrayLike = None,
-    ) -> Lars_Self:
-        ...
-
+    ) -> Lars_Self: ...
 
 class LassoLars(Lars):
     feature_names_in_: ndarray = ...
@@ -147,9 +130,7 @@ class LassoLars(Lars):
         positive: bool = False,
         jitter: None | Float = None,
         random_state: RandomState | None | Int = None,
-    ) -> None:
-        ...
-
+    ) -> None: ...
 
 class LarsCV(Lars):
     feature_names_in_: ndarray = ...
@@ -184,12 +165,8 @@ class LarsCV(Lars):
         n_jobs: None | int = None,
         eps: Float = ...,
         copy_X: bool = True,
-    ) -> None:
-        ...
-
-    def fit(self: LarsCV_Self, X: MatrixLike, y: ArrayLike) -> LarsCV_Self:
-        ...
-
+    ) -> None: ...
+    def fit(self: LarsCV_Self, X: MatrixLike, y: ArrayLike) -> LarsCV_Self: ...
 
 class LassoLarsCV(LarsCV):
     feature_names_in_: ndarray = ...
@@ -222,9 +199,7 @@ class LassoLarsCV(LarsCV):
         eps: Float = ...,
         copy_X: bool = True,
         positive: bool = False,
-    ) -> None:
-        ...
-
+    ) -> None: ...
 
 class LassoLarsIC(LassoLars):
     feature_names_in_: ndarray = ...
@@ -255,10 +230,5 @@ class LassoLarsIC(LassoLars):
         copy_X: bool = True,
         positive: bool = False,
         noise_variance: None | Float = None,
-    ) -> None:
-        ...
-
-    def fit(
-        self: LassoLarsIC_Self, X: MatrixLike, y: ArrayLike, copy_X: None | bool = None
-    ) -> LassoLarsIC_Self:
-        ...
+    ) -> None: ...
+    def fit(self: LassoLarsIC_Self, X: MatrixLike, y: ArrayLike, copy_X: None | bool = None) -> LassoLarsIC_Self: ...

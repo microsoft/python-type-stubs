@@ -1,6 +1,7 @@
-from typing import Mapping
-from numpy.typing import ArrayLike
 from collections import defaultdict
+from typing import Mapping
+
+from numpy.typing import ArrayLike
 
 from ..classes.graph import Graph
 
@@ -26,7 +27,6 @@ class ConflictPair:
 def top_of_stack(l): ...
 
 class LRPlanarity:
-
     __slots__: list = ...
 
     def __init__(self, G): ...

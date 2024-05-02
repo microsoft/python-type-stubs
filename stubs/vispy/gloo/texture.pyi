@@ -1,5 +1,12 @@
+import math
+import warnings
+
+import numpy as np
 from numpy import dtype, ndarray
 from numpy.typing import NDArray
+
+from .globject import GLObject
+from .util import check_enum
 
 # -*- coding: utf-8 -*-
 # -----------------------------------------------------------------------------
@@ -7,20 +14,11 @@ from numpy.typing import NDArray
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 # -----------------------------------------------------------------------------
 
-import math
-
-import numpy as np
-import warnings
-
-from .globject import GLObject
-from .util import check_enum
-
 F64_PRECISION_WARNING: str = ...
 
 def should_cast_to_f32(data_dtype): ...
 
 class BaseTexture(GLObject):
-
     _ndim: int = ...
 
     _formats: dict = ...
@@ -75,7 +73,6 @@ class BaseTexture(GLObject):
 
 # --------------------------------------------------------- Texture1D class ---
 class Texture1D(BaseTexture):
-
     _ndim: int = ...
     _GLIR_TYPE: str = ...
 
@@ -101,7 +98,6 @@ class Texture1D(BaseTexture):
 
 # --------------------------------------------------------- Texture2D class ---
 class Texture2D(BaseTexture):
-
     _ndim: int = ...
     _GLIR_TYPE: str = ...
 
@@ -129,7 +125,6 @@ class Texture2D(BaseTexture):
 
 # --------------------------------------------------------- Texture3D class ---
 class Texture3D(BaseTexture):
-
     _ndim: int = ...
     _GLIR_TYPE: str = ...
 
@@ -159,7 +154,6 @@ class Texture3D(BaseTexture):
 
 # --------------------------------------------------------- TextureCube class ---
 class TextureCube(BaseTexture):
-
     _ndim: int = ...
     _GLIR_TYPE: str = ...
 
@@ -189,7 +183,6 @@ class TextureCube(BaseTexture):
 
 # ------------------------------------------------- TextureEmulated3D class ---
 class TextureEmulated3D(Texture2D):
-
     # TODO: does GL's nearest use floor or round?
     _glsl_sample_nearest: str = ...
 

@@ -1,11 +1,13 @@
-from numpy import ndarray
-from numpy.typing import NDArray
 from warnings import warn
+
 import numpy as np
 import scipy.ndimage as ndi
+from numpy import ndarray
+from numpy.typing import NDArray
+
 from .. import measure
-from .._shared.utils import remove_arg
 from .._shared.coord import ensure_spacing
+from .._shared.utils import remove_arg
 
 def _get_high_intensity_peaks(image, mask, num_peaks, min_distance, p_norm): ...
 def _get_peak_mask(image, footprint, threshold, mask=None): ...
@@ -26,6 +28,4 @@ def peak_local_max(
     num_peaks_per_label: int = ...,
     p_norm: float = ...,
 ) -> np.ndarray: ...
-def _prominent_peaks(
-    image, min_xdistance=1, min_ydistance=1, threshold=None, num_peaks=np.inf
-): ...
+def _prominent_peaks(image, min_xdistance=1, min_ydistance=1, threshold=None, num_peaks=np.inf): ...

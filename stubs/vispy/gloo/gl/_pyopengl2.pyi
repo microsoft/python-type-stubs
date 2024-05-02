@@ -1,6 +1,7 @@
 import ctypes
-from OpenGL import GL
+
 import OpenGL.GL.framebufferobjects as FBO
+from OpenGL import GL
 
 def glBindAttribLocation(program, index, name): ...
 def glBufferData(target, data, usage): ...

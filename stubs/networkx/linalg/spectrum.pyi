@@ -1,5 +1,4 @@
 from ..classes.graph import Graph
-from ..classes.graph import Graph
 
 __all__ = [
     "laplacian_spectrum",

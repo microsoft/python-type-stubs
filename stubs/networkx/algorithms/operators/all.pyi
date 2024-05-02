@@ -1,5 +1,6 @@
-from numpy.typing import ArrayLike
 from itertools import zip_longest
+
+from numpy.typing import ArrayLike
 
 __all__ = ["union_all", "compose_all", "disjoint_union_all", "intersection_all"]
 

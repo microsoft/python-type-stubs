@@ -39,9 +39,7 @@ def read_edgelist(
     edgetype=None,
     encoding: str = "utf-8",
 ): ...
-def write_weighted_edgelist(
-    G: Graph, path, comments: str = "#", delimiter: str = " ", encoding: str = "utf-8"
-): ...
+def write_weighted_edgelist(G: Graph, path, comments: str = "#", delimiter: str = " ", encoding: str = "utf-8"): ...
 def read_weighted_edgelist(
     path,
     comments: str = "#",

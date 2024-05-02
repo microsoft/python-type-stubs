@@ -1,8 +1,7 @@
-from numpy.typing import NDArray
 from typing import Literal
 
 import numpy as np
-
+from numpy.typing import NDArray
 from scipy import ndimage as ndi
 
 from .._shared.utils import check_nD, deprecate_kwarg
@@ -18,18 +17,14 @@ G123_LUT = ...
 
 G123P_LUT = ...
 
-@deprecate_kwarg(
-    {"max_iter": "max_num_iter"}, removed_version="1.0", deprecated_version="0.19"
-)
+@deprecate_kwarg({"max_iter": "max_num_iter"}, removed_version="1.0", deprecated_version="0.19")
 def thin(image, max_num_iter=None) -> NDArray: ...
 
 # --------- Skeletonization by medial axis transform --------
 
 _eight_connect = ...
 
-def medial_axis(
-    image, mask=None, return_distance: bool = False, *, random_state=None
-) -> tuple[NDArray, NDArray]: ...
+def medial_axis(image, mask=None, return_distance: bool = False, *, random_state=None) -> tuple[NDArray, NDArray]: ...
 def _pattern_of(index): ...
 def _table_lookup(image, table): ...
 def skeletonize_3d(image) -> NDArray: ...

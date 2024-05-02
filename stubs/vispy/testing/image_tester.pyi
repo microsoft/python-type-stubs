@@ -1,28 +1,27 @@
+import base64
+import inspect
+import os
+import sys
+import time
+from http.client import HTTPConnection
+from subprocess import CalledProcessError, check_call
+from typing import Literal
+from urllib.parse import urlencode
+
+import numpy as np
 from numpy.typing import NDArray
+
+from .. import config, scene
+from ..gloo.util import _screenshot
+from ..io import read_png, write_png
+from ..util import run_subprocess
+from . import IS_CI
 
 # -*- coding: utf-8 -*-
 # -----------------------------------------------------------------------------
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 # -----------------------------------------------------------------------------
-
-import time
-import os
-import sys
-import inspect
-import base64
-from subprocess import check_call, CalledProcessError
-import numpy as np
-from typing import Literal
-
-from http.client import HTTPConnection
-from urllib.parse import urlencode
-
-from .. import scene, config
-from ..io import read_png, write_png
-from ..gloo.util import _screenshot
-from ..util import run_subprocess
-from . import IS_CI
 
 tester: None = ...
 

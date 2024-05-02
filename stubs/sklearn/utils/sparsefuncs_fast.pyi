@@ -1,14 +1,13 @@
-
 import numpy as np
-from scipy.sparse import csr_matrix, csc_matrix
-
+from scipy.sparse import csc_matrix, csr_matrix
 
 def csr_row_norms(X: np.ndarray) -> np.ndarray:
     """Squared L2 norm of each row in CSR matrix X."""
     ...
 
-
-def csr_mean_variance_axis0(X: csr_matrix, weights:np.ndarray|None=None, return_sum_weights:bool=False) ->     tuple[np.ndarray, np.ndarray, np.ndarray]:
+def csr_mean_variance_axis0(
+    X: csr_matrix, weights: np.ndarray | None = None, return_sum_weights: bool = False
+) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
     """Compute mean and variance along axis 0 on a CSR matrix
     Uses a np.float64 accumulator.
     Parameters
@@ -32,8 +31,9 @@ def csr_mean_variance_axis0(X: csr_matrix, weights:np.ndarray|None=None, return_
     """
     ...
 
-
-def csc_mean_variance_axis0(X: csc_matrix, weights: np.ndarray|None=None, return_sum_weights: bool=False) ->     tuple[np.ndarray, np.ndarray, np.ndarray]:
+def csc_mean_variance_axis0(
+    X: csc_matrix, weights: np.ndarray | None = None, return_sum_weights: bool = False
+) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
     """Compute mean and variance along axis 0 on a CSC matrix
     Uses a np.float64 accumulator.
     Parameters
@@ -57,8 +57,9 @@ def csc_mean_variance_axis0(X: csc_matrix, weights: np.ndarray|None=None, return
     """
     ...
 
-        
-def incr_mean_variance_axis0(X: csr_matrix|csc_matrix, last_mean: np.ndarray, last_var: np.ndarray,         last_n: np.ndarray, weights: np.ndarray|None=None) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
+def incr_mean_variance_axis0(
+    X: csr_matrix | csc_matrix, last_mean: np.ndarray, last_var: np.ndarray, last_n: np.ndarray, weights: np.ndarray | None = None
+) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
     """Compute mean and variance along axis 0 on a CSR or CSC matrix.
     last_mean, last_var are the statistics computed at the last step by this
     function. Both must be initialized to 0.0. last_n is the
@@ -87,16 +88,13 @@ def incr_mean_variance_axis0(X: csr_matrix|csc_matrix, last_mean: np.ndarray, la
     """
     ...
 
-    
 def inplace_csr_row_normalize_l1(X: np.ndarray) -> None:
     """Inplace row normalize using the l1 norm"""
     ...
 
-    
 def inplace_csr_row_normalize_l2(X: np.ndarray) -> None:
     """Inplace row normalize using the l2 norm"""
     ...
-
 
 def assign_rows_csr(
     X: csr_matrix,
@@ -113,5 +111,5 @@ def assign_rows_csr(
     X_rows : array, dtype=np.intp, shape=n_rows
     out_rows : array, dtype=np.intp, shape=n_rows
     out : array, shape=(arbitrary, n_features)
-    """   
+    """
     ...

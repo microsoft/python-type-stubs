@@ -1,11 +1,10 @@
-from typing import Callable, Mapping
-
 import math
 import time
 import warnings
 from functools import reduce
 from itertools import product
 from operator import mul
+from typing import Callable, Mapping
 
 from ..classes.graph import Graph
 
@@ -94,9 +93,5 @@ def simrank_similarity_numpy(
     max_iterations=100,
     tolerance=1e-4,
 ): ...
-def panther_similarity(
-    G: Graph, source, k=5, path_length=5, c=0.5, delta=0.1, eps=None
-) -> Mapping: ...
-def generate_random_paths(
-    G: Graph, sample_size, path_length=5, index_map: Mapping | None = None
-): ...
+def panther_similarity(G: Graph, source, k=5, path_length=5, c=0.5, delta=0.1, eps=None) -> Mapping: ...
+def generate_random_paths(G: Graph, sample_size, path_length=5, index_map: Mapping | None = None): ...

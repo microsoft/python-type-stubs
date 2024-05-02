@@ -5,7 +5,7 @@ from typing import Any, TypeVar
 
 from transformers.configuration_utils import PretrainedConfig
 
-_F = TypeVar('_F', bound=Callable[..., Any])
+_F = TypeVar("_F", bound=Callable[..., Any])
 
 CONFIG_MAPPING_NAMES: OrderedDict[str, str]
 CONFIG_ARCHIVE_MAP_MAPPING_NAMES: OrderedDict[str, str]

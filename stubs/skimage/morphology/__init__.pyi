@@ -1,59 +1,43 @@
+from ..measure._label import label as label
+from ._flood_fill import flood as flood, flood_fill as flood_fill
+from ._skeletonize import medial_axis as medial_axis, skeletonize as skeletonize, skeletonize_3d as skeletonize_3d, thin as thin
 from .binary import (
-    binary_erosion as binary_erosion,
-    binary_dilation as binary_dilation,
-    binary_opening as binary_opening,
     binary_closing as binary_closing,
+    binary_dilation as binary_dilation,
+    binary_erosion as binary_erosion,
+    binary_opening as binary_opening,
 )
-from .gray import (
-    erosion as erosion,
-    dilation as dilation,
-    opening as opening,
-    closing as closing,
-    white_tophat as white_tophat,
-    black_tophat as black_tophat,
-)
+from .convex_hull import convex_hull_image as convex_hull_image, convex_hull_object as convex_hull_object
+from .extrema import h_maxima as h_maxima, h_minima as h_minima, local_maxima as local_maxima, local_minima as local_minima
 from .footprints import (
-    square as square,
-    rectangle as rectangle,
+    ball as ball,
+    cube as cube,
     diamond as diamond,
     disk as disk,
-    cube as cube,
-    octahedron as octahedron,
-    ball as ball,
     octagon as octagon,
+    octahedron as octahedron,
+    rectangle as rectangle,
+    square as square,
     star as star,
 )
-from ..measure._label import label as label
-from ._skeletonize import (
-    skeletonize as skeletonize,
-    medial_axis as medial_axis,
-    thin as thin,
-    skeletonize_3d as skeletonize_3d,
-)
-from .convex_hull import (
-    convex_hull_image as convex_hull_image,
-    convex_hull_object as convex_hull_object,
+from .gray import (
+    black_tophat as black_tophat,
+    closing as closing,
+    dilation as dilation,
+    erosion as erosion,
+    opening as opening,
+    white_tophat as white_tophat,
 )
 from .grayreconstruct import reconstruction as reconstruction
-from .misc import (
-    remove_small_objects as remove_small_objects,
-    remove_small_holes as remove_small_holes,
-)
-from .extrema import (
-    h_minima as h_minima,
-    h_maxima as h_maxima,
-    local_maxima as local_maxima,
-    local_minima as local_minima,
-)
-from ._flood_fill import flood as flood, flood_fill as flood_fill
 from .max_tree import (
-    max_tree as max_tree,
-    area_opening as area_opening,
     area_closing as area_closing,
-    diameter_opening as diameter_opening,
+    area_opening as area_opening,
     diameter_closing as diameter_closing,
+    diameter_opening as diameter_opening,
+    max_tree as max_tree,
     max_tree_local_maxima as max_tree_local_maxima,
 )
+from .misc import remove_small_holes as remove_small_holes, remove_small_objects as remove_small_objects
 
 __all__ = [
     "binary_erosion",

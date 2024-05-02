@@ -1,13 +1,15 @@
-from typing import Any, Callable, ClassVar, Literal, TypeVar
-from ._base import NeighborsBase, KNeighborsMixin
-from numpy import ndarray
-from ..utils._param_validation import Interval as Interval, StrOptions as StrOptions
 from numbers import Real as Real
-from ..utils.metaestimators import available_if as available_if
+from typing import Any, Callable, ClassVar, Literal, TypeVar
+
+from numpy import ndarray
+
+from .._typing import ArrayLike, Int, MatrixLike
 from ..base import OutlierMixin
-from .._typing import Int, MatrixLike, ArrayLike
 from ..utils import check_array as check_array
+from ..utils._param_validation import Interval as Interval, StrOptions as StrOptions
+from ..utils.metaestimators import available_if as available_if
 from ..utils.validation import check_is_fitted as check_is_fitted
+from ._base import KNeighborsMixin, NeighborsBase
 
 LocalOutlierFactor_Self = TypeVar("LocalOutlierFactor_Self", bound="LocalOutlierFactor")
 
@@ -15,11 +17,11 @@ LocalOutlierFactor_Self = TypeVar("LocalOutlierFactor_Self", bound="LocalOutlier
 #          Alexandre Gramfort <alexandre.gramfort@telecom-paristech.fr>
 # License: BSD 3 clause
 
-import numpy as np
 import warnings
 
-__all__ = ["LocalOutlierFactor"]
+import numpy as np
 
+__all__ = ["LocalOutlierFactor"]
 
 class LocalOutlierFactor(KNeighborsMixin, OutlierMixin, NeighborsBase):
     n_samples_fit_: int = ...
@@ -45,22 +47,9 @@ class LocalOutlierFactor(KNeighborsMixin, OutlierMixin, NeighborsBase):
         contamination: float | str = "auto",
         novelty: bool = False,
         n_jobs: None | Int = None,
-    ) -> None:
-        ...
-
-    def fit_predict(self, X: MatrixLike | ArrayLike, y: Any = None) -> ndarray:
-        ...
-
-    def fit(
-        self: LocalOutlierFactor_Self, X: MatrixLike, y: Any = None
-    ) -> LocalOutlierFactor_Self:
-        ...
-
-    def predict(self, X: None | MatrixLike | ArrayLike = None) -> ndarray:
-        ...
-
-    def decision_function(self, X: MatrixLike | ArrayLike) -> ndarray:
-        ...
-
-    def score_samples(self, X: MatrixLike | ArrayLike) -> ndarray:
-        ...
+    ) -> None: ...
+    def fit_predict(self, X: MatrixLike | ArrayLike, y: Any = None) -> ndarray: ...
+    def fit(self: LocalOutlierFactor_Self, X: MatrixLike, y: Any = None) -> LocalOutlierFactor_Self: ...
+    def predict(self, X: None | MatrixLike | ArrayLike = None) -> ndarray: ...
+    def decision_function(self, X: MatrixLike | ArrayLike) -> ndarray: ...
+    def score_samples(self, X: MatrixLike | ArrayLike) -> ndarray: ...

@@ -5,9 +5,10 @@
 # Distributed under the terms of the new BSD License.
 # -----------------------------------------------------------------------------
 
-import numpy as np
 from functools import reduce
 from operator import mul
+
+import numpy as np
 
 def dtype_reduce(dtype, level=0, depth=0): ...
 def fetchcode(utype, prefix=""): ...

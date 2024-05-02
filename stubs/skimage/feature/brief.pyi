@@ -1,14 +1,10 @@
 from typing import Literal
+
 import numpy as np
 
 from .._shared.filters import gaussian
 from .._shared.utils import check_nD
-
-from .util import (
-    DescriptorExtractor,
-    _mask_border_keypoints,
-    _prepare_grayscale_input_2D,
-)
+from .util import DescriptorExtractor, _mask_border_keypoints, _prepare_grayscale_input_2D
 
 class BRIEF(DescriptorExtractor):
     def __init__(

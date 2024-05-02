@@ -1,18 +1,17 @@
+import math
+
+import numpy as np
 from vispy.util.event import Event
+
+from ...util import keys
+from ...util.quaternion import Quaternion
+from .perspective import PerspectiveCamera
 
 # -*- coding: utf-8 -*-
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 
-import math
-import numpy as np
-
-from ...util.quaternion import Quaternion
-from ...util import keys
-from .perspective import PerspectiveCamera
-
 class FlyCamera(PerspectiveCamera):
-
     # Using _rotation1 and _rotation2 for camera states instead of _rotation
     _state_props = ...
 

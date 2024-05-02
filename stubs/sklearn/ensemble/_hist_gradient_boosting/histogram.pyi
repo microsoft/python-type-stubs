@@ -1,6 +1,4 @@
-
 import numpy as np
-
 
 class HistogramBuilder:
     """A Histogram builder... used to build histograms.
@@ -31,17 +29,20 @@ class HistogramBuilder:
     hessians_are_constant : bool
         Whether hessians are constant.
     """
-    def __init__(self, X_binned: np.ndarray,
-                 n_bins: int, gradients: np.ndarray,
-                 hessians: np.ndarray,
-                 hessians_are_constant: bool,
-                 n_threads: int) -> None:
-        ...
 
+    def __init__(
+        self,
+        X_binned: np.ndarray,
+        n_bins: int,
+        gradients: np.ndarray,
+        hessians: np.ndarray,
+        hessians_are_constant: bool,
+        n_threads: int,
+    ) -> None: ...
     def compute_histograms_brute(
         self,
-        sample_indices: np.ndarray,    
-        allowed_features: np.ndarray|None = None,
+        sample_indices: np.ndarray,
+        allowed_features: np.ndarray | None = None,
     ) -> np.ndarray:
         """Compute the histograms of the node by scanning through all the data.
         For a given feature, the complexity is O(n_samples)
@@ -59,12 +60,11 @@ class HistogramBuilder:
         """
         ...
 
-
     def compute_histograms_subtraction(
         self,
         parent_histograms: np.ndarray,
         sibling_histograms: np.ndarray,
-        allowed_features: np.ndarray|None = None,
+        allowed_features: np.ndarray | None = None,
     ) -> np.ndarray:
         """Compute the histograms of the node using the subtraction trick.
         hist(parent) = hist(left_child) + hist(right_child)
@@ -86,5 +86,3 @@ class HistogramBuilder:
             The computed histograms of the current node.
         """
         ...
-
-

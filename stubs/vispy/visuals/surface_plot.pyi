@@ -1,15 +1,14 @@
+from __future__ import division
+
+import numpy as np
 from numpy.typing import NDArray
+
+from ..geometry import MeshData
+from .mesh import MeshVisual
 
 # -*- coding: utf-8 -*-
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
-
-from __future__ import division
-
-import numpy as np
-
-from .mesh import MeshVisual
-from ..geometry import MeshData
 
 class SurfacePlotVisual(MeshVisual):
     def __init__(

@@ -1,17 +1,14 @@
 from typing import Callable, ClassVar, Literal, TypeVar
-from ._base import NeighborsBase, KNeighborsMixin, RadiusNeighborsMixin
+
 from numpy import ndarray
-from ..utils._param_validation import StrOptions as StrOptions
+
+from .._typing import ArrayLike, Float, Int, MatrixLike
 from ..base import RegressorMixin
-from .._typing import Int, MatrixLike, ArrayLike, Float
+from ..utils._param_validation import StrOptions as StrOptions
+from ._base import KNeighborsMixin, NeighborsBase, RadiusNeighborsMixin
 
-KNeighborsRegressor_Self = TypeVar(
-    "KNeighborsRegressor_Self", bound="KNeighborsRegressor"
-)
-RadiusNeighborsRegressor_Self = TypeVar(
-    "RadiusNeighborsRegressor_Self", bound="RadiusNeighborsRegressor"
-)
-
+KNeighborsRegressor_Self = TypeVar("KNeighborsRegressor_Self", bound="KNeighborsRegressor")
+RadiusNeighborsRegressor_Self = TypeVar("RadiusNeighborsRegressor_Self", bound="RadiusNeighborsRegressor")
 
 # Authors: Jake Vanderplas <vanderplas@astro.washington.edu>
 #          Fabian Pedregosa <fabian.pedregosa@inria.fr>
@@ -27,7 +24,6 @@ import warnings
 
 import numpy as np
 
-
 class KNeighborsRegressor(KNeighborsMixin, RegressorMixin, NeighborsBase):
     n_samples_fit_: int = ...
     feature_names_in_: ndarray = ...
@@ -41,26 +37,16 @@ class KNeighborsRegressor(KNeighborsMixin, RegressorMixin, NeighborsBase):
         self,
         n_neighbors: Int = 5,
         *,
-        weights: None
-        | Literal["uniform", "distance", "uniform"]
-        | Callable = "uniform",
+        weights: None | Literal["uniform", "distance", "uniform"] | Callable = "uniform",
         algorithm: Literal["auto", "ball_tree", "kd_tree", "brute", "auto"] = "auto",
         leaf_size: Int = 30,
         p: Int = 2,
         metric: str | Callable = "minkowski",
         metric_params: None | dict = None,
         n_jobs: None | Int = None,
-    ) -> None:
-        ...
-
-    def fit(
-        self: KNeighborsRegressor_Self, X: MatrixLike, y: MatrixLike | ArrayLike
-    ) -> KNeighborsRegressor_Self:
-        ...
-
-    def predict(self, X: MatrixLike) -> ndarray:
-        ...
-
+    ) -> None: ...
+    def fit(self: KNeighborsRegressor_Self, X: MatrixLike, y: MatrixLike | ArrayLike) -> KNeighborsRegressor_Self: ...
+    def predict(self, X: MatrixLike) -> ndarray: ...
 
 class RadiusNeighborsRegressor(RadiusNeighborsMixin, RegressorMixin, NeighborsBase):
     n_samples_fit_: int = ...
@@ -75,22 +61,13 @@ class RadiusNeighborsRegressor(RadiusNeighborsMixin, RegressorMixin, NeighborsBa
         self,
         radius: Float = 1.0,
         *,
-        weights: None
-        | Literal["uniform", "distance", "uniform"]
-        | Callable = "uniform",
+        weights: None | Literal["uniform", "distance", "uniform"] | Callable = "uniform",
         algorithm: Literal["auto", "ball_tree", "kd_tree", "brute", "auto"] = "auto",
         leaf_size: Int = 30,
         p: Int = 2,
         metric: str | Callable = "minkowski",
         metric_params: None | dict = None,
         n_jobs: None | Int = None,
-    ) -> None:
-        ...
-
-    def fit(
-        self: RadiusNeighborsRegressor_Self, X: MatrixLike, y: MatrixLike | ArrayLike
-    ) -> RadiusNeighborsRegressor_Self:
-        ...
-
-    def predict(self, X: MatrixLike) -> ndarray:
-        ...
+    ) -> None: ...
+    def fit(self: RadiusNeighborsRegressor_Self, X: MatrixLike, y: MatrixLike | ArrayLike) -> RadiusNeighborsRegressor_Self: ...
+    def predict(self, X: MatrixLike) -> ndarray: ...

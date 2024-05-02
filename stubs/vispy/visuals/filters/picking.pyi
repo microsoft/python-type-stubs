@@ -7,7 +7,6 @@ import struct
 from .base_filter import Filter
 
 class PickingFilter(Filter):
-
     FRAG_SHADER: str = ...
 
     def __init__(self, id_=None): ...

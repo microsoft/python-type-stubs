@@ -25,5 +25,5 @@ class ShaderObject(object):
     def compile(self): ...
     def __repr__(self): ...
 
-from .variable import Variable  # noqa
 from .expression import TextExpression  # noqa
+from .variable import Variable  # noqa

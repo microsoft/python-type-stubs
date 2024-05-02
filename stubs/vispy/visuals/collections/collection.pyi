@@ -1,5 +1,12 @@
+import numpy as np
 from numpy import dtype
 from numpy.typing import ArrayLike
+
+from ... import gloo
+from ...util.event import EventEmitter
+from ..shaders import ModularProgram
+from .base_collection import BaseCollection
+from .util import fetchcode
 
 # -*- coding: utf-8 -*-
 # -----------------------------------------------------------------------------
@@ -7,15 +14,7 @@ from numpy.typing import ArrayLike
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 # -----------------------------------------------------------------------------
 
-import numpy as np
-from ... import gloo
-from .util import fetchcode
-from .base_collection import BaseCollection
-from ..shaders import ModularProgram
-from ...util.event import EventEmitter
-
 class Collection(BaseCollection):
-
     _gtypes: dict = ...
 
     def __init__(

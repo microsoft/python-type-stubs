@@ -4,15 +4,11 @@
 
 from .base_filter import Filter as Filter  # noqa
 from .clipper import Clipper as Clipper  # noqa
-from .color import (
+from .color import (  # noqa
     Alpha as Alpha,
     ColorFilter as ColorFilter,
     IsolineFilter as IsolineFilter,
     ZColormapFilter as ZColormapFilter,
-)  # noqa
+)
+from .mesh import ShadingFilter as ShadingFilter, TextureFilter as TextureFilter, WireframeFilter as WireframeFilter  # noqa
 from .picking import PickingFilter as PickingFilter  # noqa
-from .mesh import (
-    TextureFilter as TextureFilter,
-    ShadingFilter as ShadingFilter,
-    WireframeFilter as WireframeFilter,
-)  # noqa

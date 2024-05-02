@@ -1,13 +1,3 @@
 import warnings
 
-from .footprints import (
-    square,
-    rectangle,
-    diamond,
-    disk,
-    cube,
-    octahedron,
-    ball,
-    octagon,
-    star,
-)
+from .footprints import ball, cube, diamond, disk, octagon, octahedron, rectangle, square, star

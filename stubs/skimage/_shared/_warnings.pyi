@@ -1,9 +1,9 @@
-from contextlib import contextmanager
-import sys
-import warnings
-import re
 import functools
 import os
+import re
+import sys
+import warnings
+from contextlib import contextmanager
 
 __all__ = ["all_warnings", "expected_warnings", "warn"]
 

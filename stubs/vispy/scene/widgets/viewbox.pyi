@@ -1,16 +1,15 @@
+import numpy as np
 from vispy.scene.node import Node
 from vispy.util.event import Event
+
+from ...visuals.filters import Clipper
+from ..cameras import BaseCamera, make_camera
+from ..subscene import SubScene
+from .widget import Widget
 
 # -*- coding: utf-8 -*-
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
-
-import numpy as np
-
-from .widget import Widget
-from ..subscene import SubScene
-from ..cameras import make_camera, BaseCamera
-from ...visuals.filters import Clipper
 
 class ViewBox(Widget):
     def __init__(self, camera: None | str | BaseCamera = None, **kwargs): ...

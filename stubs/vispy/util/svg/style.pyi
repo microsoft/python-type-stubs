@@ -5,8 +5,8 @@
 # -----------------------------------------------------------------------------
 
 from .color import Color
-from .number import Number
 from .length import Length
+from .number import Number
 
 _converters: dict = ...
 

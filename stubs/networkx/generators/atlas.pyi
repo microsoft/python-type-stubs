@@ -1,8 +1,9 @@
-from numpy.typing import ArrayLike
 import gzip
 import os
 import os.path
 from itertools import islice
+
+from numpy.typing import ArrayLike
 
 from ..classes.graph import Graph
 

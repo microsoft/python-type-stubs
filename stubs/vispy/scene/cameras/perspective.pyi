@@ -1,19 +1,18 @@
-from vispy.util.event import Event
+import math
+
+import numpy as np
 from vispy._typing import Scalar
+from vispy.util.event import Event
+
+from ...util import keys, transforms
+from ...visuals.transforms import MatrixTransform
+from .base_camera import BaseCamera
 
 # -*- coding: utf-8 -*-
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 
-import math
-import numpy as np
-
-from .base_camera import BaseCamera
-from ...util import keys, transforms
-from ...visuals.transforms import MatrixTransform
-
 class PerspectiveCamera(BaseCamera):
-
     _state_props = ...
 
     def __init__(self, fov: float = 60.0, scale_factor: Scalar | None = None, center=None, **kwargs): ...

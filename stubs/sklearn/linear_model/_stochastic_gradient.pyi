@@ -1,46 +1,32 @@
-from typing import Any, ClassVar, Literal, Mapping, TypeVar
-from numpy.random import RandomState
-from ..base import BaseEstimator
-from ..exceptions import ConvergenceWarning as ConvergenceWarning
-from ..utils.extmath import safe_sparse_dot as safe_sparse_dot
-from scipy.sparse._csr import csr_matrix
-from ..utils.parallel import delayed as delayed, Parallel as Parallel
-from ..utils.validation import check_is_fitted as check_is_fitted
 from abc import ABCMeta, abstractmethod
-from numpy import ndarray
-from ..utils._param_validation import (
-    Interval as Interval,
-    StrOptions as StrOptions,
-    Hidden as Hidden,
-)
 from numbers import Integral as Integral, Real as Real
+from typing import Any, ClassVar, Literal, Mapping, TypeVar
+
+from numpy import ndarray
+from numpy.random import RandomState
+from scipy.sparse._csr import csr_matrix
+
+from .._typing import ArrayLike, Float, Int, MatrixLike
+from ..base import BaseEstimator, OutlierMixin, RegressorMixin, clone as clone, is_classifier as is_classifier
+from ..exceptions import ConvergenceWarning as ConvergenceWarning
+from ..model_selection import ShuffleSplit as ShuffleSplit, StratifiedShuffleSplit as StratifiedShuffleSplit
+from ..utils import check_random_state as check_random_state, compute_class_weight as compute_class_weight
+from ..utils._param_validation import Hidden as Hidden, Interval as Interval, StrOptions as StrOptions
+from ..utils.extmath import safe_sparse_dot as safe_sparse_dot
+from ..utils.metaestimators import available_if as available_if
+from ..utils.parallel import Parallel as Parallel, delayed as delayed
+from ..utils.validation import check_is_fitted as check_is_fitted
+from ._base import LinearClassifierMixin, SparseCoefMixin, make_dataset as make_dataset
 from ._sgd_fast import (
+    EpsilonInsensitive as EpsilonInsensitive,
     Hinge as Hinge,
-    SquaredHinge as SquaredHinge,
+    Huber as Huber,
     Log as Log,
     ModifiedHuber as ModifiedHuber,
-    SquaredLoss as SquaredLoss,
-    Huber as Huber,
-    EpsilonInsensitive as EpsilonInsensitive,
     SquaredEpsilonInsensitive as SquaredEpsilonInsensitive,
+    SquaredHinge as SquaredHinge,
+    SquaredLoss as SquaredLoss,
 )
-from ..base import (
-    clone as clone,
-    is_classifier as is_classifier,
-    RegressorMixin,
-    OutlierMixin,
-)
-from ..model_selection import (
-    StratifiedShuffleSplit as StratifiedShuffleSplit,
-    ShuffleSplit as ShuffleSplit,
-)
-from ..utils import (
-    check_random_state as check_random_state,
-    compute_class_weight as compute_class_weight,
-)
-from ._base import LinearClassifierMixin, SparseCoefMixin, make_dataset as make_dataset
-from ..utils.metaestimators import available_if as available_if
-from .._typing import Float, Int, MatrixLike, ArrayLike
 
 BaseSGDClassifier_Self = TypeVar("BaseSGDClassifier_Self", bound="BaseSGDClassifier")
 SGDOneClassSVM_Self = TypeVar("SGDOneClassSVM_Self", bound="SGDOneClassSVM")
@@ -51,8 +37,9 @@ BaseSGDRegressor_Self = TypeVar("BaseSGDRegressor_Self", bound="BaseSGDRegressor
 #
 # License: BSD 3 clause
 
-import numpy as np
 import warnings
+
+import numpy as np
 
 LEARNING_RATE_TYPES: dict = ...
 
@@ -63,7 +50,6 @@ DEFAULT_EPSILON: float = ...
 
 MAX_INT = ...
 
-
 class _ValidationScoreCallback:
     def __init__(
         self,
@@ -72,15 +58,10 @@ class _ValidationScoreCallback:
         y_val: ndarray,
         sample_weight_val: ndarray,
         classes: None | ndarray = None,
-    ) -> None:
-        ...
-
-    def __call__(self, coef: ndarray, intercept: float) -> Float:
-        ...
-
+    ) -> None: ...
+    def __call__(self, coef: ndarray, intercept: float) -> Float: ...
 
 class BaseSGD(SparseCoefMixin, BaseEstimator, metaclass=ABCMeta):
-
     _parameter_constraints: ClassVar[dict] = ...
 
     def __init__(
@@ -106,13 +87,9 @@ class BaseSGD(SparseCoefMixin, BaseEstimator, metaclass=ABCMeta):
         n_iter_no_change: int = 5,
         warm_start: bool = False,
         average: bool = False,
-    ) -> None:
-        ...
-
+    ) -> None: ...
     @abstractmethod
-    def fit(self, X, y):
-        ...
-
+    def fit(self, X, y): ...
 
 def fit_binary(
     est: BaseEstimator,
@@ -128,12 +105,9 @@ def fit_binary(
     sample_weight: ArrayLike,
     validation_mask: None | ArrayLike = None,
     random_state: RandomState | None | Int = None,
-) -> tuple[ndarray, float, int]:
-    ...
-
+) -> tuple[ndarray, float, int]: ...
 
 class BaseSGDClassifier(LinearClassifierMixin, BaseSGD, metaclass=ABCMeta):
-
     # TODO(1.3): Remove "log""
     loss_functions: ClassVar[dict] = ...
 
@@ -164,18 +138,14 @@ class BaseSGDClassifier(LinearClassifierMixin, BaseSGD, metaclass=ABCMeta):
         class_weight=None,
         warm_start: bool = False,
         average: bool = False,
-    ) -> None:
-        ...
-
+    ) -> None: ...
     def partial_fit(
         self: BaseSGDClassifier_Self,
         X: MatrixLike,
         y: ArrayLike,
         classes: None | ArrayLike = None,
         sample_weight: None | ArrayLike = None,
-    ) -> BaseSGDClassifier_Self:
-        ...
-
+    ) -> BaseSGDClassifier_Self: ...
     def fit(
         self: BaseSGDClassifier_Self,
         X: MatrixLike,
@@ -183,9 +153,7 @@ class BaseSGDClassifier(LinearClassifierMixin, BaseSGD, metaclass=ABCMeta):
         coef_init: None | MatrixLike = None,
         intercept_init: None | ArrayLike = None,
         sample_weight: None | ArrayLike = None,
-    ) -> BaseSGDClassifier_Self:
-        ...
-
+    ) -> BaseSGDClassifier_Self: ...
 
 class SGDClassifier(BaseSGDClassifier):
     feature_names_in_: ndarray = ...
@@ -235,18 +203,11 @@ class SGDClassifier(BaseSGDClassifier):
         class_weight: Mapping[str, float] | None | str = None,
         warm_start: bool = False,
         average: int | bool = False,
-    ) -> None:
-        ...
-
-    def predict_proba(self, X: MatrixLike) -> ndarray:
-        ...
-
-    def predict_log_proba(self, X: MatrixLike | ArrayLike) -> ndarray:
-        ...
-
+    ) -> None: ...
+    def predict_proba(self, X: MatrixLike) -> ndarray: ...
+    def predict_log_proba(self, X: MatrixLike | ArrayLike) -> ndarray: ...
 
 class BaseSGDRegressor(RegressorMixin, BaseSGD):
-
     loss_functions: ClassVar[dict] = ...
 
     _parameter_constraints: ClassVar[dict] = ...
@@ -274,17 +235,13 @@ class BaseSGDRegressor(RegressorMixin, BaseSGD):
         n_iter_no_change: int = 5,
         warm_start: bool = False,
         average: bool = False,
-    ) -> None:
-        ...
-
+    ) -> None: ...
     def partial_fit(
         self: BaseSGDRegressor_Self,
         X: MatrixLike,
         y: ArrayLike,
         sample_weight: None | ArrayLike = None,
-    ) -> BaseSGDRegressor_Self:
-        ...
-
+    ) -> BaseSGDRegressor_Self: ...
     def fit(
         self: BaseSGDRegressor_Self,
         X: MatrixLike,
@@ -292,12 +249,8 @@ class BaseSGDRegressor(RegressorMixin, BaseSGD):
         coef_init: None | ArrayLike = None,
         intercept_init: None | ArrayLike = None,
         sample_weight: None | ArrayLike = None,
-    ) -> SGDRegressor | BaseSGDRegressor_Self:
-        ...
-
-    def predict(self, X: MatrixLike) -> ndarray:
-        ...
-
+    ) -> SGDRegressor | BaseSGDRegressor_Self: ...
+    def predict(self, X: MatrixLike) -> ndarray: ...
 
 class SGDRegressor(BaseSGDRegressor):
     feature_names_in_: ndarray = ...
@@ -331,9 +284,7 @@ class SGDRegressor(BaseSGDRegressor):
         n_iter_no_change: Int = 5,
         warm_start: bool = False,
         average: int | bool = False,
-    ) -> None:
-        ...
-
+    ) -> None: ...
 
 class SGDOneClassSVM(BaseSGD, OutlierMixin):
     feature_names_in_: ndarray = ...
@@ -357,24 +308,18 @@ class SGDOneClassSVM(BaseSGD, OutlierMixin):
         shuffle: bool = True,
         verbose: Int = 0,
         random_state: RandomState | None | Int = None,
-        learning_rate: Literal[
-            "optimal", "constant", "optimal", "invscaling", "adaptive"
-        ] = "optimal",
+        learning_rate: Literal["optimal", "constant", "optimal", "invscaling", "adaptive"] = "optimal",
         eta0: Float = 0.0,
         power_t: Float = 0.5,
         warm_start: bool = False,
         average: int | bool = False,
-    ) -> None:
-        ...
-
+    ) -> None: ...
     def partial_fit(
         self: SGDOneClassSVM_Self,
         X: MatrixLike,
         y: Any = None,
         sample_weight: None | ArrayLike = None,
-    ) -> SGDOneClassSVM_Self:
-        ...
-
+    ) -> SGDOneClassSVM_Self: ...
     def fit(
         self: SGDOneClassSVM_Self,
         X: MatrixLike,
@@ -382,14 +327,7 @@ class SGDOneClassSVM(BaseSGD, OutlierMixin):
         coef_init: None | MatrixLike = None,
         offset_init: None | ArrayLike = None,
         sample_weight: None | ArrayLike = None,
-    ) -> SGDOneClassSVM_Self:
-        ...
-
-    def decision_function(self, X: MatrixLike) -> ndarray:
-        ...
-
-    def score_samples(self, X: MatrixLike) -> ndarray:
-        ...
-
-    def predict(self, X: MatrixLike) -> ndarray:
-        ...
+    ) -> SGDOneClassSVM_Self: ...
+    def decision_function(self, X: MatrixLike) -> ndarray: ...
+    def score_samples(self, X: MatrixLike) -> ndarray: ...
+    def predict(self, X: MatrixLike) -> ndarray: ...

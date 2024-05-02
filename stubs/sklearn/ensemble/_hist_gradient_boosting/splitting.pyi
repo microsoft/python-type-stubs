@@ -1,6 +1,4 @@
-
 import numpy as np
-
 
 class SplitInfo:
     """Pure data class to store information about a potential split.
@@ -39,12 +37,24 @@ class SplitInfo:
         bitset for splitting, but at prediction time, we rely on
         missing_go_to_left.
     """
-    def __init__(self, gain: float, feature_idx: int, bin_idx: int,
-                 missing_go_to_left: bool, sum_gradient_left: float, sum_hessian_left: float,
-                 sum_gradient_right: float, sum_hessian_right: float, n_samples_left: int,
-                 n_samples_right: int, value_left, value_right,
-                 is_categorical: bool, left_cat_bitset: np.ndarray|None=None): ...
 
+    def __init__(
+        self,
+        gain: float,
+        feature_idx: int,
+        bin_idx: int,
+        missing_go_to_left: bool,
+        sum_gradient_left: float,
+        sum_hessian_left: float,
+        sum_gradient_right: float,
+        sum_hessian_right: float,
+        n_samples_left: int,
+        n_samples_right: int,
+        value_left,
+        value_right,
+        is_categorical: bool,
+        left_cat_bitset: np.ndarray | None = None,
+    ): ...
 
 class Splitter:
     """Splitter used to find the best possible split at each node.
@@ -89,6 +99,7 @@ class Splitter:
     n_threads : int, default=1
         Number of OpenMP threads to use.
     """
+
     X_binned: np.ndarray
     n_features: int
     n_bins_non_missing: np.ndarray
@@ -107,21 +118,21 @@ class Splitter:
     right_indices_buffer: np.ndarray
     n_threads: int
 
-    def __init__(self,
-                 X_binned: np.ndarray,
-                 n_bins_non_missing: np.ndarray,
-                 missing_values_bin_idx: int,
-                 has_missing_values: np.ndarray,
-                 is_categorical: np.ndarray,
-                 monotonic_cst: np.ndarray,
-                 l2_regularization: float,
-                 min_hessian_to_split: float=1e-3,
-                 min_samples_leaf: int=20,
-                 min_gain_to_split: float=0.,
-                 hessians_are_constant: bool=False,
-                 n_threads: int = 1):
-        ...
-
+    def __init__(
+        self,
+        X_binned: np.ndarray,
+        n_bins_non_missing: np.ndarray,
+        missing_values_bin_idx: int,
+        has_missing_values: np.ndarray,
+        is_categorical: np.ndarray,
+        monotonic_cst: np.ndarray,
+        l2_regularization: float,
+        min_hessian_to_split: float = 1e-3,
+        min_samples_leaf: int = 20,
+        min_gain_to_split: float = 0.0,
+        hessians_are_constant: bool = False,
+        n_threads: int = 1,
+    ): ...
     def split_indices(self, split_info: SplitInfo, sample_indices: np.ndarray):
         """Split samples into left and right arrays.
         The split is performed according to the best possible split
@@ -151,16 +162,16 @@ class Splitter:
         ...
 
     def find_node_split(
-            self,
-            n_samples: int,
-            histograms,  # IN
-            sum_gradients: float,
-            sum_hessians: float,
-            value: float,
-            lower_bound: float=...,
-            upper_bound: float=...,
-            allowed_features: np.ndarray|None=None,
-            ):
+        self,
+        n_samples: int,
+        histograms,  # IN
+        sum_gradients: float,
+        sum_hessians: float,
+        value: float,
+        lower_bound: float = ...,
+        upper_bound: float = ...,
+        allowed_features: np.ndarray | None = None,
+    ):
         """For each feature, find the best bin to split on at a given node.
         Return the best split info among all features.
         Parameters
@@ -196,7 +207,5 @@ class Splitter:
         -------
         best_split_info : SplitInfo
             The info about the best possible split among all features.
-        """   
-        ...  
-
-
+        """
+        ...

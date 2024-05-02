@@ -1,17 +1,16 @@
+from __future__ import division
+
+import numpy as np
 from vispy.app.canvas import Canvas
+
+from ...util.event import EventEmitter
+from ._util import TransformCache
+from .chain import ChainTransform
+from .linear import NullTransform, STTransform
 
 # -*- coding: utf-8 -*-
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
-
-from __future__ import division
-
-from .linear import STTransform, NullTransform
-from .chain import ChainTransform
-from ._util import TransformCache
-from ...util.event import EventEmitter
-
-import numpy as np
 
 class TransformSystem(object):
     def __init__(self, canvas: Canvas | None = None, dpi: float | None = None): ...

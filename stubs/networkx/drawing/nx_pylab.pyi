@@ -1,6 +1,7 @@
-from typing import Mapping
-from numpy.typing import ArrayLike
 from numbers import Number
+from typing import Mapping
+
+from numpy.typing import ArrayLike
 
 from ..classes.graph import Graph
 from ..drawing.layout import (
@@ -30,9 +31,7 @@ __all__ = [
 ]
 
 def draw(G: Graph, pos: Mapping | None = None, ax=None, **kwds): ...
-def draw_networkx(
-    G: Graph, pos: Mapping | None = None, arrows=None, with_labels=True, **kwds
-): ...
+def draw_networkx(G: Graph, pos: Mapping | None = None, arrows=None, with_labels=True, **kwds): ...
 def draw_networkx_nodes(
     G: Graph,
     pos: Mapping,

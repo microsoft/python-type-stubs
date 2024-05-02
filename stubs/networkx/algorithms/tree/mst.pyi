@@ -1,4 +1,3 @@
-from ...algorithms.tree.mst import SpanningTreeIterator
 from dataclasses import dataclass, field
 from enum import Enum
 from heapq import heappop, heappush
@@ -7,6 +6,7 @@ from math import isnan
 from operator import itemgetter
 from queue import PriorityQueue
 
+from ...algorithms.tree.mst import SpanningTreeIterator
 from ...classes.graph import Graph
 from ...utils import UnionFind, not_implemented_for, py_random_state
 
@@ -22,14 +22,11 @@ __all__ = [
 ]
 
 class EdgePartition(Enum):
-
     OPEN = ...
     INCLUDED = ...
     EXCLUDED = ...
 
-def boruvka_mst_edges(
-    G: Graph, minimum=True, weight="weight", keys=False, data=True, ignore_nan=False
-): ...
+def boruvka_mst_edges(G: Graph, minimum=True, weight="weight", keys=False, data=True, ignore_nan=False): ...
 def kruskal_mst_edges(
     G: Graph,
     minimum,
@@ -39,9 +36,7 @@ def kruskal_mst_edges(
     ignore_nan=False,
     partition=None,
 ): ...
-def prim_mst_edges(
-    G: Graph, minimum, weight="weight", keys=True, data=True, ignore_nan=False
-): ...
+def prim_mst_edges(G: Graph, minimum, weight="weight", keys=True, data=True, ignore_nan=False): ...
 
 ALGORITHMS: dict = ...
 
@@ -61,9 +56,7 @@ def maximum_spanning_edges(
     data: bool = True,
     ignore_nan=False,
 ): ...
-def minimum_spanning_tree(
-    G: Graph, weight: str = "weight", algorithm: str = "kruskal", ignore_nan=False
-): ...
+def minimum_spanning_tree(G: Graph, weight: str = "weight", algorithm: str = "kruskal", ignore_nan=False): ...
 def partition_spanning_tree(
     G: Graph,
     minimum=True,
@@ -71,13 +64,9 @@ def partition_spanning_tree(
     partition: str = "partition",
     ignore_nan=False,
 ): ...
-def maximum_spanning_tree(
-    G: Graph, weight: str = "weight", algorithm: str = "kruskal", ignore_nan=False
-): ...
+def maximum_spanning_tree(G: Graph, weight: str = "weight", algorithm: str = "kruskal", ignore_nan=False): ...
 @py_random_state(3)
-def random_spanning_tree(
-    G: Graph, weight: str | None = None, *, multiplicative: bool = True, seed=None
-): ...
+def random_spanning_tree(G: Graph, weight: str | None = None, *, multiplicative: bool = True, seed=None): ...
 
 class SpanningTreeIterator:
     ...

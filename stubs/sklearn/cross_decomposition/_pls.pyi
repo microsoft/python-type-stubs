@@ -1,40 +1,28 @@
-from typing import ClassVar, Literal, TypeVar
 from abc import ABCMeta, abstractmethod
-from ..exceptions import ConvergenceWarning as ConvergenceWarning
-from numpy import ndarray
-from ..utils.extmath import svd_flip as svd_flip
-from scipy.linalg import svd, pinv as pinv2, pinv2 as pinv2
 from numbers import Integral as Integral, Real as Real
+from typing import ClassVar, Literal, TypeVar
+
+from numpy import ndarray
+from scipy.linalg import pinv as pinv2, pinv2 as pinv2, svd
+
+from .._typing import ArrayLike, Float, Int, MatrixLike
+from ..base import BaseEstimator, ClassNamePrefixFeaturesOutMixin, MultiOutputMixin, RegressorMixin, TransformerMixin
+from ..exceptions import ConvergenceWarning as ConvergenceWarning
+from ..utils import check_array as check_array, check_consistent_length as check_consistent_length
 from ..utils._param_validation import Interval as Interval, StrOptions as StrOptions
-from ..base import (
-    BaseEstimator,
-    RegressorMixin,
-    TransformerMixin,
-    MultiOutputMixin,
-    ClassNamePrefixFeaturesOutMixin,
-)
-from .._typing import MatrixLike, ArrayLike, Int, Float
-from ..utils import (
-    check_array as check_array,
-    check_consistent_length as check_consistent_length,
-)
-from ..utils.fixes import sp_version as sp_version, parse_version as parse_version
-from ..utils.validation import (
-    check_is_fitted as check_is_fitted,
-    FLOAT_DTYPES as FLOAT_DTYPES,
-)
+from ..utils.extmath import svd_flip as svd_flip
+from ..utils.fixes import parse_version as parse_version, sp_version as sp_version
+from ..utils.validation import FLOAT_DTYPES as FLOAT_DTYPES, check_is_fitted as check_is_fitted
 
 PLSSVD_Self = TypeVar("PLSSVD_Self", bound="PLSSVD")
 PLSRegression_Self = TypeVar("PLSRegression_Self", bound="PLSRegression")
 _PLS_Self = TypeVar("_PLS_Self", bound="_PLS")
-
 
 import warnings
 
 import numpy as np
 
 __all__ = ["PLSCanonical", "PLSRegression", "PLSSVD"]
-
 
 class _PLS(
     ClassNamePrefixFeaturesOutMixin,
@@ -44,7 +32,6 @@ class _PLS(
     BaseEstimator,
     metaclass=ABCMeta,
 ):
-
     _parameter_constraints: ClassVar[dict] = ...
 
     @abstractmethod
@@ -59,31 +46,15 @@ class _PLS(
         max_iter: int = 500,
         tol: float = 1e-06,
         copy: bool = True,
-    ) -> None:
-        ...
-
-    def fit(self: _PLS_Self, X: MatrixLike, Y: MatrixLike | ArrayLike) -> _PLS_Self:
-        ...
-
+    ) -> None: ...
+    def fit(self: _PLS_Self, X: MatrixLike, Y: MatrixLike | ArrayLike) -> _PLS_Self: ...
     def transform(
         self, X: MatrixLike, Y: None | MatrixLike = None, copy: bool = True
-    ) -> tuple[ndarray, ...] | ndarray | tuple[ndarray, ndarray]:
-        ...
-
-    def inverse_transform(
-        self, X: MatrixLike, Y: None | MatrixLike = None
-    ) -> tuple[ndarray, ndarray]:
-        ...
-
-    def predict(self, X: MatrixLike, copy: bool = True) -> ndarray:
-        ...
-
-    def fit_transform(self, X: MatrixLike, y: None | MatrixLike = None) -> ndarray:
-        ...
-
-    def coef_(self) -> ndarray:
-        ...
-
+    ) -> tuple[ndarray, ...] | ndarray | tuple[ndarray, ndarray]: ...
+    def inverse_transform(self, X: MatrixLike, Y: None | MatrixLike = None) -> tuple[ndarray, ndarray]: ...
+    def predict(self, X: MatrixLike, copy: bool = True) -> ndarray: ...
+    def fit_transform(self, X: MatrixLike, y: None | MatrixLike = None) -> ndarray: ...
+    def coef_(self) -> ndarray: ...
 
 class PLSRegression(_PLS):
     feature_names_in_: ndarray = ...
@@ -118,14 +89,8 @@ class PLSRegression(_PLS):
         max_iter: Int = 500,
         tol: Float = 1e-06,
         copy: bool = True,
-    ) -> None:
-        ...
-
-    def fit(
-        self: PLSRegression_Self, X: MatrixLike, Y: MatrixLike | ArrayLike
-    ) -> PLSRegression_Self:
-        ...
-
+    ) -> None: ...
+    def fit(self: PLSRegression_Self, X: MatrixLike, Y: MatrixLike | ArrayLike) -> PLSRegression_Self: ...
 
 class PLSCanonical(_PLS):
     feature_names_in_: ndarray = ...
@@ -161,9 +126,7 @@ class PLSCanonical(_PLS):
         max_iter: Int = 500,
         tol: Float = 1e-06,
         copy: bool = True,
-    ) -> None:
-        ...
-
+    ) -> None: ...
 
 class CCA(_PLS):
     feature_names_in_: ndarray = ...
@@ -190,9 +153,7 @@ class CCA(_PLS):
         max_iter: Int = 500,
         tol: Float = 1e-06,
         copy: bool = True,
-    ) -> None:
-        ...
-
+    ) -> None: ...
 
 class PLSSVD(ClassNamePrefixFeaturesOutMixin, TransformerMixin, BaseEstimator):
     feature_names_in_: ndarray = ...
@@ -202,20 +163,7 @@ class PLSSVD(ClassNamePrefixFeaturesOutMixin, TransformerMixin, BaseEstimator):
 
     _parameter_constraints: ClassVar[dict] = ...
 
-    def __init__(
-        self, n_components: Int = 2, *, scale: bool = True, copy: bool = True
-    ) -> None:
-        ...
-
-    def fit(self: PLSSVD_Self, X: MatrixLike, Y: MatrixLike | ArrayLike) -> PLSSVD_Self:
-        ...
-
-    def transform(
-        self, X: MatrixLike, Y: None | MatrixLike | ArrayLike = None
-    ) -> ndarray | tuple[ndarray, ndarray]:
-        ...
-
-    def fit_transform(
-        self, X: MatrixLike, y: None | MatrixLike | ArrayLike = None
-    ) -> ndarray | tuple[ndarray, ndarray]:
-        ...
+    def __init__(self, n_components: Int = 2, *, scale: bool = True, copy: bool = True) -> None: ...
+    def fit(self: PLSSVD_Self, X: MatrixLike, Y: MatrixLike | ArrayLike) -> PLSSVD_Self: ...
+    def transform(self, X: MatrixLike, Y: None | MatrixLike | ArrayLike = None) -> ndarray | tuple[ndarray, ndarray]: ...
+    def fit_transform(self, X: MatrixLike, y: None | MatrixLike | ArrayLike = None) -> ndarray | tuple[ndarray, ndarray]: ...
