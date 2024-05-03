@@ -1,5 +1,6 @@
 from types import NotImplementedType
-from typing import Any, Dict, LiteralString, Tuple as tTuple
+from typing import Any, Dict, Tuple as tTuple
+from typing_extensions import LiteralString
 
 from sympy import Order
 from sympy.core.add import Add

@@ -1,5 +1,6 @@
 from types import NotImplementedType
-from typing import Literal, Self
+from typing import Literal
+from typing_extensions import Self
 
 from sympy.core import Basic
 

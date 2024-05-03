@@ -1,5 +1,6 @@
 from collections import defaultdict
-from typing import Any, Literal, Self, Tuple as tTuple
+from typing import Any, Literal
+from typing_extensions import Self, Tuple as tTuple
 
 from sympy.core.cache import cacheit
 from sympy.core.expr import Expr

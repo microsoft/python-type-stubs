@@ -1,4 +1,5 @@
-from typing import Any, Self
+from typing import Any
+from typing_extensions import Self
 
 from sympy.core.basic import Basic
 from sympy.matrices.expressions.inverse import Inverse

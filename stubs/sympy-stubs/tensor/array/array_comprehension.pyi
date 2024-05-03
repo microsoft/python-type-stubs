@@ -1,4 +1,5 @@
-from typing import Any, Literal, Self
+from typing import Any, Literal
+from typing_extensions import Self
 
 from sympy import ImmutableDenseNDimArray
 from sympy.core import Basic

@@ -1,4 +1,5 @@
-from typing import Any, Literal, Self
+from typing import Any, Literal
+from typing_extensions import Self
 
 from sympy.core.numbers import Integer, Rational
 from sympy.liealgebras.cartan_type import Standard_Cartan

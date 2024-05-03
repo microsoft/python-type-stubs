@@ -1,4 +1,5 @@
-from typing import Any, Self
+from typing import Any
+from typing_extensions import Self
 
 from sympy.matrices.expressions.sets import MatrixSet
 from sympy.stats.rv import Distribution, MatrixDomain, NamedArgsMixin, PSpace, RandomMatrixSymbol

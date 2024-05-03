@@ -1,9 +1,9 @@
 from array import array
-from typing import Any, Literal, LiteralString
+from typing import Any, Literal
+from typing_extensions import LiteralString
 
 from sympy.core.numbers import Integer, Rational
 from sympy.matrices import Matrix
-from sympy.utilities.decorator import doctest_depends_on
 
 class NonInvertibleCipherWarning(RuntimeWarning):
     def __init__(self, msg) -> None: ...

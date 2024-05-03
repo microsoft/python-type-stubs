@@ -1,4 +1,5 @@
-from typing import Any, Literal, LiteralString, Self
+from typing import Any, Literal
+from typing_extensions import LiteralString, Self
 
 def dup_sturm(f, K) -> list[Any | list[Any]]: ...
 def dup_root_upper_bound(f, K) -> None: ...

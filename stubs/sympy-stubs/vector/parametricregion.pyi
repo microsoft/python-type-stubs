@@ -1,5 +1,6 @@
 from functools import singledispatch
-from typing import Any, Self
+from typing import Any
+from typing_extensions import Self
 
 from sympy.core import Basic
 from sympy.geometry import Curve, Ellipse, Point, Polygon, Segment

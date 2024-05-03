@@ -1,4 +1,5 @@
-from typing import Any, Callable, Literal, Self
+from typing import Any, Callable, Literal
+from typing_extensions import Self
 
 from sympy.core import Expr
 from sympy.core.function import UndefinedFunction

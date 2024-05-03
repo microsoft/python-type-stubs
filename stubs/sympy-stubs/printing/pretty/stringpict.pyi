@@ -1,4 +1,5 @@
-from typing import Any, Literal, LiteralString, Self
+from typing import Any, Literal
+from typing_extensions import LiteralString, Self
 
 class stringPict:
     LINE = ...

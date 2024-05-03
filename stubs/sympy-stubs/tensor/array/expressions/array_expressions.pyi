@@ -1,10 +1,10 @@
 import typing
 from ctypes import Array
-from typing import Any, Generator, List, Optional, Self, Tuple as tTuple
+from typing import Any, Generator, List, Optional, Tuple as tTuple
+from typing_extensions import Self
 
 from sympy import ImmutableSparseNDimArray, NDimArray
 from sympy.core.basic import Basic
-from sympy.core.containers import Tuple
 from sympy.core.expr import Expr
 from sympy.tensor.array.dense_ndim_array import ImmutableDenseNDimArray
 

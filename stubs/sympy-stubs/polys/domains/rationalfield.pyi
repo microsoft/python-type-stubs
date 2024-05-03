@@ -1,5 +1,6 @@
 from types import NotImplementedType
-from typing import Any, Literal, Self
+from typing import Any
+from typing_extensions import Self
 
 from sympy.core.numbers import Integer, Rational
 from sympy.external.gmpy import MPQ
@@ -7,7 +8,6 @@ from sympy.external.pythonmpq import PythonMPQ
 from sympy.polys.domains.characteristiczero import CharacteristicZero
 from sympy.polys.domains.field import Field
 from sympy.polys.domains.simpledomain import SimpleDomain
-from sympy.utilities import public
 
 class RationalField(Field, CharacteristicZero, SimpleDomain):
     rep = ...

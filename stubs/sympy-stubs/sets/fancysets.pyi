@@ -1,4 +1,5 @@
-from typing import Any, Generator, Literal, NoReturn, Self
+from typing import Any, Generator, Literal, NoReturn
+from typing_extensions import Self
 
 from sympy.core.basic import Basic
 from sympy.core.logic import And

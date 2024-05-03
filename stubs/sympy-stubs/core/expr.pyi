@@ -1,5 +1,6 @@
 from collections import defaultdict
-from typing import TYPE_CHECKING, Any, Literal, Self
+from typing import Any, Literal
+from typing_extensions import Self
 
 from sympy import Derivative, Equality, Integer, Mul, Order, Pow
 from sympy.core.basic import Atom, Basic
@@ -12,9 +13,6 @@ from sympy.core.relational import Ne, Relational
 from sympy.series.formal import FormalPowerSeries
 from sympy.series.fourier import FiniteFourierSeries, FourierSeries
 from sympy.tensor.array.array_derivatives import ArrayDerivative
-
-if TYPE_CHECKING:
-    ...
 
 @sympify_method_args
 class Expr(Basic, EvalfMixin):

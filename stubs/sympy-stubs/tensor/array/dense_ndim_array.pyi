@@ -1,4 +1,5 @@
-from typing import List, Self
+from typing import List
+from typing_extensions import Self
 
 from sympy import Indexed
 from sympy.core.basic import Basic

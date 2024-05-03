@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 from types import NotImplementedType
-from typing import Any, Callable, Generator, Literal, LiteralString, Self
+from typing import Any, Generator, Literal
+from typing_extensions import LiteralString, Self
 
 from sympy import ImmutableDenseNDimArray, ImmutableSparseNDimArray, Indexed, MutableDenseNDimArray
 from sympy.combinatorics.permutations import Perm

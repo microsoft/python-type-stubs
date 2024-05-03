@@ -1,4 +1,5 @@
-from typing import Any, Generator, List as tList, Literal, Self, Tuple as tTuple, Union as tUnion
+from typing import Any, Generator, List as tList, Literal, Tuple as tTuple, Union as tUnion
+from typing_extensions import Self
 
 from sympy import Equality, Integral, Ne, Piecewise, Sum
 from sympy.core.add import Add
