@@ -1,9 +1,8 @@
-from typing import Self
+from typing_extensions import Self
 
 from sympy.polys.agca.ideals import ModuleImplementedIdeal
 from sympy.polys.domains.domain import Domain
 from sympy.polys.domains.quotientring import QuotientRing
-from sympy.utilities import public
 
 class Ring(Domain):
     is_Ring = ...

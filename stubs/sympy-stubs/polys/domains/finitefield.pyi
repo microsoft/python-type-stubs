@@ -1,10 +1,9 @@
-from typing import Any, Literal, Self
+from typing import Any
+from typing_extensions import Self
 
 from sympy.core.numbers import Integer
-from sympy.external.gmpy import GROUND_TYPES
 from sympy.polys.domains.field import Field
 from sympy.polys.domains.simpledomain import SimpleDomain
-from sympy.utilities.decorator import doctest_depends_on
 
 class FiniteField(Field, SimpleDomain):  # type: ignore
     rep = ...

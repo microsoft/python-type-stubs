@@ -1,5 +1,6 @@
 from types import NotImplementedType
-from typing import Any, Literal, LiteralString, Self
+from typing import Any, Literal
+from typing_extensions import LiteralString, Self
 
 from sympy.polys.agca.homomorphisms import FreeModuleHomomorphism
 from sympy.polys.orderings import ProductOrder

@@ -1,12 +1,11 @@
-from typing import Any, Literal, Self
+from typing import Any, Literal
+from typing_extensions import Self
 
-from sympy import Basic, Contains, Equality, FiniteSet, Intersection, Ne, Piecewise, Sum
+from sympy import Basic, Contains, Equality, FiniteSet, Intersection, Ne, Sum
 from sympy.core.cache import cacheit
 from sympy.core.function import Lambda
 from sympy.core.logic import And
 from sympy.core.relational import Relational
-from sympy.logic.boolalg import Boolean
-from sympy.series.order import Order
 from sympy.sets.sets import Complement, Union
 from sympy.stats.rv import (
     ConditionalDomain,

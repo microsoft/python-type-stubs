@@ -1,5 +1,6 @@
 from types import NotImplementedType
-from typing import Any, Self
+from typing import Any
+from typing_extensions import Self
 
 from sympy.matrices.expressions.matadd import MatAdd
 from sympy.matrices.expressions.matexpr import MatrixExpr

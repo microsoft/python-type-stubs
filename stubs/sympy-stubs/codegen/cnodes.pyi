@@ -1,4 +1,4 @@
-from typing import Self
+from typing_extensions import Self
 
 from sympy.codegen.ast import FunctionCall, Node, String, Token
 from sympy.core.basic import Basic

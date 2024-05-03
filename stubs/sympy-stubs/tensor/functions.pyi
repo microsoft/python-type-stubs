@@ -1,5 +1,5 @@
 from functools import singledispatch
-from typing import Self
+from typing_extensions import Self
 
 from sympy import Mul
 from sympy.core.expr import Expr

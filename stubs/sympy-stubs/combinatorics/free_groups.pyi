@@ -1,5 +1,6 @@
 from types import NotImplementedType
-from typing import Any, Literal, Self
+from typing import Any, Literal
+from typing_extensions import Self, Unpack
 
 from sympy.core.expr import Expr
 from sympy.core.sympify import CantSympify
@@ -7,7 +8,7 @@ from sympy.printing.defaults import DefaultPrinting
 from sympy.utilities import public
 
 @public
-def free_group(symbols) -> tuple[FreeGroup, *tuple[Any, ...]]: ...
+def free_group(symbols) -> tuple[FreeGroup, Unpack[tuple[Any, ...]]]: ...
 @public
 def xfree_group(symbols) -> tuple[FreeGroup, Any]: ...
 @public

@@ -1,4 +1,4 @@
-from typing import Self
+from typing_extensions import Self
 
 from sympy.core.add import Add
 from sympy.matrices.expressions.matexpr import MatrixExpr

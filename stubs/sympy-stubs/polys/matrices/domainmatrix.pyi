@@ -1,12 +1,12 @@
 from types import NotImplementedType
-from typing import Any, Literal, Self, Tuple as tTuple, Union as tUnion
+from typing import Any, Literal
+from typing_extensions import Self, Tuple as tTuple, Union as tUnion
 
 from sympy.matrices.dense import MutableDenseMatrix
 from sympy.polys.domains import Domain
 from sympy.polys.matrices.ddm import DDM
 from sympy.polys.matrices.domainscalar import DomainScalar
 from sympy.polys.matrices.sdm import SDM
-from sympy.utilities.decorator import doctest_depends_on
 
 def DM(rows, domain) -> DomainMatrix: ...
 

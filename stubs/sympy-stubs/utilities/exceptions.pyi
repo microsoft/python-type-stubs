@@ -1,5 +1,6 @@
 import contextlib
-from typing import Any, Callable, Generator, Self
+from typing import Any, Callable, Generator
+from typing_extensions import Self
 
 class SymPyDeprecationWarning(DeprecationWarning):
     def __init__(self, message, *, deprecated_since_version, active_deprecations_target) -> None: ...

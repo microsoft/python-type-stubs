@@ -1,4 +1,5 @@
-from typing import Callable, Literal, LiteralString, Self
+from typing import Callable, Literal
+from typing_extensions import LiteralString, Self
 
 from sympy.core.cache import cacheit
 

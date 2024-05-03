@@ -1,6 +1,7 @@
 from functools import lru_cache
 from types import NotImplementedType
-from typing import Any, Literal, Self, Tuple
+from typing import Any, Literal
+from typing_extensions import Self, Tuple
 
 from sympy.core.basic import Basic
 from sympy.core.cache import cacheit
@@ -8,7 +9,6 @@ from sympy.core.decorators import _sympifyit
 from sympy.core.expr import AtomicExpr, Expr
 from sympy.core.mul import Mul
 from sympy.core.singleton import Singleton
-from sympy.external.gmpy import gmpy
 from sympy.series.order import Order
 
 _LOG2 = ...

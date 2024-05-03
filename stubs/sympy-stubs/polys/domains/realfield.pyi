@@ -1,10 +1,10 @@
-from typing import Any, Self
+from typing import Any
+from typing_extensions import Self
 
 from sympy.core.numbers import Float
 from sympy.polys.domains.characteristiczero import CharacteristicZero
 from sympy.polys.domains.field import Field
 from sympy.polys.domains.simpledomain import SimpleDomain
-from sympy.utilities import public
 
 class RealField(Field, CharacteristicZero, SimpleDomain):
     rep = ...

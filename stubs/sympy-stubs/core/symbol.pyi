@@ -1,4 +1,5 @@
-from typing import Any, Literal, Self, Tuple
+from typing import Any, Literal
+from typing_extensions import Self, Tuple
 
 from sympy.core.basic import Atom, Basic
 from sympy.core.cache import cacheit

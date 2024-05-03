@@ -1,4 +1,5 @@
-from typing import Any, Callable, Literal, Self
+from typing import Any, Callable, Literal
+from typing_extensions import Self
 
 from sympy.core.basic import Basic
 from sympy.core.decorators import _sympifyit, call_highest_priority

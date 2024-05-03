@@ -1,4 +1,5 @@
-from typing import Any, Literal, Self
+from typing import Any, Literal
+from typing_extensions import Self
 
 from sympy import Basic, Equality, Integral, Ne, Piecewise, Sum
 from sympy.core.add import Add
@@ -12,9 +13,9 @@ from sympy.stats.symbolic_multivariate_probability import CrossCovarianceMatrix,
 
 __all__ = ["Probability", "Expectation", "Variance", "Covariance"]
 
-@is_random.register(Expr)
+@is_random.register(Expr)  # type: ignore[has-type]
 def _(x) -> bool: ...
-@is_random.register(RandomSymbol)
+@is_random.register(RandomSymbol)  # type: ignore[has-type]
 def _(x) -> Literal[True]: ...
 
 class Probability(Expr):
