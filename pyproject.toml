@@ -39,15 +39,6 @@ extra_standard_library = [
     "UserList",
     "UserString",
 ]
-skip = [ # TODO
-    "stubs/networkx",
-    "stubs/scipy-stubs",
-    "stubs/skimage",
-    "stubs/sklearn",
-    "stubs/transformers-stubs/models/auto",
-    "stubs/vispy",
-    "utils",
-]
 
 [tool.pyright]
 # Target oldest supported Python version
@@ -57,26 +48,24 @@ typeCheckingMode = "basic"
 reportUnknownArgumentType = false
 # Stubs-only packages are fine for testing
 reportMissingModuleSource = false
+# Stubs are allowed to use private variables
+reportPrivateUsage = false
+reportPrivateImportUsage = false
+# The name of the self/cls parameter is out of third-party stubs' control.
+reportSelfClsParameterName = false
 # Error reports to fix in code
-reportGeneralTypeIssues = "warning" # TODO
-reportMissingImports = "warning" # TODO
-reportUnusedVariable = "warning" # TODO
-reportUndefinedVariable = "warning" # TODO
-# TODO, These files have errors with no code and must be fixed
-exclude = [
-    "stubs/sklearn/externals/_packaging/version.pyi",
-    "stubs/vispy/visuals/isosurface.pyi",
-    "stubs/vispy/visuals/mesh.pyi",
-    "stubs/vispy/visuals/surface_plot.pyi",
-    "stubs/vispy/visuals/transforms/transform_system.pyi",
-]
+reportArgumentType = "none" # TODO
+reportAssertTypeFailure = "none" # TODO
+reportAssignmentType = "none" # TODO
+reportAttributeAccessIssue = "none" # TODO
+reportGeneralTypeIssues = "none" # TODO
+reportMissingImports = "none" # TODO
+reportUndefinedVariable = "none" # TODO
+reportUnusedVariable = "none" # TODO
 
 [tool.mypy]
 # Target oldest supported Python version
 python_version = "3.8"
-# Import discovery
-namespace_packages = false
-ignore_missing_imports = true
 # Allow dynamic typing
 disallow_any_unimported = false # TODO
 disallow_any_expr = false # TODO
@@ -94,10 +83,14 @@ check_untyped_defs = true
 warn_redundant_casts = true
 warn_unused_ignores = false # Change from pandas
 # Suppressing errors
-disable_error_code = [ # TODO
+disable_error_code = [
+    # Not all imports in these stubs are gonna be typed
+    "import-untyped",
+    # TODO
     "arg-type",
     "assignment",
     "attr-defined",
+    "import-not-found",
     "misc",
     "name-defined",
     "no-redef",
