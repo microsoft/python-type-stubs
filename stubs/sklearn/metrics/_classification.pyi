@@ -112,7 +112,7 @@ def precision_recall_fscore_support(
     labels: None | ArrayLike = None,
     pos_label: str | int = 1,
     average: None | Literal["binary", "micro", "macro", "samples", "weighted"] = None,
-    warn_for: set | tuple = ...,
+    warn_for: list | set | tuple = ...,
     sample_weight: None | ArrayLike = None,
     zero_division: Literal["warn", "warn"] | int = "warn",
 ) -> tuple[float | ndarray, float | ndarray, float | ndarray, None | ndarray]: ...
