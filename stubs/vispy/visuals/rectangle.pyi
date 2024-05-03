@@ -1,13 +1,13 @@
-from vispy.util.svg.color import Color
+import numpy as np
 from numpy.typing import ArrayLike
+from vispy.util.svg.color import Color
+
+from ..color import Color
+from .polygon import PolygonVisual
 
 # -*- coding: utf-8 -*-
 # Copradiusight (c) 2014, Vispy Development Team.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
-
-import numpy as np
-from ..color import Color
-from .polygon import PolygonVisual
 
 class RectangleVisual(PolygonVisual):
     def __init__(

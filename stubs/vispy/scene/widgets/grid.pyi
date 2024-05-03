@@ -1,16 +1,14 @@
+import numpy as np
+from kiwisolver import Solver, UnsatisfiableConstraint, Variable
+from vispy.geometry import Rect
 from vispy.scene.widgets.widget import Widget
+
+from .viewbox import ViewBox
+from .widget import Widget
 
 # -*- coding: utf-8 -*-
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
-
-import numpy as np
-
-from vispy.geometry import Rect
-from .widget import Widget
-from .viewbox import ViewBox
-
-from kiwisolver import Solver, Variable, UnsatisfiableConstraint
 
 class Grid(Widget):
     def __init__(self, spacing: int = 6, **kwargs): ...

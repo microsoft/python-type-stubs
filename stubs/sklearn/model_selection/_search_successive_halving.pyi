@@ -1,53 +1,30 @@
-from typing import (
-    Callable,
-    ClassVar,
-    Iterable,
-    Iterator,
-    Literal,
-    Mapping,
-    Sequence,
-    TypeVar,
-)
-from numpy.random import RandomState
-from ..base import BaseEstimator
-from ._split import BaseShuffleSplit
-from ._split import check_cv as check_cv
-from copy import deepcopy as deepcopy
-from ..svm._classes import SVC
 from abc import abstractmethod as abstractmethod
-from numpy import ndarray
-from numbers import Integral as Integral
-from ..base import is_classifier as is_classifier
-from ..utils import resample as resample
-from . import ParameterGrid as ParameterGrid, ParameterSampler as ParameterSampler
-from ..utils.multiclass import (
-    check_classification_targets as check_classification_targets,
-)
+from copy import deepcopy as deepcopy
 from math import ceil as ceil, floor as floor, log as log
+from numbers import Integral as Integral
+from typing import Callable, ClassVar, Iterable, Iterator, Literal, Mapping, Sequence, TypeVar
+
+from numpy import ndarray
+from numpy.random import RandomState
+
+from .._typing import ArrayLike, Float, Int, MatrixLike
+from ..base import BaseEstimator, is_classifier as is_classifier
+from ..svm._classes import SVC
+from ..utils import resample as resample
+from ..utils.multiclass import check_classification_targets as check_classification_targets
+from . import BaseCrossValidator, ParameterGrid as ParameterGrid, ParameterSampler as ParameterSampler
 from ._search import BaseSearchCV
-from .._typing import MatrixLike, ArrayLike, Int, Float
-from . import BaseCrossValidator
+from ._split import BaseShuffleSplit, check_cv as check_cv
 
-BaseSuccessiveHalving_Self = TypeVar(
-    "BaseSuccessiveHalving_Self", bound="BaseSuccessiveHalving"
-)
-
+BaseSuccessiveHalving_Self = TypeVar("BaseSuccessiveHalving_Self", bound="BaseSuccessiveHalving")
 
 import numpy as np
 
-
 __all__ = ["HalvingGridSearchCV", "HalvingRandomSearchCV"]
 
-
 class _SubsampleMetaSplitter:
-    def __init__(self, *, base_cv, fraction, subsample_test, random_state) -> None:
-        ...
-
-    def split(
-        self, X: ndarray, y: ndarray, groups=None
-    ) -> Iterator[tuple[ndarray, ndarray]]:
-        ...
-
+    def __init__(self, *, base_cv, fraction, subsample_test, random_state) -> None: ...
+    def split(self, X: ndarray, y: ndarray, groups=None) -> Iterator[tuple[ndarray, ndarray]]: ...
 
 class BaseSuccessiveHalving(BaseSearchCV):
     def __init__(
@@ -67,18 +44,14 @@ class BaseSuccessiveHalving(BaseSearchCV):
         resource: str = "n_samples",
         factor: int = 3,
         aggressive_elimination: bool = False,
-    ) -> None:
-        ...
-
+    ) -> None: ...
     def fit(
         self: BaseSuccessiveHalving_Self,
         X: MatrixLike,
         y: None | MatrixLike | ArrayLike = None,
         groups: None | ArrayLike = None,
         **fit_params,
-    ) -> BaseSuccessiveHalving_Self:
-        ...
-
+    ) -> BaseSuccessiveHalving_Self: ...
 
 class HalvingGridSearchCV(BaseSuccessiveHalving):
     feature_names_in_: ndarray = ...
@@ -122,9 +95,7 @@ class HalvingGridSearchCV(BaseSuccessiveHalving):
         random_state: RandomState | None | Int = None,
         n_jobs: None | int = None,
         verbose: Int = 0,
-    ) -> None:
-        ...
-
+    ) -> None: ...
 
 class HalvingRandomSearchCV(BaseSuccessiveHalving):
     feature_names_in_: ndarray = ...
@@ -169,5 +140,4 @@ class HalvingRandomSearchCV(BaseSuccessiveHalving):
         random_state: RandomState | None | Int = None,
         n_jobs: None | int = None,
         verbose: Int = 0,
-    ) -> None:
-        ...
+    ) -> None: ...

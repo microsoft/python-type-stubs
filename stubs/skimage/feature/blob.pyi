@@ -1,14 +1,13 @@
-from numpy.typing import NDArray
 import math
 
 import numpy as np
 import scipy.ndimage as ndi
+from numpy.typing import NDArray
 from scipy import spatial
 
 from .._shared.filters import gaussian
 from .._shared.utils import _supported_float_type, check_nD
 from ..transform import integral_image
-
 from .peak import peak_local_max
 
 # This basic blob detection algorithm is based on:
@@ -29,7 +28,7 @@ def blob_dog(
     overlap: float = 0.5,
     *,
     threshold_rel: float | None = None,
-    exclude_border=False
+    exclude_border=False,
 ): ...
 def blob_log(
     image: NDArray,
@@ -41,7 +40,7 @@ def blob_log(
     log_scale: bool = False,
     *,
     threshold_rel: float | None = None,
-    exclude_border=False
+    exclude_border=False,
 ): ...
 def blob_doh(
     image,
@@ -52,5 +51,5 @@ def blob_doh(
     overlap: float = 0.5,
     log_scale: bool = False,
     *,
-    threshold_rel: float | None = None
+    threshold_rel: float | None = None,
 ): ...

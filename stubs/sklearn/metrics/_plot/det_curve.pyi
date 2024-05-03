@@ -1,13 +1,14 @@
 from typing import Literal
-from ...base import BaseEstimator
-from matplotlib.axes import Axes
-from matplotlib.artist import Artist
-from ...utils import check_matplotlib_support as check_matplotlib_support
-from ..._typing import ArrayLike, MatrixLike
-from .. import det_curve as det_curve
-from matplotlib.figure import Figure
-import scipy as sp
 
+import scipy as sp
+from matplotlib.artist import Artist
+from matplotlib.axes import Axes
+from matplotlib.figure import Figure
+
+from ..._typing import ArrayLike, MatrixLike
+from ...base import BaseEstimator
+from ...utils import check_matplotlib_support as check_matplotlib_support
+from .. import det_curve as det_curve
 
 class DetCurveDisplay:
     figure_: Figure = ...
@@ -21,9 +22,7 @@ class DetCurveDisplay:
         fnr: ArrayLike,
         estimator_name: None | str = None,
         pos_label: None | str | int = None,
-    ) -> None:
-        ...
-
+    ) -> None: ...
     @classmethod
     def from_estimator(
         cls,
@@ -32,16 +31,12 @@ class DetCurveDisplay:
         y: ArrayLike,
         *,
         sample_weight: None | ArrayLike = None,
-        response_method: Literal[
-            "predict_proba", "decision_function", "auto", "auto"
-        ] = "auto",
+        response_method: Literal["predict_proba", "decision_function", "auto", "auto"] = "auto",
         pos_label: None | str | int = None,
         name: None | str = None,
         ax: None | Axes = None,
         **kwargs,
-    ) -> DetCurveDisplay:
-        ...
-
+    ) -> DetCurveDisplay: ...
     @classmethod
     def from_predictions(
         cls,
@@ -53,10 +48,5 @@ class DetCurveDisplay:
         name: None | str = None,
         ax: None | Axes = None,
         **kwargs,
-    ) -> DetCurveDisplay:
-        ...
-
-    def plot(
-        self, ax: None | Axes = None, *, name: None | str = None, **kwargs
-    ) -> DetCurveDisplay:
-        ...
+    ) -> DetCurveDisplay: ...
+    def plot(self, ax: None | Axes = None, *, name: None | str = None, **kwargs) -> DetCurveDisplay: ...

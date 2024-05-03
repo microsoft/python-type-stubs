@@ -1,8 +1,8 @@
 import itertools as it
 from functools import partial
 
-from ...classes.graph import Graph
 from ...algorithms import bridges
+from ...classes.graph import Graph
 from ...utils import arbitrary_element, not_implemented_for
 
 __all__ = [

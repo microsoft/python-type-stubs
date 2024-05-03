@@ -1,5 +1,5 @@
-from vispy.util.svg.transform import Transform
 from numpy.typing import ArrayLike
+from vispy.util.svg.transform import Transform
 
 # -*- coding: utf-8 -*-
 # -----------------------------------------------------------------------------

@@ -1,20 +1,20 @@
+import math
+from numbers import Real as Real
 from typing import ClassVar, Literal
+
+import numpy as np
+from numpy import ndarray
 from numpy.random import RandomState
 from scipy.special import betaln as betaln, digamma as digamma, gammaln as gammaln
-from ._base import BaseMixture
-from numpy import ndarray
-from ..utils._param_validation import Interval as Interval, StrOptions as StrOptions
-from numbers import Real as Real
-from .._typing import Int, Float, ArrayLike
+
+from .._typing import ArrayLike, Float, Int
 from ..utils import check_array as check_array
+from ..utils._param_validation import Interval as Interval, StrOptions as StrOptions
+from ._base import BaseMixture
 
 # Author: Wei Xue <xuewei4d@gmail.com>
 #         Thierry Guillemot <thierry.guillemot.work@gmail.com>
 # License: BSD 3 clause
-
-import math
-import numpy as np
-
 
 class BayesianGaussianMixture(BaseMixture):
     feature_names_in_: ndarray = ...
@@ -47,9 +47,7 @@ class BayesianGaussianMixture(BaseMixture):
         reg_covar: Float = 1e-6,
         max_iter: Int = 100,
         n_init: Int = 1,
-        init_params: Literal[
-            "kmeans", "k-means++", "random", "random_from_data", "kmeans"
-        ] = "kmeans",
+        init_params: Literal["kmeans", "k-means++", "random", "random_from_data", "kmeans"] = "kmeans",
         weight_concentration_prior_type: Literal[
             "dirichlet_process", "dirichlet_distribution", "dirichlet_process"
         ] = "dirichlet_process",
@@ -62,5 +60,4 @@ class BayesianGaussianMixture(BaseMixture):
         warm_start: bool = False,
         verbose: Int = 0,
         verbose_interval: Int = 10,
-    ) -> None:
-        ...
+    ) -> None: ...

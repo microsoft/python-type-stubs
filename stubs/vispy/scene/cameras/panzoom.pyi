@@ -1,20 +1,18 @@
-from vispy.util.svg.shapes import Rect
+import numpy as np
 from vispy.util.event import Event
+from vispy.util.svg.shapes import Rect
+
+from ...geometry import Rect
+from ...visuals.transforms import MatrixTransform, STTransform
+from .base_camera import BaseCamera
 
 # -*- coding: utf-8 -*-
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 
-import numpy as np
-
-from .base_camera import BaseCamera
-from ...geometry import Rect
-from ...visuals.transforms import STTransform, MatrixTransform
-
 DEFAULT_RECT_TUPLE = ...
 
 class PanZoomCamera(BaseCamera):
-
     _state_props = ...
 
     def __init__(self, rect: Rect = ..., aspect: None | float = None, **kwargs): ...

@@ -1,19 +1,18 @@
-from typing import Literal
-from matplotlib.colors import Colormap
 from itertools import product as product
-from ...base import BaseEstimator
-from numpy import ndarray
-from matplotlib.axes import Axes
-from ...utils.multiclass import unique_labels as unique_labels
-from ...utils import check_matplotlib_support as check_matplotlib_support
-from ..._typing import MatrixLike, ArrayLike
-from .. import confusion_matrix
-from ...base import is_classifier as is_classifier
-from matplotlib.image import AxesImage
-from matplotlib.figure import Figure
+from typing import Literal
 
 import numpy as np
+from matplotlib.axes import Axes
+from matplotlib.colors import Colormap
+from matplotlib.figure import Figure
+from matplotlib.image import AxesImage
+from numpy import ndarray
 
+from ..._typing import ArrayLike, MatrixLike
+from ...base import BaseEstimator, is_classifier as is_classifier
+from ...utils import check_matplotlib_support as check_matplotlib_support
+from ...utils.multiclass import unique_labels as unique_labels
+from .. import confusion_matrix
 
 class ConfusionMatrixDisplay:
     figure_: Figure = ...
@@ -21,26 +20,19 @@ class ConfusionMatrixDisplay:
     text_: None | ndarray = ...
     im_: AxesImage = ...
 
-    def __init__(
-        self, confusion_matrix: MatrixLike, *, display_labels: None | ArrayLike = None
-    ) -> None:
-        ...
-
+    def __init__(self, confusion_matrix: MatrixLike, *, display_labels: None | ArrayLike = None) -> None: ...
     def plot(
         self,
         *,
         include_values: bool = True,
         cmap: Colormap | str = "viridis",
-        xticks_rotation: float
-        | Literal["vertical", "horizontal", "horizontal"] = "horizontal",
+        xticks_rotation: float | Literal["vertical", "horizontal", "horizontal"] = "horizontal",
         values_format: None | str = None,
         ax: None | Axes = None,
         colorbar: bool = True,
         im_kw: None | dict = None,
         text_kw: None | dict = None,
-    ) -> ConfusionMatrixDisplay:
-        ...
-
+    ) -> ConfusionMatrixDisplay: ...
     @classmethod
     def from_estimator(
         cls,
@@ -53,17 +45,14 @@ class ConfusionMatrixDisplay:
         normalize: Literal["true", "pred", "all"] | None = None,
         display_labels: None | ArrayLike = None,
         include_values: bool = True,
-        xticks_rotation: float
-        | Literal["vertical", "horizontal", "horizontal"] = "horizontal",
+        xticks_rotation: float | Literal["vertical", "horizontal", "horizontal"] = "horizontal",
         values_format: None | str = None,
         cmap: Colormap | str = "viridis",
         ax: None | Axes = None,
         colorbar: bool = True,
         im_kw: None | dict = None,
         text_kw: None | dict = None,
-    ) -> ConfusionMatrixDisplay:
-        ...
-
+    ) -> ConfusionMatrixDisplay: ...
     @classmethod
     def from_predictions(
         cls,
@@ -75,13 +64,11 @@ class ConfusionMatrixDisplay:
         normalize: Literal["true", "pred", "all"] | None = None,
         display_labels: None | ArrayLike = None,
         include_values: bool = True,
-        xticks_rotation: float
-        | Literal["vertical", "horizontal", "horizontal"] = "horizontal",
+        xticks_rotation: float | Literal["vertical", "horizontal", "horizontal"] = "horizontal",
         values_format: None | str = None,
         cmap: Colormap | str = "viridis",
         ax: None | Axes = None,
         colorbar: bool = True,
         im_kw: None | dict = None,
         text_kw: None | dict = None,
-    ) -> ConfusionMatrixDisplay:
-        ...
+    ) -> ConfusionMatrixDisplay: ...

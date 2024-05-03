@@ -1,3 +1,6 @@
+import math
+
+import numpy as np
 from numpy.typing import ArrayLike
 
 #
@@ -61,10 +64,6 @@ from numpy.typing import ArrayLike
 # those of the authors and should not be interpreted as representing official
 # policies, either expressed or implied, of Nicolas P. Rougier.
 #
-
-import math
-
-import numpy as np
 
 curve_distance_epsilon: float = ...
 curve_collinearity_epsilon: float = ...

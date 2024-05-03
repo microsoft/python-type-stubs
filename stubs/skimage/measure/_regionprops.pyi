@@ -1,16 +1,14 @@
-from skimage.measure._regionprops import RegionProperties
-from numpy.typing import ArrayLike
-from typing import Mapping
 import inspect
 from functools import wraps
-from math import atan2
-from math import pi as PI
-from math import sqrt
+from math import atan2, pi as PI, sqrt
+from typing import Mapping
 from warnings import warn
 
 import numpy as np
+from numpy.typing import ArrayLike
 from scipy import ndimage as ndi
 from scipy.spatial.distance import pdist
+from skimage.measure._regionprops import RegionProperties
 
 from . import _moments
 from ._find_contours import find_contours
@@ -38,16 +36,7 @@ def only2d(method): ...
 def _inertia_eigvals_to_axes_lengths_3D(inertia_tensor_eigvals): ...
 
 class RegionProperties:
-    def __init__(
-        self,
-        slice,
-        label,
-        label_image,
-        intensity_image,
-        cache_active,
-        *,
-        extra_properties=None
-    ): ...
+    def __init__(self, slice, label, label_image, intensity_image, cache_active, *, extra_properties=None): ...
     def __getattr__(self, attr): ...
     def __setattr__(self, name, value): ...
     @property
@@ -162,15 +151,10 @@ def regionprops_table(
     *,
     cache: bool = True,
     separator: str = "-",
-    extra_properties=None
+    extra_properties=None,
 ) -> Mapping: ...
 def regionprops(
-    label_image,
-    intensity_image=None,
-    cache: bool = True,
-    coordinates=None,
-    *,
-    extra_properties=None
+    label_image, intensity_image=None, cache: bool = True, coordinates=None, *, extra_properties=None
 ) -> list[RegionProperties]: ...
 def _parse_docs(): ...
 def _install_properties_docs(): ...

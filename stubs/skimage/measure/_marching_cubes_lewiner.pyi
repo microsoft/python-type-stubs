@@ -14,7 +14,7 @@ def marching_cubes(
     step_size: int = 1,
     allow_degenerate: bool = True,
     method: str = "lewiner",
-    mask=None
+    mask=None,
 ): ...
 def _marching_cubes_lewiner(
     volume,

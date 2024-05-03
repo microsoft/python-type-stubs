@@ -1,31 +1,25 @@
-from typing import Any, Callable, ClassVar, Literal, TypeVar
-from ..exceptions import DataConversionWarning as DataConversionWarning
-from numpy import ndarray
-from ..utils._param_validation import (
-    Interval as Interval,
-    HasMethods as HasMethods,
-    StrOptions as StrOptions,
-)
 from numbers import Integral as Integral, Real as Real
+from typing import Any, Callable, ClassVar, Literal, TypeVar
+
 from joblib import Memory
-from ..neighbors import NearestNeighbors as NearestNeighbors
-from ..metrics import pairwise_distances as pairwise_distances
+from numpy import ndarray
+from scipy.sparse import SparseEfficiencyWarning as SparseEfficiencyWarning, issparse as issparse
+
+from .._typing import ArrayLike, Float, Int, MatrixLike
 from ..base import BaseEstimator, ClusterMixin
-from scipy.sparse import (
-    issparse as issparse,
-    SparseEfficiencyWarning as SparseEfficiencyWarning,
-)
+from ..exceptions import DataConversionWarning as DataConversionWarning
+from ..metrics import pairwise_distances as pairwise_distances
 from ..metrics.pairwise import PAIRWISE_BOOLEAN_FUNCTIONS as PAIRWISE_BOOLEAN_FUNCTIONS
-from .._typing import Float, Int, MatrixLike, ArrayLike
+from ..neighbors import NearestNeighbors as NearestNeighbors
 from ..utils import gen_batches as gen_batches, get_chunk_n_rows as get_chunk_n_rows
+from ..utils._param_validation import HasMethods as HasMethods, Interval as Interval, StrOptions as StrOptions
 from ..utils.validation import check_memory as check_memory
 
 OPTICS_Self = TypeVar("OPTICS_Self", bound="OPTICS")
 
-
 import warnings
-import numpy as np
 
+import numpy as np
 
 class OPTICS(ClusterMixin, BaseEstimator):
     feature_names_in_: ndarray = ...
@@ -56,12 +50,8 @@ class OPTICS(ClusterMixin, BaseEstimator):
         leaf_size: Int = 30,
         memory: None | Memory | str = None,
         n_jobs: None | Int = None,
-    ) -> None:
-        ...
-
-    def fit(self: OPTICS_Self, X: MatrixLike, y: Any = None) -> OPTICS_Self:
-        ...
-
+    ) -> None: ...
+    def fit(self: OPTICS_Self, X: MatrixLike, y: Any = None) -> OPTICS_Self: ...
 
 def compute_optics_graph(
     X: MatrixLike,
@@ -74,20 +64,14 @@ def compute_optics_graph(
     algorithm: Literal["auto", "ball_tree", "kd_tree", "brute"],
     leaf_size: Int,
     n_jobs: Int,
-) -> tuple[ndarray, ndarray, ndarray, ndarray]:
-    ...
-
-
+) -> tuple[ndarray, ndarray, ndarray, ndarray]: ...
 def cluster_optics_dbscan(
     *,
     reachability: ArrayLike,
     core_distances: ArrayLike,
     ordering: ArrayLike,
     eps: Float,
-) -> ndarray:
-    ...
-
-
+) -> ndarray: ...
 def cluster_optics_xi(
     *,
     reachability: ArrayLike,
@@ -97,5 +81,4 @@ def cluster_optics_xi(
     min_cluster_size: float | None | int = None,
     xi: float = 0.05,
     predecessor_correction: bool = True,
-) -> tuple[ndarray, ndarray]:
-    ...
+) -> tuple[ndarray, ndarray]: ...

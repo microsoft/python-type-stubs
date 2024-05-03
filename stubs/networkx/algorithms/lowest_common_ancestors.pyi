@@ -1,7 +1,7 @@
-from typing import Any
 from collections import defaultdict
 from collections.abc import Mapping, Set
 from itertools import combinations_with_replacement
+from typing import Any
 
 from ..classes.graph import Graph
 from ..utils import UnionFind, arbitrary_element, not_implemented_for

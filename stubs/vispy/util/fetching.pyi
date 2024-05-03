@@ -2,14 +2,13 @@
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 
-from math import log
 import os
-from os import path as op
-import sys
 import shutil
+import sys
 import time
-
 import urllib.request
+from math import log
+from os import path as op
 
 from ..util.config import config
 
@@ -22,7 +21,6 @@ def load_data_file(fname: str, directory: str | None = None, force_download: str
 # File downloading (most adapted from mne-python)
 
 class ProgressBar(object):
-
     spinner_symbols: list = ...
     template: str = ...
 

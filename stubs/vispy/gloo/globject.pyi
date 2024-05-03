@@ -7,7 +7,6 @@
 from .glir import GlirQueue
 
 class GLObject(object):
-
     # Type of GLIR object, reset in subclasses
     _GLIR_TYPE: str = ...
 

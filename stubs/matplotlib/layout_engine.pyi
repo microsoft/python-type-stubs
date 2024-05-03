@@ -1,11 +1,12 @@
 from typing import Sequence
+
 from ._layoutgrid import LayoutGrid
 from .figure import Figure, FigureBase
 from .gridspec import GridSpecBase
 
 class LayoutEngine:
     def __init__(self, **kwargs) -> None: ...
-    def set(self, **kwargs)-> None: ...
+    def set(self, **kwargs) -> None: ...
     @property
     def colorbar_gridspec(self) -> bool: ...
     @property
@@ -15,23 +16,10 @@ class LayoutEngine:
 
 class TightLayoutEngine(LayoutEngine):
     def __init__(
-        self,
-        *,
-        pad: float = 1.08,
-        h_pad: float = ...,
-        w_pad: float = ...,
-        rect: Sequence[float] = ...,
-        **kwargs
+        self, *, pad: float = 1.08, h_pad: float = ..., w_pad: float = ..., rect: Sequence[float] = ..., **kwargs
     ) -> None: ...
     def execute(self, fig: Figure) -> None: ...
-    def set(
-        self,
-        *,
-        pad: float = 1.08,
-        w_pad: float = ...,
-        h_pad: float = ...,
-        rect: Sequence[float] = ...
-    ) -> None: ...
+    def set(self, *, pad: float = 1.08, w_pad: float = ..., h_pad: float = ..., rect: Sequence[float] = ...) -> None: ...
 
 class ConstrainedLayoutEngine(LayoutEngine):
     def __init__(
@@ -43,17 +31,9 @@ class ConstrainedLayoutEngine(LayoutEngine):
         wspace: float = ...,
         rect: Sequence[float] = ...,
         compress: bool = ...,
-        **kwargs
+        **kwargs,
     ) -> None: ...
-    def execute(
-        self, fig: Figure
-    ) -> dict[str | FigureBase | GridSpecBase, bool | LayoutGrid]: ...
+    def execute(self, fig: Figure) -> dict[str | FigureBase | GridSpecBase, bool | LayoutGrid]: ...
     def set(
-        self,
-        *,
-        h_pad: float = ...,
-        w_pad: float = ...,
-        hspace: float = ...,
-        wspace: float = ...,
-        rect: tuple = ...
+        self, *, h_pad: float = ..., w_pad: float = ..., hspace: float = ..., wspace: float = ..., rect: tuple = ...
     ) -> None: ...

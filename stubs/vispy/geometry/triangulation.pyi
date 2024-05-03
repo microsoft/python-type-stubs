@@ -1,11 +1,10 @@
+from collections import OrderedDict
+from itertools import permutations
+
+import numpy as np
 from numpy.typing import ArrayLike
 
 # -*- coding: utf-8 -*-
-
-from itertools import permutations
-import numpy as np
-
-from collections import OrderedDict
 
 class Triangulation(object):
     def __init__(self, pts: ArrayLike, edges: ArrayLike): ...

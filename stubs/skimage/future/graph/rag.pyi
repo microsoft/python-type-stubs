@@ -1,11 +1,11 @@
-from skimage.future.graph.rag import RAG
-from typing import Mapping, Callable, Sequence, Literal
+import math
+from typing import Callable, Literal, Mapping, Sequence
+
 import networkx as nx
 import numpy as np
 from numpy.lib.stride_tricks import as_strided
-from scipy import ndimage as ndi
-from scipy import sparse
-import math
+from scipy import ndimage as ndi, sparse
+from skimage.future.graph.rag import RAG
 
 from ..._shared.version_requirements import require
 

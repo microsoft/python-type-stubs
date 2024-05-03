@@ -1,6 +1,7 @@
-from typing import Sequence
-from cycler import Cycler
 import ast
+from typing import Sequence
+
+from cycler import Cycler
 
 interactive_bk = ...
 non_interactive_bk = ...
@@ -8,12 +9,7 @@ all_backends = ...
 
 class ValidateInStrings:
     def __init__(
-        self,
-        key: str,
-        valid: Sequence[str] | _ignorecase,
-        ignorecase: bool = ...,
-        *,
-        _deprecated_since=...
+        self, key: str, valid: Sequence[str] | _ignorecase, ignorecase: bool = ..., *, _deprecated_since=...
     ) -> None: ...
     def __call__(self, s: str) -> str: ...
 

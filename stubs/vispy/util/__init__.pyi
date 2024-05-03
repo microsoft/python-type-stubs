@@ -2,22 +2,17 @@
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 
-from .logs import (
-    logger as logger,
-    set_log_level as set_log_level,
-    use_log_level as use_log_level,
-)  # noqa
-from .config import (
-    config as config,
-    sys_info as sys_info,
-    save_config as save_config,
-    get_config_keys as get_config_keys,  # noqa
-    set_data_dir as set_data_dir,
+from . import fonts as fonts, transforms as transforms  # noqa
+from .bunch import SimpleBunch as SimpleBunch  # noqa
+from .config import (  # noqa
     _TempDir as _TempDir,
-)  # noqa
+    config as config,
+    get_config_keys as get_config_keys,
+    save_config as save_config,
+    set_data_dir as set_data_dir,
+    sys_info as sys_info,
+)
 from .fetching import load_data_file as load_data_file  # noqa
 from .frozen import Frozen as Frozen  # noqa
-from . import fonts as fonts  # noqa
-from . import transforms as transforms  # noqa
-from .wrappers import use as use, run_subprocess as run_subprocess  # noqa
-from .bunch import SimpleBunch as SimpleBunch  # noqa
+from .logs import logger as logger, set_log_level as set_log_level, use_log_level as use_log_level  # noqa
+from .wrappers import run_subprocess as run_subprocess, use as use  # noqa

@@ -10,7 +10,6 @@ from __future__ import division as division
 import os as os
 
 from ...util import config as config, logger as logger
-
 from ._constants import *  # noqa
 from ._proxy import BaseGLProxy as BaseGLProxy
 

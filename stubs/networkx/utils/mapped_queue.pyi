@@ -3,7 +3,6 @@ import heapq
 __all__ = ["MappedQueue"]
 
 class _HeapElement:
-
     __slots__: list = ...
 
     def __init__(self, priority, element): ...

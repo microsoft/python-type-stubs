@@ -1,24 +1,21 @@
-from .backend_bases import RendererBase
-from .transforms import Transform
-from typing import Sequence
-from ._typing import *
-from .path import Path
-from .patches import Patch
-from .axis import Axis, XAxis, YAxis
-from .axes import Axes
-
 from collections import OrderedDict
-from functools import partial
-
 from collections.abc import MutableMapping
+from functools import partial
+from typing import Sequence
+
+from ._typing import *
 from .artist import allow_rasterization
+from .axes import Axes
+from .axis import Axis, XAxis, YAxis
+from .backend_bases import RendererBase
+from .patches import Patch
+from .path import Path
+from .transforms import Transform
 
 class Spine(Patch):
     def __str__(self) -> str: ...
     def __init__(self, axes: Axes, spine_type: str, path: Path, **kwargs) -> None: ...
-    def set_patch_arc(
-        self, center: Sequence[float], radius: float, theta1: float, theta2: float
-    ) -> None: ...
+    def set_patch_arc(self, center: Sequence[float], radius: float, theta1: float, theta2: float) -> None: ...
     def set_patch_circle(self, center: Sequence[float], radius: float) -> None: ...
     def set_patch_line(self): ...
     def get_patch_transform(self): ...
@@ -37,14 +34,7 @@ class Spine(Patch):
     def linear_spine(cls, axes, spine_type, **kwargs) -> Spine: ...
     @classmethod
     def arc_spine(
-        cls,
-        axes,
-        spine_type,
-        center: Sequence[float],
-        radius: float,
-        theta1: float,
-        theta2: float,
-        **kwargs
+        cls, axes, spine_type, center: Sequence[float], radius: float, theta1: float, theta2: float, **kwargs
     ) -> Spine: ...
     @classmethod
     def circular_spine(cls, axes, center, radius, **kwargs): ...

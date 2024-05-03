@@ -6,12 +6,7 @@ from __future__ import division as division
 
 __all__ = ["use", "sys_info", "set_log_level", "test"]
 
-from .util import (
-    config as config,
-    set_log_level as set_log_level,
-    keys as keys,
-    sys_info as sys_info,
-)  # noqa
-from .util.wrappers import use as use, test as test  # noqa
+from .util import config as config, keys as keys, set_log_level as set_log_level, sys_info as sys_info  # noqa
+from .util.wrappers import test as test, use as use  # noqa
 
 def _get_sg_image_scraper(): ...

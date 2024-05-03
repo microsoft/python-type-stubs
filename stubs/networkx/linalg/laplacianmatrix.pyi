@@ -1,5 +1,6 @@
-from ..classes.digraph import DiGraph
 from numpy.typing import ArrayLike
+
+from ..classes.digraph import DiGraph
 from ..classes.graph import Graph
 from ..utils import not_implemented_for
 
@@ -12,9 +13,7 @@ __all__ = [
 ]
 
 def laplacian_matrix(G: Graph, nodelist: ArrayLike | None = None, weight="weight"): ...
-def normalized_laplacian_matrix(
-    G: Graph, nodelist: ArrayLike | None = None, weight="weight"
-): ...
+def normalized_laplacian_matrix(G: Graph, nodelist: ArrayLike | None = None, weight="weight"): ...
 def total_spanning_tree_weight(G: Graph, weight: str | None = None) -> float: ...
 
 ###############################################################################

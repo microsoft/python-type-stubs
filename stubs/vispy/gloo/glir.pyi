@@ -4,17 +4,17 @@
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 # -----------------------------------------------------------------------------
 
-import os
-import sys
-import re
 import json
+import os
+import re
+import sys
 import weakref
 from distutils.version import LooseVersion
 
 import numpy as np
 
-from . import gl
 from ..util import logger
+from . import gl
 
 # TODO: expose these via an extension space in .gl?
 _internalformats: list = ...
@@ -103,7 +103,6 @@ class GlirGeometryShader(GlirShader):
     def __init__(self, *args, **kwargs): ...
 
 class GlirProgram(GlirObject):
-
     UTYPEMAP: dict = ...
 
     ATYPEMAP: dict = ...
@@ -211,7 +210,6 @@ class GlirRenderBuffer(GlirObject):
     def set_size(self, shape, format): ...
 
 class GlirFrameBuffer(GlirObject):
-
     # todo: on ES 2.0 -> gl.gl_RGBA4
     _formats: dict = ...
 

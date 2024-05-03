@@ -35,14 +35,14 @@ jobs:
         run:
           python -m mypy .
 
-  lint:
+  hygiene:
     runs-on: ubuntu-latest
     timeout-minutes: 10
 
     steps:
       - name: Check out code
         uses: actions/checkout@v2
-        
+
       - name: Run isort
         uses: isort/isort-action@v1
 
@@ -50,4 +50,3 @@ jobs:
         uses: psf/black@stable
         with:
           options: "--check --verbose"
-          

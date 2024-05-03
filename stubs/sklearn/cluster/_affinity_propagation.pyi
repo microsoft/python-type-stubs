@@ -1,34 +1,26 @@
-from typing import Any, ClassVar, Literal, TypeVar
-from numpy.random import RandomState
-from ..exceptions import ConvergenceWarning as ConvergenceWarning
-from numpy import ndarray
-from ..utils._param_validation import Interval as Interval, StrOptions as StrOptions
 from numbers import Integral as Integral, Real as Real
+from typing import Any, ClassVar, Literal, TypeVar
+
+from numpy import ndarray
+from numpy.random import RandomState
+
 from .._config import config_context as config_context
-from ..metrics import (
-    euclidean_distances as euclidean_distances,
-    pairwise_distances_argmin as pairwise_distances_argmin,
-)
+from .._typing import ArrayLike, Float, Int, MatrixLike
 from ..base import BaseEstimator, ClusterMixin
-from .._typing import MatrixLike, ArrayLike, Int, Float
-from ..utils import (
-    as_float_array as as_float_array,
-    check_random_state as check_random_state,
-)
+from ..exceptions import ConvergenceWarning as ConvergenceWarning
+from ..metrics import euclidean_distances as euclidean_distances, pairwise_distances_argmin as pairwise_distances_argmin
+from ..utils import as_float_array as as_float_array, check_random_state as check_random_state
+from ..utils._param_validation import Interval as Interval, StrOptions as StrOptions
 from ..utils.validation import check_is_fitted as check_is_fitted
 
-AffinityPropagation_Self = TypeVar(
-    "AffinityPropagation_Self", bound="AffinityPropagation"
-)
+AffinityPropagation_Self = TypeVar("AffinityPropagation_Self", bound="AffinityPropagation")
 
 import warnings
 
 import numpy as np
 
-
 ###############################################################################
 # Public API
-
 
 def affinity_propagation(
     S: MatrixLike,
@@ -41,9 +33,7 @@ def affinity_propagation(
     verbose: bool = False,
     return_n_iter: bool = False,
     random_state: RandomState | None | Int = None,
-) -> tuple[ndarray, ndarray, int] | tuple[ndarray, ndarray]:
-    ...
-
+) -> tuple[ndarray, ndarray, int] | tuple[ndarray, ndarray]: ...
 
 class AffinityPropagation(ClusterMixin, BaseEstimator):
     feature_names_in_: ndarray = ...
@@ -67,16 +57,7 @@ class AffinityPropagation(ClusterMixin, BaseEstimator):
         affinity: Literal["euclidean", "precomputed", "euclidean"] = "euclidean",
         verbose: bool = False,
         random_state: RandomState | None | Int = None,
-    ) -> None:
-        ...
-
-    def fit(
-        self: AffinityPropagation_Self, X: MatrixLike, y: Any = None
-    ) -> AffinityPropagation_Self:
-        ...
-
-    def predict(self, X: MatrixLike | ArrayLike) -> ndarray:
-        ...
-
-    def fit_predict(self, X: MatrixLike, y: Any = None) -> ndarray:
-        ...
+    ) -> None: ...
+    def fit(self: AffinityPropagation_Self, X: MatrixLike, y: Any = None) -> AffinityPropagation_Self: ...
+    def predict(self, X: MatrixLike | ArrayLike) -> ndarray: ...
+    def fit_predict(self, X: MatrixLike, y: Any = None) -> ndarray: ...

@@ -1,7 +1,7 @@
 from collections import deque
 
-from ...classes.graph import Graph
 from ...algorithms.flow.utils import build_residual_network
+from ...classes.graph import Graph
 from ...utils import pairwise
 
 __all__ = ["dinitz"]

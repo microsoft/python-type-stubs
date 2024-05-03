@@ -1,14 +1,15 @@
 # Python: 3.8.2 (tags/v3.8.2:7b3ab59, Feb 25 2020, 23:03:10) [MSC v.1916 64 bit (AMD64)]
 # Library: scipy, version: 1.6.2
 # Module: scipy.linalg._flapack, version: $Revision: $
-import typing
 import builtins as _mod_builtins
+import typing
 
 __doc__: str
 __file__: str
 __name__: str
 __package__: str
 __version__: bytes
+
 def cgbsv(kl, ku, ab, b, overwrite_ab=..., overwrite_b=...) -> typing.Any:
     "lub,piv,x,info = cgbsv(kl,ku,ab,b,[overwrite_ab,overwrite_b])\n\nWrapper for ``cgbsv``.\n\nParameters\n----------\nkl : input int\nku : input int\nab : input rank-2 array('F') with bounds (2*kl+ku+1,n)\nb : input rank-2 array('F') with bounds (n,nrhs)\n\nOther Parameters\n----------------\noverwrite_ab : input int, optional\n    Default: 0\noverwrite_b : input int, optional\n    Default: 0\n\nReturns\n-------\nlub : rank-2 array('F') with bounds (2*kl+ku+1,n) and ab storage\npiv : rank-1 array('i') with bounds (n)\nx : rank-2 array('F') with bounds (n,nrhs) and b storage\ninfo : int\n"
     ...
@@ -46,7 +47,7 @@ def cgeev(a, compute_vl=..., compute_vr=..., lwork=..., overwrite_a=...) -> typi
     ...
 
 def cgeev_lwork(n, compute_vl=..., compute_vr=...) -> typing.Any:
-    'work,info = cgeev_lwork(n,[compute_vl,compute_vr])\n\nWrapper for ``cgeev_lwork``.\n\nParameters\n----------\nn : input int\n\nOther Parameters\n----------------\ncompute_vl : input int, optional\n    Default: 1\ncompute_vr : input int, optional\n    Default: 1\n\nReturns\n-------\nwork : complex\ninfo : int\n'
+    "work,info = cgeev_lwork(n,[compute_vl,compute_vr])\n\nWrapper for ``cgeev_lwork``.\n\nParameters\n----------\nn : input int\n\nOther Parameters\n----------------\ncompute_vl : input int, optional\n    Default: 1\ncompute_vr : input int, optional\n    Default: 1\n\nReturns\n-------\nwork : complex\ninfo : int\n"
     ...
 
 def cgegv(*args, **kwds) -> typing.Any:
@@ -58,7 +59,7 @@ def cgehrd(a, lo=..., hi=..., lwork=..., overwrite_a=...) -> typing.Any:
     ...
 
 def cgehrd_lwork(n, lo=..., hi=...) -> typing.Any:
-    'work,info = cgehrd_lwork(n,[lo,hi])\n\nWrapper for ``cgehrd_lwork``.\n\nParameters\n----------\nn : input int\n\nOther Parameters\n----------------\nlo : input int, optional\n    Default: 0\nhi : input int, optional\n    Default: n-1\n\nReturns\n-------\nwork : complex\ninfo : int\n'
+    "work,info = cgehrd_lwork(n,[lo,hi])\n\nWrapper for ``cgehrd_lwork``.\n\nParameters\n----------\nn : input int\n\nOther Parameters\n----------------\nlo : input int, optional\n    Default: 0\nhi : input int, optional\n    Default: n-1\n\nReturns\n-------\nwork : complex\ninfo : int\n"
     ...
 
 def cgels(a, b, trans=..., lwork=..., overwrite_a=..., overwrite_b=...) -> typing.Any:
@@ -74,7 +75,7 @@ def cgelsd(a, b, lwork, size_rwork, size_iwork, cond=..., overwrite_a=..., overw
     ...
 
 def cgelsd_lwork(m, n, nrhs, cond=..., lwork=...) -> typing.Any:
-    'work,rwork,iwork,info = cgelsd_lwork(m,n,nrhs,[cond,lwork])\n\nWrapper for ``cgelsd_lwork``.\n\nParameters\n----------\nm : input int\nn : input int\nnrhs : input int\n\nOther Parameters\n----------------\ncond : input float, optional\n    Default: -1.0\nlwork : input int, optional\n    Default: -1\n\nReturns\n-------\nwork : complex\nrwork : float\niwork : int\ninfo : int\n'
+    "work,rwork,iwork,info = cgelsd_lwork(m,n,nrhs,[cond,lwork])\n\nWrapper for ``cgelsd_lwork``.\n\nParameters\n----------\nm : input int\nn : input int\nnrhs : input int\n\nOther Parameters\n----------------\ncond : input float, optional\n    Default: -1.0\nlwork : input int, optional\n    Default: -1\n\nReturns\n-------\nwork : complex\nrwork : float\niwork : int\ninfo : int\n"
     ...
 
 def cgelss(a, b, cond=..., lwork=..., overwrite_a=..., overwrite_b=...) -> typing.Any:
@@ -82,7 +83,7 @@ def cgelss(a, b, cond=..., lwork=..., overwrite_a=..., overwrite_b=...) -> typin
     ...
 
 def cgelss_lwork(m, n, nrhs, cond=..., lwork=...) -> typing.Any:
-    'work,info = cgelss_lwork(m,n,nrhs,[cond,lwork])\n\nWrapper for ``cgelss_lwork``.\n\nParameters\n----------\nm : input int\nn : input int\nnrhs : input int\n\nOther Parameters\n----------------\ncond : input float, optional\n    Default: -1.0\nlwork : input int, optional\n    Default: -1\n\nReturns\n-------\nwork : complex\ninfo : int\n'
+    "work,info = cgelss_lwork(m,n,nrhs,[cond,lwork])\n\nWrapper for ``cgelss_lwork``.\n\nParameters\n----------\nm : input int\nn : input int\nnrhs : input int\n\nOther Parameters\n----------------\ncond : input float, optional\n    Default: -1.0\nlwork : input int, optional\n    Default: -1\n\nReturns\n-------\nwork : complex\ninfo : int\n"
     ...
 
 def cgelsy(a, b, jptv, cond, lwork, overwrite_a=..., overwrite_b=...) -> typing.Any:
@@ -90,7 +91,7 @@ def cgelsy(a, b, jptv, cond, lwork, overwrite_a=..., overwrite_b=...) -> typing.
     ...
 
 def cgelsy_lwork(m, n, nrhs, cond, lwork=...) -> typing.Any:
-    'work,info = cgelsy_lwork(m,n,nrhs,cond,[lwork])\n\nWrapper for ``cgelsy_lwork``.\n\nParameters\n----------\nm : input int\nn : input int\nnrhs : input int\ncond : input float\n\nOther Parameters\n----------------\nlwork : input int, optional\n    Default: -1\n\nReturns\n-------\nwork : complex\ninfo : int\n'
+    "work,info = cgelsy_lwork(m,n,nrhs,cond,[lwork])\n\nWrapper for ``cgelsy_lwork``.\n\nParameters\n----------\nm : input int\nn : input int\nnrhs : input int\ncond : input float\n\nOther Parameters\n----------------\nlwork : input int, optional\n    Default: -1\n\nReturns\n-------\nwork : complex\ninfo : int\n"
     ...
 
 def cgemqrt(v, t, c, side=..., trans=..., overwrite_c=...) -> typing.Any:
@@ -106,7 +107,7 @@ def cgeqrf(a, lwork=..., overwrite_a=...) -> typing.Any:
     ...
 
 def cgeqrf_lwork(m, n) -> typing.Any:
-    'work,info = cgeqrf_lwork(m,n)\n\nWrapper for ``cgeqrf_lwork``.\n\nParameters\n----------\nm : input int\nn : input int\n\nReturns\n-------\nwork : complex\ninfo : int\n'
+    "work,info = cgeqrf_lwork(m,n)\n\nWrapper for ``cgeqrf_lwork``.\n\nParameters\n----------\nm : input int\nn : input int\n\nReturns\n-------\nwork : complex\ninfo : int\n"
     ...
 
 def cgeqrfp(a, lwork=..., overwrite_a=...) -> typing.Any:
@@ -114,7 +115,7 @@ def cgeqrfp(a, lwork=..., overwrite_a=...) -> typing.Any:
     ...
 
 def cgeqrfp_lwork(m, n) -> typing.Any:
-    'work,info = cgeqrfp_lwork(m,n)\n\nWrapper for ``cgeqrfp_lwork``.\n\nParameters\n----------\nm : input int\nn : input int\n\nReturns\n-------\nwork : complex\ninfo : int\n'
+    "work,info = cgeqrfp_lwork(m,n)\n\nWrapper for ``cgeqrfp_lwork``.\n\nParameters\n----------\nm : input int\nn : input int\n\nReturns\n-------\nwork : complex\ninfo : int\n"
     ...
 
 def cgeqrt(nb, a, overwrite_a=...) -> typing.Any:
@@ -134,7 +135,7 @@ def cgesdd(a, compute_uv=..., full_matrices=..., lwork=..., overwrite_a=...) -> 
     ...
 
 def cgesdd_lwork(m, n, compute_uv=..., full_matrices=...) -> typing.Any:
-    'work,info = cgesdd_lwork(m,n,[compute_uv,full_matrices])\n\nWrapper for ``cgesdd_lwork``.\n\nParameters\n----------\nm : input int\nn : input int\n\nOther Parameters\n----------------\ncompute_uv : input int, optional\n    Default: 1\nfull_matrices : input int, optional\n    Default: 1\n\nReturns\n-------\nwork : complex\ninfo : int\n'
+    "work,info = cgesdd_lwork(m,n,[compute_uv,full_matrices])\n\nWrapper for ``cgesdd_lwork``.\n\nParameters\n----------\nm : input int\nn : input int\n\nOther Parameters\n----------------\ncompute_uv : input int, optional\n    Default: 1\nfull_matrices : input int, optional\n    Default: 1\n\nReturns\n-------\nwork : complex\ninfo : int\n"
     ...
 
 def cgesv(a, b, overwrite_a=..., overwrite_b=...) -> typing.Any:
@@ -146,7 +147,7 @@ def cgesvd(a, compute_uv=..., full_matrices=..., lwork=..., overwrite_a=...) -> 
     ...
 
 def cgesvd_lwork(m, n, compute_uv=..., full_matrices=...) -> typing.Any:
-    'work,info = cgesvd_lwork(m,n,[compute_uv,full_matrices])\n\nWrapper for ``cgesvd_lwork``.\n\nParameters\n----------\nm : input int\nn : input int\n\nOther Parameters\n----------------\ncompute_uv : input int, optional\n    Default: 1\nfull_matrices : input int, optional\n    Default: 1\n\nReturns\n-------\nwork : complex\ninfo : int\n'
+    "work,info = cgesvd_lwork(m,n,[compute_uv,full_matrices])\n\nWrapper for ``cgesvd_lwork``.\n\nParameters\n----------\nm : input int\nn : input int\n\nOther Parameters\n----------------\ncompute_uv : input int, optional\n    Default: 1\nfull_matrices : input int, optional\n    Default: 1\n\nReturns\n-------\nwork : complex\ninfo : int\n"
     ...
 
 def cgesvx(a, b, fact=..., trans=..., af=..., ipiv=..., equed=..., r=..., c=..., overwrite_a=..., overwrite_b=...) -> typing.Any:
@@ -166,14 +167,27 @@ def cgetri(lu, piv, lwork=..., overwrite_lu=...) -> typing.Any:
     ...
 
 def cgetri_lwork(n) -> typing.Any:
-    'work,info = cgetri_lwork(n)\n\nWrapper for ``cgetri_lwork``.\n\nParameters\n----------\nn : input int\n\nReturns\n-------\nwork : complex\ninfo : int\n'
+    "work,info = cgetri_lwork(n)\n\nWrapper for ``cgetri_lwork``.\n\nParameters\n----------\nn : input int\n\nReturns\n-------\nwork : complex\ninfo : int\n"
     ...
 
 def cgetrs(lu, piv, b, trans=..., overwrite_b=...) -> typing.Any:
     "x,info = cgetrs(lu,piv,b,[trans,overwrite_b])\n\nWrapper for ``cgetrs``.\n\nParameters\n----------\nlu : input rank-2 array('F') with bounds (n,n)\npiv : input rank-1 array('i') with bounds (n)\nb : input rank-2 array('F') with bounds (n,nrhs)\n\nOther Parameters\n----------------\noverwrite_b : input int, optional\n    Default: 0\ntrans : input int, optional\n    Default: 0\n\nReturns\n-------\nx : rank-2 array('F') with bounds (n,nrhs) and b storage\ninfo : int\n"
     ...
 
-def cgges(cselect, a, b, jobvsl=..., jobvsr=..., sort_t=..., ldvsl=..., ldvsr=..., lwork=..., cselect_extra_args=..., overwrite_a=..., overwrite_b=...) -> typing.Any:
+def cgges(
+    cselect,
+    a,
+    b,
+    jobvsl=...,
+    jobvsr=...,
+    sort_t=...,
+    ldvsl=...,
+    ldvsr=...,
+    lwork=...,
+    cselect_extra_args=...,
+    overwrite_a=...,
+    overwrite_b=...,
+) -> typing.Any:
     "a,b,sdim,alpha,beta,vsl,vsr,work,info = cgges(cselect,a,b,[jobvsl,jobvsr,sort_t,ldvsl,ldvsr,lwork,cselect_extra_args,overwrite_a,overwrite_b])\n\nWrapper for ``cgges``.\n\nParameters\n----------\ncselect : call-back function\na : input rank-2 array('F') with bounds (lda,n)\nb : input rank-2 array('F') with bounds (ldb,n)\n\nOther Parameters\n----------------\njobvsl : input int, optional\n    Default: 1\njobvsr : input int, optional\n    Default: 1\nsort_t : input int, optional\n    Default: 0\ncselect_extra_args : input tuple, optional\n    Default: ()\noverwrite_a : input int, optional\n    Default: 0\noverwrite_b : input int, optional\n    Default: 0\nldvsl : input int, optional\n    Default: ((jobvsl==1)?n:1)\nldvsr : input int, optional\n    Default: ((jobvsr==1)?n:1)\nlwork : input int, optional\n    Default: max(2*n,1)\n\nReturns\n-------\na : rank-2 array('F') with bounds (lda,n)\nb : rank-2 array('F') with bounds (ldb,n)\nsdim : int\nalpha : rank-1 array('F') with bounds (n)\nbeta : rank-1 array('F') with bounds (n)\nvsl : rank-2 array('F') with bounds (ldvsl,n)\nvsr : rank-2 array('F') with bounds (ldvsr,n)\nwork : rank-1 array('F') with bounds (MAX(lwork,1))\ninfo : int\n\nNotes\n-----\nCall-back functions::\n\n  def cselect(alpha,beta): return cselect\n  Required arguments:\n    alpha : input complex\n    beta : input complex\n  Return objects:\n    cselect : int\n"
     ...
 
@@ -186,7 +200,7 @@ def cgglse(a, b, c, d, lwork=..., overwrite_a=..., overwrite_b=..., overwrite_c=
     ...
 
 def cgglse_lwork(m, n, p) -> typing.Any:
-    'work,info = cgglse_lwork(m,n,p)\n\nWrapper for ``cgglse_lwork``.\n\nParameters\n----------\nm : input int\nn : input int\np : input int\n\nReturns\n-------\nwork : complex\ninfo : int\n'
+    "work,info = cgglse_lwork(m,n,p)\n\nWrapper for ``cgglse_lwork``.\n\nParameters\n----------\nm : input int\nn : input int\np : input int\n\nReturns\n-------\nwork : complex\ninfo : int\n"
     ...
 
 def cgtsv(dl, d, du, b, overwrite_dl=..., overwrite_d=..., overwrite_du=..., overwrite_b=...) -> typing.Any:
@@ -209,7 +223,9 @@ def chbevd(ab, compute_v=..., lower=..., ldab=..., lrwork=..., liwork=..., overw
     "w,z,info = chbevd(ab,[compute_v,lower,ldab,lrwork,liwork,overwrite_ab])\n\nWrapper for ``chbevd``.\n\nParameters\n----------\nab : input rank-2 array('F') with bounds (ldab,n)\n\nOther Parameters\n----------------\noverwrite_ab : input int, optional\n    Default: 1\ncompute_v : input int, optional\n    Default: 1\nlower : input int, optional\n    Default: 0\nldab : input int, optional\n    Default: shape(ab,0)\nlrwork : input int, optional\n    Default: (compute_v?1+5*n+2*n*n:n)\nliwork : input int, optional\n    Default: (compute_v?3+5*n:1)\n\nReturns\n-------\nw : rank-1 array('f') with bounds (n)\nz : rank-2 array('F') with bounds (ldz,ldz)\ninfo : int\n"
     ...
 
-def chbevx(ab, vl, vu, il, iu, ldab=..., compute_v=..., range=..., lower=..., abstol=..., mmax=..., overwrite_ab=...) -> typing.Any:
+def chbevx(
+    ab, vl, vu, il, iu, ldab=..., compute_v=..., range=..., lower=..., abstol=..., mmax=..., overwrite_ab=...
+) -> typing.Any:
     "w,z,m,ifail,info = chbevx(ab,vl,vu,il,iu,[ldab,compute_v,range,lower,abstol,mmax,overwrite_ab])\n\nWrapper for ``chbevx``.\n\nParameters\n----------\nab : input rank-2 array('F') with bounds (ldab,n)\nvl : input float\nvu : input float\nil : input int\niu : input int\n\nOther Parameters\n----------------\noverwrite_ab : input int, optional\n    Default: 1\nldab : input int, optional\n    Default: shape(ab,0)\ncompute_v : input int, optional\n    Default: 1\nrange : input int, optional\n    Default: 0\nlower : input int, optional\n    Default: 0\nabstol : input float, optional\n    Default: 0.0\nmmax : input int, optional\n    Default: (compute_v?(range==2?(iu-il+1):n):1)\n\nReturns\n-------\nw : rank-1 array('f') with bounds (n)\nz : rank-2 array('F') with bounds (ldz,mmax)\nm : int\nifail : rank-1 array('i') with bounds ((compute_v?n:1))\ninfo : int\n"
     ...
 
@@ -226,7 +242,7 @@ def cheev(a, compute_v=..., lower=..., lwork=..., overwrite_a=...) -> typing.Any
     ...
 
 def cheev_lwork(n, lower=...) -> typing.Any:
-    'work,info = cheev_lwork(n,[lower])\n\nWrapper for ``cheev_lwork``.\n\nParameters\n----------\nn : input int\n\nOther Parameters\n----------------\nlower : input int, optional\n    Default: 0\n\nReturns\n-------\nwork : complex\ninfo : int\n'
+    "work,info = cheev_lwork(n,[lower])\n\nWrapper for ``cheev_lwork``.\n\nParameters\n----------\nn : input int\n\nOther Parameters\n----------------\nlower : input int, optional\n    Default: 0\n\nReturns\n-------\nwork : complex\ninfo : int\n"
     ...
 
 def cheevd(a, compute_v=..., lower=..., lwork=..., liwork=..., lrwork=..., overwrite_a=...) -> typing.Any:
@@ -234,23 +250,39 @@ def cheevd(a, compute_v=..., lower=..., lwork=..., liwork=..., lrwork=..., overw
     ...
 
 def cheevd_lwork(n, compute_v=..., lower=...) -> typing.Any:
-    'work,iwork,rwork,info = cheevd_lwork(n,[compute_v,lower])\n\nWrapper for ``cheevd_lwork``.\n\nParameters\n----------\nn : input int\n\nOther Parameters\n----------------\ncompute_v : input int, optional\n    Default: 1\nlower : input int, optional\n    Default: 0\n\nReturns\n-------\nwork : complex\niwork : int\nrwork : float\ninfo : int\n'
+    "work,iwork,rwork,info = cheevd_lwork(n,[compute_v,lower])\n\nWrapper for ``cheevd_lwork``.\n\nParameters\n----------\nn : input int\n\nOther Parameters\n----------------\ncompute_v : input int, optional\n    Default: 1\nlower : input int, optional\n    Default: 0\n\nReturns\n-------\nwork : complex\niwork : int\nrwork : float\ninfo : int\n"
     ...
 
-def cheevr(a, compute_v=..., range=..., lower=..., vl=..., vu=..., il=..., iu=..., abstol=..., lwork=..., lrwork=..., liwork=..., overwrite_a=...) -> typing.Any:
+def cheevr(
+    a,
+    compute_v=...,
+    range=...,
+    lower=...,
+    vl=...,
+    vu=...,
+    il=...,
+    iu=...,
+    abstol=...,
+    lwork=...,
+    lrwork=...,
+    liwork=...,
+    overwrite_a=...,
+) -> typing.Any:
     "w,z,m,isuppz,info = cheevr(a,[compute_v,range,lower,vl,vu,il,iu,abstol,lwork,lrwork,liwork,overwrite_a])\n\nWrapper for ``cheevr``.\n\nParameters\n----------\na : input rank-2 array('F') with bounds ``(n,n)``\n\nOther Parameters\n----------------\ncompute_v : input int, optional\n    Default ``1``\nrange : input string(len=1), optional\n    Default ``'A'``\nlower : input int, optional\n    Default ``0``\noverwrite_a : input int, optional\n    Default ``0``\nvl : input float, optional\n    Default ``0.0``\nvu : input float, optional\n    Default ``1.0``\nil : input int, optional\n    Default ``1``\niu : input int, optional\n    Default ``n``\nabstol : input float, optional\n    Default ``0.0``\nlwork : input int, optional\n    Default ``max(2*n,1)``\nlrwork : input int, optional\n    Default ``max(24*n,1)``\nliwork : input int, optional\n    Default ``max(1,10*n)``\n\nReturns\n-------\nw : rank-1 array('f') with bounds ``(n)``\nz : rank-2 array('F') with bounds ``((compute_v?MAX(0,n):0),(compute_v?(*range=='I'?iu-il+1:MAX(1,n)):0))``\nm : int\nisuppz : rank-1 array('i') with bounds ``(2*max(1,n))``\ninfo : int\n"
     ...
 
 def cheevr_lwork(n, lower=...) -> typing.Any:
-    'work,rwork,iwork,info = cheevr_lwork(n,[lower])\n\nWrapper for ``cheevr_lwork``.\n\nParameters\n----------\nn : input int\n\nOther Parameters\n----------------\nlower : input int, optional\n    Default: 0\n\nReturns\n-------\nwork : complex\nrwork : float\niwork : int\ninfo : int\n'
+    "work,rwork,iwork,info = cheevr_lwork(n,[lower])\n\nWrapper for ``cheevr_lwork``.\n\nParameters\n----------\nn : input int\n\nOther Parameters\n----------------\nlower : input int, optional\n    Default: 0\n\nReturns\n-------\nwork : complex\nrwork : float\niwork : int\ninfo : int\n"
     ...
 
-def cheevx(a, compute_v=..., range=..., lower=..., vl=..., vu=..., il=..., iu=..., abstol=..., lwork=..., overwrite_a=...) -> typing.Any:
+def cheevx(
+    a, compute_v=..., range=..., lower=..., vl=..., vu=..., il=..., iu=..., abstol=..., lwork=..., overwrite_a=...
+) -> typing.Any:
     "w,z,m,ifail,info = cheevx(a,[compute_v,range,lower,vl,vu,il,iu,abstol,lwork,overwrite_a])\n\nWrapper for ``cheevx``.\n\nParameters\n----------\na : input rank-2 array('F') with bounds ``(n,n)``\n\nOther Parameters\n----------------\ncompute_v : input int, optional\n    Default ``1``\nrange : input string(len=1), optional\n    Default ``'A'``\nlower : input int, optional\n    Default ``0``\noverwrite_a : input int, optional\n    Default ``0``\nvl : input float, optional\n    Default ``0.0``\nvu : input float, optional\n    Default ``1.0``\nil : input int, optional\n    Default ``1``\niu : input int, optional\n    Default ``n``\nabstol : input float, optional\n    Default ``0.0``\nlwork : input int, optional\n    Default ``max(2*n,1)``\n\nReturns\n-------\nw : rank-1 array('f') with bounds ``(n)``\nz : rank-2 array('F') with bounds ``((compute_v*n),(compute_v?(*range=='I'?iu-il+1:MAX(1,n)):0))``\nm : int\nifail : rank-1 array('i') with bounds ``(compute_v*n)``\ninfo : int\n"
     ...
 
 def cheevx_lwork(n, lower=...) -> typing.Any:
-    'work,info = cheevx_lwork(n,[lower])\n\nWrapper for ``cheevx_lwork``.\n\nParameters\n----------\nn : input int\n\nOther Parameters\n----------------\nlower : input int, optional\n    Default: 0\n\nReturns\n-------\nwork : complex\ninfo : int\n'
+    "work,info = cheevx_lwork(n,[lower])\n\nWrapper for ``cheevx_lwork``.\n\nParameters\n----------\nn : input int\n\nOther Parameters\n----------------\nlower : input int, optional\n    Default: 0\n\nReturns\n-------\nwork : complex\ninfo : int\n"
     ...
 
 def chegst(a, b, itype=..., lower=..., overwrite_a=...) -> typing.Any:
@@ -265,11 +297,28 @@ def chegv_lwork(n, uplo=...) -> typing.Any:
     "work,info = chegv_lwork(n,[uplo])\n\nWrapper for ``chegv_lwork``.\n\nParameters\n----------\nn : input int\n\nOther Parameters\n----------------\nuplo : input string(len=1), optional\n    Default: 'L'\n\nReturns\n-------\nwork : complex\ninfo : int\n"
     ...
 
-def chegvd(a, b, itype=..., jobz=..., uplo=..., lwork=..., lrwork=..., liwork=..., overwrite_a=..., overwrite_b=...) -> typing.Any:
+def chegvd(
+    a, b, itype=..., jobz=..., uplo=..., lwork=..., lrwork=..., liwork=..., overwrite_a=..., overwrite_b=...
+) -> typing.Any:
     "w,v,info = chegvd(a,b,[itype,jobz,uplo,lwork,lrwork,liwork,overwrite_a,overwrite_b])\n\nWrapper for ``chegvd``.\n\nParameters\n----------\na : input rank-2 array('F') with bounds ``(n,n)``\nb : input rank-2 array('F') with bounds ``(n,n)``\n\nOther Parameters\n----------------\nitype : input int, optional\n    Default ``1``\njobz : input string(len=1), optional\n    Default ``'V'``\nuplo : input string(len=1), optional\n    Default ``'L'``\noverwrite_a : input int, optional\n    Default ``0``\noverwrite_b : input int, optional\n    Default ``0``\nlwork : input int, optional\n    Default ``(*jobz=='N'?n+1:n*(n+2))``\nlrwork : input int, optional\n    Default ``max((*jobz=='N'?n:2*n*n+5*n+1),1)``\nliwork : input int, optional\n    Default ``(*jobz=='N'?1:5*n+3)``\n\nReturns\n-------\nw : rank-1 array('f') with bounds ``(n)``\nv : rank-2 array('F') with bounds ``(n,n)`` with ``a`` storage\ninfo : int\n"
     ...
 
-def chegvx(a, b, itype=..., jobz=..., range=..., uplo=..., vl=..., vu=..., il=..., iu=..., abstol=..., lwork=..., overwrite_a=..., overwrite_b=...) -> typing.Any:
+def chegvx(
+    a,
+    b,
+    itype=...,
+    jobz=...,
+    range=...,
+    uplo=...,
+    vl=...,
+    vu=...,
+    il=...,
+    iu=...,
+    abstol=...,
+    lwork=...,
+    overwrite_a=...,
+    overwrite_b=...,
+) -> typing.Any:
     "w,z,m,ifail,info = chegvx(a,b,[itype,jobz,range,uplo,vl,vu,il,iu,abstol,lwork,overwrite_a,overwrite_b])\n\nWrapper for ``chegvx``.\n\nParameters\n----------\na : input rank-2 array('F') with bounds (n,n)\nb : input rank-2 array('F') with bounds (n,n)\n\nOther Parameters\n----------------\nitype : input int, optional\n    Default: 1\njobz : input string(len=1), optional\n    Default: 'V'\nrange : input string(len=1), optional\n    Default: 'A'\nuplo : input string(len=1), optional\n    Default: 'L'\noverwrite_a : input int, optional\n    Default: 0\noverwrite_b : input int, optional\n    Default: 0\nvl : input float, optional\n    Default: 0.0\nvu : input float, optional\n    Default: 1.0\nil : input int, optional\n    Default: 1\niu : input int, optional\n    Default: n\nabstol : input float, optional\n    Default: 0.0\nlwork : input int, optional\n    Default: max(2*n,1)\n\nReturns\n-------\nw : rank-1 array('f') with bounds (n)\nz : rank-2 array('F') with bounds ((jobz[0]=='V'?MAX(0,n):0),(jobz[0]=='V'?(range[0]=='I'?iu-il+1:MAX(1,n)):0))\nm : int\nifail : rank-1 array('i') with bounds ((jobz[0]=='N'?0:n))\ninfo : int\n"
     ...
 
@@ -282,7 +331,7 @@ def chesv(a, b, lwork=..., lower=..., overwrite_a=..., overwrite_b=...) -> typin
     ...
 
 def chesv_lwork(n, lower=...) -> typing.Any:
-    'work,info = chesv_lwork(n,[lower])\n\nWrapper for ``chesv_lwork``.\n\nParameters\n----------\nn : input int\n\nOther Parameters\n----------------\nlower : input int, optional\n    Default: 0\n\nReturns\n-------\nwork : complex\ninfo : int\n'
+    "work,info = chesv_lwork(n,[lower])\n\nWrapper for ``chesv_lwork``.\n\nParameters\n----------\nn : input int\n\nOther Parameters\n----------------\nlower : input int, optional\n    Default: 0\n\nReturns\n-------\nwork : complex\ninfo : int\n"
     ...
 
 def chesvx(a, b, af=..., ipiv=..., lwork=..., factored=..., lower=..., overwrite_a=..., overwrite_b=...) -> typing.Any:
@@ -290,7 +339,7 @@ def chesvx(a, b, af=..., ipiv=..., lwork=..., factored=..., lower=..., overwrite
     ...
 
 def chesvx_lwork(n, lower=...) -> typing.Any:
-    'work,info = chesvx_lwork(n,[lower])\n\nWrapper for ``chesvx_lwork``.\n\nParameters\n----------\nn : input int\n\nOther Parameters\n----------------\nlower : input int, optional\n    Default: 0\n\nReturns\n-------\nwork : complex\ninfo : int\n'
+    "work,info = chesvx_lwork(n,[lower])\n\nWrapper for ``chesvx_lwork``.\n\nParameters\n----------\nn : input int\n\nOther Parameters\n----------------\nlower : input int, optional\n    Default: 0\n\nReturns\n-------\nwork : complex\ninfo : int\n"
     ...
 
 def chetrd(a, lower=..., lwork=..., overwrite_a=...) -> typing.Any:
@@ -298,7 +347,7 @@ def chetrd(a, lower=..., lwork=..., overwrite_a=...) -> typing.Any:
     ...
 
 def chetrd_lwork(n, lower=...) -> typing.Any:
-    'work,info = chetrd_lwork(n,[lower])\n\nWrapper for ``chetrd_lwork``.\n\nParameters\n----------\nn : input int\n\nOther Parameters\n----------------\nlower : input int, optional\n    Default: 0\n\nReturns\n-------\nwork : complex\ninfo : int\n'
+    "work,info = chetrd_lwork(n,[lower])\n\nWrapper for ``chetrd_lwork``.\n\nParameters\n----------\nn : input int\n\nOther Parameters\n----------------\nlower : input int, optional\n    Default: 0\n\nReturns\n-------\nwork : complex\ninfo : int\n"
     ...
 
 def chetrf(a, lower=..., lwork=..., overwrite_a=...) -> typing.Any:
@@ -306,7 +355,7 @@ def chetrf(a, lower=..., lwork=..., overwrite_a=...) -> typing.Any:
     ...
 
 def chetrf_lwork(n, lower=...) -> typing.Any:
-    'work,info = chetrf_lwork(n,[lower])\n\nWrapper for ``chetrf_lwork``.\n\nParameters\n----------\nn : input int\n\nOther Parameters\n----------------\nlower : input int, optional\n    Default: 0\n\nReturns\n-------\nwork : complex\ninfo : int\n'
+    "work,info = chetrf_lwork(n,[lower])\n\nWrapper for ``chetrf_lwork``.\n\nParameters\n----------\nn : input int\n\nOther Parameters\n----------------\nlower : input int, optional\n    Default: 0\n\nReturns\n-------\nwork : complex\ninfo : int\n"
     ...
 
 def chfrk(n, k, alpha, a, beta, c, transr=..., uplo=..., trans=..., overwrite_c=...) -> typing.Any:
@@ -326,7 +375,7 @@ def clarfg(n, alpha, x, incx=..., overwrite_x=...) -> typing.Any:
     ...
 
 def clartg(f, g) -> typing.Any:
-    'cs,sn,r = clartg(f,g)\n\nWrapper for ``clartg``.\n\nParameters\n----------\nf : input complex\ng : input complex\n\nReturns\n-------\ncs : float\nsn : complex\nr : complex\n'
+    "cs,sn,r = clartg(f,g)\n\nWrapper for ``clartg``.\n\nParameters\n----------\nf : input complex\ng : input complex\n\nReturns\n-------\ncs : float\nsn : complex\nr : complex\n"
     ...
 
 def claswp(a, piv, k1=..., k2=..., off=..., inc=..., overwrite_a=...) -> typing.Any:
@@ -454,7 +503,7 @@ def csysv(a, b, lwork=..., lower=..., overwrite_a=..., overwrite_b=...) -> typin
     ...
 
 def csysv_lwork(n, lower=...) -> typing.Any:
-    'work,info = csysv_lwork(n,[lower])\n\nWrapper for ``csysv_lwork``.\n\nParameters\n----------\nn : input int\n\nOther Parameters\n----------------\nlower : input int, optional\n    Default: 0\n\nReturns\n-------\nwork : complex\ninfo : int\n'
+    "work,info = csysv_lwork(n,[lower])\n\nWrapper for ``csysv_lwork``.\n\nParameters\n----------\nn : input int\n\nOther Parameters\n----------------\nlower : input int, optional\n    Default: 0\n\nReturns\n-------\nwork : complex\ninfo : int\n"
     ...
 
 def csysvx(a, b, af=..., ipiv=..., lwork=..., factored=..., lower=..., overwrite_a=..., overwrite_b=...) -> typing.Any:
@@ -462,7 +511,7 @@ def csysvx(a, b, af=..., ipiv=..., lwork=..., factored=..., lower=..., overwrite
     ...
 
 def csysvx_lwork(n, lower=...) -> typing.Any:
-    'work,info = csysvx_lwork(n,[lower])\n\nWrapper for ``csysvx_lwork``.\n\nParameters\n----------\nn : input int\n\nOther Parameters\n----------------\nlower : input int, optional\n    Default: 0\n\nReturns\n-------\nwork : complex\ninfo : int\n'
+    "work,info = csysvx_lwork(n,[lower])\n\nWrapper for ``csysvx_lwork``.\n\nParameters\n----------\nn : input int\n\nOther Parameters\n----------------\nlower : input int, optional\n    Default: 0\n\nReturns\n-------\nwork : complex\ninfo : int\n"
     ...
 
 def csytf2(a, lower=..., overwrite_a=...) -> typing.Any:
@@ -474,7 +523,7 @@ def csytrf(a, lower=..., lwork=..., overwrite_a=...) -> typing.Any:
     ...
 
 def csytrf_lwork(n, lower=...) -> typing.Any:
-    'work,info = csytrf_lwork(n,[lower])\n\nWrapper for ``csytrf_lwork``.\n\nParameters\n----------\nn : input int\n\nOther Parameters\n----------------\nlower : input int, optional\n    Default: 0\n\nReturns\n-------\nwork : complex\ninfo : int\n'
+    "work,info = csytrf_lwork(n,[lower])\n\nWrapper for ``csytrf_lwork``.\n\nParameters\n----------\nn : input int\n\nOther Parameters\n----------------\nlower : input int, optional\n    Default: 0\n\nReturns\n-------\nwork : complex\ninfo : int\n"
     ...
 
 def ctbtrs(ab, b, uplo=..., trans=..., diag=..., overwrite_b=...) -> typing.Any:
@@ -493,7 +542,9 @@ def ctfttr(n, arf, transr=..., uplo=...) -> typing.Any:
     "a,info = ctfttr(n,arf,[transr,uplo])\n\nWrapper for ``ctfttr``.\n\nParameters\n----------\nn : input int\narf : input rank-1 array('F') with bounds (nt)\n\nOther Parameters\n----------------\ntransr : input string(len=1), optional\n    Default: 'N'\nuplo : input string(len=1), optional\n    Default: 'U'\n\nReturns\n-------\na : rank-2 array('F') with bounds (lda,n)\ninfo : int\n"
     ...
 
-def ctgsen(select, a, b, q, z, lwork=..., liwork=..., overwrite_a=..., overwrite_b=..., overwrite_q=..., overwrite_z=...) -> typing.Any:
+def ctgsen(
+    select, a, b, q, z, lwork=..., liwork=..., overwrite_a=..., overwrite_b=..., overwrite_q=..., overwrite_z=...
+) -> typing.Any:
     "a,b,alpha,beta,q,z,m,pl,pr,dif,work,iwork,info = ctgsen(select,a,b,q,z,[lwork,liwork,overwrite_a,overwrite_b,overwrite_q,overwrite_z])\n\nWrapper for ``ctgsen``.\n\nParameters\n----------\nselect : input rank-1 array('i') with bounds (n)\na : input rank-2 array('F') with bounds (lda,n)\nb : input rank-2 array('F') with bounds (ldb,n)\nq : input rank-2 array('F') with bounds (ldq,n)\nz : input rank-2 array('F') with bounds (ldz,n)\n\nOther Parameters\n----------------\noverwrite_a : input int, optional\n    Default: 0\noverwrite_b : input int, optional\n    Default: 0\noverwrite_q : input int, optional\n    Default: 0\noverwrite_z : input int, optional\n    Default: 0\nlwork : input int, optional\n    Default: max(2*m*(n-m),1)\nliwork : input int, optional\n    Default: n+2\n\nReturns\n-------\na : rank-2 array('F') with bounds (lda,n)\nb : rank-2 array('F') with bounds (ldb,n)\nalpha : rank-1 array('F') with bounds (n)\nbeta : rank-1 array('F') with bounds (n)\nq : rank-2 array('F') with bounds (ldq,n)\nz : rank-2 array('F') with bounds (ldz,n)\nm : int\npl : float\npr : float\ndif : rank-1 array('f') with bounds (2)\nwork : rank-1 array('F') with bounds (MAX(lwork,1))\niwork : rank-1 array('i') with bounds (MAX(1,liwork))\ninfo : int\n"
     ...
 
@@ -538,15 +589,32 @@ def ctzrzf(a, lwork=..., overwrite_a=...) -> typing.Any:
     ...
 
 def ctzrzf_lwork(m, n) -> typing.Any:
-    'work,info = ctzrzf_lwork(m,n)\n\nWrapper for ``ctzrzf_lwork``.\n\nParameters\n----------\nm : input int\nn : input int\n\nReturns\n-------\nwork : complex\ninfo : int\n'
+    "work,info = ctzrzf_lwork(m,n)\n\nWrapper for ``ctzrzf_lwork``.\n\nParameters\n----------\nm : input int\nn : input int\n\nReturns\n-------\nwork : complex\ninfo : int\n"
     ...
 
-def cuncsd(x11, x12, x21, x22, compute_u1=..., compute_u2=..., compute_v1t=..., compute_v2t=..., trans=..., signs=..., lwork=..., lrwork=..., overwrite_x11=..., overwrite_x12=..., overwrite_x21=..., overwrite_x22=...) -> typing.Any:
+def cuncsd(
+    x11,
+    x12,
+    x21,
+    x22,
+    compute_u1=...,
+    compute_u2=...,
+    compute_v1t=...,
+    compute_v2t=...,
+    trans=...,
+    signs=...,
+    lwork=...,
+    lrwork=...,
+    overwrite_x11=...,
+    overwrite_x12=...,
+    overwrite_x21=...,
+    overwrite_x22=...,
+) -> typing.Any:
     "cs11,cs12,cs21,cs22,theta,u1,u2,v1t,v2t,info = cuncsd(x11,x12,x21,x22,[compute_u1,compute_u2,compute_v1t,compute_v2t,trans,signs,lwork,lrwork,overwrite_x11,overwrite_x12,overwrite_x21,overwrite_x22])\n\nWrapper for ``cuncsd``.\n\nParameters\n----------\nx11 : input rank-2 array('F') with bounds (p,q)\nx12 : input rank-2 array('F') with bounds (p,mmq)\nx21 : input rank-2 array('F') with bounds (mmp,q)\nx22 : input rank-2 array('F') with bounds (mmp,mmq)\n\nOther Parameters\n----------------\ncompute_u1 : input int, optional\n    Default: 1\ncompute_u2 : input int, optional\n    Default: 1\ncompute_v1t : input int, optional\n    Default: 1\ncompute_v2t : input int, optional\n    Default: 1\ntrans : input int, optional\n    Default: 0\nsigns : input int, optional\n    Default: 0\noverwrite_x11 : input int, optional\n    Default: 0\noverwrite_x12 : input int, optional\n    Default: 0\noverwrite_x21 : input int, optional\n    Default: 0\noverwrite_x22 : input int, optional\n    Default: 0\nlwork : input int, optional\n    Default: 2*m+MAX(1,MAX(mmp,mmq))+1\nlrwork : input int, optional\n    Default: 5*MAX(1,q-1)+4*MAX(1,q)+8*q+1\n\nReturns\n-------\ncs11 : rank-2 array('F') with bounds (p,q) and x11 storage\ncs12 : rank-2 array('F') with bounds (p,mmq) and x12 storage\ncs21 : rank-2 array('F') with bounds (mmp,q) and x21 storage\ncs22 : rank-2 array('F') with bounds (mmp,mmq) and x22 storage\ntheta : rank-1 array('f') with bounds (min(min(p,mmp),min(q,mmq)))\nu1 : rank-2 array('F') with bounds ((compute_u1?p:0),(compute_u1?p:0))\nu2 : rank-2 array('F') with bounds ((compute_u2?mmp:0),(compute_u2?mmp:0))\nv1t : rank-2 array('F') with bounds ((compute_v1t?q:0),(compute_v1t?q:0))\nv2t : rank-2 array('F') with bounds ((compute_v2t?mmq:0),(compute_v2t?mmq:0))\ninfo : int\n"
     ...
 
 def cuncsd_lwork(m, p, q) -> typing.Any:
-    'work,rwork,info = cuncsd_lwork(m,p,q)\n\nWrapper for ``cuncsd_lwork``.\n\nParameters\n----------\nm : input int\np : input int\nq : input int\n\nReturns\n-------\nwork : complex\nrwork : float\ninfo : int\n'
+    "work,rwork,info = cuncsd_lwork(m,p,q)\n\nWrapper for ``cuncsd_lwork``.\n\nParameters\n----------\nm : input int\np : input int\nq : input int\n\nReturns\n-------\nwork : complex\nrwork : float\ninfo : int\n"
     ...
 
 def cunghr(a, tau, lo=..., hi=..., lwork=..., overwrite_a=...) -> typing.Any:
@@ -554,7 +622,7 @@ def cunghr(a, tau, lo=..., hi=..., lwork=..., overwrite_a=...) -> typing.Any:
     ...
 
 def cunghr_lwork(n, lo=..., hi=...) -> typing.Any:
-    'work,info = cunghr_lwork(n,[lo,hi])\n\nWrapper for ``cunghr_lwork``.\n\nParameters\n----------\nn : input int\n\nOther Parameters\n----------------\nlo : input int, optional\n    Default: 0\nhi : input int, optional\n    Default: n-1\n\nReturns\n-------\nwork : complex\ninfo : int\n'
+    "work,info = cunghr_lwork(n,[lo,hi])\n\nWrapper for ``cunghr_lwork``.\n\nParameters\n----------\nn : input int\n\nOther Parameters\n----------------\nlo : input int, optional\n    Default: 0\nhi : input int, optional\n    Default: n-1\n\nReturns\n-------\nwork : complex\ninfo : int\n"
     ...
 
 def cungqr(a, tau, lwork=..., overwrite_a=...) -> typing.Any:
@@ -614,7 +682,7 @@ def dgeev(a, compute_vl=..., compute_vr=..., lwork=..., overwrite_a=...) -> typi
     ...
 
 def dgeev_lwork(n, compute_vl=..., compute_vr=...) -> typing.Any:
-    'work,info = dgeev_lwork(n,[compute_vl,compute_vr])\n\nWrapper for ``dgeev_lwork``.\n\nParameters\n----------\nn : input int\n\nOther Parameters\n----------------\ncompute_vl : input int, optional\n    Default: 1\ncompute_vr : input int, optional\n    Default: 1\n\nReturns\n-------\nwork : float\ninfo : int\n'
+    "work,info = dgeev_lwork(n,[compute_vl,compute_vr])\n\nWrapper for ``dgeev_lwork``.\n\nParameters\n----------\nn : input int\n\nOther Parameters\n----------------\ncompute_vl : input int, optional\n    Default: 1\ncompute_vr : input int, optional\n    Default: 1\n\nReturns\n-------\nwork : float\ninfo : int\n"
     ...
 
 def dgegv(*args, **kwds) -> typing.Any:
@@ -626,7 +694,7 @@ def dgehrd(a, lo=..., hi=..., lwork=..., overwrite_a=...) -> typing.Any:
     ...
 
 def dgehrd_lwork(n, lo=..., hi=...) -> typing.Any:
-    'work,info = dgehrd_lwork(n,[lo,hi])\n\nWrapper for ``dgehrd_lwork``.\n\nParameters\n----------\nn : input int\n\nOther Parameters\n----------------\nlo : input int, optional\n    Default: 0\nhi : input int, optional\n    Default: n-1\n\nReturns\n-------\nwork : float\ninfo : int\n'
+    "work,info = dgehrd_lwork(n,[lo,hi])\n\nWrapper for ``dgehrd_lwork``.\n\nParameters\n----------\nn : input int\n\nOther Parameters\n----------------\nlo : input int, optional\n    Default: 0\nhi : input int, optional\n    Default: n-1\n\nReturns\n-------\nwork : float\ninfo : int\n"
     ...
 
 def dgejsv(a, joba=..., jobu=..., jobv=..., jobr=..., jobt=..., jobp=..., lwork=..., overwrite_a=...) -> typing.Any:
@@ -646,7 +714,7 @@ def dgelsd(a, b, lwork, size_iwork, cond=..., overwrite_a=..., overwrite_b=...) 
     ...
 
 def dgelsd_lwork(m, n, nrhs, cond=..., lwork=...) -> typing.Any:
-    'work,iwork,info = dgelsd_lwork(m,n,nrhs,[cond,lwork])\n\nWrapper for ``dgelsd_lwork``.\n\nParameters\n----------\nm : input int\nn : input int\nnrhs : input int\n\nOther Parameters\n----------------\ncond : input float, optional\n    Default: -1.0\nlwork : input int, optional\n    Default: -1\n\nReturns\n-------\nwork : float\niwork : int\ninfo : int\n'
+    "work,iwork,info = dgelsd_lwork(m,n,nrhs,[cond,lwork])\n\nWrapper for ``dgelsd_lwork``.\n\nParameters\n----------\nm : input int\nn : input int\nnrhs : input int\n\nOther Parameters\n----------------\ncond : input float, optional\n    Default: -1.0\nlwork : input int, optional\n    Default: -1\n\nReturns\n-------\nwork : float\niwork : int\ninfo : int\n"
     ...
 
 def dgelss(a, b, cond=..., lwork=..., overwrite_a=..., overwrite_b=...) -> typing.Any:
@@ -654,7 +722,7 @@ def dgelss(a, b, cond=..., lwork=..., overwrite_a=..., overwrite_b=...) -> typin
     ...
 
 def dgelss_lwork(m, n, nrhs, cond=..., lwork=...) -> typing.Any:
-    'work,info = dgelss_lwork(m,n,nrhs,[cond,lwork])\n\nWrapper for ``dgelss_lwork``.\n\nParameters\n----------\nm : input int\nn : input int\nnrhs : input int\n\nOther Parameters\n----------------\ncond : input float, optional\n    Default: -1.0\nlwork : input int, optional\n    Default: -1\n\nReturns\n-------\nwork : float\ninfo : int\n'
+    "work,info = dgelss_lwork(m,n,nrhs,[cond,lwork])\n\nWrapper for ``dgelss_lwork``.\n\nParameters\n----------\nm : input int\nn : input int\nnrhs : input int\n\nOther Parameters\n----------------\ncond : input float, optional\n    Default: -1.0\nlwork : input int, optional\n    Default: -1\n\nReturns\n-------\nwork : float\ninfo : int\n"
     ...
 
 def dgelsy(a, b, jptv, cond, lwork, overwrite_a=..., overwrite_b=...) -> typing.Any:
@@ -662,7 +730,7 @@ def dgelsy(a, b, jptv, cond, lwork, overwrite_a=..., overwrite_b=...) -> typing.
     ...
 
 def dgelsy_lwork(m, n, nrhs, cond, lwork=...) -> typing.Any:
-    'work,info = dgelsy_lwork(m,n,nrhs,cond,[lwork])\n\nWrapper for ``dgelsy_lwork``.\n\nParameters\n----------\nm : input int\nn : input int\nnrhs : input int\ncond : input float\n\nOther Parameters\n----------------\nlwork : input int, optional\n    Default: -1\n\nReturns\n-------\nwork : float\ninfo : int\n'
+    "work,info = dgelsy_lwork(m,n,nrhs,cond,[lwork])\n\nWrapper for ``dgelsy_lwork``.\n\nParameters\n----------\nm : input int\nn : input int\nnrhs : input int\ncond : input float\n\nOther Parameters\n----------------\nlwork : input int, optional\n    Default: -1\n\nReturns\n-------\nwork : float\ninfo : int\n"
     ...
 
 def dgemqrt(v, t, c, side=..., trans=..., overwrite_c=...) -> typing.Any:
@@ -678,7 +746,7 @@ def dgeqrf(a, lwork=..., overwrite_a=...) -> typing.Any:
     ...
 
 def dgeqrf_lwork(m, n) -> typing.Any:
-    'work,info = dgeqrf_lwork(m,n)\n\nWrapper for ``dgeqrf_lwork``.\n\nParameters\n----------\nm : input int\nn : input int\n\nReturns\n-------\nwork : float\ninfo : int\n'
+    "work,info = dgeqrf_lwork(m,n)\n\nWrapper for ``dgeqrf_lwork``.\n\nParameters\n----------\nm : input int\nn : input int\n\nReturns\n-------\nwork : float\ninfo : int\n"
     ...
 
 def dgeqrfp(a, lwork=..., overwrite_a=...) -> typing.Any:
@@ -686,7 +754,7 @@ def dgeqrfp(a, lwork=..., overwrite_a=...) -> typing.Any:
     ...
 
 def dgeqrfp_lwork(m, n) -> typing.Any:
-    'work,info = dgeqrfp_lwork(m,n)\n\nWrapper for ``dgeqrfp_lwork``.\n\nParameters\n----------\nm : input int\nn : input int\n\nReturns\n-------\nwork : float\ninfo : int\n'
+    "work,info = dgeqrfp_lwork(m,n)\n\nWrapper for ``dgeqrfp_lwork``.\n\nParameters\n----------\nm : input int\nn : input int\n\nReturns\n-------\nwork : float\ninfo : int\n"
     ...
 
 def dgeqrt(nb, a, overwrite_a=...) -> typing.Any:
@@ -706,7 +774,7 @@ def dgesdd(a, compute_uv=..., full_matrices=..., lwork=..., overwrite_a=...) -> 
     ...
 
 def dgesdd_lwork(m, n, compute_uv=..., full_matrices=...) -> typing.Any:
-    'work,info = dgesdd_lwork(m,n,[compute_uv,full_matrices])\n\nWrapper for ``dgesdd_lwork``.\n\nParameters\n----------\nm : input int\nn : input int\n\nOther Parameters\n----------------\ncompute_uv : input int, optional\n    Default: 1\nfull_matrices : input int, optional\n    Default: 1\n\nReturns\n-------\nwork : float\ninfo : int\n'
+    "work,info = dgesdd_lwork(m,n,[compute_uv,full_matrices])\n\nWrapper for ``dgesdd_lwork``.\n\nParameters\n----------\nm : input int\nn : input int\n\nOther Parameters\n----------------\ncompute_uv : input int, optional\n    Default: 1\nfull_matrices : input int, optional\n    Default: 1\n\nReturns\n-------\nwork : float\ninfo : int\n"
     ...
 
 def dgesv(a, b, overwrite_a=..., overwrite_b=...) -> typing.Any:
@@ -718,7 +786,7 @@ def dgesvd(a, compute_uv=..., full_matrices=..., lwork=..., overwrite_a=...) -> 
     ...
 
 def dgesvd_lwork(m, n, compute_uv=..., full_matrices=...) -> typing.Any:
-    'work,info = dgesvd_lwork(m,n,[compute_uv,full_matrices])\n\nWrapper for ``dgesvd_lwork``.\n\nParameters\n----------\nm : input int\nn : input int\n\nOther Parameters\n----------------\ncompute_uv : input int, optional\n    Default: 1\nfull_matrices : input int, optional\n    Default: 1\n\nReturns\n-------\nwork : float\ninfo : int\n'
+    "work,info = dgesvd_lwork(m,n,[compute_uv,full_matrices])\n\nWrapper for ``dgesvd_lwork``.\n\nParameters\n----------\nm : input int\nn : input int\n\nOther Parameters\n----------------\ncompute_uv : input int, optional\n    Default: 1\nfull_matrices : input int, optional\n    Default: 1\n\nReturns\n-------\nwork : float\ninfo : int\n"
     ...
 
 def dgesvx(a, b, fact=..., trans=..., af=..., ipiv=..., equed=..., r=..., c=..., overwrite_a=..., overwrite_b=...) -> typing.Any:
@@ -738,14 +806,27 @@ def dgetri(lu, piv, lwork=..., overwrite_lu=...) -> typing.Any:
     ...
 
 def dgetri_lwork(n) -> typing.Any:
-    'work,info = dgetri_lwork(n)\n\nWrapper for ``dgetri_lwork``.\n\nParameters\n----------\nn : input int\n\nReturns\n-------\nwork : float\ninfo : int\n'
+    "work,info = dgetri_lwork(n)\n\nWrapper for ``dgetri_lwork``.\n\nParameters\n----------\nn : input int\n\nReturns\n-------\nwork : float\ninfo : int\n"
     ...
 
 def dgetrs(lu, piv, b, trans=..., overwrite_b=...) -> typing.Any:
     "x,info = dgetrs(lu,piv,b,[trans,overwrite_b])\n\nWrapper for ``dgetrs``.\n\nParameters\n----------\nlu : input rank-2 array('d') with bounds (n,n)\npiv : input rank-1 array('i') with bounds (n)\nb : input rank-2 array('d') with bounds (n,nrhs)\n\nOther Parameters\n----------------\noverwrite_b : input int, optional\n    Default: 0\ntrans : input int, optional\n    Default: 0\n\nReturns\n-------\nx : rank-2 array('d') with bounds (n,nrhs) and b storage\ninfo : int\n"
     ...
 
-def dgges(dselect, a, b, jobvsl=..., jobvsr=..., sort_t=..., ldvsl=..., ldvsr=..., lwork=..., dselect_extra_args=..., overwrite_a=..., overwrite_b=...) -> typing.Any:
+def dgges(
+    dselect,
+    a,
+    b,
+    jobvsl=...,
+    jobvsr=...,
+    sort_t=...,
+    ldvsl=...,
+    ldvsr=...,
+    lwork=...,
+    dselect_extra_args=...,
+    overwrite_a=...,
+    overwrite_b=...,
+) -> typing.Any:
     "a,b,sdim,alphar,alphai,beta,vsl,vsr,work,info = dgges(dselect,a,b,[jobvsl,jobvsr,sort_t,ldvsl,ldvsr,lwork,dselect_extra_args,overwrite_a,overwrite_b])\n\nWrapper for ``dgges``.\n\nParameters\n----------\ndselect : call-back function\na : input rank-2 array('d') with bounds (lda,n)\nb : input rank-2 array('d') with bounds (ldb,n)\n\nOther Parameters\n----------------\njobvsl : input int, optional\n    Default: 1\njobvsr : input int, optional\n    Default: 1\nsort_t : input int, optional\n    Default: 0\ndselect_extra_args : input tuple, optional\n    Default: ()\noverwrite_a : input int, optional\n    Default: 0\noverwrite_b : input int, optional\n    Default: 0\nldvsl : input int, optional\n    Default: ((jobvsl==1)?n:1)\nldvsr : input int, optional\n    Default: ((jobvsr==1)?n:1)\nlwork : input int, optional\n    Default: max(8*n+16,1)\n\nReturns\n-------\na : rank-2 array('d') with bounds (lda,n)\nb : rank-2 array('d') with bounds (ldb,n)\nsdim : int\nalphar : rank-1 array('d') with bounds (n)\nalphai : rank-1 array('d') with bounds (n)\nbeta : rank-1 array('d') with bounds (n)\nvsl : rank-2 array('d') with bounds (ldvsl,n)\nvsr : rank-2 array('d') with bounds (ldvsr,n)\nwork : rank-1 array('d') with bounds (MAX(lwork,1))\ninfo : int\n\nNotes\n-----\nCall-back functions::\n\n  def dselect(alphar,alphai,beta): return dselect\n  Required arguments:\n    alphar : input float\n    alphai : input float\n    beta : input float\n  Return objects:\n    dselect : int\n"
     ...
 
@@ -758,7 +839,7 @@ def dgglse(a, b, c, d, lwork=..., overwrite_a=..., overwrite_b=..., overwrite_c=
     ...
 
 def dgglse_lwork(m, n, p) -> typing.Any:
-    'work,info = dgglse_lwork(m,n,p)\n\nWrapper for ``dgglse_lwork``.\n\nParameters\n----------\nm : input int\nn : input int\np : input int\n\nReturns\n-------\nwork : float\ninfo : int\n'
+    "work,info = dgglse_lwork(m,n,p)\n\nWrapper for ``dgglse_lwork``.\n\nParameters\n----------\nm : input int\nn : input int\np : input int\n\nReturns\n-------\nwork : float\ninfo : int\n"
     ...
 
 def dgtsv(dl, d, du, b, overwrite_dl=..., overwrite_d=..., overwrite_du=..., overwrite_b=...) -> typing.Any:
@@ -778,7 +859,7 @@ def dgttrs(dl, d, du, du2, ipiv, b, trans=..., overwrite_b=...) -> typing.Any:
     ...
 
 def dlamch(cmach) -> typing.Any:
-    'dlamch = dlamch(cmach)\n\nWrapper for ``dlamch``.\n\nParameters\n----------\ncmach : input string(len=1)\n\nReturns\n-------\ndlamch : float\n'
+    "dlamch = dlamch(cmach)\n\nWrapper for ``dlamch``.\n\nParameters\n----------\ncmach : input string(len=1)\n\nReturns\n-------\ndlamch : float\n"
     ...
 
 def dlange(norm, a) -> typing.Any:
@@ -794,7 +875,7 @@ def dlarfg(n, alpha, x, incx=..., overwrite_x=...) -> typing.Any:
     ...
 
 def dlartg(f, g) -> typing.Any:
-    'cs,sn,r = dlartg(f,g)\n\nWrapper for ``dlartg``.\n\nParameters\n----------\nf : input float\ng : input float\n\nReturns\n-------\ncs : float\nsn : float\nr : float\n'
+    "cs,sn,r = dlartg(f,g)\n\nWrapper for ``dlartg``.\n\nParameters\n----------\nf : input float\ng : input float\n\nReturns\n-------\ncs : float\nsn : float\nr : float\n"
     ...
 
 def dlasd4(i, d, z, rho=...) -> typing.Any:
@@ -809,12 +890,28 @@ def dlauum(c, lower=..., overwrite_c=...) -> typing.Any:
     "a,info = dlauum(c,[lower,overwrite_c])\n\nWrapper for ``dlauum``.\n\nParameters\n----------\nc : input rank-2 array('d') with bounds (n,n)\n\nOther Parameters\n----------------\noverwrite_c : input int, optional\n    Default: 0\nlower : input int, optional\n    Default: 0\n\nReturns\n-------\na : rank-2 array('d') with bounds (n,n) and c storage\ninfo : int\n"
     ...
 
-def dorcsd(x11, x12, x21, x22, compute_u1=..., compute_u2=..., compute_v1t=..., compute_v2t=..., trans=..., signs=..., lwork=..., overwrite_x11=..., overwrite_x12=..., overwrite_x21=..., overwrite_x22=...) -> typing.Any:
+def dorcsd(
+    x11,
+    x12,
+    x21,
+    x22,
+    compute_u1=...,
+    compute_u2=...,
+    compute_v1t=...,
+    compute_v2t=...,
+    trans=...,
+    signs=...,
+    lwork=...,
+    overwrite_x11=...,
+    overwrite_x12=...,
+    overwrite_x21=...,
+    overwrite_x22=...,
+) -> typing.Any:
     "cs11,cs12,cs21,cs22,theta,u1,u2,v1t,v2t,info = dorcsd(x11,x12,x21,x22,[compute_u1,compute_u2,compute_v1t,compute_v2t,trans,signs,lwork,overwrite_x11,overwrite_x12,overwrite_x21,overwrite_x22])\n\nWrapper for ``dorcsd``.\n\nParameters\n----------\nx11 : input rank-2 array('d') with bounds (p,q)\nx12 : input rank-2 array('d') with bounds (p,mmq)\nx21 : input rank-2 array('d') with bounds (mmp,q)\nx22 : input rank-2 array('d') with bounds (mmp,mmq)\n\nOther Parameters\n----------------\ncompute_u1 : input int, optional\n    Default: 1\ncompute_u2 : input int, optional\n    Default: 1\ncompute_v1t : input int, optional\n    Default: 1\ncompute_v2t : input int, optional\n    Default: 1\ntrans : input int, optional\n    Default: 0\nsigns : input int, optional\n    Default: 0\noverwrite_x11 : input int, optional\n    Default: 0\noverwrite_x12 : input int, optional\n    Default: 0\noverwrite_x21 : input int, optional\n    Default: 0\noverwrite_x22 : input int, optional\n    Default: 0\nlwork : input int, optional\n    Default: 2+2*m+5*MAX(1,q-1)+4*MAX(1,q)+8*q\n\nReturns\n-------\ncs11 : rank-2 array('d') with bounds (p,q) and x11 storage\ncs12 : rank-2 array('d') with bounds (p,mmq) and x12 storage\ncs21 : rank-2 array('d') with bounds (mmp,q) and x21 storage\ncs22 : rank-2 array('d') with bounds (mmp,mmq) and x22 storage\ntheta : rank-1 array('d') with bounds (min(min(p,mmp),min(q,mmq)))\nu1 : rank-2 array('d') with bounds ((compute_u1?p:0),(compute_u1?p:0))\nu2 : rank-2 array('d') with bounds ((compute_u2?mmp:0),(compute_u2?mmp:0))\nv1t : rank-2 array('d') with bounds ((compute_v1t?q:0),(compute_v1t?q:0))\nv2t : rank-2 array('d') with bounds ((compute_v2t?mmq:0),(compute_v2t?mmq:0))\ninfo : int\n"
     ...
 
 def dorcsd_lwork(m, p, q) -> typing.Any:
-    'work,info = dorcsd_lwork(m,p,q)\n\nWrapper for ``dorcsd_lwork``.\n\nParameters\n----------\nm : input int\np : input int\nq : input int\n\nReturns\n-------\nwork : float\ninfo : int\n'
+    "work,info = dorcsd_lwork(m,p,q)\n\nWrapper for ``dorcsd_lwork``.\n\nParameters\n----------\nm : input int\np : input int\nq : input int\n\nReturns\n-------\nwork : float\ninfo : int\n"
     ...
 
 def dorghr(a, tau, lo=..., hi=..., lwork=..., overwrite_a=...) -> typing.Any:
@@ -822,7 +919,7 @@ def dorghr(a, tau, lo=..., hi=..., lwork=..., overwrite_a=...) -> typing.Any:
     ...
 
 def dorghr_lwork(n, lo=..., hi=...) -> typing.Any:
-    'work,info = dorghr_lwork(n,[lo,hi])\n\nWrapper for ``dorghr_lwork``.\n\nParameters\n----------\nn : input int\n\nOther Parameters\n----------------\nlo : input int, optional\n    Default: 0\nhi : input int, optional\n    Default: n-1\n\nReturns\n-------\nwork : float\ninfo : int\n'
+    "work,info = dorghr_lwork(n,[lo,hi])\n\nWrapper for ``dorghr_lwork``.\n\nParameters\n----------\nn : input int\n\nOther Parameters\n----------------\nlo : input int, optional\n    Default: 0\nhi : input int, optional\n    Default: n-1\n\nReturns\n-------\nwork : float\ninfo : int\n"
     ...
 
 def dorgqr(a, tau, lwork=..., overwrite_a=...) -> typing.Any:
@@ -949,7 +1046,9 @@ def dsbevd(ab, compute_v=..., lower=..., ldab=..., liwork=..., overwrite_ab=...)
     "w,z,info = dsbevd(ab,[compute_v,lower,ldab,liwork,overwrite_ab])\n\nWrapper for ``dsbevd``.\n\nParameters\n----------\nab : input rank-2 array('d') with bounds (ldab,n)\n\nOther Parameters\n----------------\noverwrite_ab : input int, optional\n    Default: 1\ncompute_v : input int, optional\n    Default: 1\nlower : input int, optional\n    Default: 0\nldab : input int, optional\n    Default: shape(ab,0)\nliwork : input int, optional\n    Default: (compute_v?3+5*n:1)\n\nReturns\n-------\nw : rank-1 array('d') with bounds (n)\nz : rank-2 array('d') with bounds (ldz,ldz)\ninfo : int\n"
     ...
 
-def dsbevx(ab, vl, vu, il, iu, ldab=..., compute_v=..., range=..., lower=..., abstol=..., mmax=..., overwrite_ab=...) -> typing.Any:
+def dsbevx(
+    ab, vl, vu, il, iu, ldab=..., compute_v=..., range=..., lower=..., abstol=..., mmax=..., overwrite_ab=...
+) -> typing.Any:
     "w,z,m,ifail,info = dsbevx(ab,vl,vu,il,iu,[ldab,compute_v,range,lower,abstol,mmax,overwrite_ab])\n\nWrapper for ``dsbevx``.\n\nParameters\n----------\nab : input rank-2 array('d') with bounds (ldab,n)\nvl : input float\nvu : input float\nil : input int\niu : input int\n\nOther Parameters\n----------------\noverwrite_ab : input int, optional\n    Default: 1\nldab : input int, optional\n    Default: shape(ab,0)\ncompute_v : input int, optional\n    Default: 1\nrange : input int, optional\n    Default: 0\nlower : input int, optional\n    Default: 0\nabstol : input float, optional\n    Default: 0.0\nmmax : input int, optional\n    Default: (compute_v?(range==2?(iu-il+1):n):1)\n\nReturns\n-------\nw : rank-1 array('d') with bounds (n)\nz : rank-2 array('d') with bounds (ldz,mmax)\nm : int\nifail : rank-1 array('i') with bounds ((compute_v?n:1))\ninfo : int\n"
     ...
 
@@ -998,7 +1097,7 @@ def dsyev(a, compute_v=..., lower=..., lwork=..., overwrite_a=...) -> typing.Any
     ...
 
 def dsyev_lwork(n, lower=...) -> typing.Any:
-    'work,info = dsyev_lwork(n,[lower])\n\nWrapper for ``dsyev_lwork``.\n\nParameters\n----------\nn : input int\n\nOther Parameters\n----------------\nlower : input int, optional\n    Default: 0\n\nReturns\n-------\nwork : float\ninfo : int\n'
+    "work,info = dsyev_lwork(n,[lower])\n\nWrapper for ``dsyev_lwork``.\n\nParameters\n----------\nn : input int\n\nOther Parameters\n----------------\nlower : input int, optional\n    Default: 0\n\nReturns\n-------\nwork : float\ninfo : int\n"
     ...
 
 def dsyevd(a, compute_v=..., lower=..., lwork=..., liwork=..., overwrite_a=...) -> typing.Any:
@@ -1006,23 +1105,27 @@ def dsyevd(a, compute_v=..., lower=..., lwork=..., liwork=..., overwrite_a=...) 
     ...
 
 def dsyevd_lwork(n, compute_v=..., lower=...) -> typing.Any:
-    'work,iwork,info = dsyevd_lwork(n,[compute_v,lower])\n\nWrapper for ``dsyevd_lwork``.\n\nParameters\n----------\nn : input int\n\nOther Parameters\n----------------\ncompute_v : input int, optional\n    Default: 1\nlower : input int, optional\n    Default: 0\n\nReturns\n-------\nwork : float\niwork : int\ninfo : int\n'
+    "work,iwork,info = dsyevd_lwork(n,[compute_v,lower])\n\nWrapper for ``dsyevd_lwork``.\n\nParameters\n----------\nn : input int\n\nOther Parameters\n----------------\ncompute_v : input int, optional\n    Default: 1\nlower : input int, optional\n    Default: 0\n\nReturns\n-------\nwork : float\niwork : int\ninfo : int\n"
     ...
 
-def dsyevr(a, compute_v=..., range=..., lower=..., vl=..., vu=..., il=..., iu=..., abstol=..., lwork=..., liwork=..., overwrite_a=...) -> typing.Any:
+def dsyevr(
+    a, compute_v=..., range=..., lower=..., vl=..., vu=..., il=..., iu=..., abstol=..., lwork=..., liwork=..., overwrite_a=...
+) -> typing.Any:
     "w,z,m,isuppz,info = dsyevr(a,[compute_v,range,lower,vl,vu,il,iu,abstol,lwork,liwork,overwrite_a])\n\nWrapper for ``dsyevr``.\n\nParameters\n----------\na : input rank-2 array('d') with bounds ``(n,n)``\n\nOther Parameters\n----------------\ncompute_v : input int, optional\n    Default ``1``\nrange : input string(len=1), optional\n    Default ``'A'``\nlower : input int, optional\n    Default ``0``\noverwrite_a : input int, optional\n    Default ``0``\nvl : input float, optional\n    Default ``0.0``\nvu : input float, optional\n    Default ``1.0``\nil : input int, optional\n    Default ``1``\niu : input int, optional\n    Default ``n``\nabstol : input float, optional\n    Default ``0.0``\nlwork : input int, optional\n    Default ``max(26*n,1)``\nliwork : input int, optional\n    Default ``max(1,10*n)``\n\nReturns\n-------\nw : rank-1 array('d') with bounds ``(n)``\nz : rank-2 array('d') with bounds ``((compute_v?MAX(0,n):0),(compute_v?(*range=='I'?iu-il+1:MAX(1,n)):0))``\nm : int\nisuppz : rank-1 array('i') with bounds ``((compute_v?(2*(*range=='A'||(*range=='I' && iu-il+1==n)?n:0)):0))``\ninfo : int\n"
     ...
 
 def dsyevr_lwork(n, lower=...) -> typing.Any:
-    'work,iwork,info = dsyevr_lwork(n,[lower])\n\nWrapper for ``dsyevr_lwork``.\n\nParameters\n----------\nn : input int\n\nOther Parameters\n----------------\nlower : input int, optional\n    Default: 0\n\nReturns\n-------\nwork : float\niwork : int\ninfo : int\n'
+    "work,iwork,info = dsyevr_lwork(n,[lower])\n\nWrapper for ``dsyevr_lwork``.\n\nParameters\n----------\nn : input int\n\nOther Parameters\n----------------\nlower : input int, optional\n    Default: 0\n\nReturns\n-------\nwork : float\niwork : int\ninfo : int\n"
     ...
 
-def dsyevx(a, compute_v=..., range=..., lower=..., vl=..., vu=..., il=..., iu=..., abstol=..., lwork=..., overwrite_a=...) -> typing.Any:
+def dsyevx(
+    a, compute_v=..., range=..., lower=..., vl=..., vu=..., il=..., iu=..., abstol=..., lwork=..., overwrite_a=...
+) -> typing.Any:
     "w,z,m,ifail,info = dsyevx(a,[compute_v,range,lower,vl,vu,il,iu,abstol,lwork,overwrite_a])\n\nWrapper for ``dsyevx``.\n\nParameters\n----------\na : input rank-2 array('d') with bounds ``(n,n)``\n\nOther Parameters\n----------------\ncompute_v : input int, optional\n    Default ``1``\nrange : input string(len=1), optional\n    Default ``'A'``\nlower : input int, optional\n    Default ``0``\noverwrite_a : input int, optional\n    Default ``0``\nvl : input float, optional\n    Default ``0.0``\nvu : input float, optional\n    Default ``1.0``\nil : input int, optional\n    Default ``1``\niu : input int, optional\n    Default ``n``\nabstol : input float, optional\n    Default ``0.0``\nlwork : input int, optional\n    Default ``max(8*n,1)``\n\nReturns\n-------\nw : rank-1 array('d') with bounds ``(n)``\nz : rank-2 array('d') with bounds ``((compute_v?MAX(0,n):0),(compute_v?(*range=='I'?iu-il+1:MAX(1,n)):0))``\nm : int\nifail : rank-1 array('i') with bounds ``((compute_v?n:0))``\ninfo : int\n"
     ...
 
 def dsyevx_lwork(n, lower=...) -> typing.Any:
-    'work,info = dsyevx_lwork(n,[lower])\n\nWrapper for ``dsyevx_lwork``.\n\nParameters\n----------\nn : input int\n\nOther Parameters\n----------------\nlower : input int, optional\n    Default: 0\n\nReturns\n-------\nwork : float\ninfo : int\n'
+    "work,info = dsyevx_lwork(n,[lower])\n\nWrapper for ``dsyevx_lwork``.\n\nParameters\n----------\nn : input int\n\nOther Parameters\n----------------\nlower : input int, optional\n    Default: 0\n\nReturns\n-------\nwork : float\ninfo : int\n"
     ...
 
 def dsygst(a, b, itype=..., lower=..., overwrite_a=...) -> typing.Any:
@@ -1041,7 +1144,22 @@ def dsygvd(a, b, itype=..., jobz=..., uplo=..., lwork=..., liwork=..., overwrite
     "w,v,info = dsygvd(a,b,[itype,jobz,uplo,lwork,liwork,overwrite_a,overwrite_b])\n\nWrapper for ``dsygvd``.\n\nParameters\n----------\na : input rank-2 array('d') with bounds ``(n,n)``\nb : input rank-2 array('d') with bounds ``(n,n)``\n\nOther Parameters\n----------------\nitype : input int, optional\n    Default ``1``\njobz : input string(len=1), optional\n    Default ``'V'``\nuplo : input string(len=1), optional\n    Default ``'L'``\noverwrite_a : input int, optional\n    Default ``0``\noverwrite_b : input int, optional\n    Default ``0``\nlwork : input int, optional\n    Default ``(*jobz=='N'?2*n+1:1+6*n+2*n*n)``\nliwork : input int, optional\n    Default ``(*jobz=='N'?1:5*n+3)``\n\nReturns\n-------\nw : rank-1 array('d') with bounds ``(n)``\nv : rank-2 array('d') with bounds ``(n,n)`` with ``a`` storage\ninfo : int\n"
     ...
 
-def dsygvx(a, b, itype=..., jobz=..., range=..., uplo=..., vl=..., vu=..., il=..., iu=..., abstol=..., lwork=..., overwrite_a=..., overwrite_b=...) -> typing.Any:
+def dsygvx(
+    a,
+    b,
+    itype=...,
+    jobz=...,
+    range=...,
+    uplo=...,
+    vl=...,
+    vu=...,
+    il=...,
+    iu=...,
+    abstol=...,
+    lwork=...,
+    overwrite_a=...,
+    overwrite_b=...,
+) -> typing.Any:
     "w,z,m,ifail,info = dsygvx(a,b,[itype,jobz,range,uplo,vl,vu,il,iu,abstol,lwork,overwrite_a,overwrite_b])\n\nWrapper for ``dsygvx``.\n\nParameters\n----------\na : input rank-2 array('d') with bounds (n,n)\nb : input rank-2 array('d') with bounds (n,n)\n\nOther Parameters\n----------------\nitype : input int, optional\n    Default: 1\njobz : input string(len=1), optional\n    Default: 'V'\nrange : input string(len=1), optional\n    Default: 'A'\nuplo : input string(len=1), optional\n    Default: 'L'\noverwrite_a : input int, optional\n    Default: 0\noverwrite_b : input int, optional\n    Default: 0\nvl : input float, optional\n    Default: 0.0\nvu : input float, optional\n    Default: 1.0\nil : input int, optional\n    Default: 1\niu : input int, optional\n    Default: n\nabstol : input float, optional\n    Default: 0.0\nlwork : input int, optional\n    Default: max(8*n,1)\n\nReturns\n-------\nw : rank-1 array('d') with bounds (n)\nz : rank-2 array('d') with bounds ((jobz[0]=='V'?MAX(0,n):0),(jobz[0]=='V'?(range[0]=='I'?iu-il+1:MAX(1,n)):0))\nm : int\nifail : rank-1 array('i') with bounds ((jobz[0]=='N'?0:n))\ninfo : int\n"
     ...
 
@@ -1054,7 +1172,7 @@ def dsysv(a, b, lwork=..., lower=..., overwrite_a=..., overwrite_b=...) -> typin
     ...
 
 def dsysv_lwork(n, lower=...) -> typing.Any:
-    'work,info = dsysv_lwork(n,[lower])\n\nWrapper for ``dsysv_lwork``.\n\nParameters\n----------\nn : input int\n\nOther Parameters\n----------------\nlower : input int, optional\n    Default: 0\n\nReturns\n-------\nwork : float\ninfo : int\n'
+    "work,info = dsysv_lwork(n,[lower])\n\nWrapper for ``dsysv_lwork``.\n\nParameters\n----------\nn : input int\n\nOther Parameters\n----------------\nlower : input int, optional\n    Default: 0\n\nReturns\n-------\nwork : float\ninfo : int\n"
     ...
 
 def dsysvx(a, b, af=..., ipiv=..., lwork=..., factored=..., lower=..., overwrite_a=..., overwrite_b=...) -> typing.Any:
@@ -1062,7 +1180,7 @@ def dsysvx(a, b, af=..., ipiv=..., lwork=..., factored=..., lower=..., overwrite
     ...
 
 def dsysvx_lwork(n, lower=...) -> typing.Any:
-    'work,info = dsysvx_lwork(n,[lower])\n\nWrapper for ``dsysvx_lwork``.\n\nParameters\n----------\nn : input int\n\nOther Parameters\n----------------\nlower : input int, optional\n    Default: 0\n\nReturns\n-------\nwork : float\ninfo : int\n'
+    "work,info = dsysvx_lwork(n,[lower])\n\nWrapper for ``dsysvx_lwork``.\n\nParameters\n----------\nn : input int\n\nOther Parameters\n----------------\nlower : input int, optional\n    Default: 0\n\nReturns\n-------\nwork : float\ninfo : int\n"
     ...
 
 def dsytf2(a, lower=..., overwrite_a=...) -> typing.Any:
@@ -1074,7 +1192,7 @@ def dsytrd(a, lower=..., lwork=..., overwrite_a=...) -> typing.Any:
     ...
 
 def dsytrd_lwork(n, lower=...) -> typing.Any:
-    'work,info = dsytrd_lwork(n,[lower])\n\nWrapper for ``dsytrd_lwork``.\n\nParameters\n----------\nn : input int\n\nOther Parameters\n----------------\nlower : input int, optional\n    Default: 0\n\nReturns\n-------\nwork : float\ninfo : int\n'
+    "work,info = dsytrd_lwork(n,[lower])\n\nWrapper for ``dsytrd_lwork``.\n\nParameters\n----------\nn : input int\n\nOther Parameters\n----------------\nlower : input int, optional\n    Default: 0\n\nReturns\n-------\nwork : float\ninfo : int\n"
     ...
 
 def dsytrf(a, lower=..., lwork=..., overwrite_a=...) -> typing.Any:
@@ -1082,7 +1200,7 @@ def dsytrf(a, lower=..., lwork=..., overwrite_a=...) -> typing.Any:
     ...
 
 def dsytrf_lwork(n, lower=...) -> typing.Any:
-    'work,info = dsytrf_lwork(n,[lower])\n\nWrapper for ``dsytrf_lwork``.\n\nParameters\n----------\nn : input int\n\nOther Parameters\n----------------\nlower : input int, optional\n    Default: 0\n\nReturns\n-------\nwork : float\ninfo : int\n'
+    "work,info = dsytrf_lwork(n,[lower])\n\nWrapper for ``dsytrf_lwork``.\n\nParameters\n----------\nn : input int\n\nOther Parameters\n----------------\nlower : input int, optional\n    Default: 0\n\nReturns\n-------\nwork : float\ninfo : int\n"
     ...
 
 def dtbtrs(ab, b, uplo=..., trans=..., diag=..., overwrite_b=...) -> typing.Any:
@@ -1101,7 +1219,9 @@ def dtfttr(n, arf, transr=..., uplo=...) -> typing.Any:
     "a,info = dtfttr(n,arf,[transr,uplo])\n\nWrapper for ``dtfttr``.\n\nParameters\n----------\nn : input int\narf : input rank-1 array('d') with bounds (nt)\n\nOther Parameters\n----------------\ntransr : input string(len=1), optional\n    Default: 'N'\nuplo : input string(len=1), optional\n    Default: 'U'\n\nReturns\n-------\na : rank-2 array('d') with bounds (lda,n)\ninfo : int\n"
     ...
 
-def dtgsen(select, a, b, q, z, lwork=..., liwork=..., overwrite_a=..., overwrite_b=..., overwrite_q=..., overwrite_z=...) -> typing.Any:
+def dtgsen(
+    select, a, b, q, z, lwork=..., liwork=..., overwrite_a=..., overwrite_b=..., overwrite_q=..., overwrite_z=...
+) -> typing.Any:
     "a,b,alphar,alphai,beta,q,z,m,pl,pr,dif,work,iwork,info = dtgsen(select,a,b,q,z,[lwork,liwork,overwrite_a,overwrite_b,overwrite_q,overwrite_z])\n\nWrapper for ``dtgsen``.\n\nParameters\n----------\nselect : input rank-1 array('i') with bounds (n)\na : input rank-2 array('d') with bounds (lda,n)\nb : input rank-2 array('d') with bounds (ldb,n)\nq : input rank-2 array('d') with bounds (ldq,n)\nz : input rank-2 array('d') with bounds (ldz,n)\n\nOther Parameters\n----------------\noverwrite_a : input int, optional\n    Default: 0\noverwrite_b : input int, optional\n    Default: 0\noverwrite_q : input int, optional\n    Default: 0\noverwrite_z : input int, optional\n    Default: 0\nlwork : input int, optional\n    Default: max(MAX(4*n+16,2*m*(n-m)),1)\nliwork : input int, optional\n    Default: n+6\n\nReturns\n-------\na : rank-2 array('d') with bounds (lda,n)\nb : rank-2 array('d') with bounds (ldb,n)\nalphar : rank-1 array('d') with bounds (n)\nalphai : rank-1 array('d') with bounds (n)\nbeta : rank-1 array('d') with bounds (n)\nq : rank-2 array('d') with bounds (ldq,n)\nz : rank-2 array('d') with bounds (ldz,n)\nm : int\npl : float\npr : float\ndif : rank-1 array('d') with bounds (2)\nwork : rank-1 array('d') with bounds (MAX(lwork,1))\niwork : rank-1 array('i') with bounds (MAX(1,liwork))\ninfo : int\n"
     ...
 
@@ -1146,11 +1266,11 @@ def dtzrzf(a, lwork=..., overwrite_a=...) -> typing.Any:
     ...
 
 def dtzrzf_lwork(m, n) -> typing.Any:
-    'work,info = dtzrzf_lwork(m,n)\n\nWrapper for ``dtzrzf_lwork``.\n\nParameters\n----------\nm : input int\nn : input int\n\nReturns\n-------\nwork : float\ninfo : int\n'
+    "work,info = dtzrzf_lwork(m,n)\n\nWrapper for ``dtzrzf_lwork``.\n\nParameters\n----------\nm : input int\nn : input int\n\nReturns\n-------\nwork : float\ninfo : int\n"
     ...
 
 def ilaver() -> typing.Any:
-    'major,minor,patch = ilaver()\n\nWrapper for ``ilaver``.\n\nReturns\n-------\nmajor : int\nminor : int\npatch : int\n'
+    "major,minor,patch = ilaver()\n\nWrapper for ``ilaver``.\n\nReturns\n-------\nmajor : int\nminor : int\npatch : int\n"
     ...
 
 def sgbsv(kl, ku, ab, b, overwrite_ab=..., overwrite_b=...) -> typing.Any:
@@ -1190,7 +1310,7 @@ def sgeev(a, compute_vl=..., compute_vr=..., lwork=..., overwrite_a=...) -> typi
     ...
 
 def sgeev_lwork(n, compute_vl=..., compute_vr=...) -> typing.Any:
-    'work,info = sgeev_lwork(n,[compute_vl,compute_vr])\n\nWrapper for ``sgeev_lwork``.\n\nParameters\n----------\nn : input int\n\nOther Parameters\n----------------\ncompute_vl : input int, optional\n    Default: 1\ncompute_vr : input int, optional\n    Default: 1\n\nReturns\n-------\nwork : float\ninfo : int\n'
+    "work,info = sgeev_lwork(n,[compute_vl,compute_vr])\n\nWrapper for ``sgeev_lwork``.\n\nParameters\n----------\nn : input int\n\nOther Parameters\n----------------\ncompute_vl : input int, optional\n    Default: 1\ncompute_vr : input int, optional\n    Default: 1\n\nReturns\n-------\nwork : float\ninfo : int\n"
     ...
 
 def sgegv(*args, **kwds) -> typing.Any:
@@ -1202,7 +1322,7 @@ def sgehrd(a, lo=..., hi=..., lwork=..., overwrite_a=...) -> typing.Any:
     ...
 
 def sgehrd_lwork(n, lo=..., hi=...) -> typing.Any:
-    'work,info = sgehrd_lwork(n,[lo,hi])\n\nWrapper for ``sgehrd_lwork``.\n\nParameters\n----------\nn : input int\n\nOther Parameters\n----------------\nlo : input int, optional\n    Default: 0\nhi : input int, optional\n    Default: n-1\n\nReturns\n-------\nwork : float\ninfo : int\n'
+    "work,info = sgehrd_lwork(n,[lo,hi])\n\nWrapper for ``sgehrd_lwork``.\n\nParameters\n----------\nn : input int\n\nOther Parameters\n----------------\nlo : input int, optional\n    Default: 0\nhi : input int, optional\n    Default: n-1\n\nReturns\n-------\nwork : float\ninfo : int\n"
     ...
 
 def sgejsv(a, joba=..., jobu=..., jobv=..., jobr=..., jobt=..., jobp=..., lwork=..., overwrite_a=...) -> typing.Any:
@@ -1222,7 +1342,7 @@ def sgelsd(a, b, lwork, size_iwork, cond=..., overwrite_a=..., overwrite_b=...) 
     ...
 
 def sgelsd_lwork(m, n, nrhs, cond=..., lwork=...) -> typing.Any:
-    'work,iwork,info = sgelsd_lwork(m,n,nrhs,[cond,lwork])\n\nWrapper for ``sgelsd_lwork``.\n\nParameters\n----------\nm : input int\nn : input int\nnrhs : input int\n\nOther Parameters\n----------------\ncond : input float, optional\n    Default: -1.0\nlwork : input int, optional\n    Default: -1\n\nReturns\n-------\nwork : float\niwork : int\ninfo : int\n'
+    "work,iwork,info = sgelsd_lwork(m,n,nrhs,[cond,lwork])\n\nWrapper for ``sgelsd_lwork``.\n\nParameters\n----------\nm : input int\nn : input int\nnrhs : input int\n\nOther Parameters\n----------------\ncond : input float, optional\n    Default: -1.0\nlwork : input int, optional\n    Default: -1\n\nReturns\n-------\nwork : float\niwork : int\ninfo : int\n"
     ...
 
 def sgelss(a, b, cond=..., lwork=..., overwrite_a=..., overwrite_b=...) -> typing.Any:
@@ -1230,7 +1350,7 @@ def sgelss(a, b, cond=..., lwork=..., overwrite_a=..., overwrite_b=...) -> typin
     ...
 
 def sgelss_lwork(m, n, nrhs, cond=..., lwork=...) -> typing.Any:
-    'work,info = sgelss_lwork(m,n,nrhs,[cond,lwork])\n\nWrapper for ``sgelss_lwork``.\n\nParameters\n----------\nm : input int\nn : input int\nnrhs : input int\n\nOther Parameters\n----------------\ncond : input float, optional\n    Default: -1.0\nlwork : input int, optional\n    Default: -1\n\nReturns\n-------\nwork : float\ninfo : int\n'
+    "work,info = sgelss_lwork(m,n,nrhs,[cond,lwork])\n\nWrapper for ``sgelss_lwork``.\n\nParameters\n----------\nm : input int\nn : input int\nnrhs : input int\n\nOther Parameters\n----------------\ncond : input float, optional\n    Default: -1.0\nlwork : input int, optional\n    Default: -1\n\nReturns\n-------\nwork : float\ninfo : int\n"
     ...
 
 def sgelsy(a, b, jptv, cond, lwork, overwrite_a=..., overwrite_b=...) -> typing.Any:
@@ -1238,7 +1358,7 @@ def sgelsy(a, b, jptv, cond, lwork, overwrite_a=..., overwrite_b=...) -> typing.
     ...
 
 def sgelsy_lwork(m, n, nrhs, cond, lwork=...) -> typing.Any:
-    'work,info = sgelsy_lwork(m,n,nrhs,cond,[lwork])\n\nWrapper for ``sgelsy_lwork``.\n\nParameters\n----------\nm : input int\nn : input int\nnrhs : input int\ncond : input float\n\nOther Parameters\n----------------\nlwork : input int, optional\n    Default: -1\n\nReturns\n-------\nwork : float\ninfo : int\n'
+    "work,info = sgelsy_lwork(m,n,nrhs,cond,[lwork])\n\nWrapper for ``sgelsy_lwork``.\n\nParameters\n----------\nm : input int\nn : input int\nnrhs : input int\ncond : input float\n\nOther Parameters\n----------------\nlwork : input int, optional\n    Default: -1\n\nReturns\n-------\nwork : float\ninfo : int\n"
     ...
 
 def sgemqrt(v, t, c, side=..., trans=..., overwrite_c=...) -> typing.Any:
@@ -1254,7 +1374,7 @@ def sgeqrf(a, lwork=..., overwrite_a=...) -> typing.Any:
     ...
 
 def sgeqrf_lwork(m, n) -> typing.Any:
-    'work,info = sgeqrf_lwork(m,n)\n\nWrapper for ``sgeqrf_lwork``.\n\nParameters\n----------\nm : input int\nn : input int\n\nReturns\n-------\nwork : float\ninfo : int\n'
+    "work,info = sgeqrf_lwork(m,n)\n\nWrapper for ``sgeqrf_lwork``.\n\nParameters\n----------\nm : input int\nn : input int\n\nReturns\n-------\nwork : float\ninfo : int\n"
     ...
 
 def sgeqrfp(a, lwork=..., overwrite_a=...) -> typing.Any:
@@ -1262,7 +1382,7 @@ def sgeqrfp(a, lwork=..., overwrite_a=...) -> typing.Any:
     ...
 
 def sgeqrfp_lwork(m, n) -> typing.Any:
-    'work,info = sgeqrfp_lwork(m,n)\n\nWrapper for ``sgeqrfp_lwork``.\n\nParameters\n----------\nm : input int\nn : input int\n\nReturns\n-------\nwork : float\ninfo : int\n'
+    "work,info = sgeqrfp_lwork(m,n)\n\nWrapper for ``sgeqrfp_lwork``.\n\nParameters\n----------\nm : input int\nn : input int\n\nReturns\n-------\nwork : float\ninfo : int\n"
     ...
 
 def sgeqrt(nb, a, overwrite_a=...) -> typing.Any:
@@ -1282,7 +1402,7 @@ def sgesdd(a, compute_uv=..., full_matrices=..., lwork=..., overwrite_a=...) -> 
     ...
 
 def sgesdd_lwork(m, n, compute_uv=..., full_matrices=...) -> typing.Any:
-    'work,info = sgesdd_lwork(m,n,[compute_uv,full_matrices])\n\nWrapper for ``sgesdd_lwork``.\n\nParameters\n----------\nm : input int\nn : input int\n\nOther Parameters\n----------------\ncompute_uv : input int, optional\n    Default: 1\nfull_matrices : input int, optional\n    Default: 1\n\nReturns\n-------\nwork : float\ninfo : int\n'
+    "work,info = sgesdd_lwork(m,n,[compute_uv,full_matrices])\n\nWrapper for ``sgesdd_lwork``.\n\nParameters\n----------\nm : input int\nn : input int\n\nOther Parameters\n----------------\ncompute_uv : input int, optional\n    Default: 1\nfull_matrices : input int, optional\n    Default: 1\n\nReturns\n-------\nwork : float\ninfo : int\n"
     ...
 
 def sgesv(a, b, overwrite_a=..., overwrite_b=...) -> typing.Any:
@@ -1294,7 +1414,7 @@ def sgesvd(a, compute_uv=..., full_matrices=..., lwork=..., overwrite_a=...) -> 
     ...
 
 def sgesvd_lwork(m, n, compute_uv=..., full_matrices=...) -> typing.Any:
-    'work,info = sgesvd_lwork(m,n,[compute_uv,full_matrices])\n\nWrapper for ``sgesvd_lwork``.\n\nParameters\n----------\nm : input int\nn : input int\n\nOther Parameters\n----------------\ncompute_uv : input int, optional\n    Default: 1\nfull_matrices : input int, optional\n    Default: 1\n\nReturns\n-------\nwork : float\ninfo : int\n'
+    "work,info = sgesvd_lwork(m,n,[compute_uv,full_matrices])\n\nWrapper for ``sgesvd_lwork``.\n\nParameters\n----------\nm : input int\nn : input int\n\nOther Parameters\n----------------\ncompute_uv : input int, optional\n    Default: 1\nfull_matrices : input int, optional\n    Default: 1\n\nReturns\n-------\nwork : float\ninfo : int\n"
     ...
 
 def sgesvx(a, b, fact=..., trans=..., af=..., ipiv=..., equed=..., r=..., c=..., overwrite_a=..., overwrite_b=...) -> typing.Any:
@@ -1314,14 +1434,27 @@ def sgetri(lu, piv, lwork=..., overwrite_lu=...) -> typing.Any:
     ...
 
 def sgetri_lwork(n) -> typing.Any:
-    'work,info = sgetri_lwork(n)\n\nWrapper for ``sgetri_lwork``.\n\nParameters\n----------\nn : input int\n\nReturns\n-------\nwork : float\ninfo : int\n'
+    "work,info = sgetri_lwork(n)\n\nWrapper for ``sgetri_lwork``.\n\nParameters\n----------\nn : input int\n\nReturns\n-------\nwork : float\ninfo : int\n"
     ...
 
 def sgetrs(lu, piv, b, trans=..., overwrite_b=...) -> typing.Any:
     "x,info = sgetrs(lu,piv,b,[trans,overwrite_b])\n\nWrapper for ``sgetrs``.\n\nParameters\n----------\nlu : input rank-2 array('f') with bounds (n,n)\npiv : input rank-1 array('i') with bounds (n)\nb : input rank-2 array('f') with bounds (n,nrhs)\n\nOther Parameters\n----------------\noverwrite_b : input int, optional\n    Default: 0\ntrans : input int, optional\n    Default: 0\n\nReturns\n-------\nx : rank-2 array('f') with bounds (n,nrhs) and b storage\ninfo : int\n"
     ...
 
-def sgges(sselect, a, b, jobvsl=..., jobvsr=..., sort_t=..., ldvsl=..., ldvsr=..., lwork=..., sselect_extra_args=..., overwrite_a=..., overwrite_b=...) -> typing.Any:
+def sgges(
+    sselect,
+    a,
+    b,
+    jobvsl=...,
+    jobvsr=...,
+    sort_t=...,
+    ldvsl=...,
+    ldvsr=...,
+    lwork=...,
+    sselect_extra_args=...,
+    overwrite_a=...,
+    overwrite_b=...,
+) -> typing.Any:
     "a,b,sdim,alphar,alphai,beta,vsl,vsr,work,info = sgges(sselect,a,b,[jobvsl,jobvsr,sort_t,ldvsl,ldvsr,lwork,sselect_extra_args,overwrite_a,overwrite_b])\n\nWrapper for ``sgges``.\n\nParameters\n----------\nsselect : call-back function\na : input rank-2 array('f') with bounds (lda,n)\nb : input rank-2 array('f') with bounds (ldb,n)\n\nOther Parameters\n----------------\njobvsl : input int, optional\n    Default: 1\njobvsr : input int, optional\n    Default: 1\nsort_t : input int, optional\n    Default: 0\nsselect_extra_args : input tuple, optional\n    Default: ()\noverwrite_a : input int, optional\n    Default: 0\noverwrite_b : input int, optional\n    Default: 0\nldvsl : input int, optional\n    Default: ((jobvsl==1)?n:1)\nldvsr : input int, optional\n    Default: ((jobvsr==1)?n:1)\nlwork : input int, optional\n    Default: max(8*n+16,1)\n\nReturns\n-------\na : rank-2 array('f') with bounds (lda,n)\nb : rank-2 array('f') with bounds (ldb,n)\nsdim : int\nalphar : rank-1 array('f') with bounds (n)\nalphai : rank-1 array('f') with bounds (n)\nbeta : rank-1 array('f') with bounds (n)\nvsl : rank-2 array('f') with bounds (ldvsl,n)\nvsr : rank-2 array('f') with bounds (ldvsr,n)\nwork : rank-1 array('f') with bounds (MAX(lwork,1))\ninfo : int\n\nNotes\n-----\nCall-back functions::\n\n  def sselect(alphar,alphai,beta): return sselect\n  Required arguments:\n    alphar : input float\n    alphai : input float\n    beta : input float\n  Return objects:\n    sselect : int\n"
     ...
 
@@ -1334,7 +1467,7 @@ def sgglse(a, b, c, d, lwork=..., overwrite_a=..., overwrite_b=..., overwrite_c=
     ...
 
 def sgglse_lwork(m, n, p) -> typing.Any:
-    'work,info = sgglse_lwork(m,n,p)\n\nWrapper for ``sgglse_lwork``.\n\nParameters\n----------\nm : input int\nn : input int\np : input int\n\nReturns\n-------\nwork : float\ninfo : int\n'
+    "work,info = sgglse_lwork(m,n,p)\n\nWrapper for ``sgglse_lwork``.\n\nParameters\n----------\nm : input int\nn : input int\np : input int\n\nReturns\n-------\nwork : float\ninfo : int\n"
     ...
 
 def sgtsv(dl, d, du, b, overwrite_dl=..., overwrite_d=..., overwrite_du=..., overwrite_b=...) -> typing.Any:
@@ -1354,7 +1487,7 @@ def sgttrs(dl, d, du, du2, ipiv, b, trans=..., overwrite_b=...) -> typing.Any:
     ...
 
 def slamch(cmach) -> typing.Any:
-    'slamch = slamch(cmach)\n\nWrapper for ``slamch``.\n\nParameters\n----------\ncmach : input string(len=1)\n\nReturns\n-------\nslamch : float\n'
+    "slamch = slamch(cmach)\n\nWrapper for ``slamch``.\n\nParameters\n----------\ncmach : input string(len=1)\n\nReturns\n-------\nslamch : float\n"
     ...
 
 def slange(norm, a) -> typing.Any:
@@ -1370,7 +1503,7 @@ def slarfg(n, alpha, x, incx=..., overwrite_x=...) -> typing.Any:
     ...
 
 def slartg(f, g) -> typing.Any:
-    'cs,sn,r = slartg(f,g)\n\nWrapper for ``slartg``.\n\nParameters\n----------\nf : input float\ng : input float\n\nReturns\n-------\ncs : float\nsn : float\nr : float\n'
+    "cs,sn,r = slartg(f,g)\n\nWrapper for ``slartg``.\n\nParameters\n----------\nf : input float\ng : input float\n\nReturns\n-------\ncs : float\nsn : float\nr : float\n"
     ...
 
 def slasd4(i, d, z, rho=...) -> typing.Any:
@@ -1385,12 +1518,28 @@ def slauum(c, lower=..., overwrite_c=...) -> typing.Any:
     "a,info = slauum(c,[lower,overwrite_c])\n\nWrapper for ``slauum``.\n\nParameters\n----------\nc : input rank-2 array('f') with bounds (n,n)\n\nOther Parameters\n----------------\noverwrite_c : input int, optional\n    Default: 0\nlower : input int, optional\n    Default: 0\n\nReturns\n-------\na : rank-2 array('f') with bounds (n,n) and c storage\ninfo : int\n"
     ...
 
-def sorcsd(x11, x12, x21, x22, compute_u1=..., compute_u2=..., compute_v1t=..., compute_v2t=..., trans=..., signs=..., lwork=..., overwrite_x11=..., overwrite_x12=..., overwrite_x21=..., overwrite_x22=...) -> typing.Any:
+def sorcsd(
+    x11,
+    x12,
+    x21,
+    x22,
+    compute_u1=...,
+    compute_u2=...,
+    compute_v1t=...,
+    compute_v2t=...,
+    trans=...,
+    signs=...,
+    lwork=...,
+    overwrite_x11=...,
+    overwrite_x12=...,
+    overwrite_x21=...,
+    overwrite_x22=...,
+) -> typing.Any:
     "cs11,cs12,cs21,cs22,theta,u1,u2,v1t,v2t,info = sorcsd(x11,x12,x21,x22,[compute_u1,compute_u2,compute_v1t,compute_v2t,trans,signs,lwork,overwrite_x11,overwrite_x12,overwrite_x21,overwrite_x22])\n\nWrapper for ``sorcsd``.\n\nParameters\n----------\nx11 : input rank-2 array('f') with bounds (p,q)\nx12 : input rank-2 array('f') with bounds (p,mmq)\nx21 : input rank-2 array('f') with bounds (mmp,q)\nx22 : input rank-2 array('f') with bounds (mmp,mmq)\n\nOther Parameters\n----------------\ncompute_u1 : input int, optional\n    Default: 1\ncompute_u2 : input int, optional\n    Default: 1\ncompute_v1t : input int, optional\n    Default: 1\ncompute_v2t : input int, optional\n    Default: 1\ntrans : input int, optional\n    Default: 0\nsigns : input int, optional\n    Default: 0\noverwrite_x11 : input int, optional\n    Default: 0\noverwrite_x12 : input int, optional\n    Default: 0\noverwrite_x21 : input int, optional\n    Default: 0\noverwrite_x22 : input int, optional\n    Default: 0\nlwork : input int, optional\n    Default: 2+2*m+5*MAX(1,q-1)+4*MAX(1,q)+8*q\n\nReturns\n-------\ncs11 : rank-2 array('f') with bounds (p,q) and x11 storage\ncs12 : rank-2 array('f') with bounds (p,mmq) and x12 storage\ncs21 : rank-2 array('f') with bounds (mmp,q) and x21 storage\ncs22 : rank-2 array('f') with bounds (mmp,mmq) and x22 storage\ntheta : rank-1 array('f') with bounds (min(min(p,mmp),min(q,mmq)))\nu1 : rank-2 array('f') with bounds ((compute_u1?p:0),(compute_u1?p:0))\nu2 : rank-2 array('f') with bounds ((compute_u2?mmp:0),(compute_u2?mmp:0))\nv1t : rank-2 array('f') with bounds ((compute_v1t?q:0),(compute_v1t?q:0))\nv2t : rank-2 array('f') with bounds ((compute_v2t?mmq:0),(compute_v2t?mmq:0))\ninfo : int\n"
     ...
 
 def sorcsd_lwork(m, p, q) -> typing.Any:
-    'work,info = sorcsd_lwork(m,p,q)\n\nWrapper for ``sorcsd_lwork``.\n\nParameters\n----------\nm : input int\np : input int\nq : input int\n\nReturns\n-------\nwork : float\ninfo : int\n'
+    "work,info = sorcsd_lwork(m,p,q)\n\nWrapper for ``sorcsd_lwork``.\n\nParameters\n----------\nm : input int\np : input int\nq : input int\n\nReturns\n-------\nwork : float\ninfo : int\n"
     ...
 
 def sorghr(a, tau, lo=..., hi=..., lwork=..., overwrite_a=...) -> typing.Any:
@@ -1398,7 +1547,7 @@ def sorghr(a, tau, lo=..., hi=..., lwork=..., overwrite_a=...) -> typing.Any:
     ...
 
 def sorghr_lwork(n, lo=..., hi=...) -> typing.Any:
-    'work,info = sorghr_lwork(n,[lo,hi])\n\nWrapper for ``sorghr_lwork``.\n\nParameters\n----------\nn : input int\n\nOther Parameters\n----------------\nlo : input int, optional\n    Default: 0\nhi : input int, optional\n    Default: n-1\n\nReturns\n-------\nwork : float\ninfo : int\n'
+    "work,info = sorghr_lwork(n,[lo,hi])\n\nWrapper for ``sorghr_lwork``.\n\nParameters\n----------\nn : input int\n\nOther Parameters\n----------------\nlo : input int, optional\n    Default: 0\nhi : input int, optional\n    Default: n-1\n\nReturns\n-------\nwork : float\ninfo : int\n"
     ...
 
 def sorgqr(a, tau, lwork=..., overwrite_a=...) -> typing.Any:
@@ -1525,7 +1674,9 @@ def ssbevd(ab, compute_v=..., lower=..., ldab=..., liwork=..., overwrite_ab=...)
     "w,z,info = ssbevd(ab,[compute_v,lower,ldab,liwork,overwrite_ab])\n\nWrapper for ``ssbevd``.\n\nParameters\n----------\nab : input rank-2 array('f') with bounds (ldab,n)\n\nOther Parameters\n----------------\noverwrite_ab : input int, optional\n    Default: 1\ncompute_v : input int, optional\n    Default: 1\nlower : input int, optional\n    Default: 0\nldab : input int, optional\n    Default: shape(ab,0)\nliwork : input int, optional\n    Default: (compute_v?3+5*n:1)\n\nReturns\n-------\nw : rank-1 array('f') with bounds (n)\nz : rank-2 array('f') with bounds (ldz,ldz)\ninfo : int\n"
     ...
 
-def ssbevx(ab, vl, vu, il, iu, ldab=..., compute_v=..., range=..., lower=..., abstol=..., mmax=..., overwrite_ab=...) -> typing.Any:
+def ssbevx(
+    ab, vl, vu, il, iu, ldab=..., compute_v=..., range=..., lower=..., abstol=..., mmax=..., overwrite_ab=...
+) -> typing.Any:
     "w,z,m,ifail,info = ssbevx(ab,vl,vu,il,iu,[ldab,compute_v,range,lower,abstol,mmax,overwrite_ab])\n\nWrapper for ``ssbevx``.\n\nParameters\n----------\nab : input rank-2 array('f') with bounds (ldab,n)\nvl : input float\nvu : input float\nil : input int\niu : input int\n\nOther Parameters\n----------------\noverwrite_ab : input int, optional\n    Default: 1\nldab : input int, optional\n    Default: shape(ab,0)\ncompute_v : input int, optional\n    Default: 1\nrange : input int, optional\n    Default: 0\nlower : input int, optional\n    Default: 0\nabstol : input float, optional\n    Default: 0.0\nmmax : input int, optional\n    Default: (compute_v?(range==2?(iu-il+1):n):1)\n\nReturns\n-------\nw : rank-1 array('f') with bounds (n)\nz : rank-2 array('f') with bounds (ldz,mmax)\nm : int\nifail : rank-1 array('i') with bounds ((compute_v?n:1))\ninfo : int\n"
     ...
 
@@ -1574,7 +1725,7 @@ def ssyev(a, compute_v=..., lower=..., lwork=..., overwrite_a=...) -> typing.Any
     ...
 
 def ssyev_lwork(n, lower=...) -> typing.Any:
-    'work,info = ssyev_lwork(n,[lower])\n\nWrapper for ``ssyev_lwork``.\n\nParameters\n----------\nn : input int\n\nOther Parameters\n----------------\nlower : input int, optional\n    Default: 0\n\nReturns\n-------\nwork : float\ninfo : int\n'
+    "work,info = ssyev_lwork(n,[lower])\n\nWrapper for ``ssyev_lwork``.\n\nParameters\n----------\nn : input int\n\nOther Parameters\n----------------\nlower : input int, optional\n    Default: 0\n\nReturns\n-------\nwork : float\ninfo : int\n"
     ...
 
 def ssyevd(a, compute_v=..., lower=..., lwork=..., liwork=..., overwrite_a=...) -> typing.Any:
@@ -1582,23 +1733,27 @@ def ssyevd(a, compute_v=..., lower=..., lwork=..., liwork=..., overwrite_a=...) 
     ...
 
 def ssyevd_lwork(n, compute_v=..., lower=...) -> typing.Any:
-    'work,iwork,info = ssyevd_lwork(n,[compute_v,lower])\n\nWrapper for ``ssyevd_lwork``.\n\nParameters\n----------\nn : input int\n\nOther Parameters\n----------------\ncompute_v : input int, optional\n    Default: 1\nlower : input int, optional\n    Default: 0\n\nReturns\n-------\nwork : float\niwork : int\ninfo : int\n'
+    "work,iwork,info = ssyevd_lwork(n,[compute_v,lower])\n\nWrapper for ``ssyevd_lwork``.\n\nParameters\n----------\nn : input int\n\nOther Parameters\n----------------\ncompute_v : input int, optional\n    Default: 1\nlower : input int, optional\n    Default: 0\n\nReturns\n-------\nwork : float\niwork : int\ninfo : int\n"
     ...
 
-def ssyevr(a, compute_v=..., range=..., lower=..., vl=..., vu=..., il=..., iu=..., abstol=..., lwork=..., liwork=..., overwrite_a=...) -> typing.Any:
+def ssyevr(
+    a, compute_v=..., range=..., lower=..., vl=..., vu=..., il=..., iu=..., abstol=..., lwork=..., liwork=..., overwrite_a=...
+) -> typing.Any:
     "w,z,m,isuppz,info = ssyevr(a,[compute_v,range,lower,vl,vu,il,iu,abstol,lwork,liwork,overwrite_a])\n\nWrapper for ``ssyevr``.\n\nParameters\n----------\na : input rank-2 array('f') with bounds ``(n,n)``\n\nOther Parameters\n----------------\ncompute_v : input int, optional\n    Default ``1``\nrange : input string(len=1), optional\n    Default ``'A'``\nlower : input int, optional\n    Default ``0``\noverwrite_a : input int, optional\n    Default ``0``\nvl : input float, optional\n    Default ``0.0``\nvu : input float, optional\n    Default ``1.0``\nil : input int, optional\n    Default ``1``\niu : input int, optional\n    Default ``n``\nabstol : input float, optional\n    Default ``0.0``\nlwork : input int, optional\n    Default ``max(26*n,1)``\nliwork : input int, optional\n    Default ``max(1,10*n)``\n\nReturns\n-------\nw : rank-1 array('f') with bounds ``(n)``\nz : rank-2 array('f') with bounds ``((compute_v?MAX(0,n):0),(compute_v?(*range=='I'?iu-il+1:MAX(1,n)):0))``\nm : int\nisuppz : rank-1 array('i') with bounds ``((compute_v?(2*(*range=='A'||(*range=='I' && iu-il+1==n)?n:0)):0))``\ninfo : int\n"
     ...
 
 def ssyevr_lwork(n, lower=...) -> typing.Any:
-    'work,iwork,info = ssyevr_lwork(n,[lower])\n\nWrapper for ``ssyevr_lwork``.\n\nParameters\n----------\nn : input int\n\nOther Parameters\n----------------\nlower : input int, optional\n    Default: 0\n\nReturns\n-------\nwork : float\niwork : int\ninfo : int\n'
+    "work,iwork,info = ssyevr_lwork(n,[lower])\n\nWrapper for ``ssyevr_lwork``.\n\nParameters\n----------\nn : input int\n\nOther Parameters\n----------------\nlower : input int, optional\n    Default: 0\n\nReturns\n-------\nwork : float\niwork : int\ninfo : int\n"
     ...
 
-def ssyevx(a, compute_v=..., range=..., lower=..., vl=..., vu=..., il=..., iu=..., abstol=..., lwork=..., overwrite_a=...) -> typing.Any:
+def ssyevx(
+    a, compute_v=..., range=..., lower=..., vl=..., vu=..., il=..., iu=..., abstol=..., lwork=..., overwrite_a=...
+) -> typing.Any:
     "w,z,m,ifail,info = ssyevx(a,[compute_v,range,lower,vl,vu,il,iu,abstol,lwork,overwrite_a])\n\nWrapper for ``ssyevx``.\n\nParameters\n----------\na : input rank-2 array('f') with bounds ``(n,n)``\n\nOther Parameters\n----------------\ncompute_v : input int, optional\n    Default ``1``\nrange : input string(len=1), optional\n    Default ``'A'``\nlower : input int, optional\n    Default ``0``\noverwrite_a : input int, optional\n    Default ``0``\nvl : input float, optional\n    Default ``0.0``\nvu : input float, optional\n    Default ``1.0``\nil : input int, optional\n    Default ``1``\niu : input int, optional\n    Default ``n``\nabstol : input float, optional\n    Default ``0.0``\nlwork : input int, optional\n    Default ``max(8*n,1)``\n\nReturns\n-------\nw : rank-1 array('f') with bounds ``(n)``\nz : rank-2 array('f') with bounds ``((compute_v?MAX(0,n):0),(compute_v?(*range=='I'?iu-il+1:MAX(1,n)):0))``\nm : int\nifail : rank-1 array('i') with bounds ``((compute_v?n:0))``\ninfo : int\n"
     ...
 
 def ssyevx_lwork(n, lower=...) -> typing.Any:
-    'work,info = ssyevx_lwork(n,[lower])\n\nWrapper for ``ssyevx_lwork``.\n\nParameters\n----------\nn : input int\n\nOther Parameters\n----------------\nlower : input int, optional\n    Default: 0\n\nReturns\n-------\nwork : float\ninfo : int\n'
+    "work,info = ssyevx_lwork(n,[lower])\n\nWrapper for ``ssyevx_lwork``.\n\nParameters\n----------\nn : input int\n\nOther Parameters\n----------------\nlower : input int, optional\n    Default: 0\n\nReturns\n-------\nwork : float\ninfo : int\n"
     ...
 
 def ssygst(a, b, itype=..., lower=..., overwrite_a=...) -> typing.Any:
@@ -1617,7 +1772,22 @@ def ssygvd(a, b, itype=..., jobz=..., uplo=..., lwork=..., liwork=..., overwrite
     "w,v,info = ssygvd(a,b,[itype,jobz,uplo,lwork,liwork,overwrite_a,overwrite_b])\n\nWrapper for ``ssygvd``.\n\nParameters\n----------\na : input rank-2 array('f') with bounds ``(n,n)``\nb : input rank-2 array('f') with bounds ``(n,n)``\n\nOther Parameters\n----------------\nitype : input int, optional\n    Default ``1``\njobz : input string(len=1), optional\n    Default ``'V'``\nuplo : input string(len=1), optional\n    Default ``'L'``\noverwrite_a : input int, optional\n    Default ``0``\noverwrite_b : input int, optional\n    Default ``0``\nlwork : input int, optional\n    Default ``(*jobz=='N'?2*n+1:1+6*n+2*n*n)``\nliwork : input int, optional\n    Default ``(*jobz=='N'?1:5*n+3)``\n\nReturns\n-------\nw : rank-1 array('f') with bounds ``(n)``\nv : rank-2 array('f') with bounds ``(n,n)`` with ``a`` storage\ninfo : int\n"
     ...
 
-def ssygvx(a, b, itype=..., jobz=..., range=..., uplo=..., vl=..., vu=..., il=..., iu=..., abstol=..., lwork=..., overwrite_a=..., overwrite_b=...) -> typing.Any:
+def ssygvx(
+    a,
+    b,
+    itype=...,
+    jobz=...,
+    range=...,
+    uplo=...,
+    vl=...,
+    vu=...,
+    il=...,
+    iu=...,
+    abstol=...,
+    lwork=...,
+    overwrite_a=...,
+    overwrite_b=...,
+) -> typing.Any:
     "w,z,m,ifail,info = ssygvx(a,b,[itype,jobz,range,uplo,vl,vu,il,iu,abstol,lwork,overwrite_a,overwrite_b])\n\nWrapper for ``ssygvx``.\n\nParameters\n----------\na : input rank-2 array('f') with bounds (n,n)\nb : input rank-2 array('f') with bounds (n,n)\n\nOther Parameters\n----------------\nitype : input int, optional\n    Default: 1\njobz : input string(len=1), optional\n    Default: 'V'\nrange : input string(len=1), optional\n    Default: 'A'\nuplo : input string(len=1), optional\n    Default: 'L'\noverwrite_a : input int, optional\n    Default: 0\noverwrite_b : input int, optional\n    Default: 0\nvl : input float, optional\n    Default: 0.0\nvu : input float, optional\n    Default: 1.0\nil : input int, optional\n    Default: 1\niu : input int, optional\n    Default: n\nabstol : input float, optional\n    Default: 0.0\nlwork : input int, optional\n    Default: max(8*n,1)\n\nReturns\n-------\nw : rank-1 array('f') with bounds (n)\nz : rank-2 array('f') with bounds ((jobz[0]=='V'?MAX(0,n):0),(jobz[0]=='V'?(range[0]=='I'?iu-il+1:MAX(1,n)):0))\nm : int\nifail : rank-1 array('i') with bounds ((jobz[0]=='N'?0:n))\ninfo : int\n"
     ...
 
@@ -1630,7 +1800,7 @@ def ssysv(a, b, lwork=..., lower=..., overwrite_a=..., overwrite_b=...) -> typin
     ...
 
 def ssysv_lwork(n, lower=...) -> typing.Any:
-    'work,info = ssysv_lwork(n,[lower])\n\nWrapper for ``ssysv_lwork``.\n\nParameters\n----------\nn : input int\n\nOther Parameters\n----------------\nlower : input int, optional\n    Default: 0\n\nReturns\n-------\nwork : float\ninfo : int\n'
+    "work,info = ssysv_lwork(n,[lower])\n\nWrapper for ``ssysv_lwork``.\n\nParameters\n----------\nn : input int\n\nOther Parameters\n----------------\nlower : input int, optional\n    Default: 0\n\nReturns\n-------\nwork : float\ninfo : int\n"
     ...
 
 def ssysvx(a, b, af=..., ipiv=..., lwork=..., factored=..., lower=..., overwrite_a=..., overwrite_b=...) -> typing.Any:
@@ -1638,7 +1808,7 @@ def ssysvx(a, b, af=..., ipiv=..., lwork=..., factored=..., lower=..., overwrite
     ...
 
 def ssysvx_lwork(n, lower=...) -> typing.Any:
-    'work,info = ssysvx_lwork(n,[lower])\n\nWrapper for ``ssysvx_lwork``.\n\nParameters\n----------\nn : input int\n\nOther Parameters\n----------------\nlower : input int, optional\n    Default: 0\n\nReturns\n-------\nwork : float\ninfo : int\n'
+    "work,info = ssysvx_lwork(n,[lower])\n\nWrapper for ``ssysvx_lwork``.\n\nParameters\n----------\nn : input int\n\nOther Parameters\n----------------\nlower : input int, optional\n    Default: 0\n\nReturns\n-------\nwork : float\ninfo : int\n"
     ...
 
 def ssytf2(a, lower=..., overwrite_a=...) -> typing.Any:
@@ -1650,7 +1820,7 @@ def ssytrd(a, lower=..., lwork=..., overwrite_a=...) -> typing.Any:
     ...
 
 def ssytrd_lwork(n, lower=...) -> typing.Any:
-    'work,info = ssytrd_lwork(n,[lower])\n\nWrapper for ``ssytrd_lwork``.\n\nParameters\n----------\nn : input int\n\nOther Parameters\n----------------\nlower : input int, optional\n    Default: 0\n\nReturns\n-------\nwork : float\ninfo : int\n'
+    "work,info = ssytrd_lwork(n,[lower])\n\nWrapper for ``ssytrd_lwork``.\n\nParameters\n----------\nn : input int\n\nOther Parameters\n----------------\nlower : input int, optional\n    Default: 0\n\nReturns\n-------\nwork : float\ninfo : int\n"
     ...
 
 def ssytrf(a, lower=..., lwork=..., overwrite_a=...) -> typing.Any:
@@ -1658,7 +1828,7 @@ def ssytrf(a, lower=..., lwork=..., overwrite_a=...) -> typing.Any:
     ...
 
 def ssytrf_lwork(n, lower=...) -> typing.Any:
-    'work,info = ssytrf_lwork(n,[lower])\n\nWrapper for ``ssytrf_lwork``.\n\nParameters\n----------\nn : input int\n\nOther Parameters\n----------------\nlower : input int, optional\n    Default: 0\n\nReturns\n-------\nwork : float\ninfo : int\n'
+    "work,info = ssytrf_lwork(n,[lower])\n\nWrapper for ``ssytrf_lwork``.\n\nParameters\n----------\nn : input int\n\nOther Parameters\n----------------\nlower : input int, optional\n    Default: 0\n\nReturns\n-------\nwork : float\ninfo : int\n"
     ...
 
 def stbtrs(ab, b, uplo=..., trans=..., diag=..., overwrite_b=...) -> typing.Any:
@@ -1677,7 +1847,9 @@ def stfttr(n, arf, transr=..., uplo=...) -> typing.Any:
     "a,info = stfttr(n,arf,[transr,uplo])\n\nWrapper for ``stfttr``.\n\nParameters\n----------\nn : input int\narf : input rank-1 array('f') with bounds (nt)\n\nOther Parameters\n----------------\ntransr : input string(len=1), optional\n    Default: 'N'\nuplo : input string(len=1), optional\n    Default: 'U'\n\nReturns\n-------\na : rank-2 array('f') with bounds (lda,n)\ninfo : int\n"
     ...
 
-def stgsen(select, a, b, q, z, lwork=..., liwork=..., overwrite_a=..., overwrite_b=..., overwrite_q=..., overwrite_z=...) -> typing.Any:
+def stgsen(
+    select, a, b, q, z, lwork=..., liwork=..., overwrite_a=..., overwrite_b=..., overwrite_q=..., overwrite_z=...
+) -> typing.Any:
     "a,b,alphar,alphai,beta,q,z,m,pl,pr,dif,work,iwork,info = stgsen(select,a,b,q,z,[lwork,liwork,overwrite_a,overwrite_b,overwrite_q,overwrite_z])\n\nWrapper for ``stgsen``.\n\nParameters\n----------\nselect : input rank-1 array('i') with bounds (n)\na : input rank-2 array('f') with bounds (lda,n)\nb : input rank-2 array('f') with bounds (ldb,n)\nq : input rank-2 array('f') with bounds (ldq,n)\nz : input rank-2 array('f') with bounds (ldz,n)\n\nOther Parameters\n----------------\noverwrite_a : input int, optional\n    Default: 0\noverwrite_b : input int, optional\n    Default: 0\noverwrite_q : input int, optional\n    Default: 0\noverwrite_z : input int, optional\n    Default: 0\nlwork : input int, optional\n    Default: max(MAX(4*n+16,2*m*(n-m)),1)\nliwork : input int, optional\n    Default: n+6\n\nReturns\n-------\na : rank-2 array('f') with bounds (lda,n)\nb : rank-2 array('f') with bounds (ldb,n)\nalphar : rank-1 array('f') with bounds (n)\nalphai : rank-1 array('f') with bounds (n)\nbeta : rank-1 array('f') with bounds (n)\nq : rank-2 array('f') with bounds (ldq,n)\nz : rank-2 array('f') with bounds (ldz,n)\nm : int\npl : float\npr : float\ndif : rank-1 array('f') with bounds (2)\nwork : rank-1 array('f') with bounds (MAX(lwork,1))\niwork : rank-1 array('i') with bounds (MAX(1,liwork))\ninfo : int\n"
     ...
 
@@ -1722,7 +1894,7 @@ def stzrzf(a, lwork=..., overwrite_a=...) -> typing.Any:
     ...
 
 def stzrzf_lwork(m, n) -> typing.Any:
-    'work,info = stzrzf_lwork(m,n)\n\nWrapper for ``stzrzf_lwork``.\n\nParameters\n----------\nm : input int\nn : input int\n\nReturns\n-------\nwork : float\ninfo : int\n'
+    "work,info = stzrzf_lwork(m,n)\n\nWrapper for ``stzrzf_lwork``.\n\nParameters\n----------\nm : input int\nn : input int\n\nReturns\n-------\nwork : float\ninfo : int\n"
     ...
 
 def zgbsv(kl, ku, ab, b, overwrite_ab=..., overwrite_b=...) -> typing.Any:
@@ -1762,7 +1934,7 @@ def zgeev(a, compute_vl=..., compute_vr=..., lwork=..., overwrite_a=...) -> typi
     ...
 
 def zgeev_lwork(n, compute_vl=..., compute_vr=...) -> typing.Any:
-    'work,info = zgeev_lwork(n,[compute_vl,compute_vr])\n\nWrapper for ``zgeev_lwork``.\n\nParameters\n----------\nn : input int\n\nOther Parameters\n----------------\ncompute_vl : input int, optional\n    Default: 1\ncompute_vr : input int, optional\n    Default: 1\n\nReturns\n-------\nwork : complex\ninfo : int\n'
+    "work,info = zgeev_lwork(n,[compute_vl,compute_vr])\n\nWrapper for ``zgeev_lwork``.\n\nParameters\n----------\nn : input int\n\nOther Parameters\n----------------\ncompute_vl : input int, optional\n    Default: 1\ncompute_vr : input int, optional\n    Default: 1\n\nReturns\n-------\nwork : complex\ninfo : int\n"
     ...
 
 def zgegv(*args, **kwds) -> typing.Any:
@@ -1774,7 +1946,7 @@ def zgehrd(a, lo=..., hi=..., lwork=..., overwrite_a=...) -> typing.Any:
     ...
 
 def zgehrd_lwork(n, lo=..., hi=...) -> typing.Any:
-    'work,info = zgehrd_lwork(n,[lo,hi])\n\nWrapper for ``zgehrd_lwork``.\n\nParameters\n----------\nn : input int\n\nOther Parameters\n----------------\nlo : input int, optional\n    Default: 0\nhi : input int, optional\n    Default: n-1\n\nReturns\n-------\nwork : complex\ninfo : int\n'
+    "work,info = zgehrd_lwork(n,[lo,hi])\n\nWrapper for ``zgehrd_lwork``.\n\nParameters\n----------\nn : input int\n\nOther Parameters\n----------------\nlo : input int, optional\n    Default: 0\nhi : input int, optional\n    Default: n-1\n\nReturns\n-------\nwork : complex\ninfo : int\n"
     ...
 
 def zgels(a, b, trans=..., lwork=..., overwrite_a=..., overwrite_b=...) -> typing.Any:
@@ -1790,7 +1962,7 @@ def zgelsd(a, b, lwork, size_rwork, size_iwork, cond=..., overwrite_a=..., overw
     ...
 
 def zgelsd_lwork(m, n, nrhs, cond=..., lwork=...) -> typing.Any:
-    'work,rwork,iwork,info = zgelsd_lwork(m,n,nrhs,[cond,lwork])\n\nWrapper for ``zgelsd_lwork``.\n\nParameters\n----------\nm : input int\nn : input int\nnrhs : input int\n\nOther Parameters\n----------------\ncond : input float, optional\n    Default: -1.0\nlwork : input int, optional\n    Default: -1\n\nReturns\n-------\nwork : complex\nrwork : float\niwork : int\ninfo : int\n'
+    "work,rwork,iwork,info = zgelsd_lwork(m,n,nrhs,[cond,lwork])\n\nWrapper for ``zgelsd_lwork``.\n\nParameters\n----------\nm : input int\nn : input int\nnrhs : input int\n\nOther Parameters\n----------------\ncond : input float, optional\n    Default: -1.0\nlwork : input int, optional\n    Default: -1\n\nReturns\n-------\nwork : complex\nrwork : float\niwork : int\ninfo : int\n"
     ...
 
 def zgelss(a, b, cond=..., lwork=..., overwrite_a=..., overwrite_b=...) -> typing.Any:
@@ -1798,7 +1970,7 @@ def zgelss(a, b, cond=..., lwork=..., overwrite_a=..., overwrite_b=...) -> typin
     ...
 
 def zgelss_lwork(m, n, nrhs, cond=..., lwork=...) -> typing.Any:
-    'work,info = zgelss_lwork(m,n,nrhs,[cond,lwork])\n\nWrapper for ``zgelss_lwork``.\n\nParameters\n----------\nm : input int\nn : input int\nnrhs : input int\n\nOther Parameters\n----------------\ncond : input float, optional\n    Default: -1.0\nlwork : input int, optional\n    Default: -1\n\nReturns\n-------\nwork : complex\ninfo : int\n'
+    "work,info = zgelss_lwork(m,n,nrhs,[cond,lwork])\n\nWrapper for ``zgelss_lwork``.\n\nParameters\n----------\nm : input int\nn : input int\nnrhs : input int\n\nOther Parameters\n----------------\ncond : input float, optional\n    Default: -1.0\nlwork : input int, optional\n    Default: -1\n\nReturns\n-------\nwork : complex\ninfo : int\n"
     ...
 
 def zgelsy(a, b, jptv, cond, lwork, overwrite_a=..., overwrite_b=...) -> typing.Any:
@@ -1806,7 +1978,7 @@ def zgelsy(a, b, jptv, cond, lwork, overwrite_a=..., overwrite_b=...) -> typing.
     ...
 
 def zgelsy_lwork(m, n, nrhs, cond, lwork=...) -> typing.Any:
-    'work,info = zgelsy_lwork(m,n,nrhs,cond,[lwork])\n\nWrapper for ``zgelsy_lwork``.\n\nParameters\n----------\nm : input int\nn : input int\nnrhs : input int\ncond : input float\n\nOther Parameters\n----------------\nlwork : input int, optional\n    Default: -1\n\nReturns\n-------\nwork : complex\ninfo : int\n'
+    "work,info = zgelsy_lwork(m,n,nrhs,cond,[lwork])\n\nWrapper for ``zgelsy_lwork``.\n\nParameters\n----------\nm : input int\nn : input int\nnrhs : input int\ncond : input float\n\nOther Parameters\n----------------\nlwork : input int, optional\n    Default: -1\n\nReturns\n-------\nwork : complex\ninfo : int\n"
     ...
 
 def zgemqrt(v, t, c, side=..., trans=..., overwrite_c=...) -> typing.Any:
@@ -1822,7 +1994,7 @@ def zgeqrf(a, lwork=..., overwrite_a=...) -> typing.Any:
     ...
 
 def zgeqrf_lwork(m, n) -> typing.Any:
-    'work,info = zgeqrf_lwork(m,n)\n\nWrapper for ``zgeqrf_lwork``.\n\nParameters\n----------\nm : input int\nn : input int\n\nReturns\n-------\nwork : complex\ninfo : int\n'
+    "work,info = zgeqrf_lwork(m,n)\n\nWrapper for ``zgeqrf_lwork``.\n\nParameters\n----------\nm : input int\nn : input int\n\nReturns\n-------\nwork : complex\ninfo : int\n"
     ...
 
 def zgeqrfp(a, lwork=..., overwrite_a=...) -> typing.Any:
@@ -1830,7 +2002,7 @@ def zgeqrfp(a, lwork=..., overwrite_a=...) -> typing.Any:
     ...
 
 def zgeqrfp_lwork(m, n) -> typing.Any:
-    'work,info = zgeqrfp_lwork(m,n)\n\nWrapper for ``zgeqrfp_lwork``.\n\nParameters\n----------\nm : input int\nn : input int\n\nReturns\n-------\nwork : complex\ninfo : int\n'
+    "work,info = zgeqrfp_lwork(m,n)\n\nWrapper for ``zgeqrfp_lwork``.\n\nParameters\n----------\nm : input int\nn : input int\n\nReturns\n-------\nwork : complex\ninfo : int\n"
     ...
 
 def zgeqrt(nb, a, overwrite_a=...) -> typing.Any:
@@ -1850,7 +2022,7 @@ def zgesdd(a, compute_uv=..., full_matrices=..., lwork=..., overwrite_a=...) -> 
     ...
 
 def zgesdd_lwork(m, n, compute_uv=..., full_matrices=...) -> typing.Any:
-    'work,info = zgesdd_lwork(m,n,[compute_uv,full_matrices])\n\nWrapper for ``zgesdd_lwork``.\n\nParameters\n----------\nm : input int\nn : input int\n\nOther Parameters\n----------------\ncompute_uv : input int, optional\n    Default: 1\nfull_matrices : input int, optional\n    Default: 1\n\nReturns\n-------\nwork : complex\ninfo : int\n'
+    "work,info = zgesdd_lwork(m,n,[compute_uv,full_matrices])\n\nWrapper for ``zgesdd_lwork``.\n\nParameters\n----------\nm : input int\nn : input int\n\nOther Parameters\n----------------\ncompute_uv : input int, optional\n    Default: 1\nfull_matrices : input int, optional\n    Default: 1\n\nReturns\n-------\nwork : complex\ninfo : int\n"
     ...
 
 def zgesv(a, b, overwrite_a=..., overwrite_b=...) -> typing.Any:
@@ -1862,7 +2034,7 @@ def zgesvd(a, compute_uv=..., full_matrices=..., lwork=..., overwrite_a=...) -> 
     ...
 
 def zgesvd_lwork(m, n, compute_uv=..., full_matrices=...) -> typing.Any:
-    'work,info = zgesvd_lwork(m,n,[compute_uv,full_matrices])\n\nWrapper for ``zgesvd_lwork``.\n\nParameters\n----------\nm : input int\nn : input int\n\nOther Parameters\n----------------\ncompute_uv : input int, optional\n    Default: 1\nfull_matrices : input int, optional\n    Default: 1\n\nReturns\n-------\nwork : complex\ninfo : int\n'
+    "work,info = zgesvd_lwork(m,n,[compute_uv,full_matrices])\n\nWrapper for ``zgesvd_lwork``.\n\nParameters\n----------\nm : input int\nn : input int\n\nOther Parameters\n----------------\ncompute_uv : input int, optional\n    Default: 1\nfull_matrices : input int, optional\n    Default: 1\n\nReturns\n-------\nwork : complex\ninfo : int\n"
     ...
 
 def zgesvx(a, b, fact=..., trans=..., af=..., ipiv=..., equed=..., r=..., c=..., overwrite_a=..., overwrite_b=...) -> typing.Any:
@@ -1882,14 +2054,27 @@ def zgetri(lu, piv, lwork=..., overwrite_lu=...) -> typing.Any:
     ...
 
 def zgetri_lwork(n) -> typing.Any:
-    'work,info = zgetri_lwork(n)\n\nWrapper for ``zgetri_lwork``.\n\nParameters\n----------\nn : input int\n\nReturns\n-------\nwork : complex\ninfo : int\n'
+    "work,info = zgetri_lwork(n)\n\nWrapper for ``zgetri_lwork``.\n\nParameters\n----------\nn : input int\n\nReturns\n-------\nwork : complex\ninfo : int\n"
     ...
 
 def zgetrs(lu, piv, b, trans=..., overwrite_b=...) -> typing.Any:
     "x,info = zgetrs(lu,piv,b,[trans,overwrite_b])\n\nWrapper for ``zgetrs``.\n\nParameters\n----------\nlu : input rank-2 array('D') with bounds (n,n)\npiv : input rank-1 array('i') with bounds (n)\nb : input rank-2 array('D') with bounds (n,nrhs)\n\nOther Parameters\n----------------\noverwrite_b : input int, optional\n    Default: 0\ntrans : input int, optional\n    Default: 0\n\nReturns\n-------\nx : rank-2 array('D') with bounds (n,nrhs) and b storage\ninfo : int\n"
     ...
 
-def zgges(zselect, a, b, jobvsl=..., jobvsr=..., sort_t=..., ldvsl=..., ldvsr=..., lwork=..., zselect_extra_args=..., overwrite_a=..., overwrite_b=...) -> typing.Any:
+def zgges(
+    zselect,
+    a,
+    b,
+    jobvsl=...,
+    jobvsr=...,
+    sort_t=...,
+    ldvsl=...,
+    ldvsr=...,
+    lwork=...,
+    zselect_extra_args=...,
+    overwrite_a=...,
+    overwrite_b=...,
+) -> typing.Any:
     "a,b,sdim,alpha,beta,vsl,vsr,work,info = zgges(zselect,a,b,[jobvsl,jobvsr,sort_t,ldvsl,ldvsr,lwork,zselect_extra_args,overwrite_a,overwrite_b])\n\nWrapper for ``zgges``.\n\nParameters\n----------\nzselect : call-back function\na : input rank-2 array('D') with bounds (lda,n)\nb : input rank-2 array('D') with bounds (ldb,n)\n\nOther Parameters\n----------------\njobvsl : input int, optional\n    Default: 1\njobvsr : input int, optional\n    Default: 1\nsort_t : input int, optional\n    Default: 0\nzselect_extra_args : input tuple, optional\n    Default: ()\noverwrite_a : input int, optional\n    Default: 0\noverwrite_b : input int, optional\n    Default: 0\nldvsl : input int, optional\n    Default: ((jobvsl==1)?n:1)\nldvsr : input int, optional\n    Default: ((jobvsr==1)?n:1)\nlwork : input int, optional\n    Default: max(2*n,1)\n\nReturns\n-------\na : rank-2 array('D') with bounds (lda,n)\nb : rank-2 array('D') with bounds (ldb,n)\nsdim : int\nalpha : rank-1 array('D') with bounds (n)\nbeta : rank-1 array('D') with bounds (n)\nvsl : rank-2 array('D') with bounds (ldvsl,n)\nvsr : rank-2 array('D') with bounds (ldvsr,n)\nwork : rank-1 array('D') with bounds (MAX(lwork,1))\ninfo : int\n\nNotes\n-----\nCall-back functions::\n\n  def zselect(alpha,beta): return zselect\n  Required arguments:\n    alpha : input complex\n    beta : input complex\n  Return objects:\n    zselect : int\n"
     ...
 
@@ -1902,7 +2087,7 @@ def zgglse(a, b, c, d, lwork=..., overwrite_a=..., overwrite_b=..., overwrite_c=
     ...
 
 def zgglse_lwork(m, n, p) -> typing.Any:
-    'work,info = zgglse_lwork(m,n,p)\n\nWrapper for ``zgglse_lwork``.\n\nParameters\n----------\nm : input int\nn : input int\np : input int\n\nReturns\n-------\nwork : complex\ninfo : int\n'
+    "work,info = zgglse_lwork(m,n,p)\n\nWrapper for ``zgglse_lwork``.\n\nParameters\n----------\nm : input int\nn : input int\np : input int\n\nReturns\n-------\nwork : complex\ninfo : int\n"
     ...
 
 def zgtsv(dl, d, du, b, overwrite_dl=..., overwrite_d=..., overwrite_du=..., overwrite_b=...) -> typing.Any:
@@ -1925,7 +2110,9 @@ def zhbevd(ab, compute_v=..., lower=..., ldab=..., lrwork=..., liwork=..., overw
     "w,z,info = zhbevd(ab,[compute_v,lower,ldab,lrwork,liwork,overwrite_ab])\n\nWrapper for ``zhbevd``.\n\nParameters\n----------\nab : input rank-2 array('D') with bounds (ldab,n)\n\nOther Parameters\n----------------\noverwrite_ab : input int, optional\n    Default: 1\ncompute_v : input int, optional\n    Default: 1\nlower : input int, optional\n    Default: 0\nldab : input int, optional\n    Default: shape(ab,0)\nlrwork : input int, optional\n    Default: (compute_v?1+5*n+2*n*n:n)\nliwork : input int, optional\n    Default: (compute_v?3+5*n:1)\n\nReturns\n-------\nw : rank-1 array('d') with bounds (n)\nz : rank-2 array('D') with bounds (ldz,ldz)\ninfo : int\n"
     ...
 
-def zhbevx(ab, vl, vu, il, iu, ldab=..., compute_v=..., range=..., lower=..., abstol=..., mmax=..., overwrite_ab=...) -> typing.Any:
+def zhbevx(
+    ab, vl, vu, il, iu, ldab=..., compute_v=..., range=..., lower=..., abstol=..., mmax=..., overwrite_ab=...
+) -> typing.Any:
     "w,z,m,ifail,info = zhbevx(ab,vl,vu,il,iu,[ldab,compute_v,range,lower,abstol,mmax,overwrite_ab])\n\nWrapper for ``zhbevx``.\n\nParameters\n----------\nab : input rank-2 array('D') with bounds (ldab,n)\nvl : input float\nvu : input float\nil : input int\niu : input int\n\nOther Parameters\n----------------\noverwrite_ab : input int, optional\n    Default: 1\nldab : input int, optional\n    Default: shape(ab,0)\ncompute_v : input int, optional\n    Default: 1\nrange : input int, optional\n    Default: 0\nlower : input int, optional\n    Default: 0\nabstol : input float, optional\n    Default: 0.0\nmmax : input int, optional\n    Default: (compute_v?(range==2?(iu-il+1):n):1)\n\nReturns\n-------\nw : rank-1 array('d') with bounds (n)\nz : rank-2 array('D') with bounds (ldz,mmax)\nm : int\nifail : rank-1 array('i') with bounds ((compute_v?n:1))\ninfo : int\n"
     ...
 
@@ -1942,7 +2129,7 @@ def zheev(a, compute_v=..., lower=..., lwork=..., overwrite_a=...) -> typing.Any
     ...
 
 def zheev_lwork(n, lower=...) -> typing.Any:
-    'work,info = zheev_lwork(n,[lower])\n\nWrapper for ``zheev_lwork``.\n\nParameters\n----------\nn : input int\n\nOther Parameters\n----------------\nlower : input int, optional\n    Default: 0\n\nReturns\n-------\nwork : complex\ninfo : int\n'
+    "work,info = zheev_lwork(n,[lower])\n\nWrapper for ``zheev_lwork``.\n\nParameters\n----------\nn : input int\n\nOther Parameters\n----------------\nlower : input int, optional\n    Default: 0\n\nReturns\n-------\nwork : complex\ninfo : int\n"
     ...
 
 def zheevd(a, compute_v=..., lower=..., lwork=..., liwork=..., lrwork=..., overwrite_a=...) -> typing.Any:
@@ -1950,23 +2137,39 @@ def zheevd(a, compute_v=..., lower=..., lwork=..., liwork=..., lrwork=..., overw
     ...
 
 def zheevd_lwork(n, compute_v=..., lower=...) -> typing.Any:
-    'work,iwork,rwork,info = zheevd_lwork(n,[compute_v,lower])\n\nWrapper for ``zheevd_lwork``.\n\nParameters\n----------\nn : input int\n\nOther Parameters\n----------------\ncompute_v : input int, optional\n    Default: 1\nlower : input int, optional\n    Default: 0\n\nReturns\n-------\nwork : complex\niwork : int\nrwork : float\ninfo : int\n'
+    "work,iwork,rwork,info = zheevd_lwork(n,[compute_v,lower])\n\nWrapper for ``zheevd_lwork``.\n\nParameters\n----------\nn : input int\n\nOther Parameters\n----------------\ncompute_v : input int, optional\n    Default: 1\nlower : input int, optional\n    Default: 0\n\nReturns\n-------\nwork : complex\niwork : int\nrwork : float\ninfo : int\n"
     ...
 
-def zheevr(a, compute_v=..., range=..., lower=..., vl=..., vu=..., il=..., iu=..., abstol=..., lwork=..., lrwork=..., liwork=..., overwrite_a=...) -> typing.Any:
+def zheevr(
+    a,
+    compute_v=...,
+    range=...,
+    lower=...,
+    vl=...,
+    vu=...,
+    il=...,
+    iu=...,
+    abstol=...,
+    lwork=...,
+    lrwork=...,
+    liwork=...,
+    overwrite_a=...,
+) -> typing.Any:
     "w,z,m,isuppz,info = zheevr(a,[compute_v,range,lower,vl,vu,il,iu,abstol,lwork,lrwork,liwork,overwrite_a])\n\nWrapper for ``zheevr``.\n\nParameters\n----------\na : input rank-2 array('D') with bounds ``(n,n)``\n\nOther Parameters\n----------------\ncompute_v : input int, optional\n    Default ``1``\nrange : input string(len=1), optional\n    Default ``'A'``\nlower : input int, optional\n    Default ``0``\noverwrite_a : input int, optional\n    Default ``0``\nvl : input float, optional\n    Default ``0.0``\nvu : input float, optional\n    Default ``1.0``\nil : input int, optional\n    Default ``1``\niu : input int, optional\n    Default ``n``\nabstol : input float, optional\n    Default ``0.0``\nlwork : input int, optional\n    Default ``max(2*n,1)``\nlrwork : input int, optional\n    Default ``max(24*n,1)``\nliwork : input int, optional\n    Default ``max(1,10*n)``\n\nReturns\n-------\nw : rank-1 array('d') with bounds ``(n)``\nz : rank-2 array('D') with bounds ``((compute_v?MAX(0,n):0),(compute_v?(*range=='I'?iu-il+1:MAX(1,n)):0))``\nm : int\nisuppz : rank-1 array('i') with bounds ``(2*max(1,n))``\ninfo : int\n"
     ...
 
 def zheevr_lwork(n, lower=...) -> typing.Any:
-    'work,rwork,iwork,info = zheevr_lwork(n,[lower])\n\nWrapper for ``zheevr_lwork``.\n\nParameters\n----------\nn : input int\n\nOther Parameters\n----------------\nlower : input int, optional\n    Default: 0\n\nReturns\n-------\nwork : complex\nrwork : float\niwork : int\ninfo : int\n'
+    "work,rwork,iwork,info = zheevr_lwork(n,[lower])\n\nWrapper for ``zheevr_lwork``.\n\nParameters\n----------\nn : input int\n\nOther Parameters\n----------------\nlower : input int, optional\n    Default: 0\n\nReturns\n-------\nwork : complex\nrwork : float\niwork : int\ninfo : int\n"
     ...
 
-def zheevx(a, compute_v=..., range=..., lower=..., vl=..., vu=..., il=..., iu=..., abstol=..., lwork=..., overwrite_a=...) -> typing.Any:
+def zheevx(
+    a, compute_v=..., range=..., lower=..., vl=..., vu=..., il=..., iu=..., abstol=..., lwork=..., overwrite_a=...
+) -> typing.Any:
     "w,z,m,ifail,info = zheevx(a,[compute_v,range,lower,vl,vu,il,iu,abstol,lwork,overwrite_a])\n\nWrapper for ``zheevx``.\n\nParameters\n----------\na : input rank-2 array('D') with bounds ``(n,n)``\n\nOther Parameters\n----------------\ncompute_v : input int, optional\n    Default ``1``\nrange : input string(len=1), optional\n    Default ``'A'``\nlower : input int, optional\n    Default ``0``\noverwrite_a : input int, optional\n    Default ``0``\nvl : input float, optional\n    Default ``0.0``\nvu : input float, optional\n    Default ``1.0``\nil : input int, optional\n    Default ``1``\niu : input int, optional\n    Default ``n``\nabstol : input float, optional\n    Default ``0.0``\nlwork : input int, optional\n    Default ``max(2*n,1)``\n\nReturns\n-------\nw : rank-1 array('d') with bounds ``(n)``\nz : rank-2 array('D') with bounds ``((compute_v*n),(compute_v?(*range=='I'?iu-il+1:MAX(1,n)):0))``\nm : int\nifail : rank-1 array('i') with bounds ``(compute_v*n)``\ninfo : int\n"
     ...
 
 def zheevx_lwork(n, lower=...) -> typing.Any:
-    'work,info = zheevx_lwork(n,[lower])\n\nWrapper for ``zheevx_lwork``.\n\nParameters\n----------\nn : input int\n\nOther Parameters\n----------------\nlower : input int, optional\n    Default: 0\n\nReturns\n-------\nwork : complex\ninfo : int\n'
+    "work,info = zheevx_lwork(n,[lower])\n\nWrapper for ``zheevx_lwork``.\n\nParameters\n----------\nn : input int\n\nOther Parameters\n----------------\nlower : input int, optional\n    Default: 0\n\nReturns\n-------\nwork : complex\ninfo : int\n"
     ...
 
 def zhegst(a, b, itype=..., lower=..., overwrite_a=...) -> typing.Any:
@@ -1981,11 +2184,28 @@ def zhegv_lwork(n, uplo=...) -> typing.Any:
     "work,info = zhegv_lwork(n,[uplo])\n\nWrapper for ``zhegv_lwork``.\n\nParameters\n----------\nn : input int\n\nOther Parameters\n----------------\nuplo : input string(len=1), optional\n    Default: 'L'\n\nReturns\n-------\nwork : complex\ninfo : int\n"
     ...
 
-def zhegvd(a, b, itype=..., jobz=..., uplo=..., lwork=..., lrwork=..., liwork=..., overwrite_a=..., overwrite_b=...) -> typing.Any:
+def zhegvd(
+    a, b, itype=..., jobz=..., uplo=..., lwork=..., lrwork=..., liwork=..., overwrite_a=..., overwrite_b=...
+) -> typing.Any:
     "w,v,info = zhegvd(a,b,[itype,jobz,uplo,lwork,lrwork,liwork,overwrite_a,overwrite_b])\n\nWrapper for ``zhegvd``.\n\nParameters\n----------\na : input rank-2 array('D') with bounds ``(n,n)``\nb : input rank-2 array('D') with bounds ``(n,n)``\n\nOther Parameters\n----------------\nitype : input int, optional\n    Default ``1``\njobz : input string(len=1), optional\n    Default ``'V'``\nuplo : input string(len=1), optional\n    Default ``'L'``\noverwrite_a : input int, optional\n    Default ``0``\noverwrite_b : input int, optional\n    Default ``0``\nlwork : input int, optional\n    Default ``(*jobz=='N'?n+1:n*(n+2))``\nlrwork : input int, optional\n    Default ``max((*jobz=='N'?n:2*n*n+5*n+1),1)``\nliwork : input int, optional\n    Default ``(*jobz=='N'?1:5*n+3)``\n\nReturns\n-------\nw : rank-1 array('d') with bounds ``(n)``\nv : rank-2 array('D') with bounds ``(n,n)`` with ``a`` storage\ninfo : int\n"
     ...
 
-def zhegvx(a, b, itype=..., jobz=..., range=..., uplo=..., vl=..., vu=..., il=..., iu=..., abstol=..., lwork=..., overwrite_a=..., overwrite_b=...) -> typing.Any:
+def zhegvx(
+    a,
+    b,
+    itype=...,
+    jobz=...,
+    range=...,
+    uplo=...,
+    vl=...,
+    vu=...,
+    il=...,
+    iu=...,
+    abstol=...,
+    lwork=...,
+    overwrite_a=...,
+    overwrite_b=...,
+) -> typing.Any:
     "w,z,m,ifail,info = zhegvx(a,b,[itype,jobz,range,uplo,vl,vu,il,iu,abstol,lwork,overwrite_a,overwrite_b])\n\nWrapper for ``zhegvx``.\n\nParameters\n----------\na : input rank-2 array('D') with bounds (n,n)\nb : input rank-2 array('D') with bounds (n,n)\n\nOther Parameters\n----------------\nitype : input int, optional\n    Default: 1\njobz : input string(len=1), optional\n    Default: 'V'\nrange : input string(len=1), optional\n    Default: 'A'\nuplo : input string(len=1), optional\n    Default: 'L'\noverwrite_a : input int, optional\n    Default: 0\noverwrite_b : input int, optional\n    Default: 0\nvl : input float, optional\n    Default: 0.0\nvu : input float, optional\n    Default: 1.0\nil : input int, optional\n    Default: 1\niu : input int, optional\n    Default: n\nabstol : input float, optional\n    Default: 0.0\nlwork : input int, optional\n    Default: max(2*n,1)\n\nReturns\n-------\nw : rank-1 array('d') with bounds (n)\nz : rank-2 array('D') with bounds ((jobz[0]=='V'?MAX(0,n):0),(jobz[0]=='V'?(range[0]=='I'?iu-il+1:MAX(1,n)):0))\nm : int\nifail : rank-1 array('i') with bounds ((jobz[0]=='N'?0:n))\ninfo : int\n"
     ...
 
@@ -1998,7 +2218,7 @@ def zhesv(a, b, lwork=..., lower=..., overwrite_a=..., overwrite_b=...) -> typin
     ...
 
 def zhesv_lwork(n, lower=...) -> typing.Any:
-    'work,info = zhesv_lwork(n,[lower])\n\nWrapper for ``zhesv_lwork``.\n\nParameters\n----------\nn : input int\n\nOther Parameters\n----------------\nlower : input int, optional\n    Default: 0\n\nReturns\n-------\nwork : complex\ninfo : int\n'
+    "work,info = zhesv_lwork(n,[lower])\n\nWrapper for ``zhesv_lwork``.\n\nParameters\n----------\nn : input int\n\nOther Parameters\n----------------\nlower : input int, optional\n    Default: 0\n\nReturns\n-------\nwork : complex\ninfo : int\n"
     ...
 
 def zhesvx(a, b, af=..., ipiv=..., lwork=..., factored=..., lower=..., overwrite_a=..., overwrite_b=...) -> typing.Any:
@@ -2006,7 +2226,7 @@ def zhesvx(a, b, af=..., ipiv=..., lwork=..., factored=..., lower=..., overwrite
     ...
 
 def zhesvx_lwork(n, lower=...) -> typing.Any:
-    'work,info = zhesvx_lwork(n,[lower])\n\nWrapper for ``zhesvx_lwork``.\n\nParameters\n----------\nn : input int\n\nOther Parameters\n----------------\nlower : input int, optional\n    Default: 0\n\nReturns\n-------\nwork : complex\ninfo : int\n'
+    "work,info = zhesvx_lwork(n,[lower])\n\nWrapper for ``zhesvx_lwork``.\n\nParameters\n----------\nn : input int\n\nOther Parameters\n----------------\nlower : input int, optional\n    Default: 0\n\nReturns\n-------\nwork : complex\ninfo : int\n"
     ...
 
 def zhetrd(a, lower=..., lwork=..., overwrite_a=...) -> typing.Any:
@@ -2014,7 +2234,7 @@ def zhetrd(a, lower=..., lwork=..., overwrite_a=...) -> typing.Any:
     ...
 
 def zhetrd_lwork(n, lower=...) -> typing.Any:
-    'work,info = zhetrd_lwork(n,[lower])\n\nWrapper for ``zhetrd_lwork``.\n\nParameters\n----------\nn : input int\n\nOther Parameters\n----------------\nlower : input int, optional\n    Default: 0\n\nReturns\n-------\nwork : complex\ninfo : int\n'
+    "work,info = zhetrd_lwork(n,[lower])\n\nWrapper for ``zhetrd_lwork``.\n\nParameters\n----------\nn : input int\n\nOther Parameters\n----------------\nlower : input int, optional\n    Default: 0\n\nReturns\n-------\nwork : complex\ninfo : int\n"
     ...
 
 def zhetrf(a, lower=..., lwork=..., overwrite_a=...) -> typing.Any:
@@ -2022,7 +2242,7 @@ def zhetrf(a, lower=..., lwork=..., overwrite_a=...) -> typing.Any:
     ...
 
 def zhetrf_lwork(n, lower=...) -> typing.Any:
-    'work,info = zhetrf_lwork(n,[lower])\n\nWrapper for ``zhetrf_lwork``.\n\nParameters\n----------\nn : input int\n\nOther Parameters\n----------------\nlower : input int, optional\n    Default: 0\n\nReturns\n-------\nwork : complex\ninfo : int\n'
+    "work,info = zhetrf_lwork(n,[lower])\n\nWrapper for ``zhetrf_lwork``.\n\nParameters\n----------\nn : input int\n\nOther Parameters\n----------------\nlower : input int, optional\n    Default: 0\n\nReturns\n-------\nwork : complex\ninfo : int\n"
     ...
 
 def zhfrk(n, k, alpha, a, beta, c, transr=..., uplo=..., trans=..., overwrite_c=...) -> typing.Any:
@@ -2042,7 +2262,7 @@ def zlarfg(n, alpha, x, incx=..., overwrite_x=...) -> typing.Any:
     ...
 
 def zlartg(f, g) -> typing.Any:
-    'cs,sn,r = zlartg(f,g)\n\nWrapper for ``zlartg``.\n\nParameters\n----------\nf : input complex\ng : input complex\n\nReturns\n-------\ncs : float\nsn : complex\nr : complex\n'
+    "cs,sn,r = zlartg(f,g)\n\nWrapper for ``zlartg``.\n\nParameters\n----------\nf : input complex\ng : input complex\n\nReturns\n-------\ncs : float\nsn : complex\nr : complex\n"
     ...
 
 def zlaswp(a, piv, k1=..., k2=..., off=..., inc=..., overwrite_a=...) -> typing.Any:
@@ -2170,7 +2390,7 @@ def zsysv(a, b, lwork=..., lower=..., overwrite_a=..., overwrite_b=...) -> typin
     ...
 
 def zsysv_lwork(n, lower=...) -> typing.Any:
-    'work,info = zsysv_lwork(n,[lower])\n\nWrapper for ``zsysv_lwork``.\n\nParameters\n----------\nn : input int\n\nOther Parameters\n----------------\nlower : input int, optional\n    Default: 0\n\nReturns\n-------\nwork : complex\ninfo : int\n'
+    "work,info = zsysv_lwork(n,[lower])\n\nWrapper for ``zsysv_lwork``.\n\nParameters\n----------\nn : input int\n\nOther Parameters\n----------------\nlower : input int, optional\n    Default: 0\n\nReturns\n-------\nwork : complex\ninfo : int\n"
     ...
 
 def zsysvx(a, b, af=..., ipiv=..., lwork=..., factored=..., lower=..., overwrite_a=..., overwrite_b=...) -> typing.Any:
@@ -2178,7 +2398,7 @@ def zsysvx(a, b, af=..., ipiv=..., lwork=..., factored=..., lower=..., overwrite
     ...
 
 def zsysvx_lwork(n, lower=...) -> typing.Any:
-    'work,info = zsysvx_lwork(n,[lower])\n\nWrapper for ``zsysvx_lwork``.\n\nParameters\n----------\nn : input int\n\nOther Parameters\n----------------\nlower : input int, optional\n    Default: 0\n\nReturns\n-------\nwork : complex\ninfo : int\n'
+    "work,info = zsysvx_lwork(n,[lower])\n\nWrapper for ``zsysvx_lwork``.\n\nParameters\n----------\nn : input int\n\nOther Parameters\n----------------\nlower : input int, optional\n    Default: 0\n\nReturns\n-------\nwork : complex\ninfo : int\n"
     ...
 
 def zsytf2(a, lower=..., overwrite_a=...) -> typing.Any:
@@ -2190,7 +2410,7 @@ def zsytrf(a, lower=..., lwork=..., overwrite_a=...) -> typing.Any:
     ...
 
 def zsytrf_lwork(n, lower=...) -> typing.Any:
-    'work,info = zsytrf_lwork(n,[lower])\n\nWrapper for ``zsytrf_lwork``.\n\nParameters\n----------\nn : input int\n\nOther Parameters\n----------------\nlower : input int, optional\n    Default: 0\n\nReturns\n-------\nwork : complex\ninfo : int\n'
+    "work,info = zsytrf_lwork(n,[lower])\n\nWrapper for ``zsytrf_lwork``.\n\nParameters\n----------\nn : input int\n\nOther Parameters\n----------------\nlower : input int, optional\n    Default: 0\n\nReturns\n-------\nwork : complex\ninfo : int\n"
     ...
 
 def ztbtrs(ab, b, uplo=..., trans=..., diag=..., overwrite_b=...) -> typing.Any:
@@ -2209,7 +2429,9 @@ def ztfttr(n, arf, transr=..., uplo=...) -> typing.Any:
     "a,info = ztfttr(n,arf,[transr,uplo])\n\nWrapper for ``ztfttr``.\n\nParameters\n----------\nn : input int\narf : input rank-1 array('D') with bounds (nt)\n\nOther Parameters\n----------------\ntransr : input string(len=1), optional\n    Default: 'N'\nuplo : input string(len=1), optional\n    Default: 'U'\n\nReturns\n-------\na : rank-2 array('D') with bounds (lda,n)\ninfo : int\n"
     ...
 
-def ztgsen(select, a, b, q, z, lwork=..., liwork=..., overwrite_a=..., overwrite_b=..., overwrite_q=..., overwrite_z=...) -> typing.Any:
+def ztgsen(
+    select, a, b, q, z, lwork=..., liwork=..., overwrite_a=..., overwrite_b=..., overwrite_q=..., overwrite_z=...
+) -> typing.Any:
     "a,b,alpha,beta,q,z,m,pl,pr,dif,work,iwork,info = ztgsen(select,a,b,q,z,[lwork,liwork,overwrite_a,overwrite_b,overwrite_q,overwrite_z])\n\nWrapper for ``ztgsen``.\n\nParameters\n----------\nselect : input rank-1 array('i') with bounds (n)\na : input rank-2 array('D') with bounds (lda,n)\nb : input rank-2 array('D') with bounds (ldb,n)\nq : input rank-2 array('D') with bounds (ldq,n)\nz : input rank-2 array('D') with bounds (ldz,n)\n\nOther Parameters\n----------------\noverwrite_a : input int, optional\n    Default: 0\noverwrite_b : input int, optional\n    Default: 0\noverwrite_q : input int, optional\n    Default: 0\noverwrite_z : input int, optional\n    Default: 0\nlwork : input int, optional\n    Default: max(2*m*(n-m),1)\nliwork : input int, optional\n    Default: n+2\n\nReturns\n-------\na : rank-2 array('D') with bounds (lda,n)\nb : rank-2 array('D') with bounds (ldb,n)\nalpha : rank-1 array('D') with bounds (n)\nbeta : rank-1 array('D') with bounds (n)\nq : rank-2 array('D') with bounds (ldq,n)\nz : rank-2 array('D') with bounds (ldz,n)\nm : int\npl : float\npr : float\ndif : rank-1 array('d') with bounds (2)\nwork : rank-1 array('D') with bounds (MAX(lwork,1))\niwork : rank-1 array('i') with bounds (MAX(1,liwork))\ninfo : int\n"
     ...
 
@@ -2254,15 +2476,32 @@ def ztzrzf(a, lwork=..., overwrite_a=...) -> typing.Any:
     ...
 
 def ztzrzf_lwork(m, n) -> typing.Any:
-    'work,info = ztzrzf_lwork(m,n)\n\nWrapper for ``ztzrzf_lwork``.\n\nParameters\n----------\nm : input int\nn : input int\n\nReturns\n-------\nwork : complex\ninfo : int\n'
+    "work,info = ztzrzf_lwork(m,n)\n\nWrapper for ``ztzrzf_lwork``.\n\nParameters\n----------\nm : input int\nn : input int\n\nReturns\n-------\nwork : complex\ninfo : int\n"
     ...
 
-def zuncsd(x11, x12, x21, x22, compute_u1=..., compute_u2=..., compute_v1t=..., compute_v2t=..., trans=..., signs=..., lwork=..., lrwork=..., overwrite_x11=..., overwrite_x12=..., overwrite_x21=..., overwrite_x22=...) -> typing.Any:
+def zuncsd(
+    x11,
+    x12,
+    x21,
+    x22,
+    compute_u1=...,
+    compute_u2=...,
+    compute_v1t=...,
+    compute_v2t=...,
+    trans=...,
+    signs=...,
+    lwork=...,
+    lrwork=...,
+    overwrite_x11=...,
+    overwrite_x12=...,
+    overwrite_x21=...,
+    overwrite_x22=...,
+) -> typing.Any:
     "cs11,cs12,cs21,cs22,theta,u1,u2,v1t,v2t,info = zuncsd(x11,x12,x21,x22,[compute_u1,compute_u2,compute_v1t,compute_v2t,trans,signs,lwork,lrwork,overwrite_x11,overwrite_x12,overwrite_x21,overwrite_x22])\n\nWrapper for ``zuncsd``.\n\nParameters\n----------\nx11 : input rank-2 array('D') with bounds (p,q)\nx12 : input rank-2 array('D') with bounds (p,mmq)\nx21 : input rank-2 array('D') with bounds (mmp,q)\nx22 : input rank-2 array('D') with bounds (mmp,mmq)\n\nOther Parameters\n----------------\ncompute_u1 : input int, optional\n    Default: 1\ncompute_u2 : input int, optional\n    Default: 1\ncompute_v1t : input int, optional\n    Default: 1\ncompute_v2t : input int, optional\n    Default: 1\ntrans : input int, optional\n    Default: 0\nsigns : input int, optional\n    Default: 0\noverwrite_x11 : input int, optional\n    Default: 0\noverwrite_x12 : input int, optional\n    Default: 0\noverwrite_x21 : input int, optional\n    Default: 0\noverwrite_x22 : input int, optional\n    Default: 0\nlwork : input int, optional\n    Default: 2*m+MAX(1,MAX(mmp,mmq))+1\nlrwork : input int, optional\n    Default: 5*MAX(1,q-1)+4*MAX(1,q)+8*q+1\n\nReturns\n-------\ncs11 : rank-2 array('D') with bounds (p,q) and x11 storage\ncs12 : rank-2 array('D') with bounds (p,mmq) and x12 storage\ncs21 : rank-2 array('D') with bounds (mmp,q) and x21 storage\ncs22 : rank-2 array('D') with bounds (mmp,mmq) and x22 storage\ntheta : rank-1 array('d') with bounds (min(min(p,mmp),min(q,mmq)))\nu1 : rank-2 array('D') with bounds ((compute_u1?p:0),(compute_u1?p:0))\nu2 : rank-2 array('D') with bounds ((compute_u2?mmp:0),(compute_u2?mmp:0))\nv1t : rank-2 array('D') with bounds ((compute_v1t?q:0),(compute_v1t?q:0))\nv2t : rank-2 array('D') with bounds ((compute_v2t?mmq:0),(compute_v2t?mmq:0))\ninfo : int\n"
     ...
 
 def zuncsd_lwork(m, p, q) -> typing.Any:
-    'work,rwork,info = zuncsd_lwork(m,p,q)\n\nWrapper for ``zuncsd_lwork``.\n\nParameters\n----------\nm : input int\np : input int\nq : input int\n\nReturns\n-------\nwork : complex\nrwork : float\ninfo : int\n'
+    "work,rwork,info = zuncsd_lwork(m,p,q)\n\nWrapper for ``zuncsd_lwork``.\n\nParameters\n----------\nm : input int\np : input int\nq : input int\n\nReturns\n-------\nwork : complex\nrwork : float\ninfo : int\n"
     ...
 
 def zunghr(a, tau, lo=..., hi=..., lwork=..., overwrite_a=...) -> typing.Any:
@@ -2270,7 +2509,7 @@ def zunghr(a, tau, lo=..., hi=..., lwork=..., overwrite_a=...) -> typing.Any:
     ...
 
 def zunghr_lwork(n, lo=..., hi=...) -> typing.Any:
-    'work,info = zunghr_lwork(n,[lo,hi])\n\nWrapper for ``zunghr_lwork``.\n\nParameters\n----------\nn : input int\n\nOther Parameters\n----------------\nlo : input int, optional\n    Default: 0\nhi : input int, optional\n    Default: n-1\n\nReturns\n-------\nwork : complex\ninfo : int\n'
+    "work,info = zunghr_lwork(n,[lo,hi])\n\nWrapper for ``zunghr_lwork``.\n\nParameters\n----------\nn : input int\n\nOther Parameters\n----------------\nlo : input int, optional\n    Default: 0\nhi : input int, optional\n    Default: n-1\n\nReturns\n-------\nwork : complex\ninfo : int\n"
     ...
 
 def zungqr(a, tau, lwork=..., overwrite_a=...) -> typing.Any:
@@ -2293,6 +2532,4 @@ def zunmrz_lwork(m, n, side=..., trans=...) -> typing.Any:
     "work,info = zunmrz_lwork(m,n,[side,trans])\n\nWrapper for ``zunmrz_lwork``.\n\nParameters\n----------\nm : input int\nn : input int\n\nOther Parameters\n----------------\nside : input string(len=1), optional\n    Default: 'L'\ntrans : input string(len=1), optional\n    Default: 'N'\n\nReturns\n-------\nwork : complex\ninfo : int\n"
     ...
 
-def __getattr__(name) -> typing.Any:
-    ...
-
+def __getattr__(name) -> typing.Any: ...

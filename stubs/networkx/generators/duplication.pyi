@@ -1,5 +1,4 @@
 from ..classes.graph import Graph
-from ..classes.graph import Graph
 from ..exception import NetworkXError
 from ..utils import py_random_state
 

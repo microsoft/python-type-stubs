@@ -1,45 +1,42 @@
+import typing as typing
+
+from ._plot import LearningCurveDisplay as LearningCurveDisplay
+from ._search import (
+    GridSearchCV as GridSearchCV,
+    ParameterGrid as ParameterGrid,
+    ParameterSampler as ParameterSampler,
+    RandomizedSearchCV as RandomizedSearchCV,
+)
+from ._search_successive_halving import HalvingGridSearchCV as HalvingGridSearchCV, HalvingRandomSearchCV as HalvingRandomSearchCV
 from ._split import (
     BaseCrossValidator as BaseCrossValidator,
     BaseShuffleSplit as BaseShuffleSplit,
-    KFold as KFold,
     GroupKFold as GroupKFold,
-    StratifiedKFold as StratifiedKFold,
-    TimeSeriesSplit as TimeSeriesSplit,
+    GroupShuffleSplit as GroupShuffleSplit,
+    KFold as KFold,
     LeaveOneGroupOut as LeaveOneGroupOut,
     LeaveOneOut as LeaveOneOut,
     LeavePGroupsOut as LeavePGroupsOut,
     LeavePOut as LeavePOut,
+    PredefinedSplit as PredefinedSplit,
     RepeatedKFold as RepeatedKFold,
     RepeatedStratifiedKFold as RepeatedStratifiedKFold,
     ShuffleSplit as ShuffleSplit,
-    GroupShuffleSplit as GroupShuffleSplit,
-    StratifiedShuffleSplit as StratifiedShuffleSplit,
     StratifiedGroupKFold as StratifiedGroupKFold,
-    PredefinedSplit as PredefinedSplit,
-    train_test_split as train_test_split,
+    StratifiedKFold as StratifiedKFold,
+    StratifiedShuffleSplit as StratifiedShuffleSplit,
+    TimeSeriesSplit as TimeSeriesSplit,
     check_cv as check_cv,
-)
-from ._search_successive_halving import (
-    HalvingGridSearchCV as HalvingGridSearchCV,
-    HalvingRandomSearchCV as HalvingRandomSearchCV,
+    train_test_split as train_test_split,
 )
 from ._validation import (
-    cross_val_score as cross_val_score,
     cross_val_predict as cross_val_predict,
+    cross_val_score as cross_val_score,
     cross_validate as cross_validate,
     learning_curve as learning_curve,
     permutation_test_score as permutation_test_score,
     validation_curve as validation_curve,
 )
-from ._search import (
-    GridSearchCV as GridSearchCV,
-    RandomizedSearchCV as RandomizedSearchCV,
-    ParameterGrid as ParameterGrid,
-    ParameterSampler as ParameterSampler,
-)
-from ._plot import LearningCurveDisplay as LearningCurveDisplay
-import typing as typing
-
 
 __all__ = [
     "BaseCrossValidator",

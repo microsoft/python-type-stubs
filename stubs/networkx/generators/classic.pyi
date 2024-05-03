@@ -1,10 +1,9 @@
-from collections.abc import Iterable
-
 import itertools
 import numbers
+from collections.abc import Iterable
 
-from ..classes.graph import Graph
 from ..classes import Graph
+from ..classes.graph import Graph
 from ..exception import NetworkXError
 from ..utils import nodes_or_number, pairwise
 

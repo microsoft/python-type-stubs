@@ -1,24 +1,22 @@
-from typing import Any, Callable, ClassVar, Literal, Mapping, TypeVar
-from numpy.random import RandomState
-from ..linear_model._base import LinearClassifierMixin, SparseCoefMixin, LinearModel
-from ._base import BaseSVC, BaseLibSVM
-from numpy import ndarray
-from ..utils._param_validation import Interval as Interval, StrOptions as StrOptions
 from numbers import Integral as Integral, Real as Real
-from ..utils.multiclass import (
-    check_classification_targets as check_classification_targets,
-)
-from ..base import BaseEstimator, RegressorMixin, OutlierMixin
-from .._typing import Float, Int, MatrixLike, ArrayLike
+from typing import Any, Callable, ClassVar, Literal, Mapping, TypeVar
+
+from numpy import ndarray
+from numpy.random import RandomState
+
+from .._typing import ArrayLike, Float, Int, MatrixLike
+from ..base import BaseEstimator, OutlierMixin, RegressorMixin
+from ..linear_model._base import LinearClassifierMixin, LinearModel, SparseCoefMixin
 from ..utils import deprecated
+from ..utils._param_validation import Interval as Interval, StrOptions as StrOptions
+from ..utils.multiclass import check_classification_targets as check_classification_targets
+from ._base import BaseLibSVM, BaseSVC
 
 OneClassSVM_Self = TypeVar("OneClassSVM_Self", bound="OneClassSVM")
 LinearSVC_Self = TypeVar("LinearSVC_Self", bound="LinearSVC")
 LinearSVR_Self = TypeVar("LinearSVR_Self", bound="LinearSVR")
 
-
 import numpy as np
-
 
 class LinearSVC(LinearClassifierMixin, SparseCoefMixin, BaseEstimator):
     n_iter_: int = ...
@@ -45,17 +43,13 @@ class LinearSVC(LinearClassifierMixin, SparseCoefMixin, BaseEstimator):
         verbose: Int = 0,
         random_state: RandomState | None | Int = None,
         max_iter: Int = 1000,
-    ) -> None:
-        ...
-
+    ) -> None: ...
     def fit(
         self: LinearSVC_Self,
         X: MatrixLike | ArrayLike,
         y: ArrayLike,
         sample_weight: None | ArrayLike = None,
-    ) -> LinearSVC_Self:
-        ...
-
+    ) -> LinearSVC_Self: ...
 
 class LinearSVR(RegressorMixin, LinearModel):
     n_iter_: int = ...
@@ -72,26 +66,20 @@ class LinearSVR(RegressorMixin, LinearModel):
         epsilon: Float = 0.0,
         tol: Float = 1e-4,
         C: Float = 1.0,
-        loss: Literal[
-            "epsilon_insensitive", "squared_epsilon_insensitive", "epsilon_insensitive"
-        ] = "epsilon_insensitive",
+        loss: Literal["epsilon_insensitive", "squared_epsilon_insensitive", "epsilon_insensitive"] = "epsilon_insensitive",
         fit_intercept: bool = True,
         intercept_scaling: Float = 1.0,
         dual: bool = True,
         verbose: Int = 0,
         random_state: RandomState | None | Int = None,
         max_iter: Int = 1000,
-    ) -> None:
-        ...
-
+    ) -> None: ...
     def fit(
         self: LinearSVR_Self,
         X: MatrixLike | ArrayLike,
         y: ArrayLike,
         sample_weight: None | ArrayLike = None,
-    ) -> LinearSVR_Self:
-        ...
-
+    ) -> LinearSVR_Self: ...
 
 class SVC(BaseSVC):
     shape_fit_: tuple = ...
@@ -116,8 +104,7 @@ class SVC(BaseSVC):
         self,
         *,
         C: Float = 1.0,
-        kernel: Literal["linear", "poly", "rbf", "sigmoid", "precomputed", "rbf"]
-        | Callable = "rbf",
+        kernel: Literal["linear", "poly", "rbf", "sigmoid", "precomputed", "rbf"] | Callable = "rbf",
         degree: Int = 3,
         gamma: float | Literal["scale", "auto", "scale"] = "scale",
         coef0: Float = 0.0,
@@ -131,9 +118,7 @@ class SVC(BaseSVC):
         decision_function_shape: Literal["ovo", "ovr", "ovr"] = "ovr",
         break_ties: bool = False,
         random_state: RandomState | None | Int = None,
-    ) -> None:
-        ...
-
+    ) -> None: ...
 
 class NuSVC(BaseSVC):
     shape_fit_: tuple = ...
@@ -160,8 +145,7 @@ class NuSVC(BaseSVC):
         self,
         *,
         nu: Float = 0.5,
-        kernel: Literal["linear", "poly", "rbf", "sigmoid", "precomputed", "rbf"]
-        | Callable = "rbf",
+        kernel: Literal["linear", "poly", "rbf", "sigmoid", "precomputed", "rbf"] | Callable = "rbf",
         degree: Int = 3,
         gamma: float | Literal["scale", "auto", "scale"] = "scale",
         coef0: Float = 0.0,
@@ -175,9 +159,7 @@ class NuSVC(BaseSVC):
         decision_function_shape: Literal["ovo", "ovr", "ovr"] = "ovr",
         break_ties: bool = False,
         random_state: RandomState | None | Int = None,
-    ) -> None:
-        ...
-
+    ) -> None: ...
 
 class SVR(RegressorMixin, BaseLibSVM):
     support_vectors_: ndarray = ...
@@ -201,8 +183,7 @@ class SVR(RegressorMixin, BaseLibSVM):
     def __init__(
         self,
         *,
-        kernel: Literal["linear", "poly", "rbf", "sigmoid", "precomputed", "rbf"]
-        | Callable = "rbf",
+        kernel: Literal["linear", "poly", "rbf", "sigmoid", "precomputed", "rbf"] | Callable = "rbf",
         degree: Int = 3,
         gamma: float | Literal["scale", "auto", "scale"] = "scale",
         coef0: Float = 0.0,
@@ -213,18 +194,12 @@ class SVR(RegressorMixin, BaseLibSVM):
         cache_size: Float = 200,
         verbose: bool = False,
         max_iter: Int = ...,
-    ) -> None:
-        ...
+    ) -> None: ...
 
     # TODO(1.4): Remove
-    @deprecated(  # type: ignore
-        "Attribute `class_weight_` was deprecated in version 1.2 and will be removed in"
-        " 1.4."
-    )
+    @deprecated("Attribute `class_weight_` was deprecated in version 1.2 and will be removed in" " 1.4.")  # type: ignore
     @property
-    def class_weight_(self) -> ndarray:
-        ...
-
+    def class_weight_(self) -> ndarray: ...
 
 class NuSVR(RegressorMixin, BaseLibSVM):
     support_vectors_: ndarray = ...
@@ -250,8 +225,7 @@ class NuSVR(RegressorMixin, BaseLibSVM):
         *,
         nu: Float = 0.5,
         C: Float = 1.0,
-        kernel: Literal["linear", "poly", "rbf", "sigmoid", "precomputed", "rbf"]
-        | Callable = "rbf",
+        kernel: Literal["linear", "poly", "rbf", "sigmoid", "precomputed", "rbf"] | Callable = "rbf",
         degree: Int = 3,
         gamma: float | Literal["scale", "auto", "scale"] = "scale",
         coef0: Float = 0.0,
@@ -260,18 +234,12 @@ class NuSVR(RegressorMixin, BaseLibSVM):
         cache_size: Float = 200,
         verbose: bool = False,
         max_iter: Int = ...,
-    ) -> None:
-        ...
+    ) -> None: ...
 
     # TODO(1.4): Remove
-    @deprecated(  # type: ignore
-        "Attribute `class_weight_` was deprecated in version 1.2 and will be removed in"
-        " 1.4."
-    )
+    @deprecated("Attribute `class_weight_` was deprecated in version 1.2 and will be removed in" " 1.4.")  # type: ignore
     @property
-    def class_weight_(self) -> ndarray:
-        ...
-
+    def class_weight_(self) -> ndarray: ...
 
 class OneClassSVM(OutlierMixin, BaseLibSVM):
     support_vectors_: ndarray = ...
@@ -296,8 +264,7 @@ class OneClassSVM(OutlierMixin, BaseLibSVM):
     def __init__(
         self,
         *,
-        kernel: Literal["linear", "poly", "rbf", "sigmoid", "precomputed", "rbf"]
-        | Callable = "rbf",
+        kernel: Literal["linear", "poly", "rbf", "sigmoid", "precomputed", "rbf"] | Callable = "rbf",
         degree: Int = 3,
         gamma: float | Literal["scale", "auto", "scale"] = "scale",
         coef0: Float = 0.0,
@@ -307,31 +274,18 @@ class OneClassSVM(OutlierMixin, BaseLibSVM):
         cache_size: Float = 200,
         verbose: bool = False,
         max_iter: Int = ...,
-    ) -> None:
-        ...
+    ) -> None: ...
 
     # TODO(1.4): Remove
-    @deprecated(  # type: ignore
-        "Attribute `class_weight_` was deprecated in version 1.2 and will be removed in"
-        " 1.4."
-    )
+    @deprecated("Attribute `class_weight_` was deprecated in version 1.2 and will be removed in" " 1.4.")  # type: ignore
     @property
-    def class_weight_(self) -> ndarray:
-        ...
-
+    def class_weight_(self) -> ndarray: ...
     def fit(
         self: OneClassSVM_Self,
         X: MatrixLike | ArrayLike,
         y: Any = None,
         sample_weight: None | ArrayLike = None,
-    ) -> OneClassSVM_Self:
-        ...
-
-    def decision_function(self, X: MatrixLike) -> ndarray:
-        ...
-
-    def score_samples(self, X: MatrixLike) -> ndarray:
-        ...
-
-    def predict(self, X: MatrixLike) -> ndarray:
-        ...
+    ) -> OneClassSVM_Self: ...
+    def decision_function(self, X: MatrixLike) -> ndarray: ...
+    def score_samples(self, X: MatrixLike) -> ndarray: ...
+    def predict(self, X: MatrixLike) -> ndarray: ...

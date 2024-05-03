@@ -1,5 +1,5 @@
-from typing import Mapping
 from collections import defaultdict
+from typing import Mapping
 
 from ...classes.graph import Graph
 

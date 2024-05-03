@@ -1,19 +1,19 @@
+import warnings as _warnings
+
 from joblib import (
-    logger,
-    dump,
-    load,
+    Memory,
+    Parallel,
     __version__,
+    cpu_count,
+    delayed,
+    dump,
     effective_n_jobs,
     hash,
-    cpu_count,
-    Parallel,
-    Memory,
-    delayed,
+    load,
+    logger,
     parallel_backend,
     register_parallel_backend,
 )
-import warnings as _warnings
-
 
 __all__ = [
     "parallel_backend",

@@ -11,10 +11,10 @@ __all__ = [
     "Widget",
 ]
 
-from .console import Console as Console  # noqa
-from .grid import Grid as Grid  # noqa
-from .viewbox import ViewBox as ViewBox  # noqa
-from .widget import Widget as Widget  # noqa
 from .axis import AxisWidget as AxisWidget  # noqa
 from .colorbar import ColorBarWidget as ColorBarWidget  # noqa
+from .console import Console as Console  # noqa
+from .grid import Grid as Grid  # noqa
 from .label import Label as Label  # noqa
+from .viewbox import ViewBox as ViewBox  # noqa
+from .widget import Widget as Widget  # noqa

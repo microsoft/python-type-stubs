@@ -1,19 +1,19 @@
 from typing import ClassVar, Literal
+
+import numpy as np
+from numpy import ndarray
 from numpy.random import RandomState
 from scipy import linalg as linalg
-from ._base import BaseMixture
-from numpy import ndarray
-from ..utils.extmath import row_norms as row_norms
-from ..utils._param_validation import StrOptions as StrOptions
-from .._typing import Int, Float, ArrayLike, MatrixLike
+
+from .._typing import ArrayLike, Float, Int, MatrixLike
 from ..utils import check_array as check_array
+from ..utils._param_validation import StrOptions as StrOptions
+from ..utils.extmath import row_norms as row_norms
+from ._base import BaseMixture
 
 # Author: Wei Xue <xuewei4d@gmail.com>
 # Modified by Thierry Guillemot <thierry.guillemot.work@gmail.com>
 # License: BSD 3 clause
-
-import numpy as np
-
 
 class GaussianMixture(BaseMixture):
     feature_names_in_: ndarray = ...
@@ -38,9 +38,7 @@ class GaussianMixture(BaseMixture):
         reg_covar: Float = 1e-6,
         max_iter: Int = 100,
         n_init: Int = 1,
-        init_params: Literal[
-            "kmeans", "k-means++", "random", "random_from_data", "kmeans"
-        ] = "kmeans",
+        init_params: Literal["kmeans", "k-means++", "random", "random_from_data", "kmeans"] = "kmeans",
         weights_init: None | ArrayLike = None,
         means_init: None | ArrayLike = None,
         precisions_init: None | ArrayLike = None,
@@ -48,11 +46,6 @@ class GaussianMixture(BaseMixture):
         warm_start: bool = False,
         verbose: Int = 0,
         verbose_interval: Int = 10,
-    ) -> None:
-        ...
-
-    def bic(self, X: MatrixLike) -> Float:
-        ...
-
-    def aic(self, X: MatrixLike) -> float:
-        ...
+    ) -> None: ...
+    def bic(self, X: MatrixLike) -> Float: ...
+    def aic(self, X: MatrixLike) -> float: ...

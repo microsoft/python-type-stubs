@@ -64,11 +64,11 @@ reportUnusedVariable = "warning" # TODO
 reportUndefinedVariable = "warning" # TODO
 # TODO, These files have errors with no code and must be fixed
 exclude = [
-"stubs/sklearn/externals/_packaging/version.pyi",
-"stubs/vispy/visuals/isosurface.pyi",
-"stubs/vispy/visuals/mesh.pyi",
-"stubs/vispy/visuals/surface_plot.pyi",
-"stubs/vispy/visuals/transforms/transform_system.pyi",
+    "stubs/sklearn/externals/_packaging/version.pyi",
+    "stubs/vispy/visuals/isosurface.pyi",
+    "stubs/vispy/visuals/mesh.pyi",
+    "stubs/vispy/visuals/surface_plot.pyi",
+    "stubs/vispy/visuals/transforms/transform_system.pyi",
 ]
 
 [tool.mypy]

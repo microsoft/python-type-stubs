@@ -1,12 +1,12 @@
-from ..classes.digraph import DiGraph
-from numpy.typing import ArrayLike
-
 import heapq
 from collections import deque
 from functools import partial
 from itertools import chain, product, starmap
 from math import gcd
 
+from numpy.typing import ArrayLike
+
+from ..classes.digraph import DiGraph
 from ..classes.graph import Graph
 from ..utils import arbitrary_element, not_implemented_for, pairwise
 
@@ -49,8 +49,6 @@ def dag_longest_path(
     default_weight: int = 1,
     topo_order: ArrayLike | tuple | None = None,
 ) -> ArrayLike: ...
-def dag_longest_path_length(
-    G: Graph, weight: str = "weight", default_weight: int = 1
-) -> int: ...
+def dag_longest_path_length(G: Graph, weight: str = "weight", default_weight: int = 1) -> int: ...
 def root_to_leaf_paths(G: Graph): ...
 def dag_to_branching(G: Graph) -> DiGraph: ...

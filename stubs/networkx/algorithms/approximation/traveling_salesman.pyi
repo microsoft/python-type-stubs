@@ -1,9 +1,10 @@
-from typing import Mapping, Literal
-from numpy.typing import ArrayLike
-from ...classes.graph import Graph
 import math
+from typing import Literal, Mapping
+
+from numpy.typing import ArrayLike
 
 from ...algorithms.tree.mst import random_spanning_tree
+from ...classes.graph import Graph
 from ...utils import not_implemented_for, pairwise, py_random_state
 
 __all__ = [
@@ -18,9 +19,7 @@ __all__ = [
 def swap_two_nodes(soln, seed) -> ArrayLike: ...
 def move_one_node(soln, seed) -> ArrayLike: ...
 def christofides(G: Graph, weight="weight", tree=None) -> ArrayLike: ...
-def traveling_salesman_problem(
-    G: Graph, weight="weight", nodes=None, cycle=True, method=None
-) -> ArrayLike: ...
+def traveling_salesman_problem(G: Graph, weight="weight", nodes=None, cycle=True, method=None) -> ArrayLike: ...
 @py_random_state(2)
 def asadpour_atsp(G: Graph, weight="weight", seed=None, source=None): ...
 def held_karp_ascent(G: Graph, weight="weight"): ...

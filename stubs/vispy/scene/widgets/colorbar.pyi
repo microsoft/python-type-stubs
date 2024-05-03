@@ -1,16 +1,17 @@
-from vispy.util.event import Event
 from typing import Literal
-from vispy.color import Colormap, Color
+
+import numpy as np
+from vispy.color import Color, Colormap
+from vispy.util.event import Event
+
+from ...visuals import ColorBarVisual
+from .widget import Widget
 
 # -*- coding: utf-8 -*-
 # -----------------------------------------------------------------------------
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 # -----------------------------------------------------------------------------
-
-import numpy as np
-from .widget import Widget
-from ...visuals import ColorBarVisual
 
 class ColorBarWidget(Widget):
     def __init__(

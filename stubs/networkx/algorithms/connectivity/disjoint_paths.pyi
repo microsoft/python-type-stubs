@@ -1,12 +1,7 @@
-from ...classes.graph import Graph
-
 # Define the default maximum flow function to use for the undelying
 # maximum flow computations
-from ...algorithms.flow import (
-    edmonds_karp,
-    preflow_push,
-    shortest_augmenting_path,
-)
+from ...algorithms.flow import edmonds_karp, preflow_push, shortest_augmenting_path
+from ...classes.graph import Graph
 from ...exception import NetworkXNoPath
 
 default_flow_func = ...

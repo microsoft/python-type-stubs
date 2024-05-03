@@ -1,25 +1,18 @@
+from numbers import Integral as Integral, Real as Real
 from typing import Any, Callable, ClassVar, Literal, TypeVar
+
+from numpy import ndarray
 from numpy.random import RandomState
 from scipy import linalg as linalg
+
+from .._typing import Float, Int, MatrixLike
+from ..base import BaseEstimator, ClassNamePrefixFeaturesOutMixin, TransformerMixin
 from ..exceptions import ConvergenceWarning as ConvergenceWarning
-from numpy import ndarray
-from ..utils._param_validation import (
-    Hidden as Hidden,
-    Interval as Interval,
-    StrOptions as StrOptions,
-)
-from numbers import Integral as Integral, Real as Real
-from ..base import BaseEstimator, TransformerMixin, ClassNamePrefixFeaturesOutMixin
-from .._typing import MatrixLike, Int, Float
-from ..utils import (
-    check_array as check_array,
-    as_float_array as as_float_array,
-    check_random_state as check_random_state,
-)
+from ..utils import as_float_array as as_float_array, check_array as check_array, check_random_state as check_random_state
+from ..utils._param_validation import Hidden as Hidden, Interval as Interval, StrOptions as StrOptions
 from ..utils.validation import check_is_fitted as check_is_fitted
 
 FastICA_Self = TypeVar("FastICA_Self", bound="FastICA")
-
 
 # Authors: Pierre Lafaye de Micheaux, Stefan van der Walt, Gael Varoquaux,
 #          Bertrand Thirion, Alexandre Gramfort, Denis A. Engemann
@@ -30,7 +23,6 @@ import warnings
 import numpy as np
 
 __all__ = ["fastica", "FastICA"]
-
 
 def fastica(
     X: MatrixLike,
@@ -48,9 +40,7 @@ def fastica(
     return_X_mean: bool = False,
     compute_sources: bool = True,
     return_n_iter: bool = False,
-) -> tuple[ndarray | None, ndarray, ndarray | None, ndarray, int]:
-    ...
-
+) -> tuple[ndarray | None, ndarray, ndarray | None, ndarray, int]: ...
 
 class FastICA(ClassNamePrefixFeaturesOutMixin, TransformerMixin, BaseEstimator):
     whitening_: ndarray = ...
@@ -76,17 +66,8 @@ class FastICA(ClassNamePrefixFeaturesOutMixin, TransformerMixin, BaseEstimator):
         w_init: None | MatrixLike = None,
         whiten_solver: Literal["eigh", "svd", "svd"] = "svd",
         random_state: RandomState | None | Int = None,
-    ) -> None:
-        ...
-
-    def fit_transform(self, X: MatrixLike, y: Any = None) -> ndarray:
-        ...
-
-    def fit(self: FastICA_Self, X: MatrixLike, y: Any = None) -> FastICA_Self:
-        ...
-
-    def transform(self, X: MatrixLike, copy: bool = True) -> ndarray:
-        ...
-
-    def inverse_transform(self, X: MatrixLike, copy: bool = True) -> ndarray:
-        ...
+    ) -> None: ...
+    def fit_transform(self, X: MatrixLike, y: Any = None) -> ndarray: ...
+    def fit(self: FastICA_Self, X: MatrixLike, y: Any = None) -> FastICA_Self: ...
+    def transform(self, X: MatrixLike, copy: bool = True) -> ndarray: ...
+    def inverse_transform(self, X: MatrixLike, copy: bool = True) -> ndarray: ...

@@ -10,18 +10,17 @@ from functools import lru_cache
 
 import numpy as np
 
-from . import Visual, TextVisual, CompoundVisual, _BorderVisual
+from ..color import get_colormap
+from . import CompoundVisual, TextVisual, Visual, _BorderVisual
 
 # from .border import _BorderVisual
 from .shaders import Function
-from ..color import get_colormap
 
 _VERTEX_SHADER: str = ...  # noqa
 
 _FRAGMENT_SHADER: str = ...  # noqa
 
 class _CoreColorBarVisual(Visual):
-
     _shaders: dict = ...
 
     def __init__(self, pos, halfdim, cmap, orientation, **kwargs): ...
@@ -48,7 +47,6 @@ class _CoreColorBarVisual(Visual):
     def _prepare_draw(self, view): ...
 
 class ColorBarVisual(CompoundVisual):
-
     # The padding multiplier that's used to place the text
     # next to the Colorbar. Makes sure the text isn't
     # visually "sticking" to the Colorbar

@@ -1,47 +1,47 @@
-from .hough_transform import (
-    hough_line as hough_line,
-    hough_line_peaks as hough_line_peaks,
-    probabilistic_hough_line as probabilistic_hough_line,
-    hough_circle as hough_circle,
-    hough_circle_peaks as hough_circle_peaks,
-    hough_ellipse as hough_ellipse,
-)
-from .radon_transform import (
-    radon as radon,
-    iradon as iradon,
-    iradon_sart as iradon_sart,
-    order_angles_golden_ratio as order_angles_golden_ratio,
-)
-from .finite_radon_transform import frt2 as frt2, ifrt2 as ifrt2
-from .integral import integral_image as integral_image, integrate as integrate
 from ._geometric import (
+    AffineTransform as AffineTransform,
+    EssentialMatrixTransform as EssentialMatrixTransform,
+    EuclideanTransform as EuclideanTransform,
+    FundamentalMatrixTransform as FundamentalMatrixTransform,
+    PiecewiseAffineTransform as PiecewiseAffineTransform,
+    PolynomialTransform as PolynomialTransform,
+    ProjectiveTransform as ProjectiveTransform,
+    SimilarityTransform as SimilarityTransform,
     estimate_transform as estimate_transform,
     matrix_transform as matrix_transform,
-    EuclideanTransform as EuclideanTransform,
-    SimilarityTransform as SimilarityTransform,
-    AffineTransform as AffineTransform,
-    ProjectiveTransform as ProjectiveTransform,
-    FundamentalMatrixTransform as FundamentalMatrixTransform,
-    EssentialMatrixTransform as EssentialMatrixTransform,
-    PolynomialTransform as PolynomialTransform,
-    PiecewiseAffineTransform as PiecewiseAffineTransform,
 )
 from ._warps import (
-    swirl as swirl,
-    resize as resize,
-    rotate as rotate,
-    rescale as rescale,
     downscale_local_mean as downscale_local_mean,
+    rescale as rescale,
+    resize as resize,
+    resize_local_mean as resize_local_mean,
+    rotate as rotate,
+    swirl as swirl,
     warp as warp,
     warp_coords as warp_coords,
     warp_polar as warp_polar,
-    resize_local_mean as resize_local_mean,
 )
+from .finite_radon_transform import frt2 as frt2, ifrt2 as ifrt2
+from .hough_transform import (
+    hough_circle as hough_circle,
+    hough_circle_peaks as hough_circle_peaks,
+    hough_ellipse as hough_ellipse,
+    hough_line as hough_line,
+    hough_line_peaks as hough_line_peaks,
+    probabilistic_hough_line as probabilistic_hough_line,
+)
+from .integral import integral_image as integral_image, integrate as integrate
 from .pyramids import (
-    pyramid_reduce as pyramid_reduce,
     pyramid_expand as pyramid_expand,
     pyramid_gaussian as pyramid_gaussian,
     pyramid_laplacian as pyramid_laplacian,
+    pyramid_reduce as pyramid_reduce,
+)
+from .radon_transform import (
+    iradon as iradon,
+    iradon_sart as iradon_sart,
+    order_angles_golden_ratio as order_angles_golden_ratio,
+    radon as radon,
 )
 
 __all__ = [

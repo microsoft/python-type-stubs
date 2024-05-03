@@ -1,15 +1,13 @@
-from numpy.typing import NDArray
-from itertools import combinations_with_replacement
 import itertools
-import numpy as np
-
-from skimage._shared import utils
 from concurrent.futures import ThreadPoolExecutor
+from itertools import combinations_with_replacement
+
+import numpy as np
+from numpy.typing import NDArray
+from skimage._shared import utils
 
 def _texture_filter(gaussian_filtered): ...
-def _singlescale_basic_features_singlechannel(
-    img, sigma, intensity=True, edges=True, texture=True
-): ...
+def _singlescale_basic_features_singlechannel(img, sigma, intensity=True, edges=True, texture=True): ...
 def _mutiscale_basic_features_singlechannel(
     img,
     intensity=True,

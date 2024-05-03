@@ -4,7 +4,7 @@
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 # -----------------------------------------------------------------------------
 
-from .raw_point_collection import RawPointCollection
 from .agg_point_collection import AggPointCollection
+from .raw_point_collection import RawPointCollection
 
 def PointCollection(mode="raw", *args, **kwargs): ...

@@ -1,11 +1,10 @@
-from ..classes.multigraph import MultiGraph
-from typing import Mapping
-from ..classes.multidigraph import MultiDiGraph
-from ..classes.graph import Graph
 import warnings
 from locale import getpreferredencoding
+from typing import Mapping
 
 from ..classes.graph import Graph
+from ..classes.multidigraph import MultiDiGraph
+from ..classes.multigraph import MultiGraph
 from ..utils import open_file
 
 __all__ = [

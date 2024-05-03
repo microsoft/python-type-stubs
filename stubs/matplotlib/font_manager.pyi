@@ -1,12 +1,12 @@
-from matplotlib.ft2font import FT2Font
-from typing import Literal
-from ._typing import *
-from ._afm import AFM
-
-from pathlib import PosixPath
-
 import json
 from functools import lru_cache
+from pathlib import PosixPath
+from typing import Literal
+
+from matplotlib.ft2font import FT2Font
+
+from ._afm import AFM
+from ._typing import *
 
 font_scalings = ...
 stretch_dict = ...
@@ -34,48 +34,45 @@ def afmFontProperty(fontpath, font: AFM) -> FontEntry: ...
 class FontProperties:
     def __init__(
         self,
-        family: list[str]
-        | str
-        | Literal["sans-serif", "serif", "cursive", "fantasy", "monospace"] = ...,
+        family: list[str] | str | Literal["sans-serif", "serif", "cursive", "fantasy", "monospace"] = ...,
         style: Literal["normal", "italic", "oblique"] = ...,
         variant: Literal["normal", "small-caps"] = ...,
-        weight: int
-        | Literal[
-            "ultralight",
-            "light",
-            "normal",
-            "regular",
-            "book",
-            "medium",
-            "roman",
-            "semibold",
-            "demibold",
-            "demi",
-            "bold",
-            "heavy",
-            "extra bold",
-            "black",
-        ] = ...,
-        stretch: int
-        | Literal[
-            "ultra-condensed",
-            "extra-condensed",
-            "condensed",
-            "semi-condensed",
-            "normal",
-            "semi-expanded",
-            "expanded",
-            "extra-expanded",
-            "ultra-expanded",
-        ] = ...,
-        size: float
-        | Literal[
-            "xx-small", "x-small", "small", "medium", "large", "x-large", "xx-large"
-        ] = ...,
+        weight: (
+            int
+            | Literal[
+                "ultralight",
+                "light",
+                "normal",
+                "regular",
+                "book",
+                "medium",
+                "roman",
+                "semibold",
+                "demibold",
+                "demi",
+                "bold",
+                "heavy",
+                "extra bold",
+                "black",
+            ]
+        ) = ...,
+        stretch: (
+            int
+            | Literal[
+                "ultra-condensed",
+                "extra-condensed",
+                "condensed",
+                "semi-condensed",
+                "normal",
+                "semi-expanded",
+                "expanded",
+                "extra-expanded",
+                "ultra-expanded",
+            ]
+        ) = ...,
+        size: float | Literal["xx-small", "x-small", "small", "medium", "large", "x-large", "xx-large"] = ...,
         fname: PosixPath | None = ...,
-        math_fontfamily: Literal[
-            "dejavusans", "dejavuserif", "cm", "stix", "stixsans", "custom"
-        ] = ...,
+        math_fontfamily: Literal["dejavusans", "dejavuserif", "cm", "stix", "stixsans", "custom"] = ...,
     ) -> None: ...
     def __hash__(self) -> int: ...
     def __eq__(self, other: "FontProperties") -> bool: ...
@@ -91,62 +88,59 @@ class FontProperties:
     def get_fontconfig_pattern(self) -> str: ...
     def set_family(
         self,
-        family: str
-        | list[str]
-        | Literal["sans-serif", "serif", "cursive", "fantasy", "monospace"],
+        family: str | list[str] | Literal["sans-serif", "serif", "cursive", "fantasy", "monospace"],
     ) -> None: ...
     def set_style(self, style: Literal["normal", "italic", "oblique"]) -> None: ...
     def set_variant(self, variant: Literal["normal", "small-caps"]) -> None: ...
     def set_weight(
         self,
-        weight: int
-        | Literal[
-            "ultralight",
-            "light",
-            "normal",
-            "regular",
-            "book",
-            "medium",
-            "roman",
-            "semibold",
-            "demibold",
-            "demi",
-            "bold",
-            "heavy",
-            "extra bold",
-            "black",
-        ],
+        weight: (
+            int
+            | Literal[
+                "ultralight",
+                "light",
+                "normal",
+                "regular",
+                "book",
+                "medium",
+                "roman",
+                "semibold",
+                "demibold",
+                "demi",
+                "bold",
+                "heavy",
+                "extra bold",
+                "black",
+            ]
+        ),
     ) -> None: ...
     def set_stretch(
         self,
-        stretch: int
-        | Literal[
-            "ultra-condensed",
-            "extra-condensed",
-            "condensed",
-            "semi-condensed",
-            "normal",
-            "semi-expanded",
-            "expanded",
-            "extra-expanded",
-            "ultra-expanded",
-        ],
+        stretch: (
+            int
+            | Literal[
+                "ultra-condensed",
+                "extra-condensed",
+                "condensed",
+                "semi-condensed",
+                "normal",
+                "semi-expanded",
+                "expanded",
+                "extra-expanded",
+                "ultra-expanded",
+            ]
+        ),
     ) -> None: ...
     def set_size(
         self,
-        size: float
-        | Literal[
-            "xx-small", "x-small", "small", "medium", "large", "x-large", "xx-large"
-        ],
+        size: float | Literal["xx-small", "x-small", "small", "medium", "large", "x-large", "xx-large"],
     ) -> None: ...
     def set_file(self, file: PosixPath | None) -> None: ...
     def set_fontconfig_pattern(self, pattern: str) -> None: ...
     def get_math_fontfamily(self) -> str: ...
     def set_math_fontfamily(
         self,
-        fontfamily: Literal[
-            "dejavusans", "dejavuserif", "cm", "stix", "stixsans", "custom"
-        ],
+        fontfamily: Literal["dejavusans", "dejavuserif", "cm", "stix", "stixsans", "custom"],
     ) -> None: ...
     def copy(self) -> "FontProperties": ...
     set_name = ...
@@ -170,23 +164,25 @@ class FontManager:
     def get_default_size() -> float: ...
     def set_default_weight(
         self,
-        weight: int
-        | Literal[
-            "ultralight",
-            "light",
-            "normal",
-            "regular",
-            "book",
-            "medium",
-            "roman",
-            "semibold",
-            "demibold",
-            "demi",
-            "bold",
-            "heavy",
-            "extra bold",
-            "black",
-        ],
+        weight: (
+            int
+            | Literal[
+                "ultralight",
+                "light",
+                "normal",
+                "regular",
+                "book",
+                "medium",
+                "roman",
+                "semibold",
+                "demibold",
+                "demi",
+                "bold",
+                "heavy",
+                "extra bold",
+                "black",
+            ]
+        ),
     ): ...
     def score_family(self, families: list[str], family2: str) -> float: ...
     def score_style(self, style1: str, style2: str) -> float: ...

@@ -4,7 +4,8 @@
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 # -----------------------------------------------------------------------------
 
-from typing import Optional, Any
+from typing import Any, Optional
+
 import numpy as np
 from numpy.typing import ArrayLike, DTypeLike
 

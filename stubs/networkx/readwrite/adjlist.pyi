@@ -4,9 +4,7 @@ from ..classes.graph import Graph
 from ..utils import open_file
 
 def generate_adjlist(G: Graph, delimiter: str = " ") -> str: ...
-def write_adjlist(
-    G: Graph, path, comments: str = "#", delimiter: str = " ", encoding: str = "utf-8"
-): ...
+def write_adjlist(G: Graph, path, comments: str = "#", delimiter: str = " ", encoding: str = "utf-8"): ...
 def parse_adjlist(
     lines,
     comments: str = "#",

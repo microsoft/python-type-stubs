@@ -8,12 +8,12 @@ import builtins
 import os
 import sys
 
-from . import backends
-from .backends import CORE_BACKENDS, BACKEND_NAMES, BACKENDMAP, TRIED_BACKENDS
 from .. import config
-from .base import BaseApplicationBackend as ApplicationBackend  # noqa
-from ._detect_eventloop import _get_running_interactive_framework
 from ..util import logger
+from . import backends
+from ._detect_eventloop import _get_running_interactive_framework
+from .backends import BACKEND_NAMES, BACKENDMAP, CORE_BACKENDS, TRIED_BACKENDS
+from .base import BaseApplicationBackend as ApplicationBackend  # noqa
 
 class Application(object):
     def __init__(self, backend_name: str | None = None): ...

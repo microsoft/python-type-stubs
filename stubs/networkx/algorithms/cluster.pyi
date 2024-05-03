@@ -1,7 +1,7 @@
-from typing import Mapping
-
 from collections import Counter
 from itertools import chain, combinations
+from typing import Mapping
+
 from ..classes.graph import Graph
 from ..utils import not_implemented_for
 
@@ -15,9 +15,7 @@ __all__ = [
 ]
 
 def triangles(G: Graph, nodes=None) -> Mapping: ...
-def average_clustering(
-    G: Graph, nodes=None, weight=None, count_zeros: bool = True
-) -> float: ...
+def average_clustering(G: Graph, nodes=None, weight=None, count_zeros: bool = True) -> float: ...
 def clustering(G: Graph, nodes=None, weight=None) -> float | dict: ...
 def transitivity(G: Graph) -> float: ...
 def square_clustering(G: Graph, nodes=None) -> Mapping: ...

@@ -1,15 +1,15 @@
 from typing import Callable, Iterable, Literal
-from . import BaseCrossValidator
-from numpy.random import RandomState
-from matplotlib.figure import Figure
-from ._split import BaseShuffleSplit
-from matplotlib.axes import Axes
-from matplotlib.artist import Artist
-from .._typing import ArrayLike, MatrixLike, Int, Float
-from ..utils import check_matplotlib_support as check_matplotlib_support
-from . import learning_curve as learning_curve
-import numpy as np
 
+import numpy as np
+from matplotlib.artist import Artist
+from matplotlib.axes import Axes
+from matplotlib.figure import Figure
+from numpy.random import RandomState
+
+from .._typing import ArrayLike, Float, Int, MatrixLike
+from ..utils import check_matplotlib_support as check_matplotlib_support
+from . import BaseCrossValidator, learning_curve as learning_curve
+from ._split import BaseShuffleSplit
 
 class LearningCurveDisplay:
     fill_between_: Artist | None = ...
@@ -25,9 +25,7 @@ class LearningCurveDisplay:
         train_scores: MatrixLike,
         test_scores: MatrixLike,
         score_name: None | str = None,
-    ) -> None:
-        ...
-
+    ) -> None: ...
     def plot(
         self,
         ax: None | Axes = None,
@@ -36,14 +34,11 @@ class LearningCurveDisplay:
         score_name: None | str = None,
         score_type: Literal["test", "train", "both", "test"] = "test",
         log_scale: bool = False,
-        std_display_style: None
-        | Literal["errorbar", "fill_between", "fill_between"] = "fill_between",
+        std_display_style: None | Literal["errorbar", "fill_between", "fill_between"] = "fill_between",
         line_kw: None | dict = None,
         fill_between_kw: None | dict = None,
         errorbar_kw: None | dict = None,
-    ) -> LearningCurveDisplay:
-        ...
-
+    ) -> LearningCurveDisplay: ...
     @classmethod
     def from_estimator(
         cls,
@@ -68,10 +63,8 @@ class LearningCurveDisplay:
         score_name: None | str = None,
         score_type: Literal["test", "train", "both", "test"] = "test",
         log_scale: bool = False,
-        std_display_style: None
-        | Literal["errorbar", "fill_between", "fill_between"] = "fill_between",
+        std_display_style: None | Literal["errorbar", "fill_between", "fill_between"] = "fill_between",
         line_kw: None | dict = None,
         fill_between_kw: None | dict = None,
         errorbar_kw: None | dict = None,
-    ) -> LearningCurveDisplay:
-        ...
+    ) -> LearningCurveDisplay: ...

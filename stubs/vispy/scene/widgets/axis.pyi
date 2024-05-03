@@ -1,15 +1,14 @@
-from vispy.util.event import Event
-from vispy.scene.widgets.viewbox import ViewBox
-
 # -*- coding: utf-8 -*-
 # -----------------------------------------------------------------------------
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 # -----------------------------------------------------------------------------
 import numpy as np
+from vispy.scene.widgets.viewbox import ViewBox
+from vispy.util.event import Event
 
-from .widget import Widget
 from ...visuals import AxisVisual
+from .widget import Widget
 
 class AxisWidget(Widget):
     def __init__(self, orientation: str = "left", **kwargs): ...

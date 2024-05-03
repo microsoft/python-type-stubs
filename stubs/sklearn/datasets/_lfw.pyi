@@ -1,18 +1,14 @@
-from typing import Literal
-from os import listdir as listdir, makedirs as makedirs, remove as remove
-from ._base import (
-    get_data_home as get_data_home,
-    RemoteFileMetadata as RemoteFileMetadata,
-    load_descr as load_descr,
-)
-from os.path import join as join, exists as exists, isdir as isdir
-from joblib import Memory as Memory
-from ..utils._bunch import Bunch
-from .._typing import Float, Int
-
 import logging
+from os import listdir as listdir, makedirs as makedirs, remove as remove
+from os.path import exists as exists, isdir as isdir, join as join
+from typing import Literal
 
 import numpy as np
+from joblib import Memory as Memory
+
+from .._typing import Float, Int
+from ..utils._bunch import Bunch
+from ._base import RemoteFileMetadata as RemoteFileMetadata, get_data_home as get_data_home, load_descr as load_descr
 
 logger = ...
 
@@ -30,7 +26,6 @@ FUNNELED_ARCHIVE = ...
 # http://vis-www.cs.umass.edu/lfw/pairs.txt',
 TARGETS = ...
 
-
 def fetch_lfw_people(
     *,
     data_home: None | str = None,
@@ -41,10 +36,7 @@ def fetch_lfw_people(
     slice_: tuple[slice, ...] = ...,
     download_if_missing: bool = True,
     return_X_y: bool = False,
-) -> Bunch | tuple[Bunch, tuple]:
-    ...
-
-
+) -> Bunch | tuple[Bunch, tuple]: ...
 def fetch_lfw_pairs(
     *,
     subset: Literal["train", "test", "10_folds", "train"] = "train",
@@ -54,5 +46,4 @@ def fetch_lfw_pairs(
     color: bool = False,
     slice_: tuple[slice, ...] = ...,
     download_if_missing: bool = True,
-) -> Bunch:
-    ...
+) -> Bunch: ...

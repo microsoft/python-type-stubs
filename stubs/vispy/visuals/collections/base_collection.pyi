@@ -1,17 +1,18 @@
-from vispy.visuals.collections.collection import Collection
+import math
+
+import numpy as np
 from numpy.typing import ArrayLike, NDArray
+from vispy.visuals.collections.collection import Collection
+
+from ...gloo import IndexBuffer, Texture2D, VertexBuffer
+from .array_list import ArrayList
+from .util import dtype_reduce
 
 # -*- coding: utf-8 -*-
 # -----------------------------------------------------------------------------
 # Copyright (c) 2014, Nicolas P. Rougier
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 # -----------------------------------------------------------------------------
-
-import math
-import numpy as np
-from ...gloo import Texture2D, VertexBuffer, IndexBuffer
-from .util import dtype_reduce
-from .array_list import ArrayList
 
 def next_power_of_2(n): ...
 

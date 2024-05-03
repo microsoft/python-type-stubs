@@ -4,6 +4,7 @@
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 # -----------------------------------------------------------------------------
 import re
+
 from .. import glsl
 from ..util import logger
 
