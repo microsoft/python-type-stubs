@@ -75,10 +75,10 @@ disallow_any_generics = false # TODO
 disallow_subclassing_any = false # TODO
 # Untyped definitions and calls
 disallow_untyped_calls = false # TODO
-disallow_untyped_decorators = true # TODO
 disallow_untyped_defs = false # TODO
 disallow_incomplete_defs = false # TODO
 check_untyped_defs = true
+disallow_untyped_decorators = true
 # Configuring warnings
 warn_redundant_casts = true
 warn_unused_ignores = false # Change from pandas
