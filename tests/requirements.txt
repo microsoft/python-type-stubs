@@ -1,7 +1,6 @@
 # Tools used for testing
 docopt
 mypy==1.7.0
-pyright
 
 # Typed libraries and stubs
 matplotlib>=3.8
