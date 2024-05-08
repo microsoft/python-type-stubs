@@ -67,6 +67,7 @@ class SplineTransformer(TransformerMixin, BaseEstimator):
         extrapolation: Literal["error", "constant", "linear", "continue", "periodic", "constant"] = "constant",
         include_bias: bool = True,
         order: Literal["C", "F", "C"] = "C",
+        sparse_output: bool =False,
     ) -> None: ...
     def get_feature_names_out(self, input_features: None | ArrayLike = None) -> ndarray: ...
     def fit(
