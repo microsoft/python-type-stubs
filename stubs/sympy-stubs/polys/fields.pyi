@@ -1,5 +1,6 @@
 from types import NotImplementedType
-from typing import Any, Self
+from typing import Any
+from typing_extensions import Self
 
 from sympy.core.sympify import CantSympify
 from sympy.polys.domains.domainelement import DomainElement

@@ -1,4 +1,5 @@
-from typing import Any, Callable, Iterator, Literal, Self
+from typing import Any, Callable, Iterator, Literal
+from typing_extensions import Self
 
 from sympy.core.basic import Basic
 from sympy.core.expr import Atom, Expr

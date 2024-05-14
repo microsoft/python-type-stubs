@@ -1,4 +1,5 @@
-from typing import Callable, Self
+from typing import Callable
+from typing_extensions import Self
 
 from sympy.core.basic import Basic
 

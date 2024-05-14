@@ -1,4 +1,5 @@
 from typing import Any, Callable
+from typing_extensions import Unpack
 
 from sympy.combinatorics.coset_table import CosetTable
 from sympy.combinatorics.free_groups import FreeGroupElement
@@ -7,7 +8,7 @@ from sympy.printing.defaults import DefaultPrinting
 from sympy.utilities import public
 
 @public
-def fp_group(fr_grp, relators=...) -> tuple[FpGroup, *tuple[Any, ...]]: ...
+def fp_group(fr_grp, relators=...) -> tuple[FpGroup, Unpack[tuple[Any, ...]]]: ...
 @public
 def xfp_group(fr_grp, relators=...) -> tuple[FpGroup, Callable[[], Any]]: ...
 @public

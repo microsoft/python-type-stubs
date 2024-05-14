@@ -1,5 +1,5 @@
 from types import NotImplementedType
-from typing import Self
+from typing_extensions import Self
 
 class interval:
     def __init__(self, *args, is_valid=..., **kwargs) -> None: ...

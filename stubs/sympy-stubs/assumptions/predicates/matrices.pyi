@@ -1,4 +1,4 @@
-from typing import LiteralString
+from typing_extensions import LiteralString
 
 from sympy.assumptions import Predicate
 from sympy.multipledispatch import Dispatcher

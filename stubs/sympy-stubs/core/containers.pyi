@@ -1,6 +1,7 @@
 from collections.abc import MutableSet
 from types import NotImplementedType
-from typing import Any, Callable, Generator, Iterator, Self
+from typing import Any, Callable, Generator, Iterator
+from typing_extensions import Self
 
 from sympy.core.basic import Basic
 from sympy.core.kind import Kind

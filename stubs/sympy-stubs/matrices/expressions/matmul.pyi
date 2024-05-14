@@ -1,4 +1,5 @@
-from typing import Any, Self
+from typing import Any
+from typing_extensions import Self
 
 from sympy.core.expr import Expr
 from sympy.core.mul import Mul

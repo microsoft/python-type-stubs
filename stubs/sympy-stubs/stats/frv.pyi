@@ -1,4 +1,5 @@
-from typing import Any, Dict, Generator, Literal, Self
+from typing import Any, Dict, Generator, Literal
+from typing_extensions import Self
 
 from sympy import Basic, Equality, FiniteSet, Ne, Piecewise, Sum
 from sympy.core.cache import cacheit

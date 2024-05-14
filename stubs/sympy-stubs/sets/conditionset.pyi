@@ -1,4 +1,5 @@
-from typing import Any, Self
+from typing import Any
+from typing_extensions import Self
 
 from sympy.core.logic import And
 from sympy.sets.sets import Complement, FiniteSet, Intersection, Set, Union

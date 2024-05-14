@@ -1,16 +1,4 @@
-from typing import (
-    TYPE_CHECKING,
-    Any,
-    Callable,
-    Dict as tDict,
-    List,
-    Optional,
-    Self,
-    Tuple as tTuple,
-    Type,
-    Union as tUnion,
-    overload,
-)
+from typing import Any, Callable, Dict as tDict, List, Optional, Self, Tuple as tTuple, Type, Union as tUnion, overload
 
 from mpmath import mpc, mpf
 from sympy.concrete.products import Product
@@ -27,8 +15,6 @@ from sympy.functions.elementary.integers import ceiling, floor
 from sympy.functions.elementary.trigonometric import atan
 from sympy.integrals.integrals import Integral
 
-if TYPE_CHECKING:
-    ...
 LG10 = ...
 rnd = ...
 

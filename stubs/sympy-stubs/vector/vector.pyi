@@ -1,4 +1,5 @@
-from typing import Any, Callable, Literal, Self
+from typing import Any, Callable, Literal
+from typing_extensions import Self
 
 from sympy import ImmutableDenseMatrix, Pow
 from sympy.core.add import Add

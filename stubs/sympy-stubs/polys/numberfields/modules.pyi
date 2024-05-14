@@ -1,5 +1,6 @@
 from types import NotImplementedType
-from typing import Any, Literal, Self
+from typing import Any, Literal
+from typing_extensions import Self
 
 from sympy.polys.matrices.domainmatrix import DomainMatrix
 from sympy.polys.polyclasses import ANP

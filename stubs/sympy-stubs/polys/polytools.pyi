@@ -1,6 +1,7 @@
 from functools import _Wrapped
 from types import NotImplementedType
-from typing import Any, Callable, Iterator, Literal, Self, Tuple
+from typing import Any, Iterator, Literal
+from typing_extensions import Self, Tuple
 
 from sympy.combinatorics.galois import S1TransitiveSubgroups, S2TransitiveSubgroups, S3TransitiveSubgroups
 from sympy.combinatorics.perm_groups import PermutationGroup
@@ -181,7 +182,13 @@ class Poly(Basic):
     def make_monic_over_integers_by_scaling_roots(f) -> tuple[Self, Any] | tuple[Any | Self, Any]: ...
     def galois_group(f, by_name=..., max_tries=..., randomize=...) -> tuple[
         PermutationGroup
-        | Literal[S1TransitiveSubgroups.S1, S2TransitiveSubgroups.S2, S3TransitiveSubgroups.A3, S3TransitiveSubgroups.S3]
+        | Literal[
+            # Looks like a false-positives, no code to specify
+            S1TransitiveSubgroups.S1,  # pyright: ignore
+            S2TransitiveSubgroups.S2,  # pyright: ignore
+            S3TransitiveSubgroups.A3,  # pyright: ignore
+            S3TransitiveSubgroups.S3,  # pyright: ignore
+        ]
         | None,
         bool,
     ]: ...

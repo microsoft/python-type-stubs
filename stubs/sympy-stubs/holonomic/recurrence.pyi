@@ -1,4 +1,4 @@
-from typing import LiteralString, Self
+from typing_extensions import LiteralString, Self
 
 def RecurrenceOperators(base, generator) -> tuple[RecurrenceOperatorAlgebra, RecurrenceOperator]: ...
 

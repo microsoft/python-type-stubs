@@ -1,5 +1,6 @@
 from itertools import combinations
-from typing import Any, Self
+from typing import Any
+from typing_extensions import Self
 
 class Subset:
     _rank_binary = ...

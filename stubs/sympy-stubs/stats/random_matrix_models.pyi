@@ -1,4 +1,5 @@
-from typing import Any, Literal, Self
+from typing import Any, Literal
+from typing_extensions import Self
 
 from sympy import Equality, Integral, Ne
 from sympy.core.basic import Basic

@@ -1,5 +1,6 @@
 from contextlib import contextmanager
-from typing import Any, Callable, Generator, Self
+from typing import Any, Callable, Generator
+from typing_extensions import Self
 
 from sympy.core.basic import Basic
 from sympy.logic.boolalg import Boolean
