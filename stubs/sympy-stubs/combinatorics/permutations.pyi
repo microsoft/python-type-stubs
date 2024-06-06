@@ -1,4 +1,5 @@
-from typing import Any, Generator, Literal, Self
+from typing import Any, Generator, Literal
+from typing_extensions import Self
 
 from sympy.combinatorics.perm_groups import Coset
 from sympy.core.basic import Atom

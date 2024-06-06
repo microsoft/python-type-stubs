@@ -1,10 +1,9 @@
-from typing import Any, Generator, Literal, LiteralString
+from typing import Any, Generator, Literal
+from typing_extensions import LiteralString
 
 from sympy import Function
-from sympy.core.function import UndefinedFunction
 from sympy.core.numbers import Integer
 from sympy.series.order import Order
-from sympy.utilities.decorator import deprecated
 
 MERSENNE_PRIME_EXPONENTS = ...
 PERFECT = ...

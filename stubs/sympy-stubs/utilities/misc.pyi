@@ -1,4 +1,5 @@
-from typing import Any, Callable, LiteralString
+from typing import Any, Callable
+from typing_extensions import LiteralString
 
 class Undecidable(ValueError): ...
 

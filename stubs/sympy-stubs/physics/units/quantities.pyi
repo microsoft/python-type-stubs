@@ -1,4 +1,5 @@
-from typing import Any, Self
+from typing import Any
+from typing_extensions import Self
 
 from sympy.core.add import Add
 from sympy.core.expr import AtomicExpr, Expr

@@ -1,4 +1,5 @@
-from typing import Any, Literal, Self
+from typing import Any, Literal
+from typing_extensions import Self
 
 from sympy import Basic, Derivative, ImmutableDenseNDimArray, ImmutableSparseNDimArray, NDimArray
 from sympy.core._print_helpers import Printable

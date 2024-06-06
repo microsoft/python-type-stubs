@@ -1,8 +1,4 @@
-import collections
-import itertools
-import re
-import warnings
-from typing import ClassVar, Optional, Tuple, Union
+from typing import Callable, ClassVar, Optional, Tuple, Union
 
 from ._structures import (
     Infinity as Infinity,
@@ -37,13 +33,23 @@ from ._structures import (
 
 __all__ = ["parse", "Version", "LegacyVersion", "InvalidVersion", "VERSION_PATTERN"]
 
-InfiniteTypes = ...
-PrePostDevType = ...
-SubLocalType = ...
-LocalType = ...
-CmpKey = ...
-LegacyCmpKey = ...
-VersionComparisonMethod = ...
+InfiniteTypes = Union[InfinityType, NegativeInfinityType]
+PrePostDevType = Union[InfiniteTypes, Tuple[str, int]]
+SubLocalType = Union[InfiniteTypes, int, str]
+LocalType = Union[
+    NegativeInfinityType,
+    Tuple[
+        Union[
+            SubLocalType,
+            Tuple[SubLocalType, str],
+            Tuple[NegativeInfinityType, SubLocalType],
+        ],
+        ...,
+    ],
+]
+CmpKey = Tuple[int, Tuple[int, ...], PrePostDevType, PrePostDevType, PrePostDevType, LocalType]
+LegacyCmpKey = Tuple[int, Tuple[str, ...]]
+VersionComparisonMethod = Callable[[Union[CmpKey, LegacyCmpKey], Union[CmpKey, LegacyCmpKey]], bool]
 
 _Version = ...
 

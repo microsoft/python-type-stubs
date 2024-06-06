@@ -1,4 +1,5 @@
-from typing import Literal, Self
+from typing import Literal
+from typing_extensions import Self
 
 from sympy.assumptions import AppliedPredicate
 from sympy.assumptions.predicates.common import CommutativePredicate, IsTruePredicate

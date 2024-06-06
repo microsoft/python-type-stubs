@@ -1,4 +1,5 @@
-from typing import Any, Generator, LiteralString, Self
+from typing import Any, Generator
+from typing_extensions import LiteralString, Self
 
 from sympy.core import Basic
 

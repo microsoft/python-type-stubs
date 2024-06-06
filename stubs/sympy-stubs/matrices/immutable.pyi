@@ -1,4 +1,5 @@
-from typing import Any, Self
+from typing import Any
+from typing_extensions import Self
 
 from sympy.matrices.dense import DenseMatrix
 from sympy.matrices.expressions import MatrixExpr

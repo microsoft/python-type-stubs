@@ -1,8 +1,8 @@
-from typing import Any, Self
+from typing import Any
+from typing_extensions import Self
 
 from sympy import MatrixBase
 from sympy.matrices.common import MatrixKind
-from sympy.matrices.dense import MutableDenseMatrix
 from sympy.matrices.expressions.matexpr import MatrixElement
 from sympy.polys.matrices import DomainMatrix
 

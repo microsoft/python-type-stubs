@@ -1,4 +1,5 @@
-from typing import Any, Callable, Self
+from typing import Any, Callable
+from typing_extensions import Self
 
 from sympy.core import Atom
 from sympy.liealgebras.type_a import TypeA

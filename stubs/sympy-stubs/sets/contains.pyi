@@ -1,4 +1,4 @@
-from typing import Any, Self
+from typing import Any
 
 from sympy.core.basic import Basic
 from sympy.logic.boolalg import BooleanFunction

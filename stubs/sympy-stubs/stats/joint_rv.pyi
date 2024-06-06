@@ -1,4 +1,5 @@
-from typing import Any, Self
+from typing import Any
+from typing_extensions import Self
 
 from sympy import Basic, Equality, FiniteSet, Indexed, Integral, Ne, ProductSet, Sum
 from sympy.core.expr import Expr

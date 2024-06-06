@@ -1,4 +1,5 @@
-from typing import Any, Literal, LiteralString
+from typing import Any, Literal
+from typing_extensions import LiteralString
 
 class GaloisGroupException(Exception): ...
 class ResolventException(GaloisGroupException): ...

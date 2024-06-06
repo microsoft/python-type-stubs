@@ -1,10 +1,9 @@
-from typing import Any, Self
+from typing import Any
 
 from sympy.polys.domains.characteristiczero import CharacteristicZero
 from sympy.polys.domains.compositedomain import CompositeDomain
 from sympy.polys.domains.field import Field
 from sympy.polys.polyclasses import DMF
-from sympy.utilities import public
 
 class FractionField(Field, CharacteristicZero, CompositeDomain):
     dtype = DMF

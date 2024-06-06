@@ -1,7 +1,7 @@
 from types import NotImplementedType
-from typing import Any, Literal, Self
+from typing import Any, Literal
+from typing_extensions import Self
 
-from sympy.core.basic import Basic
 from sympy.core.expr import Expr
 from sympy.core.function import UndefinedFunction
 from sympy.core.power import Pow
