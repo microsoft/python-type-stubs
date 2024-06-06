@@ -204,7 +204,7 @@ class _CVIterableWrapper(BaseCrossValidator):
     def split(self, X: Any = None, y: Any = None, groups: Any = None): ...
 
 def check_cv(
-    cv: Iterable | int | BaseShuffleSplit | BaseCrossValidator = 5,
+    cv: Iterable | int | BaseShuffleSplit | BaseCrossValidator | None = 5,
     y: None | ArrayLike = None,
     *,
     classifier: bool = False,
