@@ -1,4 +1,4 @@
-from typing import Any, assert_type
+from typing_extensions import assert_type
 
 import matplotlib.pyplot as plt
 import numpy as np
