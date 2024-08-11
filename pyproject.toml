@@ -43,7 +43,7 @@ extra_standard_library = [
 [tool.pyright]
 # Target oldest supported Python version
 pythonversion = "3.8"
-typeCheckingMode = "basic"
+typeCheckingMode = "standard"
 # Partial stubs are acceptable
 reportUnknownArgumentType = false
 # Stubs-only packages are fine for testing
@@ -51,14 +51,26 @@ reportMissingModuleSource = false
 # Stubs are allowed to use private variables
 reportPrivateUsage = false
 reportPrivateImportUsage = false
+# Incompatible overrides and property type mismatches are out of our stubs' control
+# as they are inherited from the implementation.
+reportIncompatibleMethodOverride = false
+reportIncompatibleVariableOverride = false
+reportPropertyTypeMismatch = false
+# Overlapping overloads are often necessary in a stub, meaning pyright's check
+# (which is stricter than mypy's; see mypy issue #10143 and #10157)
+# would cause many false positives and catch few bugs.
+reportOverlappingOverload = false
 # The name of the self/cls parameter is out of third-party stubs' control.
 reportSelfClsParameterName = false
+
 # Error reports to fix in code
 reportArgumentType = "none" # TODO
 reportAssertTypeFailure = "none" # TODO
 reportAssignmentType = "none" # TODO
 reportAttributeAccessIssue = "none" # TODO
+reportFunctionMemberAccess = "none" # TODO
 reportGeneralTypeIssues = "none" # TODO
+reportInvalidTypeForm = "none" # TODO
 reportMissingImports = "none" # TODO
 reportUndefinedVariable = "none" # TODO
 reportUnusedVariable = "none" # TODO
