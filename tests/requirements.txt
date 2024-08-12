@@ -1,11 +1,11 @@
 # Tools used for testing
 docopt
-mypy==1.7.0
+mypy==1.11.*
+pyright
 
 # Typed libraries and stubs
 matplotlib>=3.8
 pytest
-typing_extensions==4.2.0
 
 # Untyped libraries, used to prevent "reportMissingImports" and get inferred typing
 joblib
