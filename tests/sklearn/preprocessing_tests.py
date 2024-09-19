@@ -2,12 +2,11 @@
 # pyright: reportMissingTypeStubs=false
 
 from typing import Any, assert_type
+
 from numpy import ndarray
-from sklearn.preprocessing import normalize
-
-from scipy.sparse._matrix import spmatrix
 from scipy.sparse._csr import csr_matrix
-
+from scipy.sparse._matrix import spmatrix
+from sklearn.preprocessing import normalize
 
 # normalize with matrix
 matrix: spmatrix = spmatrix()
