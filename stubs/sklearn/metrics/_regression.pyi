@@ -1,6 +1,5 @@
-import numbers
-import warnings
 from typing import Literal
+from typing_extensions import deprecated
 
 import numpy as np
 from numpy import ndarray
@@ -58,6 +57,7 @@ def mean_absolute_percentage_error(
     sample_weight: None | ArrayLike = None,
     multioutput: ArrayLike | Literal["raw_values", "uniform_average", "uniform_average"] = "uniform_average",
 ) -> ndarray | Float: ...
+@deprecated()
 def mean_squared_error(
     y_true: MatrixLike | ArrayLike,
     y_pred: MatrixLike | ArrayLike,
@@ -66,6 +66,7 @@ def mean_squared_error(
     multioutput: ArrayLike | Literal["raw_values", "uniform_average", "uniform_average"] = "uniform_average",
     squared: bool = True,
 ) -> ndarray | Float: ...
+@deprecated()
 def mean_squared_log_error(
     y_true: MatrixLike | ArrayLike,
     y_pred: MatrixLike | ArrayLike,
@@ -130,4 +131,18 @@ def d2_absolute_error_score(
     *,
     sample_weight: None | ArrayLike = None,
     multioutput: ArrayLike | Literal["raw_values", "uniform_average", "uniform_average"] = "uniform_average",
+) -> float | ndarray: ...
+def root_mean_squared_error(
+    y_true: MatrixLike | ArrayLike,
+    y_pred: MatrixLike | ArrayLike,
+    *,
+    sample_weight: None | ArrayLike = None,
+    multioutput: ArrayLike | Literal["raw_values", "uniform_average"] = "uniform_average",
+) -> float | ndarray: ...
+def root_mean_squared_log_error(
+    y_true: MatrixLike | ArrayLike,
+    y_pred: MatrixLike | ArrayLike,
+    *,
+    sample_weight: None | ArrayLike = None,
+    multioutput: ArrayLike | Literal["raw_values", "uniform_average"] = "uniform_average",
 ) -> float | ndarray: ...

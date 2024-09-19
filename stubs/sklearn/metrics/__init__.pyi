@@ -56,6 +56,8 @@ from ._regression import (
     mean_tweedie_deviance as mean_tweedie_deviance,
     median_absolute_error as median_absolute_error,
     r2_score as r2_score,
+    root_mean_squared_error as root_mean_squared_error,
+    root_mean_squared_log_error as root_mean_squared_log_error,
 )
 from ._scorer import (
     SCORERS as SCORERS,
@@ -166,6 +168,8 @@ __all__ = [
     "RocCurveDisplay",
     "roc_auc_score",
     "roc_curve",
+    "root_mean_squared_error",
+    "root_mean_squared_log_error",
     "SCORERS",
     "get_scorer_names",
     "silhouette_samples",
