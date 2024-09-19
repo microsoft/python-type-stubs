@@ -1,5 +1,7 @@
-pyright
 matplotlib
-pytest
 mypy==0.950
+pyright
+pytest
+scikit-learn
+scipy
 typing_extensions==4.2.0

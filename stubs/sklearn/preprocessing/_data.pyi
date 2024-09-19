@@ -1,5 +1,5 @@
 from numbers import Integral as Integral, Real as Real
-from typing import Any, ClassVar, Literal, TypeVar
+from typing import Any, ClassVar, Literal, TypeVar, overload
 
 from numpy import ndarray
 from numpy.random import RandomState
@@ -142,7 +142,15 @@ class StandardScaler(OneToOneFeatureMixin, TransformerMixin, BaseEstimator):
         y: Series | None | ndarray | list[int] = None,
         sample_weight: None | ArrayLike = None,
     ) -> StandardScaler_Self: ...
+    @overload
+    def transform(self, X: spmatrix, copy: None | bool = None) -> spmatrix: ...
+    @overload
+    def transform(self, X: ArrayLike, copy: None | bool = None) -> ndarray: ...
     def transform(self, X: MatrixLike, copy: None | bool = None) -> ndarray | spmatrix: ...
+    @overload
+    def inverse_transform(self, X: spmatrix, copy: None | bool = None) -> spmatrix: ...
+    @overload
+    def inverse_transform(self, X: ArrayLike, copy: None | bool = None) -> ndarray: ...
     def inverse_transform(self, X: MatrixLike | ArrayLike, copy: None | bool = None) -> ndarray | spmatrix: ...
 
 class MaxAbsScaler(OneToOneFeatureMixin, TransformerMixin, BaseEstimator):
@@ -157,7 +165,15 @@ class MaxAbsScaler(OneToOneFeatureMixin, TransformerMixin, BaseEstimator):
     def __init__(self, *, copy: bool = True) -> None: ...
     def fit(self: MaxAbsScaler_Self, X: MatrixLike | ArrayLike, y=None) -> MaxAbsScaler_Self: ...
     def partial_fit(self: MaxAbsScaler_Self, X: MatrixLike | ArrayLike, y=None) -> MaxAbsScaler_Self: ...
+    @overload
+    def transform(self, X: spmatrix) -> spmatrix: ...
+    @overload
+    def transform(self, X: ArrayLike) -> ndarray: ...
     def transform(self, X: MatrixLike | ArrayLike) -> ndarray | spmatrix: ...
+    @overload
+    def inverse_transform(self, X: spmatrix) -> spmatrix: ...
+    @overload
+    def inverse_transform(self, X: ArrayLike) -> ndarray: ...
     def inverse_transform(self, X: MatrixLike | ArrayLike) -> ndarray | spmatrix: ...
 
 def maxabs_scale(X: MatrixLike | ArrayLike, *, axis: Int = 0, copy: bool = True): ...
@@ -180,9 +196,39 @@ class RobustScaler(OneToOneFeatureMixin, TransformerMixin, BaseEstimator):
         unit_variance: bool = False,
     ) -> None: ...
     def fit(self: RobustScaler_Self, X: MatrixLike | ArrayLike, y: Any = None) -> RobustScaler_Self: ...
+    @overload
+    def transform(self, X: spmatrix) -> spmatrix: ...
+    @overload
+    def transform(self, X: ArrayLike) -> ndarray: ...
     def transform(self, X: MatrixLike | ArrayLike) -> ndarray | spmatrix: ...
+    @overload
+    def inverse_transform(self, X: spmatrix) -> spmatrix: ...
+    @overload
+    def inverse_transform(self, X: ArrayLike) -> ndarray: ...
     def inverse_transform(self, X: MatrixLike | ArrayLike) -> ndarray | spmatrix: ...
 
+@overload
+def robust_scale(
+    X: spmatrix,
+    *,
+    axis: Int = 0,
+    with_centering: bool = True,
+    with_scaling: bool = True,
+    quantile_range: tuple[float, float] = ...,
+    copy: bool = True,
+    unit_variance: bool = False,
+) -> spmatrix: ...
+@overload
+def robust_scale(
+    X: ndarray,
+    *,
+    axis: Int = 0,
+    with_centering: bool = True,
+    with_scaling: bool = True,
+    quantile_range: tuple[float, float] = ...,
+    copy: bool = True,
+    unit_variance: bool = False,
+) -> ndarray: ...
 def robust_scale(
     X: MatrixLike,
     *,
@@ -193,6 +239,42 @@ def robust_scale(
     copy: bool = True,
     unit_variance: bool = False,
 ) -> ndarray | spmatrix: ...
+@overload
+def normalize(
+    X: spmatrix,
+    norm: Literal["l1", "l2", "max", "l2"] = "l2",
+    *,
+    axis: int = 1,
+    copy: bool = True,
+    return_norm: Literal[True],
+) -> tuple[csr_matrix, ndarray]: ...
+@overload
+def normalize(
+    X: spmatrix,
+    norm: Literal["l1", "l2", "max", "l2"] = "l2",
+    *,
+    axis: int = 1,
+    copy: bool = True,
+    return_norm: Literal[False] = ...,
+) -> csr_matrix: ...
+@overload
+def normalize(
+    X: ArrayLike,
+    norm: Literal["l1", "l2", "max", "l2"] = "l2",
+    *,
+    axis: int = 1,
+    copy: bool = True,
+    return_norm: Literal[True],
+) -> tuple[ndarray, ndarray]: ...
+@overload
+def normalize(
+    X: ArrayLike,
+    norm: Literal["l1", "l2", "max", "l2"] = "l2",
+    *,
+    axis: int = 1,
+    copy: bool = True,
+    return_norm: Literal[False] = ...,
+) -> ndarray: ...
 def normalize(
     X: MatrixLike | ArrayLike,
     norm: Literal["l1", "l2", "max", "l2"] = "l2",
@@ -210,6 +292,10 @@ class Normalizer(OneToOneFeatureMixin, TransformerMixin, BaseEstimator):
 
     def __init__(self, norm: Literal["l1", "l2", "max", "l2"] = "l2", *, copy: bool = True) -> None: ...
     def fit(self: Normalizer_Self, X: MatrixLike | ArrayLike, y: Any = None) -> Normalizer_Self: ...
+    @overload
+    def transform(self, X: spmatrix, copy: None | bool = None) -> spmatrix: ...
+    @overload
+    def transform(self, X: ArrayLike, copy: None | bool = None) -> ndarray: ...
     def transform(self, X: MatrixLike | ArrayLike, copy: None | bool = None) -> ndarray | spmatrix: ...
 
 def binarize(X: MatrixLike | ArrayLike, *, threshold: Float = 0.0, copy: bool = True) -> ndarray | spmatrix: ...
@@ -222,6 +308,10 @@ class Binarizer(OneToOneFeatureMixin, TransformerMixin, BaseEstimator):
 
     def __init__(self, *, threshold: Float = 0.0, copy: bool = True) -> None: ...
     def fit(self: Binarizer_Self, X: MatrixLike | ArrayLike, y=None) -> Binarizer_Self: ...
+    @overload
+    def transform(self, X: spmatrix, copy: None | bool = None) -> spmatrix: ...
+    @overload
+    def transform(self, X: ArrayLike, copy: None | bool = None) -> ndarray: ...
     def transform(self, X: MatrixLike | ArrayLike, copy: None | bool = None) -> ndarray | spmatrix: ...
 
 class KernelCenterer(ClassNamePrefixFeaturesOutMixin, TransformerMixin, BaseEstimator):
@@ -234,6 +324,10 @@ class KernelCenterer(ClassNamePrefixFeaturesOutMixin, TransformerMixin, BaseEsti
     def fit(self: KernelCenterer_Self, K: MatrixLike, y=None) -> KernelCenterer_Self: ...
     def transform(self, K: MatrixLike, copy: bool = True) -> ndarray: ...
 
+@overload
+def add_dummy_feature(X: spmatrix, value: Float = 1.0) -> spmatrix: ...
+@overload
+def add_dummy_feature(X: ArrayLike, value: Float = 1.0) -> ndarray: ...
 def add_dummy_feature(X: MatrixLike | ArrayLike, value: Float = 1.0) -> ndarray | spmatrix: ...
 
 class QuantileTransformer(OneToOneFeatureMixin, TransformerMixin, BaseEstimator):
@@ -260,9 +354,41 @@ class QuantileTransformer(OneToOneFeatureMixin, TransformerMixin, BaseEstimator)
         X: MatrixLike | ArrayLike,
         y: Series | None = None,
     ) -> QuantileTransformer_Self: ...
+    @overload
+    def transform(self, X: spmatrix) -> spmatrix: ...
+    @overload
+    def transform(self, X: ArrayLike) -> ndarray: ...
     def transform(self, X: MatrixLike | ArrayLike) -> ndarray | spmatrix: ...
+    @overload
+    def inverse_transform(self, X: spmatrix) -> spmatrix: ...
+    @overload
+    def inverse_transform(self, X: ArrayLike) -> ndarray: ...
     def inverse_transform(self, X: MatrixLike | ArrayLike) -> ndarray | spmatrix: ...
 
+@overload
+def quantile_transform(
+    X: spmatrix,
+    *,
+    axis: Int = 0,
+    n_quantiles: Int = 1000,
+    output_distribution: Literal["uniform", "normal", "uniform"] = "uniform",
+    ignore_implicit_zeros: bool = False,
+    subsample: Int = ...,
+    random_state: RandomState | None | Int = None,
+    copy: bool = True,
+) -> spmatrix: ...
+@overload
+def quantile_transform(
+    X: ArrayLike,
+    *,
+    axis: Int = 0,
+    n_quantiles: Int = 1000,
+    output_distribution: Literal["uniform", "normal", "uniform"] = "uniform",
+    ignore_implicit_zeros: bool = False,
+    subsample: Int = ...,
+    random_state: RandomState | None | Int = None,
+    copy: bool = True,
+) -> ndarray: ...
 def quantile_transform(
     X: MatrixLike | ArrayLike,
     *,
