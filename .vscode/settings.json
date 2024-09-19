@@ -2,6 +2,5 @@
   "editor.formatOnSave": false,
   "python.formatting.provider": "black",
   "python.analysis.diagnosticMode": "workspace",
-  "python.analysis.typeCheckingMode": "strict",
   "python.analysis.openFilesOnly": false
 }
