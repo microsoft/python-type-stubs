@@ -1,7 +1,6 @@
-from typing import Literal
+from typing import Literal, overload
 from typing_extensions import deprecated
 
-import numpy as np
 from numpy import ndarray
 from scipy.special import xlogy as xlogy
 
@@ -57,23 +56,41 @@ def mean_absolute_percentage_error(
     sample_weight: None | ArrayLike = None,
     multioutput: ArrayLike | Literal["raw_values", "uniform_average", "uniform_average"] = "uniform_average",
 ) -> ndarray | Float: ...
-@deprecated()
+@overload
 def mean_squared_error(
     y_true: MatrixLike | ArrayLike,
     y_pred: MatrixLike | ArrayLike,
     *,
     sample_weight: None | ArrayLike = None,
     multioutput: ArrayLike | Literal["raw_values", "uniform_average", "uniform_average"] = "uniform_average",
-    squared: bool = True,
 ) -> ndarray | Float: ...
-@deprecated()
+@deprecated("`squared` is deprecated in 1.4 and will be removed in 1.6. Use `root_mean_squared_error` instead to calculate the root mean squared error.")
+@overload
+def mean_squared_error(
+    y_true: MatrixLike | ArrayLike,
+    y_pred: MatrixLike | ArrayLike,
+    *,
+    sample_weight: None | ArrayLike = None,
+    multioutput: ArrayLike | Literal["raw_values", "uniform_average", "uniform_average"] = "uniform_average",
+    squared: bool,
+) -> ndarray | Float: ...
+@overload
 def mean_squared_log_error(
     y_true: MatrixLike | ArrayLike,
     y_pred: MatrixLike | ArrayLike,
     *,
     sample_weight: None | ArrayLike = None,
     multioutput: ArrayLike | Literal["raw_values", "uniform_average", "uniform_average"] = "uniform_average",
-    squared: bool = True,
+) -> float | ndarray: ...
+@deprecated("`squared` is deprecated in 1.4 and will be removed in 1.6. Use `root_mean_squared_log_error` instead to calculate the root mean squared logarithmic error.")
+@overload
+def mean_squared_log_error(
+    y_true: MatrixLike | ArrayLike,
+    y_pred: MatrixLike | ArrayLike,
+    *,
+    sample_weight: None | ArrayLike = None,
+    multioutput: ArrayLike | Literal["raw_values", "uniform_average", "uniform_average"] = "uniform_average",
+    squared: bool,
 ) -> float | ndarray: ...
 def median_absolute_error(
     y_true: MatrixLike | ArrayLike,
