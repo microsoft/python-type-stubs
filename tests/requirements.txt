@@ -7,6 +7,7 @@ pyright
 matplotlib>=3.8
 pytest
 scipy-stubs
+typing_extensions==4.2.0
 
 # Untyped libraries, used to prevent "reportMissingImports" and get inferred typing
 joblib
@@ -19,4 +20,3 @@ vispy
 numpydoc
 pyamg
 traitlets
-typing_extensions==4.2.0
