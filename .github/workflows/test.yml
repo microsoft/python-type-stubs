@@ -29,10 +29,13 @@ jobs:
           python -m pip install -r tests/requirements.txt
 
       - name: Run pyright tests
-        uses: gramster/pyright-action@main
+        uses: jakebailey/pyright-action@v2
         with:
-          project: tests/pyrighttestconfig.json
-          warn-partial: true
+          pylance-version: latest-prerelease
+
+      - name: Run mypy tests
+        run:
+          python -m mypy .
 
   hygiene:
     runs-on: ubuntu-latest
