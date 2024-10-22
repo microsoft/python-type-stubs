@@ -6,6 +6,7 @@ pyright
 # Typed libraries and stubs
 matplotlib>=3.8
 pytest
+scipy-stubs
 
 # Untyped libraries, used to prevent "reportMissingImports" and get inferred typing
 joblib
@@ -13,10 +14,9 @@ networkx
 PyOpenGL
 scikit-image
 scikit-learn
-scipy
 transformers
 vispy
 numpydoc
 pyamg
 traitlets
-uarray
+typing_extensions==4.2.0
