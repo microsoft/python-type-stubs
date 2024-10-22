@@ -52,6 +52,7 @@ Stubs for the following libraries now exist in typeshed or the libraries themsel
 - pygame
 - pywin32 (pythonwin, win32 and win32com packages)
 - retry
+- scipy (see https://github.com/jorenham/scipy-stubs)
 - slugify
 - SQLAlchemy (see <https://pypi.org/project/types-SQLAlchemy/> for SQLAlchemy 1.4; 2.0.0 and above include type annotations)
 - tenacity
