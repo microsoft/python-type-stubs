@@ -77,7 +77,7 @@ reportUnusedVariable = "none" # TODO
 
 [tool.mypy]
 # Target oldest supported Python version
-python_version = "3.8"
+python_version = "3.9"
 # Allow dynamic typing
 disallow_any_unimported = false # TODO
 disallow_any_expr = false # TODO
