@@ -1,7 +1,7 @@
 [tool.black]
 line_length = 130
 # Target oldest supported Python version
-target_version = ["py38"]
+target_version = ["py39"]
 
 [tool.isort]
 profile = "black"
@@ -42,7 +42,7 @@ extra_standard_library = [
 
 [tool.pyright]
 # Target oldest supported Python version
-pythonversion = "3.8"
+pythonversion = "3.9"
 typeCheckingMode = "standard"
 # Partial stubs are acceptable
 reportUnknownArgumentType = false
