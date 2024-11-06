@@ -135,6 +135,7 @@ disable_error_code = [
     "override",
     "return",
     "truthy-function",
+    "type-var",
     "valid-type",
     "var-annotated",
 ]
