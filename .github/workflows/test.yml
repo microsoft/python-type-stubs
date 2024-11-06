@@ -45,8 +45,8 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v2
 
-      - name: Run isort
-        uses: isort/isort-action@v1
+      - name: Run Ruff
+        uses: astral-sh/ruff-action@v1
 
       - name: Run Black
         uses: psf/black@stable
