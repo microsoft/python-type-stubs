@@ -47,7 +47,6 @@ from numpy.testing import (
     assert_array_equal,
     assert_array_less,
 )
-from numpydoc import docscrape as docscrape
 
 from .._typing import ArrayLike, Float, Int, MatrixLike
 from ..metrics import accuracy_score as accuracy_score, r2_score as r2_score
