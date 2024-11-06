@@ -1,6 +1,6 @@
 #!/bin/python
 
-"""Count IDs.
+__doc__ = """Count IDs.
 
 Usage:
   count_ids [--path=<root>] [--suffix=<filesuffix>] [--pat=<pat>] [--uniq]
@@ -29,9 +29,9 @@ def count(root, suffix, regex, uniq):
     filepat = "*" if suffix is None else "*." + suffix[suffix.find(".") + 1 :]
     if regex is None:
         regex = "[A-Za-z_][A-Za-z0-9_]*"
-    data = {}
-    loc = {}
-    ctx = {}
+    data: dict[str, int] = {}
+    loc: dict[str, str] = {}
+    ctx: dict[str, str] = {}
     try:
         prog = re.compile(regex)
     except Exception as e:

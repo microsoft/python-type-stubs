@@ -1,7 +1,8 @@
 # pyright: reportUnknownVariableType=false
 # pyright: reportMissingTypeStubs=false
 
-from typing import Any, assert_type
+from typing import Any
+from typing_extensions import assert_type
 
 from numpy import ndarray
 from scipy.sparse._csr import csr_matrix
