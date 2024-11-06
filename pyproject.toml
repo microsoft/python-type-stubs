@@ -5,6 +5,8 @@ target_version = ["py39"]
 
 [tool.ruff]
 line-length = 130
+# Target oldest supported Python version
+target-version = "py39"
 
 [tool.ruff.lint]
 select = [
@@ -92,6 +94,7 @@ reportAssignmentType = "none" # TODO
 reportAttributeAccessIssue = "none" # TODO
 reportFunctionMemberAccess = "none" # TODO
 reportGeneralTypeIssues = "none" # TODO
+reportInvalidTypeArguments = "none" # TODO
 reportInvalidTypeForm = "none" # TODO
 reportMissingImports = "none" # TODO
 reportUndefinedVariable = "none" # TODO
