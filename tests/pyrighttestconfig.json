@@ -1,8 +1,0 @@
-{
-    "typeCheckingMode": "basic",
-    "include": [ "tests" ],
-    "stubPath": "../stubs",
-    "reportMissingModuleSource": false,
-    "reportUnusedVariable": false,
-    "reportUnknownArgumentType": true
-}

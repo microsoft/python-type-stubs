@@ -1,9 +1,12 @@
 [tool.black]
 line_length = 130
-target_version = ["py37"]
+# Target oldest supported Python version
+target_version = ["py39"]
 
 [tool.ruff]
 line-length = 130
+# Target oldest supported Python version
+target-version = "py39"
 
 [tool.ruff.lint]
 select = [
@@ -61,19 +64,46 @@ extra-standard-library = [
     "zoneinfo",
 ]
 
+[tool.pyright]
+# Target oldest supported Python version
+pythonversion = "3.9"
+typeCheckingMode = "standard"
+# Partial stubs are acceptable
+reportUnknownArgumentType = false
+# Stubs-only packages are fine for testing
+reportMissingModuleSource = false
+# Stubs are allowed to use private variables
+reportPrivateUsage = false
+reportPrivateImportUsage = false
+# Incompatible overrides and property type mismatches are out of our stubs' control
+# as they are inherited from the implementation.
+reportIncompatibleMethodOverride = false
+reportIncompatibleVariableOverride = false
+reportPropertyTypeMismatch = false
+# Overlapping overloads are often necessary in a stub, meaning pyright's check
+# (which is stricter than mypy's; see mypy issue #10143 and #10157)
+# would cause many false positives and catch few bugs.
+reportOverlappingOverload = false
+# The name of the self/cls parameter is out of third-party stubs' control.
+reportSelfClsParameterName = false
+
+# Error reports to fix in code
+reportArgumentType = "none" # TODO
+reportAssertTypeFailure = "none" # TODO
+reportAssignmentType = "none" # TODO
+reportAttributeAccessIssue = "none" # TODO
+reportFunctionMemberAccess = "none" # TODO
+reportGeneralTypeIssues = "none" # TODO
+reportInvalidTypeArguments = "none" # TODO
+reportInvalidTypeForm = "none" # TODO
+reportMissingImports = "none" # TODO
+reportUndefinedVariable = "none" # TODO
+reportUnusedVariable = "none" # TODO
+
 [tool.mypy]
-# Import discovery
-mypy_path = "partial"
-namespace_packages = false
-explicit_package_bases = false
-ignore_missing_imports = true
-follow_imports = "normal"
-follow_imports_for_stubs = false
-no_site_packages = false
-no_silence_site_packages = false
-# Platform configuration
-python_version = "3.8"
-# Disallow dynamic typing
+# Target oldest supported Python version
+python_version = "3.9"
+# Allow dynamic typing
 disallow_any_unimported = false # TODO
 disallow_any_expr = false # TODO
 disallow_any_decorated = false # TODO
@@ -86,25 +116,28 @@ disallow_untyped_defs = false # TODO
 disallow_incomplete_defs = false # TODO
 check_untyped_defs = true
 disallow_untyped_decorators = true
-# None and Optional handling
-no_implicit_optional = true
-strict_optional = true
 # Configuring warnings
 warn_redundant_casts = true
 warn_unused_ignores = false # Change from pandas
-warn_no_return = true
-warn_return_any = false # TODO
-warn_unreachable = false # GH#27396
 # Suppressing errors
-show_none_errors = true
-ignore_errors = false
-# Miscellaneous strictness flags
-allow_untyped_globals = false
-allow_redefinition = false
-local_partial_types = false
-implicit_reexport = true
-strict_equality = true
+disable_error_code = [
+    # Not all imports in these stubs are gonna be typed
+    "import-untyped",
+    # TODO
+    "arg-type",
+    "assignment",
+    "attr-defined",
+    "import-not-found",
+    "misc",
+    "name-defined",
+    "no-redef",
+    "operator",
+    "override",
+    "return",
+    "truthy-function",
+    "type-var",
+    "valid-type",
+    "var-annotated",
+]
 # Configuring error messages
-show_error_context = false
-show_column_numbers = false
-show_error_codes = true
+show_column_numbers = true
