@@ -40,7 +40,9 @@ def dup_pdiv(f, g, K) -> tuple[list[Any], Any] | tuple[list[Any], list[Any]]: ..
 def dup_prem(f, g, K) -> list[Any]: ...
 def dup_pquo(f, g, K) -> list[Any]: ...
 def dup_pexquo(f, g, K) -> list[Any]: ...
-def dmp_pdiv(f, g, u, K) -> (
+def dmp_pdiv(
+    f, g, u, K
+) -> (
     tuple[list[Any], Any]
     | tuple[list[Any], list[Any]]
     | tuple[list[list[Any]], Any]

@@ -22,7 +22,9 @@ def sdm_spoly(
     f, g, O, K, phantom=...
 ) -> list[Any] | list[tuple[Any, Any]] | tuple[list[tuple[Any, Any]], list[tuple[Any, Any]]]: ...
 def sdm_ecart(f) -> int: ...
-def sdm_nf_mora(f, G, O, K, phantom=...) -> (
+def sdm_nf_mora(
+    f, G, O, K, phantom=...
+) -> (
     tuple[
         Any | tuple[Any, Any] | list[tuple[Any, Any]] | list[Any] | tuple[list[tuple[Any, Any]], list[tuple[Any, Any]]],
         Any | tuple[Any, Any] | list[tuple[Any, Any]],
@@ -32,7 +34,9 @@ def sdm_nf_mora(f, G, O, K, phantom=...) -> (
     | list[Any]
     | tuple[list[tuple[Any, Any]], list[tuple[Any, Any]]]
 ): ...
-def sdm_nf_buchberger(f, G, O, K, phantom=...) -> (
+def sdm_nf_buchberger(
+    f, G, O, K, phantom=...
+) -> (
     tuple[
         Any | tuple[Any, Any] | list[tuple[Any, Any]] | list[Any] | tuple[list[tuple[Any, Any]], list[tuple[Any, Any]]],
         Any | tuple[Any, Any] | list[tuple[Any, Any]],
