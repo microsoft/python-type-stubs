@@ -1,5 +1,5 @@
 # Tools used for testing
-docopt
+docopt-ng
 mypy==1.13.*
 pyright
 
