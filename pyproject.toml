@@ -2,41 +2,63 @@
 line_length = 130
 target_version = ["py37"]
 
-[tool.isort]
-profile = "black"
-combine_as_imports = true
-line_length = 130
-extra_standard_library = [
+[tool.ruff]
+line-length = 130
+
+[tool.ruff.lint]
+select = [
+    "I", # isort
+]
+
+[tool.ruff.lint.isort]
+combine-as-imports = true
+extra-standard-library = [
     "typing_extensions",
     "_typeshed",
-    # Extra modules not recognized by isort
+    # Extra modules not recognized by Ruff/isort
+    "_ast",
+    "_bisect",
+    "_bootlocale",
+    "_codecs",
+    "_collections_abc",
+    "_compat_pickle",
     "_compression",
     "_csv",
+    "_ctypes",
     "_curses",
+    "_decimal",
+    "_dummy_thread",
+    "_dummy_threading",
+    "_heapq",
+    "_imp",
+    "_json",
+    "_locale",
+    "_lsprof",
     "_markupbase",
+    "_msi",
+    "_operator",
+    "_osx_support",
+    "_posixsubprocess",
+    "_py_abc",
+    "_pydecimal",
     "_random",
+    "_sitebuiltins",
+    "_socket",
+    "_sqlite3",
+    "_ssl",
+    "_stat",
+    "_thread",
+    "_threading_local",
+    "_tkinter",
+    "_tracemalloc",
+    "_warnings",
+    "_weakref",
     "_weakrefset",
+    "_winapi",
     "genericpath",
     "opcode",
     "pyexpat",
-    # Python 2 modules
-    "__builtin__",
-    "cookielib",
-    "cStringIO",
-    "httplib",
-    "mimetools",
-    "rfc822",
-    "thread",
-    "urllib2",
-    "urlparse",
-    "BaseHTTPServer",
-    "Queue",
-    "SimpleHTTPServer",
-    "SocketServer",
-    "StringIO",
-    "UserDict",
-    "UserList",
-    "UserString",
+    "zoneinfo",
 ]
 
 [tool.mypy]

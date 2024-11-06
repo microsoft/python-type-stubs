@@ -5,8 +5,14 @@ import numpy as np
 
 from ..util import logger
 from ._color_dict import _color_dict
-from .color_space import _rgb_to_hsv  # noqa
-from .color_space import _hex_to_rgba, _hsv_to_rgb, _lab_to_rgb, _rgb_to_hex, _rgb_to_lab  # noqa
+from .color_space import (  # noqa
+    _hex_to_rgba,
+    _hsv_to_rgb,
+    _lab_to_rgb,
+    _rgb_to_hex,
+    _rgb_to_hsv,  # noqa
+    _rgb_to_lab,
+)
 
 # -*- coding: utf-8 -*-
 # Copyright (c) Vispy Development Team. All Rights Reserved.
