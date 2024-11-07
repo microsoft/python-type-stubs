@@ -1,5 +1,6 @@
 from types import NotImplementedType
-from typing import Any, Callable, Literal, Never, Self
+from typing import Any, Callable, Literal
+from typing_extensions import Self
 
 from sympy.core.sympify import CantSympify
 from sympy.external.gmpy import GROUND_TYPES

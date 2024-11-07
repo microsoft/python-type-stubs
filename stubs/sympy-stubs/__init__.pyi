@@ -122,6 +122,7 @@ from sympy.core import (
     seterr,
     symbols,
     sympify,
+    trailing,
     use,
     var,
     vectorize,
@@ -526,7 +527,6 @@ from sympy.ntheory import (
     sqrt_mod,
     sqrt_mod_iter,
     totient,
-    trailing,
 )
 from sympy.parsing import parse_expr
 from sympy.plotting import plot, plot_backends, plot_implicit, plot_parametric, textplot

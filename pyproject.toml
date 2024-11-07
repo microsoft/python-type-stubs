@@ -110,7 +110,6 @@ reportUnsupportedDunderAll = "error"
 
 # Error reports to fix in code
 reportAssertTypeFailure = "none" # TODO
-reportAttributeAccessIssue = "none" # TODO
 reportGeneralTypeIssues = "none" # TODO
 
 [tool.mypy]

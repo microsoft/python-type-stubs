@@ -9,15 +9,6 @@ from matplotlib.artist import Artist
 from matplotlib.axes._secondary_axes import SecondaryAxis
 from matplotlib.axis import XAxis, YAxis
 from matplotlib.backend_tools import Cursors
-from matplotlib.collections import (
-    BrokenBarHCollection,
-    Collection,
-    EventCollection,
-    LineCollection,
-    PathCollection,
-    PolyCollection,
-    QuadMesh,
-)
 from matplotlib.colors import Colormap, Normalize
 from matplotlib.container import BarContainer, ErrorbarContainer, StemContainer
 from matplotlib.contour import QuadContourSet
@@ -34,6 +25,15 @@ from matplotlib.text import Annotation, Text
 from matplotlib.ticker import Formatter
 from matplotlib.transforms import Bbox, BboxTransformTo, Transform
 
+from ..collections import (
+    BrokenBarHCollection,
+    Collection,
+    EventCollection,
+    LineCollection,
+    PathCollection,
+    PolyCollection,
+    QuadMesh,
+)
 from ._base import _AxesBase
 
 class Axes(_AxesBase):

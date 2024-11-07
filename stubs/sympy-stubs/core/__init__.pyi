@@ -28,6 +28,7 @@ from sympy.core.function import (
     expand_trig,
     nfloat,
 )
+from sympy.core.intfunc import integer_log, integer_nthroot
 from sympy.core.kind import BooleanKind, NumberKind, UndefinedKind
 from sympy.core.mod import Mod
 from sympy.core.mul import Mul, prod
@@ -53,7 +54,7 @@ from sympy.core.numbers import (
     zoo,
 )
 from sympy.core.parameters import evaluate
-from sympy.core.power import Pow, integer_log, integer_nthroot
+from sympy.core.power import Pow
 from sympy.core.relational import (
     Eq,
     Equality,

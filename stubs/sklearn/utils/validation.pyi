@@ -15,7 +15,6 @@ from numpy import ndarray
 from numpy.core.numeric import ComplexWarning as ComplexWarning
 from numpy.random.mtrand import RandomState
 from pandas import DataFrame
-from pandas.api.types import is_sparse as is_sparse
 from scipy.sparse import spmatrix
 from scipy.sparse._coo import coo_matrix
 

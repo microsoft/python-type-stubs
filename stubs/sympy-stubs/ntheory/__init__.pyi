@@ -1,3 +1,4 @@
+from sympy.core import trailing
 from sympy.ntheory.continued_fraction import (
     continued_fraction,
     continued_fraction_convergents,
@@ -20,7 +21,6 @@ from sympy.ntheory.factor_ import (
     is_abundant,
     is_amicable,
     is_deficient,
-    is_mersenne_prime,
     is_perfect,
     mersenne_prime_exponent,
     multiplicity,
@@ -35,7 +35,6 @@ from sympy.ntheory.factor_ import (
     proper_divisors,
     reduced_totient,
     totient,
-    trailing,
 )
 from sympy.ntheory.generate import (
     Sieve,
@@ -53,7 +52,7 @@ from sympy.ntheory.generate import (
 )
 from sympy.ntheory.multinomial import binomial_coefficients, binomial_coefficients_list, multinomial_coefficients
 from sympy.ntheory.partitions_ import npartitions
-from sympy.ntheory.primetest import is_gaussian_prime, isprime
+from sympy.ntheory.primetest import is_gaussian_prime, is_mersenne_prime, isprime
 from sympy.ntheory.qs import qs
 from sympy.ntheory.residue_ntheory import (
     discrete_log,

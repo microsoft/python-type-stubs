@@ -274,7 +274,6 @@ def compare_args(real: Item, stub: Item, owner: Optional[str] = None):
     if not (isinstance(stub.object_, Callable) and isinstance(real.object_, Callable)):  # type: ignore[arg-type]
         print(f"Can't compare args for non-callables. real: {real.object_}; stub: {stub.object_}")
         return
-
     if owner is None:
         owner = ""
     elif owner and owner[-1] != ".":

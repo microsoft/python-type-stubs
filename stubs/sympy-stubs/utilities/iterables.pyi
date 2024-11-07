@@ -1,6 +1,7 @@
 from collections import defaultdict
 from itertools import chain, combinations, combinations_with_replacement, permutations, product, product as cartes  # noqa: F401
-from typing import Any, Generator, Iterator, Literal, Never, NoReturn
+from typing import Any, Generator, Iterator, Literal, NoReturn
+from typing_extensions import Never
 
 from sympy import Basic, Symbol
 from sympy.utilities.decorator import deprecated

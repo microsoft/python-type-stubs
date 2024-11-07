@@ -1,7 +1,7 @@
 import numpy as np
 from numpy.typing import ArrayLike
 
-from ...gloo import FrameBuffer, Program, Texture2D, VertexBuffer, set_state, set_viewport
+from ...gloo import Texture2D
 
 # -*- coding: utf-8 -*-
 

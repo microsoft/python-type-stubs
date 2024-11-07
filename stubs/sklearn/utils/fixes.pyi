@@ -9,7 +9,10 @@ import sklearn
 import threadpoolctl
 from numpy import percentile as percentile
 from scipy.linalg import eigh as _eigh
-from scipy.optimize.linesearch import line_search_wolfe1 as line_search_wolfe1, line_search_wolfe2 as line_search_wolfe2
+from scipy.optimize._linesearch import (  # explicitly re-exported
+    line_search_wolfe1 as line_search_wolfe1,
+    line_search_wolfe2 as line_search_wolfe2,
+)
 from threadpoolctl import _ThreadpoolLimiter
 
 from ..externals._lobpcg import lobpcg as lobpcg

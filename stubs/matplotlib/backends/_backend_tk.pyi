@@ -1,7 +1,6 @@
 import tkinter as tk
 from typing import Literal, Sequence
 
-from matplotlib import backend_tools
 from matplotlib._api import classproperty
 from matplotlib._typing import *
 from matplotlib.backend_bases import (
@@ -12,6 +11,8 @@ from matplotlib.backend_bases import (
     ToolContainerBase,
     _Backend,
 )
+
+from .. import backend_tools
 
 backend_version: float = ...
 cursord: dict[backend_tools.Cursors, str] = ...
@@ -50,8 +51,8 @@ class FigureCanvasTk(FigureCanvasBase):
 class FigureManagerTk(FigureManagerBase):
     canvas: FigureCanvasBase
     num: int | str
-    toolbar: tk.Toolbar
-    window: tk.Window
+    toolbar: NavigationToolbar2
+    window: tk.Tk
 
     def __init__(self, canvas, num, window) -> None: ...
     @classmethod
@@ -64,7 +65,7 @@ class FigureManagerTk(FigureManagerBase):
     def full_screen_toggle(self) -> None: ...
 
 class NavigationToolbar2Tk(NavigationToolbar2, tk.Frame):
-    window: tk.Window = ...
+    window: tk.Tk = ...
     def __init__(self, canvas: FigureCanvasBase, window=..., *, pack_toolbar: bool = True) -> None: ...
     def pan(self, *args) -> None: ...
     def zoom(self, *args) -> None: ...
