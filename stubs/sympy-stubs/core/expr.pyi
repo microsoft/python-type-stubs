@@ -19,7 +19,9 @@ class Expr(Basic, EvalfMixin):
     __slots__: tuple[str, ...] = ...
     is_scalar = ...
     @cacheit
-    def sort_key(self, order=...) -> tuple[
+    def sort_key(
+        self, order=...
+    ) -> tuple[
         tuple[Literal[5], Literal[0], str] | Any,
         tuple[
             int,

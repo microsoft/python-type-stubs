@@ -921,8 +921,7 @@ from sympy.utilities import (
     xthreaded,
 )
 
-if sys.version_info < (3, 8):
-    ...
+if sys.version_info < (3, 8): ...
 if "dev" in __version__:
     def enable_warnings() -> None: ...
 

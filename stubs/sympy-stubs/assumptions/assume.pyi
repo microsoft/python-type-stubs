@@ -25,7 +25,6 @@ class AppliedPredicate(Boolean):
 class PredicateMeta(type):
     def __new__(cls, clsname, bases, dct) -> Self:  # type: ignore
         ...
-
     @property
     def __doc__(cls): ...
 

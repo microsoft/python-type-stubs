@@ -38,7 +38,7 @@ class BaseEnsemble(MetaEstimatorMixin, BaseEstimator, metaclass=ABCMeta):
     # TODO(1.4): remove
     # mypy error: Decorated property not supported
     @deprecated(  # type: ignore
-        "Attribute `base_estimator_` was deprecated in version 1.2 and will be removed " "in 1.4. Use `estimator_` instead."
+        "Attribute `base_estimator_` was deprecated in version 1.2 and will be removed in 1.4. Use `estimator_` instead."
     )
     @property
     def base_estimator_(self) -> BaseEstimator: ...

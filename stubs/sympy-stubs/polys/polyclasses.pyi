@@ -206,7 +206,9 @@ class DMF(PicklableWithSlots, CantSympify):
         tuple[Any, Any, Callable[..., Any | Self], tuple[Any | list[Any], Any | list[Any]], list[Any] | Any | list[list[Any]]]
         | tuple[Any, Any, Callable[..., Any | Self], tuple[Any | list[list[Any]], Any | list[list[Any]]], Any | list[list[Any]]]
     ): ...
-    def frac_unify(f, g) -> (
+    def frac_unify(
+        f, g
+    ) -> (
         tuple[
             Any, Any, Callable[..., Any | Self], tuple[Any | list[Any], Any | list[Any]], tuple[Any | list[Any], Any | list[Any]]
         ]

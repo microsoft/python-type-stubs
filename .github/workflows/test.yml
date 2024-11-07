@@ -45,10 +45,10 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v2
 
-      - name: Run Ruff
+      - name: Run Ruff Linter
         uses: astral-sh/ruff-action@v1
 
-      - name: Run Black
-        uses: psf/black@stable
+      - name: Run Ruff Formatter
+        uses: astral-sh/ruff-action@v1
         with:
-          options: "--check --verbose"
+          args: "format --check"

@@ -2,7 +2,9 @@ from typing import Any, Literal
 
 def dup_sqf_p(f, K) -> bool: ...
 def dmp_sqf_p(f, u, K) -> bool: ...
-def dup_sqf_norm(f, K) -> tuple[
+def dup_sqf_norm(
+    f, K
+) -> tuple[
     int,
     Any | list[Any],
     tuple[Any, list[Any]]
@@ -12,7 +14,9 @@ def dup_sqf_norm(f, K) -> tuple[
     | list[list[Any]]
     | list[Any],
 ]: ...
-def dmp_sqf_norm(f, u, K) -> (
+def dmp_sqf_norm(
+    f, u, K
+) -> (
     tuple[
         int,
         Any | list[Any],

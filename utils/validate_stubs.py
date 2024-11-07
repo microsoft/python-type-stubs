@@ -13,7 +13,7 @@ Options:
   --path=<stubpath>  Where to find stubs (default to parent directory)
   --function=<f>     Restrict to the named function (or method if used with --class).
   --class=<c>        Restrict to the named class.
-  """
+"""
 
 import importlib
 import inspect
