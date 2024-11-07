@@ -1,4 +1,5 @@
-from typing import Any, Callable, Dict as tDict, List, Optional, Self, Tuple as tTuple, Type, Union as tUnion, overload
+from typing import Any, Callable, Dict as tDict, List, Optional, Tuple as tTuple, Type, Union as tUnion, overload
+from typing_extensions import Self
 
 from sympy.concrete.products import Product
 from sympy.concrete.summations import Sum

@@ -15,7 +15,6 @@ from numpy import float64, ndarray
 from numpy.typing import ArrayLike
 from PIL.Image import Image
 
-from . import _api, _docstring, backend_tools, cbook, colors, ticker, transforms
 from ._typing import Color
 from .artist import Artist
 from .lines import Line2D
@@ -374,9 +373,6 @@ class LassoSelector(_SelectorWidget):
         props: Mapping | None = None,
         button: MouseButton | Sequence[MouseButton] | None = None,
     ): ...
-    @_api.deprecated("3.5", alternative="press")
-    def onpress(self, event): ...
-    def onrelease(self, event): ...
 
 class PolygonSelector(_SelectorWidget):
     def __init__(

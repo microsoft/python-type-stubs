@@ -1,4 +1,4 @@
-from sympy.matrices.common import MatrixKind, NonSquareMatrixError, ShapeError
+from sympy.matrices.common import NonSquareMatrixError, ShapeError
 from sympy.matrices.dense import (
     GramSchmidt,
     MutableDenseMatrix,
@@ -63,7 +63,8 @@ from sympy.matrices.expressions import (
     trace,
 )
 from sympy.matrices.immutable import ImmutableDenseMatrix, ImmutableSparseMatrix
-from sympy.matrices.matrices import DeferredVector, MatrixBase
+from sympy.matrices.kind import MatrixKind
+from sympy.matrices.matrixbase import DeferredVector, MatrixBase
 from sympy.matrices.sparse import MutableSparseMatrix
 from sympy.matrices.sparsetools import banded
 from sympy.matrices.utilities import dotprodsimp

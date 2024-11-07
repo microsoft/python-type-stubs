@@ -10,7 +10,6 @@ import sys
 
 from .. import config
 from ..util import logger
-from . import backends
 from .base import BaseApplicationBackend as ApplicationBackend  # noqa
 
 class Application(object):

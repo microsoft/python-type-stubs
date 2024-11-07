@@ -2,10 +2,10 @@ from typing import Callable, Type
 
 # PyGObject is not easily installable on Windows, let tests pass as-is
 from gi.repository import Gtk  # pyright: ignore[reportMissingImports]
-from matplotlib import backend_tools
 from matplotlib._api import classproperty
 from matplotlib.backend_bases import FigureCanvasBase, ToolContainerBase
 
+from .. import backend_tools
 from ._backend_gtk import TimerGTK as TimerGTK3, _BackendGTK, _FigureManagerGTK, _NavigationToolbar2GTK
 
 class __getattr__:

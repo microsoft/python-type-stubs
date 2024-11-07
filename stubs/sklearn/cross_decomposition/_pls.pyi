@@ -3,7 +3,6 @@ from numbers import Integral as Integral, Real as Real
 from typing import ClassVar, Literal, TypeVar
 
 from numpy import ndarray
-from scipy.linalg import pinv as pinv2, pinv2 as pinv2, svd
 
 from .._typing import ArrayLike, Float, Int, MatrixLike
 from ..base import BaseEstimator, ClassNamePrefixFeaturesOutMixin, MultiOutputMixin, RegressorMixin, TransformerMixin
