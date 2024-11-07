@@ -1,8 +1,8 @@
 from __future__ import division
 
 import numpy as np
-from vispy.app.canvas import Canvas
 
+from ...app.canvas import Canvas
 from ...util.event import EventEmitter
 from ._util import TransformCache
 from .chain import ChainTransform

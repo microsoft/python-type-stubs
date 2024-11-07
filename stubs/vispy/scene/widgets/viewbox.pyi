@@ -1,9 +1,9 @@
 import numpy as np
-from vispy.scene.node import Node
-from vispy.util.event import Event
 
+from ...util.event import Event
 from ...visuals.filters import Clipper
 from ..cameras import BaseCamera, make_camera
+from ..node import Node
 from ..subscene import SubScene
 from .widget import Widget
 

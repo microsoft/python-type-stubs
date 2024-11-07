@@ -8,9 +8,9 @@ import weakref
 from typing import Any, Sequence
 
 import numpy as np
-from vispy.gloo.program import Program
 
 from .. import gloo
+from ..gloo.program import Program
 from ..util import Frozen, logger
 from ..util.event import EmitterGroup, Event
 from .shaders import MultiProgram, StatementList

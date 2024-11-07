@@ -1,6 +1,5 @@
-from vispy.util.svg.color import Color
-
 from ..color import Color
+from ..util.svg.color import Color
 from .image import ImageVisual
 from .shaders import Function
 

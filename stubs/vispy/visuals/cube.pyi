@@ -1,8 +1,8 @@
 import warnings
 
 from numpy.typing import NDArray
-from vispy.util.svg.color import Color
 
+from ..util.svg.color import Color
 from .box import BoxVisual
 
 # -*- coding: utf-8 -*-

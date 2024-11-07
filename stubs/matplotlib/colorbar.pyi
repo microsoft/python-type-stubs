@@ -1,7 +1,5 @@
 from typing import Literal, Sequence, Type
 
-from libcst import For
-
 from .axes import Axes
 from .axis import Tick
 from .backend_bases import RendererBase

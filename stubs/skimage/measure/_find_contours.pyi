@@ -1,7 +1,8 @@
 from collections import deque
 
 import numpy as np
-from skimage._shared.utils import deprecate_kwarg
+
+from .._shared.utils import deprecate_kwarg
 
 _param_options = ...
 

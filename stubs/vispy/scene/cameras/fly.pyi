@@ -1,9 +1,9 @@
 import math
 
 import numpy as np
-from vispy.util.event import Event
 
 from ...util import keys
+from ...util.event import Event
 from ...util.quaternion import Quaternion
 from .perspective import PerspectiveCamera
 

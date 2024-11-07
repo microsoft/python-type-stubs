@@ -1,8 +1,7 @@
 import numpy as np
-from vispy.util.event import Event
-from vispy.util.svg.shapes import Rect
 
 from ...geometry import Rect
+from ...util.event import Event
 from ...visuals.transforms import MatrixTransform, STTransform
 from .base_camera import BaseCamera
 

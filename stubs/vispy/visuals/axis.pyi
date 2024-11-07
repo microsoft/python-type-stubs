@@ -3,8 +3,8 @@ from collections.abc import Iterable
 
 import numpy as np
 from numpy.typing import ArrayLike
-from vispy.util.svg.color import Color
 
+from ..util.svg.color import Color
 from .line import LineVisual
 from .text import TextVisual
 from .visual import CompoundVisual, updating_property

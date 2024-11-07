@@ -2,7 +2,6 @@ import warnings
 from typing import Sequence
 
 import numpy as np
-import vispy.gloo
 from numpy.typing import ArrayLike, NDArray
 
 from .._typing import Scalar

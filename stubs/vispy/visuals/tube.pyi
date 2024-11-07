@@ -3,10 +3,10 @@ import collections
 import numpy as np
 from numpy.linalg import norm
 from numpy.typing import NDArray
-from vispy.color.color_array import ColorArray
-from vispy.util.svg.color import Color
 
 from ..color import ColorArray
+from ..color.color_array import ColorArray
+from ..util.svg.color import Color
 from ..util.transforms import rotate
 from .mesh import MeshVisual
 

@@ -1,11 +1,11 @@
 import numpy as np
 from numpy import ndarray
 from numpy.typing import NDArray
-from vispy._typing import ArrayLike
-from vispy.util.svg.color import Color
 
+from .._typing import ArrayLike
 from ..color import ColorArray
 from ..color.colormap import _normalize, get_colormap
+from ..util.svg.color import Color
 from .line import LineVisual
 
 # -*- coding: utf-8 -*-

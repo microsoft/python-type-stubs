@@ -1,10 +1,10 @@
 from __future__ import division
 
 from numpy.typing import ArrayLike, NDArray
-from vispy.util.svg.color import Color
 
 from ..color import Color
 from ..geometry.isosurface import isosurface
+from ..util.svg.color import Color
 from .mesh import MeshVisual
 
 # -*- coding: utf-8 -*-

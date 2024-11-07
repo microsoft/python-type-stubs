@@ -12,6 +12,7 @@ from scipy.spatial.distance import pdist
 from . import _moments
 from ._find_contours import find_contours
 from ._marching_cubes_lewiner import marching_cubes
+from ._regionprops import RegionProperties
 from ._regionprops_utils import euler_number, perimeter, perimeter_crofton
 
 __all__ = ["regionprops", "euler_number", "perimeter", "perimeter_crofton"]

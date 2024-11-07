@@ -2,8 +2,6 @@ import contextlib as contextlib
 import os as os
 
 import sklearn as sklearn
-from Cython import Tempita as Tempita
-from Cython.Build import cythonize as cythonize
 
 from .._min_dependencies import CYTHON_MIN_VERSION as CYTHON_MIN_VERSION
 from ..externals._packaging.version import parse as parse

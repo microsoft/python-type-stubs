@@ -5,12 +5,10 @@ import numbers
 
 import numpy as np
 from numpy.typing import ArrayLike
-from vispy.gloo import Texture2D, VertexBuffer
-from vispy.util.svg.color import Color
-from vispy.visuals.filters import Filter
-from vispy.visuals.shaders import Function, Varying
 
 from ...color import Color
+from ...util.svg.color import Color
+from . import Filter
 
 class TextureFilter(Filter):
     def __init__(self, texture: tuple | ArrayLike, texcoords: ArrayLike, enabled: bool = True): ...
