@@ -1,7 +1,10 @@
+from typing import Any
+
 from sympy.polys.domains.characteristiczero import CharacteristicZero
 from sympy.polys.domains.field import Field
 from sympy.polys.domains.simpledomain import SimpleDomain
 from sympy.polys.polyclasses import ANP
+from sympy.series import Order
 from sympy.utilities import public
 
 @public

@@ -1,8 +1,7 @@
 from typing import Any
 
+from sympy.printing.numpy import NumPyPrinter  # NumPyPrinter is imported for backward compatibility
 from sympy.printing.pycode import MpmathPrinter, PythonCodePrinter
-
-from .numpy import NumPyPrinter  # NumPyPrinter is imported for backward compatibility
 
 __all__ = [
     "PythonCodePrinter",

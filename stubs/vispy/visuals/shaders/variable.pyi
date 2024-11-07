@@ -5,6 +5,7 @@ from typing import Literal
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 import numpy as np
 
+from ...gloo.globject import GLObject
 from .shader_object import ShaderObject
 
 VARIABLE_TYPES = ...

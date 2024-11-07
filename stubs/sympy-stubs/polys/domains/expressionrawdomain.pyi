@@ -1,7 +1,10 @@
+from typing_extensions import Self
+
 from sympy.core import Expr
 from sympy.polys.domains.characteristiczero import CharacteristicZero
 from sympy.polys.domains.field import Field
 from sympy.polys.domains.simpledomain import SimpleDomain
+from sympy.series import Order
 from sympy.utilities import public
 
 @public
