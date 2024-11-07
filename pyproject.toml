@@ -87,7 +87,6 @@ reportArgumentType = "none" # TODO
 reportAssertTypeFailure = "none" # TODO
 reportAssignmentType = "none" # TODO
 reportAttributeAccessIssue = "none" # TODO
-reportFunctionMemberAccess = "none" # TODO
 reportGeneralTypeIssues = "none" # TODO
 reportInvalidTypeArguments = "none" # TODO
 reportInvalidTypeForm = "none" # TODO
