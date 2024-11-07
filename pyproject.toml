@@ -1,3 +1,26 @@
+[build-system]
+requires = ["setuptools >= 69.0"] # v69 includes type information by default
+build-backend = "setuptools.build_meta"
+
+[project]
+name="microsoft-python-type-stubs"
+dynamic = ["version"]
+
+# Allow these stubs to be installed from GitHub
+# We need an explicit mapping instead of just
+# [tool.setuptools]
+# package-dir = {"" = "stubs"}
+# because the folder names don't all match "*-stubs" 
+# see https://github.com/microsoft/python-type-stubs/issues/315
+[tool.setuptools.package-dir]
+# See README.md as to why matplotlib is not included
+"networkx-stubs" = "stubs/networkx"
+"skimage-stubs" = "stubs/skimage"
+"sklearn-stubs" = "stubs/sklearn"
+"sympy-stubs" = "stubs/sympy-stubs"
+"transformers-stubs" = "stubs/transformers-stubs"
+"vispy-stubs" = "stubs/vispy"
+
 [tool.ruff]
 line-length = 130
 # Target oldest supported Python version
