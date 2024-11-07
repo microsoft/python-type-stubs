@@ -3,6 +3,7 @@ from typing import Mapping
 
 from numpy.typing import ArrayLike
 
+from ..classes.digraph import DiGraph
 from ..classes.graph import Graph
 
 __all__ = ["check_planarity", "is_planar", "PlanarEmbedding"]
@@ -43,7 +44,7 @@ class LRPlanarity:
     def sign(self, e): ...
     def sign_recursive(self, e): ...
 
-class PlanarEmbedding(nx.DiGraph):
+class PlanarEmbedding(DiGraph):
     def get_data(self) -> Mapping: ...
     def set_data(self, data: Mapping): ...
     def neighbors_cw_order(self, v): ...

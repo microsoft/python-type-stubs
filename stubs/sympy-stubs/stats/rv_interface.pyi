@@ -9,10 +9,7 @@ from sympy.core.power import Pow
 from sympy.core.relational import Ne, Relational
 from sympy.series.order import Order
 from sympy.sets.sets import FiniteSet, Set
-from sympy.stats.symbolic_multivariate_probability import CrossCovarianceMatrix, ExpectationMatrix, VarianceMatrix
-from sympy.stats.symbolic_probability import CentralMoment, Covariance, Expectation, Moment, Variance
-
-from .rv import (
+from sympy.stats.rv import (
     PSpace,
     cdf,
     characteristic_function,
@@ -33,6 +30,8 @@ from .rv import (
     sampling_density,
     where,
 )
+from sympy.stats.symbolic_multivariate_probability import CrossCovarianceMatrix, ExpectationMatrix, VarianceMatrix
+from sympy.stats.symbolic_probability import CentralMoment, Covariance, Expectation, Moment, Variance
 
 __all__ = [
     "P",

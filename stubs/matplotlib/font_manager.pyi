@@ -1,4 +1,5 @@
 import json
+from dataclasses import dataclass
 from functools import lru_cache
 from pathlib import PosixPath
 from typing import Literal
