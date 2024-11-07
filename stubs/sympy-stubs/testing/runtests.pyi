@@ -1,4 +1,5 @@
 import doctest as pdoctest
+from collections import namedtuple
 from contextlib import contextmanager
 from doctest import DocTestFinder, DocTestRunner
 from typing import Any, Generator, Literal
@@ -32,7 +33,7 @@ sp = ...
 
 def split_list(l, split, density=...): ...
 
-SymPyTestResults = ...
+SymPyTestResults = namedtuple("SymPyTestResults", "failed attempted")
 
 def sympytestfile(
     filename,
