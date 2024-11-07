@@ -4,7 +4,7 @@ import sys
 from pathlib import Path
 
 
-def install_requirements(test_folder: str):
+def install_requirements(test_folder: Path):
     print("\nInstalling requirements...")
     return subprocess.run(
         (sys.executable, "-m", "pip", "install", "--upgrade", "-r", os.path.join(test_folder, "requirements.txt"))

@@ -106,7 +106,6 @@ reportOverlappingOverload = false
 reportSelfClsParameterName = false
 
 # Error reports to fix in code
-reportArgumentType = "none" # TODO
 reportAssertTypeFailure = "none" # TODO
 reportAttributeAccessIssue = "none" # TODO
 reportGeneralTypeIssues = "none" # TODO
@@ -114,7 +113,6 @@ reportInvalidTypeArguments = "none" # TODO
 reportInvalidTypeForm = "none" # TODO
 reportMissingImports = "none" # TODO
 reportUndefinedVariable = "none" # TODO
-reportUnusedVariable = "none" # TODO
 
 [tool.mypy]
 # Target oldest supported Python version
@@ -140,7 +138,7 @@ disable_error_code = [
     # Not all imports in these stubs are gonna be typed
     "import-untyped",
     # TODO
-    "arg-type",
+    "assert-type",
     "assignment",
     "attr-defined",
     "import-not-found",
@@ -150,7 +148,6 @@ disable_error_code = [
     "operator",
     "override",
     "return",
-    "truthy-function",
     "type-var",
     "valid-type",
     "var-annotated",
