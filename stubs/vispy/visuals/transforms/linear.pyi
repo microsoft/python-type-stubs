@@ -1,7 +1,6 @@
 import numpy as np
 from numpy import ndarray
 from numpy.typing import ArrayLike, NDArray
-from vispy.visuals.transforms.linear import STTransform
 
 from ...geometry import Rect
 from ...util import transforms
