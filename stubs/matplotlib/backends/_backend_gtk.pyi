@@ -1,3 +1,5 @@
+# PyGObject is not easily installable on Windows, let tests pass as-is
+from gi.repository import Gtk  # pyright: ignore[reportMissingImports]
 from matplotlib import backend_tools
 from matplotlib._typing import *
 from matplotlib.backend_bases import FigureCanvasBase, FigureManagerBase, NavigationToolbar2, TimerBase, _Backend

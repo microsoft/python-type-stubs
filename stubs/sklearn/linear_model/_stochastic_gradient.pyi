@@ -22,6 +22,7 @@ from ._sgd_fast import (
     Hinge as Hinge,
     Huber as Huber,
     Log as Log,
+    LossFunction,
     ModifiedHuber as ModifiedHuber,
     SquaredEpsilonInsensitive as SquaredEpsilonInsensitive,
     SquaredHinge as SquaredHinge,

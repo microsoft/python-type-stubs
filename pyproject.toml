@@ -112,7 +112,6 @@ reportUnsupportedDunderAll = "error"
 reportAssertTypeFailure = "none" # TODO
 reportAttributeAccessIssue = "none" # TODO
 reportGeneralTypeIssues = "none" # TODO
-reportUndefinedVariable = "none" # TODO
 
 [tool.mypy]
 # Target oldest supported Python version
