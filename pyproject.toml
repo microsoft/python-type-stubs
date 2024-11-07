@@ -112,7 +112,6 @@ reportUnsupportedDunderAll = "error"
 reportAssertTypeFailure = "none" # TODO
 reportAttributeAccessIssue = "none" # TODO
 reportGeneralTypeIssues = "none" # TODO
-reportInvalidTypeForm = "none" # TODO
 reportUndefinedVariable = "none" # TODO
 
 [tool.mypy]

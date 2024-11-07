@@ -10,7 +10,7 @@ from ..scene.node import Node
 from ..visuals.filters import Alpha, PickingFilter
 from .node import Node
 
-_T = ...
+_T = TypeVar("_T")
 
 class VisualNode(Node):
     _next_id: int = ...
