@@ -13,10 +13,9 @@ typing_extensions
 # Untyped libraries, used to prevent "reportMissingImports" and get inferred typing
 joblib
 networkx
-numpydoc
-pyamg
 PyOpenGL
 scikit-learn
 sympy
 traitlets
+transformers
 transformers

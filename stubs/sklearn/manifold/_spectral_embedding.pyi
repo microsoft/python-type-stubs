@@ -3,7 +3,6 @@ from typing import Any, Callable, ClassVar, Literal, TypeVar
 
 from numpy import ndarray
 from numpy.random import RandomState
-from pyamg import smoothed_aggregation_solver as smoothed_aggregation_solver
 from scipy import sparse as sparse
 from scipy.linalg import eigh as eigh
 from scipy.sparse._coo import coo_matrix
