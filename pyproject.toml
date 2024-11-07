@@ -104,6 +104,8 @@ reportPropertyTypeMismatch = false
 reportOverlappingOverload = false
 # The name of the self/cls parameter is out of third-party stubs' control.
 reportSelfClsParameterName = false
+# Not an error by default in standard mode
+reportUnsupportedDunderAll = "error"
 
 # Error reports to fix in code
 reportAssertTypeFailure = "none" # TODO
