@@ -1,7 +1,6 @@
 import numpy as np
 from numpy.typing import ArrayLike
 from vispy.util.svg.color import Color
-from vispy.visuals.line.arrow import ArrowVisual
 
 from ... import gloo, glsl
 from ..transforms._util import as_vec4

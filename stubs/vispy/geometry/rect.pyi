@@ -1,5 +1,4 @@
 import numpy as np
-from vispy.util.svg.shapes import Rect
 
 class Rect(object):
     def __init__(self, *args, **kwargs): ...

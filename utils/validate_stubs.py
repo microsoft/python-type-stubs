@@ -389,9 +389,9 @@ def find_mismatched_modules(real: Item, stub: Item):
 
 
 def find_module(package: Item, module: str):
-    module = module.split(".")[1:]
+    modules = module.split(".")[1:]
     root = package
-    for m in module:
+    for m in modules:
         if m not in root.children:
             return
         root = root.children[m]

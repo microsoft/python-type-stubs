@@ -8,7 +8,6 @@ import numpy as np
 from numpy.typing import ArrayLike
 from scipy import ndimage as ndi
 from scipy.spatial.distance import pdist
-from skimage.measure._regionprops import RegionProperties
 
 from . import _moments
 from ._find_contours import find_contours
