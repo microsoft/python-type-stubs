@@ -2,7 +2,17 @@ from typing import Any
 
 from sympy.printing.pycode import MpmathPrinter, PythonCodePrinter
 
-__all__ = ["PythonCodePrinter", "MpmathPrinter", "NumPyPrinter", "LambdaPrinter", "NumPyPrinter", "IntervalPrinter", "lambdarepr"]
+from .numpy import NumPyPrinter  # NumPyPrinter is imported for backward compatibility
+
+__all__ = [
+    "PythonCodePrinter",
+    "MpmathPrinter",  # MpmathPrinter is published for backward compatibility
+    "NumPyPrinter",
+    "LambdaPrinter",
+    "NumPyPrinter",  # Duplicate, see https://github.com/sympy/sympy/pull/27229
+    "IntervalPrinter",
+    "lambdarepr",
+]
 
 class LambdaPrinter(PythonCodePrinter):
     printmethod = ...

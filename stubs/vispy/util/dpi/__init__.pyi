@@ -4,6 +4,6 @@
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 # -----------------------------------------------------------------------------
 
-import sys as sys
-
 __all__ = ["get_dpi"]
+
+def get_dpi(raise_error: bool = True) -> float: ...

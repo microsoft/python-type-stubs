@@ -2,6 +2,7 @@ import datetime
 
 import numpy as np
 from dateutil import rrule
+from dateutil.relativedelta import relativedelta
 
 from .ticker import Formatter, Locator
 from .units import ConversionInterface
@@ -174,8 +175,6 @@ __all__ = (
     "num2date",
     "num2timedelta",
     "drange",
-    "epoch2num",
-    "num2epoch",
     "set_epoch",
     "get_epoch",
     "DateFormatter",
