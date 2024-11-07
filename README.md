@@ -30,6 +30,16 @@ We recognize that there may be cases where type stubs are more appropriate, such
 - Package authors who do not want to include type annotations, and
 - Large, complex packages where adding type annotations can take time, and stubs may be an appropriate intermediate step.
 
+## Installing our stubs
+
+Whilst these stubs come bundled with Pylance, we recognize it can be beneficial to install them
+so that type-checkers such as [Pyright](https://github.com/microsoft/pyright) and [mypy](https://github.com/python/mypy) pick up on them.  
+The stubs are not currently published on PyPI, but you can install them all at once with:
+
+```shell
+pip install git+https://github.com/microsoft/python-type-stubs.git 
+```
+
 ## Upstreamed libraries
 
 Stubs for the following libraries now exist in typeshed or the libraries themselves and are no longer maintained here:
@@ -52,7 +62,7 @@ Stubs for the following libraries now exist in typeshed or the libraries themsel
 - pygame
 - pywin32 (pythonwin, win32 and win32com packages)
 - retry
-- scipy (see https://github.com/jorenham/scipy-stubs)
+- scipy (see <https://github.com/jorenham/scipy-stubs>)
 - slugify
 - SQLAlchemy (see <https://pypi.org/project/types-SQLAlchemy/> for SQLAlchemy 1.4; 2.0.0 and above include type annotations)
 - tenacity
