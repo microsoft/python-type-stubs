@@ -1,10 +1,10 @@
 import math
 
 import numpy as np
-from vispy._typing import Scalar
-from vispy.util.event import Event
 
+from ..._typing import Scalar
 from ...util import keys, transforms
+from ...util.event import Event
 from ...visuals.transforms import MatrixTransform
 from .base_camera import BaseCamera
 

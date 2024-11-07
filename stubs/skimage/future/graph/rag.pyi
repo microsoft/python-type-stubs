@@ -5,9 +5,9 @@ import networkx as nx
 import numpy as np
 from numpy.lib.stride_tricks import as_strided
 from scipy import ndimage as ndi, sparse
-from skimage.future.graph.rag import RAG
 
 from ..._shared.version_requirements import require
+from .rag import RAG
 
 def _edge_generator_from_csr(csr_matrix): ...
 def min_weight(graph: RAG, src: int, dst: int, n: int) -> Mapping: ...

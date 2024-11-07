@@ -1,7 +1,7 @@
 from numpy.typing import ArrayLike, NDArray
-from vispy.util.svg.color import Color
 
 from ..geometry import create_box
+from ..util.svg.color import Color
 from .mesh import MeshVisual
 from .visual import CompoundVisual
 

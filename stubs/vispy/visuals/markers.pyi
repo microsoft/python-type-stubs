@@ -2,10 +2,10 @@ import warnings
 
 import numpy as np
 from numpy.typing import ArrayLike
-from vispy.util.svg.color import Color
 
 from ..color import ColorArray
 from ..gloo import VertexBuffer, _check_valid
+from ..util.svg.color import Color
 from .shaders import Function, Variable
 from .visual import Visual
 

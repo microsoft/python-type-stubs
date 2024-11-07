@@ -11,8 +11,7 @@ from typing import Sequence
 
 import joblib
 import numpy as np
-from _pytest.mark.structures import MarkDecorator
-from pytest.mark import parameterize
+from _pytest.mark.structures import _ParametrizeMarkDecorator
 from scipy import sparse as sparse
 from scipy.stats import rankdata as rankdata
 
@@ -82,7 +81,7 @@ CROSS_DECOMPOSITION: list = ...
 def check_supervised_y_no_nan(name, estimator_orig): ...
 def parametrize_with_checks(
     estimators: Sequence[BaseEstimator],
-) -> MarkDecorator | parameterize: ...
+) -> _ParametrizeMarkDecorator: ...
 def check_estimator(
     estimator: None | BaseEstimator = None,
     generate_only: bool = False,

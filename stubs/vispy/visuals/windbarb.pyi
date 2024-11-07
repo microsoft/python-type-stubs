@@ -1,11 +1,9 @@
 import numpy as np
 from numpy.typing import ArrayLike
-from vispy.color import ColorArray
-from vispy.color.color_array import ColorArray
-from vispy.gloo import VertexBuffer
-from vispy.util.svg.color import Color
-from vispy.visuals.shaders import Variable
-from vispy.visuals.visual import Visual
+
+from ..color import ColorArray
+from ..util.svg.color import Color
+from .visual import Visual
 
 # -*- coding: utf-8 -*-
 # -----------------------------------------------------------------------------

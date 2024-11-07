@@ -1,6 +1,5 @@
-from vispy.util.svg.color import Color
-
 from ..scene import SceneCanvas
+from ..util.svg.color import Color
 from .plotwidget import PlotWidget
 
 # -*- coding: utf-8 -*-

@@ -1,5 +1,4 @@
 from numpy.typing import ArrayLike
-from vispy.util.svg.transform import Transform
 
 # -*- coding: utf-8 -*-
 # -----------------------------------------------------------------------------
@@ -7,6 +6,7 @@ from vispy.util.svg.transform import Transform
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 # -----------------------------------------------------------------------------
 from ... import glsl
+from ...util.svg.transform import Transform
 from .raw_point_collection import RawPointCollection
 
 class AggPointCollection(RawPointCollection):

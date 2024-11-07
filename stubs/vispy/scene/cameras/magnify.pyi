@@ -1,6 +1,6 @@
 import numpy as np
-from vispy.util.event import Event
 
+from ...util.event import Event
 from ...visuals.transforms.nonlinear import Magnify1DTransform, MagnifyTransform
 from .panzoom import PanZoomCamera
 

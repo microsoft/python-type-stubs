@@ -1,5 +1,4 @@
-from vispy.util.event import Event
-
+from ...util.event import Event
 from ...visuals import TextVisual
 from .widget import Widget
 

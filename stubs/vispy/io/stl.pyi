@@ -1,7 +1,8 @@
 from typing import IO
 
 import numpy as np
-from vispy._typing import FileLike
+
+from .._typing import FileLike
 
 # -*- coding: utf-8 -*-
 # Copyright (c) 2015 Michael Dawson-Haggerty

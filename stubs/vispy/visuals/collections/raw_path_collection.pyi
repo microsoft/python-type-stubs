@@ -5,9 +5,9 @@
 # -----------------------------------------------------------------------------
 import numpy as np
 from numpy.typing import ArrayLike, NDArray
-from vispy.util.svg.transform import Transform
 
 from ... import glsl
+from ...util.svg.transform import Transform
 from ..transforms import NullTransform
 from .collection import Collection
 

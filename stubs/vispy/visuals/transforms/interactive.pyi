@@ -1,7 +1,7 @@
 import numpy as np
-from vispy.app.canvas import Canvas
-from vispy.util.event import Event
 
+from ...app.canvas import Canvas
+from ...util.event import Event
 from .linear import STTransform
 
 # -*- coding: utf-8 -*-

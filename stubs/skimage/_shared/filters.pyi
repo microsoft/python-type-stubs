@@ -4,10 +4,10 @@ from typing import Literal
 import numpy as np
 from numpy.typing import ArrayLike, NDArray
 from scipy import ndimage as ndi
-from skimage._typing import Scalar
 
-from .._shared import utils
-from .._shared.utils import _supported_float_type, convert_to_float, warn
+from .._typing import Scalar
+from . import utils
+from .utils import _supported_float_type, convert_to_float, warn
 
 @utils.deprecate_multichannel_kwarg(multichannel_position=5)
 def gaussian(

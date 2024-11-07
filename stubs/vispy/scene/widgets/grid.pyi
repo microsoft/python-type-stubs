@@ -1,7 +1,5 @@
 import numpy as np
 from kiwisolver import Solver, UnsatisfiableConstraint, Variable
-from vispy.geometry import Rect
-from vispy.scene.widgets.widget import Widget
 
 from .viewbox import ViewBox
 from .widget import Widget

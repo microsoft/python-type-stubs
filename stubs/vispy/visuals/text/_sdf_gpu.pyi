@@ -1,6 +1,5 @@
 import numpy as np
 from numpy.typing import ArrayLike
-from vispy.gloo.texture import Texture2D
 
 from ...gloo import FrameBuffer, Program, Texture2D, VertexBuffer, set_state, set_viewport
 

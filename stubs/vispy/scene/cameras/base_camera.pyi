@@ -1,10 +1,9 @@
 from typing import Literal, Mapping
 
 from numpy.typing import ArrayLike
-from vispy.scene.node import Node
-from vispy.util.event import Event
 
 from ...util import keys
+from ...util.event import Event
 from ...visuals.transforms import MatrixTransform, NullTransform, STTransform, TransformCache
 from ..node import Node
 

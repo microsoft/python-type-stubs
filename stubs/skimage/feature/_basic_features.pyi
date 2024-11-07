@@ -4,7 +4,8 @@ from itertools import combinations_with_replacement
 
 import numpy as np
 from numpy.typing import NDArray
-from skimage._shared import utils
+
+from .._shared import utils
 
 def _texture_filter(gaussian_filtered): ...
 def _singlescale_basic_features_singlechannel(img, sigma, intensity=True, edges=True, texture=True): ...

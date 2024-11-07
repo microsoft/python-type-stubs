@@ -1,8 +1,8 @@
 import numpy as np
 from numpy.typing import ArrayLike
-from vispy.util.svg.color import Color
 
 from ..color import Color
+from ..util.svg.color import Color
 from .polygon import PolygonVisual
 
 # -*- coding: utf-8 -*-

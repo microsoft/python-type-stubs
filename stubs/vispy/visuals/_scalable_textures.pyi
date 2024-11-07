@@ -6,8 +6,8 @@ import warnings
 import numpy as np
 from numpy import dtype
 from numpy.typing import NDArray
-from vispy.gloo import Texture2D, Texture3D
-from vispy.gloo.texture import should_cast_to_f32
+
+from ..gloo import Texture2D, Texture3D
 
 def get_default_clim_from_dtype(dtype): ...
 def get_default_clim_from_data(data): ...

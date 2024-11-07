@@ -1,8 +1,8 @@
 from typing import Sequence
 
 from numpy.typing import ArrayLike, NDArray
-from vispy.util.svg.transform import Transform
 
+from ...util.svg.transform import Transform
 from ..shaders import FunctionChain
 from .base_transform import BaseTransform
 from .linear import NullTransform

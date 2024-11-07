@@ -1,9 +1,9 @@
 from typing import Literal
 
 import numpy as np
-from vispy.color import Color, Colormap
-from vispy.util.event import Event
 
+from ...color import Color, Colormap
+from ...util.event import Event
 from ...visuals import ColorBarVisual
 from .widget import Widget
 

@@ -4,10 +4,10 @@
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 # -----------------------------------------------------------------------------
 import numpy as np
-from vispy.scene.widgets.viewbox import ViewBox
-from vispy.util.event import Event
 
+from ...util.event import Event
 from ...visuals import AxisVisual
+from .viewbox import ViewBox
 from .widget import Widget
 
 class AxisWidget(Widget):

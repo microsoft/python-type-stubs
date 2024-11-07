@@ -1,5 +1,6 @@
 from numpy.typing import NDArray
-from skimage.feature import multiscale_basic_features
+
+from ..feature import multiscale_basic_features
 
 class TrainableSegmenter(object):
     def __init__(self, clf=None, features_func=None): ...

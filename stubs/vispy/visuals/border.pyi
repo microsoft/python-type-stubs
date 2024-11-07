@@ -1,5 +1,4 @@
 import numpy as np
-from vispy.color import Color
 
 from ..color import Color
 from . import Visual
