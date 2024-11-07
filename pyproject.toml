@@ -86,7 +86,6 @@ reportSelfClsParameterName = false
 reportArgumentType = "none" # TODO
 reportAssertTypeFailure = "none" # TODO
 reportAttributeAccessIssue = "none" # TODO
-reportFunctionMemberAccess = "none" # TODO
 reportGeneralTypeIssues = "none" # TODO
 reportInvalidTypeArguments = "none" # TODO
 reportInvalidTypeForm = "none" # TODO

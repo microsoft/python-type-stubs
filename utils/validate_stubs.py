@@ -36,7 +36,7 @@ def my_overload(func):
     if key not in overloads:
         fn = lambda *args, **kwds: _overload_dummy(args, kwds)
         overloads[key] = fn
-        fn.__overloads__ = [func]
+        fn.__overloads__ = [func]  # type: ignore[attr-defined] # __overloads__ not exposed
     else:
         overloads[key].__overloads__.append(func)
     return overloads[key]

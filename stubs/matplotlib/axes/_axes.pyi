@@ -2,6 +2,7 @@ import datetime
 from re import L
 from typing import Callable, Literal, Sequence, overload
 
+import matplotlib.tri as mtri
 import numpy as np
 from matplotlib._typing import *
 from matplotlib.artist import Artist
@@ -32,12 +33,6 @@ from matplotlib.table import table as table_table
 from matplotlib.text import Annotation, Text
 from matplotlib.ticker import Formatter
 from matplotlib.transforms import Bbox, BboxTransformTo, Transform
-from matplotlib.tri import (
-    tricontour as tri_tricontour,
-    tricontour as tri_tricontourf,
-    tripcolor as tri_tripcolor,
-    triplot as tri_triplot,
-)
 
 from ._base import _AxesBase
 
@@ -610,7 +605,7 @@ class Axes(_AxesBase):
     table = table_table
     stackplot = ...
     streamplot = ...
-    tricontour = tri_tricontour.tricontour
-    tricontourf = tri_tricontourf.tricontourf
-    tripcolor = tri_tripcolor.tripcolor
-    triplot = tri_triplot.triplot
+    tricontour = mtri.tricontour
+    tricontourf = mtri.tricontourf
+    tripcolor = mtri.tripcolor
+    triplot = mtri.triplot
