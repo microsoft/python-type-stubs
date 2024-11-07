@@ -83,6 +83,7 @@ extra-standard-library = [
 ]
 
 [tool.pyright]
+exclude = ["build", ".git"]
 # Target oldest supported Python version
 pythonversion = "3.9"
 typeCheckingMode = "standard"
@@ -109,7 +110,6 @@ reportSelfClsParameterName = false
 reportAssertTypeFailure = "none" # TODO
 reportAttributeAccessIssue = "none" # TODO
 reportGeneralTypeIssues = "none" # TODO
-reportInvalidTypeArguments = "none" # TODO
 reportInvalidTypeForm = "none" # TODO
 reportMissingImports = "none" # TODO
 reportUndefinedVariable = "none" # TODO
