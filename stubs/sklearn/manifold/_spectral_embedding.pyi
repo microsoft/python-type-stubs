@@ -15,7 +15,6 @@ from ..metrics.pairwise import rbf_kernel as rbf_kernel
 from ..neighbors import NearestNeighbors as NearestNeighbors, kneighbors_graph as kneighbors_graph
 from ..utils import check_array as check_array, check_random_state as check_random_state, check_symmetric as check_symmetric
 from ..utils._param_validation import Interval as Interval, StrOptions as StrOptions
-from ..utils.fixes import lobpcg
 
 SpectralEmbedding_Self = TypeVar("SpectralEmbedding_Self", bound="SpectralEmbedding")
 

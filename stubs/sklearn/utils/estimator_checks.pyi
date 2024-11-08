@@ -56,7 +56,6 @@ from ..utils._param_validation import (
     generate_invalid_param_val as generate_invalid_param_val,
     make_constraint as make_constraint,
 )
-from ..utils.fixes import parse_version as parse_version, sp_version as sp_version
 from ..utils.validation import check_is_fitted as check_is_fitted
 from . import IS_PYPY as IS_PYPY, is_scalar_nan as is_scalar_nan, shuffle as shuffle
 from ._param_validation import Interval as Interval

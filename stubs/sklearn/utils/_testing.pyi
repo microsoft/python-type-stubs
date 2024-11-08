@@ -51,7 +51,6 @@ from numpy.testing import (
 from .._typing import ArrayLike, Float, Int, MatrixLike
 from ..metrics import accuracy_score as accuracy_score, r2_score as r2_score
 from . import IS_PYPY as IS_PYPY
-from .fixes import threadpool_info as threadpool_info
 from .multiclass import check_classification_targets as check_classification_targets
 from .validation import check_array as check_array, check_is_fitted as check_is_fitted, check_X_y as check_X_y
 
@@ -64,7 +63,8 @@ __all__ = [
     "assert_array_less",
     "assert_approx_equal",
     "assert_allclose",
-    "assert_run_python_script",
+    "assert_run_python_script_without_output",
+    "assert_no_warnings",
     "SkipTest",
 ]
 
@@ -116,6 +116,7 @@ class TempMemmap:
     def __exit__(self, exc_type, exc_val, exc_tb): ...
 
 def create_memmap_backed_data(data, mmap_mode: str = "r", return_folder: bool = False, aligned: bool = False): ...
+def assert_run_python_script_without_output(source_code, pattern=".+", timeout=60) -> None: ...
 def check_docstring_parameters(func: Callable, doc: None | str = None, ignore: Sequence | None = None) -> ndarray: ...
 def assert_run_python_script(source_code: str, timeout: Int = 60): ...
 def raises(

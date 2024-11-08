@@ -18,7 +18,6 @@ from ..utils._param_validation import (
 )
 from ..utils._readonly_array_wrapper import ReadonlyArrayWrapper as ReadonlyArrayWrapper
 from ..utils.extmath import row_norms as row_norms, stable_cumsum as stable_cumsum
-from ..utils.fixes import threadpool_info as threadpool_info, threadpool_limits as threadpool_limits
 from ..utils.sparsefuncs import mean_variance_axis as mean_variance_axis
 from ..utils.sparsefuncs_fast import assign_rows_csr as assign_rows_csr
 from ..utils.validation import check_is_fitted as check_is_fitted

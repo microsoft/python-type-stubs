@@ -10,7 +10,6 @@ from ..exceptions import ConvergenceWarning as ConvergenceWarning
 from ..utils import check_array as check_array, check_consistent_length as check_consistent_length
 from ..utils._param_validation import Interval as Interval, StrOptions as StrOptions
 from ..utils.extmath import svd_flip as svd_flip
-from ..utils.fixes import parse_version as parse_version, sp_version as sp_version
 from ..utils.validation import FLOAT_DTYPES as FLOAT_DTYPES, check_is_fitted as check_is_fitted
 
 PLSSVD_Self = TypeVar("PLSSVD_Self", bound="PLSSVD")
