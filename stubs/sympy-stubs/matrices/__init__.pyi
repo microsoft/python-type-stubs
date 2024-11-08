@@ -1,4 +1,3 @@
-from sympy.matrices.common import NonSquareMatrixError, ShapeError
 from sympy.matrices.dense import (
     GramSchmidt,
     MutableDenseMatrix,
@@ -23,6 +22,7 @@ from sympy.matrices.dense import (
     wronskian,
     zeros,
 )
+from sympy.matrices.exceptions import NonSquareMatrixError, ShapeError
 from sympy.matrices.expressions import (
     Adjoint,
     BlockDiagMatrix,

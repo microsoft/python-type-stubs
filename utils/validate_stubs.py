@@ -1,4 +1,5 @@
 #!/bin/python
+from __future__ import annotations
 
 __doc__ = """Validate Stubs.
 
@@ -14,7 +15,6 @@ Options:
   --function=<f>     Restrict to the named function (or method if used with --class).
   --class=<c>        Restrict to the named class.
 """
-from __future__ import annotations
 
 import importlib
 import importlib.machinery

@@ -9,7 +9,6 @@ from .._typing import ArrayLike, Float, MatrixLike
 from ..base import BaseEstimator, RegressorMixin
 from ..exceptions import ConvergenceWarning as ConvergenceWarning
 from ..utils._param_validation import Hidden as Hidden, Interval as Interval, StrOptions as StrOptions
-from ..utils.fixes import parse_version as parse_version, sp_version as sp_version
 from ._base import LinearModel
 
 QuantileRegressor_Self = TypeVar("QuantileRegressor_Self", bound="QuantileRegressor")

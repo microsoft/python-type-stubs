@@ -84,6 +84,7 @@ extra-standard-library = [
 
 [tool.pyright]
 exclude = ["build", ".git"]
+stubPath = "./stubs"
 # Target oldest supported Python version
 pythonversion = "3.9"
 typeCheckingMode = "standard"
@@ -107,10 +108,6 @@ reportOverlappingOverload = false
 reportSelfClsParameterName = false
 # Not an error by default in standard mode
 reportUnsupportedDunderAll = "error"
-
-# Error reports to fix in code
-reportAssertTypeFailure = "none" # TODO
-reportGeneralTypeIssues = "none" # TODO
 
 [tool.mypy]
 # Target oldest supported Python version

@@ -23,7 +23,6 @@ from ..utils import (
     is_scalar_nan as is_scalar_nan,
 )
 from ..utils.extmath import row_norms as row_norms, safe_sparse_dot as safe_sparse_dot
-from ..utils.fixes import parse_version as parse_version, sp_version as sp_version
 from ..utils.parallel import Parallel as Parallel, delayed as delayed
 from ..utils.validation import check_non_negative as check_non_negative
 from ._pairwise_distances_reduction import ArgKmin as ArgKmin

@@ -28,7 +28,7 @@ from sympy.core.function import (
     expand_trig,
     nfloat,
 )
-from sympy.core.intfunc import integer_log, integer_nthroot
+from sympy.core.intfunc import integer_log, integer_nthroot, num_digits, trailing
 from sympy.core.kind import BooleanKind, NumberKind, UndefinedKind
 from sympy.core.mod import Mod
 from sympy.core.mul import Mul, prod
@@ -120,6 +120,8 @@ __all__ = [
     "Pow",
     "integer_nthroot",
     "integer_log",
+    "num_digits",
+    "trailing",
     "Mul",
     "prod",
     "Add",

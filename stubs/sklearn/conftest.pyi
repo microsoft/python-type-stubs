@@ -20,7 +20,6 @@ from .datasets import (
     fetch_rcv1 as fetch_rcv1,
 )
 from .tests import random_seed as random_seed
-from .utils.fixes import parse_version as parse_version
 
 dataset_fetchers: dict = ...
 

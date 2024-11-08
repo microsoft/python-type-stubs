@@ -17,12 +17,12 @@ from scipy.sparse import issparse as issparse
 from .. import get_config as get_config
 from .._typing import ArrayLike, Int, MatrixLike
 from ..exceptions import DataConversionWarning as DataConversionWarning
+from . import metadata_routing
 from ._bunch import Bunch as Bunch
 from ._estimator_html_repr import estimator_html_repr as estimator_html_repr
 from .class_weight import compute_class_weight as compute_class_weight, compute_sample_weight as compute_sample_weight
 from .deprecation import deprecated as deprecated
 from .discovery import all_estimators as all_estimators
-from .fixes import parse_version as parse_version, threadpool_info as threadpool_info
 from .murmurhash import murmurhash3_32 as murmurhash3_32
 from .validation import (
     as_float_array as as_float_array,
@@ -59,17 +59,20 @@ __all__ = [
     "check_scalar",
     "indexable",
     "check_symmetric",
-    "indices_to_mask",
     "deprecated",
     "parallel_backend",
     "register_parallel_backend",
     "resample",
     "shuffle",
-    "check_matplotlib_support",
     "all_estimators",
     "DataConversionWarning",
     "estimator_html_repr",
     "Bunch",
+    "metadata_routing",
+    "safe_sqr",
+    "safe_mask",
+    "gen_batches",
+    "gen_even_slices",
 ]
 
 IS_PYPY = ...
