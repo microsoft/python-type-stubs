@@ -38,7 +38,7 @@ logger = ...
 def fetch_rcv1(
     *,
     data_home: None | str = None,
-    subset: Literal["train", "test", "all", "all"] = "all",
+    subset: Literal["train", "test", "all"] = "all",
     download_if_missing: bool = True,
     random_state: RandomState | None | Int = None,
     shuffle: bool = False,

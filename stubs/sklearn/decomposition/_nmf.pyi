@@ -17,8 +17,8 @@ from ..utils._param_validation import Interval as Interval, StrOptions as StrOpt
 from ..utils.extmath import randomized_svd as randomized_svd, safe_sparse_dot as safe_sparse_dot, squared_norm as squared_norm
 from ..utils.validation import check_is_fitted as check_is_fitted, check_non_negative as check_non_negative
 
-MiniBatchNMF_Self = TypeVar("MiniBatchNMF_Self", bound="MiniBatchNMF")
-_BaseNMF_Self = TypeVar("_BaseNMF_Self", bound="_BaseNMF")
+MiniBatchNMF_Self = TypeVar("MiniBatchNMF_Self", bound=MiniBatchNMF)
+_BaseNMF_Self = TypeVar("_BaseNMF_Self", bound=_BaseNMF)
 
 import itertools
 import time
@@ -39,12 +39,12 @@ def non_negative_factorization(
     *,
     init: Literal["random", "nndsvd", "nndsvda", "nndsvdar", "custom"] | None = None,
     update_H: bool = True,
-    solver: Literal["cd", "mu", "cd"] = "cd",
-    beta_loss: float | Literal["frobenius", "kullback-leibler", "itakura-saito", "frobenius"] = "frobenius",
+    solver: Literal["cd", "mu"] = "cd",
+    beta_loss: float | Literal["frobenius", "kullback-leibler", "itakura-saito"] = "frobenius",
     tol: Float = 1e-4,
     max_iter: Int = 200,
     alpha_W: Float = 0.0,
-    alpha_H: float | Literal["same", "same"] = "same",
+    alpha_H: float | Literal["same"] = "same",
     l1_ratio: Float = 0.0,
     random_state: RandomState | None | Int = None,
     verbose: Int = 0,
@@ -86,13 +86,13 @@ class NMF(_BaseNMF):
         n_components: None | Int = None,
         *,
         init: Literal["random", "nndsvd", "nndsvda", "nndsvdar", "custom"] | None = None,
-        solver: Literal["cd", "mu", "cd"] = "cd",
-        beta_loss: float | Literal["frobenius", "kullback-leibler", "itakura-saito", "frobenius"] = "frobenius",
+        solver: Literal["cd", "mu"] = "cd",
+        beta_loss: float | Literal["frobenius", "kullback-leibler", "itakura-saito"] = "frobenius",
         tol: Float = 1e-4,
         max_iter: Int = 200,
         random_state: RandomState | None | Int = None,
         alpha_W: Float = 0.0,
-        alpha_H: float | Literal["same", "same"] = "same",
+        alpha_H: float | Literal["same"] = "same",
         l1_ratio: Float = 0.0,
         verbose: Int = 0,
         shuffle: bool = False,
@@ -123,12 +123,12 @@ class MiniBatchNMF(_BaseNMF):
         *,
         init: Literal["random", "nndsvd", "nndsvda", "nndsvdar", "custom"] | None = None,
         batch_size: Int = 1024,
-        beta_loss: float | Literal["frobenius", "kullback-leibler", "itakura-saito", "frobenius"] = "frobenius",
+        beta_loss: float | Literal["frobenius", "kullback-leibler", "itakura-saito"] = "frobenius",
         tol: Float = 1e-4,
         max_no_improvement: Int = 10,
         max_iter: Int = 200,
         alpha_W: Float = 0.0,
-        alpha_H: float | Literal["same", "same"] = "same",
+        alpha_H: float | Literal["same"] = "same",
         l1_ratio: Float = 0.0,
         forget_factor: Float = 0.7,
         fresh_restarts: bool = False,

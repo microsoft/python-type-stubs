@@ -16,7 +16,7 @@ from . import BaseCrossValidator, ParameterGrid as ParameterGrid, ParameterSampl
 from ._search import BaseSearchCV
 from ._split import BaseShuffleSplit, check_cv as check_cv
 
-BaseSuccessiveHalving_Self = TypeVar("BaseSuccessiveHalving_Self", bound="BaseSuccessiveHalving")
+BaseSuccessiveHalving_Self = TypeVar("BaseSuccessiveHalving_Self", bound=BaseSuccessiveHalving)
 
 import numpy as np
 
@@ -85,7 +85,7 @@ class HalvingGridSearchCV(BaseSuccessiveHalving):
         factor: float | int = 3,
         resource: str = "n_samples",
         max_resources: str | Int = "auto",
-        min_resources: int | Literal["exhaust", "smallest", "exhaust"] = "exhaust",
+        min_resources: int | Literal["exhaust", "smallest"] = "exhaust",
         aggressive_elimination: bool = False,
         cv: Iterable | int | BaseShuffleSplit | BaseCrossValidator = 5,
         scoring: None | str | Callable = None,
@@ -130,7 +130,7 @@ class HalvingRandomSearchCV(BaseSuccessiveHalving):
         factor: float | int = 3,
         resource: str = "n_samples",
         max_resources: str | Int = "auto",
-        min_resources: Literal["exhaust", "smallest", "smallest"] | int = "smallest",
+        min_resources: Literal["exhaust", "smallest"] | int = "smallest",
         aggressive_elimination: bool = False,
         cv: Iterable | int | BaseShuffleSplit | BaseCrossValidator = 5,
         scoring: None | str | Callable = None,

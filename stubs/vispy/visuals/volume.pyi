@@ -2,7 +2,6 @@
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 
-from __future__ import annotations
 
 from functools import lru_cache
 from typing import Literal, Optional

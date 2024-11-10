@@ -16,8 +16,8 @@ from ..utils.parallel import Parallel as Parallel, delayed as delayed
 from ..utils.validation import check_is_fitted as check_is_fitted, column_or_1d as column_or_1d
 from ._base import _BaseHeterogeneousEnsemble
 
-VotingClassifier_Self = TypeVar("VotingClassifier_Self", bound="VotingClassifier")
-VotingRegressor_Self = TypeVar("VotingRegressor_Self", bound="VotingRegressor")
+VotingClassifier_Self = TypeVar("VotingClassifier_Self", bound=VotingClassifier)
+VotingRegressor_Self = TypeVar("VotingRegressor_Self", bound=VotingRegressor)
 
 import numpy as np
 
@@ -43,7 +43,7 @@ class VotingClassifier(ClassifierMixin, _BaseVoting):
         self,
         estimators: list[tuple[str, BaseEstimator]],
         *,
-        voting: Literal["hard", "soft", "hard"] = "hard",
+        voting: Literal["hard", "soft"] = "hard",
         weights: None | ArrayLike = None,
         n_jobs: None | Int = None,
         flatten_transform: bool = True,

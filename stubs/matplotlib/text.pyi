@@ -176,7 +176,6 @@ class _AnnotationBase:
     def draggable(self, state: bool | None = ..., use_blit: bool = ...) -> None | DraggableAnnotation: ...
 
 class Annotation(Text, _AnnotationBase):
-    def __str__(self) -> str: ...
     def __init__(
         self,
         text: str,

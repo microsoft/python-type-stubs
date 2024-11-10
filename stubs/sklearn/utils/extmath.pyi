@@ -40,7 +40,7 @@ def randomized_range_finder(
     *,
     size: Int,
     n_iter: Int,
-    power_iteration_normalizer: Literal["auto", "QR", "LU", "none", "auto"] = "auto",
+    power_iteration_normalizer: Literal["auto", "QR", "LU", "none"] = "auto",
     random_state: RandomState | None | Int = None,
 ) -> ndarray: ...
 def randomized_svd(
@@ -48,12 +48,12 @@ def randomized_svd(
     n_components: Int,
     *,
     n_oversamples: Int = 10,
-    n_iter: Literal["auto", "auto"] | Int = "auto",
-    power_iteration_normalizer: Literal["auto", "QR", "LU", "none", "auto"] = "auto",
-    transpose: Literal["auto", "auto"] | bool = "auto",
+    n_iter: Literal["auto"] | Int = "auto",
+    power_iteration_normalizer: Literal["auto", "QR", "LU", "none"] = "auto",
+    transpose: Literal["auto"] | bool = "auto",
     flip_sign: bool = True,
     random_state: RandomState | None | Int = None,
-    svd_lapack_driver: Literal["gesdd", "gesvd", "gesdd"] = "gesdd",
+    svd_lapack_driver: Literal["gesdd", "gesvd"] = "gesdd",
 ) -> tuple[ndarray, ndarray, ndarray]: ...
 def weighted_mode(a: ArrayLike, w: ArrayLike, *, axis: Int = 0) -> tuple[ndarray, ndarray]: ...
 def cartesian(arrays: Sequence[ArrayLike] | ArrayLike, out: None | MatrixLike = None) -> ndarray: ...

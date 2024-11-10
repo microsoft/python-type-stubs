@@ -81,7 +81,7 @@ def cross_val_predict(
     verbose: Int = 0,
     fit_params: None | dict = None,
     pre_dispatch: str | Int = "2*n_jobs",
-    method: Literal["predict", "predict_proba", "predict_log_proba", "decision_function", "predict"] = "predict",
+    method: Literal["predict", "predict_proba", "predict_log_proba", "decision_function"] = "predict",
 ) -> ndarray: ...
 def permutation_test_score(
     estimator: BaseEstimator | SVC,
