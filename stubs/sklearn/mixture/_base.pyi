@@ -16,7 +16,7 @@ from ..utils import check_random_state as check_random_state
 from ..utils._param_validation import Interval as Interval, StrOptions as StrOptions
 from ..utils.validation import check_is_fitted as check_is_fitted
 
-BaseMixture_Self = TypeVar("BaseMixture_Self", bound="BaseMixture")
+BaseMixture_Self = TypeVar("BaseMixture_Self", bound=BaseMixture)
 
 # Author: Wei Xue <xuewei4d@gmail.com>
 # Modified by Thierry Guillemot <thierry.guillemot.work@gmail.com>
@@ -33,7 +33,7 @@ class BaseMixture(DensityMixin, BaseEstimator, metaclass=ABCMeta):
         self,
         n_components: int,
         tol: float,
-        reg_covar: float | int,
+        reg_covar: float,
         max_iter: int,
         n_init: int,
         init_params: str,

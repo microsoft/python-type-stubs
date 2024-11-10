@@ -13,7 +13,7 @@ from ..utils.extmath import randomized_svd as randomized_svd, safe_sparse_dot as
 from ..utils.sparsefuncs import mean_variance_axis as mean_variance_axis
 from ..utils.validation import check_is_fitted as check_is_fitted
 
-TruncatedSVD_Self = TypeVar("TruncatedSVD_Self", bound="TruncatedSVD")
+TruncatedSVD_Self = TypeVar("TruncatedSVD_Self", bound=TruncatedSVD)
 
 import numpy as np
 import scipy.sparse as sp
@@ -34,10 +34,10 @@ class TruncatedSVD(ClassNamePrefixFeaturesOutMixin, TransformerMixin, BaseEstima
         self,
         n_components: Int = 2,
         *,
-        algorithm: Literal["arpack", "randomized", "randomized"] = "randomized",
+        algorithm: Literal["arpack", "randomized"] = "randomized",
         n_iter: Int = 5,
         n_oversamples: Int = 10,
-        power_iteration_normalizer: Literal["auto", "QR", "LU", "none", "auto"] = "auto",
+        power_iteration_normalizer: Literal["auto", "QR", "LU", "none"] = "auto",
         random_state: RandomState | None | Int = None,
         tol: Float = 0.0,
     ) -> None: ...

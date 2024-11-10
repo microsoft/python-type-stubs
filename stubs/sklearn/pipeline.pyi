@@ -19,8 +19,8 @@ from .utils.metaestimators import _BaseComposition, available_if as available_if
 from .utils.parallel import Parallel as Parallel, delayed as delayed
 from .utils.validation import check_is_fitted as check_is_fitted, check_memory as check_memory
 
-FeatureUnion_Self = TypeVar("FeatureUnion_Self", bound="FeatureUnion")
-Pipeline_Self = TypeVar("Pipeline_Self", bound="Pipeline")
+FeatureUnion_Self = TypeVar("FeatureUnion_Self", bound=FeatureUnion)
+Pipeline_Self = TypeVar("Pipeline_Self", bound=Pipeline)
 
 import numpy as np
 

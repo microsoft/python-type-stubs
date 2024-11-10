@@ -13,5 +13,5 @@ def consensus_score(
     a: tuple[ndarray, ndarray] | tuple[int, int],
     b: tuple[ndarray, ndarray] | tuple[int, int],
     *,
-    similarity: Literal["jaccard", "jaccard"] | Callable = "jaccard",
+    similarity: Literal["jaccard"] | Callable = "jaccard",
 ) -> Float: ...

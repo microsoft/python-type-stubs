@@ -128,7 +128,7 @@ class BaseLoss:
         self,
         n_samples: Int,
         dtype: Type[Float] | Float = ...,
-        order: Literal["C", "F", "F"] = "F",
+        order: Literal["C", "F"] = "F",
     ) -> tuple[ndarray, ndarray]: ...
 
 # Note: Naturally, we would inherit in the following order

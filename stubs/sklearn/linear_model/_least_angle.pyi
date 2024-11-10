@@ -17,9 +17,9 @@ from ..utils._param_validation import Hidden as Hidden, Interval as Interval, St
 from ..utils.parallel import Parallel as Parallel, delayed as delayed
 from ._base import LinearModel, LinearRegression as LinearRegression
 
-LassoLarsIC_Self = TypeVar("LassoLarsIC_Self", bound="LassoLarsIC")
-Lars_Self = TypeVar("Lars_Self", bound="Lars")
-LarsCV_Self = TypeVar("LarsCV_Self", bound="LarsCV")
+LassoLarsIC_Self = TypeVar("LassoLarsIC_Self", bound=LassoLarsIC)
+Lars_Self = TypeVar("Lars_Self", bound=Lars)
+LarsCV_Self = TypeVar("LarsCV_Self", bound=LarsCV)
 
 import sys
 import warnings
@@ -36,7 +36,7 @@ def lars_path(
     Gram: None | MatrixLike | str = None,
     max_iter: Int = 500,
     alpha_min: Float = 0,
-    method: Literal["lar", "lasso", "lar"] = "lar",
+    method: Literal["lar", "lasso"] = "lar",
     copy_X: bool = True,
     eps: Float = ...,
     copy_Gram: bool = True,
@@ -49,10 +49,10 @@ def lars_path_gram(
     Xy: MatrixLike | ArrayLike,
     Gram: MatrixLike,
     *,
-    n_samples: float | int,
+    n_samples: float,
     max_iter: Int = 500,
     alpha_min: Float = 0,
-    method: Literal["lar", "lasso", "lar"] = "lar",
+    method: Literal["lar", "lasso"] = "lar",
     copy_X: bool = True,
     eps: Float = ...,
     copy_Gram: bool = True,
@@ -86,7 +86,7 @@ class Lars(MultiOutputMixin, RegressorMixin, LinearModel):
         fit_intercept: bool = True,
         verbose: int | bool = False,
         normalize: str | bool = "deprecated",
-        precompute: Literal["auto", "auto"] | ArrayLike | bool = "auto",
+        precompute: Literal["auto"] | ArrayLike | bool = "auto",
         n_nonzero_coefs: Int = 500,
         eps: Float = ...,
         copy_X: bool = True,
@@ -122,7 +122,7 @@ class LassoLars(Lars):
         fit_intercept: bool = True,
         verbose: int | bool = False,
         normalize: str | bool = "deprecated",
-        precompute: Literal["auto", "auto"] | ArrayLike | bool = "auto",
+        precompute: Literal["auto"] | ArrayLike | bool = "auto",
         max_iter: Int = 500,
         eps: Float = ...,
         copy_X: bool = True,
@@ -159,7 +159,7 @@ class LarsCV(Lars):
         verbose: int | bool = False,
         max_iter: Int = 500,
         normalize: str | bool = "deprecated",
-        precompute: Literal["auto", "auto"] | ArrayLike | bool = "auto",
+        precompute: Literal["auto"] | ArrayLike | bool = "auto",
         cv: int | BaseCrossValidator | Iterable | None | BaseShuffleSplit = None,
         max_n_alphas: Int = 1000,
         n_jobs: None | int = None,
@@ -192,7 +192,7 @@ class LassoLarsCV(LarsCV):
         verbose: int | bool = False,
         max_iter: Int = 500,
         normalize: str | bool = "deprecated",
-        precompute: Literal["auto", "auto"] | bool = "auto",
+        precompute: Literal["auto"] | bool = "auto",
         cv: int | BaseCrossValidator | Iterable | None | BaseShuffleSplit = None,
         max_n_alphas: Int = 1000,
         n_jobs: None | int = None,
@@ -219,12 +219,12 @@ class LassoLarsIC(LassoLars):
 
     def __init__(
         self,
-        criterion: Literal["aic", "bic", "aic"] = "aic",
+        criterion: Literal["aic", "bic"] = "aic",
         *,
         fit_intercept: bool = True,
         verbose: int | bool = False,
         normalize: str | bool = "deprecated",
-        precompute: Literal["auto", "auto"] | ArrayLike | bool = "auto",
+        precompute: Literal["auto"] | ArrayLike | bool = "auto",
         max_iter: Int = 500,
         eps: Float = ...,
         copy_X: bool = True,

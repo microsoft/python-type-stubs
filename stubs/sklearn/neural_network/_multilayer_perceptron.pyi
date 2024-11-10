@@ -21,9 +21,9 @@ from ..utils.validation import check_is_fitted as check_is_fitted
 from ._base import ACTIVATIONS as ACTIVATIONS, DERIVATIVES as DERIVATIVES, LOSS_FUNCTIONS as LOSS_FUNCTIONS
 from ._stochastic_optimizers import AdamOptimizer as AdamOptimizer, SGDOptimizer as SGDOptimizer
 
-BaseMultilayerPerceptron_Self = TypeVar("BaseMultilayerPerceptron_Self", bound="BaseMultilayerPerceptron")
-MLPRegressor_Self = TypeVar("MLPRegressor_Self", bound="MLPRegressor")
-MLPClassifier_Self = TypeVar("MLPClassifier_Self", bound="MLPClassifier")
+BaseMultilayerPerceptron_Self = TypeVar("BaseMultilayerPerceptron_Self", bound=BaseMultilayerPerceptron)
+MLPRegressor_Self = TypeVar("MLPRegressor_Self", bound=MLPRegressor)
+MLPClassifier_Self = TypeVar("MLPClassifier_Self", bound=MLPClassifier)
 
 import warnings
 
@@ -53,7 +53,7 @@ class BaseMultilayerPerceptron(BaseEstimator, metaclass=ABCMeta):
         tol: float,
         verbose: int | bool,
         warm_start: bool,
-        momentum: float | int,
+        momentum: float,
         nesterovs_momentum: bool,
         early_stopping: bool,
         validation_fraction: float,
@@ -85,12 +85,12 @@ class MLPClassifier(ClassifierMixin, BaseMultilayerPerceptron):
     def __init__(
         self,
         hidden_layer_sizes: ArrayLike | tuple[int] = ...,
-        activation: Literal["relu", "identity", "logistic", "tanh", "relu"] = "relu",
+        activation: Literal["relu", "identity", "logistic", "tanh"] = "relu",
         *,
-        solver: Literal["lbfgs", "sgd", "adam", "adam"] = "adam",
+        solver: Literal["lbfgs", "sgd", "adam"] = "adam",
         alpha: Float = 0.0001,
         batch_size: str | Int = "auto",
-        learning_rate: Literal["constant", "invscaling", "adaptive", "constant"] = "constant",
+        learning_rate: Literal["constant", "invscaling", "adaptive"] = "constant",
         learning_rate_init: Float = 0.001,
         power_t: Float = 0.5,
         max_iter: Int = 200,
@@ -138,12 +138,12 @@ class MLPRegressor(RegressorMixin, BaseMultilayerPerceptron):
     def __init__(
         self,
         hidden_layer_sizes: ArrayLike | tuple[int, int] = ...,
-        activation: Literal["relu", "identity", "logistic", "tanh", "relu"] = "relu",
+        activation: Literal["relu", "identity", "logistic", "tanh"] = "relu",
         *,
-        solver: Literal["lbfgs", "sgd", "adam", "adam"] = "adam",
+        solver: Literal["lbfgs", "sgd", "adam"] = "adam",
         alpha: Float = 0.0001,
         batch_size: str | Int = "auto",
-        learning_rate: Literal["constant", "invscaling", "adaptive", "constant"] = "constant",
+        learning_rate: Literal["constant", "invscaling", "adaptive"] = "constant",
         learning_rate_init: Float = 0.001,
         power_t: Float = 0.5,
         max_iter: Int = 200,

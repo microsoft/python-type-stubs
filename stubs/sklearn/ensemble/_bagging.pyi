@@ -20,7 +20,7 @@ from ..utils.random import sample_without_replacement as sample_without_replacem
 from ..utils.validation import check_is_fitted as check_is_fitted, has_fit_parameter as has_fit_parameter
 from ._base import BaseEnsemble
 
-BaseBagging_Self = TypeVar("BaseBagging_Self", bound="BaseBagging")
+BaseBagging_Self = TypeVar("BaseBagging_Self", bound=BaseBagging)
 
 # Author: Gilles Louppe <g.louppe@gmail.com>
 # License: BSD 3 clause
@@ -80,8 +80,8 @@ class BaggingClassifier(ClassifierMixin, BaseBagging):
         estimator: Any = None,
         n_estimators: Int = 10,
         *,
-        max_samples: float | int = 1.0,
-        max_features: float | int = 1.0,
+        max_samples: float = 1.0,
+        max_features: float = 1.0,
         bootstrap: bool = True,
         bootstrap_features: bool = False,
         oob_score: bool = False,
@@ -112,8 +112,8 @@ class BaggingRegressor(RegressorMixin, BaseBagging):
         estimator: Any = None,
         n_estimators: Int = 10,
         *,
-        max_samples: float | int = 1.0,
-        max_features: float | int = 1.0,
+        max_samples: float = 1.0,
+        max_features: float = 1.0,
         bootstrap: bool = True,
         bootstrap_features: bool = False,
         oob_score: bool = False,

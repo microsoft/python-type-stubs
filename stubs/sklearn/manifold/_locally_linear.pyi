@@ -16,7 +16,7 @@ from ..utils._param_validation import Interval as Interval, StrOptions as StrOpt
 from ..utils.extmath import stable_cumsum as stable_cumsum
 from ..utils.validation import FLOAT_DTYPES as FLOAT_DTYPES, check_is_fitted as check_is_fitted
 
-LocallyLinearEmbedding_Self = TypeVar("LocallyLinearEmbedding_Self", bound="LocallyLinearEmbedding")
+LocallyLinearEmbedding_Self = TypeVar("LocallyLinearEmbedding_Self", bound=LocallyLinearEmbedding)
 
 import numpy as np
 
@@ -31,7 +31,7 @@ def null_space(
     M: MatrixLike | LinearOperator,
     k: Int,
     k_skip: Int = 1,
-    eigen_solver: Literal["auto", "arpack", "dense", "arpack"] = "arpack",
+    eigen_solver: Literal["auto", "arpack", "dense"] = "arpack",
     tol: Float = 1e-6,
     max_iter: Int = 100,
     random_state: None | Int | RandomState = None,
@@ -42,10 +42,10 @@ def locally_linear_embedding(
     n_neighbors: Int,
     n_components: Int,
     reg: Float = 1e-3,
-    eigen_solver: Literal["auto", "arpack", "dense", "auto"] = "auto",
+    eigen_solver: Literal["auto", "arpack", "dense"] = "auto",
     tol: Float = 1e-6,
     max_iter: Int = 100,
-    method: Literal["standard", "hessian", "modified", "ltsa", "standard"] = "standard",
+    method: Literal["standard", "hessian", "modified", "ltsa"] = "standard",
     hessian_tol: Float = 1e-4,
     modified_tol: Float = 1e-12,
     random_state: RandomState | None | Int = None,
@@ -72,13 +72,13 @@ class LocallyLinearEmbedding(
         n_neighbors: Int = 5,
         n_components: Int = 2,
         reg: Float = 1e-3,
-        eigen_solver: Literal["auto", "arpack", "dense", "auto"] = "auto",
+        eigen_solver: Literal["auto", "arpack", "dense"] = "auto",
         tol: Float = 1e-6,
         max_iter: Int = 100,
-        method: Literal["standard", "hessian", "modified", "ltsa", "standard"] = "standard",
+        method: Literal["standard", "hessian", "modified", "ltsa"] = "standard",
         hessian_tol: Float = 1e-4,
         modified_tol: Float = 1e-12,
-        neighbors_algorithm: Literal["auto", "brute", "kd_tree", "ball_tree", "auto"] = "auto",
+        neighbors_algorithm: Literal["auto", "brute", "kd_tree", "ball_tree"] = "auto",
         random_state: RandomState | None | Int = None,
         n_jobs: None | int = None,
     ) -> None: ...

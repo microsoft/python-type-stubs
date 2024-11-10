@@ -1,20 +1,21 @@
 import decimal
 import io
+import typing_extensions
 
 import numpy.typing
 import pandas as pd
 
 Decimal = decimal.Decimal
-PythonScalar = str | int | float | bool
+PythonScalar: typing_extensions.TypeAlias = str | int | float | bool
 
 ArrayLike = numpy.typing.ArrayLike
 FileLike = io.IOBase
 PathLike = str
 
-PandasScalar = pd.Period | pd.Timestamp | pd.Timedelta | pd.Interval
-Scalar = PythonScalar | PandasScalar
+PandasScalar: typing_extensions.TypeAlias = pd.Period | pd.Timestamp | pd.Timedelta | pd.Interval
+Scalar: typing_extensions.TypeAlias = PythonScalar | PandasScalar
 
-Color = tuple[float, float, float] | str
+Color: typing_extensions.TypeAlias = tuple[float, float, float] | str
 
 __all__ = [
     "ArrayLike",

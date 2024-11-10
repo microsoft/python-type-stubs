@@ -17,10 +17,10 @@ from ..utils.validation import FLOAT_DTYPES as FLOAT_DTYPES, check_array as chec
 from ._hash import FeatureHasher as FeatureHasher
 from ._stop_words import ENGLISH_STOP_WORDS
 
-TfidfVectorizer_Self = TypeVar("TfidfVectorizer_Self", bound="TfidfVectorizer")
-HashingVectorizer_Self = TypeVar("HashingVectorizer_Self", bound="HashingVectorizer")
-CountVectorizer_Self = TypeVar("CountVectorizer_Self", bound="CountVectorizer")
-TfidfTransformer_Self = TypeVar("TfidfTransformer_Self", bound="TfidfTransformer")
+TfidfVectorizer_Self = TypeVar("TfidfVectorizer_Self", bound=TfidfVectorizer)
+HashingVectorizer_Self = TypeVar("HashingVectorizer_Self", bound=HashingVectorizer)
+CountVectorizer_Self = TypeVar("CountVectorizer_Self", bound=CountVectorizer)
+TfidfTransformer_Self = TypeVar("TfidfTransformer_Self", bound=TfidfTransformer)
 
 # Authors: Olivier Grisel <olivier.grisel@ensta.org>
 #          Mathieu Blondel <mathieu@mblondel.org>
@@ -69,9 +69,9 @@ class HashingVectorizer(TransformerMixin, _VectorizerMixin, BaseEstimator, auto_
     def __init__(
         self,
         *,
-        input: Literal["filename", "file", "content", "content"] = "content",
+        input: Literal["filename", "file", "content"] = "content",
         encoding: str = "utf-8",
-        decode_error: Literal["strict", "ignore", "replace", "strict"] = "strict",
+        decode_error: Literal["strict", "ignore", "replace"] = "strict",
         strip_accents: None | Literal["ascii", "unicode"] | Callable = None,
         lowercase: bool = True,
         preprocessor: None | Callable = None,
@@ -79,10 +79,10 @@ class HashingVectorizer(TransformerMixin, _VectorizerMixin, BaseEstimator, auto_
         stop_words: None | str | ArrayLike = None,
         token_pattern: None | str = r"(?u)\b\w\w+\b",
         ngram_range: tuple[float, float] = ...,
-        analyzer: Literal["word", "char", "char_wb", "word"] | Callable = "word",
+        analyzer: Literal["word", "char", "char_wb"] | Callable = "word",
         n_features: Int = ...,
         binary: bool = False,
-        norm: Literal["l1", "l2", "l2"] = "l2",
+        norm: Literal["l1", "l2"] = "l2",
         alternate_sign: bool = True,
         dtype=...,
     ) -> None: ...
@@ -101,9 +101,9 @@ class CountVectorizer(_VectorizerMixin, BaseEstimator):
     def __init__(
         self,
         *,
-        input: Literal["filename", "file", "content", "content"] = "content",
+        input: Literal["filename", "file", "content"] = "content",
         encoding: str = "utf-8",
-        decode_error: Literal["strict", "ignore", "replace", "strict"] = "strict",
+        decode_error: Literal["strict", "ignore", "replace"] = "strict",
         strip_accents: None | Literal["ascii", "unicode"] | Callable = None,
         lowercase: bool = True,
         preprocessor: None | Callable = None,
@@ -111,9 +111,9 @@ class CountVectorizer(_VectorizerMixin, BaseEstimator):
         stop_words: None | str | ArrayLike = None,
         token_pattern: None | str = r"(?u)\b\w\w+\b",
         ngram_range: tuple[float, float] = ...,
-        analyzer: Literal["word", "char", "char_wb", "word"] | Callable = "word",
-        max_df: float | int = 1.0,
-        min_df: float | int = 1,
+        analyzer: Literal["word", "char", "char_wb"] | Callable = "word",
+        max_df: float = 1.0,
+        min_df: float = 1,
         max_features: None | Int = None,
         vocabulary: Iterable | None | Mapping = None,
         binary: bool = False,
@@ -138,7 +138,7 @@ class TfidfTransformer(OneToOneFeatureMixin, TransformerMixin, BaseEstimator, au
     def __init__(
         self,
         *,
-        norm: None | Literal["l1", "l2", "l2"] = "l2",
+        norm: None | Literal["l1", "l2"] = "l2",
         use_idf: bool = True,
         smooth_idf: bool = True,
         sublinear_tf: bool = False,
@@ -160,14 +160,14 @@ class TfidfVectorizer(CountVectorizer):
     def __init__(
         self,
         *,
-        input: Literal["filename", "file", "content", "content"] = "content",
+        input: Literal["filename", "file", "content"] = "content",
         encoding: str = "utf-8",
-        decode_error: Literal["strict", "ignore", "replace", "strict"] = "strict",
+        decode_error: Literal["strict", "ignore", "replace"] = "strict",
         strip_accents: None | Literal["ascii", "unicode"] | Callable = None,
         lowercase: bool = True,
         preprocessor: None | Callable = None,
         tokenizer: None | Callable = None,
-        analyzer: Literal["word", "char", "char_wb", "word"] | Callable = "word",
+        analyzer: Literal["word", "char", "char_wb"] | Callable = "word",
         stop_words: None | str | ArrayLike = None,
         token_pattern: str = r"(?u)\b\w\w+\b",
         ngram_range: tuple[float, float] = ...,
@@ -177,7 +177,7 @@ class TfidfVectorizer(CountVectorizer):
         vocabulary: Iterable | None | Mapping = None,
         binary: bool = False,
         dtype=...,
-        norm: None | Literal["l1", "l2", "l2"] = "l2",
+        norm: None | Literal["l1", "l2"] = "l2",
         use_idf: bool = True,
         smooth_idf: bool = True,
         sublinear_tf: bool = False,

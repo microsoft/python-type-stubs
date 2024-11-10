@@ -14,7 +14,7 @@ from ..utils.parallel import Parallel as Parallel, delayed as delayed
 from ..utils.validation import check_is_fitted as check_is_fitted, check_non_negative as check_non_negative
 from ._online_lda_fast import mean_change as cy_mean_change
 
-LatentDirichletAllocation_Self = TypeVar("LatentDirichletAllocation_Self", bound="LatentDirichletAllocation")
+LatentDirichletAllocation_Self = TypeVar("LatentDirichletAllocation_Self", bound=LatentDirichletAllocation)
 
 import numpy as np
 import scipy.sparse as sp
@@ -41,7 +41,7 @@ class LatentDirichletAllocation(ClassNamePrefixFeaturesOutMixin, TransformerMixi
         *,
         doc_topic_prior: None | Float = None,
         topic_word_prior: None | Float = None,
-        learning_method: Literal["batch", "online", "batch"] = "batch",
+        learning_method: Literal["batch", "online"] = "batch",
         learning_decay: Float = 0.7,
         learning_offset: Float = 10.0,
         max_iter: Int = 10,

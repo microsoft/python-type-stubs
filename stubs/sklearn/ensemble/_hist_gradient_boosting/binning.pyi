@@ -16,7 +16,7 @@ from .common import (
     X_DTYPE as X_DTYPE,
 )
 
-_BinMapper_Self = TypeVar("_BinMapper_Self", bound="_BinMapper")
+_BinMapper_Self = TypeVar("_BinMapper_Self", bound=_BinMapper)
 
 # Author: Nicolas Hug
 

@@ -21,7 +21,7 @@ from ..utils.extmath import row_norms as row_norms, safe_sparse_dot as safe_spar
 from ..utils.validation import check_is_fitted as check_is_fitted
 from ._base import SelectorMixin
 
-_BaseFilter_Self = TypeVar("_BaseFilter_Self", bound="_BaseFilter")
+_BaseFilter_Self = TypeVar("_BaseFilter_Self", bound=_BaseFilter)
 
 # Authors: V. Michel, B. Thirion, G. Varoquaux, A. Gramfort, E. Duchesnay.
 #          L. Buitinck, A. Joly
@@ -127,6 +127,6 @@ class GenericUnivariateSelect(_BaseFilter):
         self,
         score_func: Callable = ...,
         *,
-        mode: Literal["percentile", "k_best", "fpr", "fdr", "fwe", "percentile"] = "percentile",
-        param: float | str | int = 1e-5,
+        mode: Literal["percentile", "k_best", "fpr", "fdr", "fwe"] = "percentile",
+        param: float | str = 1e-5,
     ) -> None: ...
