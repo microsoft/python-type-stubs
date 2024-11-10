@@ -15,9 +15,7 @@ from ..utils.validation import check_is_fitted as check_is_fitted
 
 AffinityPropagation_Self = TypeVar("AffinityPropagation_Self", bound="AffinityPropagation")
 
-import warnings
 
-import numpy as np
 
 ###############################################################################
 # Public API

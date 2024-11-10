@@ -50,9 +50,7 @@ PowerTransformer_Self = TypeVar("PowerTransformer_Self", bound="PowerTransformer
 #          Eric Chang <ericchang2017@u.northwestern.edu>
 # License: BSD 3 clause
 
-import warnings
 
-import numpy as np
 
 BOUNDS_THRESHOLD: float = ...
 

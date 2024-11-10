@@ -1,7 +1,5 @@
-from collections import defaultdict
 
 from ..classes.graph import Graph
-from ..utils import not_implemented_for, pairwise
 
 __all__ = [
     "cycle_basis",

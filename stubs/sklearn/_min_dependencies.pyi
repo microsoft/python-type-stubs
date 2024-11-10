@@ -1,5 +1,3 @@
-import argparse
-import platform
 from collections import defaultdict as defaultdict
 
 SCIPY_MIN_VERSION: str = ...

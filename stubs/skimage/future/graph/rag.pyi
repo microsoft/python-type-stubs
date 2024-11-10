@@ -1,10 +1,6 @@
-import math
 from typing import Callable, Literal, Mapping, Sequence
 
 import networkx as nx
-import numpy as np
-from numpy.lib.stride_tricks import as_strided
-from scipy import ndimage as ndi, sparse
 
 from ..._shared.version_requirements import require
 from .rag import RAG

@@ -1,8 +1,6 @@
-import numpy as np
 from numpy.typing import NDArray
 
 from .._shared.utils import deprecate_kwarg
-from ._util import _offsets_to_raveled_neighbors, _resolve_neighborhood, _set_border_values
 
 @deprecate_kwarg(
     kwarg_mapping={"selem": "footprint"},

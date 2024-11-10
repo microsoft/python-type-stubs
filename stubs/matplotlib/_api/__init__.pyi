@@ -1,5 +1,5 @@
 import functools
-from typing import Any, Callable, Generator, Iterable, Type
+from typing import Callable, Generator, Iterable, Type
 
 from .deprecation import MatplotlibDeprecationWarning
 

@@ -1,10 +1,8 @@
 from typing import Literal
 
-import numpy as np
 from numpy.typing import NDArray
-from scipy import ndimage as ndi
 
-from .._shared.utils import check_nD, deprecate_kwarg
+from .._shared.utils import deprecate_kwarg
 
 def skeletonize(image, *, method: Literal["zhang", "lee"] | None = None) -> NDArray: ...
 def skeletonize_2d(image) -> NDArray: ...

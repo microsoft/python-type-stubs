@@ -1,13 +1,10 @@
-import itertools
 
 # Define the default maximum flow function to use in all flow based
 # cut algorithms.
-from ...algorithms.flow import build_residual_network, edmonds_karp
 from ...classes.graph import Graph
 
 default_flow_func = ...
 
-from .utils import build_auxiliary_edge_connectivity, build_auxiliary_node_connectivity
 
 __all__ = [
     "minimum_st_node_cut",

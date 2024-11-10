@@ -4,9 +4,6 @@ from ...classes.graph import Graph
 
 __all__ = ["ISMAGS"]
 
-import itertools
-from collections import Counter, defaultdict
-from functools import reduce, wraps
 
 def are_all_equal(iterable) -> bool: ...
 def make_partitions(items, test): ...

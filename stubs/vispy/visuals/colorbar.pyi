@@ -8,13 +8,9 @@
 
 from functools import lru_cache
 
-import numpy as np
-
-from ..color import get_colormap
-from . import CompoundVisual, TextVisual, Visual, _BorderVisual
+from . import CompoundVisual, Visual
 
 # from .border import _BorderVisual
-from .shaders import Function
 
 _VERTEX_SHADER: str = ...  # noqa
 

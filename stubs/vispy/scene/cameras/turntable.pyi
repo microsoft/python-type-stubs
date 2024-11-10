@@ -4,9 +4,6 @@
 
 from __future__ import division
 
-import numpy as np
-
-from ...util import transforms
 from .perspective import Base3DRotationCamera
 
 class TurntableCamera(Base3DRotationCamera):

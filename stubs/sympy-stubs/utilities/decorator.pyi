@@ -1,5 +1,4 @@
 from functools import _Wrapped
-from types import FunctionType
 from typing import Any, Callable
 
 def threaded_factory(func, use_add) -> _Wrapped[..., Any, ..., Any]: ...

@@ -1,5 +1,3 @@
-import functools
-import warnings
 from typing import Any, Callable
 
 __all__ = ["deprecated"]

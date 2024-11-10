@@ -1,4 +1,3 @@
-import numpy as np
 from numpy.typing import ArrayLike, NDArray
 
 def hough_line_peaks(

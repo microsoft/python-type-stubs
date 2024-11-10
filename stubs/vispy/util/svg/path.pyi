@@ -3,13 +3,8 @@
 # Copyright (c) 2014, Nicolas P. Rougier
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 # -----------------------------------------------------------------------------
-import math
-import re
 
-import numpy as np
 
-from . import geometry
-from .geometry import epsilon
 from .transformable import Transformable
 
 # ----------------------------------------------------------------- Command ---

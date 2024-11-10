@@ -1,9 +1,5 @@
-import itertools
-import time
-from xml.etree.ElementTree import Element, ElementTree, SubElement, register_namespace, tostring
 
 from ..classes.graph import Graph
-from ..utils import open_file
 
 __all__ = ["write_gexf", "read_gexf", "relabel_gexf_graph", "generate_gexf"]
 

@@ -12,12 +12,9 @@ from ..utils import check_random_state as check_random_state, gen_batches as gen
 from ..utils._param_validation import Interval as Interval, StrOptions as StrOptions
 from ..utils.parallel import Parallel as Parallel, delayed as delayed
 from ..utils.validation import check_is_fitted as check_is_fitted, check_non_negative as check_non_negative
-from ._online_lda_fast import mean_change as cy_mean_change
 
 LatentDirichletAllocation_Self = TypeVar("LatentDirichletAllocation_Self", bound="LatentDirichletAllocation")
 
-import numpy as np
-import scipy.sparse as sp
 
 EPS = ...
 

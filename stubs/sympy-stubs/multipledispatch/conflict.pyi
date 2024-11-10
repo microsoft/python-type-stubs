@@ -1,4 +1,4 @@
-from typing import Any, _T_co
+from typing import _T_co
 
 class AmbiguityWarning(Warning): ...
 

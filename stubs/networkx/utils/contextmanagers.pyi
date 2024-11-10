@@ -1,4 +1,3 @@
-import warnings
 from contextlib import contextmanager
 
 from ..classes.graph import Graph

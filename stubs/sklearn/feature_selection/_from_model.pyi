@@ -17,7 +17,6 @@ SelectFromModel_Self = TypeVar("SelectFromModel_Self", bound="SelectFromModel")
 # Authors: Gilles Louppe, Mathieu Blondel, Maheshakya Wijewardena
 # License: BSD 3 clause
 
-import numpy as np
 
 class SelectFromModel(MetaEstimatorMixin, SelectorMixin, BaseEstimator):
     feature_names_in_: ndarray = ...

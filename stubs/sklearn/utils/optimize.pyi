@@ -1,6 +1,4 @@
-import warnings
 
-import numpy as np
 
 from ..exceptions import ConvergenceWarning as ConvergenceWarning
 

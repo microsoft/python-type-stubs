@@ -1,4 +1,3 @@
-import subprocess
 
 from numpy.typing import ArrayLike
 

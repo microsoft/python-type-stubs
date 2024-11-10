@@ -1,6 +1,4 @@
-import numpy as np
 from numpy.typing import NDArray
-from scipy import ndimage as ndi
 
 from .._shared.utils import deprecate_kwarg
 from .misc import default_footprint

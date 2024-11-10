@@ -9,7 +9,6 @@ from typing import Optional
 
 import numpy as np
 
-from ..shaders import Function, Varying
 from .base_filter import Filter
 
 class PlanesClipper(Filter):

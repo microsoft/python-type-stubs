@@ -1,11 +1,6 @@
-import functools
-from functools import wraps
 from typing import Callable
 
-import numpy as np
 from numpy.typing import ArrayLike
-
-from ...util import logger
 
 # -*- coding: utf-8 -*-
 # Copyright (c) Vispy Development Team. All Rights Reserved.

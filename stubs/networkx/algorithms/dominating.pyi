@@ -1,8 +1,6 @@
 from collections.abc import Iterable
-from itertools import chain
 
 from ..classes.graph import Graph
-from ..utils import arbitrary_element
 
 __all__ = ["dominating_set", "is_dominating_set"]
 

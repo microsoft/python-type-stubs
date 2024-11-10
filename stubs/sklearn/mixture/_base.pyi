@@ -22,9 +22,7 @@ BaseMixture_Self = TypeVar("BaseMixture_Self", bound="BaseMixture")
 # Modified by Thierry Guillemot <thierry.guillemot.work@gmail.com>
 # License: BSD 3 clause
 
-import warnings
 
-import numpy as np
 
 class BaseMixture(DensityMixin, BaseEstimator, metaclass=ABCMeta):
     _parameter_constraints: ClassVar[dict] = ...

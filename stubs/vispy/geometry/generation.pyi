@@ -1,4 +1,3 @@
-import numpy as np
 from numpy.typing import ArrayLike, NDArray
 
 from ..geometry.meshdata import MeshData

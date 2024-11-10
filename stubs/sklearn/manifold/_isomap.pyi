@@ -20,9 +20,7 @@ Isomap_Self = TypeVar("Isomap_Self", bound="Isomap")
 
 # Author: Jake Vanderplas  -- <vanderplas@astro.washington.edu>
 # License: BSD 3 clause (C) 2011
-import warnings
 
-import numpy as np
 
 class Isomap(ClassNamePrefixFeaturesOutMixin, TransformerMixin, BaseEstimator):
     feature_names_in_: ndarray = ...

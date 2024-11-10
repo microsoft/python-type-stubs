@@ -25,10 +25,7 @@ AdditiveChi2Sampler_Self = TypeVar("AdditiveChi2Sampler_Self", bound="AdditiveCh
 RBFSampler_Self = TypeVar("RBFSampler_Self", bound="RBFSampler")
 Nystroem_Self = TypeVar("Nystroem_Self", bound="Nystroem")
 
-import warnings
 
-import numpy as np
-import scipy.sparse as sp
 
 class PolynomialCountSketch(ClassNamePrefixFeaturesOutMixin, TransformerMixin, BaseEstimator):
     feature_names_in_: ndarray = ...

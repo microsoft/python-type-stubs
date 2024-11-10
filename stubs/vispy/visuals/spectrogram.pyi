@@ -1,9 +1,7 @@
 from typing import Literal
 
-import numpy as np
 from numpy.typing import ArrayLike
 
-from ..util.fourier import fft_freqs, stft
 from .image import ImageVisual
 
 # -*- coding: utf-8 -*-

@@ -1,12 +1,8 @@
-from collections import defaultdict
-from itertools import combinations, permutations
-from random import sample
 from typing import Mapping
 
 from numpy.typing import ArrayLike
 
 from ..classes.graph import Graph
-from ..utils import not_implemented_for
 
 # See https://github.com/networkx/networkx/pull/1474
 # Copyright 2011 Reya Group <http://www.reyagroup.com>

@@ -1,9 +1,6 @@
-import itertools
-import math
 
 from numpy.typing import ArrayLike
 
-from ..classes.graph import Graph
 from ..utils import py_random_state
 
 __all__ = [

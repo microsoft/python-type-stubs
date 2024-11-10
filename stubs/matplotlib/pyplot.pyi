@@ -1,18 +1,14 @@
 import datetime
-from array import array
 from typing import Callable, ContextManager, Literal, Sequence, overload
 
-import matplotlib
-import matplotlib.image
 import numpy as np
 from matplotlib import rcParams as rcParams, style as style
 from matplotlib.contour import QuadContourSet
 
-from . import rcParams
 from ._typing import *
 from .artist import Artist
 from .axes import Axes as Axes
-from .backend_bases import FigureCanvasBase, FigureManagerBase, MouseButton, _Backend
+from .backend_bases import FigureManagerBase, MouseButton, _Backend
 from .collections import BrokenBarHCollection, Collection, LineCollection, PathCollection, PolyCollection, QuadMesh
 from .colors import Colormap, Normalize
 from .container import BarContainer, ErrorbarContainer, StemContainer
@@ -23,7 +19,6 @@ from .lines import Line2D
 from .markers import MarkerStyle
 from .patches import FancyArrow, Polygon
 from .quiver import Quiver
-from .rcsetup import interactive_bk as _interactive_bk
 from .scale import ScaleBase
 from .streamplot import StreamplotSet
 from .table import Table

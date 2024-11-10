@@ -18,7 +18,6 @@ _BasePCA_Self = TypeVar("_BasePCA_Self", bound="_BasePCA")
 #
 # License: BSD 3 clause
 
-import numpy as np
 
 class _BasePCA(ClassNamePrefixFeaturesOutMixin, TransformerMixin, BaseEstimator, metaclass=ABCMeta):
     def get_covariance(self) -> ndarray: ...

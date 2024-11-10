@@ -20,10 +20,7 @@ from ..utils.validation import check_array as check_array, check_is_fitted as ch
 
 NeighborhoodComponentsAnalysis_Self = TypeVar("NeighborhoodComponentsAnalysis_Self", bound="NeighborhoodComponentsAnalysis")
 
-import sys
-import time
 
-import numpy as np
 
 class NeighborhoodComponentsAnalysis(ClassNamePrefixFeaturesOutMixin, TransformerMixin, BaseEstimator):
     feature_names_in_: ndarray = ...

@@ -1,9 +1,7 @@
 import abc
 import contextlib
 from itertools import count
-from typing import Callable, Generator, Iterable, Iterator, List
-
-from matplotlib.backend_bases import NonGuiException
+from typing import Callable, Generator, Iterable, Iterator
 
 from .figure import Figure
 

@@ -2,7 +2,6 @@ from numbers import Integral as Integral, Real as Real
 from typing import ClassVar, Literal, TypeVar
 
 from numpy import ndarray
-from scipy import linalg
 
 from ._typing import ArrayLike, Float, Int, MatrixLike
 from .base import BaseEstimator, ClassifierMixin, ClassNamePrefixFeaturesOutMixin, TransformerMixin
@@ -30,10 +29,7 @@ QuadraticDiscriminantAnalysis_Self = TypeVar("QuadraticDiscriminantAnalysis_Self
 
 # License: BSD 3-Clause
 
-import warnings
 
-import numpy as np
-import scipy.linalg
 
 __all__ = ["LinearDiscriminantAnalysis", "QuadraticDiscriminantAnalysis"]
 

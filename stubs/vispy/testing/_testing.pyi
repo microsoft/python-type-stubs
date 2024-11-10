@@ -6,17 +6,6 @@
 
 from __future__ import print_function
 
-import functools
-import gc
-import inspect
-import os
-import sys
-from distutils.version import LooseVersion
-
-import numpy as np
-
-from ..util.check_environment import has_backend
-
 skipif = ...
 
 IS_TRAVIS_CI = ...

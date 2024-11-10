@@ -1,6 +1,5 @@
 from typing import Literal, Sequence
 
-import numpy as np
 from numpy import ndarray
 
 from .._typing import Float, Int

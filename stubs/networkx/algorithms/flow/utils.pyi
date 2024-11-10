@@ -1,4 +1,3 @@
-from collections import deque
 
 from ...classes.graph import Graph
 

@@ -1,16 +1,12 @@
 from collections.abc import Iterable
-from copy import deepcopy
 from functools import cached_property
 from typing import Mapping
 
-import networkx.convert as convert
 from numpy.typing import ArrayLike
 
-from ..classes.coreviews import AdjacencyView
 from ..classes.digraph import DiGraph
 from ..classes.graph import Graph
 from ..classes.reportviews import DegreeView, EdgeView, NodeView
-from ..exception import NetworkXError
 
 __all__ = ["Graph"]
 

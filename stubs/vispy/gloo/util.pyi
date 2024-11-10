@@ -1,5 +1,4 @@
 from ..gloo.texture import Texture2D
-from .wrappers import read_pixels
 
 # -*- coding: utf-8 -*-
 # -----------------------------------------------------------------------------

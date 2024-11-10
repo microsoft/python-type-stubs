@@ -1,5 +1,3 @@
-import os
-import sys
 from typing import Literal
 
 from numpy.typing import ArrayLike

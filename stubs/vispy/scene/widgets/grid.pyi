@@ -1,7 +1,4 @@
-import numpy as np
-from kiwisolver import Solver, UnsatisfiableConstraint, Variable
 
-from .viewbox import ViewBox
 from .widget import Widget
 
 # -*- coding: utf-8 -*-
