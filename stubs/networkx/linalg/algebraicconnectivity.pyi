@@ -1,7 +1,6 @@
-from functools import partial
 
 from ..classes.graph import Graph
-from ..utils import not_implemented_for, np_random_state, reverse_cuthill_mckee_ordering
+from ..utils import np_random_state
 
 __all__ = ["algebraic_connectivity", "fiedler_vector", "spectral_ordering"]
 

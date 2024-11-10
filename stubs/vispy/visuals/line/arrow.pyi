@@ -1,9 +1,6 @@
-import numpy as np
 from numpy.typing import ArrayLike
 
-from ... import gloo, glsl
 from ...util.svg.color import Color
-from ..transforms._util import as_vec4
 from ..visual import Visual
 from .line import LineVisual
 

@@ -1,8 +1,6 @@
 from typing import Mapping
 
 from ...classes.graph import Graph
-from ...utils import dict_to_numpy_array
-from .pairs import node_attribute_xy, node_degree_xy
 
 __all__ = [
     "attribute_mixing_matrix",

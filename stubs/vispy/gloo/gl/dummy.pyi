@@ -2,7 +2,7 @@
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 
-from . import BaseGLProxy, _copy_gl_functions
+from . import BaseGLProxy
 from ._constants import *  # noqa
 
 class DummyProxy(BaseGLProxy):

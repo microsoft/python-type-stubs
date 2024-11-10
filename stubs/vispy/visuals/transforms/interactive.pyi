@@ -1,4 +1,3 @@
-import numpy as np
 
 from ...app.canvas import Canvas
 from ...util.event import Event

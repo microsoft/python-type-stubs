@@ -19,9 +19,7 @@ EmpiricalCovariance_Self = TypeVar("EmpiricalCovariance_Self", bound="EmpiricalC
 # License: BSD 3 clause
 
 # avoid division truncation
-import warnings
 
-import numpy as np
 
 def log_likelihood(emp_cov: MatrixLike, precision: MatrixLike) -> Float: ...
 def empirical_covariance(X: ArrayLike, *, assume_centered: bool = False) -> ndarray: ...

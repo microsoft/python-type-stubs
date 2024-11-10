@@ -20,12 +20,7 @@ from ..utils.validation import check_is_fitted as check_is_fitted, check_non_neg
 MiniBatchNMF_Self = TypeVar("MiniBatchNMF_Self", bound="MiniBatchNMF")
 _BaseNMF_Self = TypeVar("_BaseNMF_Self", bound="_BaseNMF")
 
-import itertools
-import time
-import warnings
 
-import numpy as np
-import scipy.sparse as sp
 
 EPSILON = ...
 

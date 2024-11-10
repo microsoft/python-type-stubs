@@ -26,12 +26,7 @@ from ._split import BaseShuffleSplit, check_cv as check_cv
 BaseSearchCV_Self = TypeVar("BaseSearchCV_Self", bound="BaseSearchCV")
 BaseEstimatorT = TypeVar("BaseEstimatorT", bound=BaseEstimator, default=BaseEstimator, covariant=True)
 
-import numbers
-import operator
-import time
-import warnings
 
-import numpy as np
 
 __all__ = ["GridSearchCV", "ParameterGrid", "ParameterSampler", "RandomizedSearchCV"]
 

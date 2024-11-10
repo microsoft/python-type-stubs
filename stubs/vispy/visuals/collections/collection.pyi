@@ -1,12 +1,7 @@
 import numpy as np
-from numpy import dtype
 from numpy.typing import ArrayLike
 
-from ... import gloo
-from ...util.event import EventEmitter
-from ..shaders import ModularProgram
 from .base_collection import BaseCollection
-from .util import fetchcode
 
 # -*- coding: utf-8 -*-
 # -----------------------------------------------------------------------------

@@ -1,5 +1,3 @@
-import numpy as np
-from scipy.spatial.distance import cdist
 
 def match_descriptors(
     descriptors1,

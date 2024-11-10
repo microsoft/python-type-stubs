@@ -1,6 +1,6 @@
 from heapq import heapify as heapify, heappop as heappop, heappush as heappush, heappushpop as heappushpop
 from numbers import Integral as Integral, Real as Real
-from typing import Any, Callable, ClassVar, Literal, Set, TypeVar
+from typing import Any, Callable, ClassVar, Literal, TypeVar
 
 from joblib import Memory
 from numpy import ndarray
@@ -22,9 +22,7 @@ from ._feature_agglomeration import AgglomerationTransform
 FeatureAgglomeration_Self = TypeVar("FeatureAgglomeration_Self", bound="FeatureAgglomeration")
 AgglomerativeClustering_Self = TypeVar("AgglomerativeClustering_Self", bound="AgglomerativeClustering")
 
-import warnings
 
-import numpy as np
 
 ###############################################################################
 # Hierarchical tree building functions

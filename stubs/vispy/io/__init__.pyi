@@ -2,7 +2,6 @@
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 
-from os import path as _op
 
 from .datasets import (  # noqa
     load_crate as load_crate,

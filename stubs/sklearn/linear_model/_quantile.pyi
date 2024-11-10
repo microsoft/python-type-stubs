@@ -16,9 +16,7 @@ QuantileRegressor_Self = TypeVar("QuantileRegressor_Self", bound="QuantileRegres
 # Authors: David Dale <dale.david@mail.ru>
 #          Christian Lorentzen <lorentzen.ch@gmail.com>
 # License: BSD 3 clause
-import warnings
 
-import numpy as np
 
 class QuantileRegressor(LinearModel, RegressorMixin, BaseEstimator):
     n_iter_: int = ...

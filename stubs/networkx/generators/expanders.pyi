@@ -1,6 +1,4 @@
-import itertools
 
-from ..classes.graph import Graph
 
 __all__ = ["margulis_gabber_galil_graph", "chordal_cycle_graph", "paley_graph"]
 

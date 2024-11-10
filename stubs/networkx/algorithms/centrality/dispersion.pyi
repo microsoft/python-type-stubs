@@ -1,4 +1,3 @@
-from itertools import combinations
 from typing import Mapping
 
 from ...classes.graph import Graph

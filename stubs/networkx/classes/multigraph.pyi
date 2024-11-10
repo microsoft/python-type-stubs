@@ -1,11 +1,6 @@
-from copy import deepcopy
 from functools import cached_property
 from typing import Mapping
 
-import networkx.convert as convert
-from networkx import NetworkXError
-
-from ..classes.coreviews import MultiAdjacencyView
 from ..classes.graph import Graph
 from ..classes.multidigraph import MultiDiGraph
 from ..classes.reportviews import MultiDegreeView, MultiEdgeView

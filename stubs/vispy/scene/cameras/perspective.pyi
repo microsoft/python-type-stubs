@@ -1,11 +1,7 @@
-import math
 
-import numpy as np
 
 from ..._typing import Scalar
-from ...util import keys, transforms
 from ...util.event import Event
-from ...visuals.transforms import MatrixTransform
 from .base_camera import BaseCamera
 
 # -*- coding: utf-8 -*-

@@ -17,9 +17,7 @@ TransformedTargetRegressor_Self = TypeVar("TransformedTargetRegressor_Self", bou
 #          Guillaume Lemaitre <guillaume.lemaitre@inria.fr>
 # License: BSD 3 clause
 
-import warnings
 
-import numpy as np
 
 __all__ = ["TransformedTargetRegressor"]
 

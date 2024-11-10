@@ -1,4 +1,3 @@
-import warnings
 from collections.abc import Mapping
 
 __all__ = [

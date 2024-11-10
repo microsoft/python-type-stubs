@@ -59,7 +59,6 @@
 # policies, either expressed or implied, of Nicolas P. Rougier.
 #
 # ----------------------------------------------------------------------------
-import math
 
 curve_distance_epsilon: float = ...
 curve_collinearity_epsilon: float = ...

@@ -1,11 +1,8 @@
-import warnings
-from locale import getpreferredencoding
 from typing import Mapping
 
 from ..classes.graph import Graph
 from ..classes.multidigraph import MultiDiGraph
 from ..classes.multigraph import MultiGraph
-from ..utils import open_file
 
 __all__ = [
     "write_dot",

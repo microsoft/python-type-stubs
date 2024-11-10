@@ -15,7 +15,6 @@ from ._dict_learning import MiniBatchDictionaryLearning as MiniBatchDictionaryLe
 
 _BaseSparsePCA_Self = TypeVar("_BaseSparsePCA_Self", bound="_BaseSparsePCA")
 
-import numpy as np
 
 class _BaseSparsePCA(ClassNamePrefixFeaturesOutMixin, TransformerMixin, BaseEstimator):
     _parameter_constraints: ClassVar[dict] = ...

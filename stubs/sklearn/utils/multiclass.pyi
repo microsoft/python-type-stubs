@@ -1,11 +1,9 @@
 # Author: Arnaud Joly, Joel Nothman, Hamzeh Alsalhi
 #
 # License: BSD 3 clause
-import warnings
 from collections.abc import Sequence as Sequence
 from itertools import chain as chain
 
-import numpy as np
 from numpy import ndarray
 from scipy.sparse import dok_matrix as dok_matrix, issparse as issparse, lil_matrix as lil_matrix
 

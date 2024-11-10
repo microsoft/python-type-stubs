@@ -10,7 +10,7 @@ from .._typing import ArrayLike, Float, Int, MatrixLike
 from ..base import BaseEstimator, MultiOutputMixin, RegressorMixin, clone as clone
 from ..utils import check_random_state as check_random_state
 from ..utils._param_validation import Interval as Interval, StrOptions as StrOptions
-from .kernels import RBF as RBF, ConstantKernel as C, Kernel
+from .kernels import RBF as RBF, Kernel
 
 GaussianProcessRegressor_Self = TypeVar("GaussianProcessRegressor_Self", bound="GaussianProcessRegressor")
 
@@ -18,10 +18,7 @@ GaussianProcessRegressor_Self = TypeVar("GaussianProcessRegressor_Self", bound="
 # Modified by: Pete Green <p.l.green@liverpool.ac.uk>
 # License: BSD 3 clause
 
-import warnings
 
-import numpy as np
-import scipy.optimize
 
 GPR_CHOLESKY_LOWER: bool = ...
 

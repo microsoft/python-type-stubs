@@ -1,6 +1,5 @@
 from typing import Mapping
 
-import numpy as np
 from numpy.typing import ArrayLike, NDArray
 
 # -*- coding: utf-8 -*-

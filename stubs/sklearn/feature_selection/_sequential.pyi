@@ -14,9 +14,7 @@ from ._base import SelectorMixin
 
 SequentialFeatureSelector_Self = TypeVar("SequentialFeatureSelector_Self", bound="SequentialFeatureSelector")
 
-import warnings
 
-import numpy as np
 
 class SequentialFeatureSelector(SelectorMixin, MetaEstimatorMixin, BaseEstimator):
     support_: ndarray = ...

@@ -1,9 +1,5 @@
-import numpy as np
 
-from .._shared.utils import check_nD
-from ..feature import corner_fast, corner_harris, corner_orientations, corner_peaks
-from ..feature.util import DescriptorExtractor, FeatureDetector, _mask_border_keypoints, _prepare_grayscale_input_2D
-from ..transform import pyramid_gaussian
+from ..feature.util import DescriptorExtractor, FeatureDetector
 
 OFAST_MASK = ...
 OFAST_UMAX: list = ...

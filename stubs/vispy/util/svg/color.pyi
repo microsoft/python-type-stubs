@@ -4,8 +4,6 @@
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 # -----------------------------------------------------------------------------
 
-from itertools import product
-from string import hexdigits
 
 # See <http://www.w3.org/TR/SVG/types.html#ColorKeywords>
 _keyword_colors: dict = ...

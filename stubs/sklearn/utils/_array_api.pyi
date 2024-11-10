@@ -1,7 +1,5 @@
 from typing import Type
 
-import numpy
-import scipy.special as special
 from numpy import int32, ndarray
 
 from .._config import get_config as get_config

@@ -1,12 +1,6 @@
-import math
 
-import numpy as np
-import scipy.ndimage as ndi
 
-from .._shared.filters import gaussian
-from .._shared.utils import _supported_float_type, check_nD
 from ..feature.util import DescriptorExtractor, FeatureDetector
-from ..transform import rescale
 
 def _edgeness(hxx, hyy, hxy): ...
 def _sparse_gradient(vol, positions): ...

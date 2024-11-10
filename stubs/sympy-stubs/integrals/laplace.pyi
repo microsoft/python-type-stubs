@@ -1,8 +1,7 @@
-from typing import Any, Callable
+from typing import Any
 
 from sympy import MatrixBase
 from sympy.core.basic import Basic
-from sympy.core.expr import Expr
 from sympy.core.function import UndefinedFunction
 from sympy.core.logic import And
 from sympy.core.mul import Mul

@@ -1,5 +1,4 @@
 from ...classes.graph import Graph
-from ...utils import arbitrary_element, not_implemented_for
 
 __all__ = ["ramsey_R2"]
 

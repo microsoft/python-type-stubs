@@ -1,10 +1,7 @@
 # -*- coding: utf-8 -*-
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
-from collections import OrderedDict
-from weakref import WeakKeyDictionary
 
-from .compiler import Compiler
 
 class ShaderObject(object):
     @classmethod

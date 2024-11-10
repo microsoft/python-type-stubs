@@ -1,4 +1,3 @@
-import numpy as np
 
 _data_cache: None = ...
 

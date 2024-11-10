@@ -1,5 +1,4 @@
 from typing import Mapping
-from warnings import warn
 
 from numpy.typing import ArrayLike
 

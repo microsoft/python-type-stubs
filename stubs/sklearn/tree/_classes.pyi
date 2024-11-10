@@ -43,11 +43,7 @@ DecisionTreeRegressor_Self = TypeVar("DecisionTreeRegressor_Self", bound="Decisi
 #
 # License: BSD 3 clause
 
-import copy
-import numbers
-import warnings
 
-import numpy as np
 
 __all__ = [
     "DecisionTreeClassifier",

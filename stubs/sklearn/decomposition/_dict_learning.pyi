@@ -29,12 +29,7 @@ MiniBatchDictionaryLearning_Self = TypeVar("MiniBatchDictionaryLearning_Self", b
 # Author: Vlad Niculae, Gael Varoquaux, Alexandre Gramfort
 # License: BSD 3 clause
 
-import itertools
-import sys
-import time
-import warnings
 
-import numpy as np
 
 # XXX : could be moved to the linear_model module
 def sparse_encode(

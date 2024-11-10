@@ -1,5 +1,5 @@
 from functools import _Wrapped
-from typing import Any, Callable
+from typing import Any
 
 def apply_on_element(f, args, kwargs, n) -> list[list[Any] | Any]: ...
 def iter_copy(structure) -> list[Any]: ...

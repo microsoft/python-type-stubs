@@ -22,9 +22,7 @@ MeanShift_Self = TypeVar("MeanShift_Self", bound="MeanShift")
 #          Gael Varoquaux <gael.varoquaux@normalesup.org>
 #          Martino Sorbaro <martino.sorbaro@ed.ac.uk>
 
-import warnings
 
-import numpy as np
 
 def estimate_bandwidth(
     X: MatrixLike,

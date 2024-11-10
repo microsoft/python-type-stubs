@@ -1,8 +1,6 @@
-import numpy as np
 from numpy.typing import ArrayLike
 
-from ... import gloo
-from ._util import arg_to_array, arg_to_vec4, as_vec4
+from ._util import arg_to_array, arg_to_vec4
 from .base_transform import BaseTransform
 
 # -*- coding: utf-8 -*-

@@ -15,9 +15,7 @@ from ..utils.metaestimators import _BaseComposition
 
 _BaseHeterogeneousEnsemble_Self = TypeVar("_BaseHeterogeneousEnsemble_Self", bound="_BaseHeterogeneousEnsemble")
 
-import warnings
 
-import numpy as np
 
 class BaseEnsemble(MetaEstimatorMixin, BaseEstimator, metaclass=ABCMeta):
     estimators_: list[BaseEstimator] = ...

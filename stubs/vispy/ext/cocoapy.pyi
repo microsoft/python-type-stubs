@@ -1,46 +1,7 @@
 # -*- coding: utf-8 -*-
 
-import platform
-import struct
-import sys
 from ctypes import (
-    CFUNCTYPE,
-    POINTER,
-    ArgumentError,
     Structure,
-    alignment,
-    byref,
-    c_bool,
-    c_buffer,
-    c_byte,
-    c_char,
-    c_char_p,
-    c_double,
-    c_float,
-    c_int,
-    c_int8,
-    c_int16,
-    c_int32,
-    c_int64,
-    c_long,
-    c_longdouble,
-    c_longlong,
-    c_short,
-    c_size_t,
-    c_ubyte,
-    c_uint,
-    c_uint8,
-    c_uint32,
-    c_ulong,
-    c_ulonglong,
-    c_ushort,
-    c_void_p,
-    c_wchar,
-    cast,
-    cdll,
-    py_object,
-    sizeof,
-    util,
 )
 
 # Based on Pyglet code

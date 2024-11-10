@@ -1,7 +1,5 @@
-from itertools import chain
 
 from ..classes.graph import Graph
-from ..utils import not_implemented_for
 
 __all__ = ["bridges", "has_bridges", "local_bridges"]
 

@@ -1,4 +1,3 @@
-from functools import partial
 from typing import Any
 
 from ..classes.graph import Graph

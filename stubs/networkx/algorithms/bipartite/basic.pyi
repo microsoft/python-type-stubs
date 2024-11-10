@@ -1,8 +1,6 @@
 from typing import Mapping
 
-from ...algorithms.components import connected_components
 from ...classes.graph import Graph
-from ...exception import AmbiguousSolution
 
 __all__ = [
     "is_bipartite",
