@@ -29,7 +29,7 @@ class DecisionBoundaryDisplay:
     ) -> None: ...
     def plot(
         self,
-        plot_method: Literal["contourf", "contourf", "contour", "pcolormesh"] = "contourf",
+        plot_method: Literal["contourf", "contour", "pcolormesh"] = "contourf",
         ax: None | Axes = None,
         xlabel: None | str = None,
         ylabel: None | str = None,
@@ -43,8 +43,8 @@ class DecisionBoundaryDisplay:
         *,
         grid_resolution: Int = 100,
         eps: Float = 1.0,
-        plot_method: Literal["contourf", "contour", "pcolormesh", "contourf"] = "contourf",
-        response_method: Literal["auto", "predict_proba", "decision_function", "predict", "auto"] = "auto",
+        plot_method: Literal["contourf", "contour", "pcolormesh"] = "contourf",
+        response_method: Literal["auto", "predict_proba", "decision_function", "predict"] = "auto",
         xlabel: None | str = None,
         ylabel: None | str = None,
         ax: None | Axes = None,

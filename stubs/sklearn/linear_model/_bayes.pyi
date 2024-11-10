@@ -12,8 +12,8 @@ from ..utils._param_validation import Interval as Interval
 from ..utils.extmath import fast_logdet as fast_logdet
 from ._base import LinearModel
 
-BayesianRidge_Self = TypeVar("BayesianRidge_Self", bound="BayesianRidge")
-ARDRegression_Self = TypeVar("ARDRegression_Self", bound="ARDRegression")
+BayesianRidge_Self = TypeVar("BayesianRidge_Self", bound=BayesianRidge)
+ARDRegression_Self = TypeVar("ARDRegression_Self", bound=ARDRegression)
 
 import numpy as np
 

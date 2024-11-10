@@ -16,7 +16,7 @@ from ..utils.extmath import softmax as softmax, stable_cumsum as stable_cumsum
 from ..utils.validation import check_is_fitted as check_is_fitted, has_fit_parameter as has_fit_parameter
 from ._base import BaseEnsemble
 
-BaseWeightBoosting_Self = TypeVar("BaseWeightBoosting_Self", bound="BaseWeightBoosting")
+BaseWeightBoosting_Self = TypeVar("BaseWeightBoosting_Self", bound=BaseWeightBoosting)
 
 import warnings
 
@@ -76,7 +76,7 @@ class AdaBoostClassifier(ClassifierMixin, BaseWeightBoosting):
         *,
         n_estimators: Int = 50,
         learning_rate: Float = 1.0,
-        algorithm: Literal["SAMME", "SAMME.R", "SAMME.R"] = "SAMME.R",
+        algorithm: Literal["SAMME", "SAMME.R"] = "SAMME.R",
         random_state: RandomState | None | Int = None,
         base_estimator: Any = "deprecated",
     ) -> None: ...
@@ -106,7 +106,7 @@ class AdaBoostRegressor(RegressorMixin, BaseWeightBoosting):
         *,
         n_estimators: Int = 50,
         learning_rate: Float = 1.0,
-        loss: Literal["linear", "square", "exponential", "linear"] = "linear",
+        loss: Literal["linear", "square", "exponential"] = "linear",
         random_state: RandomState | None | Int = None,
         base_estimator: Any = "deprecated",
     ) -> None: ...

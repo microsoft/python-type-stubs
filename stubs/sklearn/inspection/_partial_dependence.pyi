@@ -28,9 +28,9 @@ def partial_dependence(
     *,
     categorical_features: None | MatrixLike | ArrayLike = None,
     feature_names: None | ArrayLike = None,
-    response_method: Literal["auto", "predict_proba", "decision_function", "auto"] = "auto",
+    response_method: Literal["auto", "predict_proba", "decision_function"] = "auto",
     percentiles: tuple[float, ...] = ...,
     grid_resolution: Int = 100,
-    method: Literal["auto", "recursion", "brute", "auto"] = "auto",
-    kind: Literal["average", "individual", "both", "average"] = "average",
+    method: Literal["auto", "recursion", "brute"] = "auto",
+    kind: Literal["average", "individual", "both"] = "average",
 ) -> Bunch: ...

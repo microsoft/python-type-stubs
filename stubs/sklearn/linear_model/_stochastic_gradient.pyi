@@ -29,9 +29,9 @@ from ._sgd_fast import (
     SquaredLoss as SquaredLoss,
 )
 
-BaseSGDClassifier_Self = TypeVar("BaseSGDClassifier_Self", bound="BaseSGDClassifier")
-SGDOneClassSVM_Self = TypeVar("SGDOneClassSVM_Self", bound="SGDOneClassSVM")
-BaseSGDRegressor_Self = TypeVar("BaseSGDRegressor_Self", bound="BaseSGDRegressor")
+BaseSGDClassifier_Self = TypeVar("BaseSGDClassifier_Self", bound=BaseSGDClassifier)
+SGDOneClassSVM_Self = TypeVar("SGDOneClassSVM_Self", bound=SGDOneClassSVM)
+BaseSGDRegressor_Self = TypeVar("BaseSGDRegressor_Self", bound=BaseSGDRegressor)
 
 # Authors: Peter Prettenhofer <peter.prettenhofer@gmail.com> (main author)
 #          Mathieu Blondel (partial_fit support)
@@ -170,21 +170,9 @@ class SGDClassifier(BaseSGDClassifier):
 
     def __init__(
         self,
-        loss: Literal[
-            "hinge",
-            "log_loss",
-            "log",
-            "modified_huber",
-            "squared_hinge",
-            "perceptron",
-            "squared_error",
-            "huber",
-            "epsilon_insensitive",
-            "squared_epsilon_insensitive",
-            "hinge",
-        ] = "hinge",
+        loss: Literal["hinge", "log_loss", "log", "modified_huber", "squared_hinge", "perceptron", "squared_error", "huber", "epsilon_insensitive", "squared_epsilon_insensitive"] = "hinge",
         *,
-        penalty: None | Literal["l2", "l1", "elasticnet", "l2"] = "l2",
+        penalty: None | Literal["l2", "l1", "elasticnet"] = "l2",
         alpha: Float = 0.0001,
         l1_ratio: Float = 0.15,
         fit_intercept: bool = True,
@@ -267,7 +255,7 @@ class SGDRegressor(BaseSGDRegressor):
         self,
         loss: str = "squared_error",
         *,
-        penalty: None | Literal["l2", "l1", "elasticnet", "l2"] = "l2",
+        penalty: None | Literal["l2", "l1", "elasticnet"] = "l2",
         alpha: Float = 0.0001,
         l1_ratio: Float = 0.15,
         fit_intercept: bool = True,
@@ -309,7 +297,7 @@ class SGDOneClassSVM(BaseSGD, OutlierMixin):
         shuffle: bool = True,
         verbose: Int = 0,
         random_state: RandomState | None | Int = None,
-        learning_rate: Literal["optimal", "constant", "optimal", "invscaling", "adaptive"] = "optimal",
+        learning_rate: Literal["optimal", "constant", "invscaling", "adaptive"] = "optimal",
         eta0: Float = 0.0,
         power_t: Float = 0.5,
         warm_start: bool = False,

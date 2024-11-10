@@ -10,7 +10,7 @@ from .base import BaseEstimator, RegressorMixin, TransformerMixin
 from .utils import check_array as check_array, check_consistent_length as check_consistent_length
 from .utils._param_validation import Interval as Interval, StrOptions as StrOptions
 
-IsotonicRegression_Self = TypeVar("IsotonicRegression_Self", bound="IsotonicRegression")
+IsotonicRegression_Self = TypeVar("IsotonicRegression_Self", bound=IsotonicRegression)
 
 # Authors: Fabian Pedregosa <fabian@fseoane.net>
 #          Alexandre Gramfort <alexandre.gramfort@inria.fr>
@@ -50,7 +50,7 @@ class IsotonicRegression(RegressorMixin, TransformerMixin, BaseEstimator):
         y_min: None | Float = None,
         y_max: None | Float = None,
         increasing: str | bool = True,
-        out_of_bounds: Literal["nan", "clip", "raise", "nan"] = "nan",
+        out_of_bounds: Literal["nan", "clip", "raise"] = "nan",
     ) -> None: ...
     def fit(
         self: IsotonicRegression_Self,

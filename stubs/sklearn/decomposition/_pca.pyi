@@ -22,7 +22,7 @@ from ..utils.extmath import (
 from ..utils.validation import check_is_fitted as check_is_fitted
 from ._base import _BasePCA
 
-PCA_Self = TypeVar("PCA_Self", bound="PCA")
+PCA_Self = TypeVar("PCA_Self", bound=PCA)
 
 import numpy as np
 
@@ -46,18 +46,18 @@ class PCA(_BasePCA):
         *,
         copy: bool = True,
         whiten: bool = False,
-        svd_solver: Literal["auto", "full", "arpack", "randomized", "auto"] = "auto",
+        svd_solver: Literal["auto", "full", "arpack", "randomized"] = "auto",
         tol: Float = 0.0,
-        iterated_power: Literal["auto", "auto"] | Int = "auto",
+        iterated_power: Literal["auto"] | Int = "auto",
         n_oversamples: Int = 10,
-        power_iteration_normalizer: Literal["auto", "QR", "LU", "none", "auto"] = "auto",
+        power_iteration_normalizer: Literal["auto", "QR", "LU", "none"] = "auto",
         random_state: RandomState | None | Int = None,
     ) -> None: ...
 
     # TODO(1.4): remove in 1.4
     # mypy error: Decorated property not supported
     @deprecated(  # type: ignore
-        "Attribute `n_features_` was deprecated in version 1.2 and will be removed in 1.4. Use `n_features_in_` instead."
+        ...
     )
     @property
     def n_features_(self) -> int: ...

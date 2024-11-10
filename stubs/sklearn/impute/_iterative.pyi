@@ -17,7 +17,7 @@ from ..utils._param_validation import HasMethods as HasMethods, Interval as Inte
 from ..utils.validation import FLOAT_DTYPES as FLOAT_DTYPES, check_is_fitted as check_is_fitted
 from ._base import MissingIndicator, SimpleImputer, _BaseImputer
 
-IterativeImputer_Self = TypeVar("IterativeImputer_Self", bound="IterativeImputer")
+IterativeImputer_Self = TypeVar("IterativeImputer_Self", bound=IterativeImputer)
 
 import warnings
 
@@ -41,13 +41,13 @@ class IterativeImputer(_BaseImputer):
         self,
         estimator: None | BaseEstimator = None,
         *,
-        missing_values: float | int = ...,
+        missing_values: float = ...,
         sample_posterior: bool = False,
         max_iter: Int = 10,
         tol: Float = 1e-3,
         n_nearest_features: None | Int = None,
-        initial_strategy: Literal["mean", "median", "most_frequent", "constant", "mean"] = "mean",
-        imputation_order: Literal["ascending", "descending", "roman", "arabic", "random", "ascending"] = "ascending",
+        initial_strategy: Literal["mean", "median", "most_frequent", "constant"] = "mean",
+        imputation_order: Literal["ascending", "descending", "roman", "arabic", "random"] = "ascending",
         skip_complete: bool = False,
         min_value: float | ArrayLike = ...,
         max_value: float | ArrayLike = ...,

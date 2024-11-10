@@ -10,7 +10,7 @@ from ..utils._param_validation import Hidden as Hidden, Interval as Interval, St
 from ..utils.validation import FLOAT_DTYPES as FLOAT_DTYPES, check_is_fitted as check_is_fitted
 from ._base import MissingIndicator, _BaseImputer
 
-KNNImputer_Self = TypeVar("KNNImputer_Self", bound="KNNImputer")
+KNNImputer_Self = TypeVar("KNNImputer_Self", bound=KNNImputer)
 
 # Authors: Ashim Bhattarai <ashimb9@gmail.com>
 #          Thomas J Fan <thomasjpfan@gmail.com>
@@ -28,10 +28,10 @@ class KNNImputer(_BaseImputer):
     def __init__(
         self,
         *,
-        missing_values: float | None | str | int = ...,
+        missing_values: float | None | str = ...,
         n_neighbors: Int = 5,
-        weights: Literal["uniform", "distance", "uniform"] | Callable = "uniform",
-        metric: Callable | Literal["nan_euclidean", "nan_euclidean"] = "nan_euclidean",
+        weights: Literal["uniform", "distance"] | Callable = "uniform",
+        metric: Callable | Literal["nan_euclidean"] = "nan_euclidean",
         copy: bool = True,
         add_indicator: bool = False,
         keep_empty_features: bool = False,

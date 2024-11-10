@@ -36,7 +36,7 @@ def average_precision_score(
     y_true: MatrixLike | ArrayLike,
     y_score: MatrixLike | ArrayLike,
     *,
-    average: None | Literal["micro", "samples", "weighted", "macro", "macro"] = "macro",
+    average: None | Literal["micro", "samples", "weighted", "macro"] = "macro",
     pos_label: str | Int = 1,
     sample_weight: None | ArrayLike = None,
 ) -> Float: ...
@@ -50,10 +50,10 @@ def roc_auc_score(
     y_true: MatrixLike | ArrayLike,
     y_score: MatrixLike | ArrayLike,
     *,
-    average: Literal["micro", "macro", "samples", "weighted", "macro"] | None = "macro",
+    average: Literal["micro", "macro", "samples", "weighted"] | None = "macro",
     sample_weight: None | ArrayLike = None,
     max_fpr: float | None = None,
-    multi_class: Literal["raise", "ovr", "ovo", "raise"] = "raise",
+    multi_class: Literal["raise", "ovr", "ovo"] = "raise",
     labels: None | ArrayLike = None,
 ) -> Float: ...
 def precision_recall_curve(

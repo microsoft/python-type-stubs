@@ -69,7 +69,6 @@ def maximum_spanning_tree(G: Graph, weight: str = "weight", algorithm: str = "kr
 def random_spanning_tree(G: Graph, weight: str | None = None, *, multiplicative: bool = True, seed=None): ...
 
 class SpanningTreeIterator:
-    ...
 
     def __init__(
         self,

@@ -13,7 +13,7 @@ from ..utils.multiclass import check_classification_targets as check_classificat
 from ..utils.sparsefuncs import csc_median_axis_0 as csc_median_axis_0
 from ..utils.validation import check_is_fitted as check_is_fitted
 
-NearestCentroid_Self = TypeVar("NearestCentroid_Self", bound="NearestCentroid")
+NearestCentroid_Self = TypeVar("NearestCentroid_Self", bound=NearestCentroid)
 
 # Author: Robert Layton <robertlayton@gmail.com>
 #         Olivier Grisel <olivier.grisel@ensta.org>

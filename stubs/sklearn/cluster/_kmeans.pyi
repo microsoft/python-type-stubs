@@ -33,8 +33,8 @@ from ._k_means_lloyd import (
     lloyd_iter_chunked_sparse as lloyd_iter_chunked_sparse,
 )
 
-KMeans_Self = TypeVar("KMeans_Self", bound="KMeans")
-MiniBatchKMeans_Self = TypeVar("MiniBatchKMeans_Self", bound="MiniBatchKMeans")
+KMeans_Self = TypeVar("KMeans_Self", bound=KMeans)
+MiniBatchKMeans_Self = TypeVar("MiniBatchKMeans_Self", bound=MiniBatchKMeans)
 
 import warnings
 
@@ -57,14 +57,14 @@ def k_means(
     n_clusters: Int,
     *,
     sample_weight: None | ArrayLike = None,
-    init: MatrixLike | Callable | Literal["k-means++", "random", "k-means++"] = "k-means++",
+    init: MatrixLike | Callable | Literal["k-means++", "random"] = "k-means++",
     n_init: Literal["auto", "warn"] | int = "warn",
     max_iter: Int = 300,
     verbose: bool = False,
     tol: Float = 1e-4,
     random_state: RandomState | None | Int = None,
     copy_x: bool = True,
-    algorithm: Literal["lloyd", "elkan", "auto", "full", "lloyd"] = "lloyd",
+    algorithm: Literal["lloyd", "elkan", "auto", "full"] = "lloyd",
     return_n_iter: bool = False,
 ) -> tuple[ndarray, ndarray, float] | tuple[ndarray, ndarray, float, int]: ...
 
@@ -117,14 +117,14 @@ class KMeans(_BaseKMeans):
         self,
         n_clusters: Int = 8,
         *,
-        init: MatrixLike | Callable | Literal["k-means++", "random", "k-means++"] = "k-means++",
+        init: MatrixLike | Callable | Literal["k-means++", "random"] = "k-means++",
         n_init: Literal["auto", "warn"] | int = "warn",
         max_iter: Int = 300,
         tol: Float = 1e-4,
         verbose: Int = 0,
         random_state: RandomState | None | Int = None,
         copy_x: bool = True,
-        algorithm: Literal["lloyd", "elkan", "auto", "full", "lloyd"] = "lloyd",
+        algorithm: Literal["lloyd", "elkan", "auto", "full"] = "lloyd",
     ) -> None: ...
     def fit(
         self: KMeans_Self,
@@ -148,7 +148,7 @@ class MiniBatchKMeans(_BaseKMeans):
         self,
         n_clusters: Int = 8,
         *,
-        init: MatrixLike | Callable | Literal["k-means++", "random", "k-means++"] = "k-means++",
+        init: MatrixLike | Callable | Literal["k-means++", "random"] = "k-means++",
         max_iter: Int = 100,
         batch_size: Int = 1024,
         verbose: Int = 0,

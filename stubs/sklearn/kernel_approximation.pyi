@@ -19,11 +19,11 @@ from .utils._param_validation import Interval as Interval, StrOptions as StrOpti
 from .utils.extmath import safe_sparse_dot as safe_sparse_dot
 from .utils.validation import check_is_fitted as check_is_fitted, check_non_negative as check_non_negative
 
-SkewedChi2Sampler_Self = TypeVar("SkewedChi2Sampler_Self", bound="SkewedChi2Sampler")
-PolynomialCountSketch_Self = TypeVar("PolynomialCountSketch_Self", bound="PolynomialCountSketch")
-AdditiveChi2Sampler_Self = TypeVar("AdditiveChi2Sampler_Self", bound="AdditiveChi2Sampler")
-RBFSampler_Self = TypeVar("RBFSampler_Self", bound="RBFSampler")
-Nystroem_Self = TypeVar("Nystroem_Self", bound="Nystroem")
+SkewedChi2Sampler_Self = TypeVar("SkewedChi2Sampler_Self", bound=SkewedChi2Sampler)
+PolynomialCountSketch_Self = TypeVar("PolynomialCountSketch_Self", bound=PolynomialCountSketch)
+AdditiveChi2Sampler_Self = TypeVar("AdditiveChi2Sampler_Self", bound=AdditiveChi2Sampler)
+RBFSampler_Self = TypeVar("RBFSampler_Self", bound=RBFSampler)
+Nystroem_Self = TypeVar("Nystroem_Self", bound=Nystroem)
 
 import warnings
 

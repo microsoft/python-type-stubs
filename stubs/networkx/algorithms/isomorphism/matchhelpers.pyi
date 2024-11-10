@@ -20,7 +20,7 @@ __all__ = [
 ]
 
 def copyfunc(f, name=None): ...
-def allclose(x, y, rtol: float = 1.0000000000000001e-05, atol: float = 1e-08): ...
+def allclose(x, y, rtol: float = ..., atol: float = 1e-08): ...
 
 categorical_doc: str = ...
 
@@ -42,7 +42,7 @@ numerical_doc: str = ...
 def numerical_node_match(
     attr: str | ArrayLike,
     default,
-    rtol: float = 1.0000000000000001e-05,
+    rtol: float = ...,
     atol: float = 1e-08,
 ): ...
 
@@ -51,7 +51,7 @@ numerical_edge_match = ...
 def numerical_multiedge_match(
     attr: str | ArrayLike,
     default,
-    rtol: float = 1.0000000000000001e-05,
+    rtol: float = ...,
     atol: float = 1e-08,
 ): ...
 
