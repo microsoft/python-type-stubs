@@ -7,8 +7,7 @@ from numpy import ndarray
 from numpy.random import RandomState
 from pandas.core.frame import DataFrame
 from pandas.core.series import Series
-from scipy import linalg, optimize as optimize, sparse
-from scipy.sparse import linalg as sp_linalg
+from scipy import optimize as optimize
 from scipy.sparse._coo import coo_matrix
 from scipy.sparse._csr import csr_matrix
 from scipy.sparse.linalg import LinearOperator
@@ -41,10 +40,7 @@ RidgeClassifierCV_Self = TypeVar("RidgeClassifierCV_Self", bound="RidgeClassifie
 RidgeCV_Self = TypeVar("RidgeCV_Self", bound="RidgeCV")
 Ridge_Self = TypeVar("Ridge_Self", bound="Ridge")
 
-import numbers
-import warnings
 
-import numpy as np
 
 def ridge_regression(
     X: MatrixLike | LinearOperator,

@@ -1,11 +1,6 @@
-import math
-import types
-from itertools import permutations
 from typing import Callable
 
 from numpy.typing import ArrayLike
-
-from ...classes.graph import Graph
 
 __all__ = [
     "categorical_node_match",

@@ -1,7 +1,6 @@
 from typing import Any
 
 import numpy as np
-from numpy import float32 as DTYPE, float64 as DOUBLE
 
 from ._splitter import Splitter
 

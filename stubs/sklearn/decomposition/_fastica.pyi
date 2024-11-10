@@ -18,9 +18,7 @@ FastICA_Self = TypeVar("FastICA_Self", bound="FastICA")
 #          Bertrand Thirion, Alexandre Gramfort, Denis A. Engemann
 # License: BSD 3 clause
 
-import warnings
 
-import numpy as np
 
 __all__ = ["fastica", "FastICA"]
 

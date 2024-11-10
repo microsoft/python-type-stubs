@@ -20,9 +20,7 @@ OAS_Self = TypeVar("OAS_Self", bound="OAS")
 # License: BSD 3 clause
 
 # avoid division truncation
-import warnings
 
-import numpy as np
 
 # ShrunkCovariance estimator
 

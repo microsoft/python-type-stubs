@@ -1,10 +1,7 @@
 import numpy as np
 from numpy import (
-    float32 as G_H_DTYPE,
-    float32 as X_BITSET_INNER_DTYPE,
     float64 as X_DTYPE,
     float64 as Y_DTYPE,
-    uint8 as X_BINNED_DTYPE_C,
     uint32 as X_BINNED_DTYPE,
 )
 

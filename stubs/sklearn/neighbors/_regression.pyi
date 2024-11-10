@@ -20,9 +20,7 @@ RadiusNeighborsRegressor_Self = TypeVar("RadiusNeighborsRegressor_Self", bound="
 # License: BSD 3 clause (C) INRIA, University of Amsterdam,
 #                           University of Copenhagen
 
-import warnings
 
-import numpy as np
 
 class KNeighborsRegressor(KNeighborsMixin, RegressorMixin, NeighborsBase):
     n_samples_fit_: int = ...

@@ -39,10 +39,7 @@ LogisticRegression_Self = TypeVar("LogisticRegression_Self", bound="LogisticRegr
 #         Simon Wu <s8wu@uwaterloo.ca>
 #         Arthur Mensch <arthur.mensch@m4x.org
 
-import numbers
-import warnings
 
-import numpy as np
 
 _LOGISTIC_SOLVER_CONVERGENCE_MSG: str = ...
 

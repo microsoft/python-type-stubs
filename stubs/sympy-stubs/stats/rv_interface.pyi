@@ -10,17 +10,13 @@ from sympy.core.relational import Ne, Relational
 from sympy.series.order import Order
 from sympy.sets.sets import FiniteSet, Set
 from sympy.stats.rv import (
-    PSpace,
     cdf,
     characteristic_function,
     density,
     dependent,
-    expectation,
     given,
     independent,
-    is_random,
     moment_generating_function,
-    probability,
     pspace,
     quantile,
     random_symbols,

@@ -1,10 +1,8 @@
-import weakref
 from typing import Mapping
 
-import numpy as np
 from numpy.typing import ArrayLike
 
-from .. import app, gloo
+from .. import app
 from ..app.application import Application
 from ..app.canvas import Canvas, DrawEvent
 from ..color import Color
@@ -12,15 +10,10 @@ from ..gloo.context import GLContext
 from ..gloo.framebuffer import FrameBuffer
 from ..scene.node import Node
 from ..scene.widgets.widget import Widget
-from ..util import Frozen, logger
+from ..util import Frozen
 from ..util.event import Event
-from ..util.profiler import Profiler
 from ..util.svg.color import Color
-from ..visuals.transforms import TransformSystem
 from ..visuals.visual import Visual
-from .events import SceneMouseEvent
-from .subscene import SubScene
-from .visuals import VisualNode
 from .widgets import Widget
 
 # -*- coding: utf-8 -*-

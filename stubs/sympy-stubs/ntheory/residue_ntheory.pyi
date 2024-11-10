@@ -1,8 +1,6 @@
 from typing import Any, Generator, Literal
 
 from sympy import Function
-from sympy.core.function import UndefinedFunction
-from sympy.utilities.decorator import deprecated
 
 def n_order(a, n) -> Literal[1]: ...
 def primitive_root(p) -> int | None: ...

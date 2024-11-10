@@ -1,13 +1,8 @@
-import itertools
-from collections import defaultdict
 from collections.abc import Mapping
 from functools import cached_property
 from typing import Mapping
 
 from ...classes.graph import Graph
-from ...exception import NetworkXError
-from ...utils import not_implemented_for
-from . import local_node_connectivity
 
 __all__ = ["k_components"]
 

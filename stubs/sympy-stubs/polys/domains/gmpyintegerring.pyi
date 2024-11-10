@@ -3,7 +3,6 @@ from typing import Any
 from sympy.core.numbers import Integer
 from sympy.polys.domains.groundtypes import GMPYInteger, _GMPYInteger
 from sympy.polys.domains.integerring import IntegerRing
-from sympy.utilities import public
 
 class GMPYIntegerRing(IntegerRing):
     dtype = GMPYInteger

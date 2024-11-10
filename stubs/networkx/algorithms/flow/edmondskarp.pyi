@@ -1,4 +1,3 @@
-from ...algorithms.flow.utils import build_residual_network
 from ...classes.graph import Graph
 
 __all__ = ["edmonds_karp"]

@@ -18,9 +18,7 @@ MinCovDet_Self = TypeVar("MinCovDet_Self", bound="MinCovDet")
 #
 # License: BSD 3 clause
 
-import warnings
 
-import numpy as np
 
 # Minimum Covariance Determinant
 #   Implementing of an algorithm by Rousseeuw & Van Driessen described in

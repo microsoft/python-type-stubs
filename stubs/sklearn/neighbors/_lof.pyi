@@ -17,9 +17,7 @@ LocalOutlierFactor_Self = TypeVar("LocalOutlierFactor_Self", bound="LocalOutlier
 #          Alexandre Gramfort <alexandre.gramfort@telecom-paristech.fr>
 # License: BSD 3 clause
 
-import warnings
 
-import numpy as np
 
 __all__ = ["LocalOutlierFactor"]
 

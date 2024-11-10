@@ -18,9 +18,7 @@ DBSCAN_Self = TypeVar("DBSCAN_Self", bound="DBSCAN")
 #
 # License: BSD 3 clause
 
-import warnings
 
-import numpy as np
 
 def dbscan(
     X: MatrixLike,

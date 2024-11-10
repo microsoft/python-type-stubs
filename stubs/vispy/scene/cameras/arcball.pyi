@@ -4,11 +4,6 @@
 
 from __future__ import division
 
-import numpy as np
-
-from ...util import transforms
-from ...util.quaternion import Quaternion
-from ...visuals.transforms import MatrixTransform
 from .perspective import Base3DRotationCamera
 
 class ArcballCamera(Base3DRotationCamera):

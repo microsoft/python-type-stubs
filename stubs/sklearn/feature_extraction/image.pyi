@@ -16,7 +16,6 @@ from ..utils._param_validation import Interval as Interval
 
 PatchExtractor_Self = TypeVar("PatchExtractor_Self", bound="PatchExtractor")
 
-import numpy as np
 
 __all__ = [
     "PatchExtractor",

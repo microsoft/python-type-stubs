@@ -1,7 +1,5 @@
-from math import pi
 
 import numpy as np
-from numpy import ndarray
 
 from .._typing import Scalar
 

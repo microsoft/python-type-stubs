@@ -1,13 +1,8 @@
-import warnings
 from typing import Sequence
 
-import numpy as np
 from numpy.typing import ArrayLike, NDArray
 
 from .._typing import Scalar
-from ..ext.cubehelix import cubehelix
-from ..util.check_environment import has_matplotlib
-from .color_array import ColorArray
 
 # -*- coding: utf-8 -*-
 # Copyright (c) Vispy Development Team. All Rights Reserved.

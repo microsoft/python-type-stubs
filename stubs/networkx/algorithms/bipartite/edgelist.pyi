@@ -4,7 +4,6 @@ from ...classes.graph import Graph
 
 __all__ = ["generate_edgelist", "write_edgelist", "parse_edgelist", "read_edgelist"]
 
-from ...utils import not_implemented_for, open_file
 
 def write_edgelist(
     G: Graph,

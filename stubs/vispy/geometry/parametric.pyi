@@ -4,9 +4,7 @@
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 # -----------------------------------------------------------------------------
 
-import numpy as np
 
-from .normals import normals
 
 def surface(
     func,

@@ -15,8 +15,6 @@ from ..utils.validation import check_is_fitted as check_is_fitted
 
 TruncatedSVD_Self = TypeVar("TruncatedSVD_Self", bound="TruncatedSVD")
 
-import numpy as np
-import scipy.sparse as sp
 
 __all__ = ["TruncatedSVD"]
 

@@ -1,8 +1,6 @@
-import warnings
 from abc import ABCMeta, abstractmethod as abstractmethod
 from operator import attrgetter as attrgetter
 
-import numpy as np
 from numpy import ndarray
 from scipy.sparse import csc_matrix as csc_matrix, issparse as issparse
 from scipy.sparse._csr import csr_matrix

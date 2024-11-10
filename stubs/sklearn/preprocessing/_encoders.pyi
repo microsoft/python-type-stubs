@@ -3,7 +3,6 @@ from typing import ClassVar, Literal, Sequence, TypeVar
 
 from numpy import ndarray
 from pandas.core.series import Series
-from scipy import sparse
 from scipy.sparse import spmatrix
 
 from .._typing import ArrayLike, Int, MatrixLike
@@ -19,10 +18,7 @@ OneHotEncoder_Self = TypeVar("OneHotEncoder_Self", bound="OneHotEncoder")
 #          Joris Van den Bossche <jorisvandenbossche@gmail.com>
 # License: BSD 3 clause
 
-import numbers
-import warnings
 
-import numpy as np
 
 __all__ = ["OneHotEncoder", "OrdinalEncoder"]
 

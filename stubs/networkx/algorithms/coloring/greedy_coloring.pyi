@@ -1,8 +1,6 @@
-import itertools
-from collections import defaultdict, deque
 
 from ...classes.graph import Graph
-from ...utils import arbitrary_element, py_random_state
+from ...utils import py_random_state
 
 __all__ = [
     "greedy_color",

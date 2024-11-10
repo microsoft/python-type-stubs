@@ -1,6 +1,5 @@
 from ...classes.digraph import DiGraph
 from ...classes.multidigraph import MultiDiGraph
-from ...utils.decorators import not_implemented_for
 
 __all__ = [
     "number_attracting_components",

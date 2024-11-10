@@ -4,8 +4,6 @@
 
 from __future__ import division
 
-from ... import gloo
-
 class Compiler(object):
     def __init__(self, namespace=None, **shaders): ...
     def __getitem__(self, item): ...

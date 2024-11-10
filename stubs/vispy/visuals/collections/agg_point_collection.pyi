@@ -5,7 +5,6 @@ from numpy.typing import ArrayLike
 # Copyright (c) 2014, Nicolas P. Rougier
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 # -----------------------------------------------------------------------------
-from ... import glsl
 from ...util.svg.transform import Transform
 from .raw_point_collection import RawPointCollection
 

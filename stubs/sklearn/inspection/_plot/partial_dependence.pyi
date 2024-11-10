@@ -1,10 +1,7 @@
-import numbers
-import warnings
 from itertools import chain as chain
 from math import ceil as ceil
 from typing import Literal, Mapping, Sequence
 
-import numpy as np
 from matplotlib.axes import Axes
 from matplotlib.figure import Figure
 from matplotlib.gridspec import GridSpecFromSubplotSpec as GridSpecFromSubplotSpec

@@ -1,6 +1,4 @@
 from ...classes.digraph import DiGraph
-from ...classes.graph import Graph
-from ...utils import pairwise
 
 __all__ = ["global_reaching_centrality", "local_reaching_centrality"]
 

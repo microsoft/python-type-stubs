@@ -17,7 +17,6 @@ EllipticEnvelope_Self = TypeVar("EllipticEnvelope_Self", bound="EllipticEnvelope
 #
 # License: BSD 3 clause
 
-import numpy as np
 
 class EllipticEnvelope(OutlierMixin, MinCovDet):
     feature_names_in_: ndarray = ...

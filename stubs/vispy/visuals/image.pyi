@@ -1,14 +1,7 @@
 import numpy as np
-from numpy import dtype
 from numpy.typing import ArrayLike, NDArray
 
-from ..color import Colormap, get_colormap
-from ..gloo import Texture2D, VertexBuffer
-from ..gloo.texture import should_cast_to_f32
-from ..io import load_spatial_filters
-from ._scalable_textures import CPUScaledTexture2D, GPUScaledTexture2D
-from .shaders import Function, FunctionChain
-from .transforms import NullTransform
+from ..color import Colormap
 from .visual import Visual
 
 # -*- coding: utf-8 -*-

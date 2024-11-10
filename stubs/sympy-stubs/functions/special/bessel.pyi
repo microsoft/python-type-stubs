@@ -1,7 +1,7 @@
 from functools import _Wrapped
-from typing import Any, Callable
+from typing import Any
 
-from numpy import floating, ndarray as NDArray
+from numpy import ndarray as NDArray
 from sympy.core.basic import Basic
 from sympy.core.cache import cacheit
 from sympy.core.function import Function, UndefinedFunction

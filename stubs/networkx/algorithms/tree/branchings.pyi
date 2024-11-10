@@ -17,11 +17,6 @@
 #    pages={109-122},
 #    language={English}
 # }
-import string
-from dataclasses import dataclass, field
-from enum import Enum
-from operator import itemgetter
-from queue import PriorityQueue
 from typing import Literal
 
 from ...algorithms.tree.branchings import ArborescenceIterator
@@ -29,7 +24,6 @@ from ...classes.digraph import DiGraph
 from ...classes.graph import Graph
 from ...classes.multidigraph import MultiDiGraph
 from ...utils import py_random_state
-from .recognition import is_arborescence, is_branching
 
 __all__ = [
     "branching_weight",

@@ -1,9 +1,6 @@
-import numpy as np
 from numpy.typing import ArrayLike
 
 from ..util.svg.color import Color
-from .line import LineVisual
-from .markers import MarkersVisual
 from .visual import CompoundVisual
 
 # -*- coding: utf-8 -*-

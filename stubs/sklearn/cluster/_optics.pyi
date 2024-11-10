@@ -17,9 +17,7 @@ from ..utils.validation import check_memory as check_memory
 
 OPTICS_Self = TypeVar("OPTICS_Self", bound="OPTICS")
 
-import warnings
 
-import numpy as np
 
 class OPTICS(ClusterMixin, BaseEstimator):
     feature_names_in_: ndarray = ...

@@ -1,14 +1,8 @@
-from dataclasses import dataclass, field
 from enum import Enum
-from heapq import heappop, heappush
-from itertools import count
-from math import isnan
-from operator import itemgetter
-from queue import PriorityQueue
 
 from ...algorithms.tree.mst import SpanningTreeIterator
 from ...classes.graph import Graph
-from ...utils import UnionFind, not_implemented_for, py_random_state
+from ...utils import py_random_state
 
 __all__ = [
     "minimum_spanning_edges",

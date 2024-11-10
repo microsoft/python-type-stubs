@@ -1,7 +1,6 @@
 from abc import ABCMeta, abstractmethod
 from typing import Any, ClassVar
 
-import numpy as np
 from numpy import ndarray
 from scipy.special import expit as expit, logsumexp as logsumexp
 

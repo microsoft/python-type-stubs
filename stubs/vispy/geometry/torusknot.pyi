@@ -1,9 +1,5 @@
 from __future__ import division
 
-from math import gcd
-
-import numpy as np
-
 class TorusKnot(object):
     def __init__(
         self,

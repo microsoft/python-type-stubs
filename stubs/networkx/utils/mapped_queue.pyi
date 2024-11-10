@@ -1,4 +1,3 @@
-import heapq
 
 __all__ = ["MappedQueue"]
 
