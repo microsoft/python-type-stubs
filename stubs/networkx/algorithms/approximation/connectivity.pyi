@@ -1,6 +1,6 @@
 import itertools
+from collections.abc import Mapping
 from operator import itemgetter
-from typing import Mapping
 
 from ...classes.graph import Graph
 

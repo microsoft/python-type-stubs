@@ -27,8 +27,22 @@ line-length = 130
 target-version = "py39"
 
 [tool.ruff.lint]
+# TODO: Use extend-select instead to get base E and F rules that don't conflict with the formatter
 select = [
+    "FA", # flake8-future-annotations
     "I", # isort
+    "UP", # pyupgrade
+]
+ignore = [
+    ###
+    # Rules we don't want or don't agree with
+    ###
+    # Slower and more verbose https://github.com/astral-sh/ruff/issues/7871
+    "UP038", # Use `X | Y` in `isinstance` call instead of `(X, Y)`
+
+    # TODO
+    "UP007",
+    "UP035",
 ]
 
 [tool.ruff.lint.isort]

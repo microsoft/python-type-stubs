@@ -7,7 +7,7 @@ from ..util import _rescale_layout, _straight_line_vertices
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 
-class fruchterman_reingold(object):
+class fruchterman_reingold:
     def __init__(
         self,
         optimal: float | None = None,

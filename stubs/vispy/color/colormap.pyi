@@ -1,5 +1,5 @@
 import warnings
-from typing import Sequence
+from collections.abc import Sequence
 
 import numpy as np
 from numpy.typing import ArrayLike, NDArray
@@ -41,7 +41,7 @@ def _glsl_step(controls=None, colors=None, texture_map_data=None): ...
 # Mini GLSL template system for colors.
 def _process_glsl_template(template, colors): ...
 
-class BaseColormap(object):
+class BaseColormap:
     # Control colors used by the colormap.
     colors: None = ...
 

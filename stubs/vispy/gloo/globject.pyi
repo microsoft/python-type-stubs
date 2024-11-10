@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # -----------------------------------------------------------------------------
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
@@ -6,7 +5,7 @@
 
 from .glir import GlirQueue
 
-class GLObject(object):
+class GLObject:
     # Type of GLIR object, reset in subclasses
     _GLIR_TYPE: str = ...
 

@@ -1,4 +1,5 @@
-from typing import Any, Callable, Generator
+from collections.abc import Generator
+from typing import Any, Callable
 
 def treeapply(tree, join, leaf=...): ...
 def greedy(tree, objective=..., **kwargs): ...

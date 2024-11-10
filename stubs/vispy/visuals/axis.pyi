@@ -97,7 +97,7 @@ class AxisVisual(CompoundVisual):
     def _rotation_angle(self): ...
     def _compute_bounds(self, axis, view): ...
 
-class Ticker(object):
+class Ticker:
     def __init__(self, axis: AxisVisual, anchors=None): ...
     def get_update(self): ...
     def _get_tick_positions(self, major_tick_fractions, minor_tick_fractions): ...
@@ -107,7 +107,7 @@ class Ticker(object):
 # #############################################################################
 # Translated from matplotlib
 
-class MaxNLocator(object):
+class MaxNLocator:
     def __init__(
         self,
         nbins=10,

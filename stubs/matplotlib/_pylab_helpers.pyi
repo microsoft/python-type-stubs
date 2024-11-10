@@ -1,4 +1,5 @@
-from typing import Any, List, OrderedDict
+from collections import OrderedDict
+from typing import Any, List
 
 from .backend_bases import FigureManagerBase
 from .figure import Figure

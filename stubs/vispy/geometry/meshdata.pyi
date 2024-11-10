@@ -1,4 +1,4 @@
-from typing import Mapping
+from collections.abc import Mapping
 
 import numpy as np
 from numpy.typing import ArrayLike, NDArray
@@ -9,7 +9,7 @@ from numpy.typing import ArrayLike, NDArray
 
 def _fix_colors(colors): ...
 
-class MeshData(object):
+class MeshData:
     def __init__(
         self,
         vertices: NDArray | None = None,

@@ -1,5 +1,6 @@
+from collections.abc import Mapping
 from copy import deepcopy
-from typing import Literal, Mapping
+from typing import Literal
 
 import numpy as np
 from numpy import dtype
@@ -68,7 +69,7 @@ def _check_valid(key, val, valid): ...
 def _to_args(x): ...
 def _check_conversion(key, valid_dict): ...
 
-class BaseGlooFunctions(object):
+class BaseGlooFunctions:
     ##########################################################################
     # PRIMITIVE/VERTEX
 

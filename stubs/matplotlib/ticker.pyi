@@ -1,5 +1,6 @@
+from collections.abc import Sequence
 from functools import partial
-from typing import Any, Callable, Literal, Sequence
+from typing import Any, Callable, Literal
 
 from ._typing import *
 from .axis import Axis

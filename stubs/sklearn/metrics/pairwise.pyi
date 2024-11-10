@@ -1,7 +1,8 @@
 import itertools
 import warnings
+from collections.abc import Iterator, Sequence
 from functools import partial as partial
-from typing import Callable, Iterator, Sequence
+from typing import Callable
 
 import numpy as np
 from joblib import effective_n_jobs as effective_n_jobs

@@ -1,5 +1,5 @@
 import ast
-from typing import Sequence
+from collections.abc import Sequence
 
 from cycler import Cycler
 

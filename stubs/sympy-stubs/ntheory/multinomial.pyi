@@ -1,4 +1,5 @@
-from typing import Any, Generator, Literal
+from collections.abc import Generator
+from typing import Any, Literal
 
 def binomial_coefficients(n) -> dict[tuple[Literal[0], int] | tuple[int, Literal[0]], int]: ...
 def binomial_coefficients_list(n) -> list[int]: ...

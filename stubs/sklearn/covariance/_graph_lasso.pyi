@@ -1,5 +1,6 @@
+from collections.abc import Iterable
 from numbers import Integral as Integral, Real as Real
-from typing import Any, ClassVar, Iterable, Literal, TypeVar
+from typing import Any, ClassVar, Literal, TypeVar
 
 from numpy import ndarray
 from scipy import linalg as linalg

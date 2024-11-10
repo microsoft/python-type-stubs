@@ -1,4 +1,5 @@
-from typing import Any, Iterator, Literal
+from collections.abc import Iterator
+from typing import Any, Literal
 
 class intervalMembership:
     def __init__(self, a, b) -> None: ...
