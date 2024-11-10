@@ -16,7 +16,7 @@ from .utils.extmath import safe_sparse_dot as safe_sparse_dot
 from .utils.random import sample_without_replacement as sample_without_replacement
 from .utils.validation import check_array as check_array, check_is_fitted as check_is_fitted
 
-BaseRandomProjection_Self = TypeVar("BaseRandomProjection_Self", bound="BaseRandomProjection")
+BaseRandomProjection_Self = TypeVar("BaseRandomProjection_Self", bound=BaseRandomProjection)
 
 # Authors: Olivier Grisel <olivier.grisel@ensta.org>,
 #          Arnaud Joly <a.joly@ulg.ac.be>
@@ -63,7 +63,7 @@ class GaussianRandomProjection(BaseRandomProjection):
 
     def __init__(
         self,
-        n_components: Literal["auto", "auto"] | Int = "auto",
+        n_components: Literal["auto"] | Int = "auto",
         *,
         eps: Float = 0.1,
         compute_inverse_components: bool = False,
@@ -83,9 +83,9 @@ class SparseRandomProjection(BaseRandomProjection):
 
     def __init__(
         self,
-        n_components: Literal["auto", "auto"] | Int = "auto",
+        n_components: Literal["auto"] | Int = "auto",
         *,
-        density: float | Literal["auto", "auto"] = "auto",
+        density: float | Literal["auto"] = "auto",
         eps: Float = 0.1,
         dense_output: bool = False,
         compute_inverse_components: bool = False,

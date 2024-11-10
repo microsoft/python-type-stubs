@@ -15,8 +15,8 @@ from ..utils import check_array as check_array
 from ..utils._param_validation import Interval as Interval, StrOptions as StrOptions
 from ..utils.validation import FLOAT_DTYPES as FLOAT_DTYPES, check_is_fitted as check_is_fitted
 
-SplineTransformer_Self = TypeVar("SplineTransformer_Self", bound="SplineTransformer")
-PolynomialFeatures_Self = TypeVar("PolynomialFeatures_Self", bound="PolynomialFeatures")
+SplineTransformer_Self = TypeVar("SplineTransformer_Self", bound=SplineTransformer)
+PolynomialFeatures_Self = TypeVar("PolynomialFeatures_Self", bound=PolynomialFeatures)
 
 import collections
 
@@ -40,7 +40,7 @@ class PolynomialFeatures(TransformerMixin, BaseEstimator):
         *,
         interaction_only: bool = False,
         include_bias: bool = True,
-        order: Literal["C", "F", "C"] = "C",
+        order: Literal["C", "F"] = "C",
     ) -> None: ...
     @property
     def powers_(self) -> ndarray: ...
@@ -63,10 +63,10 @@ class SplineTransformer(TransformerMixin, BaseEstimator):
         n_knots: Int = 5,
         degree: Int = 3,
         *,
-        knots: Literal["uniform", "quantile", "uniform"] | MatrixLike = "uniform",
-        extrapolation: Literal["error", "constant", "linear", "continue", "periodic", "constant"] = "constant",
+        knots: Literal["uniform", "quantile"] | MatrixLike = "uniform",
+        extrapolation: Literal["error", "constant", "linear", "continue", "periodic"] = "constant",
         include_bias: bool = True,
-        order: Literal["C", "F", "C"] = "C",
+        order: Literal["C", "F"] = "C",
         sparse_output: bool = False,
     ) -> None: ...
     def get_feature_names_out(self, input_features: None | ArrayLike = None) -> ndarray: ...

@@ -11,8 +11,8 @@ from ..utils import is_scalar_nan as is_scalar_nan
 from ..utils._param_validation import Hidden as Hidden, StrOptions as StrOptions
 from ..utils.validation import FLOAT_DTYPES as FLOAT_DTYPES, check_is_fitted as check_is_fitted
 
-SimpleImputer_Self = TypeVar("SimpleImputer_Self", bound="SimpleImputer")
-MissingIndicator_Self = TypeVar("MissingIndicator_Self", bound="MissingIndicator")
+SimpleImputer_Self = TypeVar("SimpleImputer_Self", bound=SimpleImputer)
+MissingIndicator_Self = TypeVar("MissingIndicator_Self", bound=MissingIndicator)
 
 # Authors: Nicolas Tresegnie <nicolas.tresegnie@gmail.com>
 #          Sergey Feldman <sergeyfeldman@gmail.com>
@@ -70,8 +70,8 @@ class MissingIndicator(TransformerMixin, BaseEstimator):
         self,
         *,
         missing_values: float | None | str | int = ...,
-        features: Literal["missing-only", "all", "missing-only"] = "missing-only",
-        sparse: Literal["auto", "auto"] | bool = "auto",
+        features: Literal["missing-only", "all"] = "missing-only",
+        sparse: Literal["auto"] | bool = "auto",
         error_on_new: bool = True,
     ) -> None: ...
     def fit(self: MissingIndicator_Self, X: MatrixLike | ArrayLike, y: Any = None) -> MissingIndicator_Self: ...

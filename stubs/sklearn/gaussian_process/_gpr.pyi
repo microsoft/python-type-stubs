@@ -12,7 +12,7 @@ from ..utils import check_random_state as check_random_state
 from ..utils._param_validation import Interval as Interval, StrOptions as StrOptions
 from .kernels import RBF as RBF, ConstantKernel as C, Kernel
 
-GaussianProcessRegressor_Self = TypeVar("GaussianProcessRegressor_Self", bound="GaussianProcessRegressor")
+GaussianProcessRegressor_Self = TypeVar("GaussianProcessRegressor_Self", bound=GaussianProcessRegressor)
 
 # Authors: Jan Hendrik Metzen <jhm@informatik.uni-bremen.de>
 # Modified by: Pete Green <p.l.green@liverpool.ac.uk>
@@ -42,7 +42,7 @@ class GaussianProcessRegressor(MultiOutputMixin, RegressorMixin, BaseEstimator):
         kernel: None | Kernel = None,
         *,
         alpha: float | ArrayLike = 1e-10,
-        optimizer: Literal["fmin_l_bfgs_b", "fmin_l_bfgs_b"] | None | Callable = "fmin_l_bfgs_b",
+        optimizer: Literal["fmin_l_bfgs_b"] | None | Callable = "fmin_l_bfgs_b",
         n_restarts_optimizer: Int = 0,
         normalize_y: bool = False,
         copy_X_train: bool = True,

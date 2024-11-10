@@ -19,8 +19,8 @@ from ..utils._param_validation import HasMethods as HasMethods, Hidden as Hidden
 from ..utils.validation import check_memory as check_memory
 from ._feature_agglomeration import AgglomerationTransform
 
-FeatureAgglomeration_Self = TypeVar("FeatureAgglomeration_Self", bound="FeatureAgglomeration")
-AgglomerativeClustering_Self = TypeVar("AgglomerativeClustering_Self", bound="AgglomerativeClustering")
+FeatureAgglomeration_Self = TypeVar("FeatureAgglomeration_Self", bound=FeatureAgglomeration)
+AgglomerativeClustering_Self = TypeVar("AgglomerativeClustering_Self", bound=AgglomerativeClustering)
 
 import warnings
 
@@ -42,7 +42,7 @@ def linkage_tree(
     X: MatrixLike,
     connectivity: None | MatrixLike = None,
     n_clusters: None | Int = None,
-    linkage: Literal["complete", "average", "complete", "single"] = "complete",
+    linkage: Literal["complete", "average", "single"] = "complete",
     affinity: str | Callable = "euclidean",
     return_distance: bool = False,
 ) -> tuple[ndarray, int, int, ndarray | None, ndarray]: ...
@@ -71,8 +71,8 @@ class AgglomerativeClustering(ClusterMixin, BaseEstimator):
         metric: None | str | Callable = None,  # TODO(1.4): Set to "euclidean"
         memory: None | Memory | str = None,
         connectivity: None | ArrayLike | Callable = None,
-        compute_full_tree: Literal["auto", "auto"] | bool = "auto",
-        linkage: Literal["ward", "complete", "average", "single", "ward"] = "ward",
+        compute_full_tree: Literal["auto"] | bool = "auto",
+        linkage: Literal["ward", "complete", "average", "single"] = "ward",
         distance_threshold: None | Float = None,
         compute_distances: bool = False,
     ) -> None: ...
@@ -99,8 +99,8 @@ class FeatureAgglomeration(ClassNamePrefixFeaturesOutMixin, AgglomerativeCluster
         metric: None | str | Callable = None,  # TODO(1.4): Set to "euclidean"
         memory: None | Memory | str = None,
         connectivity: None | ArrayLike | Callable = None,
-        compute_full_tree: Literal["auto", "auto"] | bool = "auto",
-        linkage: Literal["ward", "complete", "average", "single", "ward"] = "ward",
+        compute_full_tree: Literal["auto"] | bool = "auto",
+        linkage: Literal["ward", "complete", "average", "single"] = "ward",
         pooling_func: Callable = ...,
         distance_threshold: None | Float = None,
         compute_distances: bool = False,

@@ -33,12 +33,12 @@ class BaseTexture(GLObject):
 
     def __init__(
         self,
-        data: ndarray | tuple | None | None = None,
+        data: ndarray | tuple | None = None,
         format=None,
         resizable: bool = True,
         interpolation: str | None = None,
         wrapping: str | None = None,
-        shape: tuple | None | None = None,
+        shape: tuple | None = None,
         internalformat: str | None = None,
         resizeable=None,
     ): ...
@@ -78,12 +78,12 @@ class Texture1D(BaseTexture):
 
     def __init__(
         self,
-        data: ndarray | tuple | None | None = None,
+        data: ndarray | tuple | None = None,
         format=None,
         resizable: bool = True,
         interpolation: str | None = None,
         wrapping: str | None = None,
-        shape: tuple | None | None = None,
+        shape: tuple | None = None,
         internalformat: str | None = None,
         resizeable=None,
     ): ...
@@ -130,12 +130,12 @@ class Texture3D(BaseTexture):
 
     def __init__(
         self,
-        data: ndarray | tuple | None | None = None,
+        data: ndarray | tuple | None = None,
         format=None,
         resizable: bool = True,
         interpolation: str | None = None,
         wrapping: str | None = None,
-        shape: tuple | None | None = None,
+        shape: tuple | None = None,
         internalformat: str | None = None,
         resizeable=None,
     ): ...
@@ -159,12 +159,12 @@ class TextureCube(BaseTexture):
 
     def __init__(
         self,
-        data: ndarray | tuple | None | None = None,
+        data: ndarray | tuple | None = None,
         format=None,
         resizable: bool = True,
         interpolation: str | None = None,
         wrapping: str | None = None,
-        shape: tuple | None | None = None,
+        shape: tuple | None = None,
         internalformat: str | None = None,
         resizeable=None,
     ): ...
@@ -192,12 +192,12 @@ class TextureEmulated3D(Texture2D):
 
     def __init__(
         self,
-        data: ndarray | tuple | None | None = None,
+        data: ndarray | tuple | None = None,
         format=None,
         resizable: bool = True,
         interpolation: str | None = None,
         wrapping: str | None = None,
-        shape: tuple | None | None = None,
+        shape: tuple | None = None,
         internalformat: str | None = None,
         resizeable=None,
     ): ...

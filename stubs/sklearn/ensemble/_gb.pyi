@@ -21,7 +21,7 @@ from ._base import BaseEnsemble
 from ._gb_losses import LossFunction
 from ._gradient_boosting import predict_stage as predict_stage, predict_stages as predict_stages
 
-BaseGradientBoosting_Self = TypeVar("BaseGradientBoosting_Self", bound="BaseGradientBoosting")
+BaseGradientBoosting_Self = TypeVar("BaseGradientBoosting_Self", bound=BaseGradientBoosting)
 
 import warnings
 
@@ -74,7 +74,7 @@ class BaseGradientBoosting(BaseEnsemble, metaclass=ABCMeta):
 
     # TODO(1.3): Remove
     # mypy error: Decorated property not supported
-    @deprecated("Attribute `loss_` was deprecated in version 1.1 and will be removed in 1.3.")  # type: ignore
+    @deprecated(...)  # type: ignore
     def loss_(self): ...
 
 class GradientBoostingClassifier(ClassifierMixin, BaseGradientBoosting):
@@ -97,11 +97,11 @@ class GradientBoostingClassifier(ClassifierMixin, BaseGradientBoosting):
     def __init__(
         self,
         *,
-        loss: Literal["log_loss", "deviance", "exponential", "log_loss"] = "log_loss",
+        loss: Literal["log_loss", "deviance", "exponential"] = "log_loss",
         learning_rate: Float = 0.1,
         n_estimators: Int = 100,
         subsample: Float = 1.0,
-        criterion: Literal["friedman_mse", "squared_error", "friedman_mse"] = "friedman_mse",
+        criterion: Literal["friedman_mse", "squared_error"] = "friedman_mse",
         min_samples_split: float | int = 2,
         min_samples_leaf: float | int = 1,
         min_weight_fraction_leaf: Float = 0.0,
@@ -143,11 +143,11 @@ class GradientBoostingRegressor(RegressorMixin, BaseGradientBoosting):
     def __init__(
         self,
         *,
-        loss: Literal["squared_error", "absolute_error", "huber", "quantile", "squared_error"] = "squared_error",
+        loss: Literal["squared_error", "absolute_error", "huber", "quantile"] = "squared_error",
         learning_rate: Float = 0.1,
         n_estimators: Int = 100,
         subsample: Float = 1.0,
-        criterion: Literal["friedman_mse", "squared_error", "friedman_mse"] = "friedman_mse",
+        criterion: Literal["friedman_mse", "squared_error"] = "friedman_mse",
         min_samples_split: float | int = 2,
         min_samples_leaf: float | int = 1,
         min_weight_fraction_leaf: Float = 0.0,

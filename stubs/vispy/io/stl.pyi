@@ -13,7 +13,7 @@ from .._typing import FileLike
 # the license.
 
 class HeaderError(Exception):
-    pass
+    ...
 
 # define a numpy datatype for the data section of a binary STL file
 _stl_dtype = ...

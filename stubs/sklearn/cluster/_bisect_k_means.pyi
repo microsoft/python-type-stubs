@@ -9,7 +9,7 @@ from ..utils.extmath import row_norms as row_norms
 from ..utils.validation import check_is_fitted as check_is_fitted, check_random_state as check_random_state
 from ._kmeans import _BaseKMeans
 
-BisectingKMeans_Self = TypeVar("BisectingKMeans_Self", bound="BisectingKMeans")
+BisectingKMeans_Self = TypeVar("BisectingKMeans_Self", bound=BisectingKMeans)
 
 # Author: Michal Krawczyk <mkrwczyk.1@gmail.com>
 
@@ -37,15 +37,15 @@ class BisectingKMeans(_BaseKMeans):
         self,
         n_clusters: Int = 8,
         *,
-        init: Literal["k-means++", "random", "random"] | Callable = "random",
+        init: Literal["k-means++", "random"] | Callable = "random",
         n_init: Int = 1,
         random_state: RandomState | None | Int = None,
         max_iter: Int = 300,
         verbose: Int = 0,
         tol: Float = 1e-4,
         copy_x: bool = True,
-        algorithm: Literal["lloyd", "elkan", "lloyd"] = "lloyd",
-        bisecting_strategy: Literal["biggest_inertia", "largest_cluster", "biggest_inertia"] = "biggest_inertia",
+        algorithm: Literal["lloyd", "elkan"] = "lloyd",
+        bisecting_strategy: Literal["biggest_inertia", "largest_cluster"] = "biggest_inertia",
     ) -> None: ...
     def fit(
         self: BisectingKMeans_Self,

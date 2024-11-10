@@ -13,7 +13,7 @@ from ..utils import as_float_array as as_float_array, check_random_state as chec
 from ..utils._param_validation import Interval as Interval, StrOptions as StrOptions
 from ..utils.validation import check_is_fitted as check_is_fitted
 
-AffinityPropagation_Self = TypeVar("AffinityPropagation_Self", bound="AffinityPropagation")
+AffinityPropagation_Self = TypeVar("AffinityPropagation_Self", bound=AffinityPropagation)
 
 import warnings
 
@@ -54,7 +54,7 @@ class AffinityPropagation(ClusterMixin, BaseEstimator):
         convergence_iter: Int = 15,
         copy: bool = True,
         preference: float | None | ArrayLike = None,
-        affinity: Literal["euclidean", "precomputed", "euclidean"] = "euclidean",
+        affinity: Literal["euclidean", "precomputed"] = "euclidean",
         verbose: bool = False,
         random_state: RandomState | None | Int = None,
     ) -> None: ...

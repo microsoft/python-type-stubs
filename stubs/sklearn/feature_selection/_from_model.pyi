@@ -12,7 +12,7 @@ from ..utils.metaestimators import available_if as available_if
 from ..utils.validation import check_is_fitted as check_is_fitted, check_scalar as check_scalar
 from ._base import SelectorMixin
 
-SelectFromModel_Self = TypeVar("SelectFromModel_Self", bound="SelectFromModel")
+SelectFromModel_Self = TypeVar("SelectFromModel_Self", bound=SelectFromModel)
 
 # Authors: Gilles Louppe, Mathieu Blondel, Maheshakya Wijewardena
 # License: BSD 3 clause

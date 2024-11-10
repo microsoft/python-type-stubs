@@ -27,8 +27,8 @@ from ..utils.parallel import Parallel as Parallel, delayed as delayed
 from ..utils.validation import check_is_fitted as check_is_fitted
 from ._base import BaseEnsemble
 
-BaseForest_Self = TypeVar("BaseForest_Self", bound="BaseForest")
-RandomTreesEmbedding_Self = TypeVar("RandomTreesEmbedding_Self", bound="RandomTreesEmbedding")
+BaseForest_Self = TypeVar("BaseForest_Self", bound=BaseForest)
+RandomTreesEmbedding_Self = TypeVar("RandomTreesEmbedding_Self", bound=RandomTreesEmbedding)
 
 import threading
 
@@ -135,12 +135,12 @@ class RandomForestClassifier(ForestClassifier):
         self,
         n_estimators: Int = 100,
         *,
-        criterion: Literal["gini", "entropy", "log_loss", "gini"] = "gini",
+        criterion: Literal["gini", "entropy", "log_loss"] = "gini",
         max_depth: None | Int = None,
         min_samples_split: float | int = 2,
         min_samples_leaf: float | int = 1,
         min_weight_fraction_leaf: Float = 0.0,
-        max_features: float | Literal["sqrt", "log2", "sqrt"] | int = "sqrt",
+        max_features: float | Literal["sqrt", "log2"] | int = "sqrt",
         max_leaf_nodes: None | Int = None,
         min_impurity_decrease: Float = 0.0,
         bootstrap: bool = True,
@@ -171,13 +171,7 @@ class RandomForestRegressor(ForestRegressor):
         self,
         n_estimators: Int = 100,
         *,
-        criterion: Literal[
-            "squared_error",
-            "absolute_error",
-            "friedman_mse",
-            "poisson",
-            "squared_error",
-        ] = "squared_error",
+        criterion: Literal["squared_error", "absolute_error", "friedman_mse", "poisson"] = "squared_error",
         max_depth: None | Int = None,
         min_samples_split: float | int = 2,
         min_samples_leaf: float | int = 1,
@@ -214,12 +208,12 @@ class ExtraTreesClassifier(ForestClassifier):
         self,
         n_estimators: Int = 100,
         *,
-        criterion: Literal["gini", "entropy", "log_loss", "gini"] = "gini",
+        criterion: Literal["gini", "entropy", "log_loss"] = "gini",
         max_depth: None | Int = None,
         min_samples_split: float | int = 2,
         min_samples_leaf: float | int = 1,
         min_weight_fraction_leaf: Float = 0.0,
-        max_features: float | Literal["sqrt", "log2", "sqrt"] | int = "sqrt",
+        max_features: float | Literal["sqrt", "log2"] | int = "sqrt",
         max_leaf_nodes: None | Int = None,
         min_impurity_decrease: Float = 0.0,
         bootstrap: bool = False,
@@ -250,13 +244,7 @@ class ExtraTreesRegressor(ForestRegressor):
         self,
         n_estimators: Int = 100,
         *,
-        criterion: Literal[
-            "squared_error",
-            "absolute_error",
-            "friedman_mse",
-            "poisson",
-            "squared_error",
-        ] = "squared_error",
+        criterion: Literal["squared_error", "absolute_error", "friedman_mse", "poisson"] = "squared_error",
         max_depth: None | Int = None,
         min_samples_split: float | int = 2,
         min_samples_leaf: float | int = 1,
