@@ -16,8 +16,8 @@ from ..utils.parallel import Parallel as Parallel, delayed as delayed
 from ..utils.validation import check_is_fitted as check_is_fitted
 from ._base import SelectorMixin
 
-RFECV_Self = TypeVar("RFECV_Self", bound="RFECV")
-RFE_Self = TypeVar("RFE_Self", bound="RFE")
+RFECV_Self = TypeVar("RFECV_Self", bound=RFECV)
+RFE_Self = TypeVar("RFE_Self", bound=RFE)
 
 # Authors: Alexandre Gramfort <alexandre.gramfort@inria.fr>
 #          Vincent Michel <vincent.michel@inria.fr>

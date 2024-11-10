@@ -41,7 +41,7 @@ def load_files(
     load_content: bool = True,
     shuffle: bool = True,
     encoding: None | str = None,
-    decode_error: Literal["strict", "ignore", "replace", "strict"] = "strict",
+    decode_error: Literal["strict", "ignore", "replace"] = "strict",
     random_state: RandomState | None | Int = 0,
     allowed_extensions: None | Sequence[str] = None,
 ) -> Bunch: ...

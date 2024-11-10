@@ -12,7 +12,7 @@ from ..utils import as_float_array as as_float_array, check_array as check_array
 from ..utils._param_validation import Hidden as Hidden, Interval as Interval, StrOptions as StrOptions
 from ..utils.validation import check_is_fitted as check_is_fitted
 
-FastICA_Self = TypeVar("FastICA_Self", bound="FastICA")
+FastICA_Self = TypeVar("FastICA_Self", bound=FastICA)
 
 # Authors: Pierre Lafaye de Micheaux, Stefan van der Walt, Gael Varoquaux,
 #          Bertrand Thirion, Alexandre Gramfort, Denis A. Engemann
@@ -28,14 +28,14 @@ def fastica(
     X: MatrixLike,
     n_components: None | Int = None,
     *,
-    algorithm: Literal["parallel", "deflation", "parallel"] = "parallel",
+    algorithm: Literal["parallel", "deflation"] = "parallel",
     whiten: str | bool = "warn",
-    fun: Literal["logcosh", "exp", "cube", "logcosh"] | Callable = "logcosh",
+    fun: Literal["logcosh", "exp", "cube"] | Callable = "logcosh",
     fun_args: None | dict = None,
     max_iter: Int = 200,
     tol: Float = 1e-04,
     w_init: None | MatrixLike = None,
-    whiten_solver: Literal["eigh", "svd", "svd"] = "svd",
+    whiten_solver: Literal["eigh", "svd"] = "svd",
     random_state: RandomState | None | Int = None,
     return_X_mean: bool = False,
     compute_sources: bool = True,
@@ -57,14 +57,14 @@ class FastICA(ClassNamePrefixFeaturesOutMixin, TransformerMixin, BaseEstimator):
         self,
         n_components: None | Int = None,
         *,
-        algorithm: Literal["parallel", "deflation", "parallel"] = "parallel",
+        algorithm: Literal["parallel", "deflation"] = "parallel",
         whiten: str | bool = "warn",
-        fun: Literal["logcosh", "exp", "cube", "logcosh"] | Callable = "logcosh",
+        fun: Literal["logcosh", "exp", "cube"] | Callable = "logcosh",
         fun_args: None | dict = None,
         max_iter: Int = 200,
         tol: Float = 1e-4,
         w_init: None | MatrixLike = None,
-        whiten_solver: Literal["eigh", "svd", "svd"] = "svd",
+        whiten_solver: Literal["eigh", "svd"] = "svd",
         random_state: RandomState | None | Int = None,
     ) -> None: ...
     def fit_transform(self, X: MatrixLike, y: Any = None) -> ndarray: ...

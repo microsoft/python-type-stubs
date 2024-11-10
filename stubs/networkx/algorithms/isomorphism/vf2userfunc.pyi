@@ -31,7 +31,7 @@ class DiGraphMatcher(vf2.DiGraphMatcher):
 # provide "multi" versions, but we do so to match NetworkX's base classes.
 
 class MultiGraphMatcher(GraphMatcher):
-    pass
+    ...
 
 class MultiDiGraphMatcher(DiGraphMatcher):
-    pass
+    ...

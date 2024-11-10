@@ -165,7 +165,6 @@ class OffsetImage(OffsetBox):
 
 class AnnotationBbox(Artist, _AnnotationBase):
     zorder = ...
-    def __str__(self) -> str: ...
     def __init__(
         self,
         offsetbox,

@@ -15,7 +15,7 @@ from ..utils import gen_batches as gen_batches, get_chunk_n_rows as get_chunk_n_
 from ..utils._param_validation import HasMethods as HasMethods, Interval as Interval, StrOptions as StrOptions
 from ..utils.validation import check_memory as check_memory
 
-OPTICS_Self = TypeVar("OPTICS_Self", bound="OPTICS")
+OPTICS_Self = TypeVar("OPTICS_Self", bound=OPTICS)
 
 import warnings
 
@@ -46,7 +46,7 @@ class OPTICS(ClusterMixin, BaseEstimator):
         xi: float = 0.05,
         predecessor_correction: bool = True,
         min_cluster_size: float | None | int = None,
-        algorithm: Literal["auto", "ball_tree", "kd_tree", "brute", "auto"] = "auto",
+        algorithm: Literal["auto", "ball_tree", "kd_tree", "brute"] = "auto",
         leaf_size: Int = 30,
         memory: None | Memory | str = None,
         n_jobs: None | Int = None,

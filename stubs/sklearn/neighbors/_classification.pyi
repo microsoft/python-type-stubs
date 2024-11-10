@@ -9,8 +9,8 @@ from ..utils._param_validation import StrOptions as StrOptions
 from ..utils.extmath import weighted_mode as weighted_mode
 from ._base import KNeighborsMixin, NeighborsBase, RadiusNeighborsMixin
 
-RadiusNeighborsClassifier_Self = TypeVar("RadiusNeighborsClassifier_Self", bound="RadiusNeighborsClassifier")
-KNeighborsClassifier_Self = TypeVar("KNeighborsClassifier_Self", bound="KNeighborsClassifier")
+RadiusNeighborsClassifier_Self = TypeVar("RadiusNeighborsClassifier_Self", bound=RadiusNeighborsClassifier)
+KNeighborsClassifier_Self = TypeVar("KNeighborsClassifier_Self", bound=KNeighborsClassifier)
 
 import warnings
 
@@ -31,8 +31,8 @@ class KNeighborsClassifier(KNeighborsMixin, ClassifierMixin, NeighborsBase):
         self,
         n_neighbors: Int = 5,
         *,
-        weights: None | Literal["uniform", "distance", "uniform"] | Callable = "uniform",
-        algorithm: Literal["auto", "ball_tree", "kd_tree", "brute", "auto"] = "auto",
+        weights: None | Literal["uniform", "distance"] | Callable = "uniform",
+        algorithm: Literal["auto", "ball_tree", "kd_tree", "brute"] = "auto",
         leaf_size: Int = 30,
         p: Int = 2,
         metric: str | Callable = "minkowski",
@@ -59,8 +59,8 @@ class RadiusNeighborsClassifier(RadiusNeighborsMixin, ClassifierMixin, Neighbors
         self,
         radius: Float = 1.0,
         *,
-        weights: None | Literal["uniform", "distance", "uniform"] | Callable = "uniform",
-        algorithm: Literal["auto", "ball_tree", "kd_tree", "brute", "auto"] = "auto",
+        weights: None | Literal["uniform", "distance"] | Callable = "uniform",
+        algorithm: Literal["auto", "ball_tree", "kd_tree", "brute"] = "auto",
         leaf_size: Int = 30,
         p: Int = 2,
         metric: str | Callable = "minkowski",

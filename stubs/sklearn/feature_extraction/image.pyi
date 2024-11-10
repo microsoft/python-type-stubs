@@ -14,7 +14,7 @@ from ..base import BaseEstimator
 from ..utils import check_array as check_array, check_random_state as check_random_state
 from ..utils._param_validation import Interval as Interval
 
-PatchExtractor_Self = TypeVar("PatchExtractor_Self", bound="PatchExtractor")
+PatchExtractor_Self = TypeVar("PatchExtractor_Self", bound=PatchExtractor)
 
 import numpy as np
 

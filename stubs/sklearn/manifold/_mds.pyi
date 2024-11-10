@@ -13,7 +13,7 @@ from ..utils import check_array as check_array, check_random_state as check_rand
 from ..utils._param_validation import Hidden as Hidden, Interval as Interval, StrOptions as StrOptions
 from ..utils.parallel import Parallel as Parallel, delayed as delayed
 
-MDS_Self = TypeVar("MDS_Self", bound="MDS")
+MDS_Self = TypeVar("MDS_Self", bound=MDS)
 
 import warnings
 
@@ -56,7 +56,7 @@ class MDS(BaseEstimator):
         eps: Float = 1e-3,
         n_jobs: None | Int = None,
         random_state: RandomState | None | Int = None,
-        dissimilarity: Literal["euclidean", "precomputed", "euclidean"] = "euclidean",
+        dissimilarity: Literal["euclidean", "precomputed"] = "euclidean",
         normalized_stress: Literal["auto", "warn"] | bool = "warn",
     ) -> None: ...
     def fit(self: MDS_Self, X: MatrixLike, y: Any = None, init: None | MatrixLike = None) -> MDS_Self: ...
