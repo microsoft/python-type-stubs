@@ -358,7 +358,7 @@ def boxplot(
     showfliers=...,
     boxprops=...,
     labels: Sequence = ...,  # deprecated
-    tick_labels: Sequence = ...,
+    tick_labels: Sequence[str] = ...,
     flierprops=...,
     medianprops=...,
     meanprops=...,
