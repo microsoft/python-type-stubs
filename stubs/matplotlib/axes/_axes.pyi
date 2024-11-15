@@ -254,7 +254,8 @@ class Axes(_AxesBase):
         showbox=...,
         showfliers=...,
         boxprops=...,
-        labels: Sequence = ...,
+        labels: Sequence = ...,  # deprecated
+        tick_labels: Sequence = ...,
         flierprops=...,
         medianprops=...,
         meanprops=...,
