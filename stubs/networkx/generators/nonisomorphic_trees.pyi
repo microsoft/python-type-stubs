@@ -1,6 +1,5 @@
 __all__ = ["nonisomorphic_trees", "number_of_nonisomorphic_trees"]
 
-from ..classes.graph import Graph
 
 def nonisomorphic_trees(order: int, create="graph"): ...
 def number_of_nonisomorphic_trees(order: int): ...

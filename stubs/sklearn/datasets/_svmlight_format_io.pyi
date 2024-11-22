@@ -1,10 +1,6 @@
-import io
-import os.path
 from contextlib import closing as closing
 from typing import IO, Literal
 
-import numpy as np
-import scipy.sparse as sp
 from numpy import dtype, ndarray
 from scipy.sparse import spmatrix
 

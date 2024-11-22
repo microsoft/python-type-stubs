@@ -2,15 +2,7 @@
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 
-import os
-import shutil
-import sys
-import time
-import urllib.request
-from math import log
-from os import path as op
 
-from ..util.config import config
 
 ###############################################################################
 # Vispy data directory

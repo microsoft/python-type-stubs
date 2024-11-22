@@ -1,7 +1,3 @@
-import heapq
-import math
-from itertools import chain, combinations, zip_longest
-from operator import itemgetter
 
 from numpy.typing import ArrayLike
 
@@ -9,7 +5,7 @@ from ..classes.digraph import DiGraph
 from ..classes.graph import Graph
 from ..classes.multidigraph import MultiDiGraph
 from ..classes.multigraph import MultiGraph
-from ..utils import py_random_state, random_weighted_sample
+from ..utils import py_random_state
 
 __all__ = [
     "configuration_model",

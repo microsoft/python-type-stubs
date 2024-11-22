@@ -1,8 +1,7 @@
-from collections import Counter, defaultdict
 from collections.abc import Iterable
 
 from ...classes.graph import Graph
-from ...utils import groups, not_implemented_for, py_random_state
+from ...utils import py_random_state
 
 __all__ = ["label_propagation_communities", "asyn_lpa_communities"]
 

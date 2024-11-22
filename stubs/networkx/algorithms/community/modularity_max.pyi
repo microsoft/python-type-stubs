@@ -1,11 +1,7 @@
-from collections import defaultdict
 
 from numpy.typing import ArrayLike
 
 from ...classes.graph import Graph
-from ...utils import not_implemented_for
-from ...utils.mapped_queue import MappedQueue
-from .quality import modularity
 
 __all__ = [
     "greedy_modularity_communities",

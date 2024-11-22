@@ -1,6 +1,5 @@
 from numpy.typing import NDArray
 
-from ..geometry import MeshData, create_grid_mesh
 from .mesh import MeshVisual
 
 class GridMeshVisual(MeshVisual):

@@ -18,9 +18,7 @@ from ._kmeans import k_means as k_means
 
 SpectralClustering_Self = TypeVar("SpectralClustering_Self", bound="SpectralClustering")
 
-import warnings
 
-import numpy as np
 
 def cluster_qr(vectors: MatrixLike) -> ndarray: ...
 def discretize(

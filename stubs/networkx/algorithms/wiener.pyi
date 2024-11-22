@@ -1,9 +1,6 @@
-from itertools import chain
 from typing import Any
 
 from ..classes.graph import Graph
-from .components import is_connected, is_strongly_connected
-from .shortest_paths import shortest_path_length as spl
 
 __all__ = ["wiener_index"]
 

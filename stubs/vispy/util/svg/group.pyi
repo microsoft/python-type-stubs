@@ -4,11 +4,7 @@
 # Distributed under the terms of the new BSD License.
 # -----------------------------------------------------------------------------
 
-import copy
 
-from ...util import logger
-from .base import namespace
-from .path import Path
 from .transformable import Transformable
 
 class Group(Transformable):

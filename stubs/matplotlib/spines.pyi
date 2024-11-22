@@ -6,7 +6,7 @@ from typing import Sequence
 from ._typing import *
 from .artist import allow_rasterization
 from .axes import Axes
-from .axis import Axis, XAxis, YAxis
+from .axis import Axis
 from .backend_bases import RendererBase
 from .patches import Patch
 from .path import Path

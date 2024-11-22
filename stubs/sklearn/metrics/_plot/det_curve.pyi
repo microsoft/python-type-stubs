@@ -1,6 +1,5 @@
 from typing import Literal
 
-import scipy as sp
 from matplotlib.artist import Artist
 from matplotlib.axes import Axes
 from matplotlib.figure import Figure

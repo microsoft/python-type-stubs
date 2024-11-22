@@ -2,7 +2,6 @@ from io import StringIO as StringIO
 from numbers import Integral as Integral
 from typing import Any, Literal, Sequence
 
-import numpy as np
 from matplotlib.axes import Axes
 from matplotlib.text import Annotation
 from numpy import longlong, ndarray

@@ -1,7 +1,6 @@
 from abc import ABC, abstractmethod
 from functools import partial as partial
 from numbers import Integral as Integral, Real as Real
-from timeit import default_timer as time
 from typing import Callable, ClassVar, Literal, Mapping, Sequence, TypeVar
 
 from numpy import ndarray
@@ -33,10 +32,7 @@ from .grower import TreeGrower as TreeGrower
 
 BaseHistGradientBoosting_Self = TypeVar("BaseHistGradientBoosting_Self", bound="BaseHistGradientBoosting")
 
-import itertools
-import warnings
 
-import numpy as np
 
 _LOSSES = ...
 

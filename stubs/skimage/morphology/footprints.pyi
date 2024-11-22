@@ -1,8 +1,5 @@
-import numpy as np
 from numpy.typing import NDArray
-from scipy import ndimage as ndi
 
-from .. import draw
 from .._shared.utils import deprecate_kwarg
 
 def square(width: int, dtype=...) -> NDArray: ...

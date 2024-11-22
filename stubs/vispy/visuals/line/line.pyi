@@ -1,14 +1,9 @@
 from functools import lru_cache
 
-import numpy as np
 from numpy.typing import ArrayLike
 
-from ... import gloo, glsl
-from ...color import Color, ColorArray, get_colormap
-from ...util.profiler import Profiler
-from ..shaders import Function
+from ...color import Color
 from ..visual import CompoundVisual, Visual
-from .dash_atlas import DashAtlas
 
 # -*- coding: utf-8 -*-
 # Copyright (c) Vispy Development Team. All Rights Reserved.

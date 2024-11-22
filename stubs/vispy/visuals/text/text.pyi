@@ -1,16 +1,8 @@
-import sys
-from copy import deepcopy
 from typing import Any, Mapping
 
-import numpy as np
 from numpy.typing import ArrayLike
 
-from ...color import ColorArray
-from ...gloo import IndexBuffer, TextureAtlas, VertexBuffer, context
-from ...gloo.wrappers import _check_valid
-from ...io import load_spatial_filters
 from ...util.svg.color import Color
-from ..transforms import STTransform
 from ..visual import Visual
 from ._sdf_gpu import SDFRendererGPU
 

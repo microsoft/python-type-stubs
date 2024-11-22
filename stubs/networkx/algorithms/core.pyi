@@ -1,8 +1,6 @@
 from typing import Mapping
 
 from ..classes.graph import Graph
-from ..exception import NetworkXError
-from ..utils import not_implemented_for
 
 __all__ = [
     "core_number",

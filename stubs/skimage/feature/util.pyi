@@ -1,9 +1,5 @@
 from typing import Literal
 
-import numpy as np
-
-from .._shared.utils import _supported_float_type, check_nD
-
 class FeatureDetector(object):
     def __init__(self): ...
     def detect(self, image): ...

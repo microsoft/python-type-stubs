@@ -1,4 +1,3 @@
-import warnings
 
 from .gray import black_tophat, closing, dilation, erosion, opening, white_tophat
 

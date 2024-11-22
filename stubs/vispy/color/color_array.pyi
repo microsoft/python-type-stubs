@@ -1,10 +1,5 @@
-from copy import deepcopy
 from typing import Literal, Sequence
 
-import numpy as np
-
-from ..util import logger
-from ._color_dict import _color_dict
 from .color_space import (  # noqa
     _hex_to_rgba,
     _hsv_to_rgb,

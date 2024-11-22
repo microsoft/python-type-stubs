@@ -1,5 +1,3 @@
-import struct
-import zlib
 
 import numpy as np
 from numpy.typing import ArrayLike

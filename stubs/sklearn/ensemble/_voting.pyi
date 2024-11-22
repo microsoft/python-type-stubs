@@ -19,7 +19,6 @@ from ._base import _BaseHeterogeneousEnsemble
 VotingClassifier_Self = TypeVar("VotingClassifier_Self", bound="VotingClassifier")
 VotingRegressor_Self = TypeVar("VotingRegressor_Self", bound="VotingRegressor")
 
-import numpy as np
 
 class _BaseVoting(TransformerMixin, _BaseHeterogeneousEnsemble):
     _parameter_constraints: ClassVar[dict] = ...

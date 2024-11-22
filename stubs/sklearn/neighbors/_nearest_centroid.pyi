@@ -2,7 +2,6 @@ from numbers import Real as Real
 from typing import Callable, ClassVar, TypeVar
 
 from numpy import ndarray
-from scipy import sparse as sp
 
 from .._typing import ArrayLike, Float, MatrixLike
 from ..base import BaseEstimator, ClassifierMixin
@@ -20,9 +19,7 @@ NearestCentroid_Self = TypeVar("NearestCentroid_Self", bound="NearestCentroid")
 #
 # License: BSD 3 clause
 
-import warnings
 
-import numpy as np
 
 class NearestCentroid(ClassifierMixin, BaseEstimator):
     feature_names_in_: ndarray = ...

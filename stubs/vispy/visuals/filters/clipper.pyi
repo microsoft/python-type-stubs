@@ -2,8 +2,6 @@
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 
-from ...geometry import Rect
-from ..transforms import NullTransform
 from .base_filter import Filter
 
 class Clipper(Filter):

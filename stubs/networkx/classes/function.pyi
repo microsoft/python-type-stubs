@@ -1,12 +1,9 @@
-from collections import Counter
 from collections.abc import Iterable
-from itertools import chain
 
 from numpy.typing import ArrayLike
 
 from ..classes.graph import Graph
 from ..classes.graphviews import reverse_view, subgraph_view
-from ..utils import not_implemented_for, pairwise
 
 __all__ = [
     "nodes",

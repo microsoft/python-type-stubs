@@ -3,7 +3,6 @@
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 # Based on the quaternion class in the visvis project.
 
-import numpy as np
 
 class Quaternion(object):
     def __init__(self, w=1, x=0, y=0, z=0, normalize=True): ...

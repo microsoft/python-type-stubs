@@ -1,5 +1,3 @@
-import functools
-import warnings
 from functools import update_wrapper as update_wrapper
 from typing import Any, Callable, Iterable, Iterator
 

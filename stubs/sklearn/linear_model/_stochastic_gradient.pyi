@@ -38,9 +38,7 @@ BaseSGDRegressor_Self = TypeVar("BaseSGDRegressor_Self", bound="BaseSGDRegressor
 #
 # License: BSD 3 clause
 
-import warnings
 
-import numpy as np
 
 LEARNING_RATE_TYPES: dict = ...
 

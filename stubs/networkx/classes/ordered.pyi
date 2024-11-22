@@ -1,5 +1,3 @@
-import warnings
-from collections import OrderedDict
 
 from .digraph import DiGraph
 from .graph import Graph

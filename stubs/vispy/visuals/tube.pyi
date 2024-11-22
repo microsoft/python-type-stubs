@@ -1,13 +1,9 @@
-import collections
 
-import numpy as np
-from numpy.linalg import norm
 from numpy.typing import NDArray
 
 from ..color import ColorArray
 from ..color.color_array import ColorArray
 from ..util.svg.color import Color
-from ..util.transforms import rotate
 from .mesh import MeshVisual
 
 class TubeVisual(MeshVisual):

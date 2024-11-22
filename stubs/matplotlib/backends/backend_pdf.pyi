@@ -1,7 +1,7 @@
 from enum import Enum
 from functools import total_ordering
 from io import BytesIO
-from typing import Any, Callable, Optional, Set
+from typing import Any, Optional, Set
 
 import numpy as np
 from matplotlib._enums import CapStyle, JoinStyle

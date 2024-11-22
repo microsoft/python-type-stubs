@@ -1,11 +1,6 @@
-import os
-from os import path as op
 
 import numpy as np
 from numpy.typing import ArrayLike
-
-from .stl import load_stl
-from .wavefront import WavefrontReader, WavefrontWriter
 
 # -*- coding: utf-8 -*-
 # Copyright (c) Vispy Development Team. All Rights Reserved.

@@ -25,9 +25,7 @@ RANSACRegressor_Self = TypeVar("RANSACRegressor_Self", bound="RANSACRegressor")
 #
 # License: BSD 3 clause
 
-import warnings
 
-import numpy as np
 
 _EPSILON = ...
 

@@ -17,16 +17,11 @@ from . import EmpiricalCovariance, empirical_covariance as empirical_covariance,
 GraphicalLassoCV_Self = TypeVar("GraphicalLassoCV_Self", bound="GraphicalLassoCV")
 GraphicalLasso_Self = TypeVar("GraphicalLasso_Self", bound="GraphicalLasso")
 
-import operator
-import sys
-import time
 
 # Author: Gael Varoquaux <gael.varoquaux@normalesup.org>
 # License: BSD 3 clause
 # Copyright: INRIA
-import warnings
 
-import numpy as np
 
 def alpha_max(emp_cov: MatrixLike) -> Float: ...
 

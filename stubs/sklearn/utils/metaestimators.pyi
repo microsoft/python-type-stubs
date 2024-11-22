@@ -1,10 +1,7 @@
-import warnings
 from abc import ABCMeta, abstractmethod
 from contextlib import suppress as suppress
 from operator import attrgetter as attrgetter
 from typing import Any, Callable, ClassVar, List, Sequence
-
-import numpy as np
 
 from ..base import BaseEstimator
 from ._available_if import _AvailableIfDescriptor, available_if

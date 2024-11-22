@@ -1,10 +1,7 @@
 from typing import Literal
 
-import numpy as np
-
 from ...color import Color, Colormap
 from ...util.event import Event
-from ...visuals import ColorBarVisual
 from .widget import Widget
 
 # -*- coding: utf-8 -*-

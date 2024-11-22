@@ -1,6 +1,4 @@
-import weakref
 
-from .program import ModularProgram
 
 class MultiProgram(object):
     def __init__(self, vcode="", fcode="", gcode=None): ...

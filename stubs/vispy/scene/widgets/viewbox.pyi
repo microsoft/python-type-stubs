@@ -1,10 +1,7 @@
-import numpy as np
 
 from ...util.event import Event
-from ...visuals.filters import Clipper
-from ..cameras import BaseCamera, make_camera
+from ..cameras import BaseCamera
 from ..node import Node
-from ..subscene import SubScene
 from .widget import Widget
 
 # -*- coding: utf-8 -*-

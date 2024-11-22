@@ -1,8 +1,6 @@
-import warnings
 from collections.abc import Iterable
 
 from ..classes.graph import Graph
-from ..utils import open_file
 
 __all__ = ["read_pajek", "parse_pajek", "generate_pajek", "write_pajek"]
 

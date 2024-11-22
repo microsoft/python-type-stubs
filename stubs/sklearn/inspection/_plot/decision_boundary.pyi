@@ -1,7 +1,6 @@
 from functools import reduce as reduce
 from typing import Any, Literal
 
-import numpy as np
 from matplotlib.axes import Axes
 from matplotlib.collections import QuadMesh
 from matplotlib.contour import QuadContourSet

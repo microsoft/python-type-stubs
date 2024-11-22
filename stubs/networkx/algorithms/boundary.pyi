@@ -1,5 +1,4 @@
 from collections.abc import Iterable
-from itertools import chain
 from typing import Any
 
 from ..classes.graph import Graph

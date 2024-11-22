@@ -1,6 +1,4 @@
 from ...classes.graph import Graph
-from .mixing import attribute_mixing_matrix, degree_mixing_matrix
-from .pairs import node_degree_xy
 
 __all__ = [
     "degree_pearson_correlation_coefficient",

@@ -1,4 +1,3 @@
-import numpy as np
 
 from ..color import Color
 from . import Visual

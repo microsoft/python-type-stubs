@@ -1,6 +1,4 @@
-import ctypes
 
-from .gl2 import _get_gl_func, _lib
 
 # void = glActiveTexture(GLenum texture)
 def glActiveTexture(texture): ...

@@ -39,11 +39,7 @@ MultiTaskElasticNet_Self = TypeVar("MultiTaskElasticNet_Self", bound="MultiTaskE
 #
 # License: BSD 3 clause
 
-import numbers
-import sys
-import warnings
 
-import numpy as np
 
 def lasso_path(
     X: MatrixLike | ArrayLike,

@@ -8,7 +8,6 @@ from .validation import check_array as check_array, check_is_fitted as check_is_
 
 CheckingClassifier_Self = TypeVar("CheckingClassifier_Self", bound="CheckingClassifier")
 
-import numpy as np
 
 class ArraySlicingWrapper:
     def __init__(self, array) -> None: ...

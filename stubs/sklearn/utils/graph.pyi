@@ -1,4 +1,3 @@
-import numpy as np
 from scipy import sparse as sparse
 
 from .._typing import Int, MatrixLike
