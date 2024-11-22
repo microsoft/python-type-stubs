@@ -16,7 +16,7 @@ from ..utils import as_float_array as as_float_array, check_random_state as chec
 from ..utils._param_validation import Interval as Interval, StrOptions as StrOptions
 from ._kmeans import k_means as k_means
 
-SpectralClustering_Self = TypeVar("SpectralClustering_Self", bound="SpectralClustering")
+SpectralClustering_Self = TypeVar("SpectralClustering_Self", bound=SpectralClustering)
 
 import warnings
 
@@ -40,7 +40,7 @@ def spectral_clustering(
     random_state: RandomState | None | Int = None,
     n_init: Int = 10,
     eigen_tol: str | Float = "auto",
-    assign_labels: Literal["kmeans", "discretize", "cluster_qr", "kmeans"] = "kmeans",
+    assign_labels: Literal["kmeans", "discretize", "cluster_qr"] = "kmeans",
     verbose: bool = False,
 ) -> ndarray: ...
 
@@ -64,7 +64,7 @@ class SpectralClustering(ClusterMixin, BaseEstimator):
         affinity: str | Callable = "rbf",
         n_neighbors: Int = 10,
         eigen_tol: str | Float = "auto",
-        assign_labels: Literal["kmeans", "discretize", "cluster_qr", "kmeans"] = "kmeans",
+        assign_labels: Literal["kmeans", "discretize", "cluster_qr"] = "kmeans",
         degree: Float = 3,
         coef0: Float = 1,
         kernel_params: None | Mapping[str, Any] = None,

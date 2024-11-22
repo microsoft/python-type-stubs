@@ -13,7 +13,7 @@ from ..tree import (
 from ..utils import Bunch, check_random_state as check_random_state, deprecated
 from ..utils.metaestimators import _BaseComposition
 
-_BaseHeterogeneousEnsemble_Self = TypeVar("_BaseHeterogeneousEnsemble_Self", bound="_BaseHeterogeneousEnsemble")
+_BaseHeterogeneousEnsemble_Self = TypeVar("_BaseHeterogeneousEnsemble_Self", bound=_BaseHeterogeneousEnsemble)
 
 import warnings
 
@@ -38,7 +38,7 @@ class BaseEnsemble(MetaEstimatorMixin, BaseEstimator, metaclass=ABCMeta):
     # TODO(1.4): remove
     # mypy error: Decorated property not supported
     @deprecated(  # type: ignore
-        "Attribute `base_estimator_` was deprecated in version 1.2 and will be removed in 1.4. Use `estimator_` instead."
+        ...
     )
     @property
     def base_estimator_(self) -> BaseEstimator: ...

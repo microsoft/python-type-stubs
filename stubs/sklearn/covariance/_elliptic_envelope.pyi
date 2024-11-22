@@ -11,7 +11,7 @@ from ..utils._param_validation import Interval as Interval
 from ..utils.validation import check_is_fitted as check_is_fitted
 from . import MinCovDet
 
-EllipticEnvelope_Self = TypeVar("EllipticEnvelope_Self", bound="EllipticEnvelope")
+EllipticEnvelope_Self = TypeVar("EllipticEnvelope_Self", bound=EllipticEnvelope)
 
 # Author: Virgile Fritsch <virgile.fritsch@inria.fr>
 #

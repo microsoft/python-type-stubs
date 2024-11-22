@@ -43,7 +43,7 @@ def strip_newsgroup_footer(text: str) -> str: ...
 def fetch_20newsgroups(
     *,
     data_home: None | str = None,
-    subset: Literal["train", "test", "all", "train"] = "train",
+    subset: Literal["train", "test", "all"] = "train",
     categories: None | ArrayLike = None,
     shuffle: bool = True,
     random_state: RandomState | None | Int = 42,
@@ -53,7 +53,7 @@ def fetch_20newsgroups(
 ) -> Bunch | tuple[list[str], ndarray] | tuple[Bunch, tuple]: ...
 def fetch_20newsgroups_vectorized(
     *,
-    subset: Literal["train", "test", "all", "train"] = "train",
+    subset: Literal["train", "test", "all"] = "train",
     remove: tuple = ...,
     data_home: None | str = None,
     download_if_missing: bool = True,

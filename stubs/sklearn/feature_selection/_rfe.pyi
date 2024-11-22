@@ -16,8 +16,8 @@ from ..utils.parallel import Parallel as Parallel, delayed as delayed
 from ..utils.validation import check_is_fitted as check_is_fitted
 from ._base import SelectorMixin
 
-RFECV_Self = TypeVar("RFECV_Self", bound="RFECV")
-RFE_Self = TypeVar("RFE_Self", bound="RFE")
+RFECV_Self = TypeVar("RFECV_Self", bound=RFECV)
+RFE_Self = TypeVar("RFE_Self", bound=RFE)
 
 # Authors: Alexandre Gramfort <alexandre.gramfort@inria.fr>
 #          Vincent Michel <vincent.michel@inria.fr>
@@ -41,8 +41,8 @@ class RFE(SelectorMixin, MetaEstimatorMixin, BaseEstimator):
         self,
         estimator: BaseEstimator,
         *,
-        n_features_to_select: float | None | int = None,
-        step: float | int = 1,
+        n_features_to_select: float | None = None,
+        step: float = 1,
         verbose: Int = 0,
         importance_getter: str | Callable = "auto",
     ) -> None: ...
@@ -71,7 +71,7 @@ class RFECV(RFE):
         self,
         estimator: BaseEstimator | LogisticRegression,
         *,
-        step: float | int = 1,
+        step: float = 1,
         min_features_to_select: Int = 1,
         cv: int | BaseCrossValidator | Iterable | None | BaseShuffleSplit = None,
         scoring: None | str | Callable = None,

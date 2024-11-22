@@ -22,9 +22,9 @@ from ..utils.extmath import randomized_svd as randomized_svd, row_norms as row_n
 from ..utils.parallel import Parallel as Parallel, delayed as delayed
 from ..utils.validation import check_is_fitted as check_is_fitted
 
-DictionaryLearning_Self = TypeVar("DictionaryLearning_Self", bound="DictionaryLearning")
-SparseCoder_Self = TypeVar("SparseCoder_Self", bound="SparseCoder")
-MiniBatchDictionaryLearning_Self = TypeVar("MiniBatchDictionaryLearning_Self", bound="MiniBatchDictionaryLearning")
+DictionaryLearning_Self = TypeVar("DictionaryLearning_Self", bound=DictionaryLearning)
+SparseCoder_Self = TypeVar("SparseCoder_Self", bound=SparseCoder)
+MiniBatchDictionaryLearning_Self = TypeVar("MiniBatchDictionaryLearning_Self", bound=MiniBatchDictionaryLearning)
 
 # Author: Vlad Niculae, Gael Varoquaux, Alexandre Gramfort
 # License: BSD 3 clause
@@ -43,7 +43,7 @@ def sparse_encode(
     *,
     gram: None | MatrixLike = None,
     cov: None | MatrixLike = None,
-    algorithm: Literal["lasso_lars", "lasso_cd", "lars", "omp", "threshold", "lasso_lars"] = "lasso_lars",
+    algorithm: Literal["lasso_lars", "lasso_cd", "lars", "omp", "threshold"] = "lasso_lars",
     n_nonzero_coefs: None | Int = None,
     alpha: None | Float = None,
     copy_cov: bool = True,
@@ -61,7 +61,7 @@ def dict_learning(
     alpha: Int,
     max_iter: Int = 100,
     tol: Float = 1e-8,
-    method: Literal["lars", "cd", "lars"] = "lars",
+    method: Literal["lars", "cd"] = "lars",
     n_jobs: None | Int = None,
     dict_init: None | MatrixLike = None,
     code_init: None | MatrixLike = None,
@@ -87,7 +87,7 @@ def dict_learning_online(
     verbose: bool = False,
     shuffle: bool = True,
     n_jobs: None | Int = None,
-    method: Literal["lars", "cd", "lars"] = "lars",
+    method: Literal["lars", "cd"] = "lars",
     iter_offset: str | Int = "deprecated",
     random_state: RandomState | None | Int = None,
     return_inner_stats: str | bool = "deprecated",
@@ -105,7 +105,7 @@ class _BaseSparseCoding(ClassNamePrefixFeaturesOutMixin, TransformerMixin):
         self,
         transform_algorithm: str,
         transform_n_nonzero_coefs: None | int,
-        transform_alpha: float | None | int,
+        transform_alpha: float | None,
         split_sign: bool,
         n_jobs,
         positive_code: bool,
@@ -122,7 +122,7 @@ class SparseCoder(_BaseSparseCoding, BaseEstimator):
         self,
         dictionary: MatrixLike,
         *,
-        transform_algorithm: Literal["lasso_lars", "lasso_cd", "lars", "omp", "threshold", "omp"] = "omp",
+        transform_algorithm: Literal["lasso_lars", "lasso_cd", "lars", "omp", "threshold"] = "omp",
         transform_n_nonzero_coefs: None | Int = None,
         transform_alpha: None | Float = None,
         split_sign: bool = False,
@@ -153,8 +153,8 @@ class DictionaryLearning(_BaseSparseCoding, BaseEstimator):
         alpha: Float = 1,
         max_iter: Int = 1000,
         tol: Float = 1e-8,
-        fit_algorithm: Literal["lars", "cd", "lars"] = "lars",
-        transform_algorithm: Literal["lasso_lars", "lasso_cd", "lars", "omp", "threshold", "omp"] = "omp",
+        fit_algorithm: Literal["lars", "cd"] = "lars",
+        transform_algorithm: Literal["lasso_lars", "lasso_cd", "lars", "omp", "threshold"] = "omp",
         transform_n_nonzero_coefs: None | Int = None,
         transform_alpha: None | Float = None,
         n_jobs: None | int = None,
@@ -185,12 +185,12 @@ class MiniBatchDictionaryLearning(_BaseSparseCoding, BaseEstimator):
         alpha: Float = 1,
         n_iter: str | Int = "deprecated",
         max_iter: None | Int = None,
-        fit_algorithm: Literal["lars", "cd", "lars"] = "lars",
+        fit_algorithm: Literal["lars", "cd"] = "lars",
         n_jobs: None | Int = None,
         batch_size: str | Int = "warn",
         shuffle: bool = True,
         dict_init: None | MatrixLike = None,
-        transform_algorithm: Literal["lasso_lars", "lasso_cd", "lars", "omp", "threshold", "omp"] = "omp",
+        transform_algorithm: Literal["lasso_lars", "lasso_cd", "lars", "omp", "threshold"] = "omp",
         transform_n_nonzero_coefs: None | Int = None,
         transform_alpha: None | Float = None,
         verbose: int | bool = False,
@@ -203,13 +203,13 @@ class MiniBatchDictionaryLearning(_BaseSparseCoding, BaseEstimator):
         tol: Float = 1e-3,
         max_no_improvement: Int = 10,
     ) -> None: ...
-    @deprecated("The attribute `iter_offset_` is deprecated in 1.1 and will be removed in 1.3.")  # type: ignore
+    @deprecated(...)  # type: ignore
     @property
     def iter_offset_(self) -> int: ...
-    @deprecated("The attribute `random_state_` is deprecated in 1.1 and will be removed in 1.3.")  # type: ignore
+    @deprecated(...)  # type: ignore
     @property
     def random_state_(self) -> RandomState: ...
-    @deprecated("The attribute `inner_stats_` is deprecated in 1.1 and will be removed in 1.3.")  # type: ignore
+    @deprecated(...)  # type: ignore
     @property
     def inner_stats_(self) -> tuple[ndarray, ndarray]: ...
     def fit(self: MiniBatchDictionaryLearning_Self, X: MatrixLike, y: Any = None) -> MiniBatchDictionaryLearning_Self: ...

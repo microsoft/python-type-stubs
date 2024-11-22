@@ -15,7 +15,7 @@ from ..utils import gen_batches as gen_batches, get_chunk_n_rows as get_chunk_n_
 from ..utils._param_validation import HasMethods as HasMethods, Interval as Interval, StrOptions as StrOptions
 from ..utils.validation import check_memory as check_memory
 
-OPTICS_Self = TypeVar("OPTICS_Self", bound="OPTICS")
+OPTICS_Self = TypeVar("OPTICS_Self", bound=OPTICS)
 
 import warnings
 
@@ -36,7 +36,7 @@ class OPTICS(ClusterMixin, BaseEstimator):
     def __init__(
         self,
         *,
-        min_samples: float | int = 5,
+        min_samples: float = 5,
         max_eps: Float = ...,
         metric: str | Callable = "minkowski",
         p: Float = 2,
@@ -45,8 +45,8 @@ class OPTICS(ClusterMixin, BaseEstimator):
         eps: None | Float = None,
         xi: float = 0.05,
         predecessor_correction: bool = True,
-        min_cluster_size: float | None | int = None,
-        algorithm: Literal["auto", "ball_tree", "kd_tree", "brute", "auto"] = "auto",
+        min_cluster_size: float | None = None,
+        algorithm: Literal["auto", "ball_tree", "kd_tree", "brute"] = "auto",
         leaf_size: Int = 30,
         memory: None | Memory | str = None,
         n_jobs: None | Int = None,
@@ -56,7 +56,7 @@ class OPTICS(ClusterMixin, BaseEstimator):
 def compute_optics_graph(
     X: MatrixLike,
     *,
-    min_samples: float | int,
+    min_samples: float,
     max_eps: Float,
     metric: str | Callable,
     p: Int,
@@ -77,8 +77,8 @@ def cluster_optics_xi(
     reachability: ArrayLike,
     predecessor: ArrayLike,
     ordering: ArrayLike,
-    min_samples: float | int,
-    min_cluster_size: float | None | int = None,
+    min_samples: float,
+    min_cluster_size: float | None = None,
     xi: float = 0.05,
     predecessor_correction: bool = True,
 ) -> tuple[ndarray, ndarray]: ...

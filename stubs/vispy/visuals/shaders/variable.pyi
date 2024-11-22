@@ -17,7 +17,7 @@ class Variable(ShaderObject):
     def __init__(
         self,
         name: str,
-        value: float | int | tuple | GLObject | None = None,
+        value: float | tuple | GLObject | None = None,
         vtype: Literal["const", "uniform", "attribute", "varying", "inout"] | None = None,
         dtype: str | None = None,
     ): ...

@@ -16,8 +16,8 @@ from ..utils.extmath import safe_sparse_dot as safe_sparse_dot
 from ..utils.multiclass import check_classification_targets as check_classification_targets
 from ..utils.validation import check_is_fitted as check_is_fitted
 
-BaseLabelPropagation_Self = TypeVar("BaseLabelPropagation_Self", bound="BaseLabelPropagation")
-LabelPropagation_Self = TypeVar("LabelPropagation_Self", bound="LabelPropagation")
+BaseLabelPropagation_Self = TypeVar("BaseLabelPropagation_Self", bound=BaseLabelPropagation)
+LabelPropagation_Self = TypeVar("LabelPropagation_Self", bound=LabelPropagation)
 
 # coding=utf8
 
@@ -30,7 +30,7 @@ class BaseLabelPropagation(ClassifierMixin, BaseEstimator, metaclass=ABCMeta):
 
     def __init__(
         self,
-        kernel: Callable | Literal["rbf", "knn", "rbf"] = "rbf",
+        kernel: Callable | Literal["rbf", "knn"] = "rbf",
         *,
         gamma: Float = 20,
         n_neighbors: Int = 7,
@@ -58,7 +58,7 @@ class LabelPropagation(BaseLabelPropagation):
 
     def __init__(
         self,
-        kernel: Callable | Literal["knn", "rbf", "rbf"] = "rbf",
+        kernel: Callable | Literal["knn", "rbf"] = "rbf",
         *,
         gamma: Float = 20,
         n_neighbors: Int = 7,
@@ -83,7 +83,7 @@ class LabelSpreading(BaseLabelPropagation):
 
     def __init__(
         self,
-        kernel: Callable | Literal["rbf", "knn", "rbf"] = "rbf",
+        kernel: Callable | Literal["rbf", "knn"] = "rbf",
         *,
         gamma: Float = 20,
         n_neighbors: Int = 7,

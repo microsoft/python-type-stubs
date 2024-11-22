@@ -10,7 +10,7 @@ from ..utils._param_validation import Interval as Interval
 from ..utils.extmath import svd_flip as svd_flip
 from ._base import _BasePCA
 
-IncrementalPCA_Self = TypeVar("IncrementalPCA_Self", bound="IncrementalPCA")
+IncrementalPCA_Self = TypeVar("IncrementalPCA_Self", bound=IncrementalPCA)
 
 import numpy as np
 
