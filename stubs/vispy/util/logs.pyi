@@ -46,7 +46,7 @@ logging_types = ...
 
 def set_log_level(verbose: bool | str | int | None, match: str | None = None, return_old: bool = False): ...
 
-class use_log_level(object):
+class use_log_level:
     # This method mostly wraps to set_log_level, but also takes
     # care of enabling/disabling message recording in the formatter.
 

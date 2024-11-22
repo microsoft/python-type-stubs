@@ -13,7 +13,7 @@ from ..util import logger
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 # This module was taken from visvis
 
-class WavefrontReader(object):
+class WavefrontReader:
     def __init__(self, f): ...
     @classmethod
     def read(cls, fname: str): ...
@@ -24,7 +24,7 @@ class WavefrontReader(object):
     def _calculate_normals(self): ...
     def finish(self): ...
 
-class WavefrontWriter(object):
+class WavefrontWriter:
     def __init__(self, f): ...
     @classmethod
     def write(

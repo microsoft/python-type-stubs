@@ -1,4 +1,3 @@
-from __future__ import division
 
 from numpy.typing import ArrayLike, NDArray
 

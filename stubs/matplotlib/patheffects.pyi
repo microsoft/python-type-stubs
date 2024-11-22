@@ -1,4 +1,5 @@
-from typing import Callable, Iterable, Sequence
+from collections.abc import Iterable, Sequence
+from typing import Callable
 
 from ._typing import *
 from .backend_bases import GraphicsContextBase, RendererBase

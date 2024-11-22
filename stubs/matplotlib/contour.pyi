@@ -1,5 +1,6 @@
+from collections.abc import Iterable, Sequence
 from tkinter import Label
-from typing import Callable, Iterable, Literal, Sequence
+from typing import Callable, Literal
 
 from matplotlib.collections import Collection
 

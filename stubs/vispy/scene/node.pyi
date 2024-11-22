@@ -11,7 +11,7 @@ from ..visuals.transforms.transform_system import TransformSystem
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 
-class Node(object):
+class Node:
     # Needed to allow subclasses to repr() themselves before Node.__init__()
     _name: None = ...
 

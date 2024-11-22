@@ -1,5 +1,6 @@
+from collections.abc import Sequence
 from copy import deepcopy
-from typing import Literal, Sequence
+from typing import Literal
 
 import numpy as np
 
@@ -28,7 +29,7 @@ def _array_clip_val(val): ...
 ###############################################################################
 # Color Array
 
-class ColorArray(object):
+class ColorArray:
     def __init__(
         self,
         color: str | tuple | Sequence = ...,

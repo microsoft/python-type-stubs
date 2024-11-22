@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # -----------------------------------------------------------------------------
 # Copyright (c) 2014, Nicolas P. Rougier
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
@@ -13,7 +12,7 @@ from .geometry import epsilon
 from .transformable import Transformable
 
 # ----------------------------------------------------------------- Command ---
-class Command(object):
+class Command:
     def __repr__(self): ...
     def origin(self, current=None, previous=None): ...
 

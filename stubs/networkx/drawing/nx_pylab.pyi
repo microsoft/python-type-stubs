@@ -1,5 +1,5 @@
+from collections.abc import Mapping
 from numbers import Number
-from typing import Mapping
 
 from numpy.typing import ArrayLike
 

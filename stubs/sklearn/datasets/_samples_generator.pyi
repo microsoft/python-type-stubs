@@ -1,8 +1,8 @@
 import array
 import numbers
 import warnings
-from collections.abc import Iterable
-from typing import Iterable, Literal, Sequence
+from collections.abc import Iterable, Sequence
+from typing import Literal
 
 import numpy as np
 import scipy.sparse as sp

@@ -1,10 +1,11 @@
 import math
 import time
 import warnings
+from collections.abc import Mapping
 from functools import reduce
 from itertools import product
 from operator import mul
-from typing import Callable, Mapping
+from typing import Callable
 
 from ..classes.graph import Graph
 
