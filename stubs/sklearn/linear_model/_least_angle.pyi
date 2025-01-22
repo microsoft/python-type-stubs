@@ -11,7 +11,6 @@ from .._typing import ArrayLike, Float, Int, MatrixLike
 from ..base import MultiOutputMixin, RegressorMixin
 from ..exceptions import ConvergenceWarning as ConvergenceWarning
 from ..model_selection import BaseCrossValidator, check_cv as check_cv
-from ..model_selection._split import BaseShuffleSplit
 from ..utils import arrayfuncs as arrayfuncs, as_float_array as as_float_array, check_random_state as check_random_state
 from ..utils._param_validation import Hidden as Hidden, Interval as Interval, StrOptions as StrOptions
 from ..utils.parallel import Parallel as Parallel, delayed as delayed
@@ -160,7 +159,7 @@ class LarsCV(Lars):
         max_iter: Int = 500,
         normalize: str | bool = "deprecated",
         precompute: Literal["auto", "auto"] | ArrayLike | bool = "auto",
-        cv: int | BaseCrossValidator | Iterable | None | BaseShuffleSplit = None,
+        cv: int | BaseCrossValidator | Iterable | None = None,
         max_n_alphas: Int = 1000,
         n_jobs: None | int = None,
         eps: Float = ...,
@@ -193,7 +192,7 @@ class LassoLarsCV(LarsCV):
         max_iter: Int = 500,
         normalize: str | bool = "deprecated",
         precompute: Literal["auto", "auto"] | bool = "auto",
-        cv: int | BaseCrossValidator | Iterable | None | BaseShuffleSplit = None,
+        cv: int | BaseCrossValidator | Iterable | None = None,
         max_n_alphas: Int = 1000,
         n_jobs: None | int = None,
         eps: Float = ...,

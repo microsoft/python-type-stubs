@@ -18,7 +18,6 @@ from ..base import MultiOutputMixin, RegressorMixin, is_classifier as is_classif
 from ..exceptions import ConvergenceWarning as ConvergenceWarning
 from ..metrics import check_scoring as check_scoring, get_scorer_names as get_scorer_names
 from ..model_selection import BaseCrossValidator, GridSearchCV as GridSearchCV
-from ..model_selection._split import BaseShuffleSplit
 from ..preprocessing import LabelBinarizer as LabelBinarizer
 from ..utils import (
     check_array as check_array,
@@ -257,7 +256,7 @@ class RidgeClassifierCV(_RidgeClassifierMixin, _BaseRidgeCV):
         *,
         fit_intercept: bool = True,
         scoring: None | str | Callable = None,
-        cv: int | BaseCrossValidator | Iterable | None | BaseShuffleSplit = None,
+        cv: int | BaseCrossValidator | Iterable | None = None,
         class_weight: None | Mapping | str = None,
         store_cv_values: bool = False,
     ) -> None: ...
