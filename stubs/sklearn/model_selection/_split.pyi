@@ -46,7 +46,7 @@ class BaseCrossValidator(metaclass=ABCMeta):
         groups: None | ArrayLike = None,
     ) -> Iterator[tuple[ndarray, ndarray]]: ...
     @abstractmethod
-    def get_n_splits(self, X=None, y=None, groups=None): ...
+    def get_n_splits(self, X=None, y=None, groups=None) -> int: ...
     def __repr__(self) -> str: ...
 
 class LeaveOneOut(BaseCrossValidator):
@@ -120,7 +120,7 @@ class LeavePGroupsOut(BaseCrossValidator):
     def get_n_splits(self, X: Any = None, y: Any = None, groups: None | ArrayLike = None) -> int: ...
     def split(self, X: MatrixLike, y: None | ArrayLike = None, groups: None | ArrayLike = None): ...
 
-class _RepeatedSplits(metaclass=ABCMeta):
+class _RepeatedSplits(BaseCrossValidator, metaclass=ABCMeta):
     def __init__(
         self,
         cv: Callable,
@@ -153,7 +153,7 @@ class RepeatedStratifiedKFold(_RepeatedSplits):
         random_state: RandomState | None | Int = None,
     ) -> None: ...
 
-class BaseShuffleSplit(metaclass=ABCMeta):
+class BaseShuffleSplit(BaseCrossValidator, metaclass=ABCMeta):
     def __init__(self, n_splits: int = 10, *, test_size=None, train_size=None, random_state=None) -> None: ...
     def split(
         self, X: MatrixLike, y: None | ArrayLike = None, groups: None | ArrayLike = None
