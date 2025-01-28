@@ -1,4 +1,5 @@
-from typing import Any, Iterable
+from collections.abc import Iterable
+from typing import Any
 
 import numpy as np
 from scipy.sparse import csr_matrix

@@ -127,7 +127,7 @@ class BaseLoss:
     def init_gradient_and_hessian(
         self,
         n_samples: Int,
-        dtype: Type[Float] | Float = ...,
+        dtype: type[Float] | Float = ...,
         order: Literal["C", "F", "F"] = "F",
     ) -> tuple[ndarray, ndarray]: ...
 

@@ -1,8 +1,9 @@
 import doctest as pdoctest
 from collections import namedtuple
+from collections.abc import Generator
 from contextlib import contextmanager
 from doctest import DocTestFinder, DocTestRunner
-from typing import Any, Generator, Literal
+from typing import Any, Literal
 
 IS_WINDOWS = ...
 ON_CI = ...

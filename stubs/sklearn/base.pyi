@@ -1,5 +1,6 @@
 from collections import defaultdict as defaultdict
-from typing import Any, ClassVar, Iterable, TypeVar
+from collections.abc import Iterable
+from typing import Any, ClassVar, TypeVar
 
 from numpy import ndarray
 

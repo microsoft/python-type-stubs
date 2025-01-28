@@ -1,4 +1,5 @@
-from typing import Any, Callable, Generator
+from collections.abc import Generator
+from typing import Any, Callable
 
 def identity(x) -> Generator[Any, Any, None]: ...
 def exhaust(brule) -> Callable[..., Generator[Any, Any, None]]: ...

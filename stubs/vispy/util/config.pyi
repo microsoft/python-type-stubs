@@ -8,9 +8,9 @@ import platform
 import sys
 import tempfile
 import traceback
+from collections.abc import Mapping
 from os import path as op
 from shutil import rmtree
-from typing import Mapping
 
 import numpy as np
 
@@ -47,7 +47,7 @@ def _get_vispy_app_dir(): ...
 class ConfigEvent(Event):
     def __init__(self, changes): ...
 
-class Config(object):
+class Config:
     def __init__(self, **kwargs): ...
     def __getitem__(self, item): ...
     def __setitem__(self, item, val): ...

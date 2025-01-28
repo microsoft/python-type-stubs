@@ -1,6 +1,7 @@
 from collections import defaultdict as defaultdict
+from collections.abc import Iterable
 from numbers import Integral as Integral
-from typing import Any, ClassVar, Iterable, TypeVar
+from typing import Any, ClassVar, TypeVar
 
 from numpy import ndarray
 from pandas.core.frame import DataFrame

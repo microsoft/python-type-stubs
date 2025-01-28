@@ -1,6 +1,7 @@
 import datetime
 from array import array
-from typing import Callable, ContextManager, Literal, Sequence, overload
+from collections.abc import Sequence
+from typing import Callable, ContextManager, Literal, overload
 
 import matplotlib
 import matplotlib.image

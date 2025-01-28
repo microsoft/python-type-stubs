@@ -1,5 +1,6 @@
 from abc import ABCMeta, abstractmethod
-from typing import Any, ClassVar, List, Sequence, TypeVar
+from collections.abc import Sequence
+from typing import Any, ClassVar, List, TypeVar
 
 from joblib import effective_n_jobs as effective_n_jobs
 
@@ -23,7 +24,7 @@ class BaseEnsemble(MetaEstimatorMixin, BaseEstimator, metaclass=ABCMeta):
     estimators_: list[BaseEstimator] = ...
 
     # overwrite _required_parameters from MetaEstimatorMixin
-    _required_parameters: ClassVar[List[str]] = ...
+    _required_parameters: ClassVar[list[str]] = ...
 
     @abstractmethod
     def __init__(

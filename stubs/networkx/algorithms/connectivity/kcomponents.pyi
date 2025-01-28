@@ -1,7 +1,7 @@
 from collections import defaultdict
+from collections.abc import Mapping
 from itertools import combinations
 from operator import itemgetter
-from typing import Mapping
 
 # Define the default maximum flow function.
 from ...algorithms.flow import edmonds_karp

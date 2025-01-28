@@ -1,5 +1,6 @@
 import contextlib
-from typing import Generator, Literal
+from collections.abc import Generator
+from typing import Literal
 
 import numpy as np
 from packaging.version import parse as parse_version

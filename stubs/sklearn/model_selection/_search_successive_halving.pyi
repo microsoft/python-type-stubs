@@ -1,8 +1,9 @@
 from abc import abstractmethod as abstractmethod
+from collections.abc import Iterable, Iterator, Mapping, Sequence
 from copy import deepcopy as deepcopy
 from math import ceil as ceil, floor as floor, log as log
 from numbers import Integral as Integral
-from typing import Callable, ClassVar, Iterable, Iterator, Literal, Mapping, Sequence, TypeVar
+from typing import Callable, ClassVar, Literal, TypeVar
 
 from numpy import ndarray
 from numpy.random import RandomState

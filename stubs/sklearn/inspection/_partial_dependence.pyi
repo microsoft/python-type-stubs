@@ -1,5 +1,5 @@
-from collections.abc import Iterable as Iterable
-from typing import Literal, Sequence
+from collections.abc import Iterable as Iterable, Sequence
+from typing import Literal
 
 import numpy as np
 from scipy import sparse as sparse

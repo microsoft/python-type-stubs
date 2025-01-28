@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 
@@ -113,7 +112,7 @@ class VolumeVisual(Visual):
     @property
     def clipping_planes(self) -> np.ndarray: ...
     @clipping_planes.setter
-    def clipping_planes(self, value: Optional[np.ndarray]): ...
+    def clipping_planes(self, value: np.ndarray | None): ...
     @property
     def clipping_planes_coord_system(self) -> str: ...
     @property

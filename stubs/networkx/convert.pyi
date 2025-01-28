@@ -1,6 +1,5 @@
 import warnings
-from collections.abc import Collection, Generator, Iterator
-from typing import Mapping
+from collections.abc import Collection, Generator, Iterator, Mapping
 
 from numpy.typing import ArrayLike
 

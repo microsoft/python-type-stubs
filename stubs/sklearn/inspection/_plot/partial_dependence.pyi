@@ -1,8 +1,9 @@
 import numbers
 import warnings
+from collections.abc import Mapping, Sequence
 from itertools import chain as chain
 from math import ceil as ceil
-from typing import Literal, Mapping, Sequence
+from typing import Literal
 
 import numpy as np
 from matplotlib.axes import Axes

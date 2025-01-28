@@ -46,9 +46,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Run Ruff Linter
-        uses: astral-sh/ruff-action@v1
-
-      - name: Run Ruff Formatter
-        uses: astral-sh/ruff-action@v1
+        uses: astral-sh/ruff-action@v3
         with:
-          args: "format --check"
+          version: "0.9.*"
+      - run: ruff format --check

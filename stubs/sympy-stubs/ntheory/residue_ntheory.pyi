@@ -1,4 +1,5 @@
-from typing import Any, Generator, Literal
+from collections.abc import Generator
+from typing import Any, Literal
 
 from sympy import Function
 from sympy.core.function import UndefinedFunction
