@@ -70,8 +70,6 @@ class BaseLibSVM(BaseEstimator, metaclass=ABCMeta):
 
 class BaseSVC(ClassifierMixin, BaseLibSVM, metaclass=ABCMeta):
     _parameter_constraints: ClassVar[dict] = ...
-    for unused_param in ["epsilon", "nu"]:
-        pass
 
     @abstractmethod
     def __init__(
