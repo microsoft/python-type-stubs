@@ -46,6 +46,7 @@ class GaussianProcessRegressor(MultiOutputMixin, RegressorMixin, BaseEstimator):
         n_restarts_optimizer: Int = 0,
         normalize_y: bool = False,
         copy_X_train: bool = True,
+        n_targets: Int | None = None,
         random_state: RandomState | None | Int = None,
     ) -> None: ...
     def fit(
