@@ -9,7 +9,6 @@ from scipy.linalg.lapack import get_lapack_funcs as get_lapack_funcs
 from .._typing import ArrayLike, Float, Int, MatrixLike
 from ..base import MultiOutputMixin, RegressorMixin
 from ..model_selection import BaseCrossValidator, check_cv as check_cv
-from ..model_selection._split import BaseShuffleSplit
 from ..utils import as_float_array as as_float_array, check_array as check_array
 from ..utils._param_validation import Hidden as Hidden, Interval as Interval, StrOptions as StrOptions
 from ..utils.parallel import Parallel as Parallel, delayed as delayed
@@ -90,7 +89,7 @@ class OrthogonalMatchingPursuitCV(RegressorMixin, LinearModel):
         fit_intercept: bool = True,
         normalize: str | bool = "deprecated",
         max_iter: None | Int = None,
-        cv: int | BaseCrossValidator | Iterable | None | BaseShuffleSplit = None,
+        cv: int | BaseCrossValidator | Iterable | None = None,
         n_jobs: None | Int = None,
         verbose: int | bool = False,
     ) -> None: ...

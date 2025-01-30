@@ -13,7 +13,6 @@ from scipy.sparse._coo import coo_matrix
 from .._typing import ArrayLike, Float, Int, MatrixLike
 from ..base import MultiOutputMixin, RegressorMixin
 from ..model_selection import BaseCrossValidator, check_cv as check_cv
-from ..model_selection._split import BaseShuffleSplit
 from ..utils import check_array as check_array, check_scalar as check_scalar
 from ..utils._param_validation import Interval as Interval, StrOptions as StrOptions
 from ..utils.extmath import safe_sparse_dot as safe_sparse_dot
@@ -206,7 +205,7 @@ class LassoCV(RegressorMixin, LinearModelCV):
         max_iter: Int = 1000,
         tol: Float = 1e-4,
         copy_X: bool = True,
-        cv: int | BaseCrossValidator | Iterable | None | BaseShuffleSplit = None,
+        cv: int | BaseCrossValidator | Iterable | None = None,
         verbose: int | bool = False,
         n_jobs: None | Int = None,
         positive: bool = False,
@@ -241,7 +240,7 @@ class ElasticNetCV(RegressorMixin, LinearModelCV):
         precompute: Literal["auto", "auto"] | MatrixLike | bool = "auto",
         max_iter: Int = 1000,
         tol: Float = 1e-4,
-        cv: int | BaseCrossValidator | Iterable | None | BaseShuffleSplit = None,
+        cv: int | BaseCrossValidator | Iterable | None = None,
         copy_X: bool = True,
         verbose: int | bool = 0,
         n_jobs: None | Int = None,
@@ -333,7 +332,7 @@ class MultiTaskElasticNetCV(RegressorMixin, LinearModelCV):
         fit_intercept: bool = True,
         max_iter: Int = 1000,
         tol: Float = 1e-4,
-        cv: int | BaseCrossValidator | Iterable | None | BaseShuffleSplit = None,
+        cv: int | BaseCrossValidator | Iterable | None = None,
         copy_X: bool = True,
         verbose: int | bool = 0,
         n_jobs: None | Int = None,
@@ -370,7 +369,7 @@ class MultiTaskLassoCV(RegressorMixin, LinearModelCV):
         max_iter: Int = 1000,
         tol: Float = 1e-4,
         copy_X: bool = True,
-        cv: int | BaseCrossValidator | Iterable | None | BaseShuffleSplit = None,
+        cv: int | BaseCrossValidator | Iterable | None = None,
         verbose: int | bool = False,
         n_jobs: None | Int = None,
         random_state: RandomState | None | Int = None,
