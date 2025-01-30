@@ -9,7 +9,7 @@ from .._typing import Int
 from ..base import BaseEstimator, TransformerMixin
 from ..utils._param_validation import Interval as Interval, StrOptions as StrOptions
 
-FeatureHasher_Self = TypeVar("FeatureHasher_Self", bound="FeatureHasher")
+FeatureHasher_Self = TypeVar("FeatureHasher_Self", bound=FeatureHasher)
 
 # Author: Lars Buitinck
 # License: BSD 3 clause

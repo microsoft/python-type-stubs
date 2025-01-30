@@ -15,7 +15,7 @@ from ..utils._param_validation import Interval as Interval
 from ..utils.parallel import Parallel as Parallel, delayed as delayed
 from ..utils.validation import check_is_fitted as check_is_fitted
 
-MeanShift_Self = TypeVar("MeanShift_Self", bound="MeanShift")
+MeanShift_Self = TypeVar("MeanShift_Self", bound=MeanShift)
 
 # Authors: Conrad Lee <conradlee@gmail.com>
 #          Alexandre Gramfort <alexandre.gramfort@inria.fr>

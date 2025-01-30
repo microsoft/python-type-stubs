@@ -15,44 +15,19 @@ __all__ = [
     "NetworkXUnfeasible",
 ]
 
-class NetworkXException(Exception):
-    pass
-
-class NetworkXError(NetworkXException):
-    pass
-
-class NetworkXPointlessConcept(NetworkXException):
-    pass
-
-class NetworkXAlgorithmError(NetworkXException):
-    pass
-
-class NetworkXUnfeasible(NetworkXAlgorithmError):
-    pass
-
-class NetworkXNoPath(NetworkXUnfeasible):
-    pass
-
-class NetworkXNoCycle(NetworkXUnfeasible):
-    pass
-
-class HasACycle(NetworkXException):
-    pass
-
-class NetworkXUnbounded(NetworkXAlgorithmError):
-    pass
-
-class NetworkXNotImplemented(NetworkXException):
-    pass
-
-class NodeNotFound(NetworkXException):
-    pass
-
-class AmbiguousSolution(NetworkXException):
-    pass
-
-class ExceededMaxIterations(NetworkXException):
-    pass
+class NetworkXException(Exception): ...
+class NetworkXError(NetworkXException): ...
+class NetworkXPointlessConcept(NetworkXException): ...
+class NetworkXAlgorithmError(NetworkXException): ...
+class NetworkXUnfeasible(NetworkXAlgorithmError): ...
+class NetworkXNoPath(NetworkXUnfeasible): ...
+class NetworkXNoCycle(NetworkXUnfeasible): ...
+class HasACycle(NetworkXException): ...
+class NetworkXUnbounded(NetworkXAlgorithmError): ...
+class NetworkXNotImplemented(NetworkXException): ...
+class NodeNotFound(NetworkXException): ...
+class AmbiguousSolution(NetworkXException): ...
+class ExceededMaxIterations(NetworkXException): ...
 
 class PowerIterationFailedConvergence(ExceededMaxIterations):
     def __init__(self, num_iterations, *args, **kw): ...

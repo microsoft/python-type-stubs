@@ -13,7 +13,7 @@ from .offsetbox import DraggableAnnotation
 from .patches import FancyBboxPatch
 from .transforms import Bbox, Transform
 
-def get_rotation(rotation: float | Literal[None, "horizontal", "vertical"]) -> float: ...
+def get_rotation(rotation: float | Literal["horizontal", "vertical"] | None) -> float: ...
 
 class Text(Artist):
     zorder = ...
@@ -176,7 +176,6 @@ class _AnnotationBase:
     def draggable(self, state: bool | None = ..., use_blit: bool = ...) -> None | DraggableAnnotation: ...
 
 class Annotation(Text, _AnnotationBase):
-    def __str__(self) -> str: ...
     def __init__(
         self,
         text: str,

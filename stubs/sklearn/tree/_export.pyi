@@ -13,8 +13,7 @@ from ._classes import DecisionTreeClassifier
 from ._reingold_tilford import buchheim as buchheim
 from ._tree import Tree
 
-class Sentinel:
-    def __repr__(self) -> str: ...
+class Sentinel: ...
 
 SENTINEL = ...
 
@@ -24,7 +23,7 @@ def plot_tree(
     max_depth: None | Int = None,
     feature_names: None | Sequence[str] = None,
     class_names: Sequence[str | bool] | None = None,
-    label: Literal["all", "root", "none", "all"] = "all",
+    label: Literal["all", "root", "none"] = "all",
     filled: bool = False,
     impurity: bool = True,
     node_ids: bool = False,
@@ -103,7 +102,7 @@ def export_graphviz(
     max_depth: None | Int = None,
     feature_names: None | Sequence[str] = None,
     class_names: Sequence[str | bool] | None = None,
-    label: Literal["all", "root", "none", "all"] = "all",
+    label: Literal["all", "root", "none"] = "all",
     filled: bool = False,
     leaves_parallel: bool = False,
     impurity: bool = True,

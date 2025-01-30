@@ -61,7 +61,7 @@ class KNeighborsMixin:
         self,
         X: None | MatrixLike = None,
         n_neighbors: None | Int = None,
-        mode: Literal["connectivity", "connectivity", "distance"] = "connectivity",
+        mode: Literal["connectivity", "distance"] = "connectivity",
     ) -> spmatrix: ...
 
 class RadiusNeighborsMixin:
@@ -76,6 +76,6 @@ class RadiusNeighborsMixin:
         self,
         X: None | MatrixLike | ArrayLike = None,
         radius: None | Float = None,
-        mode: Literal["connectivity", "distance", "connectivity"] = "connectivity",
+        mode: Literal["connectivity", "distance"] = "connectivity",
         sort_results: bool = False,
     ): ...

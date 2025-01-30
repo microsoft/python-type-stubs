@@ -30,7 +30,7 @@ from ...utils.validation import check_consistent_length as check_consistent_leng
 from .common import G_H_DTYPE as G_H_DTYPE, X_DTYPE as X_DTYPE, Y_DTYPE as Y_DTYPE
 from .grower import TreeGrower as TreeGrower
 
-BaseHistGradientBoosting_Self = TypeVar("BaseHistGradientBoosting_Self", bound="BaseHistGradientBoosting")
+BaseHistGradientBoosting_Self = TypeVar("BaseHistGradientBoosting_Self", bound=BaseHistGradientBoosting)
 
 
 
@@ -86,7 +86,7 @@ class HistGradientBoostingRegressor(RegressorMixin, BaseHistGradientBoosting):
 
     def __init__(
         self,
-        loss: Literal["squared_error", "absolute_error", "poisson", "quantile", "squared_error"] = "squared_error",
+        loss: Literal["squared_error", "absolute_error", "poisson", "quantile"] = "squared_error",
         *,
         quantile: None | Float = None,
         learning_rate: Float = 0.1,
@@ -101,9 +101,9 @@ class HistGradientBoostingRegressor(RegressorMixin, BaseHistGradientBoosting):
         monotonic_cst: None | Mapping | ArrayLike = None,
         interaction_cst: None | Literal["pairwise", "no_interaction"] | Sequence[list[int] | tuple[int, ...] | set[int]] = None,
         warm_start: bool = False,
-        early_stopping: Literal["auto", "auto"] | bool = "auto",
+        early_stopping: Literal["auto"] | bool = "auto",
         scoring: None | str | Callable = "loss",
-        validation_fraction: float | None | int = 0.1,
+        validation_fraction: float | None = 0.1,
         n_iter_no_change: Int = 10,
         tol: Float = 1e-7,
         verbose: Int = 0,
@@ -128,13 +128,7 @@ class HistGradientBoostingClassifier(ClassifierMixin, BaseHistGradientBoosting):
 
     def __init__(
         self,
-        loss: Literal[
-            "log_loss",
-            "log_loss",
-            "auto",
-            "binary_crossentropy",
-            "categorical_crossentropy",
-        ] = "log_loss",
+        loss: Literal["log_loss", "auto", "binary_crossentropy", "categorical_crossentropy"] = "log_loss",
         *,
         learning_rate: Float = 0.1,
         max_iter: Int = 100,
@@ -148,9 +142,9 @@ class HistGradientBoostingClassifier(ClassifierMixin, BaseHistGradientBoosting):
         monotonic_cst: None | Mapping | ArrayLike = None,
         interaction_cst: None | Literal["pairwise", "no_interaction"] | Sequence[list[int] | tuple[int, ...] | set[int]] = None,
         warm_start: bool = False,
-        early_stopping: Literal["auto", "auto"] | bool = "auto",
+        early_stopping: Literal["auto"] | bool = "auto",
         scoring: None | str | Callable = "loss",
-        validation_fraction: float | None | int = 0.1,
+        validation_fraction: float | None = 0.1,
         n_iter_no_change: Int = 10,
         tol: Float = 1e-7,
         verbose: Int = 0,

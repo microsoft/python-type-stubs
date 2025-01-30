@@ -17,7 +17,7 @@ from ..utils.extmath import row_norms as row_norms
 from ..utils.validation import check_is_fitted as check_is_fitted
 from . import AgglomerativeClustering as AgglomerativeClustering
 
-Birch_Self = TypeVar("Birch_Self", bound="Birch")
+Birch_Self = TypeVar("Birch_Self", bound=Birch)
 
 # Authors: Manoj Kumar <manojkumarsivaraj334@gmail.com>
 #          Alexandre Gramfort <alexandre.gramfort@telecom-paristech.fr>

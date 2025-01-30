@@ -12,7 +12,7 @@ from ..utils._param_validation import Interval as Interval
 from ..utils.extmath import fast_logdet as fast_logdet
 from . import EmpiricalCovariance, empirical_covariance as empirical_covariance
 
-MinCovDet_Self = TypeVar("MinCovDet_Self", bound="MinCovDet")
+MinCovDet_Self = TypeVar("MinCovDet_Self", bound=MinCovDet)
 
 # Author: Virgile Fritsch <virgile.fritsch@inria.fr>
 #

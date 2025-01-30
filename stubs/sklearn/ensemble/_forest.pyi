@@ -27,8 +27,8 @@ from ..utils.parallel import Parallel as Parallel, delayed as delayed
 from ..utils.validation import check_is_fitted as check_is_fitted
 from ._base import BaseEnsemble
 
-BaseForest_Self = TypeVar("BaseForest_Self", bound="BaseForest")
-RandomTreesEmbedding_Self = TypeVar("RandomTreesEmbedding_Self", bound="RandomTreesEmbedding")
+BaseForest_Self = TypeVar("BaseForest_Self", bound=BaseForest)
+RandomTreesEmbedding_Self = TypeVar("RandomTreesEmbedding_Self", bound=RandomTreesEmbedding)
 
 
 
@@ -133,12 +133,12 @@ class RandomForestClassifier(ForestClassifier):
         self,
         n_estimators: Int = 100,
         *,
-        criterion: Literal["gini", "entropy", "log_loss", "gini"] = "gini",
+        criterion: Literal["gini", "entropy", "log_loss"] = "gini",
         max_depth: None | Int = None,
-        min_samples_split: float | int = 2,
-        min_samples_leaf: float | int = 1,
+        min_samples_split: float = 2,
+        min_samples_leaf: float = 1,
         min_weight_fraction_leaf: Float = 0.0,
-        max_features: float | Literal["sqrt", "log2", "sqrt"] | int = "sqrt",
+        max_features: float | Literal["sqrt", "log2"] = "sqrt",
         max_leaf_nodes: None | Int = None,
         min_impurity_decrease: Float = 0.0,
         bootstrap: bool = True,
@@ -149,7 +149,7 @@ class RandomForestClassifier(ForestClassifier):
         warm_start: bool = False,
         class_weight: Literal["balanced", "balanced_subsample"] | None | Mapping | Sequence[Mapping] = None,
         ccp_alpha: float = 0.0,
-        max_samples: float | None | int = None,
+        max_samples: float | None = None,
     ) -> None: ...
 
 class RandomForestRegressor(ForestRegressor):
@@ -169,18 +169,12 @@ class RandomForestRegressor(ForestRegressor):
         self,
         n_estimators: Int = 100,
         *,
-        criterion: Literal[
-            "squared_error",
-            "absolute_error",
-            "friedman_mse",
-            "poisson",
-            "squared_error",
-        ] = "squared_error",
+        criterion: Literal["squared_error", "absolute_error", "friedman_mse", "poisson"] = "squared_error",
         max_depth: None | Int = None,
-        min_samples_split: float | int = 2,
-        min_samples_leaf: float | int = 1,
+        min_samples_split: float = 2,
+        min_samples_leaf: float = 1,
         min_weight_fraction_leaf: Float = 0.0,
-        max_features: float | Literal["sqrt", "log2"] | int = 1.0,
+        max_features: float | Literal["sqrt", "log2"] = 1.0,
         max_leaf_nodes: None | Int = None,
         min_impurity_decrease: Float = 0.0,
         bootstrap: bool = True,
@@ -190,7 +184,7 @@ class RandomForestRegressor(ForestRegressor):
         verbose: Int = 0,
         warm_start: bool = False,
         ccp_alpha: float = 0.0,
-        max_samples: float | None | int = None,
+        max_samples: float | None = None,
     ) -> None: ...
 
 class ExtraTreesClassifier(ForestClassifier):
@@ -212,12 +206,12 @@ class ExtraTreesClassifier(ForestClassifier):
         self,
         n_estimators: Int = 100,
         *,
-        criterion: Literal["gini", "entropy", "log_loss", "gini"] = "gini",
+        criterion: Literal["gini", "entropy", "log_loss"] = "gini",
         max_depth: None | Int = None,
-        min_samples_split: float | int = 2,
-        min_samples_leaf: float | int = 1,
+        min_samples_split: float = 2,
+        min_samples_leaf: float = 1,
         min_weight_fraction_leaf: Float = 0.0,
-        max_features: float | Literal["sqrt", "log2", "sqrt"] | int = "sqrt",
+        max_features: float | Literal["sqrt", "log2"] = "sqrt",
         max_leaf_nodes: None | Int = None,
         min_impurity_decrease: Float = 0.0,
         bootstrap: bool = False,
@@ -228,7 +222,7 @@ class ExtraTreesClassifier(ForestClassifier):
         warm_start: bool = False,
         class_weight: Literal["balanced", "balanced_subsample"] | None | Mapping | Sequence[Mapping] = None,
         ccp_alpha: float = 0.0,
-        max_samples: float | None | int = None,
+        max_samples: float | None = None,
     ) -> None: ...
 
 class ExtraTreesRegressor(ForestRegressor):
@@ -248,18 +242,12 @@ class ExtraTreesRegressor(ForestRegressor):
         self,
         n_estimators: Int = 100,
         *,
-        criterion: Literal[
-            "squared_error",
-            "absolute_error",
-            "friedman_mse",
-            "poisson",
-            "squared_error",
-        ] = "squared_error",
+        criterion: Literal["squared_error", "absolute_error", "friedman_mse", "poisson"] = "squared_error",
         max_depth: None | Int = None,
-        min_samples_split: float | int = 2,
-        min_samples_leaf: float | int = 1,
+        min_samples_split: float = 2,
+        min_samples_leaf: float = 1,
         min_weight_fraction_leaf: Float = 0.0,
-        max_features: float | Literal["sqrt", "log2"] | int = 1.0,
+        max_features: float | Literal["sqrt", "log2"] = 1.0,
         max_leaf_nodes: None | Int = None,
         min_impurity_decrease: Float = 0.0,
         bootstrap: bool = False,
@@ -269,7 +257,7 @@ class ExtraTreesRegressor(ForestRegressor):
         verbose: Int = 0,
         warm_start: bool = False,
         ccp_alpha: float = 0.0,
-        max_samples: float | None | int = None,
+        max_samples: float | None = None,
     ) -> None: ...
 
 class RandomTreesEmbedding(TransformerMixin, BaseForest):
@@ -294,8 +282,8 @@ class RandomTreesEmbedding(TransformerMixin, BaseForest):
         n_estimators: Int = 100,
         *,
         max_depth: Int = 5,
-        min_samples_split: float | int = 2,
-        min_samples_leaf: float | int = 1,
+        min_samples_split: float = 2,
+        min_samples_leaf: float = 1,
         min_weight_fraction_leaf: Float = 0.0,
         max_leaf_nodes: None | Int = None,
         min_impurity_decrease: Float = 0.0,

@@ -31,8 +31,8 @@ from .utils.multiclass import check_classification_targets as check_classificati
 from .utils.parallel import Parallel as Parallel, delayed as delayed
 from .utils.validation import check_consistent_length as check_consistent_length, check_is_fitted as check_is_fitted
 
-CalibratedClassifierCV_Self = TypeVar("CalibratedClassifierCV_Self", bound="CalibratedClassifierCV")
-_SigmoidCalibration_Self = TypeVar("_SigmoidCalibration_Self", bound="_SigmoidCalibration")
+CalibratedClassifierCV_Self = TypeVar("CalibratedClassifierCV_Self", bound=CalibratedClassifierCV)
+_SigmoidCalibration_Self = TypeVar("_SigmoidCalibration_Self", bound=_SigmoidCalibration)
 
 
 
@@ -48,7 +48,7 @@ class CalibratedClassifierCV(ClassifierMixin, MetaEstimatorMixin, BaseEstimator)
         self,
         estimator: None | BaseEstimator = None,
         *,
-        method: Literal["sigmoid", "isotonic", "sigmoid"] = "sigmoid",
+        method: Literal["sigmoid", "isotonic"] = "sigmoid",
         cv: int | BaseCrossValidator | Iterable | None | str | BaseShuffleSplit = None,
         n_jobs: None | Int = None,
         ensemble: bool = True,
@@ -71,7 +71,7 @@ class _CalibratedClassifier:
         calibrators: list[IsotonicRegression | _SigmoidCalibration] | list[BaseEstimator],
         *,
         classes: ArrayLike,
-        method: Literal["sigmoid", "isotonic", "sigmoid"] = "sigmoid",
+        method: Literal["sigmoid", "isotonic"] = "sigmoid",
     ) -> None: ...
     def predict_proba(self, X: ArrayLike) -> ndarray: ...
 
@@ -94,7 +94,7 @@ def calibration_curve(
     pos_label: None | str | Int = None,
     normalize: str | bool = "deprecated",
     n_bins: Int = 5,
-    strategy: Literal["uniform", "quantile", "uniform"] = "uniform",
+    strategy: Literal["uniform", "quantile"] = "uniform",
 ) -> tuple[ndarray, ndarray]: ...
 
 class CalibrationDisplay:
@@ -127,7 +127,7 @@ class CalibrationDisplay:
         y: ArrayLike,
         *,
         n_bins: Int = 5,
-        strategy: Literal["uniform", "quantile", "uniform"] = "uniform",
+        strategy: Literal["uniform", "quantile"] = "uniform",
         pos_label: None | str | int = None,
         name: None | str = None,
         ref_line: bool = True,
@@ -141,7 +141,7 @@ class CalibrationDisplay:
         y_prob: ArrayLike,
         *,
         n_bins: Int = 5,
-        strategy: Literal["uniform", "quantile", "uniform"] = "uniform",
+        strategy: Literal["uniform", "quantile"] = "uniform",
         pos_label: None | str | int = None,
         name: None | str = None,
         ref_line: bool = True,

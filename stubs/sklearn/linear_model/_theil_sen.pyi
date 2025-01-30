@@ -17,7 +17,7 @@ from ..utils._param_validation import Interval as Interval
 from ..utils.parallel import Parallel as Parallel, delayed as delayed
 from ._base import LinearModel
 
-TheilSenRegressor_Self = TypeVar("TheilSenRegressor_Self", bound="TheilSenRegressor")
+TheilSenRegressor_Self = TypeVar("TheilSenRegressor_Self", bound=TheilSenRegressor)
 
 # Author: Florian Wilhelm <florian.wilhelm@gmail.com>
 #

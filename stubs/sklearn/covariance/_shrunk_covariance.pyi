@@ -9,9 +9,9 @@ from ..utils import check_array as check_array
 from ..utils._param_validation import Interval as Interval
 from . import EmpiricalCovariance, empirical_covariance as empirical_covariance
 
-ShrunkCovariance_Self = TypeVar("ShrunkCovariance_Self", bound="ShrunkCovariance")
-LedoitWolf_Self = TypeVar("LedoitWolf_Self", bound="LedoitWolf")
-OAS_Self = TypeVar("OAS_Self", bound="OAS")
+ShrunkCovariance_Self = TypeVar("ShrunkCovariance_Self", bound=ShrunkCovariance)
+LedoitWolf_Self = TypeVar("LedoitWolf_Self", bound=LedoitWolf)
+OAS_Self = TypeVar("OAS_Self", bound=OAS)
 
 # Author: Alexandre Gramfort <alexandre.gramfort@inria.fr>
 #         Gael Varoquaux <gael.varoquaux@normalesup.org>

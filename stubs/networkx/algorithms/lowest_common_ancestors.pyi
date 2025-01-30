@@ -1,3 +1,6 @@
+from collections import defaultdict
+from collections.abc import Mapping, Set as AbstractSet
+from itertools import combinations_with_replacement
 from typing import Any
 
 from ..classes.graph import Graph

@@ -15,7 +15,7 @@ from ..utils.metaestimators import _BaseComposition
 from ..utils.parallel import Parallel as Parallel, delayed as delayed
 from ..utils.validation import check_array as check_array, check_is_fitted as check_is_fitted
 
-ColumnTransformer_Self = TypeVar("ColumnTransformer_Self", bound="ColumnTransformer")
+ColumnTransformer_Self = TypeVar("ColumnTransformer_Self", bound=ColumnTransformer)
 
 
 __all__ = ["ColumnTransformer", "make_column_transformer", "make_column_selector"]
@@ -34,7 +34,7 @@ class ColumnTransformer(TransformerMixin, _BaseComposition):
         self,
         transformers: Sequence[tuple],
         *,
-        remainder: Literal["drop", "passthrough", "drop"] | BaseEstimator = "drop",
+        remainder: Literal["drop", "passthrough"] | BaseEstimator = "drop",
         sparse_threshold: Float = 0.3,
         n_jobs: None | Int = None,
         transformer_weights: None | dict = None,
@@ -53,7 +53,7 @@ class ColumnTransformer(TransformerMixin, _BaseComposition):
 
 def make_column_transformer(
     *transformers,
-    remainder: Literal["drop", "passthrough", "drop"] | BaseEstimator = "drop",
+    remainder: Literal["drop", "passthrough"] | BaseEstimator = "drop",
     sparse_threshold: Float = 0.3,
     n_jobs: None | Int = None,
     verbose: bool = False,

@@ -31,15 +31,15 @@ from ..utils.validation import (
 )
 from ._encoders import OneHotEncoder
 
-RobustScaler_Self = TypeVar("RobustScaler_Self", bound="RobustScaler")
-KernelCenterer_Self = TypeVar("KernelCenterer_Self", bound="KernelCenterer")
-Binarizer_Self = TypeVar("Binarizer_Self", bound="Binarizer")
-QuantileTransformer_Self = TypeVar("QuantileTransformer_Self", bound="QuantileTransformer")
-MaxAbsScaler_Self = TypeVar("MaxAbsScaler_Self", bound="MaxAbsScaler")
-StandardScaler_Self = TypeVar("StandardScaler_Self", bound="StandardScaler")
-MinMaxScaler_Self = TypeVar("MinMaxScaler_Self", bound="MinMaxScaler")
-Normalizer_Self = TypeVar("Normalizer_Self", bound="Normalizer")
-PowerTransformer_Self = TypeVar("PowerTransformer_Self", bound="PowerTransformer")
+RobustScaler_Self = TypeVar("RobustScaler_Self", bound=RobustScaler)
+KernelCenterer_Self = TypeVar("KernelCenterer_Self", bound=KernelCenterer)
+Binarizer_Self = TypeVar("Binarizer_Self", bound=Binarizer)
+QuantileTransformer_Self = TypeVar("QuantileTransformer_Self", bound=QuantileTransformer)
+MaxAbsScaler_Self = TypeVar("MaxAbsScaler_Self", bound=MaxAbsScaler)
+StandardScaler_Self = TypeVar("StandardScaler_Self", bound=StandardScaler)
+MinMaxScaler_Self = TypeVar("MinMaxScaler_Self", bound=MinMaxScaler)
+Normalizer_Self = TypeVar("Normalizer_Self", bound=Normalizer)
+PowerTransformer_Self = TypeVar("PowerTransformer_Self", bound=PowerTransformer)
 
 # Authors: Alexandre Gramfort <alexandre.gramfort@inria.fr>
 #          Mathieu Blondel <mathieu@mblondel.org>
@@ -240,7 +240,7 @@ def robust_scale(
 @overload
 def normalize(
     X: spmatrix,
-    norm: Literal["l1", "l2", "max", "l2"] = "l2",
+    norm: Literal["l1", "l2", "max"] = "l2",
     *,
     axis: int = 1,
     copy: bool = True,
@@ -249,7 +249,7 @@ def normalize(
 @overload
 def normalize(
     X: spmatrix,
-    norm: Literal["l1", "l2", "max", "l2"] = "l2",
+    norm: Literal["l1", "l2", "max"] = "l2",
     *,
     axis: int = 1,
     copy: bool = True,
@@ -258,7 +258,7 @@ def normalize(
 @overload
 def normalize(
     X: ArrayLike,
-    norm: Literal["l1", "l2", "max", "l2"] = "l2",
+    norm: Literal["l1", "l2", "max"] = "l2",
     *,
     axis: int = 1,
     copy: bool = True,
@@ -267,7 +267,7 @@ def normalize(
 @overload
 def normalize(
     X: ArrayLike,
-    norm: Literal["l1", "l2", "max", "l2"] = "l2",
+    norm: Literal["l1", "l2", "max"] = "l2",
     *,
     axis: int = 1,
     copy: bool = True,
@@ -275,7 +275,7 @@ def normalize(
 ) -> ndarray: ...
 def normalize(
     X: MatrixLike | ArrayLike,
-    norm: Literal["l1", "l2", "max", "l2"] = "l2",
+    norm: Literal["l1", "l2", "max"] = "l2",
     *,
     axis: int = 1,
     copy: bool = True,
@@ -288,7 +288,7 @@ class Normalizer(OneToOneFeatureMixin, TransformerMixin, BaseEstimator):
 
     _parameter_constraints: ClassVar[dict] = ...
 
-    def __init__(self, norm: Literal["l1", "l2", "max", "l2"] = "l2", *, copy: bool = True) -> None: ...
+    def __init__(self, norm: Literal["l1", "l2", "max"] = "l2", *, copy: bool = True) -> None: ...
     def fit(self: Normalizer_Self, X: MatrixLike | ArrayLike, y: Any = None) -> Normalizer_Self: ...
     @overload
     def transform(self, X: spmatrix, copy: None | bool = None) -> spmatrix: ...
@@ -341,7 +341,7 @@ class QuantileTransformer(OneToOneFeatureMixin, TransformerMixin, BaseEstimator)
         self,
         *,
         n_quantiles: Int = 1000,
-        output_distribution: Literal["uniform", "normal", "uniform"] = "uniform",
+        output_distribution: Literal["uniform", "normal"] = "uniform",
         ignore_implicit_zeros: bool = False,
         subsample: Int = 10_000,
         random_state: RandomState | None | Int = None,
@@ -369,7 +369,7 @@ def quantile_transform(
     *,
     axis: Int = 0,
     n_quantiles: Int = 1000,
-    output_distribution: Literal["uniform", "normal", "uniform"] = "uniform",
+    output_distribution: Literal["uniform", "normal"] = "uniform",
     ignore_implicit_zeros: bool = False,
     subsample: Int = ...,
     random_state: RandomState | None | Int = None,
@@ -381,7 +381,7 @@ def quantile_transform(
     *,
     axis: Int = 0,
     n_quantiles: Int = 1000,
-    output_distribution: Literal["uniform", "normal", "uniform"] = "uniform",
+    output_distribution: Literal["uniform", "normal"] = "uniform",
     ignore_implicit_zeros: bool = False,
     subsample: Int = ...,
     random_state: RandomState | None | Int = None,
@@ -392,7 +392,7 @@ def quantile_transform(
     *,
     axis: Int = 0,
     n_quantiles: Int = 1000,
-    output_distribution: Literal["uniform", "normal", "uniform"] = "uniform",
+    output_distribution: Literal["uniform", "normal"] = "uniform",
     ignore_implicit_zeros: bool = False,
     subsample: Int = ...,
     random_state: RandomState | None | Int = None,
@@ -408,7 +408,7 @@ class PowerTransformer(OneToOneFeatureMixin, TransformerMixin, BaseEstimator):
 
     def __init__(
         self,
-        method: Literal["yeo-johnson", "box-cox", "yeo-johnson"] = "yeo-johnson",
+        method: Literal["yeo-johnson", "box-cox"] = "yeo-johnson",
         *,
         standardize: bool = True,
         copy: bool = True,
@@ -420,7 +420,7 @@ class PowerTransformer(OneToOneFeatureMixin, TransformerMixin, BaseEstimator):
 
 def power_transform(
     X: MatrixLike,
-    method: Literal["yeo-johnson", "box-cox", "yeo-johnson"] = "yeo-johnson",
+    method: Literal["yeo-johnson", "box-cox"] = "yeo-johnson",
     *,
     standardize: bool = True,
     copy: bool = True,

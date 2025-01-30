@@ -11,7 +11,7 @@ from ..utils import check_array as check_array
 from ..utils._param_validation import HasMethods as HasMethods
 from ..utils.validation import check_is_fitted as check_is_fitted
 
-TransformedTargetRegressor_Self = TypeVar("TransformedTargetRegressor_Self", bound="TransformedTargetRegressor")
+TransformedTargetRegressor_Self = TypeVar("TransformedTargetRegressor_Self", bound=TransformedTargetRegressor)
 
 # Authors: Andreas Mueller <andreas.mueller@columbia.edu>
 #          Guillaume Lemaitre <guillaume.lemaitre@inria.fr>

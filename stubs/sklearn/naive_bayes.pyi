@@ -12,9 +12,9 @@ from .utils._param_validation import Hidden as Hidden, Interval as Interval, Str
 from .utils.extmath import safe_sparse_dot as safe_sparse_dot
 from .utils.validation import check_is_fitted as check_is_fitted, check_non_negative as check_non_negative
 
-_BaseDiscreteNB_Self = TypeVar("_BaseDiscreteNB_Self", bound="_BaseDiscreteNB")
-GaussianNB_Self = TypeVar("GaussianNB_Self", bound="GaussianNB")
-CategoricalNB_Self = TypeVar("CategoricalNB_Self", bound="CategoricalNB")
+_BaseDiscreteNB_Self = TypeVar("_BaseDiscreteNB_Self", bound=_BaseDiscreteNB)
+GaussianNB_Self = TypeVar("GaussianNB_Self", bound=GaussianNB)
+CategoricalNB_Self = TypeVar("CategoricalNB_Self", bound=CategoricalNB)
 
 # Author: Vincent Michel <vincent.michel@inria.fr>
 #         Minor fixes by Fabian Pedregosa

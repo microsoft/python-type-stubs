@@ -23,9 +23,9 @@ from .utils.multiclass import check_classification_targets as check_classificati
 from .utils.parallel import Parallel as Parallel, delayed as delayed
 from .utils.validation import check_is_fitted as check_is_fitted
 
-OneVsRestClassifier_Self = TypeVar("OneVsRestClassifier_Self", bound="OneVsRestClassifier")
-OneVsOneClassifier_Self = TypeVar("OneVsOneClassifier_Self", bound="OneVsOneClassifier")
-OutputCodeClassifier_Self = TypeVar("OutputCodeClassifier_Self", bound="OutputCodeClassifier")
+OneVsRestClassifier_Self = TypeVar("OneVsRestClassifier_Self", bound=OneVsRestClassifier)
+OneVsOneClassifier_Self = TypeVar("OneVsOneClassifier_Self", bound=OneVsOneClassifier)
+OutputCodeClassifier_Self = TypeVar("OutputCodeClassifier_Self", bound=OutputCodeClassifier)
 
 # Author: Mathieu Blondel <mathieu@mblondel.org>
 # Author: Hamzeh Alsalhi <93hamsal@gmail.com>

@@ -20,7 +20,7 @@ from ..utils.extmath import (
 from ..utils.validation import assert_all_finite as assert_all_finite
 from . import KMeans as KMeans, MiniBatchKMeans as MiniBatchKMeans
 
-BaseSpectral_Self = TypeVar("BaseSpectral_Self", bound="BaseSpectral")
+BaseSpectral_Self = TypeVar("BaseSpectral_Self", bound=BaseSpectral)
 
 
 __all__ = ["SpectralCoclustering", "SpectralBiclustering"]
@@ -56,10 +56,10 @@ class SpectralCoclustering(BaseSpectral):
         self,
         n_clusters: Int = 3,
         *,
-        svd_method: Literal["randomized", "arpack", "randomized"] = "randomized",
+        svd_method: Literal["randomized", "arpack"] = "randomized",
         n_svd_vecs: None | Int = None,
         mini_batch: bool = False,
-        init: MatrixLike | Literal["k-means++", "random", "k-means++"] = "k-means++",
+        init: MatrixLike | Literal["k-means++", "random"] = "k-means++",
         n_init: Int = 10,
         random_state: RandomState | None | Int = None,
     ) -> None: ...
@@ -79,13 +79,13 @@ class SpectralBiclustering(BaseSpectral):
         self,
         n_clusters: tuple[int, int] | int = 3,
         *,
-        method: Literal["bistochastic", "scale", "log", "bistochastic"] = "bistochastic",
+        method: Literal["bistochastic", "scale", "log"] = "bistochastic",
         n_components: Int = 6,
         n_best: Int = 3,
-        svd_method: Literal["randomized", "arpack", "randomized"] = "randomized",
+        svd_method: Literal["randomized", "arpack"] = "randomized",
         n_svd_vecs: None | Int = None,
         mini_batch: bool = False,
-        init: MatrixLike | Literal["k-means++", "random", "k-means++"] = "k-means++",
+        init: MatrixLike | Literal["k-means++", "random"] = "k-means++",
         n_init: Int = 10,
         random_state: RandomState | None | Int = None,
     ) -> None: ...
