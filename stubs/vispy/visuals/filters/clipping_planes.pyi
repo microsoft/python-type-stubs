@@ -2,7 +2,6 @@
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 
 from functools import lru_cache
-from typing import Optional
 
 import numpy as np
 

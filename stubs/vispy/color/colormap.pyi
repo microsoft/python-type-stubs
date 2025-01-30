@@ -9,7 +9,6 @@ from ..ext.cubehelix import cubehelix
 from ..util.check_environment import has_matplotlib
 from .color_array import ColorArray
 
-# -*- coding: utf-8 -*-
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 

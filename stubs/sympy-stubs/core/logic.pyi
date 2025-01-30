@@ -1,4 +1,4 @@
-from typing import Any, Optional
+from typing import Any
 from typing_extensions import Self, TypeAlias
 
 FuzzyBool: TypeAlias = bool | None

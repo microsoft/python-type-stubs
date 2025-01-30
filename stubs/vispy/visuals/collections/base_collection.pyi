@@ -8,7 +8,6 @@ from .array_list import ArrayList
 from .collection import Collection
 from .util import dtype_reduce
 
-# -*- coding: utf-8 -*-
 # -----------------------------------------------------------------------------
 # Copyright (c) 2014, Nicolas P. Rougier
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.

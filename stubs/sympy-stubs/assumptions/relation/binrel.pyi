@@ -1,4 +1,3 @@
-from typing import Optional
 from typing_extensions import Self
 
 from sympy.assumptions import AppliedPredicate, Predicate

@@ -2,7 +2,7 @@
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 
 from functools import lru_cache
-from typing import Literal, Optional
+from typing import Literal
 
 import numpy as np
 from numpy.typing import ArrayLike, NDArray

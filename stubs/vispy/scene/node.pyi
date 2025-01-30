@@ -7,7 +7,6 @@ from ..visuals.transforms import BaseTransform, ChainTransform, NullTransform, T
 from ..visuals.transforms.chain import ChainTransform
 from ..visuals.transforms.transform_system import TransformSystem
 
-# -*- coding: utf-8 -*-
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 

@@ -17,7 +17,6 @@ import numpy as np
 from .event import EmitterGroup, Event, EventEmitter
 from .logs import logger, set_log_level, use_log_level
 
-# -*- coding: utf-8 -*-
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 

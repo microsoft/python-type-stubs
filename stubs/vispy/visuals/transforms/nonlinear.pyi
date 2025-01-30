@@ -5,7 +5,6 @@ from ... import gloo
 from ._util import arg_to_array, arg_to_vec4, as_vec4
 from .base_transform import BaseTransform
 
-# -*- coding: utf-8 -*-
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 
