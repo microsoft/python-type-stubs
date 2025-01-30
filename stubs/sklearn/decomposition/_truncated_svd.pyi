@@ -1,6 +1,8 @@
 from numbers import Integral as Integral, Real as Real
 from typing import Any, ClassVar, Literal, TypeVar
 
+import numpy as np
+import scipy.sparse as sp
 from numpy import ndarray
 from numpy.random import RandomState
 from scipy.sparse.linalg import svds as svds
@@ -14,9 +16,6 @@ from ..utils.sparsefuncs import mean_variance_axis as mean_variance_axis
 from ..utils.validation import check_is_fitted as check_is_fitted
 
 TruncatedSVD_Self = TypeVar("TruncatedSVD_Self", bound=TruncatedSVD)
-
-import numpy as np
-import scipy.sparse as sp
 
 __all__ = ["TruncatedSVD"]
 

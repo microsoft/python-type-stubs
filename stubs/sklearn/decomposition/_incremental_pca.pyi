@@ -1,6 +1,7 @@
 from numbers import Integral as Integral
 from typing import Any, ClassVar, TypeVar
 
+import numpy as np
 from numpy import ndarray
 from scipy import linalg as linalg, sparse as sparse
 
@@ -11,8 +12,6 @@ from ..utils.extmath import svd_flip as svd_flip
 from ._base import _BasePCA
 
 IncrementalPCA_Self = TypeVar("IncrementalPCA_Self", bound=IncrementalPCA)
-
-import numpy as np
 
 class IncrementalPCA(_BasePCA):
     feature_names_in_: ndarray = ...

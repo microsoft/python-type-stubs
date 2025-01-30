@@ -2,6 +2,7 @@ from collections import Counter as Counter
 from itertools import chain as chain
 from typing import ClassVar, Literal, Sequence, TypeVar
 
+import numpy as np
 from numpy import dtype, ndarray
 from scipy import sparse as sparse
 from scipy.sparse import spmatrix
@@ -16,8 +17,6 @@ from ..utils.parallel import Parallel as Parallel, delayed as delayed
 from ..utils.validation import check_array as check_array, check_is_fitted as check_is_fitted
 
 ColumnTransformer_Self = TypeVar("ColumnTransformer_Self", bound=ColumnTransformer)
-
-import numpy as np
 
 __all__ = ["ColumnTransformer", "make_column_transformer", "make_column_selector"]
 

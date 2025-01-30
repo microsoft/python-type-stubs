@@ -1,7 +1,9 @@
+import numbers
 from numbers import Integral as Integral, Real as Real
 from typing import Any, ClassVar, Literal, TypeVar
 from warnings import warn as warn
 
+import numpy as np
 from numpy import ndarray
 from numpy.random import RandomState
 from scipy.sparse import issparse as issparse
@@ -25,10 +27,6 @@ IsolationForest_Self = TypeVar("IsolationForest_Self", bound=IsolationForest)
 # Authors: Nicolas Goix <nicolas.goix@telecom-paristech.fr>
 #          Alexandre Gramfort <alexandre.gramfort@telecom-paristech.fr>
 # License: BSD 3 clause
-
-import numbers
-
-import numpy as np
 
 __all__ = ["IsolationForest"]
 

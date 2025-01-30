@@ -1,7 +1,12 @@
+import itertools
+import sys
+import time
+import warnings
 from math import ceil as ceil
 from numbers import Integral as Integral, Real as Real
 from typing import Any, Callable, ClassVar, Literal, TypeVar
 
+import numpy as np
 from joblib import effective_n_jobs as effective_n_jobs
 from numpy import ndarray
 from numpy.random import RandomState
@@ -28,13 +33,6 @@ MiniBatchDictionaryLearning_Self = TypeVar("MiniBatchDictionaryLearning_Self", b
 
 # Author: Vlad Niculae, Gael Varoquaux, Alexandre Gramfort
 # License: BSD 3 clause
-
-import itertools
-import sys
-import time
-import warnings
-
-import numpy as np
 
 # XXX : could be moved to the linear_model module
 def sparse_encode(

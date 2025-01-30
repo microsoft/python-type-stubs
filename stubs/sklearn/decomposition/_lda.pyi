@@ -1,6 +1,8 @@
 from numbers import Integral as Integral, Real as Real
 from typing import Any, ClassVar, Literal, TypeVar
 
+import numpy as np
+import scipy.sparse as sp
 from joblib import effective_n_jobs as effective_n_jobs
 from numpy import ndarray
 from numpy.random import RandomState
@@ -15,9 +17,6 @@ from ..utils.validation import check_is_fitted as check_is_fitted, check_non_neg
 from ._online_lda_fast import mean_change as cy_mean_change
 
 LatentDirichletAllocation_Self = TypeVar("LatentDirichletAllocation_Self", bound=LatentDirichletAllocation)
-
-import numpy as np
-import scipy.sparse as sp
 
 EPS = ...
 

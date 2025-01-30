@@ -1,6 +1,9 @@
+import warnings
 from numbers import Integral as Integral, Real as Real
 from typing import Callable, ClassVar, TypeVar
 
+import numpy as np
+import scipy.sparse as sp
 from numpy import ndarray
 from numpy.random import RandomState
 from scipy.fftpack import fft as fft, ifft as ifft
@@ -24,11 +27,6 @@ PolynomialCountSketch_Self = TypeVar("PolynomialCountSketch_Self", bound=Polynom
 AdditiveChi2Sampler_Self = TypeVar("AdditiveChi2Sampler_Self", bound=AdditiveChi2Sampler)
 RBFSampler_Self = TypeVar("RBFSampler_Self", bound=RBFSampler)
 Nystroem_Self = TypeVar("Nystroem_Self", bound=Nystroem)
-
-import warnings
-
-import numpy as np
-import scipy.sparse as sp
 
 class PolynomialCountSketch(ClassNamePrefixFeaturesOutMixin, TransformerMixin, BaseEstimator):
     feature_names_in_: ndarray = ...

@@ -5,7 +5,6 @@ from numpy.typing import ArrayLike, NDArray
 from .. import scene
 from ..color import Color, Colormap
 from ..geometry import MeshData
-from ..geometry.meshdata import MeshData
 from ..io import read_mesh
 from ..scene.visuals import Image, LinePlot, Mesh, Polygon, Spectrogram, Volume
 from ..scene.widgets.colorbar import ColorBarWidget

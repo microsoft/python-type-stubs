@@ -1,6 +1,7 @@
 from numbers import Real as Real
 from typing import Any, ClassVar, TypeVar
 
+import numpy as np
 from numpy import ndarray
 
 from .._typing import Float, MatrixLike
@@ -14,8 +15,6 @@ VarianceThreshold_Self = TypeVar("VarianceThreshold_Self", bound=VarianceThresho
 
 # Author: Lars Buitinck
 # License: 3-clause BSD
-
-import numpy as np
 
 class VarianceThreshold(SelectorMixin, BaseEstimator):
     feature_names_in_: ndarray = ...

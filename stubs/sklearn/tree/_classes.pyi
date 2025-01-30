@@ -1,8 +1,12 @@
+import copy
+import numbers
+import warnings
 from abc import ABCMeta, abstractmethod
 from math import ceil as ceil
 from numbers import Integral as Integral, Real as Real
 from typing import ClassVar, Literal, Mapping, Sequence, TypeVar
 
+import numpy as np
 from numpy import ndarray
 from numpy.random import RandomState
 from scipy.sparse import issparse as issparse, spmatrix
@@ -42,12 +46,6 @@ DecisionTreeRegressor_Self = TypeVar("DecisionTreeRegressor_Self", bound=Decisio
 #          Nelson Liu <nelson@nelsonliu.me>
 #
 # License: BSD 3 clause
-
-import copy
-import numbers
-import warnings
-
-import numpy as np
 
 __all__ = [
     "DecisionTreeClassifier",

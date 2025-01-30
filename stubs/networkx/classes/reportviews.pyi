@@ -2,7 +2,6 @@ from collections.abc import Mapping, Set as AbstractSet
 from typing import Any
 
 from ..classes.graph import Graph
-from ..classes.reportviews import NodeDataView
 
 __all__ = [
     "NodeView",

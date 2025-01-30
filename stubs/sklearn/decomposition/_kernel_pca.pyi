@@ -1,6 +1,7 @@
 from numbers import Integral as Integral, Real as Real
 from typing import Any, Callable, ClassVar, Literal, TypeVar
 
+import numpy as np
 from numpy import ndarray
 from numpy.random import RandomState
 from scipy import linalg as linalg
@@ -20,8 +21,6 @@ KernelPCA_Self = TypeVar("KernelPCA_Self", bound=KernelPCA)
 # Author: Mathieu Blondel <mathieu@mblondel.org>
 #         Sylvain Marie <sylvain.marie@schneider-electric.com>
 # License: BSD 3 clause
-
-import numpy as np
 
 class KernelPCA(ClassNamePrefixFeaturesOutMixin, TransformerMixin, BaseEstimator):
     feature_names_in_: ndarray = ...
