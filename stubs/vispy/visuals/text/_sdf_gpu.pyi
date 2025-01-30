@@ -3,8 +3,6 @@ from numpy.typing import ArrayLike
 
 from ...gloo import Texture2D
 
-# -*- coding: utf-8 -*-
-
 vert_seed: str = ...
 
 vert: str = ...
@@ -15,7 +13,7 @@ frag_flood: str = ...
 
 frag_insert: str = ...
 
-class SDFRendererGPU(object):
+class SDFRendererGPU:
     def __init__(self): ...
     def render_to_texture(
         self,

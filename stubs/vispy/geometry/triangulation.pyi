@@ -4,9 +4,7 @@ from itertools import permutations
 import numpy as np
 from numpy.typing import ArrayLike
 
-# -*- coding: utf-8 -*-
-
-class Triangulation(object):
+class Triangulation:
     def __init__(self, pts: ArrayLike, edges: ArrayLike): ...
     def _normalize(self): ...
     def _initialize(self): ...

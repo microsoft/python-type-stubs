@@ -1,4 +1,5 @@
-from typing import Any, ClassVar, Iterator
+from collections.abc import Iterator
+from typing import Any, ClassVar
 
 from sympy.core.cache import cached_property
 from sympy.core.expr import Expr

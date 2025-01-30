@@ -1,8 +1,9 @@
+from collections.abc import Iterable
 from functools import partial as partial
 from inspect import signature as signature
 from math import log as log
 from numbers import Integral as Integral
-from typing import ClassVar, Iterable, Literal, TypeVar
+from typing import ClassVar, Literal, TypeVar
 
 from matplotlib.artist import Artist
 from matplotlib.axes import Axes

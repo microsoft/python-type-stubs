@@ -1,7 +1,6 @@
-from collections.abc import Iterable
+from collections.abc import Iterable, Mapping
 from copy import deepcopy
 from functools import cached_property
-from typing import Mapping
 
 import networkx.convert as convert
 from numpy.typing import ArrayLike

@@ -4,7 +4,6 @@ from ...util.event import Event
 from ...visuals.transforms.nonlinear import Magnify1DTransform, MagnifyTransform
 from .panzoom import PanZoomCamera
 
-# -*- coding: utf-8 -*-
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 

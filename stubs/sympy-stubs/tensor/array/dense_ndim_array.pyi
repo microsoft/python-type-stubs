@@ -1,4 +1,3 @@
-from typing import List
 from typing_extensions import Self
 
 from sympy import Indexed
@@ -8,7 +7,7 @@ from sympy.tensor.array.mutable_ndim_array import MutableNDimArray
 from sympy.tensor.array.ndim_array import ArrayKind, ImmutableNDimArray, NDimArray
 
 class DenseNDimArray(NDimArray):
-    _array: List[Basic]
+    _array: list[Basic]
     def __new__(self, *args, **kwargs) -> ImmutableDenseNDimArray: ...
     @property
     def kind(self) -> ArrayKind: ...

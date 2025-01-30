@@ -1,5 +1,5 @@
 from typing import Any
-from typing_extensions import Self, Tuple as tTuple
+from typing_extensions import Self
 
 from sympy.core.function import Function, UndefinedFunction
 from sympy.core.numbers import Float, Integer, Rational
@@ -34,7 +34,7 @@ class tribonacci(Function):
     def eval(cls, n, sym=...) -> Integer | None: ...
 
 class bernoulli(Function):
-    args: tTuple[Integer]
+    args: tuple[Integer]
     _cache = ...
     _highest = ...
     @classmethod

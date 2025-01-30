@@ -10,7 +10,7 @@ FAST_GLYPHS: int
 FIXED_SIZES: int
 FIXED_WIDTH: int
 
-class FT2Font(_mod_builtins.object):
+class FT2Font:
     "Create a new FT2Font object.\n\nAttributes\n----------\nnum_faces\n    Number of faces in file.\nface_flags, style_flags : int\n    Face and style flags; see the ft2font constants.\nnum_glyphs\n    Number of glyphs in the face.\nfamily_name, style_name\n    Face family and style name.\nnum_fixed_sizes\n    Number of bitmap in the face.\nscalable\n    Whether face is scalable; attributes after this one are only\n    defined for scalable faces.\nbbox\n    Face global bounding box (xmin, ymin, xmax, ymax).\nunits_per_EM\n    Number of font units covered by the EM.\nascender, descender\n    Ascender and descender in 26.6 units.\nheight\n    Height in 26.6 units; used to compute a default line spacing\n    (baseline-to-baseline distance).\nmax_advance_width, max_advance_height\n    Maximum horizontal and vertical cursor advance for all glyphs.\nunderline_position, underline_thickness\n    Vertical position and thickness of the underline bar.\npostscript_name\n    PostScript name of the font.\n"
     def __init__(self, *args, **kwargs) -> None:
         "Create a new FT2Font object.\n\nAttributes\n----------\nnum_faces\n    Number of faces in file.\nface_flags, style_flags : int\n    Face and style flags; see the ft2font constants.\nnum_glyphs\n    Number of glyphs in the face.\nfamily_name, style_name\n    Face family and style name.\nnum_fixed_sizes\n    Number of bitmap in the face.\nscalable\n    Whether face is scalable; attributes after this one are only\n    defined for scalable faces.\nbbox\n    Face global bounding box (xmin, ymin, xmax, ymax).\nunits_per_EM\n    Number of font units covered by the EM.\nascender, descender\n    Ascender and descender in 26.6 units.\nheight\n    Height in 26.6 units; used to compute a default line spacing\n    (baseline-to-baseline distance).\nmax_advance_width, max_advance_height\n    Maximum horizontal and vertical cursor advance for all glyphs.\nunderline_position, underline_thickness\n    Vertical position and thickness of the underline bar.\npostscript_name\n    PostScript name of the font.\n"
@@ -164,7 +164,7 @@ class FT2Font(_mod_builtins.object):
     def units_per_EM(self) -> typing.Any: ...
     def __getattr__(self, name) -> typing.Any: ...
 
-class FT2Image(_mod_builtins.object):
+class FT2Image:
     def __init__(self, *args, **kwargs) -> None: ...
     @classmethod
     def __init_subclass__(cls) -> None:

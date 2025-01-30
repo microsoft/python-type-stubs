@@ -8,11 +8,10 @@ from numpy.typing import ArrayLike
 
 from .logs import _handle_exception, logger
 
-# -*- coding: utf-8 -*-
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 
-class Event(object):
+class Event:
     def __init__(self, type: str, native=None, **kwargs): ...
     @property
     def source(self): ...
@@ -37,7 +36,7 @@ class Event(object):
 
 _event_repr_depth: int = ...
 
-class EventEmitter(object):
+class EventEmitter:
     def __init__(self, source: Any = None, type: str | None = None, event_class: Event = ...): ...
     @property
     def ignore_callback_errors(self): ...
@@ -97,7 +96,7 @@ class EmitterGroup(EventEmitter):
     @ignore_callback_errors.setter
     def ignore_callback_errors(self, ignore): ...
 
-class EventBlocker(object):
+class EventBlocker:
     def __init__(self, target, callback=None): ...
     def __enter__(self): ...
     def __exit__(self, *args): ...

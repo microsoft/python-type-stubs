@@ -1,13 +1,13 @@
 import weakref
+from collections.abc import Mapping
 from copy import deepcopy
-from typing import Any, Mapping
+from typing import Any
 
 from .. import config
 from ..util.event import Event
 from .glir import BaseGlirParser, GlirParser, GlirQueue, glir_logger
 from .wrappers import BaseGlooFunctions
 
-# -*- coding: utf-8 -*-
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 
@@ -37,7 +37,7 @@ class GLContext(BaseGlooFunctions):
     def set_viewport(self, *args): ...
     def get_viewport(self): ...
 
-class GLShared(object):
+class GLShared:
     # We keep a (weak) ref of each backend that gets associated with
     # this object. In theory, this means that multiple canvases can
     # be created and also deleted; as long as there is at least one
@@ -55,6 +55,6 @@ class GLShared(object):
     @property
     def ref(self): ...
 
-class FakeCanvas(object):
+class FakeCanvas:
     def __init__(self): ...
     def flush(self): ...

@@ -1,6 +1,7 @@
 import pathlib
+from collections.abc import Sequence
 from pathlib import PosixPath
-from typing import Any, Callable, Literal, Sequence
+from typing import Any, Callable, Literal
 
 from matplotlib.path import Path
 

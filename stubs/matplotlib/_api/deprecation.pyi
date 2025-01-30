@@ -1,6 +1,7 @@
 import contextlib
+from collections.abc import Iterator
 from functools import partial
-from typing import Callable, Iterator
+from typing import Callable
 
 class MatplotlibDeprecationWarning(DeprecationWarning): ...
 

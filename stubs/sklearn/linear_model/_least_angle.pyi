@@ -1,6 +1,7 @@
+from collections.abc import Iterable
 from math import log as log
 from numbers import Integral as Integral, Real as Real
-from typing import ClassVar, Iterable, Literal, TypeVar
+from typing import ClassVar, Literal, TypeVar
 
 from numpy import ndarray
 from numpy.random import RandomState

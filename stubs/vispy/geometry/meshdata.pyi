@@ -1,15 +1,14 @@
-from typing import Mapping
+from collections.abc import Mapping
 
 import numpy as np
 from numpy.typing import ArrayLike, NDArray
 
-# -*- coding: utf-8 -*-
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 
 def _fix_colors(colors): ...
 
-class MeshData(object):
+class MeshData:
     def __init__(
         self,
         vertices: NDArray | None = None,

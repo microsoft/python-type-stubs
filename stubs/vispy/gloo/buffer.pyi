@@ -9,7 +9,6 @@ from ..gloo.buffer import DataBuffer
 from ..util import logger
 from .globject import GLObject
 
-# -*- coding: utf-8 -*-
 # -----------------------------------------------------------------------------
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.

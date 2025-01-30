@@ -1,7 +1,6 @@
 from collections import OrderedDict
-from collections.abc import MutableMapping
+from collections.abc import MutableMapping, Sequence
 from functools import partial
-from typing import Sequence
 
 from ._typing import *
 from .artist import allow_rasterization

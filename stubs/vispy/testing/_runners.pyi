@@ -11,7 +11,6 @@ from ..util import run_subprocess, use_log_level
 from ..util.ptime import time
 from ._testing import IS_CI, IS_TRAVIS_CI, has_application, nottest
 
-# -*- coding: utf-8 -*-
 # vispy: testskip
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.

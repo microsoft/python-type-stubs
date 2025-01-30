@@ -7,7 +7,6 @@ from ..color.colormap import _normalize, get_colormap
 from ..geometry.isocurve import isocurve
 from .line import LineVisual
 
-# -*- coding: utf-8 -*-
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 

@@ -1,4 +1,4 @@
-from typing import Mapping
+from collections.abc import Mapping
 
 from ...classes.digraph import DiGraph
 from ...utils import not_implemented_for

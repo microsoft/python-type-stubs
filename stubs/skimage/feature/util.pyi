@@ -4,11 +4,11 @@ import numpy as np
 
 from .._shared.utils import _supported_float_type, check_nD
 
-class FeatureDetector(object):
+class FeatureDetector:
     def __init__(self): ...
     def detect(self, image): ...
 
-class DescriptorExtractor(object):
+class DescriptorExtractor:
     def __init__(self): ...
     def extract(self, image, keypoints): ...
 

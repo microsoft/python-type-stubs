@@ -6,7 +6,6 @@ from numpy.typing import ArrayLike
 from ..util.fourier import fft_freqs, stft
 from .image import ImageVisual
 
-# -*- coding: utf-8 -*-
 # -----------------------------------------------------------------------------
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.

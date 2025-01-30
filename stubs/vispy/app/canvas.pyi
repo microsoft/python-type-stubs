@@ -1,12 +1,10 @@
-# -*- coding: utf-8 -*-
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 
-from __future__ import division, print_function
-
 import sys
+from collections.abc import Mapping
 from time import sleep
-from typing import Callable, Mapping
+from typing import Callable
 
 import numpy as np
 from numpy.typing import ArrayLike
@@ -26,7 +24,7 @@ from .application import Application
 # todo: add hover enter/exit events
 # todo: add focus events
 
-class Canvas(object):
+class Canvas:
     def __init__(
         self,
         title: str = "VisPy canvas",
