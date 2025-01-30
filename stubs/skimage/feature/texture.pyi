@@ -1,7 +1,10 @@
 from typing import Literal
 
 import numpy as np
+from numpy import ndarray
 from numpy.typing import NDArray
+
+from .._shared.utils import check_nD
 
 def graycomatrix(
     image,

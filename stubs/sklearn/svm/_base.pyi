@@ -23,7 +23,10 @@ from ..utils.validation import check_consistent_length as check_consistent_lengt
 
 BaseLibSVM_Self = TypeVar("BaseLibSVM_Self", bound=BaseLibSVM)
 
+import warnings
 
+import numpy as np
+import scipy.sparse as sp
 
 LIBSVM_IMPL: list = ...
 

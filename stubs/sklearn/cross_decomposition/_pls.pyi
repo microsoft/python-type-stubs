@@ -16,7 +16,9 @@ PLSSVD_Self = TypeVar("PLSSVD_Self", bound=PLSSVD)
 PLSRegression_Self = TypeVar("PLSRegression_Self", bound=PLSRegression)
 _PLS_Self = TypeVar("_PLS_Self", bound=_PLS)
 
+import warnings
 
+import numpy as np
 
 __all__ = ["PLSCanonical", "PLSRegression", "PLSSVD"]
 

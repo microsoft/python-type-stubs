@@ -6,6 +6,7 @@ __all__ = [
 ]
 
 from ..classes.graph import Graph
+from ..utils import open_file
 
 def generate_multiline_adjlist(G: Graph, delimiter: str = " ") -> str: ...
 def write_multiline_adjlist(G: Graph, path, delimiter: str = " ", comments: str = "#", encoding: str = "utf-8"): ...

@@ -2,6 +2,7 @@ from typing import Any
 
 from sympy.core.numbers import Integer, Rational
 from sympy.polys.domains.rationalfield import RationalField
+from sympy.utilities import public
 
 class PythonRationalField(RationalField):
     dtype = ...

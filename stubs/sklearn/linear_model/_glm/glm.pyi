@@ -18,10 +18,12 @@ from ...utils import check_array as check_array, deprecated
 from ...utils._param_validation import Hidden as Hidden, Interval as Interval, StrOptions as StrOptions
 from ...utils.validation import check_is_fitted as check_is_fitted
 from .._linear_loss import LinearModelLoss as LinearModelLoss
-from ._newton_solver import NewtonCholeskySolver as NewtonCholeskySolver
+from ._newton_solver import NewtonCholeskySolver as NewtonCholeskySolver, NewtonSolver
 
 _GeneralizedLinearRegressor_Self = TypeVar("_GeneralizedLinearRegressor_Self", bound=_GeneralizedLinearRegressor)
 
+import numpy as np
+import scipy.optimize
 
 class _GeneralizedLinearRegressor(RegressorMixin, BaseEstimator):
     _base_loss: BaseLoss = ...

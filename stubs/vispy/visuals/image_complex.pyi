@@ -1,6 +1,8 @@
+import numpy as np
 from numpy.typing import ArrayLike, NDArray
 
-from .image import ImageVisual
+from .image import _APPLY_CLIM_FLOAT, _APPLY_GAMMA_FLOAT, ImageVisual
+from .shaders import Function, FunctionChain
 
 # In a complex Image, the texture will be rg32f, where:
 # data.r contains the real component

@@ -1,3 +1,4 @@
+import pytest
 
 # Passes the main worker's random seeds to workers
 class XDistHooks:

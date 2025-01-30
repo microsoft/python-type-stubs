@@ -1,7 +1,10 @@
+from itertools import chain, combinations, permutations, product
 
 from numpy.typing import ArrayLike
 
 from ...classes.graph import Graph
+from ...exception import NetworkXException
+from ...utils import arbitrary_element
 
 __all__ = [
     "contracted_edge",

@@ -1,3 +1,4 @@
+from collections import defaultdict
 from typing import Mapping
 
 from numpy.typing import ArrayLike

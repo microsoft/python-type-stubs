@@ -19,7 +19,9 @@ from ._base import MissingIndicator, SimpleImputer, _BaseImputer
 
 IterativeImputer_Self = TypeVar("IterativeImputer_Self", bound=IterativeImputer)
 
+import warnings
 
+import numpy as np
 
 _ImputerTriplet = ...
 

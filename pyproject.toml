@@ -27,8 +27,7 @@ line-length = 130
 target-version = "py39"
 
 [tool.ruff.lint]
-# TODO: Use extend-select instead to get base E and F rules that don't conflict with the formatter
-select = [
+extend-select = [
     "FA", # flake8-future-annotations
     "I", # isort
     "PYI", # flake8-pyi
@@ -53,11 +52,10 @@ ignore = [
     # TODO: Investigate and fix or configure
     "E402",
     "E722",
-    "E743",
+    "F401",
     "F811",
     "F822",
     "F841",
-    "F842",
     "PYI001",
     "PYI002",
     "PYI017",
@@ -69,7 +67,10 @@ ignore = [
 ]
 [tool.ruff.lint.per-file-ignores]
 "*.pyi" = [
+    ###
     # Rules that are out of the control of stub authors:
+    ###
+    "E743", # Ambiguous function name; stubs must follow implementation
     "F403", # `from . import *` used; unable to detect undefined names
     # Stubs can sometimes re-export entire modules.
     # Issues with using a star-imported name will be caught by type-checkers.

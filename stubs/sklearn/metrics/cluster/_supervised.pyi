@@ -1,6 +1,9 @@
+import warnings
 from math import log as log
 
+import numpy as np
 from numpy import ndarray
+from scipy import sparse as sp
 from scipy.sparse import spmatrix
 
 from ..._typing import ArrayLike, Float, MatrixLike

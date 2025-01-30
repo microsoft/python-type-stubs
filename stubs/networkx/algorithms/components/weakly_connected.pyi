@@ -1,4 +1,5 @@
 from ...classes.graph import Graph
+from ...utils.decorators import not_implemented_for
 
 __all__ = [
     "number_weakly_connected_components",

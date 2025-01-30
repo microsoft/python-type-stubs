@@ -1,5 +1,7 @@
+import numbers
 from typing import Literal
 
+import numpy as np
 from matplotlib.artist import Artist
 from matplotlib.axes import Axes
 from matplotlib.figure import Figure

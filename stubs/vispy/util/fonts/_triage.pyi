@@ -1,5 +1,8 @@
+import sys
 
 from numpy.typing import ArrayLike
+
+from ._vispy_fonts import _vispy_fonts
 
 # -*- coding: utf-8 -*-
 # -----------------------------------------------------------------------------

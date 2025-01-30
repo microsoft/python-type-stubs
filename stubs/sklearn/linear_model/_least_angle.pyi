@@ -21,7 +21,10 @@ LassoLarsIC_Self = TypeVar("LassoLarsIC_Self", bound=LassoLarsIC)
 Lars_Self = TypeVar("Lars_Self", bound=Lars)
 LarsCV_Self = TypeVar("LarsCV_Self", bound=LarsCV)
 
+import sys
+import warnings
 
+import numpy as np
 
 SOLVE_TRIANGULAR_ARGS: dict = ...
 

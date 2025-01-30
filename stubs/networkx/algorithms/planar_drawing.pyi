@@ -1,6 +1,9 @@
+from collections import defaultdict
 from typing import Mapping
 
 from numpy.typing import ArrayLike
+
+from ..classes.graph import Graph
 
 __all__ = ["combinatorial_embedding_to_pos"]
 

@@ -4,10 +4,17 @@
 
 from __future__ import division
 
+import weakref
 from typing import Any, Sequence
 
+import numpy as np
+
+from .. import gloo
 from ..gloo.program import Program
-from ..util import Frozen
+from ..util import Frozen, logger
+from ..util.event import EmitterGroup, Event
+from .shaders import MultiProgram, StatementList
+from .transforms import TransformSystem
 
 class VisualShare(object):
     def __init__(self): ...

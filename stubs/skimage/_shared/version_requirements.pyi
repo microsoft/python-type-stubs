@@ -1,4 +1,6 @@
+import sys
 
+from packaging import version as _version
 
 def ensure_python_version(min_version): ...
 def _check_version(actver, version, cmp_op): ...

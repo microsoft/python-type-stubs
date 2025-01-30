@@ -34,7 +34,9 @@ from .utils.validation import check_consistent_length as check_consistent_length
 CalibratedClassifierCV_Self = TypeVar("CalibratedClassifierCV_Self", bound=CalibratedClassifierCV)
 _SigmoidCalibration_Self = TypeVar("_SigmoidCalibration_Self", bound=_SigmoidCalibration)
 
+import warnings
 
+import numpy as np
 
 class CalibratedClassifierCV(ClassifierMixin, MetaEstimatorMixin, BaseEstimator):
     calibrated_classifiers_: list = ...

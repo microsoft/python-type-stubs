@@ -1,5 +1,6 @@
 from typing import ClassVar, Literal
 
+import numpy as np
 from numpy import ndarray
 from numpy.random import RandomState
 from scipy import linalg as linalg

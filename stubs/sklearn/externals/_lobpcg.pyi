@@ -1,6 +1,9 @@
+import inspect
+import warnings
 from typing import Callable
 
-from numpy import ndarray
+import numpy as np
+from numpy import block as bmat, ndarray
 from scipy.linalg import (
     LinAlgError as LinAlgError,
     cho_factor as cho_factor,

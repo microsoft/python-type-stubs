@@ -4,6 +4,9 @@
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 # -----------------------------------------------------------------------------
 
+from .color import Color
+from .length import Length
+from .number import Number
 
 _converters: dict = ...
 

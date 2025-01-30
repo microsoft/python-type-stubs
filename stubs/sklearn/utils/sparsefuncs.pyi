@@ -1,12 +1,19 @@
+import numpy as np
 
 # Authors: Manoj Kumar
 #          Thomas Unterthiner
 #          Giorgio Patrini
 #
 # License: BSD 3 clause
+import scipy.sparse as sp
 from numpy import ndarray
 
 from .._typing import ArrayLike, Int, MatrixLike
+from .sparsefuncs_fast import (
+    csc_mean_variance_axis0 as _csc_mean_var_axis0,
+    csr_mean_variance_axis0 as _csr_mean_var_axis0,
+    incr_mean_variance_axis0 as _incr_mean_var_axis0,
+)
 
 def inplace_csr_column_scale(X: MatrixLike, scale: MatrixLike): ...
 def inplace_csr_row_scale(X: MatrixLike, scale: ArrayLike): ...

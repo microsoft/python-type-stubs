@@ -36,7 +36,10 @@ from ._k_means_lloyd import (
 KMeans_Self = TypeVar("KMeans_Self", bound=KMeans)
 MiniBatchKMeans_Self = TypeVar("MiniBatchKMeans_Self", bound=MiniBatchKMeans)
 
+import warnings
 
+import numpy as np
+import scipy.sparse as sp
 
 ###############################################################################
 # Initialization heuristic

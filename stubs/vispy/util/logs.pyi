@@ -1,5 +1,14 @@
+import base64
+import inspect
 import json
 import logging
+import re
+import sys
+import traceback
+from functools import partial
+
+import numpy as np
+from numpy.typing import ArrayLike
 
 # -*- coding: utf-8 -*-
 # Copyright (c) Vispy Development Team. All Rights Reserved.

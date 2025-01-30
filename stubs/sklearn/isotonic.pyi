@@ -17,7 +17,10 @@ IsotonicRegression_Self = TypeVar("IsotonicRegression_Self", bound=IsotonicRegre
 #          Nelle Varoquaux <nelle.varoquaux@gmail.com>
 # License: BSD 3 clause
 
+import math
+import warnings
 
+import numpy as np
 
 __all__ = ["check_increasing", "isotonic_regression", "IsotonicRegression"]
 

@@ -1,3 +1,4 @@
+import numpy as np
 from numpy import longlong, ndarray
 
 # Authors: William Mill (bill@billmill.org)

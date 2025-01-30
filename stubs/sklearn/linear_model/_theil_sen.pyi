@@ -23,7 +23,9 @@ TheilSenRegressor_Self = TypeVar("TheilSenRegressor_Self", bound=TheilSenRegress
 #
 # License: BSD 3 clause
 
+import warnings
 
+import numpy as np
 
 _EPSILON = ...
 

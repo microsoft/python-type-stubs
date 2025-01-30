@@ -1,7 +1,10 @@
 from numpy.typing import ArrayLike, NDArray
 
 from ...color import Colormap
+from ..line import ArrowVisual
+from ..markers import MarkersVisual
 from ..visual import CompoundVisual
+from . import layouts
 
 # -*- coding: utf-8 -*-
 # Copyright (c) Vispy Development Team. All Rights Reserved.

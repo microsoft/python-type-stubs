@@ -1,7 +1,10 @@
 import numpy as np
 from numpy.typing import NDArray
 
+from ..color import ColorArray
 from ..color.color_array import Color
+from ..color.colormap import _normalize, get_colormap
+from ..geometry.isocurve import isocurve
 from .line import LineVisual
 
 # -*- coding: utf-8 -*-

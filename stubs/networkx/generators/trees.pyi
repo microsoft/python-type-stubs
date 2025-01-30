@@ -1,5 +1,7 @@
+from collections import defaultdict
 
 from ..classes.digraph import DiGraph
+from ..classes.graph import Graph
 from ..utils import py_random_state
 
 __all__ = ["prefix_tree", "random_tree", "prefix_tree_recursive"]

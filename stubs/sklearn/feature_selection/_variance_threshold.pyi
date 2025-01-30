@@ -15,6 +15,7 @@ VarianceThreshold_Self = TypeVar("VarianceThreshold_Self", bound=VarianceThresho
 # Author: Lars Buitinck
 # License: 3-clause BSD
 
+import numpy as np
 
 class VarianceThreshold(SelectorMixin, BaseEstimator):
     feature_names_in_: ndarray = ...

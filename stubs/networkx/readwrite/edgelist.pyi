@@ -10,6 +10,7 @@ __all__ = [
 ]
 
 from ..classes.graph import Graph
+from ..utils import open_file
 
 def generate_edgelist(G: Graph, delimiter: str = " ", data=True) -> str: ...
 def write_edgelist(

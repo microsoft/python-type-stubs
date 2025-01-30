@@ -1,4 +1,6 @@
+import os
 
+import numpy as np
 
 # Putting this in cython was giving strange bugs for different versions
 # of cython which seemed to indicate troubles with the __file__ variable

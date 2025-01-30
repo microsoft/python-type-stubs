@@ -3,7 +3,11 @@
 # Copyright (c) 2014, Nicolas P. Rougier
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 # -----------------------------------------------------------------------------
+import math
+import re
 
+from .. import logger
+from .base import units
 
 class Length(object):
     def __init__(self, content, mode="x", parent=None): ...

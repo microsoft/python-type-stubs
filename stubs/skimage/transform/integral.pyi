@@ -1,4 +1,5 @@
 import numpy as np
+from numpy import ndarray
 from numpy.typing import NDArray
 
 from .._typing import Scalar

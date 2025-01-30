@@ -9,6 +9,7 @@ from contextlib import contextmanager as contextmanager, suppress as suppress
 from itertools import compress as compress, islice as islice
 from typing import Any, Iterable, Iterator, Sequence, SupportsIndex
 
+import numpy as np
 from numpy import ndarray
 from numpy.random import RandomState
 from scipy.sparse import issparse as issparse

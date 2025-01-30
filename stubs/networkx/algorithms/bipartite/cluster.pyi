@@ -1,3 +1,4 @@
+import itertools
 from collections.abc import Iterable
 from typing import Mapping
 

@@ -12,7 +12,7 @@ from ..exceptions import ConvergenceWarning as ConvergenceWarning
 from ..metrics import accuracy_score as accuracy_score, r2_score as r2_score
 from ..model_selection import train_test_split as train_test_split
 from ..preprocessing import LabelBinarizer as LabelBinarizer
-from ..utils import check_random_state as check_random_state, column_or_1d as column_or_1d, gen_batches as gen_batches
+from ..utils import check_random_state as check_random_state, column_or_1d as column_or_1d, gen_batches as gen_batches, shuffle
 from ..utils._param_validation import Interval as Interval, Options as Options, StrOptions as StrOptions
 from ..utils.extmath import safe_sparse_dot as safe_sparse_dot
 from ..utils.metaestimators import available_if as available_if
@@ -25,7 +25,10 @@ BaseMultilayerPerceptron_Self = TypeVar("BaseMultilayerPerceptron_Self", bound=B
 MLPRegressor_Self = TypeVar("MLPRegressor_Self", bound=MLPRegressor)
 MLPClassifier_Self = TypeVar("MLPClassifier_Self", bound=MLPClassifier)
 
+import warnings
 
+import numpy as np
+import scipy.optimize
 
 _STOCHASTIC_SOLVERS: list = ...
 

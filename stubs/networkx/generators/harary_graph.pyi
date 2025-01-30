@@ -1,3 +1,5 @@
+from ..classes.graph import Graph
+from ..exception import NetworkXError
 
 __all__ = ["hnm_harary_graph", "hkn_harary_graph"]
 

@@ -22,7 +22,9 @@ OrthogonalMatchingPursuit_Self = TypeVar("OrthogonalMatchingPursuit_Self", bound
 #
 # License: BSD 3 clause
 
+import warnings
 
+import numpy as np
 
 premature: str = ...
 

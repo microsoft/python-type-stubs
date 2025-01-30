@@ -24,7 +24,9 @@ KBinsDiscretizer_Self = TypeVar("KBinsDiscretizer_Self", bound=KBinsDiscretizer)
 
 # License: BSD
 
+import warnings
 
+import numpy as np
 
 class KBinsDiscretizer(TransformerMixin, BaseEstimator):
     feature_names_in_: ndarray = ...

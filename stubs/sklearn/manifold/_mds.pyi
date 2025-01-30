@@ -15,7 +15,9 @@ from ..utils.parallel import Parallel as Parallel, delayed as delayed
 
 MDS_Self = TypeVar("MDS_Self", bound=MDS)
 
+import warnings
 
+import numpy as np
 
 def smacof(
     dissimilarities: MatrixLike,

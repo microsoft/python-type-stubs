@@ -2,7 +2,7 @@ from typing import Any
 
 from ..._typing import Scalar
 from ...classes.graph import Graph
-from ...utils.decorators import py_random_state
+from ...utils.decorators import not_implemented_for, py_random_state
 
 __all__ = ["randomized_partitioning", "one_exchange"]
 

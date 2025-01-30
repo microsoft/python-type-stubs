@@ -1,7 +1,9 @@
 from __future__ import division
 
+import numpy as np
 from numpy.typing import NDArray
 
+from ..geometry import MeshData
 from .mesh import MeshVisual
 
 # -*- coding: utf-8 -*-

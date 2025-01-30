@@ -23,7 +23,9 @@ from ._gradient_boosting import predict_stage as predict_stage, predict_stages a
 
 BaseGradientBoosting_Self = TypeVar("BaseGradientBoosting_Self", bound=BaseGradientBoosting)
 
+import warnings
 
+import numpy as np
 
 class VerboseReporter:
     def __init__(self, verbose: Int) -> None: ...

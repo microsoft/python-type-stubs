@@ -1,5 +1,5 @@
 from functools import partial
-from typing import Callable, Literal, Sequence
+from typing import Any, Callable, Literal, Sequence
 
 from ._typing import *
 from .axis import Axis

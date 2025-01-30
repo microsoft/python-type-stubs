@@ -23,7 +23,10 @@ DummyClassifier_Self = TypeVar("DummyClassifier_Self", bound=DummyClassifier)
 #         Maheshakya Wijewardena <maheshakya.10@cse.mrt.ac.lk>
 # License: BSD 3 clause
 
+import warnings
 
+import numpy as np
+import scipy.sparse as sp
 
 class DummyClassifier(MultiOutputMixin, ClassifierMixin, BaseEstimator):
     sparse_output_: bool = ...

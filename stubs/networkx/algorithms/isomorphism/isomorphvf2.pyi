@@ -3,6 +3,7 @@
 # James P. Crutchfield, principal investigator.
 # Complexity Sciences Center and Physics Department, UC Davis.
 
+import sys
 
 from ...classes.graph import Graph
 

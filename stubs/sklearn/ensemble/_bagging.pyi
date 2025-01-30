@@ -25,7 +25,10 @@ BaseBagging_Self = TypeVar("BaseBagging_Self", bound=BaseBagging)
 # Author: Gilles Louppe <g.louppe@gmail.com>
 # License: BSD 3 clause
 
+import itertools
+import numbers
 
+import numpy as np
 
 __all__ = ["BaggingClassifier", "BaggingRegressor"]
 

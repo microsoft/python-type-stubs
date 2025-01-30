@@ -1,4 +1,6 @@
+import warnings
 
+from ..utils import edges_equal, graphs_equal, nodes_equal
 
 __all__ = [
     "assert_nodes_equal",

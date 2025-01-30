@@ -16,6 +16,7 @@ OneClassSVM_Self = TypeVar("OneClassSVM_Self", bound=OneClassSVM)
 LinearSVC_Self = TypeVar("LinearSVC_Self", bound=LinearSVC)
 LinearSVR_Self = TypeVar("LinearSVR_Self", bound=LinearSVR)
 
+import numpy as np
 
 class LinearSVC(LinearClassifierMixin, SparseCoefMixin, BaseEstimator):
     n_iter_: int = ...

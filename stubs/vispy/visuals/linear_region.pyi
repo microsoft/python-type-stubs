@@ -1,5 +1,7 @@
+import numpy as np
 from numpy.typing import ArrayLike, NDArray
 
+from .. import gloo
 from .visual import Visual
 
 _VERTEX_SHADER: str = ...

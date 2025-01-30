@@ -1,9 +1,12 @@
+import math
+import warnings
 
 import numpy as np
-from numpy import ndarray
+from numpy import dtype, ndarray
 from numpy.typing import NDArray
 
 from .globject import GLObject
+from .util import check_enum
 
 # -*- coding: utf-8 -*-
 # -----------------------------------------------------------------------------

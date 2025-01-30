@@ -30,7 +30,11 @@
 # policies, either expressed or implied, of Nicolas P. Rougier.
 # -----------------------------------------------------------------------------
 
+import math
+from inspect import cleandoc
+from itertools import product
 
+import numpy as np
 
 class SpatialFilter:
     def __init__(self, radius=1): ...

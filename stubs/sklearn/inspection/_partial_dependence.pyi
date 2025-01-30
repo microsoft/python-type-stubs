@@ -1,6 +1,7 @@
 from collections.abc import Iterable as Iterable
 from typing import Literal, Sequence
 
+import numpy as np
 from scipy import sparse as sparse
 from scipy.stats.mstats import mquantiles as mquantiles
 

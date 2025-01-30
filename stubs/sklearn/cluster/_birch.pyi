@@ -24,7 +24,9 @@ Birch_Self = TypeVar("Birch_Self", bound=Birch)
 #          Joel Nothman <joel.nothman@gmail.com>
 # License: BSD 3 clause
 
+import warnings
 
+import numpy as np
 
 class _CFNode:
     squared_norm_: ndarray = ...

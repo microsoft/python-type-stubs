@@ -6,7 +6,7 @@ from numpy.random import RandomState
 from scipy import sparse as sparse
 from scipy.linalg import eigh as eigh
 from scipy.sparse._coo import coo_matrix
-from scipy.sparse.csgraph import connected_components as connected_components
+from scipy.sparse.csgraph import connected_components as connected_components, laplacian as csgraph_laplacian
 from scipy.sparse.linalg import eigsh as eigsh
 
 from .._typing import ArrayLike, Float, Int, MatrixLike
@@ -18,7 +18,9 @@ from ..utils._param_validation import Interval as Interval, StrOptions as StrOpt
 
 SpectralEmbedding_Self = TypeVar("SpectralEmbedding_Self", bound=SpectralEmbedding)
 
+import warnings
 
+import numpy as np
 
 def spectral_embedding(
     adjacency: coo_matrix | MatrixLike,

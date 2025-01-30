@@ -1,8 +1,14 @@
+import heapq
+from collections import deque
+from functools import partial
+from itertools import chain, product, starmap
+from math import gcd
 
 from numpy.typing import ArrayLike
 
 from ..classes.digraph import DiGraph
 from ..classes.graph import Graph
+from ..utils import arbitrary_element, not_implemented_for, pairwise
 
 __all__ = [
     "descendants",

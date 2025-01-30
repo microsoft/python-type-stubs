@@ -1,3 +1,4 @@
+import numpy as np
 from numpy.typing import NDArray
 
 # -*- coding: utf-8 -*-

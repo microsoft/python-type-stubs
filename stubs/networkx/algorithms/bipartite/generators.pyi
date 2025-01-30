@@ -1,7 +1,11 @@
+import math
+import numbers
+from functools import reduce
 
 from numpy.typing import ArrayLike
 
-from ...utils import py_random_state
+from ...classes.graph import Graph
+from ...utils import nodes_or_number, py_random_state
 
 __all__ = [
     "configuration_model",

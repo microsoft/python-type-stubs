@@ -2,7 +2,10 @@
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 # Adapted from PyQtGraph
+import sys
 
+from .. import config
+from . import ptime
 
 class Profiler(object):
     _profilers = ...

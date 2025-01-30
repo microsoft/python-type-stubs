@@ -2,6 +2,11 @@
 #               2010 Fabian Pedregosa <fabian.pedregosa@inria.fr>
 #               2010 Olivier Grisel <olivier.grisel@ensta.org>
 # License: BSD 3 clause
+import csv
+import gzip
+import hashlib
+import os
+import shutil
 from collections import namedtuple as namedtuple
 from importlib import resources as resources
 from os import environ as environ, listdir as listdir, makedirs as makedirs
@@ -10,6 +15,7 @@ from pathlib import Path as Path
 from typing import Literal, Sequence
 from urllib.request import urlretrieve as urlretrieve
 
+import numpy as np
 from numpy import ndarray
 from numpy.random import RandomState
 from PIL import Image as Image

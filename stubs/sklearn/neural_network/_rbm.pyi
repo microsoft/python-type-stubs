@@ -20,7 +20,10 @@ BernoulliRBM_Self = TypeVar("BernoulliRBM_Self", bound=BernoulliRBM)
 #          Lars Buitinck
 # License: BSD 3 clause
 
+import time
 
+import numpy as np
+import scipy.sparse as sp
 
 class BernoulliRBM(ClassNamePrefixFeaturesOutMixin, TransformerMixin, BaseEstimator):
     feature_names_in_: ndarray = ...

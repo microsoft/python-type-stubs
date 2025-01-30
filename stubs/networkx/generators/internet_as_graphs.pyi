@@ -1,5 +1,6 @@
 from typing import Any, Mapping
 
+from ..classes.graph import Graph
 from ..utils import py_random_state
 
 __all__ = ["random_internet_as_graph"]

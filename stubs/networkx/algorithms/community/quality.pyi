@@ -1,8 +1,12 @@
+from itertools import combinations
 from typing import Sequence
 
 from networkx import NetworkXError
 
 from ...classes.graph import Graph
+from ...utils import not_implemented_for
+from ...utils.decorators import argmap
+from .community_utils import is_partition
 
 __all__ = ["coverage", "modularity", "performance", "partition_quality"]
 

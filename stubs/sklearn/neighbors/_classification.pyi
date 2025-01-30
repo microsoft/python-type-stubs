@@ -12,7 +12,9 @@ from ._base import KNeighborsMixin, NeighborsBase, RadiusNeighborsMixin
 RadiusNeighborsClassifier_Self = TypeVar("RadiusNeighborsClassifier_Self", bound=RadiusNeighborsClassifier)
 KNeighborsClassifier_Self = TypeVar("KNeighborsClassifier_Self", bound=KNeighborsClassifier)
 
+import warnings
 
+import numpy as np
 
 class KNeighborsClassifier(KNeighborsMixin, ClassifierMixin, NeighborsBase):
     outputs_2d_: bool = ...

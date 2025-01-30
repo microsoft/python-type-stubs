@@ -22,6 +22,7 @@ from .utils.validation import check_is_fitted as check_is_fitted, check_memory a
 FeatureUnion_Self = TypeVar("FeatureUnion_Self", bound=FeatureUnion)
 Pipeline_Self = TypeVar("Pipeline_Self", bound=Pipeline)
 
+import numpy as np
 
 __all__ = ["Pipeline", "FeatureUnion", "make_pipeline", "make_union"]
 

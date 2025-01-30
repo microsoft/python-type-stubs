@@ -1,3 +1,4 @@
+from itertools import chain, count
 from typing import Mapping
 
 from ...classes.graph import Graph

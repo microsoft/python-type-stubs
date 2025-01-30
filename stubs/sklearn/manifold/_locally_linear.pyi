@@ -18,6 +18,7 @@ from ..utils.validation import FLOAT_DTYPES as FLOAT_DTYPES, check_is_fitted as 
 
 LocallyLinearEmbedding_Self = TypeVar("LocallyLinearEmbedding_Self", bound=LocallyLinearEmbedding)
 
+import numpy as np
 
 def barycenter_weights(X: MatrixLike, Y: MatrixLike, indices: MatrixLike, reg: Float = 1e-3) -> ndarray: ...
 def barycenter_kneighbors_graph(

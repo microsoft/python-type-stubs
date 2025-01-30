@@ -1,7 +1,11 @@
+from copy import deepcopy
+from functools import lru_cache
+from random import choice
 
 from numpy.typing import ArrayLike
 
 from ...classes.graph import Graph
+from ...utils import not_implemented_for
 
 __all__ = ["lukes_partitioning"]
 

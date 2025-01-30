@@ -1,7 +1,9 @@
 from typing import Literal
 
+import numpy as np
 from numpy.typing import NDArray
 
+from .._shared._geometry import polygon_clip
 from .._shared.version_requirements import require
 
 def _ellipse_in_shape(shape, center, radii, rotation=0.0): ...

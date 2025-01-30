@@ -1,5 +1,7 @@
+from math import log
 
 from ..classes.graph import Graph
+from ..utils import not_implemented_for
 
 __all__ = [
     "resource_allocation_index",

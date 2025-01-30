@@ -24,6 +24,7 @@ from ._base import _BasePCA
 
 PCA_Self = TypeVar("PCA_Self", bound=PCA)
 
+import numpy as np
 
 class PCA(_BasePCA):
     feature_names_in_: ndarray = ...

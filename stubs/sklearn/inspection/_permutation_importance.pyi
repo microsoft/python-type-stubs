@@ -1,5 +1,7 @@
+import numbers
 from typing import Any, Callable, Mapping
 
+import numpy as np
 from numpy.random import RandomState
 
 from .._typing import ArrayLike, Int, MatrixLike

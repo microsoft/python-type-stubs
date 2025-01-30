@@ -13,7 +13,10 @@ BisectingKMeans_Self = TypeVar("BisectingKMeans_Self", bound=BisectingKMeans)
 
 # Author: Michal Krawczyk <mkrwczyk.1@gmail.com>
 
+import warnings
 
+import numpy as np
+import scipy.sparse as sp
 
 class _BisectingTree:
     def __init__(self, center: ndarray, indices: ndarray, score: Float) -> None: ...

@@ -1,8 +1,16 @@
+import html.entities as htmlentitydefs
+import re
+import warnings
+from ast import literal_eval
+from collections import defaultdict
 from collections.abc import Iterable
 from enum import Enum
+from io import StringIO
 from typing import Any, Callable, NamedTuple
 
 from ..classes.graph import Graph
+from ..exception import NetworkXError
+from ..utils import open_file
 
 __all__ = ["read_gml", "parse_gml", "generate_gml", "write_gml"]
 

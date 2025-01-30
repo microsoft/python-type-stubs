@@ -1,3 +1,4 @@
+from collections import Counter, defaultdict
 from collections.abc import Iterable
 
 from ..classes.graph import Graph

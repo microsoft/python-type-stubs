@@ -1,5 +1,9 @@
+import itertools as it
+from functools import partial
 
+from ...algorithms import bridges
 from ...classes.graph import Graph
+from ...utils import arbitrary_element, not_implemented_for
 
 __all__ = [
     "k_edge_components",

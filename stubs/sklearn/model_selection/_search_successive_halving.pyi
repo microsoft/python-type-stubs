@@ -18,6 +18,7 @@ from ._split import BaseShuffleSplit, check_cv as check_cv
 
 BaseSuccessiveHalving_Self = TypeVar("BaseSuccessiveHalving_Self", bound=BaseSuccessiveHalving)
 
+import numpy as np
 
 __all__ = ["HalvingGridSearchCV", "HalvingRandomSearchCV"]
 

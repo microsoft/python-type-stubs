@@ -25,6 +25,7 @@ RFE_Self = TypeVar("RFE_Self", bound=RFE)
 #
 # License: BSD 3 clause
 
+import numpy as np
 
 class RFE(SelectorMixin, MetaEstimatorMixin, BaseEstimator):
     support_: ndarray = ...

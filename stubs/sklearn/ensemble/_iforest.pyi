@@ -9,6 +9,7 @@ from scipy.sparse import issparse as issparse
 from .._typing import ArrayLike, Int, MatrixLike
 from ..base import OutlierMixin
 from ..tree import ExtraTreeRegressor
+from ..tree._tree import DTYPE as tree_dtype
 from ..utils import (
     check_array as check_array,
     check_random_state as check_random_state,
@@ -25,7 +26,9 @@ IsolationForest_Self = TypeVar("IsolationForest_Self", bound=IsolationForest)
 #          Alexandre Gramfort <alexandre.gramfort@telecom-paristech.fr>
 # License: BSD 3 clause
 
+import numbers
 
+import numpy as np
 
 __all__ = ["IsolationForest"]
 

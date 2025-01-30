@@ -3,6 +3,7 @@ from typing import Any, Literal
 from sympy.polys.domains.compositedomain import CompositeDomain
 from sympy.polys.domains.ring import Ring
 from sympy.polys.rings import PolyElement
+from sympy.utilities import public
 
 class PolynomialRing(Ring, CompositeDomain):
     is_Poly = ...

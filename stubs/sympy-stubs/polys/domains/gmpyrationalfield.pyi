@@ -3,6 +3,7 @@ from typing import Any
 from sympy.core.numbers import Rational
 from sympy.polys.domains.groundtypes import GMPYRational, _GMPYRational
 from sympy.polys.domains.rationalfield import RationalField
+from sympy.utilities import public
 
 class GMPYRationalField(RationalField):
     dtype = GMPYRational

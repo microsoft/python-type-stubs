@@ -4,6 +4,7 @@ from typing import Any, Generator, Iterator, Literal, NoReturn
 from typing_extensions import Never
 
 from sympy import Basic, Symbol
+from sympy.utilities.decorator import deprecated
 
 def is_palindromic(s, i=..., j=...) -> bool: ...
 def flatten(iterable, levels=..., cls=...) -> list[Any]: ...

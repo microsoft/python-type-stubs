@@ -3,7 +3,10 @@ from typing import Literal
 from numpy.typing import ArrayLike
 
 from ..gloo.framebuffer import RenderBuffer
+from .context import get_current_canvas
 from .globject import GLObject
+from .texture import Texture2D
+from .wrappers import _check_valid, read_pixels
 
 # -*- coding: utf-8 -*-
 # -----------------------------------------------------------------------------

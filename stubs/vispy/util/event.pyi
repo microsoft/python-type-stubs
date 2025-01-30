@@ -1,6 +1,12 @@
+import inspect
+import traceback
+import weakref
+from collections import OrderedDict
 from typing import Any, Callable
 
 from numpy.typing import ArrayLike
+
+from .logs import _handle_exception, logger
 
 # -*- coding: utf-8 -*-
 # Copyright (c) Vispy Development Team. All Rights Reserved.

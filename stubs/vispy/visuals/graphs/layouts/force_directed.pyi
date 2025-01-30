@@ -1,4 +1,7 @@
+import numpy as np
 from numpy.typing import ArrayLike
+
+from ..util import _rescale_layout, _straight_line_vertices
 
 # -*- coding: utf-8 -*-
 # Copyright (c) Vispy Development Team. All Rights Reserved.

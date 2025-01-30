@@ -18,7 +18,9 @@ from ._base import BaseEnsemble
 
 BaseWeightBoosting_Self = TypeVar("BaseWeightBoosting_Self", bound=BaseWeightBoosting)
 
+import warnings
 
+import numpy as np
 
 __all__ = [
     "AdaBoostClassifier",

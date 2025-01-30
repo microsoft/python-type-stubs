@@ -1,3 +1,4 @@
+from ..classes.graph import Graph
 from ..classes.multigraph import MultiGraph
 from ..utils import py_random_state
 

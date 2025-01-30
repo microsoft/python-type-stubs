@@ -1,3 +1,4 @@
+import itertools
 
 from numpy.typing import ArrayLike
 

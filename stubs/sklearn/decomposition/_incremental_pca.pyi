@@ -12,6 +12,7 @@ from ._base import _BasePCA
 
 IncrementalPCA_Self = TypeVar("IncrementalPCA_Self", bound=IncrementalPCA)
 
+import numpy as np
 
 class IncrementalPCA(_BasePCA):
     feature_names_in_: ndarray = ...

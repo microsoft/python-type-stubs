@@ -1,4 +1,12 @@
 from collections.abc import Iterable
+from itertools import repeat
+from math import sqrt
+
+from ..classes import set_node_attributes
+from ..exception import NetworkXError
+from ..generators.classic import cycle_graph, empty_graph, path_graph
+from ..relabel import relabel_nodes
+from ..utils import flatten, nodes_or_number, pairwise
 
 __all__ = [
     "grid_2d_graph",

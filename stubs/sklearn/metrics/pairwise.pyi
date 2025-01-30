@@ -1,14 +1,18 @@
+import itertools
+import warnings
 from functools import partial as partial
 from typing import Callable, Iterator, Sequence
 
+import numpy as np
 from joblib import effective_n_jobs as effective_n_jobs
 from numpy import ndarray
 from scipy.sparse import csr_matrix as csr_matrix, issparse as issparse
+from scipy.spatial import distance
 
 from .. import config_context as config_context
 from .._typing import ArrayLike, Float, Int, MatrixLike
 from ..exceptions import DataConversionWarning as DataConversionWarning
-from ..gaussian_process.kernels import ExpSineSquared
+from ..gaussian_process.kernels import ExpSineSquared, Kernel as GPKernel
 from ..metrics import DistanceMetric as DistanceMetric
 from ..preprocessing import normalize as normalize
 from ..utils import (

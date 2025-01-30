@@ -1,4 +1,5 @@
 from sympy.core.assumptions import check_assumptions, failing_assumptions
+from sympy.core.singleton import S
 from sympy.solvers.decompogen import decompogen
 from sympy.solvers.deutils import ode_order
 from sympy.solvers.diophantine import diophantine

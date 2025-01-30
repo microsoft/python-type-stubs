@@ -21,7 +21,9 @@ LabelPropagation_Self = TypeVar("LabelPropagation_Self", bound=LabelPropagation)
 
 # coding=utf8
 
+import warnings
 
+import numpy as np
 
 class BaseLabelPropagation(ClassifierMixin, BaseEstimator, metaclass=ABCMeta):
     _parameter_constraints: ClassVar[dict] = ...

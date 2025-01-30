@@ -1,3 +1,4 @@
+from ..classes.graph import Graph
 
 __all__ = [
     "karate_club_graph",

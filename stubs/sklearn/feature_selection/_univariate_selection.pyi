@@ -3,7 +3,7 @@ from typing import Callable, ClassVar, Literal, TypeVar
 
 from joblib.memory import MemorizedFunc
 from numpy import ndarray
-from scipy import special as special
+from scipy import special as special, stats
 from scipy.sparse import issparse as issparse
 
 from .._typing import ArrayLike, Float, Int, MatrixLike
@@ -27,7 +27,9 @@ _BaseFilter_Self = TypeVar("_BaseFilter_Self", bound=_BaseFilter)
 #          L. Buitinck, A. Joly
 # License: BSD 3 clause
 
+import warnings
 
+import numpy as np
 
 ######################################################################
 # Scoring functions

@@ -1,5 +1,14 @@
+import math
 
+import numpy as np
+import scipy.ndimage as ndi
 from numpy.typing import NDArray
+from scipy import spatial
+
+from .._shared.filters import gaussian
+from .._shared.utils import _supported_float_type, check_nD
+from ..transform import integral_image
+from .peak import peak_local_max
 
 # This basic blob detection algorithm is based on:
 # http://www.cs.utah.edu/~jfishbau/advimproc/project1/ (04.04.2013)

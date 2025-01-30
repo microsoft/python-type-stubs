@@ -2,7 +2,11 @@ from typing import Callable
 
 from networkx import DiGraph, Graph
 
+from ..classes.coreviews import FilterAdjacency, FilterAtlas, FilterMultiAdjacency, UnionAdjacency, UnionMultiAdjacency
+from ..classes.filters import no_filter
 from ..classes.graph import Graph
+from ..exception import NetworkXError
+from ..utils import not_implemented_for
 
 __all__ = ["generic_graph_view", "subgraph_view", "reverse_view"]
 

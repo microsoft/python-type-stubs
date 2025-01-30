@@ -22,6 +22,7 @@ from . import KMeans as KMeans, MiniBatchKMeans as MiniBatchKMeans
 
 BaseSpectral_Self = TypeVar("BaseSpectral_Self", bound=BaseSpectral)
 
+import numpy as np
 
 __all__ = ["SpectralCoclustering", "SpectralBiclustering"]
 

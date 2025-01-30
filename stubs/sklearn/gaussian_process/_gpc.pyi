@@ -5,7 +5,7 @@ from typing import Any, Callable, ClassVar, Literal, TypeVar
 from numpy import ndarray
 from numpy.random import RandomState
 from scipy.linalg import cho_solve as cho_solve, cholesky as cholesky, solve as solve
-from scipy.special import expit as expit
+from scipy.special import erf, expit as expit
 
 from .._typing import ArrayLike, Float, Int, MatrixLike
 from ..base import BaseEstimator, ClassifierMixin, clone as clone
@@ -14,7 +14,7 @@ from ..preprocessing import LabelEncoder as LabelEncoder
 from ..utils import check_random_state as check_random_state
 from ..utils._param_validation import Interval as Interval, StrOptions as StrOptions
 from ..utils.validation import check_is_fitted as check_is_fitted
-from .kernels import RBF as RBF, CompoundKernel as CompoundKernel, Kernel, Product
+from .kernels import RBF as RBF, CompoundKernel as CompoundKernel, ConstantKernel as C, Kernel, Product
 
 _BinaryGaussianProcessClassifierLaplace_Self = TypeVar(
     "_BinaryGaussianProcessClassifierLaplace_Self",
@@ -22,6 +22,8 @@ _BinaryGaussianProcessClassifierLaplace_Self = TypeVar(
 )
 GaussianProcessClassifier_Self = TypeVar("GaussianProcessClassifier_Self", bound=GaussianProcessClassifier)
 
+import numpy as np
+import scipy.optimize
 
 # Values required for approximating the logistic sigmoid by
 # error functions. coefs are obtained via:

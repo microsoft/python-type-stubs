@@ -1,6 +1,11 @@
+import itertools
+import math
+from collections import defaultdict
 
 from ..classes.graph import Graph
 from ..utils import py_random_state
+from .classic import complete_graph, empty_graph, path_graph, star_graph
+from .degree_seq import degree_sequence_tree
 
 __all__ = [
     "fast_gnp_random_graph",

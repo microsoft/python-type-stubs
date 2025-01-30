@@ -16,6 +16,7 @@ HuberRegressor_Self = TypeVar("HuberRegressor_Self", bound=HuberRegressor)
 # Authors: Manoj Kumar mks542@nyu.edu
 # License: BSD 3 clause
 
+import numpy as np
 
 class HuberRegressor(LinearModel, RegressorMixin, BaseEstimator):
     outliers_: ndarray = ...

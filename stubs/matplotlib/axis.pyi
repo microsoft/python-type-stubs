@@ -1,4 +1,5 @@
 import datetime
+from datetime import timezone
 from typing import Any, Callable, Literal, Type
 
 import numpy as np

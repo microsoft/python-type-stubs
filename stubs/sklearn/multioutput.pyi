@@ -31,6 +31,8 @@ _MultiOutputEstimator_Self = TypeVar("_MultiOutputEstimator_Self", bound=_MultiO
 MultiOutputRegressor_Self = TypeVar("MultiOutputRegressor_Self", bound=MultiOutputRegressor)
 ClassifierChain_Self = TypeVar("ClassifierChain_Self", bound=ClassifierChain)
 
+import numpy as np
+import scipy.sparse as sp
 
 __all__ = [
     "MultiOutputRegressor",

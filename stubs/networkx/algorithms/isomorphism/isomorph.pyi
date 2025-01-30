@@ -1,6 +1,7 @@
 from typing import Callable
 
 from ...classes.graph import Graph
+from ...exception import NetworkXError
 
 __all__ = [
     "could_be_isomorphic",

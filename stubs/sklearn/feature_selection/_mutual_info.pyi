@@ -1,5 +1,6 @@
 from typing import Literal
 
+import numpy as np
 from numpy import ndarray
 from numpy.random import RandomState
 from scipy.sparse import issparse as issparse

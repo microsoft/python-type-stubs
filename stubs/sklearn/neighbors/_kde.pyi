@@ -19,7 +19,9 @@ from ._kd_tree import KDTree as KDTree
 KernelDensity_Self = TypeVar("KernelDensity_Self", bound=KernelDensity)
 
 # Author: Jake Vanderplas <jakevdp@cs.washington.edu>
+import itertools
 
+import numpy as np
 
 VALID_KERNELS: list = ...
 

@@ -5,7 +5,7 @@ import numpy as np
 from mpl_toolkits.mplot3d import Axes3D
 
 from ._typing import *
-from .artist import Artist, allow_rasterization
+from .artist import Artist, _finalize_rasterization, allow_rasterization
 from .axes import Axes
 from .backend_bases import FigureCanvasBase, MouseButton, MouseEvent, RendererBase
 from .colorbar import Colorbar

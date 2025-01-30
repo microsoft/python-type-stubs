@@ -1,4 +1,6 @@
+from typing import IO
 
+import numpy as np
 
 from .._typing import FileLike
 

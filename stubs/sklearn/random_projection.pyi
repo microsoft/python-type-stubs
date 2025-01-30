@@ -22,7 +22,10 @@ BaseRandomProjection_Self = TypeVar("BaseRandomProjection_Self", bound=BaseRando
 #          Arnaud Joly <a.joly@ulg.ac.be>
 # License: BSD 3 clause
 
+import warnings
 
+import numpy as np
+import scipy.sparse as sp
 
 __all__ = [
     "SparseRandomProjection",

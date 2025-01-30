@@ -8,7 +8,13 @@ from typing import Literal, Optional
 import numpy as np
 from numpy.typing import ArrayLike, NDArray
 
+from ..color import get_colormap
+from ..gloo import IndexBuffer, VertexBuffer
+from ..gloo.texture import should_cast_to_f32
+from ..io import load_spatial_filters
 from . import Visual
+from ._scalable_textures import CPUScaledTexture3D, GPUScaledTextured3D, Texture2D
+from .shaders import Function
 
 # todo: implement more render methods (port from visvis)
 # todo: allow anisotropic data

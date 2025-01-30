@@ -1,7 +1,17 @@
+from itertools import combinations_with_replacement
 from typing import Literal
+from warnings import warn
 
 import numpy as np
+from numpy import ndarray
 from numpy.typing import ArrayLike, NDArray
+from scipy import ndimage as ndi, spatial, stats
+
+from .._shared.filters import gaussian
+from .._shared.utils import _supported_float_type, safe_as_int
+from ..transform import integral_image
+from .peak import peak_local_max
+from .util import _prepare_grayscale_input_2D, _prepare_grayscale_input_nD
 
 def _compute_derivatives(image, mode="constant", cval=0): ...
 def structure_tensor(

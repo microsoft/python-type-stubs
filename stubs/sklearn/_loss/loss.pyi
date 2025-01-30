@@ -1,5 +1,7 @@
+import numbers
 from typing import ClassVar, Literal, Type
 
+import numpy as np
 from numpy import ndarray
 from scipy.special import xlogy as xlogy
 
@@ -12,6 +14,7 @@ from ._loss import (
     CyHalfGammaLoss as CyHalfGammaLoss,
     CyHalfMultinomialLoss as CyHalfMultinomialLoss,
     CyHalfPoissonLoss as CyHalfPoissonLoss,
+    CyHalfSquaredError,
     CyHalfTweedieLoss as CyHalfTweedieLoss,
     CyHalfTweedieLossIdentity as CyHalfTweedieLossIdentity,
     CyLossFunction,
@@ -19,6 +22,7 @@ from ._loss import (
 )
 from .link import (
     BaseLink,
+    IdentityLink,
     Interval,
     LogitLink as LogitLink,
     LogLink as LogLink,

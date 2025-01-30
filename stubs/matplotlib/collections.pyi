@@ -1,3 +1,4 @@
+from tkinter.messagebox import NO
 from typing import Callable, Literal, Sequence
 
 import numpy as np

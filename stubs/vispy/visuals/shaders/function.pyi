@@ -1,7 +1,16 @@
+import logging
+import re
+from collections import OrderedDict
 
+import numpy as np
 from numpy.typing import ArrayLike
 
+from ...util import logger
+from ...util.eq import eq
+from . import parsing
+from .expression import FunctionCall, TextExpression
 from .shader_object import ShaderObject
+from .variable import Variable, Varying
 
 # -*- coding: utf-8 -*-
 # Copyright (c) Vispy Development Team. All Rights Reserved.

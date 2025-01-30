@@ -4,6 +4,9 @@
 
 from __future__ import division
 
+from ...util.event import EventEmitter
+from ..shaders import Function
+
 class BaseTransform(object):
     glsl_map: None = ...  # Must be GLSL code
     glsl_imap: None = ...

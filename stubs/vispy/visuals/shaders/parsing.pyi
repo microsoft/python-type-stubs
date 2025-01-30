@@ -4,6 +4,8 @@
 
 from __future__ import division
 
+import re
+
 # regular expressions for parsing GLSL
 
 re_version_pragma: str = ...

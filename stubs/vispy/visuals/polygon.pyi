@@ -1,7 +1,12 @@
 from typing import Sequence
 
+import numpy as np
 from numpy.typing import ArrayLike
 
+from ..color import Color
+from ..geometry import PolygonData
+from .line import LineVisual
+from .mesh import MeshVisual
 from .visual import CompoundVisual
 
 # -*- coding: utf-8 -*-

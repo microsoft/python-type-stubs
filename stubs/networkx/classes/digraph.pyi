@@ -1,7 +1,12 @@
+from copy import deepcopy
 from functools import cached_property
 
+import networkx.convert as convert
+
+from ..classes.coreviews import AdjacencyView
 from ..classes.graph import Graph
-from ..classes.reportviews import DiDegreeView, InEdgeView, OutEdgeView
+from ..classes.reportviews import DiDegreeView, InDegreeView, InEdgeView, OutDegreeView, OutEdgeView
+from ..exception import NetworkXError
 
 __all__ = ["DiGraph"]
 

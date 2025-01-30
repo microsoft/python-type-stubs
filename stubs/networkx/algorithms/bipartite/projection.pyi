@@ -2,6 +2,9 @@ from collections.abc import Iterable
 
 from numpy.typing import ArrayLike
 
+from ...exception import NetworkXAlgorithmError
+from ...utils import not_implemented_for
+
 __all__ = [
     "project",
     "projected_graph",

@@ -1,6 +1,6 @@
 import threading
 from io import BufferedWriter, BytesIO
-from typing import Any
+from typing import Any, Tuple
 
 import numpy as np
 from matplotlib._typing import *

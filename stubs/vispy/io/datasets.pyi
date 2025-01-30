@@ -1,5 +1,7 @@
+from os import path as op
 
 import numpy as np
+from numpy.typing import ArrayLike
 
 from ..util import load_data_file as load_data_file
 

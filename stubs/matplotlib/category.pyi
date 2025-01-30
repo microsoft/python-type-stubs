@@ -1,4 +1,4 @@
-from typing import Iterable
+from typing import Any, Iterable
 
 import numpy as np
 

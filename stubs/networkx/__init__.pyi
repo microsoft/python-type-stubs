@@ -63,3 +63,4 @@ from .generators import *
 from .linalg import *
 from .readwrite import *
 from .relabel import convert_node_labels_to_integers as convert_node_labels_to_integers, relabel_nodes as relabel_nodes
+from .testing.test import run as test

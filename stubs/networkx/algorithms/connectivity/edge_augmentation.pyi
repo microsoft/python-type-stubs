@@ -1,6 +1,9 @@
+import itertools as it
+import math
+from collections import defaultdict, namedtuple
 
 from ...classes.graph import Graph
-from ...utils import py_random_state
+from ...utils import not_implemented_for, py_random_state
 
 __all__ = ["k_edge_augmentation", "is_k_edge_connected", "is_locally_k_edge_connected"]
 

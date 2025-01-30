@@ -12,7 +12,9 @@ from ..utils.validation import check_is_fitted as check_is_fitted
 
 SelfTrainingClassifier_Self = TypeVar("SelfTrainingClassifier_Self", bound=SelfTrainingClassifier)
 
+import warnings
 
+import numpy as np
 
 __all__ = ["SelfTrainingClassifier"]
 

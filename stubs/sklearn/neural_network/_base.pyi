@@ -1,4 +1,5 @@
-from scipy.special import xlogy as xlogy
+import numpy as np
+from scipy.special import expit as logistic_sigmoid, xlogy as xlogy
 
 from .._typing import ArrayLike, Float, MatrixLike
 

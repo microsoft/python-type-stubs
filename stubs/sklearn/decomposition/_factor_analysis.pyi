@@ -22,7 +22,9 @@ FactorAnalysis_Self = TypeVar("FactorAnalysis_Self", bound=FactorAnalysis)
 
 # License: BSD3
 
+import warnings
 
+import numpy as np
 
 class FactorAnalysis(ClassNamePrefixFeaturesOutMixin, TransformerMixin, BaseEstimator):
     feature_names_in_: ndarray = ...

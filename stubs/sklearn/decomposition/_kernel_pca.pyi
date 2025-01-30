@@ -21,6 +21,7 @@ KernelPCA_Self = TypeVar("KernelPCA_Self", bound=KernelPCA)
 #         Sylvain Marie <sylvain.marie@schneider-electric.com>
 # License: BSD 3 clause
 
+import numpy as np
 
 class KernelPCA(ClassNamePrefixFeaturesOutMixin, TransformerMixin, BaseEstimator):
     feature_names_in_: ndarray = ...

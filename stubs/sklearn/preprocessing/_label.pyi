@@ -25,7 +25,12 @@ LabelBinarizer_Self = TypeVar("LabelBinarizer_Self", bound=LabelBinarizer)
 #          Hamzeh Alsalhi <ha258@cornell.edu>
 # License: BSD 3 clause
 
+import array
+import itertools
+import warnings
 
+import numpy as np
+import scipy.sparse as sp
 
 __all__ = [
     "label_binarize",

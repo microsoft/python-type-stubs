@@ -1,7 +1,10 @@
 import contextlib
 from typing import Generator, Literal
 
-from . import colors as colors
+import numpy as np
+from packaging.version import parse as parse_version
+
+from . import _docstring, _version, cbook, colors as colors, rcsetup
 from ._typing import *
 
 class __getattr__:

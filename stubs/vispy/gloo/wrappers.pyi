@@ -1,7 +1,13 @@
+from copy import deepcopy
 from typing import Literal, Mapping
 
 import numpy as np
+from numpy import dtype
 from numpy.typing import ArrayLike
+
+from ..color import Color
+from ..util import logger
+from . import gl
 
 # -*- coding: utf-8 -*-
 # -----------------------------------------------------------------------------

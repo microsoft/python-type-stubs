@@ -17,6 +17,7 @@ from ..utils.validation import check_array as check_array, check_is_fitted as ch
 
 ColumnTransformer_Self = TypeVar("ColumnTransformer_Self", bound=ColumnTransformer)
 
+import numpy as np
 
 __all__ = ["ColumnTransformer", "make_column_transformer", "make_column_selector"]
 

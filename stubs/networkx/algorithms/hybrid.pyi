@@ -1,3 +1,4 @@
+import copy
 
 from ..classes.graph import Graph
 

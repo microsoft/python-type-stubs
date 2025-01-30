@@ -1,5 +1,10 @@
+import logging
+import tarfile
 from os import makedirs as makedirs, remove as remove
 from os.path import exists as exists
+
+import joblib
+import numpy as np
 
 from ..utils import Bunch
 from . import get_data_home as get_data_home

@@ -1,6 +1,10 @@
+import numbers
+from collections import Counter
 
 from ..classes import MultiDiGraph
-from ..utils import py_random_state
+from ..classes.graph import Graph
+from ..generators.classic import empty_graph
+from ..utils import discrete_sequence, py_random_state, weighted_choice
 
 __all__ = [
     "gn_graph",

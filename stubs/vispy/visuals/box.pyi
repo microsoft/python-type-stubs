@@ -1,6 +1,8 @@
 from numpy.typing import ArrayLike, NDArray
 
+from ..geometry import create_box
 from ..util.svg.color import Color
+from .mesh import MeshVisual
 from .visual import CompoundVisual
 
 # -*- coding: utf-8 -*-

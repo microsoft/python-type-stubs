@@ -1,7 +1,10 @@
 import numpy as np
+from numpy import ndarray
 from numpy.typing import ArrayLike, NDArray
 
-from ._util import arg_to_vec4
+from ...geometry import Rect
+from ...util import transforms
+from ._util import arg_to_vec4, as_vec4
 from .base_transform import BaseTransform
 
 # -*- coding: utf-8 -*-

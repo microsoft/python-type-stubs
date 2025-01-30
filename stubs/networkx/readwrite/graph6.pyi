@@ -2,9 +2,13 @@ from collections.abc import Iterable
 
 # Original author: D. Eppstein, UC Irvine, August 12, 2003.
 # The original code at http://www.ics.uci.edu/~eppstein/PADS/ is public domain.
+from itertools import islice
+
 from numpy.typing import ArrayLike
 
 from ..classes.graph import Graph
+from ..exception import NetworkXError
+from ..utils import not_implemented_for, open_file
 
 __all__ = ["from_graph6_bytes", "read_graph6", "to_graph6_bytes", "write_graph6"]
 

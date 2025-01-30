@@ -1,4 +1,7 @@
+import numpy as np
 from numpy.typing import NDArray
+
+from ._util import _offsets_to_raveled_neighbors, _validate_connectivity
 
 unsigned_int_types: list = ...
 signed_int_types: list = ...

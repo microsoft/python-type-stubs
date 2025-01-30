@@ -1,3 +1,4 @@
+import html
 from contextlib import closing as closing
 from inspect import isclass as isclass
 from io import StringIO as StringIO

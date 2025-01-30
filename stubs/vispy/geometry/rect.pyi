@@ -1,3 +1,4 @@
+import numpy as np
 
 class Rect(object):
     def __init__(self, *args, **kwargs): ...

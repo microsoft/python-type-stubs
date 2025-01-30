@@ -4,6 +4,7 @@
 # Distributed under the terms of the new BSD License.
 # -----------------------------------------------------------------------------
 
+from .length import XLength, YLength
 
 class Viewport(object):
     def __init__(self, content=None, parent=None): ...

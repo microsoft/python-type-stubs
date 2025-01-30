@@ -4,6 +4,7 @@
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 # -----------------------------------------------------------------------------
 
+from .glir import GlirQueue
 
 class GLObject(object):
     # Type of GLIR object, reset in subclasses

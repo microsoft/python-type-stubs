@@ -32,7 +32,12 @@ OutputCodeClassifier_Self = TypeVar("OutputCodeClassifier_Self", bound=OutputCod
 #
 # License: BSD 3 clause
 
+import array
+import itertools
+import warnings
 
+import numpy as np
+import scipy.sparse as sp
 
 __all__ = [
     "OneVsRestClassifier",

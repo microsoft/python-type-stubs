@@ -16,7 +16,13 @@ BaseEstimator_Self = TypeVar("BaseEstimator_Self", bound=BaseEstimator)
 # Author: Gael Varoquaux <gael.varoquaux@normalesup.org>
 # License: BSD 3 clause
 
+import copy
+import inspect
+import platform
+import re
+import warnings
 
+import numpy as np
 
 def clone(estimator: BaseEstimator | Iterable[BaseEstimator], *, safe: bool = True) -> Any: ...
 

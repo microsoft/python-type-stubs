@@ -16,6 +16,7 @@ KNNImputer_Self = TypeVar("KNNImputer_Self", bound=KNNImputer)
 #          Thomas J Fan <thomasjpfan@gmail.com>
 # License: BSD 3 clause
 
+import numpy as np
 
 class KNNImputer(_BaseImputer):
     feature_names_in_: ndarray = ...

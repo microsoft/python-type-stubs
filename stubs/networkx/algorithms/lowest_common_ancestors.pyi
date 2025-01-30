@@ -4,6 +4,7 @@ from itertools import combinations_with_replacement
 from typing import Any
 
 from ..classes.graph import Graph
+from ..utils import UnionFind, arbitrary_element, not_implemented_for
 
 __all__ = [
     "all_pairs_lowest_common_ancestor",

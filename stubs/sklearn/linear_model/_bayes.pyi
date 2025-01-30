@@ -15,6 +15,7 @@ from ._base import LinearModel
 BayesianRidge_Self = TypeVar("BayesianRidge_Self", bound=BayesianRidge)
 ARDRegression_Self = TypeVar("ARDRegression_Self", bound=ARDRegression)
 
+import numpy as np
 
 ###############################################################################
 # BayesianRidge regression

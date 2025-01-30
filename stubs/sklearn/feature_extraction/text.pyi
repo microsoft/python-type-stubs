@@ -31,7 +31,13 @@ TfidfTransformer_Self = TypeVar("TfidfTransformer_Self", bound=TfidfTransformer)
 #
 # License: BSD 3 clause
 
+import array
+import re
+import unicodedata
+import warnings
 
+import numpy as np
+import scipy.sparse as sp
 
 __all__ = [
     "HashingVectorizer",

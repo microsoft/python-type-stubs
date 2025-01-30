@@ -1,8 +1,9 @@
+import weakref
 
 from numpy.typing import ArrayLike
 
-from ..util.event import Event
-from ..visuals.transforms import ChainTransform, TransformSystem
+from ..util.event import EmitterGroup, Event
+from ..visuals.transforms import BaseTransform, ChainTransform, NullTransform, TransformSystem, create_transform
 from ..visuals.transforms.chain import ChainTransform
 from ..visuals.transforms.transform_system import TransformSystem
 

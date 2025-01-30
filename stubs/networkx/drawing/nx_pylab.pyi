@@ -1,8 +1,18 @@
+from numbers import Number
 from typing import Mapping
 
 from numpy.typing import ArrayLike
 
 from ..classes.graph import Graph
+from ..drawing.layout import (
+    circular_layout,
+    kamada_kawai_layout,
+    planar_layout,
+    random_layout,
+    shell_layout,
+    spectral_layout,
+    spring_layout,
+)
 
 __all__ = [
     "draw",

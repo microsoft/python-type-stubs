@@ -1,6 +1,9 @@
+from functools import reduce
 
+import numpy as np
 
 from .._shared.version_requirements import require
+from ..draw import polygon
 
 LEFT_CLICK: int = ...
 RIGHT_CLICK: int = ...

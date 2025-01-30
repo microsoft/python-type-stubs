@@ -1,4 +1,5 @@
 from ...util.event import Event
+from ...visuals import TextVisual
 from .widget import Widget
 
 # -*- coding: utf-8 -*-
