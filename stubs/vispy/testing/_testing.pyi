@@ -3,7 +3,6 @@
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 # -----------------------------------------------------------------------------
 
-
 import functools
 import gc
 import inspect

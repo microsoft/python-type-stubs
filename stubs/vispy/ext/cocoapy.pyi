@@ -1,4 +1,3 @@
-
 import platform
 import struct
 import sys

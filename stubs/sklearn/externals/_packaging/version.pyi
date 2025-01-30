@@ -37,7 +37,9 @@ __all__ = ["parse", "Version", "LegacyVersion", "InvalidVersion", "VERSION_PATTE
 InfiniteTypes: typing_extensions.TypeAlias = InfinityType | NegativeInfinityType
 PrePostDevType: typing_extensions.TypeAlias = InfiniteTypes | tuple[str, int]
 SubLocalType: typing_extensions.TypeAlias = InfiniteTypes | int | str
-LocalType: typing_extensions.TypeAlias = NegativeInfinityType | tuple[SubLocalType | tuple[SubLocalType, str] | tuple[NegativeInfinityType, SubLocalType], ...]
+LocalType: typing_extensions.TypeAlias = (
+    NegativeInfinityType | tuple[SubLocalType | tuple[SubLocalType, str] | tuple[NegativeInfinityType, SubLocalType], ...]
+)
 CmpKey: typing_extensions.TypeAlias = tuple[int, tuple[int, ...], PrePostDevType, PrePostDevType, PrePostDevType, LocalType]
 LegacyCmpKey: typing_extensions.TypeAlias = tuple[int, tuple[str, ...]]
 VersionComparisonMethod: typing_extensions.TypeAlias = Callable[[CmpKey | LegacyCmpKey, CmpKey | LegacyCmpKey], bool]

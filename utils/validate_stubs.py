@@ -356,9 +356,7 @@ def compare_classes(real: list[Item], stub: list[Item]):
         i_s += 1
 
 
-def find_item(
-    items: list[Item], name: str, which: Literal["stub", "real"], type_: Literal["class", "function"]
-) -> Item | None:
+def find_item(items: list[Item], name: str, which: Literal["stub", "real"], type_: Literal["class", "function"]) -> Item | None:
     """
     which - whether this is 'stub' or 'real'
     """
