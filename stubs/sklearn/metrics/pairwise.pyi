@@ -62,7 +62,7 @@ def nan_euclidean_distances(
     Y: None | MatrixLike = None,
     *,
     squared: bool = False,
-    missing_values: float | int = ...,
+    missing_values: float = ...,
     copy: bool = True,
 ) -> ndarray: ...
 def pairwise_distances_argmin_min(

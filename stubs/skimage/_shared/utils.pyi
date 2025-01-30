@@ -25,8 +25,7 @@ __all__ = [
     "slice_at_axis",
 ]
 
-class skimage_deprecation(Warning):
-    pass
+class skimage_deprecation(Warning): ...
 
 def _get_stack_rank(func): ...
 def _is_wrapped(func): ...

@@ -12,9 +12,9 @@ from ..utils._param_validation import Interval as Interval, StrOptions as StrOpt
 from ..utils.multiclass import check_classification_targets as check_classification_targets
 from ._base import BaseLibSVM, BaseSVC
 
-OneClassSVM_Self = TypeVar("OneClassSVM_Self", bound="OneClassSVM")
-LinearSVC_Self = TypeVar("LinearSVC_Self", bound="LinearSVC")
-LinearSVR_Self = TypeVar("LinearSVR_Self", bound="LinearSVR")
+OneClassSVM_Self = TypeVar("OneClassSVM_Self", bound=OneClassSVM)
+LinearSVC_Self = TypeVar("LinearSVC_Self", bound=LinearSVC)
+LinearSVR_Self = TypeVar("LinearSVR_Self", bound=LinearSVR)
 
 import numpy as np
 
@@ -30,13 +30,13 @@ class LinearSVC(LinearClassifierMixin, SparseCoefMixin, BaseEstimator):
 
     def __init__(
         self,
-        penalty: Literal["l1", "l2", "l2"] = "l2",
-        loss: Literal["squared_hinge", "hinge", "squared_hinge"] = "squared_hinge",
+        penalty: Literal["l1", "l2"] = "l2",
+        loss: Literal["squared_hinge", "hinge"] = "squared_hinge",
         *,
         dual: bool = True,
         tol: Float = 1e-4,
         C: Float = 1.0,
-        multi_class: Literal["ovr", "crammer_singer", "ovr"] = "ovr",
+        multi_class: Literal["ovr", "crammer_singer"] = "ovr",
         fit_intercept: bool = True,
         intercept_scaling: Float = 1,
         class_weight: None | Mapping | str = None,
@@ -66,7 +66,7 @@ class LinearSVR(RegressorMixin, LinearModel):
         epsilon: Float = 0.0,
         tol: Float = 1e-4,
         C: Float = 1.0,
-        loss: Literal["epsilon_insensitive", "squared_epsilon_insensitive", "epsilon_insensitive"] = "epsilon_insensitive",
+        loss: Literal["epsilon_insensitive", "squared_epsilon_insensitive"] = "epsilon_insensitive",
         fit_intercept: bool = True,
         intercept_scaling: Float = 1.0,
         dual: bool = True,
@@ -104,9 +104,9 @@ class SVC(BaseSVC):
         self,
         *,
         C: Float = 1.0,
-        kernel: Literal["linear", "poly", "rbf", "sigmoid", "precomputed", "rbf"] | Callable = "rbf",
+        kernel: Literal["linear", "poly", "rbf", "sigmoid", "precomputed"] | Callable = "rbf",
         degree: Int = 3,
-        gamma: float | Literal["scale", "auto", "scale"] = "scale",
+        gamma: float | Literal["scale", "auto"] = "scale",
         coef0: Float = 0.0,
         shrinking: bool = True,
         probability: bool = False,
@@ -115,7 +115,7 @@ class SVC(BaseSVC):
         class_weight: None | Mapping | str = None,
         verbose: bool = False,
         max_iter: Int = ...,
-        decision_function_shape: Literal["ovo", "ovr", "ovr"] = "ovr",
+        decision_function_shape: Literal["ovo", "ovr"] = "ovr",
         break_ties: bool = False,
         random_state: RandomState | None | Int = None,
     ) -> None: ...
@@ -145,9 +145,9 @@ class NuSVC(BaseSVC):
         self,
         *,
         nu: Float = 0.5,
-        kernel: Literal["linear", "poly", "rbf", "sigmoid", "precomputed", "rbf"] | Callable = "rbf",
+        kernel: Literal["linear", "poly", "rbf", "sigmoid", "precomputed"] | Callable = "rbf",
         degree: Int = 3,
-        gamma: float | Literal["scale", "auto", "scale"] = "scale",
+        gamma: float | Literal["scale", "auto"] = "scale",
         coef0: Float = 0.0,
         shrinking: bool = True,
         probability: bool = False,
@@ -156,7 +156,7 @@ class NuSVC(BaseSVC):
         class_weight: None | Mapping | str = None,
         verbose: bool = False,
         max_iter: Int = ...,
-        decision_function_shape: Literal["ovo", "ovr", "ovr"] = "ovr",
+        decision_function_shape: Literal["ovo", "ovr"] = "ovr",
         break_ties: bool = False,
         random_state: RandomState | None | Int = None,
     ) -> None: ...
@@ -181,9 +181,9 @@ class SVR(RegressorMixin, BaseLibSVM):
     def __init__(
         self,
         *,
-        kernel: Literal["linear", "poly", "rbf", "sigmoid", "precomputed", "rbf"] | Callable = "rbf",
+        kernel: Literal["linear", "poly", "rbf", "sigmoid", "precomputed"] | Callable = "rbf",
         degree: Int = 3,
-        gamma: float | Literal["scale", "auto", "scale"] = "scale",
+        gamma: float | Literal["scale", "auto"] = "scale",
         coef0: Float = 0.0,
         tol: Float = 1e-3,
         C: Float = 1.0,
@@ -221,9 +221,9 @@ class NuSVR(RegressorMixin, BaseLibSVM):
         *,
         nu: Float = 0.5,
         C: Float = 1.0,
-        kernel: Literal["linear", "poly", "rbf", "sigmoid", "precomputed", "rbf"] | Callable = "rbf",
+        kernel: Literal["linear", "poly", "rbf", "sigmoid", "precomputed"] | Callable = "rbf",
         degree: Int = 3,
-        gamma: float | Literal["scale", "auto", "scale"] = "scale",
+        gamma: float | Literal["scale", "auto"] = "scale",
         coef0: Float = 0.0,
         shrinking: bool = True,
         tol: Float = 1e-3,
@@ -258,9 +258,9 @@ class OneClassSVM(OutlierMixin, BaseLibSVM):
     def __init__(
         self,
         *,
-        kernel: Literal["linear", "poly", "rbf", "sigmoid", "precomputed", "rbf"] | Callable = "rbf",
+        kernel: Literal["linear", "poly", "rbf", "sigmoid", "precomputed"] | Callable = "rbf",
         degree: Int = 3,
-        gamma: float | Literal["scale", "auto", "scale"] = "scale",
+        gamma: float | Literal["scale", "auto"] = "scale",
         coef0: Float = 0.0,
         tol: Float = 1e-3,
         nu: Float = 0.5,

@@ -42,15 +42,13 @@ class BayesianGaussianMixture(BaseMixture):
         self,
         *,
         n_components: Int = 1,
-        covariance_type: Literal["full", "tied", "diag", "spherical", "full"] = "full",
+        covariance_type: Literal["full", "tied", "diag", "spherical"] = "full",
         tol: Float = 1e-3,
         reg_covar: Float = 1e-6,
         max_iter: Int = 100,
         n_init: Int = 1,
-        init_params: Literal["kmeans", "k-means++", "random", "random_from_data", "kmeans"] = "kmeans",
-        weight_concentration_prior_type: Literal[
-            "dirichlet_process", "dirichlet_distribution", "dirichlet_process"
-        ] = "dirichlet_process",
+        init_params: Literal["kmeans", "k-means++", "random", "random_from_data"] = "kmeans",
+        weight_concentration_prior_type: Literal["dirichlet_process", "dirichlet_distribution"] = "dirichlet_process",
         weight_concentration_prior: None | Float = None,
         mean_precision_prior: None | Float = None,
         mean_prior: None | ArrayLike = None,

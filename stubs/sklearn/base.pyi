@@ -11,7 +11,7 @@ from .utils._param_validation import validate_parameter_constraints as validate_
 from .utils._set_output import _SetOutputMixin
 from .utils.validation import check_array as check_array, check_is_fitted as check_is_fitted, check_X_y as check_X_y
 
-BaseEstimator_Self = TypeVar("BaseEstimator_Self", bound="BaseEstimator")
+BaseEstimator_Self = TypeVar("BaseEstimator_Self", bound=BaseEstimator)
 
 # Author: Gael Varoquaux <gael.varoquaux@normalesup.org>
 # License: BSD 3 clause

@@ -27,59 +27,42 @@ line-length = 130
 target-version = "py39"
 
 [tool.ruff.lint]
+# TODO: Use extend-select instead to get base E and F rules that don't conflict with the formatter
 select = [
+    "FA", # flake8-future-annotations
     "I", # isort
+    "PYI", # flake8-pyi
+]
+ignore = [
+    ###
+    # Rules we don't want or don't agree with
+    ###
+    # Typeshed doesn't want complex or non-literal defaults, or long strings, for maintenance and testing reasons.
+    # This doesn't affect us, let's have more complete stubs.
+    "PYI011",
+    "PYI014",
+    "PYI053",
+
+    # TODO: Handle in its own PR
+    "PYI021", # https://github.com/microsoft/python-type-stubs/pull/343
+
+    # TODO: Investigate and fix or configure
+    "PYI001",
+    "PYI002",
+    "PYI017",
+    "PYI019", # Request for more autofixes: https://github.com/astral-sh/ruff/issues/15798
+    "PYI024",
+    "PYI048",
+    "PYI051", # Request for autofix: https://github.com/astral-sh/ruff/issues/14185
+    "PYI052",
 ]
 
 [tool.ruff.lint.isort]
 combine-as-imports = true
 extra-standard-library = [
+    # Group these with stdlib
     "typing_extensions",
     "_typeshed",
-    # Extra modules not recognized by Ruff/isort
-    "_ast",
-    "_bisect",
-    "_bootlocale",
-    "_codecs",
-    "_collections_abc",
-    "_compat_pickle",
-    "_compression",
-    "_csv",
-    "_ctypes",
-    "_curses",
-    "_decimal",
-    "_dummy_thread",
-    "_dummy_threading",
-    "_heapq",
-    "_imp",
-    "_json",
-    "_locale",
-    "_lsprof",
-    "_markupbase",
-    "_msi",
-    "_operator",
-    "_osx_support",
-    "_posixsubprocess",
-    "_py_abc",
-    "_pydecimal",
-    "_random",
-    "_sitebuiltins",
-    "_socket",
-    "_sqlite3",
-    "_ssl",
-    "_stat",
-    "_thread",
-    "_threading_local",
-    "_tkinter",
-    "_tracemalloc",
-    "_warnings",
-    "_weakref",
-    "_weakrefset",
-    "_winapi",
-    "genericpath",
-    "opcode",
-    "pyexpat",
-    "zoneinfo",
 ]
 
 [tool.pyright]

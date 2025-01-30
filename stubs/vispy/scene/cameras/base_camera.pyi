@@ -66,9 +66,9 @@ class BaseCamera(Node):
 
     def set_range(
         self,
-        x: tuple | None | None = None,
-        y: tuple | None | None = None,
-        z: tuple | None | None = None,
+        x: tuple | None = None,
+        y: tuple | None = None,
+        z: tuple | None = None,
         margin: float = 0.05,
     ): ...
     def _set_range(self, init): ...
