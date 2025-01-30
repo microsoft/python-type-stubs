@@ -37,7 +37,7 @@ ignore = [
     ###
     # Rules we don't want or don't agree with
     ###
-    # Typeshed doesn't want complex or non-literal defaults for maintenance and testing reasons.
+    # Typeshed doesn't want complex or non-literal defaults, or long strings, for maintenance and testing reasons.
     # This doesn't affect us, let's have more complete stubs.
     "PYI011",
     "PYI014",
