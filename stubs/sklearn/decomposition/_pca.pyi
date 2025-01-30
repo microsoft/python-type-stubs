@@ -56,7 +56,9 @@ class PCA(_BasePCA):
 
     # TODO(1.4): remove in 1.4
     # mypy error: Decorated property not supported
-    @deprecated(...)  # type: ignore
+    @deprecated(  # type: ignore
+        "Attribute `n_features_` was deprecated in version 1.2 and will be removed in 1.4. Use `n_features_in_` instead."
+    )
     @property
     def n_features_(self) -> int: ...
     def fit(self: PCA_Self, X: MatrixLike, y: Any = None) -> PCA_Self: ...

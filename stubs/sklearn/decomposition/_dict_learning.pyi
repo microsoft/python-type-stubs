@@ -203,13 +203,13 @@ class MiniBatchDictionaryLearning(_BaseSparseCoding, BaseEstimator):
         tol: Float = 1e-3,
         max_no_improvement: Int = 10,
     ) -> None: ...
-    @deprecated(...)  # type: ignore
+    @deprecated("The attribute `iter_offset_` is deprecated in 1.1 and will be removed in 1.3.")  # type: ignore
     @property
     def iter_offset_(self) -> int: ...
-    @deprecated(...)  # type: ignore
+    @deprecated("The attribute `random_state_` is deprecated in 1.1 and will be removed in 1.3.")  # type: ignore
     @property
     def random_state_(self) -> RandomState: ...
-    @deprecated(...)  # type: ignore
+    @deprecated("The attribute `inner_stats_` is deprecated in 1.1 and will be removed in 1.3.")  # type: ignore
     @property
     def inner_stats_(self) -> tuple[ndarray, ndarray]: ...
     def fit(self: MiniBatchDictionaryLearning_Self, X: MatrixLike, y: Any = None) -> MiniBatchDictionaryLearning_Self: ...

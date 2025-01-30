@@ -74,7 +74,7 @@ class BaseGradientBoosting(BaseEnsemble, metaclass=ABCMeta):
 
     # TODO(1.3): Remove
     # mypy error: Decorated property not supported
-    @deprecated(...)  # type: ignore
+    @deprecated("Attribute `loss_` was deprecated in version 1.1 and will be removed in 1.3.")  # type: ignore
     def loss_(self): ...
 
 class GradientBoostingClassifier(ClassifierMixin, BaseGradientBoosting):

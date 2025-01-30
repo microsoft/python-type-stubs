@@ -62,7 +62,7 @@ class _GeneralizedLinearRegressor(RegressorMixin, BaseEstimator):
     ) -> Float: ...
 
     # TODO(1.3): remove
-    @deprecated(...)  # type: ignore
+    @deprecated("Attribute `family` was deprecated in version 1.1 and will be removed in 1.3.")  # type: ignore
     def family(self): ...
 
 class PoissonRegressor(_GeneralizedLinearRegressor):

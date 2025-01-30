@@ -197,7 +197,7 @@ class SVR(RegressorMixin, BaseLibSVM):
     ) -> None: ...
 
     # TODO(1.4): Remove
-    @deprecated(...)  # type: ignore
+    @deprecated("Attribute `class_weight_` was deprecated in version 1.2 and will be removed in 1.4.")  # type: ignore
     @property
     def class_weight_(self) -> ndarray: ...
 
@@ -237,7 +237,7 @@ class NuSVR(RegressorMixin, BaseLibSVM):
     ) -> None: ...
 
     # TODO(1.4): Remove
-    @deprecated(...)  # type: ignore
+    @deprecated("Attribute `class_weight_` was deprecated in version 1.2 and will be removed in 1.4.")  # type: ignore
     @property
     def class_weight_(self) -> ndarray: ...
 
@@ -277,7 +277,7 @@ class OneClassSVM(OutlierMixin, BaseLibSVM):
     ) -> None: ...
 
     # TODO(1.4): Remove
-    @deprecated(...)  # type: ignore
+    @deprecated("Attribute `class_weight_` was deprecated in version 1.2 and will be removed in 1.4.")  # type: ignore
     @property
     def class_weight_(self) -> ndarray: ...
     def fit(
