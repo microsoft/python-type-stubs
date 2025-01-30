@@ -19,8 +19,8 @@ from ..utils.sparsefuncs import inplace_column_scale as inplace_column_scale, me
 from ..utils.validation import FLOAT_DTYPES as FLOAT_DTYPES, check_is_fitted as check_is_fitted
 from ._stochastic_gradient import SGDClassifier
 
-LinearRegression_Self = TypeVar("LinearRegression_Self", bound="LinearRegression")
-SparseCoefMixin_Self = TypeVar("SparseCoefMixin_Self", bound="SparseCoefMixin")
+LinearRegression_Self = TypeVar("LinearRegression_Self", bound=LinearRegression)
+SparseCoefMixin_Self = TypeVar("SparseCoefMixin_Self", bound=SparseCoefMixin)
 
 import numbers
 import warnings

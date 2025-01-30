@@ -9,7 +9,7 @@ from ..utils._param_validation import StrOptions as StrOptions
 from ..utils.metaestimators import available_if as available_if
 from ..utils.validation import check_array as check_array
 
-FunctionTransformer_Self = TypeVar("FunctionTransformer_Self", bound="FunctionTransformer")
+FunctionTransformer_Self = TypeVar("FunctionTransformer_Self", bound=FunctionTransformer)
 
 import warnings
 

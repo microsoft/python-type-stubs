@@ -574,7 +574,7 @@ class Axes(_AxesBase):
         precision: float | Literal["present"] = 0,
         marker=...,
         markersize=...,
-        aspect: Literal["equal", "auto", None] | float = "equal",
+        aspect: Literal["equal", "auto"] | None | float = "equal",
         origin: Literal["upper", "lower"] = ...,
         **kwargs,
     ) -> AxesImage | Line2D: ...

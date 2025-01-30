@@ -13,9 +13,9 @@ from ..utils.multiclass import type_of_target as type_of_target, unique_labels a
 from ..utils.sparsefuncs import min_max_axis as min_max_axis
 from ..utils.validation import check_array as check_array, check_is_fitted as check_is_fitted
 
-MultiLabelBinarizer_Self = TypeVar("MultiLabelBinarizer_Self", bound="MultiLabelBinarizer")
-LabelEncoder_Self = TypeVar("LabelEncoder_Self", bound="LabelEncoder")
-LabelBinarizer_Self = TypeVar("LabelBinarizer_Self", bound="LabelBinarizer")
+MultiLabelBinarizer_Self = TypeVar("MultiLabelBinarizer_Self", bound=MultiLabelBinarizer)
+LabelEncoder_Self = TypeVar("LabelEncoder_Self", bound=LabelEncoder)
+LabelBinarizer_Self = TypeVar("LabelBinarizer_Self", bound=LabelBinarizer)
 
 # Authors: Alexandre Gramfort <alexandre.gramfort@inria.fr>
 #          Mathieu Blondel <mathieu@mblondel.org>

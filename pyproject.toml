@@ -27,8 +27,34 @@ line-length = 130
 target-version = "py39"
 
 [tool.ruff.lint]
+# TODO: Use extend-select instead to get base E and F rules that don't conflict with the formatter
 select = [
+    "FA", # flake8-future-annotations
     "I", # isort
+    "PYI", # flake8-pyi
+]
+ignore = [
+    ###
+    # Rules we don't want or don't agree with
+    ###
+    # Typeshed doesn't want complex or non-literal defaults, or long strings, for maintenance and testing reasons.
+    # This doesn't affect us, let's have more complete stubs.
+    "PYI011",
+    "PYI014",
+    "PYI053",
+
+    # TODO: Handle in its own PR
+    "PYI021", # https://github.com/microsoft/python-type-stubs/pull/343
+
+    # TODO: Investigate and fix or configure
+    "PYI001",
+    "PYI002",
+    "PYI017",
+    "PYI019", # Request for more autofixes: https://github.com/astral-sh/ruff/issues/15798
+    "PYI024",
+    "PYI048",
+    "PYI051", # Request for autofix: https://github.com/astral-sh/ruff/issues/14185
+    "PYI052",
 ]
 
 [tool.ruff.lint.isort]

@@ -39,7 +39,7 @@ def fetch_lfw_people(
 ) -> Bunch | tuple[Bunch, tuple]: ...
 def fetch_lfw_pairs(
     *,
-    subset: Literal["train", "test", "10_folds", "train"] = "train",
+    subset: Literal["train", "test", "10_folds"] = "train",
     data_home: None | str = None,
     funneled: bool = True,
     resize: Float = 0.5,

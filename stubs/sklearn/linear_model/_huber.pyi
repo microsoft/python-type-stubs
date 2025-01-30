@@ -11,7 +11,7 @@ from ..utils._param_validation import Interval as Interval
 from ..utils.extmath import safe_sparse_dot as safe_sparse_dot
 from ._base import LinearModel
 
-HuberRegressor_Self = TypeVar("HuberRegressor_Self", bound="HuberRegressor")
+HuberRegressor_Self = TypeVar("HuberRegressor_Self", bound=HuberRegressor)
 
 # Authors: Manoj Kumar mks542@nyu.edu
 # License: BSD 3 clause

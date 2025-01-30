@@ -7,8 +7,8 @@ from ..base import RegressorMixin
 from ..utils._param_validation import StrOptions as StrOptions
 from ._base import KNeighborsMixin, NeighborsBase, RadiusNeighborsMixin
 
-KNeighborsRegressor_Self = TypeVar("KNeighborsRegressor_Self", bound="KNeighborsRegressor")
-RadiusNeighborsRegressor_Self = TypeVar("RadiusNeighborsRegressor_Self", bound="RadiusNeighborsRegressor")
+KNeighborsRegressor_Self = TypeVar("KNeighborsRegressor_Self", bound=KNeighborsRegressor)
+RadiusNeighborsRegressor_Self = TypeVar("RadiusNeighborsRegressor_Self", bound=RadiusNeighborsRegressor)
 
 # Authors: Jake Vanderplas <vanderplas@astro.washington.edu>
 #          Fabian Pedregosa <fabian.pedregosa@inria.fr>
@@ -37,8 +37,8 @@ class KNeighborsRegressor(KNeighborsMixin, RegressorMixin, NeighborsBase):
         self,
         n_neighbors: Int = 5,
         *,
-        weights: None | Literal["uniform", "distance", "uniform"] | Callable = "uniform",
-        algorithm: Literal["auto", "ball_tree", "kd_tree", "brute", "auto"] = "auto",
+        weights: None | Literal["uniform", "distance"] | Callable = "uniform",
+        algorithm: Literal["auto", "ball_tree", "kd_tree", "brute"] = "auto",
         leaf_size: Int = 30,
         p: Int = 2,
         metric: str | Callable = "minkowski",
@@ -61,8 +61,8 @@ class RadiusNeighborsRegressor(RadiusNeighborsMixin, RegressorMixin, NeighborsBa
         self,
         radius: Float = 1.0,
         *,
-        weights: None | Literal["uniform", "distance", "uniform"] | Callable = "uniform",
-        algorithm: Literal["auto", "ball_tree", "kd_tree", "brute", "auto"] = "auto",
+        weights: None | Literal["uniform", "distance"] | Callable = "uniform",
+        algorithm: Literal["auto", "ball_tree", "kd_tree", "brute"] = "auto",
         leaf_size: Int = 30,
         p: Int = 2,
         metric: str | Callable = "minkowski",

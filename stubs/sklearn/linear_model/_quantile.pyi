@@ -11,7 +11,7 @@ from ..exceptions import ConvergenceWarning as ConvergenceWarning
 from ..utils._param_validation import Hidden as Hidden, Interval as Interval, StrOptions as StrOptions
 from ._base import LinearModel
 
-QuantileRegressor_Self = TypeVar("QuantileRegressor_Self", bound="QuantileRegressor")
+QuantileRegressor_Self = TypeVar("QuantileRegressor_Self", bound=QuantileRegressor)
 
 # Authors: David Dale <dale.david@mail.ru>
 #          Christian Lorentzen <lorentzen.ch@gmail.com>

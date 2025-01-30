@@ -8,8 +8,8 @@ from .._typing import ArrayLike, Float, Int, MatrixLike
 from ..utils._param_validation import Interval as Interval, StrOptions as StrOptions
 from ._stochastic_gradient import DEFAULT_EPSILON as DEFAULT_EPSILON, BaseSGDClassifier, BaseSGDRegressor
 
-PassiveAggressiveClassifier_Self = TypeVar("PassiveAggressiveClassifier_Self", bound="PassiveAggressiveClassifier")
-PassiveAggressiveRegressor_Self = TypeVar("PassiveAggressiveRegressor_Self", bound="PassiveAggressiveRegressor")
+PassiveAggressiveClassifier_Self = TypeVar("PassiveAggressiveClassifier_Self", bound=PassiveAggressiveClassifier)
+PassiveAggressiveRegressor_Self = TypeVar("PassiveAggressiveRegressor_Self", bound=PassiveAggressiveRegressor)
 
 # Authors: Rob Zinkov, Mathieu Blondel
 # License: BSD 3 clause

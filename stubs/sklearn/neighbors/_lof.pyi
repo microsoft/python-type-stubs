@@ -11,7 +11,7 @@ from ..utils.metaestimators import available_if as available_if
 from ..utils.validation import check_is_fitted as check_is_fitted
 from ._base import KNeighborsMixin, NeighborsBase
 
-LocalOutlierFactor_Self = TypeVar("LocalOutlierFactor_Self", bound="LocalOutlierFactor")
+LocalOutlierFactor_Self = TypeVar("LocalOutlierFactor_Self", bound=LocalOutlierFactor)
 
 # Authors: Nicolas Goix <nicolas.goix@telecom-paristech.fr>
 #          Alexandre Gramfort <alexandre.gramfort@telecom-paristech.fr>
@@ -39,7 +39,7 @@ class LocalOutlierFactor(KNeighborsMixin, OutlierMixin, NeighborsBase):
         self,
         n_neighbors: Int = 20,
         *,
-        algorithm: Literal["auto", "ball_tree", "kd_tree", "brute", "auto"] = "auto",
+        algorithm: Literal["auto", "ball_tree", "kd_tree", "brute"] = "auto",
         leaf_size: Int = 30,
         metric: str | Callable = "minkowski",
         p: Int = 2,

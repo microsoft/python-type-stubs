@@ -44,10 +44,8 @@ class PartialDependenceDisplay:
         target_idx: Int,
         deciles: dict,
         pdp_lim: None | Mapping | str = "deprecated",
-        kind: (
-            Sequence[Literal["average", "individual", "both"]] | Literal["average", "individual", "both", "average"]
-        ) = "average",
-        subsample: float | None | int = 1000,
+        kind: (Sequence[Literal["average", "individual", "both"]] | Literal["average", "individual", "both"]) = "average",
+        subsample: float | None = 1000,
         random_state: RandomState | None | Int = None,
         is_categorical: None | ArrayLike = None,
     ) -> None: ...
@@ -61,7 +59,7 @@ class PartialDependenceDisplay:
         categorical_features: None | MatrixLike | ArrayLike = None,
         feature_names: None | ArrayLike = None,
         target: None | Int = None,
-        response_method: Literal["auto", "predict_proba", "decision_function", "auto"] = "auto",
+        response_method: Literal["auto", "predict_proba", "decision_function"] = "auto",
         n_cols: Int = 3,
         grid_resolution: Int = 100,
         percentiles: tuple[float, ...] = ...,
@@ -73,9 +71,9 @@ class PartialDependenceDisplay:
         pd_line_kw: None | dict = None,
         contour_kw: None | dict = None,
         ax: None | Sequence[Axes] | Axes = None,
-        kind: Literal["average", "individual", "both", "average"] = "average",
+        kind: Literal["average", "individual", "both"] = "average",
         centered: bool = False,
-        subsample: float | None | int = 1000,
+        subsample: float | None = 1000,
         random_state: RandomState | None | Int = None,
     ) -> PartialDependenceDisplay: ...
     def plot(

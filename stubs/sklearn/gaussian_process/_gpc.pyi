@@ -18,9 +18,9 @@ from .kernels import RBF as RBF, CompoundKernel as CompoundKernel, ConstantKerne
 
 _BinaryGaussianProcessClassifierLaplace_Self = TypeVar(
     "_BinaryGaussianProcessClassifierLaplace_Self",
-    bound="_BinaryGaussianProcessClassifierLaplace",
+    bound=_BinaryGaussianProcessClassifierLaplace,
 )
-GaussianProcessClassifier_Self = TypeVar("GaussianProcessClassifier_Self", bound="GaussianProcessClassifier")
+GaussianProcessClassifier_Self = TypeVar("GaussianProcessClassifier_Self", bound=GaussianProcessClassifier)
 
 import numpy as np
 import scipy.optimize
@@ -48,7 +48,7 @@ class _BinaryGaussianProcessClassifierLaplace(BaseEstimator):
         self,
         kernel: Product | None | Kernel = None,
         *,
-        optimizer: Literal["fmin_l_bfgs_b", "fmin_l_bfgs_b"] | Callable = "fmin_l_bfgs_b",
+        optimizer: Literal["fmin_l_bfgs_b"] | Callable = "fmin_l_bfgs_b",
         n_restarts_optimizer: Int = 0,
         max_iter_predict: Int = 100,
         warm_start: bool = False,
@@ -83,13 +83,13 @@ class GaussianProcessClassifier(ClassifierMixin, BaseEstimator):
         self,
         kernel: Product | None | Kernel = None,
         *,
-        optimizer: Literal["fmin_l_bfgs_b", "fmin_l_bfgs_b"] | None | Callable = "fmin_l_bfgs_b",
+        optimizer: Literal["fmin_l_bfgs_b"] | None | Callable = "fmin_l_bfgs_b",
         n_restarts_optimizer: Int = 0,
         max_iter_predict: Int = 100,
         warm_start: bool = False,
         copy_X_train: bool = True,
         random_state: RandomState | None | Int = None,
-        multi_class: Literal["one_vs_rest", "one_vs_one", "one_vs_rest"] = "one_vs_rest",
+        multi_class: Literal["one_vs_rest", "one_vs_one"] = "one_vs_rest",
         n_jobs: None | Int = None,
     ) -> None: ...
     def fit(self: GaussianProcessClassifier_Self, X: MatrixLike | ArrayLike, y: ArrayLike) -> GaussianProcessClassifier_Self: ...

@@ -20,5 +20,5 @@ def permutation_importance(
     n_jobs: None | int = None,
     random_state: RandomState | None | Int = None,
     sample_weight: None | ArrayLike = None,
-    max_samples: float | int = 1.0,
+    max_samples: float = 1.0,
 ) -> Bunch | dict[str, Bunch]: ...
