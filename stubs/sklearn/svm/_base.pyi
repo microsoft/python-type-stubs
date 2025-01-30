@@ -21,7 +21,7 @@ from ..utils.metaestimators import available_if as available_if
 from ..utils.multiclass import check_classification_targets as check_classification_targets
 from ..utils.validation import check_consistent_length as check_consistent_length, check_is_fitted as check_is_fitted
 
-BaseLibSVM_Self = TypeVar("BaseLibSVM_Self", bound="BaseLibSVM")
+BaseLibSVM_Self = TypeVar("BaseLibSVM_Self", bound=BaseLibSVM)
 
 import warnings
 
@@ -44,7 +44,7 @@ class BaseLibSVM(BaseEstimator, metaclass=ABCMeta):
         kernel: str | Callable,
         degree: int,
         gamma: str | Float,
-        coef0: float | int,
+        coef0: float,
         tol: float,
         C: Float,
         nu: float,
@@ -79,7 +79,7 @@ class BaseSVC(ClassifierMixin, BaseLibSVM, metaclass=ABCMeta):
         kernel: str | Callable,
         degree: int,
         gamma: str | Float,
-        coef0: float | int,
+        coef0: float,
         tol: float,
         C: Float,
         nu: float,

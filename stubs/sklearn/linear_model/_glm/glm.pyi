@@ -20,7 +20,7 @@ from ...utils.validation import check_is_fitted as check_is_fitted
 from .._linear_loss import LinearModelLoss as LinearModelLoss
 from ._newton_solver import NewtonCholeskySolver as NewtonCholeskySolver, NewtonSolver
 
-_GeneralizedLinearRegressor_Self = TypeVar("_GeneralizedLinearRegressor_Self", bound="_GeneralizedLinearRegressor")
+_GeneralizedLinearRegressor_Self = TypeVar("_GeneralizedLinearRegressor_Self", bound=_GeneralizedLinearRegressor)
 
 import numpy as np
 import scipy.optimize
@@ -41,7 +41,7 @@ class _GeneralizedLinearRegressor(RegressorMixin, BaseEstimator):
         *,
         alpha: Float = 1.0,
         fit_intercept: bool = True,
-        solver: Literal["lbfgs", "newton-cholesky", "lbfgs"] = "lbfgs",
+        solver: Literal["lbfgs", "newton-cholesky"] = "lbfgs",
         max_iter: Int = 100,
         tol: Float = 1e-4,
         warm_start: bool = False,
@@ -79,7 +79,7 @@ class PoissonRegressor(_GeneralizedLinearRegressor):
         *,
         alpha: Float = 1.0,
         fit_intercept: bool = True,
-        solver: Literal["lbfgs", "newton-cholesky", "lbfgs"] = "lbfgs",
+        solver: Literal["lbfgs", "newton-cholesky"] = "lbfgs",
         max_iter: Int = 100,
         tol: Float = 1e-4,
         warm_start: bool = False,
@@ -100,7 +100,7 @@ class GammaRegressor(_GeneralizedLinearRegressor):
         *,
         alpha: Float = 1.0,
         fit_intercept: bool = True,
-        solver: Literal["lbfgs", "newton-cholesky", "lbfgs"] = "lbfgs",
+        solver: Literal["lbfgs", "newton-cholesky"] = "lbfgs",
         max_iter: Int = 100,
         tol: Float = 1e-4,
         warm_start: bool = False,
@@ -122,8 +122,8 @@ class TweedieRegressor(_GeneralizedLinearRegressor):
         power: Float = 0.0,
         alpha: Float = 1.0,
         fit_intercept: bool = True,
-        link: Literal["auto", "identity", "log", "auto"] = "auto",
-        solver: Literal["lbfgs", "newton-cholesky", "lbfgs"] = "lbfgs",
+        link: Literal["auto", "identity", "log"] = "auto",
+        solver: Literal["lbfgs", "newton-cholesky"] = "lbfgs",
         max_iter: Int = 100,
         tol: Float = 1e-4,
         warm_start: bool = False,

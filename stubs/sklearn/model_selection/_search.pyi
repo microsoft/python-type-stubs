@@ -23,7 +23,7 @@ from ..utils.validation import check_is_fitted as check_is_fitted, indexable as 
 from . import BaseCrossValidator
 from ._split import BaseShuffleSplit, check_cv as check_cv
 
-BaseSearchCV_Self = TypeVar("BaseSearchCV_Self", bound="BaseSearchCV")
+BaseSearchCV_Self = TypeVar("BaseSearchCV_Self", bound=BaseSearchCV)
 BaseEstimatorT = TypeVar("BaseEstimatorT", bound=BaseEstimator, default=BaseEstimator, covariant=True)
 
 import numbers
@@ -86,7 +86,7 @@ class BaseSearchCV(MetaEstimatorMixin, BaseEstimator, metaclass=ABCMeta):
         **fit_params,
     ) -> BaseSearchCV_Self: ...
 
-class GridSearchCV(Generic[BaseEstimatorT], BaseSearchCV):
+class GridSearchCV(BaseSearchCV, Generic[BaseEstimatorT]):
     feature_names_in_: ndarray = ...
     n_features_in_: int = ...
     classes_: ndarray = ...

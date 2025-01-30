@@ -8,7 +8,6 @@ class ImplicitSeries(BaseSeries):
     def __init__(
         self, expr, var_start_end_x, var_start_end_y, has_equality, use_interval_math, depth, nb_of_points, line_color
     ) -> None: ...
-    def __str__(self) -> str: ...
     def get_raster(
         self,
     ) -> (

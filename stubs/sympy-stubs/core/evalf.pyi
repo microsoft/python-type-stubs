@@ -1,5 +1,5 @@
 from typing import Any, Callable, Dict as tDict, List, Optional, Tuple as tTuple, Type, Union as tUnion, overload
-from typing_extensions import Self
+from typing_extensions import Self, TypeAlias
 
 from sympy.concrete.products import Product
 from sympy.concrete.summations import Sum
@@ -26,14 +26,14 @@ DEFAULT_MAXPREC = ...
 
 class PrecisionExhausted(ArithmeticError): ...
 
-MPF_TUP = tuple[int, int, int, int]
-TMP_RES = Any
-OPT_DICT = dict[str, Any]
+MPF_TUP: TypeAlias = tuple[int, int, int, int]
+TMP_RES: TypeAlias = Any
+OPT_DICT: TypeAlias = dict[str, Any]
 
 def fastlog(x: MPF_TUP | None) -> int | Any: ...
 def pure_complex(v: Expr, or_real=...) -> tuple[Number, Number] | None: ...
 
-SCALED_ZERO_TUP = tuple[list[int], int, int, int]
+SCALED_ZERO_TUP: TypeAlias = tuple[list[int], int, int, int]
 
 @overload
 def scaled_zero(mag: SCALED_ZERO_TUP, sign=...) -> MPF_TUP: ...

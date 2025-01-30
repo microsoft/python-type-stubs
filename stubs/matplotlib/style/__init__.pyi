@@ -1,11 +1,12 @@
 # COMPLETE
 
+import typing_extensions
 from collections.abc import Mapping
 from pathlib import Path
 from typing import Any, Dict, List, Union
 
-_Style = Union[str, Path, Mapping[str, Any]]
-_StyleOrList = Union[_Style, list[_Style]]
+_Style: typing_extensions.TypeAlias = Union[str, Path, Mapping[str, Any]]
+_StyleOrList: typing_extensions.TypeAlias = Union[_Style, list[_Style]]
 
 def context(style: _StyleOrList, after_reset: bool = ...) -> None: ...
 def reload_library() -> None: ...

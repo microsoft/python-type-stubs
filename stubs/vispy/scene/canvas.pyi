@@ -64,8 +64,8 @@ class SceneCanvas(app.Canvas, Frozen):
     def on_draw(self, event: Event): ...
     def render(
         self,
-        region: tuple | None | None = None,
-        size: tuple | None | None = None,
+        region: tuple | None = None,
+        size: tuple | None = None,
         bgcolor: None | Color = None,
         crop: ArrayLike | None = None,
         alpha: bool = True,

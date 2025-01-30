@@ -15,8 +15,8 @@ from ..utils.parallel import Parallel as Parallel, delayed as delayed
 from ..utils.validation import check_random_state as check_random_state, check_scalar as check_scalar
 from . import EmpiricalCovariance, empirical_covariance as empirical_covariance, log_likelihood as log_likelihood
 
-GraphicalLassoCV_Self = TypeVar("GraphicalLassoCV_Self", bound="GraphicalLassoCV")
-GraphicalLasso_Self = TypeVar("GraphicalLasso_Self", bound="GraphicalLasso")
+GraphicalLassoCV_Self = TypeVar("GraphicalLassoCV_Self", bound=GraphicalLassoCV)
+GraphicalLasso_Self = TypeVar("GraphicalLasso_Self", bound=GraphicalLasso)
 
 import operator
 import sys
@@ -37,7 +37,7 @@ def graphical_lasso(
     alpha: Float,
     *,
     cov_init: None | MatrixLike = None,
-    mode: Literal["cd", "lars", "cd"] = "cd",
+    mode: Literal["cd", "lars"] = "cd",
     tol: Float = 1e-4,
     enet_tol: Float = 1e-4,
     max_iter: Int = 100,
@@ -79,7 +79,7 @@ class GraphicalLasso(BaseGraphicalLasso):
         self,
         alpha: Float = 0.01,
         *,
-        mode: Literal["cd", "lars", "cd"] = "cd",
+        mode: Literal["cd", "lars"] = "cd",
         tol: Float = 1e-4,
         enet_tol: Float = 1e-4,
         max_iter: Int = 100,
@@ -94,7 +94,7 @@ def graphical_lasso_path(
     alphas: ArrayLike,
     cov_init: None | MatrixLike = None,
     X_test: None | MatrixLike = None,
-    mode: Literal["cd", "lars", "cd"] = "cd",
+    mode: Literal["cd", "lars"] = "cd",
     tol: Float = 1e-4,
     enet_tol: Float = 1e-4,
     max_iter: Int = 100,
@@ -122,7 +122,7 @@ class GraphicalLassoCV(BaseGraphicalLasso):
         tol: Float = 1e-4,
         enet_tol: Float = 1e-4,
         max_iter: Int = 100,
-        mode: Literal["cd", "lars", "cd"] = "cd",
+        mode: Literal["cd", "lars"] = "cd",
         n_jobs: None | Int = None,
         verbose: bool = False,
         assume_centered: bool = False,

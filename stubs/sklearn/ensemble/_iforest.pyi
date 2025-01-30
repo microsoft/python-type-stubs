@@ -20,7 +20,7 @@ from ..utils._param_validation import Interval as Interval, StrOptions as StrOpt
 from ..utils.validation import check_is_fitted as check_is_fitted
 from ._bagging import BaseBagging
 
-IsolationForest_Self = TypeVar("IsolationForest_Self", bound="IsolationForest")
+IsolationForest_Self = TypeVar("IsolationForest_Self", bound=IsolationForest)
 
 # Authors: Nicolas Goix <nicolas.goix@telecom-paristech.fr>
 #          Alexandre Gramfort <alexandre.gramfort@telecom-paristech.fr>
@@ -49,9 +49,9 @@ class IsolationForest(OutlierMixin, BaseBagging):
         self,
         *,
         n_estimators: Int = 100,
-        max_samples: float | Literal["auto", "auto"] | int = "auto",
+        max_samples: float | Literal["auto"] = "auto",
         contamination: float | str = "auto",
-        max_features: float | int = 1.0,
+        max_features: float = 1.0,
         bootstrap: bool = False,
         n_jobs: None | Int = None,
         random_state: RandomState | None | Int = None,

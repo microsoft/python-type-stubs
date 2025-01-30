@@ -27,11 +27,11 @@ from ..utils.validation import (
 )
 from ._base import LinearModel
 
-LinearModelCV_Self = TypeVar("LinearModelCV_Self", bound="LinearModelCV")
-MultiTaskElasticNetCV_Self = TypeVar("MultiTaskElasticNetCV_Self", bound="MultiTaskElasticNetCV")
-MultiTaskLassoCV_Self = TypeVar("MultiTaskLassoCV_Self", bound="MultiTaskLassoCV")
-ElasticNet_Self = TypeVar("ElasticNet_Self", bound="ElasticNet")
-MultiTaskElasticNet_Self = TypeVar("MultiTaskElasticNet_Self", bound="MultiTaskElasticNet")
+LinearModelCV_Self = TypeVar("LinearModelCV_Self", bound=LinearModelCV)
+MultiTaskElasticNetCV_Self = TypeVar("MultiTaskElasticNetCV_Self", bound=MultiTaskElasticNetCV)
+MultiTaskLassoCV_Self = TypeVar("MultiTaskLassoCV_Self", bound=MultiTaskLassoCV)
+ElasticNet_Self = TypeVar("ElasticNet_Self", bound=ElasticNet)
+MultiTaskElasticNet_Self = TypeVar("MultiTaskElasticNet_Self", bound=MultiTaskElasticNet)
 
 # Author: Alexandre Gramfort <alexandre.gramfort@inria.fr>
 #         Fabian Pedregosa <fabian.pedregosa@inria.fr>
@@ -53,7 +53,7 @@ def lasso_path(
     eps: Float = 1e-3,
     n_alphas: Int = 100,
     alphas: None | ArrayLike = None,
-    precompute: Literal["auto", "auto"] | MatrixLike | bool = "auto",
+    precompute: Literal["auto"] | MatrixLike | bool = "auto",
     Xy: None | MatrixLike | ArrayLike = None,
     copy_X: bool = True,
     coef_init: None | ArrayLike = None,
@@ -70,7 +70,7 @@ def enet_path(
     eps: Float = 1e-3,
     n_alphas: Int = 100,
     alphas: None | ArrayLike = None,
-    precompute: Literal["auto", "auto"] | MatrixLike | bool = "auto",
+    precompute: Literal["auto"] | MatrixLike | bool = "auto",
     Xy: None | MatrixLike | ArrayLike = None,
     copy_X: bool = True,
     coef_init: None | ArrayLike = None,
@@ -109,7 +109,7 @@ class ElasticNet(MultiOutputMixin, RegressorMixin, LinearModel):
         warm_start: bool = False,
         positive: bool = False,
         random_state: RandomState | None | Int = None,
-        selection: Literal["cyclic", "random", "cyclic"] = "cyclic",
+        selection: Literal["cyclic", "random"] = "cyclic",
     ) -> None: ...
     def fit(
         self: ElasticNet_Self,
@@ -149,7 +149,7 @@ class Lasso(ElasticNet):
         warm_start: bool = False,
         positive: bool = False,
         random_state: RandomState | None | Int = None,
-        selection: Literal["cyclic", "random", "cyclic"] = "cyclic",
+        selection: Literal["cyclic", "random"] = "cyclic",
     ) -> None: ...
 
 class LinearModelCV(MultiOutputMixin, LinearModel, ABC):
@@ -203,7 +203,7 @@ class LassoCV(RegressorMixin, LinearModelCV):
         n_alphas: Int = 100,
         alphas: None | ArrayLike = None,
         fit_intercept: bool = True,
-        precompute: Literal["auto", "auto"] | MatrixLike | bool = "auto",
+        precompute: Literal["auto"] | MatrixLike | bool = "auto",
         max_iter: Int = 1000,
         tol: Float = 1e-4,
         copy_X: bool = True,
@@ -212,7 +212,7 @@ class LassoCV(RegressorMixin, LinearModelCV):
         n_jobs: None | Int = None,
         positive: bool = False,
         random_state: RandomState | None | Int = None,
-        selection: Literal["cyclic", "random", "cyclic"] = "cyclic",
+        selection: Literal["cyclic", "random"] = "cyclic",
     ) -> None: ...
 
 class ElasticNetCV(RegressorMixin, LinearModelCV):
@@ -239,7 +239,7 @@ class ElasticNetCV(RegressorMixin, LinearModelCV):
         n_alphas: Int = 100,
         alphas: None | ArrayLike = None,
         fit_intercept: bool = True,
-        precompute: Literal["auto", "auto"] | MatrixLike | bool = "auto",
+        precompute: Literal["auto"] | MatrixLike | bool = "auto",
         max_iter: Int = 1000,
         tol: Float = 1e-4,
         cv: int | BaseCrossValidator | Iterable | None | BaseShuffleSplit = None,
@@ -248,7 +248,7 @@ class ElasticNetCV(RegressorMixin, LinearModelCV):
         n_jobs: None | Int = None,
         positive: bool = False,
         random_state: RandomState | None | Int = None,
-        selection: Literal["cyclic", "random", "cyclic"] = "cyclic",
+        selection: Literal["cyclic", "random"] = "cyclic",
     ) -> None: ...
 
 ###############################################################################
@@ -279,7 +279,7 @@ class MultiTaskElasticNet(Lasso):
         tol: Float = 1e-4,
         warm_start: bool = False,
         random_state: RandomState | None | Int = None,
-        selection: Literal["cyclic", "random", "cyclic"] = "cyclic",
+        selection: Literal["cyclic", "random"] = "cyclic",
     ) -> None: ...
     def fit(self: MultiTaskElasticNet_Self, X: ArrayLike, y: MatrixLike) -> MultiTaskElasticNet_Self | MultiTaskLasso: ...
 
@@ -305,7 +305,7 @@ class MultiTaskLasso(MultiTaskElasticNet):
         tol: Float = 1e-4,
         warm_start: bool = False,
         random_state: RandomState | None | Int = None,
-        selection: Literal["cyclic", "random", "cyclic"] = "cyclic",
+        selection: Literal["cyclic", "random"] = "cyclic",
     ) -> None: ...
 
 class MultiTaskElasticNetCV(RegressorMixin, LinearModelCV):
@@ -339,7 +339,7 @@ class MultiTaskElasticNetCV(RegressorMixin, LinearModelCV):
         verbose: int | bool = 0,
         n_jobs: None | Int = None,
         random_state: RandomState | None | Int = None,
-        selection: Literal["cyclic", "random", "cyclic"] = "cyclic",
+        selection: Literal["cyclic", "random"] = "cyclic",
     ) -> None: ...
 
     # This is necessary as LinearModelCV now supports sample_weight while
@@ -375,7 +375,7 @@ class MultiTaskLassoCV(RegressorMixin, LinearModelCV):
         verbose: int | bool = False,
         n_jobs: None | Int = None,
         random_state: RandomState | None | Int = None,
-        selection: Literal["cyclic", "random", "cyclic"] = "cyclic",
+        selection: Literal["cyclic", "random"] = "cyclic",
     ) -> None: ...
 
     # This is necessary as LinearModelCV now supports sample_weight while

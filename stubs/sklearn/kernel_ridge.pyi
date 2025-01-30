@@ -10,7 +10,7 @@ from .metrics.pairwise import PAIRWISE_KERNEL_FUNCTIONS as PAIRWISE_KERNEL_FUNCT
 from .utils._param_validation import Interval as Interval, StrOptions as StrOptions
 from .utils.validation import check_is_fitted as check_is_fitted
 
-KernelRidge_Self = TypeVar("KernelRidge_Self", bound="KernelRidge")
+KernelRidge_Self = TypeVar("KernelRidge_Self", bound=KernelRidge)
 
 import numpy as np
 

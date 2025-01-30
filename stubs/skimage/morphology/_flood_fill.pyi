@@ -16,7 +16,7 @@ def flood_fill(
     *,
     footprint: NDArray | None = None,
     connectivity: int | None = None,
-    tolerance: float | int | None = None,
+    tolerance: float | None = None,
     in_place: bool = False,
 ) -> NDArray: ...
 @deprecate_kwarg(
@@ -30,5 +30,5 @@ def flood(
     *,
     footprint: NDArray | None = None,
     connectivity: int | None = None,
-    tolerance: float | int | None = None,
+    tolerance: float | None = None,
 ) -> NDArray: ...

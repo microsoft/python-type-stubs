@@ -15,8 +15,8 @@ from .utils.validation import (
     check_is_fitted as check_is_fitted,
 )
 
-DummyRegressor_Self = TypeVar("DummyRegressor_Self", bound="DummyRegressor")
-DummyClassifier_Self = TypeVar("DummyClassifier_Self", bound="DummyClassifier")
+DummyRegressor_Self = TypeVar("DummyRegressor_Self", bound=DummyRegressor)
+DummyClassifier_Self = TypeVar("DummyClassifier_Self", bound=DummyClassifier)
 
 # Author: Mathieu Blondel <mathieu@mblondel.org>
 #         Arnaud Joly <a.joly@ulg.ac.be>
@@ -40,7 +40,7 @@ class DummyClassifier(MultiOutputMixin, ClassifierMixin, BaseEstimator):
     def __init__(
         self,
         *,
-        strategy: Literal["most_frequent", "prior", "stratified", "uniform", "constant", "prior"] = "prior",
+        strategy: Literal["most_frequent", "prior", "stratified", "uniform", "constant"] = "prior",
         random_state: RandomState | None | Int = None,
         constant: None | str | ArrayLike | int = None,
     ) -> None: ...
@@ -69,8 +69,8 @@ class DummyRegressor(MultiOutputMixin, RegressorMixin, BaseEstimator):
     def __init__(
         self,
         *,
-        strategy: Literal["mean", "median", "quantile", "constant", "mean"] = "mean",
-        constant: float | None | ArrayLike | int = None,
+        strategy: Literal["mean", "median", "quantile", "constant"] = "mean",
+        constant: float | None | ArrayLike = None,
         quantile: float | None = None,
     ) -> None: ...
     def fit(

@@ -220,7 +220,6 @@ class MouseEvent(LocationEvent):
         dblclick: bool = ...,
         guiEvent=...,
     ) -> None: ...
-    def __str__(self) -> str: ...
 
 class PickEvent(Event):
     mouseevent: MouseEvent
@@ -343,7 +342,6 @@ class _Mode(str, Enum):
     NONE: _Mode
     PAN: _Mode
     ZOOM: _Mode
-    def __str__(self) -> str: ...
 
 class NavigationToolbar2:
     toolitems = ...

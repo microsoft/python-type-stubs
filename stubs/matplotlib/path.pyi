@@ -54,7 +54,7 @@ class Path:
         self,
         transform: None = ...,
         remove_nans: bool = ...,
-        clip: None | float | float = ...,
+        clip: None | float = ...,
         snap: None | bool = ...,
         stroke_width: float = ...,
         simplify: None | bool = ...,

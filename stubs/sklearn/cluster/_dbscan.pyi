@@ -10,7 +10,7 @@ from ..neighbors import NearestNeighbors as NearestNeighbors
 from ..utils._param_validation import Interval as Interval, StrOptions as StrOptions
 from ._dbscan_inner import dbscan_inner as dbscan_inner
 
-DBSCAN_Self = TypeVar("DBSCAN_Self", bound="DBSCAN")
+DBSCAN_Self = TypeVar("DBSCAN_Self", bound=DBSCAN)
 
 # Author: Robert Layton <robertlayton@gmail.com>
 #         Joel Nothman <joel.nothman@gmail.com>
@@ -29,7 +29,7 @@ def dbscan(
     min_samples: Int = 5,
     metric: str | Callable = "minkowski",
     metric_params: None | dict = None,
-    algorithm: Literal["auto", "ball_tree", "kd_tree", "brute", "auto"] = "auto",
+    algorithm: Literal["auto", "ball_tree", "kd_tree", "brute"] = "auto",
     leaf_size: Int = 30,
     p: Float = 2,
     sample_weight: None | ArrayLike = None,
@@ -52,7 +52,7 @@ class DBSCAN(ClusterMixin, BaseEstimator):
         min_samples: Int = 5,
         metric: str | Callable = "euclidean",
         metric_params: None | dict = None,
-        algorithm: Literal["auto", "ball_tree", "kd_tree", "brute", "auto"] = "auto",
+        algorithm: Literal["auto", "ball_tree", "kd_tree", "brute"] = "auto",
         leaf_size: Int = 30,
         p: None | Float = None,
         n_jobs: None | Int = None,
