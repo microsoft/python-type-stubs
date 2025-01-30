@@ -8,7 +8,7 @@ from .._typing import MatrixLike
 from ..base import BaseEstimator, ClassNamePrefixFeaturesOutMixin, TransformerMixin
 from ..utils.validation import check_is_fitted as check_is_fitted
 
-_BasePCA_Self = TypeVar("_BasePCA_Self", bound="_BasePCA")
+_BasePCA_Self = TypeVar("_BasePCA_Self", bound=_BasePCA)
 
 # Author: Alexandre Gramfort <alexandre.gramfort@inria.fr>
 #         Olivier Grisel <olivier.grisel@ensta.org>

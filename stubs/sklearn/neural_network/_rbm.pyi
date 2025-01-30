@@ -12,7 +12,7 @@ from ..utils._param_validation import Interval as Interval
 from ..utils.extmath import log_logistic as log_logistic, safe_sparse_dot as safe_sparse_dot
 from ..utils.validation import check_is_fitted as check_is_fitted
 
-BernoulliRBM_Self = TypeVar("BernoulliRBM_Self", bound="BernoulliRBM")
+BernoulliRBM_Self = TypeVar("BernoulliRBM_Self", bound=BernoulliRBM)
 
 # Authors: Yann N. Dauphin <dauphiya@iro.umontreal.ca>
 #          Vlad Niculae

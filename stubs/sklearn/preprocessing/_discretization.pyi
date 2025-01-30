@@ -17,7 +17,7 @@ from ..utils.validation import (
 )
 from . import OneHotEncoder as OneHotEncoder
 
-KBinsDiscretizer_Self = TypeVar("KBinsDiscretizer_Self", bound="KBinsDiscretizer")
+KBinsDiscretizer_Self = TypeVar("KBinsDiscretizer_Self", bound=KBinsDiscretizer)
 
 # Author: Henry Lin <hlin117@gmail.com>
 #         Tom Dupré la Tour
@@ -40,10 +40,10 @@ class KBinsDiscretizer(TransformerMixin, BaseEstimator):
         self,
         n_bins: ArrayLike | Int = 5,
         *,
-        encode: Literal["onehot", "onehot-dense", "ordinal", "onehot"] = "onehot",
-        strategy: Literal["uniform", "quantile", "kmeans", "quantile"] = "quantile",
+        encode: Literal["onehot", "onehot-dense", "ordinal"] = "onehot",
+        strategy: Literal["uniform", "quantile", "kmeans"] = "quantile",
         dtype: None | Float = None,
-        subsample: int | None | Literal["warn", "warn"] = "warn",
+        subsample: int | None | Literal["warn"] = "warn",
         random_state: RandomState | None | Int = None,
     ) -> None: ...
     def fit(self: KBinsDiscretizer_Self, X: MatrixLike, y: Series | None | ndarray = None) -> KBinsDiscretizer_Self: ...

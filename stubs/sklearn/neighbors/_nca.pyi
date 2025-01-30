@@ -18,7 +18,7 @@ from ..utils.multiclass import check_classification_targets as check_classificat
 from ..utils.random import check_random_state as check_random_state
 from ..utils.validation import check_array as check_array, check_is_fitted as check_is_fitted
 
-NeighborhoodComponentsAnalysis_Self = TypeVar("NeighborhoodComponentsAnalysis_Self", bound="NeighborhoodComponentsAnalysis")
+NeighborhoodComponentsAnalysis_Self = TypeVar("NeighborhoodComponentsAnalysis_Self", bound=NeighborhoodComponentsAnalysis)
 
 import sys
 import time
@@ -38,7 +38,7 @@ class NeighborhoodComponentsAnalysis(ClassNamePrefixFeaturesOutMixin, Transforme
         self,
         n_components: None | Int = None,
         *,
-        init: Literal["auto", "pca", "lda", "identity", "random", "auto"] | MatrixLike = "auto",
+        init: Literal["auto", "pca", "lda", "identity", "random"] | MatrixLike = "auto",
         warm_start: bool = False,
         max_iter: Int = 50,
         tol: Float = 1e-5,

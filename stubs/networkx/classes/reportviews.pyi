@@ -1,4 +1,4 @@
-from collections.abc import Mapping, Set
+from collections.abc import Mapping, Set as AbstractSet
 from typing import Any
 
 from ..classes.graph import Graph
@@ -30,7 +30,7 @@ __all__ = [
 ]
 
 # NodeViews
-class NodeView(Mapping, Set):
+class NodeView(Mapping, AbstractSet):
     __slots__ = ...
 
     def __getstate__(self): ...
@@ -53,7 +53,7 @@ class NodeView(Mapping, Set):
     def __str__(self): ...
     def __repr__(self): ...
 
-class NodeDataView(Set):
+class NodeDataView(AbstractSet):
     __slots__ = ...
 
     def __getstate__(self): ...
@@ -155,7 +155,7 @@ class InMultiEdgeDataView(OutMultiEdgeDataView):
     def __contains__(self, e): ...
 
 # EdgeViews    have set operations and no data reported
-class OutEdgeView(Set, Mapping):
+class OutEdgeView(AbstractSet, Mapping):
     __slots__ = ...
 
     def __getstate__(self): ...

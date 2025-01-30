@@ -34,7 +34,7 @@ class PrecisionRecallDisplay:
         *,
         sample_weight: None | ArrayLike = None,
         pos_label: None | str | int = None,
-        response_method: Literal["predict_proba", "decision_function", "auto", "auto"] = "auto",
+        response_method: Literal["predict_proba", "decision_function", "auto"] = "auto",
         name: None | str = None,
         ax: None | Axes = None,
         **kwargs,
