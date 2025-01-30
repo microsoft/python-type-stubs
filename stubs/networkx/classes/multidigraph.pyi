@@ -33,9 +33,6 @@ class MultiDiGraph(MultiGraph, DiGraph):
     # alias out_edges to edges
     @cached_property
     def out_edges(self) -> OutMultiEdgeView: ...
-
-    out_edges.__doc__ = ...
-
     @cached_property
     def in_edges(self) -> InMultiEdgeView: ...
     @cached_property

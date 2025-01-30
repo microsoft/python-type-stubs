@@ -51,9 +51,6 @@ class DiGraph(Graph):
     # alias out_edges to edges
     @cached_property
     def out_edges(self) -> OutEdgeView: ...
-
-    out_edges.__doc__ = ...
-
     @cached_property
     def in_edges(self) -> InEdgeView: ...
     @cached_property

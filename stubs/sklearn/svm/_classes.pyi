@@ -177,8 +177,6 @@ class SVR(RegressorMixin, BaseLibSVM):
     _impl: ClassVar[str] = ...
 
     _parameter_constraints: ClassVar[dict] = ...
-    for unused_param in ["class_weight", "nu", "probability", "random_state"]:
-        pass
 
     def __init__(
         self,
@@ -217,8 +215,6 @@ class NuSVR(RegressorMixin, BaseLibSVM):
     _impl: ClassVar[str] = ...
 
     _parameter_constraints: ClassVar[dict] = ...
-    for unused_param in ["class_weight", "epsilon", "probability", "random_state"]:
-        pass
 
     def __init__(
         self,
@@ -258,8 +254,6 @@ class OneClassSVM(OutlierMixin, BaseLibSVM):
     _impl: ClassVar[str] = ...
 
     _parameter_constraints: ClassVar[dict] = ...
-    for unused_param in ["C", "class_weight", "epsilon", "probability", "random_state"]:
-        pass
 
     def __init__(
         self,

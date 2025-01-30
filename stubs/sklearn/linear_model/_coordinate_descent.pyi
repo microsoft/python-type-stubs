@@ -264,8 +264,6 @@ class MultiTaskElasticNet(Lasso):
     intercept_: ndarray = ...
 
     _parameter_constraints: ClassVar[dict] = ...
-    for param in ("precompute", "positive"):
-        pass
 
     def __init__(
         self,
