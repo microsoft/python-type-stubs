@@ -14,8 +14,7 @@ from ._classes import DecisionTreeClassifier
 from ._reingold_tilford import buchheim as buchheim
 from ._tree import Tree
 
-class Sentinel:
-    ...
+class Sentinel: ...
 
 SENTINEL = ...
 

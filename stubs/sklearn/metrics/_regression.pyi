@@ -116,9 +116,7 @@ def r2_score(
     y_pred: MatrixLike | ArrayLike,
     *,
     sample_weight: None | ArrayLike = None,
-    multioutput: (
-        Literal["raw_values", "uniform_average", "variance_weighted"] | None | ArrayLike
-    ) = "uniform_average",
+    multioutput: (Literal["raw_values", "uniform_average", "variance_weighted"] | None | ArrayLike) = "uniform_average",
     force_finite: bool = True,
 ) -> ndarray | Float: ...
 def max_error(y_true: ArrayLike, y_pred: ArrayLike) -> float: ...

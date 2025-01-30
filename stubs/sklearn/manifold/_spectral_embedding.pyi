@@ -47,8 +47,7 @@ class SpectralEmbedding(BaseEstimator):
         n_components: Int = 2,
         *,
         affinity: (
-            Literal["nearest_neighbors", "rbf", "precomputed", "precomputed_nearest_neighbors"]
-            | Callable
+            Literal["nearest_neighbors", "rbf", "precomputed", "precomputed_nearest_neighbors"] | Callable
         ) = "nearest_neighbors",
         gamma: None | Float = None,
         random_state: RandomState | None | Int = None,

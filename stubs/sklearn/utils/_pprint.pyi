@@ -68,9 +68,7 @@ from . import is_scalar_nan as is_scalar_nan
 # - long sequences (lists, tuples, dict items) with more than N elements are
 #   shortened using ellipsis (', ...') at the end.
 
-class KeyValTuple(tuple):
-    ...
-
+class KeyValTuple(tuple): ...
 class KeyValTupleParam(KeyValTuple): ...
 
 class _EstimatorPrettyPrinter(pprint.PrettyPrinter):

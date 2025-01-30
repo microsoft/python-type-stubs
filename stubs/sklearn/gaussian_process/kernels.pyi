@@ -19,8 +19,6 @@ from ..metrics.pairwise import pairwise_kernels as pairwise_kernels
 Kernel_Self = TypeVar("Kernel_Self", bound=Kernel)
 Hyperparameter_Self = TypeVar("Hyperparameter_Self", bound=Hyperparameter)
 
-
-
 class Hyperparameter(namedtuple("Hyperparameter", ("name", "value_type", "bounds", "n_elements", "fixed"))):
     fixed: bool = ...
     n_elements: int = ...
@@ -255,8 +253,7 @@ class PairwiseKernel(Kernel):
         gamma: Float = 1.0,
         gamma_bounds: str | tuple[float, float] = ...,
         metric: (
-            Literal["linear", "additive_chi2", "chi2", "poly", "polynomial", "rbf", "laplacian", "sigmoid", "cosine"]
-            | Callable
+            Literal["linear", "additive_chi2", "chi2", "poly", "polynomial", "rbf", "laplacian", "sigmoid", "cosine"] | Callable
         ) = "linear",
         pairwise_kernels_kwargs: None | dict = None,
     ) -> None: ...

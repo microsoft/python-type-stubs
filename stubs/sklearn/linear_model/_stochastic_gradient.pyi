@@ -170,7 +170,18 @@ class SGDClassifier(BaseSGDClassifier):
 
     def __init__(
         self,
-        loss: Literal["hinge", "log_loss", "log", "modified_huber", "squared_hinge", "perceptron", "squared_error", "huber", "epsilon_insensitive", "squared_epsilon_insensitive"] = "hinge",
+        loss: Literal[
+            "hinge",
+            "log_loss",
+            "log",
+            "modified_huber",
+            "squared_hinge",
+            "perceptron",
+            "squared_error",
+            "huber",
+            "epsilon_insensitive",
+            "squared_epsilon_insensitive",
+        ] = "hinge",
         *,
         penalty: None | Literal["l2", "l1", "elasticnet"] = "l2",
         alpha: Float = 0.0001,

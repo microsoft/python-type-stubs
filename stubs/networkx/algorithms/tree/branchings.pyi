@@ -121,7 +121,6 @@ maximum_spanning_arborescence.__doc__ = ...
 minimum_spanning_arborescence.__doc__ = ...
 
 class ArborescenceIterator:
-
     def __init__(
         self,
         G: Graph,
