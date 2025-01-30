@@ -1,13 +1,15 @@
+import warnings
 from abc import ABCMeta, abstractmethod as abstractmethod
 from numbers import Integral as Integral, Real as Real
 from typing import ClassVar, TypeVar
 
+import numpy as np
 from numpy import ndarray
 from scipy.special import logsumexp as logsumexp
 
 from ._typing import ArrayLike, Float, Int, MatrixLike
 from .base import BaseEstimator, ClassifierMixin
-from .preprocessing import LabelBinarizer as LabelBinarizer, binarize, label_binarize as label_binarize
+from .preprocessing import LabelBinarizer as LabelBinarizer, label_binarize as label_binarize
 from .utils._param_validation import Hidden as Hidden, Interval as Interval, StrOptions as StrOptions
 from .utils.extmath import safe_sparse_dot as safe_sparse_dot
 from .utils.validation import check_is_fitted as check_is_fitted, check_non_negative as check_non_negative
@@ -25,9 +27,6 @@ CategoricalNB_Self = TypeVar("CategoricalNB_Self", bound=CategoricalNB)
 #         (parts based on earlier work by Mathieu Blondel)
 #
 # License: BSD 3 clause
-import warnings
-
-import numpy as np
 
 __all__ = [
     "BernoulliNB",

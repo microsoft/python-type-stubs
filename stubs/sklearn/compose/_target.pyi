@@ -1,5 +1,7 @@
+import warnings
 from typing import Any, Callable, ClassVar, TypeVar
 
+import numpy as np
 from numpy import ndarray
 
 from .._typing import ArrayLike, MatrixLike
@@ -16,10 +18,6 @@ TransformedTargetRegressor_Self = TypeVar("TransformedTargetRegressor_Self", bou
 # Authors: Andreas Mueller <andreas.mueller@columbia.edu>
 #          Guillaume Lemaitre <guillaume.lemaitre@inria.fr>
 # License: BSD 3 clause
-
-import warnings
-
-import numpy as np
 
 __all__ = ["TransformedTargetRegressor"]
 

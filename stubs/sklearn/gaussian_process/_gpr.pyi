@@ -1,7 +1,10 @@
+import warnings
 from numbers import Integral as Integral, Real as Real
 from operator import itemgetter as itemgetter
 from typing import Any, Callable, ClassVar, Literal, TypeVar
 
+import numpy as np
+import scipy.optimize
 from numpy import ndarray
 from numpy.random import RandomState
 from scipy.linalg import cho_solve as cho_solve, cholesky as cholesky, solve_triangular as solve_triangular
@@ -17,11 +20,6 @@ GaussianProcessRegressor_Self = TypeVar("GaussianProcessRegressor_Self", bound=G
 # Authors: Jan Hendrik Metzen <jhm@informatik.uni-bremen.de>
 # Modified by: Pete Green <p.l.green@liverpool.ac.uk>
 # License: BSD 3 clause
-
-import warnings
-
-import numpy as np
-import scipy.optimize
 
 GPR_CHOLESKY_LOWER: bool = ...
 

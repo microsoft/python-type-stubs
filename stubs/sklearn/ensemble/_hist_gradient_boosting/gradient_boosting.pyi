@@ -1,14 +1,16 @@
+import itertools
+import warnings
 from abc import ABC, abstractmethod
 from functools import partial as partial
 from numbers import Integral as Integral, Real as Real
 from timeit import default_timer as time
 from typing import Callable, ClassVar, Literal, Mapping, Sequence, TypeVar
 
+import numpy as np
 from numpy import ndarray
 from numpy.random import RandomState
 
 from ..._loss.loss import (
-    _LOSSES,
     BaseLoss as BaseLoss,
     HalfBinomialLoss as HalfBinomialLoss,
     HalfMultinomialLoss as HalfMultinomialLoss,
@@ -33,12 +35,6 @@ from .grower import TreeGrower as TreeGrower
 
 BaseHistGradientBoosting_Self = TypeVar("BaseHistGradientBoosting_Self", bound=BaseHistGradientBoosting)
 
-import itertools
-import warnings
-
-import numpy as np
-
-_LOSSES = ...
 
 class BaseHistGradientBoosting(BaseEstimator, ABC):
     _parameter_constraints: ClassVar[dict] = ...

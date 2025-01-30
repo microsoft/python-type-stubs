@@ -1,7 +1,9 @@
+import warnings
 from abc import ABCMeta, abstractmethod as abstractmethod
 from numbers import Integral as Integral, Real as Real
 from typing import Callable, ClassVar, Literal, TypeVar
 
+import numpy as np
 from numpy import ndarray
 from scipy import sparse as sparse
 from scipy.sparse import csgraph as csgraph
@@ -18,12 +20,6 @@ from ..utils.validation import check_is_fitted as check_is_fitted
 
 BaseLabelPropagation_Self = TypeVar("BaseLabelPropagation_Self", bound=BaseLabelPropagation)
 LabelPropagation_Self = TypeVar("LabelPropagation_Self", bound=LabelPropagation)
-
-# coding=utf8
-
-import warnings
-
-import numpy as np
 
 class BaseLabelPropagation(ClassifierMixin, BaseEstimator, metaclass=ABCMeta):
     _parameter_constraints: ClassVar[dict] = ...

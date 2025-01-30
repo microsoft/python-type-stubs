@@ -1,6 +1,11 @@
+import array
+import itertools
+import warnings
 from numbers import Integral as Integral, Real as Real
 from typing import ClassVar, TypeVar
 
+import numpy as np
+import scipy.sparse as sp
 from numpy import ndarray
 from numpy.random import RandomState
 
@@ -31,13 +36,6 @@ OutputCodeClassifier_Self = TypeVar("OutputCodeClassifier_Self", bound=OutputCod
 # Author: Hamzeh Alsalhi <93hamsal@gmail.com>
 #
 # License: BSD 3 clause
-
-import array
-import itertools
-import warnings
-
-import numpy as np
-import scipy.sparse as sp
 
 __all__ = [
     "OneVsRestClassifier",

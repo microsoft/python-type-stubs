@@ -1,7 +1,9 @@
+import warnings
 from math import sqrt as sqrt
 from numbers import Integral as Integral, Real as Real
 from typing import Any, ClassVar, TypeVar
 
+import numpy as np
 from numpy import ndarray
 from scipy import sparse as sparse
 from scipy.sparse import spmatrix
@@ -23,10 +25,6 @@ Birch_Self = TypeVar("Birch_Self", bound=Birch)
 #          Alexandre Gramfort <alexandre.gramfort@telecom-paristech.fr>
 #          Joel Nothman <joel.nothman@gmail.com>
 # License: BSD 3 clause
-
-import warnings
-
-import numpy as np
 
 class _CFNode:
     squared_norm_: ndarray = ...

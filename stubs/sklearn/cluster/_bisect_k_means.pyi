@@ -1,5 +1,8 @@
+import warnings
 from typing import Any, Callable, ClassVar, Iterator, Literal, TypeVar
 
+import numpy as np
+import scipy.sparse as sp
 from numpy import ndarray
 from numpy.random import RandomState
 
@@ -12,11 +15,6 @@ from ._kmeans import _BaseKMeans
 BisectingKMeans_Self = TypeVar("BisectingKMeans_Self", bound=BisectingKMeans)
 
 # Author: Michal Krawczyk <mkrwczyk.1@gmail.com>
-
-import warnings
-
-import numpy as np
-import scipy.sparse as sp
 
 class _BisectingTree:
     def __init__(self, center: ndarray, indices: ndarray, score: Float) -> None: ...

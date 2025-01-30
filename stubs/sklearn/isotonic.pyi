@@ -1,6 +1,9 @@
+import math
+import warnings
 from numbers import Real as Real
 from typing import Callable, ClassVar, Literal, TypeVar
 
+import numpy as np
 from numpy import ndarray
 from scipy import interpolate as interpolate
 from scipy.stats import spearmanr as spearmanr
@@ -16,11 +19,6 @@ IsotonicRegression_Self = TypeVar("IsotonicRegression_Self", bound=IsotonicRegre
 #          Alexandre Gramfort <alexandre.gramfort@inria.fr>
 #          Nelle Varoquaux <nelle.varoquaux@gmail.com>
 # License: BSD 3 clause
-
-import math
-import warnings
-
-import numpy as np
 
 __all__ = ["check_increasing", "isotonic_regression", "IsotonicRegression"]
 

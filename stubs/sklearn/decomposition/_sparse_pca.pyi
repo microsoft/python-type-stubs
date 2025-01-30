@@ -1,6 +1,7 @@
 from numbers import Integral as Integral, Real as Real
 from typing import Any, Callable, ClassVar, Literal, TypeVar
 
+import numpy as np
 from numpy import ndarray
 from numpy.random import RandomState
 
@@ -14,8 +15,6 @@ from ..utils.validation import check_array as check_array, check_is_fitted as ch
 from ._dict_learning import MiniBatchDictionaryLearning as MiniBatchDictionaryLearning, dict_learning as dict_learning
 
 _BaseSparsePCA_Self = TypeVar("_BaseSparsePCA_Self", bound=_BaseSparsePCA)
-
-import numpy as np
 
 class _BaseSparsePCA(ClassNamePrefixFeaturesOutMixin, TransformerMixin, BaseEstimator):
     _parameter_constraints: ClassVar[dict] = ...

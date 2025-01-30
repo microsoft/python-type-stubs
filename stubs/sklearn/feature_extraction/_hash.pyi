@@ -2,6 +2,8 @@ from itertools import chain as chain
 from numbers import Integral as Integral
 from typing import Any, ClassVar, Iterator, TypeVar
 
+import numpy as np
+import scipy.sparse as sp
 from numpy import dtype
 from scipy.sparse import spmatrix
 
@@ -14,9 +16,6 @@ FeatureHasher_Self = TypeVar("FeatureHasher_Self", bound=FeatureHasher)
 
 # Author: Lars Buitinck
 # License: BSD 3 clause
-
-import numpy as np
-import scipy.sparse as sp
 
 class FeatureHasher(TransformerMixin, BaseEstimator):
     _parameter_constraints: ClassVar[dict] = ...

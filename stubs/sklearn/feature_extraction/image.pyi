@@ -2,6 +2,7 @@ from itertools import product as product
 from numbers import Integral as Integral, Number as Number, Real as Real
 from typing import Any, ClassVar, TypeVar
 
+import numpy as np
 from numpy import ndarray
 from numpy.lib.stride_tricks import as_strided as as_strided
 from numpy.random import RandomState
@@ -15,8 +16,6 @@ from ..utils import check_array as check_array, check_random_state as check_rand
 from ..utils._param_validation import Interval as Interval
 
 PatchExtractor_Self = TypeVar("PatchExtractor_Self", bound=PatchExtractor)
-
-import numpy as np
 
 __all__ = [
     "PatchExtractor",

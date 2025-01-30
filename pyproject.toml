@@ -49,13 +49,12 @@ ignore = [
     # TODO: Handle in its own PR
     "PYI021", # https://github.com/microsoft/python-type-stubs/pull/343
 
-    # TODO: Investigate and fix or configure
-    "E402",
-    "E722",
+    # TODO: Fixing these would change which symbols are even visible for Pylance.
+    # Which may negatively affect users, especially if the symbol wasn't meant to be re-exported.
+    # Manually evaluate each violation.
     "F401",
-    "F811",
-    "F822",
-    "F841",
+
+    # TODO: Investigate and fix or configure
     "PYI001",
     "PYI002",
     "PYI017",
