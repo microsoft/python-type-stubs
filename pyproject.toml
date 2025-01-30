@@ -41,6 +41,7 @@ ignore = [
     # This doesn't affect us, let's have more complete stubs.
     "PYI011",
     "PYI014",
+    "PYI053",
 
     # TODO: Handle in its own PR
     "PYI021", # https://github.com/microsoft/python-type-stubs/pull/343
