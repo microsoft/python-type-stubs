@@ -35,7 +35,6 @@ from .grower import TreeGrower as TreeGrower
 
 BaseHistGradientBoosting_Self = TypeVar("BaseHistGradientBoosting_Self", bound=BaseHistGradientBoosting)
 
-
 class BaseHistGradientBoosting(BaseEstimator, ABC):
     _parameter_constraints: ClassVar[dict] = ...
 

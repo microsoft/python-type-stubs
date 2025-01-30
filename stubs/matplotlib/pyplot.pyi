@@ -777,7 +777,7 @@ def tick_params(axis: Literal["x", "y", "both"] = ..., **kwargs): ...
 def ticklabel_format(
     *,
     axis: Literal["x", "y", "both"] = ...,
-    style: Literal["sci", "scientific", "plain"] = ..., # noqa: F811
+    style: Literal["sci", "scientific", "plain"] = ...,  # noqa: F811
     scilimits=...,
     useOffset: bool | float = ...,
     useLocale: bool = ...,
