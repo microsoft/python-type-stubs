@@ -1,5 +1,5 @@
 from types import NotImplementedType
-from typing import Any, Tuple
+from typing import Any
 
 _show = ...
 

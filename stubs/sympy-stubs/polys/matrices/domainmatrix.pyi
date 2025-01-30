@@ -1,5 +1,5 @@
 from types import NotImplementedType
-from typing import Any, Literal, Tuple as tTuple, Union as tUnion
+from typing import Any, Literal
 from typing_extensions import Self
 
 from sympy.matrices.dense import MutableDenseMatrix

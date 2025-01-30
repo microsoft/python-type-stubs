@@ -1,4 +1,4 @@
-from typing import Callable, Type
+from typing import Callable
 
 import numpy as np
 from numpy import bool_, ndarray

@@ -1,6 +1,6 @@
 from encodings.utf_8 import StreamWriter
 from io import BytesIO, TextIOWrapper
-from typing import Any, Type
+from typing import Any
 
 from matplotlib._typing import *
 from matplotlib.backend_bases import FigureCanvasBase, FigureManagerBase, GraphicsContextBase, RendererBase, _Backend

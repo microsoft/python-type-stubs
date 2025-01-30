@@ -1,4 +1,4 @@
-from typing import Callable, Type
+from typing import Callable
 
 # PyGObject is not easily installable on Windows, let tests pass as-is
 from gi.repository import Gtk  # pyright: ignore[reportMissingImports]

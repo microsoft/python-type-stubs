@@ -1,4 +1,4 @@
-from typing import Any, Literal, Tuple as tTuple
+from typing import Any, Literal
 from typing_extensions import Self
 
 from sympy.core.basic import Basic

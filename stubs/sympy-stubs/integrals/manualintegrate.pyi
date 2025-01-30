@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 from collections.abc import Sequence
 from dataclasses import dataclass
-from typing import Any, Callable, NamedTuple, Type
+from typing import Any, Callable, NamedTuple
 
 from sympy.core.cache import cacheit
 from sympy.core.expr import Expr

@@ -1,5 +1,3 @@
-from typing import Type
-
 from matplotlib.transforms import Bbox
 
 from ._backend_tk import FigureCanvasTk, _BackendTk

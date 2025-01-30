@@ -1,4 +1,4 @@
-from typing import Any, Tuple as tTuple
+from typing import Any
 from typing_extensions import Self
 
 from sympy.calculus.accumulationbounds import AccumBounds

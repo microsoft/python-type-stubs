@@ -1,4 +1,4 @@
-from typing import Any, Type
+from typing import Any
 
 from matplotlib._api import classproperty
 from matplotlib.backend_bases import (

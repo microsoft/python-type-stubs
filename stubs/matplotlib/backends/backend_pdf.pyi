@@ -1,7 +1,7 @@
 from enum import Enum
 from functools import total_ordering
 from io import BytesIO
-from typing import Any, Callable, Optional, Set
+from typing import Any
 from typing_extensions import Self
 
 import numpy as np

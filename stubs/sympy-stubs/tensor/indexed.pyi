@@ -1,4 +1,4 @@
-from typing import Any, Tuple
+from typing import Any
 from typing_extensions import Self
 
 from sympy import Basic, MatrixBase, NDimArray

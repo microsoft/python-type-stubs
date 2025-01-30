@@ -1,5 +1,5 @@
 from types import NotImplementedType
-from typing import Any, Tuple as tTuple, Type
+from typing import Any
 from typing_extensions import Self
 
 _PyHASH_MODULUS = ...

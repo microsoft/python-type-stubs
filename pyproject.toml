@@ -59,8 +59,6 @@ ignore = [
     "PYI048",
     "PYI051", # Request for autofix: https://github.com/astral-sh/ruff/issues/14185
     "PYI052",
-    "UP007",
-    "UP035",
 ]
 
 [tool.ruff.lint.isort]

@@ -1,5 +1,5 @@
 import numbers
-from typing import ClassVar, Literal, Type
+from typing import ClassVar, Literal
 
 import numpy as np
 from numpy import ndarray

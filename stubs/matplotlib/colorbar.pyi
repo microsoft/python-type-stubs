@@ -1,5 +1,5 @@
 from collections.abc import Sequence
-from typing import Literal, Type
+from typing import Literal
 
 from .axes import Axes
 from .axis import Tick

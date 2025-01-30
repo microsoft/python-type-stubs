@@ -1,6 +1,6 @@
 import ast
 import typing_extensions
-from typing import Any, Callable, Dict as tDict, List, Optional, Tuple as tTuple, Union as tUnion
+from typing import Any, Callable
 
 null = ...
 TOKEN: typing_extensions.TypeAlias = tuple[int, str]

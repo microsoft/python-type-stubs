@@ -1,4 +1,4 @@
-from typing import Any, Callable, Dict as tDict, List, Optional, Tuple as tTuple, Type, Union as tUnion, overload
+from typing import Any, Callable, overload
 from typing_extensions import Self, TypeAlias
 
 from sympy.concrete.products import Product

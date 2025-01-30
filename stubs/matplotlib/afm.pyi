@@ -1,6 +1,6 @@
 # COMPLETE
 
-from typing import BinaryIO, List, Literal, NamedTuple, Optional, Tuple, Union, overload
+from typing import BinaryIO, Literal, NamedTuple, overload
 
 class CharMetrics(NamedTuple):
     width: float

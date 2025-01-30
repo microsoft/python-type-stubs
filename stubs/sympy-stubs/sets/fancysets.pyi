@@ -1,5 +1,5 @@
-from collections.abc import Generator
-from typing import Any, Generator, Iterator, Literal, NoReturn
+from collections.abc import Generator, Iterator
+from typing import Any, Literal, NoReturn
 from typing_extensions import Self
 
 from sympy.core.basic import Basic

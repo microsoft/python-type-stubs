@@ -1,7 +1,7 @@
 from collections.abc import Iterator
 from functools import _Wrapped
 from types import NotImplementedType
-from typing import Any, Literal, Tuple
+from typing import Any, Literal
 from typing_extensions import Self
 
 from sympy.combinatorics.galois import S1TransitiveSubgroups, S2TransitiveSubgroups, S3TransitiveSubgroups

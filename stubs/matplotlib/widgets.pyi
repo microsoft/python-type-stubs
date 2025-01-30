@@ -2,7 +2,7 @@ import copy
 from collections.abc import Mapping, Sequence
 from contextlib import ExitStack
 from numbers import Integral, Number
-from typing import Any, Callable, Dict, List, Literal, Optional, Tuple, Union
+from typing import Callable, Literal
 
 import matplotlib as mpl
 import numpy as np

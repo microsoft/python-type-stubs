@@ -1,4 +1,3 @@
-from typing import Tuple
 from typing_extensions import Self
 
 from sympy.core import Function

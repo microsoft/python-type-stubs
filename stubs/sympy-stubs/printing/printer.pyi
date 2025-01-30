@@ -1,7 +1,7 @@
 import inspect
 from collections.abc import Generator
 from contextlib import contextmanager
-from typing import Any, Callable, Type
+from typing import Any, Callable
 
 @contextmanager
 def printer_context(printer, **kwargs) -> Generator[None, Any, None]: ...

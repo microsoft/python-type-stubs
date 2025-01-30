@@ -25,10 +25,7 @@ from enum import Enum
 from operator import attrgetter
 from typing import (
     Callable,
-    List,
     Literal,
-    Optional,
-    Tuple,
     _overload_dummy,  # type: ignore[attr-defined] # _overload_dummy not exposed
 )
 

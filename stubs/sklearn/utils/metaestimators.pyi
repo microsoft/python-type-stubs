@@ -3,7 +3,7 @@ from abc import ABCMeta, abstractmethod
 from collections.abc import Sequence
 from contextlib import suppress as suppress
 from operator import attrgetter as attrgetter
-from typing import Any, Callable, ClassVar, List
+from typing import Any, Callable, ClassVar
 
 import numpy as np
 

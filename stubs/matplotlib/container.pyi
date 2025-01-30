@@ -1,4 +1,4 @@
-from typing import Literal, Type
+from typing import Literal
 from typing_extensions import Self
 
 from matplotlib.artist import Artist

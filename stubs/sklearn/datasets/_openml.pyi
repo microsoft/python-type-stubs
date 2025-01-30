@@ -8,7 +8,7 @@ from contextlib import closing as closing
 from functools import wraps as wraps
 from os.path import join as join
 from tempfile import TemporaryDirectory as TemporaryDirectory
-from typing import List, Literal, Optional, Union, overload
+from typing import Literal, overload
 from urllib.error import HTTPError as HTTPError, URLError as URLError
 from urllib.request import Request as Request, urlopen as urlopen
 from warnings import warn

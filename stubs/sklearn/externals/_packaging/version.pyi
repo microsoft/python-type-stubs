@@ -1,5 +1,5 @@
 import typing_extensions
-from typing import Callable, ClassVar, Optional, Tuple, Union
+from typing import Callable, ClassVar
 
 from ._structures import (
     Infinity as Infinity,
@@ -34,23 +34,17 @@ from ._structures import (
 
 __all__ = ["parse", "Version", "LegacyVersion", "InvalidVersion", "VERSION_PATTERN"]
 
-InfiniteTypes: typing_extensions.TypeAlias = Union[InfinityType, NegativeInfinityType]
-PrePostDevType: typing_extensions.TypeAlias = Union[InfiniteTypes, tuple[str, int]]
-SubLocalType: typing_extensions.TypeAlias = Union[InfiniteTypes, int, str]
-LocalType: typing_extensions.TypeAlias = Union[
-    NegativeInfinityType,
-    tuple[
-        SubLocalType | tuple[SubLocalType, str] | tuple[NegativeInfinityType, SubLocalType],
-        ...,
-    ],
-]
+InfiniteTypes: typing_extensions.TypeAlias = InfinityType | NegativeInfinityType
+PrePostDevType: typing_extensions.TypeAlias = InfiniteTypes | tuple[str, int]
+SubLocalType: typing_extensions.TypeAlias = InfiniteTypes | int | str
+LocalType: typing_extensions.TypeAlias = NegativeInfinityType | tuple[SubLocalType | tuple[SubLocalType, str] | tuple[NegativeInfinityType, SubLocalType], ...]
 CmpKey: typing_extensions.TypeAlias = tuple[int, tuple[int, ...], PrePostDevType, PrePostDevType, PrePostDevType, LocalType]
 LegacyCmpKey: typing_extensions.TypeAlias = tuple[int, tuple[str, ...]]
-VersionComparisonMethod: typing_extensions.TypeAlias = Callable[[Union[CmpKey, LegacyCmpKey], Union[CmpKey, LegacyCmpKey]], bool]
+VersionComparisonMethod: typing_extensions.TypeAlias = Callable[[CmpKey | LegacyCmpKey, CmpKey | LegacyCmpKey], bool]
 
 _Version = ...
 
-def parse(version: str) -> Union[LegacyVersion, Version]: ...
+def parse(version: str) -> LegacyVersion | Version: ...
 
 class InvalidVersion(ValueError): ...
 

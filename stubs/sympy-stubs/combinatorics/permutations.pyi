@@ -1,5 +1,5 @@
-from collections.abc import Generator
-from typing import Any, Generator, Iterator, Literal
+from collections.abc import Generator, Iterator
+from typing import Any, Literal
 from typing_extensions import Self
 
 from sympy.combinatorics.perm_groups import Coset

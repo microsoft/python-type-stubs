@@ -1,7 +1,7 @@
 import warnings
 from abc import ABCMeta, abstractmethod
 from collections.abc import Sequence
-from typing import Any, ClassVar, List, Sequence, TypeVar
+from typing import Any, ClassVar
 from typing_extensions import Self
 
 import numpy as np

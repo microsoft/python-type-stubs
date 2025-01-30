@@ -1,5 +1,5 @@
 from collections.abc import Generator
-from typing import Any, List as tList, Literal, Tuple as tTuple, Union as tUnion
+from typing import Any, Literal
 from typing_extensions import Self
 
 from sympy import Equality, Integral, Ne, Piecewise, Sum

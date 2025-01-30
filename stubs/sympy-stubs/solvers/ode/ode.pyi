@@ -1,5 +1,5 @@
 from collections.abc import Generator
-from typing import Any, Literal, NoReturn, Tuple
+from typing import Any, Literal, NoReturn
 
 from sympy.core.add import Add
 from sympy.core.basic import Basic

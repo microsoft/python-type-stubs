@@ -1,6 +1,6 @@
 import datetime
 from datetime import timezone
-from typing import Any, Callable, Literal, Type
+from typing import Any, Callable, Literal
 
 import numpy as np
 

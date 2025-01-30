@@ -1,6 +1,6 @@
 import functools
 from collections.abc import Generator, Iterable
-from typing import Any, Callable, Type
+from typing import Callable
 
 from .deprecation import MatplotlibDeprecationWarning
 

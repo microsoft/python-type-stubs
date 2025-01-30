@@ -6,7 +6,7 @@ from contextlib import suppress as suppress
 from functools import wraps as wraps
 from inspect import Parameter as Parameter, isclass as isclass, signature as signature
 from numbers import Integral, Number, Real
-from typing import Any, Callable, Literal, Type
+from typing import Any, Callable, Literal
 
 import joblib
 import numpy as np

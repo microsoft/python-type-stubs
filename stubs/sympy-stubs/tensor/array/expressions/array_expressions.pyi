@@ -1,7 +1,7 @@
 import typing
 from collections.abc import Generator
 from ctypes import Array
-from typing import Any, List, Optional, Tuple as tTuple
+from typing import Any
 from typing_extensions import Self
 
 from sympy import ImmutableSparseNDimArray, NDimArray
@@ -148,8 +148,8 @@ class Reshape(_CodegenArrayAbstract):
     def as_explicit(self) -> Self | Array: ...
 
 class _ArgE:
-    indices: list[Optional[int]]
-    def __init__(self, element, indices: Optional[list[Optional[int]]] = ...) -> None: ...
+    indices: list[int | None]
+    def __init__(self, element, indices: list[int | None] | None = ...) -> None: ...
 
     __repr__ = ...
 

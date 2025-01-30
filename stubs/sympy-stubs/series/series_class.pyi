@@ -1,5 +1,5 @@
-from collections.abc import Generator
-from typing import Any, Generator, Iterator
+from collections.abc import Generator, Iterator
+from typing import Any
 
 from sympy.core.basic import Basic
 from sympy.core.cache import cacheit

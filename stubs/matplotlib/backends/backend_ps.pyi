@@ -1,5 +1,4 @@
 from enum import Enum
-from typing import Type
 
 from matplotlib._typing import *
 from matplotlib.backend_bases import FigureCanvasBase, FigureManagerBase, GraphicsContextBase, _Backend

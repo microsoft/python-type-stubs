@@ -1,6 +1,6 @@
 from functools import singledispatch
 from trace import Trace
-from typing import Any, List, Union as tUnion
+from typing import Any
 
 from sympy import Basic, MatAdd, MatrixExpr, Mul, Transpose, ZeroMatrix
 from sympy.matrices.expressions.applyfunc import ElementwiseApplyFunction
