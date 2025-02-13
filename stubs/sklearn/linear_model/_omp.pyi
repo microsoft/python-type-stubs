@@ -14,8 +14,8 @@ from ..utils._param_validation import Hidden as Hidden, Interval as Interval, St
 from ..utils.parallel import Parallel as Parallel, delayed as delayed
 from ._base import LinearModel
 
-OrthogonalMatchingPursuitCV_Self = TypeVar("OrthogonalMatchingPursuitCV_Self", bound="OrthogonalMatchingPursuitCV")
-OrthogonalMatchingPursuit_Self = TypeVar("OrthogonalMatchingPursuit_Self", bound="OrthogonalMatchingPursuit")
+OrthogonalMatchingPursuitCV_Self = TypeVar("OrthogonalMatchingPursuitCV_Self", bound=OrthogonalMatchingPursuitCV)
+OrthogonalMatchingPursuit_Self = TypeVar("OrthogonalMatchingPursuit_Self", bound=OrthogonalMatchingPursuit)
 
 # Author: Vlad Niculae
 #
@@ -68,7 +68,7 @@ class OrthogonalMatchingPursuit(MultiOutputMixin, RegressorMixin, LinearModel):
         tol: None | Float = None,
         fit_intercept: bool = True,
         normalize: str | bool = "deprecated",
-        precompute: Literal["auto", "auto"] | bool = "auto",
+        precompute: Literal["auto"] | bool = "auto",
     ) -> None: ...
     def fit(self: OrthogonalMatchingPursuit_Self, X: MatrixLike, y: MatrixLike | ArrayLike) -> OrthogonalMatchingPursuit_Self: ...
 

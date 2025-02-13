@@ -6,7 +6,7 @@ from .._typing import ArrayLike, Int, MatrixLike
 from ..base import BaseEstimator, ClassifierMixin
 from .validation import check_array as check_array, check_is_fitted as check_is_fitted
 
-CheckingClassifier_Self = TypeVar("CheckingClassifier_Self", bound="CheckingClassifier")
+CheckingClassifier_Self = TypeVar("CheckingClassifier_Self", bound=CheckingClassifier)
 
 import numpy as np
 
@@ -35,7 +35,7 @@ class CheckingClassifier(ClassifierMixin, BaseEstimator):
         check_y_params: None | dict = None,
         check_X: None | Callable = None,
         check_X_params: None | dict = None,
-        methods_to_check: Literal["all", "all"] | Sequence[str] = "all",
+        methods_to_check: Literal["all"] | Sequence[str] = "all",
         foo_param: Int = 0,
         expected_sample_weight: None | bool = None,
         expected_fit_params: None | Sequence[str] = None,

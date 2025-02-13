@@ -12,8 +12,7 @@ from .._typing import FileLike
 # See https://github.com/mikedh/trimesh/blob/master/LICENSE.md for
 # the license.
 
-class HeaderError(Exception):
-    pass
+class HeaderError(Exception): ...
 
 # define a numpy datatype for the data section of a binary STL file
 _stl_dtype = ...

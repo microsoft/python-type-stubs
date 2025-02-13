@@ -12,8 +12,8 @@ from ..utils import check_array as check_array, is_scalar_nan as is_scalar_nan
 from ..utils._param_validation import Hidden as Hidden, Interval as Interval, StrOptions as StrOptions
 from ..utils.validation import check_is_fitted as check_is_fitted
 
-OrdinalEncoder_Self = TypeVar("OrdinalEncoder_Self", bound="OrdinalEncoder")
-OneHotEncoder_Self = TypeVar("OneHotEncoder_Self", bound="OneHotEncoder")
+OrdinalEncoder_Self = TypeVar("OrdinalEncoder_Self", bound=OrdinalEncoder)
+OneHotEncoder_Self = TypeVar("OneHotEncoder_Self", bound=OneHotEncoder)
 
 # Authors: Andreas Mueller <amueller@ais.uni-bonn.de>
 #          Joris Van den Bossche <jorisvandenbossche@gmail.com>
@@ -39,13 +39,13 @@ class OneHotEncoder(_BaseEncoder):
     def __init__(
         self,
         *,
-        categories: Sequence[ArrayLike] | Literal["auto", "auto"] = "auto",
+        categories: Sequence[ArrayLike] | Literal["auto"] = "auto",
         drop: None | ArrayLike | Literal["first", "if_binary"] = None,
         sparse: str | bool = "deprecated",
         sparse_output: bool = True,
         dtype=...,
-        handle_unknown: Literal["error", "ignore", "infrequent_if_exist", "error"] = "error",
-        min_frequency: float | None | int = None,
+        handle_unknown: Literal["error", "ignore", "infrequent_if_exist"] = "error",
+        min_frequency: float | None = None,
         max_categories: None | Int = None,
     ) -> None: ...
     @property
@@ -69,11 +69,11 @@ class OrdinalEncoder(OneToOneFeatureMixin, _BaseEncoder):
     def __init__(
         self,
         *,
-        categories: Sequence[ArrayLike] | Literal["auto", "auto"] = "auto",
+        categories: Sequence[ArrayLike] | Literal["auto"] = "auto",
         dtype=...,
-        handle_unknown: Literal["error", "use_encoded_value", "error"] = "error",
-        unknown_value: float | None | int = None,
-        encoded_missing_value: float | int = ...,
+        handle_unknown: Literal["error", "use_encoded_value"] = "error",
+        unknown_value: float | None = None,
+        encoded_missing_value: float = ...,
     ) -> None: ...
     def fit(self: OrdinalEncoder_Self, X: MatrixLike, y: Series | None = None) -> OrdinalEncoder_Self: ...
     def transform(self, X: MatrixLike) -> ndarray: ...

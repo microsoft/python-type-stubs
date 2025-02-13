@@ -47,7 +47,7 @@ def make_multilabel_classification(
     length: Int = 50,
     allow_unlabeled: bool = True,
     sparse: bool = False,
-    return_indicator: Literal["dense", "sparse", "dense"] | bool = "dense",
+    return_indicator: Literal["dense", "sparse"] | bool = "dense",
     return_distributions: bool = False,
     random_state: RandomState | None | Int = None,
 ) -> tuple[ndarray, ndarray | spmatrix, ndarray, ndarray]: ...

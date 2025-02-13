@@ -55,7 +55,6 @@ class _MultimetricScorer:
 
 class _BaseScorer:
     def __init__(self, score_func: Callable, sign: int, kwargs) -> None: ...
-    def __repr__(self) -> str: ...
     def __call__(
         self,
         estimator: Any,

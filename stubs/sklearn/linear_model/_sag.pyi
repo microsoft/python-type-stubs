@@ -28,7 +28,7 @@ def sag_solver(
     X: MatrixLike | ArrayLike,
     y: ArrayLike,
     sample_weight: None | ArrayLike = None,
-    loss: Literal["log", "log", "squared", "multinomial"] = "log",
+    loss: Literal["log", "squared", "multinomial"] = "log",
     alpha: Float = 1.0,
     beta: Float = 0.0,
     max_iter: Int = 1000,

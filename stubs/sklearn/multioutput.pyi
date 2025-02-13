@@ -24,12 +24,12 @@ from .utils.multiclass import check_classification_targets as check_classificati
 from .utils.parallel import Parallel as Parallel, delayed as delayed
 from .utils.validation import check_is_fitted as check_is_fitted, has_fit_parameter as has_fit_parameter
 
-MultiOutputClassifier_Self = TypeVar("MultiOutputClassifier_Self", bound="MultiOutputClassifier")
-RegressorChain_Self = TypeVar("RegressorChain_Self", bound="RegressorChain")
-_BaseChain_Self = TypeVar("_BaseChain_Self", bound="_BaseChain")
-_MultiOutputEstimator_Self = TypeVar("_MultiOutputEstimator_Self", bound="_MultiOutputEstimator")
-MultiOutputRegressor_Self = TypeVar("MultiOutputRegressor_Self", bound="MultiOutputRegressor")
-ClassifierChain_Self = TypeVar("ClassifierChain_Self", bound="ClassifierChain")
+MultiOutputClassifier_Self = TypeVar("MultiOutputClassifier_Self", bound=MultiOutputClassifier)
+RegressorChain_Self = TypeVar("RegressorChain_Self", bound=RegressorChain)
+_BaseChain_Self = TypeVar("_BaseChain_Self", bound=_BaseChain)
+_MultiOutputEstimator_Self = TypeVar("_MultiOutputEstimator_Self", bound=_MultiOutputEstimator)
+MultiOutputRegressor_Self = TypeVar("MultiOutputRegressor_Self", bound=MultiOutputRegressor)
+ClassifierChain_Self = TypeVar("ClassifierChain_Self", bound=ClassifierChain)
 
 import numpy as np
 import scipy.sparse as sp

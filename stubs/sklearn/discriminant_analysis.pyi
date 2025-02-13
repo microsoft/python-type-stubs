@@ -20,8 +20,8 @@ from .utils.extmath import softmax as softmax
 from .utils.multiclass import check_classification_targets as check_classification_targets, unique_labels as unique_labels
 from .utils.validation import check_is_fitted as check_is_fitted
 
-LinearDiscriminantAnalysis_Self = TypeVar("LinearDiscriminantAnalysis_Self", bound="LinearDiscriminantAnalysis")
-QuadraticDiscriminantAnalysis_Self = TypeVar("QuadraticDiscriminantAnalysis_Self", bound="QuadraticDiscriminantAnalysis")
+LinearDiscriminantAnalysis_Self = TypeVar("LinearDiscriminantAnalysis_Self", bound=LinearDiscriminantAnalysis)
+QuadraticDiscriminantAnalysis_Self = TypeVar("QuadraticDiscriminantAnalysis_Self", bound=QuadraticDiscriminantAnalysis)
 
 # Authors: Clemens Brunner
 #          Martin Billinger
@@ -59,7 +59,7 @@ class LinearDiscriminantAnalysis(
 
     def __init__(
         self,
-        solver: Literal["svd", "lsqr", "eigen", "svd"] = "svd",
+        solver: Literal["svd", "lsqr", "eigen"] = "svd",
         shrinkage: float | None | str = None,
         priors: None | ArrayLike = None,
         n_components: None | Int = None,

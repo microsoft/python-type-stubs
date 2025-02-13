@@ -10,7 +10,7 @@ from ..utils._param_validation import HasMethods as HasMethods, Interval as Inte
 from ..utils.metaestimators import available_if as available_if
 from ..utils.validation import check_is_fitted as check_is_fitted
 
-SelfTrainingClassifier_Self = TypeVar("SelfTrainingClassifier_Self", bound="SelfTrainingClassifier")
+SelfTrainingClassifier_Self = TypeVar("SelfTrainingClassifier_Self", bound=SelfTrainingClassifier)
 
 import warnings
 
@@ -36,7 +36,7 @@ class SelfTrainingClassifier(MetaEstimatorMixin, BaseEstimator):
         self,
         base_estimator: BaseEstimator,
         threshold: Float = 0.75,
-        criterion: Literal["threshold", "k_best", "threshold"] = "threshold",
+        criterion: Literal["threshold", "k_best"] = "threshold",
         k_best: Int = 10,
         max_iter: None | int = 10,
         verbose: bool = False,

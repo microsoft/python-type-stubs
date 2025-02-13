@@ -11,7 +11,7 @@ from ..utils._param_validation import HasMethods as HasMethods, Hidden as Hidden
 from ..utils.validation import check_is_fitted as check_is_fitted
 from ._base import SelectorMixin
 
-SequentialFeatureSelector_Self = TypeVar("SequentialFeatureSelector_Self", bound="SequentialFeatureSelector")
+SequentialFeatureSelector_Self = TypeVar("SequentialFeatureSelector_Self", bound=SequentialFeatureSelector)
 
 import warnings
 
@@ -29,9 +29,9 @@ class SequentialFeatureSelector(SelectorMixin, MetaEstimatorMixin, BaseEstimator
         self,
         estimator: BaseEstimator,
         *,
-        n_features_to_select: float | int | Literal["auto", "warn"] = "warn",
+        n_features_to_select: float | Literal["auto", "warn"] = "warn",
         tol: None | Float = None,
-        direction: Literal["forward", "backward", "forward"] = "forward",
+        direction: Literal["forward", "backward"] = "forward",
         scoring: None | str | Callable = None,
         cv: Iterable | int | BaseCrossValidator = 5,
         n_jobs: None | Int = None,

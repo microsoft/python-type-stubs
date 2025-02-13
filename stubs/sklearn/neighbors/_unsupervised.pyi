@@ -5,7 +5,7 @@ from numpy import ndarray
 from .._typing import Float, Int, MatrixLike
 from ._base import KNeighborsMixin, NeighborsBase, RadiusNeighborsMixin
 
-NearestNeighbors_Self = TypeVar("NearestNeighbors_Self", bound="NearestNeighbors")
+NearestNeighbors_Self = TypeVar("NearestNeighbors_Self", bound=NearestNeighbors)
 
 class NearestNeighbors(KNeighborsMixin, RadiusNeighborsMixin, NeighborsBase):
     n_samples_fit_: int = ...
@@ -19,7 +19,7 @@ class NearestNeighbors(KNeighborsMixin, RadiusNeighborsMixin, NeighborsBase):
         *,
         n_neighbors: Int = 5,
         radius: Float = 1.0,
-        algorithm: Literal["auto", "ball_tree", "kd_tree", "brute", "auto"] = "auto",
+        algorithm: Literal["auto", "ball_tree", "kd_tree", "brute"] = "auto",
         leaf_size: Int = 30,
         metric: str | Callable = "minkowski",
         p: Float = 2,
