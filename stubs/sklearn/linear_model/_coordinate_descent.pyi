@@ -1,8 +1,12 @@
+import numbers
+import sys
+import warnings
 from abc import ABC, abstractmethod
 from functools import partial as partial
 from numbers import Integral as Integral, Real as Real
 from typing import ClassVar, Iterable, Literal, Sequence, TypeVar
 
+import numpy as np
 from joblib import effective_n_jobs as effective_n_jobs
 from numpy import ndarray
 from numpy.random import RandomState
@@ -37,12 +41,6 @@ MultiTaskElasticNet_Self = TypeVar("MultiTaskElasticNet_Self", bound=MultiTaskEl
 #         Gael Varoquaux <gael.varoquaux@inria.fr>
 #
 # License: BSD 3 clause
-
-import numbers
-import sys
-import warnings
-
-import numpy as np
 
 def lasso_path(
     X: MatrixLike | ArrayLike,

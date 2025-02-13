@@ -30,7 +30,7 @@ from subprocess import (
     TimeoutExpired as TimeoutExpired,
     check_output as check_output,
 )
-from typing import Any, Callable, ClassVar, Sequence
+from typing import Any, Callable, ClassVar
 from unittest import TestCase as TestCase
 
 import joblib

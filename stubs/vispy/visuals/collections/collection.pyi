@@ -1,5 +1,4 @@
 import numpy as np
-from numpy import dtype
 from numpy.typing import ArrayLike
 
 from ... import gloo

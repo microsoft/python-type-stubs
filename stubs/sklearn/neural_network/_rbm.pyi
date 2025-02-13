@@ -1,6 +1,9 @@
+import time
 from numbers import Integral as Integral, Real as Real
 from typing import ClassVar, TypeVar
 
+import numpy as np
+import scipy.sparse as sp
 from numpy import ndarray
 from numpy.random import RandomState
 from scipy.special import expit as expit
@@ -19,11 +22,6 @@ BernoulliRBM_Self = TypeVar("BernoulliRBM_Self", bound=BernoulliRBM)
 #          Gabriel Synnaeve
 #          Lars Buitinck
 # License: BSD 3 clause
-
-import time
-
-import numpy as np
-import scipy.sparse as sp
 
 class BernoulliRBM(ClassNamePrefixFeaturesOutMixin, TransformerMixin, BaseEstimator):
     feature_names_in_: ndarray = ...

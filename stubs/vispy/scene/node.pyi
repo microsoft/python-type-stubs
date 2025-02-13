@@ -4,8 +4,6 @@ from numpy.typing import ArrayLike
 
 from ..util.event import EmitterGroup, Event
 from ..visuals.transforms import BaseTransform, ChainTransform, NullTransform, TransformSystem, create_transform
-from ..visuals.transforms.chain import ChainTransform
-from ..visuals.transforms.transform_system import TransformSystem
 
 # -*- coding: utf-8 -*-
 # Copyright (c) Vispy Development Team. All Rights Reserved.

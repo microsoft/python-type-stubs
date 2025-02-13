@@ -1,7 +1,9 @@
+import warnings
 from itertools import combinations as combinations
 from numbers import Integral as Integral, Real as Real
 from typing import ClassVar, TypeVar
 
+import numpy as np
 from joblib import effective_n_jobs as effective_n_jobs
 from numpy import ndarray
 from numpy.random import RandomState
@@ -22,10 +24,6 @@ TheilSenRegressor_Self = TypeVar("TheilSenRegressor_Self", bound=TheilSenRegress
 # Author: Florian Wilhelm <florian.wilhelm@gmail.com>
 #
 # License: BSD 3 clause
-
-import warnings
-
-import numpy as np
 
 _EPSILON = ...
 

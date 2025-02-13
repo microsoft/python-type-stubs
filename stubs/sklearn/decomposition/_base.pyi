@@ -1,6 +1,7 @@
 from abc import ABCMeta, abstractmethod
 from typing import TypeVar
 
+import numpy as np
 from numpy import ndarray
 from scipy import linalg as linalg
 
@@ -17,8 +18,6 @@ _BasePCA_Self = TypeVar("_BasePCA_Self", bound=_BasePCA)
 #         Kyle Kastner <kastnerkyle@gmail.com>
 #
 # License: BSD 3 clause
-
-import numpy as np
 
 class _BasePCA(ClassNamePrefixFeaturesOutMixin, TransformerMixin, BaseEstimator, metaclass=ABCMeta):
     def get_covariance(self) -> ndarray: ...

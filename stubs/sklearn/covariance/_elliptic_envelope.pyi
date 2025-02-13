@@ -1,6 +1,7 @@
 from numbers import Real as Real
 from typing import Any, ClassVar, TypeVar
 
+import numpy as np
 from numpy import ndarray
 from numpy.random import RandomState
 
@@ -16,8 +17,6 @@ EllipticEnvelope_Self = TypeVar("EllipticEnvelope_Self", bound=EllipticEnvelope)
 # Author: Virgile Fritsch <virgile.fritsch@inria.fr>
 #
 # License: BSD 3 clause
-
-import numpy as np
 
 class EllipticEnvelope(OutlierMixin, MinCovDet):
     feature_names_in_: ndarray = ...

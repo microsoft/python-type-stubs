@@ -1,6 +1,7 @@
 from numbers import Integral as Integral, Real as Real
 from typing import Callable, ClassVar, Iterable, TypeVar
 
+import numpy as np
 from joblib import effective_n_jobs as effective_n_jobs
 from numpy import ndarray
 
@@ -23,8 +24,6 @@ RFE_Self = TypeVar("RFE_Self", bound=RFE)
 #          Gilles Louppe <g.louppe@gmail.com>
 #
 # License: BSD 3 clause
-
-import numpy as np
 
 class RFE(SelectorMixin, MetaEstimatorMixin, BaseEstimator):
     support_: ndarray = ...

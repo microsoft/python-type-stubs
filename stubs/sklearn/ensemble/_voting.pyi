@@ -2,6 +2,7 @@ from abc import abstractmethod
 from numbers import Integral as Integral
 from typing import ClassVar, Literal, TypeVar
 
+import numpy as np
 from numpy import ndarray
 
 from .._typing import ArrayLike, Int, MatrixLike
@@ -18,8 +19,6 @@ from ._base import _BaseHeterogeneousEnsemble
 
 VotingClassifier_Self = TypeVar("VotingClassifier_Self", bound=VotingClassifier)
 VotingRegressor_Self = TypeVar("VotingRegressor_Self", bound=VotingRegressor)
-
-import numpy as np
 
 class _BaseVoting(TransformerMixin, _BaseHeterogeneousEnsemble):
     _parameter_constraints: ClassVar[dict] = ...

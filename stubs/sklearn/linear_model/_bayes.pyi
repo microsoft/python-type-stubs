@@ -2,6 +2,7 @@ from math import log as log
 from numbers import Integral as Integral, Real as Real
 from typing import ClassVar, TypeVar
 
+import numpy as np
 from numpy import ndarray
 from scipy import linalg as linalg
 from scipy.linalg import pinvh as pinvh
@@ -14,8 +15,6 @@ from ._base import LinearModel
 
 BayesianRidge_Self = TypeVar("BayesianRidge_Self", bound=BayesianRidge)
 ARDRegression_Self = TypeVar("ARDRegression_Self", bound=ARDRegression)
-
-import numpy as np
 
 ###############################################################################
 # BayesianRidge regression

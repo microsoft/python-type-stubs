@@ -5,7 +5,6 @@ from os import path as op
 import numpy as np
 from numpy.typing import NDArray
 
-from ..geometry import _calculate_normals
 from ..util import logger
 
 # -*- coding: utf-8 -*-
