@@ -22,7 +22,7 @@ from ..svm._classes import SVC, LinearSVC
 from ..utils import check_random_state as check_random_state, indexable as indexable
 from ..utils.parallel import Parallel as Parallel, delayed as delayed
 from . import BaseCrossValidator
-from ._split import BaseShuffleSplit, check_cv as check_cv
+from ._split import check_cv as check_cv
 
 # Author: Alexandre Gramfort <alexandre.gramfort@inria.fr>
 #         Gael Varoquaux <gael.varoquaux@normalesup.org>
@@ -47,7 +47,7 @@ def cross_validate(
     *,
     groups: None | ArrayLike = None,
     scoring: ArrayLike | None | tuple | Callable | Mapping | str = None,
-    cv: int | BaseCrossValidator | Iterable | None | BaseShuffleSplit = None,
+    cv: int | BaseCrossValidator | Iterable | None = None,
     n_jobs: None | Int = None,
     verbose: Int = 0,
     fit_params: None | dict = None,
@@ -63,7 +63,7 @@ def cross_val_score(
     *,
     groups: None | ArrayLike = None,
     scoring: None | str | Callable = None,
-    cv: int | BaseCrossValidator | Iterable | None | BaseShuffleSplit = None,
+    cv: int | BaseCrossValidator | Iterable | None = None,
     n_jobs: None | Int = None,
     verbose: Int = 0,
     fit_params: None | dict = None,
@@ -76,7 +76,7 @@ def cross_val_predict(
     y: None | MatrixLike | ArrayLike = None,
     *,
     groups: None | ArrayLike = None,
-    cv: int | BaseCrossValidator | Iterable | None | BaseShuffleSplit = None,
+    cv: int | BaseCrossValidator | Iterable | None = None,
     n_jobs: None | Int = None,
     verbose: Int = 0,
     fit_params: None | dict = None,
@@ -89,7 +89,7 @@ def permutation_test_score(
     y: None | MatrixLike | ArrayLike,
     *,
     groups: None | ArrayLike = None,
-    cv: int | BaseCrossValidator | Iterable | None | BaseShuffleSplit = None,
+    cv: int | BaseCrossValidator | Iterable | None = None,
     n_permutations: Int = 100,
     n_jobs: None | Int = None,
     random_state: RandomState | None | Int = 0,
@@ -104,7 +104,7 @@ def learning_curve(
     *,
     groups: None | ArrayLike = None,
     train_sizes: ArrayLike = ...,
-    cv: int | BaseCrossValidator | Iterable | None | BaseShuffleSplit = None,
+    cv: int | BaseCrossValidator | Iterable | None = None,
     scoring: None | str | Callable = None,
     exploit_incremental_learning: bool = False,
     n_jobs: None | Int = None,
@@ -124,7 +124,7 @@ def validation_curve(
     param_name: str,
     param_range: ArrayLike,
     groups: None | ArrayLike = None,
-    cv: int | BaseCrossValidator | Iterable | None | BaseShuffleSplit = None,
+    cv: int | BaseCrossValidator | Iterable | None = None,
     scoring: None | str | Callable = None,
     n_jobs: None | Int = None,
     pre_dispatch: str | Int = "all",

@@ -10,7 +10,6 @@ from .._loss.loss import HalfBinomialLoss as HalfBinomialLoss, HalfMultinomialLo
 from .._typing import ArrayLike, Float, Int, MatrixLike
 from ..metrics import get_scorer as get_scorer, get_scorer_names as get_scorer_names
 from ..model_selection import BaseCrossValidator, check_cv as check_cv
-from ..model_selection._split import BaseShuffleSplit
 from ..preprocessing import LabelBinarizer as LabelBinarizer, LabelEncoder as LabelEncoder
 from ..utils import (
     check_array as check_array,
@@ -108,7 +107,7 @@ class LogisticRegressionCV(LogisticRegression, LinearClassifierMixin, BaseEstima
         *,
         Cs: Sequence[float] | int = 10,
         fit_intercept: bool = True,
-        cv: int | None | BaseShuffleSplit | BaseCrossValidator = None,
+        cv: int | None | BaseCrossValidator = None,
         dual: bool = False,
         penalty: Literal["l1", "l2", "elasticnet"] = "l2",
         scoring: None | str | Callable = None,
