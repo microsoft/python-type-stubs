@@ -227,8 +227,6 @@ class RidgeClassifierCV(_RidgeClassifierMixin, _BaseRidgeCV):
     cv_values_: ndarray = ...
 
     _parameter_constraints: ClassVar[dict] = ...
-    for param in ("gcv_mode", "alpha_per_target"):
-        pass
 
     def __init__(
         self,

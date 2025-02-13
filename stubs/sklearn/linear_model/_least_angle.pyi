@@ -146,9 +146,6 @@ class LarsCV(Lars):
 
     _parameter_constraints: ClassVar[dict] = ...
 
-    for parameter in ["n_nonzero_coefs", "jitter", "fit_path", "random_state"]:
-        pass
-
     method: ClassVar[str] = ...
 
     def __init__(
@@ -212,9 +209,6 @@ class LassoLarsIC(LassoLars):
     coef_: ArrayLike = ...
 
     _parameter_constraints: ClassVar[dict] = ...
-
-    for parameter in ["jitter", "fit_path", "alpha", "random_state"]:
-        pass
 
     def __init__(
         self,
