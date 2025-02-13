@@ -1,10 +1,8 @@
-from __future__ import division
-
 from math import gcd
 
 import numpy as np
 
-class TorusKnot(object):
+class TorusKnot:
     def __init__(
         self,
         p: int = 3,

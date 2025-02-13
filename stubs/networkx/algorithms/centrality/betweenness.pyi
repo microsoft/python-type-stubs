@@ -1,8 +1,8 @@
 import warnings
 from collections import deque
+from collections.abc import Mapping
 from heapq import heappop, heappush
 from itertools import count
-from typing import Mapping
 
 from ...classes.graph import Graph
 from ...utils import py_random_state

@@ -1,8 +1,8 @@
 import platform
 import sys
+from collections.abc import Sequence
 from functools import wraps as wraps
 from os import environ as environ
-from typing import Sequence
 
 import numpy as np
 import pytest

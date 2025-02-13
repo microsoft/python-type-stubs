@@ -1,5 +1,6 @@
+from collections.abc import Sequence
 from numbers import Integral as Integral, Real as Real
-from typing import ClassVar, Literal, Sequence, TypeVar
+from typing import ClassVar, Literal, TypeVar
 
 from numpy import ndarray
 from pandas.core.series import Series

@@ -8,16 +8,15 @@ import platform
 import sys
 import tempfile
 import traceback
+from collections.abc import Mapping
 from os import path as op
 from shutil import rmtree
-from typing import Mapping
 
 import numpy as np
 
 from .event import EmitterGroup, Event, EventEmitter
 from .logs import logger, set_log_level, use_log_level
 
-# -*- coding: utf-8 -*-
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 
@@ -47,7 +46,7 @@ def _get_vispy_app_dir(): ...
 class ConfigEvent(Event):
     def __init__(self, changes): ...
 
-class Config(object):
+class Config:
     def __init__(self, **kwargs): ...
     def __getitem__(self, item): ...
     def __setitem__(self, item, val): ...

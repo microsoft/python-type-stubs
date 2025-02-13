@@ -1,5 +1,5 @@
 import weakref
-from typing import Mapping
+from collections.abc import Mapping
 
 import numpy as np
 from numpy.typing import ArrayLike
@@ -23,7 +23,6 @@ from .subscene import SubScene
 from .visuals import VisualNode
 from .widgets import Widget
 
-# -*- coding: utf-8 -*-
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 

@@ -2,8 +2,8 @@ import functools
 import inspect
 import sys
 import warnings
-from collections.abc import Iterable
-from typing import Any, Literal, Mapping
+from collections.abc import Iterable, Mapping
+from typing import Any, Literal
 
 import numpy as np
 import scipy

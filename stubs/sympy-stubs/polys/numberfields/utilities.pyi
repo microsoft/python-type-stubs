@@ -1,4 +1,5 @@
-from typing import Any, Generator, Literal, NoReturn
+from collections.abc import Generator
+from typing import Any, Literal, NoReturn
 
 from sympy.utilities.decorator import public
 

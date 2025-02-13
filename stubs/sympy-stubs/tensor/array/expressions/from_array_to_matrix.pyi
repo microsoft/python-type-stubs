@@ -1,6 +1,6 @@
 from functools import singledispatch
 from trace import Trace
-from typing import Any, List, Union as tUnion
+from typing import Any
 
 from sympy import Basic, MatAdd, MatrixExpr, Mul, Transpose, ZeroMatrix
 from sympy.matrices.expressions.applyfunc import ElementwiseApplyFunction
@@ -53,7 +53,7 @@ def _(expr: ArrayElement) -> MatrixElement | ArrayElement: ...
 @singledispatch
 def _remove_trivial_dims(expr) -> Any: ...
 @_remove_trivial_dims.register(ArrayTensorProduct)
-def _(expr: ArrayTensorProduct) -> tuple[ArrayTensorProduct | Mul, List[int] | list[Any]]: ...
+def _(expr: ArrayTensorProduct) -> tuple[ArrayTensorProduct | Mul, list[int] | list[Any]]: ...
 @_remove_trivial_dims.register(ArrayAdd)
 def _(
     expr: ArrayAdd,
@@ -61,16 +61,16 @@ def _(
 @_remove_trivial_dims.register(PermuteDims)
 def _(
     expr: PermuteDims,
-) -> tuple[Any | ZeroArray | ArrayTensorProduct | ArrayContraction | Basic | PermuteDims, List[int] | list[Any]]: ...
+) -> tuple[Any | ZeroArray | ArrayTensorProduct | ArrayContraction | Basic | PermuteDims, list[int] | list[Any]]: ...
 @_remove_trivial_dims.register(ArrayContraction)
 def _(
     expr: ArrayContraction,
-) -> tuple[Any, List[int]] | tuple[Basic | Any | ZeroArray | ArrayTensorProduct | ArrayContraction | PermuteDims, list[int]]: ...
+) -> tuple[Any, list[int]] | tuple[Basic | Any | ZeroArray | ArrayTensorProduct | ArrayContraction | PermuteDims, list[int]]: ...
 @_remove_trivial_dims.register(ArrayDiagonal)
 def _(
     expr: ArrayDiagonal,
 ) -> (
-    tuple[Any | ZeroArray | ArrayTensorProduct | ArrayContraction | Basic | PermuteDims, List[int]]
+    tuple[Any | ZeroArray | ArrayTensorProduct | ArrayContraction | Basic | PermuteDims, list[int]]
     | tuple[Any | ZeroArray | ArrayTensorProduct | ArrayContraction | Basic | PermuteDims, list[Any]]
 ): ...
 @_remove_trivial_dims.register(ElementwiseApplyFunction)
@@ -79,7 +79,7 @@ def _(expr: ElementwiseApplyFunction) -> tuple[Any, list[Any]] | tuple[MatrixExp
 def _(expr: ArrayElementwiseApplyFunc) -> tuple[ArrayElementwiseApplyFunc, list[Any]]: ...
 def convert_array_to_matrix(expr): ...
 def identify_hadamard_products(
-    expr: tUnion[ArrayContraction, ArrayDiagonal],
+    expr: ArrayContraction | ArrayDiagonal,
 ) -> ZeroArray | ArrayTensorProduct | ArrayContraction | Basic | PermuteDims: ...
 def identify_removable_identity_matrices(expr) -> ZeroArray | ArrayTensorProduct | ArrayContraction | Basic | PermuteDims: ...
 def remove_identity_matrices(

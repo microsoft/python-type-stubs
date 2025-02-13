@@ -5,7 +5,6 @@ from numpy import dtype
 from numpy.typing import ArrayLike, NDArray
 
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 
 # Note: we use functions (e.g. sin) from math module because they're faster
 

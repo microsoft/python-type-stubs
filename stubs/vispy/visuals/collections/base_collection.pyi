@@ -8,7 +8,6 @@ from .array_list import ArrayList
 from .collection import Collection
 from .util import dtype_reduce
 
-# -*- coding: utf-8 -*-
 # -----------------------------------------------------------------------------
 # Copyright (c) 2014, Nicolas P. Rougier
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
@@ -16,7 +15,7 @@ from .util import dtype_reduce
 
 def next_power_of_2(n): ...
 
-class Item(object):
+class Item:
     def __init__(
         self,
         parent: Collection,
@@ -41,7 +40,7 @@ class Item(object):
     def __setitem__(self, key, value): ...
     def __str__(self): ...
 
-class BaseCollection(object):
+class BaseCollection:
     def __init__(self, vtype, utype=None, itype=None): ...
     def __len__(self): ...
     @property

@@ -2,10 +2,11 @@ import numbers
 import time
 import warnings
 from collections import Counter as Counter
+from collections.abc import Iterable, Mapping
 from contextlib import suppress as suppress
 from functools import partial as partial
 from traceback import format_exc as format_exc
-from typing import Callable, Iterable, Literal, Mapping
+from typing import Callable, Literal
 
 import numpy as np
 import scipy.sparse as sp

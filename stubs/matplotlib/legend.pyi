@@ -1,4 +1,5 @@
-from typing import Literal, Sequence
+from collections.abc import Sequence
+from typing import Literal
 
 from .artist import Artist, allow_rasterization
 from .axes import Axes

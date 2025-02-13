@@ -13,8 +13,8 @@ import os
 import re
 import subprocess
 import sys
+from collections.abc import Mapping, Sequence
 from distutils.errors import DistutilsExecError
-from typing import Mapping, Sequence
 
 from numpy.distutils import log
 

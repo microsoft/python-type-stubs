@@ -1,4 +1,5 @@
-from typing import Any, Callable, Generator, Literal, NoReturn
+from collections.abc import Generator
+from typing import Any, Callable, Literal, NoReturn
 from typing_extensions import Self
 
 from sympy.core.basic import Basic

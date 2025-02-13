@@ -1,5 +1,6 @@
 from collections import defaultdict
-from typing import Literal, Mapping
+from collections.abc import Mapping
+from typing import Literal
 
 from ...classes.graph import Graph
 

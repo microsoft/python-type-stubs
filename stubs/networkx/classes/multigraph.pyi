@@ -1,6 +1,6 @@
+from collections.abc import Mapping
 from copy import deepcopy
 from functools import cached_property
-from typing import Mapping
 
 import networkx.convert as convert
 from networkx import NetworkXError

@@ -1,6 +1,7 @@
+from collections.abc import Generator
 from contextlib import contextmanager
 from threading import local
-from typing import Any, Generator
+from typing import Any
 
 class _global_parameters(local):
     def __init__(self, **kwargs) -> None: ...

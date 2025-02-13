@@ -32,11 +32,15 @@ select = [
     "FA", # flake8-future-annotations
     "I", # isort
     "PYI", # flake8-pyi
+    "UP", # pyupgrade
 ]
 ignore = [
     ###
     # Rules we don't want or don't agree with
     ###
+    # Slower and more verbose https://github.com/astral-sh/ruff/issues/7871
+    "UP038", # Use `X | Y` in `isinstance` call instead of `(X, Y)`
+
     # Typeshed doesn't want complex or non-literal defaults, or long strings, for maintenance and testing reasons.
     # This doesn't affect us, let's have more complete stubs.
     "PYI011",
