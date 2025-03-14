@@ -19,7 +19,6 @@ from ..exceptions import NotFittedError as NotFittedError
 from ..linear_model._logistic import LogisticRegression
 from ..linear_model._ridge import RidgeCV
 from ..model_selection import BaseCrossValidator, check_cv as check_cv, cross_val_predict as cross_val_predict
-from ..model_selection._split import BaseShuffleSplit
 from ..pipeline import Pipeline
 from ..preprocessing import LabelEncoder as LabelEncoder
 from ..utils import Bunch
@@ -30,9 +29,9 @@ from ..utils.parallel import Parallel as Parallel, delayed as delayed
 from ..utils.validation import check_is_fitted as check_is_fitted, column_or_1d as column_or_1d
 from ._base import _BaseHeterogeneousEnsemble
 
-_BaseStacking_Self = TypeVar("_BaseStacking_Self", bound="_BaseStacking")
-StackingRegressor_Self = TypeVar("StackingRegressor_Self", bound="StackingRegressor")
-StackingClassifier_Self = TypeVar("StackingClassifier_Self", bound="StackingClassifier")
+_BaseStacking_Self = TypeVar("_BaseStacking_Self", bound=_BaseStacking)
+StackingRegressor_Self = TypeVar("StackingRegressor_Self", bound=StackingRegressor)
+StackingClassifier_Self = TypeVar("StackingClassifier_Self", bound=StackingClassifier)
 
 import numpy as np
 import scipy.sparse as sparse
@@ -78,8 +77,8 @@ class StackingClassifier(ClassifierMixin, _BaseStacking):
         estimators: Sequence[tuple[str, BaseEstimator]],
         final_estimator: None | BaseEstimator | LogisticRegression = None,
         *,
-        cv: int | BaseCrossValidator | Iterable | None | str | BaseShuffleSplit = None,
-        stack_method: Literal["auto", "predict_proba", "decision_function", "predict", "auto"] = "auto",
+        cv: int | BaseCrossValidator | Iterable | None | str = None,
+        stack_method: Literal["auto", "predict_proba", "decision_function", "predict"] = "auto",
         n_jobs: None | Int = None,
         passthrough: bool = False,
         verbose: Int = 0,
@@ -108,7 +107,7 @@ class StackingRegressor(RegressorMixin, _BaseStacking):
         estimators: Sequence[tuple[str, BaseEstimator]] | list[tuple[str, Pipeline]],
         final_estimator: None | BaseEstimator | RidgeCV = None,
         *,
-        cv: int | BaseCrossValidator | Iterable | None | str | BaseShuffleSplit = None,
+        cv: int | BaseCrossValidator | Iterable | None | str = None,
         n_jobs: None | Int = None,
         passthrough: bool = False,
         verbose: Int = 0,

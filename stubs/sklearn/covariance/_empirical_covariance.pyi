@@ -10,7 +10,7 @@ from ..metrics.pairwise import pairwise_distances as pairwise_distances
 from ..utils import check_array as check_array
 from ..utils.extmath import fast_logdet as fast_logdet
 
-EmpiricalCovariance_Self = TypeVar("EmpiricalCovariance_Self", bound="EmpiricalCovariance")
+EmpiricalCovariance_Self = TypeVar("EmpiricalCovariance_Self", bound=EmpiricalCovariance)
 
 # Author: Alexandre Gramfort <alexandre.gramfort@inria.fr>
 #         Gael Varoquaux <gael.varoquaux@normalesup.org>
@@ -42,7 +42,7 @@ class EmpiricalCovariance(BaseEstimator):
     def error_norm(
         self,
         comp_cov: MatrixLike,
-        norm: Literal["frobenius", "spectral", "frobenius"] = "frobenius",
+        norm: Literal["frobenius", "spectral"] = "frobenius",
         scaling: bool = True,
         squared: bool = True,
     ) -> Float: ...

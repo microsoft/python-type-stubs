@@ -12,9 +12,9 @@ from ..utils._param_validation import Interval as Interval, StrOptions as StrOpt
 from ..utils.extmath import svd_flip as svd_flip
 from ..utils.validation import FLOAT_DTYPES as FLOAT_DTYPES, check_is_fitted as check_is_fitted
 
-PLSSVD_Self = TypeVar("PLSSVD_Self", bound="PLSSVD")
-PLSRegression_Self = TypeVar("PLSRegression_Self", bound="PLSRegression")
-_PLS_Self = TypeVar("_PLS_Self", bound="_PLS")
+PLSSVD_Self = TypeVar("PLSSVD_Self", bound=PLSSVD)
+PLSRegression_Self = TypeVar("PLSRegression_Self", bound=PLSRegression)
+_PLS_Self = TypeVar("_PLS_Self", bound=_PLS)
 
 import warnings
 
@@ -70,8 +70,6 @@ class PLSRegression(_PLS):
     x_weights_: ndarray = ...
 
     _parameter_constraints: ClassVar[dict] = ...
-    for param in ("deflation_mode", "mode", "algorithm"):
-        pass
 
     # This implementation provides the same results that 3 PLS packages
     # provided in the R language (R-project):
@@ -104,8 +102,6 @@ class PLSCanonical(_PLS):
     x_weights_: ndarray = ...
 
     _parameter_constraints: ClassVar[dict] = ...
-    for param in ("deflation_mode", "mode"):
-        pass
 
     # This implementation provides the same results that the "plspm" package
     # provided in the R language (R-project), using the function plsca(X, Y).
@@ -120,7 +116,7 @@ class PLSCanonical(_PLS):
         n_components: Int = 2,
         *,
         scale: bool = True,
-        algorithm: Literal["nipals", "svd", "nipals"] = "nipals",
+        algorithm: Literal["nipals", "svd"] = "nipals",
         max_iter: Int = 500,
         tol: Float = 1e-06,
         copy: bool = True,
@@ -140,8 +136,6 @@ class CCA(_PLS):
     x_weights_: ndarray = ...
 
     _parameter_constraints: ClassVar[dict] = ...
-    for param in ("deflation_mode", "mode", "algorithm"):
-        pass
 
     def __init__(
         self,

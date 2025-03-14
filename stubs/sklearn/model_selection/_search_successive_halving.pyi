@@ -14,9 +14,9 @@ from ..utils import resample as resample
 from ..utils.multiclass import check_classification_targets as check_classification_targets
 from . import BaseCrossValidator, ParameterGrid as ParameterGrid, ParameterSampler as ParameterSampler
 from ._search import BaseSearchCV
-from ._split import BaseShuffleSplit, check_cv as check_cv
+from ._split import check_cv as check_cv
 
-BaseSuccessiveHalving_Self = TypeVar("BaseSuccessiveHalving_Self", bound="BaseSuccessiveHalving")
+BaseSuccessiveHalving_Self = TypeVar("BaseSuccessiveHalving_Self", bound=BaseSuccessiveHalving)
 
 import numpy as np
 
@@ -82,12 +82,12 @@ class HalvingGridSearchCV(BaseSuccessiveHalving):
         estimator: BaseEstimator | SVC,
         param_grid: Mapping | dict[str, list[int | float]] | Sequence[dict],
         *,
-        factor: float | int = 3,
+        factor: float = 3,
         resource: str = "n_samples",
         max_resources: str | Int = "auto",
-        min_resources: int | Literal["exhaust", "smallest", "exhaust"] = "exhaust",
+        min_resources: int | Literal["exhaust", "smallest"] = "exhaust",
         aggressive_elimination: bool = False,
-        cv: Iterable | int | BaseShuffleSplit | BaseCrossValidator = 5,
+        cv: Iterable | int | BaseCrossValidator = 5,
         scoring: None | str | Callable = None,
         refit: bool = True,
         error_score: str | Float = ...,
@@ -127,12 +127,12 @@ class HalvingRandomSearchCV(BaseSuccessiveHalving):
         param_distributions: dict,
         *,
         n_candidates: str | Int = "exhaust",
-        factor: float | int = 3,
+        factor: float = 3,
         resource: str = "n_samples",
         max_resources: str | Int = "auto",
-        min_resources: Literal["exhaust", "smallest", "smallest"] | int = "smallest",
+        min_resources: Literal["exhaust", "smallest"] | int = "smallest",
         aggressive_elimination: bool = False,
-        cv: Iterable | int | BaseShuffleSplit | BaseCrossValidator = 5,
+        cv: Iterable | int | BaseCrossValidator = 5,
         scoring: None | str | Callable = None,
         refit: bool = True,
         error_score: str | Float = ...,

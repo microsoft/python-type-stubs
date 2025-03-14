@@ -16,7 +16,7 @@ from ..preprocessing import KernelCenterer as KernelCenterer
 from ..utils._param_validation import Interval as Interval, StrOptions as StrOptions
 from ..utils.validation import check_is_fitted as check_is_fitted
 
-Isomap_Self = TypeVar("Isomap_Self", bound="Isomap")
+Isomap_Self = TypeVar("Isomap_Self", bound=Isomap)
 
 # Author: Jake Vanderplas  -- <vanderplas@astro.washington.edu>
 # License: BSD 3 clause (C) 2011
@@ -40,11 +40,11 @@ class Isomap(ClassNamePrefixFeaturesOutMixin, TransformerMixin, BaseEstimator):
         n_neighbors: None | int = 5,
         radius: None | Float = None,
         n_components: Int = 2,
-        eigen_solver: Literal["auto", "arpack", "dense", "auto"] = "auto",
+        eigen_solver: Literal["auto", "arpack", "dense"] = "auto",
         tol: Float = 0,
         max_iter: None | Int = None,
-        path_method: Literal["auto", "FW", "D", "auto"] = "auto",
-        neighbors_algorithm: Literal["auto", "brute", "kd_tree", "ball_tree", "auto"] = "auto",
+        path_method: Literal["auto", "FW", "D"] = "auto",
+        neighbors_algorithm: Literal["auto", "brute", "kd_tree", "ball_tree"] = "auto",
         n_jobs: None | int = None,
         metric: str | Callable = "minkowski",
         p: Int = 2,

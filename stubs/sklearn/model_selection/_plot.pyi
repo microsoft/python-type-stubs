@@ -9,7 +9,6 @@ from numpy.random import RandomState
 from .._typing import ArrayLike, Float, Int, MatrixLike
 from ..utils import check_matplotlib_support as check_matplotlib_support
 from . import BaseCrossValidator, learning_curve as learning_curve
-from ._split import BaseShuffleSplit
 
 class LearningCurveDisplay:
     fill_between_: Artist | None = ...
@@ -32,9 +31,9 @@ class LearningCurveDisplay:
         *,
         negate_score: bool = False,
         score_name: None | str = None,
-        score_type: Literal["test", "train", "both", "test"] = "test",
+        score_type: Literal["test", "train", "both"] = "test",
         log_scale: bool = False,
-        std_display_style: None | Literal["errorbar", "fill_between", "fill_between"] = "fill_between",
+        std_display_style: None | Literal["errorbar", "fill_between"] = "fill_between",
         line_kw: None | dict = None,
         fill_between_kw: None | dict = None,
         errorbar_kw: None | dict = None,
@@ -48,7 +47,7 @@ class LearningCurveDisplay:
         *,
         groups: None | ArrayLike = None,
         train_sizes: ArrayLike = ...,
-        cv: int | BaseCrossValidator | Iterable | None | BaseShuffleSplit = None,
+        cv: int | BaseCrossValidator | Iterable | None = None,
         scoring: None | str | Callable = None,
         exploit_incremental_learning: bool = False,
         n_jobs: None | Int = None,
@@ -61,9 +60,9 @@ class LearningCurveDisplay:
         ax: None | Axes = None,
         negate_score: bool = False,
         score_name: None | str = None,
-        score_type: Literal["test", "train", "both", "test"] = "test",
+        score_type: Literal["test", "train", "both"] = "test",
         log_scale: bool = False,
-        std_display_style: None | Literal["errorbar", "fill_between", "fill_between"] = "fill_between",
+        std_display_style: None | Literal["errorbar", "fill_between"] = "fill_between",
         line_kw: None | dict = None,
         fill_between_kw: None | dict = None,
         errorbar_kw: None | dict = None,

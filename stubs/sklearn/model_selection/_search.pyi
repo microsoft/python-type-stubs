@@ -21,9 +21,9 @@ from ..utils.parallel import Parallel as Parallel, delayed as delayed
 from ..utils.random import sample_without_replacement as sample_without_replacement
 from ..utils.validation import check_is_fitted as check_is_fitted, indexable as indexable
 from . import BaseCrossValidator
-from ._split import BaseShuffleSplit, check_cv as check_cv
+from ._split import check_cv as check_cv
 
-BaseSearchCV_Self = TypeVar("BaseSearchCV_Self", bound="BaseSearchCV")
+BaseSearchCV_Self = TypeVar("BaseSearchCV_Self", bound=BaseSearchCV)
 BaseEstimatorT = TypeVar("BaseEstimatorT", bound=BaseEstimator, default=BaseEstimator, covariant=True)
 
 import numbers
@@ -86,7 +86,7 @@ class BaseSearchCV(MetaEstimatorMixin, BaseEstimator, metaclass=ABCMeta):
         **fit_params,
     ) -> BaseSearchCV_Self: ...
 
-class GridSearchCV(Generic[BaseEstimatorT], BaseSearchCV):
+class GridSearchCV(BaseSearchCV, Generic[BaseEstimatorT]):
     feature_names_in_: ndarray = ...
     n_features_in_: int = ...
     classes_: ndarray = ...
@@ -110,7 +110,7 @@ class GridSearchCV(Generic[BaseEstimatorT], BaseSearchCV):
         scoring: ArrayLike | None | tuple | Callable | Mapping | str = None,
         n_jobs: None | Int = None,
         refit: str | Callable | bool = True,
-        cv: int | BaseCrossValidator | Iterable | None | BaseShuffleSplit = None,
+        cv: int | BaseCrossValidator | Iterable | None = None,
         verbose: Int = 0,
         pre_dispatch: str | int = "2*n_jobs",
         error_score: str | Float = ...,
@@ -142,7 +142,7 @@ class RandomizedSearchCV(BaseSearchCV):
         scoring: ArrayLike | None | tuple | Callable | Mapping | str = None,
         n_jobs: None | Int = None,
         refit: str | Callable | bool = True,
-        cv: int | BaseCrossValidator | Iterable | None | BaseShuffleSplit = None,
+        cv: int | BaseCrossValidator | Iterable | None = None,
         verbose: Int = 0,
         pre_dispatch: str | int = "2*n_jobs",
         random_state: RandomState | None | Int = None,

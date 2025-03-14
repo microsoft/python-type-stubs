@@ -10,7 +10,6 @@ from .._loss.loss import HalfBinomialLoss as HalfBinomialLoss, HalfMultinomialLo
 from .._typing import ArrayLike, Float, Int, MatrixLike
 from ..metrics import get_scorer as get_scorer, get_scorer_names as get_scorer_names
 from ..model_selection import BaseCrossValidator, check_cv as check_cv
-from ..model_selection._split import BaseShuffleSplit
 from ..preprocessing import LabelBinarizer as LabelBinarizer, LabelEncoder as LabelEncoder
 from ..utils import (
     check_array as check_array,
@@ -28,8 +27,8 @@ from ._glm.glm import NewtonCholeskySolver as NewtonCholeskySolver
 from ._linear_loss import LinearModelLoss as LinearModelLoss
 from ._sag import sag_solver as sag_solver
 
-LogisticRegressionCV_Self = TypeVar("LogisticRegressionCV_Self", bound="LogisticRegressionCV")
-LogisticRegression_Self = TypeVar("LogisticRegression_Self", bound="LogisticRegression")
+LogisticRegressionCV_Self = TypeVar("LogisticRegressionCV_Self", bound=LogisticRegressionCV)
+LogisticRegression_Self = TypeVar("LogisticRegression_Self", bound=LogisticRegression)
 
 # Author: Gael Varoquaux <gael.varoquaux@normalesup.org>
 #         Fabian Pedregosa <f@bianp.net>
@@ -58,7 +57,7 @@ class LogisticRegression(LinearClassifierMixin, SparseCoefMixin, BaseEstimator):
 
     def __init__(
         self,
-        penalty: Literal["l1", "l2", "elasticnet", "l2"] | None = "l2",
+        penalty: Literal["l1", "l2", "elasticnet"] | None = "l2",
         *,
         dual: bool = False,
         tol: Float = 1e-4,
@@ -67,9 +66,9 @@ class LogisticRegression(LinearClassifierMixin, SparseCoefMixin, BaseEstimator):
         intercept_scaling: Float = 1,
         class_weight: None | Mapping | str = None,
         random_state: RandomState | None | Int = None,
-        solver: Literal["lbfgs", "liblinear", "newton-cg", "newton-cholesky", "sag", "saga", "lbfgs"] = "lbfgs",
+        solver: Literal["lbfgs", "liblinear", "newton-cg", "newton-cholesky", "sag", "saga"] = "lbfgs",
         max_iter: Int = 100,
-        multi_class: Literal["auto", "ovr", "multinomial", "auto"] = "auto",
+        multi_class: Literal["auto", "ovr", "multinomial"] = "auto",
         verbose: Int = 0,
         warm_start: bool = False,
         n_jobs: None | Int = None,
@@ -100,19 +99,16 @@ class LogisticRegressionCV(LogisticRegression, LinearClassifierMixin, BaseEstima
 
     _parameter_constraints: ClassVar[dict] = ...
 
-    for param in ["C", "warm_start", "l1_ratio"]:
-        pass
-
     def __init__(
         self,
         *,
         Cs: Sequence[float] | int = 10,
         fit_intercept: bool = True,
-        cv: int | None | BaseShuffleSplit | BaseCrossValidator = None,
+        cv: int | None | BaseCrossValidator = None,
         dual: bool = False,
-        penalty: Literal["l1", "l2", "elasticnet", "l2"] = "l2",
+        penalty: Literal["l1", "l2", "elasticnet"] = "l2",
         scoring: None | str | Callable = None,
-        solver: Literal["lbfgs", "liblinear", "newton-cg", "newton-cholesky", "sag", "saga", "lbfgs"] = "lbfgs",
+        solver: Literal["lbfgs", "liblinear", "newton-cg", "newton-cholesky", "sag", "saga"] = "lbfgs",
         tol: Float = 1e-4,
         max_iter: Int = 100,
         class_weight: None | Mapping | str = None,
@@ -120,7 +116,7 @@ class LogisticRegressionCV(LogisticRegression, LinearClassifierMixin, BaseEstima
         verbose: Int = 0,
         refit: bool = True,
         intercept_scaling: Float = 1.0,
-        multi_class: Literal["auto", "ovr", "multinomial", "auto"] = "auto",
+        multi_class: Literal["auto", "ovr", "multinomial"] = "auto",
         random_state: RandomState | None | Int = None,
         l1_ratios: None | Sequence[float] = None,
     ) -> None: ...

@@ -33,7 +33,7 @@ class RocCurveDisplay:
         *,
         sample_weight: None | ArrayLike = None,
         drop_intermediate: bool = True,
-        response_method: Literal["predict_proba", "decision_function", "auto", "auto"] = "auto",
+        response_method: Literal["predict_proba", "decision_function", "auto"] = "auto",
         pos_label: None | str | int = None,
         name: None | str = None,
         ax: None | Axes = None,

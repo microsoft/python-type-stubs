@@ -24,7 +24,7 @@ class SGDOptimizer(BaseOptimizer):
         self,
         params: Sequence | list[ndarray],
         learning_rate_init: Float = 0.1,
-        lr_schedule: Literal["constant", "adaptive", "invscaling", "constant"] = "constant",
+        lr_schedule: Literal["constant", "adaptive", "invscaling"] = "constant",
         momentum: Float = 0.9,
         nesterov: bool = True,
         power_t: Float = 0.5,

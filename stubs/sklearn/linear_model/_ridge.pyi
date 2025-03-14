@@ -18,7 +18,6 @@ from ..base import MultiOutputMixin, RegressorMixin, is_classifier as is_classif
 from ..exceptions import ConvergenceWarning as ConvergenceWarning
 from ..metrics import check_scoring as check_scoring, get_scorer_names as get_scorer_names
 from ..model_selection import BaseCrossValidator, GridSearchCV as GridSearchCV
-from ..model_selection._split import BaseShuffleSplit
 from ..preprocessing import LabelBinarizer as LabelBinarizer
 from ..utils import (
     check_array as check_array,
@@ -34,12 +33,12 @@ from ..utils.validation import check_is_fitted as check_is_fitted
 from ._base import LinearClassifierMixin, LinearModel
 from ._sag import sag_solver as sag_solver
 
-_BaseRidgeCV_Self = TypeVar("_BaseRidgeCV_Self", bound="_BaseRidgeCV")
-_RidgeGCV_Self = TypeVar("_RidgeGCV_Self", bound="_RidgeGCV")
-RidgeClassifier_Self = TypeVar("RidgeClassifier_Self", bound="RidgeClassifier")
-RidgeClassifierCV_Self = TypeVar("RidgeClassifierCV_Self", bound="RidgeClassifierCV")
-RidgeCV_Self = TypeVar("RidgeCV_Self", bound="RidgeCV")
-Ridge_Self = TypeVar("Ridge_Self", bound="Ridge")
+_BaseRidgeCV_Self = TypeVar("_BaseRidgeCV_Self", bound=_BaseRidgeCV)
+_RidgeGCV_Self = TypeVar("_RidgeGCV_Self", bound=_RidgeGCV)
+RidgeClassifier_Self = TypeVar("RidgeClassifier_Self", bound=RidgeClassifier)
+RidgeClassifierCV_Self = TypeVar("RidgeClassifierCV_Self", bound=RidgeClassifierCV)
+RidgeCV_Self = TypeVar("RidgeCV_Self", bound=RidgeCV)
+Ridge_Self = TypeVar("Ridge_Self", bound=Ridge)
 
 import numbers
 import warnings
@@ -52,7 +51,7 @@ def ridge_regression(
     alpha: float | ArrayLike,
     *,
     sample_weight: None | ArrayLike = None,
-    solver: Literal["auto", "svd", "cholesky", "lsqr", "sparse_cg", "sag", "saga", "lbfgs", "auto"] = "auto",
+    solver: Literal["auto", "svd", "cholesky", "lsqr", "sparse_cg", "sag", "saga", "lbfgs"] = "auto",
     max_iter: None | Int = None,
     tol: Float = 1e-4,
     verbose: Int = 0,
@@ -101,17 +100,7 @@ class Ridge(MultiOutputMixin, RegressorMixin, _BaseRidge):
         copy_X: bool = True,
         max_iter: None | Int = None,
         tol: Float = 1e-4,
-        solver: Literal[
-            "auto",
-            "svd",
-            "cholesky",
-            "lsqr",
-            "sparse_cg",
-            "sag",
-            "saga",
-            "lbfgs",
-            "auto",
-        ] = "auto",
+        solver: Literal["auto", "svd", "cholesky", "lsqr", "sparse_cg", "sag", "saga", "lbfgs"] = "auto",
         positive: bool = False,
         random_state: RandomState | None | Int = None,
     ) -> None: ...
@@ -145,17 +134,7 @@ class RidgeClassifier(_RidgeClassifierMixin, _BaseRidge):
         max_iter: None | Int = None,
         tol: Float = 1e-4,
         class_weight: None | Mapping | str = None,
-        solver: Literal[
-            "auto",
-            "svd",
-            "cholesky",
-            "lsqr",
-            "sparse_cg",
-            "sag",
-            "saga",
-            "lbfgs",
-            "auto",
-        ] = "auto",
+        solver: Literal["auto", "svd", "cholesky", "lsqr", "sparse_cg", "sag", "saga", "lbfgs"] = "auto",
         positive: bool = False,
         random_state: RandomState | None | Int = None,
     ) -> None: ...
@@ -248,8 +227,6 @@ class RidgeClassifierCV(_RidgeClassifierMixin, _BaseRidgeCV):
     cv_values_: ndarray = ...
 
     _parameter_constraints: ClassVar[dict] = ...
-    for param in ("gcv_mode", "alpha_per_target"):
-        pass
 
     def __init__(
         self,
@@ -257,7 +234,7 @@ class RidgeClassifierCV(_RidgeClassifierMixin, _BaseRidgeCV):
         *,
         fit_intercept: bool = True,
         scoring: None | str | Callable = None,
-        cv: int | BaseCrossValidator | Iterable | None | BaseShuffleSplit = None,
+        cv: int | BaseCrossValidator | Iterable | None = None,
         class_weight: None | Mapping | str = None,
         store_cv_values: bool = False,
     ) -> None: ...

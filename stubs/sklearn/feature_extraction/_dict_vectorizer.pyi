@@ -11,7 +11,7 @@ from .._typing import ArrayLike, MatrixLike
 from ..base import BaseEstimator, TransformerMixin
 from ..utils import check_array as check_array
 
-DictVectorizer_Self = TypeVar("DictVectorizer_Self", bound="DictVectorizer")
+DictVectorizer_Self = TypeVar("DictVectorizer_Self", bound=DictVectorizer)
 
 # Authors: Lars Buitinck
 #          Dan Blanchard <dblanchard@ets.org>

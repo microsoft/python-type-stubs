@@ -14,7 +14,7 @@ from ..utils._param_validation import Interval as Interval, StrOptions as StrOpt
 from ..utils.extmath import fast_logdet as fast_logdet, randomized_svd as randomized_svd, squared_norm as squared_norm
 from ..utils.validation import check_is_fitted as check_is_fitted
 
-FactorAnalysis_Self = TypeVar("FactorAnalysis_Self", bound="FactorAnalysis")
+FactorAnalysis_Self = TypeVar("FactorAnalysis_Self", bound=FactorAnalysis)
 
 # Author: Christian Osendorfer <osendorf@gmail.com>
 #         Alexandre Gramfort <alexandre.gramfort@inria.fr>
@@ -45,7 +45,7 @@ class FactorAnalysis(ClassNamePrefixFeaturesOutMixin, TransformerMixin, BaseEsti
         copy: bool = True,
         max_iter: Int = 1000,
         noise_variance_init: None | ArrayLike = None,
-        svd_method: Literal["lapack", "randomized", "randomized"] = "randomized",
+        svd_method: Literal["lapack", "randomized"] = "randomized",
         iterated_power: Int = 3,
         rotation: None | Literal["varimax", "quartimax"] = None,
         random_state: None | RandomState | int = 0,

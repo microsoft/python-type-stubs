@@ -16,7 +16,7 @@ from ._ball_tree import DTYPE as DTYPE, BallTree as BallTree
 from ._binary_tree import BinaryTree
 from ._kd_tree import KDTree as KDTree
 
-KernelDensity_Self = TypeVar("KernelDensity_Self", bound="KernelDensity")
+KernelDensity_Self = TypeVar("KernelDensity_Self", bound=KernelDensity)
 
 # Author: Jake Vanderplas <jakevdp@cs.washington.edu>
 import itertools
@@ -41,16 +41,8 @@ class KernelDensity(BaseEstimator):
         self,
         *,
         bandwidth: float | Literal["scott", "silverman"] = 1.0,
-        algorithm: Literal["kd_tree", "ball_tree", "auto", "auto"] = "auto",
-        kernel: Literal[
-            "gaussian",
-            "tophat",
-            "epanechnikov",
-            "exponential",
-            "linear",
-            "cosine",
-            "gaussian",
-        ] = "gaussian",
+        algorithm: Literal["kd_tree", "ball_tree", "auto"] = "auto",
+        kernel: Literal["gaussian", "tophat", "epanechnikov", "exponential", "linear", "cosine"] = "gaussian",
         metric: str = "euclidean",
         atol: Float = 0,
         rtol: Float = 0,

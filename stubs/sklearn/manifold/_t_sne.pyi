@@ -40,7 +40,8 @@ def trustworthiness(
 ) -> float: ...
 
 class TSNE(BaseEstimator):
-    n_iter_: int = ...
+    max_iter: None | int = ...
+    n_iter_: str | int = ...
     learning_rate_: float = ...
     feature_names_in_: ndarray = ...
     n_features_in_: int = ...
@@ -61,19 +62,20 @@ class TSNE(BaseEstimator):
         *,
         perplexity: Float = 30.0,
         early_exaggeration: Float = 12.0,
-        learning_rate: float | Literal["auto", "auto"] = "auto",
-        n_iter: Int = 1000,
+        learning_rate: float | Literal["auto"] = "auto",
+        max_iter: None | Int = None,
         n_iter_without_progress: Int = 300,
         min_grad_norm: Float = 1e-7,
         metric: str | Callable = "euclidean",
         metric_params: None | dict = None,
-        init: MatrixLike | Literal["random", "pca", "pca"] = "pca",
+        init: MatrixLike | Literal["random", "pca"] = "pca",
         verbose: Int = 0,
         random_state: RandomState | None | Int = None,
-        method: Literal["barnes_hut", "exact", "barnes_hut"] = "barnes_hut",
+        method: Literal["barnes_hut", "exact"] = "barnes_hut",
         angle: Float = 0.5,
         n_jobs: None | Int = None,
         square_distances: str | bool = "deprecated",
+        n_iter: str | Int = "deprecated",
     ) -> None: ...
     def fit_transform(self, X: MatrixLike, y: None | ndarray = None) -> ndarray: ...
     def fit(self, X: MatrixLike, y=None) -> ndarray: ...

@@ -7,12 +7,11 @@ from .._typing import ArrayLike, Float, Int, MatrixLike
 from ..base import BaseEstimator, MetaEstimatorMixin, clone as clone
 from ..metrics import get_scorer_names as get_scorer_names
 from ..model_selection import BaseCrossValidator, cross_val_score as cross_val_score
-from ..model_selection._split import BaseShuffleSplit
 from ..utils._param_validation import HasMethods as HasMethods, Hidden as Hidden, Interval as Interval, StrOptions as StrOptions
 from ..utils.validation import check_is_fitted as check_is_fitted
 from ._base import SelectorMixin
 
-SequentialFeatureSelector_Self = TypeVar("SequentialFeatureSelector_Self", bound="SequentialFeatureSelector")
+SequentialFeatureSelector_Self = TypeVar("SequentialFeatureSelector_Self", bound=SequentialFeatureSelector)
 
 import warnings
 
@@ -30,11 +29,11 @@ class SequentialFeatureSelector(SelectorMixin, MetaEstimatorMixin, BaseEstimator
         self,
         estimator: BaseEstimator,
         *,
-        n_features_to_select: float | int | Literal["auto", "warn"] = "warn",
+        n_features_to_select: float | Literal["auto", "warn"] = "warn",
         tol: None | Float = None,
-        direction: Literal["forward", "backward", "forward"] = "forward",
+        direction: Literal["forward", "backward"] = "forward",
         scoring: None | str | Callable = None,
-        cv: Iterable | int | BaseShuffleSplit | BaseCrossValidator = 5,
+        cv: Iterable | int | BaseCrossValidator = 5,
         n_jobs: None | Int = None,
     ) -> None: ...
     def fit(

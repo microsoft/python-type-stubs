@@ -16,7 +16,7 @@ from ..neighbors import NearestNeighbors as NearestNeighbors, kneighbors_graph a
 from ..utils import check_array as check_array, check_random_state as check_random_state, check_symmetric as check_symmetric
 from ..utils._param_validation import Interval as Interval, StrOptions as StrOptions
 
-SpectralEmbedding_Self = TypeVar("SpectralEmbedding_Self", bound="SpectralEmbedding")
+SpectralEmbedding_Self = TypeVar("SpectralEmbedding_Self", bound=SpectralEmbedding)
 
 import warnings
 
@@ -47,14 +47,7 @@ class SpectralEmbedding(BaseEstimator):
         n_components: Int = 2,
         *,
         affinity: (
-            Literal[
-                "nearest_neighbors",
-                "rbf",
-                "precomputed",
-                "precomputed_nearest_neighbors",
-                "nearest_neighbors",
-            ]
-            | Callable
+            Literal["nearest_neighbors", "rbf", "precomputed", "precomputed_nearest_neighbors"] | Callable
         ) = "nearest_neighbors",
         gamma: None | Float = None,
         random_state: RandomState | None | Int = None,

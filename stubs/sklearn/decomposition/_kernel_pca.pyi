@@ -15,7 +15,7 @@ from ..utils._param_validation import Interval as Interval, StrOptions as StrOpt
 from ..utils.extmath import svd_flip as svd_flip
 from ..utils.validation import check_is_fitted as check_is_fitted
 
-KernelPCA_Self = TypeVar("KernelPCA_Self", bound="KernelPCA")
+KernelPCA_Self = TypeVar("KernelPCA_Self", bound=KernelPCA)
 
 # Author: Mathieu Blondel <mathieu@mblondel.org>
 #         Sylvain Marie <sylvain.marie@schneider-electric.com>
@@ -38,17 +38,17 @@ class KernelPCA(ClassNamePrefixFeaturesOutMixin, TransformerMixin, BaseEstimator
         self,
         n_components: None | Int = None,
         *,
-        kernel: Callable | Literal["linear", "poly", "rbf", "sigmoid", "cosine", "precomputed", "linear"] = "linear",
+        kernel: Callable | Literal["linear", "poly", "rbf", "sigmoid", "cosine", "precomputed"] = "linear",
         gamma: None | Float = None,
         degree: Int = 3,
         coef0: Float = 1,
         kernel_params: None | dict = None,
         alpha: Float = 1.0,
         fit_inverse_transform: bool = False,
-        eigen_solver: Literal["auto", "dense", "arpack", "randomized", "auto"] = "auto",
+        eigen_solver: Literal["auto", "dense", "arpack", "randomized"] = "auto",
         tol: Float = 0,
         max_iter: None | Int = None,
-        iterated_power: Literal["auto", "auto"] | int = "auto",
+        iterated_power: Literal["auto"] | int = "auto",
         remove_zero_eig: bool = False,
         random_state: RandomState | None | Int = None,
         copy_X: bool = True,

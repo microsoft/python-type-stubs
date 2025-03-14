@@ -46,8 +46,7 @@ class BaseCrossValidator(metaclass=ABCMeta):
         groups: None | ArrayLike = None,
     ) -> Iterator[tuple[ndarray, ndarray]]: ...
     @abstractmethod
-    def get_n_splits(self, X=None, y=None, groups=None): ...
-    def __repr__(self) -> str: ...
+    def get_n_splits(self, X=None, y=None, groups=None) -> int: ...
 
 class LeaveOneOut(BaseCrossValidator):
     def get_n_splits(self, X: MatrixLike, y: Any = None, groups: Any = None) -> int: ...
@@ -120,7 +119,7 @@ class LeavePGroupsOut(BaseCrossValidator):
     def get_n_splits(self, X: Any = None, y: Any = None, groups: None | ArrayLike = None) -> int: ...
     def split(self, X: MatrixLike, y: None | ArrayLike = None, groups: None | ArrayLike = None): ...
 
-class _RepeatedSplits(metaclass=ABCMeta):
+class _RepeatedSplits(BaseCrossValidator, metaclass=ABCMeta):
     def __init__(
         self,
         cv: Callable,
@@ -133,7 +132,6 @@ class _RepeatedSplits(metaclass=ABCMeta):
         self, X: MatrixLike, y: None | ArrayLike = None, groups: None | ArrayLike = None
     ) -> Iterator[tuple[ndarray, ndarray]]: ...
     def get_n_splits(self, X: Any = None, y: Any = None, groups: None | ArrayLike = None) -> int: ...
-    def __repr__(self) -> str: ...
 
 class RepeatedKFold(_RepeatedSplits):
     def __init__(
@@ -153,13 +151,12 @@ class RepeatedStratifiedKFold(_RepeatedSplits):
         random_state: RandomState | None | Int = None,
     ) -> None: ...
 
-class BaseShuffleSplit(metaclass=ABCMeta):
+class BaseShuffleSplit(BaseCrossValidator, metaclass=ABCMeta):
     def __init__(self, n_splits: int = 10, *, test_size=None, train_size=None, random_state=None) -> None: ...
     def split(
         self, X: MatrixLike, y: None | ArrayLike = None, groups: None | ArrayLike = None
     ) -> Iterator[tuple[ndarray, ndarray]]: ...
     def get_n_splits(self, X: Any = None, y: Any = None, groups: Any = None) -> int: ...
-    def __repr__(self) -> str: ...
 
 class ShuffleSplit(BaseShuffleSplit):
     def __init__(
@@ -176,7 +173,7 @@ class GroupShuffleSplit(ShuffleSplit):
         self,
         n_splits: Int = 5,
         *,
-        test_size: float | None | int = None,
+        test_size: float | None = None,
         train_size: None | Float = None,
         random_state: RandomState | None | Int = None,
     ) -> None: ...
@@ -204,7 +201,7 @@ class _CVIterableWrapper(BaseCrossValidator):
     def split(self, X: Any = None, y: Any = None, groups: Any = None): ...
 
 def check_cv(
-    cv: Iterable | int | BaseShuffleSplit | BaseCrossValidator | None = 5,
+    cv: Iterable | int | BaseCrossValidator | None = 5,
     y: None | ArrayLike = None,
     *,
     classifier: bool = False,

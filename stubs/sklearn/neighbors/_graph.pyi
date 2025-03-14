@@ -11,14 +11,14 @@ from ._ball_tree import BallTree
 from ._base import KNeighborsMixin, NeighborsBase, RadiusNeighborsMixin
 from ._unsupervised import NearestNeighbors
 
-RadiusNeighborsTransformer_Self = TypeVar("RadiusNeighborsTransformer_Self", bound="RadiusNeighborsTransformer")
-KNeighborsTransformer_Self = TypeVar("KNeighborsTransformer_Self", bound="KNeighborsTransformer")
+RadiusNeighborsTransformer_Self = TypeVar("RadiusNeighborsTransformer_Self", bound=RadiusNeighborsTransformer)
+KNeighborsTransformer_Self = TypeVar("KNeighborsTransformer_Self", bound=KNeighborsTransformer)
 
 def kneighbors_graph(
     X: MatrixLike | BallTree | NearestNeighbors,
     n_neighbors: Int,
     *,
-    mode: Literal["connectivity", "distance", "connectivity"] = "connectivity",
+    mode: Literal["connectivity", "distance"] = "connectivity",
     metric: str = "minkowski",
     p: Int = 2,
     metric_params: None | dict = None,
@@ -29,7 +29,7 @@ def radius_neighbors_graph(
     X: MatrixLike | BallTree,
     radius: Float,
     *,
-    mode: Literal["connectivity", "distance", "connectivity"] = "connectivity",
+    mode: Literal["connectivity", "distance"] = "connectivity",
     metric: str = "minkowski",
     p: Int = 2,
     metric_params: None | dict = None,
@@ -49,9 +49,9 @@ class KNeighborsTransformer(ClassNamePrefixFeaturesOutMixin, KNeighborsMixin, Tr
     def __init__(
         self,
         *,
-        mode: Literal["distance", "connectivity", "distance"] = "distance",
+        mode: Literal["distance", "connectivity"] = "distance",
         n_neighbors: Int = 5,
-        algorithm: Literal["auto", "ball_tree", "kd_tree", "brute", "auto"] = "auto",
+        algorithm: Literal["auto", "ball_tree", "kd_tree", "brute"] = "auto",
         leaf_size: Int = 30,
         metric: str | Callable = "minkowski",
         p: Int = 2,
@@ -79,9 +79,9 @@ class RadiusNeighborsTransformer(
     def __init__(
         self,
         *,
-        mode: Literal["distance", "connectivity", "distance"] = "distance",
+        mode: Literal["distance", "connectivity"] = "distance",
         radius: Float = 1.0,
-        algorithm: Literal["auto", "ball_tree", "kd_tree", "brute", "auto"] = "auto",
+        algorithm: Literal["auto", "ball_tree", "kd_tree", "brute"] = "auto",
         leaf_size: Int = 30,
         metric: str | Callable = "minkowski",
         p: Int = 2,

@@ -15,8 +15,7 @@ __all__ = [
     "complete_to_chordal_graph",
 ]
 
-class NetworkXTreewidthBoundExceeded(NetworkXException):
-    pass
+class NetworkXTreewidthBoundExceeded(NetworkXException): ...
 
 def is_chordal(G: Graph) -> bool: ...
 def find_induced_nodes(G: Graph, s, t, treewidth_bound: float = ...): ...
