@@ -99,9 +99,6 @@ class LogisticRegressionCV(LogisticRegression, LinearClassifierMixin, BaseEstima
 
     _parameter_constraints: ClassVar[dict] = ...
 
-    for param in ["C", "warm_start", "l1_ratio"]:
-        pass
-
     def __init__(
         self,
         *,
