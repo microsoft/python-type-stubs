@@ -63,7 +63,7 @@ class TSNE(BaseEstimator):
         perplexity: Float = 30.0,
         early_exaggeration: Float = 12.0,
         learning_rate: float | Literal["auto"] = "auto",
-        max_iter: None | Int = None
+        max_iter: None | Int = None,
         n_iter_without_progress: Int = 300,
         min_grad_norm: Float = 1e-7,
         metric: str | Callable = "euclidean",
