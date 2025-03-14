@@ -9,7 +9,6 @@ from numpy.random import RandomState
 from .._typing import ArrayLike, Float, Int, MatrixLike
 from ..utils import check_matplotlib_support as check_matplotlib_support
 from . import BaseCrossValidator, learning_curve as learning_curve
-from ._split import BaseShuffleSplit
 
 class LearningCurveDisplay:
     fill_between_: Artist | None = ...
@@ -48,7 +47,7 @@ class LearningCurveDisplay:
         *,
         groups: None | ArrayLike = None,
         train_sizes: ArrayLike = ...,
-        cv: int | BaseCrossValidator | Iterable | None | BaseShuffleSplit = None,
+        cv: int | BaseCrossValidator | Iterable | None = None,
         scoring: None | str | Callable = None,
         exploit_incremental_learning: bool = False,
         n_jobs: None | Int = None,

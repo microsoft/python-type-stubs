@@ -22,7 +22,6 @@ from .base import (
 )
 from .isotonic import IsotonicRegression
 from .model_selection import BaseCrossValidator, check_cv as check_cv, cross_val_predict as cross_val_predict
-from .model_selection._split import BaseShuffleSplit
 from .preprocessing import LabelEncoder as LabelEncoder, label_binarize as label_binarize
 from .svm import LinearSVC as LinearSVC
 from .utils import check_matplotlib_support as check_matplotlib_support, column_or_1d as column_or_1d, indexable as indexable
@@ -51,7 +50,7 @@ class CalibratedClassifierCV(ClassifierMixin, MetaEstimatorMixin, BaseEstimator)
         estimator: None | BaseEstimator = None,
         *,
         method: Literal["sigmoid", "isotonic"] = "sigmoid",
-        cv: int | BaseCrossValidator | Iterable | None | str | BaseShuffleSplit = None,
+        cv: int | BaseCrossValidator | Iterable | None | str = None,
         n_jobs: None | Int = None,
         ensemble: bool = True,
         base_estimator: str | BaseEstimator = "deprecated",

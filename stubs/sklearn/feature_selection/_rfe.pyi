@@ -9,7 +9,6 @@ from ..base import BaseEstimator, MetaEstimatorMixin, clone as clone, is_classif
 from ..linear_model._logistic import LogisticRegression
 from ..metrics import check_scoring as check_scoring
 from ..model_selection import BaseCrossValidator, check_cv as check_cv
-from ..model_selection._split import BaseShuffleSplit
 from ..utils._param_validation import HasMethods as HasMethods, Interval as Interval
 from ..utils.metaestimators import available_if as available_if
 from ..utils.parallel import Parallel as Parallel, delayed as delayed
@@ -73,7 +72,7 @@ class RFECV(RFE):
         *,
         step: float = 1,
         min_features_to_select: Int = 1,
-        cv: int | BaseCrossValidator | Iterable | None | BaseShuffleSplit = None,
+        cv: int | BaseCrossValidator | Iterable | None = None,
         scoring: None | str | Callable = None,
         verbose: Int = 0,
         n_jobs: None | int = None,

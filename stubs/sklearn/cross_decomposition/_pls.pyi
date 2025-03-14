@@ -70,8 +70,6 @@ class PLSRegression(_PLS):
     x_weights_: ndarray = ...
 
     _parameter_constraints: ClassVar[dict] = ...
-    for param in ("deflation_mode", "mode", "algorithm"):
-        pass
 
     # This implementation provides the same results that 3 PLS packages
     # provided in the R language (R-project):
@@ -104,8 +102,6 @@ class PLSCanonical(_PLS):
     x_weights_: ndarray = ...
 
     _parameter_constraints: ClassVar[dict] = ...
-    for param in ("deflation_mode", "mode"):
-        pass
 
     # This implementation provides the same results that the "plspm" package
     # provided in the R language (R-project), using the function plsca(X, Y).
@@ -140,8 +136,6 @@ class CCA(_PLS):
     x_weights_: ndarray = ...
 
     _parameter_constraints: ClassVar[dict] = ...
-    for param in ("deflation_mode", "mode", "algorithm"):
-        pass
 
     def __init__(
         self,
