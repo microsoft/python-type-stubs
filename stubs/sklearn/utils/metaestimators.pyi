@@ -1,8 +1,9 @@
 import warnings
 from abc import ABCMeta, abstractmethod
+from collections.abc import Sequence
 from contextlib import suppress as suppress
 from operator import attrgetter as attrgetter
-from typing import Any, Callable, ClassVar, List, Sequence
+from typing import Any, Callable, ClassVar
 
 import numpy as np
 
@@ -12,7 +13,7 @@ from ._available_if import _AvailableIfDescriptor, available_if
 __all__ = ["available_if", "if_delegate_has_method"]
 
 class _BaseComposition(BaseEstimator, metaclass=ABCMeta):
-    steps: ClassVar[List[Any]] = ...
+    steps: ClassVar[list[Any]] = ...
 
     @abstractmethod
     def __init__(self) -> None: ...

@@ -8,11 +8,12 @@ import hashlib
 import os
 import shutil
 from collections import namedtuple as namedtuple
+from collections.abc import Sequence
 from importlib import resources as resources
 from os import environ as environ, listdir as listdir, makedirs as makedirs
 from os.path import expanduser as expanduser, isdir as isdir, join as join, splitext as splitext
 from pathlib import Path as Path
-from typing import Literal, Sequence
+from typing import Literal
 from urllib.request import urlretrieve as urlretrieve
 
 import numpy as np

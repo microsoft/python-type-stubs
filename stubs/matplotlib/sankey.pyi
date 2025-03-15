@@ -1,5 +1,5 @@
+from collections.abc import Sequence
 from types import SimpleNamespace
-from typing import Sequence
 
 from .axes import Axes
 

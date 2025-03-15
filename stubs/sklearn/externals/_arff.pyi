@@ -1,4 +1,4 @@
-from typing import ClassVar, Literal, Optional
+from typing import ClassVar, Literal
 from typing_extensions import TypedDict as TypedDict
 
 # =============================================================================
@@ -66,7 +66,7 @@ _SUPPORTED_DATA_STRUCTURES: list = ...
 
 # EXCEPTIONS ==================================================================
 class ArffException(Exception):
-    message: ClassVar[Optional[str]] = ...
+    message: ClassVar[str | None] = ...
 
     def __init__(self) -> None: ...
 

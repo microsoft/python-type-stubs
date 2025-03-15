@@ -1,8 +1,5 @@
-# -*- coding: utf-8 -*-
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
-
-from __future__ import division
 
 import builtins
 import os
@@ -12,7 +9,7 @@ from .. import config
 from ..util import logger
 from .base import BaseApplicationBackend as ApplicationBackend  # noqa
 
-class Application(object):
+class Application:
     def __init__(self, backend_name: str | None = None): ...
     def __repr__(self): ...
     @property

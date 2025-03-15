@@ -1,7 +1,7 @@
 import inspect
+from collections.abc import Mapping
 from functools import wraps
 from math import atan2, pi as PI, sqrt
-from typing import Mapping
 from warnings import warn
 
 import numpy as np

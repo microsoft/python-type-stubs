@@ -1,5 +1,5 @@
 from typing import Any
-from typing_extensions import Self, Tuple as tTuple
+from typing_extensions import Self
 
 from sympy.concrete.expr_with_intlimits import ExprWithIntLimits
 from sympy.core.basic import Basic
@@ -10,7 +10,7 @@ from sympy.series.order import Order
 
 class Product(ExprWithIntLimits):
     __slots__ = ...
-    limits: tTuple[tTuple[Symbol, Expr, Expr]]
+    limits: tuple[tuple[Symbol, Expr, Expr]]
     def __new__(cls, function, *symbols, **assumptions) -> Equality | Relational | Ne | Self: ...
     @property
     def term(self) -> Basic: ...

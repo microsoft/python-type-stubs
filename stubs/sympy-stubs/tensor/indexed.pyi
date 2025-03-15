@@ -1,5 +1,5 @@
 from typing import Any
-from typing_extensions import Self, Tuple
+from typing_extensions import Self
 
 from sympy import Basic, MatrixBase, NDimArray
 from sympy.core import Expr
@@ -24,7 +24,7 @@ class Indexed(Expr):
     @property
     def rank(self) -> int: ...
     @property
-    def shape(self) -> Tuple: ...
+    def shape(self) -> tuple: ...
     @property
     def ranges(self) -> list[Any]: ...
     @property

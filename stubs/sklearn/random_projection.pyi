@@ -1,6 +1,7 @@
 from abc import ABCMeta, abstractmethod
+from collections.abc import Sequence
 from numbers import Integral as Integral, Real as Real
-from typing import Any, ClassVar, Literal, Sequence, TypeVar
+from typing import Any, ClassVar, Literal, TypeVar
 
 from numpy import ndarray
 from numpy.random import RandomState

@@ -1,5 +1,6 @@
+from collections.abc import Generator, Iterator
 from types import NotImplementedType
-from typing import Any, Callable, Generator, Iterator, Literal
+from typing import Any, Callable, Literal
 from typing_extensions import Self
 
 from sympy.core.basic import Basic

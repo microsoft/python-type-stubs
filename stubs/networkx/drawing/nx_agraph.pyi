@@ -1,6 +1,7 @@
 import os
 import tempfile
-from typing import Callable, Mapping
+from collections.abc import Mapping
+from typing import Callable
 
 from ..classes.graph import Graph
 

@@ -1,5 +1,5 @@
+from collections.abc import Iterable, Sequence
 from datetime import date
-from typing import Iterable, Sequence
 
 from ._typing import *
 from .axis import Axis

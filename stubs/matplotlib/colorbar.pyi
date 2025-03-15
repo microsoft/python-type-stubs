@@ -1,4 +1,5 @@
-from typing import Literal, Sequence, Type
+from collections.abc import Sequence
+from typing import Literal
 
 from .axes import Axes
 from .axis import Tick
@@ -82,7 +83,7 @@ class Colorbar:
     def remove(self) -> None: ...
     def drag_pan(self, button, key, x, y) -> None: ...
 
-ColorbarBase: Type[Colorbar] = ...
+ColorbarBase: type[Colorbar] = ...
 
 def make_axes(
     parents: Axes | list[Axes],

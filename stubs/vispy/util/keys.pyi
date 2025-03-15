@@ -1,8 +1,7 @@
-# -*- coding: utf-8 -*-
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 
-class Key(object):
+class Key:
     def __init__(self, *names): ...
     @property
     def name(self): ...

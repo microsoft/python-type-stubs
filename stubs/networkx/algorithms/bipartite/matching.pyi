@@ -10,7 +10,7 @@
 # proof, see <http://www.ics.uci.edu/~eppstein/PADS/ABOUT-PADS.txt>).
 import collections
 import itertools
-from typing import Mapping
+from collections.abc import Mapping
 
 from ...classes.graph import Graph
 from .matrix import biadjacency_matrix

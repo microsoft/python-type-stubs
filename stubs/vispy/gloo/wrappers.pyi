@@ -1,5 +1,6 @@
+from collections.abc import Mapping
 from copy import deepcopy
-from typing import Literal, Mapping
+from typing import Literal
 
 import numpy as np
 from numpy import dtype
@@ -9,7 +10,6 @@ from ..color import Color
 from ..util import logger
 from . import gl
 
-# -*- coding: utf-8 -*-
 # -----------------------------------------------------------------------------
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
@@ -68,7 +68,7 @@ def _check_valid(key, val, valid): ...
 def _to_args(x): ...
 def _check_conversion(key, valid_dict): ...
 
-class BaseGlooFunctions(object):
+class BaseGlooFunctions:
     ##########################################################################
     # PRIMITIVE/VERTEX
 

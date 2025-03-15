@@ -1,5 +1,5 @@
+from collections.abc import Mapping
 from itertools import combinations
-from typing import Mapping
 
 from networkx import NetworkXError
 

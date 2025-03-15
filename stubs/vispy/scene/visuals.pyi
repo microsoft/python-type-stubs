@@ -1,9 +1,8 @@
-# -*- coding: utf-8 -*-
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 import re
 import weakref
-from typing import ClassVar, Type, TypeVar
+from typing import TypeVar
 
 from .. import visuals
 from ..scene.node import Node

@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # -----------------------------------------------------------------------------
 # Copyright (c) 2014, Nicolas P. Rougier. All rights reserved.
 # Distributed under the terms of the new BSD License.
@@ -6,7 +5,7 @@
 import numpy as np
 from numpy.typing import ArrayLike
 
-class ArrayList(object):
+class ArrayList:
     def __init__(
         self,
         data: ArrayLike | None = None,

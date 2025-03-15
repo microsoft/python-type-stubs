@@ -1,6 +1,6 @@
 from collections import Counter, defaultdict
+from collections.abc import Mapping
 from hashlib import blake2b
-from typing import Mapping
 
 from ..classes.graph import Graph
 

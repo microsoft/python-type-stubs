@@ -1,6 +1,6 @@
 from encodings.utf_8 import StreamWriter
 from io import BytesIO, TextIOWrapper
-from typing import Any, Type
+from typing import Any
 
 from matplotlib._typing import *
 from matplotlib.backend_bases import FigureCanvasBase, FigureManagerBase, GraphicsContextBase, RendererBase, _Backend
@@ -97,7 +97,7 @@ class FigureCanvasSVG(FigureCanvasBase):
     def get_default_filetype(self) -> str: ...
     def draw(self) -> None: ...
 
-FigureManagerSVG: Type[FigureManagerBase] = ...
+FigureManagerSVG: type[FigureManagerBase] = ...
 svgProlog: str = ...
 
 class _BackendSVG(_Backend):

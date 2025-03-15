@@ -2,7 +2,6 @@ from ..scene import SceneCanvas
 from ..util.svg.color import Color
 from .plotwidget import PlotWidget
 
-# -*- coding: utf-8 -*-
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 

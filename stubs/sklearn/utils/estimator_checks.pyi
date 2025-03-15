@@ -2,12 +2,11 @@ import pickle
 import re
 import types
 import warnings
-from collections.abc import Generator
+from collections.abc import Generator, Sequence
 from copy import deepcopy as deepcopy
 from functools import partial as partial, wraps as wraps
 from inspect import signature as signature
 from numbers import Real as Real
-from typing import Sequence
 
 import joblib
 import numpy as np

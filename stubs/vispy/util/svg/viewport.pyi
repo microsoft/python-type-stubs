@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # -----------------------------------------------------------------------------
 # Copyright (c) 2014, Nicolas P. Rougier. All rights reserved.
 # Distributed under the terms of the new BSD License.
@@ -6,7 +5,7 @@
 
 from .length import XLength, YLength
 
-class Viewport(object):
+class Viewport:
     def __init__(self, content=None, parent=None): ...
     @property
     def x(self): ...

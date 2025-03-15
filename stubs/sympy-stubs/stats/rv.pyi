@@ -1,5 +1,6 @@
+from collections.abc import Generator
 from functools import singledispatch
-from typing import Any, Generator
+from typing import Any
 from typing_extensions import Self
 
 from sympy import Equality, FiniteSet, Integral, Ne, Piecewise, ProductSet, Sum

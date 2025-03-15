@@ -1,4 +1,5 @@
-from typing import Any, Callable, ClassVar, Iterator, Literal, TypeVar
+from collections.abc import Iterator
+from typing import Any, Callable, ClassVar, Literal, TypeVar
 
 from numpy import ndarray
 from numpy.random import RandomState
