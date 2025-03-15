@@ -1,7 +1,8 @@
 from abc import ABCMeta, abstractmethod
 from collections import namedtuple
+from collections.abc import Sequence
 from inspect import signature as signature
-from typing import Callable, Literal, Sequence, TypeVar
+from typing import Callable, Literal, TypeVar
 
 from numpy import ndarray
 from scipy.spatial.distance import cdist as cdist, pdist as pdist, squareform as squareform

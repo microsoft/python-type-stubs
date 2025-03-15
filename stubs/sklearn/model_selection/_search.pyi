@@ -1,9 +1,9 @@
 from abc import ABCMeta, abstractmethod
 from collections import defaultdict as defaultdict
-from collections.abc import Iterable, Mapping, Sequence
+from collections.abc import Iterable, Iterator, Mapping, Sequence
 from functools import partial as partial, reduce as reduce
 from itertools import product as product
-from typing import Any, Callable, ClassVar, Generic, Iterable, Iterator, Mapping, Sequence, TypeVar
+from typing import Any, Callable, ClassVar, Generic, TypeVar
 
 from numpy import ndarray
 from numpy.ma import MaskedArray as MaskedArray

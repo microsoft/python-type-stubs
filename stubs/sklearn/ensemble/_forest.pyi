@@ -1,6 +1,7 @@
 from abc import ABCMeta, abstractmethod
+from collections.abc import Mapping, Sequence
 from numbers import Integral as Integral, Real as Real
-from typing import Any, ClassVar, Literal, Mapping, Sequence, TypeVar
+from typing import Any, ClassVar, Literal, TypeVar
 from warnings import catch_warnings as catch_warnings, simplefilter as simplefilter, warn as warn
 
 from numpy import ndarray

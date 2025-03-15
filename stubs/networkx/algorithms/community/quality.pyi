@@ -1,5 +1,5 @@
+from collections.abc import Sequence
 from itertools import combinations
-from typing import Sequence
 
 from networkx import NetworkXError
 

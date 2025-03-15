@@ -1,5 +1,3 @@
-from __future__ import division
-
 import numpy as np
 
 from ...app.canvas import Canvas
@@ -8,11 +6,10 @@ from ._util import TransformCache
 from .chain import ChainTransform
 from .linear import NullTransform, STTransform
 
-# -*- coding: utf-8 -*-
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 
-class TransformSystem(object):
+class TransformSystem:
     def __init__(self, canvas: Canvas | None = None, dpi: float | None = None): ...
     def _update_if_maps_changed(self, transform, map_key, new_maps): ...
     def configure(

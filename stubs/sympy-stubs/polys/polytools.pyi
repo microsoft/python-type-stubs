@@ -1,7 +1,8 @@
+from collections.abc import Iterator
 from functools import _Wrapped
 from types import NotImplementedType
-from typing import Any, Iterator, Literal
-from typing_extensions import Self, Tuple
+from typing import Any, Literal
+from typing_extensions import Self
 
 from sympy.combinatorics.galois import S1TransitiveSubgroups, S2TransitiveSubgroups, S3TransitiveSubgroups
 from sympy.combinatorics.perm_groups import PermutationGroup
@@ -393,7 +394,7 @@ def is_zero_dimensional(F, *gens, **args) -> Any: ...
 class GroebnerBasis(Basic):
     def __new__(cls, F, *gens, **args) -> Self: ...
     @property
-    def args(self) -> tuple[Tuple, Tuple]: ...
+    def args(self) -> tuple[tuple, tuple]: ...
     @property
     def exprs(self) -> list[Any]: ...
     @property

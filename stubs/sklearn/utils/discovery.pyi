@@ -1,9 +1,10 @@
 import inspect
 import pkgutil
+from collections.abc import Sequence
 from importlib import import_module as import_module
 from operator import itemgetter as itemgetter
 from pathlib import Path as Path
-from typing import Literal, Sequence
+from typing import Literal
 
 from numpy import ndarray
 

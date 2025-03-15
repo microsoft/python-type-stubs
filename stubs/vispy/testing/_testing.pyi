@@ -1,10 +1,7 @@
-# -*- coding: utf-8 -*-
 # -----------------------------------------------------------------------------
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 # -----------------------------------------------------------------------------
-
-from __future__ import print_function
 
 import functools
 import gc
@@ -36,7 +33,7 @@ def assert_not_equal(x, y, msg=None): ...
 def assert_not_in(member, container, msg=None): ...
 def assert_is(expr1, expr2, msg=None): ...
 
-class raises(object):
+class raises:
     def __init__(self, exc): ...
     def __enter__(self): ...
     def __exit__(self, exc_typ, exc, tb): ...

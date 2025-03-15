@@ -1,5 +1,5 @@
 import math
-from typing import Mapping
+from collections.abc import Mapping
 
 from ...classes.graph import Graph
 from ...utils import not_implemented_for

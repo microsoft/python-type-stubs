@@ -1,9 +1,9 @@
 from collections import defaultdict as defaultdict
-from collections.abc import Mapping
+from collections.abc import Iterable, Mapping
 from functools import partial
 from numbers import Integral as Integral, Real as Real
 from operator import itemgetter as itemgetter
-from typing import Any, Callable, ClassVar, Iterable, Literal, Mapping, TypeVar
+from typing import Any, Callable, ClassVar, Literal, TypeVar
 
 from numpy import ndarray
 from scipy.sparse import spmatrix

@@ -1,5 +1,6 @@
+from collections.abc import Mapping
 from numbers import Real as Real
-from typing import Callable, ClassVar, Mapping, TypeVar
+from typing import Callable, ClassVar, TypeVar
 
 from numpy import ndarray
 from numpy.random import RandomState

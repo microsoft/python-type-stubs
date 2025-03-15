@@ -1,7 +1,8 @@
 from abc import ABC, abstractmethod
+from collections.abc import Iterable, Sequence
 from functools import partial as partial
 from numbers import Integral as Integral, Real as Real
-from typing import ClassVar, Iterable, Literal, Sequence, TypeVar
+from typing import ClassVar, Literal, TypeVar
 
 from joblib import effective_n_jobs as effective_n_jobs
 from numpy import ndarray

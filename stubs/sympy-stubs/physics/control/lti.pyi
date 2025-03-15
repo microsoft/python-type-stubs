@@ -1,5 +1,5 @@
 from types import NotImplementedType
-from typing import Any, Callable, Type
+from typing import Any, Callable
 from typing_extensions import Self
 
 from sympy.core.basic import Basic
@@ -24,7 +24,7 @@ def bilinear(tf, sample_per) -> tuple[Any, Any]: ...
 def backward_diff(tf, sample_per) -> tuple[Any, Any]: ...
 
 class LinearTimeInvariant(Basic, EvalfMixin):
-    _clstype: Type
+    _clstype: type
     def __new__(cls, *system, **kwargs) -> Self: ...
     @property
     def is_SISO(self): ...

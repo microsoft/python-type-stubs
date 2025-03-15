@@ -1,5 +1,5 @@
 from typing import Any, Literal
-from typing_extensions import Self, Tuple as tTuple
+from typing_extensions import Self
 
 from sympy.core.basic import Basic
 from sympy.core.cache import cacheit
@@ -42,7 +42,7 @@ class exp(ExpBase, metaclass=ExpMeta):
 def match_real_imag(expr) -> tuple[Any, Literal[0]] | tuple[Any, Any] | tuple[None, None]: ...
 
 class log(Function):
-    args: tTuple[Expr]
+    args: tuple[Expr]
     _singularities = ...
     def fdiff(self, argindex=...): ...
     def inverse(self, argindex=...) -> type[exp]: ...

@@ -1,5 +1,6 @@
+from collections.abc import Iterator
 from types import NotImplementedType
-from typing import Any, Iterator, Literal
+from typing import Any, Literal
 from typing_extensions import LiteralString, Self
 
 from sympy.core.sympify import CantSympify

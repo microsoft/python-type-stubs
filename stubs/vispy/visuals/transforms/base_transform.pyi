@@ -1,13 +1,10 @@
-# -*- coding: utf-8 -*-
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
-
-from __future__ import division
 
 from ...util.event import EventEmitter
 from ..shaders import Function
 
-class BaseTransform(object):
+class BaseTransform:
     glsl_map: None = ...  # Must be GLSL code
     glsl_imap: None = ...
 

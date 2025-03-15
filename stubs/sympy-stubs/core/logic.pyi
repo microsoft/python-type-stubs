@@ -1,7 +1,7 @@
-from typing import Any, Optional
+from typing import Any
 from typing_extensions import Self, TypeAlias
 
-FuzzyBool: TypeAlias = Optional[bool]
+FuzzyBool: TypeAlias = bool | None
 
 def fuzzy_bool(x) -> bool | None: ...
 def fuzzy_and(args) -> bool | None: ...
