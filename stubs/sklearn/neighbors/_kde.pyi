@@ -1,6 +1,8 @@
+import itertools
 from numbers import Integral as Integral, Real as Real
 from typing import ClassVar, Literal, TypeVar
 
+import numpy as np
 from numpy import ndarray
 from numpy.random import RandomState
 from scipy.special import gammainc as gammainc
@@ -19,9 +21,6 @@ from ._kd_tree import KDTree as KDTree
 KernelDensity_Self = TypeVar("KernelDensity_Self", bound=KernelDensity)
 
 # Author: Jake Vanderplas <jakevdp@cs.washington.edu>
-import itertools
-
-import numpy as np
 
 VALID_KERNELS: list = ...
 

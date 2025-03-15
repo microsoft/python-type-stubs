@@ -1,6 +1,8 @@
+import warnings
 from numbers import Integral as Integral, Real as Real
 from typing import Any, Callable, ClassVar, TypeVar
 
+import numpy as np
 from numpy import ndarray
 from numpy.random import RandomState
 from scipy import linalg as linalg
@@ -17,10 +19,6 @@ MinCovDet_Self = TypeVar("MinCovDet_Self", bound=MinCovDet)
 # Author: Virgile Fritsch <virgile.fritsch@inria.fr>
 #
 # License: BSD 3 clause
-
-import warnings
-
-import numpy as np
 
 # Minimum Covariance Determinant
 #   Implementing of an algorithm by Rousseeuw & Van Driessen described in

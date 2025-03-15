@@ -2,6 +2,8 @@ from abc import ABCMeta, abstractmethod
 from numbers import Integral as Integral
 from typing import ClassVar, Sequence, TypeVar
 
+import numpy as np
+import scipy.sparse as sp
 from numpy import ndarray
 from scipy.sparse import spmatrix
 
@@ -30,9 +32,6 @@ _BaseChain_Self = TypeVar("_BaseChain_Self", bound=_BaseChain)
 _MultiOutputEstimator_Self = TypeVar("_MultiOutputEstimator_Self", bound=_MultiOutputEstimator)
 MultiOutputRegressor_Self = TypeVar("MultiOutputRegressor_Self", bound=MultiOutputRegressor)
 ClassifierChain_Self = TypeVar("ClassifierChain_Self", bound=ClassifierChain)
-
-import numpy as np
-import scipy.sparse as sp
 
 __all__ = [
     "MultiOutputRegressor",

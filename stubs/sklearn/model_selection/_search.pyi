@@ -1,10 +1,15 @@
+import numbers
+import operator
+import time
+import warnings
 from abc import ABCMeta, abstractmethod
 from collections import defaultdict as defaultdict
 from collections.abc import Iterable, Mapping, Sequence
 from functools import partial as partial, reduce as reduce
 from itertools import product as product
-from typing import Any, Callable, ClassVar, Generic, Iterable, Iterator, Mapping, Sequence, TypeVar
+from typing import Any, Callable, ClassVar, Generic, Iterator, TypeVar
 
+import numpy as np
 from numpy import ndarray
 from numpy.ma import MaskedArray as MaskedArray
 from numpy.random import RandomState
@@ -25,13 +30,6 @@ from ._split import check_cv as check_cv
 
 BaseSearchCV_Self = TypeVar("BaseSearchCV_Self", bound=BaseSearchCV)
 BaseEstimatorT = TypeVar("BaseEstimatorT", bound=BaseEstimator, default=BaseEstimator, covariant=True)
-
-import numbers
-import operator
-import time
-import warnings
-
-import numpy as np
 
 __all__ = ["GridSearchCV", "ParameterGrid", "ParameterSampler", "RandomizedSearchCV"]
 

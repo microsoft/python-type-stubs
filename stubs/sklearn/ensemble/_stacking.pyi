@@ -3,6 +3,8 @@ from copy import deepcopy as deepcopy
 from numbers import Integral as Integral
 from typing import ClassVar, Iterable, Literal, Sequence, TypeVar
 
+import numpy as np
+import scipy.sparse as sparse
 from numpy import ndarray
 
 from .._typing import ArrayLike, Int, MatrixLike
@@ -32,9 +34,6 @@ from ._base import _BaseHeterogeneousEnsemble
 _BaseStacking_Self = TypeVar("_BaseStacking_Self", bound=_BaseStacking)
 StackingRegressor_Self = TypeVar("StackingRegressor_Self", bound=StackingRegressor)
 StackingClassifier_Self = TypeVar("StackingClassifier_Self", bound=StackingClassifier)
-
-import numpy as np
-import scipy.sparse as sparse
 
 class _BaseStacking(TransformerMixin, _BaseHeterogeneousEnsemble, metaclass=ABCMeta):
     _parameter_constraints: ClassVar[dict] = ...

@@ -8,9 +8,6 @@ import numpy as np
 from matplotlib.axes._axes import Axes
 from matplotlib.backend_bases import DrawEvent, Event, FigureCanvasBase, KeyEvent, MouseButton, MouseEvent
 from matplotlib.figure import Figure
-from matplotlib.lines import Line2D
-from matplotlib.patches import Ellipse, Rectangle
-from matplotlib.transforms import Affine2D
 from numpy import float64, ndarray
 from numpy.typing import ArrayLike
 from PIL.Image import Image

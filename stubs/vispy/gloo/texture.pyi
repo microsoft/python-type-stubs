@@ -2,7 +2,7 @@ import math
 import warnings
 
 import numpy as np
-from numpy import dtype, ndarray
+from numpy import ndarray
 from numpy.typing import NDArray
 
 from .globject import GLObject

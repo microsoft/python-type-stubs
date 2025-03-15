@@ -1,4 +1,5 @@
 #!/bin/python
+# ruff: noqa: F841 # TODO: plenty of unused variables. Validate what was the intent.
 from __future__ import annotations
 
 __doc__ = """Validate Stubs.
@@ -147,7 +148,7 @@ def isfrommodule(v: object, module: str, default: bool = True) -> bool:
     try:
         # Make sure it came from this module
         return v.__dict__["__module__"] == module
-    except:
+    except Exception:
         return default
 
 

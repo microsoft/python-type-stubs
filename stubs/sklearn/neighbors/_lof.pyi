@@ -1,6 +1,8 @@
+import warnings
 from numbers import Real as Real
 from typing import Any, Callable, ClassVar, Literal, TypeVar
 
+import numpy as np
 from numpy import ndarray
 
 from .._typing import ArrayLike, Int, MatrixLike
@@ -16,10 +18,6 @@ LocalOutlierFactor_Self = TypeVar("LocalOutlierFactor_Self", bound=LocalOutlierF
 # Authors: Nicolas Goix <nicolas.goix@telecom-paristech.fr>
 #          Alexandre Gramfort <alexandre.gramfort@telecom-paristech.fr>
 # License: BSD 3 clause
-
-import warnings
-
-import numpy as np
 
 __all__ = ["LocalOutlierFactor"]
 

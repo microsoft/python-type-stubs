@@ -1,6 +1,7 @@
 from numbers import Integral as Integral, Real as Real
 from typing import Callable, ClassVar, TypeVar
 
+import numpy as np
 from numpy import ndarray
 from scipy.sparse import spmatrix
 
@@ -11,8 +12,6 @@ from .utils._param_validation import Interval as Interval, StrOptions as StrOpti
 from .utils.validation import check_is_fitted as check_is_fitted
 
 KernelRidge_Self = TypeVar("KernelRidge_Self", bound=KernelRidge)
-
-import numpy as np
 
 class KernelRidge(MultiOutputMixin, RegressorMixin, BaseEstimator):
     feature_names_in_: ndarray = ...

@@ -1,6 +1,7 @@
 from numbers import Integral as Integral, Real as Real
 from typing import Any, ClassVar, Literal, TypeVar
 
+import numpy as np
 from numpy import ndarray
 from numpy.random import RandomState
 from scipy.linalg import qr as qr, solve as solve, svd as svd
@@ -17,8 +18,6 @@ from ..utils.extmath import stable_cumsum as stable_cumsum
 from ..utils.validation import FLOAT_DTYPES as FLOAT_DTYPES, check_is_fitted as check_is_fitted
 
 LocallyLinearEmbedding_Self = TypeVar("LocallyLinearEmbedding_Self", bound=LocallyLinearEmbedding)
-
-import numpy as np
 
 def barycenter_weights(X: MatrixLike, Y: MatrixLike, indices: MatrixLike, reg: Float = 1e-3) -> ndarray: ...
 def barycenter_kneighbors_graph(

@@ -1,6 +1,8 @@
+import warnings
 from numbers import Integral as Integral, Real as Real
 from typing import Callable, ClassVar, Literal, TypeVar
 
+import numpy as np
 from joblib.memory import MemorizedFunc
 from numpy import ndarray
 from scipy import special as special, stats
@@ -26,10 +28,6 @@ _BaseFilter_Self = TypeVar("_BaseFilter_Self", bound=_BaseFilter)
 # Authors: V. Michel, B. Thirion, G. Varoquaux, A. Gramfort, E. Duchesnay.
 #          L. Buitinck, A. Joly
 # License: BSD 3 clause
-
-import warnings
-
-import numpy as np
 
 ######################################################################
 # Scoring functions

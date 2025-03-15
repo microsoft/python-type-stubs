@@ -1,8 +1,10 @@
+import warnings
 from abc import ABCMeta, abstractmethod
 from numbers import Integral as Integral, Real as Real
 from time import time as time
 from typing import Callable, ClassVar, Iterator, Literal, TypeVar
 
+import numpy as np
 from numpy import ndarray
 from numpy.random import RandomState
 from scipy.sparse import csc_matrix as csc_matrix, csr_matrix as csr_matrix, issparse as issparse
@@ -22,10 +24,6 @@ from ._gb_losses import LossFunction
 from ._gradient_boosting import predict_stage as predict_stage, predict_stages as predict_stages
 
 BaseGradientBoosting_Self = TypeVar("BaseGradientBoosting_Self", bound=BaseGradientBoosting)
-
-import warnings
-
-import numpy as np
 
 class VerboseReporter:
     def __init__(self, verbose: Int) -> None: ...

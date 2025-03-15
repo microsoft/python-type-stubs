@@ -1,7 +1,9 @@
+import warnings
 from math import log as log, sqrt as sqrt
 from numbers import Integral as Integral, Real as Real
 from typing import Any, ClassVar, Literal, TypeVar
 
+import numpy as np
 from numpy import ndarray
 from numpy.random import RandomState
 from scipy import linalg as linalg
@@ -21,10 +23,6 @@ FactorAnalysis_Self = TypeVar("FactorAnalysis_Self", bound=FactorAnalysis)
 #         Denis A. Engemann <denis-alexander.engemann@inria.fr>
 
 # License: BSD3
-
-import warnings
-
-import numpy as np
 
 class FactorAnalysis(ClassNamePrefixFeaturesOutMixin, TransformerMixin, BaseEstimator):
     feature_names_in_: ndarray = ...

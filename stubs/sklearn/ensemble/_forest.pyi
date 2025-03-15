@@ -1,8 +1,10 @@
+import threading
 from abc import ABCMeta, abstractmethod
 from numbers import Integral as Integral, Real as Real
 from typing import Any, ClassVar, Literal, Mapping, Sequence, TypeVar
 from warnings import catch_warnings as catch_warnings, simplefilter as simplefilter, warn as warn
 
+import numpy as np
 from numpy import ndarray
 from numpy.random import RandomState
 from scipy.sparse import hstack as sparse_hstack, issparse as issparse, spmatrix
@@ -29,10 +31,6 @@ from ._base import BaseEnsemble
 
 BaseForest_Self = TypeVar("BaseForest_Self", bound=BaseForest)
 RandomTreesEmbedding_Self = TypeVar("RandomTreesEmbedding_Self", bound=RandomTreesEmbedding)
-
-import threading
-
-import numpy as np
 
 __all__ = [
     "RandomForestClassifier",

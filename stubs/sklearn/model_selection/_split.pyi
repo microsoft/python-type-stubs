@@ -6,7 +6,7 @@ from collections.abc import Iterable
 from inspect import signature as signature
 from itertools import chain as chain, combinations as combinations
 from math import ceil as ceil, floor as floor
-from typing import Any, Callable, Iterable, Iterator
+from typing import Any, Callable, Iterator
 
 import numpy as np
 from numpy import ndarray

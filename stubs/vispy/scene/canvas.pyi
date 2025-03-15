@@ -11,11 +11,9 @@ from ..color import Color
 from ..gloo.context import GLContext
 from ..gloo.framebuffer import FrameBuffer
 from ..scene.node import Node
-from ..scene.widgets.widget import Widget
 from ..util import Frozen, logger
 from ..util.event import Event
 from ..util.profiler import Profiler
-from ..util.svg.color import Color
 from ..visuals.transforms import TransformSystem
 from ..visuals.visual import Visual
 from .events import SceneMouseEvent

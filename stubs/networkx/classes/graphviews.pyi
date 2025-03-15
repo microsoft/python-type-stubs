@@ -4,7 +4,6 @@ from networkx import DiGraph, Graph
 
 from ..classes.coreviews import FilterAdjacency, FilterAtlas, FilterMultiAdjacency, UnionAdjacency, UnionMultiAdjacency
 from ..classes.filters import no_filter
-from ..classes.graph import Graph
 from ..exception import NetworkXError
 from ..utils import not_implemented_for
 

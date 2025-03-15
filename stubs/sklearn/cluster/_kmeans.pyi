@@ -1,7 +1,10 @@
+import warnings
 from abc import ABC, abstractmethod as abstractmethod
 from numbers import Integral as Integral, Real as Real
 from typing import Any, Callable, ClassVar, Literal, TypeVar
 
+import numpy as np
+import scipy.sparse as sp
 from numpy import ndarray
 from numpy.random import RandomState
 
@@ -35,11 +38,6 @@ from ._k_means_lloyd import (
 
 KMeans_Self = TypeVar("KMeans_Self", bound=KMeans)
 MiniBatchKMeans_Self = TypeVar("MiniBatchKMeans_Self", bound=MiniBatchKMeans)
-
-import warnings
-
-import numpy as np
-import scipy.sparse as sp
 
 ###############################################################################
 # Initialization heuristic

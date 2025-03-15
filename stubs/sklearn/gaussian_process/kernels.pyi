@@ -1,11 +1,15 @@
+import math
+import warnings
 from abc import ABCMeta, abstractmethod
 from collections import namedtuple
 from inspect import signature as signature
 from typing import Callable, Literal, Sequence, TypeVar
+from typing_extensions import Self
 
+import numpy as np
 from numpy import ndarray
 from scipy.spatial.distance import cdist as cdist, pdist as pdist, squareform as squareform
-from scipy.special import gamma, kv as kv
+from scipy.special import kv as kv
 
 from .._typing import ArrayLike, Float, MatrixLike
 from ..base import clone as clone
@@ -14,12 +18,6 @@ from ..metrics.pairwise import pairwise_kernels as pairwise_kernels
 
 Kernel_Self = TypeVar("Kernel_Self", bound=Kernel)
 Hyperparameter_Self = TypeVar("Hyperparameter_Self", bound=Hyperparameter)
-
-import math
-import warnings
-from typing_extensions import Self
-
-import numpy as np
 
 class Hyperparameter(namedtuple("Hyperparameter", ("name", "value_type", "bounds", "n_elements", "fixed"))):
     fixed: bool = ...

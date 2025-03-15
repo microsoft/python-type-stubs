@@ -1,6 +1,8 @@
+import warnings
 from numbers import Integral as Integral, Real as Real
 from typing import Any, Callable, ClassVar, Literal, Mapping, TypeVar
 
+import numpy as np
 from numpy import ndarray
 from numpy.random import RandomState
 from scipy.linalg import LinAlgError as LinAlgError, qr as qr, svd as svd
@@ -17,10 +19,6 @@ from ..utils._param_validation import Interval as Interval, StrOptions as StrOpt
 from ._kmeans import k_means as k_means
 
 SpectralClustering_Self = TypeVar("SpectralClustering_Self", bound=SpectralClustering)
-
-import warnings
-
-import numpy as np
 
 def cluster_qr(vectors: MatrixLike) -> ndarray: ...
 def discretize(

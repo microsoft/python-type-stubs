@@ -1,6 +1,7 @@
 from numbers import Integral as Integral
 from typing import Any, Callable, ClassVar, Literal, TypeVar
 
+import numpy as np
 from numpy import ndarray
 
 from .._typing import ArrayLike, Int, MatrixLike
@@ -15,8 +16,6 @@ KNNImputer_Self = TypeVar("KNNImputer_Self", bound=KNNImputer)
 # Authors: Ashim Bhattarai <ashimb9@gmail.com>
 #          Thomas J Fan <thomasjpfan@gmail.com>
 # License: BSD 3 clause
-
-import numpy as np
 
 class KNNImputer(_BaseImputer):
     feature_names_in_: ndarray = ...

@@ -1,6 +1,8 @@
 from numbers import Integral as Integral, Real as Real
 from typing import ClassVar, Literal, TypeVar
 
+import numpy as np
+import scipy.optimize
 from numpy import ndarray
 
 from ..._loss.glm_distribution import TweedieDistribution as TweedieDistribution
@@ -21,9 +23,6 @@ from .._linear_loss import LinearModelLoss as LinearModelLoss
 from ._newton_solver import NewtonCholeskySolver as NewtonCholeskySolver, NewtonSolver
 
 _GeneralizedLinearRegressor_Self = TypeVar("_GeneralizedLinearRegressor_Self", bound=_GeneralizedLinearRegressor)
-
-import numpy as np
-import scipy.optimize
 
 class _GeneralizedLinearRegressor(RegressorMixin, BaseEstimator):
     _base_loss: BaseLoss = ...

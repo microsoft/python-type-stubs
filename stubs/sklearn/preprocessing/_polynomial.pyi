@@ -1,7 +1,9 @@
+import collections
 from itertools import chain as chain, combinations as combinations, combinations_with_replacement as combinations_w_r
 from numbers import Integral as Integral
 from typing import Any, ClassVar, Literal, TypeVar
 
+import numpy as np
 from numpy import ndarray
 from pandas.core.series import Series
 from scipy import sparse
@@ -17,10 +19,6 @@ from ..utils.validation import FLOAT_DTYPES as FLOAT_DTYPES, check_is_fitted as 
 
 SplineTransformer_Self = TypeVar("SplineTransformer_Self", bound=SplineTransformer)
 PolynomialFeatures_Self = TypeVar("PolynomialFeatures_Self", bound=PolynomialFeatures)
-
-import collections
-
-import numpy as np
 
 __all__ = [
     "PolynomialFeatures",

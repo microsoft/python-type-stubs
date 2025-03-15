@@ -1,7 +1,9 @@
+import warnings
 from collections import defaultdict as defaultdict
 from numbers import Integral as Integral, Real as Real
 from typing import Any, ClassVar, TypeVar
 
+import numpy as np
 from numpy import ndarray
 from numpy.random import RandomState
 
@@ -21,10 +23,6 @@ MeanShift_Self = TypeVar("MeanShift_Self", bound=MeanShift)
 #          Alexandre Gramfort <alexandre.gramfort@inria.fr>
 #          Gael Varoquaux <gael.varoquaux@normalesup.org>
 #          Martino Sorbaro <martino.sorbaro@ed.ac.uk>
-
-import warnings
-
-import numpy as np
 
 def estimate_bandwidth(
     X: MatrixLike,

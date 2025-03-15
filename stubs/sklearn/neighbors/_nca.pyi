@@ -1,7 +1,10 @@
+import sys
+import time
 from numbers import Integral as Integral, Real as Real
 from typing import Callable, ClassVar, Literal, TypeVar
 from warnings import warn as warn
 
+import numpy as np
 from numpy import ndarray
 from numpy.random import RandomState
 from scipy.optimize import minimize as minimize
@@ -19,11 +22,6 @@ from ..utils.random import check_random_state as check_random_state
 from ..utils.validation import check_array as check_array, check_is_fitted as check_is_fitted
 
 NeighborhoodComponentsAnalysis_Self = TypeVar("NeighborhoodComponentsAnalysis_Self", bound=NeighborhoodComponentsAnalysis)
-
-import sys
-import time
-
-import numpy as np
 
 class NeighborhoodComponentsAnalysis(ClassNamePrefixFeaturesOutMixin, TransformerMixin, BaseEstimator):
     feature_names_in_: ndarray = ...

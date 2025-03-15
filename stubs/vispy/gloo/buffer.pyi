@@ -5,7 +5,6 @@ from traceback import extract_stack, format_list
 import numpy as np
 from numpy.typing import NDArray
 
-from ..gloo.buffer import DataBuffer
 from ..util import logger
 from .globject import GLObject
 

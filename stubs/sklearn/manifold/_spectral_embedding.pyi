@@ -1,6 +1,8 @@
+import warnings
 from numbers import Integral as Integral, Real as Real
 from typing import Any, Callable, ClassVar, Literal, TypeVar
 
+import numpy as np
 from numpy import ndarray
 from numpy.random import RandomState
 from scipy import sparse as sparse
@@ -17,10 +19,6 @@ from ..utils import check_array as check_array, check_random_state as check_rand
 from ..utils._param_validation import Interval as Interval, StrOptions as StrOptions
 
 SpectralEmbedding_Self = TypeVar("SpectralEmbedding_Self", bound=SpectralEmbedding)
-
-import warnings
-
-import numpy as np
 
 def spectral_embedding(
     adjacency: coo_matrix | MatrixLike,

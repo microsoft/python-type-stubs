@@ -1,5 +1,5 @@
 from collections.abc import Sequence
-from typing import Callable, Sequence
+from typing import Callable
 
 from .artist import Artist
 from .container import BarContainer

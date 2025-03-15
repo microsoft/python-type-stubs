@@ -2,7 +2,7 @@ import array
 import numbers
 import warnings
 from collections.abc import Iterable
-from typing import Iterable, Literal, Sequence
+from typing import Literal, Sequence
 
 import numpy as np
 import scipy.sparse as sp

@@ -1,6 +1,9 @@
+import warnings
 from numbers import Integral as Integral, Real as Real
 from typing import ClassVar, Literal, TypeVar
 
+import numpy as np
+import scipy.sparse as sp
 from numpy import ndarray
 from numpy.random import RandomState
 
@@ -22,11 +25,6 @@ DummyClassifier_Self = TypeVar("DummyClassifier_Self", bound=DummyClassifier)
 #         Arnaud Joly <a.joly@ulg.ac.be>
 #         Maheshakya Wijewardena <maheshakya.10@cse.mrt.ac.lk>
 # License: BSD 3 clause
-
-import warnings
-
-import numpy as np
-import scipy.sparse as sp
 
 class DummyClassifier(MultiOutputMixin, ClassifierMixin, BaseEstimator):
     sparse_output_: bool = ...

@@ -1,6 +1,8 @@
+import warnings
 from numbers import Integral as Integral, Real as Real
 from typing import Any, Callable, ClassVar, Literal, TypeVar
 
+import numpy as np
 from joblib import Memory
 from numpy import ndarray
 from scipy.sparse import SparseEfficiencyWarning as SparseEfficiencyWarning, issparse as issparse
@@ -16,10 +18,6 @@ from ..utils._param_validation import HasMethods as HasMethods, Interval as Inte
 from ..utils.validation import check_memory as check_memory
 
 OPTICS_Self = TypeVar("OPTICS_Self", bound=OPTICS)
-
-import warnings
-
-import numpy as np
 
 class OPTICS(ClusterMixin, BaseEstimator):
     feature_names_in_: ndarray = ...

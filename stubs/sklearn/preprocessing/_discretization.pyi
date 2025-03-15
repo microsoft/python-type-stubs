@@ -1,6 +1,8 @@
+import warnings
 from numbers import Integral as Integral
 from typing import ClassVar, Literal, TypeVar
 
+import numpy as np
 from numpy import ndarray
 from numpy.random import RandomState
 from pandas.core.series import Series
@@ -23,10 +25,6 @@ KBinsDiscretizer_Self = TypeVar("KBinsDiscretizer_Self", bound=KBinsDiscretizer)
 #         Tom Dupré la Tour
 
 # License: BSD
-
-import warnings
-
-import numpy as np
 
 class KBinsDiscretizer(TransformerMixin, BaseEstimator):
     feature_names_in_: ndarray = ...
