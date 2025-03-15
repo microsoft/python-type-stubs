@@ -68,6 +68,7 @@ extra-standard-library = [
 
 [tool.pyright]
 exclude = ["build", ".git"]
+stubPath = "./stubs"
 # Target oldest supported Python version
 pythonversion = "3.9"
 typeCheckingMode = "standard"
