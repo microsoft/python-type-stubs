@@ -4,7 +4,6 @@ import json
 import logging
 import re
 import sys
-import traceback
 from functools import partial
 
 import numpy as np

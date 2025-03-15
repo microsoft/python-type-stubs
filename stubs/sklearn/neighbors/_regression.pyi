@@ -1,5 +1,7 @@
+import warnings
 from typing import Callable, ClassVar, Literal, TypeVar
 
+import numpy as np
 from numpy import ndarray
 
 from .._typing import ArrayLike, Float, Int, MatrixLike
@@ -19,10 +21,6 @@ RadiusNeighborsRegressor_Self = TypeVar("RadiusNeighborsRegressor_Self", bound=R
 #
 # License: BSD 3 clause (C) INRIA, University of Amsterdam,
 #                           University of Copenhagen
-
-import warnings
-
-import numpy as np
 
 class KNeighborsRegressor(KNeighborsMixin, RegressorMixin, NeighborsBase):
     n_samples_fit_: int = ...

@@ -8,7 +8,6 @@ from numpy.typing import ArrayLike
 
 from ..classes.coreviews import AdjacencyView
 from ..classes.digraph import DiGraph
-from ..classes.graph import Graph
 from ..classes.reportviews import DegreeView, EdgeView, NodeView
 from ..exception import NetworkXError
 

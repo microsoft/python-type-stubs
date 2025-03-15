@@ -4,7 +4,6 @@
 import warnings
 
 import numpy as np
-from numpy import dtype
 from numpy.typing import NDArray
 
 from ..gloo import Texture2D, Texture3D

@@ -2,6 +2,7 @@ from abc import ABCMeta, abstractmethod
 from numbers import Integral as Integral
 from typing import Any, ClassVar, Literal, TypeVar
 
+import numpy as np
 from numpy import ndarray
 from numpy.random import RandomState
 from scipy.linalg import norm as norm
@@ -21,8 +22,6 @@ from ..utils.validation import assert_all_finite as assert_all_finite
 from . import KMeans as KMeans, MiniBatchKMeans as MiniBatchKMeans
 
 BaseSpectral_Self = TypeVar("BaseSpectral_Self", bound=BaseSpectral)
-
-import numpy as np
 
 __all__ = ["SpectralCoclustering", "SpectralBiclustering"]
 

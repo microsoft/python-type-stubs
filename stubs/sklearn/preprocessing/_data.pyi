@@ -1,6 +1,8 @@
+import warnings
 from numbers import Integral as Integral, Real as Real
 from typing import Any, ClassVar, Literal, TypeVar, overload
 
+import numpy as np
 from numpy import ndarray
 from numpy.random import RandomState
 from pandas.core.series import Series
@@ -49,10 +51,6 @@ PowerTransformer_Self = TypeVar("PowerTransformer_Self", bound=PowerTransformer)
 #          Giorgio Patrini <giorgio.patrini@anu.edu.au>
 #          Eric Chang <ericchang2017@u.northwestern.edu>
 # License: BSD 3 clause
-
-import warnings
-
-import numpy as np
 
 BOUNDS_THRESHOLD: float = ...
 

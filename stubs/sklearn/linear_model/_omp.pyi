@@ -1,7 +1,9 @@
+import warnings
 from math import sqrt as sqrt
 from numbers import Integral as Integral, Real as Real
 from typing import ClassVar, Iterable, Literal, TypeVar
 
+import numpy as np
 from numpy import ndarray
 from scipy import linalg as linalg
 from scipy.linalg.lapack import get_lapack_funcs as get_lapack_funcs
@@ -20,10 +22,6 @@ OrthogonalMatchingPursuit_Self = TypeVar("OrthogonalMatchingPursuit_Self", bound
 # Author: Vlad Niculae
 #
 # License: BSD 3 clause
-
-import warnings
-
-import numpy as np
 
 premature: str = ...
 

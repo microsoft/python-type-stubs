@@ -1,7 +1,10 @@
+import sys
+import warnings
 from math import log as log
 from numbers import Integral as Integral, Real as Real
 from typing import ClassVar, Iterable, Literal, TypeVar
 
+import numpy as np
 from numpy import ndarray
 from numpy.random import RandomState
 from scipy import interpolate as interpolate, linalg as linalg
@@ -19,11 +22,6 @@ from ._base import LinearModel, LinearRegression as LinearRegression
 LassoLarsIC_Self = TypeVar("LassoLarsIC_Self", bound=LassoLarsIC)
 Lars_Self = TypeVar("Lars_Self", bound=Lars)
 LarsCV_Self = TypeVar("LarsCV_Self", bound=LarsCV)
-
-import sys
-import warnings
-
-import numpy as np
 
 SOLVE_TRIANGULAR_ARGS: dict = ...
 

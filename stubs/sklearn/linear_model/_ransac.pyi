@@ -1,6 +1,8 @@
+import warnings
 from numbers import Integral as Integral, Real as Real
 from typing import Any, Callable, ClassVar, TypeVar
 
+import numpy as np
 from numpy import ndarray
 from numpy.random import RandomState
 
@@ -24,10 +26,6 @@ RANSACRegressor_Self = TypeVar("RANSACRegressor_Self", bound=RANSACRegressor)
 # Author: Johannes Schönberger
 #
 # License: BSD 3 clause
-
-import warnings
-
-import numpy as np
 
 _EPSILON = ...
 

@@ -7,7 +7,7 @@ import warnings as warnings
 from collections.abc import Sequence as Sequence
 from contextlib import contextmanager as contextmanager, suppress as suppress
 from itertools import compress as compress, islice as islice
-from typing import Any, Iterable, Iterator, Sequence, SupportsIndex
+from typing import Any, Iterable, Iterator, SupportsIndex
 
 import numpy as np
 from numpy import ndarray

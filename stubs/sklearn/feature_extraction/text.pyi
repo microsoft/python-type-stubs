@@ -1,10 +1,16 @@
+import array
+import re
+import unicodedata
+import warnings
 from collections import defaultdict as defaultdict
 from collections.abc import Mapping
 from functools import partial
 from numbers import Integral as Integral, Real as Real
 from operator import itemgetter as itemgetter
-from typing import Any, Callable, ClassVar, Iterable, Literal, Mapping, TypeVar
+from typing import Any, Callable, ClassVar, Iterable, Literal, TypeVar
 
+import numpy as np
+import scipy.sparse as sp
 from numpy import ndarray
 from scipy.sparse import spmatrix
 
@@ -30,14 +36,6 @@ TfidfTransformer_Self = TypeVar("TfidfTransformer_Self", bound=TfidfTransformer)
 #          Roman Sinayev <roman.sinayev@gmail.com>
 #
 # License: BSD 3 clause
-
-import array
-import re
-import unicodedata
-import warnings
-
-import numpy as np
-import scipy.sparse as sp
 
 __all__ = [
     "HashingVectorizer",

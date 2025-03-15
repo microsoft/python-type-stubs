@@ -1,5 +1,7 @@
+import warnings
 from typing import Any, ClassVar, Literal, TypeVar
 
+import numpy as np
 from numpy import ndarray
 from scipy import linalg as linalg
 
@@ -19,9 +21,6 @@ EmpiricalCovariance_Self = TypeVar("EmpiricalCovariance_Self", bound=EmpiricalCo
 # License: BSD 3 clause
 
 # avoid division truncation
-import warnings
-
-import numpy as np
 
 def log_likelihood(emp_cov: MatrixLike, precision: MatrixLike) -> Float: ...
 def empirical_covariance(X: ArrayLike, *, assume_centered: bool = False) -> ndarray: ...

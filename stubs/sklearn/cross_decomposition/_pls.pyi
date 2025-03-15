@@ -1,7 +1,9 @@
+import warnings
 from abc import ABCMeta, abstractmethod
 from numbers import Integral as Integral, Real as Real
 from typing import ClassVar, Literal, TypeVar
 
+import numpy as np
 from numpy import ndarray
 
 from .._typing import ArrayLike, Float, Int, MatrixLike
@@ -15,10 +17,6 @@ from ..utils.validation import FLOAT_DTYPES as FLOAT_DTYPES, check_is_fitted as 
 PLSSVD_Self = TypeVar("PLSSVD_Self", bound=PLSSVD)
 PLSRegression_Self = TypeVar("PLSRegression_Self", bound=PLSRegression)
 _PLS_Self = TypeVar("_PLS_Self", bound=_PLS)
-
-import warnings
-
-import numpy as np
 
 __all__ = ["PLSCanonical", "PLSRegression", "PLSSVD"]
 

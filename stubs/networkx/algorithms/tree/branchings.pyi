@@ -24,7 +24,6 @@ from operator import itemgetter
 from queue import PriorityQueue
 from typing import Literal
 
-from ...algorithms.tree.branchings import ArborescenceIterator
 from ...classes.digraph import DiGraph
 from ...classes.graph import Graph
 from ...classes.multidigraph import MultiDiGraph

@@ -1,5 +1,6 @@
 from typing import Sequence, TypeVar
 
+import numpy as np
 from numpy import ndarray, uint8
 from numpy.random import RandomState
 
@@ -19,8 +20,6 @@ from .common import (
 _BinMapper_Self = TypeVar("_BinMapper_Self", bound=_BinMapper)
 
 # Author: Nicolas Hug
-
-import numpy as np
 
 class _BinMapper(TransformerMixin, BaseEstimator):
     missing_values_bin_idx_: uint8 = ...

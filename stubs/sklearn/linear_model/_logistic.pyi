@@ -1,6 +1,9 @@
+import numbers
+import warnings
 from numbers import Integral as Integral, Real as Real
 from typing import Callable, ClassVar, Literal, Mapping, Sequence, TypeVar
 
+import numpy as np
 from joblib import effective_n_jobs as effective_n_jobs
 from numpy import ndarray
 from numpy.random import RandomState
@@ -37,11 +40,6 @@ LogisticRegression_Self = TypeVar("LogisticRegression_Self", bound=LogisticRegre
 #         Lars Buitinck
 #         Simon Wu <s8wu@uwaterloo.ca>
 #         Arthur Mensch <arthur.mensch@m4x.org
-
-import numbers
-import warnings
-
-import numpy as np
 
 _LOGISTIC_SOLVER_CONVERGENCE_MSG: str = ...
 
