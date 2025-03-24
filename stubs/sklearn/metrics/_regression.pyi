@@ -49,7 +49,7 @@ def mean_absolute_error(
     *,
     sample_weight: None | ArrayLike = None,
     multioutput: Literal["uniform_average"] | ArrayLike = "uniform_average",
-) -> Float: ...
+) -> float: ...
 @overload
 def mean_pinball_loss(
     y_true: MatrixLike | ArrayLike,
@@ -83,7 +83,7 @@ def mean_absolute_percentage_error(
     *,
     sample_weight: None | ArrayLike = None,
     multioutput: Literal["uniform_average"] | ArrayLike = "uniform_average",
-) -> Float: ...
+) -> float: ...
 @overload
 def mean_squared_error(
     y_true: MatrixLike | ArrayLike,
@@ -99,7 +99,7 @@ def mean_squared_error(
     *,
     sample_weight: None | ArrayLike = None,
     multioutput: Literal["uniform_average"] | ArrayLike = "uniform_average",
-) -> Float: ...
+) -> float: ...
 @deprecated(
     "`squared` is deprecated in 1.4 and will be removed in 1.6. Use `root_mean_squared_error` instead to calculate the root mean squared error."
 )
@@ -123,7 +123,7 @@ def mean_squared_error(
     sample_weight: None | ArrayLike = None,
     multioutput: Literal["uniform_average"] | ArrayLike = "uniform_average",
     squared: bool,
-) -> Float: ...
+) -> float: ...
 @overload
 def mean_squared_log_error(
     y_true: MatrixLike | ArrayLike,
@@ -215,7 +215,7 @@ def r2_score(
     sample_weight: None | ArrayLike = None,
     multioutput: Literal["uniform_average", "variance_weighted"] | ArrayLike | None = "uniform_average",
     force_finite: bool = True,
-) -> Float: ...
+) -> float: ...
 def max_error(y_true: ArrayLike, y_pred: ArrayLike) -> float: ...
 def mean_tweedie_deviance(
     y_true: ArrayLike,
@@ -223,7 +223,7 @@ def mean_tweedie_deviance(
     *,
     sample_weight: None | ArrayLike = None,
     power: Float = 0,
-) -> Float: ...
+) -> float: ...
 def mean_poisson_deviance(y_true: ArrayLike, y_pred: ArrayLike, *, sample_weight: None | ArrayLike = None) -> Float: ...
 def mean_gamma_deviance(y_true: ArrayLike, y_pred: ArrayLike, *, sample_weight: None | ArrayLike = None) -> float: ...
 def d2_tweedie_score(
@@ -249,7 +249,7 @@ def d2_pinball_score(
     sample_weight: None | ArrayLike = None,
     alpha: Float = 0.5,
     multioutput: Literal["uniform_average"] | ArrayLike = "uniform_average",
-) -> float: ...
+) -> Float: ...
 @overload
 def d2_absolute_error_score(
     y_true: MatrixLike | ArrayLike,
@@ -265,7 +265,7 @@ def d2_absolute_error_score(
     *,
     sample_weight: None | ArrayLike = None,
     multioutput: Literal["uniform_average"] | ArrayLike = "uniform_average",
-) -> float: ...
+) -> Float: ...
 @overload
 def root_mean_squared_error(
     y_true: MatrixLike | ArrayLike,
