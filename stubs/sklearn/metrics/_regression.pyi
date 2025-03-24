@@ -34,36 +34,72 @@ from ..utils.validation import (
 
 __ALL__: list = ...
 
+@overload
 def mean_absolute_error(
     y_true: MatrixLike | ArrayLike,
     y_pred: MatrixLike | ArrayLike,
     *,
     sample_weight: None | ArrayLike = None,
-    multioutput: ArrayLike | Literal["raw_values", "uniform_average"] = "uniform_average",
-) -> ndarray | Float: ...
+    multioutput: Literal["raw_values"],
+) -> ndarray: ...
+@overload
+def mean_absolute_error(
+    y_true: MatrixLike | ArrayLike,
+    y_pred: MatrixLike | ArrayLike,
+    *,
+    sample_weight: None | ArrayLike = None,
+    multioutput: Literal["uniform_average"] | ArrayLike = "uniform_average",
+) -> Float: ...
+@overload
 def mean_pinball_loss(
     y_true: MatrixLike | ArrayLike,
     y_pred: MatrixLike | ArrayLike,
     *,
     sample_weight: None | ArrayLike = None,
     alpha: float = 0.5,
-    multioutput: ArrayLike | Literal["raw_values", "uniform_average"] = "uniform_average",
-) -> ndarray | Float: ...
+    multioutput: Literal["raw_values"],
+) -> ndarray: ...
+@overload
+def mean_pinball_loss(
+    y_true: MatrixLike | ArrayLike,
+    y_pred: MatrixLike | ArrayLike,
+    *,
+    sample_weight: None | ArrayLike = None,
+    alpha: float = 0.5,
+    multioutput: Literal["uniform_average"] | ArrayLike = "uniform_average",
+) -> Float: ...
+@overload
 def mean_absolute_percentage_error(
     y_true: MatrixLike | ArrayLike,
     y_pred: MatrixLike | ArrayLike,
     *,
     sample_weight: None | ArrayLike = None,
-    multioutput: ArrayLike | Literal["raw_values", "uniform_average"] = "uniform_average",
-) -> ndarray | Float: ...
+    multioutput: Literal["raw_values"],
+) -> ndarray: ...
+@overload
+def mean_absolute_percentage_error(
+    y_true: MatrixLike | ArrayLike,
+    y_pred: MatrixLike | ArrayLike,
+    *,
+    sample_weight: None | ArrayLike = None,
+    multioutput: Literal["uniform_average"] | ArrayLike = "uniform_average",
+) -> Float: ...
 @overload
 def mean_squared_error(
     y_true: MatrixLike | ArrayLike,
     y_pred: MatrixLike | ArrayLike,
     *,
     sample_weight: None | ArrayLike = None,
-    multioutput: ArrayLike | Literal["raw_values", "uniform_average"] = "uniform_average",
-) -> ndarray | Float: ...
+    multioutput: Literal["raw_values"],
+) -> ndarray: ...
+@overload
+def mean_squared_error(
+    y_true: MatrixLike | ArrayLike,
+    y_pred: MatrixLike | ArrayLike,
+    *,
+    sample_weight: None | ArrayLike = None,
+    multioutput: Literal["uniform_average"] | ArrayLike = "uniform_average",
+) -> Float: ...
 @deprecated(
     "`squared` is deprecated in 1.4 and will be removed in 1.6. Use `root_mean_squared_error` instead to calculate the root mean squared error."
 )
@@ -73,17 +109,37 @@ def mean_squared_error(
     y_pred: MatrixLike | ArrayLike,
     *,
     sample_weight: None | ArrayLike = None,
-    multioutput: ArrayLike | Literal["raw_values", "uniform_average"] = "uniform_average",
+    multioutput: Literal["raw_values"],
     squared: bool,
-) -> ndarray | Float: ...
+) -> ndarray: ...
+@deprecated(
+    "`squared` is deprecated in 1.4 and will be removed in 1.6. Use `root_mean_squared_error` instead to calculate the root mean squared error."
+)
+@overload
+def mean_squared_error(
+    y_true: MatrixLike | ArrayLike,
+    y_pred: MatrixLike | ArrayLike,
+    *,
+    sample_weight: None | ArrayLike = None,
+    multioutput: Literal["uniform_average"] | ArrayLike = "uniform_average",
+    squared: bool,
+) -> Float: ...
 @overload
 def mean_squared_log_error(
     y_true: MatrixLike | ArrayLike,
     y_pred: MatrixLike | ArrayLike,
     *,
     sample_weight: None | ArrayLike = None,
-    multioutput: ArrayLike | Literal["raw_values", "uniform_average"] = "uniform_average",
-) -> float | ndarray: ...
+    multioutput: Literal["raw_values"],
+) -> ndarray: ...
+@overload
+def mean_squared_log_error(
+    y_true: MatrixLike | ArrayLike,
+    y_pred: MatrixLike | ArrayLike,
+    *,
+    sample_weight: None | ArrayLike = None,
+    multioutput: Literal["uniform_average"] | ArrayLike = "uniform_average",
+) -> float: ...
 @deprecated(
     "`squared` is deprecated in 1.4 and will be removed in 1.6. Use `root_mean_squared_log_error` instead to calculate the root mean squared logarithmic error."
 )
@@ -93,32 +149,73 @@ def mean_squared_log_error(
     y_pred: MatrixLike | ArrayLike,
     *,
     sample_weight: None | ArrayLike = None,
-    multioutput: ArrayLike | Literal["raw_values", "uniform_average"] = "uniform_average",
+    multioutput: Literal["raw_values"],
     squared: bool,
-) -> float | ndarray: ...
+) -> ndarray: ...
+@deprecated(
+    "`squared` is deprecated in 1.4 and will be removed in 1.6. Use `root_mean_squared_log_error` instead to calculate the root mean squared logarithmic error."
+)
+@overload
+def mean_squared_log_error(
+    y_true: MatrixLike | ArrayLike,
+    y_pred: MatrixLike | ArrayLike,
+    *,
+    sample_weight: None | ArrayLike = None,
+    multioutput: Literal["uniform_average"] | ArrayLike = "uniform_average",
+    squared: bool,
+) -> float: ...
+@overload
 def median_absolute_error(
     y_true: MatrixLike | ArrayLike,
     y_pred: MatrixLike | ArrayLike,
     *,
-    multioutput: ArrayLike | Literal["raw_values", "uniform_average"] = "uniform_average",
+    multioutput: Literal["raw_values"],
     sample_weight: None | ArrayLike = None,
-) -> ndarray | Float: ...
+) -> ndarray: ...
+@overload
+def median_absolute_error(
+    y_true: MatrixLike | ArrayLike,
+    y_pred: MatrixLike | ArrayLike,
+    *,
+    multioutput: Literal["uniform_average"] | ArrayLike = "uniform_average",
+    sample_weight: None | ArrayLike = None,
+) -> Float: ...
+@overload
 def explained_variance_score(
     y_true: MatrixLike | ArrayLike,
     y_pred: MatrixLike | ArrayLike,
     *,
     sample_weight: None | ArrayLike = None,
-    multioutput: Literal["raw_values", "uniform_average", "variance_weighted"] | ArrayLike = "uniform_average",
+    multioutput: Literal["raw_values"],
     force_finite: bool = True,
-) -> float | ndarray: ...
+) -> ndarray: ...
+@overload
+def explained_variance_score(
+    y_true: MatrixLike | ArrayLike,
+    y_pred: MatrixLike | ArrayLike,
+    *,
+    sample_weight: None | ArrayLike = None,
+    multioutput: Literal["uniform_average", "variance_weighted"] | ArrayLike = "uniform_average",
+    force_finite: bool = True,
+) -> float: ...
+@overload
 def r2_score(
     y_true: MatrixLike | ArrayLike,
     y_pred: MatrixLike | ArrayLike,
     *,
     sample_weight: None | ArrayLike = None,
-    multioutput: (Literal["raw_values", "uniform_average", "variance_weighted"] | None | ArrayLike) = "uniform_average",
+    multioutput: Literal["raw_values"],
     force_finite: bool = True,
-) -> ndarray | Float: ...
+) -> ndarray: ...
+@overload
+def r2_score(
+    y_true: MatrixLike | ArrayLike,
+    y_pred: MatrixLike | ArrayLike,
+    *,
+    sample_weight: None | ArrayLike = None,
+    multioutput: Literal["uniform_average", "variance_weighted"] | ArrayLike | None = "uniform_average",
+    force_finite: bool = True,
+) -> Float: ...
 def max_error(y_true: ArrayLike, y_pred: ArrayLike) -> float: ...
 def mean_tweedie_deviance(
     y_true: ArrayLike,
@@ -135,33 +232,69 @@ def d2_tweedie_score(
     *,
     sample_weight: None | ArrayLike = None,
     power: Float = 0,
-) -> float | ndarray: ...
+@overload
 def d2_pinball_score(
     y_true: MatrixLike | ArrayLike,
     y_pred: MatrixLike | ArrayLike,
     *,
     sample_weight: None | ArrayLike = None,
     alpha: Float = 0.5,
-    multioutput: ArrayLike | Literal["raw_values", "uniform_average"] = "uniform_average",
-) -> float | ndarray: ...
+    multioutput: Literal["raw_values"],
+) -> ndarray: ...
+@overload
+def d2_pinball_score(
+    y_true: MatrixLike | ArrayLike,
+    y_pred: MatrixLike | ArrayLike,
+    *,
+    sample_weight: None | ArrayLike = None,
+    alpha: Float = 0.5,
+    multioutput: Literal["uniform_average"] | ArrayLike = "uniform_average",
+) -> float: ...
+@overload
 def d2_absolute_error_score(
     y_true: MatrixLike | ArrayLike,
     y_pred: MatrixLike | ArrayLike,
     *,
     sample_weight: None | ArrayLike = None,
-    multioutput: ArrayLike | Literal["raw_values", "uniform_average"] = "uniform_average",
-) -> float | ndarray: ...
+    multioutput: Literal["raw_values"],
+) -> ndarray: ...
+@overload
+def d2_absolute_error_score(
+    y_true: MatrixLike | ArrayLike,
+    y_pred: MatrixLike | ArrayLike,
+    *,
+    sample_weight: None | ArrayLike = None,
+    multioutput: Literal["uniform_average"] | ArrayLike = "uniform_average",
+) -> float: ...
+@overload
 def root_mean_squared_error(
     y_true: MatrixLike | ArrayLike,
     y_pred: MatrixLike | ArrayLike,
     *,
     sample_weight: None | ArrayLike = None,
-    multioutput: ArrayLike | Literal["raw_values", "uniform_average"] = "uniform_average",
-) -> float | ndarray: ...
+    multioutput: Literal["raw_values"],
+) -> ndarray: ...
+@overload
+def root_mean_squared_error(
+    y_true: MatrixLike | ArrayLike,
+    y_pred: MatrixLike | ArrayLike,
+    *,
+    sample_weight: None | ArrayLike = None,
+    multioutput: Literal["uniform_average"] | ArrayLike = "uniform_average",
+) -> float: ...
+@overload
 def root_mean_squared_log_error(
     y_true: MatrixLike | ArrayLike,
     y_pred: MatrixLike | ArrayLike,
     *,
     sample_weight: None | ArrayLike = None,
-    multioutput: ArrayLike | Literal["raw_values", "uniform_average"] = "uniform_average",
-) -> float | ndarray: ...
+    multioutput: Literal["raw_values"],
+) -> ndarray: ...
+@overload
+def root_mean_squared_log_error(
+    y_true: MatrixLike | ArrayLike,
+    y_pred: MatrixLike | ArrayLike,
+    *,
+    sample_weight: None | ArrayLike = None,
+    multioutput: Literal["uniform_average"] | ArrayLike = "uniform_average",
+) -> float: ...
