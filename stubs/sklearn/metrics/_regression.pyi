@@ -232,6 +232,7 @@ def d2_tweedie_score(
     *,
     sample_weight: None | ArrayLike = None,
     power: Float = 0,
+) -> float: ...
 @overload
 def d2_pinball_score(
     y_true: MatrixLike | ArrayLike,
