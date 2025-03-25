@@ -1,4 +1,5 @@
-from typing import Any, Iterator
+from collections.abc import Iterator
+from typing import Any
 from typing_extensions import Self
 
 from sympy.core.basic import Basic

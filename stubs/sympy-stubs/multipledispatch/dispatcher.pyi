@@ -1,7 +1,8 @@
+from collections.abc import Generator, ValuesView
 from inspect import Parameter
 from itertools import islice
-from typing import Any, Callable, Generator
-from typing_extensions import LiteralString, Self, ValuesView
+from typing import Any, Callable
+from typing_extensions import LiteralString, Self
 
 class MDNotImplementedError(NotImplementedError): ...
 

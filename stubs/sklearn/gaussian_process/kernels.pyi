@@ -2,8 +2,9 @@ import math
 import warnings
 from abc import ABCMeta, abstractmethod
 from collections import namedtuple
+from collections.abc import Sequence
 from inspect import signature as signature
-from typing import Callable, Literal, Sequence, TypeVar
+from typing import Callable, Literal, TypeVar
 from typing_extensions import Self
 
 import numpy as np

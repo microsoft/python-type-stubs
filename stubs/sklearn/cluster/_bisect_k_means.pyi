@@ -1,5 +1,6 @@
 import warnings
-from typing import Any, Callable, ClassVar, Iterator, Literal, TypeVar
+from collections.abc import Iterator
+from typing import Any, Callable, ClassVar, Literal, TypeVar
 
 import numpy as np
 import scipy.sparse as sp

@@ -1,5 +1,6 @@
 import math
-from typing import Callable, Literal, Mapping, Sequence
+from collections.abc import Mapping, Sequence
+from typing import Callable, Literal
 
 import networkx as nx
 import numpy as np

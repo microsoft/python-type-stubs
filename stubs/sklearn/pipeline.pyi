@@ -1,6 +1,7 @@
 from collections import defaultdict as defaultdict
+from collections.abc import Iterable, Sequence
 from itertools import islice as islice
-from typing import Any, ClassVar, Iterable, Literal, Sequence, TypeVar
+from typing import Any, ClassVar, Literal, TypeVar
 
 import numpy as np
 from joblib import Memory

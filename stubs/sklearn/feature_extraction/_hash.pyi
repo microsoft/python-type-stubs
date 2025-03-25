@@ -1,6 +1,7 @@
+from collections.abc import Iterator
 from itertools import chain as chain
 from numbers import Integral as Integral
-from typing import Any, ClassVar, Iterator, TypeVar
+from typing import Any, ClassVar, TypeVar
 
 import numpy as np
 import scipy.sparse as sp

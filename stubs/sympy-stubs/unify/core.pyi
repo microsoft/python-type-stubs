@@ -1,4 +1,5 @@
-from typing import Any, Generator
+from collections.abc import Generator
+from typing import Any
 
 class Compound:
     def __init__(self, op, args) -> None: ...

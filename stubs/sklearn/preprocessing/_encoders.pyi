@@ -1,7 +1,8 @@
 import numbers
 import warnings
+from collections.abc import Sequence
 from numbers import Integral as Integral, Real as Real
-from typing import ClassVar, Literal, Sequence, TypeVar
+from typing import ClassVar, Literal, TypeVar
 
 import numpy as np
 from numpy import ndarray

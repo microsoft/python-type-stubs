@@ -4,10 +4,10 @@ import time
 import warnings
 from abc import ABCMeta, abstractmethod
 from collections import defaultdict as defaultdict
-from collections.abc import Iterable, Mapping, Sequence
+from collections.abc import Iterable, Iterator, Mapping, Sequence
 from functools import partial as partial, reduce as reduce
 from itertools import product as product
-from typing import Any, Callable, ClassVar, Generic, Iterator, TypeVar
+from typing import Any, Callable, ClassVar, Generic, TypeVar
 
 import numpy as np
 from numpy import ndarray

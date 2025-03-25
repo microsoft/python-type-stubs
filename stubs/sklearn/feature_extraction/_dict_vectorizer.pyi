@@ -1,8 +1,8 @@
 from array import array as array
-from collections.abc import Iterable, Mapping
+from collections.abc import Iterable, Iterator, Mapping
 from numbers import Number as Number
 from operator import itemgetter as itemgetter
-from typing import Any, ClassVar, Iterator, TypeVar
+from typing import Any, ClassVar, TypeVar
 
 import numpy as np
 import scipy.sparse as sp

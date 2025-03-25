@@ -1,5 +1,6 @@
+from collections.abc import Iterable
 from numbers import Integral as Integral, Real as Real
-from typing import Callable, ClassVar, Iterable, TypeVar
+from typing import Callable, ClassVar, TypeVar
 
 import numpy as np
 from joblib import effective_n_jobs as effective_n_jobs

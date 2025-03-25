@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # -----------------------------------------------------------------------------
 # Copyright (c) 2014, Nicolas P. Rougier
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
@@ -10,7 +9,7 @@ from .number import Number
 
 _converters: dict = ...
 
-class Style(object):
+class Style:
     def __init__(self): ...
     def update(self, content): ...
     @property

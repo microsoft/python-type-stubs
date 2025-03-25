@@ -11,7 +11,7 @@ def install_requirements():
 
 def run_ruff_fix():
     print("\nRunning Ruff check --fix...")
-    return subprocess.run((sys.executable, "-m", "ruff", "--fix"))
+    return subprocess.run((sys.executable, "-m", "ruff", "check", "--fix"))
 
 
 def run_ruff_format():

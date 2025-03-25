@@ -1,9 +1,10 @@
 import numbers
 import warnings
 from abc import ABCMeta, abstractmethod
+from collections.abc import Iterable, Mapping
 from functools import partial as partial
 from numbers import Integral as Integral, Real as Real
-from typing import Callable, ClassVar, Iterable, Literal, Mapping, TypeVar
+from typing import Callable, ClassVar, Literal, TypeVar
 
 import numpy as np
 from numpy import ndarray

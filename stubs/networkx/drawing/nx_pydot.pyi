@@ -1,6 +1,6 @@
 import warnings
+from collections.abc import Mapping
 from locale import getpreferredencoding
-from typing import Mapping
 
 from ..classes.graph import Graph
 from ..classes.multidigraph import MultiDiGraph

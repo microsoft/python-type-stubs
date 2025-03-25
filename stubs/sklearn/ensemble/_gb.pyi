@@ -1,8 +1,9 @@
 import warnings
 from abc import ABCMeta, abstractmethod
+from collections.abc import Iterator
 from numbers import Integral as Integral, Real as Real
 from time import time as time
-from typing import Callable, ClassVar, Iterator, Literal, TypeVar
+from typing import Callable, ClassVar, Literal, TypeVar
 
 import numpy as np
 from numpy import ndarray

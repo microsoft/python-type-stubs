@@ -1,5 +1,6 @@
 import tkinter as tk
-from typing import Literal, Sequence
+from collections.abc import Sequence
+from typing import Literal
 
 from matplotlib._api import classproperty
 from matplotlib._typing import *

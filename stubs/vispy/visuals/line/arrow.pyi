@@ -7,7 +7,6 @@ from ..transforms._util import as_vec4
 from ..visual import Visual
 from .line import LineVisual
 
-# -*- coding: utf-8 -*-
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 

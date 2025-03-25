@@ -1,12 +1,9 @@
-# -*- coding: utf-8 -*-
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 
-from __future__ import division
-
 from ... import gloo
 
-class Compiler(object):
+class Compiler:
     def __init__(self, namespace=None, **shaders): ...
     def __getitem__(self, item): ...
     def compile(self, pretty: bool = True): ...

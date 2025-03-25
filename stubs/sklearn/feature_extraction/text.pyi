@@ -3,11 +3,11 @@ import re
 import unicodedata
 import warnings
 from collections import defaultdict as defaultdict
-from collections.abc import Mapping
+from collections.abc import Iterable, Mapping
 from functools import partial
 from numbers import Integral as Integral, Real as Real
 from operator import itemgetter as itemgetter
-from typing import Any, Callable, ClassVar, Iterable, Literal, TypeVar
+from typing import Any, Callable, ClassVar, Literal, TypeVar
 
 import numpy as np
 import scipy.sparse as sp

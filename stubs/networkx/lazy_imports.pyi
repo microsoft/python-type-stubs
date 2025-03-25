@@ -4,7 +4,7 @@ import inspect
 import os
 import sys
 import types
-from typing import Mapping
+from collections.abc import Mapping
 
 __all__ = ["attach"]
 

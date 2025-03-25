@@ -9,7 +9,6 @@ from ..io import read_mesh
 from ..scene.visuals import Image, LinePlot, Mesh, Polygon, Spectrogram, Volume
 from ..scene.widgets.colorbar import ColorBarWidget
 
-# -*- coding: utf-8 -*-
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 

@@ -7,12 +7,11 @@ from numpy.typing import NDArray
 
 from ..util import logger
 
-# -*- coding: utf-8 -*-
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 # This module was taken from visvis
 
-class WavefrontReader(object):
+class WavefrontReader:
     def __init__(self, f): ...
     @classmethod
     def read(cls, fname: str): ...
@@ -23,7 +22,7 @@ class WavefrontReader(object):
     def _calculate_normals(self): ...
     def finish(self): ...
 
-class WavefrontWriter(object):
+class WavefrontWriter:
     def __init__(self, f): ...
     @classmethod
     def write(

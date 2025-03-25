@@ -1,6 +1,7 @@
 from collections import Counter as Counter
+from collections.abc import Sequence
 from itertools import chain as chain
-from typing import ClassVar, Literal, Sequence, TypeVar
+from typing import ClassVar, Literal, TypeVar
 
 import numpy as np
 from numpy import dtype, ndarray

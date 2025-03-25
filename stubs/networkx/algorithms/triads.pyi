@@ -1,7 +1,7 @@
 from collections import defaultdict
+from collections.abc import Mapping
 from itertools import combinations, permutations
 from random import sample
-from typing import Mapping
 
 from numpy.typing import ArrayLike
 

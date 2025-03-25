@@ -1,6 +1,7 @@
 from abc import ABCMeta, abstractmethod
+from collections.abc import Sequence
 from numbers import Integral as Integral
-from typing import ClassVar, Sequence, TypeVar
+from typing import ClassVar, TypeVar
 
 import numpy as np
 import scipy.sparse as sp

@@ -26,10 +26,7 @@ from enum import Enum
 from operator import attrgetter
 from typing import (
     Callable,
-    List,
     Literal,
-    Optional,
-    Tuple,
     _overload_dummy,  # type: ignore[attr-defined] # _overload_dummy not exposed
 )
 
@@ -55,7 +52,7 @@ def my_overload(func):
 _typing.overload = my_overload
 
 
-def import_dual(m: str, stub_path: str) -> Tuple:
+def import_dual(m: str, stub_path: str) -> tuple:
     """
     Import both a stub package and a real package with the same name.
 
@@ -231,23 +228,23 @@ def walk(tree: dict, fn: Callable, *args, postproc: Callable | None = None, path
         postproc(tree, to_postproc)
 
 
-def collect_items(root: Item) -> Tuple[List[Item], List[Item]]:
-    def _collect(path, name, node: Item, functions: List[Item], classes: List[Item]):
+def collect_items(root: Item) -> tuple[list[Item], list[Item]]:
+    def _collect(path, name, node: Item, functions: list[Item], classes: list[Item]):
         if node.isclass():
             classes.append(node)
             return True  # Don't recurse
         elif node.isfunction():
             functions.append(node)
 
-    functions: List[Item] = []
-    classes: List[Item] = []
+    functions: list[Item] = []
+    classes: list[Item] = []
     walk(root.children, _collect, functions, classes)
     functions = sorted(functions, key=attrgetter("name"))
     classes = sorted(classes, key=attrgetter("name"))
     return functions, classes
 
 
-def match_pairs(real: List[Item], stub: List[Item], label: str, owner: str = ""):
+def match_pairs(real: list[Item], stub: list[Item], label: str, owner: str = ""):
     i_r = 0
     i_s = 0
     while i_r < len(real) or i_s < len(stub):
@@ -267,7 +264,7 @@ def match_pairs(real: List[Item], stub: List[Item], label: str, owner: str = "")
             i_r += 1
 
 
-def compare_args(real: Item, stub: Item, owner: Optional[str] = None):
+def compare_args(real: Item, stub: Item, owner: str | None = None):
     """
     owner - name of owner class, if a member; else None if a top-level function
     """
@@ -327,7 +324,7 @@ def compare_args(real: Item, stub: Item, owner: Optional[str] = None):
             print(f"Failed to validate {module}.{owner}{name}: {e}")
 
 
-def compare_functions(real: List[Item], stub: List[Item], owner: Optional[str] = None):
+def compare_functions(real: list[Item], stub: list[Item], owner: str | None = None):
     if owner is None:
         owner = ""
     elif owner and owner[-1] != ".":
@@ -345,7 +342,7 @@ def compare_functions(real: List[Item], stub: List[Item], owner: Optional[str] =
         i_s += 1
 
 
-def compare_classes(real: List[Item], stub: List[Item]):
+def compare_classes(real: list[Item], stub: list[Item]):
     match_pairs(real, stub, "class")
     # For the classes that do have analogs, compare the
     # methods.
@@ -360,9 +357,7 @@ def compare_classes(real: List[Item], stub: List[Item]):
         i_s += 1
 
 
-def find_item(
-    items: List[Item], name: str, which: Literal["stub", "real"], type_: Literal["class", "function"]
-) -> Optional[Item]:
+def find_item(items: list[Item], name: str, which: Literal["stub", "real"], type_: Literal["class", "function"]) -> Item | None:
     """
     which - whether this is 'stub' or 'real'
     """
@@ -376,7 +371,7 @@ def find_item(
     return None
 
 
-def compare_class(real: List[Item], stub: List[Item], class_: str):
+def compare_class(real: list[Item], stub: list[Item], class_: str):
     a = find_item(real, class_, "real", "class")
     s = find_item(stub, class_, "stub", "class")
     if a is None or s is None:
@@ -419,10 +414,10 @@ def find_module(package: Item, module: str):
 
 def compare(
     name: str,
-    stubpath: Optional[str] = None,
-    submodule: Optional[str] = None,
-    class_: Optional[str] = None,
-    function_: Optional[str] = None,
+    stubpath: str | None = None,
+    submodule: str | None = None,
+    class_: str | None = None,
+    function_: str | None = None,
 ):
     split = name.find(".")
     if split > 0:

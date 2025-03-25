@@ -1,7 +1,8 @@
 import warnings
 from abc import ABCMeta, abstractmethod
+from collections.abc import Sequence
 from numbers import Integral as Integral, Real as Real
-from typing import Any, ClassVar, Literal, Sequence, TypeVar
+from typing import Any, ClassVar, Literal, TypeVar
 
 import numpy as np
 import scipy.sparse as sp

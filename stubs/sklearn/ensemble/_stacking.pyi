@@ -1,7 +1,8 @@
 from abc import ABCMeta, abstractmethod
+from collections.abc import Iterable, Sequence
 from copy import deepcopy as deepcopy
 from numbers import Integral as Integral
-from typing import ClassVar, Iterable, Literal, Sequence, TypeVar
+from typing import ClassVar, Literal, TypeVar
 
 import numpy as np
 import scipy.sparse as sparse

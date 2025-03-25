@@ -4,7 +4,8 @@ import platform
 import re
 import warnings
 from collections import defaultdict as defaultdict
-from typing import Any, ClassVar, Iterable, TypeVar
+from collections.abc import Iterable
+from typing import Any, ClassVar, TypeVar
 
 import numpy as np
 from numpy import ndarray

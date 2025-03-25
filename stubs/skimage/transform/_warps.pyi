@@ -1,5 +1,5 @@
-from collections.abc import Iterable
-from typing import Literal, Mapping
+from collections.abc import Iterable, Mapping
+from typing import Literal
 
 import numpy as np
 import scipy

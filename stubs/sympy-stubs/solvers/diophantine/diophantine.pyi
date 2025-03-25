@@ -1,5 +1,6 @@
+from collections.abc import Generator
 from types import NotImplementedType
-from typing import Any, Generator, Literal, NoReturn
+from typing import Any, Literal, NoReturn
 
 from sympy import Pow
 from sympy.core.function import UndefinedFunction

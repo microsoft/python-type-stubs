@@ -1,4 +1,5 @@
-from typing import Callable, Literal, Sequence, TypeVar
+from collections.abc import Sequence
+from typing import Callable, Literal, TypeVar
 
 import numpy as np
 from numpy import ndarray

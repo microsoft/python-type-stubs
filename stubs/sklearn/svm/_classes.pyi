@@ -1,5 +1,6 @@
+from collections.abc import Mapping
 from numbers import Integral as Integral, Real as Real
-from typing import Any, Callable, ClassVar, Literal, Mapping, TypeVar
+from typing import Any, Callable, ClassVar, Literal, TypeVar
 
 import numpy as np
 from numpy import ndarray
