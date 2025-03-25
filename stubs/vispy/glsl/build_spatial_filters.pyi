@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 # -----------------------------------------------------------------------------
 # glumpy is an OpenGL framework for the fast visualization of numpy arrays.
 # Copyright (C) 2009-2011  Nicolas P. Rougier. All rights reserved.

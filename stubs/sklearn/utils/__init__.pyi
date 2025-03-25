@@ -4,10 +4,10 @@ import platform as platform
 import struct as struct
 import timeit as timeit
 import warnings as warnings
-from collections.abc import Sequence as Sequence
+from collections.abc import Iterable, Iterator, Sequence, Sequence as Sequence
 from contextlib import contextmanager as contextmanager, suppress as suppress
 from itertools import compress as compress, islice as islice
-from typing import Any, Iterable, Iterator, Sequence, SupportsIndex
+from typing import Any, SupportsIndex
 
 import numpy as np
 from numpy import ndarray

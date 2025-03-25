@@ -1,6 +1,6 @@
 import datetime
 from datetime import timezone
-from typing import Any, Callable, Literal, Type
+from typing import Any, Callable, Literal
 
 import numpy as np
 
@@ -94,7 +94,7 @@ class Ticker:
 
 class _LazyTickList:
     def __init__(self, major: bool) -> None: ...
-    def __get__(self, instance: XAxis | YAxis, cls: Type[XAxis] | Type[YAxis]) -> list[XTick | YTick]: ...
+    def __get__(self, instance: XAxis | YAxis, cls: type[XAxis | YAxis]) -> list[XTick | YTick]: ...
 
 class Axis(Artist):
     isDefault_label: bool

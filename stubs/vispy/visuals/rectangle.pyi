@@ -5,7 +5,6 @@ from ..color import Color
 from ..util.svg.color import Color
 from .polygon import PolygonVisual
 
-# -*- coding: utf-8 -*-
 # Copradiusight (c) 2014, Vispy Development Team.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 

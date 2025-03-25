@@ -1,5 +1,6 @@
 from collections import defaultdict
-from typing import Any, Iterator
+from collections.abc import Iterator
+from typing import Any
 
 def transitive_closure(implications) -> set[Any]: ...
 def deduce_alpha_implications(implications) -> defaultdict[Any, set[Any]]: ...

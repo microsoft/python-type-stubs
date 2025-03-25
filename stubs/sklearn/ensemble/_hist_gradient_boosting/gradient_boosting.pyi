@@ -1,8 +1,9 @@
 from abc import ABC, abstractmethod
+from collections.abc import Mapping, Sequence
 from functools import partial as partial
 from numbers import Integral as Integral, Real as Real
 from timeit import default_timer as time
-from typing import Callable, ClassVar, Literal, Mapping, Sequence, TypeVar
+from typing import Callable, ClassVar, Literal, TypeVar
 
 from numpy import ndarray
 from numpy.random import RandomState

@@ -6,7 +6,7 @@ from numpy.typing import ArrayLike
 
 def _show_skimage_info(): ...
 
-class PytestTester(object):
+class PytestTester:
     def __init__(self, module_name): ...
     def __call__(
         self,

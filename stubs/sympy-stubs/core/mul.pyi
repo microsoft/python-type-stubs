@@ -1,6 +1,6 @@
 from collections import defaultdict
 from typing import Any, Literal
-from typing_extensions import Self, Tuple as tTuple
+from typing_extensions import Self
 
 from sympy.core.cache import cacheit
 from sympy.core.expr import Expr
@@ -18,7 +18,7 @@ _args_sortkey = ...
 
 class Mul(Expr, AssocOp):
     __slots__ = ...
-    args: tTuple[Expr]
+    args: tuple[Expr]
     is_Mul = ...
     _args_type = Expr
     _kind_dispatcher = ...
@@ -35,9 +35,7 @@ class Mul(Expr, AssocOp):
     @cacheit
     def as_coeff_mul(
         self, *deps, rational=..., **kwargs
-    ) -> (
-        tuple[Any | Self, tuple[Any, ...]] | tuple[Expr, tuple[()]] | tuple[Any, tuple[Any | Mul]] | tuple[Any, tTuple[Expr]]
-    ): ...
+    ) -> tuple[Any | Self, tuple[Any, ...]] | tuple[Expr, tuple[()]] | tuple[Any, tuple[Any | Mul]] | tuple[Any, tuple[Expr]]: ...
     def as_coeff_Mul(
         self, rational=...
     ) -> tuple[Expr, Any] | tuple[Expr, Any | Self] | tuple[Any, Any | Self] | tuple[Any, Self]: ...

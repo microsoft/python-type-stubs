@@ -1,5 +1,6 @@
 from array import array
-from typing import Any, Generator, Iterator, Literal
+from collections.abc import Generator, Iterator
+from typing import Any, Literal
 
 from sympy import Function
 from sympy.core.function import UndefinedFunction

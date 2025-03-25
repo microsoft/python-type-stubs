@@ -1,4 +1,4 @@
-from typing import Any, Tuple as tTuple
+from typing import Any
 from typing_extensions import Self, Unpack
 
 from sympy.concrete.expr_with_limits import AddWithLimits
@@ -10,7 +10,7 @@ from sympy.tensor.functions import shape
 
 class Integral(AddWithLimits):
     __slots__ = ...
-    args: tTuple[Expr, Tuple]
+    args: tuple[Expr, Tuple]
     def __new__(cls, function, *symbols, **assumptions) -> Equality | Relational | Ne | Self: ...
     def __getnewargs__(self) -> tuple[Basic, Unpack[tuple[tuple[Any], ...]]]: ...
     @property

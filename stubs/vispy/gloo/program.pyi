@@ -12,7 +12,6 @@ from .preprocessor import preprocess
 from .texture import BaseTexture, Texture1D, Texture2D, Texture3D, TextureCube
 from .util import check_enum
 
-# -*- coding: utf-8 -*-
 # -----------------------------------------------------------------------------
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.

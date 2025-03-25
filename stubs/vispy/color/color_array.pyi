@@ -1,5 +1,6 @@
+from collections.abc import Sequence
 from copy import deepcopy
-from typing import Literal, Sequence
+from typing import Literal
 
 import numpy as np
 
@@ -14,7 +15,6 @@ from .color_space import (  # noqa
     _rgb_to_lab,
 )
 
-# -*- coding: utf-8 -*-
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 
@@ -28,7 +28,7 @@ def _array_clip_val(val): ...
 ###############################################################################
 # Color Array
 
-class ColorArray(object):
+class ColorArray:
     def __init__(
         self,
         color: str | tuple | Sequence = ...,

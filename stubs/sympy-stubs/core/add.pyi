@@ -1,5 +1,5 @@
 from typing import Any, Literal
-from typing_extensions import Self, Tuple as tTuple
+from typing_extensions import Self
 
 from sympy.core.cache import cacheit
 from sympy.core.expr import Expr
@@ -13,7 +13,7 @@ _args_sortkey = ...
 
 class Add(Expr, AssocOp):
     __slots__ = ...
-    args: tTuple[Expr, ...]
+    args: tuple[Expr, ...]
     is_Add = ...
     _args_type = Expr
     @classmethod
@@ -26,7 +26,7 @@ class Add(Expr, AssocOp):
     @cacheit
     def as_coeff_add(
         self, *deps
-    ) -> tuple[Any | Self, tuple[Any, ...]] | tuple[Expr, tuple[Expr, ...]] | tuple[Any, tTuple[Expr, ...]]: ...
+    ) -> tuple[Any | Self, tuple[Any, ...]] | tuple[Expr, tuple[Expr, ...]] | tuple[Any, tuple[Expr, ...]]: ...
     def as_coeff_Add(self, rational=..., deps=...) -> tuple[Expr, Any | Self] | tuple[Any, Self]: ...
     def matches(self, expr, repl_dict=..., old=...): ...
     @cacheit

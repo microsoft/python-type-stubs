@@ -16,16 +16,15 @@ Scripts for future use:
 import os
 import re
 import shutil
-from typing import List
 
 SOURCE_DIR = "typings\\sympy"
 DEST_DIR = "typings\\sympy-returnvalues"
 
-def read_file(file_path: str) -> List[str]:
+def read_file(file_path: str) -> list[str]:
     with open(file_path, "r") as file:
         return file.readlines()
 
-def write_file(file_path: str, lines: List[str]) -> None:
+def write_file(file_path: str, lines: list[str]) -> None:
     try:
         os.makedirs(os.path.dirname(file_path))
     except FileExistsError:
@@ -75,5 +74,4 @@ def fix_all_stubs() -> None:
                 fix_file(file_path, dest_path, sub_package)
 
 fix_all_stubs()
-
 ```

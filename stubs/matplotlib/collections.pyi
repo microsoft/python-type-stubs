@@ -1,5 +1,6 @@
+from collections.abc import Sequence
 from tkinter.messagebox import NO
-from typing import Callable, Literal, Sequence
+from typing import Callable, Literal
 
 import numpy as np
 from matplotlib._enums import CapStyle, JoinStyle

@@ -12,7 +12,6 @@ from .expression import FunctionCall, TextExpression
 from .shader_object import ShaderObject
 from .variable import Variable, Varying
 
-# -*- coding: utf-8 -*-
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 

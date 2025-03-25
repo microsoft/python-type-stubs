@@ -32,11 +32,13 @@ select = [
     "FA", # flake8-future-annotations
     "I", # isort
     "PYI", # flake8-pyi
+    "UP", # pyupgrade
 ]
 ignore = [
     ###
     # Rules we don't want or don't agree with
     ###
+
     # Typeshed doesn't want complex or non-literal defaults, or long strings, for maintenance and testing reasons.
     # This doesn't affect us, let's have more complete stubs.
     "PYI011",
