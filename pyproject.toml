@@ -76,7 +76,6 @@ ignore = [
     "F405", # may be undefined, or defined from star imports
 ]
 
-[tool.ruff.lint.per-file-ignores]
 # We keep docstrings in sklearn
 "stubs/sklearn/**" = ["PYI021"]
 
