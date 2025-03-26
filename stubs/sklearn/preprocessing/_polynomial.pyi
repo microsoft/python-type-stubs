@@ -1,7 +1,8 @@
 import collections
 from itertools import chain as chain, combinations as combinations, combinations_with_replacement as combinations_w_r
 from numbers import Integral as Integral
-from typing import Any, ClassVar, Literal, TypeVar
+from typing import Any, ClassVar, Literal
+from typing_extensions import Self
 
 import numpy as np
 from numpy import ndarray
@@ -16,9 +17,6 @@ from ..base import BaseEstimator, TransformerMixin
 from ..utils import check_array as check_array
 from ..utils._param_validation import Interval as Interval, StrOptions as StrOptions
 from ..utils.validation import FLOAT_DTYPES as FLOAT_DTYPES, check_is_fitted as check_is_fitted
-
-SplineTransformer_Self = TypeVar("SplineTransformer_Self", bound=SplineTransformer)
-PolynomialFeatures_Self = TypeVar("PolynomialFeatures_Self", bound=PolynomialFeatures)
 
 __all__ = [
     "PolynomialFeatures",
@@ -43,7 +41,7 @@ class PolynomialFeatures(TransformerMixin, BaseEstimator):
     @property
     def powers_(self) -> ndarray: ...
     def get_feature_names_out(self, input_features: None | ArrayLike = None) -> ndarray: ...
-    def fit(self: PolynomialFeatures_Self, X: MatrixLike | ArrayLike, y: Any = None) -> PolynomialFeatures_Self: ...
+    def fit(self, X: MatrixLike | ArrayLike, y: Any = None) -> Self: ...
     def transform(self, X: MatrixLike | ArrayLike) -> ndarray | spmatrix: ...
 
 # TODO:
@@ -69,9 +67,9 @@ class SplineTransformer(TransformerMixin, BaseEstimator):
     ) -> None: ...
     def get_feature_names_out(self, input_features: None | ArrayLike = None) -> ndarray: ...
     def fit(
-        self: SplineTransformer_Self,
+        self,
         X: MatrixLike,
         y: Series | None | ndarray = None,
         sample_weight: None | ArrayLike = None,
-    ) -> SplineTransformer_Self: ...
+    ) -> Self: ...
     def transform(self, X: MatrixLike) -> ndarray: ...

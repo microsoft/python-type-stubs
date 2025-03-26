@@ -1,5 +1,6 @@
 from numbers import Integral as Integral
-from typing import Any, Callable, ClassVar, Literal, TypeVar
+from typing import Any, Callable, ClassVar, Literal
+from typing_extensions import Self
 
 import numpy as np
 from numpy import ndarray
@@ -10,8 +11,6 @@ from ..utils import is_scalar_nan as is_scalar_nan
 from ..utils._param_validation import Hidden as Hidden, Interval as Interval, StrOptions as StrOptions
 from ..utils.validation import FLOAT_DTYPES as FLOAT_DTYPES, check_is_fitted as check_is_fitted
 from ._base import MissingIndicator, _BaseImputer
-
-KNNImputer_Self = TypeVar("KNNImputer_Self", bound=KNNImputer)
 
 # Authors: Ashim Bhattarai <ashimb9@gmail.com>
 #          Thomas J Fan <thomasjpfan@gmail.com>
@@ -35,6 +34,6 @@ class KNNImputer(_BaseImputer):
         add_indicator: bool = False,
         keep_empty_features: bool = False,
     ) -> None: ...
-    def fit(self: KNNImputer_Self, X: list[list[int | float]] | MatrixLike, y: Any = None) -> KNNImputer_Self: ...
+    def fit(self, X: list[list[int | float]] | MatrixLike, y: Any = None) -> Self: ...
     def transform(self, X: list[list[int | float]] | MatrixLike) -> ndarray: ...
     def get_feature_names_out(self, input_features: None | ArrayLike = None) -> ndarray: ...

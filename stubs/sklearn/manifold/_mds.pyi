@@ -1,6 +1,7 @@
 import warnings
 from numbers import Integral as Integral, Real as Real
-from typing import Any, ClassVar, Literal, TypeVar
+from typing import Any, ClassVar, Literal
+from typing_extensions import Self
 
 import numpy as np
 from joblib import effective_n_jobs as effective_n_jobs
@@ -14,8 +15,6 @@ from ..metrics import euclidean_distances as euclidean_distances
 from ..utils import check_array as check_array, check_random_state as check_random_state, check_symmetric as check_symmetric
 from ..utils._param_validation import Hidden as Hidden, Interval as Interval, StrOptions as StrOptions
 from ..utils.parallel import Parallel as Parallel, delayed as delayed
-
-MDS_Self = TypeVar("MDS_Self", bound=MDS)
 
 def smacof(
     dissimilarities: MatrixLike,
@@ -57,5 +56,5 @@ class MDS(BaseEstimator):
         dissimilarity: Literal["euclidean", "precomputed"] = "euclidean",
         normalized_stress: Literal["auto", "warn"] | bool = "warn",
     ) -> None: ...
-    def fit(self: MDS_Self, X: MatrixLike, y: Any = None, init: None | MatrixLike = None) -> MDS_Self: ...
+    def fit(self, X: MatrixLike, y: Any = None, init: None | MatrixLike = None) -> Self: ...
     def fit_transform(self, X: MatrixLike, y: Any = None, init: None | MatrixLike = None) -> ndarray: ...

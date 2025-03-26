@@ -1,5 +1,6 @@
 import warnings
-from typing import Any, Callable, ClassVar, TypeVar
+from typing import Any, Callable, ClassVar
+from typing_extensions import Self
 
 import numpy as np
 from numpy import ndarray
@@ -12,8 +13,6 @@ from ..preprocessing import FunctionTransformer as FunctionTransformer
 from ..utils import check_array as check_array
 from ..utils._param_validation import HasMethods as HasMethods
 from ..utils.validation import check_is_fitted as check_is_fitted
-
-TransformedTargetRegressor_Self = TypeVar("TransformedTargetRegressor_Self", bound=TransformedTargetRegressor)
 
 # Authors: Andreas Mueller <andreas.mueller@columbia.edu>
 #          Guillaume Lemaitre <guillaume.lemaitre@inria.fr>
@@ -38,11 +37,11 @@ class TransformedTargetRegressor(RegressorMixin, BaseEstimator):
         check_inverse: bool = True,
     ) -> None: ...
     def fit(
-        self: TransformedTargetRegressor_Self,
+        self,
         X: MatrixLike | ArrayLike,
         y: ArrayLike,
         **fit_params,
-    ) -> TransformedTargetRegressor_Self: ...
+    ) -> Self: ...
     def predict(self, X: MatrixLike | ArrayLike, **predict_params) -> ndarray: ...
     @property
     def n_features_in_(self) -> int: ...

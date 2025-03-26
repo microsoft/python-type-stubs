@@ -1,5 +1,6 @@
 from numbers import Integral as Integral, Real as Real
-from typing import Any, Callable, ClassVar, Literal, TypeVar
+from typing import Any, Callable, ClassVar, Literal
+from typing_extensions import Self
 
 import numpy as np
 from numpy import ndarray
@@ -13,8 +14,6 @@ from ..utils._param_validation import Hidden as Hidden, Interval as Interval, St
 from ..utils.extmath import svd_flip as svd_flip
 from ..utils.validation import check_array as check_array, check_is_fitted as check_is_fitted
 from ._dict_learning import MiniBatchDictionaryLearning as MiniBatchDictionaryLearning, dict_learning as dict_learning
-
-_BaseSparsePCA_Self = TypeVar("_BaseSparsePCA_Self", bound=_BaseSparsePCA)
 
 class _BaseSparsePCA(ClassNamePrefixFeaturesOutMixin, TransformerMixin, BaseEstimator):
     _parameter_constraints: ClassVar[dict] = ...
@@ -32,7 +31,7 @@ class _BaseSparsePCA(ClassNamePrefixFeaturesOutMixin, TransformerMixin, BaseEsti
         verbose: bool = False,
         random_state=None,
     ) -> None: ...
-    def fit(self: _BaseSparsePCA_Self, X: MatrixLike, y: Any = None) -> _BaseSparsePCA_Self | MiniBatchSparsePCA: ...
+    def fit(self, X: MatrixLike, y: Any = None) -> Self | MiniBatchSparsePCA: ...
     def transform(self, X: ArrayLike) -> ndarray: ...
     def inverse_transform(self, X: MatrixLike) -> ndarray: ...
 

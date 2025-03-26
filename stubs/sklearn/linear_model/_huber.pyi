@@ -1,5 +1,6 @@
 from numbers import Integral as Integral, Real as Real
-from typing import ClassVar, TypeVar
+from typing import ClassVar
+from typing_extensions import Self
 
 import numpy as np
 from numpy import ndarray
@@ -11,8 +12,6 @@ from ..utils import axis0_safe_slice as axis0_safe_slice
 from ..utils._param_validation import Interval as Interval
 from ..utils.extmath import safe_sparse_dot as safe_sparse_dot
 from ._base import LinearModel
-
-HuberRegressor_Self = TypeVar("HuberRegressor_Self", bound=HuberRegressor)
 
 # Authors: Manoj Kumar mks542@nyu.edu
 # License: BSD 3 clause
@@ -39,8 +38,8 @@ class HuberRegressor(LinearModel, RegressorMixin, BaseEstimator):
         tol: Float = 1e-05,
     ) -> None: ...
     def fit(
-        self: HuberRegressor_Self,
+        self,
         X: MatrixLike,
         y: ArrayLike,
         sample_weight: None | ArrayLike = None,
-    ) -> HuberRegressor_Self: ...
+    ) -> Self: ...

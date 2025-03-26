@@ -1,6 +1,7 @@
 import warnings
 from numbers import Integral as Integral, Real as Real
-from typing import ClassVar, Literal, TypeVar
+from typing import ClassVar, Literal
+from typing_extensions import Self
 
 import numpy as np
 from numpy import ndarray
@@ -11,8 +12,6 @@ from ..utils import safe_mask as safe_mask
 from ..utils._param_validation import HasMethods as HasMethods, Interval as Interval, StrOptions as StrOptions
 from ..utils.metaestimators import available_if as available_if
 from ..utils.validation import check_is_fitted as check_is_fitted
-
-SelfTrainingClassifier_Self = TypeVar("SelfTrainingClassifier_Self", bound=SelfTrainingClassifier)
 
 __all__ = ["SelfTrainingClassifier"]
 
@@ -39,7 +38,7 @@ class SelfTrainingClassifier(MetaEstimatorMixin, BaseEstimator):
         max_iter: None | int = 10,
         verbose: bool = False,
     ) -> None: ...
-    def fit(self: SelfTrainingClassifier_Self, X: MatrixLike | ArrayLike, y: ArrayLike) -> SelfTrainingClassifier_Self: ...
+    def fit(self, X: MatrixLike | ArrayLike, y: ArrayLike) -> Self: ...
     def predict(self, X: MatrixLike | ArrayLike) -> ndarray: ...
     def predict_proba(self, X: MatrixLike | ArrayLike) -> ndarray: ...
     def decision_function(self, X: MatrixLike | ArrayLike) -> ndarray: ...

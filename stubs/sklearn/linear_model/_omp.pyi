@@ -2,7 +2,8 @@ import warnings
 from collections.abc import Iterable
 from math import sqrt as sqrt
 from numbers import Integral as Integral, Real as Real
-from typing import ClassVar, Literal, TypeVar
+from typing import ClassVar, Literal
+from typing_extensions import Self
 
 import numpy as np
 from numpy import ndarray
@@ -16,9 +17,6 @@ from ..utils import as_float_array as as_float_array, check_array as check_array
 from ..utils._param_validation import Hidden as Hidden, Interval as Interval, StrOptions as StrOptions
 from ..utils.parallel import Parallel as Parallel, delayed as delayed
 from ._base import LinearModel
-
-OrthogonalMatchingPursuitCV_Self = TypeVar("OrthogonalMatchingPursuitCV_Self", bound=OrthogonalMatchingPursuitCV)
-OrthogonalMatchingPursuit_Self = TypeVar("OrthogonalMatchingPursuit_Self", bound=OrthogonalMatchingPursuit)
 
 # Author: Vlad Niculae
 #
@@ -69,7 +67,7 @@ class OrthogonalMatchingPursuit(MultiOutputMixin, RegressorMixin, LinearModel):
         normalize: str | bool = "deprecated",
         precompute: Literal["auto"] | bool = "auto",
     ) -> None: ...
-    def fit(self: OrthogonalMatchingPursuit_Self, X: MatrixLike, y: MatrixLike | ArrayLike) -> OrthogonalMatchingPursuit_Self: ...
+    def fit(self, X: MatrixLike, y: MatrixLike | ArrayLike) -> Self: ...
 
 class OrthogonalMatchingPursuitCV(RegressorMixin, LinearModel):
     feature_names_in_: ndarray = ...
@@ -92,4 +90,4 @@ class OrthogonalMatchingPursuitCV(RegressorMixin, LinearModel):
         n_jobs: None | Int = None,
         verbose: int | bool = False,
     ) -> None: ...
-    def fit(self: OrthogonalMatchingPursuitCV_Self, X: MatrixLike, y: ArrayLike) -> OrthogonalMatchingPursuitCV_Self: ...
+    def fit(self, X: MatrixLike, y: ArrayLike) -> Self: ...

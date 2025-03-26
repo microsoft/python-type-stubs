@@ -1,6 +1,7 @@
 import warnings
 from numbers import Integral as Integral, Real as Real
-from typing import Callable, ClassVar, Literal, TypeVar
+from typing import Callable, ClassVar, Literal
+from typing_extensions import Self
 
 import numpy as np
 from joblib.memory import MemorizedFunc
@@ -22,8 +23,6 @@ from ..utils._param_validation import Interval as Interval, StrOptions as StrOpt
 from ..utils.extmath import row_norms as row_norms, safe_sparse_dot as safe_sparse_dot
 from ..utils.validation import check_is_fitted as check_is_fitted
 from ._base import SelectorMixin
-
-_BaseFilter_Self = TypeVar("_BaseFilter_Self", bound=_BaseFilter)
 
 # Authors: V. Michel, B. Thirion, G. Varoquaux, A. Gramfort, E. Duchesnay.
 #          L. Buitinck, A. Joly
@@ -50,7 +49,7 @@ class _BaseFilter(SelectorMixin, BaseEstimator):
     _parameter_constraints: ClassVar[dict] = ...
 
     def __init__(self, score_func: Callable | MemorizedFunc) -> None: ...
-    def fit(self: _BaseFilter_Self, X: MatrixLike, y: ArrayLike) -> _BaseFilter_Self: ...
+    def fit(self, X: MatrixLike, y: ArrayLike) -> Self: ...
 
 ######################################################################
 # Specific filters

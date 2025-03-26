@@ -1,6 +1,7 @@
 import warnings
 from numbers import Integral as Integral, Real as Real
-from typing import Callable, ClassVar, TypeVar
+from typing import Callable, ClassVar
+from typing_extensions import Self
 
 import numpy as np
 import scipy.sparse as sp
@@ -22,12 +23,6 @@ from .utils._param_validation import Interval as Interval, StrOptions as StrOpti
 from .utils.extmath import safe_sparse_dot as safe_sparse_dot
 from .utils.validation import check_is_fitted as check_is_fitted, check_non_negative as check_non_negative
 
-SkewedChi2Sampler_Self = TypeVar("SkewedChi2Sampler_Self", bound=SkewedChi2Sampler)
-PolynomialCountSketch_Self = TypeVar("PolynomialCountSketch_Self", bound=PolynomialCountSketch)
-AdditiveChi2Sampler_Self = TypeVar("AdditiveChi2Sampler_Self", bound=AdditiveChi2Sampler)
-RBFSampler_Self = TypeVar("RBFSampler_Self", bound=RBFSampler)
-Nystroem_Self = TypeVar("Nystroem_Self", bound=Nystroem)
-
 class PolynomialCountSketch(ClassNamePrefixFeaturesOutMixin, TransformerMixin, BaseEstimator):
     feature_names_in_: ndarray = ...
     n_features_in_: int = ...
@@ -46,10 +41,10 @@ class PolynomialCountSketch(ClassNamePrefixFeaturesOutMixin, TransformerMixin, B
         random_state: RandomState | None | Int = None,
     ) -> None: ...
     def fit(
-        self: PolynomialCountSketch_Self,
+        self,
         X: MatrixLike | ArrayLike,
         y: None | MatrixLike | ArrayLike = None,
-    ) -> PolynomialCountSketch_Self: ...
+    ) -> Self: ...
     def transform(self, X: MatrixLike) -> ndarray: ...
 
 class RBFSampler(ClassNamePrefixFeaturesOutMixin, TransformerMixin, BaseEstimator):
@@ -67,7 +62,7 @@ class RBFSampler(ClassNamePrefixFeaturesOutMixin, TransformerMixin, BaseEstimato
         n_components: Int = 100,
         random_state: RandomState | None | Int = None,
     ) -> None: ...
-    def fit(self: RBFSampler_Self, X: MatrixLike, y: None | MatrixLike | ArrayLike = None) -> RBFSampler_Self: ...
+    def fit(self, X: MatrixLike, y: None | MatrixLike | ArrayLike = None) -> Self: ...
     def transform(self, X: MatrixLike) -> ndarray: ...
 
 class SkewedChi2Sampler(ClassNamePrefixFeaturesOutMixin, TransformerMixin, BaseEstimator):
@@ -86,10 +81,10 @@ class SkewedChi2Sampler(ClassNamePrefixFeaturesOutMixin, TransformerMixin, BaseE
         random_state: RandomState | None | Int = None,
     ) -> None: ...
     def fit(
-        self: SkewedChi2Sampler_Self,
+        self,
         X: MatrixLike,
         y: None | MatrixLike | ArrayLike = None,
-    ) -> SkewedChi2Sampler_Self: ...
+    ) -> Self: ...
     def transform(self, X: MatrixLike) -> ndarray: ...
 
 class AdditiveChi2Sampler(TransformerMixin, BaseEstimator):
@@ -101,10 +96,10 @@ class AdditiveChi2Sampler(TransformerMixin, BaseEstimator):
 
     def __init__(self, *, sample_steps: Int = 2, sample_interval: None | Float = None) -> None: ...
     def fit(
-        self: AdditiveChi2Sampler_Self,
+        self,
         X: MatrixLike,
         y: None | MatrixLike | ArrayLike = None,
-    ) -> AdditiveChi2Sampler_Self: ...
+    ) -> Self: ...
     def transform(self, X: MatrixLike) -> ndarray | spmatrix: ...
     def get_feature_names_out(self, input_features: None | ArrayLike = None) -> ndarray: ...
 
@@ -129,5 +124,5 @@ class Nystroem(ClassNamePrefixFeaturesOutMixin, TransformerMixin, BaseEstimator)
         random_state: RandomState | None | Int = None,
         n_jobs: None | Int = None,
     ) -> None: ...
-    def fit(self: Nystroem_Self, X: MatrixLike, y: None | MatrixLike | ArrayLike = None) -> Nystroem_Self: ...
+    def fit(self, X: MatrixLike, y: None | MatrixLike | ArrayLike = None) -> Self: ...
     def transform(self, X: MatrixLike) -> ndarray: ...

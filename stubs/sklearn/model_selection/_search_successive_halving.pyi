@@ -3,7 +3,8 @@ from collections.abc import Iterable, Iterator, Mapping, Sequence
 from copy import deepcopy as deepcopy
 from math import ceil as ceil, floor as floor, log as log
 from numbers import Integral as Integral
-from typing import Callable, ClassVar, Literal, TypeVar
+from typing import Callable, ClassVar, Literal
+from typing_extensions import Self
 
 import numpy as np
 from numpy import ndarray
@@ -17,8 +18,6 @@ from ..utils.multiclass import check_classification_targets as check_classificat
 from . import BaseCrossValidator, ParameterGrid as ParameterGrid, ParameterSampler as ParameterSampler
 from ._search import BaseSearchCV
 from ._split import check_cv as check_cv
-
-BaseSuccessiveHalving_Self = TypeVar("BaseSuccessiveHalving_Self", bound=BaseSuccessiveHalving)
 
 __all__ = ["HalvingGridSearchCV", "HalvingRandomSearchCV"]
 
@@ -46,12 +45,12 @@ class BaseSuccessiveHalving(BaseSearchCV):
         aggressive_elimination: bool = False,
     ) -> None: ...
     def fit(
-        self: BaseSuccessiveHalving_Self,
+        self,
         X: MatrixLike,
         y: None | MatrixLike | ArrayLike = None,
         groups: None | ArrayLike = None,
         **fit_params,
-    ) -> BaseSuccessiveHalving_Self: ...
+    ) -> Self: ...
 
 class HalvingGridSearchCV(BaseSuccessiveHalving):
     feature_names_in_: ndarray = ...

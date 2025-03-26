@@ -5,7 +5,8 @@ from collections.abc import Mapping, Sequence
 from functools import partial as partial
 from numbers import Integral as Integral, Real as Real
 from timeit import default_timer as time
-from typing import Callable, ClassVar, Literal, TypeVar
+from typing import Callable, ClassVar, Literal
+from typing_extensions import Self
 
 import numpy as np
 from numpy import ndarray
@@ -33,8 +34,6 @@ from ...utils.multiclass import check_classification_targets as check_classifica
 from ...utils.validation import check_consistent_length as check_consistent_length, check_is_fitted as check_is_fitted
 from .common import G_H_DTYPE as G_H_DTYPE, X_DTYPE as X_DTYPE, Y_DTYPE as Y_DTYPE
 from .grower import TreeGrower as TreeGrower
-
-BaseHistGradientBoosting_Self = TypeVar("BaseHistGradientBoosting_Self", bound=BaseHistGradientBoosting)
 
 class BaseHistGradientBoosting(BaseEstimator, ABC):
     _parameter_constraints: ClassVar[dict] = ...
@@ -65,11 +64,11 @@ class BaseHistGradientBoosting(BaseEstimator, ABC):
         random_state,
     ) -> None: ...
     def fit(
-        self: BaseHistGradientBoosting_Self,
+        self,
         X: MatrixLike,
         y: ArrayLike,
         sample_weight: None | ArrayLike = None,
-    ) -> BaseHistGradientBoosting_Self: ...
+    ) -> Self: ...
     def n_iter_(self): ...
 
 class HistGradientBoostingRegressor(RegressorMixin, BaseHistGradientBoosting):

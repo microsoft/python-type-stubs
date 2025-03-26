@@ -1,6 +1,7 @@
 import warnings
 from numbers import Integral as Integral, Real as Real
-from typing import Any, ClassVar, TypeVar
+from typing import Any, ClassVar
+from typing_extensions import Self
 
 import numpy as np
 from numpy import ndarray
@@ -10,10 +11,6 @@ from .._typing import Float, Int, MatrixLike
 from ..utils import check_array as check_array
 from ..utils._param_validation import Interval as Interval
 from . import EmpiricalCovariance, empirical_covariance as empirical_covariance
-
-ShrunkCovariance_Self = TypeVar("ShrunkCovariance_Self", bound=ShrunkCovariance)
-LedoitWolf_Self = TypeVar("LedoitWolf_Self", bound=LedoitWolf)
-OAS_Self = TypeVar("OAS_Self", bound=OAS)
 
 # Author: Alexandre Gramfort <alexandre.gramfort@inria.fr>
 #         Gael Varoquaux <gael.varoquaux@normalesup.org>
@@ -37,7 +34,7 @@ class ShrunkCovariance(EmpiricalCovariance):
     _parameter_constraints: ClassVar[dict] = ...
 
     def __init__(self, *, store_precision: bool = True, assume_centered: bool = False, shrinkage: Float = 0.1) -> None: ...
-    def fit(self: ShrunkCovariance_Self, X: MatrixLike, y: Any = None) -> ShrunkCovariance_Self: ...
+    def fit(self, X: MatrixLike, y: Any = None) -> Self: ...
 
 # Ledoit-Wolf estimator
 
@@ -57,7 +54,7 @@ class LedoitWolf(EmpiricalCovariance):
     _parameter_constraints: ClassVar[dict] = ...
 
     def __init__(self, *, store_precision: bool = True, assume_centered: bool = False, block_size: Int = 1000) -> None: ...
-    def fit(self: LedoitWolf_Self, X: MatrixLike, y: Any = None) -> LedoitWolf_Self: ...
+    def fit(self, X: MatrixLike, y: Any = None) -> Self: ...
 
 # OAS estimator
 def oas(X: MatrixLike, *, assume_centered: bool = False) -> tuple[ndarray, Float] | tuple[ndarray, float]: ...
@@ -70,4 +67,4 @@ class OAS(EmpiricalCovariance):
     location_: ndarray = ...
     covariance_: ndarray = ...
 
-    def fit(self: OAS_Self, X: MatrixLike, y: Any = None) -> OAS_Self: ...
+    def fit(self, X: MatrixLike, y: Any = None) -> Self: ...

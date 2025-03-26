@@ -1,7 +1,8 @@
 import warnings
 from heapq import heapify as heapify, heappop as heappop, heappush as heappush, heappushpop as heappushpop
 from numbers import Integral as Integral, Real as Real
-from typing import Any, Callable, ClassVar, Literal, TypeVar
+from typing import Any, Callable, ClassVar, Literal
+from typing_extensions import Self
 
 import numpy as np
 from joblib import Memory
@@ -20,9 +21,6 @@ from ..utils._fast_dict import IntFloatDict as IntFloatDict
 from ..utils._param_validation import HasMethods as HasMethods, Hidden as Hidden, Interval as Interval, StrOptions as StrOptions
 from ..utils.validation import check_memory as check_memory
 from ._feature_agglomeration import AgglomerationTransform
-
-FeatureAgglomeration_Self = TypeVar("FeatureAgglomeration_Self", bound=FeatureAgglomeration)
-AgglomerativeClustering_Self = TypeVar("AgglomerativeClustering_Self", bound=AgglomerativeClustering)
 
 ###############################################################################
 # Hierarchical tree building functions
@@ -74,7 +72,7 @@ class AgglomerativeClustering(ClusterMixin, BaseEstimator):
         distance_threshold: None | Float = None,
         compute_distances: bool = False,
     ) -> None: ...
-    def fit(self: AgglomerativeClustering_Self, X: MatrixLike, y: Any = None) -> AgglomerativeClustering_Self: ...
+    def fit(self, X: MatrixLike, y: Any = None) -> Self: ...
     def fit_predict(self, X: MatrixLike, y: Any = None) -> ndarray: ...
 
 class FeatureAgglomeration(ClassNamePrefixFeaturesOutMixin, AgglomerativeClustering, AgglomerationTransform):
@@ -103,5 +101,5 @@ class FeatureAgglomeration(ClassNamePrefixFeaturesOutMixin, AgglomerativeCluster
         distance_threshold: None | Float = None,
         compute_distances: bool = False,
     ) -> None: ...
-    def fit(self: FeatureAgglomeration_Self, X: MatrixLike, y: Any = None) -> FeatureAgglomeration_Self: ...
+    def fit(self, X: MatrixLike, y: Any = None) -> Self: ...
     def fit_predict(self): ...

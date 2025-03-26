@@ -1,6 +1,7 @@
 import numbers
 from numbers import Integral as Integral, Real as Real
-from typing import Any, ClassVar, Literal, TypeVar
+from typing import Any, ClassVar, Literal
+from typing_extensions import Self
 from warnings import warn as warn
 
 import numpy as np
@@ -21,8 +22,6 @@ from ..utils import (
 from ..utils._param_validation import Interval as Interval, StrOptions as StrOptions
 from ..utils.validation import check_is_fitted as check_is_fitted
 from ._bagging import BaseBagging
-
-IsolationForest_Self = TypeVar("IsolationForest_Self", bound=IsolationForest)
 
 # Authors: Nicolas Goix <nicolas.goix@telecom-paristech.fr>
 #          Alexandre Gramfort <alexandre.gramfort@telecom-paristech.fr>
@@ -57,11 +56,11 @@ class IsolationForest(OutlierMixin, BaseBagging):
         warm_start: bool = False,
     ) -> None: ...
     def fit(
-        self: IsolationForest_Self,
+        self,
         X: MatrixLike | ArrayLike,
         y: Any = None,
         sample_weight: None | ArrayLike = None,
-    ) -> IsolationForest_Self: ...
+    ) -> Self: ...
     def predict(self, X: MatrixLike | ArrayLike) -> ndarray: ...
     def decision_function(self, X: MatrixLike | ArrayLike) -> ndarray: ...
     def score_samples(self, X: MatrixLike | ArrayLike) -> ndarray: ...

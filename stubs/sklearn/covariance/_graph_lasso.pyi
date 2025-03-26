@@ -4,7 +4,8 @@ import time
 import warnings
 from collections.abc import Iterable
 from numbers import Integral as Integral, Real as Real
-from typing import Any, ClassVar, Literal, TypeVar
+from typing import Any, ClassVar, Literal
+from typing_extensions import Self
 
 import numpy as np
 from numpy import ndarray
@@ -18,9 +19,6 @@ from ..utils._param_validation import Interval as Interval, StrOptions as StrOpt
 from ..utils.parallel import Parallel as Parallel, delayed as delayed
 from ..utils.validation import check_random_state as check_random_state, check_scalar as check_scalar
 from . import EmpiricalCovariance, empirical_covariance as empirical_covariance, log_likelihood as log_likelihood
-
-GraphicalLassoCV_Self = TypeVar("GraphicalLassoCV_Self", bound=GraphicalLassoCV)
-GraphicalLasso_Self = TypeVar("GraphicalLasso_Self", bound=GraphicalLasso)
 
 # Author: Gael Varoquaux <gael.varoquaux@normalesup.org>
 # License: BSD 3 clause
@@ -83,7 +81,7 @@ class GraphicalLasso(BaseGraphicalLasso):
         verbose: bool = False,
         assume_centered: bool = False,
     ) -> None: ...
-    def fit(self: GraphicalLasso_Self, X: MatrixLike, y: Any = None) -> GraphicalLasso_Self: ...
+    def fit(self, X: MatrixLike, y: Any = None) -> Self: ...
 
 # Cross-validation with GraphicalLasso
 def graphical_lasso_path(
@@ -124,4 +122,4 @@ class GraphicalLassoCV(BaseGraphicalLasso):
         verbose: bool = False,
         assume_centered: bool = False,
     ) -> None: ...
-    def fit(self: GraphicalLassoCV_Self, X: MatrixLike, y: Any = None) -> GraphicalLassoCV_Self: ...
+    def fit(self, X: MatrixLike, y: Any = None) -> Self: ...

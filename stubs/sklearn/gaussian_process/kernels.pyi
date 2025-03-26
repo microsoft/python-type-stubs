@@ -4,7 +4,7 @@ from abc import ABCMeta, abstractmethod
 from collections import namedtuple
 from collections.abc import Sequence
 from inspect import signature as signature
-from typing import Callable, Literal, TypeVar
+from typing import Callable, Literal
 from typing_extensions import Self
 
 import numpy as np
@@ -16,9 +16,6 @@ from .._typing import ArrayLike, Float, MatrixLike
 from ..base import clone as clone
 from ..exceptions import ConvergenceWarning as ConvergenceWarning
 from ..metrics.pairwise import pairwise_kernels as pairwise_kernels
-
-Kernel_Self = TypeVar("Kernel_Self", bound=Kernel)
-Hyperparameter_Self = TypeVar("Hyperparameter_Self", bound=Hyperparameter)
 
 class Hyperparameter(namedtuple("Hyperparameter", ("name", "value_type", "bounds", "n_elements", "fixed"))):
     fixed: bool = ...
@@ -52,7 +49,7 @@ class Hyperparameter(namedtuple("Hyperparameter", ("name", "value_type", "bounds
 
 class Kernel(metaclass=ABCMeta):
     def get_params(self, deep: bool = True) -> dict: ...
-    def set_params(self: Kernel_Self, **params) -> Kernel_Self: ...
+    def set_params(self, **params) -> Self: ...
     def clone_with_theta(self, theta: ArrayLike): ...
     def n_dims(self) -> int: ...
     def hyperparameters(self) -> list[Hyperparameter]: ...

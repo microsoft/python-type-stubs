@@ -1,6 +1,7 @@
 import warnings
 from numbers import Real as Real
-from typing import ClassVar, Literal, TypeVar
+from typing import ClassVar, Literal
+from typing_extensions import Self
 
 import numpy as np
 from numpy import ndarray
@@ -12,8 +13,6 @@ from ..base import BaseEstimator, RegressorMixin
 from ..exceptions import ConvergenceWarning as ConvergenceWarning
 from ..utils._param_validation import Hidden as Hidden, Interval as Interval, StrOptions as StrOptions
 from ._base import LinearModel
-
-QuantileRegressor_Self = TypeVar("QuantileRegressor_Self", bound=QuantileRegressor)
 
 # Authors: David Dale <dale.david@mail.ru>
 #          Christian Lorentzen <lorentzen.ch@gmail.com>
@@ -45,8 +44,8 @@ class QuantileRegressor(LinearModel, RegressorMixin, BaseEstimator):
         solver_options: None | dict = None,
     ) -> None: ...
     def fit(
-        self: QuantileRegressor_Self,
+        self,
         X: MatrixLike | ArrayLike,
         y: ArrayLike,
         sample_weight: None | ArrayLike = None,
-    ) -> QuantileRegressor_Self: ...
+    ) -> Self: ...

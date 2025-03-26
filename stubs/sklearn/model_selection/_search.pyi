@@ -8,6 +8,7 @@ from collections.abc import Iterable, Iterator, Mapping, Sequence
 from functools import partial as partial, reduce as reduce
 from itertools import product as product
 from typing import Any, Callable, ClassVar, Generic, TypeVar
+from typing_extensions import Self
 
 import numpy as np
 from numpy import ndarray
@@ -28,7 +29,6 @@ from ..utils.validation import check_is_fitted as check_is_fitted, indexable as 
 from . import BaseCrossValidator
 from ._split import check_cv as check_cv
 
-BaseSearchCV_Self = TypeVar("BaseSearchCV_Self", bound=BaseSearchCV)
 BaseEstimatorT = TypeVar("BaseEstimatorT", bound=BaseEstimator, default=BaseEstimator, covariant=True)
 
 __all__ = ["GridSearchCV", "ParameterGrid", "ParameterSampler", "RandomizedSearchCV"]
@@ -76,13 +76,13 @@ class BaseSearchCV(MetaEstimatorMixin, BaseEstimator, metaclass=ABCMeta):
     def n_features_in_(self): ...
     def classes_(self): ...
     def fit(
-        self: BaseSearchCV_Self,
+        self,
         X: list[str] | MatrixLike,
         y: None | MatrixLike | ArrayLike = None,
         *,
         groups: None | ArrayLike = None,
         **fit_params,
-    ) -> BaseSearchCV_Self: ...
+    ) -> Self: ...
 
 class GridSearchCV(BaseSearchCV, Generic[BaseEstimatorT]):
     feature_names_in_: ndarray = ...

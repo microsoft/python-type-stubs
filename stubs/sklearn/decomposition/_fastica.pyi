@@ -1,6 +1,7 @@
 import warnings
 from numbers import Integral as Integral, Real as Real
-from typing import Any, Callable, ClassVar, Literal, TypeVar
+from typing import Any, Callable, ClassVar, Literal
+from typing_extensions import Self
 
 import numpy as np
 from numpy import ndarray
@@ -13,8 +14,6 @@ from ..exceptions import ConvergenceWarning as ConvergenceWarning
 from ..utils import as_float_array as as_float_array, check_array as check_array, check_random_state as check_random_state
 from ..utils._param_validation import Hidden as Hidden, Interval as Interval, StrOptions as StrOptions
 from ..utils.validation import check_is_fitted as check_is_fitted
-
-FastICA_Self = TypeVar("FastICA_Self", bound=FastICA)
 
 # Authors: Pierre Lafaye de Micheaux, Stefan van der Walt, Gael Varoquaux,
 #          Bertrand Thirion, Alexandre Gramfort, Denis A. Engemann
@@ -66,6 +65,6 @@ class FastICA(ClassNamePrefixFeaturesOutMixin, TransformerMixin, BaseEstimator):
         random_state: RandomState | None | Int = None,
     ) -> None: ...
     def fit_transform(self, X: MatrixLike, y: Any = None) -> ndarray: ...
-    def fit(self: FastICA_Self, X: MatrixLike, y: Any = None) -> FastICA_Self: ...
+    def fit(self, X: MatrixLike, y: Any = None) -> Self: ...
     def transform(self, X: MatrixLike, copy: bool = True) -> ndarray: ...
     def inverse_transform(self, X: MatrixLike, copy: bool = True) -> ndarray: ...
