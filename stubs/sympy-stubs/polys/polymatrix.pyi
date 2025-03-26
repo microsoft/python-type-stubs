@@ -39,4 +39,5 @@ class MutablePolyDenseMatrix:
     def nullspace(self) -> list[Self]: ...
     def rank(self): ...
 
-PolyMatrix = MutablePolyMatrix = MutablePolyDenseMatrix
+PolyMatrix = MutablePolyDenseMatrix
+MutablePolyMatrix = MutablePolyDenseMatrix
