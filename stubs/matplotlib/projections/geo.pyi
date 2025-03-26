@@ -1,5 +1,5 @@
-from typing import Sequence
-from typing_extensions import NoReturn
+from collections.abc import Sequence
+from typing import NoReturn
 
 import numpy as np
 from matplotlib.axes import Axes

@@ -5,8 +5,6 @@ from numpy import ndarray
 
 from .._typing import Scalar
 
-# -*- coding: utf-8 -*-
-
 def cubehelix(
     start: Scalar = 0.5,
     rot: Scalar = 1,

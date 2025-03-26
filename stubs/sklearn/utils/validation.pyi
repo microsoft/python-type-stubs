@@ -1,11 +1,12 @@
 import numbers
 import operator
 import warnings
+from collections.abc import Sequence
 from contextlib import suppress as suppress
 from functools import wraps as wraps
 from inspect import Parameter as Parameter, isclass as isclass, signature as signature
 from numbers import Integral, Number, Real
-from typing import Any, Callable, Literal, Sequence, Type
+from typing import Any, Callable, Literal
 
 import joblib
 import numpy as np
@@ -99,7 +100,7 @@ def check_non_negative(X: MatrixLike | ArrayLike, whom: str) -> None: ...
 def check_scalar(
     x: Any,
     name: str,
-    target_type: Type[Integral] | tuple | Type[Real] | type,
+    target_type: type[Integral | Real] | tuple | type,
     *,
     min_val: None | Float = None,
     max_val: None | Float = None,

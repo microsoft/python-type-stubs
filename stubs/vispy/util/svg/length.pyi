@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # -----------------------------------------------------------------------------
 # Copyright (c) 2014, Nicolas P. Rougier
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
@@ -9,7 +8,7 @@ import re
 from .. import logger
 from .base import units
 
-class Length(object):
+class Length:
     def __init__(self, content, mode="x", parent=None): ...
     def __float__(self): ...
     @property

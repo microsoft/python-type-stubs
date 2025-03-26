@@ -1,7 +1,8 @@
 from abc import ABCMeta, abstractmethod
+from collections.abc import Mapping, Sequence
 from math import ceil as ceil
 from numbers import Integral as Integral, Real as Real
-from typing import ClassVar, Literal, Mapping, Sequence, TypeVar
+from typing import ClassVar, Literal, TypeVar
 
 from numpy import ndarray
 from numpy.random import RandomState

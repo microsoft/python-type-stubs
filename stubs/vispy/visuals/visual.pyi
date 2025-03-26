@@ -1,11 +1,9 @@
-# -*- coding: utf-8 -*-
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 
-from __future__ import division
-
 import weakref
-from typing import Any, Sequence
+from collections.abc import Sequence
+from typing import Any
 
 import numpy as np
 
@@ -16,7 +14,7 @@ from ..util.event import EmitterGroup, Event
 from .shaders import MultiProgram, StatementList
 from .transforms import TransformSystem
 
-class VisualShare(object):
+class VisualShare:
     def __init__(self): ...
 
 class BaseVisual(Frozen):
@@ -44,7 +42,7 @@ class BaseVisual(Frozen):
     def update(self): ...
     def _transform_changed(self, event=None): ...
 
-class BaseVisualView(object):
+class BaseVisualView:
     def __init__(self, visual): ...
     @property
     def visual(self): ...

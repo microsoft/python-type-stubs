@@ -1,6 +1,3 @@
-# pyright: reportUnknownVariableType=false
-# pyright: reportMissingTypeStubs=false
-
 from typing import Any
 from typing_extensions import assert_type
 

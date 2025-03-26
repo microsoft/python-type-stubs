@@ -1,4 +1,5 @@
-from typing import Sequence, TypeVar
+from collections.abc import Sequence
+from typing import TypeVar
 
 from numpy import ndarray, uint8
 from numpy.random import RandomState

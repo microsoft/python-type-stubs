@@ -1,4 +1,5 @@
-from typing import Any, Sequence, TypeVar
+from collections.abc import Sequence
+from typing import Any, TypeVar
 
 from sympy.polys.matrices._typing import RingElement
 

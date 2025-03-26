@@ -1,6 +1,6 @@
 import itertools
+from collections.abc import Mapping
 from operator import itemgetter
-from typing import Mapping
 
 # Define the default maximum flow function to use in all flow based
 # connectivity algorithms.

@@ -1,4 +1,5 @@
-from typing import Callable, Mapping
+from collections.abc import Mapping
+from typing import Callable
 
 import numpy as np
 from numpy.typing import NDArray

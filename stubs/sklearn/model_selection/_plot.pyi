@@ -1,4 +1,5 @@
-from typing import Callable, Iterable, Literal
+from collections.abc import Iterable
+from typing import Callable, Literal
 
 import numpy as np
 from matplotlib.artist import Artist

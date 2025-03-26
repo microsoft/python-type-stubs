@@ -2,7 +2,6 @@ import itertools
 from collections import defaultdict
 from collections.abc import Mapping
 from functools import cached_property
-from typing import Mapping
 
 from ...classes.graph import Graph
 from ...exception import NetworkXError

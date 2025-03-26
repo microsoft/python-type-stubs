@@ -59,19 +59,18 @@ select = [
     "FA", # flake8-future-annotations
     "I", # isort
     "PYI", # flake8-pyi
+    "UP", # pyupgrade
 ]
 ignore = [
     ###
     # Rules we don't want or don't agree with
     ###
+
     # Typeshed doesn't want complex or non-literal defaults, or long strings, for maintenance and testing reasons.
     # This doesn't affect us, let's have more complete stubs.
     "PYI011",
     "PYI014",
     "PYI053",
-
-    # TODO: Handle in its own PR
-    "PYI021", # https://github.com/microsoft/python-type-stubs/pull/343
 
     # TODO: Investigate and fix or configure
     "PYI001",
@@ -83,6 +82,10 @@ ignore = [
     "PYI051", # Request for autofix: https://github.com/astral-sh/ruff/issues/14185
     "PYI052",
 ]
+
+[tool.ruff.lint.per-file-ignores]
+# We keep docstrings in sklearn
+"stubs/sklearn/**" = ["PYI021"]
 
 [tool.ruff.lint.isort]
 combine-as-imports = true
