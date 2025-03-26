@@ -14,14 +14,14 @@ def install_requirements(test_folder: Path):
 def run_pyright():
     print("\nRunning Pyright...")
     # https://github.com/RobertCraigie/pyright-python#keeping-pyright-and-pylance-in-sync
-    del os.environ["PYRIGHT_PYTHON_FORCE_VERSION"]
+    os.environ.pop("PYRIGHT_PYTHON_FORCE_VERSION", None)
     os.environ["PYRIGHT_PYTHON_PYLANCE_VERSION"] = "latest-prerelease"
     return subprocess.run((sys.executable, "-m", "pyright"))
 
 
 def run_mypy():
     print("\nRunning mypy...")
-    return subprocess.run((sys.executable, "-m", "mypy"))
+    return subprocess.run((sys.executable, "-m", "mypy", "."))
 
 
 def main():
