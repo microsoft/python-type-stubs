@@ -1,8 +1,13 @@
+import array
+import itertools
+import warnings
 from collections import defaultdict as defaultdict
 from collections.abc import Iterable
 from numbers import Integral as Integral
 from typing import Any, ClassVar, TypeVar
 
+import numpy as np
+import scipy.sparse as sp
 from numpy import ndarray
 from pandas.core.frame import DataFrame
 from scipy.sparse import csr_matrix, spmatrix
@@ -25,13 +30,6 @@ LabelBinarizer_Self = TypeVar("LabelBinarizer_Self", bound=LabelBinarizer)
 #          Joel Nothman <joel.nothman@gmail.com>
 #          Hamzeh Alsalhi <ha258@cornell.edu>
 # License: BSD 3 clause
-
-import array
-import itertools
-import warnings
-
-import numpy as np
-import scipy.sparse as sp
 
 __all__ = [
     "label_binarize",

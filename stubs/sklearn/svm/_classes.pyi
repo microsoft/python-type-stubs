@@ -2,6 +2,7 @@ from collections.abc import Mapping
 from numbers import Integral as Integral, Real as Real
 from typing import Any, Callable, ClassVar, Literal, TypeVar
 
+import numpy as np
 from numpy import ndarray
 from numpy.random import RandomState
 
@@ -16,8 +17,6 @@ from ._base import BaseLibSVM, BaseSVC
 OneClassSVM_Self = TypeVar("OneClassSVM_Self", bound=OneClassSVM)
 LinearSVC_Self = TypeVar("LinearSVC_Self", bound=LinearSVC)
 LinearSVR_Self = TypeVar("LinearSVR_Self", bound=LinearSVR)
-
-import numpy as np
 
 class LinearSVC(LinearClassifierMixin, SparseCoefMixin, BaseEstimator):
     n_iter_: int = ...

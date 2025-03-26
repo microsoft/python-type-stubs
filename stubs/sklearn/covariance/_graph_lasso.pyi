@@ -1,7 +1,12 @@
+import operator
+import sys
+import time
+import warnings
 from collections.abc import Iterable
 from numbers import Integral as Integral, Real as Real
 from typing import Any, ClassVar, Literal, TypeVar
 
+import numpy as np
 from numpy import ndarray
 from scipy import linalg as linalg
 
@@ -17,16 +22,9 @@ from . import EmpiricalCovariance, empirical_covariance as empirical_covariance,
 GraphicalLassoCV_Self = TypeVar("GraphicalLassoCV_Self", bound=GraphicalLassoCV)
 GraphicalLasso_Self = TypeVar("GraphicalLasso_Self", bound=GraphicalLasso)
 
-import operator
-import sys
-import time
-
 # Author: Gael Varoquaux <gael.varoquaux@normalesup.org>
 # License: BSD 3 clause
 # Copyright: INRIA
-import warnings
-
-import numpy as np
 
 def alpha_max(emp_cov: MatrixLike) -> Float: ...
 

@@ -1,8 +1,10 @@
+import warnings
 from abc import ABCMeta, abstractmethod
 from collections.abc import Iterator
 from numbers import Integral as Integral, Real as Real
 from typing import Any, ClassVar, Literal, TypeVar
 
+import numpy as np
 from numpy import ndarray
 from numpy.random import RandomState
 from scipy.special import xlogy as xlogy
@@ -18,10 +20,6 @@ from ..utils.validation import check_is_fitted as check_is_fitted, has_fit_param
 from ._base import BaseEnsemble
 
 BaseWeightBoosting_Self = TypeVar("BaseWeightBoosting_Self", bound=BaseWeightBoosting)
-
-import warnings
-
-import numpy as np
 
 __all__ = [
     "AdaBoostClassifier",

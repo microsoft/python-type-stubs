@@ -1,7 +1,13 @@
+import copy
+import inspect
+import platform
+import re
+import warnings
 from collections import defaultdict as defaultdict
 from collections.abc import Iterable
 from typing import Any, ClassVar, TypeVar
 
+import numpy as np
 from numpy import ndarray
 
 from ._config import get_config as get_config
@@ -16,14 +22,6 @@ BaseEstimator_Self = TypeVar("BaseEstimator_Self", bound=BaseEstimator)
 
 # Author: Gael Varoquaux <gael.varoquaux@normalesup.org>
 # License: BSD 3 clause
-
-import copy
-import inspect
-import platform
-import re
-import warnings
-
-import numpy as np
 
 def clone(estimator: BaseEstimator | Iterable[BaseEstimator], *, safe: bool = True) -> Any: ...
 

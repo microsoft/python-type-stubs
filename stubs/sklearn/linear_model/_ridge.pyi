@@ -1,9 +1,12 @@
+import numbers
+import warnings
 from abc import ABCMeta, abstractmethod
 from collections.abc import Iterable, Mapping
 from functools import partial as partial
 from numbers import Integral as Integral, Real as Real
 from typing import Callable, ClassVar, Literal, TypeVar
 
+import numpy as np
 from numpy import ndarray
 from numpy.random import RandomState
 from pandas.core.frame import DataFrame
@@ -40,11 +43,6 @@ RidgeClassifier_Self = TypeVar("RidgeClassifier_Self", bound=RidgeClassifier)
 RidgeClassifierCV_Self = TypeVar("RidgeClassifierCV_Self", bound=RidgeClassifierCV)
 RidgeCV_Self = TypeVar("RidgeCV_Self", bound=RidgeCV)
 Ridge_Self = TypeVar("Ridge_Self", bound=Ridge)
-
-import numbers
-import warnings
-
-import numpy as np
 
 def ridge_regression(
     X: MatrixLike | LinearOperator,

@@ -1,8 +1,10 @@
+import warnings
 from abc import ABCMeta, abstractmethod
 from collections.abc import Mapping
 from numbers import Integral as Integral, Real as Real
 from typing import Any, ClassVar, Literal, TypeVar
 
+import numpy as np
 from numpy import ndarray
 from numpy.random import RandomState
 from scipy.sparse._csr import csr_matrix
@@ -38,10 +40,6 @@ BaseSGDRegressor_Self = TypeVar("BaseSGDRegressor_Self", bound=BaseSGDRegressor)
 #          Mathieu Blondel (partial_fit support)
 #
 # License: BSD 3 clause
-
-import warnings
-
-import numpy as np
 
 LEARNING_RATE_TYPES: dict = ...
 

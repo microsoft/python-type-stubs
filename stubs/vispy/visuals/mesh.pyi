@@ -6,10 +6,8 @@ from numpy.typing import ArrayLike
 from ..color import Color, get_colormap
 from ..color.colormap import CubeHelixColormap
 from ..geometry import MeshData
-from ..geometry.meshdata import MeshData
 from ..gloo import VertexBuffer
 from ..util.event import Event
-from ..util.svg.color import Color
 from .shaders import Function, FunctionChain
 from .visual import Visual
 

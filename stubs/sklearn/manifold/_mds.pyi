@@ -1,6 +1,8 @@
+import warnings
 from numbers import Integral as Integral, Real as Real
 from typing import Any, ClassVar, Literal, TypeVar
 
+import numpy as np
 from joblib import effective_n_jobs as effective_n_jobs
 from numpy import ndarray
 from numpy.random import RandomState
@@ -14,10 +16,6 @@ from ..utils._param_validation import Hidden as Hidden, Interval as Interval, St
 from ..utils.parallel import Parallel as Parallel, delayed as delayed
 
 MDS_Self = TypeVar("MDS_Self", bound=MDS)
-
-import warnings
-
-import numpy as np
 
 def smacof(
     dissimilarities: MatrixLike,

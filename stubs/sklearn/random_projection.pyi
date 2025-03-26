@@ -1,8 +1,11 @@
+import warnings
 from abc import ABCMeta, abstractmethod
 from collections.abc import Sequence
 from numbers import Integral as Integral, Real as Real
 from typing import Any, ClassVar, Literal, TypeVar
 
+import numpy as np
+import scipy.sparse as sp
 from numpy import ndarray
 from numpy.random import RandomState
 from scipy import linalg as linalg
@@ -22,11 +25,6 @@ BaseRandomProjection_Self = TypeVar("BaseRandomProjection_Self", bound=BaseRando
 # Authors: Olivier Grisel <olivier.grisel@ensta.org>,
 #          Arnaud Joly <a.joly@ulg.ac.be>
 # License: BSD 3 clause
-
-import warnings
-
-import numpy as np
-import scipy.sparse as sp
 
 __all__ = [
     "SparseRandomProjection",

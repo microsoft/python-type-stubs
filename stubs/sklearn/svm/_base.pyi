@@ -1,7 +1,10 @@
+import warnings
 from abc import ABCMeta, abstractmethod
 from numbers import Integral as Integral, Real as Real
 from typing import Callable, ClassVar, TypeVar
 
+import numpy as np
+import scipy.sparse as sp
 from numpy import ndarray
 from numpy.random.mtrand import RandomState
 
@@ -22,11 +25,6 @@ from ..utils.multiclass import check_classification_targets as check_classificat
 from ..utils.validation import check_consistent_length as check_consistent_length, check_is_fitted as check_is_fitted
 
 BaseLibSVM_Self = TypeVar("BaseLibSVM_Self", bound=BaseLibSVM)
-
-import warnings
-
-import numpy as np
-import scipy.sparse as sp
 
 LIBSVM_IMPL: list = ...
 

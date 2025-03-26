@@ -1,10 +1,12 @@
+import numbers
+import warnings
 from collections.abc import Sequence
 from numbers import Integral as Integral, Real as Real
 from typing import ClassVar, Literal, TypeVar
 
+import numpy as np
 from numpy import ndarray
 from pandas.core.series import Series
-from scipy import sparse
 from scipy.sparse import spmatrix
 
 from .._typing import ArrayLike, Int, MatrixLike
@@ -19,11 +21,6 @@ OneHotEncoder_Self = TypeVar("OneHotEncoder_Self", bound=OneHotEncoder)
 # Authors: Andreas Mueller <amueller@ais.uni-bonn.de>
 #          Joris Van den Bossche <jorisvandenbossche@gmail.com>
 # License: BSD 3 clause
-
-import numbers
-import warnings
-
-import numpy as np
 
 __all__ = ["OneHotEncoder", "OrdinalEncoder"]
 

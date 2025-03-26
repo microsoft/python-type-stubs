@@ -2,7 +2,6 @@ from numpy.typing import ArrayLike, NDArray
 
 from ..color import Color
 from ..geometry.isosurface import isosurface
-from ..util.svg.color import Color
 from .mesh import MeshVisual
 
 # Copyright (c) Vispy Development Team. All Rights Reserved.

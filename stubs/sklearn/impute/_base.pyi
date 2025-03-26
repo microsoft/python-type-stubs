@@ -1,6 +1,10 @@
+import numbers
+import warnings
 from collections import Counter as Counter
 from typing import Any, ClassVar, Literal, TypeVar
 
+import numpy as np
+import numpy.ma as ma
 from numpy import ndarray
 from scipy import sparse as sp
 from scipy.sparse import spmatrix
@@ -17,12 +21,6 @@ MissingIndicator_Self = TypeVar("MissingIndicator_Self", bound=MissingIndicator)
 # Authors: Nicolas Tresegnie <nicolas.tresegnie@gmail.com>
 #          Sergey Feldman <sergeyfeldman@gmail.com>
 # License: BSD 3 clause
-
-import numbers
-import warnings
-
-import numpy as np
-import numpy.ma as ma
 
 class _BaseImputer(TransformerMixin, BaseEstimator):
     _parameter_constraints: ClassVar[dict] = ...

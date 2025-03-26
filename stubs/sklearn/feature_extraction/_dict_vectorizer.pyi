@@ -4,6 +4,8 @@ from numbers import Number as Number
 from operator import itemgetter as itemgetter
 from typing import Any, ClassVar, TypeVar
 
+import numpy as np
+import scipy.sparse as sp
 from numpy import ndarray
 from scipy.sparse import spmatrix
 
@@ -16,9 +18,6 @@ DictVectorizer_Self = TypeVar("DictVectorizer_Self", bound=DictVectorizer)
 # Authors: Lars Buitinck
 #          Dan Blanchard <dblanchard@ets.org>
 # License: BSD 3 clause
-
-import numpy as np
-import scipy.sparse as sp
 
 class DictVectorizer(TransformerMixin, BaseEstimator):
     feature_names_: list = ...

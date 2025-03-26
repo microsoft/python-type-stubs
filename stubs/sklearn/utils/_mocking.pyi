@@ -1,6 +1,7 @@
 from collections.abc import Sequence
 from typing import Callable, Literal, TypeVar
 
+import numpy as np
 from numpy import ndarray
 
 from .._typing import ArrayLike, Int, MatrixLike
@@ -8,8 +9,6 @@ from ..base import BaseEstimator, ClassifierMixin
 from .validation import check_array as check_array, check_is_fitted as check_is_fitted
 
 CheckingClassifier_Self = TypeVar("CheckingClassifier_Self", bound=CheckingClassifier)
-
-import numpy as np
 
 class ArraySlicingWrapper:
     def __init__(self, array) -> None: ...

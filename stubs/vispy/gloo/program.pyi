@@ -3,7 +3,6 @@ import re
 import numpy as np
 from numpy.typing import ArrayLike
 
-from ..gloo.buffer import VertexBuffer
 from ..util import logger
 from .buffer import DataBuffer, IndexBuffer, VertexBuffer
 from .context import get_current_canvas

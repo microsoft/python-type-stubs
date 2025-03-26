@@ -1,6 +1,8 @@
+import warnings
 from numbers import Real as Real
 from typing import ClassVar, Literal, TypeVar
 
+import numpy as np
 from numpy import ndarray
 from scipy import sparse as sparse
 from scipy.optimize import linprog as linprog
@@ -16,9 +18,6 @@ QuantileRegressor_Self = TypeVar("QuantileRegressor_Self", bound=QuantileRegress
 # Authors: David Dale <dale.david@mail.ru>
 #          Christian Lorentzen <lorentzen.ch@gmail.com>
 # License: BSD 3 clause
-import warnings
-
-import numpy as np
 
 class QuantileRegressor(LinearModel, RegressorMixin, BaseEstimator):
     n_iter_: int = ...

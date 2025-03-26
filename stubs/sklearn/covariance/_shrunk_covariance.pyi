@@ -1,6 +1,8 @@
+import warnings
 from numbers import Integral as Integral, Real as Real
 from typing import Any, ClassVar, TypeVar
 
+import numpy as np
 from numpy import ndarray
 
 from .._config import config_context as config_context
@@ -20,9 +22,6 @@ OAS_Self = TypeVar("OAS_Self", bound=OAS)
 # License: BSD 3 clause
 
 # avoid division truncation
-import warnings
-
-import numpy as np
 
 # ShrunkCovariance estimator
 

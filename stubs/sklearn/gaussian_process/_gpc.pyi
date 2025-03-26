@@ -2,6 +2,8 @@ from numbers import Integral as Integral
 from operator import itemgetter as itemgetter
 from typing import Any, Callable, ClassVar, Literal, TypeVar
 
+import numpy as np
+import scipy.optimize
 from numpy import ndarray
 from numpy.random import RandomState
 from scipy.linalg import cho_solve as cho_solve, cholesky as cholesky, solve as solve
@@ -21,9 +23,6 @@ _BinaryGaussianProcessClassifierLaplace_Self = TypeVar(
     bound=_BinaryGaussianProcessClassifierLaplace,
 )
 GaussianProcessClassifier_Self = TypeVar("GaussianProcessClassifier_Self", bound=GaussianProcessClassifier)
-
-import numpy as np
-import scipy.optimize
 
 # Values required for approximating the logistic sigmoid by
 # error functions. coefs are obtained via:

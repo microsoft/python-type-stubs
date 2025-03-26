@@ -1,7 +1,6 @@
 import math
 
 import numpy as np
-from numpy import dtype
 from numpy.typing import ArrayLike, NDArray
 
 #!/usr/bin/env python

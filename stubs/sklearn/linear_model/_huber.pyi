@@ -1,6 +1,7 @@
 from numbers import Integral as Integral, Real as Real
 from typing import ClassVar, TypeVar
 
+import numpy as np
 from numpy import ndarray
 from scipy import optimize as optimize
 
@@ -15,8 +16,6 @@ HuberRegressor_Self = TypeVar("HuberRegressor_Self", bound=HuberRegressor)
 
 # Authors: Manoj Kumar mks542@nyu.edu
 # License: BSD 3 clause
-
-import numpy as np
 
 class HuberRegressor(LinearModel, RegressorMixin, BaseEstimator):
     outliers_: ndarray = ...

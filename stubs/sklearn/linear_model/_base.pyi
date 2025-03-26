@@ -1,7 +1,11 @@
+import numbers
+import warnings
 from abc import ABCMeta, abstractmethod
 from numbers import Integral as Integral
 from typing import ClassVar, TypeVar
 
+import numpy as np
+import scipy.sparse as sp
 from numpy import ndarray
 from numpy.random.mtrand import RandomState
 from scipy import linalg as linalg, optimize as optimize, sparse
@@ -21,12 +25,6 @@ from ._stochastic_gradient import SGDClassifier
 
 LinearRegression_Self = TypeVar("LinearRegression_Self", bound=LinearRegression)
 SparseCoefMixin_Self = TypeVar("SparseCoefMixin_Self", bound=SparseCoefMixin)
-
-import numbers
-import warnings
-
-import numpy as np
-import scipy.sparse as sp
 
 # TODO: bayesian_ridge_regression and bayesian_regression_ard
 # should be squashed into its respective objects.

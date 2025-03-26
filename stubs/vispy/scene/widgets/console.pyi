@@ -3,7 +3,6 @@ import numpy as np
 from ...color import Color
 from ...gloo import VertexBuffer
 from ...util.event import Event
-from ...util.svg.color import Color
 from ...visuals import Visual
 from .widget import Widget
 

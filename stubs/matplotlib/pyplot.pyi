@@ -11,7 +11,6 @@ import numpy as np
 from matplotlib import rcParams as rcParams, style as style
 from matplotlib.contour import QuadContourSet
 
-from . import rcParams
 from ._typing import *
 from .artist import Artist
 from .axes import Axes as Axes
@@ -780,7 +779,7 @@ def tick_params(axis: Literal["x", "y", "both"] = ..., **kwargs): ...
 def ticklabel_format(
     *,
     axis: Literal["x", "y", "both"] = ...,
-    style: Literal["sci", "scientific", "plain"] = ...,
+    style: Literal["sci", "scientific", "plain"] = ...,  # noqa: F811
     scilimits=...,
     useOffset: bool | float = ...,
     useLocale: bool = ...,

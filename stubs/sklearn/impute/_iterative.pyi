@@ -1,8 +1,10 @@
+import warnings
 from collections import namedtuple as namedtuple
 from numbers import Integral as Integral, Real as Real
 from time import time as time
 from typing import Any, ClassVar, Literal, TypeVar
 
+import numpy as np
 from numpy import ndarray
 from numpy.random import RandomState
 from scipy import stats as stats
@@ -18,10 +20,6 @@ from ..utils.validation import FLOAT_DTYPES as FLOAT_DTYPES, check_is_fitted as 
 from ._base import MissingIndicator, SimpleImputer, _BaseImputer
 
 IterativeImputer_Self = TypeVar("IterativeImputer_Self", bound=IterativeImputer)
-
-import warnings
-
-import numpy as np
 
 _ImputerTriplet = ...
 

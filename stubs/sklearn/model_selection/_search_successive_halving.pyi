@@ -5,6 +5,7 @@ from math import ceil as ceil, floor as floor, log as log
 from numbers import Integral as Integral
 from typing import Callable, ClassVar, Literal, TypeVar
 
+import numpy as np
 from numpy import ndarray
 from numpy.random import RandomState
 
@@ -18,8 +19,6 @@ from ._search import BaseSearchCV
 from ._split import check_cv as check_cv
 
 BaseSuccessiveHalving_Self = TypeVar("BaseSuccessiveHalving_Self", bound=BaseSuccessiveHalving)
-
-import numpy as np
 
 __all__ = ["HalvingGridSearchCV", "HalvingRandomSearchCV"]
 
