@@ -1,5 +1,6 @@
 import warnings
-from typing import Callable, ClassVar, Literal, TypeVar
+from typing import Callable, ClassVar, Literal
+from typing_extensions import Self
 
 import numpy as np
 from numpy import ndarray
@@ -8,9 +9,6 @@ from .._typing import ArrayLike, Float, Int, MatrixLike
 from ..base import RegressorMixin
 from ..utils._param_validation import StrOptions as StrOptions
 from ._base import KNeighborsMixin, NeighborsBase, RadiusNeighborsMixin
-
-KNeighborsRegressor_Self = TypeVar("KNeighborsRegressor_Self", bound=KNeighborsRegressor)
-RadiusNeighborsRegressor_Self = TypeVar("RadiusNeighborsRegressor_Self", bound=RadiusNeighborsRegressor)
 
 # Authors: Jake Vanderplas <vanderplas@astro.washington.edu>
 #          Fabian Pedregosa <fabian.pedregosa@inria.fr>
@@ -43,7 +41,7 @@ class KNeighborsRegressor(KNeighborsMixin, RegressorMixin, NeighborsBase):
         metric_params: None | dict = None,
         n_jobs: None | Int = None,
     ) -> None: ...
-    def fit(self: KNeighborsRegressor_Self, X: MatrixLike, y: MatrixLike | ArrayLike) -> KNeighborsRegressor_Self: ...
+    def fit(self, X: MatrixLike, y: MatrixLike | ArrayLike) -> Self: ...
     def predict(self, X: MatrixLike) -> ndarray: ...
 
 class RadiusNeighborsRegressor(RadiusNeighborsMixin, RegressorMixin, NeighborsBase):
@@ -67,5 +65,5 @@ class RadiusNeighborsRegressor(RadiusNeighborsMixin, RegressorMixin, NeighborsBa
         metric_params: None | dict = None,
         n_jobs: None | Int = None,
     ) -> None: ...
-    def fit(self: RadiusNeighborsRegressor_Self, X: MatrixLike, y: MatrixLike | ArrayLike) -> RadiusNeighborsRegressor_Self: ...
+    def fit(self, X: MatrixLike, y: MatrixLike | ArrayLike) -> Self: ...
     def predict(self, X: MatrixLike) -> ndarray: ...

@@ -1,7 +1,8 @@
 import warnings
 from collections.abc import Mapping
 from numbers import Integral as Integral, Real as Real
-from typing import Any, Callable, ClassVar, Literal, TypeVar
+from typing import Any, Callable, ClassVar, Literal
+from typing_extensions import Self
 
 import numpy as np
 from numpy import ndarray
@@ -18,8 +19,6 @@ from ..neighbors import NearestNeighbors as NearestNeighbors, kneighbors_graph a
 from ..utils import as_float_array as as_float_array, check_random_state as check_random_state
 from ..utils._param_validation import Interval as Interval, StrOptions as StrOptions
 from ._kmeans import k_means as k_means
-
-SpectralClustering_Self = TypeVar("SpectralClustering_Self", bound=SpectralClustering)
 
 def cluster_qr(vectors: MatrixLike) -> ndarray: ...
 def discretize(
@@ -70,5 +69,5 @@ class SpectralClustering(ClusterMixin, BaseEstimator):
         n_jobs: None | Int = None,
         verbose: bool = False,
     ) -> None: ...
-    def fit(self: SpectralClustering_Self, X: MatrixLike, y: Any = None) -> SpectralClustering_Self: ...
+    def fit(self, X: MatrixLike, y: Any = None) -> Self: ...
     def fit_predict(self, X: MatrixLike, y: Any = None) -> ndarray: ...

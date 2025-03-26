@@ -1,6 +1,7 @@
 import warnings
 from numbers import Integral as Integral, Real as Real
-from typing import Any, Callable, ClassVar, TypeVar
+from typing import Any, Callable, ClassVar
+from typing_extensions import Self
 
 import numpy as np
 from numpy import ndarray
@@ -20,8 +21,6 @@ from ..utils._param_validation import (
 from ..utils.random import sample_without_replacement as sample_without_replacement
 from ..utils.validation import check_is_fitted as check_is_fitted, has_fit_parameter as has_fit_parameter
 from ._base import LinearRegression as LinearRegression
-
-RANSACRegressor_Self = TypeVar("RANSACRegressor_Self", bound=RANSACRegressor)
 
 # Author: Johannes Schönberger
 #
@@ -59,10 +58,10 @@ class RANSACRegressor(MetaEstimatorMixin, RegressorMixin, MultiOutputMixin, Base
         base_estimator: Any = "deprecated",
     ) -> None: ...
     def fit(
-        self: RANSACRegressor_Self,
+        self,
         X: MatrixLike | ArrayLike,
         y: MatrixLike | ArrayLike,
         sample_weight: None | ArrayLike = None,
-    ) -> RANSACRegressor_Self: ...
+    ) -> Self: ...
     def predict(self, X: MatrixLike) -> ndarray: ...
     def score(self, X: MatrixLike, y: MatrixLike | ArrayLike) -> float: ...

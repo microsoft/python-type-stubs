@@ -2,7 +2,8 @@ import numbers
 import warnings
 from collections.abc import Sequence
 from numbers import Integral as Integral, Real as Real
-from typing import ClassVar, Literal, TypeVar
+from typing import ClassVar, Literal
+from typing_extensions import Self
 
 import numpy as np
 from numpy import ndarray
@@ -14,9 +15,6 @@ from ..base import BaseEstimator, OneToOneFeatureMixin, TransformerMixin
 from ..utils import check_array as check_array, is_scalar_nan as is_scalar_nan
 from ..utils._param_validation import Hidden as Hidden, Interval as Interval, StrOptions as StrOptions
 from ..utils.validation import check_is_fitted as check_is_fitted
-
-OrdinalEncoder_Self = TypeVar("OrdinalEncoder_Self", bound=OrdinalEncoder)
-OneHotEncoder_Self = TypeVar("OneHotEncoder_Self", bound=OneHotEncoder)
 
 # Authors: Andreas Mueller <amueller@ais.uni-bonn.de>
 #          Joris Van den Bossche <jorisvandenbossche@gmail.com>
@@ -49,10 +47,10 @@ class OneHotEncoder(_BaseEncoder):
     @property
     def infrequent_categories_(self) -> list[ndarray]: ...
     def fit(
-        self: OneHotEncoder_Self,
+        self,
         X: MatrixLike,
         y: Series | None | ndarray | list[int] = None,
-    ) -> OneHotEncoder_Self: ...
+    ) -> Self: ...
     def transform(self, X: MatrixLike) -> ndarray | spmatrix: ...
     def inverse_transform(self, X: MatrixLike) -> ndarray: ...
     def get_feature_names_out(self, input_features: None | ArrayLike = None) -> ndarray: ...
@@ -73,6 +71,6 @@ class OrdinalEncoder(OneToOneFeatureMixin, _BaseEncoder):
         unknown_value: float | None = None,
         encoded_missing_value: float = ...,
     ) -> None: ...
-    def fit(self: OrdinalEncoder_Self, X: MatrixLike, y: Series | None = None) -> OrdinalEncoder_Self: ...
+    def fit(self, X: MatrixLike, y: Series | None = None) -> Self: ...
     def transform(self, X: MatrixLike) -> ndarray: ...
     def inverse_transform(self, X: MatrixLike) -> ndarray: ...

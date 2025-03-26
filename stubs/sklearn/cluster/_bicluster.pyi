@@ -1,6 +1,7 @@
 from abc import ABCMeta, abstractmethod
 from numbers import Integral as Integral
-from typing import Any, ClassVar, Literal, TypeVar
+from typing import Any, ClassVar, Literal
+from typing_extensions import Self
 
 import numpy as np
 from numpy import ndarray
@@ -21,8 +22,6 @@ from ..utils.extmath import (
 from ..utils.validation import assert_all_finite as assert_all_finite
 from . import KMeans as KMeans, MiniBatchKMeans as MiniBatchKMeans
 
-BaseSpectral_Self = TypeVar("BaseSpectral_Self", bound=BaseSpectral)
-
 __all__ = ["SpectralCoclustering", "SpectralBiclustering"]
 
 class BaseSpectral(BiclusterMixin, BaseEstimator, metaclass=ABCMeta):
@@ -39,7 +38,7 @@ class BaseSpectral(BiclusterMixin, BaseEstimator, metaclass=ABCMeta):
         n_init: int = 10,
         random_state: None | int = None,
     ) -> None: ...
-    def fit(self: BaseSpectral_Self, X: MatrixLike, y: Any = None) -> BaseSpectral_Self: ...
+    def fit(self, X: MatrixLike, y: Any = None) -> Self: ...
 
 class SpectralCoclustering(BaseSpectral):
     feature_names_in_: ndarray = ...

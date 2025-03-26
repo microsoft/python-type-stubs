@@ -1,5 +1,5 @@
 from collections.abc import Sequence
-from typing import TypeVar
+from typing_extensions import Self
 
 import numpy as np
 from numpy import ndarray, uint8
@@ -18,8 +18,6 @@ from .common import (
     X_DTYPE as X_DTYPE,
 )
 
-_BinMapper_Self = TypeVar("_BinMapper_Self", bound=_BinMapper)
-
 # Author: Nicolas Hug
 
 class _BinMapper(TransformerMixin, BaseEstimator):
@@ -37,6 +35,6 @@ class _BinMapper(TransformerMixin, BaseEstimator):
         random_state: RandomState | None | Int = None,
         n_threads: None | Int = None,
     ) -> None: ...
-    def fit(self: _BinMapper_Self, X: MatrixLike, y=None) -> _BinMapper_Self: ...
+    def fit(self, X: MatrixLike, y=None) -> Self: ...
     def transform(self, X: MatrixLike) -> ndarray: ...
     def make_known_categories_bitsets(self) -> tuple[ndarray, ndarray]: ...

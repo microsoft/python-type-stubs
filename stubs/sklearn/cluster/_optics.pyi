@@ -1,6 +1,7 @@
 import warnings
 from numbers import Integral as Integral, Real as Real
-from typing import Any, Callable, ClassVar, Literal, TypeVar
+from typing import Any, Callable, ClassVar, Literal
+from typing_extensions import Self
 
 import numpy as np
 from joblib import Memory
@@ -16,8 +17,6 @@ from ..neighbors import NearestNeighbors as NearestNeighbors
 from ..utils import gen_batches as gen_batches, get_chunk_n_rows as get_chunk_n_rows
 from ..utils._param_validation import HasMethods as HasMethods, Interval as Interval, StrOptions as StrOptions
 from ..utils.validation import check_memory as check_memory
-
-OPTICS_Self = TypeVar("OPTICS_Self", bound=OPTICS)
 
 class OPTICS(ClusterMixin, BaseEstimator):
     feature_names_in_: ndarray = ...
@@ -49,7 +48,7 @@ class OPTICS(ClusterMixin, BaseEstimator):
         memory: None | Memory | str = None,
         n_jobs: None | Int = None,
     ) -> None: ...
-    def fit(self: OPTICS_Self, X: MatrixLike, y: Any = None) -> OPTICS_Self: ...
+    def fit(self, X: MatrixLike, y: Any = None) -> Self: ...
 
 def compute_optics_graph(
     X: MatrixLike,

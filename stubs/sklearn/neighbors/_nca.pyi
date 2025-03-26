@@ -1,7 +1,8 @@
 import sys
 import time
 from numbers import Integral as Integral, Real as Real
-from typing import Callable, ClassVar, Literal, TypeVar
+from typing import Callable, ClassVar, Literal
+from typing_extensions import Self
 from warnings import warn as warn
 
 import numpy as np
@@ -20,8 +21,6 @@ from ..utils.extmath import softmax as softmax
 from ..utils.multiclass import check_classification_targets as check_classification_targets
 from ..utils.random import check_random_state as check_random_state
 from ..utils.validation import check_array as check_array, check_is_fitted as check_is_fitted
-
-NeighborhoodComponentsAnalysis_Self = TypeVar("NeighborhoodComponentsAnalysis_Self", bound=NeighborhoodComponentsAnalysis)
 
 class NeighborhoodComponentsAnalysis(ClassNamePrefixFeaturesOutMixin, TransformerMixin, BaseEstimator):
     feature_names_in_: ndarray = ...
@@ -44,5 +43,5 @@ class NeighborhoodComponentsAnalysis(ClassNamePrefixFeaturesOutMixin, Transforme
         verbose: Int = 0,
         random_state: None | RandomState | int = None,
     ) -> None: ...
-    def fit(self: NeighborhoodComponentsAnalysis_Self, X: MatrixLike, y: ArrayLike) -> NeighborhoodComponentsAnalysis_Self: ...
+    def fit(self, X: MatrixLike, y: ArrayLike) -> Self: ...
     def transform(self, X: MatrixLike) -> ndarray: ...
