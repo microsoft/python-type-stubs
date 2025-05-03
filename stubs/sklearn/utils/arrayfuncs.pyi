@@ -5,6 +5,5 @@ def min_pos(X: np.ndarray) -> float:
     Returns the maximum representable value of the input dtype if none of the
     values are positive.
     """
-    ...
 
 def cholesky_delete(L: np.ndarray, go_out: int) -> None: ...

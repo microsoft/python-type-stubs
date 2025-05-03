@@ -159,7 +159,6 @@ class Splitter:
         right_child_position : int
             The position of the right child in ``sample_indices``.
         """
-        ...
 
     def find_node_split(
         self,
@@ -208,4 +207,3 @@ class Splitter:
         best_split_info : SplitInfo
             The info about the best possible split among all features.
         """
-        ...
