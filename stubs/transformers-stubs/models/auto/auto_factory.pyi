@@ -7,8 +7,6 @@ from typing_extensions import TypeAlias
 from transformers.configuration_utils import PretrainedConfig
 from transformers.tokenization_utils_fast import PreTrainedTokenizerFast
 
-from .configuration_auto import AutoConfig as AutoConfig
-
 _LazyAutoMappingValue: TypeAlias = tuple[
     # Tokenizers will depend on packages installed, too much variance and there are no common base or Protocol
     type[Any | None],
