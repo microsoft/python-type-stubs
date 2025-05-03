@@ -84,8 +84,7 @@ extra-standard-library = [
 [tool.pyright]
 exclude = ["build", ".git"]
 stubPath = "./stubs"
-# Target oldest supported Python version
-pythonversion = "3.9"
+pythonversion = "3.9" # Target oldest supported Python version
 typeCheckingMode = "standard"
 # Partial stubs are acceptable
 reportUnknownArgumentType = false
@@ -109,24 +108,18 @@ reportSelfClsParameterName = false
 reportUnsupportedDunderAll = "error"
 
 [tool.mypy]
-# Target oldest supported Python version
-python_version = "3.9"
-# Allow dynamic typing
-disallow_any_unimported = false # TODO
-disallow_any_expr = false # TODO
-disallow_any_decorated = false # TODO
-disallow_any_explicit = false # TODO
-disallow_any_generics = false # TODO
-disallow_subclassing_any = false # TODO
-# Untyped definitions and calls
-disallow_untyped_calls = false # TODO
-disallow_untyped_defs = false # TODO
-disallow_incomplete_defs = false # TODO
-check_untyped_defs = true
-disallow_untyped_decorators = true
-# Configuring warnings
-warn_redundant_casts = true
+python_version = "3.9" # Target oldest supported Python version
+strict = true
+show_column_numbers = true
 warn_unused_ignores = false # Change from pandas
+# Partial stubs are acceptable
+disallow_any_generics = false
+disallow_incomplete_defs = false
+disallow_untyped_defs = false
+# Allow dynamic typing in our own code
+warn_return_any = false # TODO
+disallow_untyped_calls = false # TODO
+check_untyped_defs = true
 # Suppressing errors
 disable_error_code = [
     # Not all imports in these stubs are gonna be typed
@@ -142,9 +135,6 @@ disable_error_code = [
     "operator",
     "override",
     "return",
-    "type-var",
     "valid-type",
     "var-annotated",
 ]
-# Configuring error messages
-show_column_numbers = true
