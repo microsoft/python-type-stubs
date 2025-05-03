@@ -133,7 +133,6 @@ disable_error_code = [
     "misc",
     "name-defined",
     "no-redef",
-    "operator",
     "override",
     "return",
     "valid-type",

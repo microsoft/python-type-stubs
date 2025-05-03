@@ -1,12 +1,14 @@
-from typing import Any, Literal
+from collections.abc import Callable
+from typing import Any, Literal, TypeVar
 
 from sympy.core.basic import Basic
 from sympy.core.cache import cacheit
 from sympy.core.function import UndefinedFunction
 from sympy.utilities.misc import debug_decorator as debug
 
-timeit = ...
+_CallableT = TypeVar("_CallableT", bound=Callable)
 
+def timeit(func: _CallableT) -> _CallableT: ...
 def compare(a, b, x) -> Literal["<", ">", "="]: ...
 
 class SubsSet(dict):
