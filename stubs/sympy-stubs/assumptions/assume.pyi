@@ -1,7 +1,7 @@
 from collections.abc import Generator
 from contextlib import contextmanager
 from typing import Any, Callable
-from typing_extensions import Never, Self
+from typing_extensions import Self
 
 from sympy.core.basic import Basic
 from sympy.logic.boolalg import Boolean
