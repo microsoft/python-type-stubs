@@ -1,4 +1,5 @@
 #!/bin/python
+from __future__ import annotations
 
 __doc__ = """Count IDs.
 
@@ -23,7 +24,7 @@ import re
 import docopt
 
 
-def count(root, suffix, regex, uniq):
+def count(root: str | None, suffix: str | None, regex: str | re.Pattern[str] | None, uniq: bool) -> None:
     if root is None:
         root = "."
     filepat = "*" if suffix is None else "*." + suffix[suffix.find(".") + 1 :]

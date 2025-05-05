@@ -66,7 +66,7 @@ def import_dual(m: str, stub_path: str) -> tuple:
 
     """
 
-    def _clean(m):
+    def _clean(m: str) -> None:
         to_del = [k for k in sys.modules.keys() if k == m or k.startswith(m + ".")]
         for k in to_del:
             del sys.modules[k]
@@ -99,7 +99,7 @@ class Item:
 
     def __init__(
         self, file: str, module: str, name: str, object_: object, type_: ItemType, children: dict[str, Item] | None = None
-    ):
+    ) -> None:
         self.file = file
         self.module = module
         self.name = name
@@ -109,25 +109,25 @@ class Item:
         self.done = False
         self.analog: Item | None = None
 
-    def ismodule(self):
+    def ismodule(self) -> bool:
         return self.type_ == Item.ItemType.MODULE
 
-    def isclass(self):
+    def isclass(self) -> bool:
         return self.type_ == Item.ItemType.CLASS
 
-    def isfunction(self):
+    def isfunction(self) -> bool:
         return self.type_ == Item.ItemType.FUNCTION
 
     @staticmethod
-    def make_function(file: str, module: str, name: str, object_: object):
+    def make_function(file: str, module: str, name: str, object_: object) -> Item:
         return Item(file, module, name, object_, Item.ItemType.FUNCTION)
 
     @staticmethod
-    def make_class(file: str, module: str, name: str, object_: object, children: dict[str, Item]):
+    def make_class(file: str, module: str, name: str, object_: object, children: dict[str, Item]) -> Item:
         return Item(file, module, name, object_, Item.ItemType.CLASS, children)
 
     @staticmethod
-    def make_module(file: str, module: str, name: str, object_: object, children: dict[str, Item]):
+    def make_module(file: str, module: str, name: str, object_: object, children: dict[str, Item]) -> Item:
         return Item(file, module, name, object_, Item.ItemType.MODULE, children)
 
 
@@ -144,7 +144,9 @@ def isfrompackage(v: object, path: str) -> bool:
 def isfrommodule(v: object, module: str, default: bool = True) -> bool:
     try:
         # Make sure it came from this module
-        return v.__dict__["__module__"] == module
+        __module__ = v.__dict__["__module__"]
+        assert isinstance(__module__, str)
+        return module == __module__
     except Exception:
         return default
 

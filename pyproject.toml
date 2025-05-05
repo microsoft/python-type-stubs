@@ -137,16 +137,13 @@ reportUnsupportedDunderAll = "error"
 [tool.mypy]
 python_version = "3.9" # Target oldest supported Python version
 strict = true
+check_untyped_defs = true # Strict check on all defs
 show_column_numbers = true
 warn_unused_ignores = false # Change from pandas
 # Partial stubs are acceptable
 disallow_any_generics = false
 disallow_incomplete_defs = false
 disallow_untyped_defs = false
-# Allow dynamic typing in our own code
-warn_return_any = false # TODO
-disallow_untyped_calls = false # TODO
-check_untyped_defs = true
 # Suppressing errors
 disable_error_code = [
     # Not all imports in these stubs are gonna be typed

@@ -4,13 +4,13 @@ import sys
 from pathlib import Path
 
 
-def install_requirements():
+def install_requirements() -> None:
     print("\nInstalling requirements...")
     subprocess.check_call((sys.executable, "-m", "pip", "install", "pip>=25.1"))
     subprocess.check_call((sys.executable, "-m", "pip", "install", "--upgrade", "--group", "tests"))
 
 
-def run_pyright():
+def run_pyright() -> subprocess.CompletedProcess[bytes]:
     print("\nRunning Pyright...")
     # https://github.com/RobertCraigie/pyright-python#keeping-pyright-and-pylance-in-sync
     os.environ.pop("PYRIGHT_PYTHON_FORCE_VERSION", None)
@@ -18,12 +18,12 @@ def run_pyright():
     return subprocess.run((sys.executable, "-m", "pyright"))
 
 
-def run_mypy():
+def run_mypy() -> subprocess.CompletedProcess[bytes]:
     print("\nRunning mypy...")
     return subprocess.run((sys.executable, "-m", "mypy", "."))
 
 
-def main():
+def main() -> None:
     os.chdir(Path(__file__).parent.parent)
 
     install_requirements()
