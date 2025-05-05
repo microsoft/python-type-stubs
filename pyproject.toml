@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "microsoft-python-type-stubs"
-dynamic = ["version"]
+version = "0"
 
 [dependency-groups]
 hygiene = ["ruff ==0.11.*"]
