@@ -1,7 +1,6 @@
 # Python: 3.8.8 (tags/v3.8.8:024d805, Feb 19 2021, 13:18:16) [MSC v.1928 64 bit (AMD64)]
 # Library: matplotlib, version: 3.4.0
 # Module: matplotlib.ft2font, version: unspecified
-import builtins as _mod_builtins
 import typing
 
 BOLD: int
@@ -123,11 +122,7 @@ MULTIPLE_MASTERS: int
 SCALABLE: int
 SFNT: int
 VERTICAL: int
-__doc__: typing.Any
-__file__: str
 __freetype_build_type__: str
 __freetype_version__: str
-__name__: str
-__package__: str
 
 def __getattr__(name) -> typing.Any: ...
