@@ -55,7 +55,6 @@ ignore = [
     "F401",
 
     # TODO: Investigate and fix or configure
-    "PYI024",
     "PYI048",
     "PYI051", # Request for autofix: https://github.com/astral-sh/ruff/issues/14185
 ]
