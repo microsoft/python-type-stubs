@@ -145,7 +145,6 @@ disallow_incomplete_defs = false
 disallow_untyped_defs = false
 # Allow dynamic typing in our own code
 warn_return_any = false # TODO
-disallow_untyped_calls = false # TODO
 check_untyped_defs = true
 # Suppressing errors
 disable_error_code = [
