@@ -1,6 +1,9 @@
+import warnings
 from numbers import Integral as Integral, Real as Real
-from typing import Any, Callable, ClassVar, TypeVar
+from typing import Any, Callable, ClassVar
+from typing_extensions import Self
 
+import numpy as np
 from numpy import ndarray
 from numpy.random import RandomState
 from scipy import linalg as linalg
@@ -12,15 +15,9 @@ from ..utils._param_validation import Interval as Interval
 from ..utils.extmath import fast_logdet as fast_logdet
 from . import EmpiricalCovariance, empirical_covariance as empirical_covariance
 
-MinCovDet_Self = TypeVar("MinCovDet_Self", bound=MinCovDet)
-
 # Author: Virgile Fritsch <virgile.fritsch@inria.fr>
 #
 # License: BSD 3 clause
-
-import warnings
-
-import numpy as np
 
 # Minimum Covariance Determinant
 #   Implementing of an algorithm by Rousseeuw & Van Driessen described in
@@ -78,6 +75,6 @@ class MinCovDet(EmpiricalCovariance):
         support_fraction: None | Float = None,
         random_state: RandomState | None | Int = None,
     ) -> None: ...
-    def fit(self: MinCovDet_Self, X: MatrixLike, y: Any = None) -> MinCovDet_Self: ...
+    def fit(self, X: MatrixLike, y: Any = None) -> Self: ...
     def correct_covariance(self, data: MatrixLike) -> ndarray: ...
     def reweight_covariance(self, data: MatrixLike) -> tuple[ndarray, ndarray, ndarray]: ...

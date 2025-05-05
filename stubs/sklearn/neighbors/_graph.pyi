@@ -1,4 +1,5 @@
-from typing import Any, Callable, ClassVar, Literal, TypeVar
+from typing import Any, Callable, ClassVar, Literal
+from typing_extensions import Self
 
 from numpy import ndarray
 from scipy.sparse import spmatrix
@@ -10,9 +11,6 @@ from ..utils.validation import check_is_fitted as check_is_fitted
 from ._ball_tree import BallTree
 from ._base import KNeighborsMixin, NeighborsBase, RadiusNeighborsMixin
 from ._unsupervised import NearestNeighbors
-
-RadiusNeighborsTransformer_Self = TypeVar("RadiusNeighborsTransformer_Self", bound=RadiusNeighborsTransformer)
-KNeighborsTransformer_Self = TypeVar("KNeighborsTransformer_Self", bound=KNeighborsTransformer)
 
 def kneighbors_graph(
     X: MatrixLike | BallTree | NearestNeighbors,
@@ -58,7 +56,7 @@ class KNeighborsTransformer(ClassNamePrefixFeaturesOutMixin, KNeighborsMixin, Tr
         metric_params: None | dict = None,
         n_jobs: None | Int = None,
     ) -> None: ...
-    def fit(self: KNeighborsTransformer_Self, X: MatrixLike, y: Any = None) -> KNeighborsTransformer_Self: ...
+    def fit(self, X: MatrixLike, y: Any = None) -> Self: ...
     def transform(self, X: MatrixLike) -> spmatrix: ...
     def fit_transform(self, X: MatrixLike, y: Any = None) -> spmatrix: ...
 
@@ -88,6 +86,6 @@ class RadiusNeighborsTransformer(
         metric_params: None | dict = None,
         n_jobs: None | Int = None,
     ) -> None: ...
-    def fit(self: RadiusNeighborsTransformer_Self, X: MatrixLike, y: Any = None) -> RadiusNeighborsTransformer_Self: ...
+    def fit(self, X: MatrixLike, y: Any = None) -> Self: ...
     def transform(self, X: MatrixLike): ...
     def fit_transform(self, X: MatrixLike, y: Any = None): ...

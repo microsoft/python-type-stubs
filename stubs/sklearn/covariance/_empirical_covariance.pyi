@@ -1,5 +1,8 @@
-from typing import Any, ClassVar, Literal, TypeVar
+import warnings
+from typing import Any, ClassVar, Literal
+from typing_extensions import Self
 
+import numpy as np
 from numpy import ndarray
 from scipy import linalg as linalg
 
@@ -10,8 +13,6 @@ from ..metrics.pairwise import pairwise_distances as pairwise_distances
 from ..utils import check_array as check_array
 from ..utils.extmath import fast_logdet as fast_logdet
 
-EmpiricalCovariance_Self = TypeVar("EmpiricalCovariance_Self", bound=EmpiricalCovariance)
-
 # Author: Alexandre Gramfort <alexandre.gramfort@inria.fr>
 #         Gael Varoquaux <gael.varoquaux@normalesup.org>
 #         Virgile Fritsch <virgile.fritsch@inria.fr>
@@ -19,9 +20,6 @@ EmpiricalCovariance_Self = TypeVar("EmpiricalCovariance_Self", bound=EmpiricalCo
 # License: BSD 3 clause
 
 # avoid division truncation
-import warnings
-
-import numpy as np
 
 def log_likelihood(emp_cov: MatrixLike, precision: MatrixLike) -> Float: ...
 def empirical_covariance(X: ArrayLike, *, assume_centered: bool = False) -> ndarray: ...
@@ -37,7 +35,7 @@ class EmpiricalCovariance(BaseEstimator):
 
     def __init__(self, *, store_precision: bool = True, assume_centered: bool = False) -> None: ...
     def get_precision(self) -> ndarray: ...
-    def fit(self: EmpiricalCovariance_Self, X: MatrixLike, y: Any = None) -> EmpiricalCovariance_Self: ...
+    def fit(self, X: MatrixLike, y: Any = None) -> Self: ...
     def score(self, X_test: MatrixLike, y: Any = None) -> Float: ...
     def error_norm(
         self,

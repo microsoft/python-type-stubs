@@ -1,6 +1,9 @@
+import warnings
 from numbers import Integral as Integral, Real as Real
-from typing import Any, Callable, ClassVar, Literal, TypeVar
+from typing import Any, Callable, ClassVar, Literal
+from typing_extensions import Self
 
+import numpy as np
 from numpy import ndarray
 from scipy.sparse import issparse as issparse
 from scipy.sparse._csr import csr_matrix
@@ -16,13 +19,8 @@ from ..preprocessing import KernelCenterer as KernelCenterer
 from ..utils._param_validation import Interval as Interval, StrOptions as StrOptions
 from ..utils.validation import check_is_fitted as check_is_fitted
 
-Isomap_Self = TypeVar("Isomap_Self", bound=Isomap)
-
 # Author: Jake Vanderplas  -- <vanderplas@astro.washington.edu>
 # License: BSD 3 clause (C) 2011
-import warnings
-
-import numpy as np
 
 class Isomap(ClassNamePrefixFeaturesOutMixin, TransformerMixin, BaseEstimator):
     feature_names_in_: ndarray = ...
@@ -52,9 +50,9 @@ class Isomap(ClassNamePrefixFeaturesOutMixin, TransformerMixin, BaseEstimator):
     ) -> None: ...
     def reconstruction_error(self) -> float: ...
     def fit(
-        self: Isomap_Self,
+        self,
         X: ArrayLike | BallTree | NearestNeighbors | KDTree | csr_matrix,
         y: Any = None,
-    ) -> Isomap_Self: ...
+    ) -> Self: ...
     def fit_transform(self, X: BallTree | ArrayLike | KDTree, y: Any = None) -> ndarray: ...
     def transform(self, X: MatrixLike) -> ndarray: ...

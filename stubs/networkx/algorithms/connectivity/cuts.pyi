@@ -4,10 +4,9 @@ import itertools
 # cut algorithms.
 from ...algorithms.flow import build_residual_network, edmonds_karp
 from ...classes.graph import Graph
+from .utils import build_auxiliary_edge_connectivity, build_auxiliary_node_connectivity
 
 default_flow_func = ...
-
-from .utils import build_auxiliary_edge_connectivity, build_auxiliary_node_connectivity
 
 __all__ = [
     "minimum_st_node_cut",

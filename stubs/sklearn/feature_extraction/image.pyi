@@ -1,7 +1,9 @@
 from itertools import product as product
 from numbers import Integral as Integral, Number as Number, Real as Real
-from typing import Any, ClassVar, TypeVar
+from typing import Any, ClassVar
+from typing_extensions import Self
 
+import numpy as np
 from numpy import ndarray
 from numpy.lib.stride_tricks import as_strided as as_strided
 from numpy.random import RandomState
@@ -13,10 +15,6 @@ from .._typing import ArrayLike, Int, MatrixLike
 from ..base import BaseEstimator
 from ..utils import check_array as check_array, check_random_state as check_random_state
 from ..utils._param_validation import Interval as Interval
-
-PatchExtractor_Self = TypeVar("PatchExtractor_Self", bound=PatchExtractor)
-
-import numpy as np
 
 __all__ = [
     "PatchExtractor",
@@ -51,5 +49,5 @@ class PatchExtractor(BaseEstimator):
         max_patches: float | None = None,
         random_state: RandomState | None | Int = None,
     ) -> None: ...
-    def fit(self: PatchExtractor_Self, X: MatrixLike, y: Any = None) -> PatchExtractor_Self: ...
+    def fit(self, X: MatrixLike, y: Any = None) -> Self: ...
     def transform(self, X: MatrixLike) -> ndarray: ...

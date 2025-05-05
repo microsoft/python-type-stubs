@@ -1,6 +1,5 @@
 import pickle
 import re
-import types
 import warnings
 from collections.abc import Generator, Sequence
 from copy import deepcopy as deepcopy

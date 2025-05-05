@@ -54,17 +54,21 @@ line-length = 130
 target-version = "py39"
 
 [tool.ruff.lint]
-# TODO: Use extend-select instead to get base E and F rules that don't conflict with the formatter
-select = [
+extend-select = [
     "FA", # flake8-future-annotations
     "I", # isort
     "PYI", # flake8-pyi
     "UP", # pyupgrade
+    "W", # pycodestyle Warning
 ]
 ignore = [
     ###
     # Rules we don't want or don't agree with
     ###
+
+    # Used for direct, non-subclass type comparison, for example: `type(val) is str`
+    # see https://github.com/astral-sh/ruff/issues/6465
+    "E721", # Do not compare types, use `isinstance()`
 
     # Typeshed doesn't want complex or non-literal defaults, or long strings, for maintenance and testing reasons.
     # This doesn't affect us, let's have more complete stubs.
@@ -72,18 +76,27 @@ ignore = [
     "PYI014",
     "PYI053",
 
+    # TODO: Fixing these would change which symbols are even visible for Pylance.
+    # Which may negatively affect users, especially if the symbol wasn't meant to be re-exported.
+    # Manually evaluate each violation.
+    "F401",
+
     # TODO: Investigate and fix or configure
-    "PYI001",
-    "PYI002",
-    "PYI017",
-    "PYI019", # Request for more autofixes: https://github.com/astral-sh/ruff/issues/15798
-    "PYI024",
     "PYI048",
     "PYI051", # Request for autofix: https://github.com/astral-sh/ruff/issues/14185
-    "PYI052",
+]
+[tool.ruff.lint.per-file-ignores]
+"*.pyi" = [
+    ###
+    # Rules that are out of the control of stub authors:
+    ###
+    "E743", # Ambiguous function name; stubs must follow implementation
+    "F403", # `from . import *` used; unable to detect undefined names
+    # Stubs can sometimes re-export entire modules.
+    # Issues with using a star-imported name will be caught by type-checkers.
+    "F405", # may be undefined, or defined from star imports
 ]
 
-[tool.ruff.lint.per-file-ignores]
 # We keep docstrings in sklearn
 "stubs/sklearn/**" = ["PYI021"]
 
@@ -98,8 +111,7 @@ extra-standard-library = [
 [tool.pyright]
 exclude = ["build", ".git"]
 stubPath = "./stubs"
-# Target oldest supported Python version
-pythonversion = "3.9"
+pythonversion = "3.9" # Target oldest supported Python version
 typeCheckingMode = "standard"
 # Partial stubs are acceptable
 reportUnknownArgumentType = false
@@ -123,24 +135,18 @@ reportSelfClsParameterName = false
 reportUnsupportedDunderAll = "error"
 
 [tool.mypy]
-# Target oldest supported Python version
-python_version = "3.9"
-# Allow dynamic typing
-disallow_any_unimported = false # TODO
-disallow_any_expr = false # TODO
-disallow_any_decorated = false # TODO
-disallow_any_explicit = false # TODO
-disallow_any_generics = false # TODO
-disallow_subclassing_any = false # TODO
-# Untyped definitions and calls
-disallow_untyped_calls = false # TODO
-disallow_untyped_defs = false # TODO
-disallow_incomplete_defs = false # TODO
-check_untyped_defs = true
-disallow_untyped_decorators = true
-# Configuring warnings
-warn_redundant_casts = true
+python_version = "3.9" # Target oldest supported Python version
+strict = true
+show_column_numbers = true
 warn_unused_ignores = false # Change from pandas
+# Partial stubs are acceptable
+disallow_any_generics = false
+disallow_incomplete_defs = false
+disallow_untyped_defs = false
+# Allow dynamic typing in our own code
+warn_return_any = false # TODO
+disallow_untyped_calls = false # TODO
+check_untyped_defs = true
 # Suppressing errors
 disable_error_code = [
     # Not all imports in these stubs are gonna be typed
@@ -149,16 +155,11 @@ disable_error_code = [
     "assert-type",
     "assignment",
     "attr-defined",
-    "import-not-found",
     "misc",
-    "name-defined",
     "no-redef",
     "operator",
     "override",
     "return",
-    "type-var",
     "valid-type",
     "var-annotated",
 ]
-# Configuring error messages
-show_column_numbers = true

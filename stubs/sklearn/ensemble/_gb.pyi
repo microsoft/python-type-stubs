@@ -1,9 +1,12 @@
+import warnings
 from abc import ABCMeta, abstractmethod
 from collections.abc import Iterator
 from numbers import Integral as Integral, Real as Real
 from time import time as time
-from typing import Callable, ClassVar, Literal, TypeVar
+from typing import Callable, ClassVar, Literal
+from typing_extensions import Self
 
+import numpy as np
 from numpy import ndarray
 from numpy.random import RandomState
 from scipy.sparse import csc_matrix as csc_matrix, csr_matrix as csr_matrix, issparse as issparse
@@ -21,12 +24,6 @@ from ..utils.validation import check_is_fitted as check_is_fitted
 from ._base import BaseEnsemble
 from ._gb_losses import LossFunction
 from ._gradient_boosting import predict_stage as predict_stage, predict_stages as predict_stages
-
-BaseGradientBoosting_Self = TypeVar("BaseGradientBoosting_Self", bound=BaseGradientBoosting)
-
-import warnings
-
-import numpy as np
 
 class VerboseReporter:
     def __init__(self, verbose: Int) -> None: ...
@@ -63,12 +60,12 @@ class BaseGradientBoosting(BaseEnsemble, metaclass=ABCMeta):
         tol: float = 1e-4,
     ) -> None: ...
     def fit(
-        self: BaseGradientBoosting_Self,
+        self,
         X: MatrixLike | ArrayLike,
         y: ArrayLike,
         sample_weight: None | ArrayLike = None,
         monitor: None | Callable = None,
-    ) -> BaseGradientBoosting_Self: ...
+    ) -> Self: ...
     @property
     def feature_importances_(self) -> ndarray: ...
     def apply(self, X: MatrixLike | ArrayLike) -> ndarray: ...

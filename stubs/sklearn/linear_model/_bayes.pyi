@@ -1,7 +1,9 @@
 from math import log as log
 from numbers import Integral as Integral, Real as Real
-from typing import ClassVar, TypeVar
+from typing import ClassVar
+from typing_extensions import Self
 
+import numpy as np
 from numpy import ndarray
 from scipy import linalg as linalg
 from scipy.linalg import pinvh as pinvh
@@ -11,11 +13,6 @@ from ..base import RegressorMixin
 from ..utils._param_validation import Interval as Interval
 from ..utils.extmath import fast_logdet as fast_logdet
 from ._base import LinearModel
-
-BayesianRidge_Self = TypeVar("BayesianRidge_Self", bound=BayesianRidge)
-ARDRegression_Self = TypeVar("ARDRegression_Self", bound=ARDRegression)
-
-import numpy as np
 
 ###############################################################################
 # BayesianRidge regression
@@ -52,11 +49,11 @@ class BayesianRidge(RegressorMixin, LinearModel):
         verbose: bool = False,
     ) -> None: ...
     def fit(
-        self: BayesianRidge_Self,
+        self,
         X: ArrayLike,
         y: ArrayLike,
         sample_weight: None | ArrayLike = None,
-    ) -> BayesianRidge_Self: ...
+    ) -> Self: ...
     def predict(
         self, X: MatrixLike | ArrayLike, return_std: bool = False
     ) -> ArrayLike | tuple[ndarray, ndarray] | tuple[ArrayLike, ArrayLike]: ...
@@ -93,7 +90,7 @@ class ARDRegression(RegressorMixin, LinearModel):
         copy_X: bool = True,
         verbose: bool = False,
     ) -> None: ...
-    def fit(self: ARDRegression_Self, X: MatrixLike, y: ArrayLike) -> ARDRegression_Self: ...
+    def fit(self, X: MatrixLike, y: ArrayLike) -> Self: ...
     def predict(
         self, X: MatrixLike | ArrayLike, return_std: bool = False
     ) -> tuple[ndarray, ndarray] | tuple[ArrayLike, ArrayLike]: ...

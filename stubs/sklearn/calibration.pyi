@@ -1,10 +1,13 @@
+import warnings
 from collections.abc import Iterable
 from functools import partial as partial
 from inspect import signature as signature
 from math import log as log
 from numbers import Integral as Integral
-from typing import ClassVar, Literal, TypeVar
+from typing import ClassVar, Literal
+from typing_extensions import Self
 
+import numpy as np
 from matplotlib.artist import Artist
 from matplotlib.axes import Axes
 from matplotlib.figure import Figure
@@ -31,13 +34,6 @@ from .utils.multiclass import check_classification_targets as check_classificati
 from .utils.parallel import Parallel as Parallel, delayed as delayed
 from .utils.validation import check_consistent_length as check_consistent_length, check_is_fitted as check_is_fitted
 
-CalibratedClassifierCV_Self = TypeVar("CalibratedClassifierCV_Self", bound=CalibratedClassifierCV)
-_SigmoidCalibration_Self = TypeVar("_SigmoidCalibration_Self", bound=_SigmoidCalibration)
-
-import warnings
-
-import numpy as np
-
 class CalibratedClassifierCV(ClassifierMixin, MetaEstimatorMixin, BaseEstimator):
     calibrated_classifiers_: list = ...
     feature_names_in_: ndarray = ...
@@ -57,12 +53,12 @@ class CalibratedClassifierCV(ClassifierMixin, MetaEstimatorMixin, BaseEstimator)
         base_estimator: str | BaseEstimator = "deprecated",
     ) -> None: ...
     def fit(
-        self: CalibratedClassifierCV_Self,
+        self,
         X: MatrixLike,
         y: ArrayLike,
         sample_weight: None | ArrayLike = None,
         **fit_params,
-    ) -> CalibratedClassifierCV_Self: ...
+    ) -> Self: ...
     def predict_proba(self, X: MatrixLike) -> ndarray: ...
     def predict(self, X: MatrixLike) -> ndarray: ...
 
@@ -82,11 +78,11 @@ class _SigmoidCalibration(RegressorMixin, BaseEstimator):
     a_: float = ...
 
     def fit(
-        self: _SigmoidCalibration_Self,
+        self,
         X: ArrayLike,
         y: ArrayLike,
         sample_weight: None | ArrayLike = None,
-    ) -> _SigmoidCalibration_Self: ...
+    ) -> Self: ...
     def predict(self, T: ArrayLike) -> ndarray: ...
 
 def calibration_curve(

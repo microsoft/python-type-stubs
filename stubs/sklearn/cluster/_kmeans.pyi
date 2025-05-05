@@ -1,7 +1,11 @@
+import warnings
 from abc import ABC, abstractmethod as abstractmethod
 from numbers import Integral as Integral, Real as Real
-from typing import Any, Callable, ClassVar, Literal, TypeVar
+from typing import Any, Callable, ClassVar, Literal
+from typing_extensions import Self
 
+import numpy as np
+import scipy.sparse as sp
 from numpy import ndarray
 from numpy.random import RandomState
 
@@ -32,14 +36,6 @@ from ._k_means_lloyd import (
     lloyd_iter_chunked_dense as lloyd_iter_chunked_dense,
     lloyd_iter_chunked_sparse as lloyd_iter_chunked_sparse,
 )
-
-KMeans_Self = TypeVar("KMeans_Self", bound=KMeans)
-MiniBatchKMeans_Self = TypeVar("MiniBatchKMeans_Self", bound=MiniBatchKMeans)
-
-import warnings
-
-import numpy as np
-import scipy.sparse as sp
 
 ###############################################################################
 # Initialization heuristic
@@ -127,11 +123,11 @@ class KMeans(_BaseKMeans):
         algorithm: Literal["lloyd", "elkan", "auto", "full"] = "lloyd",
     ) -> None: ...
     def fit(
-        self: KMeans_Self,
+        self,
         X: MatrixLike | ArrayLike,
         y: Any = None,
         sample_weight: None | ArrayLike = None,
-    ) -> KMeans_Self: ...
+    ) -> Self: ...
 
 class MiniBatchKMeans(_BaseKMeans):
     feature_names_in_: ndarray = ...
@@ -161,14 +157,14 @@ class MiniBatchKMeans(_BaseKMeans):
         reassignment_ratio: Float = 0.01,
     ) -> None: ...
     def fit(
-        self: MiniBatchKMeans_Self,
+        self,
         X: MatrixLike | ArrayLike,
         y: Any = None,
         sample_weight: None | ArrayLike = None,
-    ) -> MiniBatchKMeans_Self: ...
+    ) -> Self: ...
     def partial_fit(
-        self: MiniBatchKMeans_Self,
+        self,
         X: MatrixLike | ArrayLike,
         y: Any = None,
         sample_weight: None | ArrayLike = None,
-    ) -> MiniBatchKMeans_Self: ...
+    ) -> Self: ...

@@ -1,33 +1,27 @@
+import math
+import warnings
 from abc import ABCMeta, abstractmethod
-from collections import namedtuple
 from collections.abc import Sequence
 from inspect import signature as signature
-from typing import Callable, Literal, TypeVar
+from typing import Callable, Literal, NamedTuple
+from typing_extensions import Self
 
+import numpy as np
 from numpy import ndarray
 from scipy.spatial.distance import cdist as cdist, pdist as pdist, squareform as squareform
-from scipy.special import gamma, kv as kv
+from scipy.special import kv as kv
 
 from .._typing import ArrayLike, Float, MatrixLike
 from ..base import clone as clone
 from ..exceptions import ConvergenceWarning as ConvergenceWarning
 from ..metrics.pairwise import pairwise_kernels as pairwise_kernels
 
-Kernel_Self = TypeVar("Kernel_Self", bound=Kernel)
-Hyperparameter_Self = TypeVar("Hyperparameter_Self", bound=Hyperparameter)
-
-import math
-import warnings
-from typing_extensions import Self
-
-import numpy as np
-
-class Hyperparameter(namedtuple("Hyperparameter", ("name", "value_type", "bounds", "n_elements", "fixed"))):
-    fixed: bool = ...
-    n_elements: int = ...
-    bounds: tuple[float, float] | str = ...
-    value_type: str = ...
-    name: str = ...
+class Hyperparameter(NamedTuple):
+    fixed: bool
+    n_elements: int
+    bounds: tuple[float, float] | str
+    value_type: str
+    name: str
 
     # A raw namedtuple is very memory efficient as it packs the attributes
     # in a struct to get rid of the __dict__ of attributes in particular it
@@ -54,7 +48,7 @@ class Hyperparameter(namedtuple("Hyperparameter", ("name", "value_type", "bounds
 
 class Kernel(metaclass=ABCMeta):
     def get_params(self, deep: bool = True) -> dict: ...
-    def set_params(self: Kernel_Self, **params) -> Kernel_Self: ...
+    def set_params(self, **params) -> Self: ...
     def clone_with_theta(self, theta: ArrayLike): ...
     def n_dims(self) -> int: ...
     def hyperparameters(self) -> list[Hyperparameter]: ...

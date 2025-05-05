@@ -1,7 +1,9 @@
 from collections.abc import Mapping
 from numbers import Integral as Integral, Real as Real
-from typing import Any, Callable, ClassVar, Literal, TypeVar
+from typing import Any, Callable, ClassVar, Literal
+from typing_extensions import Self
 
+import numpy as np
 from numpy import ndarray
 from numpy.random import RandomState
 
@@ -12,12 +14,6 @@ from ..utils import deprecated
 from ..utils._param_validation import Interval as Interval, StrOptions as StrOptions
 from ..utils.multiclass import check_classification_targets as check_classification_targets
 from ._base import BaseLibSVM, BaseSVC
-
-OneClassSVM_Self = TypeVar("OneClassSVM_Self", bound=OneClassSVM)
-LinearSVC_Self = TypeVar("LinearSVC_Self", bound=LinearSVC)
-LinearSVR_Self = TypeVar("LinearSVR_Self", bound=LinearSVR)
-
-import numpy as np
 
 class LinearSVC(LinearClassifierMixin, SparseCoefMixin, BaseEstimator):
     n_iter_: int = ...
@@ -46,11 +42,11 @@ class LinearSVC(LinearClassifierMixin, SparseCoefMixin, BaseEstimator):
         max_iter: Int = 1000,
     ) -> None: ...
     def fit(
-        self: LinearSVC_Self,
+        self,
         X: MatrixLike | ArrayLike,
         y: ArrayLike,
         sample_weight: None | ArrayLike = None,
-    ) -> LinearSVC_Self: ...
+    ) -> Self: ...
 
 class LinearSVR(RegressorMixin, LinearModel):
     n_iter_: int = ...
@@ -76,11 +72,11 @@ class LinearSVR(RegressorMixin, LinearModel):
         max_iter: Int = 1000,
     ) -> None: ...
     def fit(
-        self: LinearSVR_Self,
+        self,
         X: MatrixLike | ArrayLike,
         y: ArrayLike,
         sample_weight: None | ArrayLike = None,
-    ) -> LinearSVR_Self: ...
+    ) -> Self: ...
 
 class SVC(BaseSVC):
     shape_fit_: tuple = ...
@@ -276,11 +272,11 @@ class OneClassSVM(OutlierMixin, BaseLibSVM):
     @property
     def class_weight_(self) -> ndarray: ...
     def fit(
-        self: OneClassSVM_Self,
+        self,
         X: MatrixLike | ArrayLike,
         y: Any = None,
         sample_weight: None | ArrayLike = None,
-    ) -> OneClassSVM_Self: ...
+    ) -> Self: ...
     def decision_function(self, X: MatrixLike) -> ndarray: ...
     def score_samples(self, X: MatrixLike) -> ndarray: ...
     def predict(self, X: MatrixLike) -> ndarray: ...

@@ -1,7 +1,9 @@
 from copy import deepcopy as deepcopy
 from numbers import Integral as Integral, Real as Real
-from typing import Any, Callable, ClassVar, TypeVar
+from typing import Any, Callable, ClassVar
+from typing_extensions import Self
 
+import numpy as np
 from numpy import ndarray
 
 from .._typing import ArrayLike, MatrixLike
@@ -12,12 +14,8 @@ from ..utils.metaestimators import available_if as available_if
 from ..utils.validation import check_is_fitted as check_is_fitted, check_scalar as check_scalar
 from ._base import SelectorMixin
 
-SelectFromModel_Self = TypeVar("SelectFromModel_Self", bound=SelectFromModel)
-
 # Authors: Gilles Louppe, Mathieu Blondel, Maheshakya Wijewardena
 # License: BSD 3 clause
-
-import numpy as np
 
 class SelectFromModel(MetaEstimatorMixin, SelectorMixin, BaseEstimator):
     feature_names_in_: ndarray = ...
@@ -37,18 +35,18 @@ class SelectFromModel(MetaEstimatorMixin, SelectorMixin, BaseEstimator):
         importance_getter: str | Callable = "auto",
     ) -> None: ...
     def fit(
-        self: SelectFromModel_Self,
+        self,
         X: MatrixLike,
         y: None | ArrayLike = None,
         **fit_params,
-    ) -> SelectFromModel_Self: ...
+    ) -> Self: ...
     @property
     def threshold_(self) -> float: ...
     def partial_fit(
-        self: SelectFromModel_Self,
+        self,
         X: MatrixLike,
         y: None | ArrayLike = None,
         **fit_params,
-    ) -> SelectFromModel_Self: ...
+    ) -> Self: ...
     @property
     def n_features_in_(self) -> int: ...

@@ -1,7 +1,13 @@
+import itertools
+import sys
+import time
+import warnings
 from math import ceil as ceil
 from numbers import Integral as Integral, Real as Real
-from typing import Any, Callable, ClassVar, Literal, TypeVar
+from typing import Any, Callable, ClassVar, Literal
+from typing_extensions import Self
 
+import numpy as np
 from joblib import effective_n_jobs as effective_n_jobs
 from numpy import ndarray
 from numpy.random import RandomState
@@ -22,19 +28,8 @@ from ..utils.extmath import randomized_svd as randomized_svd, row_norms as row_n
 from ..utils.parallel import Parallel as Parallel, delayed as delayed
 from ..utils.validation import check_is_fitted as check_is_fitted
 
-DictionaryLearning_Self = TypeVar("DictionaryLearning_Self", bound=DictionaryLearning)
-SparseCoder_Self = TypeVar("SparseCoder_Self", bound=SparseCoder)
-MiniBatchDictionaryLearning_Self = TypeVar("MiniBatchDictionaryLearning_Self", bound=MiniBatchDictionaryLearning)
-
 # Author: Vlad Niculae, Gael Varoquaux, Alexandre Gramfort
 # License: BSD 3 clause
-
-import itertools
-import sys
-import time
-import warnings
-
-import numpy as np
 
 # XXX : could be moved to the linear_model module
 def sparse_encode(
@@ -130,7 +125,7 @@ class SparseCoder(_BaseSparseCoding, BaseEstimator):
         positive_code: bool = False,
         transform_max_iter: Int = 1000,
     ) -> None: ...
-    def fit(self: SparseCoder_Self, X: Any, y: Any = None) -> SparseCoder_Self: ...
+    def fit(self, X: Any, y: Any = None) -> Self: ...
     def transform(self, X: ArrayLike, y: Any = None) -> ndarray: ...
     @property
     def n_components_(self) -> int: ...
@@ -167,7 +162,7 @@ class DictionaryLearning(_BaseSparseCoding, BaseEstimator):
         positive_dict: bool = False,
         transform_max_iter: Int = 1000,
     ) -> None: ...
-    def fit(self: DictionaryLearning_Self, X: MatrixLike, y: Any = None) -> DictionaryLearning_Self: ...
+    def fit(self, X: MatrixLike, y: Any = None) -> Self: ...
 
 class MiniBatchDictionaryLearning(_BaseSparseCoding, BaseEstimator):
     n_steps_: int = ...
@@ -212,10 +207,10 @@ class MiniBatchDictionaryLearning(_BaseSparseCoding, BaseEstimator):
     @deprecated("The attribute `inner_stats_` is deprecated in 1.1 and will be removed in 1.3.")  # type: ignore
     @property
     def inner_stats_(self) -> tuple[ndarray, ndarray]: ...
-    def fit(self: MiniBatchDictionaryLearning_Self, X: MatrixLike, y: Any = None) -> MiniBatchDictionaryLearning_Self: ...
+    def fit(self, X: MatrixLike, y: Any = None) -> Self: ...
     def partial_fit(
-        self: MiniBatchDictionaryLearning_Self,
+        self,
         X: MatrixLike,
         y: Any = None,
         iter_offset: str | Int = "deprecated",
-    ) -> MiniBatchDictionaryLearning_Self: ...
+    ) -> Self: ...

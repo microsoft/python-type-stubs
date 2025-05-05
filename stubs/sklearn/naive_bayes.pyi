@@ -1,20 +1,19 @@
+import warnings
 from abc import ABCMeta, abstractmethod as abstractmethod
 from numbers import Integral as Integral, Real as Real
-from typing import ClassVar, TypeVar
+from typing import ClassVar
+from typing_extensions import Self
 
+import numpy as np
 from numpy import ndarray
 from scipy.special import logsumexp as logsumexp
 
 from ._typing import ArrayLike, Float, Int, MatrixLike
 from .base import BaseEstimator, ClassifierMixin
-from .preprocessing import LabelBinarizer as LabelBinarizer, binarize, label_binarize as label_binarize
+from .preprocessing import LabelBinarizer as LabelBinarizer, label_binarize as label_binarize
 from .utils._param_validation import Hidden as Hidden, Interval as Interval, StrOptions as StrOptions
 from .utils.extmath import safe_sparse_dot as safe_sparse_dot
 from .utils.validation import check_is_fitted as check_is_fitted, check_non_negative as check_non_negative
-
-_BaseDiscreteNB_Self = TypeVar("_BaseDiscreteNB_Self", bound=_BaseDiscreteNB)
-GaussianNB_Self = TypeVar("GaussianNB_Self", bound=GaussianNB)
-CategoricalNB_Self = TypeVar("CategoricalNB_Self", bound=CategoricalNB)
 
 # Author: Vincent Michel <vincent.michel@inria.fr>
 #         Minor fixes by Fabian Pedregosa
@@ -25,9 +24,6 @@ CategoricalNB_Self = TypeVar("CategoricalNB_Self", bound=CategoricalNB)
 #         (parts based on earlier work by Mathieu Blondel)
 #
 # License: BSD 3 clause
-import warnings
-
-import numpy as np
 
 __all__ = [
     "BernoulliNB",
@@ -57,18 +53,18 @@ class GaussianNB(_BaseNB):
 
     def __init__(self, *, priors: None | ArrayLike = None, var_smoothing: Float = 1e-9) -> None: ...
     def fit(
-        self: GaussianNB_Self,
+        self,
         X: MatrixLike,
         y: ArrayLike,
         sample_weight: None | ArrayLike = None,
-    ) -> GaussianNB_Self: ...
+    ) -> Self: ...
     def partial_fit(
-        self: GaussianNB_Self,
+        self,
         X: MatrixLike,
         y: ArrayLike,
         classes: None | ArrayLike = None,
         sample_weight: None | ArrayLike = None,
-    ) -> GaussianNB_Self: ...
+    ) -> Self: ...
 
 class _BaseDiscreteNB(_BaseNB):
     _parameter_constraints: ClassVar[dict] = ...
@@ -81,18 +77,18 @@ class _BaseDiscreteNB(_BaseNB):
         force_alpha: str = "warn",
     ) -> None: ...
     def partial_fit(
-        self: _BaseDiscreteNB_Self,
+        self,
         X: MatrixLike | ArrayLike,
         y: ArrayLike,
         classes: None | ArrayLike = None,
         sample_weight: None | ArrayLike = None,
-    ) -> MultinomialNB | _BaseDiscreteNB_Self: ...
+    ) -> MultinomialNB | Self: ...
     def fit(
-        self: _BaseDiscreteNB_Self,
+        self,
         X: MatrixLike | ArrayLike,
         y: ArrayLike,
         sample_weight: None | ArrayLike = None,
-    ) -> _BaseDiscreteNB_Self | BernoulliNB | ComplementNB: ...
+    ) -> Self | BernoulliNB | ComplementNB: ...
 
 class MultinomialNB(_BaseDiscreteNB):
     feature_names_in_: ndarray = ...
@@ -177,15 +173,15 @@ class CategoricalNB(_BaseDiscreteNB):
         min_categories: None | ArrayLike | Int = None,
     ) -> None: ...
     def fit(
-        self: CategoricalNB_Self,
+        self,
         X: MatrixLike | ArrayLike,
         y: ArrayLike,
         sample_weight: None | ArrayLike = None,
-    ) -> CategoricalNB_Self: ...
+    ) -> Self: ...
     def partial_fit(
-        self: CategoricalNB_Self,
+        self,
         X: MatrixLike | ArrayLike,
         y: ArrayLike,
         classes: None | ArrayLike = None,
         sample_weight: None | ArrayLike = None,
-    ) -> CategoricalNB_Self: ...
+    ) -> Self: ...

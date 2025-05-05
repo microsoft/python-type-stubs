@@ -5,7 +5,6 @@ import weakref
 from typing import TypeVar
 
 from .. import visuals
-from ..scene.node import Node
 from ..visuals.filters import Alpha, PickingFilter
 from .node import Node
 

@@ -1,6 +1,10 @@
+import time
 from numbers import Integral as Integral, Real as Real
-from typing import ClassVar, TypeVar
+from typing import ClassVar
+from typing_extensions import Self
 
+import numpy as np
+import scipy.sparse as sp
 from numpy import ndarray
 from numpy.random import RandomState
 from scipy.special import expit as expit
@@ -12,18 +16,11 @@ from ..utils._param_validation import Interval as Interval
 from ..utils.extmath import log_logistic as log_logistic, safe_sparse_dot as safe_sparse_dot
 from ..utils.validation import check_is_fitted as check_is_fitted
 
-BernoulliRBM_Self = TypeVar("BernoulliRBM_Self", bound=BernoulliRBM)
-
 # Authors: Yann N. Dauphin <dauphiya@iro.umontreal.ca>
 #          Vlad Niculae
 #          Gabriel Synnaeve
 #          Lars Buitinck
 # License: BSD 3 clause
-
-import time
-
-import numpy as np
-import scipy.sparse as sp
 
 class BernoulliRBM(ClassNamePrefixFeaturesOutMixin, TransformerMixin, BaseEstimator):
     feature_names_in_: ndarray = ...
@@ -47,10 +44,10 @@ class BernoulliRBM(ClassNamePrefixFeaturesOutMixin, TransformerMixin, BaseEstima
     ) -> None: ...
     def transform(self, X: MatrixLike | ArrayLike) -> ndarray: ...
     def gibbs(self, v: ArrayLike) -> ndarray: ...
-    def partial_fit(self: BernoulliRBM_Self, X: ArrayLike, y: None | MatrixLike | ArrayLike = None) -> BernoulliRBM_Self: ...
+    def partial_fit(self, X: ArrayLike, y: None | MatrixLike | ArrayLike = None) -> Self: ...
     def score_samples(self, X: MatrixLike | ArrayLike) -> ndarray: ...
     def fit(
-        self: BernoulliRBM_Self,
+        self,
         X: MatrixLike | ArrayLike,
         y: None | MatrixLike | ArrayLike = None,
-    ) -> BernoulliRBM_Self: ...
+    ) -> Self: ...

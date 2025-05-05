@@ -1,7 +1,12 @@
+import numbers
+import warnings
 from abc import ABCMeta, abstractmethod
 from numbers import Integral as Integral
-from typing import ClassVar, TypeVar
+from typing import ClassVar
+from typing_extensions import Self
 
+import numpy as np
+import scipy.sparse as sp
 from numpy import ndarray
 from numpy.random.mtrand import RandomState
 from scipy import linalg as linalg, optimize as optimize, sparse
@@ -18,15 +23,6 @@ from ..utils.parallel import Parallel as Parallel, delayed as delayed
 from ..utils.sparsefuncs import inplace_column_scale as inplace_column_scale, mean_variance_axis as mean_variance_axis
 from ..utils.validation import FLOAT_DTYPES as FLOAT_DTYPES, check_is_fitted as check_is_fitted
 from ._stochastic_gradient import SGDClassifier
-
-LinearRegression_Self = TypeVar("LinearRegression_Self", bound=LinearRegression)
-SparseCoefMixin_Self = TypeVar("SparseCoefMixin_Self", bound=SparseCoefMixin)
-
-import numbers
-import warnings
-
-import numpy as np
-import scipy.sparse as sp
 
 # TODO: bayesian_ridge_regression and bayesian_regression_ard
 # should be squashed into its respective objects.
@@ -52,8 +48,8 @@ class LinearClassifierMixin(ClassifierMixin):
     def predict(self, X: MatrixLike | ArrayLike) -> ndarray: ...
 
 class SparseCoefMixin:
-    def densify(self: SparseCoefMixin_Self) -> SparseCoefMixin_Self: ...
-    def sparsify(self: SparseCoefMixin_Self) -> SGDClassifier | SparseCoefMixin_Self: ...
+    def densify(self) -> Self: ...
+    def sparsify(self) -> SGDClassifier | Self: ...
 
 class LinearRegression(MultiOutputMixin, RegressorMixin, LinearModel):
     feature_names_in_: ndarray = ...
@@ -74,8 +70,8 @@ class LinearRegression(MultiOutputMixin, RegressorMixin, LinearModel):
         positive: bool = False,
     ) -> None: ...
     def fit(
-        self: LinearRegression_Self,
+        self,
         X: MatrixLike | ArrayLike,
         y: MatrixLike | ArrayLike,
         sample_weight: None | ArrayLike = None,
-    ) -> LinearRegression_Self: ...
+    ) -> Self: ...

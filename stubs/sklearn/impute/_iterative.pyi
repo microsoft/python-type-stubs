@@ -1,8 +1,11 @@
+import warnings
 from collections import namedtuple as namedtuple
 from numbers import Integral as Integral, Real as Real
 from time import time as time
-from typing import Any, ClassVar, Literal, TypeVar
+from typing import Any, ClassVar, Literal
+from typing_extensions import Self
 
+import numpy as np
 from numpy import ndarray
 from numpy.random import RandomState
 from scipy import stats as stats
@@ -16,12 +19,6 @@ from ..utils import check_array as check_array, check_random_state as check_rand
 from ..utils._param_validation import HasMethods as HasMethods, Interval as Interval, StrOptions as StrOptions
 from ..utils.validation import FLOAT_DTYPES as FLOAT_DTYPES, check_is_fitted as check_is_fitted
 from ._base import MissingIndicator, SimpleImputer, _BaseImputer
-
-IterativeImputer_Self = TypeVar("IterativeImputer_Self", bound=IterativeImputer)
-
-import warnings
-
-import numpy as np
 
 _ImputerTriplet = ...
 
@@ -58,5 +55,5 @@ class IterativeImputer(_BaseImputer):
     ) -> None: ...
     def fit_transform(self, X: MatrixLike, y: Any = None) -> ndarray: ...
     def transform(self, X: MatrixLike) -> ndarray: ...
-    def fit(self: IterativeImputer_Self, X: MatrixLike, y: Any = None) -> IterativeImputer_Self: ...
+    def fit(self, X: MatrixLike, y: Any = None) -> Self: ...
     def get_feature_names_out(self, input_features: None | ArrayLike = None) -> ndarray: ...

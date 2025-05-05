@@ -1,6 +1,12 @@
+import array
+import itertools
+import warnings
 from numbers import Integral as Integral, Real as Real
-from typing import ClassVar, TypeVar
+from typing import ClassVar
+from typing_extensions import Self
 
+import numpy as np
+import scipy.sparse as sp
 from numpy import ndarray
 from numpy.random import RandomState
 
@@ -23,21 +29,10 @@ from .utils.multiclass import check_classification_targets as check_classificati
 from .utils.parallel import Parallel as Parallel, delayed as delayed
 from .utils.validation import check_is_fitted as check_is_fitted
 
-OneVsRestClassifier_Self = TypeVar("OneVsRestClassifier_Self", bound=OneVsRestClassifier)
-OneVsOneClassifier_Self = TypeVar("OneVsOneClassifier_Self", bound=OneVsOneClassifier)
-OutputCodeClassifier_Self = TypeVar("OutputCodeClassifier_Self", bound=OutputCodeClassifier)
-
 # Author: Mathieu Blondel <mathieu@mblondel.org>
 # Author: Hamzeh Alsalhi <93hamsal@gmail.com>
 #
 # License: BSD 3 clause
-
-import array
-import itertools
-import warnings
-
-import numpy as np
-import scipy.sparse as sp
 
 __all__ = [
     "OneVsRestClassifier",
@@ -62,16 +57,16 @@ class OneVsRestClassifier(MultiOutputMixin, ClassifierMixin, MetaEstimatorMixin,
 
     def __init__(self, estimator: BaseEstimator, *, n_jobs: None | Int = None, verbose: Int = 0) -> None: ...
     def fit(
-        self: OneVsRestClassifier_Self,
+        self,
         X: MatrixLike | ArrayLike,
         y: MatrixLike | ArrayLike,
-    ) -> OneVsRestClassifier_Self: ...
+    ) -> Self: ...
     def partial_fit(
-        self: OneVsRestClassifier_Self,
+        self,
         X: MatrixLike | ArrayLike,
         y: MatrixLike | ArrayLike,
         classes: None | ArrayLike = None,
-    ) -> OneVsRestClassifier_Self: ...
+    ) -> Self: ...
     def predict(self, X: MatrixLike | ArrayLike) -> ndarray: ...
     def predict_proba(self, X: MatrixLike | ArrayLike) -> ndarray: ...
     def decision_function(self, X: MatrixLike) -> ndarray: ...
@@ -90,13 +85,13 @@ class OneVsOneClassifier(MetaEstimatorMixin, ClassifierMixin, BaseEstimator):
     _parameter_constraints: ClassVar[dict] = ...
 
     def __init__(self, estimator: BaseEstimator, *, n_jobs: None | Int = None) -> None: ...
-    def fit(self: OneVsOneClassifier_Self, X: MatrixLike | ArrayLike, y: ArrayLike) -> OneVsOneClassifier_Self: ...
+    def fit(self, X: MatrixLike | ArrayLike, y: ArrayLike) -> Self: ...
     def partial_fit(
-        self: OneVsOneClassifier_Self,
+        self,
         X: MatrixLike,
         y: ArrayLike,
         classes: None | ArrayLike = None,
-    ) -> OneVsOneClassifier_Self: ...
+    ) -> Self: ...
     def predict(self, X: MatrixLike | ArrayLike) -> ndarray: ...
     def decision_function(self, X: MatrixLike) -> ndarray: ...
     @property
@@ -119,5 +114,5 @@ class OutputCodeClassifier(MetaEstimatorMixin, ClassifierMixin, BaseEstimator):
         random_state: RandomState | None | Int = None,
         n_jobs: None | Int = None,
     ) -> None: ...
-    def fit(self: OutputCodeClassifier_Self, X: MatrixLike | ArrayLike, y: ArrayLike) -> OutputCodeClassifier_Self: ...
+    def fit(self, X: MatrixLike | ArrayLike, y: ArrayLike) -> Self: ...
     def predict(self, X: MatrixLike | ArrayLike) -> ndarray: ...

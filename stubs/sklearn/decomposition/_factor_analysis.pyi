@@ -1,7 +1,10 @@
+import warnings
 from math import log as log, sqrt as sqrt
 from numbers import Integral as Integral, Real as Real
-from typing import Any, ClassVar, Literal, TypeVar
+from typing import Any, ClassVar, Literal
+from typing_extensions import Self
 
+import numpy as np
 from numpy import ndarray
 from numpy.random import RandomState
 from scipy import linalg as linalg
@@ -14,17 +17,11 @@ from ..utils._param_validation import Interval as Interval, StrOptions as StrOpt
 from ..utils.extmath import fast_logdet as fast_logdet, randomized_svd as randomized_svd, squared_norm as squared_norm
 from ..utils.validation import check_is_fitted as check_is_fitted
 
-FactorAnalysis_Self = TypeVar("FactorAnalysis_Self", bound=FactorAnalysis)
-
 # Author: Christian Osendorfer <osendorf@gmail.com>
 #         Alexandre Gramfort <alexandre.gramfort@inria.fr>
 #         Denis A. Engemann <denis-alexander.engemann@inria.fr>
 
 # License: BSD3
-
-import warnings
-
-import numpy as np
 
 class FactorAnalysis(ClassNamePrefixFeaturesOutMixin, TransformerMixin, BaseEstimator):
     feature_names_in_: ndarray = ...
@@ -50,7 +47,7 @@ class FactorAnalysis(ClassNamePrefixFeaturesOutMixin, TransformerMixin, BaseEsti
         rotation: None | Literal["varimax", "quartimax"] = None,
         random_state: None | RandomState | int = 0,
     ) -> None: ...
-    def fit(self: FactorAnalysis_Self, X: MatrixLike, y: Any = None) -> FactorAnalysis_Self: ...
+    def fit(self, X: MatrixLike, y: Any = None) -> Self: ...
     def transform(self, X: MatrixLike) -> ndarray: ...
     def get_covariance(self) -> ndarray: ...
     def get_precision(self) -> ndarray: ...

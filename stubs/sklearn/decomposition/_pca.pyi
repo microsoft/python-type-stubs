@@ -1,7 +1,9 @@
 from math import log as log, sqrt as sqrt
 from numbers import Integral as Integral, Real as Real
-from typing import Any, ClassVar, Literal, TypeVar
+from typing import Any, ClassVar, Literal
+from typing_extensions import Self
 
+import numpy as np
 from numpy import ndarray
 from numpy.random import RandomState
 from scipy import linalg as linalg
@@ -21,10 +23,6 @@ from ..utils.extmath import (
 )
 from ..utils.validation import check_is_fitted as check_is_fitted
 from ._base import _BasePCA
-
-PCA_Self = TypeVar("PCA_Self", bound=PCA)
-
-import numpy as np
 
 class PCA(_BasePCA):
     feature_names_in_: ndarray = ...
@@ -61,7 +59,7 @@ class PCA(_BasePCA):
     )
     @property
     def n_features_(self) -> int: ...
-    def fit(self: PCA_Self, X: MatrixLike, y: Any = None) -> PCA_Self: ...
+    def fit(self, X: MatrixLike, y: Any = None) -> Self: ...
     def fit_transform(self, X: MatrixLike, y: Any = None) -> ndarray: ...
     def score_samples(self, X: MatrixLike) -> ndarray: ...
     def score(self, X: MatrixLike, y: Any = None) -> float: ...
