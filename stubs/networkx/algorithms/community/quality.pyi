@@ -1,5 +1,6 @@
-from collections.abc import Sequence
+from collections.abc import Callable, Sequence
 from itertools import combinations
+from typing import TypeVar
 
 from networkx import NetworkXError
 
@@ -13,7 +14,7 @@ __all__ = ["coverage", "modularity", "performance", "partition_quality"]
 class NotAPartition(NetworkXError):
     def __init__(self, G: Graph, collection): ...
 
-require_partition = ...
+require_partition: argmap
 
 def intra_community_edges(G: Graph, partition): ...
 def inter_community_edges(G: Graph, partition): ...

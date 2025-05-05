@@ -56,7 +56,6 @@ ignore = [
     "F401",
 
     # TODO: Investigate and fix or configure
-    "PYI024",
     "PYI051", # Request for autofix: https://github.com/astral-sh/ruff/issues/14185
 ]
 [tool.ruff.lint.per-file-ignores]
@@ -129,11 +128,8 @@ disable_error_code = [
     "assert-type",
     "assignment",
     "attr-defined",
-    "import-not-found",
     "misc",
-    "name-defined",
     "no-redef",
-    "operator",
     "override",
     "return",
     "valid-type",
