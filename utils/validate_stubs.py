@@ -144,7 +144,9 @@ def isfrompackage(v: object, path: str) -> bool:
 def isfrommodule(v: object, module: str, default: bool = True) -> bool:
     try:
         # Make sure it came from this module
-        return v.__dict__["__module__"] == module
+        __module__ = v.__dict__["__module__"]
+        assert isinstance(__module__, str)
+        return module == __module__
     except Exception:
         return default
 
