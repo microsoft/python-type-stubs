@@ -1,10 +1,9 @@
 import math
 import warnings
 from abc import ABCMeta, abstractmethod
-from collections import namedtuple
 from collections.abc import Sequence
 from inspect import signature as signature
-from typing import Callable, Literal
+from typing import Callable, Literal, NamedTuple
 from typing_extensions import Self
 
 import numpy as np
@@ -17,12 +16,12 @@ from ..base import clone as clone
 from ..exceptions import ConvergenceWarning as ConvergenceWarning
 from ..metrics.pairwise import pairwise_kernels as pairwise_kernels
 
-class Hyperparameter(namedtuple("Hyperparameter", ("name", "value_type", "bounds", "n_elements", "fixed"))):
-    fixed: bool = ...
-    n_elements: int = ...
-    bounds: tuple[float, float] | str = ...
-    value_type: str = ...
-    name: str = ...
+class Hyperparameter(NamedTuple):
+    fixed: bool
+    n_elements: int
+    bounds: tuple[float, float] | str
+    value_type: str
+    name: str
 
     # A raw namedtuple is very memory efficient as it packs the attributes
     # in a struct to get rid of the __dict__ of attributes in particular it

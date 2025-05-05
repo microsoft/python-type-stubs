@@ -3,10 +3,9 @@ from collections import OrderedDict
 from typing import Any
 
 from transformers.configuration_utils import PretrainedConfig
+from transformers.models.auto.auto_factory import _LazyAutoMapping
 from transformers.tokenization_utils import PreTrainedTokenizer
 from transformers.tokenization_utils_fast import PreTrainedTokenizerFast
-
-from .auto_factory import _LazyAutoMapping
 
 TOKENIZER_MAPPING_NAMES: OrderedDict[str, tuple[str | None, str | None]]
 TOKENIZER_MAPPING: _LazyAutoMapping

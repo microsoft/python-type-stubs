@@ -55,7 +55,6 @@ ignore = [
     "F401",
 
     # TODO: Investigate and fix or configure
-    "PYI024",
     "PYI048",
     "PYI051", # Request for autofix: https://github.com/astral-sh/ruff/issues/14185
 ]
@@ -131,8 +130,5 @@ disable_error_code = [
     "assignment", # 773 errors in 172 files
     "misc", # 692 errors in 132 files
     "attr-defined", # 202 errors in 75 files
-    "operator", # 118 errors in 35 files
-    "name-defined", # 15 errors in 1 file
     "assert-type", # 6 errors in 1 file
-    "import-not-found", # 5 errors in 5 files
 ]
