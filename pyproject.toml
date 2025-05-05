@@ -130,7 +130,6 @@ disable_error_code = [
     "attr-defined",
     "misc",
     "no-redef",
-    "operator",
     "override",
     "return",
     "valid-type",

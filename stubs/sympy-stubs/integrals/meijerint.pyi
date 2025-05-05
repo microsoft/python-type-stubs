@@ -1,9 +1,15 @@
+from collections.abc import Callable
+from typing import TypeVar
+
 from sympy.core.basic import Basic
 from sympy.core.symbol import Dummy
 from sympy.functions.elementary.piecewise import Piecewise
 
+_CallableT = TypeVar("_CallableT", bound=Callable)
+
 z = ...
-timeit = ...
+
+def timeit(func: _CallableT) -> _CallableT: ...
 
 class _CoeffExpValueError(ValueError): ...
 
