@@ -44,7 +44,6 @@ def lloyd_iter_chunked_dense(
           the algorithm. This is useful especially when calling predict on a
           fitted model.
     """
-    ...
 
 def lloyd_iter_chunked_sparse(
     X: np.ndarray,
@@ -90,4 +89,3 @@ def lloyd_iter_chunked_sparse(
           the algorithm. This is useful especially when calling predict on a
           fitted model.
     """
-    ...

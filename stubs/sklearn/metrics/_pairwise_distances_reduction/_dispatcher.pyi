@@ -20,7 +20,6 @@ def sqeuclidean_row_norms(X: np.ndarray | csr_matrix, num_threads: int) -> np.nd
     sqeuclidean_row_norms : ndarray of shape (n_samples,)
         Arrays containing the squared euclidean norm of each row of X.
     """
-    ...
 
 class BaseDistancesReductionDispatcher:
     """Abstract base dispatcher for pairwise distance computation & reduction.
@@ -53,7 +52,6 @@ class BaseDistancesReductionDispatcher:
         -------
         True if the dispatcher can be used, else False.
         """
-        ...
 
     @classmethod
     @abstractmethod
@@ -170,7 +168,6 @@ class ArgKmin(BaseDistancesReductionDispatcher):
         for the concrete implementation are therefore freed when this classmethod
         returns.
         """
-        ...
 
 class RadiusNeighbors(BaseDistancesReductionDispatcher):
     """Compute radius-based neighbors for two sets of vectors.
@@ -286,4 +283,3 @@ class RadiusNeighbors(BaseDistancesReductionDispatcher):
         for the concrete implementation are therefore freed when this classmethod
         returns.
         """
-        ...

@@ -8,4 +8,3 @@ def transform(
     indices, indptr, values : lists
         For constructing a scipy.sparse.csr_matrix.
     """
-    ...

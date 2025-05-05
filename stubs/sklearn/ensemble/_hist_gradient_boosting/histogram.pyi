@@ -58,7 +58,6 @@ class HistogramBuilder:
         histograms : ndarray of HISTOGRAM_DTYPE, shape (n_features, n_bins)
             The computed histograms of the current node.
         """
-        ...
 
     def compute_histograms_subtraction(
         self,
@@ -85,4 +84,3 @@ class HistogramBuilder:
         histograms : ndarray of HISTOGRAM_DTYPE, shape(n_features, n_bins)
             The computed histograms of the current node.
         """
-        ...

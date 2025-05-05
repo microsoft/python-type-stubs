@@ -33,6 +33,7 @@ extend-select = [
     "PYI", # flake8-pyi
     "UP", # pyupgrade
     "W", # pycodestyle Warning
+    "PIE790", # unnecessary-placeholder
 ]
 ignore = [
     ###
@@ -55,7 +56,6 @@ ignore = [
     "F401",
 
     # TODO: Investigate and fix or configure
-    "PYI048",
     "PYI051", # Request for autofix: https://github.com/astral-sh/ruff/issues/14185
 ]
 [tool.ruff.lint.per-file-ignores]
