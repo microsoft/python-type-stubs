@@ -125,13 +125,10 @@ disable_error_code = [
     # Not all imports in these stubs are gonna be typed
     "import-untyped",
     # TODO
-    "assert-type",
-    "assignment",
-    "attr-defined",
-    "misc",
-    "no-redef",
-    "override",
-    "return",
-    "valid-type",
-    "var-annotated",
+    "valid-type", # 967 errors in 115 files
+    "override", # 790 errors in 220 files
+    "assignment", # 773 errors in 172 files
+    "misc", # 692 errors in 132 files
+    "attr-defined", # 202 errors in 75 files
+    "assert-type", # 6 errors in 1 file
 ]

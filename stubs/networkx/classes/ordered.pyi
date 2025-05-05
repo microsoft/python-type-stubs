@@ -6,7 +6,7 @@ from .graph import Graph
 from .multidigraph import MultiDiGraph
 from .multigraph import MultiGraph
 
-__all__ = []
+__all__: list[str] = []
 
 class OrderedGraph(Graph):
     node_dict_factory = ...
