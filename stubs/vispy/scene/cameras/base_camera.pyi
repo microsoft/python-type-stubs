@@ -1,4 +1,5 @@
-from typing import Literal, Mapping
+from collections.abc import Mapping
+from typing import Literal
 
 from numpy.typing import ArrayLike
 
@@ -7,7 +8,6 @@ from ...util.event import Event
 from ...visuals.transforms import MatrixTransform, NullTransform, STTransform, TransformCache
 from ..node import Node
 
-# -*- coding: utf-8 -*-
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 

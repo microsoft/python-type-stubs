@@ -1,6 +1,10 @@
+import warnings
 from numbers import Integral as Integral, Real as Real
-from typing import ClassVar, Literal, TypeVar
+from typing import ClassVar, Literal
+from typing_extensions import Self
 
+import numpy as np
+import scipy.sparse as sp
 from numpy import ndarray
 from numpy.random import RandomState
 
@@ -15,18 +19,10 @@ from .utils.validation import (
     check_is_fitted as check_is_fitted,
 )
 
-DummyRegressor_Self = TypeVar("DummyRegressor_Self", bound=DummyRegressor)
-DummyClassifier_Self = TypeVar("DummyClassifier_Self", bound=DummyClassifier)
-
 # Author: Mathieu Blondel <mathieu@mblondel.org>
 #         Arnaud Joly <a.joly@ulg.ac.be>
 #         Maheshakya Wijewardena <maheshakya.10@cse.mrt.ac.lk>
 # License: BSD 3 clause
-
-import warnings
-
-import numpy as np
-import scipy.sparse as sp
 
 class DummyClassifier(MultiOutputMixin, ClassifierMixin, BaseEstimator):
     sparse_output_: bool = ...
@@ -45,11 +41,11 @@ class DummyClassifier(MultiOutputMixin, ClassifierMixin, BaseEstimator):
         constant: None | str | ArrayLike | int = None,
     ) -> None: ...
     def fit(
-        self: DummyClassifier_Self,
+        self,
         X: MatrixLike,
         y: MatrixLike | ArrayLike,
         sample_weight: None | ArrayLike = None,
-    ) -> DummyClassifier_Self: ...
+    ) -> Self: ...
     def predict(self, X: MatrixLike) -> ndarray: ...
     def predict_proba(self, X: MatrixLike) -> ndarray | list[ndarray]: ...
     def predict_log_proba(self, X: ArrayLike) -> ndarray | list[ndarray]: ...
@@ -74,11 +70,11 @@ class DummyRegressor(MultiOutputMixin, RegressorMixin, BaseEstimator):
         quantile: float | None = None,
     ) -> None: ...
     def fit(
-        self: DummyRegressor_Self,
+        self,
         X: MatrixLike,
         y: MatrixLike | ArrayLike,
         sample_weight: None | ArrayLike = None,
-    ) -> DummyRegressor_Self: ...
+    ) -> Self: ...
     def predict(self, X: MatrixLike, return_std: bool = False) -> ndarray | tuple[ndarray, ndarray]: ...
     def score(
         self,

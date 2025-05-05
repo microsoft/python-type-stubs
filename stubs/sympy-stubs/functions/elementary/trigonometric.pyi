@@ -1,5 +1,5 @@
 from typing import Any
-from typing_extensions import Self, Tuple as tTuple
+from typing_extensions import Self
 
 from sympy.calculus.accumulationbounds import AccumBounds
 from sympy.core.cache import cacheit
@@ -92,7 +92,7 @@ class sinc(Function):
     _eval_is_finite = ...
 
 class InverseTrigonometricFunction(Function):
-    _singularities: tTuple[Expr, ...] = ...
+    _singularities: tuple[Expr, ...] = ...
 
 class asin(InverseTrigonometricFunction):
     def fdiff(self, argindex=...): ...
@@ -117,7 +117,7 @@ class acos(InverseTrigonometricFunction):
     def inverse(self, argindex=...) -> type[cos]: ...
 
 class atan(InverseTrigonometricFunction):
-    args: tTuple[Expr]
+    args: tuple[Expr]
     _singularities = ...
     def fdiff(self, argindex=...): ...
     @classmethod

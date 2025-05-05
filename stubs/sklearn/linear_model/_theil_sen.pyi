@@ -1,7 +1,10 @@
+import warnings
 from itertools import combinations as combinations
 from numbers import Integral as Integral, Real as Real
-from typing import ClassVar, TypeVar
+from typing import ClassVar
+from typing_extensions import Self
 
+import numpy as np
 from joblib import effective_n_jobs as effective_n_jobs
 from numpy import ndarray
 from numpy.random import RandomState
@@ -17,15 +20,9 @@ from ..utils._param_validation import Interval as Interval
 from ..utils.parallel import Parallel as Parallel, delayed as delayed
 from ._base import LinearModel
 
-TheilSenRegressor_Self = TypeVar("TheilSenRegressor_Self", bound=TheilSenRegressor)
-
 # Author: Florian Wilhelm <florian.wilhelm@gmail.com>
 #
 # License: BSD 3 clause
-
-import warnings
-
-import numpy as np
 
 _EPSILON = ...
 
@@ -53,4 +50,4 @@ class TheilSenRegressor(RegressorMixin, LinearModel):
         n_jobs: None | Int = None,
         verbose: bool = False,
     ) -> None: ...
-    def fit(self: TheilSenRegressor_Self, X: ArrayLike, y: ArrayLike) -> TheilSenRegressor_Self: ...
+    def fit(self, X: ArrayLike, y: ArrayLike) -> Self: ...

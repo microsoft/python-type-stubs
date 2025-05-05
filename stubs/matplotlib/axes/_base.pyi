@@ -1,4 +1,5 @@
-from typing import Any, Callable, Collection, Literal, MutableSequence, Sequence, overload
+from collections.abc import Collection, MutableSequence, Sequence
+from typing import Any, Callable, Literal, overload
 
 import numpy as np
 from matplotlib._typing import *

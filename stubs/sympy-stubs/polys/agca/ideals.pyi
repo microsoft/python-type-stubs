@@ -1,5 +1,6 @@
+from collections.abc import Generator
 from types import NotImplementedType
-from typing import Any, Generator
+from typing import Any
 from typing_extensions import LiteralString
 
 from sympy.polys.polyutils import IntegerPowerable

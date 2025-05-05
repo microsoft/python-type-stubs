@@ -1,7 +1,9 @@
 from abc import abstractmethod
 from numbers import Integral as Integral
-from typing import ClassVar, Literal, TypeVar
+from typing import ClassVar, Literal
+from typing_extensions import Self
 
+import numpy as np
 from numpy import ndarray
 
 from .._typing import ArrayLike, Int, MatrixLike
@@ -15,11 +17,6 @@ from ..utils.multiclass import check_classification_targets as check_classificat
 from ..utils.parallel import Parallel as Parallel, delayed as delayed
 from ..utils.validation import check_is_fitted as check_is_fitted, column_or_1d as column_or_1d
 from ._base import _BaseHeterogeneousEnsemble
-
-VotingClassifier_Self = TypeVar("VotingClassifier_Self", bound=VotingClassifier)
-VotingRegressor_Self = TypeVar("VotingRegressor_Self", bound=VotingRegressor)
-
-import numpy as np
 
 class _BaseVoting(TransformerMixin, _BaseHeterogeneousEnsemble):
     _parameter_constraints: ClassVar[dict] = ...
@@ -50,11 +47,11 @@ class VotingClassifier(ClassifierMixin, _BaseVoting):
         verbose: bool = False,
     ) -> None: ...
     def fit(
-        self: VotingClassifier_Self,
+        self,
         X: MatrixLike | ArrayLike,
         y: ArrayLike,
         sample_weight: None | ArrayLike = None,
-    ) -> VotingClassifier_Self: ...
+    ) -> Self: ...
     def predict(self, X: MatrixLike | ArrayLike) -> ArrayLike: ...
     def predict_proba(self, X: MatrixLike | ArrayLike) -> ndarray: ...
     def transform(self, X: MatrixLike | ArrayLike): ...
@@ -75,11 +72,11 @@ class VotingRegressor(RegressorMixin, _BaseVoting):
         verbose: bool = False,
     ) -> None: ...
     def fit(
-        self: VotingRegressor_Self,
+        self,
         X: MatrixLike | ArrayLike,
         y: ArrayLike,
         sample_weight: None | ArrayLike = None,
-    ) -> VotingRegressor_Self: ...
+    ) -> Self: ...
     def predict(self, X: MatrixLike | ArrayLike) -> ndarray: ...
     def transform(self, X: MatrixLike | ArrayLike) -> ndarray: ...
     def get_feature_names_out(self, input_features: None | ArrayLike = None) -> ndarray: ...

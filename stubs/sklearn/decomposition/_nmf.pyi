@@ -1,8 +1,14 @@
+import itertools
+import time
+import warnings
 from abc import ABC
 from math import sqrt as sqrt
 from numbers import Integral as Integral, Real as Real
-from typing import Any, ClassVar, Literal, TypeVar
+from typing import Any, ClassVar, Literal
+from typing_extensions import Self
 
+import numpy as np
+import scipy.sparse as sp
 from numpy import ndarray
 from numpy.random import RandomState
 from scipy import linalg as linalg
@@ -16,16 +22,6 @@ from ..utils import check_array as check_array, check_random_state as check_rand
 from ..utils._param_validation import Interval as Interval, StrOptions as StrOptions, validate_params as validate_params
 from ..utils.extmath import randomized_svd as randomized_svd, safe_sparse_dot as safe_sparse_dot, squared_norm as squared_norm
 from ..utils.validation import check_is_fitted as check_is_fitted, check_non_negative as check_non_negative
-
-MiniBatchNMF_Self = TypeVar("MiniBatchNMF_Self", bound=MiniBatchNMF)
-_BaseNMF_Self = TypeVar("_BaseNMF_Self", bound=_BaseNMF)
-
-import itertools
-import time
-import warnings
-
-import numpy as np
-import scipy.sparse as sp
 
 EPSILON = ...
 
@@ -68,7 +64,7 @@ class _BaseNMF(ClassNamePrefixFeaturesOutMixin, TransformerMixin, BaseEstimator,
         l1_ratio: float = 0.0,
         verbose: int = 0,
     ) -> None: ...
-    def fit(self: _BaseNMF_Self, X: MatrixLike | ArrayLike, y: Any = None, **params) -> _BaseNMF_Self: ...
+    def fit(self, X: MatrixLike | ArrayLike, y: Any = None, **params) -> Self: ...
     def inverse_transform(self, W: MatrixLike) -> ndarray | spmatrix: ...
 
 class NMF(_BaseNMF):
@@ -146,9 +142,9 @@ class MiniBatchNMF(_BaseNMF):
     ) -> ndarray: ...
     def transform(self, X: MatrixLike | ArrayLike) -> ndarray: ...
     def partial_fit(
-        self: MiniBatchNMF_Self,
+        self,
         X: MatrixLike | ArrayLike,
         y: Any = None,
         W: None | MatrixLike = None,
         H: None | ArrayLike = None,
-    ) -> MiniBatchNMF_Self: ...
+    ) -> Self: ...

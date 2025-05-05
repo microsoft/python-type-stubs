@@ -1,7 +1,8 @@
 import collections
 import collections.abc
 import contextlib
-from typing import Any, Callable, Generator, Iterator, overload
+from collections.abc import Generator, Iterator
+from typing import Any, Callable, overload
 
 import numpy as np
 from matplotlib._typing import *

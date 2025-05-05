@@ -1,7 +1,11 @@
+import warnings
 from abc import ABCMeta, abstractmethod
 from numbers import Integral as Integral, Real as Real
-from typing import Callable, ClassVar, TypeVar
+from typing import Callable, ClassVar
+from typing_extensions import Self
 
+import numpy as np
+import scipy.sparse as sp
 from numpy import ndarray
 from numpy.random.mtrand import RandomState
 
@@ -20,13 +24,6 @@ from ..utils.extmath import safe_sparse_dot as safe_sparse_dot
 from ..utils.metaestimators import available_if as available_if
 from ..utils.multiclass import check_classification_targets as check_classification_targets
 from ..utils.validation import check_consistent_length as check_consistent_length, check_is_fitted as check_is_fitted
-
-BaseLibSVM_Self = TypeVar("BaseLibSVM_Self", bound=BaseLibSVM)
-
-import warnings
-
-import numpy as np
-import scipy.sparse as sp
 
 LIBSVM_IMPL: list = ...
 
@@ -58,11 +55,11 @@ class BaseLibSVM(BaseEstimator, metaclass=ABCMeta):
         random_state: None | RandomState | int,
     ) -> None: ...
     def fit(
-        self: BaseLibSVM_Self,
+        self,
         X: MatrixLike,
         y: ArrayLike,
         sample_weight: None | ArrayLike = None,
-    ) -> BaseLibSVM_Self: ...
+    ) -> Self: ...
     def predict(self, X: MatrixLike | ArrayLike) -> ndarray: ...
     @property
     def coef_(self) -> ndarray: ...

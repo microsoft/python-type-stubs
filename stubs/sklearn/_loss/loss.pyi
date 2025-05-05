@@ -1,5 +1,5 @@
 import numbers
-from typing import ClassVar, Literal, Type
+from typing import ClassVar, Literal
 
 import numpy as np
 from numpy import ndarray
@@ -127,7 +127,7 @@ class BaseLoss:
     def init_gradient_and_hessian(
         self,
         n_samples: Int,
-        dtype: Type[Float] | Float = ...,
+        dtype: type[Float] | Float = ...,
         order: Literal["C", "F"] = "F",
     ) -> tuple[ndarray, ndarray]: ...
 

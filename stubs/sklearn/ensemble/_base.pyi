@@ -1,6 +1,7 @@
 import warnings
 from abc import ABCMeta, abstractmethod
-from typing import Any, ClassVar, List, Sequence, TypeVar
+from collections.abc import Sequence
+from typing import Any, ClassVar
 from typing_extensions import Self
 
 import numpy as np
@@ -20,7 +21,7 @@ class BaseEnsemble(MetaEstimatorMixin, BaseEstimator, metaclass=ABCMeta):
     estimators_: list[BaseEstimator] = ...
 
     # overwrite _required_parameters from MetaEstimatorMixin
-    _required_parameters: ClassVar[List[str]] = ...
+    _required_parameters: ClassVar[list[str]] = ...
 
     @abstractmethod
     def __init__(

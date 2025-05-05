@@ -1,9 +1,13 @@
+import itertools
+import numbers
 from abc import ABCMeta, abstractmethod
 from functools import partial as partial
 from numbers import Integral as Integral, Real as Real
-from typing import Any, ClassVar, TypeVar
+from typing import Any, ClassVar
+from typing_extensions import Self
 from warnings import warn as warn
 
+import numpy as np
 from numpy import ndarray
 from numpy.random import RandomState
 
@@ -20,15 +24,8 @@ from ..utils.random import sample_without_replacement as sample_without_replacem
 from ..utils.validation import check_is_fitted as check_is_fitted, has_fit_parameter as has_fit_parameter
 from ._base import BaseEnsemble
 
-BaseBagging_Self = TypeVar("BaseBagging_Self", bound=BaseBagging)
-
 # Author: Gilles Louppe <g.louppe@gmail.com>
 # License: BSD 3 clause
-
-import itertools
-import numbers
-
-import numpy as np
 
 __all__ = ["BaggingClassifier", "BaggingRegressor"]
 
@@ -55,11 +52,11 @@ class BaseBagging(BaseEnsemble, metaclass=ABCMeta):
         base_estimator: str = "deprecated",
     ) -> None: ...
     def fit(
-        self: BaseBagging_Self,
+        self,
         X: MatrixLike | ArrayLike,
         y: ArrayLike,
         sample_weight: None | ArrayLike = None,
-    ) -> BaggingRegressor | BaseBagging_Self: ...
+    ) -> BaggingRegressor | Self: ...
     def estimators_samples_(self): ...
 
 class BaggingClassifier(ClassifierMixin, BaseBagging):

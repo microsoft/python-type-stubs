@@ -1,7 +1,10 @@
+import warnings
 from collections import defaultdict as defaultdict
 from numbers import Integral as Integral, Real as Real
-from typing import Any, ClassVar, TypeVar
+from typing import Any, ClassVar
+from typing_extensions import Self
 
+import numpy as np
 from numpy import ndarray
 from numpy.random import RandomState
 
@@ -15,16 +18,10 @@ from ..utils._param_validation import Interval as Interval
 from ..utils.parallel import Parallel as Parallel, delayed as delayed
 from ..utils.validation import check_is_fitted as check_is_fitted
 
-MeanShift_Self = TypeVar("MeanShift_Self", bound=MeanShift)
-
 # Authors: Conrad Lee <conradlee@gmail.com>
 #          Alexandre Gramfort <alexandre.gramfort@inria.fr>
 #          Gael Varoquaux <gael.varoquaux@normalesup.org>
 #          Martino Sorbaro <martino.sorbaro@ed.ac.uk>
-
-import warnings
-
-import numpy as np
 
 def estimate_bandwidth(
     X: MatrixLike,
@@ -67,5 +64,5 @@ class MeanShift(ClusterMixin, BaseEstimator):
         n_jobs: None | Int = None,
         max_iter: Int = 300,
     ) -> None: ...
-    def fit(self: MeanShift_Self, X: MatrixLike, y: Any = None) -> MeanShift_Self: ...
+    def fit(self, X: MatrixLike, y: Any = None) -> Self: ...
     def predict(self, X: MatrixLike) -> ndarray: ...

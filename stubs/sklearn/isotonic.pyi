@@ -1,6 +1,10 @@
+import math
+import warnings
 from numbers import Real as Real
-from typing import Callable, ClassVar, Literal, TypeVar
+from typing import Callable, ClassVar, Literal
+from typing_extensions import Self
 
+import numpy as np
 from numpy import ndarray
 from scipy import interpolate as interpolate
 from scipy.stats import spearmanr as spearmanr
@@ -10,17 +14,10 @@ from .base import BaseEstimator, RegressorMixin, TransformerMixin
 from .utils import check_array as check_array, check_consistent_length as check_consistent_length
 from .utils._param_validation import Interval as Interval, StrOptions as StrOptions
 
-IsotonicRegression_Self = TypeVar("IsotonicRegression_Self", bound=IsotonicRegression)
-
 # Authors: Fabian Pedregosa <fabian@fseoane.net>
 #          Alexandre Gramfort <alexandre.gramfort@inria.fr>
 #          Nelle Varoquaux <nelle.varoquaux@gmail.com>
 # License: BSD 3 clause
-
-import math
-import warnings
-
-import numpy as np
 
 __all__ = ["check_increasing", "isotonic_regression", "IsotonicRegression"]
 
@@ -53,11 +50,11 @@ class IsotonicRegression(RegressorMixin, TransformerMixin, BaseEstimator):
         out_of_bounds: Literal["nan", "clip", "raise"] = "nan",
     ) -> None: ...
     def fit(
-        self: IsotonicRegression_Self,
+        self,
         X: ArrayLike,
         y: ArrayLike,
         sample_weight: None | ArrayLike = None,
-    ) -> IsotonicRegression_Self: ...
+    ) -> Self: ...
     def transform(self, T: ArrayLike) -> ndarray: ...
     def predict(self, T: ArrayLike) -> ndarray: ...
 

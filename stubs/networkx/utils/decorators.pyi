@@ -5,10 +5,11 @@ import inspect
 import itertools
 import re
 from collections import defaultdict
+from collections.abc import Sequence
 from contextlib import contextmanager
 from os.path import splitext
 from pathlib import Path
-from typing import Callable, Sequence
+from typing import Callable
 
 from ..classes.graph import Graph
 from ..utils import create_py_random_state, create_random_state

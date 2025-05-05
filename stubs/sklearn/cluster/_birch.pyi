@@ -1,7 +1,10 @@
+import warnings
 from math import sqrt as sqrt
 from numbers import Integral as Integral, Real as Real
-from typing import Any, ClassVar, TypeVar
+from typing import Any, ClassVar
+from typing_extensions import Self
 
+import numpy as np
 from numpy import ndarray
 from scipy import sparse as sparse
 from scipy.sparse import spmatrix
@@ -17,16 +20,10 @@ from ..utils.extmath import row_norms as row_norms
 from ..utils.validation import check_is_fitted as check_is_fitted
 from . import AgglomerativeClustering as AgglomerativeClustering
 
-Birch_Self = TypeVar("Birch_Self", bound=Birch)
-
 # Authors: Manoj Kumar <manojkumarsivaraj334@gmail.com>
 #          Alexandre Gramfort <alexandre.gramfort@telecom-paristech.fr>
 #          Joel Nothman <joel.nothman@gmail.com>
 # License: BSD 3 clause
-
-import warnings
-
-import numpy as np
 
 class _CFNode:
     squared_norm_: ndarray = ...
@@ -88,7 +85,7 @@ class Birch(ClassNamePrefixFeaturesOutMixin, ClusterMixin, TransformerMixin, Bas
         compute_labels: bool = True,
         copy: bool = True,
     ) -> None: ...
-    def fit(self: Birch_Self, X: MatrixLike | ArrayLike, y: Any = None) -> Birch_Self: ...
-    def partial_fit(self: Birch_Self, X: None | MatrixLike | ArrayLike = None, y: Any = None) -> Birch_Self: ...
+    def fit(self, X: MatrixLike | ArrayLike, y: Any = None) -> Self: ...
+    def partial_fit(self, X: None | MatrixLike | ArrayLike = None, y: Any = None) -> Self: ...
     def predict(self, X: MatrixLike | ArrayLike) -> ndarray: ...
     def transform(self, X: MatrixLike | ArrayLike) -> ndarray | spmatrix: ...

@@ -1,7 +1,8 @@
 import functools
 import warnings
+from collections.abc import Iterable, Iterator
 from functools import update_wrapper as update_wrapper
-from typing import Any, Callable, Iterable, Iterator
+from typing import Any, Callable
 
 import joblib
 from numpy import ndarray

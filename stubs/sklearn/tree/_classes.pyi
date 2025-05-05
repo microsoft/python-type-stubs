@@ -1,8 +1,14 @@
+import copy
+import numbers
+import warnings
 from abc import ABCMeta, abstractmethod
+from collections.abc import Mapping, Sequence
 from math import ceil as ceil
 from numbers import Integral as Integral, Real as Real
-from typing import ClassVar, Literal, Mapping, Sequence, TypeVar
+from typing import ClassVar, Literal
+from typing_extensions import Self
 
+import numpy as np
 from numpy import ndarray
 from numpy.random import RandomState
 from scipy.sparse import issparse as issparse, spmatrix
@@ -30,8 +36,6 @@ from ._tree import (
     ccp_pruning_path as ccp_pruning_path,
 )
 
-DecisionTreeRegressor_Self = TypeVar("DecisionTreeRegressor_Self", bound=DecisionTreeRegressor)
-
 # Authors: Gilles Louppe <g.louppe@gmail.com>
 #          Peter Prettenhofer <peter.prettenhofer@gmail.com>
 #          Brian Holt <bdholt1@gmail.com>
@@ -42,12 +46,6 @@ DecisionTreeRegressor_Self = TypeVar("DecisionTreeRegressor_Self", bound=Decisio
 #          Nelson Liu <nelson@nelsonliu.me>
 #
 # License: BSD 3 clause
-
-import copy
-import numbers
-import warnings
-
-import numpy as np
 
 __all__ = [
     "DecisionTreeClassifier",
@@ -183,12 +181,12 @@ class DecisionTreeRegressor(RegressorMixin, BaseDecisionTree):
         ccp_alpha: float = 0.0,
     ) -> None: ...
     def fit(
-        self: DecisionTreeRegressor_Self,
+        self,
         X: MatrixLike | ArrayLike,
         y: MatrixLike | ArrayLike,
         sample_weight: None | ArrayLike = None,
         check_input: bool = True,
-    ) -> DecisionTreeRegressor_Self: ...
+    ) -> Self: ...
 
 class ExtraTreeClassifier(DecisionTreeClassifier):
     tree_: Tree = ...

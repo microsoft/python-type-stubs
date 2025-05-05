@@ -1,6 +1,9 @@
+import warnings
 from numbers import Real as Real
-from typing import Any, Callable, ClassVar, Literal, TypeVar
+from typing import Any, Callable, ClassVar, Literal
+from typing_extensions import Self
 
+import numpy as np
 from numpy import ndarray
 
 from .._typing import ArrayLike, Int, MatrixLike
@@ -11,15 +14,9 @@ from ..utils.metaestimators import available_if as available_if
 from ..utils.validation import check_is_fitted as check_is_fitted
 from ._base import KNeighborsMixin, NeighborsBase
 
-LocalOutlierFactor_Self = TypeVar("LocalOutlierFactor_Self", bound=LocalOutlierFactor)
-
 # Authors: Nicolas Goix <nicolas.goix@telecom-paristech.fr>
 #          Alexandre Gramfort <alexandre.gramfort@telecom-paristech.fr>
 # License: BSD 3 clause
-
-import warnings
-
-import numpy as np
 
 __all__ = ["LocalOutlierFactor"]
 
@@ -49,7 +46,7 @@ class LocalOutlierFactor(KNeighborsMixin, OutlierMixin, NeighborsBase):
         n_jobs: None | Int = None,
     ) -> None: ...
     def fit_predict(self, X: MatrixLike | ArrayLike, y: Any = None) -> ndarray: ...
-    def fit(self: LocalOutlierFactor_Self, X: MatrixLike, y: Any = None) -> LocalOutlierFactor_Self: ...
+    def fit(self, X: MatrixLike, y: Any = None) -> Self: ...
     def predict(self, X: None | MatrixLike | ArrayLike = None) -> ndarray: ...
     def decision_function(self, X: MatrixLike | ArrayLike) -> ndarray: ...
     def score_samples(self, X: MatrixLike | ArrayLike) -> ndarray: ...

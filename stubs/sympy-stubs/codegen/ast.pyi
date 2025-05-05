@@ -1,4 +1,5 @@
-from typing import Any, Callable, Iterator, Literal
+from collections.abc import Iterator
+from typing import Any, Callable, Literal
 from typing_extensions import Self
 
 from sympy.core.basic import Basic
@@ -146,7 +147,9 @@ class FloatBaseType(Type):
 class FloatType(FloatBaseType):
     __slots__ = ...
     _fields = ...
-    _construct_nexp = _construct_nmant = _construct_nbits = Integer
+    _construct_nexp = Integer
+    _construct_nmant = Integer
+    _construct_nbits = Integer
     @property
     def max_exponent(self) -> Expr: ...
     @property

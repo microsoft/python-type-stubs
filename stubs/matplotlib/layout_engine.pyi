@@ -1,4 +1,4 @@
-from typing import Sequence
+from collections.abc import Sequence
 
 from ._layoutgrid import LayoutGrid
 from .figure import Figure, FigureBase

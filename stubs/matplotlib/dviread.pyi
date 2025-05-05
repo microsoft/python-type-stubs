@@ -1,5 +1,7 @@
+from _typeshed import Incomplete
 from collections import namedtuple
 from functools import lru_cache
+from typing import NamedTuple
 
 from ._typing import *
 from .path import Path
@@ -7,7 +9,12 @@ from .path import Path
 Page = ...
 Box = ...
 
-class Text(namedtuple("Text", "x y font glyph width")):
+class Text(NamedTuple):
+    x: float
+    y: float
+    font: Incomplete
+    glyph: Incomplete
+    width: int
     @property
     def font_path(self) -> Path: ...
     @property
@@ -40,12 +47,12 @@ class Tfm:
 PsFont = ...
 
 class PsfontsMap:
-    @lru_cache()
+    @lru_cache
     def __new__(cls, filename): ...
     def __getitem__(self, texname): ...
 
 class _LuatexKpsewhich:
-    @lru_cache()
+    @lru_cache
     def __new__(cls): ...
     def search(self, filename): ...
 

@@ -1,7 +1,11 @@
+import warnings
 from abc import ABCMeta, abstractmethod
+from collections.abc import Iterator
 from numbers import Integral as Integral, Real as Real
-from typing import Any, ClassVar, Iterator, Literal, TypeVar
+from typing import Any, ClassVar, Literal
+from typing_extensions import Self
 
+import numpy as np
 from numpy import ndarray
 from numpy.random import RandomState
 from scipy.special import xlogy as xlogy
@@ -15,12 +19,6 @@ from ..utils._param_validation import HasMethods as HasMethods, Interval as Inte
 from ..utils.extmath import softmax as softmax, stable_cumsum as stable_cumsum
 from ..utils.validation import check_is_fitted as check_is_fitted, has_fit_parameter as has_fit_parameter
 from ._base import BaseEnsemble
-
-BaseWeightBoosting_Self = TypeVar("BaseWeightBoosting_Self", bound=BaseWeightBoosting)
-
-import warnings
-
-import numpy as np
 
 __all__ = [
     "AdaBoostClassifier",
@@ -42,11 +40,11 @@ class BaseWeightBoosting(BaseEnsemble, metaclass=ABCMeta):
         base_estimator: str = "deprecated",
     ) -> None: ...
     def fit(
-        self: BaseWeightBoosting_Self,
+        self,
         X: MatrixLike | ArrayLike,
         y: ArrayLike,
         sample_weight: None | ArrayLike = None,
-    ) -> BaseWeightBoosting_Self: ...
+    ) -> Self: ...
     def staged_score(
         self,
         X: MatrixLike | ArrayLike,

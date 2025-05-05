@@ -1,8 +1,8 @@
 import functools
-from collections.abc import Mapping
+from collections.abc import Iterator, Mapping
 from email.errors import NonPrintableDefect
 from re import Pattern
-from typing import Callable, Iterator, Literal
+from typing import Callable, Literal
 
 import numpy as np
 from matplotlib._typing import *

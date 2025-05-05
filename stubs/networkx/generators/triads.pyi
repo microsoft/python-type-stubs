@@ -4,7 +4,6 @@ from networkx import DiGraph
 # Copyright 2011 Reya Group <http://www.reyagroup.com>
 # Copyright 2011 Alex Levenson <alex@isnotinvain.com>
 # Copyright 2011 Diederik van Liere <diederik.vanliere@rotman.utoronto.ca>
-from ..classes import DiGraph
 
 __all__ = ["triad_graph"]
 

@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
+from collections.abc import Generator
 from types import NotImplementedType
-from typing import Any, Generator, Literal
+from typing import Any, Literal
 from typing_extensions import LiteralString, Self
 
 from sympy import ImmutableDenseNDimArray, ImmutableSparseNDimArray, Indexed, MutableDenseNDimArray

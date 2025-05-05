@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # This file was auto-generated from `mc_meta/LookUpTable.h` by
 # `mc_meta/createluts.py`.
 

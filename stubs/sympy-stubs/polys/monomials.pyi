@@ -1,4 +1,5 @@
-from typing import Any, Generator, Iterator
+from collections.abc import Generator, Iterator
+from typing import Any
 from typing_extensions import Self
 
 from sympy.polys.polyutils import PicklableWithSlots

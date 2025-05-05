@@ -1,8 +1,12 @@
+import warnings
 from abc import ABCMeta, abstractmethod
 from itertools import chain as chain
 from numbers import Integral as Integral, Real as Real
-from typing import ClassVar, Literal, TypeVar
+from typing import ClassVar, Literal
+from typing_extensions import Self
 
+import numpy as np
+import scipy.optimize
 from numpy import ndarray
 from numpy.random import RandomState
 
@@ -12,7 +16,7 @@ from ..exceptions import ConvergenceWarning as ConvergenceWarning
 from ..metrics import accuracy_score as accuracy_score, r2_score as r2_score
 from ..model_selection import train_test_split as train_test_split
 from ..preprocessing import LabelBinarizer as LabelBinarizer
-from ..utils import check_random_state as check_random_state, column_or_1d as column_or_1d, gen_batches as gen_batches, shuffle
+from ..utils import check_random_state as check_random_state, column_or_1d as column_or_1d, gen_batches as gen_batches
 from ..utils._param_validation import Interval as Interval, Options as Options, StrOptions as StrOptions
 from ..utils.extmath import safe_sparse_dot as safe_sparse_dot
 from ..utils.metaestimators import available_if as available_if
@@ -20,15 +24,6 @@ from ..utils.multiclass import type_of_target as type_of_target, unique_labels a
 from ..utils.validation import check_is_fitted as check_is_fitted
 from ._base import ACTIVATIONS as ACTIVATIONS, DERIVATIVES as DERIVATIVES, LOSS_FUNCTIONS as LOSS_FUNCTIONS
 from ._stochastic_optimizers import AdamOptimizer as AdamOptimizer, SGDOptimizer as SGDOptimizer
-
-BaseMultilayerPerceptron_Self = TypeVar("BaseMultilayerPerceptron_Self", bound=BaseMultilayerPerceptron)
-MLPRegressor_Self = TypeVar("MLPRegressor_Self", bound=MLPRegressor)
-MLPClassifier_Self = TypeVar("MLPClassifier_Self", bound=MLPClassifier)
-
-import warnings
-
-import numpy as np
-import scipy.optimize
 
 _STOCHASTIC_SOLVERS: list = ...
 
@@ -63,7 +58,7 @@ class BaseMultilayerPerceptron(BaseEstimator, metaclass=ABCMeta):
         n_iter_no_change: int,
         max_fun: int,
     ) -> None: ...
-    def fit(self: BaseMultilayerPerceptron_Self, X: MatrixLike, y: MatrixLike | ArrayLike) -> BaseMultilayerPerceptron_Self: ...
+    def fit(self, X: MatrixLike, y: MatrixLike | ArrayLike) -> Self: ...
 
 class MLPClassifier(ClassifierMixin, BaseMultilayerPerceptron):
     out_activation_: str = ...
@@ -111,11 +106,11 @@ class MLPClassifier(ClassifierMixin, BaseMultilayerPerceptron):
     ) -> None: ...
     def predict(self, X: MatrixLike | ArrayLike) -> ndarray: ...
     def partial_fit(
-        self: MLPClassifier_Self,
+        self,
         X: MatrixLike | ArrayLike,
         y: ArrayLike,
         classes: None | ArrayLike = None,
-    ) -> MLPClassifier_Self: ...
+    ) -> Self: ...
     def predict_log_proba(self, X: ArrayLike) -> ndarray: ...
     def predict_proba(self, X: MatrixLike | ArrayLike) -> ndarray: ...
 
@@ -163,4 +158,4 @@ class MLPRegressor(RegressorMixin, BaseMultilayerPerceptron):
         max_fun: Int = 15000,
     ) -> None: ...
     def predict(self, X: MatrixLike | ArrayLike) -> ndarray: ...
-    def partial_fit(self: MLPRegressor_Self, X: MatrixLike | ArrayLike, y: ArrayLike) -> MLPRegressor_Self: ...
+    def partial_fit(self, X: MatrixLike | ArrayLike, y: ArrayLike) -> Self: ...

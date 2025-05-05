@@ -1,6 +1,9 @@
+import warnings
 from numbers import Integral as Integral
-from typing import Callable, ClassVar, Literal, TypeVar
+from typing import Callable, ClassVar, Literal
+from typing_extensions import Self
 
+import numpy as np
 from numpy import ndarray
 
 from .._typing import ArrayLike, Float, Int, MatrixLike
@@ -8,13 +11,6 @@ from ..base import ClassifierMixin
 from ..utils._param_validation import StrOptions as StrOptions
 from ..utils.extmath import weighted_mode as weighted_mode
 from ._base import KNeighborsMixin, NeighborsBase, RadiusNeighborsMixin
-
-RadiusNeighborsClassifier_Self = TypeVar("RadiusNeighborsClassifier_Self", bound=RadiusNeighborsClassifier)
-KNeighborsClassifier_Self = TypeVar("KNeighborsClassifier_Self", bound=KNeighborsClassifier)
-
-import warnings
-
-import numpy as np
 
 class KNeighborsClassifier(KNeighborsMixin, ClassifierMixin, NeighborsBase):
     outputs_2d_: bool = ...
@@ -39,7 +35,7 @@ class KNeighborsClassifier(KNeighborsMixin, ClassifierMixin, NeighborsBase):
         metric_params: None | dict = None,
         n_jobs: None | Int = None,
     ) -> None: ...
-    def fit(self: KNeighborsClassifier_Self, X: MatrixLike, y: MatrixLike | ArrayLike) -> KNeighborsClassifier_Self: ...
+    def fit(self, X: MatrixLike, y: MatrixLike | ArrayLike) -> Self: ...
     def predict(self, X: MatrixLike) -> ndarray: ...
     def predict_proba(self, X: MatrixLike) -> ndarray | list[ndarray]: ...
 
@@ -68,6 +64,6 @@ class RadiusNeighborsClassifier(RadiusNeighborsMixin, ClassifierMixin, Neighbors
         metric_params: None | dict = None,
         n_jobs: None | Int = None,
     ) -> None: ...
-    def fit(self: RadiusNeighborsClassifier_Self, X: MatrixLike, y: MatrixLike | ArrayLike) -> RadiusNeighborsClassifier_Self: ...
+    def fit(self, X: MatrixLike, y: MatrixLike | ArrayLike) -> Self: ...
     def predict(self, X: MatrixLike) -> ndarray: ...
     def predict_proba(self, X: MatrixLike) -> ndarray: ...

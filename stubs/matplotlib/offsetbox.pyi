@@ -1,4 +1,5 @@
-from typing import Any, Callable, Literal, Sequence
+from collections.abc import Sequence
+from typing import Any, Callable, Literal
 
 from ._typing import *
 from .artist import Artist

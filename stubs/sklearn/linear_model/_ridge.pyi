@@ -1,8 +1,13 @@
+import numbers
+import warnings
 from abc import ABCMeta, abstractmethod
+from collections.abc import Iterable, Mapping
 from functools import partial as partial
 from numbers import Integral as Integral, Real as Real
-from typing import Callable, ClassVar, Iterable, Literal, Mapping, TypeVar
+from typing import Callable, ClassVar, Literal
+from typing_extensions import Self
 
+import numpy as np
 from numpy import ndarray
 from numpy.random import RandomState
 from pandas.core.frame import DataFrame
@@ -32,18 +37,6 @@ from ..utils.sparsefuncs import mean_variance_axis as mean_variance_axis
 from ..utils.validation import check_is_fitted as check_is_fitted
 from ._base import LinearClassifierMixin, LinearModel
 from ._sag import sag_solver as sag_solver
-
-_BaseRidgeCV_Self = TypeVar("_BaseRidgeCV_Self", bound=_BaseRidgeCV)
-_RidgeGCV_Self = TypeVar("_RidgeGCV_Self", bound=_RidgeGCV)
-RidgeClassifier_Self = TypeVar("RidgeClassifier_Self", bound=RidgeClassifier)
-RidgeClassifierCV_Self = TypeVar("RidgeClassifierCV_Self", bound=RidgeClassifierCV)
-RidgeCV_Self = TypeVar("RidgeCV_Self", bound=RidgeCV)
-Ridge_Self = TypeVar("Ridge_Self", bound=Ridge)
-
-import numbers
-import warnings
-
-import numpy as np
 
 def ridge_regression(
     X: MatrixLike | LinearOperator,
@@ -105,11 +98,11 @@ class Ridge(MultiOutputMixin, RegressorMixin, _BaseRidge):
         random_state: RandomState | None | Int = None,
     ) -> None: ...
     def fit(
-        self: Ridge_Self,
+        self,
         X: coo_matrix | MatrixLike,
         y: MatrixLike | ArrayLike,
         sample_weight: float | None | ArrayLike = None,
-    ) -> Ridge_Self: ...
+    ) -> Self: ...
 
 class _RidgeClassifierMixin(LinearClassifierMixin):
     def predict(self, X: MatrixLike) -> ndarray: ...
@@ -139,11 +132,11 @@ class RidgeClassifier(_RidgeClassifierMixin, _BaseRidge):
         random_state: RandomState | None | Int = None,
     ) -> None: ...
     def fit(
-        self: RidgeClassifier_Self,
+        self,
         X: MatrixLike,
         y: ArrayLike,
         sample_weight: float | None | ArrayLike = None,
-    ) -> RidgeClassifier_Self: ...
+    ) -> Self: ...
 
 class _X_CenterStackOp(LinearOperator):
     def __init__(self, X, X_mean, sqrt_sw) -> None: ...
@@ -173,11 +166,11 @@ class _RidgeGCV(LinearModel):
         alpha_per_target: bool = False,
     ) -> None: ...
     def fit(
-        self: _RidgeGCV_Self,
+        self,
         X: MatrixLike,
         y: MatrixLike | ArrayLike,
         sample_weight: float | None | ArrayLike = None,
-    ) -> _RidgeGCV_Self: ...
+    ) -> Self: ...
 
 class _BaseRidgeCV(LinearModel):
     _parameter_constraints: ClassVar[dict] = ...
@@ -194,11 +187,11 @@ class _BaseRidgeCV(LinearModel):
         alpha_per_target: bool = False,
     ) -> None: ...
     def fit(
-        self: _BaseRidgeCV_Self,
+        self,
         X: ArrayLike | DataFrame,
         y: MatrixLike | ArrayLike,
         sample_weight: float | None | ArrayLike = None,
-    ) -> _BaseRidgeCV_Self | RidgeCV: ...
+    ) -> Self | RidgeCV: ...
 
 class RidgeCV(MultiOutputMixin, RegressorMixin, _BaseRidgeCV):
     feature_names_in_: ndarray = ...
@@ -210,11 +203,11 @@ class RidgeCV(MultiOutputMixin, RegressorMixin, _BaseRidgeCV):
     cv_values_: ndarray = ...
 
     def fit(
-        self: RidgeCV_Self,
+        self,
         X: ArrayLike | DataFrame,
         y: MatrixLike | ArrayLike,
         sample_weight: float | None | ArrayLike = None,
-    ) -> RidgeCV_Self: ...
+    ) -> Self: ...
 
 class RidgeClassifierCV(_RidgeClassifierMixin, _BaseRidgeCV):
     feature_names_in_: ndarray = ...
@@ -239,8 +232,8 @@ class RidgeClassifierCV(_RidgeClassifierMixin, _BaseRidgeCV):
         store_cv_values: bool = False,
     ) -> None: ...
     def fit(
-        self: RidgeClassifierCV_Self,
+        self,
         X: ArrayLike,
         y: ArrayLike,
         sample_weight: float | None | ArrayLike = None,
-    ) -> RidgeClassifierCV_Self: ...
+    ) -> Self: ...

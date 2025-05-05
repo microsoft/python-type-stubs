@@ -1,4 +1,5 @@
-from typing import Any, Generator, Literal
+from collections.abc import Generator
+from typing import Any, Literal
 from typing_extensions import Self
 
 from sympy.combinatorics.fp_groups import FpGroup

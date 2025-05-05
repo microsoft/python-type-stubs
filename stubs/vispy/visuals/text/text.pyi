@@ -1,6 +1,7 @@
 import sys
+from collections.abc import Mapping
 from copy import deepcopy
-from typing import Any, Mapping
+from typing import Any
 
 import numpy as np
 from numpy.typing import ArrayLike
@@ -14,7 +15,6 @@ from ..transforms import STTransform
 from ..visual import Visual
 from ._sdf_gpu import SDFRendererGPU
 
-# -*- coding: utf-8 -*-
 # -----------------------------------------------------------------------------
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
@@ -23,7 +23,7 @@ from ._sdf_gpu import SDFRendererGPU
 ##############################################################################
 # Load font into texture
 
-class TextureFont(object):
+class TextureFont:
     def __init__(self, font: Mapping, renderer: SDFRendererGPU): ...
     @property
     def ratio(self): ...
@@ -32,7 +32,7 @@ class TextureFont(object):
     def __getitem__(self, char): ...
     def _load_char(self, char): ...
 
-class FontManager(object):
+class FontManager:
     # XXX: should store a font-manager on each context,
     # or let TextureFont use a TextureAtlas for each context
     def __init__(self, method="cpu"): ...
@@ -107,7 +107,7 @@ class TextVisual(Visual):
     def italic(self, value): ...
     def _update_font(self): ...
 
-class SDFRendererCPU(object):
+class SDFRendererCPU:
     # This should probably live in _sdf_cpu.pyx, but doing so makes
     # debugging substantially more annoying
     def render_to_texture(self, data, texture, offset, size): ...

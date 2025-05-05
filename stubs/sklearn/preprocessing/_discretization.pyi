@@ -1,6 +1,9 @@
+import warnings
 from numbers import Integral as Integral
-from typing import ClassVar, Literal, TypeVar
+from typing import ClassVar, Literal
+from typing_extensions import Self
 
+import numpy as np
 from numpy import ndarray
 from numpy.random import RandomState
 from pandas.core.series import Series
@@ -17,16 +20,10 @@ from ..utils.validation import (
 )
 from . import OneHotEncoder as OneHotEncoder
 
-KBinsDiscretizer_Self = TypeVar("KBinsDiscretizer_Self", bound=KBinsDiscretizer)
-
 # Author: Henry Lin <hlin117@gmail.com>
 #         Tom Dupré la Tour
 
 # License: BSD
-
-import warnings
-
-import numpy as np
 
 class KBinsDiscretizer(TransformerMixin, BaseEstimator):
     feature_names_in_: ndarray = ...
@@ -46,7 +43,7 @@ class KBinsDiscretizer(TransformerMixin, BaseEstimator):
         subsample: int | None | Literal["warn"] = "warn",
         random_state: RandomState | None | Int = None,
     ) -> None: ...
-    def fit(self: KBinsDiscretizer_Self, X: MatrixLike, y: Series | None | ndarray = None) -> KBinsDiscretizer_Self: ...
+    def fit(self, X: MatrixLike, y: Series | None | ndarray = None) -> Self: ...
     def transform(self, X: MatrixLike) -> ndarray | spmatrix: ...
     def inverse_transform(self, Xt: MatrixLike) -> ndarray: ...
     def get_feature_names_out(self, input_features: None | ArrayLike = None) -> ndarray: ...

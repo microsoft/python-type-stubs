@@ -1,6 +1,9 @@
+import warnings
 from numbers import Integral as Integral, Real as Real
-from typing import Any, Callable, ClassVar, Literal, TypeVar
+from typing import Any, Callable, ClassVar, Literal
+from typing_extensions import Self
 
+import numpy as np
 from numpy import ndarray
 from numpy.random import RandomState
 from scipy import sparse as sparse
@@ -15,12 +18,6 @@ from ..metrics.pairwise import rbf_kernel as rbf_kernel
 from ..neighbors import NearestNeighbors as NearestNeighbors, kneighbors_graph as kneighbors_graph
 from ..utils import check_array as check_array, check_random_state as check_random_state, check_symmetric as check_symmetric
 from ..utils._param_validation import Interval as Interval, StrOptions as StrOptions
-
-SpectralEmbedding_Self = TypeVar("SpectralEmbedding_Self", bound=SpectralEmbedding)
-
-import warnings
-
-import numpy as np
 
 def spectral_embedding(
     adjacency: coo_matrix | MatrixLike,
@@ -56,5 +53,5 @@ class SpectralEmbedding(BaseEstimator):
         n_neighbors: None | Int = None,
         n_jobs: None | Int = None,
     ) -> None: ...
-    def fit(self: SpectralEmbedding_Self, X: MatrixLike | ArrayLike, y: Any = None) -> SpectralEmbedding_Self: ...
+    def fit(self, X: MatrixLike | ArrayLike, y: Any = None) -> Self: ...
     def fit_transform(self, X: MatrixLike | ArrayLike, y: Any = None) -> ndarray: ...

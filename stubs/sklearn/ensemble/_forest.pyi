@@ -1,8 +1,12 @@
+import threading
 from abc import ABCMeta, abstractmethod
+from collections.abc import Mapping, Sequence
 from numbers import Integral as Integral, Real as Real
-from typing import Any, ClassVar, Literal, Mapping, Sequence, TypeVar
+from typing import Any, ClassVar, Literal
+from typing_extensions import Self
 from warnings import catch_warnings as catch_warnings, simplefilter as simplefilter, warn as warn
 
+import numpy as np
 from numpy import ndarray
 from numpy.random import RandomState
 from scipy.sparse import hstack as sparse_hstack, issparse as issparse, spmatrix
@@ -26,13 +30,6 @@ from ..utils.multiclass import check_classification_targets as check_classificat
 from ..utils.parallel import Parallel as Parallel, delayed as delayed
 from ..utils.validation import check_is_fitted as check_is_fitted
 from ._base import BaseEnsemble
-
-BaseForest_Self = TypeVar("BaseForest_Self", bound=BaseForest)
-RandomTreesEmbedding_Self = TypeVar("RandomTreesEmbedding_Self", bound=RandomTreesEmbedding)
-
-import threading
-
-import numpy as np
 
 __all__ = [
     "RandomForestClassifier",
@@ -67,11 +64,11 @@ class BaseForest(MultiOutputMixin, BaseEnsemble, metaclass=ABCMeta):
     def apply(self, X: MatrixLike | ArrayLike) -> ndarray: ...
     def decision_path(self, X: MatrixLike | ArrayLike) -> tuple[spmatrix, ndarray]: ...
     def fit(
-        self: BaseForest_Self,
+        self,
         X: MatrixLike | ArrayLike,
         y: MatrixLike | ArrayLike,
         sample_weight: None | ArrayLike = None,
-    ) -> BaseForest_Self: ...
+    ) -> Self: ...
     @property
     def feature_importances_(self) -> ndarray: ...
 
@@ -294,11 +291,11 @@ class RandomTreesEmbedding(TransformerMixin, BaseForest):
         warm_start: bool = False,
     ) -> None: ...
     def fit(
-        self: RandomTreesEmbedding_Self,
+        self,
         X: MatrixLike | ArrayLike,
         y: Any = None,
         sample_weight: None | ArrayLike = None,
-    ) -> RandomTreesEmbedding_Self: ...
+    ) -> Self: ...
     def fit_transform(
         self,
         X: MatrixLike | ArrayLike,

@@ -1,10 +1,17 @@
+import array
+import re
+import unicodedata
+import warnings
 from collections import defaultdict as defaultdict
-from collections.abc import Mapping
+from collections.abc import Iterable, Mapping
 from functools import partial
 from numbers import Integral as Integral, Real as Real
 from operator import itemgetter as itemgetter
-from typing import Any, Callable, ClassVar, Iterable, Literal, Mapping, TypeVar
+from typing import Any, Callable, ClassVar, Literal
+from typing_extensions import Self
 
+import numpy as np
+import scipy.sparse as sp
 from numpy import ndarray
 from scipy.sparse import spmatrix
 
@@ -17,11 +24,6 @@ from ..utils.validation import FLOAT_DTYPES as FLOAT_DTYPES, check_array as chec
 from ._hash import FeatureHasher as FeatureHasher
 from ._stop_words import ENGLISH_STOP_WORDS
 
-TfidfVectorizer_Self = TypeVar("TfidfVectorizer_Self", bound=TfidfVectorizer)
-HashingVectorizer_Self = TypeVar("HashingVectorizer_Self", bound=HashingVectorizer)
-CountVectorizer_Self = TypeVar("CountVectorizer_Self", bound=CountVectorizer)
-TfidfTransformer_Self = TypeVar("TfidfTransformer_Self", bound=TfidfTransformer)
-
 # Authors: Olivier Grisel <olivier.grisel@ensta.org>
 #          Mathieu Blondel <mathieu@mblondel.org>
 #          Lars Buitinck
@@ -30,14 +32,6 @@ TfidfTransformer_Self = TypeVar("TfidfTransformer_Self", bound=TfidfTransformer)
 #          Roman Sinayev <roman.sinayev@gmail.com>
 #
 # License: BSD 3 clause
-
-import array
-import re
-import unicodedata
-import warnings
-
-import numpy as np
-import scipy.sparse as sp
 
 __all__ = [
     "HashingVectorizer",
@@ -86,8 +80,8 @@ class HashingVectorizer(TransformerMixin, _VectorizerMixin, BaseEstimator, auto_
         alternate_sign: bool = True,
         dtype=...,
     ) -> None: ...
-    def partial_fit(self: HashingVectorizer_Self, X: MatrixLike, y: Any = None) -> HashingVectorizer_Self: ...
-    def fit(self: HashingVectorizer_Self, X: list[str] | MatrixLike, y: Any = None) -> HashingVectorizer_Self: ...
+    def partial_fit(self, X: MatrixLike, y: Any = None) -> Self: ...
+    def fit(self, X: list[str] | MatrixLike, y: Any = None) -> Self: ...
     def transform(self, X: Iterable[str]) -> spmatrix: ...
     def fit_transform(self, X: list[str] | Iterable[str], y: Any = None) -> spmatrix: ...
 
@@ -119,7 +113,7 @@ class CountVectorizer(_VectorizerMixin, BaseEstimator):
         binary: bool = False,
         dtype=...,
     ) -> None: ...
-    def fit(self: CountVectorizer_Self, raw_documents: Iterable, y=None) -> CountVectorizer_Self: ...
+    def fit(self, raw_documents: Iterable, y=None) -> Self: ...
     def fit_transform(
         self,
         raw_documents: list[str] | ndarray | Iterable,
@@ -143,7 +137,7 @@ class TfidfTransformer(OneToOneFeatureMixin, TransformerMixin, BaseEstimator, au
         smooth_idf: bool = True,
         sublinear_tf: bool = False,
     ) -> None: ...
-    def fit(self: TfidfTransformer_Self, X: MatrixLike, y: None | ndarray | list[Int] = None) -> TfidfTransformer_Self: ...
+    def fit(self, X: MatrixLike, y: None | ndarray | list[Int] = None) -> Self: ...
     def transform(self, X: MatrixLike, copy: bool = True) -> spmatrix: ...
     @property
     def idf_(self) -> ndarray: ...
@@ -190,6 +184,6 @@ class TfidfVectorizer(CountVectorizer):
     def idf_(self) -> ndarray: ...
     @idf_.setter
     def idf_(self, value) -> ndarray: ...
-    def fit(self: TfidfVectorizer_Self, raw_documents: Iterable, y=None) -> TfidfVectorizer_Self: ...
+    def fit(self, raw_documents: Iterable, y=None) -> Self: ...
     def fit_transform(self, raw_documents: list[str] | ndarray | Iterable, y: None | ndarray = None) -> spmatrix: ...
     def transform(self, raw_documents: list[str] | ndarray | Iterable) -> spmatrix: ...

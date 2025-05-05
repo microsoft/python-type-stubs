@@ -1,6 +1,7 @@
+from collections.abc import Sequence
 from io import StringIO as StringIO
 from numbers import Integral as Integral
-from typing import Any, Literal, Sequence
+from typing import Any, Literal
 
 import numpy as np
 from matplotlib.axes import Axes

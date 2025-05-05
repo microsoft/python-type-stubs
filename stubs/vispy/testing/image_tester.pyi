@@ -17,7 +17,6 @@ from ..io import read_png, write_png
 from ..util import run_subprocess
 from . import IS_CI
 
-# -*- coding: utf-8 -*-
 # -----------------------------------------------------------------------------
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.

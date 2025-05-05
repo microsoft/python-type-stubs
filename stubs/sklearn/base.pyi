@@ -1,6 +1,14 @@
+import copy
+import inspect
+import platform
+import re
+import warnings
 from collections import defaultdict as defaultdict
-from typing import Any, ClassVar, Iterable, TypeVar
+from collections.abc import Iterable
+from typing import Any, ClassVar
+from typing_extensions import Self
 
+import numpy as np
 from numpy import ndarray
 
 from ._config import get_config as get_config
@@ -11,24 +19,14 @@ from .utils._param_validation import validate_parameter_constraints as validate_
 from .utils._set_output import _SetOutputMixin
 from .utils.validation import check_array as check_array, check_is_fitted as check_is_fitted, check_X_y as check_X_y
 
-BaseEstimator_Self = TypeVar("BaseEstimator_Self", bound=BaseEstimator)
-
 # Author: Gael Varoquaux <gael.varoquaux@normalesup.org>
 # License: BSD 3 clause
-
-import copy
-import inspect
-import platform
-import re
-import warnings
-
-import numpy as np
 
 def clone(estimator: BaseEstimator | Iterable[BaseEstimator], *, safe: bool = True) -> Any: ...
 
 class BaseEstimator:
     def get_params(self, deep: bool = True) -> dict: ...
-    def set_params(self: BaseEstimator_Self, **params) -> BaseEstimator_Self: ...
+    def set_params(self, **params) -> Self: ...
     def __repr__(self, N_CHAR_MAX: int = 700) -> str: ...
     def __getstate__(self): ...
     def __setstate__(self, state) -> None: ...

@@ -1,7 +1,11 @@
 from abc import ABCMeta, abstractmethod
+from collections.abc import Sequence
 from numbers import Integral as Integral
-from typing import ClassVar, Sequence, TypeVar
+from typing import ClassVar
+from typing_extensions import Self
 
+import numpy as np
+import scipy.sparse as sp
 from numpy import ndarray
 from scipy.sparse import spmatrix
 
@@ -24,16 +28,6 @@ from .utils.multiclass import check_classification_targets as check_classificati
 from .utils.parallel import Parallel as Parallel, delayed as delayed
 from .utils.validation import check_is_fitted as check_is_fitted, has_fit_parameter as has_fit_parameter
 
-MultiOutputClassifier_Self = TypeVar("MultiOutputClassifier_Self", bound=MultiOutputClassifier)
-RegressorChain_Self = TypeVar("RegressorChain_Self", bound=RegressorChain)
-_BaseChain_Self = TypeVar("_BaseChain_Self", bound=_BaseChain)
-_MultiOutputEstimator_Self = TypeVar("_MultiOutputEstimator_Self", bound=_MultiOutputEstimator)
-MultiOutputRegressor_Self = TypeVar("MultiOutputRegressor_Self", bound=MultiOutputRegressor)
-ClassifierChain_Self = TypeVar("ClassifierChain_Self", bound=ClassifierChain)
-
-import numpy as np
-import scipy.sparse as sp
-
 __all__ = [
     "MultiOutputRegressor",
     "MultiOutputClassifier",
@@ -47,19 +41,19 @@ class _MultiOutputEstimator(MetaEstimatorMixin, BaseEstimator, metaclass=ABCMeta
     @abstractmethod
     def __init__(self, estimator: RandomForestRegressor, *, n_jobs=None) -> None: ...
     def partial_fit(
-        self: _MultiOutputEstimator_Self,
+        self,
         X: MatrixLike | ArrayLike,
         y: MatrixLike,
         classes: Sequence[ArrayLike] | None = None,
         sample_weight: None | ArrayLike = None,
-    ) -> _MultiOutputEstimator_Self: ...
+    ) -> Self: ...
     def fit(
-        self: _MultiOutputEstimator_Self,
+        self,
         X: MatrixLike | ArrayLike,
         y: MatrixLike,
         sample_weight: None | ArrayLike = None,
         **fit_params,
-    ) -> _MultiOutputEstimator_Self | MultiOutputRegressor: ...
+    ) -> Self | MultiOutputRegressor: ...
     def predict(self, X: MatrixLike | ArrayLike) -> ndarray | spmatrix: ...
 
 class MultiOutputRegressor(RegressorMixin, _MultiOutputEstimator):
@@ -69,11 +63,11 @@ class MultiOutputRegressor(RegressorMixin, _MultiOutputEstimator):
 
     def __init__(self, estimator: BaseEstimator | RandomForestRegressor, *, n_jobs: None | int = None) -> None: ...
     def partial_fit(
-        self: MultiOutputRegressor_Self,
+        self,
         X: MatrixLike | ArrayLike,
         y: MatrixLike,
         sample_weight: None | ArrayLike = None,
-    ) -> MultiOutputRegressor_Self: ...
+    ) -> Self: ...
 
 class MultiOutputClassifier(ClassifierMixin, _MultiOutputEstimator):
     feature_names_in_: ndarray = ...
@@ -83,12 +77,12 @@ class MultiOutputClassifier(ClassifierMixin, _MultiOutputEstimator):
 
     def __init__(self, estimator: BaseEstimator, *, n_jobs: None | int = None) -> None: ...
     def fit(
-        self: MultiOutputClassifier_Self,
+        self,
         X: MatrixLike | ArrayLike,
         Y: MatrixLike,
         sample_weight: None | ArrayLike = None,
         **fit_params,
-    ) -> MultiOutputClassifier_Self: ...
+    ) -> Self: ...
     def predict_proba(self, X: MatrixLike) -> ndarray | list[ndarray]: ...
     def score(self, X: MatrixLike, y: MatrixLike) -> float: ...
 
@@ -99,9 +93,7 @@ class _BaseChain(BaseEstimator, metaclass=ABCMeta):
         self, base_estimator: LogisticRegression, *, order=None, cv=None, random_state=None, verbose: bool = False
     ) -> None: ...
     @abstractmethod
-    def fit(
-        self: _BaseChain_Self, X: MatrixLike | ArrayLike, Y: MatrixLike, **fit_params
-    ) -> _BaseChain_Self | ClassifierChain: ...
+    def fit(self, X: MatrixLike | ArrayLike, Y: MatrixLike, **fit_params) -> Self | ClassifierChain: ...
     def predict(self, X: MatrixLike | ArrayLike) -> ndarray: ...
 
 class ClassifierChain(MetaEstimatorMixin, ClassifierMixin, _BaseChain):
@@ -111,7 +103,7 @@ class ClassifierChain(MetaEstimatorMixin, ClassifierMixin, _BaseChain):
     estimators_: list = ...
     classes_: list = ...
 
-    def fit(self: ClassifierChain_Self, X: MatrixLike | ArrayLike, Y: MatrixLike) -> ClassifierChain_Self: ...
+    def fit(self, X: MatrixLike | ArrayLike, Y: MatrixLike) -> Self: ...
     def predict_proba(self, X: MatrixLike | ArrayLike) -> ndarray: ...
     def decision_function(self, X: MatrixLike) -> ndarray: ...
 
@@ -121,4 +113,4 @@ class RegressorChain(MetaEstimatorMixin, RegressorMixin, _BaseChain):
     order_: list = ...
     estimators_: list = ...
 
-    def fit(self: RegressorChain_Self, X: MatrixLike | ArrayLike, Y: MatrixLike, **fit_params) -> RegressorChain_Self: ...
+    def fit(self, X: MatrixLike | ArrayLike, Y: MatrixLike, **fit_params) -> Self: ...

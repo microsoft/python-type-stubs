@@ -1,7 +1,7 @@
 import inspect
 import pprint
 from collections import OrderedDict as OrderedDict
-from typing import Any, Type
+from typing import Any
 
 from .._config import get_config as get_config
 from ..base import BaseEstimator as BaseEstimator

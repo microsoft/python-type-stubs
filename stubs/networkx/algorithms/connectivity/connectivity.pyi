@@ -1,15 +1,14 @@
 import itertools
+from collections.abc import Mapping
 from operator import itemgetter
-from typing import Mapping
 
 # Define the default maximum flow function to use in all flow based
 # connectivity algorithms.
 from ...algorithms.flow import boykov_kolmogorov, build_residual_network, dinitz, edmonds_karp, shortest_augmenting_path
 from ...classes.graph import Graph
+from .utils import build_auxiliary_edge_connectivity, build_auxiliary_node_connectivity
 
 default_flow_func = ...
-
-from .utils import build_auxiliary_edge_connectivity, build_auxiliary_node_connectivity
 
 __all__ = [
     "average_node_connectivity",

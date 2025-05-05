@@ -1,5 +1,7 @@
+from collections.abc import Mapping
 from numbers import Real as Real
-from typing import Callable, ClassVar, Mapping, TypeVar
+from typing import Callable, ClassVar
+from typing_extensions import Self
 
 from numpy import ndarray
 from numpy.random import RandomState
@@ -7,9 +9,6 @@ from numpy.random import RandomState
 from .._typing import ArrayLike, Float, Int, MatrixLike
 from ..utils._param_validation import Interval as Interval, StrOptions as StrOptions
 from ._stochastic_gradient import DEFAULT_EPSILON as DEFAULT_EPSILON, BaseSGDClassifier, BaseSGDRegressor
-
-PassiveAggressiveClassifier_Self = TypeVar("PassiveAggressiveClassifier_Self", bound=PassiveAggressiveClassifier)
-PassiveAggressiveRegressor_Self = TypeVar("PassiveAggressiveRegressor_Self", bound=PassiveAggressiveRegressor)
 
 # Authors: Rob Zinkov, Mathieu Blondel
 # License: BSD 3 clause
@@ -46,18 +45,18 @@ class PassiveAggressiveClassifier(BaseSGDClassifier):
         average: int | bool = False,
     ) -> None: ...
     def partial_fit(
-        self: PassiveAggressiveClassifier_Self,
+        self,
         X: MatrixLike | ArrayLike,
         y: ArrayLike,
         classes: None | ArrayLike = None,
-    ) -> PassiveAggressiveClassifier_Self: ...
+    ) -> Self: ...
     def fit(
-        self: PassiveAggressiveClassifier_Self,
+        self,
         X: MatrixLike | ArrayLike,
         y: ArrayLike,
         coef_init: None | MatrixLike = None,
         intercept_init: None | ArrayLike = None,
-    ) -> PassiveAggressiveClassifier_Self: ...
+    ) -> Self: ...
 
 class PassiveAggressiveRegressor(BaseSGDRegressor):
     t_: int = ...
@@ -87,13 +86,11 @@ class PassiveAggressiveRegressor(BaseSGDRegressor):
         warm_start: bool = False,
         average: int | bool = False,
     ) -> None: ...
-    def partial_fit(
-        self: PassiveAggressiveRegressor_Self, X: MatrixLike | ArrayLike, y: ArrayLike
-    ) -> PassiveAggressiveRegressor_Self: ...
+    def partial_fit(self, X: MatrixLike | ArrayLike, y: ArrayLike) -> Self: ...
     def fit(
-        self: PassiveAggressiveRegressor_Self,
+        self,
         X: MatrixLike | ArrayLike,
         y: ArrayLike,
         coef_init: None | ArrayLike = None,
         intercept_init: None | ArrayLike = None,
-    ) -> PassiveAggressiveRegressor_Self: ...
+    ) -> Self: ...

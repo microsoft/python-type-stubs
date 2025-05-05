@@ -1,9 +1,9 @@
 import itertools
 import re
 from collections import OrderedDict as OrderedDict
-from collections.abc import Generator as Generator
+from collections.abc import Generator as Generator, Sequence
 from gzip import GzipFile
-from typing import Any, Literal, Sequence
+from typing import Any, Literal
 
 import numpy as np
 import scipy as sp
