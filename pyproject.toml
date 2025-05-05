@@ -4,7 +4,34 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "microsoft-python-type-stubs"
-dynamic = ["version"]
+version = "0"
+
+[dependency-groups]
+hygiene = ["ruff ==0.11.*"]
+tests = [
+    # Tools used for testing
+    "docopt-ng",
+    "mypy ==1.13.*",
+    "pyright",
+
+    # Typed libraries and stubs
+    "matplotlib >=3.8",
+    "pandas-stubs",
+    "pytest",
+    "scipy-stubs",
+    "typing_extensions",
+
+    # Untyped libraries, used to prevent "reportMissingImports" and get inferred typing
+    "joblib",
+    "networkx",
+    "PyOpenGL",
+    "scikit-learn",
+    "sympy",
+    "traitlets",
+    "transformers",
+]
+dev = [{ include-group = "hygiene" }, { include-group = "tests" }]
+
 
 # Allow these stubs to be installed from GitHub
 # We need an explicit mapping instead of just

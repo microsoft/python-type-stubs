@@ -4,11 +4,10 @@ import sys
 from pathlib import Path
 
 
-def install_requirements(test_folder: Path):
+def install_requirements():
     print("\nInstalling requirements...")
-    return subprocess.run(
-        (sys.executable, "-m", "pip", "install", "--upgrade", "-r", os.path.join(test_folder, "requirements.txt"))
-    )
+    subprocess.check_call((sys.executable, "-m", "pip", "install", "pip>=25.1"))
+    subprocess.check_call((sys.executable, "-m", "pip", "install", "--upgrade", "--group", "tests"))
 
 
 def run_pyright():
@@ -25,11 +24,9 @@ def run_mypy():
 
 
 def main():
-    test_folder = Path(__file__).parent
-    root = test_folder.parent
-    os.chdir(root)
+    os.chdir(Path(__file__).parent.parent)
 
-    install_requirements(test_folder).check_returncode()
+    install_requirements()
     results = (
         run_mypy(),
         run_pyright(),

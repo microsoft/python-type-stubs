@@ -6,7 +6,8 @@ from pathlib import Path
 
 def install_requirements():
     print("\nInstalling requirements...")
-    return subprocess.run((sys.executable, "-m", "pip", "install", "--upgrade", "ruff"))
+    subprocess.check_call((sys.executable, "-m", "pip", "install", "pip>=25.1"))
+    subprocess.check_call((sys.executable, "-m", "pip", "install", "--upgrade", "--group", "hygiene"))
 
 
 def run_ruff_fix():
@@ -20,11 +21,9 @@ def run_ruff_format():
 
 
 def main():
-    test_folder = Path(__file__).parent
-    root = test_folder.parent
-    os.chdir(root)
+    os.chdir(Path(__file__).parent.parent)
 
-    install_requirements().check_returncode()
+    install_requirements()
     results = (
         run_ruff_fix(),
         run_ruff_format(),
