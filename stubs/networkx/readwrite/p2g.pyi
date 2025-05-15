@@ -1,9 +1,0 @@
-import networkx
-
-from ..classes.graph import Graph
-from ..classes.multidigraph import MultiDiGraph
-from ..utils import open_file
-
-def write_p2g(G: Graph, path, encoding="utf-8"): ...
-def read_p2g(path, encoding="utf-8") -> MultiDiGraph: ...
-def parse_p2g(lines) -> MultiDiGraph: ...

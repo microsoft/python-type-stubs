@@ -23,7 +23,7 @@ tests = [
 
     # Untyped libraries, used to prevent "reportMissingImports" and get inferred typing
     "joblib",
-    "networkx",
+    "types-networkx",
     "PyOpenGL",
     "scikit-learn",
     "sympy",
@@ -41,7 +41,6 @@ dev = [{ include-group = "hygiene" }, { include-group = "tests" }]
 # see https://github.com/microsoft/python-type-stubs/issues/315
 [tool.setuptools.package-dir]
 # See README.md as to why matplotlib is not included
-"networkx-stubs" = "stubs/networkx"
 "skimage-stubs" = "stubs/skimage"
 "sklearn-stubs" = "stubs/sklearn"
 "sympy-stubs" = "stubs/sympy-stubs"
