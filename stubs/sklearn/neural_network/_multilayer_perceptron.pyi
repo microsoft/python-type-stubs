@@ -1,12 +1,9 @@
-import warnings
 from abc import ABCMeta, abstractmethod
 from itertools import chain as chain
 from numbers import Integral as Integral, Real as Real
 from typing import ClassVar, Literal
 from typing_extensions import Self
 
-import numpy as np
-import scipy.optimize
 from numpy import ndarray
 from numpy.random import RandomState
 

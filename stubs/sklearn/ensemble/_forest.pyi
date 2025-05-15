@@ -1,4 +1,3 @@
-import threading
 from abc import ABCMeta, abstractmethod
 from collections.abc import Mapping, Sequence
 from numbers import Integral as Integral, Real as Real
@@ -6,10 +5,9 @@ from typing import Any, ClassVar, Literal
 from typing_extensions import Self
 from warnings import catch_warnings as catch_warnings, simplefilter as simplefilter, warn as warn
 
-import numpy as np
 from numpy import ndarray
 from numpy.random import RandomState
-from scipy.sparse import hstack as sparse_hstack, issparse as issparse, spmatrix
+from scipy.sparse import issparse as issparse, spmatrix
 
 from .._typing import ArrayLike, Float, Int, MatrixLike
 from ..base import ClassifierMixin, MultiOutputMixin, RegressorMixin, TransformerMixin, is_classifier as is_classifier

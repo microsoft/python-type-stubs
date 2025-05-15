@@ -1,4 +1,3 @@
-import warnings as _warnings
 
 import joblib
 from joblib import (

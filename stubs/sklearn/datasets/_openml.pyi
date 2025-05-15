@@ -1,9 +1,3 @@
-import gzip
-import hashlib
-import json
-import os
-import shutil
-import time
 from contextlib import closing as closing
 from functools import wraps as wraps
 from os.path import join as join
@@ -11,9 +5,6 @@ from tempfile import TemporaryDirectory as TemporaryDirectory
 from typing import Literal, overload
 from urllib.error import HTTPError as HTTPError, URLError as URLError
 from urllib.request import Request as Request, urlopen as urlopen
-from warnings import warn
-
-import numpy as np
 
 from ..utils import Bunch, check_pandas_support as check_pandas_support
 from . import get_data_home as get_data_home

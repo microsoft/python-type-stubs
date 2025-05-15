@@ -1,4 +1,3 @@
-from scipy import ndimage
 
 from .._shared.utils import deprecate_kwarg
 

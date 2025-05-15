@@ -1,8 +1,6 @@
-import numbers
 from collections.abc import Mapping
 from typing import Any, Callable
 
-import numpy as np
 from numpy.random import RandomState
 
 from .._typing import ArrayLike, Int, MatrixLike

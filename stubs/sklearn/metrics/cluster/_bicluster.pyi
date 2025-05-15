@@ -1,6 +1,5 @@
 from typing import Callable, Literal
 
-import numpy as np
 from numpy import ndarray
 from scipy.optimize import linear_sum_assignment as linear_sum_assignment
 

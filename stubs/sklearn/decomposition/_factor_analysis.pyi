@@ -1,10 +1,8 @@
-import warnings
 from math import log as log, sqrt as sqrt
 from numbers import Integral as Integral, Real as Real
 from typing import Any, ClassVar, Literal
 from typing_extensions import Self
 
-import numpy as np
 from numpy import ndarray
 from numpy.random import RandomState
 from scipy import linalg as linalg

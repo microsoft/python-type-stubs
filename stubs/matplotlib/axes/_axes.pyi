@@ -1,6 +1,5 @@
 import datetime
 from collections.abc import Sequence
-from re import L
 from typing import Callable, Literal, overload
 
 import matplotlib.tri as mtri

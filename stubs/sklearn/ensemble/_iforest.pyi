@@ -1,10 +1,8 @@
-import numbers
 from numbers import Integral as Integral, Real as Real
 from typing import Any, ClassVar, Literal
 from typing_extensions import Self
 from warnings import warn as warn
 
-import numpy as np
 from numpy import ndarray
 from numpy.random import RandomState
 from scipy.sparse import issparse as issparse
@@ -12,7 +10,6 @@ from scipy.sparse import issparse as issparse
 from .._typing import ArrayLike, Int, MatrixLike
 from ..base import OutlierMixin
 from ..tree import ExtraTreeRegressor
-from ..tree._tree import DTYPE as tree_dtype
 from ..utils import (
     check_array as check_array,
     check_random_state as check_random_state,

@@ -1,10 +1,8 @@
-import warnings
 from abc import ABCMeta, abstractmethod
 from collections.abc import Sequence
 from typing import Any, ClassVar
 from typing_extensions import Self
 
-import numpy as np
 from joblib import effective_n_jobs as effective_n_jobs
 
 from .._typing import Int

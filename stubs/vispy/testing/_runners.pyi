@@ -1,15 +1,7 @@
-import os
-import sys
-import warnings
-from copy import deepcopy
-from functools import partial
-from os import path as op
 
 from numpy.typing import ArrayLike
 
-from ..util import run_subprocess, use_log_level
-from ..util.ptime import time
-from ._testing import IS_CI, IS_TRAVIS_CI, has_application, nottest
+from ._testing import nottest
 
 # vispy: testskip
 # Copyright (c) Vispy Development Team. All Rights Reserved.

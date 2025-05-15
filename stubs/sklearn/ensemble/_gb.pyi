@@ -1,4 +1,3 @@
-import warnings
 from abc import ABCMeta, abstractmethod
 from collections.abc import Iterator
 from numbers import Integral as Integral, Real as Real
@@ -6,7 +5,6 @@ from time import time as time
 from typing import Callable, ClassVar, Literal
 from typing_extensions import Self
 
-import numpy as np
 from numpy import ndarray
 from numpy.random import RandomState
 from scipy.sparse import csc_matrix as csc_matrix, csr_matrix as csr_matrix, issparse as issparse

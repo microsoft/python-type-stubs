@@ -1,11 +1,8 @@
-import warnings
 from numbers import Real as Real
 from typing import Callable, ClassVar
 from typing_extensions import Self
 
-import numpy as np
 from numpy import ndarray
-from scipy import sparse as sp
 
 from .._typing import ArrayLike, Float, MatrixLike
 from ..base import BaseEstimator, ClassifierMixin

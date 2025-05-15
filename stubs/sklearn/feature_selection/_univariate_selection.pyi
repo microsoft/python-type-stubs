@@ -1,12 +1,10 @@
-import warnings
 from numbers import Integral as Integral, Real as Real
 from typing import Callable, ClassVar, Literal
 from typing_extensions import Self
 
-import numpy as np
 from joblib.memory import MemorizedFunc
 from numpy import ndarray
-from scipy import special as special, stats
+from scipy import special as special
 from scipy.sparse import issparse as issparse
 
 from .._typing import ArrayLike, Float, Int, MatrixLike

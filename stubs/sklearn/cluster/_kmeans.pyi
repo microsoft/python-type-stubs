@@ -1,11 +1,8 @@
-import warnings
 from abc import ABC, abstractmethod as abstractmethod
 from numbers import Integral as Integral, Real as Real
 from typing import Any, Callable, ClassVar, Literal
 from typing_extensions import Self
 
-import numpy as np
-import scipy.sparse as sp
 from numpy import ndarray
 from numpy.random import RandomState
 
