@@ -14,7 +14,6 @@ from ..base import BaseEstimator, ClassifierMixin, RegressorMixin, is_classifier
 from ..exceptions import NotFittedError as NotFittedError
 from ..model_selection import train_test_split as train_test_split
 from ..tree import DecisionTreeRegressor as DecisionTreeRegressor
-from ..tree._tree import DOUBLE as DOUBLE, DTYPE as DTYPE
 from ..utils import check_array as check_array, check_random_state as check_random_state, column_or_1d as column_or_1d, deprecated
 from ..utils._param_validation import HasMethods as HasMethods, Interval as Interval, StrOptions as StrOptions
 from ..utils.multiclass import check_classification_targets as check_classification_targets

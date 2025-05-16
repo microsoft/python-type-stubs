@@ -1,4 +1,3 @@
-
 def _validate_connectivity(image_dim, connectivity, offset): ...
 def _raveled_offsets_and_distances(
     image_shape,

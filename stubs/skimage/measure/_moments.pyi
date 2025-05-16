@@ -1,4 +1,3 @@
-
 from numpy.typing import ArrayLike
 
 def moments_coords(coords, order: int = 3): ...

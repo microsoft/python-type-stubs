@@ -1,4 +1,3 @@
-
 from numpy.typing import ArrayLike
 
 from ._testing import nottest

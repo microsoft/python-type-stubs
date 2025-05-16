@@ -1,6 +1,3 @@
-
-
-
 def marching_cubes(
     volume,
     level: float | None = None,

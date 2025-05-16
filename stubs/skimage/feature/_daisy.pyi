@@ -1,6 +1,3 @@
-
-
-
 def daisy(
     image,
     step: int = 4,

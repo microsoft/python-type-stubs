@@ -5,9 +5,6 @@
 
 # Use OSX cocoa/quartz to get glyph bitmaps
 
-
-
-
 _font_dict: dict = ...
 
 def _load_vispy_font(face, bold, italic): ...

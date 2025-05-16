@@ -3,7 +3,6 @@
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 # -----------------------------------------------------------------------------
 
-
 # List the vispy fonts made available online
 _vispy_fonts = ...
 

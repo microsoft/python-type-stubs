@@ -1,5 +1,3 @@
-
-
 from .._shared.utils import deprecate_multichannel_kwarg
 
 def _generate_rectangle_mask(point, image, shape, random): ...

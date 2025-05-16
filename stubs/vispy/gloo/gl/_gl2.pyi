@@ -1,5 +1,3 @@
-
-
 # void = glActiveTexture(GLenum texture)
 def glActiveTexture(texture): ...
 

@@ -3,9 +3,6 @@
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 # -----------------------------------------------------------------------------
 
-
-
-
 skipif = ...
 
 IS_TRAVIS_CI = ...

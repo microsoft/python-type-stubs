@@ -1,4 +1,3 @@
-
 from ._typing import *
 
 CharMetrics = ...

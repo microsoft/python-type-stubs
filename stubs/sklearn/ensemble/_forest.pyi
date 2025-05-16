@@ -21,7 +21,6 @@ from ..tree import (
     ExtraTreeClassifier as ExtraTreeClassifier,
     ExtraTreeRegressor,
 )
-from ..tree._tree import DOUBLE as DOUBLE, DTYPE as DTYPE
 from ..utils import check_random_state as check_random_state, compute_sample_weight as compute_sample_weight
 from ..utils._param_validation import Interval as Interval, StrOptions as StrOptions
 from ..utils.multiclass import check_classification_targets as check_classification_targets, type_of_target as type_of_target

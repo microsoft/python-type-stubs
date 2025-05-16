@@ -1,4 +1,3 @@
-
 from numpy.typing import NDArray
 
 from .._shared import utils

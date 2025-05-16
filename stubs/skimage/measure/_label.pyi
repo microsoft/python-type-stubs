@@ -1,4 +1,3 @@
-
 from .._shared.utils import deprecate_kwarg
 
 def _label_bool(image, background=None, return_num=False, connectivity=None): ...

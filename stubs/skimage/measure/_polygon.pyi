@@ -1,4 +1,3 @@
-
 def approximate_polygon(coords, tolerance: float): ...
 
 # B-Spline subdivision
