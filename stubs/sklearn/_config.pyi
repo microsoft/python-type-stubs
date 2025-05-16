@@ -1,5 +1,3 @@
-import os
-import threading
 from collections.abc import Iterator
 from contextlib import contextmanager as contextmanager
 from typing import Literal

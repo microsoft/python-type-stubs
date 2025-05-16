@@ -1,10 +1,8 @@
-import warnings
 from collections.abc import Iterable
 from numbers import Integral as Integral, Real as Real
 from typing import Callable, ClassVar, Literal
 from typing_extensions import Self
 
-import numpy as np
 from numpy import ndarray
 
 from .._typing import ArrayLike, Float, Int, MatrixLike

@@ -1,5 +1,3 @@
-import numbers
-import warnings
 from abc import ABCMeta, abstractmethod
 from collections import defaultdict as defaultdict
 from collections.abc import Iterable, Iterator
@@ -8,7 +6,6 @@ from itertools import chain as chain, combinations as combinations
 from math import ceil as ceil, floor as floor
 from typing import Any, Callable
 
-import numpy as np
 from numpy import ndarray
 from numpy.random import RandomState
 from scipy.special import comb as comb

@@ -1,8 +1,3 @@
-from math import sqrt
-
-import numpy as np
-from scipy import ndimage as ndi
-
 STREL_4 = ...
 STREL_8 = ...
 

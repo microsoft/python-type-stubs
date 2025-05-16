@@ -1,6 +1,5 @@
 from typing import Callable, Literal
 
-import numpy as np
 from matplotlib._typing import *
 from matplotlib.axes._base import _AxesBase
 from matplotlib.transforms import Transform

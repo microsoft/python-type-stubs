@@ -9,14 +9,7 @@
 # THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-import os
-import re
-import subprocess
-import sys
 from collections.abc import Mapping, Sequence
-from distutils.errors import DistutilsExecError
-
-from numpy.distutils import log
 
 # Copyright (c) 2005-2022, NumPy Developers.
 # All rights reserved.

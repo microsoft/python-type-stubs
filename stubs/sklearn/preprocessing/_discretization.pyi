@@ -1,9 +1,7 @@
-import warnings
 from numbers import Integral as Integral
 from typing import ClassVar, Literal
 from typing_extensions import Self
 
-import numpy as np
 from numpy import ndarray
 from numpy.random import RandomState
 from pandas.core.series import Series

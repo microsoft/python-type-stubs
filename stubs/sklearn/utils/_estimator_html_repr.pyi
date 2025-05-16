@@ -1,4 +1,3 @@
-import html
 from collections.abc import Sequence
 from contextlib import closing as closing
 from inspect import isclass as isclass

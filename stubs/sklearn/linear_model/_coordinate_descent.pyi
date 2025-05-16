@@ -1,6 +1,3 @@
-import numbers
-import sys
-import warnings
 from abc import ABC, abstractmethod
 from collections.abc import Iterable, Sequence
 from functools import partial as partial
@@ -8,7 +5,6 @@ from numbers import Integral as Integral, Real as Real
 from typing import ClassVar, Literal
 from typing_extensions import Self
 
-import numpy as np
 from joblib import effective_n_jobs as effective_n_jobs
 from numpy import ndarray
 from numpy.random import RandomState

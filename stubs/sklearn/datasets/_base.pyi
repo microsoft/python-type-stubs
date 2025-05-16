@@ -2,11 +2,6 @@
 #               2010 Fabian Pedregosa <fabian.pedregosa@inria.fr>
 #               2010 Olivier Grisel <olivier.grisel@ensta.org>
 # License: BSD 3 clause
-import csv
-import gzip
-import hashlib
-import os
-import shutil
 from collections import namedtuple as namedtuple
 from collections.abc import Sequence
 from importlib import resources as resources
@@ -16,7 +11,6 @@ from pathlib import Path as Path
 from typing import Literal
 from urllib.request import urlretrieve as urlretrieve
 
-import numpy as np
 from numpy import ndarray
 from numpy.random import RandomState
 from PIL import Image as Image

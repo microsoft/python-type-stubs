@@ -1,5 +1,3 @@
-import numpy as np
-
 from ._typing import *
 
 CharMetrics = ...

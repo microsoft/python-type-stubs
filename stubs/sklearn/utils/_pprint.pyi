@@ -1,4 +1,3 @@
-import inspect
 import pprint
 from collections import OrderedDict as OrderedDict
 from typing import Any

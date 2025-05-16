@@ -1,9 +1,7 @@
-import warnings
 from numbers import Integral as Integral, Real as Real
 from typing import Any, Callable, ClassVar
 from typing_extensions import Self
 
-import numpy as np
 from numpy import ndarray
 from numpy.random import RandomState
 

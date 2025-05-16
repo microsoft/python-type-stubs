@@ -1,12 +1,8 @@
-import itertools
-import re
 from collections import OrderedDict as OrderedDict
 from collections.abc import Generator as Generator, Sequence
 from gzip import GzipFile
 from typing import Any, Literal
 
-import numpy as np
-import scipy as sp
 from numpy import ndarray
 from pandas import DataFrame, Series
 from scipy.sparse import spmatrix

@@ -6,7 +6,6 @@ from numbers import Integral as Integral
 from typing import Callable, ClassVar, Literal
 from typing_extensions import Self
 
-import numpy as np
 from numpy import ndarray
 from numpy.random import RandomState
 

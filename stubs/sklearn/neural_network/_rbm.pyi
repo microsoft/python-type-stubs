@@ -1,10 +1,7 @@
-import time
 from numbers import Integral as Integral, Real as Real
 from typing import ClassVar
 from typing_extensions import Self
 
-import numpy as np
-import scipy.sparse as sp
 from numpy import ndarray
 from numpy.random import RandomState
 from scipy.special import expit as expit

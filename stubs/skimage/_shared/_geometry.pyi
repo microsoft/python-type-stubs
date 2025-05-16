@@ -1,7 +1,5 @@
 __all__ = ["polygon_clip", "polygon_area"]
 
-import numpy as np
-
 from .version_requirements import require
 
 @require("matplotlib", ">=3.0.3")

@@ -1,8 +1,6 @@
-import warnings
 from typing import Any, ClassVar, Literal
 from typing_extensions import Self
 
-import numpy as np
 from numpy import ndarray
 from scipy import linalg as linalg
 

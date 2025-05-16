@@ -1,11 +1,9 @@
-import warnings
 from collections.abc import Iterable
 from math import sqrt as sqrt
 from numbers import Integral as Integral, Real as Real
 from typing import ClassVar, Literal
 from typing_extensions import Self
 
-import numpy as np
 from numpy import ndarray
 from scipy import linalg as linalg
 from scipy.linalg.lapack import get_lapack_funcs as get_lapack_funcs

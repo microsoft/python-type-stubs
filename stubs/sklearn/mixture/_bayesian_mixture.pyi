@@ -1,8 +1,6 @@
-import math
 from numbers import Real as Real
 from typing import ClassVar, Literal
 
-import numpy as np
 from numpy import ndarray
 from numpy.random import RandomState
 from scipy.special import betaln as betaln, digamma as digamma, gammaln as gammaln

@@ -1,8 +1,4 @@
-import sys
-
 from numpy.typing import ArrayLike
-
-from ._vispy_fonts import _vispy_fonts
 
 # -----------------------------------------------------------------------------
 # Copyright (c) Vispy Development Team. All Rights Reserved.

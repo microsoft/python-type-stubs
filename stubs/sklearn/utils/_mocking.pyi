@@ -2,7 +2,6 @@ from collections.abc import Sequence
 from typing import Callable, Literal
 from typing_extensions import Self
 
-import numpy as np
 from numpy import ndarray
 
 from .._typing import ArrayLike, Int, MatrixLike

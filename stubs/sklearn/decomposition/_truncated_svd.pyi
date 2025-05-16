@@ -2,8 +2,6 @@ from numbers import Integral as Integral, Real as Real
 from typing import Any, ClassVar, Literal
 from typing_extensions import Self
 
-import numpy as np
-import scipy.sparse as sp
 from numpy import ndarray
 from numpy.random import RandomState
 from scipy.sparse.linalg import svds as svds

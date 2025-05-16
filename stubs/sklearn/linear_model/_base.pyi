@@ -1,15 +1,11 @@
-import numbers
-import warnings
 from abc import ABCMeta, abstractmethod
 from numbers import Integral as Integral
 from typing import ClassVar
 from typing_extensions import Self
 
-import numpy as np
-import scipy.sparse as sp
 from numpy import ndarray
 from numpy.random.mtrand import RandomState
-from scipy import linalg as linalg, optimize as optimize, sparse
+from scipy import linalg as linalg, optimize as optimize
 from scipy.sparse.linalg import lsqr as lsqr
 from scipy.special import expit as expit
 

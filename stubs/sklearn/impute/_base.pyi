@@ -1,13 +1,8 @@
-import numbers
-import warnings
 from collections import Counter as Counter
 from typing import Any, ClassVar, Literal
 from typing_extensions import Self
 
-import numpy as np
-import numpy.ma as ma
 from numpy import ndarray
-from scipy import sparse as sp
 from scipy.sparse import spmatrix
 
 from .._typing import ArrayLike, Int, MatrixLike

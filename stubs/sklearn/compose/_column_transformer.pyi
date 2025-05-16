@@ -4,7 +4,6 @@ from itertools import chain as chain
 from typing import ClassVar, Literal
 from typing_extensions import Self
 
-import numpy as np
 from numpy import dtype, ndarray
 from scipy import sparse as sparse
 from scipy.sparse import spmatrix

@@ -1,10 +1,8 @@
-import warnings
 from itertools import combinations as combinations
 from numbers import Integral as Integral, Real as Real
 from typing import ClassVar
 from typing_extensions import Self
 
-import numpy as np
 from joblib import effective_n_jobs as effective_n_jobs
 from numpy import ndarray
 from numpy.random import RandomState

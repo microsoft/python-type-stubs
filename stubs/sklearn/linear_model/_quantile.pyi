@@ -1,9 +1,7 @@
-import warnings
 from numbers import Real as Real
 from typing import ClassVar, Literal
 from typing_extensions import Self
 
-import numpy as np
 from numpy import ndarray
 from scipy import sparse as sparse
 from scipy.optimize import linprog as linprog

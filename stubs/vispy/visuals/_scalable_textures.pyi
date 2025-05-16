@@ -1,6 +1,5 @@
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
-import warnings
 
 import numpy as np
 from numpy.typing import NDArray

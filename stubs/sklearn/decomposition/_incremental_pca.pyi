@@ -2,7 +2,6 @@ from numbers import Integral as Integral
 from typing import Any, ClassVar
 from typing_extensions import Self
 
-import numpy as np
 from numpy import ndarray
 from scipy import linalg as linalg, sparse as sparse
 

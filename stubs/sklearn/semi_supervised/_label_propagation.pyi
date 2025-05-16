@@ -1,10 +1,8 @@
-import warnings
 from abc import ABCMeta, abstractmethod as abstractmethod
 from numbers import Integral as Integral, Real as Real
 from typing import Callable, ClassVar, Literal
 from typing_extensions import Self
 
-import numpy as np
 from numpy import ndarray
 from scipy import sparse as sparse
 from scipy.sparse import csgraph as csgraph

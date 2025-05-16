@@ -1,5 +1,3 @@
-import itertools
-import numbers
 from abc import ABCMeta, abstractmethod
 from functools import partial as partial
 from numbers import Integral as Integral, Real as Real
@@ -7,7 +5,6 @@ from typing import Any, ClassVar
 from typing_extensions import Self
 from warnings import warn as warn
 
-import numpy as np
 from numpy import ndarray
 from numpy.random import RandomState
 

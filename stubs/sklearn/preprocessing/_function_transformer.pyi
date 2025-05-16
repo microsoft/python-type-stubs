@@ -1,8 +1,6 @@
-import warnings
 from typing import Any, Callable, ClassVar, Literal
 from typing_extensions import Self
 
-import numpy as np
 from numpy import ndarray, ufunc
 from pandas.core.frame import DataFrame
 

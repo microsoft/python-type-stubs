@@ -1,9 +1,7 @@
-import warnings
 from numbers import Integral as Integral, Real as Real
 from typing import Any, Callable, ClassVar, Literal
 from typing_extensions import Self
 
-import numpy as np
 from joblib import Memory
 from numpy import ndarray
 from scipy.sparse import SparseEfficiencyWarning as SparseEfficiencyWarning, issparse as issparse

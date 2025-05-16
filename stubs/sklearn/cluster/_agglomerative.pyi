@@ -1,10 +1,8 @@
-import warnings
 from heapq import heapify as heapify, heappop as heappop, heappush as heappush, heappushpop as heappushpop
 from numbers import Integral as Integral, Real as Real
 from typing import Any, Callable, ClassVar, Literal
 from typing_extensions import Self
 
-import numpy as np
 from joblib import Memory
 from numpy import ndarray
 from scipy import sparse as sparse
