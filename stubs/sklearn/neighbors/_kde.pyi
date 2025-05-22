@@ -13,7 +13,7 @@ from ..utils import check_random_state as check_random_state
 from ..utils._param_validation import Interval as Interval, StrOptions as StrOptions
 from ..utils.extmath import row_norms as row_norms
 from ..utils.validation import check_is_fitted as check_is_fitted
-from ._ball_tree import DTYPE as DTYPE, BallTree as BallTree
+from ._ball_tree import BallTree as BallTree
 from ._binary_tree import BinaryTree
 from ._kd_tree import KDTree as KDTree
 
