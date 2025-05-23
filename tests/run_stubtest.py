@@ -8,7 +8,7 @@ from collections.abc import Collection, Generator
 from pathlib import Path
 from subprocess import CompletedProcess, run
 
-if sys.version_info >= (3,11):
+if sys.version_info >= (3, 11):
     from contextlib import chdir as chdir_context
 else:
     from contextlib import contextmanager
@@ -21,6 +21,7 @@ else:
             yield
         finally:
             os.chdir(previous_working_directory)
+
 
 root = Path(__file__).parent.parent
 stubs_path = root / "stubs"

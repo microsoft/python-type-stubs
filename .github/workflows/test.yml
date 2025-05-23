@@ -42,7 +42,7 @@ jobs:
         run: python -m mypy .
 
       - name: Run stubtest
-        run: python tests/run_stubtests.py
+        run: python tests/run_stubtest.py
 
   hygiene:
     runs-on: ubuntu-latest
