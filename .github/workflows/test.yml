@@ -6,15 +6,20 @@ jobs:
   test:
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    strategy:
+      matrix:
+        # Oldest non-EOL and newest released
+        python-version: ["3.9", "3.13"]
+      fail-fast: false
 
     steps:
       - name: Check out code
         uses: actions/checkout@v2
 
-      - name: Setup Python
+      - name: Setup Python ${{ matrix.python-version }}
         uses: actions/setup-python@v2
         with:
-          python-version: "3.11"
+          python-version: ${{ matrix.python-version }}
 
       - name: Cache pip
         uses: actions/cache@v4
@@ -35,6 +40,9 @@ jobs:
       - name: Run mypy tests
         run: python -m mypy .
 
+      - name: Run stubtest
+        run: python tests/run_stubtests.py
+
   hygiene:
     runs-on: ubuntu-latest
     timeout-minutes: 10
@@ -45,4 +53,5 @@ jobs:
 
       - name: Run Ruff Linter
         uses: astral-sh/ruff-action@v3
-      - run: ruff format --check
+      - name: Run Ruff Formatter
+        run: ruff format --check

@@ -11,24 +11,29 @@ hygiene = ["ruff ==0.11.*"]
 tests = [
     # Tools used for testing
     "docopt-ng",
-    "mypy ==1.13.*",
+    "mypy ==1.15.*",
     "pyright",
 
     # Typed libraries and stubs
     "matplotlib >=3.8",
+    "numpy >=2",
     "pandas-stubs",
     "pytest",
     "scipy-stubs",
     "typing_extensions",
 
-    # Untyped libraries, used to prevent "reportMissingImports" and get inferred typing
+    # Untyped libraries. Used to prevent "reportMissingImports" and get inferred typing
     "joblib",
-    "networkx",
     "PyOpenGL",
-    "scikit-learn",
-    "sympy",
     "traitlets",
     "transformers",
+
+    # The libraries we're stubbing. Needed for stubtest
+    "networkx",
+    "scikit-image",
+    "scikit-learn",
+    "sympy",
+    "vispy",
 ]
 dev = [{ include-group = "hygiene" }, { include-group = "tests" }]
 
@@ -57,6 +62,7 @@ target-version = "py39"
 extend-select = [
     "FA", # flake8-future-annotations
     "I", # isort
+    "ICN", # flake8-import-conventions
     "PYI", # flake8-pyi
     "UP", # pyupgrade
     "W", # pycodestyle Warning
@@ -100,12 +106,22 @@ ignore = [
 # We keep docstrings in sklearn
 "stubs/sklearn/**" = ["PYI021"]
 
+[tool.ruff.lint.flake8-import-conventions.aliases]
+# Prevent aliasing these, as it causes false-negatives for certain rules
+typing_extensions = "typing_extensions"
+typing = "typing"
+
 [tool.ruff.lint.isort]
 combine-as-imports = true
 extra-standard-library = [
     # Group these with stdlib
     "typing_extensions",
     "_typeshed",
+    # Extra modules not recognized by Ruff
+    # Added in Python 3.9
+    "zoneinfo",
+    # Added in Python 3.14
+    "compression",
 ]
 
 [tool.pyright]
