@@ -1082,8 +1082,8 @@ sklearn.model_selection.LeaveOneGroupOut.set_split_request
 sklearn.model_selection.LeavePGroupsOut.set_split_request
 sklearn.model_selection.StratifiedGroupKFold.set_split_request
 sklearn.model_selection.__all__
+sklearn.model_selection._plot.learning_curve
 sklearn.model_selection._plot.LearningCurveDisplay.from_estimator
-sklearn.model_selection._plot.ValidationCurveDisplay
 sklearn.model_selection._search.BaseSearchCV.__sklearn_tags__
 sklearn.model_selection._search.BaseSearchCV.get_metadata_routing
 sklearn.model_selection._split.GroupKFold.set_split_request
@@ -1091,6 +1091,7 @@ sklearn.model_selection._split.GroupShuffleSplit.set_split_request
 sklearn.model_selection._split.LeaveOneGroupOut.set_split_request
 sklearn.model_selection._split.LeavePGroupsOut.set_split_request
 sklearn.model_selection._split.StratifiedGroupKFold.set_split_request
+sklearn.model_selection._validation.check_scoring
 sklearn.model_selection._validation.learning_curve
 sklearn.model_selection.learning_curve
 sklearn.model_selection.tests
@@ -2064,9 +2065,6 @@ sklearn.ensemble._base.DecisionTreeRegressor
 sklearn.ensemble._forest.BaseDecisionTree.__init__
 sklearn.ensemble._forest.BaseDecisionTree.fit
 sklearn.ensemble._forest.BaseForest.__init__
-sklearn.ensemble._forest.DOUBLE.__getformat__
-sklearn.ensemble._forest.DOUBLE.__pow__
-sklearn.ensemble._forest.DOUBLE.__rpow__
 sklearn.ensemble._forest.ExtraTreeClassifier.__init__
 sklearn.ensemble._forest.ExtraTreeClassifier.feature_importances_
 sklearn.ensemble._forest.ExtraTreesClassifier.__init__
@@ -2085,9 +2083,6 @@ sklearn.ensemble._forest.catch_warnings.__init__
 sklearn.ensemble._forest.type_of_target
 sklearn.ensemble._forest.warn
 sklearn.ensemble._gb.BaseGradientBoosting.loss_
-sklearn.ensemble._gb.DOUBLE.__getformat__
-sklearn.ensemble._gb.DOUBLE.__pow__
-sklearn.ensemble._gb.DOUBLE.__rpow__
 sklearn.ensemble._gb.DecisionTreeRegressor.__init__
 sklearn.ensemble._gb.DecisionTreeRegressor.feature_importances_
 sklearn.ensemble._gb.GradientBoostingClassifier.feature_importances_
@@ -2640,9 +2635,15 @@ sklearn.model_selection._split.check_array
 sklearn.model_selection._split.column_or_1d
 sklearn.model_selection._split.signature
 sklearn.model_selection._split.type_of_target
+sklearn.model_selection._validation.Counter.__ge__
+sklearn.model_selection._validation.Counter.__gt__
+sklearn.model_selection._validation.Counter.__le__
+sklearn.model_selection._validation.Counter.__lt__
+sklearn.model_selection._validation.Counter.total
 sklearn.model_selection._validation.cross_val_predict
 sklearn.model_selection._validation.cross_val_score
 sklearn.model_selection._validation.cross_validate
+sklearn.model_selection._validation.LabelEncoder.__sklearn_tags__
 sklearn.model_selection._validation.permutation_test_score
 sklearn.model_selection._validation.validation_curve
 sklearn.model_selection.cross_val_predict
@@ -2670,7 +2671,6 @@ sklearn.neighbors._base.check_array
 sklearn.neighbors._base.check_non_negative
 sklearn.neighbors._binary_tree
 sklearn.neighbors._distance_metric
-sklearn.neighbors._kde.DTYPE
 sklearn.neighbors._kde.VALID_METRICS
 sklearn.neighbors._kde.gammainc
 sklearn.neighbors._lof.check_array

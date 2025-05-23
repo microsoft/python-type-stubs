@@ -1,7 +1,8 @@
-from ._classification_threshold import (
+from sklearn.model_selection._classification_threshold import (
     FixedThresholdClassifier as FixedThresholdClassifier,
     TunedThresholdClassifierCV as TunedThresholdClassifierCV,
 )
+
 from ._plot import (
     LearningCurveDisplay as LearningCurveDisplay,
     ValidationCurveDisplay as ValidationCurveDisplay,
