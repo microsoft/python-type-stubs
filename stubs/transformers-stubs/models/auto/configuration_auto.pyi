@@ -1,14 +1,13 @@
 import os
 from collections import OrderedDict
 from collections.abc import Callable, Iterator, KeysView, ValuesView
-from typing import Any, TypeVar
+from typing import Any, NoReturn, TypeVar
 
 from transformers.configuration_utils import PretrainedConfig
 
 _F = TypeVar("_F", bound=Callable[..., Any])
 
 CONFIG_MAPPING_NAMES: OrderedDict[str, str]
-CONFIG_ARCHIVE_MAP_MAPPING_NAMES: OrderedDict[str, str]
 MODEL_NAMES_MAPPING: OrderedDict[str, str]
 SPECIAL_MODEL_TYPE_TO_MODULE_NAME: OrderedDict[str, str]
 
@@ -23,7 +22,7 @@ class _LazyConfigMapping(OrderedDict[str, type[PretrainedConfig]]):
     def items(self) -> list[tuple[str, type[PretrainedConfig]]]: ...
     def __iter__(self) -> Iterator[str]: ...
     def __contains__(self, item: object) -> bool: ...
-    def register(self, key: str, value: type[PretrainedConfig]) -> None: ...
+    def register(self, key: str, value: type[PretrainedConfig], exist_ok=False) -> None: ...
 
 CONFIG_MAPPING: _LazyConfigMapping
 
@@ -36,8 +35,6 @@ class _LazyLoadAllMappings(OrderedDict[str, str]):
     def __iter__(self) -> Iterator[str]: ...
     def __contains__(self, item: object) -> bool: ...
 
-ALL_PRETRAINED_CONFIG_ARCHIVE_MAP: _LazyLoadAllMappings
-
 def replace_list_option_in_docstrings(config_to_class=None, use_model_types: bool = True) -> Callable[[_F], _F]: ...
 
 class AutoConfig:
@@ -47,4 +44,4 @@ class AutoConfig:
     @classmethod
     def from_pretrained(cls, pretrained_model_name_or_path: str | os.PathLike[str], **kwargs): ...
     @staticmethod
-    def register(model_type, config) -> None: ...
+    def register(model_type, config, exist_ok=False) -> None: ...
