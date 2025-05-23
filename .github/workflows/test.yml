@@ -9,7 +9,8 @@ jobs:
     strategy:
       matrix:
         # Oldest non-EOL and newest released
-        python-version: ["3.9", "3.13"]
+        # scipy-stubs does not support Python 3.9
+        python-version: ["3.10", "3.13"]
       fail-fast: false
 
     steps:
