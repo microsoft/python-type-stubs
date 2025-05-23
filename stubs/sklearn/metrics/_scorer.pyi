@@ -1,12 +1,9 @@
-import copy
-import warnings
 from collections import Counter as Counter
 from collections.abc import Iterable as Iterable
 from functools import partial as partial
 from traceback import format_exc as format_exc
 from typing import Any, Callable
 
-import numpy as np
 from numpy import ndarray
 
 from .._typing import ArrayLike, Float, MatrixLike

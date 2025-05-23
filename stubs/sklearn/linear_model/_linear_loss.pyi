@@ -1,6 +1,5 @@
 from typing import Callable
 
-import numpy as np
 from numpy import bool_, ndarray
 from scipy import sparse as sparse
 

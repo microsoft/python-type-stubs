@@ -1,8 +1,6 @@
-import warnings
 from functools import partial as partial
 from typing import Literal
 
-import numpy as np
 from numpy import ndarray
 from scipy.sparse import csr_matrix as csr_matrix, issparse as issparse
 from scipy.stats import rankdata as rankdata

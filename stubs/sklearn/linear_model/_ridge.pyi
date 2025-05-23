@@ -1,5 +1,3 @@
-import numbers
-import warnings
 from abc import ABCMeta, abstractmethod
 from collections.abc import Iterable, Mapping
 from functools import partial as partial
@@ -7,13 +5,11 @@ from numbers import Integral as Integral, Real as Real
 from typing import Callable, ClassVar, Literal
 from typing_extensions import Self
 
-import numpy as np
 from numpy import ndarray
 from numpy.random import RandomState
 from pandas.core.frame import DataFrame
 from pandas.core.series import Series
-from scipy import linalg, optimize as optimize, sparse
-from scipy.sparse import linalg as sp_linalg
+from scipy import optimize as optimize
 from scipy.sparse._coo import coo_matrix
 from scipy.sparse._csr import csr_matrix
 from scipy.sparse.linalg import LinearOperator

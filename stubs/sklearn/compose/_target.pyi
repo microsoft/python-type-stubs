@@ -1,8 +1,6 @@
-import warnings
 from typing import Any, Callable, ClassVar
 from typing_extensions import Self
 
-import numpy as np
 from numpy import ndarray
 
 from .._typing import ArrayLike, MatrixLike

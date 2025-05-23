@@ -1,11 +1,8 @@
-import numbers
-import warnings
 from collections.abc import Sequence
 from numbers import Integral as Integral, Real as Real
 from typing import ClassVar, Literal
 from typing_extensions import Self
 
-import numpy as np
 from numpy import ndarray
 from pandas.core.series import Series
 from scipy.sparse import spmatrix

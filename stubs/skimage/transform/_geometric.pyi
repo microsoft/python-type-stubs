@@ -1,12 +1,6 @@
-import math
-import textwrap
 from collections.abc import Sequence
 
-import numpy as np
 from numpy.typing import ArrayLike
-from scipy import spatial
-
-from .._shared.utils import get_bound_method_class, safe_as_int
 
 def _affine_matrix_from_vector(v): ...
 def _center_and_normalize_points(points): ...

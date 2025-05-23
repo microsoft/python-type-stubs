@@ -1,7 +1,5 @@
-import functools
 from typing import Callable
 
-import numpy as np
 from numpy.random import RandomState
 
 from ..._typing import ArrayLike, Float, Int, MatrixLike

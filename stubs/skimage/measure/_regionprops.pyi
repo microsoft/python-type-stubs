@@ -1,17 +1,7 @@
-import inspect
 from collections.abc import Mapping
-from functools import wraps
-from math import atan2, pi as PI, sqrt
-from warnings import warn
 
-import numpy as np
 from numpy.typing import ArrayLike
-from scipy import ndimage as ndi
-from scipy.spatial.distance import pdist
 
-from . import _moments
-from ._find_contours import find_contours
-from ._marching_cubes_lewiner import marching_cubes
 from ._regionprops_utils import euler_number, perimeter, perimeter_crofton
 
 __all__ = ["regionprops", "euler_number", "perimeter", "perimeter_crofton"]

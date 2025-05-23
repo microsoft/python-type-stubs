@@ -1,9 +1,7 @@
-import warnings
 from numbers import Integral as Integral, Real as Real
 from typing import Any, ClassVar
 from typing_extensions import Self
 
-import numpy as np
 from numpy import ndarray
 
 from .._config import config_context as config_context

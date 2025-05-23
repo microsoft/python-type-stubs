@@ -1,7 +1,5 @@
-import warnings
 from typing import Literal
 
-import numpy as np
 from numpy import ndarray
 from scipy.sparse import coo_matrix as coo_matrix, csr_matrix as csr_matrix
 from scipy.special import xlogy as xlogy

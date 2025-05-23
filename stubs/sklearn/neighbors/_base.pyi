@@ -5,15 +5,11 @@
 #          Multi-output support by Arnaud Joly <a.joly@ulg.ac.be>
 #
 # License: BSD 3 clause (C) INRIA, University of Amsterdam
-import itertools
-import numbers
-import warnings
 from abc import ABCMeta, abstractmethod
 from functools import partial as partial
 from numbers import Integral as Integral, Real as Real
 from typing import ClassVar, Literal
 
-import numpy as np
 from joblib import effective_n_jobs as effective_n_jobs
 from numpy import ndarray
 from scipy.sparse import csr_matrix as csr_matrix, issparse as issparse, spmatrix

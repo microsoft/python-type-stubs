@@ -1,11 +1,7 @@
-import logging
-import os
 from gzip import GzipFile as GzipFile
 from os.path import exists as exists, join as join
 from tempfile import TemporaryDirectory as TemporaryDirectory
 
-import joblib
-import numpy as np
 from numpy import ndarray
 from numpy.random import RandomState
 
