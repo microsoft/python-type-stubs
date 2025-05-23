@@ -2,7 +2,6 @@ from numbers import Integral as Integral, Real as Real
 from typing import ClassVar
 from typing_extensions import Self
 
-import numpy as np
 from numpy import ndarray
 from scipy import optimize as optimize
 

@@ -3,7 +3,6 @@ from numbers import Integral as Integral
 from typing import ClassVar, Literal
 from typing_extensions import Self
 
-import numpy as np
 from numpy import ndarray
 
 from .._typing import ArrayLike, Int, MatrixLike

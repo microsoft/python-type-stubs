@@ -1,9 +1,7 @@
-import warnings
 from numbers import Integral as Integral, Real as Real
 from time import time as time
 from typing import Callable, ClassVar, Literal
 
-import numpy as np
 from numpy import ndarray
 from numpy.random import RandomState
 from scipy import linalg as linalg

@@ -3,7 +3,6 @@ from numbers import Integral as Integral
 from typing import Any, ClassVar, Literal
 from typing_extensions import Self
 
-import numpy as np
 from numpy import ndarray
 from numpy.random import RandomState
 from scipy.linalg import norm as norm

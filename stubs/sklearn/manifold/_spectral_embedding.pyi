@@ -1,15 +1,13 @@
-import warnings
 from numbers import Integral as Integral, Real as Real
 from typing import Any, Callable, ClassVar, Literal
 from typing_extensions import Self
 
-import numpy as np
 from numpy import ndarray
 from numpy.random import RandomState
 from scipy import sparse as sparse
 from scipy.linalg import eigh as eigh
 from scipy.sparse._coo import coo_matrix
-from scipy.sparse.csgraph import connected_components as connected_components, laplacian as csgraph_laplacian
+from scipy.sparse.csgraph import connected_components as connected_components
 from scipy.sparse.linalg import eigsh as eigsh
 
 from .._typing import ArrayLike, Float, Int, MatrixLike

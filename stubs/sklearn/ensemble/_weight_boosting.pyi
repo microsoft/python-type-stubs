@@ -1,11 +1,9 @@
-import warnings
 from abc import ABCMeta, abstractmethod
 from collections.abc import Iterator
 from numbers import Integral as Integral, Real as Real
 from typing import Any, ClassVar, Literal
 from typing_extensions import Self
 
-import numpy as np
 from numpy import ndarray
 from numpy.random import RandomState
 from scipy.special import xlogy as xlogy

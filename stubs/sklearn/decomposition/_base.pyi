@@ -1,7 +1,6 @@
 from abc import ABCMeta, abstractmethod
 from typing_extensions import Self
 
-import numpy as np
 from numpy import ndarray
 from scipy import linalg as linalg
 

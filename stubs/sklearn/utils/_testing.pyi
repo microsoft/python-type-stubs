@@ -1,7 +1,4 @@
-import atexit
 import contextlib
-import functools
-import inspect
 
 # Copyright (c) 2011, 2012
 # Authors: Pietro Berkes,
@@ -13,14 +10,6 @@ import inspect
 #          Giorgio Patrini
 #          Thierry Guillemot
 # License: BSD 3 clause
-import os
-import os.path as op
-import re
-import shutil
-import sys
-import tempfile
-import unittest
-import warnings
 from collections.abc import Iterable as Iterable, Sequence
 from functools import wraps as wraps
 from inspect import signature as signature
@@ -33,14 +22,9 @@ from subprocess import (
 from typing import Any, Callable, ClassVar
 from unittest import TestCase as TestCase
 
-import joblib
-import numpy as np
-import scipy as sp
-import sklearn
 from numpy import ndarray
 from numpy.random import RandomState
 from numpy.testing import (
-    assert_allclose as np_assert_allclose,
     assert_almost_equal,
     assert_approx_equal,
     assert_array_almost_equal,

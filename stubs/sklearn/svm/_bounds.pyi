@@ -1,8 +1,6 @@
 from numbers import Real as Real
 from typing import Literal
 
-import numpy as np
-
 from .._typing import ArrayLike, Float, MatrixLike
 from ..preprocessing import LabelBinarizer as LabelBinarizer
 from ..utils._param_validation import Interval as Interval, StrOptions as StrOptions, validate_params as validate_params

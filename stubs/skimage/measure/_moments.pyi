@@ -1,9 +1,4 @@
-import itertools
-
-import numpy as np
 from numpy.typing import ArrayLike
-
-from .._shared.utils import _supported_float_type, check_nD
 
 def moments_coords(coords, order: int = 3): ...
 def moments_coords_central(coords, center: tuple[float, ...] | None = None, order: int = 3): ...

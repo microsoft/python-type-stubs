@@ -62,7 +62,6 @@ target-version = "py39"
 extend-select = [
     "FA", # flake8-future-annotations
     "I", # isort
-    "ICN", # flake8-import-conventions
     "PYI", # flake8-pyi
     "UP", # pyupgrade
     "W", # pycodestyle Warning
@@ -83,14 +82,10 @@ ignore = [
     "PYI014",
     "PYI053",
 
-    # TODO: Fixing these would change which symbols are even visible for Pylance.
-    # Which may negatively affect users, especially if the symbol wasn't meant to be re-exported.
-    # Manually evaluate each violation.
-    "F401",
-
     # TODO: Investigate and fix or configure
     "PYI051", # Request for autofix: https://github.com/astral-sh/ruff/issues/14185
 ]
+
 [tool.ruff.lint.per-file-ignores]
 "*.pyi" = [
     ###
@@ -106,10 +101,12 @@ ignore = [
 # We keep docstrings in sklearn
 "stubs/sklearn/**" = ["PYI021"]
 
-[tool.ruff.lint.flake8-import-conventions.aliases]
-# Prevent aliasing these, as it causes false-negatives for certain rules
-typing_extensions = "typing_extensions"
-typing = "typing"
+# TODO: For public modules, manually evaluate each violation.
+# Removing unused imports change which symbols are even visible for Pylance.
+# Which may negatively affect users, especially if the symbol wasn't meant to be re-exported.
+# We do assume no public re-exports were meant from private modules
+"!_*.pyi" = ["F401"]
+"__init__.pyi" = ["F401"]
 
 [tool.ruff.lint.isort]
 combine-as-imports = true
@@ -117,11 +114,6 @@ extra-standard-library = [
     # Group these with stdlib
     "typing_extensions",
     "_typeshed",
-    # Extra modules not recognized by Ruff
-    # Added in Python 3.9
-    "zoneinfo",
-    # Added in Python 3.14
-    "compression",
 ]
 
 [tool.pyright]

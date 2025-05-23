@@ -3,17 +3,6 @@
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 # -----------------------------------------------------------------------------
 
-import functools
-import gc
-import inspect
-import os
-import sys
-from distutils.version import LooseVersion
-
-import numpy as np
-
-from ..util.check_environment import has_backend
-
 skipif = ...
 
 IS_TRAVIS_CI = ...

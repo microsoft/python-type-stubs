@@ -1,13 +1,10 @@
-import collections
-from itertools import chain as chain, combinations as combinations, combinations_with_replacement as combinations_w_r
+from itertools import chain as chain, combinations as combinations
 from numbers import Integral as Integral
 from typing import Any, ClassVar, Literal
 from typing_extensions import Self
 
-import numpy as np
 from numpy import ndarray
 from pandas.core.series import Series
-from scipy import sparse
 from scipy.interpolate import BSpline as BSpline
 from scipy.sparse import spmatrix
 from scipy.special import comb as comb

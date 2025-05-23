@@ -5,8 +5,6 @@ from operator import itemgetter as itemgetter
 from typing import Any, ClassVar
 from typing_extensions import Self
 
-import numpy as np
-import scipy.sparse as sp
 from numpy import ndarray
 from scipy.sparse import spmatrix
 

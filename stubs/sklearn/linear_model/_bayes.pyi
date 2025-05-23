@@ -3,7 +3,6 @@ from numbers import Integral as Integral, Real as Real
 from typing import ClassVar
 from typing_extensions import Self
 
-import numpy as np
 from numpy import ndarray
 from scipy import linalg as linalg
 from scipy.linalg import pinvh as pinvh

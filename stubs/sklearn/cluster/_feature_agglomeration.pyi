@@ -1,4 +1,3 @@
-import numpy as np
 from numpy import ndarray
 from scipy.sparse import issparse as issparse
 
