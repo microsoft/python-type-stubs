@@ -2120,8 +2120,6 @@ sklearn.externals._packaging.version._legacy_version_component_re
 sklearn.externals._packaging.version._local_version_separators
 sklearn.externals.conftest.pytest_ignore_collect
 sklearn.feature_extraction.FeatureHasher.__init__
-sklearn.feature_extraction._dict_vectorizer.Number.__hash__
-sklearn.feature_extraction._dict_vectorizer.check_array
 sklearn.feature_extraction._hash.FeatureHasher.__init__
 sklearn.feature_extraction._hashing_fast.transform
 sklearn.feature_extraction._stop_words.ENGLISH_STOP_WORDS
