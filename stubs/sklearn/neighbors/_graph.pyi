@@ -6,8 +6,6 @@ from scipy.sparse import spmatrix
 
 from .._typing import Float, Int, MatrixLike
 from ..base import ClassNamePrefixFeaturesOutMixin, TransformerMixin
-from ..utils._param_validation import StrOptions as StrOptions
-from ..utils.validation import check_is_fitted as check_is_fitted
 from ._ball_tree import BallTree
 from ._base import KNeighborsMixin, NeighborsBase, RadiusNeighborsMixin
 from ._unsupervised import NearestNeighbors

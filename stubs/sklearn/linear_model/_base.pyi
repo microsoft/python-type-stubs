@@ -1,23 +1,13 @@
 from abc import ABCMeta, abstractmethod
-from numbers import Integral as Integral
 from typing import ClassVar
 from typing_extensions import Self
 
 from numpy import ndarray
 from numpy.random.mtrand import RandomState
-from scipy import linalg as linalg, optimize as optimize
-from scipy.sparse.linalg import lsqr as lsqr
-from scipy.special import expit as expit
 
 from .._typing import ArrayLike, Int, MatrixLike
 from ..base import BaseEstimator, ClassifierMixin, MultiOutputMixin, RegressorMixin
-from ..utils import check_array as check_array, check_random_state as check_random_state
-from ..utils._array_api import get_namespace as get_namespace
-from ..utils._seq_dataset import ArrayDataset32 as ArrayDataset32, ArrayDataset64, CSRDataset32 as CSRDataset32, CSRDataset64
-from ..utils.extmath import safe_sparse_dot as safe_sparse_dot
-from ..utils.parallel import Parallel as Parallel, delayed as delayed
-from ..utils.sparsefuncs import inplace_column_scale as inplace_column_scale, mean_variance_axis as mean_variance_axis
-from ..utils.validation import FLOAT_DTYPES as FLOAT_DTYPES, check_is_fitted as check_is_fitted
+from ..utils._seq_dataset import ArrayDataset64, CSRDataset64
 from ._stochastic_gradient import SGDClassifier
 
 # TODO: bayesian_ridge_regression and bayesian_regression_ard

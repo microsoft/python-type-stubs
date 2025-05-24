@@ -2,13 +2,9 @@ from abc import ABC, abstractmethod
 from dataclasses import dataclass
 from typing import ClassVar
 
-import numpy as np
 from numpy import ndarray
-from scipy.special import expit as expit, logit as logit
-from scipy.stats import gmean as gmean
 
 from .._typing import ArrayLike, Float
-from ..utils.extmath import softmax as softmax
 
 @dataclass
 class Interval:

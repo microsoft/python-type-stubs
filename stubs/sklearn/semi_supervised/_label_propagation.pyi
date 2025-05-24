@@ -1,21 +1,11 @@
-from abc import ABCMeta, abstractmethod as abstractmethod
-from numbers import Integral as Integral, Real as Real
+from abc import ABCMeta
 from typing import Callable, ClassVar, Literal
 from typing_extensions import Self
 
 from numpy import ndarray
-from scipy import sparse as sparse
-from scipy.sparse import csgraph as csgraph
 
 from .._typing import ArrayLike, Float, Int, MatrixLike
 from ..base import BaseEstimator, ClassifierMixin
-from ..exceptions import ConvergenceWarning as ConvergenceWarning
-from ..metrics.pairwise import rbf_kernel as rbf_kernel
-from ..neighbors import NearestNeighbors as NearestNeighbors
-from ..utils._param_validation import Interval as Interval, StrOptions as StrOptions
-from ..utils.extmath import safe_sparse_dot as safe_sparse_dot
-from ..utils.multiclass import check_classification_targets as check_classification_targets
-from ..utils.validation import check_is_fitted as check_is_fitted
 
 class BaseLabelPropagation(ClassifierMixin, BaseEstimator, metaclass=ABCMeta):
     _parameter_constraints: ClassVar[dict] = ...

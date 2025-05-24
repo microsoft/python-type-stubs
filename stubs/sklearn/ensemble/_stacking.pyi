@@ -1,7 +1,5 @@
 from abc import ABCMeta, abstractmethod
 from collections.abc import Iterable, Sequence
-from copy import deepcopy as deepcopy
-from numbers import Integral as Integral
 from typing import ClassVar, Literal
 from typing_extensions import Self
 
@@ -13,22 +11,12 @@ from ..base import (
     ClassifierMixin,
     RegressorMixin,
     TransformerMixin,
-    clone as clone,
-    is_classifier as is_classifier,
-    is_regressor as is_regressor,
 )
-from ..exceptions import NotFittedError as NotFittedError
 from ..linear_model._logistic import LogisticRegression
 from ..linear_model._ridge import RidgeCV
-from ..model_selection import BaseCrossValidator, check_cv as check_cv, cross_val_predict as cross_val_predict
+from ..model_selection import BaseCrossValidator
 from ..pipeline import Pipeline
-from ..preprocessing import LabelEncoder as LabelEncoder
 from ..utils import Bunch
-from ..utils._param_validation import HasMethods as HasMethods, StrOptions as StrOptions
-from ..utils.metaestimators import available_if as available_if
-from ..utils.multiclass import check_classification_targets as check_classification_targets, type_of_target as type_of_target
-from ..utils.parallel import Parallel as Parallel, delayed as delayed
-from ..utils.validation import check_is_fitted as check_is_fitted, column_or_1d as column_or_1d
 from ._base import _BaseHeterogeneousEnsemble
 
 class _BaseStacking(TransformerMixin, _BaseHeterogeneousEnsemble, metaclass=ABCMeta):

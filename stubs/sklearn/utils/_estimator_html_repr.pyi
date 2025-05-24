@@ -1,11 +1,6 @@
 from collections.abc import Sequence
-from contextlib import closing as closing
-from inspect import isclass as isclass
-from io import StringIO as StringIO
-from string import Template as Template
 from typing import Literal
 
-from .. import config_context as config_context
 from ..base import BaseEstimator
 
 class _IDCounter:

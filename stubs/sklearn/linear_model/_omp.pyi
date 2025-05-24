@@ -1,19 +1,12 @@
 from collections.abc import Iterable
-from math import sqrt as sqrt
-from numbers import Integral as Integral, Real as Real
 from typing import ClassVar, Literal
 from typing_extensions import Self
 
 from numpy import ndarray
-from scipy import linalg as linalg
-from scipy.linalg.lapack import get_lapack_funcs as get_lapack_funcs
 
 from .._typing import ArrayLike, Float, Int, MatrixLike
 from ..base import MultiOutputMixin, RegressorMixin
-from ..model_selection import BaseCrossValidator, check_cv as check_cv
-from ..utils import as_float_array as as_float_array, check_array as check_array
-from ..utils._param_validation import Hidden as Hidden, Interval as Interval, StrOptions as StrOptions
-from ..utils.parallel import Parallel as Parallel, delayed as delayed
+from ..model_selection import BaseCrossValidator
 from ._base import LinearModel
 
 # Author: Vlad Niculae

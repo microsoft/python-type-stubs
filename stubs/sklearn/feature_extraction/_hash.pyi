@@ -1,6 +1,4 @@
 from collections.abc import Iterator
-from itertools import chain as chain
-from numbers import Integral as Integral
 from typing import Any, ClassVar
 from typing_extensions import Self
 
@@ -9,7 +7,6 @@ from scipy.sparse import spmatrix
 
 from .._typing import Int
 from ..base import BaseEstimator, TransformerMixin
-from ..utils._param_validation import Interval as Interval, StrOptions as StrOptions
 
 # Author: Lars Buitinck
 # License: BSD 3 clause

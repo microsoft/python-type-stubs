@@ -7,7 +7,6 @@ from typing import Literal
 
 from numpy import ndarray
 from numpy.random import RandomState
-from PIL import Image as Image
 
 from .._typing import Int
 from ..utils._bunch import Bunch

@@ -1,4 +1,3 @@
-from numbers import Integral as Integral, Real as Real
 from typing import Any, Callable, ClassVar
 from typing_extensions import Self
 
@@ -6,19 +5,7 @@ from numpy import ndarray
 from numpy.random import RandomState
 
 from .._typing import ArrayLike, Float, Int, MatrixLike
-from ..base import BaseEstimator, MetaEstimatorMixin, MultiOutputMixin, RegressorMixin, clone as clone
-from ..exceptions import ConvergenceWarning as ConvergenceWarning
-from ..utils import check_consistent_length as check_consistent_length, check_random_state as check_random_state
-from ..utils._param_validation import (
-    HasMethods as HasMethods,
-    Hidden as Hidden,
-    Interval as Interval,
-    Options as Options,
-    StrOptions as StrOptions,
-)
-from ..utils.random import sample_without_replacement as sample_without_replacement
-from ..utils.validation import check_is_fitted as check_is_fitted, has_fit_parameter as has_fit_parameter
-from ._base import LinearRegression as LinearRegression
+from ..base import BaseEstimator, MetaEstimatorMixin, MultiOutputMixin, RegressorMixin
 
 # Author: Johannes Schönberger
 #

@@ -1,10 +1,7 @@
 from collections import Counter
-from contextlib import suppress as suppress
 from typing import Any, NamedTuple
 
 from numpy import ndarray, str_
-
-from . import is_scalar_nan as is_scalar_nan
 
 class MissingValues(NamedTuple):
     nan: bool = ...

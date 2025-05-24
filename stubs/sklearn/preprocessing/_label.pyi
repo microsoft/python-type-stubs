@@ -1,6 +1,4 @@
-from collections import defaultdict as defaultdict
 from collections.abc import Iterable
-from numbers import Integral as Integral
 from typing import Any, ClassVar
 from typing_extensions import Self
 
@@ -10,10 +8,6 @@ from scipy.sparse import csr_matrix, spmatrix
 
 from .._typing import ArrayLike, Float, Int, MatrixLike
 from ..base import BaseEstimator, TransformerMixin
-from ..utils import column_or_1d as column_or_1d
-from ..utils.multiclass import type_of_target as type_of_target, unique_labels as unique_labels
-from ..utils.sparsefuncs import min_max_axis as min_max_axis
-from ..utils.validation import check_array as check_array, check_is_fitted as check_is_fitted
 
 # Authors: Alexandre Gramfort <alexandre.gramfort@inria.fr>
 #          Mathieu Blondel <mathieu@mblondel.org>
