@@ -1,15 +1,6 @@
 from typing import Callable
 
 from numpy import ndarray
-from scipy.linalg import (
-    LinAlgError as LinAlgError,
-    cho_factor as cho_factor,
-    cho_solve as cho_solve,
-    cholesky as cholesky,
-    eigh as eigh,
-    inv as inv,
-)
-from scipy.sparse import isspmatrix as isspmatrix
 from scipy.sparse.linalg import LinearOperator
 
 from .._typing import ArrayLike, Float, Int, MatrixLike, Scalar

@@ -1,4 +1,3 @@
-from numbers import Real as Real
 from typing import Any, ClassVar
 from typing_extensions import Self
 
@@ -7,9 +6,6 @@ from numpy.random import RandomState
 
 from .._typing import ArrayLike, Float, Int, MatrixLike
 from ..base import OutlierMixin
-from ..metrics import accuracy_score as accuracy_score
-from ..utils._param_validation import Interval as Interval
-from ..utils.validation import check_is_fitted as check_is_fitted
 from . import MinCovDet
 
 # Author: Virgile Fritsch <virgile.fritsch@inria.fr>

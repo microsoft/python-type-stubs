@@ -1,4 +1,3 @@
-from numbers import Integral as Integral
 from typing import Callable, ClassVar, Literal
 from typing_extensions import Self
 
@@ -6,8 +5,6 @@ from numpy import ndarray
 
 from .._typing import ArrayLike, Float, Int, MatrixLike
 from ..base import ClassifierMixin
-from ..utils._param_validation import StrOptions as StrOptions
-from ..utils.extmath import weighted_mode as weighted_mode
 from ._base import KNeighborsMixin, NeighborsBase, RadiusNeighborsMixin
 
 class KNeighborsClassifier(KNeighborsMixin, ClassifierMixin, NeighborsBase):

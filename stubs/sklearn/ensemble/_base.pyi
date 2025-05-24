@@ -3,16 +3,9 @@ from collections.abc import Sequence
 from typing import Any, ClassVar
 from typing_extensions import Self
 
-from joblib import effective_n_jobs as effective_n_jobs
-
 from .._typing import Int
-from ..base import BaseEstimator, MetaEstimatorMixin, clone as clone, is_classifier as is_classifier, is_regressor as is_regressor
-from ..tree import (
-    BaseDecisionTree as BaseDecisionTree,
-    DecisionTreeClassifier as DecisionTreeClassifier,
-    DecisionTreeRegressor as DecisionTreeRegressor,
-)
-from ..utils import Bunch, check_random_state as check_random_state, deprecated
+from ..base import BaseEstimator, MetaEstimatorMixin
+from ..utils import Bunch, deprecated
 from ..utils.metaestimators import _BaseComposition
 
 class BaseEnsemble(MetaEstimatorMixin, BaseEstimator, metaclass=ABCMeta):

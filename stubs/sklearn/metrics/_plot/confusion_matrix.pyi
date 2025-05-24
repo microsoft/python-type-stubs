@@ -1,7 +1,5 @@
-from itertools import product as product
 from typing import Literal
 
-import numpy as np
 from matplotlib.axes import Axes
 from matplotlib.colors import Colormap
 from matplotlib.figure import Figure
@@ -9,9 +7,7 @@ from matplotlib.image import AxesImage
 from numpy import ndarray
 
 from ..._typing import ArrayLike, MatrixLike
-from ...base import BaseEstimator, is_classifier as is_classifier
-from ...utils import check_matplotlib_support as check_matplotlib_support
-from ...utils.multiclass import unique_labels as unique_labels
+from ...base import BaseEstimator
 
 class ConfusionMatrixDisplay:
     figure_: Figure = ...

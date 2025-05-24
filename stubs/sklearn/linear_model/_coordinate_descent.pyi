@@ -1,30 +1,16 @@
 from abc import ABC, abstractmethod
 from collections.abc import Iterable, Sequence
-from functools import partial as partial
-from numbers import Integral as Integral, Real as Real
 from typing import ClassVar, Literal
 from typing_extensions import Self
 
-from joblib import effective_n_jobs as effective_n_jobs
 from numpy import ndarray
 from numpy.random import RandomState
-from scipy import sparse as sparse
 from scipy.sparse import spmatrix
 from scipy.sparse._coo import coo_matrix
 
 from .._typing import ArrayLike, Float, Int, MatrixLike
 from ..base import MultiOutputMixin, RegressorMixin
-from ..model_selection import BaseCrossValidator, check_cv as check_cv
-from ..utils import check_array as check_array, check_scalar as check_scalar
-from ..utils._param_validation import Interval as Interval, StrOptions as StrOptions
-from ..utils.extmath import safe_sparse_dot as safe_sparse_dot
-from ..utils.parallel import Parallel as Parallel, delayed as delayed
-from ..utils.validation import (
-    check_consistent_length as check_consistent_length,
-    check_is_fitted as check_is_fitted,
-    check_random_state as check_random_state,
-    column_or_1d as column_or_1d,
-)
+from ..model_selection import BaseCrossValidator
 from ._base import LinearModel
 
 # Author: Alexandre Gramfort <alexandre.gramfort@inria.fr>

@@ -1,22 +1,8 @@
-from functools import partial as partial
 from typing import Literal
 
 from numpy import ndarray
-from scipy.sparse import csr_matrix as csr_matrix, issparse as issparse
-from scipy.stats import rankdata as rankdata
 
 from .._typing import ArrayLike, Float, Int, MatrixLike
-from ..exceptions import UndefinedMetricWarning as UndefinedMetricWarning
-from ..preprocessing import label_binarize as label_binarize
-from ..utils import (
-    assert_all_finite as assert_all_finite,
-    check_array as check_array,
-    check_consistent_length as check_consistent_length,
-    column_or_1d as column_or_1d,
-)
-from ..utils.extmath import stable_cumsum as stable_cumsum
-from ..utils.multiclass import type_of_target as type_of_target
-from ..utils.sparsefuncs import count_nonzero as count_nonzero
 
 # Authors: Alexandre Gramfort <alexandre.gramfort@inria.fr>
 #          Mathieu Blondel <mathieu@mblondel.org>

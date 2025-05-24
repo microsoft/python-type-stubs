@@ -1,5 +1,3 @@
-from functools import update_wrapper as update_wrapper, wraps as wraps
-from types import MethodType as MethodType
 from typing import Callable
 
 class _AvailableIfDescriptor:

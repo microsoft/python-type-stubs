@@ -1,10 +1,6 @@
-import numbers
 from abc import ABCMeta, abstractmethod
-from collections import namedtuple as namedtuple
 
-import numpy as np
 from numpy import ndarray
-from scipy.special import xlogy as xlogy
 
 from .._typing import ArrayLike, Float
 

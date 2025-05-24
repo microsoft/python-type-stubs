@@ -1,13 +1,9 @@
-from numbers import Real as Real
 from typing import ClassVar, Literal
 
 from numpy import ndarray
 from numpy.random import RandomState
-from scipy.special import betaln as betaln, digamma as digamma, gammaln as gammaln
 
 from .._typing import ArrayLike, Float, Int
-from ..utils import check_array as check_array
-from ..utils._param_validation import Interval as Interval, StrOptions as StrOptions
 from ._base import BaseMixture
 
 # Author: Wei Xue <xuewei4d@gmail.com>

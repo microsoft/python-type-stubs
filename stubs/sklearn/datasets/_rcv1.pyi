@@ -1,15 +1,9 @@
-from gzip import GzipFile as GzipFile
-from os import makedirs as makedirs, remove as remove
-from os.path import exists as exists, join as join
 from typing import Literal
 
 from numpy.random import RandomState
 
 from .._typing import Int
 from ..utils import Bunch
-from . import get_data_home as get_data_home
-from ._base import RemoteFileMetadata as RemoteFileMetadata, load_descr as load_descr
-from ._svmlight_format_io import load_svmlight_files as load_svmlight_files
 
 # Author: Tom Dupre la Tour
 # License: BSD 3 clause

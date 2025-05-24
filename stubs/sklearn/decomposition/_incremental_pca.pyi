@@ -1,14 +1,9 @@
-from numbers import Integral as Integral
 from typing import Any, ClassVar
 from typing_extensions import Self
 
 from numpy import ndarray
-from scipy import linalg as linalg, sparse as sparse
 
 from .._typing import ArrayLike, Int, MatrixLike
-from ..utils import gen_batches as gen_batches
-from ..utils._param_validation import Interval as Interval
-from ..utils.extmath import svd_flip as svd_flip
 from ._base import _BasePCA
 
 class IncrementalPCA(_BasePCA):

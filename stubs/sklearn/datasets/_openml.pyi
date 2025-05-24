@@ -1,14 +1,6 @@
-from contextlib import closing as closing
-from functools import wraps as wraps
-from os.path import join as join
-from tempfile import TemporaryDirectory as TemporaryDirectory
 from typing import Literal, overload
-from urllib.error import HTTPError as HTTPError, URLError as URLError
-from urllib.request import Request as Request, urlopen as urlopen
 
-from ..utils import Bunch, check_pandas_support as check_pandas_support
-from . import get_data_home as get_data_home
-from ._arff_parser import load_arff_from_gzip_file as load_arff_from_gzip_file
+from ..utils import Bunch
 
 __all__ = ["fetch_openml"]
 

@@ -6,9 +6,6 @@ from pandas.core.frame import DataFrame
 
 from .._typing import ArrayLike, MatrixLike
 from ..base import BaseEstimator, TransformerMixin
-from ..utils._param_validation import StrOptions as StrOptions
-from ..utils.metaestimators import available_if as available_if
-from ..utils.validation import check_array as check_array
 
 class FunctionTransformer(TransformerMixin, BaseEstimator):
     feature_names_in_: ndarray = ...

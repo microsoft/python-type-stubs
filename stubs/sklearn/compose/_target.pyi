@@ -4,13 +4,7 @@ from typing_extensions import Self
 from numpy import ndarray
 
 from .._typing import ArrayLike, MatrixLike
-from ..base import BaseEstimator, RegressorMixin, clone as clone
-from ..exceptions import NotFittedError as NotFittedError
-from ..linear_model import LinearRegression as LinearRegression
-from ..preprocessing import FunctionTransformer as FunctionTransformer
-from ..utils import check_array as check_array
-from ..utils._param_validation import HasMethods as HasMethods
-from ..utils.validation import check_is_fitted as check_is_fitted
+from ..base import BaseEstimator, RegressorMixin
 
 # Authors: Andreas Mueller <andreas.mueller@columbia.edu>
 #          Guillaume Lemaitre <guillaume.lemaitre@inria.fr>

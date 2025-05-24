@@ -10,17 +10,8 @@ import contextlib
 #          Giorgio Patrini
 #          Thierry Guillemot
 # License: BSD 3 clause
-from collections.abc import Iterable as Iterable, Sequence
-from functools import wraps as wraps
-from inspect import signature as signature
-from subprocess import (
-    STDOUT as STDOUT,
-    CalledProcessError as CalledProcessError,
-    TimeoutExpired as TimeoutExpired,
-    check_output as check_output,
-)
+from collections.abc import Sequence
 from typing import Any, Callable, ClassVar
-from unittest import TestCase as TestCase
 
 from numpy import ndarray
 from numpy.random import RandomState
@@ -33,10 +24,6 @@ from numpy.testing import (
 )
 
 from .._typing import ArrayLike, Float, Int, MatrixLike
-from ..metrics import accuracy_score as accuracy_score, r2_score as r2_score
-from . import IS_PYPY as IS_PYPY
-from .multiclass import check_classification_targets as check_classification_targets
-from .validation import check_array as check_array, check_is_fitted as check_is_fitted, check_X_y as check_X_y
 
 __all__ = [
     "assert_raises",

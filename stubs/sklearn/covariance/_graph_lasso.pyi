@@ -1,19 +1,12 @@
 from collections.abc import Iterable
-from numbers import Integral as Integral, Real as Real
 from typing import Any, ClassVar, Literal
 from typing_extensions import Self
 
 from numpy import ndarray
-from scipy import linalg as linalg
 
 from .._typing import ArrayLike, Float, Int, MatrixLike
-from ..exceptions import ConvergenceWarning as ConvergenceWarning
-from ..linear_model import lars_path_gram as lars_path_gram
-from ..model_selection import BaseCrossValidator, check_cv as check_cv, cross_val_score as cross_val_score
-from ..utils._param_validation import Interval as Interval, StrOptions as StrOptions
-from ..utils.parallel import Parallel as Parallel, delayed as delayed
-from ..utils.validation import check_random_state as check_random_state, check_scalar as check_scalar
-from . import EmpiricalCovariance, empirical_covariance as empirical_covariance, log_likelihood as log_likelihood
+from ..model_selection import BaseCrossValidator
+from . import EmpiricalCovariance
 
 # Author: Gael Varoquaux <gael.varoquaux@normalesup.org>
 # License: BSD 3 clause

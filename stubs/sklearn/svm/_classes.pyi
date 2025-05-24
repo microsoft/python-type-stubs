@@ -1,5 +1,4 @@
 from collections.abc import Mapping
-from numbers import Integral as Integral, Real as Real
 from typing import Any, Callable, ClassVar, Literal
 from typing_extensions import Self
 
@@ -10,8 +9,6 @@ from .._typing import ArrayLike, Float, Int, MatrixLike
 from ..base import BaseEstimator, OutlierMixin, RegressorMixin
 from ..linear_model._base import LinearClassifierMixin, LinearModel, SparseCoefMixin
 from ..utils import deprecated
-from ..utils._param_validation import Interval as Interval, StrOptions as StrOptions
-from ..utils.multiclass import check_classification_targets as check_classification_targets
 from ._base import BaseLibSVM, BaseSVC
 
 class LinearSVC(LinearClassifierMixin, SparseCoefMixin, BaseEstimator):

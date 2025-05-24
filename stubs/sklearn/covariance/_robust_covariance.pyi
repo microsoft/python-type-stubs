@@ -1,17 +1,11 @@
-from numbers import Integral as Integral, Real as Real
 from typing import Any, Callable, ClassVar
 from typing_extensions import Self
 
 from numpy import ndarray
 from numpy.random import RandomState
-from scipy import linalg as linalg
-from scipy.stats import chi2 as chi2
 
 from .._typing import Float, Int, MatrixLike
-from ..utils import check_array as check_array, check_random_state as check_random_state
-from ..utils._param_validation import Interval as Interval
-from ..utils.extmath import fast_logdet as fast_logdet
-from . import EmpiricalCovariance, empirical_covariance as empirical_covariance
+from . import EmpiricalCovariance
 
 # Author: Virgile Fritsch <virgile.fritsch@inria.fr>
 #
