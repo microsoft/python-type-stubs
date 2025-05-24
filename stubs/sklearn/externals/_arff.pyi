@@ -1,5 +1,4 @@
 from typing import ClassVar, Literal
-from typing_extensions import TypedDict as TypedDict
 
 # =============================================================================
 # Federal University of Rio Grande do Sul (UFRGS)

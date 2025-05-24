@@ -1,21 +1,13 @@
 from abc import ABCMeta, abstractmethod
 from collections.abc import Iterator
-from numbers import Integral as Integral, Real as Real
 from typing import Any, ClassVar, Literal
 from typing_extensions import Self
 
 from numpy import ndarray
 from numpy.random import RandomState
-from scipy.special import xlogy as xlogy
 
 from .._typing import ArrayLike, Float, Int, MatrixLike
-from ..base import BaseEstimator, ClassifierMixin, RegressorMixin, is_classifier as is_classifier, is_regressor as is_regressor
-from ..metrics import accuracy_score as accuracy_score, r2_score as r2_score
-from ..tree import DecisionTreeClassifier as DecisionTreeClassifier, DecisionTreeRegressor as DecisionTreeRegressor
-from ..utils import check_random_state as check_random_state
-from ..utils._param_validation import HasMethods as HasMethods, Interval as Interval, StrOptions as StrOptions
-from ..utils.extmath import softmax as softmax, stable_cumsum as stable_cumsum
-from ..utils.validation import check_is_fitted as check_is_fitted, has_fit_parameter as has_fit_parameter
+from ..base import BaseEstimator, ClassifierMixin, RegressorMixin
 from ._base import BaseEnsemble
 
 __all__ = [

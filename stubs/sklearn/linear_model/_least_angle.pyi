@@ -1,22 +1,14 @@
 from collections.abc import Iterable
-from math import log as log
-from numbers import Integral as Integral, Real as Real
 from typing import ClassVar, Literal
 from typing_extensions import Self
 
 from numpy import ndarray
 from numpy.random import RandomState
-from scipy import interpolate as interpolate, linalg as linalg
-from scipy.linalg.lapack import get_lapack_funcs as get_lapack_funcs
 
 from .._typing import ArrayLike, Float, Int, MatrixLike
 from ..base import MultiOutputMixin, RegressorMixin
-from ..exceptions import ConvergenceWarning as ConvergenceWarning
-from ..model_selection import BaseCrossValidator, check_cv as check_cv
-from ..utils import arrayfuncs as arrayfuncs, as_float_array as as_float_array, check_random_state as check_random_state
-from ..utils._param_validation import Hidden as Hidden, Interval as Interval, StrOptions as StrOptions
-from ..utils.parallel import Parallel as Parallel, delayed as delayed
-from ._base import LinearModel, LinearRegression as LinearRegression
+from ..model_selection import BaseCrossValidator
+from ._base import LinearModel
 
 SOLVE_TRIANGULAR_ARGS: dict = ...
 

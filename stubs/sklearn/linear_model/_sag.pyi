@@ -4,11 +4,6 @@ from numpy import ndarray
 from numpy.random.mtrand import RandomState
 
 from .._typing import ArrayLike, Float, Int, MatrixLike
-from ..exceptions import ConvergenceWarning as ConvergenceWarning
-from ..utils import check_array as check_array
-from ..utils.extmath import row_norms as row_norms
-from ._base import make_dataset as make_dataset
-from ._sag_fast import sag32 as sag32, sag64 as sag64
 
 # Authors: Tom Dupre la Tour <tom.dupre-la-tour@m4x.org>
 #

@@ -1,14 +1,11 @@
 from typing import Literal
 
-import scipy as sp
 from matplotlib.artist import Artist
 from matplotlib.axes import Axes
 from matplotlib.figure import Figure
 
 from ..._typing import ArrayLike, MatrixLike
 from ...base import BaseEstimator
-from ...utils import check_matplotlib_support as check_matplotlib_support
-from .. import det_curve as det_curve
 
 class DetCurveDisplay:
     figure_: Figure = ...

@@ -1,35 +1,14 @@
-from numbers import Integral as Integral, Real as Real
 from typing import Any, ClassVar, Literal, overload
 from typing_extensions import Self
 
 from numpy import ndarray
 from numpy.random import RandomState
 from pandas.core.series import Series
-from scipy import optimize as optimize, sparse as sparse, stats as stats
 from scipy.sparse import spmatrix
 from scipy.sparse._csr import csr_matrix
-from scipy.special import boxcox as boxcox
 
 from .._typing import ArrayLike, Float, Int, MatrixLike
 from ..base import BaseEstimator, ClassNamePrefixFeaturesOutMixin, OneToOneFeatureMixin, TransformerMixin
-from ..utils import check_array as check_array
-from ..utils._param_validation import Interval as Interval, StrOptions as StrOptions
-from ..utils.extmath import row_norms as row_norms
-from ..utils.sparsefuncs import (
-    incr_mean_variance_axis as incr_mean_variance_axis,
-    inplace_column_scale as inplace_column_scale,
-    mean_variance_axis as mean_variance_axis,
-    min_max_axis as min_max_axis,
-)
-from ..utils.sparsefuncs_fast import (
-    inplace_csr_row_normalize_l1 as inplace_csr_row_normalize_l1,
-    inplace_csr_row_normalize_l2 as inplace_csr_row_normalize_l2,
-)
-from ..utils.validation import (
-    FLOAT_DTYPES as FLOAT_DTYPES,
-    check_is_fitted as check_is_fitted,
-    check_random_state as check_random_state,
-)
 from ._encoders import OneHotEncoder
 
 # Authors: Alexandre Gramfort <alexandre.gramfort@inria.fr>

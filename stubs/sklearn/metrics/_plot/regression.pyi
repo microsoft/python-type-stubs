@@ -1,7 +1,5 @@
-import numbers
 from typing import Literal
 
-import numpy as np
 from matplotlib.artist import Artist
 from matplotlib.axes import Axes
 from matplotlib.figure import Figure
@@ -9,7 +7,6 @@ from numpy.random import RandomState
 
 from ..._typing import ArrayLike, MatrixLike
 from ...base import BaseEstimator
-from ...utils import check_matplotlib_support as check_matplotlib_support, check_random_state as check_random_state
 
 class PredictionErrorDisplay:
     figure_: Figure = ...

@@ -1,29 +1,14 @@
-import numbers
-import warnings
 from collections.abc import Mapping, Sequence
-from itertools import chain as chain
-from math import ceil as ceil
 from typing import Literal
 
-import numpy as np
 from matplotlib.axes import Axes
 from matplotlib.figure import Figure
-from matplotlib.gridspec import GridSpecFromSubplotSpec as GridSpecFromSubplotSpec
 from numpy import ndarray
 from numpy.random import RandomState
-from scipy import sparse as sparse
-from scipy.stats.mstats import mquantiles as mquantiles
 
 from ..._typing import ArrayLike, Int, MatrixLike
-from ...base import BaseEstimator, is_regressor as is_regressor
-from ...utils import (
-    check_array as check_array,
-    check_matplotlib_support as check_matplotlib_support,
-    check_random_state as check_random_state,
-)
+from ...base import BaseEstimator
 from ...utils._bunch import Bunch
-from ...utils.parallel import Parallel as Parallel, delayed as delayed
-from .. import partial_dependence as partial_dependence
 
 class PartialDependenceDisplay:
     figure_: Figure = ...

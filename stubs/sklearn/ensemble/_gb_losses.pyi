@@ -2,11 +2,10 @@ from abc import ABCMeta, abstractmethod
 from typing import Any, ClassVar
 
 from numpy import ndarray
-from scipy.special import expit as expit, logsumexp as logsumexp
 
 from .._typing import ArrayLike, Float, Int, MatrixLike
 from ..dummy import DummyClassifier, DummyRegressor
-from ..tree._tree import TREE_LEAF as TREE_LEAF, Tree
+from ..tree._tree import Tree
 
 class LossFunction(metaclass=ABCMeta):
     K: int = ...

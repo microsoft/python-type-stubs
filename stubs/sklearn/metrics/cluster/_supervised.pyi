@@ -1,11 +1,7 @@
-from math import log as log
-
 from numpy import ndarray
 from scipy.sparse import spmatrix
 
 from ..._typing import ArrayLike, Float, MatrixLike
-from ...utils.multiclass import type_of_target as type_of_target
-from ...utils.validation import check_array as check_array, check_consistent_length as check_consistent_length
 from ._expected_mutual_info_fast import expected_mutual_information as expected_mutual_information
 
 # Authors: Olivier Grisel <olivier.grisel@ensta.org>

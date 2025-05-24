@@ -6,9 +6,6 @@ from numpy import ndarray
 from numpy.random import RandomState
 
 from .._typing import ArrayLike, Float, Int, MatrixLike
-from ..utils._param_validation import StrOptions as StrOptions
-from ..utils.extmath import row_norms as row_norms
-from ..utils.validation import check_is_fitted as check_is_fitted, check_random_state as check_random_state
 from ._kmeans import _BaseKMeans
 
 # Author: Michal Krawczyk <mkrwczyk.1@gmail.com>

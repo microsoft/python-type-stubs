@@ -1,21 +1,14 @@
-from collections import Counter as Counter
 from collections.abc import Sequence
-from itertools import chain as chain
 from typing import ClassVar, Literal
 from typing_extensions import Self
 
 from numpy import dtype, ndarray
-from scipy import sparse as sparse
 from scipy.sparse import spmatrix
 
 from .._typing import ArrayLike, Float, Int, MatrixLike
-from ..base import BaseEstimator, TransformerMixin, clone as clone
-from ..preprocessing import FunctionTransformer as FunctionTransformer
-from ..utils import check_pandas_support as check_pandas_support
+from ..base import BaseEstimator, TransformerMixin
 from ..utils._bunch import Bunch
 from ..utils.metaestimators import _BaseComposition
-from ..utils.parallel import Parallel as Parallel, delayed as delayed
-from ..utils.validation import check_array as check_array, check_is_fitted as check_is_fitted
 
 __all__ = ["ColumnTransformer", "make_column_transformer", "make_column_selector"]
 

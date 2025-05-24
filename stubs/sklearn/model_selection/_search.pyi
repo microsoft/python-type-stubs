@@ -1,28 +1,15 @@
 from abc import ABCMeta, abstractmethod
-from collections import defaultdict as defaultdict
 from collections.abc import Iterable, Iterator, Mapping, Sequence
-from functools import partial as partial, reduce as reduce
-from itertools import product as product
 from typing import Any, Callable, ClassVar, Generic, TypeVar
 from typing_extensions import Self
 
 from numpy import ndarray
-from numpy.ma import MaskedArray as MaskedArray
 from numpy.random import RandomState
 from scipy.sparse import spmatrix
-from scipy.stats import rankdata as rankdata
 
 from .._typing import ArrayLike, Float, Int, MatrixLike
-from ..base import BaseEstimator, MetaEstimatorMixin, clone as clone, is_classifier as is_classifier
-from ..exceptions import NotFittedError as NotFittedError
-from ..metrics import check_scoring as check_scoring
-from ..utils import check_random_state as check_random_state
-from ..utils.metaestimators import available_if as available_if
-from ..utils.parallel import Parallel as Parallel, delayed as delayed
-from ..utils.random import sample_without_replacement as sample_without_replacement
-from ..utils.validation import check_is_fitted as check_is_fitted, indexable as indexable
+from ..base import BaseEstimator, MetaEstimatorMixin
 from . import BaseCrossValidator
-from ._split import check_cv as check_cv
 
 _BaseEstimatorT = TypeVar("_BaseEstimatorT", bound=BaseEstimator, default=BaseEstimator, covariant=True)
 

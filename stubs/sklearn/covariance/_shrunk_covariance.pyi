@@ -1,14 +1,10 @@
-from numbers import Integral as Integral, Real as Real
 from typing import Any, ClassVar
 from typing_extensions import Self
 
 from numpy import ndarray
 
-from .._config import config_context as config_context
 from .._typing import Float, Int, MatrixLike
-from ..utils import check_array as check_array
-from ..utils._param_validation import Interval as Interval
-from . import EmpiricalCovariance, empirical_covariance as empirical_covariance
+from . import EmpiricalCovariance
 
 # Author: Alexandre Gramfort <alexandre.gramfort@inria.fr>
 #         Gael Varoquaux <gael.varoquaux@normalesup.org>

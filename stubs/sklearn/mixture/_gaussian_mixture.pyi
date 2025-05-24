@@ -2,12 +2,8 @@ from typing import ClassVar, Literal
 
 from numpy import ndarray
 from numpy.random import RandomState
-from scipy import linalg as linalg
 
 from .._typing import ArrayLike, Float, Int, MatrixLike
-from ..utils import check_array as check_array
-from ..utils._param_validation import StrOptions as StrOptions
-from ..utils.extmath import row_norms as row_norms
 from ._base import BaseMixture
 
 # Author: Wei Xue <xuewei4d@gmail.com>

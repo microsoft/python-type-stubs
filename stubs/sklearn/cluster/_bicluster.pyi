@@ -1,25 +1,12 @@
 from abc import ABCMeta, abstractmethod
-from numbers import Integral as Integral
 from typing import Any, ClassVar, Literal
 from typing_extensions import Self
 
 from numpy import ndarray
 from numpy.random import RandomState
-from scipy.linalg import norm as norm
-from scipy.sparse import dia_matrix as dia_matrix, issparse as issparse
-from scipy.sparse.linalg import eigsh as eigsh, svds as svds
 
 from .._typing import ArrayLike, Int, MatrixLike
 from ..base import BaseEstimator, BiclusterMixin
-from ..utils import check_random_state as check_random_state, check_scalar as check_scalar
-from ..utils._param_validation import Interval as Interval, StrOptions as StrOptions
-from ..utils.extmath import (
-    make_nonnegative as make_nonnegative,
-    randomized_svd as randomized_svd,
-    safe_sparse_dot as safe_sparse_dot,
-)
-from ..utils.validation import assert_all_finite as assert_all_finite
-from . import KMeans as KMeans, MiniBatchKMeans as MiniBatchKMeans
 
 __all__ = ["SpectralCoclustering", "SpectralBiclustering"]
 

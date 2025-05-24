@@ -1,5 +1,4 @@
 from abc import ABCMeta, abstractmethod
-from numbers import Integral as Integral, Real as Real
 from typing import ClassVar, Literal
 from typing_extensions import Self
 
@@ -7,11 +6,6 @@ from numpy import ndarray
 
 from .._typing import ArrayLike, Float, Int, MatrixLike
 from ..base import BaseEstimator, ClassNamePrefixFeaturesOutMixin, MultiOutputMixin, RegressorMixin, TransformerMixin
-from ..exceptions import ConvergenceWarning as ConvergenceWarning
-from ..utils import check_array as check_array, check_consistent_length as check_consistent_length
-from ..utils._param_validation import Interval as Interval, StrOptions as StrOptions
-from ..utils.extmath import svd_flip as svd_flip
-from ..utils.validation import FLOAT_DTYPES as FLOAT_DTYPES, check_is_fitted as check_is_fitted
 
 __all__ = ["PLSCanonical", "PLSRegression", "PLSSVD"]
 

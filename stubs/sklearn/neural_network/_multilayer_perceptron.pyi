@@ -1,6 +1,4 @@
 from abc import ABCMeta, abstractmethod
-from itertools import chain as chain
-from numbers import Integral as Integral, Real as Real
 from typing import ClassVar, Literal
 from typing_extensions import Self
 
@@ -8,19 +6,7 @@ from numpy import ndarray
 from numpy.random import RandomState
 
 from .._typing import ArrayLike, Float, Int, MatrixLike
-from ..base import BaseEstimator, ClassifierMixin, RegressorMixin, is_classifier as is_classifier
-from ..exceptions import ConvergenceWarning as ConvergenceWarning
-from ..metrics import accuracy_score as accuracy_score, r2_score as r2_score
-from ..model_selection import train_test_split as train_test_split
-from ..preprocessing import LabelBinarizer as LabelBinarizer
-from ..utils import check_random_state as check_random_state, column_or_1d as column_or_1d, gen_batches as gen_batches
-from ..utils._param_validation import Interval as Interval, Options as Options, StrOptions as StrOptions
-from ..utils.extmath import safe_sparse_dot as safe_sparse_dot
-from ..utils.metaestimators import available_if as available_if
-from ..utils.multiclass import type_of_target as type_of_target, unique_labels as unique_labels
-from ..utils.validation import check_is_fitted as check_is_fitted
-from ._base import ACTIVATIONS as ACTIVATIONS, DERIVATIVES as DERIVATIVES, LOSS_FUNCTIONS as LOSS_FUNCTIONS
-from ._stochastic_optimizers import AdamOptimizer as AdamOptimizer, SGDOptimizer as SGDOptimizer
+from ..base import BaseEstimator, ClassifierMixin, RegressorMixin
 
 _STOCHASTIC_SOLVERS: list = ...
 

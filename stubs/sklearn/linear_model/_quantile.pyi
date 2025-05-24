@@ -1,15 +1,10 @@
-from numbers import Real as Real
 from typing import ClassVar, Literal
 from typing_extensions import Self
 
 from numpy import ndarray
-from scipy import sparse as sparse
-from scipy.optimize import linprog as linprog
 
 from .._typing import ArrayLike, Float, MatrixLike
 from ..base import BaseEstimator, RegressorMixin
-from ..exceptions import ConvergenceWarning as ConvergenceWarning
-from ..utils._param_validation import Hidden as Hidden, Interval as Interval, StrOptions as StrOptions
 from ._base import LinearModel
 
 # Authors: David Dale <dale.david@mail.ru>
