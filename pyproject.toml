@@ -11,7 +11,7 @@ hygiene = ["ruff ==0.11.*"]
 tests = [
     # Tools used for testing
     "docopt-ng",
-    "mypy ==1.13.*",
+    "mypy ==1.15.*",
     "pyright",
 
     # Typed libraries and stubs
@@ -112,7 +112,7 @@ extra-standard-library = [
 ]
 
 [tool.pyright]
-exclude = ["build", ".git"]
+exclude = ["build", ".git", ".venv*"]
 stubPath = "./stubs"
 pythonversion = "3.9" # Target oldest supported Python version
 typeCheckingMode = "standard"

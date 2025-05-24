@@ -357,6 +357,9 @@ MigrationBackup/
 # Python virtual environment
 .venv
 
+# Lock files (like uv.lock)
+*.lock
+
 # Build files from utils
 .eggs
 *.egg-info
