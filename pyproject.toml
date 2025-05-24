@@ -11,7 +11,7 @@ hygiene = ["ruff ==0.11.*"]
 tests = [
     # Tools used for testing
     "docopt-ng",
-    "mypy ==1.13.*",
+    "mypy ==1.15.*",
     "pyright",
 
     # Typed libraries and stubs

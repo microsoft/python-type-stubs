@@ -1,10 +1,18 @@
 import enum
 import functools
-from tkinter.tix import HList
+import sys
+from _typeshed import Incomplete
 from typing import Literal
 
 from .font_manager import FontProperties
 from .mathtext import MathtextBackend
+
+# tkinter.tix was removed from Python 3.13
+# Recent matplotlib versions define HList in this module
+if sys.version_info >= (3, 13):
+    HList: Incomplete
+else:
+    from tkinter.tix import HList
 
 def get_unicode_index(symbol: str, math: bool = True) -> int: ...
 
