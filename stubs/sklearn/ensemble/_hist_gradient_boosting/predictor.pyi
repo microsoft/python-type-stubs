@@ -2,8 +2,6 @@ from numpy import ndarray
 
 from ..._typing import ArrayLike, Int, MatrixLike
 
-# Author: Nicolas Hug
-
 class TreePredictor:
     def __init__(
         self,

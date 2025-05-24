@@ -1,24 +1,17 @@
-import numpy as np
-from numpy import (
-    float64 as X_DTYPE,
-    float64 as Y_DTYPE,
-    uint32 as X_BINNED_DTYPE,
-)
+import enum
+from typing import Final
 
-ALMOST_INF: float = 1e300
-MonotonicConstraint: int
+import numpy.dtypes
 
-class PREDICTOR_RECORD_DTYPE:
-    value: Y_DTYPE
-    count: np.uint32
-    feature_idx: np.uint32
-    num_threshold: X_DTYPE
-    missing_go_to_left: np.uint8
-    left: np.uint32
-    right: np.uint32
-    gain: Y_DTYPE
-    depth: np.uint32
-    is_leaf: np.uint8
-    bin_threshold: X_BINNED_DTYPE
-    is_categorical: np.uint8
-    bitset_idx: np.uint32
+class MonotonicConstraint(enum.IntFlag):
+    NEG = -1
+    NO_CST = 0
+    POS = 1
+
+ALMOST_INF: float
+HISTOGRAM_DTYPE: numpy.dtypes.VoidDType
+NEG: Final = MonotonicConstraint.NEG
+NO_CST: Final = MonotonicConstraint.NO_CST
+POS: Final = MonotonicConstraint.POS
+PREDICTOR_RECORD_DTYPE: numpy.dtypes.VoidDType
+__test__: dict
