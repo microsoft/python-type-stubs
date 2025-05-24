@@ -1941,6 +1941,7 @@ vispy.visuals.GraphVisual._node_kwargs
 vispy.visuals.GraphVisual._node_properties_args
 vispy.visuals.GridLinesVisual.__init__
 vispy.visuals.ImageVisual.set_data
+vispy.visuals.IsosurfaceVisual.__init__
 vispy.visuals.LinePlotVisual._kw_trans
 vispy.visuals.LinePlotVisual._line_kwargs
 vispy.visuals.LinePlotVisual._marker_kwargs
@@ -1973,6 +1974,7 @@ vispy.visuals.graphs.layouts.AVAILABLE_LAYOUTS
 vispy.visuals.gridlines.GridLinesVisual.__init__
 vispy.visuals.image.ImageVisual.set_data
 vispy.visuals.image_complex.ComplexImageVisual.COMPLEX_MODES
+vispy.visuals.isosurface.IsosurfaceVisual.__init__
 vispy.visuals.line.LineVisual._cap_types
 vispy.visuals.line.LineVisual._join_types
 vispy.visuals.line.arrow.ARROW_TYPES

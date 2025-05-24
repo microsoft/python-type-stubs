@@ -390,8 +390,6 @@ networkx.linalg.tests.test_graphmatrix
 networkx.linalg.tests.test_laplacian
 networkx.linalg.tests.test_modularity
 networkx.linalg.tests.test_spectrum
-networkx.readwrite.gml.Token.__match_args__
-networkx.readwrite.gml.Token.__replace__
 networkx.readwrite.json_graph.tests
 networkx.readwrite.json_graph.tests.test_adjacency
 networkx.readwrite.json_graph.tests.test_cytoscape
@@ -446,6 +444,9 @@ networkx.utils.tests.test_unionfind
 networkx.DiGraph._adj
 networkx.DiGraph._pred
 networkx.DiGraph._succ
+networkx.EdgePartition.EXCLUDED
+networkx.EdgePartition.INCLUDED
+networkx.EdgePartition.OPEN
 networkx.Graph._adj
 networkx.Graph._node
 networkx.Graph.adjlist_inner_dict_factory
@@ -463,6 +464,9 @@ networkx.adj_matrix
 networkx.adjacency_graph
 networkx.adjacency_matrix
 networkx.adjacency_spectrum
+networkx.algorithms.EdgePartition.EXCLUDED
+networkx.algorithms.EdgePartition.INCLUDED
+networkx.algorithms.EdgePartition.OPEN
 networkx.algorithms.adamic_adar_index
 networkx.algorithms.all_node_cuts
 networkx.algorithms.all_pairs_bellman_ford_path
@@ -1628,6 +1632,9 @@ networkx.algorithms.traversal.edge_bfs
 networkx.algorithms.traversal.edge_dfs
 networkx.algorithms.traversal.edgebfs.edge_bfs
 networkx.algorithms.traversal.edgedfs.edge_dfs
+networkx.algorithms.tree.EdgePartition.EXCLUDED
+networkx.algorithms.tree.EdgePartition.INCLUDED
+networkx.algorithms.tree.EdgePartition.OPEN
 networkx.algorithms.tree.Edmonds
 networkx.algorithms.tree.branching_weight
 networkx.algorithms.tree.branchings.Edmonds
@@ -1661,6 +1668,9 @@ networkx.algorithms.tree.minimum_branching
 networkx.algorithms.tree.minimum_spanning_arborescence
 networkx.algorithms.tree.minimum_spanning_edges
 networkx.algorithms.tree.minimum_spanning_tree
+networkx.algorithms.tree.mst.EdgePartition.EXCLUDED
+networkx.algorithms.tree.mst.EdgePartition.INCLUDED
+networkx.algorithms.tree.mst.EdgePartition.OPEN
 networkx.algorithms.tree.mst.boruvka_mst_edges
 networkx.algorithms.tree.mst.kruskal_mst_edges
 networkx.algorithms.tree.mst.maximum_spanning_edges
@@ -2032,7 +2042,6 @@ networkx.full_rary_tree
 networkx.generalized_degree
 networkx.generate_random_paths
 networkx.generators.LCF_graph
-networkx.generators.atlas.THIS_DIR
 networkx.generators.atlas.graph_atlas
 networkx.generators.atlas.graph_atlas_g
 networkx.generators.balanced_tree
@@ -2481,6 +2490,13 @@ networkx.readwrite.forest_str
 networkx.readwrite.from_graph6_bytes
 networkx.readwrite.from_sparse6_bytes
 networkx.readwrite.gexf.read_gexf
+networkx.readwrite.gml.Pattern.COMMENT_WHITESPACE
+networkx.readwrite.gml.Pattern.DICT_END
+networkx.readwrite.gml.Pattern.DICT_START
+networkx.readwrite.gml.Pattern.INTS
+networkx.readwrite.gml.Pattern.KEYS
+networkx.readwrite.gml.Pattern.REALS
+networkx.readwrite.gml.Pattern.STRINGS
 networkx.readwrite.gml.Token.__new__
 networkx.readwrite.gml.parse_gml
 networkx.readwrite.gml.read_gml

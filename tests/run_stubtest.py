@@ -37,6 +37,7 @@ def run_stubtest(module: str) -> CompletedProcess[bytes]:
         "--mypy-config-file",
         str(root / "pyproject.toml"),
         *("--allowlist", str(allowlist)) * allowlist.exists(),
+        # "--ignore-positional-only",
         # "--generate-allowlist",
     )
     print(f"\nRunning {' '.join(args)!r} ...", flush=True)
