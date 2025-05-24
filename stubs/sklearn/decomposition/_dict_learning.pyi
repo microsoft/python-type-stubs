@@ -1,27 +1,14 @@
-from math import ceil as ceil
-from numbers import Integral as Integral, Real as Real
 from typing import Any, Callable, ClassVar, Literal
 from typing_extensions import Self
 
-from joblib import effective_n_jobs as effective_n_jobs
 from numpy import ndarray
 from numpy.random import RandomState
-from scipy import linalg as linalg
 
 from .._typing import ArrayLike, Float, Int, MatrixLike
 from ..base import BaseEstimator, ClassNamePrefixFeaturesOutMixin, TransformerMixin
-from ..linear_model import Lars as Lars, Lasso as Lasso, LassoLars as LassoLars, orthogonal_mp_gram as orthogonal_mp_gram
 from ..utils import (
-    check_array as check_array,
-    check_random_state as check_random_state,
     deprecated,
-    gen_batches as gen_batches,
-    gen_even_slices as gen_even_slices,
 )
-from ..utils._param_validation import Hidden as Hidden, Interval as Interval, StrOptions as StrOptions
-from ..utils.extmath import randomized_svd as randomized_svd, row_norms as row_norms, svd_flip as svd_flip
-from ..utils.parallel import Parallel as Parallel, delayed as delayed
-from ..utils.validation import check_is_fitted as check_is_fitted
 
 # Author: Vlad Niculae, Gael Varoquaux, Alexandre Gramfort
 # License: BSD 3 clause

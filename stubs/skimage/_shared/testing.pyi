@@ -1,30 +1,4 @@
-import functools
-import os
-import re
-import struct
-import threading
-import warnings
-from tempfile import NamedTemporaryFile
-
-import numpy as np
-from numpy import testing
-from numpy.testing import (
-    TestCase,
-    assert_,
-    assert_allclose,
-    assert_almost_equal,
-    assert_array_almost_equal,
-    assert_array_almost_equal_nulp,
-    assert_array_equal,
-    assert_array_less,
-    assert_equal,
-    assert_no_warnings,
-    assert_warns,
-)
 from numpy.typing import ArrayLike
-
-from ..data._fetchers import _fetch
-from ._warnings import expected_warnings
 
 SKIP_RE = ...
 

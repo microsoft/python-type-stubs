@@ -1,26 +1,11 @@
-from math import log as log, sqrt as sqrt
-from numbers import Integral as Integral, Real as Real
 from typing import Any, ClassVar, Literal
 from typing_extensions import Self
 
 from numpy import ndarray
 from numpy.random import RandomState
-from scipy import linalg as linalg
-from scipy.sparse import issparse as issparse
-from scipy.sparse.linalg import svds as svds
-from scipy.special import gammaln as gammaln
 
 from .._typing import Float, Int, MatrixLike
-from ..utils import check_random_state as check_random_state
-from ..utils._param_validation import Interval as Interval, StrOptions as StrOptions
 from ..utils.deprecation import deprecated
-from ..utils.extmath import (
-    fast_logdet as fast_logdet,
-    randomized_svd as randomized_svd,
-    stable_cumsum as stable_cumsum,
-    svd_flip as svd_flip,
-)
-from ..utils.validation import check_is_fitted as check_is_fitted
 from ._base import _BasePCA
 
 class PCA(_BasePCA):

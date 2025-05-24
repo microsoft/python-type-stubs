@@ -1,10 +1,7 @@
 from abc import ABC, abstractmethod
-from collections.abc import Iterable as Iterable, Mapping, Sequence
-from inspect import signature as signature
+from collections.abc import Mapping, Sequence
 from numbers import Integral, Real
 from typing import Any, Callable, Literal
-
-from scipy.sparse import csr_matrix as csr_matrix, issparse as issparse
 
 from .._typing import Float
 

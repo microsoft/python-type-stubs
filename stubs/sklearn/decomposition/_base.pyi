@@ -2,11 +2,9 @@ from abc import ABCMeta, abstractmethod
 from typing_extensions import Self
 
 from numpy import ndarray
-from scipy import linalg as linalg
 
 from .._typing import MatrixLike
 from ..base import BaseEstimator, ClassNamePrefixFeaturesOutMixin, TransformerMixin
-from ..utils.validation import check_is_fitted as check_is_fitted
 
 # Author: Alexandre Gramfort <alexandre.gramfort@inria.fr>
 #         Olivier Grisel <olivier.grisel@ensta.org>

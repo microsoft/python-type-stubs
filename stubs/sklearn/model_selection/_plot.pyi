@@ -7,8 +7,7 @@ from matplotlib.figure import Figure
 from numpy.random import RandomState
 
 from .._typing import ArrayLike, Float, Int, MatrixLike
-from ..utils import check_matplotlib_support as check_matplotlib_support
-from . import BaseCrossValidator, learning_curve as learning_curve
+from . import BaseCrossValidator
 
 class LearningCurveDisplay:
     fill_between_: Artist | None = ...

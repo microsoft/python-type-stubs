@@ -1,6 +1,5 @@
 from abc import ABCMeta, abstractmethod
 from collections.abc import Mapping
-from numbers import Integral as Integral, Real as Real
 from typing import Any, ClassVar, Literal
 from typing_extensions import Self
 
@@ -9,26 +8,10 @@ from numpy.random import RandomState
 from scipy.sparse._csr import csr_matrix
 
 from .._typing import ArrayLike, Float, Int, MatrixLike
-from ..base import BaseEstimator, OutlierMixin, RegressorMixin, clone as clone, is_classifier as is_classifier
-from ..exceptions import ConvergenceWarning as ConvergenceWarning
-from ..model_selection import ShuffleSplit as ShuffleSplit, StratifiedShuffleSplit as StratifiedShuffleSplit
-from ..utils import check_random_state as check_random_state, compute_class_weight as compute_class_weight
-from ..utils._param_validation import Hidden as Hidden, Interval as Interval, StrOptions as StrOptions
-from ..utils.extmath import safe_sparse_dot as safe_sparse_dot
-from ..utils.metaestimators import available_if as available_if
-from ..utils.parallel import Parallel as Parallel, delayed as delayed
-from ..utils.validation import check_is_fitted as check_is_fitted
-from ._base import LinearClassifierMixin, SparseCoefMixin, make_dataset as make_dataset
+from ..base import BaseEstimator, OutlierMixin, RegressorMixin
+from ._base import LinearClassifierMixin, SparseCoefMixin
 from ._sgd_fast import (
-    EpsilonInsensitive as EpsilonInsensitive,
-    Hinge as Hinge,
-    Huber as Huber,
-    Log as Log,
     LossFunction,
-    ModifiedHuber as ModifiedHuber,
-    SquaredEpsilonInsensitive as SquaredEpsilonInsensitive,
-    SquaredHinge as SquaredHinge,
-    SquaredLoss as SquaredLoss,
 )
 
 # Authors: Peter Prettenhofer <peter.prettenhofer@gmail.com> (main author)

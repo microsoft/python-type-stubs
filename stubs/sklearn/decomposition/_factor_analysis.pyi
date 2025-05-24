@@ -1,19 +1,11 @@
-from math import log as log, sqrt as sqrt
-from numbers import Integral as Integral, Real as Real
 from typing import Any, ClassVar, Literal
 from typing_extensions import Self
 
 from numpy import ndarray
 from numpy.random import RandomState
-from scipy import linalg as linalg
 
 from .._typing import ArrayLike, Float, Int, MatrixLike
 from ..base import BaseEstimator, ClassNamePrefixFeaturesOutMixin, TransformerMixin
-from ..exceptions import ConvergenceWarning as ConvergenceWarning
-from ..utils import check_random_state as check_random_state
-from ..utils._param_validation import Interval as Interval, StrOptions as StrOptions
-from ..utils.extmath import fast_logdet as fast_logdet, randomized_svd as randomized_svd, squared_norm as squared_norm
-from ..utils.validation import check_is_fitted as check_is_fitted
 
 # Author: Christian Osendorfer <osendorf@gmail.com>
 #         Alexandre Gramfort <alexandre.gramfort@inria.fr>

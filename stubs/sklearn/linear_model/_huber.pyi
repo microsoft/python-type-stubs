@@ -1,15 +1,10 @@
-from numbers import Integral as Integral, Real as Real
 from typing import ClassVar
 from typing_extensions import Self
 
 from numpy import ndarray
-from scipy import optimize as optimize
 
 from .._typing import ArrayLike, Float, Int, MatrixLike
 from ..base import BaseEstimator, RegressorMixin
-from ..utils import axis0_safe_slice as axis0_safe_slice
-from ..utils._param_validation import Interval as Interval
-from ..utils.extmath import safe_sparse_dot as safe_sparse_dot
 from ._base import LinearModel
 
 # Authors: Manoj Kumar mks542@nyu.edu

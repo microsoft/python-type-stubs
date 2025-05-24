@@ -2,10 +2,8 @@ import typing_extensions
 from typing import Callable, ClassVar
 
 from ._structures import (
-    Infinity as Infinity,
-    InfinityType as InfinityType,
-    NegativeInfinity as NegativeInfinity,
-    NegativeInfinityType as NegativeInfinityType,
+    InfinityType,
+    NegativeInfinityType,
 )
 
 # Copyright (c) Donald Stufft and individual contributors.

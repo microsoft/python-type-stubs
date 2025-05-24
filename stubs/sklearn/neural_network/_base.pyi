@@ -1,5 +1,3 @@
-from scipy.special import xlogy as xlogy
-
 from .._typing import ArrayLike, Float, MatrixLike
 
 # Author: Issam H. Laradji <issam.laradji@gmail.com>

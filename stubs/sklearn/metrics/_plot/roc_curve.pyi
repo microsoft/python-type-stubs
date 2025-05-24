@@ -6,8 +6,6 @@ from matplotlib.figure import Figure
 
 from ..._typing import ArrayLike, Float, MatrixLike
 from ...base import BaseEstimator
-from ...utils import check_matplotlib_support as check_matplotlib_support
-from .. import auc as auc, roc_curve as roc_curve
 
 class RocCurveDisplay:
     figure_: Figure = ...
