@@ -18,9 +18,6 @@ sklearn.__check_build._check_build.__test__
 sklearn.__check_build.raise_build_error
 sklearn._build_utils.tempita
 sklearn._build_utils.version
-sklearn._distributor_init.libs_path
-sklearn._distributor_init.msvcp140_dll_filename
-sklearn._distributor_init.vcomp140_dll_filename
 sklearn._loss.HuberLoss
 sklearn._loss.__all__
 sklearn._loss._loss.CyAbsoluteError.gradient
@@ -281,7 +278,6 @@ sklearn.datasets.__all__
 sklearn.datasets._base.Path.from_uri
 sklearn.datasets._base.Path.hardlink_to
 sklearn.datasets._base.Path.is_junction
-sklearn.datasets._base.Path.is_mount
 sklearn.datasets._base.Path.walk
 sklearn.datasets._base.fetch_file
 sklearn.datasets._samples_generator.MultiLabelBinarizer.__sklearn_tags__
@@ -1541,7 +1537,6 @@ sklearn.utils.arrayfuncs.sum_parallel
 sklearn.utils.discovery.Path.from_uri
 sklearn.utils.discovery.Path.hardlink_to
 sklearn.utils.discovery.Path.is_junction
-sklearn.utils.discovery.Path.is_mount
 sklearn.utils.discovery.Path.walk
 sklearn.utils.estimator_checks.ClusterMixin.__sklearn_tags__
 sklearn.utils.estimator_checks.RegressorMixin.__sklearn_tags__

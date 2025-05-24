@@ -34,7 +34,6 @@ vispy.geometry.tests.test_triangulation
 vispy.gloo.VertexBuffer.divisor
 vispy.gloo.buffer.VertexBuffer.divisor
 vispy.gloo.gl.es2
-vispy.gloo.gl.gl2.wglGetProcAddress
 vispy.gloo.gl.glplus.GL_VOID_P
 vispy.gloo.gl.tests
 vispy.gloo.gl.tests.test_basics

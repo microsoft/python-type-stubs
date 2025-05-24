@@ -28,7 +28,7 @@ stubs_path = root / "stubs"
 PARTIAL_STUBS_MARKER = "-stubs"
 
 
-def call_stubtest(module: str) -> CompletedProcess[bytes]:
+def run_stubtest(module: str) -> CompletedProcess[bytes]:
     allowlist = stubs_path / module / "stubtest_allowlist.txt"
     clean_module_name = module.removesuffix(PARTIAL_STUBS_MARKER)
     args = (
@@ -39,7 +39,7 @@ def call_stubtest(module: str) -> CompletedProcess[bytes]:
         *("--allowlist", str(allowlist)) * allowlist.exists(),
         # "--generate-allowlist",
     )
-    print(f"\nRunning {' '.join(args)!r} ...")
+    print(f"\nRunning {' '.join(args)!r} ...", flush=True)
     if module.endswith(PARTIAL_STUBS_MARKER):
         # We need the module name to match runtime, so copy foo-stubs into temp/foo
         with tempfile.TemporaryDirectory() as tmpdir, chdir_context(tmpdir):
@@ -62,11 +62,11 @@ def main(modules: Collection[str]) -> int:
             # Requires way too much to validate against runtime for our very slim partial stub
             "transformers-stubs",
         }:
-            print(f"\nSkipped {stub_module}")
+            print(f"\nSkipped {stub_module}", flush=True)
             continue
         if stub_module.startswith("."):
             continue
-        returncode += call_stubtest(stub_module).returncode
+        returncode += run_stubtest(stub_module).returncode
 
     sys.exit(returncode)
 
