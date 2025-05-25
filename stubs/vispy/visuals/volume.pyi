@@ -1,23 +1,10 @@
-# Copyright (c) Vispy Development Team. All Rights Reserved.
-# Distributed under the (new) BSD License. See LICENSE.txt for more info.
-
 from functools import lru_cache
 from typing import Literal
 
 import numpy as np
 from numpy.typing import ArrayLike, NDArray
 
-from ..color import get_colormap
-from ..gloo import IndexBuffer, VertexBuffer
-from ..gloo.texture import should_cast_to_f32
-from ..io import load_spatial_filters
 from . import Visual
-from ._scalable_textures import CPUScaledTexture3D, GPUScaledTextured3D, Texture2D
-from .shaders import Function
-
-# todo: implement more render methods (port from visvis)
-# todo: allow anisotropic data
-# todo: what to do about lighting? ambi/diffuse/spec/shinynes on each visual?
 
 _VERTEX_SHADER: str = ...  # noqa
 

@@ -4,7 +4,7 @@ from typing_extensions import Self
 
 from sympy.core.basic import Basic
 from sympy.core.evalf import EvalfMixin
-from sympy.logic.boolalg import Boolean
+from sympy.logic.boolalg import Boolean as Boolean
 
 __all__ = (
     "Rel",

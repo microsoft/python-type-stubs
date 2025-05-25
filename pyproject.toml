@@ -11,7 +11,7 @@ hygiene = ["ruff ==0.11.*"]
 tests = [
     # Tools used for testing
     "docopt-ng",
-    "mypy ==1.13.*",
+    "mypy ==1.15.*",
     "pyright",
 
     # Typed libraries and stubs
@@ -156,6 +156,5 @@ disable_error_code = [
     "override", # 790 errors in 220 files
     "assignment", # 773 errors in 172 files
     "misc", # 692 errors in 132 files
-    "attr-defined", # 202 errors in 75 files
     "assert-type", # 6 errors in 1 file
 ]

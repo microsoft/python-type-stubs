@@ -1,3 +1,4 @@
+from sympy.multipledispatch import Dispatcher
 from sympy.sets.conditionset import ConditionSet
 from sympy.sets.fancysets import (
     CartesianComplexRegion,
@@ -12,7 +13,7 @@ from sympy.sets.fancysets import (
 )
 from sympy.sets.sets import Complement, EmptySet, FiniteSet, Intersection, Interval, ProductSet, Set, Union, UniversalSet
 
-intersection_sets = ...
+intersection_sets: Dispatcher
 
 @intersection_sets.register(ConditionSet, ConditionSet)
 def _(a, b) -> None: ...

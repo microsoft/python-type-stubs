@@ -5,7 +5,7 @@ from typing_extensions import Self
 
 from sympy.core.basic import Basic
 from sympy.core.cache import cacheit
-from sympy.core.decorators import _sympifyit
+from sympy.core.decorators import _sympifyit as _sympifyit
 from sympy.core.expr import AtomicExpr, Expr
 from sympy.core.mul import Mul
 from sympy.core.singleton import Singleton

@@ -1,5 +1,5 @@
-from sympy.plotting import PlotGrid
 from sympy.plotting.plot import (
+    PlotGrid,
     plot,
     plot3d,
     plot3d_parametric_line,
