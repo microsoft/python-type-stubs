@@ -221,7 +221,7 @@ def normalize(
     *,
     axis: int = 1,
     copy: bool = True,
-    return_norm: Literal[False] = ...,
+    return_norm: Literal[False] = False,
 ) -> csr_matrix: ...
 @overload
 def normalize(
@@ -239,7 +239,7 @@ def normalize(
     *,
     axis: int = 1,
     copy: bool = True,
-    return_norm: Literal[False] = ...,
+    return_norm: Literal[False] = False,
 ) -> ndarray: ...
 def normalize(
     X: MatrixLike | ArrayLike,
