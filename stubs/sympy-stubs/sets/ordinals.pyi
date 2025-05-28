@@ -1,8 +1,13 @@
-from types import NotImplementedType
-from typing import Literal
-from typing_extensions import Self
+import sys
+from typing import Any, Literal
+from typing_extensions import Self, TypeAlias
 
 from sympy.core import Basic
+
+if sys.version_info >= (3, 10):
+    from types import NotImplementedType
+else:
+    NotImplementedType: TypeAlias = Any
 
 class OmegaPower(Basic):
     def __new__(cls, a, b) -> Self: ...

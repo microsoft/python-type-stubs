@@ -1,9 +1,14 @@
-from types import NotImplementedType
+import sys
 from typing import Any
+from typing_extensions import TypeAlias
 
 from sympy.polys.agca.modules import FreeModuleQuotientRing
 from sympy.polys.domains.ring import Ring
-from sympy.utilities import public
+
+if sys.version_info >= (3, 10):
+    from types import NotImplementedType
+else:
+    NotImplementedType: TypeAlias = Any
 
 class QuotientRingElement:
     def __init__(self, ring, data) -> None: ...

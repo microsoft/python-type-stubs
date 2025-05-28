@@ -1,10 +1,11 @@
 from sympy.core import Basic, Expr
 from sympy.core.numbers import Infinity, NegativeInfinity
+from sympy.multipledispatch import Dispatcher
 from sympy.sets import Interval
 from sympy.sets.sets import FiniteSet
 
-_set_add = ...
-_set_sub = ...
+_set_add: Dispatcher
+_set_sub: Dispatcher
 
 @_set_add.register(Basic, Basic)
 def _(x, y) -> None: ...

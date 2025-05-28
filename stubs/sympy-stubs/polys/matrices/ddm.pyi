@@ -1,9 +1,14 @@
+import sys
 from itertools import chain
-from types import NotImplementedType
 from typing import Any
-from typing_extensions import Self
+from typing_extensions import Self, TypeAlias
 
 from sympy.polys.matrices.sdm import SDM
+
+if sys.version_info >= (3, 10):
+    from types import NotImplementedType
+else:
+    NotImplementedType: TypeAlias = Any
 
 class DDM(list):
     fmt = ...

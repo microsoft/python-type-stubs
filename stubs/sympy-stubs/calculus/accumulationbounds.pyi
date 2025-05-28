@@ -1,5 +1,6 @@
-from types import NotImplementedType
-from typing_extensions import Self
+import sys
+from typing import Any
+from typing_extensions import Self, TypeAlias
 
 from sympy.core.basic import Basic
 from sympy.core.expr import Expr
@@ -7,6 +8,11 @@ from sympy.core.logic import And
 from sympy.core.numbers import _sympifyit
 from sympy.core.power import Pow
 from sympy.series.order import Order
+
+if sys.version_info >= (3, 10):
+    from types import NotImplementedType
+else:
+    NotImplementedType: TypeAlias = Any
 
 class AccumulationBounds(Expr):
     is_extended_real = ...
