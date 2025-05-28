@@ -3,7 +3,7 @@ from typing import Any, Literal
 from typing_extensions import Self
 
 from sympy import Derivative, Equality, Integer, Mul, Order, Pow
-from sympy.core.basic import Atom, Basic
+from sympy.core.basic import Atom as Atom, Basic
 from sympy.core.cache import cacheit
 from sympy.core.decorators import call_highest_priority, sympify_method_args, sympify_return
 from sympy.core.evalf import EvalfMixin

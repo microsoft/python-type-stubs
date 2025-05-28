@@ -1,5 +1,11 @@
-from types import NotImplementedType
-from typing_extensions import Self
+import sys
+from typing import Any
+from typing_extensions import Self, TypeAlias
+
+if sys.version_info >= (3, 10):
+    from types import NotImplementedType
+else:
+    NotImplementedType: TypeAlias = Any
 
 class ModuleHomomorphism:
     def __init__(self, domain, codomain) -> None: ...

@@ -1,11 +1,16 @@
-from types import NotImplementedType
+import sys
 from typing import Any, Callable
-from typing_extensions import Self
+from typing_extensions import Self, TypeAlias
 
 from sympy.core.basic import Basic
 from sympy.core.evalf import EvalfMixin
 from sympy.core.power import Pow
 from sympy.series.order import Order
+
+if sys.version_info >= (3, 10):
+    from types import NotImplementedType
+else:
+    NotImplementedType: TypeAlias = Any
 
 __all__ = [
     "TransferFunction",

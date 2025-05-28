@@ -1,13 +1,16 @@
-from types import NotImplementedType
+import sys
 from typing import Any, Literal
-from typing_extensions import LiteralString, Self, Unpack
+from typing_extensions import LiteralString, Self, TypeAlias, Unpack
 
 from sympy.polys.domains.domain import Domain
 from sympy.polys.domains.domainelement import DomainElement
 from sympy.polys.domains.field import Field
-from sympy.polys.domains.integerring import ZZ
-from sympy.polys.domains.rationalfield import QQ
 from sympy.polys.domains.ring import Ring
+
+if sys.version_info >= (3, 10):
+    from types import NotImplementedType
+else:
+    NotImplementedType: TypeAlias = Any
 
 class GaussianElement(DomainElement):  # type: ignore
     base: Domain

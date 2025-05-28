@@ -1,5 +1,6 @@
 from typing import Any
 
+from sympy.multipledispatch import Dispatcher
 from sympy.sets.fancysets import (
     CartesianComplexRegion,
     ComplexRegion,
@@ -12,7 +13,7 @@ from sympy.sets.fancysets import (
 )
 from sympy.sets.sets import EmptySet, FiniteSet, Interval, ProductSet, Set, UniversalSet
 
-union_sets = ...
+union_sets: Dispatcher
 
 @union_sets.register(Naturals0, Naturals)
 def _(a, b): ...

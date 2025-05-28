@@ -1,10 +1,15 @@
-from types import NotImplementedType
+import sys
 from typing import Any, Literal
-from typing_extensions import Self
+from typing_extensions import Self, TypeAlias
 
 from sympy.polys.matrices.domainmatrix import DomainMatrix
 from sympy.polys.polyclasses import ANP
 from sympy.polys.polyutils import IntegerPowerable
+
+if sys.version_info >= (3, 10):
+    from types import NotImplementedType
+else:
+    NotImplementedType: TypeAlias = Any
 
 def to_col(coeffs) -> DomainMatrix: ...
 

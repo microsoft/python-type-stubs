@@ -1,12 +1,17 @@
-from types import NotImplementedType
+import sys
 from typing import Any
-from typing_extensions import Self
+from typing_extensions import Self, TypeAlias
 
 from sympy.core.sympify import CantSympify
 from sympy.polys.domains.domainelement import DomainElement
 from sympy.polys.rings import PolyElement, PolyRing
 from sympy.printing.defaults import DefaultPrinting
 from sympy.utilities import public
+
+if sys.version_info >= (3, 10):
+    from types import NotImplementedType
+else:
+    NotImplementedType: TypeAlias = Any
 
 @public
 def field(symbols, domain, order=...) -> Any: ...

@@ -1,7 +1,7 @@
-from collections.abc import Generator, Iterator
-from types import NotImplementedType
+import sys
+from collections.abc import Iterator
 from typing import Any
-from typing_extensions import Self
+from typing_extensions import Self, TypeAlias
 
 from sympy import ImmutableDenseNDimArray, ImmutableSparseNDimArray
 from sympy.core.basic import Basic
@@ -10,6 +10,11 @@ from sympy.core.kind import Kind
 from sympy.printing.defaults import Printable
 from sympy.tensor.array.array_derivatives import ArrayDerivative
 from sympy.tensor.array.expressions.array_expressions import ArrayContraction, ArrayTensorProduct, PermuteDims, ZeroArray
+
+if sys.version_info >= (3, 10):
+    from types import NotImplementedType
+else:
+    NotImplementedType: TypeAlias = Any
 
 class ArrayKind(Kind):
     def __new__(cls, element_kind=...) -> Self: ...

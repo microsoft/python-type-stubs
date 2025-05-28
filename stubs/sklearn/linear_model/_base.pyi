@@ -6,12 +6,9 @@ from numpy import ndarray
 from numpy.random.mtrand import RandomState
 
 from .._typing import ArrayLike, Int, MatrixLike
-from ..base import BaseEstimator, ClassifierMixin, MultiOutputMixin, RegressorMixin
+from ..base import BaseEstimator as BaseEstimator, ClassifierMixin, MultiOutputMixin, RegressorMixin
 from ..utils._seq_dataset import ArrayDataset64, CSRDataset64
 from ._stochastic_gradient import SGDClassifier
-
-# TODO: bayesian_ridge_regression and bayesian_regression_ard
-# should be squashed into its respective objects.
 
 SPARSE_INTERCEPT_DECAY: float = ...
 
@@ -27,8 +24,6 @@ class LinearModel(BaseEstimator, metaclass=ABCMeta):
     def fit(self, X, y): ...
     def predict(self, X: MatrixLike) -> ndarray: ...
 
-# XXX Should this derive from LinearModel? It should be a mixin, not an ABC.
-# Maybe the n_features checking can be moved to LinearModel.
 class LinearClassifierMixin(ClassifierMixin):
     def decision_function(self, X: MatrixLike | ArrayLike) -> ndarray: ...
     def predict(self, X: MatrixLike | ArrayLike) -> ndarray: ...

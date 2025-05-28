@@ -1,11 +1,12 @@
 from typing import Any
 
 from sympy.core import Basic, Expr
+from sympy.multipledispatch import Dispatcher
 from sympy.sets.fancysets import ImageSet
 from sympy.sets.sets import FiniteSet, Interval, Set, Union
 
-_set_mul = ...
-_set_div = ...
+_set_mul: Dispatcher
+_set_div: Dispatcher
 
 @_set_mul.register(Basic, Basic)
 def _(x, y) -> None: ...
