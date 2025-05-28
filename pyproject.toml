@@ -21,7 +21,7 @@ tests = [
     "scipy-stubs",
     "typing_extensions",
 
-    # Untyped libraries, used to prevent "reportMissingImports" and get inferred typing
+    # Untyped libraries and partial stubs. Used to prevent "reportMissingImports" and get inferred typing
     "joblib",
     "networkx",
     "PyOpenGL",
@@ -140,6 +140,9 @@ python_version = "3.9" # Target oldest supported Python version
 strict = true
 check_untyped_defs = true # Strict check on all defs
 show_column_numbers = true
+# Not all imports in these stubs are gonna be typed
+# Don't infer symbols from untyped packages as Any
+follow_untyped_imports = true
 warn_unused_ignores = false # Change from pandas
 # Partial stubs are acceptable
 disallow_any_generics = false
@@ -147,8 +150,6 @@ disallow_incomplete_defs = false
 disallow_untyped_defs = false
 # Suppressing errors
 disable_error_code = [
-    # Not all imports in these stubs are gonna be typed
-    "import-untyped",
     # mypy's overload implementation differs from pyright
     # `assert-type` issues is tests mostly comme from checking overloads
     # Since this project is specific to Pylance, just ignore them
@@ -157,6 +158,18 @@ disable_error_code = [
     # as they are inherited from the implementation.
     "override",
     # TODO
-    "assignment", # 773 errors in 172 files
-    "misc", # 692 errors in 132 files
+    "assignment", # 744 errors in 155 files
 ]
+
+[[tool.mypy.overrides]]
+# These modules are to be removed soon, not worth solving many issues
+module = ["matplotlib.*", "networkx.*"]
+disable_error_code = [
+    "assignment",
+    "misc",
+]
+[[tool.mypy.overrides]]
+module = ["sympy.*", "skimage.*", "sklearn.*"]
+# TODO: Too many untyped decorators still left
+# https://github.com/python/mypy/issues/19148
+disable_error_code = ["misc"]
