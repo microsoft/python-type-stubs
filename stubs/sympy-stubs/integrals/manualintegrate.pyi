@@ -8,7 +8,6 @@ from sympy.core.expr import Expr
 from sympy.core.function import Derivative, UndefinedFunction
 from sympy.core.relational import Boolean
 from sympy.core.symbol import Symbol, Wild
-from sympy.functions.elementary.exponential import exp
 from sympy.functions.elementary.piecewise import Piecewise
 from sympy.tensor.array.array_derivatives import ArrayDerivative
 

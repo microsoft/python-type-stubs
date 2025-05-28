@@ -1,3 +1,0 @@
-from .._build_utils import gen_from_templates
-
-def configuration(parent_package: str = "", top_path=None): ...

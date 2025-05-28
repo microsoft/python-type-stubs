@@ -1,5 +1,11 @@
-from types import NotImplementedType
+import sys
 from typing import Any
+from typing_extensions import TypeAlias
+
+if sys.version_info >= (3, 10):
+    from types import NotImplementedType
+else:
+    NotImplementedType: TypeAlias = Any
 
 _show = ...
 

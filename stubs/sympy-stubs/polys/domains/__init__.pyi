@@ -1,4 +1,4 @@
-from sympy.external.gmpy import GROUND_TYPES
+from sympy.external.gmpy import GROUND_TYPES as GROUND_TYPES
 from sympy.polys.domains.algebraicfield import AlgebraicField
 from sympy.polys.domains.complexfield import CC, ComplexField
 from sympy.polys.domains.domain import Domain
@@ -41,10 +41,25 @@ __all__ = [
     "CC",
     "EX",
     "EXRAW",
+    "PythonFiniteField",
+    "GMPYFiniteField",
+    "PythonIntegerRing",
+    "GMPYIntegerRing",
+    "PythonRational",
+    "GMPYRationalField",
+    "FF_python",
+    "FF_gmpy",
+    "ZZ_python",
+    "ZZ_gmpy",
+    "QQ_python",
+    "QQ_gmpy",
 ]
-FF_python = ...
-FF_gmpy = ...
-ZZ_python = ...
-ZZ_gmpy = ...
-QQ_python = ...
-QQ_gmpy = ...
+
+FF_python = PythonFiniteField
+FF_gmpy = GMPYFiniteField
+
+ZZ_python = PythonIntegerRing
+ZZ_gmpy = GMPYIntegerRing
+
+QQ_python = PythonRationalField
+QQ_gmpy = GMPYRationalField

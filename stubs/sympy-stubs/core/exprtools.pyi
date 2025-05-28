@@ -1,6 +1,6 @@
-from types import NotImplementedType
+import sys
 from typing import Any
-from typing_extensions import LiteralString
+from typing_extensions import LiteralString, TypeAlias
 
 from sympy import Order
 from sympy.core.add import Add
@@ -8,6 +8,11 @@ from sympy.core.basic import Basic
 from sympy.core.expr import Expr
 from sympy.core.mul import Mul
 from sympy.core.numbers import Rational
+
+if sys.version_info >= (3, 10):
+    from types import NotImplementedType
+else:
+    NotImplementedType: TypeAlias = Any
 
 _eps = ...
 

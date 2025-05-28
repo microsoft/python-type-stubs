@@ -40,6 +40,7 @@ from ctypes import (
     sizeof,
     util,
 )
+from typing import ClassVar
 
 # Based on Pyglet code
 
@@ -61,17 +62,17 @@ CGImageEncoding: str = ...
 NSZoneEncoding: str = ...
 
 class NSPoint(Structure):
-    _fields_: list = ...
+    _fields_: ClassVar[list]
 
 CGPoint = NSPoint
 
 class NSSize(Structure):
-    _fields_: list = ...
+    _fields_: ClassVar[list]
 
 CGSize = NSSize
 
 class NSRect(Structure):
-    _fields_: list = ...
+    _fields_: ClassVar[list]
 
 CGRect = NSRect
 
@@ -82,10 +83,10 @@ unichar = ...
 CGGlyph = ...
 
 class CFRange(Structure):
-    _fields_: list = ...
+    _fields_: ClassVar[list]
 
 class NSRange(Structure):
-    _fields_: list = ...
+    _fields_: ClassVar[list]
 
 CFTypeID = ...
 CFNumberType = ...
@@ -112,7 +113,7 @@ def should_use_fpret(restype): ...
 def send_message(receiver, selName, *args, **kwargs): ...
 
 class OBJC_SUPER(Structure):
-    _fields_: list = ...
+    _fields_: ClassVar[list]
 
 OBJC_SUPER_PTR = ...
 

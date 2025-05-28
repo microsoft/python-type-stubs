@@ -1,4 +1,5 @@
-from typing import Any, TypeAlias
+from typing import Any
+from typing_extensions import TypeAlias
 
 QT_API_PYQT6: str = ...
 QT_API_PYSIDE6: str = ...

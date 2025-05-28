@@ -56,10 +56,10 @@ def mean_squared_error(
     sample_weight: None | ArrayLike = None,
     multioutput: ArrayLike | Literal["raw_values", "uniform_average"] = "uniform_average",
 ) -> ndarray | Float: ...
+@overload
 @deprecated(
     "`squared` is deprecated in 1.4 and will be removed in 1.6. Use `root_mean_squared_error` instead to calculate the root mean squared error."
 )
-@overload
 def mean_squared_error(
     y_true: MatrixLike | ArrayLike,
     y_pred: MatrixLike | ArrayLike,
@@ -76,10 +76,10 @@ def mean_squared_log_error(
     sample_weight: None | ArrayLike = None,
     multioutput: ArrayLike | Literal["raw_values", "uniform_average"] = "uniform_average",
 ) -> float | ndarray: ...
+@overload
 @deprecated(
     "`squared` is deprecated in 1.4 and will be removed in 1.6. Use `root_mean_squared_log_error` instead to calculate the root mean squared logarithmic error."
 )
-@overload
 def mean_squared_log_error(
     y_true: MatrixLike | ArrayLike,
     y_pred: MatrixLike | ArrayLike,

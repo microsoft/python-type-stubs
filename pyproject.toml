@@ -14,7 +14,7 @@ tests = [
     "mypy ==1.15.*",
     "pyright",
 
-    # Typed libraries and stubs
+    # Typed dependencies and stubs
     "matplotlib >=3.8",
     "numpy >=2",
     "pandas-stubs",
@@ -25,14 +25,14 @@ tests = [
     # Untyped libraries. Used to prevent "reportMissingImports" and get inferred typing
     "joblib",
     "PyOpenGL",
-    "traitlets",
-    "transformers",
 
-    # The libraries we're stubbing. Needed for stubtest
+    # The libraries we're stubbing.
+    # Needed for stubtest and downloads their dependencies to get known import symbols
     "networkx",
     "scikit-image",
     "scikit-learn",
     "sympy",
+    "transformers",
     "vispy",
 ]
 dev = [{ include-group = "hygiene" }, { include-group = "tests" }]
@@ -146,6 +146,9 @@ reportUnsupportedDunderAll = "error"
 strict = true
 check_untyped_defs = true # Strict check on all defs
 show_column_numbers = true
+# Not all imports in these stubs are gonna be typed
+# Don't infer symbols from untyped packages as Any
+follow_untyped_imports = true
 warn_unused_ignores = false # Change from pandas
 # Partial stubs are acceptable
 disallow_any_generics = false
@@ -153,13 +156,26 @@ disallow_incomplete_defs = false
 disallow_untyped_defs = false
 # Suppressing errors
 disable_error_code = [
-    # Not all imports in these stubs are gonna be typed
-    "import-untyped",
+    # mypy's overload implementation differs from pyright
+    # `assert-type` issues is tests mostly comme from checking overloads
+    # Since this project is specific to Pylance, just ignore them
+    "assert-type",
+    # Incompatible overrides are out of our stubs' control
+    # as they are inherited from the implementation.
+    "override",
     # TODO
-    "valid-type", # 967 errors in 115 files
-    "override", # 790 errors in 220 files
-    "assignment", # 773 errors in 172 files
-    "misc", # 692 errors in 132 files
-    "attr-defined", # 202 errors in 75 files
-    "assert-type", # 6 errors in 1 file
+    "assignment", # 744 errors in 155 files
 ]
+
+[[tool.mypy.overrides]]
+# These modules are to be removed soon, not worth solving many issues
+module = ["matplotlib.*", "networkx.*"]
+disable_error_code = [
+    "assignment",
+    "misc",
+]
+[[tool.mypy.overrides]]
+module = ["sympy.*", "skimage.*", "sklearn.*"]
+# TODO: Too many untyped decorators still left
+# https://github.com/python/mypy/issues/19148
+disable_error_code = ["misc"]

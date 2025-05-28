@@ -1,11 +1,12 @@
 from sympy.core.basic import Basic
 from sympy.core.function import FunctionClass, Lambda
+from sympy.multipledispatch import Dispatcher
 from sympy.sets import FiniteSet, Intersection, Interval, Range, Union
 from sympy.sets.fancysets import ImageSet, Integers, Naturals, Reals
 from sympy.sets.sets import Complement, EmptySet, Set
 
 FunctionUnion = ...
-_set_function = ...
+_set_function: Dispatcher
 
 @_set_function.register(FunctionClass, Set)
 def _(f, x) -> None: ...
