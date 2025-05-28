@@ -24,10 +24,10 @@ import sys
 import typing as _typing
 from enum import Enum
 from operator import attrgetter
-from typing import (
+from typing import (  # type: ignore[attr-defined] # _overload_dummy not exposed
     Callable,
     Literal,
-    _overload_dummy,  # type: ignore[attr-defined] # _overload_dummy not exposed
+    _overload_dummy,  # pyright: ignore[reportAttributeAccessIssue] # _overload_dummy not exposed
 )
 
 import docopt

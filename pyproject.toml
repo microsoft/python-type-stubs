@@ -151,11 +151,14 @@ disallow_untyped_defs = false
 disable_error_code = [
     # Not all imports in these stubs are gonna be typed
     "import-untyped",
+    # mypy's overload implementation differs from pyright
+    # `assert-type` issues is tests mostly comme from checking overloads
+    # Since this project is specific to Pylance, just ignore them
+    "assert-type",
+    # Incompatible overrides are out of our stubs' control
+    # as they are inherited from the implementation.
+    "override",
     # TODO
-    "valid-type", # 967 errors in 115 files
-    "override", # 790 errors in 220 files
     "assignment", # 773 errors in 172 files
     "misc", # 692 errors in 132 files
-    "attr-defined", # 202 errors in 75 files
-    "assert-type", # 6 errors in 1 file
 ]

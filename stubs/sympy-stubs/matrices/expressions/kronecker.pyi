@@ -1,12 +1,17 @@
-from types import NotImplementedType
+import sys
 from typing import Any
-from typing_extensions import Self
+from typing_extensions import Self, TypeAlias
 
 from sympy.matrices.expressions.matadd import MatAdd
 from sympy.matrices.expressions.matexpr import MatrixExpr
 from sympy.matrices.expressions.special import GenericIdentity, GenericZeroMatrix, Identity
 from sympy.matrices.immutable import ImmutableDenseMatrix
 from sympy.series.order import Order
+
+if sys.version_info >= (3, 10):
+    from types import NotImplementedType
+else:
+    NotImplementedType: TypeAlias = Any
 
 def kronecker_product(*matrices) -> NotImplementedType | GenericIdentity | Order | object | Identity: ...
 

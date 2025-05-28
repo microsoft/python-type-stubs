@@ -1,6 +1,13 @@
-from types import NotImplementedType
+import sys
+from typing import Any
+from typing_extensions import TypeAlias
 
 from sympy.plotting.intervalmath.interval_arithmetic import interval
+
+if sys.version_info >= (3, 10):
+    from types import NotImplementedType
+else:
+    NotImplementedType: TypeAlias = Any
 
 def Abs(x) -> interval: ...
 def exp(x) -> interval: ...

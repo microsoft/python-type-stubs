@@ -1,7 +1,7 @@
+import sys
 from _typeshed import Incomplete
-from types import NotImplementedType
 from typing import Any
-from typing_extensions import Self
+from typing_extensions import Self, TypeAlias
 
 from sympy.core.numbers import Integer, Rational
 from sympy.external.gmpy import MPQ
@@ -9,6 +9,11 @@ from sympy.external.pythonmpq import PythonMPQ
 from sympy.polys.domains.characteristiczero import CharacteristicZero
 from sympy.polys.domains.field import Field
 from sympy.polys.domains.simpledomain import SimpleDomain
+
+if sys.version_info >= (3, 10):
+    from types import NotImplementedType
+else:
+    NotImplementedType: TypeAlias = Any
 
 class RationalField(Field, CharacteristicZero, SimpleDomain):
     rep = ...

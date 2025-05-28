@@ -1,10 +1,15 @@
-from types import NotImplementedType
+import sys
 from typing import Any
-from typing_extensions import Self
+from typing_extensions import Self, TypeAlias
 
 from sympy.core.basic import Basic
 from sympy.core.evalf import EvalfMixin
-from sympy.logic.boolalg import Boolean
+from sympy.logic.boolalg import Boolean as Boolean
+
+if sys.version_info >= (3, 10):
+    from types import NotImplementedType
+else:
+    NotImplementedType: TypeAlias = Any
 
 __all__ = (
     "Rel",

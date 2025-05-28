@@ -1,14 +1,12 @@
-import decimal
 import io
 import typing_extensions
+from decimal import Decimal as Decimal
 
-import numpy.typing
 import pandas as pd
+from numpy.typing import ArrayLike as ArrayLike
 
-Decimal = decimal.Decimal
 PythonScalar: typing_extensions.TypeAlias = str | int | float | bool
 
-ArrayLike = numpy.typing.ArrayLike
 FileLike = io.IOBase
 PathLike = str
 
