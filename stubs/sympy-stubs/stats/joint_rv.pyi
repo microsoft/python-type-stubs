@@ -1,5 +1,5 @@
 from typing import Any
-from typing_extensions import Self
+from typing_extensions import Self, TypeAlias
 
 from sympy import Basic, Equality, FiniteSet, Indexed, Integral, Ne, ProductSet, Sum
 from sympy.core.expr import Expr
@@ -9,6 +9,8 @@ from sympy.stats.crv import ProductContinuousDomain, SingleContinuousPSpace
 from sympy.stats.drv import ProductDiscreteDomain, SingleDiscretePSpace
 from sympy.stats.frv import ProductFiniteDomain
 from sympy.stats.rv import Distribution, NamedArgsMixin, ProductDomain, ProductPSpace as ProductPSpace, RandomSymbol, SingleDomain
+
+_Set = set
 
 class JointPSpace(ProductPSpace):
     def __new__(cls, sym, dist) -> SingleContinuousPSpace | SingleDiscretePSpace | Self: ...
@@ -65,7 +67,7 @@ class MarginalDistribution(Distribution):
     @property
     def set(self) -> FiniteSet | ProductSet: ...
     @property
-    def symbols(self) -> set[Any]: ...
+    def symbols(self) -> _Set[Any]: ...
     def pdf(self, *x) -> Basic: ...
     def compute_pdf(self, expr, rvs) -> Equality | Relational | Ne | Integral | Sum: ...
     def marginalise_out(self, expr, rv) -> Equality | Relational | Ne | Integral | Sum: ...

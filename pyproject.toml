@@ -156,7 +156,6 @@ disable_error_code = [
     # Since this project is specific to Pylance, just ignore them
     "assert-type",
     # TODO
-    "valid-type", # 967 errors in 115 files
     "override", # 790 errors in 220 files
     "assignment", # 773 errors in 172 files
     "misc", # 692 errors in 132 files
