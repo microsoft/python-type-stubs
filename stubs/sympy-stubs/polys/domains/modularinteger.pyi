@@ -1,10 +1,15 @@
-from types import NotImplementedType
+import sys
 from typing import Any
-from typing_extensions import LiteralString, Self
+from typing_extensions import LiteralString, Self, TypeAlias
 
 from sympy.polys.domains.domainelement import DomainElement
 from sympy.polys.polyutils import PicklableWithSlots
 from sympy.utilities import public
+
+if sys.version_info >= (3, 10):
+    from types import NotImplementedType
+else:
+    NotImplementedType: TypeAlias = Any
 
 @public
 class ModularInteger(PicklableWithSlots, DomainElement):

@@ -1,7 +1,7 @@
+import sys
 from functools import lru_cache
-from types import NotImplementedType
 from typing import Any, Literal
-from typing_extensions import Self
+from typing_extensions import Self, TypeAlias
 
 from sympy.core.basic import Basic
 from sympy.core.cache import cacheit
@@ -10,6 +10,11 @@ from sympy.core.expr import AtomicExpr, Expr
 from sympy.core.mul import Mul
 from sympy.core.singleton import Singleton
 from sympy.series.order import Order
+
+if sys.version_info >= (3, 10):
+    from types import NotImplementedType
+else:
+    NotImplementedType: TypeAlias = Any
 
 _LOG2 = ...
 

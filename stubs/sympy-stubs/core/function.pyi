@@ -1,7 +1,7 @@
+import sys
 from inspect import Signature
-from types import NotImplementedType
 from typing import Any, Callable, Literal
-from typing_extensions import Self
+from typing_extensions import Self, TypeAlias
 
 from sympy.core.basic import Basic
 from sympy.core.cache import cacheit
@@ -10,9 +10,13 @@ from sympy.core.expr import AtomicExpr, Expr
 from sympy.core.kind import Kind
 from sympy.core.logic import FuzzyBool
 from sympy.core.numbers import Float
-from sympy.printing.str import StrPrinter
 from sympy.sets.sets import FiniteSet
 from sympy.tensor.array.array_derivatives import ArrayDerivative
+
+if sys.version_info >= (3, 10):
+    from types import NotImplementedType
+else:
+    NotImplementedType: TypeAlias = Any
 
 class PoleError(Exception): ...
 class ArgumentIndexError(ValueError): ...

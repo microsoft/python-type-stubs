@@ -1,9 +1,14 @@
-from types import NotImplementedType
+import sys
 from typing import Any, Literal
-from typing_extensions import LiteralString, Self
+from typing_extensions import LiteralString, Self, TypeAlias
 
 from sympy.polys.agca.homomorphisms import FreeModuleHomomorphism
 from sympy.polys.orderings import ProductOrder
+
+if sys.version_info >= (3, 10):
+    from types import NotImplementedType
+else:
+    NotImplementedType: TypeAlias = Any
 
 class Module:
     def __init__(self, ring) -> None: ...

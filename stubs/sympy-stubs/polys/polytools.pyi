@@ -1,8 +1,8 @@
+import sys
 from collections.abc import Iterator
 from functools import _Wrapped
-from types import NotImplementedType
 from typing import Any, Literal
-from typing_extensions import Self
+from typing_extensions import Self, TypeAlias
 
 from sympy.combinatorics.galois import S1TransitiveSubgroups, S2TransitiveSubgroups, S3TransitiveSubgroups
 from sympy.combinatorics.perm_groups import PermutationGroup
@@ -16,6 +16,11 @@ from sympy.core.numbers import Integer
 from sympy.core.relational import Equality, Ne, Relational
 from sympy.series.order import Order
 from sympy.utilities import public
+
+if sys.version_info >= (3, 10):
+    from types import NotImplementedType
+else:
+    NotImplementedType: TypeAlias = Any
 
 def _polifyit(func) -> _Wrapped[..., Any, ..., Any]: ...
 @public
