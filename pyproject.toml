@@ -11,7 +11,7 @@ hygiene = ["ruff ==0.11.*"]
 tests = [
     # Tools used for testing
     "docopt-ng",
-    "mypy ==1.13.*",
+    "mypy ==1.15.*",
     "pyright",
 
     # Typed libraries and stubs
@@ -21,7 +21,7 @@ tests = [
     "scipy-stubs",
     "typing_extensions",
 
-    # Untyped libraries, used to prevent "reportMissingImports" and get inferred typing
+    # Untyped libraries and partial stubs. Used to prevent "reportMissingImports" and get inferred typing
     "joblib",
     "networkx",
     "PyOpenGL",
@@ -140,6 +140,7 @@ reportUnsupportedDunderAll = "error"
 [tool.mypy]
 python_version = "3.9" # Target oldest supported Python version
 strict = true
+follow_untyped_imports = true # Don't infer symbols from untyped packages as Any
 check_untyped_defs = true # Strict check on all defs
 show_column_numbers = true
 warn_unused_ignores = false # Change from pandas
@@ -159,6 +160,20 @@ disable_error_code = [
     "valid-type", # 967 errors in 115 files
     "override", # 790 errors in 220 files
     "assignment", # 773 errors in 172 files
-    "misc", # 692 errors in 132 files
     "attr-defined", # 202 errors in 75 files
 ]
+
+[[tool.mypy.overrides]]
+# These modules are to be removed soon, not worth solving many issues
+module = ["matplotlib.*", "networkx.*"]
+disable_error_code = [
+    "valid-type",
+    "override",
+    "assignment",
+    "misc",
+]
+[[tool.mypy.overrides]]
+module = ["sympy.*", "skimage.*", "sklearn.*"]
+# TODO: Too many untyped decorators still left
+# https://github.com/python/mypy/issues/19148
+disable_error_code = ["misc"]

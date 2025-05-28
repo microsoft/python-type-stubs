@@ -5,7 +5,7 @@ from typing import Any, NoReturn, TypeVar
 
 from transformers.configuration_utils import PretrainedConfig
 
-_F = TypeVar("_F", bound=Callable[..., Any])
+_CallableT = TypeVar("_CallableT", bound=Callable)
 
 CONFIG_MAPPING_NAMES: OrderedDict[str, str]
 MODEL_NAMES_MAPPING: OrderedDict[str, str]
@@ -35,7 +35,9 @@ class _LazyLoadAllMappings(OrderedDict[str, str]):
     def __iter__(self) -> Iterator[str]: ...
     def __contains__(self, item: object) -> bool: ...
 
-def replace_list_option_in_docstrings(config_to_class=None, use_model_types: bool = True) -> Callable[[_F], _F]: ...
+def replace_list_option_in_docstrings(
+    config_to_class=None, use_model_types: bool = True
+) -> Callable[[_CallableT], _CallableT]: ...
 
 class AutoConfig:
     def __init__(self) -> None: ...
