@@ -1,11 +1,16 @@
-from types import NotImplementedType
+import sys
 from typing import Any, Literal
-from typing_extensions import Self
+from typing_extensions import Self, TypeAlias
 
 from sympy.core.expr import Expr
 from sympy.core.function import UndefinedFunction
 from sympy.core.power import Pow
 from sympy.matrices.dense import MutableDenseMatrix
+
+if sys.version_info >= (3, 10):
+    from types import NotImplementedType
+else:
+    NotImplementedType: TypeAlias = Any
 
 class Quaternion(Expr):
     _op_priority = ...

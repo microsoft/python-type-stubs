@@ -1,11 +1,14 @@
-from types import NotImplementedType
+import sys
 from typing import Any, Callable, Literal
-from typing_extensions import Self
+from typing_extensions import Self, TypeAlias
 
 from sympy.core.sympify import CantSympify
-from sympy.external.gmpy import GROUND_TYPES
-from sympy.polys.domains import Domain
 from sympy.polys.polyutils import PicklableWithSlots
+
+if sys.version_info >= (3, 10):
+    from types import NotImplementedType
+else:
+    NotImplementedType: TypeAlias = Any
 
 class GenericPoly(PicklableWithSlots):
     def ground_to_ring(f): ...

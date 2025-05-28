@@ -1,7 +1,7 @@
 import os
 from collections import OrderedDict
 from collections.abc import Iterator
-from typing import Any, TypeVar, Union
+from typing import Any, TypeVar
 from typing_extensions import TypeAlias
 
 from transformers.configuration_utils import PretrainedConfig

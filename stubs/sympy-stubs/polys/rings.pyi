@@ -1,7 +1,7 @@
+import sys
 from collections.abc import Iterator
-from types import NotImplementedType
 from typing import Any, Literal
-from typing_extensions import LiteralString, Self
+from typing_extensions import LiteralString, Self, TypeAlias
 
 from sympy.core.sympify import CantSympify
 from sympy.polys.compatibility import IPolys
@@ -10,6 +10,11 @@ from sympy.polys.fields import FracField
 from sympy.printing.defaults import DefaultPrinting
 from sympy.series.order import Order
 from sympy.utilities import public
+
+if sys.version_info >= (3, 10):
+    from types import NotImplementedType
+else:
+    NotImplementedType: TypeAlias = Any
 
 @public
 def ring(symbols, domain, order=...) -> Any: ...

@@ -1,6 +1,11 @@
-from types import NotImplementedType
+import sys
 from typing import Any
-from typing_extensions import Self
+from typing_extensions import Self, TypeAlias
+
+if sys.version_info >= (3, 10):
+    from types import NotImplementedType
+else:
+    NotImplementedType: TypeAlias = Any
 
 class MutablePolyDenseMatrix:
     def __new__(cls, *args, ring=...) -> Self: ...

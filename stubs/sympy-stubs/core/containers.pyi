@@ -1,10 +1,15 @@
-from collections.abc import Generator, Iterator, MutableSet
-from types import NotImplementedType
+import sys
+from collections.abc import Iterator, MutableSet
 from typing import Any, Callable
-from typing_extensions import Self
+from typing_extensions import Self, TypeAlias
 
 from sympy.core.basic import Basic
 from sympy.core.kind import Kind
+
+if sys.version_info >= (3, 10):
+    from types import NotImplementedType
+else:
+    NotImplementedType: TypeAlias = Any
 
 class Tuple(Basic):
     def __new__(cls, *args, **kwargs) -> Self: ...

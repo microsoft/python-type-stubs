@@ -8,7 +8,7 @@ from sympy.core.relational import Relational
 from sympy.stats.crv import ProductContinuousDomain, SingleContinuousPSpace
 from sympy.stats.drv import ProductDiscreteDomain, SingleDiscretePSpace
 from sympy.stats.frv import ProductFiniteDomain
-from sympy.stats.rv import Distribution, NamedArgsMixin, ProductDomain, ProductPSpace, RandomSymbol, SingleDomain
+from sympy.stats.rv import Distribution, NamedArgsMixin, ProductDomain, ProductPSpace as ProductPSpace, RandomSymbol, SingleDomain
 
 class JointPSpace(ProductPSpace):
     def __new__(cls, sym, dist) -> SingleContinuousPSpace | SingleDiscretePSpace | Self: ...
