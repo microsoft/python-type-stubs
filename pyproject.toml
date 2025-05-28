@@ -160,7 +160,7 @@ disable_error_code = [
     # as they are inherited from the implementation.
     "override",
     # TODO
-    "assignment", # 773 errors in 172 files
+    "assignment", # 744 errors in 155 files
 ]
 
 [[tool.mypy.overrides]]
