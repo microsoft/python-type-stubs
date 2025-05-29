@@ -1,6 +1,11 @@
 from typing import Literal
 
-from sympy.assumptions.predicates.ntheory import CompositePredicate, EvenPredicate, OddPredicate, PrimePredicate
+from sympy.assumptions.predicates.ntheory import (
+    CompositePredicate as CompositePredicate,
+    EvenPredicate as EvenPredicate,
+    OddPredicate as OddPredicate,
+    PrimePredicate as PrimePredicate,
+)
 from sympy.core import Add, Basic, Expr, Float, Mul, Pow
 from sympy.core.numbers import ImaginaryUnit, Infinity, Integer, NaN, NegativeInfinity, NumberSymbol, Rational
 from sympy.functions import Abs, im, re

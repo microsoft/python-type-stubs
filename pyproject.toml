@@ -32,7 +32,6 @@ tests = [
     "scikit-image",
     "scikit-learn",
     "sympy",
-    "transformers",
     "vispy",
 ]
 dev = [{ include-group = "hygiene" }, { include-group = "tests" }]
@@ -50,7 +49,6 @@ dev = [{ include-group = "hygiene" }, { include-group = "tests" }]
 "skimage-stubs" = "stubs/skimage"
 "sklearn-stubs" = "stubs/sklearn"
 "sympy-stubs" = "stubs/sympy-stubs"
-"transformers-stubs" = "stubs/transformers-stubs"
 "vispy-stubs" = "stubs/vispy"
 
 [tool.ruff]

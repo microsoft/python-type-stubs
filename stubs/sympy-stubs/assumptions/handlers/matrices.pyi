@@ -2,19 +2,19 @@ from typing import Literal
 
 from sympy import MatrixBase
 from sympy.assumptions.predicates.matrices import (
-    ComplexElementsPredicate,
-    DiagonalPredicate,
-    FullRankPredicate,
-    IntegerElementsPredicate,
-    InvertiblePredicate,
-    LowerTriangularPredicate,
-    OrthogonalPredicate,
-    PositiveDefinitePredicate,
-    RealElementsPredicate,
-    SquarePredicate,
-    SymmetricPredicate,
-    UnitaryPredicate,
-    UpperTriangularPredicate,
+    ComplexElementsPredicate as ComplexElementsPredicate,
+    DiagonalPredicate as DiagonalPredicate,
+    FullRankPredicate as FullRankPredicate,
+    IntegerElementsPredicate as IntegerElementsPredicate,
+    InvertiblePredicate as InvertiblePredicate,
+    LowerTriangularPredicate as LowerTriangularPredicate,
+    OrthogonalPredicate as OrthogonalPredicate,
+    PositiveDefinitePredicate as PositiveDefinitePredicate,
+    RealElementsPredicate as RealElementsPredicate,
+    SquarePredicate as SquarePredicate,
+    SymmetricPredicate as SymmetricPredicate,
+    UnitaryPredicate as UnitaryPredicate,
+    UpperTriangularPredicate as UpperTriangularPredicate,
 )
 from sympy.matrices.expressions import (
     BlockDiagMatrix,
