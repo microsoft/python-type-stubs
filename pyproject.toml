@@ -22,10 +22,6 @@ tests = [
     "scipy-stubs",
     "typing_extensions",
 
-    # Untyped libraries. Used to prevent "reportMissingImports" and get inferred typing
-    "joblib",
-    "PyOpenGL",
-
     # The libraries we're stubbing.
     # Needed for stubtest and downloads their dependencies to get known import symbols
     "networkx",
@@ -33,6 +29,9 @@ tests = [
     "scikit-learn",
     "sympy",
     "vispy",
+
+    # Optional vispy dependency
+    "PyOpenGL",
 ]
 dev = [{ include-group = "hygiene" }, { include-group = "tests" }]
 
