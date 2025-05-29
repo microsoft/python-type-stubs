@@ -14,9 +14,9 @@ tests = [
     "mypy ==1.15.*",
     "pyright",
 
-    # Typed dependencies and stubs
+    # External type stubs and optional dependencies
+    "PyOpenGL",
     "matplotlib >=3.8",
-    "numpy >=2",
     "pandas-stubs",
     "pytest",
     "scipy-stubs",
@@ -29,9 +29,6 @@ tests = [
     "scikit-learn",
     "sympy",
     "vispy",
-
-    # Optional vispy dependency
-    "PyOpenGL",
 ]
 dev = [{ include-group = "hygiene" }, { include-group = "tests" }]
 
