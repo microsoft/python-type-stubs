@@ -1,9 +1,5 @@
-import networkx as nx
-import numpy as np
 from numpy.typing import ArrayLike, NDArray
-from scipy.sparse import linalg
 
-from . import _ncut
 from .rag import RAG
 
 def cut_threshold(labels: NDArray, rag: RAG, thresh: float, in_place: bool = True) -> NDArray: ...
