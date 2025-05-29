@@ -1,7 +1,6 @@
 from typing import Any, ClassVar
 from typing_extensions import Self
 
-from sympy.core import S
 from sympy.core.function import DefinedFunction, Function, UndefinedFunction
 from sympy.core.numbers import Float, Integer, Rational
 from sympy.series.order import Order
