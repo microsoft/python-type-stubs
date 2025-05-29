@@ -8,6 +8,10 @@ from scipy.sparse import spmatrix
 from .._typing import ArrayLike, MatrixLike
 from ..base import BaseEstimator, TransformerMixin
 
+# Authors: Lars Buitinck
+#          Dan Blanchard <dblanchard@ets.org>
+# License: BSD 3 clause
+
 class DictVectorizer(TransformerMixin, BaseEstimator):
     feature_names_: list = ...
     vocabulary_: dict = ...
