@@ -4,24 +4,9 @@ import os
 import shutil
 import sys
 import tempfile
-from collections.abc import Collection, Generator
+from collections.abc import Collection
 from pathlib import Path
 from subprocess import CompletedProcess, run
-
-if sys.version_info >= (3, 11):
-    from contextlib import chdir as chdir_context
-else:
-    from contextlib import contextmanager
-
-    @contextmanager
-    def chdir_context(path: str) -> Generator[None, None, None]:
-        previous_working_directory = os.getcwd()
-        os.chdir(path)
-        try:
-            yield
-        finally:
-            os.chdir(previous_working_directory)
-
 
 root = Path(__file__).parent.parent
 stubs_path = root / "stubs"
@@ -29,7 +14,10 @@ PARTIAL_STUBS_MARKER = "-stubs"
 
 
 def run_stubtest(module: str) -> CompletedProcess[bytes]:
-    allowlist = stubs_path / module / "stubtest_allowlist.txt"
+    module_path = stubs_path / module
+    if not (module_path).is_dir():
+        raise ValueError(f"{module_path} is not folder or does not exists")
+    allowlist = module_path / "stubtest_allowlist.txt"
     clean_module_name = module.removesuffix(PARTIAL_STUBS_MARKER)
     args = (
         "mypy.stubtest",
@@ -40,21 +28,22 @@ def run_stubtest(module: str) -> CompletedProcess[bytes]:
         # "--ignore-positional-only",
         # "--generate-allowlist",
     )
-    print(f"\nRunning {' '.join(args)!r} ...", flush=True)
     if module.endswith(PARTIAL_STUBS_MARKER):
         # We need the module name to match runtime, so copy foo-stubs into temp/foo
-        with tempfile.TemporaryDirectory() as tmpdir, chdir_context(tmpdir):
-            shutil.copytree(stubs_path / module, Path(tmpdir, clean_module_name))
-            return run((sys.executable, "-m", *args, "--ignore-missing-stub"))
+        with tempfile.TemporaryDirectory() as tmpdir:
+            shutil.copytree(module_path, Path(tmpdir, clean_module_name))
+            args += ("--ignore-missing-stub",)
+            print(f"\nRunning {' '.join(args)!r} ...", flush=True)
+            return run((sys.executable, "-m", *args), cwd=tmpdir)
     else:
-        return run((sys.executable, "-m", *args))
+        print(f"\nRunning {' '.join(args)!r} ...", flush=True)
+        return run((sys.executable, "-m", *args), cwd=stubs_path)
 
 
 def main(modules: Collection[str]) -> int:
-    os.chdir(stubs_path)
     returncode = 0
     if not modules:
-        modules = os.listdir()
+        modules = os.listdir(stubs_path)
     for stub_module in modules:
         if stub_module in {
             # This stub has been upstreamed and is only kept for backwards compatibility

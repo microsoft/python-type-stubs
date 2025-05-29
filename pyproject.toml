@@ -166,6 +166,13 @@ disable_error_code = [
 ]
 
 [[tool.mypy.overrides]]
+# follow_untyped_imports = true will cause stubtest to run mypy on the source
+# So disable it for partial stubs
+module = ["sympy.*"]
+follow_untyped_imports = false
+disable_error_code = ["import-untyped", "misc"]
+
+[[tool.mypy.overrides]]
 # These modules are to be removed soon, not worth solving many issues
 module = ["matplotlib.*", "networkx.*"]
 disable_error_code = [
@@ -173,7 +180,7 @@ disable_error_code = [
     "misc",
 ]
 [[tool.mypy.overrides]]
-module = ["sympy.*", "skimage.*", "sklearn.*"]
+module = ["skimage.*", "sklearn.*"]
 # TODO: Too many untyped decorators still left
 # https://github.com/python/mypy/issues/19148
 disable_error_code = ["misc"]
