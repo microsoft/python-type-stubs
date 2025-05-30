@@ -1,5 +1,13 @@
-from types import NotImplementedType
-from typing import Any, Generator, Literal, NoReturn
+import sys
+from collections.abc import Generator
+from typing import Any
+from typing_extensions import TypeAlias
+
+if sys.version_info >= (3, 10):
+    from types import NotImplementedType
+else:
+    NotImplementedType: TypeAlias = Any
+from typing import Literal, NoReturn
 
 from sympy import Pow
 from sympy.core.function import UndefinedFunction

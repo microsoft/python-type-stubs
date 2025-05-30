@@ -1,23 +1,11 @@
-import numbers
-from heapq import heappop as heappop, heappush as heappush
-from timeit import default_timer as time
 from typing import ClassVar
 
-import numpy as np
 from numpy import ndarray
 
 from ..._typing import ArrayLike, Float, Int, MatrixLike
-from ._bitset import set_raw_bitset_from_binned_bitset as set_raw_bitset_from_binned_bitset
-from .common import (
-    PREDICTOR_RECORD_DTYPE as PREDICTOR_RECORD_DTYPE,
-    X_BITSET_INNER_DTYPE as X_BITSET_INNER_DTYPE,
-    Y_DTYPE as Y_DTYPE,
-    MonotonicConstraint as MonotonicConstraint,
-)
 from .histogram import HistogramBuilder
 from .predictor import TreePredictor
 from .splitting import SplitInfo, Splitter
-from .utils import sum_parallel as sum_parallel
 
 EPS = ...  # to avoid zero division errors
 

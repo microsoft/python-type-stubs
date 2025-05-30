@@ -1,6 +1,3 @@
-import numpy as np
-from scipy import signal
-
 def approximate_polygon(coords, tolerance: float): ...
 
 # B-Spline subdivision

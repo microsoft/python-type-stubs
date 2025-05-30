@@ -1,29 +1,14 @@
-from numbers import Integral as Integral, Real as Real
-from typing import ClassVar, Literal, TypeVar
+from typing import ClassVar, Literal
+from typing_extensions import Self
 
 from numpy import ndarray
 
-from ..._loss.glm_distribution import TweedieDistribution as TweedieDistribution
 from ..._loss.loss import (
     BaseLoss,
-    HalfGammaLoss as HalfGammaLoss,
-    HalfPoissonLoss as HalfPoissonLoss,
-    HalfSquaredError as HalfSquaredError,
-    HalfTweedieLoss as HalfTweedieLoss,
-    HalfTweedieLossIdentity as HalfTweedieLossIdentity,
 )
 from ..._typing import ArrayLike, Float, Int, MatrixLike
 from ...base import BaseEstimator, RegressorMixin
-from ...utils import check_array as check_array, deprecated
-from ...utils._param_validation import Hidden as Hidden, Interval as Interval, StrOptions as StrOptions
-from ...utils.validation import check_is_fitted as check_is_fitted
-from .._linear_loss import LinearModelLoss as LinearModelLoss
-from ._newton_solver import NewtonCholeskySolver as NewtonCholeskySolver, NewtonSolver
-
-_GeneralizedLinearRegressor_Self = TypeVar("_GeneralizedLinearRegressor_Self", bound=_GeneralizedLinearRegressor)
-
-import numpy as np
-import scipy.optimize
+from ...utils import deprecated
 
 class _GeneralizedLinearRegressor(RegressorMixin, BaseEstimator):
     _base_loss: BaseLoss = ...
@@ -48,11 +33,11 @@ class _GeneralizedLinearRegressor(RegressorMixin, BaseEstimator):
         verbose: Int = 0,
     ) -> None: ...
     def fit(
-        self: _GeneralizedLinearRegressor_Self,
+        self,
         X: MatrixLike | ArrayLike,
         y: ArrayLike,
         sample_weight: None | ArrayLike = None,
-    ) -> _GeneralizedLinearRegressor_Self: ...
+    ) -> Self: ...
     def predict(self, X: MatrixLike | ArrayLike) -> ndarray: ...
     def score(
         self,

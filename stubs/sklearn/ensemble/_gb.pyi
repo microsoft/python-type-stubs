@@ -1,31 +1,16 @@
 from abc import ABCMeta, abstractmethod
-from numbers import Integral as Integral, Real as Real
-from time import time as time
-from typing import Callable, ClassVar, Iterator, Literal, TypeVar
+from collections.abc import Iterator
+from typing import Callable, ClassVar, Literal
+from typing_extensions import Self
 
 from numpy import ndarray
 from numpy.random import RandomState
-from scipy.sparse import csc_matrix as csc_matrix, csr_matrix as csr_matrix, issparse as issparse
 
 from .._typing import ArrayLike, Float, Int, MatrixLike
-from ..base import BaseEstimator, ClassifierMixin, RegressorMixin, is_classifier as is_classifier
-from ..exceptions import NotFittedError as NotFittedError
-from ..model_selection import train_test_split as train_test_split
-from ..tree import DecisionTreeRegressor as DecisionTreeRegressor
-from ..tree._tree import DOUBLE as DOUBLE, DTYPE as DTYPE
-from ..utils import check_array as check_array, check_random_state as check_random_state, column_or_1d as column_or_1d, deprecated
-from ..utils._param_validation import HasMethods as HasMethods, Interval as Interval, StrOptions as StrOptions
-from ..utils.multiclass import check_classification_targets as check_classification_targets
-from ..utils.validation import check_is_fitted as check_is_fitted
+from ..base import BaseEstimator, ClassifierMixin, RegressorMixin
+from ..utils import deprecated
 from ._base import BaseEnsemble
 from ._gb_losses import LossFunction
-from ._gradient_boosting import predict_stage as predict_stage, predict_stages as predict_stages
-
-BaseGradientBoosting_Self = TypeVar("BaseGradientBoosting_Self", bound=BaseGradientBoosting)
-
-import warnings
-
-import numpy as np
 
 class VerboseReporter:
     def __init__(self, verbose: Int) -> None: ...
@@ -62,12 +47,12 @@ class BaseGradientBoosting(BaseEnsemble, metaclass=ABCMeta):
         tol: float = 1e-4,
     ) -> None: ...
     def fit(
-        self: BaseGradientBoosting_Self,
+        self,
         X: MatrixLike | ArrayLike,
         y: ArrayLike,
         sample_weight: None | ArrayLike = None,
         monitor: None | Callable = None,
-    ) -> BaseGradientBoosting_Self: ...
+    ) -> Self: ...
     @property
     def feature_importances_(self) -> ndarray: ...
     def apply(self, X: MatrixLike | ArrayLike) -> ndarray: ...

@@ -41,7 +41,6 @@ def init_bounds_dense(
     n_threads : int
         The number of threads to be used by openmp.
     """
-    ...
 
 def init_bounds_sparse(
     X: spmatrix,
@@ -83,7 +82,6 @@ def init_bounds_sparse(
     n_threads : int
         The number of threads to be used by openmp.
     """
-    ...
 
 def elkan_iter_chunked_dense(
     X: np.ndarray,
@@ -141,7 +139,6 @@ def elkan_iter_chunked_dense(
           the algorithm. This is useful especially when calling predict on a
           fitted model.
     """
-    ...
 
 def elkan_iter_chunked_sparse(
     X: spmatrix,
@@ -199,4 +196,3 @@ def elkan_iter_chunked_sparse(
           the algorithm. This is useful especially when calling predict on a
           fitted model.
     """
-    ...

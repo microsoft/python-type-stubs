@@ -1,21 +1,11 @@
-from numbers import Integral as Integral, Real as Real
-from typing import Any, Callable, ClassVar, Literal, TypeVar
+from typing import Any, Callable, ClassVar, Literal
+from typing_extensions import Self
 
 from numpy import ndarray
 from numpy.random import RandomState
 
 from .._typing import ArrayLike, Float, Int, MatrixLike
 from ..base import BaseEstimator, ClassNamePrefixFeaturesOutMixin, TransformerMixin
-from ..linear_model import ridge_regression as ridge_regression
-from ..utils import check_random_state as check_random_state
-from ..utils._param_validation import Hidden as Hidden, Interval as Interval, StrOptions as StrOptions
-from ..utils.extmath import svd_flip as svd_flip
-from ..utils.validation import check_array as check_array, check_is_fitted as check_is_fitted
-from ._dict_learning import MiniBatchDictionaryLearning as MiniBatchDictionaryLearning, dict_learning as dict_learning
-
-_BaseSparsePCA_Self = TypeVar("_BaseSparsePCA_Self", bound=_BaseSparsePCA)
-
-import numpy as np
 
 class _BaseSparsePCA(ClassNamePrefixFeaturesOutMixin, TransformerMixin, BaseEstimator):
     _parameter_constraints: ClassVar[dict] = ...
@@ -33,7 +23,7 @@ class _BaseSparsePCA(ClassNamePrefixFeaturesOutMixin, TransformerMixin, BaseEsti
         verbose: bool = False,
         random_state=None,
     ) -> None: ...
-    def fit(self: _BaseSparsePCA_Self, X: MatrixLike, y: Any = None) -> _BaseSparsePCA_Self | MiniBatchSparsePCA: ...
+    def fit(self, X: MatrixLike, y: Any = None) -> Self | MiniBatchSparsePCA: ...
     def transform(self, X: ArrayLike) -> ndarray: ...
     def inverse_transform(self, X: MatrixLike) -> ndarray: ...
 

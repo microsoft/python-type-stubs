@@ -1,30 +1,20 @@
-from numbers import Integral as Integral, Real as Real
-from typing import Callable, ClassVar, Iterable, TypeVar
+from collections.abc import Iterable
+from typing import Callable, ClassVar
+from typing_extensions import Self
 
-from joblib import effective_n_jobs as effective_n_jobs
 from numpy import ndarray
 
 from .._typing import ArrayLike, Int, MatrixLike
-from ..base import BaseEstimator, MetaEstimatorMixin, clone as clone, is_classifier as is_classifier
+from ..base import BaseEstimator, MetaEstimatorMixin
 from ..linear_model._logistic import LogisticRegression
-from ..metrics import check_scoring as check_scoring
-from ..model_selection import BaseCrossValidator, check_cv as check_cv
-from ..utils._param_validation import HasMethods as HasMethods, Interval as Interval
-from ..utils.metaestimators import available_if as available_if
-from ..utils.parallel import Parallel as Parallel, delayed as delayed
-from ..utils.validation import check_is_fitted as check_is_fitted
+from ..model_selection import BaseCrossValidator
 from ._base import SelectorMixin
-
-RFECV_Self = TypeVar("RFECV_Self", bound=RFECV)
-RFE_Self = TypeVar("RFE_Self", bound=RFE)
 
 # Authors: Alexandre Gramfort <alexandre.gramfort@inria.fr>
 #          Vincent Michel <vincent.michel@inria.fr>
 #          Gilles Louppe <g.louppe@gmail.com>
 #
 # License: BSD 3 clause
-
-import numpy as np
 
 class RFE(SelectorMixin, MetaEstimatorMixin, BaseEstimator):
     support_: ndarray = ...
@@ -47,7 +37,7 @@ class RFE(SelectorMixin, MetaEstimatorMixin, BaseEstimator):
     ) -> None: ...
     @property
     def classes_(self) -> ndarray: ...
-    def fit(self: RFE_Self, X: MatrixLike | ArrayLike, y: ArrayLike, **fit_params) -> RFE_Self: ...
+    def fit(self, X: MatrixLike | ArrayLike, y: ArrayLike, **fit_params) -> Self: ...
     def predict(self, X: MatrixLike) -> ndarray: ...
     def score(self, X: MatrixLike, y: ArrayLike, **fit_params) -> float: ...
     def decision_function(self, X: MatrixLike) -> ndarray: ...
@@ -79,8 +69,8 @@ class RFECV(RFE):
         importance_getter: str | Callable = "auto",
     ) -> None: ...
     def fit(
-        self: RFECV_Self,
+        self,
         X: MatrixLike | ArrayLike,
         y: ArrayLike,
         groups: None | ArrayLike = None,
-    ) -> RFECV_Self: ...
+    ) -> Self: ...

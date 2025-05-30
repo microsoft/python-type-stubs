@@ -1,6 +1,3 @@
-import numpy as np
-from scipy.special import expit as logistic_sigmoid, xlogy as xlogy
-
 from .._typing import ArrayLike, Float, MatrixLike
 
 # Author: Issam H. Laradji <issam.laradji@gmail.com>

@@ -1,22 +1,11 @@
-from numbers import Integral as Integral, Real as Real
-from typing import Any, ClassVar, Literal, TypeVar
+from typing import Any, ClassVar, Literal
+from typing_extensions import Self
 
 from numpy import ndarray
 from numpy.random import RandomState
-from scipy.sparse.linalg import svds as svds
 
 from .._typing import ArrayLike, Float, Int, MatrixLike
 from ..base import BaseEstimator, ClassNamePrefixFeaturesOutMixin, TransformerMixin
-from ..utils import check_array as check_array, check_random_state as check_random_state
-from ..utils._param_validation import Interval as Interval, StrOptions as StrOptions
-from ..utils.extmath import randomized_svd as randomized_svd, safe_sparse_dot as safe_sparse_dot, svd_flip as svd_flip
-from ..utils.sparsefuncs import mean_variance_axis as mean_variance_axis
-from ..utils.validation import check_is_fitted as check_is_fitted
-
-TruncatedSVD_Self = TypeVar("TruncatedSVD_Self", bound=TruncatedSVD)
-
-import numpy as np
-import scipy.sparse as sp
 
 __all__ = ["TruncatedSVD"]
 
@@ -41,7 +30,7 @@ class TruncatedSVD(ClassNamePrefixFeaturesOutMixin, TransformerMixin, BaseEstima
         random_state: RandomState | None | Int = None,
         tol: Float = 0.0,
     ) -> None: ...
-    def fit(self: TruncatedSVD_Self, X: MatrixLike | ArrayLike, y: Any = None) -> TruncatedSVD_Self: ...
+    def fit(self, X: MatrixLike | ArrayLike, y: Any = None) -> Self: ...
     def fit_transform(self, X: MatrixLike | ArrayLike, y: Any = None) -> ndarray: ...
     def transform(self, X: MatrixLike | ArrayLike) -> ndarray: ...
     def inverse_transform(self, X: MatrixLike) -> ndarray: ...

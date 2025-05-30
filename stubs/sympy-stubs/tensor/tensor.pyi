@@ -1,7 +1,8 @@
+import sys
 from abc import ABC, abstractmethod
-from types import NotImplementedType
-from typing import Any, Generator, Literal
-from typing_extensions import LiteralString, Self
+from collections.abc import Generator
+from typing import Any, Literal
+from typing_extensions import LiteralString, Self, TypeAlias
 
 from sympy import ImmutableDenseNDimArray, ImmutableSparseNDimArray, Indexed, MutableDenseNDimArray
 from sympy.combinatorics.permutations import Perm
@@ -18,6 +19,11 @@ from sympy.tensor.array.expressions.array_expressions import (
     ZeroArray,
 )
 from sympy.utilities.decorator import deprecated, memoize_property
+
+if sys.version_info >= (3, 10):
+    from types import NotImplementedType
+else:
+    NotImplementedType: TypeAlias = Any
 
 def deprecate_data() -> None: ...
 def deprecate_fun_eval() -> None: ...

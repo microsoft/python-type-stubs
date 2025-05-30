@@ -1,4 +1,4 @@
-from typing_extensions import Self, Tuple
+from typing_extensions import Self
 
 from sympy.core import Function
 from sympy.core.expr import Expr
@@ -14,7 +14,7 @@ from sympy.series.order import Order
 class IdentityFunction(Lambda, metaclass=Singleton):
     _symbol = ...
     @property
-    def signature(self) -> Tuple: ...
+    def signature(self) -> tuple: ...
     @property
     def expr(self) -> Dummy: ...
 

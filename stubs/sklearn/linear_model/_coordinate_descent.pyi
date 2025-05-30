@@ -1,35 +1,17 @@
 from abc import ABC, abstractmethod
-from functools import partial as partial
-from numbers import Integral as Integral, Real as Real
-from typing import ClassVar, Iterable, Literal, Sequence, TypeVar
+from collections.abc import Iterable, Sequence
+from typing import ClassVar, Literal
+from typing_extensions import Self
 
-from joblib import effective_n_jobs as effective_n_jobs
 from numpy import ndarray
 from numpy.random import RandomState
-from scipy import sparse as sparse
 from scipy.sparse import spmatrix
 from scipy.sparse._coo import coo_matrix
 
 from .._typing import ArrayLike, Float, Int, MatrixLike
 from ..base import MultiOutputMixin, RegressorMixin
-from ..model_selection import BaseCrossValidator, check_cv as check_cv
-from ..utils import check_array as check_array, check_scalar as check_scalar
-from ..utils._param_validation import Interval as Interval, StrOptions as StrOptions
-from ..utils.extmath import safe_sparse_dot as safe_sparse_dot
-from ..utils.parallel import Parallel as Parallel, delayed as delayed
-from ..utils.validation import (
-    check_consistent_length as check_consistent_length,
-    check_is_fitted as check_is_fitted,
-    check_random_state as check_random_state,
-    column_or_1d as column_or_1d,
-)
+from ..model_selection import BaseCrossValidator
 from ._base import LinearModel
-
-LinearModelCV_Self = TypeVar("LinearModelCV_Self", bound=LinearModelCV)
-MultiTaskElasticNetCV_Self = TypeVar("MultiTaskElasticNetCV_Self", bound=MultiTaskElasticNetCV)
-MultiTaskLassoCV_Self = TypeVar("MultiTaskLassoCV_Self", bound=MultiTaskLassoCV)
-ElasticNet_Self = TypeVar("ElasticNet_Self", bound=ElasticNet)
-MultiTaskElasticNet_Self = TypeVar("MultiTaskElasticNet_Self", bound=MultiTaskElasticNet)
 
 # Author: Alexandre Gramfort <alexandre.gramfort@inria.fr>
 #         Fabian Pedregosa <fabian.pedregosa@inria.fr>
@@ -37,12 +19,6 @@ MultiTaskElasticNet_Self = TypeVar("MultiTaskElasticNet_Self", bound=MultiTaskEl
 #         Gael Varoquaux <gael.varoquaux@inria.fr>
 #
 # License: BSD 3 clause
-
-import numbers
-import sys
-import warnings
-
-import numpy as np
 
 def lasso_path(
     X: MatrixLike | ArrayLike,
@@ -110,12 +86,12 @@ class ElasticNet(MultiOutputMixin, RegressorMixin, LinearModel):
         selection: Literal["cyclic", "random"] = "cyclic",
     ) -> None: ...
     def fit(
-        self: ElasticNet_Self,
+        self,
         X: coo_matrix | MatrixLike,
         y: MatrixLike | ArrayLike,
         sample_weight: None | ArrayLike = None,
         check_input: bool = True,
-    ) -> ElasticNet_Self: ...
+    ) -> Self: ...
     @property
     def sparse_coef_(self) -> spmatrix: ...
 
@@ -175,11 +151,11 @@ class LinearModelCV(MultiOutputMixin, LinearModel, ABC):
     @abstractmethod
     def path(X, y, **kwargs): ...
     def fit(
-        self: LinearModelCV_Self,
+        self,
         X: MatrixLike | ArrayLike,
         y: MatrixLike | ArrayLike,
         sample_weight: None | ArrayLike = None,
-    ) -> LinearModelCV_Self | LassoCV: ...
+    ) -> Self | LassoCV: ...
 
 class LassoCV(RegressorMixin, LinearModelCV):
     feature_names_in_: ndarray = ...
@@ -277,7 +253,7 @@ class MultiTaskElasticNet(Lasso):
         random_state: RandomState | None | Int = None,
         selection: Literal["cyclic", "random"] = "cyclic",
     ) -> None: ...
-    def fit(self: MultiTaskElasticNet_Self, X: ArrayLike, y: MatrixLike) -> MultiTaskElasticNet_Self | MultiTaskLasso: ...
+    def fit(self, X: ArrayLike, y: MatrixLike) -> Self | MultiTaskLasso: ...
 
 class MultiTaskLasso(MultiTaskElasticNet):
     feature_names_in_: ndarray = ...
@@ -340,7 +316,7 @@ class MultiTaskElasticNetCV(RegressorMixin, LinearModelCV):
 
     # This is necessary as LinearModelCV now supports sample_weight while
     # MultiTaskElasticNet does not (yet).
-    def fit(self: MultiTaskElasticNetCV_Self, X: ArrayLike, y: MatrixLike) -> MultiTaskElasticNetCV_Self: ...
+    def fit(self, X: ArrayLike, y: MatrixLike) -> Self: ...
 
 class MultiTaskLassoCV(RegressorMixin, LinearModelCV):
     feature_names_in_: ndarray = ...
@@ -376,4 +352,4 @@ class MultiTaskLassoCV(RegressorMixin, LinearModelCV):
 
     # This is necessary as LinearModelCV now supports sample_weight while
     # MultiTaskElasticNet does not (yet).
-    def fit(self: MultiTaskLassoCV_Self, X: ArrayLike, y: MatrixLike) -> MultiTaskLassoCV_Self: ...
+    def fit(self, X: ArrayLike, y: MatrixLike) -> Self: ...

@@ -1,23 +1,16 @@
-from numbers import Real as Real
-from typing import Any, ClassVar, TypeVar
+from typing import Any, ClassVar
+from typing_extensions import Self
 
 from numpy import ndarray
 from numpy.random import RandomState
 
 from .._typing import ArrayLike, Float, Int, MatrixLike
 from ..base import OutlierMixin
-from ..metrics import accuracy_score as accuracy_score
-from ..utils._param_validation import Interval as Interval
-from ..utils.validation import check_is_fitted as check_is_fitted
 from . import MinCovDet
-
-EllipticEnvelope_Self = TypeVar("EllipticEnvelope_Self", bound=EllipticEnvelope)
 
 # Author: Virgile Fritsch <virgile.fritsch@inria.fr>
 #
 # License: BSD 3 clause
-
-import numpy as np
 
 class EllipticEnvelope(OutlierMixin, MinCovDet):
     feature_names_in_: ndarray = ...
@@ -43,7 +36,7 @@ class EllipticEnvelope(OutlierMixin, MinCovDet):
         contamination: Float = 0.1,
         random_state: RandomState | None | Int = None,
     ) -> None: ...
-    def fit(self: EllipticEnvelope_Self, X: MatrixLike, y: Any = None) -> EllipticEnvelope_Self: ...
+    def fit(self, X: MatrixLike, y: Any = None) -> Self: ...
     def decision_function(self, X: MatrixLike) -> ndarray: ...
     def score_samples(self, X: MatrixLike) -> ArrayLike: ...
     def predict(self, X: MatrixLike) -> ndarray: ...

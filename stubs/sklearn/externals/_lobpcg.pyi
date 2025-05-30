@@ -1,18 +1,6 @@
-import inspect
-import warnings
 from typing import Callable
 
-import numpy as np
-from numpy import block as bmat, ndarray
-from scipy.linalg import (
-    LinAlgError as LinAlgError,
-    cho_factor as cho_factor,
-    cho_solve as cho_solve,
-    cholesky as cholesky,
-    eigh as eigh,
-    inv as inv,
-)
-from scipy.sparse import isspmatrix as isspmatrix
+from numpy import ndarray
 from scipy.sparse.linalg import LinearOperator
 
 from .._typing import ArrayLike, Float, Int, MatrixLike, Scalar

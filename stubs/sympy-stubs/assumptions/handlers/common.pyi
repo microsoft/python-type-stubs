@@ -2,7 +2,7 @@ from typing import Literal
 from typing_extensions import Self
 
 from sympy.assumptions import AppliedPredicate
-from sympy.assumptions.predicates.common import CommutativePredicate, IsTruePredicate
+from sympy.assumptions.predicates.common import CommutativePredicate as CommutativePredicate, IsTruePredicate as IsTruePredicate
 from sympy.core import Basic, Symbol
 from sympy.core.numbers import NaN, Number
 from sympy.logic.boolalg import And, BooleanFalse, BooleanTrue, Equivalent, Implies, Not, Or

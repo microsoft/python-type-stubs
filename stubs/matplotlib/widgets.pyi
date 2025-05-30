@@ -1,16 +1,14 @@
 import copy
+from collections.abc import Mapping, Sequence
 from contextlib import ExitStack
 from numbers import Integral, Number
-from typing import Any, Callable, Dict, List, Literal, Mapping, Optional, Sequence, Tuple, Union
+from typing import Callable, Literal
 
 import matplotlib as mpl
 import numpy as np
 from matplotlib.axes._axes import Axes
 from matplotlib.backend_bases import DrawEvent, Event, FigureCanvasBase, KeyEvent, MouseButton, MouseEvent
 from matplotlib.figure import Figure
-from matplotlib.lines import Line2D
-from matplotlib.patches import Ellipse, Rectangle
-from matplotlib.transforms import Affine2D
 from numpy import float64, ndarray
 from numpy.typing import ArrayLike
 from PIL.Image import Image

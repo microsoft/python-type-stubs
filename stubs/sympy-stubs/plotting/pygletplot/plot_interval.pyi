@@ -1,4 +1,5 @@
-from typing import Any, Callable, Generator
+from collections.abc import Generator
+from typing import Any, Callable
 
 from sympy.core.numbers import Integer
 from sympy.core.symbol import Symbol

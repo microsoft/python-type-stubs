@@ -1,9 +1,4 @@
-import math
-
-import numpy as np
-
-from .._shared.utils import deprecate_multichannel_kwarg, warn
-from . import disk as draw_disk, ellipse as draw_ellipse, polygon as draw_polygon
+from .._shared.utils import deprecate_multichannel_kwarg
 
 def _generate_rectangle_mask(point, image, shape, random): ...
 def _generate_circle_mask(point, image, shape, random): ...

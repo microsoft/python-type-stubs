@@ -1,10 +1,12 @@
 from collections import defaultdict
-from itertools import chain, combinations, combinations_with_replacement, permutations, product, product as cartes  # noqa: F401
-from typing import Any, Generator, Iterator, Literal, NoReturn
+from collections.abc import Generator, Iterator
+from itertools import chain, combinations, combinations_with_replacement, permutations, product
+from typing import Any, Literal, NoReturn
 from typing_extensions import Never
 
 from sympy import Basic, Symbol
-from sympy.utilities.decorator import deprecated
+
+cartes = product
 
 def is_palindromic(s, i=..., j=...) -> bool: ...
 def flatten(iterable, levels=..., cls=...) -> list[Any]: ...

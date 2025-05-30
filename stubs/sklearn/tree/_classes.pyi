@@ -1,11 +1,11 @@
 from abc import ABCMeta, abstractmethod
-from math import ceil as ceil
-from numbers import Integral as Integral, Real as Real
-from typing import ClassVar, Literal, Mapping, Sequence, TypeVar
+from collections.abc import Mapping, Sequence
+from typing import ClassVar, Literal
+from typing_extensions import Self
 
 from numpy import ndarray
 from numpy.random import RandomState
-from scipy.sparse import issparse as issparse, spmatrix
+from scipy.sparse import spmatrix
 
 from .._typing import ArrayLike, Float, Int, MatrixLike
 from ..base import (
@@ -13,24 +13,11 @@ from ..base import (
     ClassifierMixin,
     MultiOutputMixin,
     RegressorMixin,
-    clone as clone,
-    is_classifier as is_classifier,
 )
-from ..utils import check_random_state as check_random_state, compute_sample_weight as compute_sample_weight
 from ..utils._bunch import Bunch
-from ..utils._param_validation import Hidden as Hidden, Interval as Interval, StrOptions as StrOptions
-from ..utils.multiclass import check_classification_targets as check_classification_targets
-from ..utils.validation import check_is_fitted as check_is_fitted
-from ._criterion import Criterion as Criterion
-from ._splitter import Splitter as Splitter
 from ._tree import (
-    BestFirstTreeBuilder as BestFirstTreeBuilder,
-    DepthFirstTreeBuilder as DepthFirstTreeBuilder,
     Tree,
-    ccp_pruning_path as ccp_pruning_path,
 )
-
-DecisionTreeRegressor_Self = TypeVar("DecisionTreeRegressor_Self", bound=DecisionTreeRegressor)
 
 # Authors: Gilles Louppe <g.louppe@gmail.com>
 #          Peter Prettenhofer <peter.prettenhofer@gmail.com>
@@ -42,12 +29,6 @@ DecisionTreeRegressor_Self = TypeVar("DecisionTreeRegressor_Self", bound=Decisio
 #          Nelson Liu <nelson@nelsonliu.me>
 #
 # License: BSD 3 clause
-
-import copy
-import numbers
-import warnings
-
-import numpy as np
 
 __all__ = [
     "DecisionTreeClassifier",
@@ -183,12 +164,12 @@ class DecisionTreeRegressor(RegressorMixin, BaseDecisionTree):
         ccp_alpha: float = 0.0,
     ) -> None: ...
     def fit(
-        self: DecisionTreeRegressor_Self,
+        self,
         X: MatrixLike | ArrayLike,
         y: MatrixLike | ArrayLike,
         sample_weight: None | ArrayLike = None,
         check_input: bool = True,
-    ) -> DecisionTreeRegressor_Self: ...
+    ) -> Self: ...
 
 class ExtraTreeClassifier(DecisionTreeClassifier):
     tree_: Tree = ...

@@ -1,28 +1,13 @@
-import numbers
-import time
-import warnings
-from collections import Counter as Counter
-from contextlib import suppress as suppress
-from functools import partial as partial
-from traceback import format_exc as format_exc
-from typing import Callable, Iterable, Literal, Mapping
+from collections.abc import Iterable, Mapping
+from typing import Callable, Literal
 
-import numpy as np
-import scipy.sparse as sp
-from joblib import logger as logger
 from numpy import ndarray
 from numpy.random import RandomState
 
 from .._typing import ArrayLike, Float, Int, MatrixLike
-from ..base import BaseEstimator, clone as clone, is_classifier as is_classifier
-from ..exceptions import FitFailedWarning as FitFailedWarning
-from ..metrics import check_scoring as check_scoring
-from ..preprocessing import LabelEncoder as LabelEncoder
+from ..base import BaseEstimator
 from ..svm._classes import SVC, LinearSVC
-from ..utils import check_random_state as check_random_state, indexable as indexable
-from ..utils.parallel import Parallel as Parallel, delayed as delayed
 from . import BaseCrossValidator
-from ._split import check_cv as check_cv
 
 # Author: Alexandre Gramfort <alexandre.gramfort@inria.fr>
 #         Gael Varoquaux <gael.varoquaux@normalesup.org>

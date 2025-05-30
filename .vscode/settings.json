@@ -1,6 +1,8 @@
 {
   "editor.formatOnSave": false,
-  "python.formatting.provider": "black",
   "python.analysis.diagnosticMode": "workspace",
-  "python.analysis.openFilesOnly": false
+  "[python]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "charliermarsh.ruff"
+  }
 }

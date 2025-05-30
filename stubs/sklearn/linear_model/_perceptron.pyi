@@ -1,11 +1,10 @@
-from numbers import Real as Real
-from typing import ClassVar, Literal, Mapping
+from collections.abc import Mapping
+from typing import ClassVar, Literal
 
 from numpy import ndarray
 from numpy.random import RandomState
 
 from .._typing import Float, Int
-from ..utils._param_validation import Interval as Interval, StrOptions as StrOptions
 from ._sgd_fast import LossFunction
 from ._stochastic_gradient import BaseSGDClassifier
 

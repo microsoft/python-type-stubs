@@ -1,37 +1,17 @@
 from abc import ABCMeta, abstractmethod
-from collections import defaultdict as defaultdict
-from collections.abc import Iterable, Mapping, Sequence
-from functools import partial as partial, reduce as reduce
-from itertools import product as product
-from typing import Any, Callable, ClassVar, Generic, Iterable, Iterator, Mapping, Sequence, TypeVar
+from collections.abc import Iterable, Iterator, Mapping, Sequence
+from typing import Any, Callable, ClassVar, Generic, TypeVar
+from typing_extensions import Self
 
 from numpy import ndarray
-from numpy.ma import MaskedArray as MaskedArray
 from numpy.random import RandomState
 from scipy.sparse import spmatrix
-from scipy.stats import rankdata as rankdata
 
 from .._typing import ArrayLike, Float, Int, MatrixLike
-from ..base import BaseEstimator, MetaEstimatorMixin, clone as clone, is_classifier as is_classifier
-from ..exceptions import NotFittedError as NotFittedError
-from ..metrics import check_scoring as check_scoring
-from ..utils import check_random_state as check_random_state
-from ..utils.metaestimators import available_if as available_if
-from ..utils.parallel import Parallel as Parallel, delayed as delayed
-from ..utils.random import sample_without_replacement as sample_without_replacement
-from ..utils.validation import check_is_fitted as check_is_fitted, indexable as indexable
+from ..base import BaseEstimator, MetaEstimatorMixin
 from . import BaseCrossValidator
-from ._split import check_cv as check_cv
 
-BaseSearchCV_Self = TypeVar("BaseSearchCV_Self", bound=BaseSearchCV)
-BaseEstimatorT = TypeVar("BaseEstimatorT", bound=BaseEstimator, default=BaseEstimator, covariant=True)
-
-import numbers
-import operator
-import time
-import warnings
-
-import numpy as np
+_BaseEstimatorT = TypeVar("_BaseEstimatorT", bound=BaseEstimator, default=BaseEstimator, covariant=True)
 
 __all__ = ["GridSearchCV", "ParameterGrid", "ParameterSampler", "RandomizedSearchCV"]
 
@@ -78,15 +58,15 @@ class BaseSearchCV(MetaEstimatorMixin, BaseEstimator, metaclass=ABCMeta):
     def n_features_in_(self): ...
     def classes_(self): ...
     def fit(
-        self: BaseSearchCV_Self,
+        self,
         X: list[str] | MatrixLike,
         y: None | MatrixLike | ArrayLike = None,
         *,
         groups: None | ArrayLike = None,
         **fit_params,
-    ) -> BaseSearchCV_Self: ...
+    ) -> Self: ...
 
-class GridSearchCV(BaseSearchCV, Generic[BaseEstimatorT]):
+class GridSearchCV(BaseSearchCV, Generic[_BaseEstimatorT]):
     feature_names_in_: ndarray = ...
     n_features_in_: int = ...
     classes_: ndarray = ...
@@ -97,14 +77,14 @@ class GridSearchCV(BaseSearchCV, Generic[BaseEstimatorT]):
     best_index_: int = ...
     best_params_: dict = ...
     best_score_: float = ...
-    best_estimator_: BaseEstimatorT = ...
+    best_estimator_: _BaseEstimatorT = ...
     cv_results_: dict[str, ndarray] = ...
 
     _required_parameters: ClassVar[list] = ...
 
     def __init__(
         self,
-        estimator: BaseEstimatorT,
+        estimator: _BaseEstimatorT,
         param_grid: Mapping | Sequence[dict],
         *,
         scoring: ArrayLike | None | tuple | Callable | Mapping | str = None,

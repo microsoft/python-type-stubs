@@ -1,12 +1,10 @@
-# -*- coding: utf-8 -*-
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 
-from __future__ import division, print_function
-
 import sys
+from collections.abc import Mapping
 from time import sleep
-from typing import Callable, Mapping
+from typing import Callable
 
 import numpy as np
 from numpy.typing import ArrayLike
@@ -18,15 +16,13 @@ from ..util import config as util_config, logger
 from ..util.dpi import get_dpi
 from ..util.event import EmitterGroup, Event, WarningEmitter
 from ..util.keys import Key
-from ..util.ptime import time
 from . import Application, use_app
-from .application import Application
 
 # todo: add functions for asking about current mouse/keyboard state
 # todo: add hover enter/exit events
 # todo: add focus events
 
-class Canvas(object):
+class Canvas:
     def __init__(
         self,
         title: str = "VisPy canvas",

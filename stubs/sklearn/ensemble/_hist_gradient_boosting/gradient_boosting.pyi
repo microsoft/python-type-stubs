@@ -1,44 +1,13 @@
 from abc import ABC, abstractmethod
-from functools import partial as partial
-from numbers import Integral as Integral, Real as Real
-from timeit import default_timer as time
-from typing import Callable, ClassVar, Literal, Mapping, Sequence, TypeVar
+from collections.abc import Mapping, Sequence
+from typing import Callable, ClassVar, Literal
+from typing_extensions import Self
 
 from numpy import ndarray
 from numpy.random import RandomState
 
-from ..._loss.loss import (
-    _LOSSES,
-    BaseLoss as BaseLoss,
-    HalfBinomialLoss as HalfBinomialLoss,
-    HalfMultinomialLoss as HalfMultinomialLoss,
-    HalfPoissonLoss as HalfPoissonLoss,
-    PinballLoss as PinballLoss,
-)
 from ..._typing import ArrayLike, Float, Int, MatrixLike
-from ...base import BaseEstimator, ClassifierMixin, RegressorMixin, is_classifier as is_classifier
-from ...metrics import check_scoring as check_scoring
-from ...model_selection import train_test_split as train_test_split
-from ...preprocessing import LabelEncoder as LabelEncoder
-from ...utils import (
-    check_random_state as check_random_state,
-    compute_sample_weight as compute_sample_weight,
-    resample as resample,
-)
-from ...utils._param_validation import Interval as Interval, StrOptions as StrOptions
-from ...utils.multiclass import check_classification_targets as check_classification_targets
-from ...utils.validation import check_consistent_length as check_consistent_length, check_is_fitted as check_is_fitted
-from .common import G_H_DTYPE as G_H_DTYPE, X_DTYPE as X_DTYPE, Y_DTYPE as Y_DTYPE
-from .grower import TreeGrower as TreeGrower
-
-BaseHistGradientBoosting_Self = TypeVar("BaseHistGradientBoosting_Self", bound=BaseHistGradientBoosting)
-
-import itertools
-import warnings
-
-import numpy as np
-
-_LOSSES = ...
+from ...base import BaseEstimator, ClassifierMixin, RegressorMixin
 
 class BaseHistGradientBoosting(BaseEstimator, ABC):
     _parameter_constraints: ClassVar[dict] = ...
@@ -69,11 +38,11 @@ class BaseHistGradientBoosting(BaseEstimator, ABC):
         random_state,
     ) -> None: ...
     def fit(
-        self: BaseHistGradientBoosting_Self,
+        self,
         X: MatrixLike,
         y: ArrayLike,
         sample_weight: None | ArrayLike = None,
-    ) -> BaseHistGradientBoosting_Self: ...
+    ) -> Self: ...
     def n_iter_(self): ...
 
 class HistGradientBoostingRegressor(RegressorMixin, BaseHistGradientBoosting):

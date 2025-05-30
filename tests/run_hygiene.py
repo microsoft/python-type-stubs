@@ -4,30 +4,29 @@ import sys
 from pathlib import Path
 
 
-def install_requirements():
+def install_requirements() -> None:
     print("\nInstalling requirements...")
-    return subprocess.run((sys.executable, "-m", "pip", "install", "--upgrade", "isort", "black"))
+    subprocess.check_call((sys.executable, "-m", "pip", "install", "pip>=25.1"))
+    subprocess.check_call((sys.executable, "-m", "pip", "install", "--upgrade", "--group", "hygiene"))
 
 
-def run_isort():
-    print("\nRunning isort...")
-    return subprocess.run((sys.executable, "-m", "isort", "."))
+def run_ruff_fix() -> subprocess.CompletedProcess[bytes]:
+    print("\nRunning Ruff check --fix...")
+    return subprocess.run((sys.executable, "-m", "ruff", "check", "--fix"))
 
 
-def run_black():
-    print("\nRunning Black...")
-    return subprocess.run((sys.executable, "-m", "black", "."))
+def run_ruff_format() -> subprocess.CompletedProcess[bytes]:
+    print("\nRunning Ruff format...")
+    return subprocess.run((sys.executable, "-m", "ruff", "format"))
 
 
-def main():
-    test_folder = Path(__file__).parent
-    root = test_folder.parent
-    os.chdir(root)
+def main() -> None:
+    os.chdir(Path(__file__).parent.parent)
 
-    install_requirements().check_returncode()
+    install_requirements()
     results = (
-        run_isort(),
-        run_black(),
+        run_ruff_fix(),
+        run_ruff_format(),
     )
     if sum([result.returncode for result in results]) > 0:
         print("\nOne or more tests failed. See above for details.")

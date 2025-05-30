@@ -4,32 +4,29 @@ import sys
 from pathlib import Path
 
 
-def install_requirements(test_folder: Path):
+def install_requirements() -> None:
     print("\nInstalling requirements...")
-    return subprocess.run(
-        (sys.executable, "-m", "pip", "install", "--upgrade", "-r", os.path.join(test_folder, "requirements.txt"))
-    )
+    subprocess.check_call((sys.executable, "-m", "pip", "install", "pip>=25.1"))
+    subprocess.check_call((sys.executable, "-m", "pip", "install", "--upgrade", "--group", "tests"))
 
 
-def run_pyright():
+def run_pyright() -> subprocess.CompletedProcess[bytes]:
     print("\nRunning Pyright...")
     # https://github.com/RobertCraigie/pyright-python#keeping-pyright-and-pylance-in-sync
-    del os.environ["PYRIGHT_PYTHON_FORCE_VERSION"]
+    os.environ.pop("PYRIGHT_PYTHON_FORCE_VERSION", None)
     os.environ["PYRIGHT_PYTHON_PYLANCE_VERSION"] = "latest-prerelease"
     return subprocess.run((sys.executable, "-m", "pyright"))
 
 
-def run_mypy():
+def run_mypy() -> subprocess.CompletedProcess[bytes]:
     print("\nRunning mypy...")
-    return subprocess.run((sys.executable, "-m", "mypy"))
+    return subprocess.run((sys.executable, "-m", "mypy", "."))
 
 
-def main():
-    test_folder = Path(__file__).parent
-    root = test_folder.parent
-    os.chdir(root)
+def main() -> None:
+    os.chdir(Path(__file__).parent.parent)
 
-    install_requirements(test_folder).check_returncode()
+    install_requirements()
     results = (
         run_mypy(),
         run_pyright(),

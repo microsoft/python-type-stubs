@@ -1,24 +1,14 @@
-from numbers import Integral as Integral, Real as Real
-from typing import Any, ClassVar, Literal, TypeVar
+from typing import Any, ClassVar, Literal
+from typing_extensions import Self
 
 from numpy import ndarray
 from numpy.random import RandomState
-from scipy.linalg import qr as qr, solve as solve, svd as svd
-from scipy.sparse import eye as eye
 from scipy.sparse._csr import csr_matrix
-from scipy.sparse.linalg import LinearOperator, eigsh as eigsh
+from scipy.sparse.linalg import LinearOperator
 
 from .._typing import ArrayLike, Float, Int, MatrixLike
 from ..base import BaseEstimator, ClassNamePrefixFeaturesOutMixin, TransformerMixin, _UnstableArchMixin
 from ..neighbors._unsupervised import NearestNeighbors
-from ..utils import check_array as check_array, check_random_state as check_random_state
-from ..utils._param_validation import Interval as Interval, StrOptions as StrOptions
-from ..utils.extmath import stable_cumsum as stable_cumsum
-from ..utils.validation import FLOAT_DTYPES as FLOAT_DTYPES, check_is_fitted as check_is_fitted
-
-LocallyLinearEmbedding_Self = TypeVar("LocallyLinearEmbedding_Self", bound=LocallyLinearEmbedding)
-
-import numpy as np
 
 def barycenter_weights(X: MatrixLike, Y: MatrixLike, indices: MatrixLike, reg: Float = 1e-3) -> ndarray: ...
 def barycenter_kneighbors_graph(
@@ -82,6 +72,6 @@ class LocallyLinearEmbedding(
         random_state: RandomState | None | Int = None,
         n_jobs: None | int = None,
     ) -> None: ...
-    def fit(self: LocallyLinearEmbedding_Self, X: MatrixLike, y: Any = None) -> LocallyLinearEmbedding_Self: ...
+    def fit(self, X: MatrixLike, y: Any = None) -> Self: ...
     def fit_transform(self, X: MatrixLike, y: Any = None) -> ndarray: ...
     def transform(self, X: MatrixLike) -> ndarray: ...

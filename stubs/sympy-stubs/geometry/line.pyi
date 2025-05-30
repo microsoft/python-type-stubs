@@ -1,6 +1,6 @@
-from types import NotImplementedType
+import sys
 from typing import Any
-from typing_extensions import Self
+from typing_extensions import Self, TypeAlias
 
 from sympy.core.basic import Basic
 from sympy.core.containers import Tuple
@@ -9,6 +9,11 @@ from sympy.core.power import Pow
 from sympy.geometry.entity import GeometrySet
 from sympy.geometry.point import Point, Point2D, Point3D
 from sympy.sets.sets import Complement, FiniteSet, Intersection, Union
+
+if sys.version_info >= (3, 10):
+    from types import NotImplementedType
+else:
+    NotImplementedType: TypeAlias = Any
 
 class LinearEntity(GeometrySet):
     def __new__(cls, p1, p2=..., **kwargs) -> Self: ...

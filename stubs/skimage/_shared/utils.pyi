@@ -1,13 +1,6 @@
-import functools
-import inspect
-import sys
-import warnings
-from collections.abc import Iterable
-from typing import Any, Literal, Mapping
+from collections.abc import Iterable, Mapping
+from typing import Any, Literal
 
-import numpy as np
-import scipy
-from numpy.lib import NumpyVersion
 from numpy.typing import ArrayLike, NDArray
 
 from ._warnings import all_warnings, warn

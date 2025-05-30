@@ -1,11 +1,18 @@
 import enum
 import functools
-from sre_parse import State
-from tkinter.tix import HList
+import sys
+from _typeshed import Incomplete
 from typing import Literal
 
 from .font_manager import FontProperties
 from .mathtext import MathtextBackend
+
+# tkinter.tix was removed from Python 3.13
+# Recent matplotlib versions define HList in this module
+if sys.version_info >= (3, 13):
+    HList = Incomplete
+else:
+    from tkinter.tix import HList
 
 def get_unicode_index(symbol: str, math: bool = True) -> int: ...
 
@@ -64,7 +71,7 @@ class DejaVuSansFonts(DejaVuFonts): ...
 
 class StixFonts(UnicodeFonts):
     def __init__(self, *args, **kwargs) -> None: ...
-    @functools.lru_cache()
+    @functools.lru_cache
     def get_sized_alternatives_for_symbol(self, fontname, sym) -> list[tuple]: ...
 
 class StixSansFonts(StixFonts): ...
@@ -143,14 +150,23 @@ class List(Box):
 
 class Hlist(List):
     def __init__(
-        self, elements, w: float = 0, m: Literal["exactly", "additional"] = "additional", do_kern: bool = True
+        self,
+        elements,
+        w: float = 0,
+        m: Literal["exactly", "additional"] = "additional",
+        do_kern: bool = True,
     ) -> None: ...
     def kern(self) -> None: ...
     def hpack(self, w: float = 0, m: Literal["exactly", "additional"] = "additional") -> None: ...
 
 class Vlist(List):
     def __init__(self, elements, h=0, m=...) -> None: ...
-    def vpack(self, h: float = ..., m: Literal["exactly", "additional"] = "additional", l: float = ...) -> None: ...
+    def vpack(
+        self,
+        h: float = ...,
+        m: Literal["exactly", "additional"] = "additional",
+        l: float = ...,
+    ) -> None: ...
 
 class Rule(Box):
     def __init__(self, width: float, height: float, depth: float, state) -> None: ...

@@ -1,5 +1,6 @@
 import functools
-from typing import Any, Callable, Generator, Iterable, Type
+from collections.abc import Generator, Iterable
+from typing import Callable
 
 from .deprecation import MatplotlibDeprecationWarning
 
@@ -19,5 +20,5 @@ def select_matching_signature(funcs: list[Callable], *args, **kwargs): ...
 def recursive_subclasses(cls) -> Generator: ...
 def warn_external(
     message: MatplotlibDeprecationWarning | PendingDeprecationWarning | str,
-    category: None | Type[MatplotlibDeprecationWarning] = ...,
+    category: None | type[MatplotlibDeprecationWarning] = ...,
 ) -> None: ...

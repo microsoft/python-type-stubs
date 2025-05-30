@@ -1,6 +1,11 @@
-from types import NotImplementedType
+import sys
 from typing import Any
-from typing_extensions import Self, Tuple as tTuple, Type
+from typing_extensions import Self, TypeAlias
+
+if sys.version_info >= (3, 10):
+    from types import NotImplementedType
+else:
+    NotImplementedType: TypeAlias = Any
 
 _PyHASH_MODULUS = ...
 _PyHASH_INF = ...
@@ -31,4 +36,4 @@ class PythonMPQ:
     def __truediv__(self, other) -> NotImplementedType | Self: ...
     def __rtruediv__(self, other) -> Self | NotImplementedType: ...
 
-    _compatible_types: tTuple[Type, ...] = ...
+    _compatible_types: tuple[type, ...] = ...

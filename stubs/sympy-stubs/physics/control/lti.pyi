@@ -1,11 +1,16 @@
-from types import NotImplementedType
-from typing import Any, Callable, Type
-from typing_extensions import Self
+import sys
+from typing import Any, Callable
+from typing_extensions import Self, TypeAlias
 
 from sympy.core.basic import Basic
 from sympy.core.evalf import EvalfMixin
 from sympy.core.power import Pow
 from sympy.series.order import Order
+
+if sys.version_info >= (3, 10):
+    from types import NotImplementedType
+else:
+    NotImplementedType: TypeAlias = Any
 
 __all__ = [
     "TransferFunction",
@@ -24,7 +29,7 @@ def bilinear(tf, sample_per) -> tuple[Any, Any]: ...
 def backward_diff(tf, sample_per) -> tuple[Any, Any]: ...
 
 class LinearTimeInvariant(Basic, EvalfMixin):
-    _clstype: Type
+    _clstype: type
     def __new__(cls, *system, **kwargs) -> Self: ...
     @property
     def is_SISO(self): ...

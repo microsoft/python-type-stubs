@@ -1,10 +1,5 @@
-from typing import Type
-
-import numpy
-import scipy.special as special
 from numpy import int32, ndarray
 
-from .._config import get_config as get_config
 from .._typing import Float
 
 class _ArrayAPIWrapper:
@@ -14,9 +9,7 @@ class _ArrayAPIWrapper:
 
 class _NumPyApiWrapper:
     def __getattr__(self, name: str): ...
-    def astype(
-        self, x: ndarray, dtype: Type[int32] | Type[int] | Type[Float], *, copy: bool = True, casting: str = "unsafe"
-    ) -> ndarray: ...
+    def astype(self, x: ndarray, dtype: type[int32 | int | Float], *, copy: bool = True, casting: str = "unsafe") -> ndarray: ...
     def asarray(self, x, *, dtype=None, device=None, copy=None) -> ndarray: ...
     def unique_inverse(self, x: ndarray) -> tuple[ndarray, ndarray]: ...
     def unique_counts(self, x: ndarray) -> tuple[ndarray, ndarray]: ...

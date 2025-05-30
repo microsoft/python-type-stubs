@@ -1,6 +1,7 @@
-from types import NotImplementedType
-from typing import Any, Callable, Generator, Iterator, Literal
-from typing_extensions import Self
+import sys
+from collections.abc import Iterator
+from typing import Any, Callable, Literal
+from typing_extensions import Self, TypeAlias
 
 from sympy.core.basic import Basic
 from sympy.core.decorators import sympify_method_args, sympify_return
@@ -14,6 +15,11 @@ from sympy.logic.boolalg import BooleanFalse, BooleanTrue, Xor
 from sympy.sets.contains import Contains
 from sympy.sets.fancysets import ImageSet
 from sympy.sets.powerset import PowerSet
+
+if sys.version_info >= (3, 10):
+    from types import NotImplementedType
+else:
+    NotImplementedType: TypeAlias = Any
 
 tfn = ...
 

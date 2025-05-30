@@ -1,12 +1,17 @@
-from types import NotImplementedType
-from typing_extensions import Self
+import sys
+from typing import Any
+from typing_extensions import Self, TypeAlias
 
 from sympy.polys.domains.characteristiczero import CharacteristicZero
-from sympy.polys.domains.domainelement import DomainElement
 from sympy.polys.domains.field import Field
 from sympy.polys.domains.simpledomain import SimpleDomain
 from sympy.polys.polyutils import PicklableWithSlots
 from sympy.utilities import public
+
+if sys.version_info >= (3, 10):
+    from types import NotImplementedType
+else:
+    NotImplementedType: TypeAlias = Any
 
 eflags = ...
 
@@ -47,7 +52,7 @@ class ExpressionDomain(Field, CharacteristicZero, SimpleDomain):
     has_assoc_Field = ...
     def __init__(self) -> None: ...
     def to_sympy(self, a): ...
-    def from_sympy(self, a) -> dtype: ...
+    def from_sympy(self, a) -> Expression: ...
     def from_ZZ(K1, a, K0): ...
     def from_ZZ_python(K1, a, K0): ...
     def from_QQ(K1, a, K0): ...

@@ -1,8 +1,14 @@
-from types import NotImplementedType
-from typing import Any, Generator
-from typing_extensions import LiteralString
+import sys
+from collections.abc import Generator
+from typing import Any
+from typing_extensions import LiteralString, TypeAlias
 
 from sympy.polys.polyutils import IntegerPowerable
+
+if sys.version_info >= (3, 10):
+    from types import NotImplementedType
+else:
+    NotImplementedType: TypeAlias = Any
 
 class Ideal(IntegerPowerable):
     def is_whole_ring(self): ...

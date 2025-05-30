@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # -----------------------------------------------------------------------------
 # Copyright (c) 2014, Nicolas P. Rougier. All rights reserved.
 # Distributed under the terms of the new BSD License.
@@ -10,7 +9,7 @@ import numpy as np
 
 # ------------------------------------------------------------------ Matrix ---
 
-class Matrix(object):
+class Matrix:
     def __init__(self, a=1, b=0, c=0, d=1, e=0, f=0): ...
     @property
     def matrix(self): ...
@@ -48,7 +47,7 @@ class SkewY(Matrix):
     def __repr__(self): ...
 
 # --------------------------------------------------------------- Transform ---
-class Transform(object):
+class Transform:
     def __init__(self, content=""): ...
     def __add__(self, other): ...
     def __radd__(self, other): ...

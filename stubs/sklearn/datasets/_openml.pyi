@@ -1,23 +1,6 @@
-import gzip
-import hashlib
-import json
-import os
-import shutil
-import time
-from contextlib import closing as closing
-from functools import wraps as wraps
-from os.path import join as join
-from tempfile import TemporaryDirectory as TemporaryDirectory
-from typing import List, Literal, Optional, Union, overload
-from urllib.error import HTTPError as HTTPError, URLError as URLError
-from urllib.request import Request as Request, urlopen as urlopen
-from warnings import warn
+from typing import Literal, overload
 
-import numpy as np
-
-from ..utils import Bunch, check_pandas_support as check_pandas_support
-from . import get_data_home as get_data_home
-from ._arff_parser import load_arff_from_gzip_file as load_arff_from_gzip_file
+from ..utils import Bunch
 
 __all__ = ["fetch_openml"]
 
@@ -35,31 +18,31 @@ class OpenMLError(ValueError): ...
 
 @overload
 def fetch_openml(
-    name: Optional[str] = None,
+    name: str | None = None,
     *,
-    version: Union[str, int] = "active",
-    data_id: Optional[int] = None,
-    data_home: Optional[str] = None,
-    target_column: Optional[Union[str, List]] = "default-target",
+    version: str | int = "active",
+    data_id: int | None = None,
+    data_home: str | None = None,
+    target_column: str | list | None = "default-target",
     cache: bool = True,
     return_X_y: Literal[False] = ...,
-    as_frame: Union[str, bool] = "auto",
+    as_frame: str | bool = "auto",
     n_retries: int = 3,
     delay: float = 1.0,
-    parser: Optional[str] = "warn",
+    parser: str | None = "warn",
 ) -> Bunch: ...
 @overload
 def fetch_openml(
-    name: Optional[str] = None,
+    name: str | None = None,
     *,
-    version: Union[str, int] = "active",
-    data_id: Optional[int] = None,
-    data_home: Optional[str] = None,
-    target_column: Optional[Union[str, List]] = "default-target",
+    version: str | int = "active",
+    data_id: int | None = None,
+    data_home: str | None = None,
+    target_column: str | list | None = "default-target",
     cache: bool = True,
     return_X_y: Literal[True] = ...,
-    as_frame: Union[str, bool] = "auto",
+    as_frame: str | bool = "auto",
     n_retries: int = 3,
     delay: float = 1.0,
-    parser: Optional[str] = "warn",
+    parser: str | None = "warn",
 ) -> tuple[Bunch, tuple]: ...

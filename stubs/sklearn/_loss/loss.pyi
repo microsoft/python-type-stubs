@@ -1,32 +1,14 @@
-import numbers
-from typing import ClassVar, Literal, Type
+from typing import ClassVar, Literal
 
-import numpy as np
 from numpy import ndarray
-from scipy.special import xlogy as xlogy
 
 from .._typing import ArrayLike, Float, Int, MatrixLike, Scalar
-from ..utils import check_scalar as check_scalar
-from ..utils._readonly_array_wrapper import ReadonlyArrayWrapper as ReadonlyArrayWrapper
 from ._loss import (
-    CyAbsoluteError as CyAbsoluteError,
-    CyHalfBinomialLoss as CyHalfBinomialLoss,
-    CyHalfGammaLoss as CyHalfGammaLoss,
-    CyHalfMultinomialLoss as CyHalfMultinomialLoss,
-    CyHalfPoissonLoss as CyHalfPoissonLoss,
-    CyHalfSquaredError,
-    CyHalfTweedieLoss as CyHalfTweedieLoss,
-    CyHalfTweedieLossIdentity as CyHalfTweedieLossIdentity,
     CyLossFunction,
-    CyPinballLoss as CyPinballLoss,
 )
 from .link import (
     BaseLink,
-    IdentityLink,
     Interval,
-    LogitLink as LogitLink,
-    LogLink as LogLink,
-    MultinomialLogit as MultinomialLogit,
 )
 
 # Goals:
@@ -127,7 +109,7 @@ class BaseLoss:
     def init_gradient_and_hessian(
         self,
         n_samples: Int,
-        dtype: Type[Float] | Float = ...,
+        dtype: type[Float] | Float = ...,
         order: Literal["C", "F"] = "F",
     ) -> tuple[ndarray, ndarray]: ...
 

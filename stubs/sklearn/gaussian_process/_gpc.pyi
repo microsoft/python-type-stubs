@@ -1,29 +1,12 @@
-from numbers import Integral as Integral
-from operator import itemgetter as itemgetter
-from typing import Any, Callable, ClassVar, Literal, TypeVar
+from typing import Any, Callable, ClassVar, Literal
+from typing_extensions import Self
 
 from numpy import ndarray
 from numpy.random import RandomState
-from scipy.linalg import cho_solve as cho_solve, cholesky as cholesky, solve as solve
-from scipy.special import erf, expit as expit
 
 from .._typing import ArrayLike, Float, Int, MatrixLike
-from ..base import BaseEstimator, ClassifierMixin, clone as clone
-from ..multiclass import OneVsOneClassifier as OneVsOneClassifier, OneVsRestClassifier as OneVsRestClassifier
-from ..preprocessing import LabelEncoder as LabelEncoder
-from ..utils import check_random_state as check_random_state
-from ..utils._param_validation import Interval as Interval, StrOptions as StrOptions
-from ..utils.validation import check_is_fitted as check_is_fitted
-from .kernels import RBF as RBF, CompoundKernel as CompoundKernel, ConstantKernel as C, Kernel, Product
-
-_BinaryGaussianProcessClassifierLaplace_Self = TypeVar(
-    "_BinaryGaussianProcessClassifierLaplace_Self",
-    bound=_BinaryGaussianProcessClassifierLaplace,
-)
-GaussianProcessClassifier_Self = TypeVar("GaussianProcessClassifier_Self", bound=GaussianProcessClassifier)
-
-import numpy as np
-import scipy.optimize
+from ..base import BaseEstimator, ClassifierMixin
+from .kernels import Kernel, Product
 
 # Values required for approximating the logistic sigmoid by
 # error functions. coefs are obtained via:
@@ -56,10 +39,10 @@ class _BinaryGaussianProcessClassifierLaplace(BaseEstimator):
         random_state: RandomState | None | Int = None,
     ) -> None: ...
     def fit(
-        self: _BinaryGaussianProcessClassifierLaplace_Self,
+        self,
         X: MatrixLike | ArrayLike,
         y: ArrayLike,
-    ) -> _BinaryGaussianProcessClassifierLaplace_Self: ...
+    ) -> Self: ...
     def predict(self, X: MatrixLike | ArrayLike) -> ndarray: ...
     def predict_proba(self, X: MatrixLike | ArrayLike) -> ndarray: ...
     def log_marginal_likelihood(
@@ -92,7 +75,7 @@ class GaussianProcessClassifier(ClassifierMixin, BaseEstimator):
         multi_class: Literal["one_vs_rest", "one_vs_one"] = "one_vs_rest",
         n_jobs: None | Int = None,
     ) -> None: ...
-    def fit(self: GaussianProcessClassifier_Self, X: MatrixLike | ArrayLike, y: ArrayLike) -> GaussianProcessClassifier_Self: ...
+    def fit(self, X: MatrixLike | ArrayLike, y: ArrayLike) -> Self: ...
     def predict(self, X: MatrixLike | ArrayLike) -> ndarray: ...
     def predict_proba(self, X: MatrixLike | ArrayLike) -> ndarray: ...
     @property

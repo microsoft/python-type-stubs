@@ -1,8 +1,14 @@
-from types import NotImplementedType
+import sys
 from typing import Any
+from typing_extensions import TypeAlias
 
 from sympy.matrices.immutable import ImmutableSparseMatrix
 from sympy.matrices.repmatrix import MutableRepMatrix, RepMatrix
+
+if sys.version_info >= (3, 10):
+    from types import NotImplementedType
+else:
+    NotImplementedType: TypeAlias = Any
 
 class SparseRepMatrix(RepMatrix):
     def applyfunc(self, f): ...
@@ -11,10 +17,7 @@ class SparseRepMatrix(RepMatrix):
     def col_list(self) -> list[tuple[Any, ...]]: ...
     def nnz(self) -> int: ...
     def row_list(self) -> list[tuple[Any, ...]]: ...
-    def scalar_multiply(self, scalar):
-        "Scalar element-wise multiplication"
-        ...
-
+    def scalar_multiply(self, scalar): ...
     def solve_least_squares(self, rhs, method=...): ...
     def solve(self, rhs, method=...) -> NotImplementedType | None: ...
 

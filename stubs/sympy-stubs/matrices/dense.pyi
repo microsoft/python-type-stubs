@@ -21,7 +21,8 @@ class DenseMatrix(RepMatrix):
 class MutableDenseMatrix(DenseMatrix, MutableRepMatrix):
     def simplify(self, **kwargs) -> None: ...
 
-Matrix = MutableMatrix = MutableDenseMatrix
+Matrix = MutableDenseMatrix
+MutableMatrix = MutableDenseMatrix
 
 def list2numpy(l, dtype=...) -> NDArray[Any, Any]: ...
 def matrix2numpy(m, dtype=...) -> NDArray[Any, Any]: ...

@@ -6,7 +6,6 @@ from math import isnan
 from operator import itemgetter
 from queue import PriorityQueue
 
-from ...algorithms.tree.mst import SpanningTreeIterator
 from ...classes.graph import Graph
 from ...utils import UnionFind, not_implemented_for, py_random_state
 

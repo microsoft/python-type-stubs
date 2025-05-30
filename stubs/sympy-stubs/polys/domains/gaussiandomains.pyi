@@ -1,13 +1,16 @@
-from types import NotImplementedType
+import sys
 from typing import Any, Literal
-from typing_extensions import LiteralString, Self, Unpack
+from typing_extensions import LiteralString, Self, TypeAlias, Unpack
 
 from sympy.polys.domains.domain import Domain
 from sympy.polys.domains.domainelement import DomainElement
 from sympy.polys.domains.field import Field
-from sympy.polys.domains.integerring import ZZ
-from sympy.polys.domains.rationalfield import QQ
 from sympy.polys.domains.ring import Ring
+
+if sys.version_info >= (3, 10):
+    from types import NotImplementedType
+else:
+    NotImplementedType: TypeAlias = Any
 
 class GaussianElement(DomainElement):  # type: ignore
     base: Domain
@@ -76,9 +79,9 @@ class GaussianDomain:
 class GaussianIntegerRing(GaussianDomain, Ring):
     dom = ...
     dtype = GaussianInteger
-    zero = dtype(ZZ(0), ZZ(0))
-    one = dtype(ZZ(1), ZZ(0))
-    imag_unit = dtype(ZZ(0), ZZ(1))
+    zero: GaussianInteger
+    one: GaussianInteger
+    imag_unit: GaussianInteger
     units = ...
     rep = ...
     is_GaussianRing = ...
@@ -95,9 +98,9 @@ class GaussianIntegerRing(GaussianDomain, Ring):
 class GaussianRationalField(GaussianDomain, Field):
     dom = ...
     dtype = GaussianRational
-    zero = dtype(QQ(0), QQ(0))
-    one = dtype(QQ(1), QQ(0))
-    imag_unit = dtype(QQ(0), QQ(1))
+    zero: GaussianInteger
+    one: GaussianInteger
+    imag_unit: GaussianInteger
     units = ...
     rep = ...
     is_GaussianField = ...

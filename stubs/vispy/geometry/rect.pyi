@@ -1,6 +1,6 @@
 import numpy as np
 
-class Rect(object):
+class Rect:
     def __init__(self, *args, **kwargs): ...
     @property
     def pos(self): ...

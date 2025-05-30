@@ -1,23 +1,10 @@
-import warnings
-from numbers import Integral as Integral, Real as Real
-from time import time as time
 from typing import Callable, ClassVar, Literal
 
-import numpy as np
 from numpy import ndarray
 from numpy.random import RandomState
-from scipy import linalg as linalg
-from scipy.sparse import csr_matrix as csr_matrix, issparse as issparse
-from scipy.spatial.distance import pdist as pdist, squareform as squareform
 
 from .._typing import ArrayLike, Float, Int, MatrixLike
 from ..base import BaseEstimator
-from ..decomposition import PCA as PCA
-from ..metrics.pairwise import pairwise_distances as pairwise_distances
-from ..neighbors import NearestNeighbors as NearestNeighbors
-from ..utils import check_random_state as check_random_state
-from ..utils._param_validation import Hidden as Hidden, Interval as Interval, StrOptions as StrOptions
-from ..utils.validation import check_non_negative as check_non_negative
 
 # Author: Alexander Fabisch  -- <afabisch@informatik.uni-bremen.de>
 # Author: Christopher Moody <chrisemoody@gmail.com>

@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # -----------------------------------------------------------------------------
 # Copyright (c) 2014, Nicolas P. Rougier
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
@@ -14,7 +13,7 @@ _HEXDEC: dict = ...
 
 def _rgb(triplet): ...
 
-class Color(object):
+class Color:
     def __init__(self, content): ...
     @property
     def rgb(self): ...

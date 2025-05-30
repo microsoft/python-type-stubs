@@ -1,22 +1,11 @@
-import numbers
-import warnings
 from abc import ABCMeta, abstractmethod
-from collections import defaultdict as defaultdict
-from collections.abc import Iterable
-from inspect import signature as signature
-from itertools import chain as chain, combinations as combinations
-from math import ceil as ceil, floor as floor
-from typing import Any, Callable, Iterable, Iterator
+from collections.abc import Iterable, Iterator
+from typing import Any, Callable
 
-import numpy as np
 from numpy import ndarray
 from numpy.random import RandomState
-from scipy.special import comb as comb
 
 from .._typing import ArrayLike, Float, Int, MatrixLike
-from ..utils import check_random_state as check_random_state, indexable as indexable
-from ..utils.multiclass import type_of_target as type_of_target
-from ..utils.validation import check_array as check_array, column_or_1d as column_or_1d
 
 __all__ = [
     "BaseCrossValidator",

@@ -1,10 +1,3 @@
-import base64
-
-import numpy as np
-
-from . import _marching_cubes_lewiner_luts as mcluts
-from ._marching_cubes_classic import _marching_cubes_classic
-
 def marching_cubes(
     volume,
     level: float | None = None,

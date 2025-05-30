@@ -1,6 +1,6 @@
-from types import NotImplementedType
+import sys
 from typing import Any
-from typing_extensions import LiteralString, Self
+from typing_extensions import LiteralString, Self, TypeAlias
 
 from sympy.core.basic import Basic
 from sympy.core.power import Pow
@@ -9,6 +9,11 @@ from sympy.geometry.ellipse import Circle
 from sympy.geometry.entity import GeometryEntity, GeometrySet
 from sympy.geometry.line import Line, Line2D, Line3D, Segment, Segment2D, Segment3D
 from sympy.geometry.point import Point, Point2D, Point3D
+
+if sys.version_info >= (3, 10):
+    from types import NotImplementedType
+else:
+    NotImplementedType: TypeAlias = Any
 
 class Polygon(GeometrySet):
     __slots__ = ...

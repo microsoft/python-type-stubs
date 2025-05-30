@@ -1,5 +1,6 @@
+from collections.abc import Sequence
 from copy import deepcopy
-from typing import Literal, Sequence
+from typing import Literal
 
 import numpy as np
 
@@ -14,7 +15,6 @@ from .color_space import (  # noqa
     _rgb_to_lab,
 )
 
-# -*- coding: utf-8 -*-
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 
@@ -28,7 +28,7 @@ def _array_clip_val(val): ...
 ###############################################################################
 # Color Array
 
-class ColorArray(object):
+class ColorArray:
     def __init__(
         self,
         color: str | tuple | Sequence = ...,
@@ -109,23 +109,23 @@ class Color(ColorArray):
         alpha: None | float = None,
         clip: bool = False,
     ): ...
-    @ColorArray.rgba.getter
+    @ColorArray.rgba.getter  # type: ignore[attr-defined] # python/mypy#5936
     def rgba(self): ...
-    @ColorArray.rgb.getter
+    @ColorArray.rgb.getter  # type: ignore[attr-defined] # python/mypy#5936
     def rgb(self): ...
-    @ColorArray.RGBA.getter
+    @ColorArray.RGBA.getter  # type: ignore[attr-defined] # python/mypy#5936
     def RGBA(self): ...
-    @ColorArray.RGB.getter
+    @ColorArray.RGB.getter  # type: ignore[attr-defined] # python/mypy#5936
     def RGB(self): ...
-    @ColorArray.alpha.getter
+    @ColorArray.alpha.getter  # type: ignore[attr-defined] # python/mypy#5936
     def alpha(self): ...
-    @ColorArray.hex.getter
+    @ColorArray.hex.getter  # type: ignore[attr-defined] # python/mypy#5936
     def hex(self): ...
-    @ColorArray.hsv.getter
+    @ColorArray.hsv.getter  # type: ignore[attr-defined] # python/mypy#5936
     def hsv(self): ...
-    @ColorArray.value.getter
+    @ColorArray.value.getter  # type: ignore[attr-defined] # python/mypy#5936
     def value(self): ...
-    @ColorArray.lab.getter
+    @ColorArray.lab.getter  # type: ignore[attr-defined] # python/mypy#5936
     def lab(self): ...
     @property
     def is_blank(self): ...

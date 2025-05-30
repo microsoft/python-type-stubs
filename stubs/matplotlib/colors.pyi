@@ -1,8 +1,8 @@
 import functools
-from collections.abc import Mapping
+from collections.abc import Iterator, Mapping
 from email.errors import NonPrintableDefect
 from re import Pattern
-from typing import Callable, Iterator, Literal
+from typing import Callable, Literal
 
 import numpy as np
 from matplotlib._typing import *
@@ -128,24 +128,42 @@ class CenteredNorm(Normalize):
     def __call__(self, value, clip: bool = ...): ...
 
 def make_norm_from_scale(scale_cls, base_norm_cls=..., *, init=...): ...
-@make_norm_from_scale(FuncScale, init=lambda functions, vmin=None, vmax=None, clip=False: None)
-class FuncNorm(Normalize): ...
 
-@make_norm_from_scale(functools.partial(LogScale, nonpositive="mask"))
+class FuncNorm(Normalize):
+    def __init__(
+        self,
+        functions: tuple[Callable, Callable],
+        vmin: float | None = ...,
+        vmax: float | None = ...,
+        clip: bool = ...,
+    ) -> None: ...
+
 class LogNorm(Normalize): ...
 
-@make_norm_from_scale(
-    SymmetricalLogScale,
-    init=lambda linthresh, linscale=1, vmin=None, vmax=None, clip=False, *, base=10: None,
-)
 class SymLogNorm(Normalize):
+    def __init__(
+        self,
+        linthresh: float,
+        linscale: float = ...,
+        vmin: float | None = ...,
+        vmax: float | None = ...,
+        clip: bool = ...,
+        *,
+        base: float = ...,
+    ) -> None: ...
     @property
     def linthresh(self): ...
     @linthresh.setter
     def linthresh(self, value): ...
 
-@make_norm_from_scale(AsinhScale, init=lambda linear_width=1, vmin=None, vmax=None, clip=False: None)
 class AsinhNorm(Normalize):
+    def __init__(
+        self,
+        linear_width: float = ...,
+        vmin: float | None = ...,
+        vmax: float | None = ...,
+        clip: bool = ...,
+    ) -> None: ...
     @property
     def linear_width(self): ...
     @linear_width.setter

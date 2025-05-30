@@ -1,10 +1,7 @@
-# -*- coding: utf-8 -*-
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
-import warnings
 
 import numpy as np
-from numpy import dtype
 from numpy.typing import NDArray
 
 from ..gloo import Texture2D, Texture3D

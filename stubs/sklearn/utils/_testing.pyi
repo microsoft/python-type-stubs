@@ -1,7 +1,4 @@
-import atexit
 import contextlib
-import functools
-import inspect
 
 # Copyright (c) 2011, 2012
 # Authors: Pietro Berkes,
@@ -13,34 +10,12 @@ import inspect
 #          Giorgio Patrini
 #          Thierry Guillemot
 # License: BSD 3 clause
-import os
-import os.path as op
-import re
-import shutil
-import sys
-import tempfile
-import unittest
-import warnings
-from collections.abc import Iterable as Iterable, Sequence
-from functools import wraps as wraps
-from inspect import signature as signature
-from subprocess import (
-    STDOUT as STDOUT,
-    CalledProcessError as CalledProcessError,
-    TimeoutExpired as TimeoutExpired,
-    check_output as check_output,
-)
-from typing import Any, Callable, ClassVar, Sequence
-from unittest import TestCase as TestCase
+from collections.abc import Sequence
+from typing import Any, Callable, ClassVar
 
-import joblib
-import numpy as np
-import scipy as sp
-import sklearn
 from numpy import ndarray
 from numpy.random import RandomState
 from numpy.testing import (
-    assert_allclose as np_assert_allclose,
     assert_almost_equal,
     assert_approx_equal,
     assert_array_almost_equal,
@@ -49,10 +24,6 @@ from numpy.testing import (
 )
 
 from .._typing import ArrayLike, Float, Int, MatrixLike
-from ..metrics import accuracy_score as accuracy_score, r2_score as r2_score
-from . import IS_PYPY as IS_PYPY
-from .multiclass import check_classification_targets as check_classification_targets
-from .validation import check_array as check_array, check_is_fitted as check_is_fitted, check_X_y as check_X_y
 
 __all__ = [
     "assert_raises",

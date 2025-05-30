@@ -1,7 +1,12 @@
+import warnings
 from abc import ABCMeta, abstractmethod
+from collections.abc import Sequence
 from numbers import Integral as Integral, Real as Real
-from typing import Any, ClassVar, Literal, Sequence, TypeVar
+from typing import Any, ClassVar, Literal
+from typing_extensions import Self
 
+import numpy as np
+import scipy.sparse as sp
 from numpy import ndarray
 from numpy.random import RandomState
 from scipy import linalg as linalg
@@ -16,16 +21,9 @@ from .utils.extmath import safe_sparse_dot as safe_sparse_dot
 from .utils.random import sample_without_replacement as sample_without_replacement
 from .utils.validation import check_array as check_array, check_is_fitted as check_is_fitted
 
-BaseRandomProjection_Self = TypeVar("BaseRandomProjection_Self", bound=BaseRandomProjection)
-
 # Authors: Olivier Grisel <olivier.grisel@ensta.org>,
 #          Arnaud Joly <a.joly@ulg.ac.be>
 # License: BSD 3 clause
-
-import warnings
-
-import numpy as np
-import scipy.sparse as sp
 
 __all__ = [
     "SparseRandomProjection",
@@ -49,9 +47,7 @@ class BaseRandomProjection(TransformerMixin, BaseEstimator, ClassNamePrefixFeatu
         compute_inverse_components: bool = False,
         random_state=None,
     ) -> None: ...
-    def fit(
-        self: BaseRandomProjection_Self, X: MatrixLike, y: Any = None
-    ) -> BaseRandomProjection_Self | SparseRandomProjection: ...
+    def fit(self, X: MatrixLike, y: Any = None) -> Self | SparseRandomProjection: ...
     def inverse_transform(self, X: MatrixLike) -> ndarray: ...
 
 class GaussianRandomProjection(BaseRandomProjection):

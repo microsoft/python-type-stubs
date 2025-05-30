@@ -1,23 +1,14 @@
-from collections import Counter as Counter
-from itertools import chain as chain
-from typing import ClassVar, Literal, Sequence, TypeVar
+from collections.abc import Sequence
+from typing import ClassVar, Literal
+from typing_extensions import Self
 
 from numpy import dtype, ndarray
-from scipy import sparse as sparse
 from scipy.sparse import spmatrix
 
 from .._typing import ArrayLike, Float, Int, MatrixLike
-from ..base import BaseEstimator, TransformerMixin, clone as clone
-from ..preprocessing import FunctionTransformer as FunctionTransformer
-from ..utils import check_pandas_support as check_pandas_support
+from ..base import BaseEstimator, TransformerMixin
 from ..utils._bunch import Bunch
 from ..utils.metaestimators import _BaseComposition
-from ..utils.parallel import Parallel as Parallel, delayed as delayed
-from ..utils.validation import check_array as check_array, check_is_fitted as check_is_fitted
-
-ColumnTransformer_Self = TypeVar("ColumnTransformer_Self", bound=ColumnTransformer)
-
-import numpy as np
 
 __all__ = ["ColumnTransformer", "make_column_transformer", "make_column_selector"]
 
@@ -44,11 +35,11 @@ class ColumnTransformer(TransformerMixin, _BaseComposition):
     ) -> None: ...
     def set_output(self, *, transform: None | Literal["default", "pandas"] = None) -> BaseEstimator: ...
     def get_params(self, deep: bool = True) -> dict: ...
-    def set_params(self: ColumnTransformer_Self, **kwargs) -> ColumnTransformer_Self: ...
+    def set_params(self, **kwargs) -> Self: ...
     @property
     def named_transformers_(self) -> Bunch: ...
     def get_feature_names_out(self, input_features: None | ArrayLike = None) -> ndarray: ...
-    def fit(self: ColumnTransformer_Self, X: MatrixLike, y: None | ArrayLike = None) -> ColumnTransformer_Self: ...
+    def fit(self, X: MatrixLike, y: None | ArrayLike = None) -> Self: ...
     def fit_transform(self, X: MatrixLike, y: None | ArrayLike = None) -> ndarray | spmatrix: ...
     def transform(self, X: MatrixLike) -> ndarray | spmatrix: ...
 

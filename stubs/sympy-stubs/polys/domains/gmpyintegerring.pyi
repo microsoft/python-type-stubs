@@ -1,15 +1,14 @@
 from typing import Any
 
 from sympy.core.numbers import Integer
-from sympy.polys.domains.groundtypes import GMPYInteger, _GMPYInteger
+from sympy.polys.domains.groundtypes import _GMPYInteger
 from sympy.polys.domains.integerring import IntegerRing
-from sympy.utilities import public
 
 class GMPYIntegerRing(IntegerRing):
-    dtype = GMPYInteger
-    zero = dtype(0)
-    one = dtype(1)
-    tp: type[dtype]
+    dtype = _GMPYInteger
+    zero: _GMPYInteger
+    one: _GMPYInteger
+    tp: type[_GMPYInteger]
     alias = ...
     def __init__(self) -> None: ...
     def to_sympy(self, a) -> Integer: ...

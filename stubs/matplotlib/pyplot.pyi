@@ -1,6 +1,8 @@
 import datetime
 from array import array
-from typing import Callable, ContextManager, Literal, Sequence, overload
+from collections.abc import Sequence
+from contextlib import AbstractContextManager
+from typing import Callable, Literal, overload
 from typing_extensions import Self
 
 import matplotlib
@@ -9,7 +11,6 @@ import numpy as np
 from matplotlib import rcParams as rcParams, style as style
 from matplotlib.contour import QuadContourSet
 
-from . import rcParams
 from ._typing import *
 from .artist import Artist
 from .axes import Axes as Axes
@@ -58,7 +59,7 @@ def ioff() -> _IoffContext: ...
 def ion() -> _IonContext: ...
 def pause(interval) -> None: ...
 def rc(group, **kwargs) -> None: ...
-def rc_context(rc: dict = ..., fname: str | PathLike = ...) -> ContextManager: ...
+def rc_context(rc: dict = ..., fname: str | PathLike = ...) -> AbstractContextManager: ...
 def rcdefaults() -> None: ...
 def getp(obj: Artist, *args, **kwargs): ...
 def get(obj: Artist, *args, **kwargs): ...
@@ -778,7 +779,7 @@ def tick_params(axis: Literal["x", "y", "both"] = ..., **kwargs): ...
 def ticklabel_format(
     *,
     axis: Literal["x", "y", "both"] = ...,
-    style: Literal["sci", "scientific", "plain"] = ...,
+    style: Literal["sci", "scientific", "plain"] = ...,  # noqa: F811
     scilimits=...,
     useOffset: bool | float = ...,
     useLocale: bool = ...,

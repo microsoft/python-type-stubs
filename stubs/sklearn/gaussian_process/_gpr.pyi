@@ -1,27 +1,16 @@
-from numbers import Integral as Integral, Real as Real
-from operator import itemgetter as itemgetter
-from typing import Any, Callable, ClassVar, Literal, TypeVar
+from typing import Any, Callable, ClassVar, Literal
+from typing_extensions import Self
 
 from numpy import ndarray
 from numpy.random import RandomState
-from scipy.linalg import cho_solve as cho_solve, cholesky as cholesky, solve_triangular as solve_triangular
 
 from .._typing import ArrayLike, Float, Int, MatrixLike
-from ..base import BaseEstimator, MultiOutputMixin, RegressorMixin, clone as clone
-from ..utils import check_random_state as check_random_state
-from ..utils._param_validation import Interval as Interval, StrOptions as StrOptions
-from .kernels import RBF as RBF, ConstantKernel as C, Kernel
-
-GaussianProcessRegressor_Self = TypeVar("GaussianProcessRegressor_Self", bound=GaussianProcessRegressor)
+from ..base import BaseEstimator, MultiOutputMixin, RegressorMixin
+from .kernels import Kernel
 
 # Authors: Jan Hendrik Metzen <jhm@informatik.uni-bremen.de>
 # Modified by: Pete Green <p.l.green@liverpool.ac.uk>
 # License: BSD 3 clause
-
-import warnings
-
-import numpy as np
-import scipy.optimize
 
 GPR_CHOLESKY_LOWER: bool = ...
 
@@ -50,10 +39,10 @@ class GaussianProcessRegressor(MultiOutputMixin, RegressorMixin, BaseEstimator):
         random_state: RandomState | None | Int = None,
     ) -> None: ...
     def fit(
-        self: GaussianProcessRegressor_Self,
+        self,
         X: MatrixLike | ArrayLike,
         y: MatrixLike | ArrayLike,
-    ) -> GaussianProcessRegressor_Self: ...
+    ) -> Self: ...
     def predict(
         self,
         X: MatrixLike | ArrayLike,

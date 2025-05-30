@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 from collections import OrderedDict
@@ -6,9 +5,9 @@ from weakref import WeakKeyDictionary
 
 from .compiler import Compiler
 
-class ShaderObject(object):
+class ShaderObject:
     @classmethod
-    def create(self, obj, ref=None): ...
+    def create(cls, obj, ref=None): ...
     def __init__(self): ...
     @property
     def name(self): ...

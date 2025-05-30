@@ -1,18 +1,10 @@
-from numbers import Integral as Integral
-from typing import Any, ClassVar, TypeVar
+from typing import Any, ClassVar
+from typing_extensions import Self
 
 from numpy import ndarray
-from scipy import linalg as linalg, sparse as sparse
 
 from .._typing import ArrayLike, Int, MatrixLike
-from ..utils import gen_batches as gen_batches
-from ..utils._param_validation import Interval as Interval
-from ..utils.extmath import svd_flip as svd_flip
 from ._base import _BasePCA
-
-IncrementalPCA_Self = TypeVar("IncrementalPCA_Self", bound=IncrementalPCA)
-
-import numpy as np
 
 class IncrementalPCA(_BasePCA):
     feature_names_in_: ndarray = ...
@@ -33,11 +25,11 @@ class IncrementalPCA(_BasePCA):
     def __init__(
         self, n_components: None | Int = None, *, whiten: bool = False, copy: bool = True, batch_size: None | Int = None
     ) -> None: ...
-    def fit(self: IncrementalPCA_Self, X: MatrixLike | ArrayLike, y: Any = None) -> IncrementalPCA_Self: ...
+    def fit(self, X: MatrixLike | ArrayLike, y: Any = None) -> Self: ...
     def partial_fit(
-        self: IncrementalPCA_Self,
+        self,
         X: MatrixLike,
         y: Any = None,
         check_input: bool = True,
-    ) -> IncrementalPCA_Self: ...
+    ) -> Self: ...
     def transform(self, X: MatrixLike | ArrayLike) -> ndarray: ...

@@ -1,22 +1,14 @@
-from typing import Any, Callable, ClassVar, Iterator, Literal, TypeVar
+from collections.abc import Iterator
+from typing import Any, Callable, ClassVar, Literal
+from typing_extensions import Self
 
 from numpy import ndarray
 from numpy.random import RandomState
 
 from .._typing import ArrayLike, Float, Int, MatrixLike
-from ..utils._param_validation import StrOptions as StrOptions
-from ..utils.extmath import row_norms as row_norms
-from ..utils.validation import check_is_fitted as check_is_fitted, check_random_state as check_random_state
 from ._kmeans import _BaseKMeans
 
-BisectingKMeans_Self = TypeVar("BisectingKMeans_Self", bound=BisectingKMeans)
-
 # Author: Michal Krawczyk <mkrwczyk.1@gmail.com>
-
-import warnings
-
-import numpy as np
-import scipy.sparse as sp
 
 class _BisectingTree:
     def __init__(self, center: ndarray, indices: ndarray, score: Float) -> None: ...
@@ -48,9 +40,9 @@ class BisectingKMeans(_BaseKMeans):
         bisecting_strategy: Literal["biggest_inertia", "largest_cluster"] = "biggest_inertia",
     ) -> None: ...
     def fit(
-        self: BisectingKMeans_Self,
+        self,
         X: MatrixLike | ArrayLike,
         y: Any = None,
         sample_weight: None | ArrayLike = None,
-    ) -> BisectingKMeans_Self: ...
+    ) -> Self: ...
     def predict(self, X: MatrixLike | ArrayLike) -> ndarray: ...

@@ -1,0 +1,6 @@
+from ...classes.graph import Graph
+
+__all__ = ["edge_betweenness_partition", "edge_current_flow_betweenness_partition"]
+
+def edge_betweenness_partition(G: Graph, number_of_sets: int, *, weight: str | None = None) -> list: ...
+def edge_current_flow_betweenness_partition(G: Graph, number_of_sets: int, *, weight: str | None = None) -> list: ...

@@ -1,26 +1,16 @@
-from numbers import Integral as Integral, Real as Real
-from typing import Any, Callable, ClassVar, Literal, TypeVar
+from typing import Any, Callable, ClassVar, Literal
+from typing_extensions import Self
 
 from numpy import ndarray
-from scipy import sparse as sparse
 
 from .._typing import ArrayLike, Float, Int, MatrixLike
 from ..base import BaseEstimator, ClusterMixin
-from ..neighbors import NearestNeighbors as NearestNeighbors
-from ..utils._param_validation import Interval as Interval, StrOptions as StrOptions
-from ._dbscan_inner import dbscan_inner as dbscan_inner
-
-DBSCAN_Self = TypeVar("DBSCAN_Self", bound=DBSCAN)
 
 # Author: Robert Layton <robertlayton@gmail.com>
 #         Joel Nothman <joel.nothman@gmail.com>
 #         Lars Buitinck
 #
 # License: BSD 3 clause
-
-import warnings
-
-import numpy as np
 
 def dbscan(
     X: MatrixLike,
@@ -58,9 +48,9 @@ class DBSCAN(ClusterMixin, BaseEstimator):
         n_jobs: None | Int = None,
     ) -> None: ...
     def fit(
-        self: DBSCAN_Self,
+        self,
         X: MatrixLike,
         y: Any = None,
         sample_weight: None | ArrayLike = None,
-    ) -> DBSCAN_Self: ...
+    ) -> Self: ...
     def fit_predict(self, X: MatrixLike, y: Any = None, sample_weight: None | ArrayLike = None) -> ndarray: ...

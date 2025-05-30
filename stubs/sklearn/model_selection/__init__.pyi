@@ -1,13 +1,18 @@
-import typing as typing
+from sklearn.model_selection._classification_threshold import (
+    FixedThresholdClassifier as FixedThresholdClassifier,
+    TunedThresholdClassifierCV as TunedThresholdClassifierCV,
+)
 
-from ._plot import LearningCurveDisplay as LearningCurveDisplay
+from ._plot import (
+    LearningCurveDisplay as LearningCurveDisplay,
+    ValidationCurveDisplay as ValidationCurveDisplay,
+)
 from ._search import (
     GridSearchCV as GridSearchCV,
     ParameterGrid as ParameterGrid,
     ParameterSampler as ParameterSampler,
     RandomizedSearchCV as RandomizedSearchCV,
 )
-from ._search_successive_halving import HalvingGridSearchCV as HalvingGridSearchCV, HalvingRandomSearchCV as HalvingRandomSearchCV
 from ._split import (
     BaseCrossValidator as BaseCrossValidator,
     BaseShuffleSplit as BaseShuffleSplit,

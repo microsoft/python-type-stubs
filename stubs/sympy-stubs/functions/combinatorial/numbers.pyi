@@ -1,7 +1,7 @@
-from typing import Any
-from typing_extensions import Self, Tuple as tTuple
+from typing import Any, ClassVar
+from typing_extensions import Self
 
-from sympy.core.function import Function, UndefinedFunction
+from sympy.core.function import DefinedFunction, Function, UndefinedFunction
 from sympy.core.numbers import Float, Integer, Rational
 from sympy.series.order import Order
 
@@ -34,7 +34,7 @@ class tribonacci(Function):
     def eval(cls, n, sym=...) -> Integer | None: ...
 
 class bernoulli(Function):
-    args: tTuple[Integer]
+    args: tuple[Integer]
     _cache = ...
     _highest = ...
     @classmethod
@@ -69,8 +69,88 @@ class andre(Function):
 _npartition = ...
 
 class partition(Function):
+    is_integer: ClassVar[bool]
+    is_nonnegative: ClassVar[bool]
+
     @classmethod
     def eval(cls, n) -> Integer | None: ...
+
+class divisor_sigma(DefinedFunction):
+    is_integer: ClassVar[bool]
+    is_positive: ClassVar[bool]
+
+    @classmethod
+    def eval(cls, n, k=...): ...
+
+class udivisor_sigma(DefinedFunction):
+    is_integer: ClassVar[bool]
+    is_positive: ClassVar[bool]
+
+    @classmethod
+    def eval(cls, n, k=...): ...
+
+class legendre_symbol(DefinedFunction):
+    is_integer: ClassVar[bool]
+    is_prime: ClassVar[bool]
+
+    @classmethod
+    def eval(cls, a, p): ...
+
+class jacobi_symbol(DefinedFunction):
+    is_integer: ClassVar[bool]
+    is_prime: ClassVar[bool]
+
+    @classmethod
+    def eval(cls, m, n): ...
+
+class kronecker_symbol(DefinedFunction):
+    is_integer: ClassVar[bool]
+    is_prime: ClassVar[bool]
+
+    @classmethod
+    def eval(cls, a, n): ...
+
+class mobius(DefinedFunction):
+    is_integer: ClassVar[bool]
+    is_prime: ClassVar[bool]
+
+    @classmethod
+    def eval(cls, n): ...
+
+class primenu(DefinedFunction):
+    is_integer: ClassVar[bool]
+    is_nonnegative: ClassVar[bool]
+
+    @classmethod
+    def eval(cls, n): ...
+
+class primeomega(DefinedFunction):
+    is_integer: ClassVar[bool]
+    is_nonnegative: ClassVar[bool]
+
+    @classmethod
+    def eval(cls, n): ...
+
+class totient(DefinedFunction):
+    is_integer: ClassVar[bool]
+    is_positive: ClassVar[bool]
+
+    @classmethod
+    def eval(cls, n): ...
+
+class reduced_totient(DefinedFunction):
+    is_integer: ClassVar[bool]
+    is_positive: ClassVar[bool]
+
+    @classmethod
+    def eval(cls, n): ...
+
+class primepi(DefinedFunction):
+    is_integer: ClassVar[bool]
+    is_nonnegative: ClassVar[bool]
+
+    @classmethod
+    def eval(cls, n): ...
 
 class _MultisetHistogram(tuple): ...
 

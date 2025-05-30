@@ -1,17 +1,11 @@
-from functools import reduce as reduce
 from typing import Any, Literal
 
-import numpy as np
 from matplotlib.axes import Axes
 from matplotlib.collections import QuadMesh
 from matplotlib.contour import QuadContourSet
 from matplotlib.figure import Figure
 
 from ..._typing import Float, Int, MatrixLike
-from ...base import is_regressor as is_regressor
-from ...preprocessing import LabelEncoder as LabelEncoder
-from ...utils import check_matplotlib_support as check_matplotlib_support
-from ...utils.validation import check_is_fitted as check_is_fitted
 
 class DecisionBoundaryDisplay:
     figure_: Figure = ...

@@ -1,8 +1,4 @@
-import importlib
-import importlib.util
-import os
-import sys
-from typing import Mapping
+from collections.abc import Mapping
 
 def attach(
     package_name: str,

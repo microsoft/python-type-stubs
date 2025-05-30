@@ -2,16 +2,8 @@ from typing import Literal, overload
 from typing_extensions import deprecated
 
 from numpy import ndarray
-from scipy.special import xlogy as xlogy
 
 from .._typing import ArrayLike, Float, MatrixLike
-from ..exceptions import UndefinedMetricWarning as UndefinedMetricWarning
-from ..utils.validation import (
-    check_array as check_array,
-    check_consistent_length as check_consistent_length,
-    check_scalar as check_scalar,
-    column_or_1d as column_or_1d,
-)
 
 # Authors: Alexandre Gramfort <alexandre.gramfort@inria.fr>
 #          Mathieu Blondel <mathieu@mblondel.org>
@@ -115,7 +107,6 @@ def mean_squared_error(
 @deprecated(
     "`squared` is deprecated in 1.4 and will be removed in 1.6. Use `root_mean_squared_error` instead to calculate the root mean squared error."
 )
-@overload
 def mean_squared_error(
     y_true: MatrixLike | ArrayLike,
     y_pred: MatrixLike | ArrayLike,
@@ -155,7 +146,6 @@ def mean_squared_log_error(
 @deprecated(
     "`squared` is deprecated in 1.4 and will be removed in 1.6. Use `root_mean_squared_log_error` instead to calculate the root mean squared logarithmic error."
 )
-@overload
 def mean_squared_log_error(
     y_true: MatrixLike | ArrayLike,
     y_pred: MatrixLike | ArrayLike,

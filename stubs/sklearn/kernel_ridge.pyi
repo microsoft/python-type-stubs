@@ -1,6 +1,8 @@
 from numbers import Integral as Integral, Real as Real
-from typing import Callable, ClassVar, TypeVar
+from typing import Callable, ClassVar
+from typing_extensions import Self
 
+import numpy as np
 from numpy import ndarray
 from scipy.sparse import spmatrix
 
@@ -9,10 +11,6 @@ from .base import BaseEstimator, MultiOutputMixin, RegressorMixin
 from .metrics.pairwise import PAIRWISE_KERNEL_FUNCTIONS as PAIRWISE_KERNEL_FUNCTIONS, pairwise_kernels as pairwise_kernels
 from .utils._param_validation import Interval as Interval, StrOptions as StrOptions
 from .utils.validation import check_is_fitted as check_is_fitted
-
-KernelRidge_Self = TypeVar("KernelRidge_Self", bound=KernelRidge)
-
-import numpy as np
 
 class KernelRidge(MultiOutputMixin, RegressorMixin, BaseEstimator):
     feature_names_in_: ndarray = ...
@@ -33,9 +31,9 @@ class KernelRidge(MultiOutputMixin, RegressorMixin, BaseEstimator):
         kernel_params: None | dict = None,
     ) -> None: ...
     def fit(
-        self: KernelRidge_Self,
+        self,
         X: MatrixLike | ArrayLike,
         y: MatrixLike | ArrayLike,
         sample_weight: None | ArrayLike = None,
-    ) -> KernelRidge_Self: ...
+    ) -> Self: ...
     def predict(self, X: MatrixLike | ArrayLike) -> ndarray: ...

@@ -1,6 +1,6 @@
 import datetime
-from re import L
-from typing import Callable, Literal, Sequence, overload
+from collections.abc import Sequence
+from typing import Callable, Literal, overload
 
 import matplotlib.tri as mtri
 import numpy as np

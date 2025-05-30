@@ -1,46 +1,23 @@
 from abc import ABCMeta, abstractmethod
-from numbers import Integral as Integral, Real as Real
-from typing import Any, ClassVar, Literal, Mapping, TypeVar
+from collections.abc import Mapping
+from typing import Any, ClassVar, Literal
+from typing_extensions import Self
 
 from numpy import ndarray
 from numpy.random import RandomState
 from scipy.sparse._csr import csr_matrix
 
 from .._typing import ArrayLike, Float, Int, MatrixLike
-from ..base import BaseEstimator, OutlierMixin, RegressorMixin, clone as clone, is_classifier as is_classifier
-from ..exceptions import ConvergenceWarning as ConvergenceWarning
-from ..model_selection import ShuffleSplit as ShuffleSplit, StratifiedShuffleSplit as StratifiedShuffleSplit
-from ..utils import check_random_state as check_random_state, compute_class_weight as compute_class_weight
-from ..utils._param_validation import Hidden as Hidden, Interval as Interval, StrOptions as StrOptions
-from ..utils.extmath import safe_sparse_dot as safe_sparse_dot
-from ..utils.metaestimators import available_if as available_if
-from ..utils.parallel import Parallel as Parallel, delayed as delayed
-from ..utils.validation import check_is_fitted as check_is_fitted
-from ._base import LinearClassifierMixin, SparseCoefMixin, make_dataset as make_dataset
+from ..base import BaseEstimator, OutlierMixin, RegressorMixin
+from ._base import LinearClassifierMixin, SparseCoefMixin
 from ._sgd_fast import (
-    EpsilonInsensitive as EpsilonInsensitive,
-    Hinge as Hinge,
-    Huber as Huber,
-    Log as Log,
     LossFunction,
-    ModifiedHuber as ModifiedHuber,
-    SquaredEpsilonInsensitive as SquaredEpsilonInsensitive,
-    SquaredHinge as SquaredHinge,
-    SquaredLoss as SquaredLoss,
 )
-
-BaseSGDClassifier_Self = TypeVar("BaseSGDClassifier_Self", bound=BaseSGDClassifier)
-SGDOneClassSVM_Self = TypeVar("SGDOneClassSVM_Self", bound=SGDOneClassSVM)
-BaseSGDRegressor_Self = TypeVar("BaseSGDRegressor_Self", bound=BaseSGDRegressor)
 
 # Authors: Peter Prettenhofer <peter.prettenhofer@gmail.com> (main author)
 #          Mathieu Blondel (partial_fit support)
 #
 # License: BSD 3 clause
-
-import warnings
-
-import numpy as np
 
 LEARNING_RATE_TYPES: dict = ...
 
@@ -141,20 +118,20 @@ class BaseSGDClassifier(LinearClassifierMixin, BaseSGD, metaclass=ABCMeta):
         average: bool = False,
     ) -> None: ...
     def partial_fit(
-        self: BaseSGDClassifier_Self,
+        self,
         X: MatrixLike,
         y: ArrayLike,
         classes: None | ArrayLike = None,
         sample_weight: None | ArrayLike = None,
-    ) -> BaseSGDClassifier_Self: ...
+    ) -> Self: ...
     def fit(
-        self: BaseSGDClassifier_Self,
+        self,
         X: MatrixLike,
         y: ArrayLike,
         coef_init: None | MatrixLike = None,
         intercept_init: None | ArrayLike = None,
         sample_weight: None | ArrayLike = None,
-    ) -> BaseSGDClassifier_Self: ...
+    ) -> Self: ...
 
 class SGDClassifier(BaseSGDClassifier):
     feature_names_in_: ndarray = ...
@@ -237,19 +214,19 @@ class BaseSGDRegressor(RegressorMixin, BaseSGD):
         average: bool = False,
     ) -> None: ...
     def partial_fit(
-        self: BaseSGDRegressor_Self,
+        self,
         X: MatrixLike,
         y: ArrayLike,
         sample_weight: None | ArrayLike = None,
-    ) -> BaseSGDRegressor_Self: ...
+    ) -> Self: ...
     def fit(
-        self: BaseSGDRegressor_Self,
+        self,
         X: MatrixLike,
         y: ArrayLike,
         coef_init: None | ArrayLike = None,
         intercept_init: None | ArrayLike = None,
         sample_weight: None | ArrayLike = None,
-    ) -> SGDRegressor | BaseSGDRegressor_Self: ...
+    ) -> SGDRegressor | Self: ...
     def predict(self, X: MatrixLike) -> ndarray: ...
 
 class SGDRegressor(BaseSGDRegressor):
@@ -315,19 +292,19 @@ class SGDOneClassSVM(BaseSGD, OutlierMixin):
         average: int | bool = False,
     ) -> None: ...
     def partial_fit(
-        self: SGDOneClassSVM_Self,
+        self,
         X: MatrixLike,
         y: Any = None,
         sample_weight: None | ArrayLike = None,
-    ) -> SGDOneClassSVM_Self: ...
+    ) -> Self: ...
     def fit(
-        self: SGDOneClassSVM_Self,
+        self,
         X: MatrixLike,
         y: Any = None,
         coef_init: None | MatrixLike = None,
         offset_init: None | ArrayLike = None,
         sample_weight: None | ArrayLike = None,
-    ) -> SGDOneClassSVM_Self: ...
+    ) -> Self: ...
     def decision_function(self, X: MatrixLike) -> ndarray: ...
     def score_samples(self, X: MatrixLike) -> ndarray: ...
     def predict(self, X: MatrixLike) -> ndarray: ...

@@ -1,9 +1,10 @@
-from typing import Any, Sequence, TypeVar
+from collections.abc import Sequence
+from typing import Any, TypeVar
 
 from sympy.polys.matrices._typing import RingElement
 
-T = TypeVar("T")
-R = TypeVar("R", bound=RingElement)
+T = TypeVar("T")  # noqa: PYI001 # Exists at runtime
+R = TypeVar("R", bound=RingElement)  # noqa: PYI001 # Exists at runtime
 
 def ddm_transpose(matrix: Sequence[Sequence[T]]) -> list[list[T]]: ...
 def ddm_iadd(a: list[list[R]], b: Sequence[Sequence[R]]) -> None: ...

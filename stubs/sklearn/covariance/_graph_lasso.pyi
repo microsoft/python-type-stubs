@@ -1,31 +1,16 @@
-from numbers import Integral as Integral, Real as Real
-from typing import Any, ClassVar, Iterable, Literal, TypeVar
+from collections.abc import Iterable
+from typing import Any, ClassVar, Literal
+from typing_extensions import Self
 
 from numpy import ndarray
-from scipy import linalg as linalg
 
 from .._typing import ArrayLike, Float, Int, MatrixLike
-from ..exceptions import ConvergenceWarning as ConvergenceWarning
-from ..linear_model import lars_path_gram as lars_path_gram
-from ..model_selection import BaseCrossValidator, check_cv as check_cv, cross_val_score as cross_val_score
-from ..utils._param_validation import Interval as Interval, StrOptions as StrOptions
-from ..utils.parallel import Parallel as Parallel, delayed as delayed
-from ..utils.validation import check_random_state as check_random_state, check_scalar as check_scalar
-from . import EmpiricalCovariance, empirical_covariance as empirical_covariance, log_likelihood as log_likelihood
-
-GraphicalLassoCV_Self = TypeVar("GraphicalLassoCV_Self", bound=GraphicalLassoCV)
-GraphicalLasso_Self = TypeVar("GraphicalLasso_Self", bound=GraphicalLasso)
-
-import operator
-import sys
-import time
+from ..model_selection import BaseCrossValidator
+from . import EmpiricalCovariance
 
 # Author: Gael Varoquaux <gael.varoquaux@normalesup.org>
 # License: BSD 3 clause
 # Copyright: INRIA
-import warnings
-
-import numpy as np
 
 def alpha_max(emp_cov: MatrixLike) -> Float: ...
 
@@ -84,7 +69,7 @@ class GraphicalLasso(BaseGraphicalLasso):
         verbose: bool = False,
         assume_centered: bool = False,
     ) -> None: ...
-    def fit(self: GraphicalLasso_Self, X: MatrixLike, y: Any = None) -> GraphicalLasso_Self: ...
+    def fit(self, X: MatrixLike, y: Any = None) -> Self: ...
 
 # Cross-validation with GraphicalLasso
 def graphical_lasso_path(
@@ -125,4 +110,4 @@ class GraphicalLassoCV(BaseGraphicalLasso):
         verbose: bool = False,
         assume_centered: bool = False,
     ) -> None: ...
-    def fit(self: GraphicalLassoCV_Self, X: MatrixLike, y: Any = None) -> GraphicalLassoCV_Self: ...
+    def fit(self, X: MatrixLike, y: Any = None) -> Self: ...

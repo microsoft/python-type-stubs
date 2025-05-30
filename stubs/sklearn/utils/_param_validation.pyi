@@ -1,16 +1,7 @@
-import functools
-import math
-import operator
-import re
-import warnings
 from abc import ABC, abstractmethod
-from collections.abc import Iterable as Iterable
-from inspect import signature as signature
+from collections.abc import Mapping, Sequence
 from numbers import Integral, Real
-from typing import Any, Callable, Literal, Mapping, Sequence, Type
-
-import numpy as np
-from scipy.sparse import csr_matrix as csr_matrix, issparse as issparse
+from typing import Any, Callable, Literal
 
 from .._typing import Float
 
@@ -43,8 +34,8 @@ class _PandasNAConstraint(_Constraint):
 class Options(_Constraint):
     def __init__(
         self,
-        type: Type[str] | Type[type] | Type[Real],
-        options: set | set[float] | set[str] | set[Type[Float]],
+        type: type[str | type | Real],
+        options: set | set[float] | set[str] | set[type[Float]],
         *,
         deprecated: set | None = None,
     ) -> None: ...
@@ -56,7 +47,7 @@ class StrOptions(Options):
 class Interval(_Constraint):
     def __init__(
         self,
-        type: Real | Type[Integral] | Type[Real] | Integral,
+        type: type[Integral | Real] | Real | Integral,
         left: float | None,
         right: float | None,
         *,
