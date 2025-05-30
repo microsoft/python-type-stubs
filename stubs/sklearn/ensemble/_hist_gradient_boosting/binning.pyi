@@ -7,6 +7,8 @@ from numpy.random import RandomState
 from ..._typing import ArrayLike, Int, MatrixLike
 from ...base import BaseEstimator, TransformerMixin
 
+# Author: Nicolas Hug
+
 class _BinMapper(TransformerMixin, BaseEstimator):
     missing_values_bin_idx_: uint8 = ...
     is_categorical_: ndarray = ...
