@@ -1,3 +1,10 @@
+# These modules fail to import on non-macOS, and we're no doing per-environment allowlist
+(vispy\.ext\.cocoapy)?
+(vispy\.util\.fonts\._quartz)?
+
+# TODO: macOS-specific issues. Comment this line and gradually fix them.
+(vispy\.ext\.cocoapy\..+?)?
+
 # TODO: Missing in this non-partial stub
 vispy.app.backends
 vispy.app.backends.tests
@@ -197,7 +204,6 @@ vispy.color.colormap._colormaps
 vispy.color.colormap.get_colormap
 vispy.color.get_colormap
 vispy.config
-vispy.ext.cocoapy
 vispy.geometry.Triangulation._iscounterclockwise
 vispy.geometry.create_cylinder
 vispy.geometry.curves.m_angle_tolerance
@@ -1887,7 +1893,6 @@ vispy.util.config._data_path
 vispy.util.config.config
 vispy.util.config.file_types
 vispy.util.event.EventEmitter.__init__
-vispy.util.fonts._quartz
 vispy.util.fonts._vispy_fonts
 vispy.util.fonts._vispy_fonts._vispy_fonts
 vispy.util.keys.ALT
