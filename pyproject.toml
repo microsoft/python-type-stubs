@@ -14,20 +14,21 @@ tests = [
     "mypy ==1.15.*",
     "pyright",
 
-    # Typed libraries and stubs
+    # External type stubs and optional dependencies
+    "PyOpenGL",
     "matplotlib >=3.8",
     "pandas-stubs",
     "pytest",
     "scipy-stubs",
     "typing_extensions",
 
-    # Untyped libraries and partial stubs. Used to prevent "reportMissingImports" and get inferred typing
-    "joblib",
+    # The libraries we're stubbing.
+    # Needed for stubtest and downloads their dependencies to get known import symbols
     "networkx",
-    "PyOpenGL",
+    "scikit-image",
     "scikit-learn",
     "sympy",
-    "traitlets",
+    "vispy",
 ]
 dev = [{ include-group = "hygiene" }, { include-group = "tests" }]
 
@@ -136,7 +137,6 @@ reportSelfClsParameterName = false
 reportUnsupportedDunderAll = "error"
 
 [tool.mypy]
-python_version = "3.9" # Target oldest supported Python version
 strict = true
 check_untyped_defs = true # Strict check on all defs
 show_column_numbers = true
@@ -162,6 +162,13 @@ disable_error_code = [
 ]
 
 [[tool.mypy.overrides]]
+# follow_untyped_imports = true will cause stubtest to run mypy on the source
+# So disable it for partial stubs
+module = ["sympy.*"]
+follow_untyped_imports = false
+disable_error_code = ["import-untyped", "misc"]
+
+[[tool.mypy.overrides]]
 # These modules are to be removed soon, not worth solving many issues
 module = ["matplotlib.*", "networkx.*"]
 disable_error_code = [
@@ -169,7 +176,7 @@ disable_error_code = [
     "misc",
 ]
 [[tool.mypy.overrides]]
-module = ["sympy.*", "skimage.*", "sklearn.*"]
+module = ["skimage.*", "sklearn.*"]
 # TODO: Too many untyped decorators still left
 # https://github.com/python/mypy/issues/19148
 disable_error_code = ["misc"]

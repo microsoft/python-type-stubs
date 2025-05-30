@@ -1,16 +1,16 @@
 from typing import Literal
 
 from sympy.assumptions.predicates.sets import (
-    AlgebraicPredicate,
-    AntihermitianPredicate,
-    ComplexPredicate,
-    ExtendedRealPredicate,
-    HermitianPredicate,
-    ImaginaryPredicate,
-    IntegerPredicate,
-    IrrationalPredicate,
-    RationalPredicate,
-    RealPredicate,
+    AlgebraicPredicate as AlgebraicPredicate,
+    AntihermitianPredicate as AntihermitianPredicate,
+    ComplexPredicate as ComplexPredicate,
+    ExtendedRealPredicate as ExtendedRealPredicate,
+    HermitianPredicate as HermitianPredicate,
+    ImaginaryPredicate as ImaginaryPredicate,
+    IntegerPredicate as IntegerPredicate,
+    IrrationalPredicate as IrrationalPredicate,
+    RationalPredicate as RationalPredicate,
+    RealPredicate as RealPredicate,
 )
 from sympy.core import Add, Basic, Expr, Mul, Pow
 from sympy.core.numbers import (

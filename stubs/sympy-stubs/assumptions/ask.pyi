@@ -1,12 +1,59 @@
 from sympy.assumptions.assume import UndefinedPredicate
-from sympy.assumptions.predicates.calculus import *
-from sympy.assumptions.predicates.common import *
-from sympy.assumptions.predicates.matrices import *
-from sympy.assumptions.predicates.ntheory import *
-from sympy.assumptions.predicates.order import *
-from sympy.assumptions.predicates.sets import *
-from sympy.assumptions.relation.equality import *
 from sympy.utilities.decorator import memoize_property
+
+from .handlers.calculus import FinitePredicate, InfinitePredicate, NegativeInfinitePredicate, PositiveInfinitePredicate
+from .handlers.common import CommutativePredicate, IsTruePredicate
+from .handlers.matrices import (
+    ComplexElementsPredicate,
+    DiagonalPredicate,
+    FullRankPredicate,
+    IntegerElementsPredicate,
+    InvertiblePredicate,
+    LowerTriangularPredicate,
+    OrthogonalPredicate,
+    PositiveDefinitePredicate,
+    RealElementsPredicate,
+    SquarePredicate,
+    SymmetricPredicate,
+    UnitaryPredicate,
+    UpperTriangularPredicate,
+)
+from .handlers.ntheory import CompositePredicate, EvenPredicate, OddPredicate, PrimePredicate
+from .handlers.order import (
+    ExtendedNegativePredicate,
+    ExtendedNonNegativePredicate,
+    ExtendedNonPositivePredicate,
+    ExtendedNonZeroPredicate,
+    ExtendedPositivePredicate,
+    NegativePredicate,
+    NonNegativePredicate,
+    NonPositivePredicate,
+    NonZeroPredicate,
+    PositivePredicate,
+    ZeroPredicate,
+)
+from .handlers.sets import (
+    AlgebraicPredicate,
+    AntihermitianPredicate,
+    ComplexPredicate,
+    ExtendedRealPredicate,
+    HermitianPredicate,
+    ImaginaryPredicate,
+    IntegerPredicate,
+    IrrationalPredicate,
+    RationalPredicate,
+    RealPredicate,
+)
+from .predicates.matrices import NormalPredicate, SingularPredicate, TriangularPredicate, UnitTriangularPredicate
+from .predicates.sets import NonIntegerPredicate, TranscendentalPredicate
+from .relation.equality import (
+    EqualityPredicate,
+    GreaterThanPredicate,
+    LessThanPredicate,
+    StrictGreaterThanPredicate,
+    StrictLessThanPredicate,
+    UnequalityPredicate,
+)
 
 class AssumptionKeys:
     @memoize_property
@@ -27,6 +74,8 @@ class AssumptionKeys:
     def transcendental(self) -> UndefinedPredicate | TranscendentalPredicate: ...
     @memoize_property
     def integer(self) -> UndefinedPredicate | IntegerPredicate: ...
+    @memoize_property
+    def noninteger(self) -> UndefinedPredicate | NonIntegerPredicate: ...
     @memoize_property
     def rational(self) -> UndefinedPredicate | RationalPredicate: ...
     @memoize_property
