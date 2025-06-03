@@ -60,6 +60,3 @@ class InverseTransform(BaseTransform):
     @property
     def shader_imap(self): ...
     def __repr__(self): ...
-
-# import here to avoid import cycle; needed for BaseTransform.__mul__.
-from .chain import ChainTransform  # noqa

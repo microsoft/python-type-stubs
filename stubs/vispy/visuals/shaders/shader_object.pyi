@@ -1,10 +1,3 @@
-# Copyright (c) Vispy Development Team. All Rights Reserved.
-# Distributed under the (new) BSD License. See LICENSE.txt for more info.
-from collections import OrderedDict
-from weakref import WeakKeyDictionary
-
-from .compiler import Compiler
-
 class ShaderObject:
     @classmethod
     def create(cls, obj, ref=None): ...
@@ -23,6 +16,3 @@ class ShaderObject:
     def changed(self, code_changed=False, value_changed=False): ...
     def compile(self): ...
     def __repr__(self): ...
-
-from .expression import TextExpression  # noqa
-from .variable import Variable  # noqa

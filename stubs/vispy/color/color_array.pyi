@@ -1,22 +1,5 @@
 from collections.abc import Sequence
-from copy import deepcopy
 from typing import Literal
-
-import numpy as np
-
-from ..util import logger
-from ._color_dict import _color_dict
-from .color_space import (  # noqa
-    _hex_to_rgba,
-    _hsv_to_rgb,
-    _lab_to_rgb,
-    _rgb_to_hex,
-    _rgb_to_hsv,  # noqa
-    _rgb_to_lab,
-)
-
-# Copyright (c) Vispy Development Team. All Rights Reserved.
-# Distributed under the (new) BSD License. See LICENSE.txt for more info.
 
 ###############################################################################
 # User-friendliness helpers

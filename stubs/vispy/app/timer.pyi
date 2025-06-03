@@ -1,9 +1,9 @@
-# Copyright (c) Vispy Development Team. All Rights Reserved.
-# Distributed under the (new) BSD License. See LICENSE.txt for more info.
 from typing import Any
 
 from . import Application
-from .base import BaseTimerBackend as TimerBackend  # noqa
+from .base import BaseTimerBackend
+
+TimerBackend = BaseTimerBackend
 
 class Timer:
     def __init__(self, interval=..., connect=..., iterations=..., start=..., app=...) -> None: ...

@@ -6,9 +6,9 @@ from numpy.typing import ArrayLike, NDArray
 
 from . import Visual
 
-_VERTEX_SHADER: str = ...  # noqa
+_VERTEX_SHADER: str = ...
 
-_FRAGMENT_SHADER: str = ...  # noqa
+_FRAGMENT_SHADER: str = ...
 
 _RAYCASTING_SETUP_VOLUME: str = ...
 

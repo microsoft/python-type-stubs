@@ -1,8 +1,8 @@
 # Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 
-from ._runners import test as test  # noqa
-from ._testing import (  # noqa
+from ._runners import test as test
+from ._testing import (
     IS_CI as IS_CI,
     IS_TRAVIS_CI as IS_TRAVIS_CI,
     SkipTest as SkipTest,

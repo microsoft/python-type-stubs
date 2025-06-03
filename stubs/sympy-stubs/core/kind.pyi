@@ -4,7 +4,7 @@ from typing_extensions import LiteralString, Self
 from sympy.core.cache import cacheit
 
 class KindMeta(type):
-    def __new__(cls, clsname, bases, dct) -> Self:  # type: ignore
+    def __new__(cls, clsname, bases, dct) -> Self:  # pyright: ignore[reportGeneralTypeIssues]
         ...
 
 class Kind(metaclass=KindMeta):

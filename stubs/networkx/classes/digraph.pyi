@@ -1,12 +1,7 @@
-from copy import deepcopy
 from functools import cached_property
 
-import networkx.convert as convert
-
-from ..classes.coreviews import AdjacencyView
 from ..classes.graph import Graph
-from ..classes.reportviews import DiDegreeView, InDegreeView, InEdgeView, OutDegreeView, OutEdgeView
-from ..exception import NetworkXError
+from ..classes.reportviews import DiDegreeView, InEdgeView, OutEdgeView
 
 __all__ = ["DiGraph"]
 
@@ -18,8 +13,8 @@ class _CachedPropertyResetterPred:
 
 class DiGraph(Graph):
     graph = ...
-    _adj = ...  # type: ignore
-    _succ = ...  # type: ignore
+    _adj = ...
+    _succ = ...
     _pred = ...
 
     def __init__(self, incoming_graph_data=None, **attr): ...

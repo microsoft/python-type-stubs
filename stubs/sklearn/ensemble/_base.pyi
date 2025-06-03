@@ -5,7 +5,7 @@ from typing_extensions import Self
 
 from .._typing import Int
 from ..base import BaseEstimator, MetaEstimatorMixin
-from ..utils import Bunch, deprecated
+from ..utils import Bunch
 from ..utils.metaestimators import _BaseComposition
 
 class BaseEnsemble(MetaEstimatorMixin, BaseEstimator, metaclass=ABCMeta):
@@ -23,18 +23,6 @@ class BaseEnsemble(MetaEstimatorMixin, BaseEstimator, metaclass=ABCMeta):
         estimator_params: Sequence[str] = ...,
         base_estimator: Any = "deprecated",
     ) -> None: ...
-
-    # TODO(1.4): remove
-    # mypy error: Decorated property not supported
-    @deprecated(  # type: ignore
-        "Attribute `base_estimator_` was deprecated in version 1.2 and will be removed in 1.4. Use `estimator_` instead."
-    )
-    @property
-    def base_estimator_(self) -> BaseEstimator: ...
-
-    # TODO(1.4): remove
-    @property
-    def estimator_(self) -> BaseEstimator: ...
     def __len__(self) -> int: ...
     def __getitem__(self, index): ...
     def __iter__(self): ...

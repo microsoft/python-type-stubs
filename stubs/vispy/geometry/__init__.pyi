@@ -18,8 +18,8 @@ __all__ = [
     "resize",
 ]
 
-from .calculations import _calculate_normals as _calculate_normals, _fast_cross_3d as _fast_cross_3d, resize as resize  # noqa
-from .generation import (  # noqa
+from .calculations import _calculate_normals as _calculate_normals, _fast_cross_3d as _fast_cross_3d, resize as resize
+from .generation import (
     create_arrow as create_arrow,
     create_box as create_box,
     create_cone as create_cone,
@@ -29,8 +29,8 @@ from .generation import (  # noqa
     create_plane as create_plane,
     create_sphere as create_sphere,
 )
-from .meshdata import MeshData as MeshData  # noqa
-from .polygon import PolygonData as PolygonData  # noqa
-from .rect import Rect as Rect  # noqa
-from .torusknot import TorusKnot as TorusKnot  # noqa
-from .triangulation import Triangulation as Triangulation, triangulate as triangulate  # noqa
+from .meshdata import MeshData as MeshData
+from .polygon import PolygonData as PolygonData
+from .rect import Rect as Rect
+from .torusknot import TorusKnot as TorusKnot
+from .triangulation import Triangulation as Triangulation, triangulate as triangulate

@@ -12,7 +12,7 @@ if sys.version_info >= (3, 10):
 else:
     NotImplementedType: TypeAlias = Any
 
-class GaussianElement(DomainElement):  # type: ignore
+class GaussianElement(DomainElement):
     base: Domain
     _parent: Domain
     __slots__ = ...

@@ -1,5 +1,5 @@
 from ._shared import lazy as lazy
-from ._shared.tester import PytestTester as PytestTester  # noqa
+from ._shared.tester import PytestTester as PytestTester
 from ._shared.version_requirements import ensure_python_version as ensure_python_version
 
 __version__: str = ...

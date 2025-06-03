@@ -1,18 +1,5 @@
-import bz2
-import collections
-import gzip
-import inspect
-import itertools
-import re
-from collections import defaultdict
 from collections.abc import Sequence
-from contextlib import contextmanager
-from os.path import splitext
-from pathlib import Path
 from typing import Callable
-
-from ..classes.graph import Graph
-from ..utils import create_py_random_state, create_random_state
 
 __all__ = [
     "not_implemented_for",
@@ -30,7 +17,7 @@ def not_implemented_for(*graph_types): ...
 # To handle new extensions, define a function accepting a `path` and `mode`.
 # Then add the extension to _dispatch_dict.
 fopeners: dict = ...
-_dispatch_dict = ...  # type: ignore
+_dispatch_dict = ...
 
 def open_file(path_arg: str | int, mode: str = "r"): ...
 def nodes_or_number(which_args: str | int | Sequence[str]): ...

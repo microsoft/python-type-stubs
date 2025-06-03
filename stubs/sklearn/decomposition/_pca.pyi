@@ -5,7 +5,6 @@ from numpy import ndarray
 from numpy.random import RandomState
 
 from .._typing import Float, Int, MatrixLike
-from ..utils.deprecation import deprecated
 from ._base import _BasePCA
 
 class PCA(_BasePCA):
@@ -35,14 +34,6 @@ class PCA(_BasePCA):
         power_iteration_normalizer: Literal["auto", "QR", "LU", "none"] = "auto",
         random_state: RandomState | None | Int = None,
     ) -> None: ...
-
-    # TODO(1.4): remove in 1.4
-    # mypy error: Decorated property not supported
-    @deprecated(  # type: ignore
-        "Attribute `n_features_` was deprecated in version 1.2 and will be removed in 1.4. Use `n_features_in_` instead."
-    )
-    @property
-    def n_features_(self) -> int: ...
     def fit(self, X: MatrixLike, y: Any = None) -> Self: ...
     def fit_transform(self, X: MatrixLike, y: Any = None) -> ndarray: ...
     def score_samples(self, X: MatrixLike) -> ndarray: ...

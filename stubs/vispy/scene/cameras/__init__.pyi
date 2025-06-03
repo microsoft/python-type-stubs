@@ -10,10 +10,10 @@ __all__ = [
     "TurntableCamera",
 ]
 
-from ._base import make_camera as make_camera  # noqa
-from .arcball import ArcballCamera as ArcballCamera  # noqa
-from .base_camera import BaseCamera as BaseCamera  # noqa
-from .fly import FlyCamera as FlyCamera  # noqa
-from .magnify import Magnify1DCamera as Magnify1DCamera, MagnifyCamera as MagnifyCamera  # noqa
-from .panzoom import PanZoomCamera as PanZoomCamera  # noqa
-from .turntable import TurntableCamera as TurntableCamera  # noqa
+from ._base import make_camera as make_camera
+from .arcball import ArcballCamera as ArcballCamera
+from .base_camera import BaseCamera as BaseCamera
+from .fly import FlyCamera as FlyCamera
+from .magnify import Magnify1DCamera as Magnify1DCamera, MagnifyCamera as MagnifyCamera
+from .panzoom import PanZoomCamera as PanZoomCamera
+from .turntable import TurntableCamera as TurntableCamera

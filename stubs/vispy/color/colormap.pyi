@@ -165,15 +165,6 @@ class Diverging(Colormap):
 class RedYellowBlueCyan(Colormap):
     def __init__(self, limits: ArrayLike = ...): ...
 
-# https://github.com/matplotlib/matplotlib/pull/4707/files#diff-893cf0348279e9f4570488a7a297ab1eR774  # noqa
-# Taken from original Viridis colormap data in matplotlib implementation
-#
-# Issue #1331 https://github.com/vispy/vispy/issues/1331 explains that the
-# 128 viridis sample size fails on some GPUs
-# but lowering to 64 samples allows more GPUs to use viridis.
-#
-# VisPy has beem updated to use a texture map lookup.
-# Thus, sampling of the Viridis colormap data is no longer necessary.
 _viridis_data: list = ...
 
 _colormaps = ...

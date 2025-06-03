@@ -56,10 +56,13 @@ target-version = "py39"
 extend-select = [
     "FA", # flake8-future-annotations
     "I", # isort
+    "PGH", # pygrep-hooks
+    "PGH", # pygrep-hooks and blanket-noqa
+    "PIE790", # unnecessary-placeholder
     "PYI", # flake8-pyi
+    "RUF", # Ruff-specific and unused-noqa
     "UP", # pyupgrade
     "W", # pycodestyle Warning
-    "PIE790", # unnecessary-placeholder
 ]
 ignore = [
     ###
@@ -82,6 +85,11 @@ ignore = [
 
 [tool.ruff.lint.per-file-ignores]
 "*.pyi" = [
+    # Ruff 0.8.0 added sorting of __all__ and __slots_.
+    # There is no consensus in typeshed on whether they want to apply this to stubs, so keeping the status quo.
+    # See https://github.com/python/typeshed/pull/13108
+    "RUF022", # `__all__` is not sorted
+    "RUF023", # `{}.__slots__` is not sorted
     ###
     # Rules that are out of the control of stub authors:
     ###
