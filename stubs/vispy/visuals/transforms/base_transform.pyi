@@ -1,12 +1,8 @@
-# Copyright (c) Vispy Development Team. All Rights Reserved.
-# Distributed under the (new) BSD License. See LICENSE.txt for more info.
-
-from ...util.event import EventEmitter
-from ..shaders import Function
+from typing import ClassVar
 
 class BaseTransform:
-    glsl_map: None = ...  # Must be GLSL code
-    glsl_imap: None = ...
+    glsl_map: ClassVar[str | None]
+    glsl_imap: ClassVar[str | None]
 
     # Flags used to describe the transformation. Subclasses should define each
     # as True or False.
