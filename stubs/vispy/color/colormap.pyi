@@ -1,16 +1,9 @@
-import warnings
 from collections.abc import Sequence
+from typing import ClassVar
 
-import numpy as np
 from numpy.typing import ArrayLike, NDArray
 
 from .._typing import Scalar
-from ..ext.cubehelix import cubehelix
-from ..util.check_environment import has_matplotlib
-from .color_array import ColorArray
-
-# Copyright (c) Vispy Development Team. All Rights Reserved.
-# Distributed under the (new) BSD License. See LICENSE.txt for more info.
 
 ###############################################################################
 # Color maps
@@ -45,7 +38,7 @@ class BaseColormap:
     colors: None = ...
 
     # GLSL string with a function implementing the color map.
-    glsl_map: None = ...
+    glsl_map: ClassVar[str | None]
 
     # Texture map data used by the 'colormap' GLSL function
     # for luminance to RGBA conversion.
@@ -98,31 +91,31 @@ class CubeHelixColormap(Colormap):
 class _Fire(BaseColormap):
     colors: list = ...
 
-    glsl_map: str = ...
+    glsl_map: ClassVar[str]
 
     def map(self, t) -> NDArray: ...
 
 class _Grays(BaseColormap):
-    glsl_map: str = ...
+    glsl_map: ClassVar[str]
 
     def map(self, t) -> NDArray: ...
 
 class _Ice(BaseColormap):
-    glsl_map: str = ...
+    glsl_map: ClassVar[str]
 
     def map(self, t) -> NDArray: ...
 
 class _Hot(BaseColormap):
     colors: list = ...
 
-    glsl_map: str = ...
+    glsl_map: ClassVar[str]
 
     def map(self, t) -> NDArray: ...
 
 class _Winter(BaseColormap):
     colors: list = ...
 
-    glsl_map: str = ...
+    glsl_map: ClassVar[str]
 
     def map(self, t) -> NDArray: ...
 
