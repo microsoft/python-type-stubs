@@ -1,12 +1,7 @@
-import itertools
-from collections import defaultdict
 from collections.abc import Mapping
 from functools import cached_property
 
 from ...classes.graph import Graph
-from ...exception import NetworkXError
-from ...utils import not_implemented_for
-from . import local_node_connectivity
 
 __all__ = ["k_components"]
 
@@ -17,7 +12,7 @@ class _AntiGraph(Graph):
 
     def single_edge_dict(self): ...
 
-    edge_attr_dict_factory = single_edge_dict  # type: ignore
+    edge_attr_dict_factory = single_edge_dict
 
     def __getitem__(self, n) -> Mapping: ...
     def neighbors(self, n): ...

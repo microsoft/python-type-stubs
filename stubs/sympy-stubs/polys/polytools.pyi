@@ -191,11 +191,10 @@ class Poly(Basic):
     ) -> tuple[
         PermutationGroup
         | Literal[
-            # Looks like a false-positives, no code to specify
-            S1TransitiveSubgroups.S1,  # pyright: ignore
-            S2TransitiveSubgroups.S2,  # pyright: ignore
-            S3TransitiveSubgroups.A3,  # pyright: ignore
-            S3TransitiveSubgroups.S3,  # pyright: ignore
+            S1TransitiveSubgroups.S1,
+            S2TransitiveSubgroups.S2,
+            S3TransitiveSubgroups.A3,
+            S3TransitiveSubgroups.S3,
         ]
         | None,
         bool,

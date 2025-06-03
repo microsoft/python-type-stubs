@@ -3,13 +3,13 @@
 
 from os import path as _op
 
-from .datasets import (  # noqa
+from .datasets import (
     load_crate as load_crate,
     load_data_file as load_data_file,
     load_iris as load_iris,
     load_spatial_filters as load_spatial_filters,
 )
-from .image import (  # noqa
+from .image import (
     _check_img_lib as _check_img_lib,
     _make_png as _make_png,
     imread as imread,
@@ -17,7 +17,7 @@ from .image import (  # noqa
     read_png as read_png,
     write_png as write_png,
 )
-from .mesh import read_mesh as read_mesh, write_mesh as write_mesh  # noqa
+from .mesh import read_mesh as read_mesh, write_mesh as write_mesh
 
 _data_dir = ...
 

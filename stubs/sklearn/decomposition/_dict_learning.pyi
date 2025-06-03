@@ -6,14 +6,7 @@ from numpy.random import RandomState
 
 from .._typing import ArrayLike, Float, Int, MatrixLike
 from ..base import BaseEstimator, ClassNamePrefixFeaturesOutMixin, TransformerMixin
-from ..utils import (
-    deprecated,
-)
 
-# Author: Vlad Niculae, Gael Varoquaux, Alexandre Gramfort
-# License: BSD 3 clause
-
-# XXX : could be moved to the linear_model module
 def sparse_encode(
     X: ArrayLike,
     dictionary: MatrixLike,
@@ -180,15 +173,6 @@ class MiniBatchDictionaryLearning(_BaseSparseCoding, BaseEstimator):
         tol: Float = 1e-3,
         max_no_improvement: Int = 10,
     ) -> None: ...
-    @deprecated("The attribute `iter_offset_` is deprecated in 1.1 and will be removed in 1.3.")  # type: ignore
-    @property
-    def iter_offset_(self) -> int: ...
-    @deprecated("The attribute `random_state_` is deprecated in 1.1 and will be removed in 1.3.")  # type: ignore
-    @property
-    def random_state_(self) -> RandomState: ...
-    @deprecated("The attribute `inner_stats_` is deprecated in 1.1 and will be removed in 1.3.")  # type: ignore
-    @property
-    def inner_stats_(self) -> tuple[ndarray, ndarray]: ...
     def fit(self, X: MatrixLike, y: Any = None) -> Self: ...
     def partial_fit(
         self,

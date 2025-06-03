@@ -1,1 +1,1 @@
-from .graph import GraphVisual as GraphVisual  # noqa
+from .graph import GraphVisual as GraphVisual

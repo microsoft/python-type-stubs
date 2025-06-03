@@ -1,5 +1,3 @@
-# flake8: noqa
-
 # This minimal dataset was available as part of
 # scikit-image 0.15 and will be retained until
 # further notice.

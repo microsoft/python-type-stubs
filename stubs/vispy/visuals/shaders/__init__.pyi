@@ -12,13 +12,13 @@ __all__ = [
     "MultiProgram",
 ]
 
-from .compiler import Compiler as Compiler  # noqa
-from .function import (  # noqa
+from .compiler import Compiler as Compiler
+from .function import (
     Function as Function,
     FunctionChain as FunctionChain,
     MainFunction as MainFunction,
     StatementList as StatementList,
 )
-from .multiprogram import MultiProgram as MultiProgram  # noqa
-from .program import ModularProgram as ModularProgram  # noqa
-from .variable import Variable as Variable, Varying as Varying  # noqa
+from .multiprogram import MultiProgram as MultiProgram
+from .program import ModularProgram as ModularProgram
+from .variable import Variable as Variable, Varying as Varying

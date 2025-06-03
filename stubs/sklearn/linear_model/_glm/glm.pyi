@@ -8,7 +8,6 @@ from ..._loss.loss import (
 )
 from ..._typing import ArrayLike, Float, Int, MatrixLike
 from ...base import BaseEstimator, RegressorMixin
-from ...utils import deprecated
 
 class _GeneralizedLinearRegressor(RegressorMixin, BaseEstimator):
     _base_loss: BaseLoss = ...
@@ -45,10 +44,6 @@ class _GeneralizedLinearRegressor(RegressorMixin, BaseEstimator):
         y: ArrayLike,
         sample_weight: None | ArrayLike = None,
     ) -> Float: ...
-
-    # TODO(1.3): remove
-    @deprecated("Attribute `family` was deprecated in version 1.1 and will be removed in 1.3.")  # type: ignore
-    def family(self): ...
 
 class PoissonRegressor(_GeneralizedLinearRegressor):
     n_iter_: int = ...

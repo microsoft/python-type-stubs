@@ -1,13 +1,6 @@
-# Copyright (c) Vispy Development Team. All Rights Reserved.
-# Distributed under the (new) BSD License. See LICENSE.txt for more info.
+from .base import BaseApplicationBackend
 
-import builtins
-import os
-import sys
-
-from .. import config
-from ..util import logger
-from .base import BaseApplicationBackend as ApplicationBackend  # noqa
+ApplicationBackend = BaseApplicationBackend
 
 class Application:
     def __init__(self, backend_name: str | None = None): ...

@@ -11,7 +11,7 @@ if sys.version_info >= (3, 10):
 else:
     NotImplementedType: TypeAlias = Any
 
-class ExtensionElement(DomainElement, DefaultPrinting):  # type: ignore
+class ExtensionElement(DomainElement, DefaultPrinting):
     __slots__ = ...
     def __init__(self, rep, ext) -> None: ...
     def parent(self) -> Any: ...
@@ -47,7 +47,7 @@ class ExtensionElement(DomainElement, DefaultPrinting):  # type: ignore
 
 ExtElem = ExtensionElement
 
-class MonogenicFiniteExtension(Domain):  # type: ignore
+class MonogenicFiniteExtension(Domain):
     is_FiniteExtension = ...
     dtype = ExtensionElement
     def __init__(self, mod) -> None: ...

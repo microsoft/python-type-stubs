@@ -79,8 +79,4 @@ class _EstimatorPrettyPrinter(pprint.PrettyPrinter):
     ) -> None: ...
     def format(self, object, context: dict[Any, Any] | dict[int, int], maxlevels, level: int) -> tuple[str, bool, bool]: ...
 
-    # Note: need to copy _dispatch to prevent instances of the builtin
-    # PrettyPrinter class to call methods of _EstimatorPrettyPrinter (see issue
-    # 12906)
-    # mypy error: "Type[PrettyPrinter]" has no attribute "_dispatch"
-    _dispatch = ...  # type: ignore
+    _dispatch = ...

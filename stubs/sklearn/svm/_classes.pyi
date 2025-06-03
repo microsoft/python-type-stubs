@@ -8,7 +8,6 @@ from numpy.random import RandomState
 from .._typing import ArrayLike, Float, Int, MatrixLike
 from ..base import BaseEstimator, OutlierMixin, RegressorMixin
 from ..linear_model._base import LinearClassifierMixin, LinearModel, SparseCoefMixin
-from ..utils import deprecated
 from ._base import BaseLibSVM, BaseSVC
 
 class LinearSVC(LinearClassifierMixin, SparseCoefMixin, BaseEstimator):
@@ -187,11 +186,6 @@ class SVR(RegressorMixin, BaseLibSVM):
         max_iter: Int = ...,
     ) -> None: ...
 
-    # TODO(1.4): Remove
-    @deprecated("Attribute `class_weight_` was deprecated in version 1.2 and will be removed in 1.4.")  # type: ignore
-    @property
-    def class_weight_(self) -> ndarray: ...
-
 class NuSVR(RegressorMixin, BaseLibSVM):
     support_vectors_: ndarray = ...
     support_: ndarray = ...
@@ -225,11 +219,6 @@ class NuSVR(RegressorMixin, BaseLibSVM):
         max_iter: Int = ...,
     ) -> None: ...
 
-    # TODO(1.4): Remove
-    @deprecated("Attribute `class_weight_` was deprecated in version 1.2 and will be removed in 1.4.")  # type: ignore
-    @property
-    def class_weight_(self) -> ndarray: ...
-
 class OneClassSVM(OutlierMixin, BaseLibSVM):
     support_vectors_: ndarray = ...
     support_: ndarray = ...
@@ -262,11 +251,6 @@ class OneClassSVM(OutlierMixin, BaseLibSVM):
         verbose: bool = False,
         max_iter: Int = ...,
     ) -> None: ...
-
-    # TODO(1.4): Remove
-    @deprecated("Attribute `class_weight_` was deprecated in version 1.2 and will be removed in 1.4.")  # type: ignore
-    @property
-    def class_weight_(self) -> ndarray: ...
     def fit(
         self,
         X: MatrixLike | ArrayLike,

@@ -8,7 +8,6 @@ from numpy.random import RandomState
 
 from .._typing import ArrayLike, Float, Int, MatrixLike
 from ..base import BaseEstimator, ClassifierMixin, RegressorMixin
-from ..utils import deprecated
 from ._base import BaseEnsemble
 from ._gb_losses import LossFunction
 
@@ -56,11 +55,6 @@ class BaseGradientBoosting(BaseEnsemble, metaclass=ABCMeta):
     @property
     def feature_importances_(self) -> ndarray: ...
     def apply(self, X: MatrixLike | ArrayLike) -> ndarray: ...
-
-    # TODO(1.3): Remove
-    # mypy error: Decorated property not supported
-    @deprecated("Attribute `loss_` was deprecated in version 1.1 and will be removed in 1.3.")  # type: ignore
-    def loss_(self): ...
 
 class GradientBoostingClassifier(ClassifierMixin, BaseGradientBoosting):
     max_features_: int = ...
