@@ -19,7 +19,7 @@ from ._data import (
     scale as scale,
 )
 from ._discretization import KBinsDiscretizer as KBinsDiscretizer
-from ._encoders import OneHotEncoder as OneHotEncoder, OrdinalEncoder as OrdinalEncoder
+from ._encoders import OneHotEncoder as OneHotEncoder, OrdinalEncoder as OrdinalEncoder, TargetEncoder as TargetEncoder
 from ._function_transformer import FunctionTransformer as FunctionTransformer
 from ._label import (
     LabelBinarizer as LabelBinarizer,
@@ -47,6 +47,7 @@ __all__ = [
     "RobustScaler",
     "SplineTransformer",
     "StandardScaler",
+    "TargetEncoder",
     "add_dummy_feature",
     "PolynomialFeatures",
     "binarize",
