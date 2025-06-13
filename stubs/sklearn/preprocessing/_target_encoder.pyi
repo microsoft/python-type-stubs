@@ -147,7 +147,7 @@ class TargetEncoder(OneToOneFeatureMixin, _BaseEncoder):
     ----------
     .. [MIC] :doi:`Micci-Barreca, Daniele. "A preprocessing scheme for high-cardinality
        categorical attributes in classification and prediction problems"
-       SIGKDD Explor. Newsl. 3, 1 (July 2001), 27–32. <10.1145/507533.507538>`
+       SIGKDD Explor. Newsl. 3, 1 (July 2001), 27-32. <10.1145/507533.507538>`
 
     Examples
     --------
