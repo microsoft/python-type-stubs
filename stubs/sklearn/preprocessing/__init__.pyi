@@ -19,7 +19,7 @@ from ._data import (
     scale as scale,
 )
 from ._discretization import KBinsDiscretizer as KBinsDiscretizer
-from ._encoders import OneHotEncoder as OneHotEncoder, OrdinalEncoder as OrdinalEncoder, TargetEncoder as TargetEncoder
+from ._encoders import OneHotEncoder as OneHotEncoder, OrdinalEncoder as OrdinalEncoder
 from ._function_transformer import FunctionTransformer as FunctionTransformer
 from ._label import (
     LabelBinarizer as LabelBinarizer,
@@ -28,6 +28,7 @@ from ._label import (
     label_binarize as label_binarize,
 )
 from ._polynomial import PolynomialFeatures as PolynomialFeatures, SplineTransformer as SplineTransformer
+from ._target_encoder import TargetEncoder as TargetEncoder
 
 __all__ = [
     "Binarizer",
@@ -36,27 +37,27 @@ __all__ = [
     "KernelCenterer",
     "LabelBinarizer",
     "LabelEncoder",
-    "MultiLabelBinarizer",
-    "MinMaxScaler",
     "MaxAbsScaler",
-    "QuantileTransformer",
+    "MinMaxScaler",
+    "MultiLabelBinarizer",
     "Normalizer",
     "OneHotEncoder",
     "OrdinalEncoder",
+    "PolynomialFeatures",
     "PowerTransformer",
+    "QuantileTransformer",
     "RobustScaler",
     "SplineTransformer",
     "StandardScaler",
     "TargetEncoder",
     "add_dummy_feature",
-    "PolynomialFeatures",
     "binarize",
-    "normalize",
-    "scale",
-    "robust_scale",
+    "label_binarize",
     "maxabs_scale",
     "minmax_scale",
-    "label_binarize",
-    "quantile_transform",
+    "normalize",
     "power_transform",
+    "quantile_transform",
+    "robust_scale",
+    "scale",
 ]
