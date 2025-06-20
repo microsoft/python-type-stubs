@@ -15,14 +15,14 @@ tests = [
     "pyright",
 
     # External type stubs and optional dependencies
+    "PyOpenGL",
     "matplotlib >=3.8",
     "pandas-stubs",
-    "PyOpenGL",
     "pytest",
     "scipy-stubs",
     "types-networkx",
     "typing_extensions",
-    
+
     # The libraries we're stubbing.
     # Needed for stubtest and downloads their dependencies to get known import symbols
     "scikit-image",
