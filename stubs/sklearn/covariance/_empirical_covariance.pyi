@@ -1,17 +1,10 @@
-import warnings
 from typing import Any, ClassVar, Literal
 from typing_extensions import Self
 
-import numpy as np
 from numpy import ndarray
-from scipy import linalg as linalg
 
-from .. import config_context as config_context
 from .._typing import ArrayLike, Float, MatrixLike
 from ..base import BaseEstimator
-from ..metrics.pairwise import pairwise_distances as pairwise_distances
-from ..utils import check_array as check_array
-from ..utils.extmath import fast_logdet as fast_logdet
 
 # Author: Alexandre Gramfort <alexandre.gramfort@inria.fr>
 #         Gael Varoquaux <gael.varoquaux@normalesup.org>

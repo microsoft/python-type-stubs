@@ -1,12 +1,17 @@
-from types import NotImplementedType
+import sys
 from typing import Any, Literal
-from typing_extensions import Self
+from typing_extensions import Self, TypeAlias
 
 from sympy.matrices.dense import MutableDenseMatrix
 from sympy.polys.domains import Domain
 from sympy.polys.matrices.ddm import DDM
 from sympy.polys.matrices.domainscalar import DomainScalar
 from sympy.polys.matrices.sdm import SDM
+
+if sys.version_info >= (3, 10):
+    from types import NotImplementedType
+else:
+    NotImplementedType: TypeAlias = Any
 
 def DM(rows, domain) -> DomainMatrix: ...
 

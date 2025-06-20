@@ -1,15 +1,10 @@
-import numbers
 from collections.abc import Mapping
 from typing import Any, Callable
 
-import numpy as np
 from numpy.random import RandomState
 
 from .._typing import ArrayLike, Int, MatrixLike
-from ..metrics import check_scoring as check_scoring
-from ..utils import check_array as check_array, check_random_state as check_random_state
 from ..utils._bunch import Bunch
-from ..utils.parallel import Parallel as Parallel, delayed as delayed
 
 def permutation_importance(
     estimator: Any,

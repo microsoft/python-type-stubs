@@ -15,9 +15,9 @@ from . import CompoundVisual, TextVisual, Visual, _BorderVisual
 # from .border import _BorderVisual
 from .shaders import Function
 
-_VERTEX_SHADER: str = ...  # noqa
+_VERTEX_SHADER: str = ...
 
-_FRAGMENT_SHADER: str = ...  # noqa
+_FRAGMENT_SHADER: str = ...
 
 class _CoreColorBarVisual(Visual):
     _shaders: dict = ...

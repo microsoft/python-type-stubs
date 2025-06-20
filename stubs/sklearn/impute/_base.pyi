@@ -1,20 +1,11 @@
-import numbers
-import warnings
-from collections import Counter as Counter
 from typing import Any, ClassVar, Literal
 from typing_extensions import Self
 
-import numpy as np
-import numpy.ma as ma
 from numpy import ndarray
-from scipy import sparse as sp
 from scipy.sparse import spmatrix
 
 from .._typing import ArrayLike, Int, MatrixLike
 from ..base import BaseEstimator, TransformerMixin
-from ..utils import is_scalar_nan as is_scalar_nan
-from ..utils._param_validation import Hidden as Hidden, StrOptions as StrOptions
-from ..utils.validation import FLOAT_DTYPES as FLOAT_DTYPES, check_is_fitted as check_is_fitted
 
 # Authors: Nicolas Tresegnie <nicolas.tresegnie@gmail.com>
 #          Sergey Feldman <sergeyfeldman@gmail.com>

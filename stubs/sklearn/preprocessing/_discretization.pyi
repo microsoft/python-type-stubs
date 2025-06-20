@@ -1,9 +1,6 @@
-import warnings
-from numbers import Integral as Integral
 from typing import ClassVar, Literal
 from typing_extensions import Self
 
-import numpy as np
 from numpy import ndarray
 from numpy.random import RandomState
 from pandas.core.series import Series
@@ -11,14 +8,6 @@ from scipy.sparse import spmatrix
 
 from .._typing import ArrayLike, Float, Int, MatrixLike
 from ..base import BaseEstimator, TransformerMixin
-from ..cluster import KMeans as KMeans
-from ..utils._param_validation import Hidden as Hidden, Interval as Interval, Options as Options, StrOptions as StrOptions
-from ..utils.validation import (
-    check_array as check_array,
-    check_is_fitted as check_is_fitted,
-    check_random_state as check_random_state,
-)
-from . import OneHotEncoder as OneHotEncoder
 
 # Author: Henry Lin <hlin117@gmail.com>
 #         Tom Dupré la Tour

@@ -1,18 +1,13 @@
 from collections.abc import Mapping
-from numbers import Integral as Integral, Real as Real
 from typing import Any, Callable, ClassVar, Literal
 from typing_extensions import Self
 
-import numpy as np
 from numpy import ndarray
 from numpy.random import RandomState
 
 from .._typing import ArrayLike, Float, Int, MatrixLike
 from ..base import BaseEstimator, OutlierMixin, RegressorMixin
 from ..linear_model._base import LinearClassifierMixin, LinearModel, SparseCoefMixin
-from ..utils import deprecated
-from ..utils._param_validation import Interval as Interval, StrOptions as StrOptions
-from ..utils.multiclass import check_classification_targets as check_classification_targets
 from ._base import BaseLibSVM, BaseSVC
 
 class LinearSVC(LinearClassifierMixin, SparseCoefMixin, BaseEstimator):
@@ -191,11 +186,6 @@ class SVR(RegressorMixin, BaseLibSVM):
         max_iter: Int = ...,
     ) -> None: ...
 
-    # TODO(1.4): Remove
-    @deprecated("Attribute `class_weight_` was deprecated in version 1.2 and will be removed in 1.4.")  # type: ignore
-    @property
-    def class_weight_(self) -> ndarray: ...
-
 class NuSVR(RegressorMixin, BaseLibSVM):
     support_vectors_: ndarray = ...
     support_: ndarray = ...
@@ -229,11 +219,6 @@ class NuSVR(RegressorMixin, BaseLibSVM):
         max_iter: Int = ...,
     ) -> None: ...
 
-    # TODO(1.4): Remove
-    @deprecated("Attribute `class_weight_` was deprecated in version 1.2 and will be removed in 1.4.")  # type: ignore
-    @property
-    def class_weight_(self) -> ndarray: ...
-
 class OneClassSVM(OutlierMixin, BaseLibSVM):
     support_vectors_: ndarray = ...
     support_: ndarray = ...
@@ -266,11 +251,6 @@ class OneClassSVM(OutlierMixin, BaseLibSVM):
         verbose: bool = False,
         max_iter: Int = ...,
     ) -> None: ...
-
-    # TODO(1.4): Remove
-    @deprecated("Attribute `class_weight_` was deprecated in version 1.2 and will be removed in 1.4.")  # type: ignore
-    @property
-    def class_weight_(self) -> ndarray: ...
     def fit(
         self,
         X: MatrixLike | ArrayLike,

@@ -1,12 +1,17 @@
-from types import NotImplementedType
+import sys
 from typing import Any, Literal
-from typing_extensions import Self
+from typing_extensions import Self, TypeAlias
 
 from sympy.polys.domains.domain import Domain
 from sympy.polys.domains.domainelement import DomainElement
 from sympy.printing.defaults import DefaultPrinting
 
-class ExtensionElement(DomainElement, DefaultPrinting):  # type: ignore
+if sys.version_info >= (3, 10):
+    from types import NotImplementedType
+else:
+    NotImplementedType: TypeAlias = Any
+
+class ExtensionElement(DomainElement, DefaultPrinting):
     __slots__ = ...
     def __init__(self, rep, ext) -> None: ...
     def parent(self) -> Any: ...
@@ -42,7 +47,7 @@ class ExtensionElement(DomainElement, DefaultPrinting):  # type: ignore
 
 ExtElem = ExtensionElement
 
-class MonogenicFiniteExtension(Domain):  # type: ignore
+class MonogenicFiniteExtension(Domain):
     is_FiniteExtension = ...
     dtype = ExtensionElement
     def __init__(self, mod) -> None: ...

@@ -1,8 +1,5 @@
-import numpy
-import scipy.special as special
 from numpy import int32, ndarray
 
-from .._config import get_config as get_config
 from .._typing import Float
 
 class _ArrayAPIWrapper:

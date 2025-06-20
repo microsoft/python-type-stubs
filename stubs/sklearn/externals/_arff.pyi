@@ -1,5 +1,4 @@
 from typing import ClassVar, Literal
-from typing_extensions import TypedDict as TypedDict
 
 # =============================================================================
 # Federal University of Rio Grande do Sul (UFRGS)
@@ -30,9 +29,6 @@ from typing_extensions import TypedDict as TypedDict
 __author__: Literal["Renato de Pontes Pereira, Matthias Feurer, Joel Nothman"] = ...
 __author_email__: str = ...
 __version__: str = ...
-
-import csv
-import re
 
 # CONSTANTS ===================================================================
 _SIMPLE_TYPES: list = ...

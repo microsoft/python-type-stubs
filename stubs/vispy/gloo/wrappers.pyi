@@ -18,31 +18,31 @@ from . import gl
 __all__ = (
     "set_viewport",
     "set_depth_range",
-    "set_front_face",  # noqa
+    "set_front_face",
     "set_cull_face",
     "set_line_width",
-    "set_polygon_offset",  # noqa
+    "set_polygon_offset",
     "clear",
     "set_clear_color",
     "set_clear_depth",
-    "set_clear_stencil",  # noqa
+    "set_clear_stencil",
     "set_blend_func",
     "set_blend_color",
-    "set_blend_equation",  # noqa
+    "set_blend_equation",
     "set_scissor",
     "set_stencil_func",
-    "set_stencil_mask",  # noqa
+    "set_stencil_mask",
     "set_stencil_op",
     "set_depth_func",
-    "set_depth_mask",  # noqa
+    "set_depth_mask",
     "set_color_mask",
-    "set_sample_coverage",  # noqa
+    "set_sample_coverage",
     "get_state_presets",
     "set_state",
     "finish",
-    "flush",  # noqa
+    "flush",
     "read_pixels",
-    "set_hint",  # noqa
+    "set_hint",
     "get_gl_configuration",
     "_check_valid",
     "GL_PRESETS",

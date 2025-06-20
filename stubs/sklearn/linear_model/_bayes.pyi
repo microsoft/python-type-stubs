@@ -1,17 +1,10 @@
-from math import log as log
-from numbers import Integral as Integral, Real as Real
 from typing import ClassVar
 from typing_extensions import Self
 
-import numpy as np
 from numpy import ndarray
-from scipy import linalg as linalg
-from scipy.linalg import pinvh as pinvh
 
 from .._typing import ArrayLike, Float, Int, MatrixLike
 from ..base import RegressorMixin
-from ..utils._param_validation import Interval as Interval
-from ..utils.extmath import fast_logdet as fast_logdet
 from ._base import LinearModel
 
 ###############################################################################

@@ -1,22 +1,12 @@
-import collections
-from itertools import chain as chain, combinations as combinations, combinations_with_replacement as combinations_w_r
-from numbers import Integral as Integral
 from typing import Any, ClassVar, Literal
 from typing_extensions import Self
 
-import numpy as np
 from numpy import ndarray
 from pandas.core.series import Series
-from scipy import sparse
-from scipy.interpolate import BSpline as BSpline
 from scipy.sparse import spmatrix
-from scipy.special import comb as comb
 
 from .._typing import ArrayLike, Int, MatrixLike
 from ..base import BaseEstimator, TransformerMixin
-from ..utils import check_array as check_array
-from ..utils._param_validation import Interval as Interval, StrOptions as StrOptions
-from ..utils.validation import FLOAT_DTYPES as FLOAT_DTYPES, check_is_fitted as check_is_fitted
 
 __all__ = [
     "PolynomialFeatures",

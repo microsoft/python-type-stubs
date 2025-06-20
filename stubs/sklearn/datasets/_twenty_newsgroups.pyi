@@ -1,25 +1,10 @@
-import codecs
-import logging
-import os
-import pickle
-import re
-import shutil
-import tarfile
 from typing import Literal
 
-import joblib
-import numpy as np
-import scipy.sparse as sp
 from numpy import ndarray
 from numpy.random import RandomState
 
-from .. import preprocessing as preprocessing
 from .._typing import ArrayLike, Int
-from ..feature_extraction.text import CountVectorizer as CountVectorizer
-from ..utils import check_random_state as check_random_state
 from ..utils._bunch import Bunch
-from . import get_data_home as get_data_home, load_files as load_files
-from ._base import RemoteFileMetadata as RemoteFileMetadata, load_descr as load_descr
 
 # Copyright (c) 2011 Olivier Grisel <olivier.grisel@ensta.org>
 # License: BSD 3 clause

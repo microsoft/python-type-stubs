@@ -1,23 +1,12 @@
-import warnings
-from numbers import Integral as Integral, Real as Real
 from typing import Any, Callable, ClassVar, Literal
 from typing_extensions import Self
 
-import numpy as np
 from numpy import ndarray
 from numpy.random import RandomState
-from scipy import sparse as sparse
-from scipy.linalg import eigh as eigh
 from scipy.sparse._coo import coo_matrix
-from scipy.sparse.csgraph import connected_components as connected_components, laplacian as csgraph_laplacian
-from scipy.sparse.linalg import eigsh as eigsh
 
 from .._typing import ArrayLike, Float, Int, MatrixLike
 from ..base import BaseEstimator
-from ..metrics.pairwise import rbf_kernel as rbf_kernel
-from ..neighbors import NearestNeighbors as NearestNeighbors, kneighbors_graph as kneighbors_graph
-from ..utils import check_array as check_array, check_random_state as check_random_state, check_symmetric as check_symmetric
-from ..utils._param_validation import Interval as Interval, StrOptions as StrOptions
 
 def spectral_embedding(
     adjacency: coo_matrix | MatrixLike,

@@ -1,27 +1,12 @@
-import itertools
-import numbers
 from abc import ABCMeta, abstractmethod
-from functools import partial as partial
-from numbers import Integral as Integral, Real as Real
 from typing import Any, ClassVar
 from typing_extensions import Self
-from warnings import warn as warn
 
-import numpy as np
 from numpy import ndarray
 from numpy.random import RandomState
 
 from .._typing import ArrayLike, Int, MatrixLike
 from ..base import BaseEstimator, ClassifierMixin, RegressorMixin
-from ..metrics import accuracy_score as accuracy_score, r2_score as r2_score
-from ..tree import DecisionTreeClassifier as DecisionTreeClassifier, DecisionTreeRegressor as DecisionTreeRegressor
-from ..utils import check_random_state as check_random_state, column_or_1d as column_or_1d, indices_to_mask as indices_to_mask
-from ..utils._param_validation import HasMethods as HasMethods, Interval as Interval, StrOptions as StrOptions
-from ..utils.metaestimators import available_if as available_if
-from ..utils.multiclass import check_classification_targets as check_classification_targets
-from ..utils.parallel import Parallel as Parallel, delayed as delayed
-from ..utils.random import sample_without_replacement as sample_without_replacement
-from ..utils.validation import check_is_fitted as check_is_fitted, has_fit_parameter as has_fit_parameter
 from ._base import BaseEnsemble
 
 # Author: Gilles Louppe <g.louppe@gmail.com>

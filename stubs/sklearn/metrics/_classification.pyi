@@ -1,23 +1,8 @@
-import warnings
 from typing import Literal
 
-import numpy as np
 from numpy import ndarray
-from scipy.sparse import coo_matrix as coo_matrix, csr_matrix as csr_matrix
-from scipy.special import xlogy as xlogy
 
 from .._typing import ArrayLike, Float, Int, MatrixLike
-from ..exceptions import UndefinedMetricWarning as UndefinedMetricWarning
-from ..preprocessing import LabelBinarizer as LabelBinarizer, LabelEncoder as LabelEncoder
-from ..utils import (
-    assert_all_finite as assert_all_finite,
-    check_array as check_array,
-    check_consistent_length as check_consistent_length,
-    column_or_1d as column_or_1d,
-)
-from ..utils._param_validation import validate_params as validate_params
-from ..utils.multiclass import type_of_target as type_of_target, unique_labels as unique_labels
-from ..utils.sparsefuncs import count_nonzero as count_nonzero
 
 # Authors: Alexandre Gramfort <alexandre.gramfort@inria.fr>
 #          Mathieu Blondel <mathieu@mblondel.org>

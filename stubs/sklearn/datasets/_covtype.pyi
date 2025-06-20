@@ -1,19 +1,8 @@
-import logging
-import os
-from gzip import GzipFile as GzipFile
-from os.path import exists as exists, join as join
-from tempfile import TemporaryDirectory as TemporaryDirectory
-
-import joblib
-import numpy as np
 from numpy import ndarray
 from numpy.random import RandomState
 
 from .._typing import Int
-from ..utils import check_random_state as check_random_state
 from ..utils._bunch import Bunch
-from . import get_data_home as get_data_home
-from ._base import RemoteFileMetadata as RemoteFileMetadata, load_descr as load_descr
 
 # The original data can be found in:
 # https://archive.ics.uci.edu/ml/machine-learning-databases/covtype/covtype.data.gz

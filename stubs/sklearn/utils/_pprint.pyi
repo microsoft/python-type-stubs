@@ -1,11 +1,5 @@
-import inspect
 import pprint
-from collections import OrderedDict as OrderedDict
 from typing import Any
-
-from .._config import get_config as get_config
-from ..base import BaseEstimator as BaseEstimator
-from . import is_scalar_nan as is_scalar_nan
 
 # Copyright (c) 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010,
 # 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018 Python Software Foundation;
@@ -85,8 +79,4 @@ class _EstimatorPrettyPrinter(pprint.PrettyPrinter):
     ) -> None: ...
     def format(self, object, context: dict[Any, Any] | dict[int, int], maxlevels, level: int) -> tuple[str, bool, bool]: ...
 
-    # Note: need to copy _dispatch to prevent instances of the builtin
-    # PrettyPrinter class to call methods of _EstimatorPrettyPrinter (see issue
-    # 12906)
-    # mypy error: "Type[PrettyPrinter]" has no attribute "_dispatch"
-    _dispatch = ...  # type: ignore
+    _dispatch = ...

@@ -1,17 +1,17 @@
 from typing import Literal
 
 from sympy.assumptions.predicates.order import (
-    ExtendedNegativePredicate,
-    ExtendedNonNegativePredicate,
-    ExtendedNonPositivePredicate,
-    ExtendedNonZeroPredicate,
-    ExtendedPositivePredicate,
-    NegativePredicate,
-    NonNegativePredicate,
-    NonPositivePredicate,
-    NonZeroPredicate,
-    PositivePredicate,
-    ZeroPredicate,
+    ExtendedNegativePredicate as ExtendedNegativePredicate,
+    ExtendedNonNegativePredicate as ExtendedNonNegativePredicate,
+    ExtendedNonPositivePredicate as ExtendedNonPositivePredicate,
+    ExtendedNonZeroPredicate as ExtendedNonZeroPredicate,
+    ExtendedPositivePredicate as ExtendedPositivePredicate,
+    NegativePredicate as NegativePredicate,
+    NonNegativePredicate as NonNegativePredicate,
+    NonPositivePredicate as NonPositivePredicate,
+    NonZeroPredicate as NonZeroPredicate,
+    PositivePredicate as PositivePredicate,
+    ZeroPredicate as ZeroPredicate,
 )
 from sympy.core import Add, Basic, Expr, Mul, Pow
 from sympy.core.numbers import ImaginaryUnit, NaN

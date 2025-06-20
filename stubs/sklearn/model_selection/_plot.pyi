@@ -1,15 +1,14 @@
 from collections.abc import Iterable
 from typing import Callable, Literal
+from typing_extensions import Self
 
-import numpy as np
 from matplotlib.artist import Artist
 from matplotlib.axes import Axes
 from matplotlib.figure import Figure
 from numpy.random import RandomState
 
 from .._typing import ArrayLike, Float, Int, MatrixLike
-from ..utils import check_matplotlib_support as check_matplotlib_support
-from . import BaseCrossValidator, learning_curve as learning_curve
+from . import BaseCrossValidator
 
 class LearningCurveDisplay:
     fill_between_: Artist | None = ...
@@ -68,3 +67,44 @@ class LearningCurveDisplay:
         fill_between_kw: None | dict = None,
         errorbar_kw: None | dict = None,
     ) -> LearningCurveDisplay: ...
+
+class ValidationCurveDisplay:
+    def __init__(self, *, param_name, param_range, train_scores, test_scores, score_name=None) -> None: ...
+    def plot(
+        self,
+        ax=None,
+        *,
+        negate_score=False,
+        score_name=None,
+        score_type="both",
+        std_display_style="fill_between",
+        line_kw=None,
+        fill_between_kw=None,
+        errorbar_kw=None,
+    ) -> Self: ...
+    @classmethod
+    def from_estimator(
+        cls,
+        estimator,
+        X,
+        y,
+        *,
+        param_name,
+        param_range,
+        groups=None,
+        cv=None,
+        scoring=None,
+        n_jobs=None,
+        pre_dispatch="all",
+        verbose=0,
+        error_score=...,
+        fit_params=None,
+        ax=None,
+        negate_score=False,
+        score_name=None,
+        score_type="both",
+        std_display_style="fill_between",
+        line_kw=None,
+        fill_between_kw=None,
+        errorbar_kw=None,
+    ) -> Self: ...

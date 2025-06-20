@@ -1,41 +1,12 @@
-import warnings
-from abc import ABC, abstractmethod as abstractmethod
-from numbers import Integral as Integral, Real as Real
+from abc import ABC
 from typing import Any, Callable, ClassVar, Literal
 from typing_extensions import Self
 
-import numpy as np
-import scipy.sparse as sp
 from numpy import ndarray
 from numpy.random import RandomState
 
 from .._typing import ArrayLike, Float, Int, MatrixLike
 from ..base import BaseEstimator, ClassNamePrefixFeaturesOutMixin, ClusterMixin, TransformerMixin
-from ..exceptions import ConvergenceWarning as ConvergenceWarning
-from ..metrics.pairwise import euclidean_distances as euclidean_distances
-from ..utils import check_array as check_array, check_random_state as check_random_state
-from ..utils._param_validation import (
-    Hidden as Hidden,
-    Interval as Interval,
-    StrOptions as StrOptions,
-    validate_params as validate_params,
-)
-from ..utils._readonly_array_wrapper import ReadonlyArrayWrapper as ReadonlyArrayWrapper
-from ..utils.extmath import row_norms as row_norms, stable_cumsum as stable_cumsum
-from ..utils.sparsefuncs import mean_variance_axis as mean_variance_axis
-from ..utils.sparsefuncs_fast import assign_rows_csr as assign_rows_csr
-from ..utils.validation import check_is_fitted as check_is_fitted
-from ._k_means_common import CHUNK_SIZE as CHUNK_SIZE
-from ._k_means_elkan import (
-    elkan_iter_chunked_dense as elkan_iter_chunked_dense,
-    elkan_iter_chunked_sparse as elkan_iter_chunked_sparse,
-    init_bounds_dense as init_bounds_dense,
-    init_bounds_sparse as init_bounds_sparse,
-)
-from ._k_means_lloyd import (
-    lloyd_iter_chunked_dense as lloyd_iter_chunked_dense,
-    lloyd_iter_chunked_sparse as lloyd_iter_chunked_sparse,
-)
 
 ###############################################################################
 # Initialization heuristic

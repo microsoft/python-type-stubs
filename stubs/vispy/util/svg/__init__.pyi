@@ -5,7 +5,7 @@
 from xml.etree import ElementTree as ElementTree
 
 from .base import namespace as namespace
-from .path import Path as Path  # noqa
+from .path import Path as Path
 from .svg import SVG as SVG
 
 def Document(filename): ...

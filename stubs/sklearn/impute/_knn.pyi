@@ -1,15 +1,9 @@
-from numbers import Integral as Integral
 from typing import Any, Callable, ClassVar, Literal
 from typing_extensions import Self
 
-import numpy as np
 from numpy import ndarray
 
 from .._typing import ArrayLike, Int, MatrixLike
-from ..metrics import pairwise_distances_chunked as pairwise_distances_chunked
-from ..utils import is_scalar_nan as is_scalar_nan
-from ..utils._param_validation import Hidden as Hidden, Interval as Interval, StrOptions as StrOptions
-from ..utils.validation import FLOAT_DTYPES as FLOAT_DTYPES, check_is_fitted as check_is_fitted
 from ._base import MissingIndicator, _BaseImputer
 
 # Authors: Ashim Bhattarai <ashimb9@gmail.com>

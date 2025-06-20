@@ -1,8 +1,14 @@
-from types import NotImplementedType
+import sys
 from typing import Any
+from typing_extensions import TypeAlias
 
 from sympy.matrices.immutable import ImmutableSparseMatrix
 from sympy.matrices.repmatrix import MutableRepMatrix, RepMatrix
+
+if sys.version_info >= (3, 10):
+    from types import NotImplementedType
+else:
+    NotImplementedType: TypeAlias = Any
 
 class SparseRepMatrix(RepMatrix):
     def applyfunc(self, f): ...

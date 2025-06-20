@@ -1,18 +1,13 @@
 from collections.abc import Sequence
-from io import StringIO as StringIO
-from numbers import Integral as Integral
 from typing import Any, Literal
 
-import numpy as np
 from matplotlib.axes import Axes
 from matplotlib.text import Annotation
 from numpy import longlong, ndarray
 
 from .._typing import Int
-from ..base import ClassifierMixin, RegressorMixin, is_classifier as is_classifier
-from ..utils.validation import check_is_fitted as check_is_fitted
+from ..base import ClassifierMixin, RegressorMixin
 from ._classes import DecisionTreeClassifier
-from ._reingold_tilford import buchheim as buchheim
 from ._tree import Tree
 
 class Sentinel: ...

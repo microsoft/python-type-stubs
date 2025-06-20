@@ -1,15 +1,9 @@
-import io
-import os.path
-from contextlib import closing as closing
 from typing import IO, Literal
 
-import numpy as np
-import scipy.sparse as sp
 from numpy import dtype, ndarray
 from scipy.sparse import spmatrix
 
 from .._typing import ArrayLike, Int, MatrixLike, PathLike
-from ..utils import IS_PYPY as IS_PYPY, check_array as check_array
 
 def load_svmlight_file(
     f: PathLike | str | IO | int,

@@ -1,27 +1,13 @@
-import itertools
-import time
-import warnings
 from abc import ABC
-from math import sqrt as sqrt
-from numbers import Integral as Integral, Real as Real
 from typing import Any, ClassVar, Literal
 from typing_extensions import Self
 
-import numpy as np
-import scipy.sparse as sp
 from numpy import ndarray
 from numpy.random import RandomState
-from scipy import linalg as linalg
 from scipy.sparse import spmatrix
 
-from .._config import config_context as config_context
 from .._typing import ArrayLike, Float, Int, MatrixLike
 from ..base import BaseEstimator, ClassNamePrefixFeaturesOutMixin, TransformerMixin
-from ..exceptions import ConvergenceWarning as ConvergenceWarning
-from ..utils import check_array as check_array, check_random_state as check_random_state, gen_batches as gen_batches
-from ..utils._param_validation import Interval as Interval, StrOptions as StrOptions, validate_params as validate_params
-from ..utils.extmath import randomized_svd as randomized_svd, safe_sparse_dot as safe_sparse_dot, squared_norm as squared_norm
-from ..utils.validation import check_is_fitted as check_is_fitted, check_non_negative as check_non_negative
 
 EPSILON = ...
 

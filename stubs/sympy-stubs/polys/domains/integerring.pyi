@@ -5,9 +5,8 @@ from sympy.external.gmpy import MPZ
 from sympy.polys.domains.characteristiczero import CharacteristicZero
 from sympy.polys.domains.ring import Ring
 from sympy.polys.domains.simpledomain import SimpleDomain
-from sympy.utilities import public
 
-class IntegerRing(Ring, CharacteristicZero, SimpleDomain):  # type: ignore
+class IntegerRing(Ring, CharacteristicZero, SimpleDomain):
     rep = ...
     alias = ...
     dtype = MPZ

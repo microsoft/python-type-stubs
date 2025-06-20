@@ -23,29 +23,6 @@ class Hyperparameter(NamedTuple):
     value_type: str
     name: str
 
-    # A raw namedtuple is very memory efficient as it packs the attributes
-    # in a struct to get rid of the __dict__ of attributes in particular it
-    # does not copy the string for the keys on each instance.
-    # By deriving a namedtuple class just to introduce the __init__ method we
-    # would also reintroduce the __dict__ on the instance. By telling the
-    # Python interpreter that this subclass uses static __slots__ instead of
-    # dynamic attributes. Furthermore we don't need any additional slot in the
-    # subclass so we set __slots__ to the empty tuple.
-    __slots__ = ...
-
-    def __new__(
-        cls,
-        name: str,
-        value_type: str,
-        bounds: ndarray | str | tuple[float, int] | tuple[float, float],
-        n_elements: int = 1,
-        fixed=None,
-    ) -> Self: ...
-
-    # This is mainly a testing utility to check that two hyperparameters
-    # are equal.
-    def __eq__(self, other) -> bool: ...
-
 class Kernel(metaclass=ABCMeta):
     def get_params(self, deep: bool = True) -> dict: ...
     def set_params(self, **params) -> Self: ...

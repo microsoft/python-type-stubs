@@ -1,29 +1,12 @@
-import warnings
 from abc import ABCMeta, abstractmethod
-from numbers import Integral as Integral, Real as Real
 from typing import Callable, ClassVar
 from typing_extensions import Self
 
-import numpy as np
-import scipy.sparse as sp
 from numpy import ndarray
 from numpy.random.mtrand import RandomState
 
 from .._typing import ArrayLike, Float, MatrixLike
 from ..base import BaseEstimator, ClassifierMixin
-from ..exceptions import ConvergenceWarning as ConvergenceWarning, NotFittedError as NotFittedError
-from ..preprocessing import LabelEncoder as LabelEncoder
-from ..utils import (
-    check_array as check_array,
-    check_random_state as check_random_state,
-    column_or_1d as column_or_1d,
-    compute_class_weight as compute_class_weight,
-)
-from ..utils._param_validation import Interval as Interval, StrOptions as StrOptions
-from ..utils.extmath import safe_sparse_dot as safe_sparse_dot
-from ..utils.metaestimators import available_if as available_if
-from ..utils.multiclass import check_classification_targets as check_classification_targets
-from ..utils.validation import check_consistent_length as check_consistent_length, check_is_fitted as check_is_fitted
 
 LIBSVM_IMPL: list = ...
 

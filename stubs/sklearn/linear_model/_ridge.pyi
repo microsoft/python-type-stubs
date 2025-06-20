@@ -1,42 +1,20 @@
-import numbers
-import warnings
 from abc import ABCMeta, abstractmethod
 from collections.abc import Iterable, Mapping
-from functools import partial as partial
-from numbers import Integral as Integral, Real as Real
 from typing import Callable, ClassVar, Literal
 from typing_extensions import Self
 
-import numpy as np
 from numpy import ndarray
 from numpy.random import RandomState
 from pandas.core.frame import DataFrame
 from pandas.core.series import Series
-from scipy import linalg, optimize as optimize, sparse
-from scipy.sparse import linalg as sp_linalg
 from scipy.sparse._coo import coo_matrix
 from scipy.sparse._csr import csr_matrix
 from scipy.sparse.linalg import LinearOperator
 
 from .._typing import ArrayLike, Float, Int, MatrixLike
-from ..base import MultiOutputMixin, RegressorMixin, is_classifier as is_classifier
-from ..exceptions import ConvergenceWarning as ConvergenceWarning
-from ..metrics import check_scoring as check_scoring, get_scorer_names as get_scorer_names
-from ..model_selection import BaseCrossValidator, GridSearchCV as GridSearchCV
-from ..preprocessing import LabelBinarizer as LabelBinarizer
-from ..utils import (
-    check_array as check_array,
-    check_consistent_length as check_consistent_length,
-    check_scalar as check_scalar,
-    column_or_1d as column_or_1d,
-    compute_sample_weight as compute_sample_weight,
-)
-from ..utils._param_validation import Interval as Interval, StrOptions as StrOptions
-from ..utils.extmath import row_norms as row_norms, safe_sparse_dot as safe_sparse_dot
-from ..utils.sparsefuncs import mean_variance_axis as mean_variance_axis
-from ..utils.validation import check_is_fitted as check_is_fitted
+from ..base import MultiOutputMixin, RegressorMixin
+from ..model_selection import BaseCrossValidator
 from ._base import LinearClassifierMixin, LinearModel
-from ._sag import sag_solver as sag_solver
 
 def ridge_regression(
     X: MatrixLike | LinearOperator,

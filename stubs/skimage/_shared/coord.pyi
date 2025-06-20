@@ -1,6 +1,3 @@
-import numpy as np
-from scipy.spatial import distance
-
 def _ensure_spacing(coord, spacing, p_norm, max_out): ...
 def ensure_spacing(
     coords,

@@ -1,34 +1,20 @@
-import threading
 from abc import ABCMeta, abstractmethod
 from collections.abc import Mapping, Sequence
-from numbers import Integral as Integral, Real as Real
 from typing import Any, ClassVar, Literal
 from typing_extensions import Self
-from warnings import catch_warnings as catch_warnings, simplefilter as simplefilter, warn as warn
 
-import numpy as np
 from numpy import ndarray
 from numpy.random import RandomState
-from scipy.sparse import hstack as sparse_hstack, issparse as issparse, spmatrix
+from scipy.sparse import spmatrix
 
 from .._typing import ArrayLike, Float, Int, MatrixLike
-from ..base import ClassifierMixin, MultiOutputMixin, RegressorMixin, TransformerMixin, is_classifier as is_classifier
-from ..exceptions import DataConversionWarning as DataConversionWarning
-from ..metrics import accuracy_score as accuracy_score, r2_score as r2_score
+from ..base import ClassifierMixin, MultiOutputMixin, RegressorMixin, TransformerMixin
 from ..preprocessing import OneHotEncoder
 from ..tree import (
-    BaseDecisionTree as BaseDecisionTree,
     DecisionTreeClassifier,
     DecisionTreeRegressor,
-    ExtraTreeClassifier as ExtraTreeClassifier,
     ExtraTreeRegressor,
 )
-from ..tree._tree import DOUBLE as DOUBLE, DTYPE as DTYPE
-from ..utils import check_random_state as check_random_state, compute_sample_weight as compute_sample_weight
-from ..utils._param_validation import Interval as Interval, StrOptions as StrOptions
-from ..utils.multiclass import check_classification_targets as check_classification_targets, type_of_target as type_of_target
-from ..utils.parallel import Parallel as Parallel, delayed as delayed
-from ..utils.validation import check_is_fitted as check_is_fitted
 from ._base import BaseEnsemble
 
 __all__ = [

@@ -1,5 +1,4 @@
 from collections.abc import Mapping
-from numbers import Real as Real
 from typing import Callable, ClassVar
 from typing_extensions import Self
 
@@ -7,8 +6,7 @@ from numpy import ndarray
 from numpy.random import RandomState
 
 from .._typing import ArrayLike, Float, Int, MatrixLike
-from ..utils._param_validation import Interval as Interval, StrOptions as StrOptions
-from ._stochastic_gradient import DEFAULT_EPSILON as DEFAULT_EPSILON, BaseSGDClassifier, BaseSGDRegressor
+from ._stochastic_gradient import BaseSGDClassifier, BaseSGDRegressor
 
 # Authors: Rob Zinkov, Mathieu Blondel
 # License: BSD 3 clause

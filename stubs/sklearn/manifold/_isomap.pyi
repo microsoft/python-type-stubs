@@ -1,23 +1,14 @@
-import warnings
-from numbers import Integral as Integral, Real as Real
 from typing import Any, Callable, ClassVar, Literal
 from typing_extensions import Self
 
-import numpy as np
 from numpy import ndarray
-from scipy.sparse import issparse as issparse
 from scipy.sparse._csr import csr_matrix
-from scipy.sparse.csgraph import connected_components as connected_components, shortest_path as shortest_path
 
 from .._typing import ArrayLike, Float, Int, MatrixLike
 from ..base import BaseEstimator, ClassNamePrefixFeaturesOutMixin, TransformerMixin
-from ..decomposition import KernelPCA as KernelPCA
-from ..neighbors import NearestNeighbors, kneighbors_graph as kneighbors_graph, radius_neighbors_graph as radius_neighbors_graph
+from ..neighbors import NearestNeighbors
 from ..neighbors._ball_tree import BallTree
 from ..neighbors._kd_tree import KDTree
-from ..preprocessing import KernelCenterer as KernelCenterer
-from ..utils._param_validation import Interval as Interval, StrOptions as StrOptions
-from ..utils.validation import check_is_fitted as check_is_fitted
 
 # Author: Jake Vanderplas  -- <vanderplas@astro.washington.edu>
 # License: BSD 3 clause (C) 2011

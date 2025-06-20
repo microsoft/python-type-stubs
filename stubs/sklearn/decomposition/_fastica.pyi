@@ -1,19 +1,11 @@
-import warnings
-from numbers import Integral as Integral, Real as Real
 from typing import Any, Callable, ClassVar, Literal
 from typing_extensions import Self
 
-import numpy as np
 from numpy import ndarray
 from numpy.random import RandomState
-from scipy import linalg as linalg
 
 from .._typing import Float, Int, MatrixLike
 from ..base import BaseEstimator, ClassNamePrefixFeaturesOutMixin, TransformerMixin
-from ..exceptions import ConvergenceWarning as ConvergenceWarning
-from ..utils import as_float_array as as_float_array, check_array as check_array, check_random_state as check_random_state
-from ..utils._param_validation import Hidden as Hidden, Interval as Interval, StrOptions as StrOptions
-from ..utils.validation import check_is_fitted as check_is_fitted
 
 # Authors: Pierre Lafaye de Micheaux, Stefan van der Walt, Gael Varoquaux,
 #          Bertrand Thirion, Alexandre Gramfort, Denis A. Engemann

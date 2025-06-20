@@ -1,12 +1,17 @@
-from types import NotImplementedType
+import sys
 from typing import Any
-from typing_extensions import Self
+from typing_extensions import Self, TypeAlias
 
 from sympy.core.sympify import CantSympify
 from sympy.polys.domains.domainelement import DomainElement
 from sympy.polys.rings import PolyElement, PolyRing
 from sympy.printing.defaults import DefaultPrinting
 from sympy.utilities import public
+
+if sys.version_info >= (3, 10):
+    from types import NotImplementedType
+else:
+    NotImplementedType: TypeAlias = Any
 
 @public
 def field(symbols, domain, order=...) -> Any: ...
@@ -37,7 +42,7 @@ class FracField(DefaultPrinting):
     def to_domain(self) -> Any: ...
     def to_ring(self) -> PolyRing | Any: ...
 
-class FracElement(DomainElement, DefaultPrinting, CantSympify):  # type: ignore
+class FracElement(DomainElement, DefaultPrinting, CantSympify):
     def __init__(self, numer, denom=...) -> None: ...
     def raw_new(f, numer, denom) -> Self: ...
     def new(f, numer, denom) -> Self: ...

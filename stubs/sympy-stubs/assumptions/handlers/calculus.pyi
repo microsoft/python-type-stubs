@@ -1,10 +1,10 @@
 from typing import Literal
 
 from sympy.assumptions.predicates.calculus import (
-    FinitePredicate,
-    InfinitePredicate,
-    NegativeInfinitePredicate,
-    PositiveInfinitePredicate,
+    FinitePredicate as FinitePredicate,
+    InfinitePredicate as InfinitePredicate,
+    NegativeInfinitePredicate as NegativeInfinitePredicate,
+    PositiveInfinitePredicate as PositiveInfinitePredicate,
 )
 from sympy.core import Add, Mul, Pow, Symbol
 from sympy.core.numbers import (

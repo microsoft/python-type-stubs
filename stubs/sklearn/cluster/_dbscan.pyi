@@ -1,17 +1,10 @@
-import warnings
-from numbers import Integral as Integral, Real as Real
 from typing import Any, Callable, ClassVar, Literal
 from typing_extensions import Self
 
-import numpy as np
 from numpy import ndarray
-from scipy import sparse as sparse
 
 from .._typing import ArrayLike, Float, Int, MatrixLike
 from ..base import BaseEstimator, ClusterMixin
-from ..neighbors import NearestNeighbors as NearestNeighbors
-from ..utils._param_validation import Interval as Interval, StrOptions as StrOptions
-from ._dbscan_inner import dbscan_inner as dbscan_inner
 
 # Author: Robert Layton <robertlayton@gmail.com>
 #         Joel Nothman <joel.nothman@gmail.com>

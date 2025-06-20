@@ -1,16 +1,9 @@
-import warnings
 from collections.abc import Sequence
+from typing import ClassVar
 
-import numpy as np
 from numpy.typing import ArrayLike, NDArray
 
 from .._typing import Scalar
-from ..ext.cubehelix import cubehelix
-from ..util.check_environment import has_matplotlib
-from .color_array import ColorArray
-
-# Copyright (c) Vispy Development Team. All Rights Reserved.
-# Distributed under the (new) BSD License. See LICENSE.txt for more info.
 
 ###############################################################################
 # Color maps
@@ -45,7 +38,7 @@ class BaseColormap:
     colors: None = ...
 
     # GLSL string with a function implementing the color map.
-    glsl_map: None = ...
+    glsl_map: ClassVar[str | None]
 
     # Texture map data used by the 'colormap' GLSL function
     # for luminance to RGBA conversion.
@@ -98,31 +91,31 @@ class CubeHelixColormap(Colormap):
 class _Fire(BaseColormap):
     colors: list = ...
 
-    glsl_map: str = ...
+    glsl_map: ClassVar[str]
 
     def map(self, t) -> NDArray: ...
 
 class _Grays(BaseColormap):
-    glsl_map: str = ...
+    glsl_map: ClassVar[str]
 
     def map(self, t) -> NDArray: ...
 
 class _Ice(BaseColormap):
-    glsl_map: str = ...
+    glsl_map: ClassVar[str]
 
     def map(self, t) -> NDArray: ...
 
 class _Hot(BaseColormap):
     colors: list = ...
 
-    glsl_map: str = ...
+    glsl_map: ClassVar[str]
 
     def map(self, t) -> NDArray: ...
 
 class _Winter(BaseColormap):
     colors: list = ...
 
-    glsl_map: str = ...
+    glsl_map: ClassVar[str]
 
     def map(self, t) -> NDArray: ...
 
@@ -165,15 +158,6 @@ class Diverging(Colormap):
 class RedYellowBlueCyan(Colormap):
     def __init__(self, limits: ArrayLike = ...): ...
 
-# https://github.com/matplotlib/matplotlib/pull/4707/files#diff-893cf0348279e9f4570488a7a297ab1eR774  # noqa
-# Taken from original Viridis colormap data in matplotlib implementation
-#
-# Issue #1331 https://github.com/vispy/vispy/issues/1331 explains that the
-# 128 viridis sample size fails on some GPUs
-# but lowering to 64 samples allows more GPUs to use viridis.
-#
-# VisPy has beem updated to use a texture map lookup.
-# Thus, sampling of the Viridis colormap data is no longer necessary.
 _viridis_data: list = ...
 
 _colormaps = ...

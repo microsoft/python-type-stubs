@@ -1,7 +1,3 @@
-from collections import deque
-
-import numpy as np
-
 from .._shared.utils import deprecate_kwarg
 
 _param_options = ...

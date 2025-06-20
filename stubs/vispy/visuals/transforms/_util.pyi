@@ -1,18 +1,12 @@
-import functools
-from functools import wraps
-from typing import Callable
+from typing import Callable, TypeVar
 
-import numpy as np
 from numpy.typing import ArrayLike
 
-from ...util import logger
-
-# Copyright (c) Vispy Development Team. All Rights Reserved.
-# Distributed under the (new) BSD License. See LICENSE.txt for more info.
+_CallableT = TypeVar("_CallableT", bound=Callable)
 
 def arg_to_array(func: Callable) -> Callable: ...
 def as_vec4(obj: ArrayLike, default: ArrayLike = ...) -> ArrayLike: ...
-def arg_to_vec4(func): ...
+def arg_to_vec4(func: _CallableT) -> _CallableT: ...
 
 class TransformCache:
     def __init__(self, max_age=1): ...

@@ -1,11 +1,16 @@
-from types import NotImplementedType
+import sys
 from typing import Any, Literal
-from typing_extensions import Self, Unpack
+from typing_extensions import Self, TypeAlias, Unpack
 
 from sympy.core.expr import Expr
 from sympy.core.sympify import CantSympify
 from sympy.printing.defaults import DefaultPrinting
 from sympy.utilities import public
+
+if sys.version_info >= (3, 10):
+    from types import NotImplementedType
+else:
+    NotImplementedType: TypeAlias = Any
 
 @public
 def free_group(symbols) -> tuple[FreeGroup, Unpack[tuple[Any, ...]]]: ...

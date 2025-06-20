@@ -1,20 +1,11 @@
-import warnings
 from abc import ABCMeta, abstractmethod
 from collections.abc import Sequence
 from typing import Any, ClassVar
 from typing_extensions import Self
 
-import numpy as np
-from joblib import effective_n_jobs as effective_n_jobs
-
 from .._typing import Int
-from ..base import BaseEstimator, MetaEstimatorMixin, clone as clone, is_classifier as is_classifier, is_regressor as is_regressor
-from ..tree import (
-    BaseDecisionTree as BaseDecisionTree,
-    DecisionTreeClassifier as DecisionTreeClassifier,
-    DecisionTreeRegressor as DecisionTreeRegressor,
-)
-from ..utils import Bunch, check_random_state as check_random_state, deprecated
+from ..base import BaseEstimator, MetaEstimatorMixin
+from ..utils import Bunch
 from ..utils.metaestimators import _BaseComposition
 
 class BaseEnsemble(MetaEstimatorMixin, BaseEstimator, metaclass=ABCMeta):
@@ -32,18 +23,6 @@ class BaseEnsemble(MetaEstimatorMixin, BaseEstimator, metaclass=ABCMeta):
         estimator_params: Sequence[str] = ...,
         base_estimator: Any = "deprecated",
     ) -> None: ...
-
-    # TODO(1.4): remove
-    # mypy error: Decorated property not supported
-    @deprecated(  # type: ignore
-        "Attribute `base_estimator_` was deprecated in version 1.2 and will be removed in 1.4. Use `estimator_` instead."
-    )
-    @property
-    def base_estimator_(self) -> BaseEstimator: ...
-
-    # TODO(1.4): remove
-    @property
-    def estimator_(self) -> BaseEstimator: ...
     def __len__(self) -> int: ...
     def __getitem__(self, index): ...
     def __iter__(self): ...

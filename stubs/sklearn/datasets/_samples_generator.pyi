@@ -1,20 +1,11 @@
-import array
-import numbers
-import warnings
 from collections.abc import Iterable, Sequence
 from typing import Literal
 
-import numpy as np
-import scipy.sparse as sp
 from numpy import ndarray
 from numpy.random import RandomState
-from scipy import linalg as linalg
 from scipy.sparse import spmatrix
 
 from .._typing import ArrayLike, Float, Int, MatrixLike
-from ..preprocessing import MultiLabelBinarizer as MultiLabelBinarizer
-from ..utils import check_array as check_array, check_random_state as check_random_state, shuffle as util_shuffle
-from ..utils.random import sample_without_replacement as sample_without_replacement
 
 # Authors: B. Thirion, G. Varoquaux, A. Gramfort, V. Michel, O. Grisel,
 #          G. Louppe, J. Nothman

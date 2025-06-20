@@ -1,15 +1,9 @@
-import warnings
 from abc import ABC, abstractmethod
 
-import numpy as np
-import scipy.linalg
-import scipy.optimize
 from numpy import ndarray
 from scipy.sparse._csr import csr_matrix
 
-from ..._loss.loss import HalfSquaredError as HalfSquaredError
 from ..._typing import ArrayLike, Float, Int, MatrixLike
-from ...exceptions import ConvergenceWarning as ConvergenceWarning
 from .._linear_loss import LinearModelLoss
 
 # Author: Christian Lorentzen <lorentzen.ch@gmail.com>

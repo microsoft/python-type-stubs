@@ -1,12 +1,17 @@
-from types import NotImplementedType
+import sys
 from typing import Any, Literal
-from typing_extensions import Self
+from typing_extensions import Self, TypeAlias
 
 from sympy.core.basic import Basic
 from sympy.core.power import Pow
 from sympy.geometry.entity import GeometrySet
 from sympy.geometry.line import Line, Line2D, Line3D, Segment, Segment2D, Segment3D
 from sympy.geometry.point import Point, Point2D, Point3D
+
+if sys.version_info >= (3, 10):
+    from types import NotImplementedType
+else:
+    NotImplementedType: TypeAlias = Any
 
 class Ellipse(GeometrySet):
     def __contains__(self, o) -> bool | NotImplementedType: ...

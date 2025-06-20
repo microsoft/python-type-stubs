@@ -1,21 +1,13 @@
 from abc import abstractmethod
-from numbers import Integral as Integral
 from typing import ClassVar, Literal
 from typing_extensions import Self
 
-import numpy as np
 from numpy import ndarray
 
 from .._typing import ArrayLike, Int, MatrixLike
-from ..base import BaseEstimator, ClassifierMixin, RegressorMixin, TransformerMixin, clone as clone
-from ..exceptions import NotFittedError as NotFittedError
+from ..base import BaseEstimator, ClassifierMixin, RegressorMixin, TransformerMixin
 from ..preprocessing import LabelEncoder
 from ..utils import Bunch
-from ..utils._param_validation import StrOptions as StrOptions
-from ..utils.metaestimators import available_if as available_if
-from ..utils.multiclass import check_classification_targets as check_classification_targets
-from ..utils.parallel import Parallel as Parallel, delayed as delayed
-from ..utils.validation import check_is_fitted as check_is_fitted, column_or_1d as column_or_1d
 from ._base import _BaseHeterogeneousEnsemble
 
 class _BaseVoting(TransformerMixin, _BaseHeterogeneousEnsemble):

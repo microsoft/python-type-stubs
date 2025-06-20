@@ -1,8 +1,6 @@
-import numpy as np
 from numpy import ndarray
 
 from ..._typing import ArrayLike, Int, MatrixLike
-from .common import Y_DTYPE as Y_DTYPE
 
 # Author: Nicolas Hug
 

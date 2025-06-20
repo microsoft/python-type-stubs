@@ -1,13 +1,10 @@
-import warnings
 from typing import Callable, ClassVar, Literal
 from typing_extensions import Self
 
-import numpy as np
 from numpy import ndarray
 
 from .._typing import ArrayLike, Float, Int, MatrixLike
 from ..base import RegressorMixin
-from ..utils._param_validation import StrOptions as StrOptions
 from ._base import KNeighborsMixin, NeighborsBase, RadiusNeighborsMixin
 
 # Authors: Jake Vanderplas <vanderplas@astro.washington.edu>

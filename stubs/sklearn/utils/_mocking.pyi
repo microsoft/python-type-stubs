@@ -2,12 +2,10 @@ from collections.abc import Sequence
 from typing import Callable, Literal
 from typing_extensions import Self
 
-import numpy as np
 from numpy import ndarray
 
 from .._typing import ArrayLike, Int, MatrixLike
 from ..base import BaseEstimator, ClassifierMixin
-from .validation import check_array as check_array, check_is_fitted as check_is_fitted
 
 class ArraySlicingWrapper:
     def __init__(self, array) -> None: ...
