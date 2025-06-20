@@ -49,9 +49,6 @@ def main(modules: Collection[str]) -> int:
             # This stub has been upstreamed and is only kept for backwards compatibility
             # The version that is stubbed does not match the one we install for type testing
             "matplotlib",
-            # This stub is being upstreamed to typeshed and not worth fixing all issues.
-            # networkx 3.5 also isn't available on Python 3.10
-            "networkx",
         }:
             print(f"\nSkipped {stub_module}", flush=True)
             continue
