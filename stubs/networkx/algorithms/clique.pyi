@@ -1,10 +1,6 @@
-from collections import defaultdict, deque
-from itertools import chain, combinations, islice
-
 from numpy.typing import ArrayLike
 
 from ..classes.graph import Graph
-from ..utils import not_implemented_for
 
 __all__ = [
     "find_cliques",
@@ -22,8 +18,6 @@ __all__ = [
 
 def enumerate_all_cliques(G: Graph): ...
 def find_cliques(G: Graph, nodes=None): ...
-
-# TODO Should this also be not implemented for directed graphs?
 def find_cliques_recursive(G: Graph, nodes=None): ...
 def make_max_clique_graph(G: Graph, create_using=None): ...
 def make_clique_bipartite(G: Graph, fpos: bool | None = None, create_using=None, name=None): ...

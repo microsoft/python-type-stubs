@@ -49,8 +49,7 @@ class AgglomerativeClustering(ClusterMixin, BaseEstimator):
         self,
         n_clusters: None | int = 2,
         *,
-        affinity: str | Callable = "deprecated",  # TODO(1.4): Remove
-        metric: None | str | Callable = None,  # TODO(1.4): Set to "euclidean"
+        metric: str | Callable = "euclidean",
         memory: None | Memory | str = None,
         connectivity: None | ArrayLike | Callable = None,
         compute_full_tree: Literal["auto"] | bool = "auto",
@@ -77,8 +76,7 @@ class FeatureAgglomeration(ClassNamePrefixFeaturesOutMixin, AgglomerativeCluster
         self,
         n_clusters: None | int = 2,
         *,
-        affinity: str | Callable = "deprecated",  # TODO(1.4): Remove
-        metric: None | str | Callable = None,  # TODO(1.4): Set to "euclidean"
+        metric: str | Callable = "euclidean",
         memory: None | Memory | str = None,
         connectivity: None | ArrayLike | Callable = None,
         compute_full_tree: Literal["auto"] | bool = "auto",
