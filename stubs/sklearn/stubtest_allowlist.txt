@@ -1506,7 +1506,6 @@ sklearn.calibration.fmin_bfgs
 sklearn.calibration.is_classifier
 sklearn.calibration.partial
 sklearn.calibration.xlogy
-sklearn.cluster.AgglomerativeClustering.__init__
 sklearn.cluster.Birch.__init__
 sklearn.cluster.FeatureAgglomeration.fit_predict
 sklearn.cluster.KMeans.__init__
