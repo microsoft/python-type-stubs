@@ -1017,7 +1017,6 @@ sklearn.neighbors.NeighborhoodComponentsAnalysis.__sklearn_tags__
 sklearn.neighbors.RadiusNeighborsClassifier.__sklearn_tags__
 sklearn.neighbors.RadiusNeighborsClassifier.set_score_request
 sklearn.neighbors.RadiusNeighborsRegressor.set_score_request
-sklearn.neighbors.__all__
 sklearn.neighbors._ball_tree.BallTree32
 sklearn.neighbors._ball_tree.BallTree64
 sklearn.neighbors._ball_tree.__all__
@@ -1387,7 +1386,6 @@ sklearn.utils.estimator_checks.check_valid_tag_types
 sklearn.utils.estimator_checks.estimator_checks_generator
 sklearn.utils.extmath.safe_sqr
 sklearn.utils.get_tags
-sklearn.utils.metaestimators.__all__
 sklearn.utils.murmurhash.__pyx_capi__
 sklearn.utils.murmurhash.__test__
 sklearn.utils.murmurhash.murmurhash3_bytes_s32
@@ -1508,16 +1506,12 @@ sklearn.calibration.fmin_bfgs
 sklearn.calibration.is_classifier
 sklearn.calibration.partial
 sklearn.calibration.xlogy
-sklearn.cluster.AgglomerativeClustering.__init__
 sklearn.cluster.Birch.__init__
-sklearn.cluster.FeatureAgglomeration.__init__
 sklearn.cluster.FeatureAgglomeration.fit_predict
 sklearn.cluster.KMeans.__init__
 sklearn.cluster.MiniBatchKMeans.__init__
 sklearn.cluster.SpectralBiclustering.biclusters_
 sklearn.cluster.SpectralCoclustering.biclusters_
-sklearn.cluster._agglomerative.AgglomerativeClustering.__init__
-sklearn.cluster._agglomerative.FeatureAgglomeration.__init__
 sklearn.cluster._agglomerative.FeatureAgglomeration.fit_predict
 sklearn.cluster._agglomerative._TREE_BUILDERS
 sklearn.cluster._bicluster.SpectralBiclustering.biclusters_
@@ -2105,14 +2099,12 @@ sklearn.naive_bayes.Hidden
 sklearn.naive_bayes.MultinomialNB.__init__
 sklearn.naive_bayes.StrOptions
 sklearn.naive_bayes._BaseDiscreteNB.__init__
-sklearn.neighbors.DistanceMetric
 sklearn.neighbors.NearestCentroid.__init__
 sklearn.neighbors.VALID_METRICS
 sklearn.neighbors.VALID_METRICS_SPARSE
 sklearn.neighbors._base.VALID_METRICS
 sklearn.neighbors._base.VALID_METRICS_SPARSE
 sklearn.neighbors._binary_tree
-sklearn.neighbors._distance_metric
 sklearn.neighbors._nearest_centroid.NearestCentroid.__init__
 sklearn.pipeline.FeatureUnion.__init__
 sklearn.pipeline.Pipeline.__init__
@@ -2316,7 +2308,6 @@ sklearn.utils.is_scalar_nan
 sklearn.utils.islice
 sklearn.utils.issparse
 sklearn.utils.metaestimators.attrgetter
-sklearn.utils.metaestimators.if_delegate_has_method
 sklearn.utils.multiclass.Sequence.index
 sklearn.utils.multiclass.check_array
 sklearn.utils.multiclass.dok_matrix

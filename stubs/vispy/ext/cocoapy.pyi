@@ -1,45 +1,4 @@
-import platform
-import struct
-import sys
-from ctypes import (
-    CFUNCTYPE,
-    POINTER,
-    ArgumentError,
-    Structure,
-    alignment,
-    byref,
-    c_bool,
-    c_buffer,
-    c_byte,
-    c_char,
-    c_char_p,
-    c_double,
-    c_float,
-    c_int,
-    c_int8,
-    c_int16,
-    c_int32,
-    c_int64,
-    c_long,
-    c_longdouble,
-    c_longlong,
-    c_short,
-    c_size_t,
-    c_ubyte,
-    c_uint,
-    c_uint8,
-    c_uint32,
-    c_ulong,
-    c_ulonglong,
-    c_ushort,
-    c_void_p,
-    c_wchar,
-    cast,
-    cdll,
-    py_object,
-    sizeof,
-    util,
-)
+from ctypes import Structure
 from typing import ClassVar
 
 # Based on Pyglet code
@@ -175,36 +134,6 @@ class ObjCSubclass:
     def rawmethod(self, encoding): ...
     def method(self, encoding): ...
     def classmethod(self, encoding): ...
-
-# XXX This causes segfaults in all backends (yikes!), and makes it so that
-# pyglet can't even be loaded. We'll just have to live with leaks for now,
-# which is probably alright since we only use the
-# NSFontManager.sharedFontManager class currently.
-
-# class DeallocationObserver_Implementation(object):
-#    DeallocationObserver = ObjCSubclass('NSObject', 'DeallocationObserver',
-#                                        register=False)
-#    DeallocationObserver.add_ivar('observed_object', c_void_p)
-#    DeallocationObserver.register()
-#
-#    @DeallocationObserver.rawmethod('@@')
-#    def initWithObject_(self, cmd, anObject):
-#        self = send_super(self, 'init')
-#        self = self.value
-#        set_instance_variable(self, 'observed_object', anObject, c_void_p)
-#        return self
-#
-#    @DeallocationObserver.rawmethod('v')
-#    def dealloc(self, cmd):
-#        anObject = get_instance_variable(self, 'observed_object', c_void_p)
-#        ObjCInstance._cached_objects.pop(anObject, None)
-#        send_super(self, 'dealloc')
-#
-#    @DeallocationObserver.rawmethod('v')
-#    def finalize(self, cmd):
-#        anObject = get_instance_variable(self, 'observed_object', c_void_p)
-#        ObjCInstance._cached_objects.pop(anObject, None)
-#        send_super(self, 'finalize')
 
 ##############################################################################
 # cocoalibs.py

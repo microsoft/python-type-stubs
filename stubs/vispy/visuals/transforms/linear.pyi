@@ -92,15 +92,3 @@ class MatrixTransform(BaseTransform):
     def __repr__(self): ...
     def set_perspective(self, fov: float, aspect: float, near: float, far: float): ...
     def set_frustum(self, l: float, r: float, b: float, t: float, n: float, f: float): ...
-
-# class SRTTransform(BaseTransform):
-#    """ Transform performing scale, rotate, and translate, in that order.
-#
-#    This transformation allows objects to be placed arbitrarily in a scene
-#    much the same way MatrixTransform does. However, an incorrect order of
-#    operations in MatrixTransform may result in shearing the object (if scale
-#    is applied after rotate) or in unpredictable translation (if scale/rotate
-#    is applied after translation). SRTTransform avoids these problems by
-#    enforcing the correct order of operations.
-#    """
-#    # TODO

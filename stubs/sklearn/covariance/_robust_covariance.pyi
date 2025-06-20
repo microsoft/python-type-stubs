@@ -7,17 +7,6 @@ from numpy.random import RandomState
 from .._typing import Float, Int, MatrixLike
 from . import EmpiricalCovariance
 
-# Author: Virgile Fritsch <virgile.fritsch@inria.fr>
-#
-# License: BSD 3 clause
-
-# Minimum Covariance Determinant
-#   Implementing of an algorithm by Rousseeuw & Van Driessen described in
-#   (A Fast Algorithm for the Minimum Covariance Determinant Estimator,
-#   1999, American Statistical Association and the American Society
-#   for Quality, TECHNOMETRICS)
-# XXX Is this really a public function? It's not listed in the docs or
-# exported by sklearn.covariance. Deprecate?
 def c_step(
     X: MatrixLike,
     n_support: Int,
