@@ -92,8 +92,6 @@ class SelectFwe(_BaseFilter):
 # Generic filter
 ######################################################################
 
-# TODO this class should fit on either p-values or scores,
-# depending on the mode.
 class GenericUnivariateSelect(_BaseFilter):
     feature_names_in_: ndarray = ...
     n_features_in_: int = ...

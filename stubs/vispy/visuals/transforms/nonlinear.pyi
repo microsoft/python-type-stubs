@@ -43,15 +43,6 @@ class PolarTransform(BaseTransform):
     @arg_to_array
     def imap(self, coords): ...
 
-# class BilinearTransform(BaseTransform):
-#    # TODO
-#    pass
-
-# class WarpTransform(BaseTransform):
-#    """ Multiple bilinear transforms in a grid arrangement.
-#    """
-#    # TODO
-
 class MagnifyTransform(BaseTransform):
     glsl_map: ClassVar[str]
 

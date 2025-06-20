@@ -1,17 +1,8 @@
-import math
-import warnings
-
 import numpy as np
 from numpy import ndarray
 from numpy.typing import NDArray
 
 from .globject import GLObject
-from .util import check_enum
-
-# -----------------------------------------------------------------------------
-# Copyright (c) Vispy Development Team. All Rights Reserved.
-# Distributed under the (new) BSD License. See LICENSE.txt for more info.
-# -----------------------------------------------------------------------------
 
 F64_PRECISION_WARNING: str = ...
 
@@ -182,12 +173,11 @@ class TextureCube(BaseTexture):
 
 # ------------------------------------------------- TextureEmulated3D class ---
 class TextureEmulated3D(Texture2D):
-    # TODO: does GL's nearest use floor or round?
     _glsl_sample_nearest: str = ...
 
     _glsl_sample_linear: str = ...
 
-    _gl_max_texture_size: int = ...  # For now, we just set this manually
+    _gl_max_texture_size: int = ...
 
     def __init__(
         self,

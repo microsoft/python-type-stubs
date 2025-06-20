@@ -1,26 +1,9 @@
-import math
 from collections.abc import Iterable
 
-import numpy as np
 from numpy.typing import ArrayLike
 
 from ..util.svg.color import Color
-from .line import LineVisual
-from .text import TextVisual
 from .visual import CompoundVisual, updating_property
-
-# -----------------------------------------------------------------------------
-# Copyright (c) Vispy Development Team. All Rights Reserved.
-# Distributed under the (new) BSD License. See LICENSE.txt for more info.
-# -----------------------------------------------------------------------------
-
-# XXX TODO list (see code, plus):
-# 1. Automated tick direction?
-# 2. Expand to 3D (only 2D supported currently)
-# 3. Input validation
-# 4. Property support
-# 5. Reactivity to resizing (current tick lengths grow/shrink w/zoom)
-# 6. Improve tick label naming (str(x) is not good) and tick selection
 
 class AxisVisual(CompoundVisual):
     def __init__(

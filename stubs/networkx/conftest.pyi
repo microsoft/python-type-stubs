@@ -1,14 +1,8 @@
-import sys
-import warnings
-
-import networkx
 import pytest
 
 def pytest_addoption(parser): ...
 def pytest_configure(config): ...
 def pytest_collection_modifyitems(config, items): ...
-
-# TODO: The warnings below need to be dealt with, but for now we silence them.
 @pytest.fixture(autouse=True)
 def set_warnings(): ...
 @pytest.fixture(autouse=True)

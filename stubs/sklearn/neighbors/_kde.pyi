@@ -8,14 +8,10 @@ from .._typing import ArrayLike, Float, Int, MatrixLike
 from ..base import BaseEstimator
 from ._binary_tree import BinaryTree
 
-# Author: Jake Vanderplas <jakevdp@cs.washington.edu>
-
 VALID_KERNELS: list = ...
 
 TREE_DICT: dict = ...
 
-# TODO: implement a brute force version for testing purposes
-# TODO: create a density estimation base class?
 class KernelDensity(BaseEstimator):
     bandwidth_: float = ...
     feature_names_in_: ndarray = ...

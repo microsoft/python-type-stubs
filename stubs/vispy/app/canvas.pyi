@@ -1,26 +1,13 @@
-# Copyright (c) Vispy Development Team. All Rights Reserved.
-# Distributed under the (new) BSD License. See LICENSE.txt for more info.
-
-import sys
 from collections.abc import Mapping
-from time import sleep
 from typing import Callable
 
-import numpy as np
 from numpy.typing import ArrayLike
 
-from ..gloo import FrameBuffer, RenderBuffer
-from ..gloo.context import GLContext, forget_canvas, set_current_canvas
+from ..gloo.context import GLContext
 from ..scene.widgets.widget import Widget
-from ..util import config as util_config, logger
-from ..util.dpi import get_dpi
-from ..util.event import EmitterGroup, Event, WarningEmitter
+from ..util.event import Event
 from ..util.keys import Key
-from . import Application, use_app
-
-# todo: add functions for asking about current mouse/keyboard state
-# todo: add hover enter/exit events
-# todo: add focus events
+from . import Application
 
 class Canvas:
     def __init__(

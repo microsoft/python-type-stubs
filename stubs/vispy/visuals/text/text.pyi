@@ -1,17 +1,9 @@
-import sys
 from collections.abc import Mapping
-from copy import deepcopy
 from typing import Any
 
-import numpy as np
 from numpy.typing import ArrayLike
 
-from ...color import ColorArray
-from ...gloo import IndexBuffer, TextureAtlas, VertexBuffer, context
-from ...gloo.wrappers import _check_valid
-from ...io import load_spatial_filters
 from ...util.svg.color import Color
-from ..transforms import STTransform
 from ..visual import Visual
 from ._sdf_gpu import SDFRendererGPU
 
@@ -33,8 +25,6 @@ class TextureFont:
     def _load_char(self, char): ...
 
 class FontManager:
-    # XXX: should store a font-manager on each context,
-    # or let TextureFont use a TextureAtlas for each context
     def __init__(self, method="cpu"): ...
     def get_font(self, face, bold=False, italic=False): ...
 

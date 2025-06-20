@@ -1,27 +1,3 @@
-# TODO: Implement method from Gabow, Galil, Spence and Tarjan:
-#
-# @article{
-#    year={1986},
-#    issn={0209-9683},
-#    journal={Combinatorica},
-#    volume={6},
-#    number={2},
-#    doi={10.1007/BF02579168},
-#    title={Efficient algorithms for finding minimum spanning trees in
-#        undirected and directed graphs},
-#    url={https://doi.org/10.1007/BF02579168},
-#    publisher={Springer-Verlag},
-#    keywords={68 B 15; 68 C 05},
-#    author={Gabow, Harold N. and Galil, Zvi and Spencer, Thomas and Tarjan,
-#        Robert E.},
-#    pages={109-122},
-#    language={English}
-# }
-import string
-from dataclasses import dataclass, field
-from enum import Enum
-from operator import itemgetter
-from queue import PriorityQueue
 from typing import Literal
 
 from ...classes.digraph import DiGraph
