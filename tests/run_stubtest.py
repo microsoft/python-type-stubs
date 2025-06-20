@@ -11,6 +11,11 @@ from subprocess import CompletedProcess, run
 root = Path(__file__).parent.parent
 stubs_path = root / "stubs"
 PARTIAL_STUBS_MARKER = "-stubs"
+SKIP_PACKAGES = {
+    # This stub has been upstreamed and is only kept for backwards compatibility
+    # The version that is stubbed does not match the one we install for type testing
+    "matplotlib",
+}
 
 
 def run_stubtest(module: str) -> CompletedProcess[bytes]:
@@ -40,16 +45,12 @@ def run_stubtest(module: str) -> CompletedProcess[bytes]:
         return run((sys.executable, "-m", *args), cwd=stubs_path)
 
 
-def main(modules: Collection[str]) -> int:
+def main(packages: Collection[str]) -> int:
     returncode = 0
-    if not modules:
-        modules = os.listdir(stubs_path)
-    for stub_module in modules:
-        if stub_module in {
-            # This stub has been upstreamed and is only kept for backwards compatibility
-            # The version that is stubbed does not match the one we install for type testing
-            "matplotlib",
-        }:
+    if not packages:
+        packages = os.listdir(stubs_path)
+    for stub_module in packages:
+        if stub_module in SKIP_PACKAGES:
             print(f"\nSkipped {stub_module}", flush=True)
             continue
         if stub_module.startswith("."):
