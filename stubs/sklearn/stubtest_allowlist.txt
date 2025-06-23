@@ -1103,8 +1103,6 @@ sklearn.preprocessing.StandardScaler.set_fit_request
 sklearn.preprocessing.StandardScaler.set_inverse_transform_request
 sklearn.preprocessing.StandardScaler.set_partial_fit_request
 sklearn.preprocessing.StandardScaler.set_transform_request
-sklearn.preprocessing.TargetEncoder
-sklearn.preprocessing.__all__
 sklearn.preprocessing._data.Binarizer.__sklearn_tags__
 sklearn.preprocessing._data.Binarizer.set_transform_request
 sklearn.preprocessing._data.KernelCenterer.__sklearn_tags__
