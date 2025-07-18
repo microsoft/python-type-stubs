@@ -16,6 +16,8 @@ def set_config(
     enable_cython_pairwise_dist: None | bool = None,
     array_api_dispatch: None | bool = None,
     transform_output: None | str = None,
+    enable_metadata_routing: None | bool = None,
+    skip_parameter_validation: None | bool = None,
 ) -> None: ...
 def config_context(
     *,
@@ -27,4 +29,6 @@ def config_context(
     enable_cython_pairwise_dist: None | bool = None,
     array_api_dispatch: None | bool = None,
     transform_output: None | str = None,
+    enable_metadata_routing: None | bool = None,
+    skip_parameter_validation: None | bool = None,
 ) -> Iterator[None]: ...
