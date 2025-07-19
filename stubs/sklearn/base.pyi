@@ -15,6 +15,7 @@ from ._config import get_config as get_config
 from ._typing import ArrayLike, Float, Int, MatrixLike
 from .metrics import accuracy_score as accuracy_score, r2_score as r2_score
 from .utils._estimator_html_repr import estimator_html_repr as estimator_html_repr
+from .utils._metadata_requests import _MetadataRequester
 from .utils._param_validation import validate_parameter_constraints as validate_parameter_constraints
 from .utils._set_output import _SetOutputMixin
 from .utils.validation import check_array as check_array, check_is_fitted as check_is_fitted, check_X_y as check_X_y
@@ -24,7 +25,7 @@ from .utils.validation import check_array as check_array, check_is_fitted as che
 
 def clone(estimator: BaseEstimator | Iterable[BaseEstimator], *, safe: bool = True) -> Any: ...
 
-class BaseEstimator:
+class BaseEstimator(_MetadataRequester):
     def get_params(self, deep: bool = True) -> dict: ...
     def set_params(self, **params) -> Self: ...
     def __repr__(self, N_CHAR_MAX: int = 700) -> str: ...
