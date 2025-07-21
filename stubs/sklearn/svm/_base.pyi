@@ -13,9 +13,6 @@ LIBSVM_IMPL: list = ...
 class BaseLibSVM(BaseEstimator, metaclass=ABCMeta):
     _parameter_constraints: ClassVar[dict] = ...
 
-    # The order of these must match the integer values in LibSVM.
-    # XXX These are actually the same in the dense case. Need to factor
-    # this out.
     _sparse_kernels: ClassVar[list] = ...
 
     @abstractmethod

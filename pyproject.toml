@@ -26,7 +26,7 @@ tests = [
     # The libraries we're stubbing.
     # Needed for stubtest and downloads their dependencies to get known import symbols
     "scikit-image",
-    "scikit-learn",
+    "scikit-learn <1.7.0", # TODO: Update stubs for sklearn
     "sympy",
     "vispy",
 ]

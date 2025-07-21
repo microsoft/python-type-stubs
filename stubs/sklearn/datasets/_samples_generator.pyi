@@ -110,9 +110,6 @@ def make_low_rank_matrix(
     tail_strength: Float = 0.5,
     random_state: RandomState | None | Int = None,
 ) -> ndarray: ...
-
-# TODO(1.3): Change argument `data_transposed` default from True to False.
-# TODO(1.3): Deprecate data_transposed, always return data not transposed.
 def make_sparse_coded_signal(
     n_samples: Int,
     *,

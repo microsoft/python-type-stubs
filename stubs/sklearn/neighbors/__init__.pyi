@@ -5,7 +5,6 @@ from ._base import (
     sort_graph_by_row_values as sort_graph_by_row_values,
 )
 from ._classification import KNeighborsClassifier as KNeighborsClassifier, RadiusNeighborsClassifier as RadiusNeighborsClassifier
-from ._distance_metric import DistanceMetric as DistanceMetric
 from ._graph import (
     KNeighborsTransformer as KNeighborsTransformer,
     RadiusNeighborsTransformer as RadiusNeighborsTransformer,
@@ -22,7 +21,6 @@ from ._unsupervised import NearestNeighbors as NearestNeighbors
 
 __all__ = [
     "BallTree",
-    "DistanceMetric",
     "KDTree",
     "KNeighborsClassifier",
     "KNeighborsRegressor",
