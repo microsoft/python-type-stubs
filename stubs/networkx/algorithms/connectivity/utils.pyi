@@ -1,6 +1,0 @@
-from ...classes.graph import Graph
-
-__all__ = ["build_auxiliary_node_connectivity", "build_auxiliary_edge_connectivity"]
-
-def build_auxiliary_node_connectivity(G: Graph): ...
-def build_auxiliary_edge_connectivity(G: Graph): ...

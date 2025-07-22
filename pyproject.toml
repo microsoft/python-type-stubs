@@ -20,11 +20,11 @@ tests = [
     "pandas-stubs",
     "pytest",
     "scipy-stubs",
+    "types-networkx",
     "typing_extensions",
 
     # The libraries we're stubbing.
     # Needed for stubtest and downloads their dependencies to get known import symbols
-    "networkx",
     "scikit-image",
     "scikit-learn <1.7.0", # TODO: Update stubs for sklearn
     "sympy",
@@ -41,7 +41,6 @@ dev = [{ include-group = "hygiene" }, { include-group = "tests" }]
 # see https://github.com/microsoft/python-type-stubs/issues/315
 [tool.setuptools.package-dir]
 # See README.md as to why matplotlib is not included
-"networkx-stubs" = "stubs/networkx"
 "skimage-stubs" = "stubs/skimage"
 "sklearn-stubs" = "stubs/sklearn"
 "sympy-stubs" = "stubs/sympy-stubs"

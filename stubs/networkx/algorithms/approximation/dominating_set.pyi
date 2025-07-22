@@ -1,6 +1,0 @@
-from ...classes.graph import Graph
-
-__all__ = ["min_weighted_dominating_set", "min_edge_dominating_set"]
-
-def min_weighted_dominating_set(G: Graph, weight: str | None = None) -> set: ...
-def min_edge_dominating_set(G: Graph) -> set: ...
