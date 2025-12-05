@@ -1,4 +1,4 @@
-from typing import Any, Literal
+from typing import Any
 from typing_extensions import Self
 
 from sympy import Equality, Integral, Ne
@@ -6,7 +6,7 @@ from sympy.core.basic import Basic
 from sympy.core.function import Lambda
 from sympy.core.relational import Relational
 from sympy.stats.joint_rv_types import JointDistributionHandmade
-from sympy.stats.rv import Density, RandomMatrixSymbol, is_random
+from sympy.stats.rv import Density, RandomMatrixSymbol
 
 __all__ = [
     "CircularEnsemble",
@@ -21,9 +21,6 @@ __all__ = [
     "JointEigenDistribution",
     "level_spacing_distribution",
 ]
-
-@is_random.register(RandomMatrixSymbol)
-def _(x) -> Literal[True]: ...
 
 class RandomMatrixEnsembleModel(Basic):
     def __new__(cls, sym, dim=...) -> Self: ...

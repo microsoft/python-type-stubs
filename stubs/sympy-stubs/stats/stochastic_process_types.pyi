@@ -1,5 +1,5 @@
 from collections.abc import Generator
-from typing import Any, Literal
+from typing import Any
 from typing_extensions import Self
 
 from sympy import Equality, Integral, Ne, Piecewise, Sum
@@ -23,7 +23,7 @@ from sympy.stats.drv_types import PoissonDistribution
 from sympy.stats.frv_types import BernoulliDistribution
 from sympy.stats.joint_rv import JointDistribution, JointRandomSymbol
 from sympy.stats.joint_rv_types import JointDistributionHandmade
-from sympy.stats.rv import Density, Distribution, RandomIndexedSymbol, RandomSymbol, is_random
+from sympy.stats.rv import Density, Distribution, RandomIndexedSymbol, RandomSymbol
 from sympy.stats.symbolic_multivariate_probability import ExpectationMatrix
 from sympy.stats.symbolic_probability import Expectation, Probability
 from sympy.tensor.indexed import Indexed
@@ -42,11 +42,6 @@ __all__ = [
     "WienerProcess",
     "GammaProcess",
 ]
-
-@is_random.register(Indexed)
-def _(x) -> bool: ...
-@is_random.register(RandomIndexedSymbol)
-def _(x) -> Literal[True]: ...
 
 class StochasticProcess(Basic):
     index_set = ...

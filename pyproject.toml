@@ -7,11 +7,11 @@ name = "microsoft-python-type-stubs"
 version = "0"
 
 [dependency-groups]
-hygiene = ["ruff ==0.11.*"]
+hygiene = ["ruff ==0.14.*"]
 tests = [
     # Tools used for testing
     "docopt-ng",
-    "mypy ==1.16.*",
+    "mypy ==1.19.*",
     "pyright",
 
     # External type stubs and optional dependencies
@@ -55,15 +55,22 @@ target-version = "py39"
 extend-select = [
     "FA", # flake8-future-annotations
     "I", # isort
-    "PGH", # pygrep-hooks
     "PGH", # pygrep-hooks and blanket-noqa
-    "PIE790", # unnecessary-placeholder
+    "PIE", # flake8-pie and unnecessary-placeholder
     "PYI", # flake8-pyi
     "RUF", # Ruff-specific and unused-noqa
+    "TC", # flake8-type-checking
     "UP", # pyupgrade
     "W", # pycodestyle Warning
+    "YTT", # flake8-2020 (version_info misuses)
 ]
 ignore = [
+    # Not colored correctly in Pylance https://github.com/microsoft/pylance-release/issues/6942
+    "UP047",
+
+    # TODO: Investigate and fix or configure
+    "PYI051", # Request for autofix: https://github.com/astral-sh/ruff/issues/14185
+
     ###
     # Rules we don't want or don't agree with
     ###
@@ -77,9 +84,6 @@ ignore = [
     "PYI011",
     "PYI014",
     "PYI053",
-
-    # TODO: Investigate and fix or configure
-    "PYI051", # Request for autofix: https://github.com/astral-sh/ruff/issues/14185
 ]
 
 [tool.ruff.lint.per-file-ignores]
@@ -144,13 +148,12 @@ reportSelfClsParameterName = false
 reportUnsupportedDunderAll = "error"
 
 [tool.mypy]
+fixed_format_cache = true # Will be default in mypy 1.20
 strict = true
-check_untyped_defs = true # Strict check on all defs
 show_column_numbers = true
 # Not all imports in these stubs are gonna be typed
 # Don't infer symbols from untyped packages as Any
 follow_untyped_imports = true
-warn_unused_ignores = false # Change from pandas
 # Partial stubs are acceptable
 disallow_any_generics = false
 disallow_incomplete_defs = false
@@ -165,25 +168,32 @@ disable_error_code = [
     # as they are inherited from the implementation.
     "override",
     # TODO
-    "assignment", # 744 errors in 155 files
+    "assignment", # 688 errors in 155 files
 ]
 
 [[tool.mypy.overrides]]
-# follow_untyped_imports = true will cause stubtest to run mypy on the source
-# So disable it for partial stubs
 module = ["sympy.*"]
-follow_untyped_imports = false
-disable_error_code = ["import-untyped", "misc"]
+disable_error_code = [
+    # TODO
+    "misc", # 185
+]
 
 [[tool.mypy.overrides]]
 # These modules are to be removed soon, not worth solving many issues
-module = ["matplotlib.*", "networkx.*"]
-disable_error_code = [
-    "assignment",
-    "misc",
-]
+module = ["matplotlib.*"]
+disable_error_code = ["assignment", "misc", "untyped-decorator"]
+
 [[tool.mypy.overrides]]
-module = ["skimage.*", "sklearn.*"]
-# TODO: Too many untyped decorators still left
-# https://github.com/python/mypy/issues/19148
-disable_error_code = ["misc"]
+module = ["sklearn.*"]
+disable_error_code = [
+    # TODO
+    "misc", # 25
+    "overload-overlap", # 14
+]
+
+[[tool.mypy.overrides]]
+module = ["skimage.*"]
+disable_error_code = [
+    # TODO: Too many untyped decorators still left
+    "untyped-decorator", # 52
+]

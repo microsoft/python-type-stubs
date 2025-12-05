@@ -1,5 +1,4 @@
 from collections.abc import Generator
-from functools import singledispatch
 from typing import Any
 from typing_extensions import Self
 
@@ -24,10 +23,7 @@ from sympy.utilities.decorator import doctest_depends_on
 
 x = ...
 
-@singledispatch
-def is_random(x) -> bool: ...
-@is_random.register(Basic)
-def _(x) -> bool: ...
+def is_random(x: object) -> bool: ...
 
 class RandomDomain(Basic):
     is_ProductDomain = ...
