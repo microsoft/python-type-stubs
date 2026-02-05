@@ -12,6 +12,7 @@ from sympy.core.singleton import Singleton
 from sympy.core.symbol import Symbol
 
 def as_Boolean(e) -> BooleanTrue | BooleanFalse | Symbol | Boolean: ...
+
 @sympify_method_args
 class Boolean(Basic):
     __slots__ = ...

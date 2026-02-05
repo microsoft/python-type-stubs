@@ -7,7 +7,7 @@ name = "microsoft-python-type-stubs"
 version = "0"
 
 [dependency-groups]
-hygiene = ["ruff ==0.14.*"]
+hygiene = ["ruff ==0.15.*"]
 tests = [
     # Tools used for testing
     "docopt-ng",
@@ -70,6 +70,9 @@ ignore = [
 
     # TODO: Investigate and fix or configure
     "PYI051", # Request for autofix: https://github.com/astral-sh/ruff/issues/14185
+
+    # TODO: Manually simplify generator types first
+    "UP043",
 
     ###
     # Rules we don't want or don't agree with

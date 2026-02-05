@@ -155,6 +155,7 @@ class TensorSymmetry(Basic):
     def no_symmetry(cls, rank) -> TensorSymmetry: ...
 
 def tensorsymmetry(*args) -> TensorSymmetry: ...
+
 @deprecated(
     "TensorType is deprecated. Use tensor_heads() instead.",
     deprecated_since_version="1.5",
