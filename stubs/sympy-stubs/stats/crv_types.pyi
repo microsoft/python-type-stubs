@@ -4,10 +4,9 @@ from typing_extensions import Self
 from sympy import Equality, FiniteSet, Integral, Interval, Ne, Piecewise, Sum
 from sympy.core.basic import Basic
 from sympy.core.relational import Relational
-from sympy.matrices import MatrixBase
 from sympy.stats.crv import SingleContinuousDistribution
 from sympy.stats.joint_rv import JointRandomSymbol
-from sympy.stats.rv import RandomSymbol, is_random
+from sympy.stats.rv import RandomSymbol
 
 oo = ...
 __all__ = [
@@ -66,8 +65,6 @@ __all__ = [
     "WignerSemicircle",
 ]
 
-@is_random.register(MatrixBase)
-def _(x) -> bool: ...
 def rv(symbol, cls, args, **kwargs) -> RandomSymbol: ...
 
 class ContinuousDistributionHandmade(SingleContinuousDistribution):
