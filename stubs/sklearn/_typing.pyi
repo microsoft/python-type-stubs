@@ -5,8 +5,10 @@
 import io
 import typing_extensions
 from decimal import Decimal as Decimal
+from typing import Any
 
 import numpy as np
+import numpy.typing as npt
 import pandas as pd
 from numpy.typing import ArrayLike as ArrayLike
 from scipy.sparse import spmatrix
@@ -15,7 +17,8 @@ from .base import BaseEstimator, ClassifierMixin, RegressorMixin
 
 PythonScalar: typing_extensions.TypeAlias = str | int | float | bool
 
-MatrixLike: typing_extensions.TypeAlias = np.ndarray | pd.DataFrame | spmatrix
+NDArray: typing_extensions.TypeAlias = npt.NDArray[Any]
+MatrixLike: typing_extensions.TypeAlias = NDArray | pd.DataFrame | spmatrix
 FileLike = io.IOBase
 PathLike = str
 Int: typing_extensions.TypeAlias = int | np.int8 | np.int16 | np.int32 | np.int64
