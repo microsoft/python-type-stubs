@@ -17,15 +17,15 @@ jobs:
 
     steps:
       - name: Check out code
-        uses: actions/checkout@v2
+        uses: actions/checkout@0717577d45739eb3c851188b29f50ed6c0b2194e # v2.8.0
 
       - name: Setup Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@e9aba2c848f5ebd159c070c61ea2c4e2b122355e # v2.3.4
         with:
           python-version: ${{ matrix.python-version }}
 
       - name: Cache pip
-        uses: actions/cache@v4
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
         with:
           path: ~/.cache/pip
           key: ${{ runner.os }}-pip-${{ hashFiles('**/pyproject.toml') }}
@@ -36,7 +36,7 @@ jobs:
         run: python -m pip install --group tests
 
       - name: Run pyright tests
-        uses: jakebailey/pyright-action@v2
+        uses: jakebailey/pyright-action@6cabc0f01c4994be48fd45cd9dbacdd6e1ee6e5e # v2.3.3
         with:
           pylance-version: latest-prerelease
           python-version: ${{ matrix.python-version }}
@@ -53,9 +53,9 @@ jobs:
 
     steps:
       - name: Check out code
-        uses: actions/checkout@v2
+        uses: actions/checkout@0717577d45739eb3c851188b29f50ed6c0b2194e # v2.8.0
 
       - name: Run Ruff Linter
-        uses: astral-sh/ruff-action@v3
+        uses: astral-sh/ruff-action@4919ec5cf1f49eff0871dbcea0da843445b837e6 # v3.6.1
       - name: Run Ruff Formatter
         run: ruff format --check
