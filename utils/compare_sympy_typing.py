@@ -164,7 +164,7 @@ def markdown(report: dict[str, Any]) -> str:
         if file["candidate"] or file["protected"]:
             continue
         reasons = sorted({declaration["reason"] for declaration in file["declarations"] if declaration["status"] != TYPED})
-        lines.append(f"- `{file['stub_file']}`: {' '.join(reasons)}")
+        lines.append(f"- `{file['stub_file']}`: {' '.join(reasons) or 'No material declarations were found.'}")
     return "\n".join(lines) + "\n"
 
 

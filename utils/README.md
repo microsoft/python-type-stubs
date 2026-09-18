@@ -44,4 +44,4 @@ or `simplify/simplify.pyi`, which were performance workarounds. To assess those,
 run the smoke command with and without the relevant stub and compare its reported
 elapsed time manually; timing is intentionally not an automatic deletion gate.
 Add another relative `.pyi` path to
-`PROTECTED_FILES` when a stub has value structural comparison cannot detect.
+`PROTECTED_FILES` when a stub provides value structural comparison cannot detect.
