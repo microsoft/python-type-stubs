@@ -8,5 +8,5 @@ from sympy.simplify.simplify import simplify
 
 x = Symbol("x")
 power = Pow(x, 2)
-result = simplify(powsimp(x))
+result = simplify(powsimp(power))
 evalf(result, 53, {})

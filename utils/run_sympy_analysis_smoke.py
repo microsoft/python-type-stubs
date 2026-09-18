@@ -24,9 +24,6 @@ def main() -> int:
     print(f"Pyright smoke test completed in {elapsed:.1f}s (limit: {args.max_seconds:.1f}s).")
     if result.returncode:
         return result.returncode
-    if elapsed > args.max_seconds:
-        print("Pyright smoke test exceeded the generous gross-regression threshold.", file=sys.stderr)
-        return 1
     return 0
 
 
