@@ -38,14 +38,15 @@ jobs:
           import pathlib
           report = json.loads(pathlib.Path("artifacts/sympy-typing.json").read_text())
           stub_root = pathlib.Path(report["stub_root"])
-          paths = [stub_root / path for path in report["candidates"]]
+          relative_paths = [pathlib.Path(path) for path in report["candidates"]]
+          paths = [stub_root / path for path in relative_paths]
           for path in paths:
               path.unlink()
           for directory in sorted({path.parent for path in paths}, reverse=True):
               if directory.exists() and not any(directory.iterdir()):
                   directory.rmdir()
           pathlib.Path("artifacts/removed-files.txt").write_text(
-              "\n".join(str(path) for path in paths) + ("\n" if paths else "")
+              "\n".join(str(path) for path in relative_paths) + ("\n" if relative_paths else "")
           )
           with pathlib.Path(os.environ["GITHUB_OUTPUT"]).open("a") as output:
               output.write(f"count={len(paths)}\n")
@@ -53,7 +54,7 @@ jobs:
               "Automated monthly SymPy typing comparison.\n\n"
               f"SymPy version: `{report['sympy_version']}`.\n"
               "Removed files:\n"
-              + "".join(f"- `{path}`\n" for path in paths)
+              + "".join(f"- `{path}`\n" for path in relative_paths)
               + f"\nWorkflow run: {os.environ['GITHUB_SERVER_URL']}/"
               f"{os.environ['GITHUB_REPOSITORY']}/actions/runs/{os.environ['GITHUB_RUN_ID']}.\n\n"
               "A file is removed only when every material declaration maps by name and kind "

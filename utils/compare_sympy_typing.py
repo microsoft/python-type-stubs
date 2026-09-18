@@ -64,7 +64,7 @@ def declarations(tree: ast.Module) -> tuple[dict[str, dict[str, Any]], bool, set
         if isinstance(node, ast.ImportFrom)
         for name in node.names
         if name.name != "*"
-    }
+    } | {name.asname or name.name.split(".", 1)[0] for node in tree.body if isinstance(node, ast.Import) for name in node.names}
 
     def visit(nodes: list[ast.stmt], prefix: str = "") -> None:
         for node in nodes:
@@ -82,7 +82,12 @@ def declarations(tree: ast.Module) -> tuple[dict[str, dict[str, Any]], bool, set
                     if isinstance(node, ast.AsyncFunctionDef)
                     else "function"
                 )
-                found[name] = {"kind": kind, "typed": _function_is_typed(node), "overload": _is_overload(node)}
+                previous = found.get(name)
+                found[name] = {
+                    "kind": kind,
+                    "typed": _function_is_typed(node) and (previous is None or previous["typed"]),
+                    "overload": _is_overload(node) or (previous is not None and previous["overload"]),
+                }
             else:
                 found[name] = {"kind": "attribute", "typed": True, "overload": False}
 

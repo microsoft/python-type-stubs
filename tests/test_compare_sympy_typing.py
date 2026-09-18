@@ -16,8 +16,8 @@ def _compare(tmp_path: Path, stub: str, source: str) -> dict[str, Any]:
     sympy_root = tmp_path / "sympy"
     (stub_root / "sample.pyi").parent.mkdir(parents=True)
     sympy_root.mkdir()
-    (stub_root / "sample.pyi").write_text(stub)
-    (sympy_root / "sample.py").write_text(source)
+    (stub_root / "sample.pyi").write_text(stub, encoding="utf-8")
+    (sympy_root / "sample.py").write_text(source, encoding="utf-8")
     return cast("dict[str, Any]", comparison.compare_file(stub_root / "sample.pyi", stub_root, sympy_root))
 
 
@@ -78,5 +78,15 @@ def test_dynamic_or_reexported_source_is_not_a_candidate(tmp_path: Path) -> None
 
 def test_class_without_explicit_stub_members_is_not_covered(tmp_path: Path) -> None:
     result = _compare(tmp_path, "class Item: ...\n", "class Item:\n    pass\n")
+    assert result["candidate"] is False
+    assert result["declarations"][0]["status"] == comparison.UNTYPED
+
+
+def test_each_overload_must_be_typed(tmp_path: Path) -> None:
+    result = _compare(
+        tmp_path,
+        "from typing import overload\n@overload\ndef parse(value: int) -> int: ...\n@overload\ndef parse(value: str) -> str: ...\n",
+        "from typing import overload\n@overload\ndef parse(value) -> int: ...\n@overload\ndef parse(value: str) -> str: ...\n",
+    )
     assert result["candidate"] is False
     assert result["declarations"][0]["status"] == comparison.UNTYPED

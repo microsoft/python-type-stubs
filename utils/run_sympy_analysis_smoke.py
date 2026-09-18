@@ -15,7 +15,11 @@ def main() -> int:
     parser.add_argument("--fixture", type=Path, default=Path("tests/sympy_analysis_smoke.py"))
     args = parser.parse_args()
     started = time.monotonic()
-    result = subprocess.run((sys.executable, "-m", "pyright", str(args.fixture)), check=False)
+    try:
+        result = subprocess.run((sys.executable, "-m", "pyright", str(args.fixture)), check=False, timeout=args.max_seconds)
+    except subprocess.TimeoutExpired:
+        print("Pyright smoke test exceeded the generous gross-regression threshold.", file=sys.stderr)
+        return 1
     elapsed = time.monotonic() - started
     print(f"Pyright smoke test completed in {elapsed:.1f}s (limit: {args.max_seconds:.1f}s).")
     if result.returncode:
