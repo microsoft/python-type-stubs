@@ -37,7 +37,8 @@ jobs:
           import os
           import pathlib
           report = json.loads(pathlib.Path("artifacts/sympy-typing.json").read_text())
-          paths = [pathlib.Path("stubs/sympy-stubs") / path for path in report["candidates"]]
+          stub_root = pathlib.Path(report["stub_root"])
+          paths = [stub_root / path for path in report["candidates"]]
           for path in paths:
               path.unlink()
           for directory in sorted({path.parent for path in paths}, reverse=True):

@@ -74,3 +74,9 @@ def test_dynamic_or_reexported_source_is_not_a_candidate(tmp_path: Path) -> None
     )
     assert result["candidate"] is False
     assert result["declarations"][0]["status"] == comparison.DYNAMIC
+
+
+def test_class_without_explicit_stub_members_is_not_covered(tmp_path: Path) -> None:
+    result = _compare(tmp_path, "class Item: ...\n", "class Item:\n    pass\n")
+    assert result["candidate"] is False
+    assert result["declarations"][0]["status"] == comparison.UNTYPED

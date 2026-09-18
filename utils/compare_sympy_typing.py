@@ -50,13 +50,21 @@ def _declaration_name(node: ast.AST, prefix: str = "") -> str | None:
     return None
 
 
-def declarations(tree: ast.Module) -> tuple[dict[str, dict[str, Any]], bool]:
-    """Return material declarations and whether the module has dynamic exports."""
+def declarations(tree: ast.Module) -> tuple[dict[str, dict[str, Any]], bool, set[str]]:
+    """Return material declarations, dynamic-export state, and direct re-exports."""
     found: dict[str, dict[str, Any]] = {}
     dynamic = any(
-        (isinstance(node, ast.FunctionDef) and node.name == "__getattr__") or isinstance(node, (ast.Import, ast.ImportFrom))
+        (isinstance(node, ast.FunctionDef) and node.name == "__getattr__")
+        or (isinstance(node, ast.ImportFrom) and any(name.name == "*" for name in node.names))
         for node in tree.body
     )
+    reexports = {
+        name.asname or name.name
+        for node in tree.body
+        if isinstance(node, ast.ImportFrom)
+        for name in node.names
+        if name.name != "*"
+    }
 
     def visit(nodes: list[ast.stmt], prefix: str = "") -> None:
         for node in nodes:
@@ -79,7 +87,7 @@ def declarations(tree: ast.Module) -> tuple[dict[str, dict[str, Any]], bool]:
                 found[name] = {"kind": "attribute", "typed": True, "overload": False}
 
     visit(tree.body)
-    return found, dynamic
+    return found, dynamic, reexports
 
 
 def _source_path(sympy_root: Path, relative_stub: Path) -> Path | None:
@@ -91,7 +99,7 @@ def _source_path(sympy_root: Path, relative_stub: Path) -> Path | None:
 def compare_file(stub_path: Path, stub_root: Path, sympy_root: Path) -> dict[str, Any]:
     relative = stub_path.relative_to(stub_root)
     source_path = _source_path(sympy_root, relative)
-    stub_declarations, _ = declarations(ast.parse(stub_path.read_text(encoding="utf-8"), filename=str(stub_path)))
+    stub_declarations, _, _ = declarations(ast.parse(stub_path.read_text(encoding="utf-8"), filename=str(stub_path)))
     result: dict[str, Any] = {
         "stub_file": relative.as_posix(),
         "source_file": str(source_path) if source_path else None,
@@ -106,18 +114,28 @@ def compare_file(stub_path: Path, stub_root: Path, sympy_root: Path) -> dict[str
         result["candidate"] = False
         return result
 
-    source_declarations, source_dynamic = declarations(
+    source_declarations, source_dynamic, source_reexports = declarations(
         ast.parse(source_path.read_text(encoding="utf-8"), filename=str(source_path))
     )
     for name, declaration in stub_declarations.items():
         source = source_declarations.get(name)
         if source is None:
-            status = DYNAMIC if source_dynamic else MISSING
-            reason = "Source module has dynamic exports." if source_dynamic else "No same-named source declaration was found."
+            status = DYNAMIC if source_dynamic or name.split(".", 1)[0] in source_reexports else MISSING
+            reason = (
+                "Source module dynamically exports or directly re-exports this name."
+                if status == DYNAMIC
+                else "No same-named source declaration was found."
+            )
         elif source["kind"] != declaration["kind"]:
             status, reason = MISSING, "The same name has a different declaration kind upstream."
         elif declaration["kind"] == "class":
-            status, reason = TYPED, "The class exists; its explicit members are compared separately."
+            has_members = any(other_name.startswith(f"{name}.") for other_name in stub_declarations)
+            status = TYPED if has_members else UNTYPED
+            reason = (
+                "The class exists; its explicit members are compared separately."
+                if has_members
+                else "A class without explicit stub members cannot establish annotation coverage."
+            )
         elif source["typed"]:
             status, reason = TYPED, "The same declaration has annotations for every parameter and return value."
         else:
@@ -182,10 +200,10 @@ def main() -> int:
         args.markdown_out.parent.mkdir(parents=True, exist_ok=True)
         args.json_out.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
         args.markdown_out.write_text(markdown(report), encoding="utf-8")
+        return int(args.check and bool(report["candidates"]))
     except (OSError, SyntaxError, importlib.metadata.PackageNotFoundError) as error:
         print(f"comparison failed: {error}", file=sys.stderr)
         return 2
-    return int(args.check and bool(report["candidates"]))
 
 
 if __name__ == "__main__":
