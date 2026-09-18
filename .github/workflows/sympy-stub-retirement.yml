@@ -1,0 +1,79 @@
+name: SymPy stub retirement
+
+on:
+  schedule:
+    - cron: "23 4 1 * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+      - name: Install comparison dependencies
+        run: python -m pip install --group tests --upgrade sympy
+      - name: Compare inline SymPy typing
+        run: |
+          python utils/compare_sympy_typing.py \
+            --sympy-root "$(python -c 'import sympy; print(sympy.__path__[0])')" \
+            --json-out artifacts/sympy-typing.json \
+            --markdown-out artifacts/sympy-typing.md
+      - name: Run protected-stub Pyright smoke test
+        run: python utils/run_sympy_analysis_smoke.py --max-seconds 60
+      - name: Prepare safe removals
+        id: removals
+        run: |
+          python - <<'PY'
+          import json
+          import pathlib
+          report = json.loads(pathlib.Path("artifacts/sympy-typing.json").read_text())
+          paths = [pathlib.Path("stubs/sympy-stubs") / path for path in report["candidates"]]
+          for path in paths:
+              path.unlink()
+          for directory in sorted({path.parent for path in paths}, reverse=True):
+              if directory.exists() and not any(directory.iterdir()):
+                  directory.rmdir()
+          pathlib.Path("artifacts/removed-files.txt").write_text(
+              "\n".join(str(path) for path in paths) + ("\n" if paths else "")
+          )
+          with pathlib.Path(__import__("os").environ["GITHUB_OUTPUT"]).open("a") as output:
+              output.write(f"count={len(paths)}\n")
+          pathlib.Path("artifacts/pull-request-body.md").write_text(
+              "Automated monthly SymPy typing comparison.\n\n"
+              f"SymPy version: `{report['sympy_version']}`.\n"
+              "Removed files:\n"
+              + "".join(f"- `{path}`\n" for path in paths)
+              + f"\nWorkflow run: {__import__('os').environ['GITHUB_SERVER_URL']}/"
+              f"{__import__('os').environ['GITHUB_REPOSITORY']}/actions/runs/"
+              f"{__import__('os').environ['GITHUB_RUN_ID']}.\n\n"
+              "A file is removed only when every material declaration maps by name and kind "
+              "to an upstream declaration with annotations on every non-`self`/`cls` parameter "
+              "and its return value. Classes are structurally matched and their explicit members "
+              "are independently checked. Dynamic and re-exported declarations are retained.\n\n"
+              "**Warning:** static annotation coverage does not prove equivalent Pyright/Pylance "
+              "analysis performance. The historical performance-workaround files are excluded "
+              "from automated deletion.\n"
+          )
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: sympy-typing-report
+          path: artifacts/
+      - name: Create or update retirement pull request
+        if: steps.removals.outputs.count != '0'
+        uses: peter-evans/create-pull-request@v7
+        with:
+          branch: automation/sympy-stub-retirement
+          delete-branch: true
+          commit-message: Retire covered SymPy partial stubs
+          title: Retire covered SymPy partial stubs
+          body-path: artifacts/pull-request-body.md
