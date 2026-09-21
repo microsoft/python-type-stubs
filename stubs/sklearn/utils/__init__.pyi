@@ -1,40 +1,29 @@
-import math as math
-import numbers as numbers
-import platform as platform
-import struct as struct
-import timeit as timeit
-import warnings as warnings
 from collections.abc import Iterable, Iterator, Sequence
-from contextlib import contextmanager as contextmanager, suppress as suppress
-from itertools import compress as compress, islice as islice
 from typing import Any, SupportsIndex
 
-import numpy as np
 from numpy import ndarray
 from numpy.random import RandomState
-from scipy.sparse import issparse as issparse
 
-from .. import get_config as get_config
 from .._typing import ArrayLike, Int, MatrixLike
-from ..exceptions import DataConversionWarning as DataConversionWarning
+from ..exceptions import DataConversionWarning
 from . import metadata_routing
-from ._bunch import Bunch as Bunch
-from ._estimator_html_repr import estimator_html_repr as estimator_html_repr
-from .class_weight import compute_class_weight as compute_class_weight, compute_sample_weight as compute_sample_weight
-from .deprecation import deprecated as deprecated
-from .discovery import all_estimators as all_estimators
-from .murmurhash import murmurhash3_32 as murmurhash3_32
+from ._bunch import Bunch
+from ._estimator_html_repr import estimator_html_repr
+from .class_weight import compute_class_weight, compute_sample_weight
+from .deprecation import deprecated
+from .discovery import all_estimators
+from .murmurhash import murmurhash3_32
 from .validation import (
-    as_float_array as as_float_array,
-    assert_all_finite as assert_all_finite,
-    check_array as check_array,
-    check_consistent_length as check_consistent_length,
-    check_random_state as check_random_state,
-    check_scalar as check_scalar,
-    check_symmetric as check_symmetric,
-    check_X_y as check_X_y,
-    column_or_1d as column_or_1d,
-    indexable as indexable,
+    as_float_array,
+    assert_all_finite,
+    check_array,
+    check_consistent_length,
+    check_random_state,
+    check_scalar,
+    check_symmetric,
+    check_X_y,
+    column_or_1d,
+    indexable,
 )
 
 # Do not deprecate parallel_backend and register_parallel_backend as they are

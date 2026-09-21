@@ -112,7 +112,6 @@ ignore = [
 # Which may negatively affect users, especially if the symbol wasn't meant to be re-exported.
 # We do assume no public re-exports were meant from private modules
 "!_*.pyi" = ["F401"]
-"__init__.pyi" = ["F401"]
 
 [tool.ruff.lint.isort]
 combine-as-imports = true

@@ -2,10 +2,10 @@ import contextlib
 from collections.abc import Generator
 from typing import Literal
 
-import numpy as np
-from packaging.version import parse as parse_version
+from matplotlib import (
+    colors as colors,  # Example usage: https://matplotlib.org/stable/users/explain/colors/colormapnorms.html#colormap-normalization
+)
 
-from . import _docstring, _version, cbook, colors as colors, rcsetup
 from ._typing import *
 
 class __getattr__:
