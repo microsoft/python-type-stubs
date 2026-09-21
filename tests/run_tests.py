@@ -8,6 +8,10 @@ def install_requirements() -> None:
     print("\nInstalling requirements...")
     subprocess.check_call((sys.executable, "-m", "pip", "install", "pip>=25.1"))
     subprocess.check_call((sys.executable, "-m", "pip", "install", "--upgrade", "--group", "tests"))
+    if sys.version_info < (3, 10):
+        subprocess.check_call(
+            (sys.executable, "-m", "pip", "install", "scipy-stubs<1.16", "optype<0.10", "--ignore-requires-python")
+        )
 
 
 def run_pyright() -> subprocess.CompletedProcess[bytes]:
