@@ -2,6 +2,10 @@ import contextlib
 from collections.abc import Generator
 from typing import Literal
 
+from matplotlib import (
+    colors as colors,  # Example usage: https://matplotlib.org/stable/users/explain/colors/colormapnorms.html#colormap-normalization
+)
+
 from ._typing import *
 
 class __getattr__:
