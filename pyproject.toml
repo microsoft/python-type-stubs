@@ -168,8 +168,6 @@ disable_error_code = [
     # Incompatible overrides are out of our stubs' control
     # as they are inherited from the implementation.
     "override",
-    # TODO
-    "assignment", # 688 errors in 155 files
 ]
 
 [[tool.mypy.overrides]]
@@ -177,6 +175,7 @@ module = ["sympy.*"]
 disable_error_code = [
     # TODO
     "misc", # 185
+    "assignment", # 611 errors in 134 files
 ]
 
 [[tool.mypy.overrides]]
@@ -185,11 +184,12 @@ module = ["matplotlib.*"]
 disable_error_code = ["assignment", "misc", "untyped-decorator"]
 
 [[tool.mypy.overrides]]
-module = ["sklearn.*"]
+module = ["sklearn.*", "preprocessing_tests"]
 disable_error_code = [
     # TODO
     "misc", # 25
     "overload-overlap", # 14
+    "assignment", # 52
 ]
 
 [[tool.mypy.overrides]]
@@ -197,4 +197,11 @@ module = ["skimage.*"]
 disable_error_code = [
     # TODO: Too many untyped decorators still left
     "untyped-decorator", # 52
+]
+
+[[tool.mypy.overrides]]
+module = ["vispy.*"]
+disable_error_code = [
+    # TODO
+    "assignment", # 25
 ]

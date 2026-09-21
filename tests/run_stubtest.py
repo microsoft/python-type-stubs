@@ -15,6 +15,9 @@ SKIP_PACKAGES = {
     # This stub has been upstreamed and is only kept for backwards compatibility
     # The version that is stubbed does not match the one we install for type testing
     "matplotlib",
+    # This stub is extremely out of date, with many incorrect types.
+    # Upstream has ongoing efforts to annotate first-party. Consider retirement.
+    "sympy-stubs",
 }
 
 
