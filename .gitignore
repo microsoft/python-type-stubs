@@ -359,6 +359,7 @@ MigrationBackup/
 
 # Lock files (like uv.lock)
 *.lock
+.python-version
 
 # Build files from utils
 .eggs
