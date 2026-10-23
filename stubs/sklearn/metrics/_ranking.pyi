@@ -1,4 +1,5 @@
-from typing import Literal
+from typing import Literal, overload
+from typing_extensions import deprecated
 
 from numpy import ndarray
 
@@ -40,12 +41,25 @@ def roc_auc_score(
     multi_class: Literal["raise", "ovr", "ovo"] = "raise",
     labels: None | ArrayLike = None,
 ) -> Float: ...
+@overload
 def precision_recall_curve(
     y_true: ArrayLike,
-    probas_pred: ArrayLike,
+    y_score: ArrayLike,
     *,
     pos_label: None | str | Int = None,
     sample_weight: None | ArrayLike = None,
+    drop_intermediate: bool = False,
+) -> tuple[ndarray, ndarray, ndarray]: ...
+@deprecated("`probas_pred` is deprecated in 1.5 and will be removed in 1.7. Use `y_score` instead.")
+@overload
+def precision_recall_curve(
+    y_true: ArrayLike,
+    y_score: None = None,
+    *,
+    pos_label: None | str | Int = None,
+    sample_weight: None | ArrayLike = None,
+    drop_intermediate: bool = False,
+    probas_pred: ArrayLike,
 ) -> tuple[ndarray, ndarray, ndarray]: ...
 def roc_curve(
     y_true: ArrayLike,
