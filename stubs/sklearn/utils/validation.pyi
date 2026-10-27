@@ -13,7 +13,7 @@ import numpy as np
 import scipy.sparse as sp
 from joblib.memory import Memory
 from numpy import ndarray
-from numpy.core.numeric import ComplexWarning as ComplexWarning
+from numpy.exceptions import ComplexWarning as ComplexWarning
 from numpy.random.mtrand import RandomState
 from pandas import DataFrame
 from scipy.sparse import spmatrix
