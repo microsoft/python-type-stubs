@@ -1,3 +1,5 @@
+from typing_extensions import disjoint_base
+
 import numpy as np
 
 from ._criterion import Criterion
@@ -13,6 +15,7 @@ class SplitRecord:
     impurity_left: float  # Impurity of the left split.
     impurity_right: float  # Impurity of the right split.
 
+@disjoint_base
 class Splitter:
     """The splitter searches in the input space for a feature and a threshold
     to split the samples samples[start:end]."""

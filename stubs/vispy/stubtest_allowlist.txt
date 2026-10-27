@@ -17,6 +17,7 @@ vispy.app.tests.test_backends
 vispy.app.tests.test_canvas
 vispy.app.tests.test_context
 vispy.app.tests.test_qt
+vispy.app.tests.test_qt_mouse_buttons
 vispy.app.tests.test_simultaneous
 vispy.color.BaseColormap.bad_color
 vispy.color.BaseColormap.high_color
@@ -83,6 +84,7 @@ vispy.scene.node.Node.set_picking
 vispy.scene.tests
 vispy.scene.tests.test_canvas
 vispy.scene.tests.test_node
+vispy.scene.tests.test_viewbox
 vispy.scene.tests.test_visuals
 vispy.scene.visuals.__all__
 vispy.scene.visuals.InstancedMesh
@@ -129,6 +131,7 @@ vispy.visuals.Visual.pop_gl_state
 vispy.visuals.Visual.push_gl_state
 vispy.visuals.Visual.push_gl_state_update
 vispy.visuals._scalable_textures._ScaledTextureMixin.set_data
+vispy.visuals.conftest
 vispy.visuals.filters.WireframeFilter.on_data_updated
 vispy.visuals.filters.base_filter.PrimitivePickingFilter
 vispy.visuals.filters.markers
