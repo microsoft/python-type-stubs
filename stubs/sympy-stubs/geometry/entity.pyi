@@ -3,12 +3,13 @@ from typing_extensions import Self
 
 from sympy.core.basic import Basic
 from sympy.core.evalf import EvalfMixin
+from sympy.core.symbol import Dummy as _Dummy
 from sympy.multipledispatch import dispatch
 from sympy.sets import Set
 from sympy.sets.sets import FiniteSet, Union
 
 ordering_of_classes = ...
-T = ...
+T: _Dummy
 
 class GeometryEntity(Basic, EvalfMixin):
     __slots__: tuple[str, ...] = ...

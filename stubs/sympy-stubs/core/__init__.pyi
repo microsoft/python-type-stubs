@@ -35,14 +35,18 @@ from sympy.core.mul import Mul, prod
 from sympy.core.multidimensional import vectorize
 from sympy.core.numbers import (
     AlgebraicNumber,
+    Catalan as _Catalan,
     E,
+    EulerGamma as _EulerGamma,
     Float,
+    GoldenRatio as _GoldenRatio,
     I,
     Integer,
     Number,
     NumberSymbol,
     Rational,
     RealNumber,
+    TribonacciConstant as _TribonacciConstant,
     comp,
     igcd,
     ilcm,
@@ -76,10 +80,10 @@ from sympy.core.symbol import Dummy, Symbol, Wild, symbols, var
 from sympy.core.sympify import SympifyError, sympify
 from sympy.core.traversal import bottom_up, postorder_traversal, preorder_traversal, use
 
-Catalan = ...
-EulerGamma = ...
-GoldenRatio = ...
-TribonacciConstant = ...
+Catalan: _Catalan
+EulerGamma: _EulerGamma
+GoldenRatio: _GoldenRatio
+TribonacciConstant: _TribonacciConstant
 __all__ = [
     "sympify",
     "SympifyError",

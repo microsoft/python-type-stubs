@@ -4,6 +4,7 @@ from sympy.core.basic import Basic
 from sympy.core.cache import cacheit
 from sympy.core.function import Function, UndefinedFunction
 from sympy.core.mul import Mul
+from sympy.core.numbers import ComplexInfinity as _ComplexInfinity, NegativeOne as _NegativeOne, One as _One, Zero as _Zero
 from sympy.functions.elementary.hyperbolic import cosh, sinh
 from sympy.functions.elementary.trigonometric import cos, sin
 
@@ -106,19 +107,19 @@ class TrigonometricIntegral(Function):
 
 class Si(TrigonometricIntegral):
     _trigfunc = sin
-    _atzero = ...
+    _atzero: _Zero
 
 class Ci(TrigonometricIntegral):
     _trigfunc = cos
-    _atzero = ...
+    _atzero: _ComplexInfinity
 
 class Shi(TrigonometricIntegral):
     _trigfunc = sinh
-    _atzero = ...
+    _atzero: _Zero
 
 class Chi(TrigonometricIntegral):
     _trigfunc = cosh
-    _atzero = ...
+    _atzero: _ComplexInfinity
 
 class FresnelIntegral(Function):
     unbranched = ...
@@ -131,14 +132,14 @@ class FresnelIntegral(Function):
 
 class fresnels(FresnelIntegral):
     _trigfunc = sin
-    _sign = ...
+    _sign: _NegativeOne
     @staticmethod
     @cacheit
     def taylor_term(n, x, *previous_terms): ...
 
 class fresnelc(FresnelIntegral):
     _trigfunc = cos
-    _sign = ...
+    _sign: _One
     @staticmethod
     @cacheit
     def taylor_term(n, x, *previous_terms): ...

@@ -5,12 +5,12 @@ from sympy.core.expr import Expr
 from sympy.core.mul import Mul
 from sympy.matrices.expressions.matadd import MatAdd
 from sympy.matrices.expressions.matexpr import MatrixExpr
-from sympy.matrices.expressions.special import GenericIdentity, GenericZeroMatrix, ZeroMatrix
+from sympy.matrices.expressions.special import GenericIdentity, GenericIdentity as _GenericIdentity, GenericZeroMatrix, ZeroMatrix
 from sympy.series.order import Order
 
 class MatMul(MatrixExpr, Mul):
-    is_MatMul = ...
-    identity = ...
+    is_MatMul: bool
+    identity: _GenericIdentity
     def __new__(cls, *args, evaluate=..., check=..., _sympify=...) -> GenericIdentity | Order | object | Self: ...
     @property
     def shape(self) -> tuple[Any, Any]: ...

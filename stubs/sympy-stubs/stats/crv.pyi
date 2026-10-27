@@ -6,7 +6,7 @@ from sympy.core.cache import cacheit
 from sympy.core.function import Lambda
 from sympy.core.logic import And
 from sympy.core.relational import Relational
-from sympy.sets.sets import Union
+from sympy.sets.sets import Interval as _Interval, Union
 from sympy.stats.rv import (
     ConditionalDomain,
     Distribution,
@@ -41,7 +41,7 @@ class ContinuousDistribution(Distribution):
     def __call__(self, *args): ...
 
 class SingleContinuousDistribution(ContinuousDistribution, NamedArgsMixin):
-    set = ...
+    set: _Interval
     def __new__(cls, *args) -> Self: ...
     @staticmethod
     def check(*args) -> None: ...

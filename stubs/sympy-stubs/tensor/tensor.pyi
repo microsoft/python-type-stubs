@@ -8,6 +8,7 @@ from sympy import ImmutableDenseNDimArray, ImmutableSparseNDimArray, Indexed, Mu
 from sympy.combinatorics.permutations import Perm
 from sympy.core import Basic, Expr
 from sympy.core.containers import Tuple
+from sympy.core.numbers import One as _One
 from sympy.core.operations import AssocOp
 from sympy.core.sympify import CantSympify
 from sympy.matrices import Matrix
@@ -342,7 +343,7 @@ class Tensor(TensExpr):
     def contract_delta(self, metric) -> Self: ...
 
 class TensMul(TensExpr, AssocOp):
-    identity = ...
+    identity: _One
     _index_structure: _IndexStructure = ...
     def __new__(cls, *args, **kw_args) -> Self: ...
 

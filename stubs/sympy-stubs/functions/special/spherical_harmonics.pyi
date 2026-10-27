@@ -1,8 +1,9 @@
 from typing import Any
 
 from sympy.core.function import Function, UndefinedFunction
+from sympy.core.symbol import Dummy as _Dummy
 
-_x = ...
+_x: _Dummy
 
 class Ynm(Function):
     @classmethod

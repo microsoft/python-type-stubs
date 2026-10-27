@@ -3,9 +3,10 @@ from typing_extensions import Self
 
 from sympy.core.function import DefinedFunction, Function, UndefinedFunction
 from sympy.core.numbers import Float, Integer, Rational
+from sympy.core.symbol import Symbol as _Symbol
 from sympy.series.order import Order
 
-_sym = ...
+_sym: _Symbol
 
 class carmichael(Function):
     @staticmethod

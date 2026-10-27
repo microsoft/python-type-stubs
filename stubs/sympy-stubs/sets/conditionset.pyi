@@ -2,9 +2,10 @@ from typing import Any
 from typing_extensions import Self
 
 from sympy.core.logic import And
+from sympy.core.symbol import Dummy as _Dummy
 from sympy.sets.sets import Complement, FiniteSet, Intersection, Set, Union
 
-adummy = ...
+adummy: _Dummy
 
 class ConditionSet(Set):
     def __new__(cls, sym, condition, base_set=...) -> Set | FiniteSet | Intersection | Union | Complement | Self: ...
