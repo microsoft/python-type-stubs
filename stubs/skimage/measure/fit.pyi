@@ -1,7 +1,7 @@
 import math
 import sys
 from typing import Any, Protocol, TypeVar, overload, runtime_checkable
-from typing_extensions import Self
+from typing_extensions import Self, TypeVarTuple, Unpack
 from warnings import warn
 
 import numpy as np
@@ -12,11 +12,13 @@ from scipy import optimize, spatial
 if sys.version_info >= (3, 11):
     from .._shared.utils import FailedEstimation
 
+    _Data = TypeVarTuple("_Data")
+
     @runtime_checkable
-    class RansacModelProtocol(Protocol):
+    class RansacModelProtocol(Protocol[Unpack[_Data]]):
         @classmethod
-        def from_estimate(cls, *data: NDArray) -> Self | FailedEstimation: ...
-        def residuals(self, *data: NDArray) -> NDArray[np.floating]: ...
+        def from_estimate(cls, *data: Unpack[_Data]) -> Self | FailedEstimation: ...
+        def residuals(self, *data: Unpack[_Data]) -> NDArray[np.floating]: ...
 
     _ModelT = TypeVar("_ModelT")
 

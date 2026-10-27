@@ -70,6 +70,10 @@ from sympy.stats.crv_types import BetaDistribution
 from sympy.utilities.decorator import public
 
 assert_type(S, SingletonRegistry)
+S(1)
+S(a=1)
+S(1, locals={})
+S(a=1, locals={}, convert_xor=False, strict=True, rational=True, evaluate=False)
 assert_type(pi, Pi)
 assert_type(core_pi, Pi)
 assert_type(E, Exp1)
@@ -105,6 +109,10 @@ assert_type(GaussianRationalField.imag_unit, GaussianRational)
 assert_type(MonomialOps(2), MonomialOps)
 assert_type(BooleanTrue(), BooleanTrue)
 assert_type(BooleanFalse(), BooleanFalse)
+
+
+def check_singleton_required_argument() -> None:
+    S()  # type: ignore[call-arg]
 
 
 def check_methods(

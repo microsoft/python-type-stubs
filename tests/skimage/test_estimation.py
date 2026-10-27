@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import sys
 import warnings
 from typing_extensions import assert_type
@@ -34,6 +36,41 @@ def test_legacy_estimation() -> None:
 if sys.version_info >= (3, 11):
     from skimage._shared.utils import FailedEstimation, FailedEstimationAccessError
     from skimage.measure import RansacModelProtocol
+
+    def check_single_array_protocol(
+        model: RansacModelProtocol[np.ndarray], model_class: type[RansacModelProtocol[np.ndarray]], data: np.ndarray
+    ) -> None:
+        model.residuals(data)
+        model_class.from_estimate(data)
+        model.residuals(data, data)  # type: ignore[call-arg]
+        model_class.from_estimate(data, data)  # type: ignore[call-arg]
+
+    def check_two_array_protocol(
+        model: RansacModelProtocol[np.ndarray, np.ndarray],
+        model_class: type[RansacModelProtocol[np.ndarray, np.ndarray]],
+        data: np.ndarray,
+    ) -> None:
+        model.residuals(data, data)
+        model_class.from_estimate(data, data)
+        model.residuals(data)  # type: ignore[call-arg]
+        model_class.from_estimate(data)  # type: ignore[call-arg]
+
+    def check_model_protocols(
+        circle: CircleModel,
+        ellipse: EllipseModel,
+        line: LineModelND,
+        affine: AffineTransform,
+        similarity: SimilarityTransform,
+        data: np.ndarray,
+    ) -> None:
+        model: RansacModelProtocol = circle
+        model = affine
+        assert isinstance(model, RansacModelProtocol)
+        check_single_array_protocol(circle, CircleModel, data)
+        check_single_array_protocol(ellipse, EllipseModel, data)
+        check_single_array_protocol(line, LineModelND, data)
+        check_two_array_protocol(affine, AffineTransform, data)
+        check_two_array_protocol(similarity, SimilarityTransform, data)
 
     def test_explicit_model_construction() -> None:
         circle = CircleModel(center=(1, 2), radius=3)
