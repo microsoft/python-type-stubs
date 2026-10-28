@@ -1,6 +1,3 @@
-import sys
-
-import mpmath
 from sympy.algebras import Quaternion
 from sympy.assumptions import (
     AppliedPredicate,
@@ -128,7 +125,6 @@ from sympy.core import (
     vectorize,
     zoo,
 )
-from sympy.core.cache import lazy_function
 from sympy.discrete import (
     convolution,
     covering_product,

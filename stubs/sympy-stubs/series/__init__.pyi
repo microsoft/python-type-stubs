@@ -1,4 +1,3 @@
-from sympy.core.singleton import S
 from sympy.series.approximants import approximants
 from sympy.series.formal import fps
 from sympy.series.fourier import fourier_series
