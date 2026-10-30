@@ -1,5 +1,7 @@
+import sys
 from collections.abc import Iterable, Mapping
-from typing import Any, Literal
+from typing import Any, ClassVar, Literal
+from typing_extensions import Never
 
 from numpy.typing import ArrayLike, NDArray
 
@@ -30,7 +32,18 @@ class _DecoratorBaseClass:
     def get_stack_length(self, func): ...
 
 class change_default_value(_DecoratorBaseClass):
-    def __init__(self, arg_name: str, *, new_value: Any, changed_version: str, warning_msg: str | None = None): ...
+    if sys.version_info >= (3, 11):
+        def __init__(
+            self,
+            arg_name: str,
+            *,
+            new_value: Any,
+            changed_version: str,
+            warning_msg: str | None = None,
+            stacklevel: int | None = None,
+        ): ...
+    else:
+        def __init__(self, arg_name: str, *, new_value: Any, changed_version: str, warning_msg: str | None = None): ...
     def __call__(self, func): ...
 
 class remove_arg(_DecoratorBaseClass):
@@ -87,3 +100,15 @@ new_float_type: dict = ...
 
 def _supported_float_type(input_dtype, allow_complex=False): ...
 def identity(image, *args, **kwargs): ...
+
+if sys.version_info >= (3, 11):
+    class FailedEstimationAccessError(AttributeError): ...
+
+    class FailedEstimation:
+        error_cls: ClassVar[type[FailedEstimationAccessError]]
+        hint: ClassVar[str]
+        message: str
+        def __init__(self, message: str) -> None: ...
+        def __bool__(self) -> Literal[False]: ...
+        def __call__(self, *args: object, **kwargs: object) -> Never: ...
+        def __getattr__(self, name: str) -> Never: ...

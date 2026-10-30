@@ -1,3 +1,4 @@
+import sys
 from typing import Literal
 
 import numpy as np
@@ -5,6 +6,9 @@ from numpy.typing import NDArray
 
 from .._shared._geometry import polygon_clip
 from .._shared.version_requirements import require
+
+if sys.version_info >= (3, 11):
+    __doctest_requires__: dict[tuple[str, ...], list[str]]
 
 def _ellipse_in_shape(shape, center, radii, rotation=0.0): ...
 def ellipse(r, c, r_radius, c_radius, shape: tuple | None = None, rotation=0.0) -> NDArray: ...
