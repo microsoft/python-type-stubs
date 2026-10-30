@@ -27,7 +27,6 @@ tests = [
     # Needed for stubtest and downloads their dependencies to get known import symbols
     "scikit-image",
     "scikit-learn <1.7.0", # TODO: Update stubs for sklearn
-    "sympy",
     "vispy",
 ]
 dev = [{ include-group = "hygiene" }, { include-group = "tests" }]
@@ -43,7 +42,6 @@ dev = [{ include-group = "hygiene" }, { include-group = "tests" }]
 # See README.md as to why matplotlib is not included
 "skimage-stubs" = "stubs/skimage"
 "sklearn-stubs" = "stubs/sklearn"
-"sympy-stubs" = "stubs/sympy-stubs"
 "vispy-stubs" = "stubs/vispy"
 
 [tool.ruff]
@@ -170,13 +168,6 @@ disable_error_code = [
     "override",
     # TODO
     "assignment", # 688 errors in 155 files
-]
-
-[[tool.mypy.overrides]]
-module = ["sympy.*"]
-disable_error_code = [
-    # TODO
-    "misc", # 185
 ]
 
 [[tool.mypy.overrides]]
