@@ -1,9 +1,11 @@
 from typing import Any, ClassVar
+from typing_extensions import disjoint_base
 
 __reduce_cython__: Any
 __setstate_cython__: Any
 __test__: dict
 
+@disjoint_base
 class Cascade:
     __pyx_vtable__: ClassVar[Any] = ...
     eps: Any

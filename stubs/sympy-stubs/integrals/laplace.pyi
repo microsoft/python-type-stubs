@@ -6,6 +6,7 @@ from sympy.core.expr import Expr
 from sympy.core.function import UndefinedFunction
 from sympy.core.logic import And
 from sympy.core.mul import Mul
+from sympy.core.symbol import Dummy as _Dummy
 from sympy.functions.elementary.miscellaneous import Max
 from sympy.integrals.transforms import IntegralTransform
 from sympy.series.order import Order
@@ -22,8 +23,8 @@ def laplace_transform(f, t, s, legacy_matrix=..., **hints) -> tuple[MatrixBase, 
 
 class InverseLaplaceTransform(IntegralTransform):
     _name = ...
-    _none_sentinel = ...
-    _c = ...
+    _none_sentinel: _Dummy
+    _c: _Dummy
     def __new__(cls, F, s, x, plane, **opts) -> type[UndefinedFunction]: ...
     @property
     def fundamental_plane(self) -> Basic | None: ...

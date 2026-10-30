@@ -4,8 +4,9 @@ from sympy.concrete.summations import Sum
 from sympy.core.function import Function, UndefinedFunction
 from sympy.core.mul import Mul
 from sympy.core.relational import Equality, Ne, Relational
+from sympy.core.symbol import Dummy as _Dummy
 
-_x = ...
+_x: _Dummy
 
 class OrthogonalPolynomial(Function): ...
 

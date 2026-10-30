@@ -1,5 +1,5 @@
 import sys
-from typing import Any, Literal
+from typing import Any, ClassVar, Literal
 from typing_extensions import LiteralString, Self, TypeAlias, Unpack
 
 from sympy.polys.domains.domain import Domain
@@ -98,9 +98,9 @@ class GaussianIntegerRing(GaussianDomain, Ring):
 class GaussianRationalField(GaussianDomain, Field):
     dom = ...
     dtype = GaussianRational
-    zero: GaussianInteger
-    one: GaussianInteger
-    imag_unit: GaussianInteger
+    zero: ClassVar[GaussianRational]
+    one: ClassVar[GaussianRational]
+    imag_unit: ClassVar[GaussianRational]
     units = ...
     rep = ...
     is_GaussianField = ...

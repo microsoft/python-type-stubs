@@ -1,6 +1,8 @@
 # Don't expose test modules
 skimage\..+?\.tests.*
 
+# scikit-image wheels may omit tests. Exact optional entries also cover wheels
+# (including 0.25 on Python 3.10) that still distribute these test modules.
 # TODO: Missing in this non-partial stub
 skimage.__all__
 skimage._shared._dependency_checks.is_wasm
@@ -358,3 +360,15 @@ skimage.transform.ProjectiveTransform.__array__
 skimage.transform.ProjectiveTransform.inverse
 skimage.transform.SimilarityTransform
 skimage.transform.warp
+
+# 0.26 introspection bugs: _deprecate_no_args copies the required-argument
+# signature onto wrappers that still support deprecated no-argument construction.
+# Keep both valid constructor overloads rather than removing legacy calls.
+(skimage\.measure\.(fit\.)?CircleModel\.__init__)?
+(skimage\.measure\.(fit\.)?EllipseModel\.__init__)?
+(skimage\.measure\.(fit\.)?LineModelND\.__init__)?
+# _update_from_estimate_docstring copies an already-bound signature onto a new
+# classmethod, so inspect.signature drops src a second time. Both methods really
+# accept src, dst (and AffineTransform also accepts weights).
+(skimage\.transform\.(_geometric\.)?AffineTransform\.from_estimate)?
+(skimage\.transform\.(_geometric\.)?SimilarityTransform\.from_estimate)?

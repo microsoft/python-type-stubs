@@ -2,12 +2,12 @@ from collections.abc import Callable
 from typing import TypeVar
 
 from sympy.core.basic import Basic
-from sympy.core.symbol import Dummy
+from sympy.core.symbol import Dummy, Dummy as _Dummy
 from sympy.functions.elementary.piecewise import Piecewise
 
 _CallableT = TypeVar("_CallableT", bound=Callable)
 
-z = ...
+z: _Dummy
 
 def timeit(func: _CallableT) -> _CallableT: ...
 

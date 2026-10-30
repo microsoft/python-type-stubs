@@ -1,3 +1,5 @@
+from typing_extensions import disjoint_base
+
 class LossFunction:
     def loss(self, p: float, y: float) -> float: ...
     def dloss(self, p: float, y) -> float: ...
@@ -22,6 +24,7 @@ class ModifiedHuber(Classification):
     def loss(self, p: float, y: float) -> float: ...
     def dloss(self, p: float, y: float) -> float: ...
 
+@disjoint_base
 class Hinge(Classification):
     """Hinge loss for binary classification tasks with y in {-1,1}
 
@@ -38,6 +41,7 @@ class Hinge(Classification):
     def loss(self, p: float, y: float) -> float: ...
     def dloss(self, p: float, y: float) -> float: ...
 
+@disjoint_base
 class SquaredHinge(Classification):
     """Squared Hinge loss for binary classification tasks with y in {-1,1}
 
@@ -80,6 +84,7 @@ class Huber(Regression):
     def loss(self, p: float, y: float) -> float: ...
     def dloss(self, p: float, y: float) -> float: ...
 
+@disjoint_base
 class EpsilonInsensitive(Regression):
     """Epsilon-Insensitive loss (used by SVR).
 
@@ -91,6 +96,7 @@ class EpsilonInsensitive(Regression):
     def loss(self, p: float, y: float) -> float: ...
     def dloss(self, p: float, y: float) -> float: ...
 
+@disjoint_base
 class SquaredEpsilonInsensitive(Regression):
     """Epsilon-Insensitive loss.
 

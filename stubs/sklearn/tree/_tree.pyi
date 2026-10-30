@@ -1,4 +1,5 @@
 from typing import Any
+from typing_extensions import Self, disjoint_base
 
 import numpy as np
 
@@ -18,15 +19,15 @@ class Node:
 class DepthFirstTreeBuilder(TreeBuilder):
     """Build a decision tree in depth-first fashion."""
 
-    def __init__(
-        self,
+    def __new__(
+        cls,
         splitter: Splitter,
         min_samples_split: int,
         min_samples_leaf: int,
         min_weight_leaf: float,
         max_depth: int,
         min_impurity_decrease: float,
-    ) -> None: ...
+    ) -> Self: ...
     def build(
         self,
         tree: Tree,
@@ -35,6 +36,7 @@ class DepthFirstTreeBuilder(TreeBuilder):
         sample_weight: np.ndarray | None = None,
     ) -> None: ...
 
+@disjoint_base
 class BestFirstTreeBuilder(TreeBuilder):
     """Build a decision tree in best-first fashion.
     The best node to expand is given by the node at the frontier that has the
@@ -43,8 +45,8 @@ class BestFirstTreeBuilder(TreeBuilder):
 
     max_leaf_nodes: int
 
-    def __init__(
-        self,
+    def __new__(
+        cls,
         splitter: Splitter,
         min_samples_split: int,
         min_samples_leaf: int,
@@ -52,7 +54,7 @@ class BestFirstTreeBuilder(TreeBuilder):
         max_depth: int,
         max_leaf_nodes: int,
         min_impurity_decrease: float,
-    ) -> None: ...
+    ) -> Self: ...
     def build(
         self,
         tree: Tree,
@@ -61,6 +63,7 @@ class BestFirstTreeBuilder(TreeBuilder):
         sample_weight: np.ndarray | None = None,
     ) -> None: ...
 
+@disjoint_base
 class Tree:
     n_features: int
     n_classes: int
@@ -80,6 +83,7 @@ class Tree:
     def compute_node_depths(self): ...
     def compute_feature_importances(self, normalize): ...
 
+@disjoint_base
 class TreeBuilder:
     splitter: Splitter
     min_samples_split: int

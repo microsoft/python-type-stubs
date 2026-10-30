@@ -3,6 +3,7 @@ from typing_extensions import Self
 
 from sympy.core import Expr
 from sympy.core.function import UndefinedFunction
+from sympy.core.symbol import Dummy as _Dummy
 
 def add_formulae(formulae) -> None: ...
 def add_meijerg_formulae(formulae) -> None: ...
@@ -30,7 +31,7 @@ class G_Function(Expr):
     @property
     def signature(self) -> tuple[int, int, int, int]: ...
 
-_x = ...
+_x: _Dummy
 
 class Formula:
     def __init__(self, func, z, res, symbols, B=..., C=..., M=...) -> None: ...

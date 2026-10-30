@@ -1,3 +1,5 @@
+import sys
+
 from ._blur_effect import blur_effect as blur_effect
 from ._find_contours import find_contours as find_contours
 from ._label import label as label
@@ -27,6 +29,9 @@ from .entropy import shannon_entropy as shannon_entropy
 from .fit import CircleModel as CircleModel, EllipseModel as EllipseModel, LineModelND as LineModelND, ransac as ransac
 from .pnpoly import grid_points_in_poly as grid_points_in_poly, points_in_poly as points_in_poly
 from .profile import profile_line as profile_line
+
+if sys.version_info >= (3, 11):
+    from .fit import RansacModelProtocol as RansacModelProtocol
 
 __all__ = [
     "find_contours",
@@ -59,3 +64,6 @@ __all__ = [
     "shannon_entropy",
     "blur_effect",
 ]
+
+if sys.version_info >= (3, 11):
+    __all__ += ["RansacModelProtocol"]

@@ -62,6 +62,15 @@ vispy.visuals.CompoundVisual.pop_gl_state
 vispy.visuals.CompoundVisual.push_gl_state
 vispy.visuals.CompoundVisual.push_gl_state_update
 vispy.visuals.conftest
+vispy.visuals.GridLinesVisual.border_width
+vispy.visuals.GridLinesVisual.grid_bounds
+vispy.visuals.ImageVisual.bad_color
+vispy.visuals.Visual.pop_gl_state
+vispy.visuals.Visual.push_gl_state
+vispy.visuals.Visual.push_gl_state_update
+vispy.visuals._scalable_textures._ScaledTextureMixin.set_data
+vispy.visuals.conftest
+vispy.visuals.filters.WireframeFilter.on_data_updated
 vispy.visuals.filters.base_filter.PrimitivePickingFilter
 vispy.visuals.filters.markers
 vispy.visuals.filters.mesh.FacePickingFilter
