@@ -6,7 +6,7 @@ from sympy.core.cache import cacheit
 from sympy.core.expr import Expr
 from sympy.core.function import Function, FunctionClass, UndefinedFunction
 from sympy.core.kind import Kind
-from sympy.core.numbers import Integer
+from sympy.core.numbers import ComplexInfinity as _ComplexInfinity, Integer, Zero as _Zero
 from sympy.series.order import Order
 
 class ExpBase(Function):
@@ -42,8 +42,9 @@ class exp(ExpBase, metaclass=ExpMeta):
 def match_real_imag(expr) -> tuple[Any, Literal[0]] | tuple[Any, Any] | tuple[None, None]: ...
 
 class log(Function):
-    args: tuple[Expr]
-    _singularities = ...
+    @property
+    def args(self) -> tuple[Expr]: ...
+    _singularities: tuple[_Zero, _ComplexInfinity]
     def fdiff(self, argindex=...): ...
     def inverse(self, argindex=...) -> type[exp]: ...
     @classmethod

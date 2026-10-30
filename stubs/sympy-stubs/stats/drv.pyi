@@ -6,6 +6,7 @@ from sympy.core.cache import cacheit
 from sympy.core.function import Lambda
 from sympy.core.logic import And
 from sympy.core.relational import Relational
+from sympy.sets.fancysets import Integers as _Integers
 from sympy.sets.sets import Complement, Union
 from sympy.stats.rv import (
     ConditionalDomain,
@@ -24,7 +25,7 @@ class DiscreteDistribution(Distribution):
     def __call__(self, *args): ...
 
 class SingleDiscreteDistribution(DiscreteDistribution, NamedArgsMixin):
-    set = ...
+    set: _Integers
     def __new__(cls, *args) -> Self: ...
     @staticmethod
     def check(*args) -> None: ...

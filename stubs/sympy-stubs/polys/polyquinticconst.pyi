@@ -1,8 +1,9 @@
 from typing import Any
 
+from sympy.core.symbol import Symbol as _Symbol
 from sympy.utilities import public
 
-x = ...
+x: _Symbol
 
 @public
 class PolyQuintic:

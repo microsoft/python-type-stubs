@@ -8,6 +8,7 @@ from sympy.core.expr import Expr
 from sympy.core.function import Lambda
 from sympy.core.logic import And
 from sympy.core.relational import Relational
+from sympy.core.symbol import Symbol as _Symbol
 from sympy.matrices.expressions.matexpr import MatrixSymbol
 from sympy.series.order import Order
 from sympy.stats.compound_rv import CompoundPSpace
@@ -21,7 +22,7 @@ from sympy.stats.symbolic_multivariate_probability import ExpectationMatrix
 from sympy.stats.symbolic_probability import Expectation, Probability
 from sympy.utilities.decorator import doctest_depends_on
 
-x = ...
+x: _Symbol
 
 def is_random(x: object) -> bool: ...
 

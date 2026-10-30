@@ -1,9 +1,10 @@
 from typing import Any
 
+from sympy.core.symbol import Symbol as _Symbol
 from sympy.functions.elementary.piecewise import Piecewise
 from sympy.utilities import public
 
-z = ...
+z: _Symbol
 
 def roots_linear(f) -> list[Any]: ...
 def roots_quadratic(f) -> list[Any]: ...

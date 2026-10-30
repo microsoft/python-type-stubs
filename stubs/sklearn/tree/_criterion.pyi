@@ -1,5 +1,8 @@
+from typing_extensions import disjoint_base
+
 import numpy as np
 
+@disjoint_base
 class Criterion:
     y: np.ndarray
     sample_weight: np.ndarray
@@ -35,6 +38,7 @@ class Criterion:
     def impurity_improvement(self, impurity_parent: float, impurity_left: float, impurity_right: float) -> float: ...
     def proxy_impurity_improvement(self) -> float: ...
 
+@disjoint_base
 class ClassificationCriterion(Criterion):
     n_classes: np.ndarray
     max_n_classes: int
@@ -43,6 +47,7 @@ class ClassificationCriterion(Criterion):
     sum_left: np.ndarray
     sum_right: np.ndarray
 
+@disjoint_base
 class RegressionCriterion(Criterion):
     sq_sum_total: float
 

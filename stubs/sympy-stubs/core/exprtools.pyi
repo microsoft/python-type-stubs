@@ -8,13 +8,14 @@ from sympy.core.basic import Basic
 from sympy.core.expr import Expr
 from sympy.core.mul import Mul
 from sympy.core.numbers import Rational
+from sympy.core.symbol import Dummy as _Dummy
 
 if sys.version_info >= (3, 10):
     from types import NotImplementedType
 else:
     NotImplementedType: TypeAlias = Any
 
-_eps = ...
+_eps: _Dummy
 
 def decompose_power(expr: Expr) -> tuple[Expr, int]: ...
 def decompose_power_rat(expr: Expr) -> tuple[Expr, Rational]: ...

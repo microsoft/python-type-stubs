@@ -324,7 +324,7 @@ from sympy.physics.units.definitions.dimension_definitions import (
     voltage,
     volume,
 )
-from sympy.physics.units.dimensions import Dimension, DimensionSystem
+from sympy.physics.units.dimensions import Dimension, Dimension as _Dimension, DimensionSystem
 from sympy.physics.units.prefixes import (
     atto,
     centi,
@@ -359,10 +359,10 @@ from sympy.physics.units.unitsystem import UnitSystem
 from sympy.physics.units.util import convert_to
 
 Unit = Quantity
-speed = ...
-luminosity = ...
-magnetic_flux_density = ...
-amount = ...
+speed: _Dimension
+luminosity: _Dimension
+magnetic_flux_density: _Dimension
+amount: _Dimension
 
 def find_unit(quantity, unit_system=...) -> list[str]: ...
 

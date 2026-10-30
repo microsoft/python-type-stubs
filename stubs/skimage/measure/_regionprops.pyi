@@ -1,6 +1,7 @@
+import sys
 from collections.abc import Mapping
 
-from numpy.typing import ArrayLike
+from numpy.typing import ArrayLike, NDArray
 
 from ._regionprops_utils import euler_number, perimeter, perimeter_crofton
 
@@ -80,6 +81,9 @@ class RegionProperties:
     def intensity_max(self): ...
     @property
     def intensity_mean(self): ...
+    if sys.version_info >= (3, 11):
+        @property
+        def intensity_median(self) -> float | NDArray: ...
     @property
     def intensity_min(self): ...
     @property

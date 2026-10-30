@@ -2,11 +2,11 @@ from typing_extensions import Self
 
 from sympy.core.add import Add
 from sympy.matrices.expressions.matexpr import MatrixExpr
-from sympy.matrices.expressions.special import GenericZeroMatrix
+from sympy.matrices.expressions.special import GenericZeroMatrix, GenericZeroMatrix as _GenericZeroMatrix
 
 class MatAdd(MatrixExpr, Add):
-    is_MatAdd = ...
-    identity = ...
+    is_MatAdd: bool
+    identity: _GenericZeroMatrix
     def __new__(cls, *args, evaluate=..., check=..., _sympify=...) -> GenericZeroMatrix | MatAdd | Self: ...
     @property
     def shape(self): ...

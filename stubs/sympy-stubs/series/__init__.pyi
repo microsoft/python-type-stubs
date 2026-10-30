@@ -7,10 +7,10 @@ from sympy.series.limits import Limit, limit
 from sympy.series.limitseq import difference_delta, limit_seq
 from sympy.series.order import Order
 from sympy.series.residues import residue
-from sympy.series.sequences import SeqAdd, SeqFormula, SeqMul, SeqPer, sequence
+from sympy.series.sequences import EmptySequence as _EmptySequence, SeqAdd, SeqFormula, SeqMul, SeqPer, sequence
 from sympy.series.series import series
 
-EmptySequence = ...
+EmptySequence: _EmptySequence
 O = Order
 __all__ = [
     "Order",

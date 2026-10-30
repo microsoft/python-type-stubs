@@ -3,6 +3,7 @@ from typing import Any, Callable
 from sympy.core import Add, Mul, Number, NumberSymbol, Pow
 from sympy.core.logic import And, Or
 from sympy.core.numbers import ImaginaryUnit
+from sympy.core.symbol import Symbol as _Symbol
 from sympy.functions.elementary.complexes import Abs
 from sympy.logic.boolalg import Implies
 from sympy.matrices.expressions import MatMul
@@ -19,7 +20,7 @@ class ClassFactRegistry:
     def __call__(self, expr) -> set[Any]: ...
 
 class_fact_registry: ClassFactRegistry
-x = ...
+x: _Symbol
 
 @class_fact_registry.multiregister(Abs)
 def _(expr) -> list[Any]: ...
