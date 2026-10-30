@@ -1,3 +1,6 @@
+# Our own type alias for Python 3.9 support
+sympy\..+?\.NotImplementedType
+
 # These modules have no stubs: mypy follows the runtime sources. Their conditional
 # flint/gmpy/python definitions create synthetic "-redefinition" names that do not
 # exist at runtime. Keep these exact entries limited to backend-selection artifacts.
