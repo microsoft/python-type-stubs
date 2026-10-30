@@ -1,76 +1,9 @@
-import pickle
-import re
-import warnings
 from collections.abc import Generator, Sequence
-from copy import deepcopy as deepcopy
-from functools import partial as partial, wraps as wraps
-from inspect import signature as signature
-from numbers import Real as Real
 
-import joblib
-import numpy as np
 from _pytest.mark.structures import _ParametrizeMarkDecorator
-from scipy import sparse as sparse
-from scipy.stats import rankdata as rankdata
 
-from .. import config_context as config_context
 from .._typing import ArrayLike
-from ..base import (
-    BaseEstimator,
-    ClusterMixin as ClusterMixin,
-    RegressorMixin as RegressorMixin,
-    clone as clone,
-    is_classifier as is_classifier,
-    is_outlier_detector as is_outlier_detector,
-    is_regressor as is_regressor,
-)
-from ..datasets import (
-    load_iris as load_iris,
-    make_blobs as make_blobs,
-    make_multilabel_classification as make_multilabel_classification,
-    make_regression as make_regression,
-)
-from ..exceptions import (
-    DataConversionWarning as DataConversionWarning,
-    NotFittedError as NotFittedError,
-    SkipTestWarning as SkipTestWarning,
-)
-from ..feature_selection import SelectFromModel as SelectFromModel, SelectKBest as SelectKBest
-from ..linear_model import (
-    LinearRegression as LinearRegression,
-    LogisticRegression as LogisticRegression,
-    RANSACRegressor as RANSACRegressor,
-    Ridge as Ridge,
-    SGDRegressor as SGDRegressor,
-)
-from ..metrics import accuracy_score as accuracy_score, adjusted_rand_score as adjusted_rand_score, f1_score as f1_score
-from ..metrics.pairwise import linear_kernel as linear_kernel, pairwise_distances as pairwise_distances, rbf_kernel as rbf_kernel
-from ..model_selection import ShuffleSplit as ShuffleSplit, train_test_split as train_test_split
-from ..pipeline import make_pipeline as make_pipeline
-from ..preprocessing import StandardScaler as StandardScaler, scale as scale
-from ..random_projection import BaseRandomProjection as BaseRandomProjection
-from ..utils._param_validation import (
-    InvalidParameterError as InvalidParameterError,
-    generate_invalid_param_val as generate_invalid_param_val,
-    make_constraint as make_constraint,
-)
-from ..utils.validation import check_is_fitted as check_is_fitted
-from . import IS_PYPY as IS_PYPY, is_scalar_nan as is_scalar_nan, shuffle as shuffle
-from ._param_validation import Interval as Interval
-from ._testing import (
-    SkipTest as SkipTest,
-    assert_allclose as assert_allclose,
-    assert_allclose_dense_sparse as assert_allclose_dense_sparse,
-    assert_array_almost_equal as assert_array_almost_equal,
-    assert_array_equal as assert_array_equal,
-    assert_array_less as assert_array_less,
-    assert_raise_message as assert_raise_message,
-    create_memmap_backed_data as create_memmap_backed_data,
-    ignore_warnings as ignore_warnings,
-    raises as raises,
-    set_random_state as set_random_state,
-)
-from .validation import has_fit_parameter as has_fit_parameter
+from ..base import BaseEstimator
 
 REGRESSION_DATASET = ...
 CROSS_DECOMPOSITION: list = ...

@@ -1,10 +1,7 @@
 # Don't expose test modules
 skimage\..+?\.tests.*
 
-# scikit-image wheels may omit tests. Exact optional entries also cover wheels
-# (including 0.25 on Python 3.10) that still distribute these test modules.
 # TODO: Missing in this non-partial stub
-skimage.__all__
 skimage._shared._dependency_checks.is_wasm
 skimage._shared.compat
 skimage._shared.dtype
@@ -26,20 +23,16 @@ skimage.color.colorlabel
 skimage.color.delta_e
 skimage.color.rgb_colors
 skimage.conftest
-skimage.data
 skimage.data.binary_blobs
 skimage.data.cat
 skimage.data.data_dir
-skimage.draw
 skimage.draw.__all__
 skimage.draw._bezier_segment
 skimage.exposure
 skimage.exposure.exposure
 skimage.exposure.histogram_matching
-skimage.feature
 skimage.feature.__all__
 skimage.feature.brief_cy
-skimage.feature.brief.np2
 skimage.feature.censure_cy
 skimage.feature.corner_cy
 skimage.feature.fisher_vector
@@ -47,7 +40,6 @@ skimage.feature.learn_gmm
 skimage.feature.orb_cy
 skimage.feature.orb.i
 skimage.feature.orb.j
-skimage.feature.plot_matched_features
 skimage.feature.util.plot_matched_features
 skimage.filters
 skimage.filters.edges
@@ -62,7 +54,6 @@ skimage.filters.rank.generic_cy
 skimage.filters.rank.percentile_cy
 skimage.filters.ridges
 skimage.filters.thresholding
-skimage.future
 skimage.future.__all__
 skimage.future.trainable_segmentation.has_sklearn
 skimage.graph
@@ -82,7 +73,6 @@ skimage.io.collection
 skimage.io.manage_plugins
 skimage.io.sift
 skimage.io.util
-skimage.measure
 skimage.measure.__all__
 skimage.measure._marching_cubes_lewiner.mesh_surface_area
 skimage.measure._regionprops.RegionProperties.coords_scaled
@@ -95,13 +85,10 @@ skimage.measure.pearson_corr_coeff
 skimage.metrics
 skimage.metrics.set_metrics
 skimage.metrics.simple_metrics
-skimage.morphology
 skimage.morphology.__all__
 skimage.morphology.ellipse
 skimage.morphology.footprint_from_sequence
-skimage.morphology.footprint_rectangle
 skimage.morphology.footprints.footprint_from_sequence
-skimage.morphology.footprints.footprint_rectangle
 skimage.morphology.footprints.mirror_footprint
 skimage.morphology.footprints.pad_footprint
 skimage.morphology.isotropic
@@ -127,7 +114,6 @@ skimage.segmentation.boundaries
 skimage.segmentation.morphsnakes
 skimage.segmentation.random_walker_segmentation
 skimage.segmentation.slic_superpixels
-skimage.transform
 skimage.transform.__all__
 skimage.transform.ThinPlateSplineTransform
 skimage.util
@@ -172,7 +158,6 @@ skimage.data._fetchers.skimage_distribution_dir
 skimage.draw._random_shapes.SHAPE_CHOICES
 skimage.draw._random_shapes.SHAPE_GENERATORS
 skimage.ensure_python_version
-skimage.feature._cascade.Cascade
 skimage.feature._cascade.Cascade.detect_multi_scale
 skimage.feature._hessian_det_appx_pythran
 skimage.feature._orb_descriptor_positions.POS
@@ -182,7 +167,6 @@ skimage.feature._orb_descriptor_positions.this_dir
 skimage.feature.brief_pythran
 skimage.feature.BRIEF.__init__
 skimage.feature.brief.BRIEF.__init__
-skimage.feature.Cascade
 skimage.feature.Cascade.detect_multi_scale
 skimage.feature.corner.hessian_matrix
 skimage.feature.corner.structure_tensor
@@ -195,10 +179,8 @@ skimage.feature.haar.draw_haar_like_feature
 skimage.feature.haar.FEATURE_TYPE
 skimage.feature.hessian_matrix
 skimage.feature.orb.OFAST_MASK
-skimage.feature.plot_matches
 skimage.feature.structure_tensor
 skimage.feature.structure_tensor_eigvals
-skimage.feature.util.plot_matches
 skimage.future.graph
 skimage.future.graph._ncut
 skimage.future.graph.graph_cut
@@ -291,7 +273,6 @@ skimage.morphology._skeletonize.G123_LUT
 skimage.morphology._skeletonize.G123P_LUT
 skimage.morphology._skeletonize.medial_axis
 skimage.morphology._skeletonize.skeletonize_2d
-skimage.morphology._skeletonize.skeletonize_3d
 skimage.morphology._util._resolve_neighborhood
 skimage.morphology._util._set_border_values
 skimage.morphology.ball
@@ -316,14 +297,12 @@ skimage.morphology.misc.funcs
 skimage.morphology.octagon
 skimage.morphology.octahedron
 skimage.morphology.selem
-skimage.morphology.skeletonize_3d
 skimage.morphology.square
 skimage.PytestTester
 skimage.scripts
 skimage.scripts.skivi
 skimage.submodules
 skimage.test
-skimage.transform._geometric._euler_rotation_matrix
 skimage.transform._geometric.AffineTransform
 skimage.transform._geometric.EssentialMatrixTransform
 skimage.transform._geometric.EuclideanTransform
@@ -335,7 +314,6 @@ skimage.transform._geometric.PiecewiseAffineTransform.inverse
 skimage.transform._geometric.PolynomialTransform
 skimage.transform._geometric.PolynomialTransform.inverse
 skimage.transform._geometric.ProjectiveTransform
-skimage.transform._geometric.ProjectiveTransform.__array__
 skimage.transform._geometric.ProjectiveTransform.inverse
 skimage.transform._geometric.SimilarityTransform
 skimage.transform._warps.HOMOGRAPHY_TRANSFORMS
@@ -356,7 +334,6 @@ skimage.transform.PolynomialTransform
 skimage.transform.PolynomialTransform.inverse
 skimage.transform.probabilistic_hough_line
 skimage.transform.ProjectiveTransform
-skimage.transform.ProjectiveTransform.__array__
 skimage.transform.ProjectiveTransform.inverse
 skimage.transform.SimilarityTransform
 skimage.transform.warp
