@@ -1,8 +1,6 @@
 from collections.abc import Generator
-from typing import Any, Literal, NoReturn
+from typing import Any, Literal
 
 def minisat22_satisfiable(
     expr, all_models=..., minimal=...
-) -> (
-    Generator[bool, None, None] | dict[Any, Any] | Generator[dict[Any, Any] | Literal[False], Any, NoReturn] | Literal[False]
-): ...
+) -> Generator[bool] | Generator[dict[Any, Any] | Literal[False]] | dict[Any, Any] | Literal[False]: ...

@@ -70,7 +70,6 @@ ignore = [
 
     # TODO: Investigate and fix or configure
     "PYI051", # Request for autofix: https://github.com/astral-sh/ruff/issues/14185
-    "UP043", # Manually simplify generator types first
 
     ###
     # Rules we don't want or don't agree with

@@ -1,15 +1,14 @@
 from collections.abc import Generator
-from typing import Any, Literal, NoReturn
+from typing import Any, Literal
 
 def literal_symbol(literal) -> bool: ...
 def satisfiable(
     expr, algorithm=..., all_models=..., minimal=...
 ) -> (
     dict[Any, Any]
-    | Generator[bool, None, None]
-    | Generator[Any | Literal[False], Any, None]
-    | Generator[dict[Any, Any] | Literal[False], Any, None]
-    | Generator[dict[Any, Any] | Literal[False], Any, NoReturn]
+    | Generator[bool]
+    | Generator[Any | Literal[False]]
+    | Generator[dict[Any, Any] | Literal[False]]
     | Literal[False]
 ): ...
 def valid(expr) -> bool: ...
