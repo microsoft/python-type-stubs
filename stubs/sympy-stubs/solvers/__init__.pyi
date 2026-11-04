@@ -1,5 +1,4 @@
 from sympy.core.assumptions import check_assumptions, failing_assumptions
-from sympy.core.singleton import S
 from sympy.sets.fancysets import Complexes as _Complexes
 from sympy.solvers.decompogen import decompogen
 from sympy.solvers.deutils import ode_order
