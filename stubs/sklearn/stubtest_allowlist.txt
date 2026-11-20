@@ -2142,7 +2142,6 @@ sklearn.tree._criterion.Criterion.reset
 sklearn.tree._criterion.Criterion.reverse_reset
 sklearn.tree._criterion.Criterion.update
 sklearn.tree._export.SENTINEL
-sklearn.tree._export.export_text
 sklearn.tree._reingold_tilford.DrawTree.lmost_sibling
 sklearn.tree._splitter.SplitRecord
 sklearn.tree._splitter.Splitter.init
@@ -2155,7 +2154,6 @@ sklearn.tree._tree.DepthFirstTreeBuilder.build
 sklearn.tree._tree.Node
 sklearn.tree._tree.Tree.compute_feature_importances
 sklearn.tree._tree.TreeBuilder.build
-sklearn.tree.export_text
 sklearn.utils.IS_PYPY
 sklearn.utils._array_api.get_namespace
 sklearn.utils._encode.MissingValues.__new__

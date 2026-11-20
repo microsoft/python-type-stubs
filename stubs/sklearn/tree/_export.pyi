@@ -5,7 +5,7 @@ from matplotlib.axes import Axes
 from matplotlib.text import Annotation
 from numpy import longlong, ndarray
 
-from .._typing import Int
+from .._typing import ArrayLike, Int
 from ..base import ClassifierMixin, RegressorMixin
 from ._classes import DecisionTreeClassifier
 from ._tree import Tree
@@ -115,6 +115,7 @@ def export_text(
     decision_tree: Any,
     *,
     feature_names: None | Sequence[str] = None,
+    class_names: ArrayLike | None = None,
     max_depth: Int = 10,
     spacing: Int = 3,
     decimals: Int = 2,
